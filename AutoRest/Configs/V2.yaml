@@ -1,0 +1,28 @@
+debug: true
+verbose: true
+disable-validation: false
+powershell: true
+version: latest
+use: "@microsoft.azure/autorest.powershell@beta"
+base-folder: ".."
+module-name: JumpCloudApiSdkV2
+input-file: SwaggerSpecs/V2.json
+clear-output-folder: true
+output-folder: SDKs/PowerShell/JumpCloudApiSdkV2
+namespace: JumpCloudApiSdkV2
+# subject-prefix: JcSdk
+prefix: JcSdk
+module-version: 0.0.1
+sanitize-names: false
+metadata:
+  authors: JumpCloud Solutions Architect Team
+  owners: JumpCloud
+  requireLicenseAcceptance: false
+  description: The JumpCloud PowerShell SDK
+  copyright: (c) JumpCloud. All rights reserved.
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  companyName: JumpCloud
+  projectUri: https://github.com/TheJumpCloud/support/wiki
+  licenseUri: https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE
+  iconUri: https://avatars1.githubusercontent.com/u/4927461?s=200&v=4
+  releaseNotes: https://git.io/jc-pwsh-releasenotes
