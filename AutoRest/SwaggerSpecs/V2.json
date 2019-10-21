@@ -24,6 +24,52 @@
     }
   },
   "paths": {
+    "/activedirectories/{activedirectory_id}/users": {
+      "parameters": [
+        {
+          "name": "activedirectory_id",
+          "in": "path",
+          "description": "ObjectID of the Active Directory instance.",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "operationId": "List-GraphActiveDirectoryTraverseUser",
+        "summary": "List the Users bound to an Active Directory instance",
+        "tags": [
+          "Graph"
+        ],
+        "description": "This endpoint will return all Users bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Active Directory instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Active Directory instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/users \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
     "/users/{user_id}/activedirectories": {
       "parameters": [
         {
@@ -70,43 +116,176 @@
         ]
       }
     },
-    "/activedirectories/{activedirectory_id}/users": {
-      "parameters": [
-        {
-          "name": "activedirectory_id",
-          "in": "path",
-          "description": "ObjectID of the Active Directory instance.",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "operationId": "List-GraphActiveDirectoryTraverseUser",
-        "summary": "List the Users bound to an Active Directory instance",
+    "/applemdms": {
+      "post": {
+        "operationId": "applemdm_post",
+        "summary": "Create Apple MDM",
         "tags": [
-          "Graph"
+          "Apple MDM"
         ],
-        "description": "This endpoint will return all Users bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Active Directory instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Active Directory instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/users \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "Creates an Apple MDM Enrollment for an organization. Only one enrollment per organization will be allowed.  Note that this is the first step in completly setting up an MDM Enrollment.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/organizations/{Organization_ID}/mdm \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
         "parameters": [
           {
-            "$ref": "#/parameters/trait:filter:filter"
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name used to identify this AppleMDM."
+                }
+              }
+            }
           }
         ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppleMDM"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "applemdm_list",
+        "summary": "List Apple MDMs",
+        "tags": [
+          "Apple MDM"
+        ],
+        "description": "Get a list of all Apple MDM configurations.  An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/GraphObjectWithPaths"
+                "$ref": "#/definitions/AppleMDM"
               }
             }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/applemdms/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "operationId": "applemdm_delete",
+        "summary": "Delete an Apple MDM",
+        "tags": [
+          "Apple MDM"
+        ],
+        "description": "Removes an Apple MDM configuration.\n\nWarning: This is a destructive operation and will remove your Apple Push Certificates.  We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppleMDM"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "put": {
+        "operationId": "applemdm_put",
+        "summary": "Update an Apple MDM",
+        "tags": [
+          "Apple MDM"
+        ],
+        "description": "Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"MDM name\",\n    \"appleSignedCert\": \"{CERTIFICATE}\"\n  }'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/apple-mdm-patch-input"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/AppleMDM"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -2783,49 +2962,6 @@
         ]
       }
     },
-    "/policyresults": {
-      "get": {
-        "operationId": "List-PolicyResult",
-        "summary": "Lists all the policy results for an organization.",
-        "tags": [
-          "Policies"
-        ],
-        "description": "This endpoint returns all policies results for an organization.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
-        "parameters": [
-          {
-            "$ref": "#/parameters/trait:fields:fields"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "$ref": "#/parameters/trait:sort:sort"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/PolicyResult"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
     "/systems/{system_id}/policystatuses": {
       "parameters": [
         {
@@ -3173,6 +3309,49 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/PolicyTemplateWithDetails"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/policyresults": {
+      "get": {
+        "operationId": "policyresults_org_list",
+        "summary": "Lists all the policy results for an organization.",
+        "tags": [
+          "Policies"
+        ],
+        "description": "This endpoint returns all policies results for an organization.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:fields:fields"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:sort:sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PolicyResult"
+              }
             }
           }
         },
@@ -4904,7 +5083,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsChromeExtensions",
+        "operationId": "systeminsights_list_system_chrome_extensions",
         "summary": "List System Insights System Chrome Extensions",
         "tags": [
           "System Insights"
@@ -4939,22 +5118,14 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/safari_extensions": {
-      "parameters": [
-        {
-          "name": "system_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
+    "/systeminsights/safari_extensions": {
       "get": {
         "operationId": "List-SysteminsightsSafariExtensions",
-        "summary": "List System Insights System Safari Extensions",
+        "summary": "List System Insights Safari Extensions",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `name`.",
+        "description": "Valid filter fields are `system_id` and `name`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -4984,14 +5155,22 @@
         ]
       }
     },
-    "/systeminsights/safari_extensions": {
+    "/systeminsights/{system_id}/safari_extensions": {
+      "parameters": [
+        {
+          "name": "system_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
-        "operationId": "List-SysteminsightsSafariExtensions",
-        "summary": "List System Insights Safari Extensions",
+        "operationId": "systeminsights_list_system_safari_extensions",
+        "summary": "List System Insights System Safari Extensions",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `system_id` and `name`.",
+        "description": "Valid filter fields are `name`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5068,7 +5247,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsMounts",
+        "operationId": "systeminsights_list_system_mounts",
         "summary": "List System Insights System Mounts",
         "tags": [
           "System Insights"
@@ -5092,51 +5271,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/system-insights-mounts"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
-    "/systeminsights/{system_id}/browser_plugins": {
-      "parameters": [
-        {
-          "name": "system_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "operationId": "List-SysteminsightsBrowserPlugins",
-        "summary": "List System Insights System Browser Plugins",
-        "tags": [
-          "System Insights"
-        ],
-        "description": "Valid filter fields are `name`.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/trait:limitMax100:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "$ref": "#/parameters/trait:systemInsightsFilter:filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/system-insights-browser-plugins"
               }
             }
           }
@@ -5185,7 +5319,7 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/firefox_addons": {
+    "/systeminsights/{system_id}/browser_plugins": {
       "parameters": [
         {
           "name": "system_id",
@@ -5195,12 +5329,49 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsFirefoxAddons",
-        "summary": "List System Insights System Firefox Addons",
+        "operationId": "systeminsights_list_system_browser_plugins",
+        "summary": "List System Insights System Browser Plugins",
         "tags": [
           "System Insights"
         ],
         "description": "Valid filter fields are `name`.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limitMax100:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:systemInsightsFilter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/system-insights-browser-plugins"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systeminsights/firefox_addons": {
+      "get": {
+        "operationId": "List-SysteminsightsFirefoxAddons",
+        "summary": "List System Insights Firefox Addons",
+        "tags": [
+          "System Insights"
+        ],
+        "description": "Valid filter fields are `system_id` and `name`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5230,14 +5401,22 @@
         ]
       }
     },
-    "/systeminsights/firefox_addons": {
+    "/systeminsights/{system_id}/firefox_addons": {
+      "parameters": [
+        {
+          "name": "system_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
-        "operationId": "List-SysteminsightsFirefoxAddons",
-        "summary": "List System Insights Firefox Addons",
+        "operationId": "systeminsights_list_system_firefox_addons",
+        "summary": "List System Insights System Firefox Addons",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `system_id` and `name`.",
+        "description": "Valid filter fields are `name`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5314,7 +5493,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsApps",
+        "operationId": "systeminsights_list_system_apps",
         "summary": "List System Insights System Apps",
         "tags": [
           "System Insights"
@@ -5396,7 +5575,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsDiskEncryption",
+        "operationId": "systeminsights_list_system_disk_encryption",
         "summary": "List System Insights System Disk Encryption",
         "tags": [
           "System Insights"
@@ -5478,7 +5657,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsOsVersion",
+        "operationId": "systeminsights_list_system_os_version",
         "summary": "List System Insights System OS Version",
         "tags": [
           "System Insights"
@@ -5560,7 +5739,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsInterfaceAddresses",
+        "operationId": "systeminsights_list_system_interface_addresses",
         "summary": "List System Insights System Interface Addresses",
         "tags": [
           "System Insights"
@@ -5595,22 +5774,14 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/groups": {
-      "parameters": [
-        {
-          "name": "system_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
+    "/systeminsights/groups": {
       "get": {
         "operationId": "List-SysteminsightsGroups",
-        "summary": "List System Insights System Groups",
+        "summary": "List System Insights Groups",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `groupname`.",
+        "description": "Valid filter fields are `system_id` and `groupname`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5640,14 +5811,22 @@
         ]
       }
     },
-    "/systeminsights/groups": {
+    "/systeminsights/{system_id}/groups": {
+      "parameters": [
+        {
+          "name": "system_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
-        "operationId": "List-SysteminsightsGroups",
-        "summary": "List System Insights Groups",
+        "operationId": "systeminsights_list_system_groups",
+        "summary": "List System Insights System Groups",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `system_id` and `groupname`.",
+        "description": "Valid filter fields are `groupname`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5724,7 +5903,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsUsers",
+        "operationId": "systeminsights_list_system_users",
         "summary": "List System Insights System Users",
         "tags": [
           "System Insights"
@@ -5806,7 +5985,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsSystemInfo",
+        "operationId": "systeminsights_list_system_system_info",
         "summary": "List System Insights System System Info",
         "tags": [
           "System Insights"
@@ -5841,22 +6020,14 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/bitlocker_info": {
-      "parameters": [
-        {
-          "name": "system_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
+    "/systeminsights/bitlocker_info": {
       "get": {
         "operationId": "List-SysteminsightsBitlockerInfo",
-        "summary": "List System Insights System Bitlocker Info",
+        "summary": "List System Insights Bitlocker Info",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `protection_status`.",
+        "description": "Valid filter fields are `system_id` and `protection_status`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5886,14 +6057,22 @@
         ]
       }
     },
-    "/systeminsights/bitlocker_info": {
+    "/systeminsights/{system_id}/bitlocker_info": {
+      "parameters": [
+        {
+          "name": "system_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
-        "operationId": "List-SysteminsightsBitlockerInfo",
-        "summary": "List System Insights Bitlocker Info",
+        "operationId": "systeminsights_list_system_bitlocker_info",
+        "summary": "List System Insights System Bitlocker Info",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `system_id` and `protection_status`.",
+        "description": "Valid filter fields are `protection_status`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -5970,7 +6149,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsDiskInfo",
+        "operationId": "systeminsights_list_system_disk_info",
         "summary": "List System Insights System Disk Info",
         "tags": [
           "System Insights"
@@ -6052,7 +6231,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsEtcHosts",
+        "operationId": "systeminsights_list_system_etc_hosts",
         "summary": "List System Insights System Etc Hosts",
         "tags": [
           "System Insights"
@@ -6134,7 +6313,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsLogicalDrives",
+        "operationId": "systeminsights_list_system_logical_drives",
         "summary": "List System Insights System Logical Drives",
         "tags": [
           "System Insights"
@@ -6158,51 +6337,6 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/system-insights-logical-drvies"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
-    "/systeminsights/{system_id}/patches": {
-      "parameters": [
-        {
-          "name": "system_id",
-          "in": "path",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "get": {
-        "operationId": "List-SysteminsightsPatches",
-        "summary": "List System Insights System Patches",
-        "tags": [
-          "System Insights"
-        ],
-        "description": "Valid filter fields are `hotfix_id  `.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/trait:limitMax100:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "$ref": "#/parameters/trait:systemInsightsFilter:filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/system-insights-patches"
               }
             }
           }
@@ -6251,7 +6385,7 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/programs": {
+    "/systeminsights/{system_id}/patches": {
       "parameters": [
         {
           "name": "system_id",
@@ -6261,12 +6395,12 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsPrograms",
-        "summary": "List System Insights System Programs",
+        "operationId": "systeminsights_list_system_patches",
+        "summary": "List System Insights System Patches",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `name`.",
+        "description": "Valid filter fields are `hotfix_id  `.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -6284,7 +6418,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/system-insights-programs"
+                "$ref": "#/definitions/system-insights-patches"
               }
             }
           }
@@ -6333,7 +6467,7 @@
         ]
       }
     },
-    "/systeminsights/{system_id}/kernel_info": {
+    "/systeminsights/{system_id}/programs": {
       "parameters": [
         {
           "name": "system_id",
@@ -6343,12 +6477,49 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsKernelInfo",
-        "summary": "List System Insights System Kernel Info",
+        "operationId": "systeminsights_list_system_programs",
+        "summary": "List System Insights System Programs",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `version`.",
+        "description": "Valid filter fields are `name`.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limitMax100:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:systemInsightsFilter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/system-insights-programs"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systeminsights/kernel_info": {
+      "get": {
+        "operationId": "List-SysteminsightsKernelInfo",
+        "summary": "List System Insights Kernel Info",
+        "tags": [
+          "System Insights"
+        ],
+        "description": "Valid filter fields are `system_id` and `version`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -6378,14 +6549,22 @@
         ]
       }
     },
-    "/systeminsights/kernel_info": {
+    "/systeminsights/{system_id}/kernel_info": {
+      "parameters": [
+        {
+          "name": "system_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "get": {
-        "operationId": "List-SysteminsightsKernelInfo",
-        "summary": "List System Insights Kernel Info",
+        "operationId": "systeminsights_list_system_kernel_info",
+        "summary": "List System Insights System Kernel Info",
         "tags": [
           "System Insights"
         ],
-        "description": "Valid filter fields are `system_id` and `version`.",
+        "description": "Valid filter fields are `version`.",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limitMax100:limit"
@@ -6462,7 +6641,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsSystemControls",
+        "operationId": "systeminsights_list_system_system_controls",
         "summary": "List System Insights System System Controls",
         "tags": [
           "System Insights"
@@ -6544,7 +6723,7 @@
         }
       ],
       "get": {
-        "operationId": "List-SysteminsightsUptime",
+        "operationId": "systeminsights_list_system_uptime",
         "summary": "List System Insights System Uptime",
         "tags": [
           "System Insights"
@@ -11842,6 +12021,41 @@
         },
         "secretKey": {
           "type": "string"
+        }
+      }
+    },
+    "AppleMDM": {
+      "title": "AppleMDM",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ObjectId uniquely identifying an MDM Enrollment,"
+        },
+        "name": {
+          "type": "string",
+          "description": "A friendly name to identify this enrollment.  Not required to be unique."
+        },
+        "apnsPushTopic": {
+          "type": "string",
+          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist."
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "apple-mdm-patch-input": {
+      "title": "Apple MDM Patch Input",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "A new name for the Apple MDM configuration."
+        },
+        "appleSignedCert": {
+          "type": "string",
+          "description": "A signed certificate obtained from Apple after providing Apple with the plist file provided on POST."
         }
       }
     }

@@ -24,6 +24,118 @@
     }
   },
   "paths": {
+    "/application-templates": {
+      "get": {
+        "operationId": "application_templates_list",
+        "summary": "List Application Templates",
+        "tags": [
+          "Application Templates"
+        ],
+        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string",
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending."
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplateslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/application-templates/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "operationId": "application_templates_get",
+        "summary": "Get an Application Template",
+        "tags": [
+          "Application Templates"
+        ],
+        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "type": "string",
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending."
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplate"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
     "/applications": {
       "get": {
         "operationId": "List-Application",
@@ -115,6 +227,28 @@
           "type": "string"
         }
       ],
+      "get": {
+        "operationId": "Get-Application",
+        "summary": "Get an Application",
+        "tags": [
+          "Applications"
+        ],
+        "description": "The endpoint retrieves an SSO / SAML Application.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
       "put": {
         "operationId": "Put-Application",
         "summary": "Update an Application",
@@ -131,28 +265,6 @@
             }
           }
         ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      },
-      "get": {
-        "operationId": "Get-Application",
-        "summary": "Get an Application",
-        "tags": [
-          "Applications"
-        ],
-        "description": "The endpoint retrieves an SSO / SAML Application.",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -597,36 +709,6 @@
       }
     },
     "/radiusservers": {
-      "post": {
-        "operationId": "Create-RadiusServer",
-        "summary": "Create a Radius Server",
-        "tags": [
-          "Radius Servers"
-        ],
-        "description": "This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/radiusserverpost"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/radiusserver"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      },
       "get": {
         "operationId": "List-RadiusServer",
         "summary": "List Radius Servers",
@@ -664,9 +746,47 @@
             "x-api-key": []
           }
         ]
+      },
+      "post": {
+        "operationId": "Create-RadiusServer",
+        "summary": "Create a Radius Server",
+        "tags": [
+          "Radius Servers"
+        ],
+        "description": "This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/radiusserverpost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserver"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
       }
     },
-    "/radiusservers:id": {
+    "/radiusservers/{id}": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
       "put": {
         "operationId": "Put-RadiusServer",
         "summary": "Update Radius Servers",
@@ -3852,6 +3972,395 @@
                 "description": "Trigger to execute command."
               }
             }
+          }
+        }
+      }
+    },
+    "applicationtemplate": {
+      "title": "ApplicationTemplate",
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "displayLabel": {
+          "type": "string"
+        },
+        "ssoUrl": {
+          "type": "string"
+        },
+        "learnMore": {
+          "type": "string"
+        },
+        "config": {
+          "type": "object",
+          "properties": {
+            "idpEntityId": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "idpCertificate": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "spEntityId": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "acsUrl": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "constantAttributes": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "mutable": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "databaseAttributes": {
+              "type": "object",
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              }
+            },
+            "idpPrivateKey": {
+              "type": "object",
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "type": "object",
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "position": {
+                  "type": "integer"
+                }
+              }
+            }
+          }
+        },
+        "beta": {
+          "type": "boolean"
+        },
+        "color": {
+          "type": "string"
+        }
+      }
+    },
+    "applicationtemplateslist": {
+      "title": "ApplicationTemplatesList",
+      "type": "object",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "description": "The total number of applications."
+        },
+        "results": {
+          "type": "array",
+          "description": "The list of applications.",
+          "items": {
+            "$ref": "#/definitions/applicationtemplate"
           }
         }
       }
