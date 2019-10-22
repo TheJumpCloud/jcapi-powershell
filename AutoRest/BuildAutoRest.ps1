@@ -1,24 +1,23 @@
-# Requires -Modules 'powershell-yaml'
+# Requires -Modules 'powershell-yaml','JumpCloud','BuildHelpers'
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
+$NuGetApiKey = ''
+$PSRepoName = 'LocalRepository'
+$PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
+$ModuleVersionIncrementType = 'Build' # Major, Minor, Build
+$PrereleaseName = 'beta'
 $InstallPreReq = $true
 $GenerateModule = $true
 $CopyModuleFile = $true
 $BuildModule = $true
+$UpdateModuleManifest = $true
 $PackModule = $true
 $PublishModule = $true
-$InstallModule = $false
-$ImportModule = $false
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
 .($PSScriptRoot + '/ApiTransform.ps1')
 # Start SDK generation
 Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
-    # Get-ChildItem -Path:('{0}/V1.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
-    # Get-ChildItem -Path:('{0}/V2.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
-    # Get-ChildItem -Path:('{0}/TestApi.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
     ###########################################################################
-    $LocalPSRepoName = 'LocalRepository'
-    $LocalPSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
     $ConfigFileFullName = $_.FullName
     $BaseFolder = $PSScriptRoot
     Set-Location $BaseFolder
@@ -28,23 +27,17 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
     $ModuleName = $Config.'module-name'
     $Namespace = $Config.'namespace'
-    $ModuleVersion = $Config.'module-version'
     $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
-    $nupkgName = '{0}.{1}.nupkg' -f $ModuleName, $ModuleVersion
-    $nupkgPath = '{0}/bin/{1}' -f $OutputFullPath, $nupkgName
-    $extractedModulePath = '{0}/bin/{1}' -f $OutputFullPath, $ModuleName
+    # $ModuleVersion = $Config.'module-version'
+    $nupkgName = '{0}*.nupkg' -f $ModuleName
+    $binFolder = '{0}/bin/' -f $OutputFullPath
+    $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
     $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
     $CustomFolderPath = '{0}/custom' -f $OutputFullPath
     $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
     $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
+    $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
     Set-Location $BaseFolder
-    # Log Parsing Regex
-    # "(DEBUG)(.*?)(: )", ""
-    # "( \/\/  )", "`t"
-    # "( => )", "`t"
-    # " taking ", "`t taking: "
-    # "create-commands - START"
-    # "create-commands - END"
     ###########################################################################
     # Remove module from session if it has been imported
     $Module = Get-Module -ListAvailable | Where-Object { $_.Name -match $ModuleName }
@@ -61,7 +54,6 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($InstallPreReq)
     {
-        # Convert JSON to module
         Write-Host ('[RUN COMMAND] npm.cmd install -g pwsh') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         npm.cmd install -g pwsh # | Out-Null
         Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -90,10 +82,9 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
         (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace") | Set-Content -Path:($CustomFolderPath + '/Module.cs')
     }
-    ##########################################################################
+    ###########################################################################
     If ($BuildModule)
     {
-        # Build module
         If (Test-Path -Path:($buildModulePath))
         {
             Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -102,6 +93,28 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         Else
         {
             Write-Error ("Path does not exist: $buildModulePath")
+        }
+    }
+    ###########################################################################
+    If ($UpdateModuleManifest)
+    {
+        $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+        If (-not [System.String]::IsNullOrEmpty($LatestModule))
+        {
+            If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+            {
+                $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
+            }
+            If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+            {
+                $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+            }
+            ## ToDo: Figure out how to retain the same GUID
+            # $CurrentGuid = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('GUID')
+            # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($CurrentGuid)
         }
     }
     ###########################################################################
@@ -117,36 +130,35 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         {
             Write-Error ("Path does not exist: $packModulePath")
         }
-        Expand-Archive -Path:($nupkgPath) -DestinationPath:($extractedModulePath)
+        $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
+        Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
         Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
         Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
+        Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
+        Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
     }
-    ##########################################################################
+    ###########################################################################
     If ($PublishModule)
     {
-        # Create the local PSRepository path if it does not exist
-        If (!(Test-Path -Path:($LocalPSRepoPath))) { New-Item -Path:($LocalPSRepoPath) -ItemType:('Directory') | Out-Null }
-        # Create the local PSRepository if it does not exist
-        If (!(Get-PSRepository -Name:($LocalPSRepoName) -ErrorAction:('Ignore')))
+        If ($PSRepoName -eq 'PSGallery')
         {
-            Write-Host ('Creating new PSRepository: ' + $LocalPSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
-            Register-PSRepository -Name:($LocalPSRepoName) -SourceLocation:($LocalPSRepoPath) -ScriptSourceLocation:($LocalPSRepoPath) -InstallationPolicy:('Trusted')
-            # Unregister-PSRepository -Name:($LocalPSRepoName)
+            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($NuGetApiKey)
         }
-        If (Test-Path -Path:($LocalPSRepoPath + '/' + $nupkgName)) { Remove-Item -Path:($LocalPSRepoPath + '/' + $nupkgName) -Force }
-        Publish-Module -Repository:($LocalPSRepoName) -Path:($extractedModulePath)
-    }
-    ##########################################################################
-    If ($InstallModule)
-    {
-        Install-Module -Repository:($LocalPSRepoName) -Name:($ModuleName) -Scope:('CurrentUser') -Force
-        If ($ImportModule)
+        Else
         {
-            Import-Module -Name:($ModuleName)
-            # Get-Command | Where-Object { $_.Module -like ('*' + $ModuleName + '*') -and $_.Source -notlike '*private*' } | Select-Object Source, Name | Sort-Object Source, Name | Where-Object { $_.Name -like '*invoke*' }
-            # Get-Command | Where-Object { $_.Module -like ('*' + $ModuleName + '*') } | Select-Object Source, Name | Sort-Object Source, Name
+            # Create the local PSRepository if it does not exist
+            If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
+            {
+                # Create the local PSRepository path if it does not exist
+                If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
+                Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+                Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
+                # Unregister-PSRepository -Name:($PSRepoName)
+            }
+            # If (Test-Path -Path:($PSRepoPath + '/' + $nupkg.Name)) { Remove-Item -Path:($PSRepoPath + '/' + $nupkg.Name) -Force }
+            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
         }
     }
-    ##########################################################################
+    ###########################################################################
     Set-Location -Path:($OutputFullPath)
 }

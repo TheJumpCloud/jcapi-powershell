@@ -1,5 +1,5 @@
 @{
-  GUID = '66d440dd-45aa-4c1c-bc5a-dd8378eec706'
+  GUID = 'cc4eb447-504a-41d7-ba3b-712cd308723b'
   RootModule = './JumpCloudApiSdkV1.psm1'
   ModuleVersion = '0.0.1'
   CompatiblePSEditions = 'Core', 'Desktop'

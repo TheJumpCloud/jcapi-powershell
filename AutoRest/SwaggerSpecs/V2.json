@@ -9364,8 +9364,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "type": "object",
-          "description": "The group object's attributes."
+          "$ref": "#/definitions/usergroupattributes"
         },
         "id": {
           "type": "string",
@@ -9600,27 +9599,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "type": "object",
-          "description": "The group object's attributes.",
-          "properties": {
-            "posixGroups": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "id": {
-                    "type": "integer"
-                  },
-                  "name": {
-                    "type": "string"
-                  }
-                }
-              }
-            },
-            "sambaEnabled": {
-              "type": "boolean"
-            }
-          }
+          "$ref": "#/definitions/usergroupattributes"
         },
         "name": {
           "type": "string",
@@ -10013,8 +9992,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "type": "object",
-          "description": "The graph connection's attributes."
+          "$ref": "#/definitions/usergroupattributes"
         },
         "op": {
           "type": "string",
@@ -10294,21 +10272,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "description": "The graph connection's attributes",
-          "type": "object",
-          "properties": {
-            "sudo": {
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "withoutPassword": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
+          "$ref": "#/definitions/usergroupattributes"
         },
         "op": {
           "type": "string",
@@ -10350,13 +10314,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "type": "object",
-          "description": "The group object's attributes.",
-          "properties": {
-            "sambaEnabled": {
-              "type": "boolean"
-            }
-          }
+          "$ref": "#/definitions/usergroupattributes"
         },
         "name": {
           "type": "string",
@@ -12056,6 +12014,59 @@
         "appleSignedCert": {
           "type": "string",
           "description": "A signed certificate obtained from Apple after providing Apple with the plist file provided on POST."
+        }
+      }
+    },
+    "usergroupattributes": {
+      "title": "UserGroupAttributes",
+      "type": "object",
+      "properties": {
+        "posixGroups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "sambaEnabled": {
+          "type": "boolean"
+        },
+        "radius": {
+          "type": "object",
+          "properties": {
+            "reply": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "sudo": {
+          "type": "object",
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "withoutPassword": {
+              "type": "boolean"
+            }
+          }
         }
       }
     }
