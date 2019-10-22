@@ -39,19 +39,6 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
     Set-Location $BaseFolder
     ###########################################################################
-    # Remove module from session if it has been imported
-    $Module = Get-Module -ListAvailable | Where-Object { $_.Name -match $ModuleName }
-    If ($Module)
-    {
-        $Module | Remove-Module -Force
-    }
-    # Uninstall module
-    $InstalledModule = Get-InstalledModule | Where-Object { $_.Name -like $ModuleName }
-    If ($InstalledModule)
-    {
-        $InstalledModule | Uninstall-Module -Force
-    }
-    ###########################################################################
     If ($InstallPreReq)
     {
         Write-Host ('[RUN COMMAND] npm.cmd install -g pwsh') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -61,9 +48,6 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         # autorest --help
         Write-Host ('[RUN COMMAND] npm.cmd install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         npm.cmd install -g autorest@beta # | Out-Null
-        # npm install -g autorest@latest
-        # npm install -g autorest@preview
-        # npm install -g autorest
     }
     ###########################################################################
     If ($GenerateModule)
@@ -101,20 +85,25 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
         If (-not [System.String]::IsNullOrEmpty($LatestModule))
         {
+            # Increment module version number
             If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
             {
                 $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
                 Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
             }
-            If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-            {
-                $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-                $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
-            }
-            ## ToDo: Figure out how to retain the same GUID
-            # $CurrentGuid = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('GUID')
-            # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($CurrentGuid)
+            # # Get existing GUID
+            # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
+            # Import-Module -Name:($LatestModule.Name) -Force
+            # $ExistingModule = Get-Module -Name:($LatestModule.Name)
+            # $ExistingModule | Remove-Module -Force
+            # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
+        }
+        # Add prerelease tag
+        If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+        {
+            $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+            $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+            Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
         }
     }
     ###########################################################################
