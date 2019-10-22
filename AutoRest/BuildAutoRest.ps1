@@ -83,6 +83,10 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     If ($UpdateModuleManifest)
     {
         $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+        If ([System.String]::IsNullOrEmpty($LatestModule))
+        {
+            $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+        }
         If (-not [System.String]::IsNullOrEmpty($LatestModule))
         {
             # Increment module version number
@@ -98,13 +102,19 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
             # $ExistingModule | Remove-Module -Force
             # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
         }
+        # Update FunctionsToExport with the same as CmdletsToExport
+        $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
+        Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
         # Add prerelease tag
         If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
         {
             $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+            If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+            {
             $CurrentMetaData.Add('Prerelease', $PrereleaseName)
             Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
         }
+    }
     }
     ###########################################################################
     If ($PackModule)
