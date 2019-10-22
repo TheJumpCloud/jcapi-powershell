@@ -144,7 +144,6 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
                 Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
                 # Unregister-PSRepository -Name:($PSRepoName)
             }
-            # If (Test-Path -Path:($PSRepoPath + '/' + $nupkg.Name)) { Remove-Item -Path:($PSRepoPath + '/' + $nupkg.Name) -Force }
             Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
         }
     }
