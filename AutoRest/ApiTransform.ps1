@@ -334,5 +334,5 @@ $ApiHash.GetEnumerator() | ForEach-Object {
     }
 }
 
-# Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 Return $UpdatedSpec
