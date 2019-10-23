@@ -14,7 +14,7 @@ $PackModule = $true
 $PublishModule = $true
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
-.($PSScriptRoot + '/ApiTransform.ps1')
+.($PSScriptRoot + '/ApiTransform.ps1') | Out-Null
 # Start SDK generation
 Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
     ###########################################################################
