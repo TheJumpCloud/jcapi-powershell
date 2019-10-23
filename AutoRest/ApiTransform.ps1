@@ -2,6 +2,7 @@ $ApiHash = [Ordered]@{
     'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.json';
     'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.json';
 }
+$UpdatedSpec = $false
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FindReplaceHash = [Ordered]@{
@@ -327,22 +328,11 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($CompareResults))
             {
                 $NewSpec | Out-File -FilePath:($OutputFullPath)
-                Return [PSCustomObject]@{
-                    UpdatedSpec = $true
-                }
-            }
-            Else
-            {
-                Return [PSCustomObject]@{
-                    UpdatedSpec = $false
-                }
-            }
-        }
-        Else
-        {
-            Return [PSCustomObject]@{
-                UpdatedSpec = $false
+                $UpdatedSpec = $true
             }
         }
     }
 }
+
+# Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+Return $UpdatedSpec
