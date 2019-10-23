@@ -263,6 +263,8 @@ $FindReplaceHash = [Ordered]@{
     'duo_applicationUpdate'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   = 'Update-DuoApplication';
 }
 $ApiHash.GetEnumerator() | ForEach-Object {
+    $OutputFileName = ($_.Name).Split('_')[1] + '.json'
+    $OutputFullPath = $OutputFilePath + $OutputFileName
     $WebRequest = If ($_.Name -like 'Url_*')
     {
         (Invoke-WebRequest -Uri:($_.Value)).Content
@@ -315,6 +317,32 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         # Export file
         # $WebRequest | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
         # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
-        $JsonExport | ConvertTo-Json -Depth:(99) | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '.json')
+        $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
+        If (Test-Path -Path:($OutputFullPath))
+        {
+            $CurrentSpec = Get-Content -Path:($OutputFullPath) -Raw
+            $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
+            $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
+            $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
+            If (-not [System.String]::IsNullOrEmpty($CompareResults))
+            {
+                $NewSpec | Out-File -FilePath:($OutputFullPath)
+                Return [PSCustomObject]@{
+                    UpdatedSpec = $true
+                }
+            }
+            Else
+            {
+                Return [PSCustomObject]@{
+                    UpdatedSpec = $false
+                }
+            }
+        }
+        Else
+        {
+            Return [PSCustomObject]@{
+                UpdatedSpec = $false
+            }
+        }
     }
 }
