@@ -1,4 +1,4 @@
-$TestRecordingFile = Join-Path $PSScriptRoot 'Invoke-JcSdkApplemdm.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkSystemInsightSysteminsightSystemDiskInfo.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -6,12 +6,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Invoke-JcSdkApplemdm' {
-    It 'PostExpanded' {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'Post' {
+Describe 'Get-JcSdkSystemInsightSysteminsightSystemDiskInfo' {
+    It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

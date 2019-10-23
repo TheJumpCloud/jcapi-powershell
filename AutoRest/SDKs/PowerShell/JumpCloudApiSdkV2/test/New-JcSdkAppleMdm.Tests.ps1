@@ -1,4 +1,4 @@
-$TestRecordingFile = Join-Path $PSScriptRoot 'Invoke-JcSdkTemplateApplication.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'New-JcSdkAppleMdm.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -6,16 +6,12 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Invoke-JcSdkTemplateApplication' {
-    It 'Templates' {
+Describe 'New-JcSdkAppleMdm' {
+    It 'NewExpanded' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Templates1' {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'TemplatesViaIdentity' {
+    It 'New' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

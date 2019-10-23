@@ -1,4 +1,4 @@
-$TestRecordingFile = Join-Path $PSScriptRoot 'Remove-JcSdkAppleMdm.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkApplicationTemplate.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -6,12 +6,16 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Remove-JcSdkAppleMdm' {
-    It 'Delete' {
+Describe 'Get-JcSdkApplicationTemplate' {
+    It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' {
+    It 'Get' {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

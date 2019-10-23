@@ -1,4 +1,4 @@
-$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkSysteminsight.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkSystemInsightSysteminsightSystemOSVersion.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -6,7 +6,7 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkSysteminsight' {
+Describe 'Get-JcSdkSystemInsightSysteminsightSystemOSVersion' {
     It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

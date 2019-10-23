@@ -1,4 +1,4 @@
-$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkApplemdm.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkAppleMdm.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -6,7 +6,7 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkApplemdm' {
+Describe 'Get-JcSdkAppleMdm' {
     It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
