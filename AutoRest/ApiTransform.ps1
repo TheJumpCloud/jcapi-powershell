@@ -374,7 +374,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     }
                     Catch
                     {
-                        $_
+                        Write-Error $_
                     }
                 }
             }
