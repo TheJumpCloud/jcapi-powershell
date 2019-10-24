@@ -1,3 +1,5 @@
+# Require BuildHelpers
+Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.json';
     'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.json';
@@ -364,3 +366,17 @@ $ApiHash.GetEnumerator() | ForEach-Object {
 
 Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 Return $UpdatedSpec
+
+# Invoke-Git [[-Arguments] <Object>] [-NoWindow <Object>] [-RedirectStandardError <Object>] [-RedirectStandardOutput  <Object>] [-UseShellExecute <Object>] [-Path <Object>] [-Quiet <Object>] [-Split <Object>] [-Raw <Object>] [-GitPath <String>] [<CommonParameters>]
+# Publish-GithubRelease [-AccessToken] <String> [-RepositoryOwner] <String> [[-RepositoryName] <String>] [-TagName]    <String> [[-TargetCommit] <String>] [[-Name] <String>] [[-ReleaseText] <String>] [-Draft] [-PreRelease] [[-Artifact] <String[]>] [<CommonParameters>]
+# Get-GitChangedFile [[-Path] <Object>] [[-Commit] <Object>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-Resolve] [<CommonParameters>]
+
+# Get-GitChangedFile -Path:('C:\Users\epanipinto\Documents\GitHub\jcapi-powershell')
+
+# $MyName = $MyInvocation.MyCommand.Name
+# $ParentScriptName = (Get-PSCallStack | Where-Object { $_.Command -notin ($MyName, $MyName.Replace('.ps1', '')) }).Command -join ','
+# $CommitMessage = 'Push to ' + $BranchName + '; Called by:' + $ParentScriptName + ';[skip ci]'
+# Invoke-Git -Arguments:('add -A')
+# Invoke-Git -Arguments:('status')
+# Invoke-Git -Arguments:('commit -m ' + '"' + $CommitMessage + '";')
+# Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $BranchName + ';')
