@@ -1,8 +1,8 @@
-# Requires -Modules 'powershell-yaml','JumpCloud','BuildHelpers'
+#Requires -Modules 'powershell-yaml','JumpCloud','BuildHelpers'
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
-$NuGetApiKey = ''
-$PSRepoName = 'LocalRepository'
-$PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
+# $NuGetApiKey = ''
+# $PSRepoName = 'LocalRepository'
+# $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
 $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
 $PrereleaseName = 'beta'
 $InstallPreReq = $true
@@ -11,7 +11,7 @@ $CopyModuleFile = $true
 $BuildModule = $true
 $UpdateModuleManifest = $true
 $PackModule = $true
-$PublishModule = $true
+# $PublishModule = $true
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
 .($PSScriptRoot + '/ApiTransform.ps1') | Out-Null
@@ -111,10 +111,10 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
             $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
             If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
             {
-            $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-            Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+            }
         }
-    }
     }
     ###########################################################################
     If ($PackModule)
@@ -137,26 +137,26 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
     }
     ###########################################################################
-    If ($PublishModule)
-    {
-        If ($PSRepoName -eq 'PSGallery')
-        {
-            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($NuGetApiKey)
-        }
-        Else
-        {
-            # Create the local PSRepository if it does not exist
-            If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
-            {
-                # Create the local PSRepository path if it does not exist
-                If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
-                Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
-                Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
-                # Unregister-PSRepository -Name:($PSRepoName)
-            }
-            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
-        }
-    }
+    # If ($PublishModule)
+    # {
+    #     If ($PSRepoName -eq 'PSGallery')
+    #     {
+    #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($NuGetApiKey)
+    #     }
+    #     Else
+    #     {
+    #         # Create the local PSRepository if it does not exist
+    #         If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
+    #         {
+    #             # Create the local PSRepository path if it does not exist
+    #             If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
+    #             Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+    #             Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
+    #             # Unregister-PSRepository -Name:($PSRepoName)
+    #         }
+    #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
+    #     }
+    # }
     ###########################################################################
     Set-Location -Path:($OutputFullPath)
 }

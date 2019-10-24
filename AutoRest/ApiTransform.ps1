@@ -1,4 +1,4 @@
-# Require BuildHelpers
+#Requires -Modules BuildHelpers
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.json';
