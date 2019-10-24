@@ -26,7 +26,7 @@
   "paths": {
     "/application-templates": {
       "get": {
-        "operationId": "application_templates_list",
+        "operationId": "List-ApplicationTemplate",
         "summary": "List Application Templates",
         "tags": [
           "Application Templates"
@@ -86,7 +86,7 @@
         }
       ],
       "get": {
-        "operationId": "application_templates_get",
+        "operationId": "Get-ApplicationTemplate",
         "summary": "Get an Application Template",
         "tags": [
           "Application Templates"
