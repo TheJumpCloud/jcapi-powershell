@@ -361,8 +361,6 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | Out-File -FilePath:($OutputFullPath)
                 If ($env:USERNAME -eq 'VssAdministrator')
                 {
-                    Write-Host ('$env:BUILD_REQUESTEDFOR: ' + $env:BUILD_REQUESTEDFOR)
-                    Write-Host ('$env:BUILD_REQUESTEDFOR: ' + $env:BUILD_REQUESTEDFOREMAIL)
                     Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
                     Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
                     Invoke-Git -Arguments:('add -A')
