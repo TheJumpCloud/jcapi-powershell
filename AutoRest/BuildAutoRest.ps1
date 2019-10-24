@@ -42,8 +42,6 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($InstallPreReq)
     {
-        Write-Host ('[RUN COMMAND] npm.cmd install -g pwsh') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-        npm.cmd install -g pwsh # | Out-Null
         Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
         # autorest --help
