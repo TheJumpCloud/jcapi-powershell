@@ -357,13 +357,19 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
             If (-not [System.String]::IsNullOrEmpty($CompareResults))
             {
-                $NewSpec | Out-File -FilePath:($OutputFullPath)
                 $UpdatedSpec = $true
+                $NewSpec | Out-File -FilePath:($OutputFullPath)
+                If ($env:USERNAME -eq 'VssAdministrator')
+                {
+                    Invoke-Git -Arguments:('add -A')
+                    Invoke-Git -Arguments:('status')
+                    Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec;[skip ci]";')
+                    Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                }
             }
         }
     }
 }
-
 Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 Return $UpdatedSpec
 
@@ -372,11 +378,3 @@ Return $UpdatedSpec
 # Get-GitChangedFile [[-Path] <Object>] [[-Commit] <Object>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-Resolve] [<CommonParameters>]
 
 # Get-GitChangedFile -Path:('C:\Users\epanipinto\Documents\GitHub\jcapi-powershell')
-
-# $MyName = $MyInvocation.MyCommand.Name
-# $ParentScriptName = (Get-PSCallStack | Where-Object { $_.Command -notin ($MyName, $MyName.Replace('.ps1', '')) }).Command -join ','
-# $CommitMessage = 'Push to ' + $BranchName + '; Called by:' + $ParentScriptName + ';[skip ci]'
-# Invoke-Git -Arguments:('add -A')
-# Invoke-Git -Arguments:('status')
-# Invoke-Git -Arguments:('commit -m ' + '"' + $CommitMessage + '";')
-# Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $BranchName + ';')
