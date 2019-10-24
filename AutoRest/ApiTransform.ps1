@@ -361,6 +361,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | Out-File -FilePath:($OutputFullPath)
                 If ($env:USERNAME -eq 'VssAdministrator')
                 {
+                    Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                    Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
                     Invoke-Git -Arguments:('add -A')
                     Invoke-Git -Arguments:('status')
                     Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec;[skip ci]";')
