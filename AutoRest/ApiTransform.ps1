@@ -368,7 +368,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
                         Invoke-Git -Arguments:('add -A')
                         Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec;[skip ci]";')
+                        Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
                         Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
                     }
                     Catch
