@@ -1,7 +1,7 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # $NuGetApiKey = ''
-# $PSRepoName = 'LocalRepository'
+$PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
 $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
 $PrereleaseName = 'beta'
