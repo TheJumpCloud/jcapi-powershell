@@ -1,4 +1,5 @@
-#Requires -Modules BuildHelpers
+# Requires -Modules BuildHelpers
+.($PSScriptRoot + '/Invoke-Git.ps1')
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.json';
