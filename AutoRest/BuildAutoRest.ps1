@@ -1,4 +1,4 @@
-#Requires -Modules 'powershell-yaml','JumpCloud','BuildHelpers'
+#Requires -Modules powershell-yaml, BuildHelpers
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # $NuGetApiKey = ''
 # $PSRepoName = 'LocalRepository'
