@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "JumpCloud APIs",
+    "title": "Test",
     "description": " JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users."
   },
   "host": "console.jumpcloud.com",
