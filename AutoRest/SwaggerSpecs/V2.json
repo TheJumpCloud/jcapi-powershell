@@ -118,7 +118,7 @@
     },
     "/applemdms": {
       "post": {
-        "operationId": "applemdm_post",
+        "operationId": "New-AppleMdm",
         "summary": "Create Apple MDM",
         "tags": [
           "Apple MDM"
@@ -133,7 +133,8 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "The name used to identify this AppleMDM."
+                  "description": "The name used to identify this AppleMDM.",
+                  "maxLength": 255
                 }
               }
             }
@@ -143,7 +144,15 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/AppleMDM"
+              "type": "object",
+              "properties": {
+                "appleMDM": {
+                  "$ref": "#/definitions/AppleMDM"
+                },
+                "signedCsrPlist": {
+                  "type": "string"
+                }
+              }
             }
           },
           "400": {
@@ -172,7 +181,7 @@
         ]
       },
       "get": {
-        "operationId": "applemdm_list",
+        "operationId": "List-AppleMdm",
         "summary": "List Apple MDMs",
         "tags": [
           "Apple MDM"
@@ -207,7 +216,7 @@
         }
       ],
       "delete": {
-        "operationId": "applemdm_delete",
+        "operationId": "Delete-AppleMdm",
         "summary": "Delete an Apple MDM",
         "tags": [
           "Apple MDM"
@@ -247,7 +256,7 @@
         ]
       },
       "put": {
-        "operationId": "applemdm_put",
+        "operationId": "Put-AppleMdm",
         "summary": "Update an Apple MDM",
         "tags": [
           "Apple MDM"
@@ -3321,7 +3330,7 @@
     },
     "/policyresults": {
       "get": {
-        "operationId": "policyresults_org_list",
+        "operationId": "List-OrgPolicyResults",
         "summary": "Lists all the policy results for an organization.",
         "tags": [
           "Policies"
@@ -5083,7 +5092,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_chrome_extensions",
+        "operationId": "List-SysteminsightsSystemApps",
         "summary": "List System Insights System Chrome Extensions",
         "tags": [
           "System Insights"
@@ -5165,7 +5174,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_safari_extensions",
+        "operationId": "List-SysteminsightsSystemBrowserPlugins",
         "summary": "List System Insights System Safari Extensions",
         "tags": [
           "System Insights"
@@ -5247,7 +5256,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_mounts",
+        "operationId": "List-SysteminsightsSystemChromeExtensions",
         "summary": "List System Insights System Mounts",
         "tags": [
           "System Insights"
@@ -5329,7 +5338,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_browser_plugins",
+        "operationId": "List-SysteminsightsSystemEtcHosts",
         "summary": "List System Insights System Browser Plugins",
         "tags": [
           "System Insights"
@@ -5411,7 +5420,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_firefox_addons",
+        "operationId": "List-SysteminsightsSystemFirefoxAddons",
         "summary": "List System Insights System Firefox Addons",
         "tags": [
           "System Insights"
@@ -5493,7 +5502,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_apps",
+        "operationId": "List-SysteminsightsSystemGroups",
         "summary": "List System Insights System Apps",
         "tags": [
           "System Insights"
@@ -5575,7 +5584,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_disk_encryption",
+        "operationId": "List-SysteminsightsSystemInterfaceAddresses",
         "summary": "List System Insights System Disk Encryption",
         "tags": [
           "System Insights"
@@ -5657,7 +5666,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_os_version",
+        "operationId": "List-SysteminsightsSystemLogicalDrives",
         "summary": "List System Insights System OS Version",
         "tags": [
           "System Insights"
@@ -5739,7 +5748,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_interface_addresses",
+        "operationId": "List-SysteminsightsSystemMounts",
         "summary": "List System Insights System Interface Addresses",
         "tags": [
           "System Insights"
@@ -5821,7 +5830,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_groups",
+        "operationId": "List-SysteminsightsSystemPatches",
         "summary": "List System Insights System Groups",
         "tags": [
           "System Insights"
@@ -5903,7 +5912,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_users",
+        "operationId": "List-SysteminsightsSystemPrograms",
         "summary": "List System Insights System Users",
         "tags": [
           "System Insights"
@@ -5985,7 +5994,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_system_info",
+        "operationId": "List-SysteminsightsSystemSafariExtensions",
         "summary": "List System Insights System System Info",
         "tags": [
           "System Insights"
@@ -6067,7 +6076,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_bitlocker_info",
+        "operationId": "List-SysteminsightsSystemSystemControls",
         "summary": "List System Insights System Bitlocker Info",
         "tags": [
           "System Insights"
@@ -6149,7 +6158,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_disk_info",
+        "operationId": "List-SysteminsightsSystemUsers",
         "summary": "List System Insights System Disk Info",
         "tags": [
           "System Insights"
@@ -6231,7 +6240,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_etc_hosts",
+        "operationId": "List-SysteminsightsSystemBitlockerInfo",
         "summary": "List System Insights System Etc Hosts",
         "tags": [
           "System Insights"
@@ -6313,7 +6322,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_logical_drives",
+        "operationId": "List-SysteminsightsSystemDiskEncryption",
         "summary": "List System Insights System Logical Drives",
         "tags": [
           "System Insights"
@@ -6395,7 +6404,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_patches",
+        "operationId": "List-SysteminsightsSystemDiskInfo",
         "summary": "List System Insights System Patches",
         "tags": [
           "System Insights"
@@ -6477,7 +6486,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_programs",
+        "operationId": "List-SysteminsightsSystemKernelInfo",
         "summary": "List System Insights System Programs",
         "tags": [
           "System Insights"
@@ -6559,7 +6568,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_kernel_info",
+        "operationId": "List-SysteminsightsSystemOsVersion",
         "summary": "List System Insights System Kernel Info",
         "tags": [
           "System Insights"
@@ -6641,7 +6650,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_system_controls",
+        "operationId": "List-SysteminsightsSystemSystemInfo",
         "summary": "List System Insights System System Controls",
         "tags": [
           "System Insights"
@@ -6723,7 +6732,7 @@
         }
       ],
       "get": {
-        "operationId": "systeminsights_list_system_uptime",
+        "operationId": "List-SysteminsightsSystemUptime",
         "summary": "List System Insights System Uptime",
         "tags": [
           "System Insights"
@@ -9364,7 +9373,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/usergroupattributes"
+          "$ref": "#/definitions/UserGroupAttributes"
         },
         "id": {
           "type": "string",
@@ -9599,7 +9608,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/usergroupattributes"
+          "$ref": "#/definitions/UserGroupAttributes"
         },
         "name": {
           "type": "string",
@@ -9992,7 +10001,8 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/usergroupattributes"
+          "type": "object",
+          "description": "The graph connection's attributes."
         },
         "op": {
           "type": "string",
@@ -10272,7 +10282,21 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/usergroupattributes"
+          "type": "object",
+          "description": "The graph connection's attributes",
+          "properties": {
+            "sudo": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "withoutPassword": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
         },
         "op": {
           "type": "string",
@@ -10314,7 +10338,7 @@
       "type": "object",
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/usergroupattributes"
+          "$ref": "#/definitions/UserGroupAttributes"
         },
         "name": {
           "type": "string",
@@ -11992,7 +12016,8 @@
         },
         "name": {
           "type": "string",
-          "description": "A friendly name to identify this enrollment.  Not required to be unique."
+          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
+          "maxLength": 255
         },
         "apnsPushTopic": {
           "type": "string",
@@ -12017,7 +12042,7 @@
         }
       }
     },
-    "usergroupattributes": {
+    "UserGroupAttributes": {
       "title": "UserGroupAttributes",
       "type": "object",
       "properties": {
@@ -12037,36 +12062,6 @@
         },
         "sambaEnabled": {
           "type": "boolean"
-        },
-        "radius": {
-          "type": "object",
-          "properties": {
-            "reply": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "name": {
-                    "type": "string"
-                  },
-                  "value": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "sudo": {
-          "type": "object",
-          "properties": {
-            "enabled": {
-              "type": "boolean"
-            },
-            "withoutPassword": {
-              "type": "boolean"
-            }
-          }
         }
       }
     }
