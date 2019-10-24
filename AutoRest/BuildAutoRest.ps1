@@ -11,6 +11,7 @@ $CopyModuleFile = $true
 $BuildModule = $true
 $UpdateModuleManifest = $true
 $PackModule = $true
+$CommitModule = $true
 # $PublishModule = $true
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
@@ -135,6 +136,27 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
         Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
         Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
+    }
+    ###########################################################################
+    If ($CommitModule)
+    {
+
+        If ($env:USERNAME -eq 'VssAdministrator')
+        {
+            Try
+            {
+                Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
+                Invoke-Git -Arguments:('add -A')
+                Invoke-Git -Arguments:('status')
+                Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+            }
+            Catch
+            {
+                Write-Error $_
+            }
+        }
     }
     ###########################################################################
     # If ($PublishModule)
