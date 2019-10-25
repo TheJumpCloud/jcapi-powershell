@@ -35,7 +35,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
     $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
     $CustomFolderPath = '{0}/custom' -f $OutputFullPath
-    $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
+    $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
     $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
     $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
     Set-Location $BaseFolder
@@ -71,7 +71,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
         If (Test-Path -Path:($buildModulePath))
         {
             Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            Invoke-Expression -Command:($buildModulePath + ' -Docs -Release') # -Pack
+            Invoke-Expression -Command:($buildModulePath)
         }
         Else
         {
