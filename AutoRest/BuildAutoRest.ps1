@@ -68,15 +68,8 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($BuildModule)
     {
-        If (Test-Path -Path:($buildModulePath))
-        {
-            Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            Invoke-Expression -Command:($buildModulePath)
-        }
-        Else
-        {
-            Write-Error ("Path does not exist: $buildModulePath")
-        }
+        Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+        Invoke-Expression -Command:($buildModulePath)
     }
     ###########################################################################
     If ($UpdateModuleManifest)
