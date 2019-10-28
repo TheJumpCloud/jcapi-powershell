@@ -2,8 +2,12 @@
 .($PSScriptRoot + '/Invoke-Git.ps1')
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
-    'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.json';
-    'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.json';
+    # 'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
+    # 'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
+    # 'Url_V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.json' # Docs
+    # 'Url_V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.json' # Docs
+    'Url_V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUL6WP7Y5LZPNYRMDKS5YA5SU'
+    'Url_V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUJTT7DXI4VGEQ5VW5S5YA5QY'
 }
 $UpdatedSpec = $false
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
