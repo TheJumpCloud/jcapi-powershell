@@ -11,7 +11,7 @@ $BuildModule = $true
 $UpdateModuleManifest = $true
 $PackModule = $true
 $CommitModule = $true
-$PublishModule = $true
+$PublishModule = $false
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
 .($PSScriptRoot + '/ApiTransform.ps1') | Out-Null
