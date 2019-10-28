@@ -360,10 +360,10 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
             $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
             $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
+            $NewSpec | Out-File -FilePath:($OutputFullPath)
             If (-not [System.String]::IsNullOrEmpty($CompareResults))
             {
                 $UpdatedSpec = $true
-                $NewSpec | Out-File -FilePath:($OutputFullPath)
                 If ($env:USERNAME -eq 'VssAdministrator')
                 {
                     Try
@@ -381,6 +381,11 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     }
                 }
             }
+        }
+        Else
+        {
+            $UpdatedSpec = $true
+            $NewSpec | Out-File -FilePath:($OutputFullPath)
         }
     }
 }
