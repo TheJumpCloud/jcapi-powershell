@@ -18,7 +18,7 @@ ModuleVersion = '0.0.3'
 CompatiblePSEditions = 'Core', 'Desktop'
 
 # ID used to uniquely identify this module
-GUID = '8a2d7136-c1da-4d98-9074-8f6a13610c29'
+GUID = '8de423f1-34a3-438f-82ad-ce2218c26a24'
 
 # Author of this module
 Author = 'JumpCloud Solutions Architect Team'
