@@ -12,13 +12,13 @@
 RootModule = './JumpCloudApiSdkV1.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.3'
+ModuleVersion = '0.0.4'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core', 'Desktop'
 
 # ID used to uniquely identify this module
-GUID = '468202f1-3bd1-4bbe-8ee1-8fe098fe5e88'
+GUID = '9be61580-d55b-4ac1-a4bd-efc2fbfe892a'
 
 # Author of this module
 Author = 'JumpCloud Solutions Architect Team'
