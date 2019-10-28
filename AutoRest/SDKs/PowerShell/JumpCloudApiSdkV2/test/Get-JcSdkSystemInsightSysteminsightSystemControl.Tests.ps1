@@ -7,11 +7,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightSysteminsightSystemControl' {
-    It 'List1' {
+    It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'List' {
+    It 'List1' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

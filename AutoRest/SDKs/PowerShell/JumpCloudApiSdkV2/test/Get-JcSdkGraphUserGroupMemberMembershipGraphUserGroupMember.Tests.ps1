@@ -10,8 +10,4 @@ Describe 'Get-JcSdkGraphUserGroupMemberMembershipGraphUserGroupMember' {
     It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
-
-    It 'List1' {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
 }
