@@ -1,6 +1,5 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
-# $NuGetApiKey = ''
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
 $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
@@ -154,7 +153,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     {
         If ($PSRepoName -eq 'PSGallery')
         {
-            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($NuGetApiKey)
+            Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($env:NuGetApiKey)
         }
         Else
         {
