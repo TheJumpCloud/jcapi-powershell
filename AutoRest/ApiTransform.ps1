@@ -297,6 +297,10 @@ $FindReplaceHash = [Ordered]@{
 $ApiHash.GetEnumerator() | ForEach-Object {
     $OutputFileName = ($_.Name).Split('_')[1] + '.json'
     $OutputFullPath = $OutputFilePath + $OutputFileName
+    If (-not (Test-Path -Path:($OutputFilePath)))
+    {
+        New-Item -Path:($OutputFilePath) -ItemType:('Directory')
+    }
     $WebRequest = If ($_.Name -like 'Url_*')
     {
         (Invoke-WebRequest -Uri:($_.Value)).Content
