@@ -1,4 +1,4 @@
-# Requires -Modules BuildHelpers
+#Requires -Modules powershell-yaml
 .($PSScriptRoot + '/Invoke-Git.ps1')
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
@@ -11,6 +11,8 @@ $ApiHash = [Ordered]@{
 }
 $UpdatedSpec = $false
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
+# List-SystemSystemUserBinding, Put-SystemSystemUserBinding, List-SystemUserSystemBinding, Put-SystemUserSystemBinding
+
 # Build Find and Replace table
 $FindReplaceHash = [Ordered]@{
     # V1 Issues

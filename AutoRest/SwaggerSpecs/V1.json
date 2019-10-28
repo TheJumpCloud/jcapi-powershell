@@ -4259,112 +4259,6 @@
         }
       }
     },
-    "/systems/{id}/systemusers": {
-      "get": {
-        "description": "Hidden as Tags is deprecated\n\nList system user bindings for a specific system in a system and user binding format.\n\nThis endpoint is only used for users still using JumpCloud Tags. If you are using JumpCloud Groups please refer to the documentation found [here](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system).\n\n#### Sample Request\n\n*List system user bindings for specific system*\n\n```\ncurl -X https://console.jumpcloud.com/api/systems/{SystemID}/systemusers\\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  \"\n```",
-        "operationId": "List-SystemSystemUserBinding",
-        "parameters": [
-          {
-            "$ref": "#/parameters/trait:fields:fields"
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "$ref": "#/parameters/trait:sort:sort"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/systemuserbinding"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "List system user bindings",
-        "tags": [
-          "Systems"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "List-SystemSystemUserBinding",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": false
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "put": {
-        "description": "Hidden as Tags is deprecated\n\nAdds or removes a user binding for a system.\n\nThis endpoint is only used for users still using JumpCloud Tags. If you are using JumpCloud Groups please refer to the documentation found [here](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system).\n\n#### Sample Request\n\n*Add (or remove) a system user to (from) a system*\n\n```\ncurl \\\n  -d '{ \"add\": [\"[SYSTEM_USER_ID_TO_ADD_HERE]\"], \"remove\": [\"[SYSTEM_USER_ID_TO_REMOVE_HERE]\"] }' \\\n  -X PUT \\\n  -H 'Content-Type: application/json' \\\n  -H 'Accept: application/json' \\\n  -H \"x-api-key: [YOUR_API_KEY_HERE]\" \\\n  \"https://console.jumpcloud.com/api/systems/[SYSTEM_ID_HERE]/systemusers",
-        "operationId": "Put-SystemSystemUserBinding",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/systemuserbindingsput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Update a system's or user's binding",
-        "tags": [
-          "Systems"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "Put-SystemSystemUserBinding",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": false
-        }
-      }
-    },
     "/systemusers": {
       "get": {
         "description": "This endpoint returns all systemusers.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -4800,797 +4694,743 @@
         }
       }
     },
-    "/systemusers/{id}/systems": {
-      "get": {
-        "description": "Hidden as Tags is deprecated\n\nAdds or removes a system binding for a user.\n\nThis endpoint is only used for users still using JumpCloud Tags. If you are using JumpCloud Groups please refer to the documentation found [here](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system).\n\n\nList system bindings for a specific system user in a system and user binding format.\n\n### Examples\n\n#### List system bindings for specific system user\n\n```\ncurl \\\n  -H 'Content-Type: application/json' \\\n  -H \"x-api-key: [YOUR_API_KEY_HERE]\" \\\n  \"https://console.jumpcloud.com/api/systemusers/[SYSTEM_USER_ID_HERE]/systems\"\n```",
-        "operationId": "List-SystemUserSystemBinding",
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "put": {
+      "description": "Hidden as Tags is deprecated\n\nAdds or removes a system binding for a user.\n\nThis endpoint is only used for users still using JumpCloud Tags. If you are using JumpCloud Groups please refer to the documentation found [here](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system).\n\n### Example\n\n#### Add (or remove) system to system user\n\n```\ncurl \\\n  -d '{ \"add\": [\"[SYSTEM_ID_TO_ADD_HERE]\"], \"remove\": [\"[SYSTEM_ID_TO_REMOVE_HERE]\"] }' \\\n  -X PUT \\\n  -H 'Content-Type: application/json' \\\n  -H 'Accept: application/json' \\\n  -H \"x-api-key: [YOUR_API_KEY_HERE]\" \\\n  \"https://console.jumpcloud.com/api/systemusers/[SYSTEM_USER_ID_HERE]/systems\"\n```",
+      "operationId": ""
         "parameters": [
-          {
-            "$ref": "#/parameters/trait:fields:fields"
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "$ref": "#/parameters/trait:sort:sort"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "List system user binding",
-        "tags": [
-          "SystemUsers"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "List-SystemUserSystemBinding",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": false
-        }
-      },
-      "parameters": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
+          "in": "body",
+          "name": "body",
+          "schema": {
+            "$ref": "#/definitions/usersystembindingsput"
+          }
         }
       ],
-      "put": {
-        "description": "Hidden as Tags is deprecated\n\nAdds or removes a system binding for a user.\n\nThis endpoint is only used for users still using JumpCloud Tags. If you are using JumpCloud Groups please refer to the documentation found [here](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system).\n\n### Example\n\n#### Add (or remove) system to system user\n\n```\ncurl \\\n  -d '{ \"add\": [\"[SYSTEM_ID_TO_ADD_HERE]\"], \"remove\": [\"[SYSTEM_ID_TO_REMOVE_HERE]\"] }' \\\n  -X PUT \\\n  -H 'Content-Type: application/json' \\\n  -H 'Accept: application/json' \\\n  -H \"x-api-key: [YOUR_API_KEY_HERE]\" \\\n  \"https://console.jumpcloud.com/api/systemusers/[SYSTEM_USER_ID_HERE]/systems\"\n```",
-        "operationId": "Put-SystemUserSystemBinding",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/usersystembindingsput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/usersystembinding"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
+      "responses": {
+        "200": {
+          "description": "OK",
+          "schema": {
+            "$ref": "#/definitions/usersystembinding"
           }
         },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Update a system user binding",
-        "tags": [
-          "SystemUsers"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "Put-SystemUserSystemBinding",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": false
+        "401": {
+          "description": "Unauthorized"
         }
-      }
-    },
-    "/systemusers/{id}/unlock": {
-      "parameters": [
+      },
+      "security": [
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
+          "x-api-key": []
         }
       ],
-      "post": {
-        "description": "This endpoint allows you to unlock a user's account.",
-        "operationId": "Unlock-SystemUser",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
-          }
+      "summary": "Update a system user binding",
+      "tags": [
+        "SystemUsers"
+      ],
+      "x-stoplight": {
+        "afterScript": null,
+        "beforeScript": null,
+        "id": "Put-SystemUserSystemBinding",
+        "mock": {
+          "dynamic": false,
+          "enabled": false,
+          "statusCode": 200
         },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Unlock a system user",
-        "tags": [
-          "SystemUsers"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "Unlock-SystemUser",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": true
+      }
+    }
+  },
+  "/systemusers/{id}/unlock": {
+    "parameters": [
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "post": {
+      "description": "This endpoint allows you to unlock a user's account.",
+      "operationId": "Unlock-SystemUser",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": ""
+        },
+        "400": {
+          "$ref": "#/responses/trait:standardErrors:400"
+        },
+        "401": {
+          "$ref": "#/responses/trait:standardErrors:401"
+        },
+        "403": {
+          "$ref": "#/responses/trait:standardErrors:403"
+        },
+        "404": {
+          "$ref": "#/responses/trait:standardErrors:404"
+        },
+        "409": {
+          "$ref": "#/responses/trait:standardErrors:409"
+        },
+        "500": {
+          "$ref": "#/responses/trait:standardErrors:500"
         }
+      },
+      "security": [
+        {
+          "x-api-key": []
+        }
+      ],
+      "summary": "Unlock a system user",
+      "tags": [
+        "SystemUsers"
+      ],
+      "x-stoplight": {
+        "afterScript": null,
+        "beforeScript": null,
+        "id": "Unlock-SystemUser",
+        "mock": {
+          "dynamic": false,
+          "enabled": false,
+          "statusCode": 200
+        },
+        "public": true
+      }
+    }
+  },
+  "/systemusers/{systemuser_id}/sshkeys/{id}": {
+    "delete": {
+      "description": "This endpoint will delete a specific System User's SSH Key.",
+      "operationId": "Delete-SshKey",
+      "parameters": [],
+      "responses": {
+        "200": {
+          "description": ""
+        },
+        "400": {
+          "description": "",
+          "schema": {
+            "description": "Bad Request",
+            "type": "object"
+          }
+        }
+      },
+      "security": [
+        {
+          "x-api-key": []
+        }
+      ],
+      "summary": "Delete a system user's Public SSH Keys",
+      "tags": [
+        "SystemUsers"
+      ],
+      "x-stoplight": {
+        "afterScript": null,
+        "beforeScript": null,
+        "id": "Delete-SshKey",
+        "mock": {
+          "dynamic": false,
+          "enabled": false,
+          "statusCode": 200
+        },
+        "public": true
       }
     },
-    "/systemusers/{systemuser_id}/sshkeys/{id}": {
-      "delete": {
-        "description": "This endpoint will delete a specific System User's SSH Key.",
-        "operationId": "Delete-SshKey",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "description": "Bad Request",
-              "type": "object"
+    "parameters": [
+      {
+        "in": "path",
+        "name": "systemuser_id",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "in": "path",
+        "name": "id",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  }
+},
+"produces": [
+  "application/json"
+],
+"responses": {
+  "trait:standardErrors:400": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  },
+  "trait:standardErrors:401": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  },
+  "trait:standardErrors:403": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  },
+  "trait:standardErrors:404": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  },
+  "trait:standardErrors:409": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  },
+  "trait:standardErrors:500": {
+    "description": "",
+    "schema": {
+      "$ref": "#/definitions/errorresponse"
+    }
+  }
+},
+"schemes": [
+  "https"
+],
+"securityDefinitions": {
+  "x-api-key": {
+    "in": "header",
+    "name": "x-api-key",
+    "type": "apiKey"
+  }
+},
+"swagger": "2.0",
+"x-stoplight": {
+  "afterScript": "",
+  "beforeScript": "",
+  "functions": {},
+  "mock": {
+    "dynamic": false,
+    "enabled": false
+  },
+  "textSections": {
+    "api-change-log": {
+      "content": "### 08-01-2018\n\n`minor release`\n- [New Get Organization endpoint](https://docs.jumpcloud.com/1.0/organizations/get-organization-details)\n- [Multi-Tenant x-org-id](https://docs.jumpcloud.com/2.0/authentication-and-authorization/multi-tenant-organization-api-headers) documentation and functionality.\n- Corrections to Command Endpoint Documentation.\n- Remove ssh_keys from systemuserpost model.\n\n### 09-12-2018\n\n`minor release`\n\n- X-Org-Id Request Header\n- SSH Key Models for GET / POST\n- system user models properly reference the new ssh key models.\n- Correction to additional ID field on Systems\n- New System User Attribute Fields and Model Updates for System User PUT / POST / GET\n- Addition of SSH Key endpoints GET, DEL, POST\n- New Search Organizations POST endpoint\n- Misc Text Section updates\n- V1 YAML phone + address object updates",
+      "id": "api-change-log",
+      "name": "API Changelog",
+      "public": true
+    },
+    "authentication-and-authorization-overview": {
+      "content": "#### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V1 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```",
+      "id": "authentication-and-authorization-overview",
+      "name": "API Key",
+      "public": true
+    },
+    "multi-tenant-organization-api-headers": {
+      "content": "Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+      "id": "multi-tenant-organization-api-headers",
+      "name": "Multi Tenant Organization API Headers",
+      "public": true
+    },
+    "system-context": {
+      "content": "* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)",
+      "id": "system-context",
+      "name": "System Context",
+      "public": true
+    },
+    "v1-api": {
+      "content": "Our existing API offers the ability to interact with some of our core features such as: Commands, Systems, and Users. We are currently in the process of migrating our API V1 features to [API V2](https://docs.jumpcloud.com/2.0) Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V2](https://docs.jumpcloud.com/2.0) docs to understand the functionality available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)",
+      "id": "v1-api",
+      "name": "V1 API",
+      "public": true
+    }
+  },
+  "version": {
+    "groups": {
+      "docs": [
+        {
+          "divider": false,
+          "items": [
+            {
+              "_id": "v1-api",
+              "type": "docTextSections"
+            },
+            {
+              "_id": "api-change-log",
+              "type": "docTextSections"
             }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Delete a system user's Public SSH Keys",
-        "tags": [
-          "SystemUsers"
-        ],
-        "x-stoplight": {
-          "afterScript": null,
-          "beforeScript": null,
-          "id": "Delete-SshKey",
-          "mock": {
-            "dynamic": false,
-            "enabled": false,
-            "statusCode": 200
-          },
-          "public": true
-        }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "systemuser_id",
-          "required": true,
-          "type": "string"
+          ],
+          "name": "API Overview"
         },
         {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
+          "description": "",
+          "divider": false,
+          "items": [
+            {
+              "_id": "authentication-and-authorization-overview",
+              "type": "docTextSections"
+            },
+            {
+              "_id": "system-context",
+              "type": "docTextSections"
+            },
+            {
+              "_id": "multi-tenant-organization-api-headers",
+              "type": "docTextSections"
+            }
+          ],
+          "name": "Authentication & Authorization"
+        },
+        {
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-ApplicationTemplate",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-ApplicationTemplate",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Application Templates"
+        },
+        {
+          "description": "The Applications endpoint is use to create and modify your SSO Applications in JumpCloud. It's recommended to use the Console UI to setup your SSO Applications.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-Application",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Create-Application",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-Application",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-Application",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-Application",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Applications"
+        },
+        {
+          "description": "The Triggers section of the JumpCloud API allows you to use a webhook to launch a command or a workflow. When JumpCloud receives a webhook containing the trigger name, JumpCloud will automatically execute any command(s) with that trigger name, in parallel, across all the servers defined in the saved commands.\n\nTriggers can be executed solely with a trigger name (the name you provide in the \"Trigger Name:\" field when you set a Command to \"Run on Trigger (webhook)\", or you can post a JSON object in the POST body, and all top level string or numeric objects in the JSON object will be sent to the command as environment variables.\n\nFor example, posting:\n```\n{\n    \"srcip\": \"192.168.1.32\",\n    \"attack\": \"Attempted Cross-Site Request Forgery\"\n}\n```\nwill generate the following environment variables for the started command:\n```\nsrcip=\"192.168.1.32\"\nattack=\"Attempted Cross-Site Request Forgery\"\nBecause sub-objects and arrays are not stringified before being passed to the command, the command will see the environment variables set to \"[object Object]\" in these cases.\n```",
+          "divider": false,
+          "items": [
+            {
+              "_id": "Start-CommandTriggerWebhook",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Command Triggers"
+        },
+        {
+          "description": "The Command Scheduler can be used to run commands across your systems/tags either immediately, at a specific time in the future, or repeatedly. Please note that systems OR tags is a required field. Setting both is unsupported. You can retrieve the results by using the Command Results API.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-Command",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-Command",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Create-Command",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-Command",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-CommandFile",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-Command",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Commands"
+        },
+        {
+          "description": "The Command Results section of the JumpCloud API allows you to retrieve and delete the results of commands that you ran on your system through JumpCloud. None of the properties are modifiable, but you can delete records.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-CommandResult",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-CommandResult",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-CommandResult",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Command Results"
+        },
+        {
+          "description": "You can obtain information about your JumpCloud Organization(s).",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-Organization",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Organizations"
+        },
+        {
+          "divider": false,
+          "items": [
+            {
+              "_id": "Create-RadiusServer",
+              "type": "endpoints"
+            },
+            {
+              "_id": "List-RadiusServer",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-RadiusServer",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Radius Servers"
+        },
+        {
+          "items": [
+            {
+              "_id": "Search-Organization",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Search-System",
+              "type": "endpoints"
+            },
+            {
+              "_id": "search_Create-SystemUser",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Search"
+        },
+        {
+          "description": "The System Users section of the JumpCloud API allows you to add, retrieve, delete, and modify System Users. To add a System User to JumpCloud, you must provide an email address and username. The System Users email will be used to contact the new System User, allowing them to be activated. During activation, the user will prompted to set their password, an SSH public key, and to set up Google Authenticator for Multi-factor authentication.\n\nAdding a new System User will not grant them access to servers until they're associated to a Tag, and a System User can be assigned to a Tag as soon as they're created. However, they will not gain access to any servers until they have activated.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-System",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-System",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-System",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-System",
+              "type": "endpoints"
+            },
+            {
+              "_id": "List-SystemSystemUserBinding",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-SystemSystemUserBinding",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Systems"
+        },
+        {
+          "description": "The System Users section of the JumpCloud API allows you to add, retrieve, delete, and modify System Users. To add a System User to JumpCloud, you must provide an email address and username. The System Users email will be used to contact the new System User, allowing them to be activated. During activation, the user will prompted to set their password, an SSH public key, and to set up Google Authenticator for Multi-factor authentication.\n\nAdding a new System User will not grant them access to servers until they're associated to a Tag, and a System User can be assigned to a Tag as soon as they're created. However, they will not gain access to any servers until they have activated.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-SystemUser",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-SystemUser",
+              "type": "endpoints"
+            },
+            {
+              "_id": "List-SystemUserSystemBinding",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-SystemUserSystemBinding",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Create-SystemUser",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-SystemUser",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-SystemUser",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Reset-SystemUserMfa",
+              "type": "endpoints"
+            },
+            {
+              "_id": "List-SshKey",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Create-SshKey",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-SshKey",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Unlock-SystemUser",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Systemusers"
+        },
+        {
+          "description": "The Tags section of the JumpCloud API allows you to add, retrieve, delete, and modify Tags. Tags are used to associate system users to systems, and to create groups of systems for easy management in the Commands tab. For example, if you have user \"jsmith\" and a system both associated to the same Tag, then the system user \"jsmith\" will be able to login to that system. If either the system or \"jsmith\" are removed from the Tag, \"jsmith\" will no longer have access to that system.\n\nFor more information about tags see: [How to Use Tags](https://support.jumpcloud.com/customer/portal/articles/2449137-getting-started-tags)",
+          "divider": false,
+          "items": [
+            {
+              "_id": "List-Tag",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Get-Tag",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Create-Tag",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Put-Tag",
+              "type": "endpoints"
+            },
+            {
+              "_id": "Delete-Tag",
+              "type": "endpoints"
+            }
+          ],
+          "name": "Tags"
+        },
+        {
+          "description": "Models make up the core input and output structures in this API. They are used in endpoint request and response bodies.",
+          "divider": false,
+          "items": [
+            {
+              "_id": "application",
+              "type": "schemas"
+            },
+            {
+              "_id": "applicationslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "applicationtemplate",
+              "type": "schemas"
+            },
+            {
+              "_id": "applicationtemplateslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "command",
+              "type": "schemas"
+            },
+            {
+              "_id": "commandfilereturn",
+              "type": "schemas"
+            },
+            {
+              "_id": "commandresult",
+              "type": "schemas"
+            },
+            {
+              "_id": "commandresultslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "commandslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "fde",
+              "type": "schemas"
+            },
+            {
+              "_id": "organizationslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "radiusserver",
+              "type": "schemas"
+            },
+            {
+              "_id": "radiusserverpost",
+              "type": "schemas"
+            },
+            {
+              "_id": "radiusserverput",
+              "type": "schemas"
+            },
+            {
+              "_id": "radiusserverslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "search",
+              "type": "schemas"
+            },
+            {
+              "_id": "sshkeypost",
+              "type": "schemas"
+            },
+            {
+              "_id": "system",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemput",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemuserbinding",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemuserbindingsput",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemuserput",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemuserreturn",
+              "type": "schemas"
+            },
+            {
+              "_id": "systemuserslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "ddrZmggZ983Ray45n",
+              "type": "schemas"
+            },
+            {
+              "_id": "tag",
+              "type": "schemas"
+            },
+            {
+              "_id": "tagpost",
+              "type": "schemas"
+            },
+            {
+              "_id": "tagput",
+              "type": "schemas"
+            },
+            {
+              "_id": "tagslist",
+              "type": "schemas"
+            },
+            {
+              "_id": "usersystembinding",
+              "type": "schemas"
+            },
+            {
+              "_id": "usersystembindingsput",
+              "type": "schemas"
+            }
+          ],
+          "name": "Models"
+        },
+        {
+          "description": "Traits describe common behaviors or structures in this API.",
+          "items": [
+            {
+              "_id": "fields",
+              "type": "traits"
+            },
+            {
+              "_id": "filter",
+              "type": "traits"
+            },
+            {
+              "_id": "limit",
+              "type": "traits"
+            },
+            {
+              "_id": "multiTenantRequestHeaders",
+              "type": "traits"
+            },
+            {
+              "_id": "requestHeaders",
+              "type": "traits"
+            },
+            {
+              "_id": "search",
+              "type": "traits"
+            },
+            {
+              "_id": "skip",
+              "type": "traits"
+            },
+            {
+              "_id": "sort",
+              "type": "traits"
+            },
+            {
+              "_id": "systemContextAuth",
+              "type": "traits"
+            }
+          ],
+          "name": "Traits"
         }
-      ]
+      ],
+      "savedEntries": [],
+      "tests": [],
+      "traits": [],
+      "utilFuncs": []
     }
-  },
-  "produces": [
-    "application/json"
-  ],
-  "responses": {
-    "trait:standardErrors:400": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    },
-    "trait:standardErrors:401": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    },
-    "trait:standardErrors:403": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    },
-    "trait:standardErrors:404": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    },
-    "trait:standardErrors:409": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    },
-    "trait:standardErrors:500": {
-      "description": "",
-      "schema": {
-        "$ref": "#/definitions/errorresponse"
-      }
-    }
-  },
-  "schemes": [
-    "https"
-  ],
-  "securityDefinitions": {
-    "x-api-key": {
-      "in": "header",
-      "name": "x-api-key",
-      "type": "apiKey"
-    }
-  },
-  "swagger": "2.0",
-  "x-stoplight": {
-    "afterScript": "",
-    "beforeScript": "",
-    "functions": {},
-    "mock": {
-      "dynamic": false,
-      "enabled": false
-    },
-    "textSections": {
-      "api-change-log": {
-        "content": "### 08-01-2018\n\n`minor release`\n- [New Get Organization endpoint](https://docs.jumpcloud.com/1.0/organizations/get-organization-details)\n- [Multi-Tenant x-org-id](https://docs.jumpcloud.com/2.0/authentication-and-authorization/multi-tenant-organization-api-headers) documentation and functionality.\n- Corrections to Command Endpoint Documentation.\n- Remove ssh_keys from systemuserpost model.\n\n### 09-12-2018\n\n`minor release`\n\n- X-Org-Id Request Header\n- SSH Key Models for GET / POST\n- system user models properly reference the new ssh key models.\n- Correction to additional ID field on Systems\n- New System User Attribute Fields and Model Updates for System User PUT / POST / GET\n- Addition of SSH Key endpoints GET, DEL, POST\n- New Search Organizations POST endpoint\n- Misc Text Section updates\n- V1 YAML phone + address object updates",
-        "id": "api-change-log",
-        "name": "API Changelog",
-        "public": true
-      },
-      "authentication-and-authorization-overview": {
-        "content": "#### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V1 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```",
-        "id": "authentication-and-authorization-overview",
-        "name": "API Key",
-        "public": true
-      },
-      "multi-tenant-organization-api-headers": {
-        "content": "Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "id": "multi-tenant-organization-api-headers",
-        "name": "Multi Tenant Organization API Headers",
-        "public": true
-      },
-      "system-context": {
-        "content": "* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)",
-        "id": "system-context",
-        "name": "System Context",
-        "public": true
-      },
-      "v1-api": {
-        "content": "Our existing API offers the ability to interact with some of our core features such as: Commands, Systems, and Users. We are currently in the process of migrating our API V1 features to [API V2](https://docs.jumpcloud.com/2.0) Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V2](https://docs.jumpcloud.com/2.0) docs to understand the functionality available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)",
-        "id": "v1-api",
-        "name": "V1 API",
-        "public": true
-      }
-    },
-    "version": {
-      "groups": {
-        "docs": [
-          {
-            "divider": false,
-            "items": [
-              {
-                "_id": "v1-api",
-                "type": "docTextSections"
-              },
-              {
-                "_id": "api-change-log",
-                "type": "docTextSections"
-              }
-            ],
-            "name": "API Overview"
-          },
-          {
-            "description": "",
-            "divider": false,
-            "items": [
-              {
-                "_id": "authentication-and-authorization-overview",
-                "type": "docTextSections"
-              },
-              {
-                "_id": "system-context",
-                "type": "docTextSections"
-              },
-              {
-                "_id": "multi-tenant-organization-api-headers",
-                "type": "docTextSections"
-              }
-            ],
-            "name": "Authentication & Authorization"
-          },
-          {
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-ApplicationTemplate",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-ApplicationTemplate",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Application Templates"
-          },
-          {
-            "description": "The Applications endpoint is use to create and modify your SSO Applications in JumpCloud. It's recommended to use the Console UI to setup your SSO Applications.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-Application",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Create-Application",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-Application",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-Application",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-Application",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Applications"
-          },
-          {
-            "description": "The Triggers section of the JumpCloud API allows you to use a webhook to launch a command or a workflow. When JumpCloud receives a webhook containing the trigger name, JumpCloud will automatically execute any command(s) with that trigger name, in parallel, across all the servers defined in the saved commands.\n\nTriggers can be executed solely with a trigger name (the name you provide in the \"Trigger Name:\" field when you set a Command to \"Run on Trigger (webhook)\", or you can post a JSON object in the POST body, and all top level string or numeric objects in the JSON object will be sent to the command as environment variables.\n\nFor example, posting:\n```\n{\n    \"srcip\": \"192.168.1.32\",\n    \"attack\": \"Attempted Cross-Site Request Forgery\"\n}\n```\nwill generate the following environment variables for the started command:\n```\nsrcip=\"192.168.1.32\"\nattack=\"Attempted Cross-Site Request Forgery\"\nBecause sub-objects and arrays are not stringified before being passed to the command, the command will see the environment variables set to \"[object Object]\" in these cases.\n```",
-            "divider": false,
-            "items": [
-              {
-                "_id": "Start-CommandTriggerWebhook",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Command Triggers"
-          },
-          {
-            "description": "The Command Scheduler can be used to run commands across your systems/tags either immediately, at a specific time in the future, or repeatedly. Please note that systems OR tags is a required field. Setting both is unsupported. You can retrieve the results by using the Command Results API.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-Command",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-Command",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Create-Command",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-Command",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-CommandFile",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-Command",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Commands"
-          },
-          {
-            "description": "The Command Results section of the JumpCloud API allows you to retrieve and delete the results of commands that you ran on your system through JumpCloud. None of the properties are modifiable, but you can delete records.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-CommandResult",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-CommandResult",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-CommandResult",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Command Results"
-          },
-          {
-            "description": "You can obtain information about your JumpCloud Organization(s).",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-Organization",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Organizations"
-          },
-          {
-            "divider": false,
-            "items": [
-              {
-                "_id": "Create-RadiusServer",
-                "type": "endpoints"
-              },
-              {
-                "_id": "List-RadiusServer",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-RadiusServer",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Radius Servers"
-          },
-          {
-            "items": [
-              {
-                "_id": "Search-Organization",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Search-System",
-                "type": "endpoints"
-              },
-              {
-                "_id": "search_Create-SystemUser",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Search"
-          },
-          {
-            "description": "The System Users section of the JumpCloud API allows you to add, retrieve, delete, and modify System Users. To add a System User to JumpCloud, you must provide an email address and username. The System Users email will be used to contact the new System User, allowing them to be activated. During activation, the user will prompted to set their password, an SSH public key, and to set up Google Authenticator for Multi-factor authentication.\n\nAdding a new System User will not grant them access to servers until they're associated to a Tag, and a System User can be assigned to a Tag as soon as they're created. However, they will not gain access to any servers until they have activated.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-System",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-System",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-System",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-System",
-                "type": "endpoints"
-              },
-              {
-                "_id": "List-SystemSystemUserBinding",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-SystemSystemUserBinding",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Systems"
-          },
-          {
-            "description": "The System Users section of the JumpCloud API allows you to add, retrieve, delete, and modify System Users. To add a System User to JumpCloud, you must provide an email address and username. The System Users email will be used to contact the new System User, allowing them to be activated. During activation, the user will prompted to set their password, an SSH public key, and to set up Google Authenticator for Multi-factor authentication.\n\nAdding a new System User will not grant them access to servers until they're associated to a Tag, and a System User can be assigned to a Tag as soon as they're created. However, they will not gain access to any servers until they have activated.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-SystemUser",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-SystemUser",
-                "type": "endpoints"
-              },
-              {
-                "_id": "List-SystemUserSystemBinding",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-SystemUserSystemBinding",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Create-SystemUser",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-SystemUser",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-SystemUser",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Reset-SystemUserMfa",
-                "type": "endpoints"
-              },
-              {
-                "_id": "List-SshKey",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Create-SshKey",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-SshKey",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Unlock-SystemUser",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Systemusers"
-          },
-          {
-            "description": "The Tags section of the JumpCloud API allows you to add, retrieve, delete, and modify Tags. Tags are used to associate system users to systems, and to create groups of systems for easy management in the Commands tab. For example, if you have user \"jsmith\" and a system both associated to the same Tag, then the system user \"jsmith\" will be able to login to that system. If either the system or \"jsmith\" are removed from the Tag, \"jsmith\" will no longer have access to that system.\n\nFor more information about tags see: [How to Use Tags](https://support.jumpcloud.com/customer/portal/articles/2449137-getting-started-tags)",
-            "divider": false,
-            "items": [
-              {
-                "_id": "List-Tag",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Get-Tag",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Create-Tag",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Put-Tag",
-                "type": "endpoints"
-              },
-              {
-                "_id": "Delete-Tag",
-                "type": "endpoints"
-              }
-            ],
-            "name": "Tags"
-          },
-          {
-            "description": "Models make up the core input and output structures in this API. They are used in endpoint request and response bodies.",
-            "divider": false,
-            "items": [
-              {
-                "_id": "application",
-                "type": "schemas"
-              },
-              {
-                "_id": "applicationslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "applicationtemplate",
-                "type": "schemas"
-              },
-              {
-                "_id": "applicationtemplateslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "command",
-                "type": "schemas"
-              },
-              {
-                "_id": "commandfilereturn",
-                "type": "schemas"
-              },
-              {
-                "_id": "commandresult",
-                "type": "schemas"
-              },
-              {
-                "_id": "commandresultslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "commandslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "fde",
-                "type": "schemas"
-              },
-              {
-                "_id": "organizationslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "radiusserver",
-                "type": "schemas"
-              },
-              {
-                "_id": "radiusserverpost",
-                "type": "schemas"
-              },
-              {
-                "_id": "radiusserverput",
-                "type": "schemas"
-              },
-              {
-                "_id": "radiusserverslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "search",
-                "type": "schemas"
-              },
-              {
-                "_id": "sshkeypost",
-                "type": "schemas"
-              },
-              {
-                "_id": "system",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemput",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemuserbinding",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemuserbindingsput",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemuserput",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemuserreturn",
-                "type": "schemas"
-              },
-              {
-                "_id": "systemuserslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "ddrZmggZ983Ray45n",
-                "type": "schemas"
-              },
-              {
-                "_id": "tag",
-                "type": "schemas"
-              },
-              {
-                "_id": "tagpost",
-                "type": "schemas"
-              },
-              {
-                "_id": "tagput",
-                "type": "schemas"
-              },
-              {
-                "_id": "tagslist",
-                "type": "schemas"
-              },
-              {
-                "_id": "usersystembinding",
-                "type": "schemas"
-              },
-              {
-                "_id": "usersystembindingsput",
-                "type": "schemas"
-              }
-            ],
-            "name": "Models"
-          },
-          {
-            "description": "Traits describe common behaviors or structures in this API.",
-            "items": [
-              {
-                "_id": "fields",
-                "type": "traits"
-              },
-              {
-                "_id": "filter",
-                "type": "traits"
-              },
-              {
-                "_id": "limit",
-                "type": "traits"
-              },
-              {
-                "_id": "multiTenantRequestHeaders",
-                "type": "traits"
-              },
-              {
-                "_id": "requestHeaders",
-                "type": "traits"
-              },
-              {
-                "_id": "search",
-                "type": "traits"
-              },
-              {
-                "_id": "skip",
-                "type": "traits"
-              },
-              {
-                "_id": "sort",
-                "type": "traits"
-              },
-              {
-                "_id": "systemContextAuth",
-                "type": "traits"
-              }
-            ],
-            "name": "Traits"
-          }
-        ],
-        "savedEntries": [],
-        "tests": [],
-        "traits": [],
-        "utilFuncs": []
-      }
-    }
-  },
-  "x-tests": {}
+  }
+},
+"x-tests": {}
 }
