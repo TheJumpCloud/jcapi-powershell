@@ -11,8 +11,6 @@ $ApiHash = [Ordered]@{
 }
 $UpdatedSpec = $false
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
-# List-SystemSystemUserBinding, Put-SystemSystemUserBinding, List-SystemUserSystemBinding, Put-SystemUserSystemBinding
-
 # Build Find and Replace table
 $FindReplaceHash = [Ordered]@{
     # V1 Issues
@@ -393,7 +391,42 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
         # Remove tag elements
         $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
-        # $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } ) #| Sort-Object)
+        # Remove "public": false elements
+        $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+        ForEach ($PathName In $PathNames)
+        {
+            $PathChildNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+            ForEach ($PathChildName In $PathChildNames)
+            {
+                If ($JsonExport.paths.$PathName.$PathChildName.'x-stoplight'.public -eq $false)
+                {
+                    Write-Warning ('Excluding "Path" "' + $PathName + '" "' + $PathChildName + '"')
+                    $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:($PathName)
+                }
+            }
+        }
+        $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+        ForEach ($DefinitionName In $DefinitionNames)
+        {
+            If ($JsonExport.definitions.$DefinitionName.$DefinitionChildName.'x-stoplight'.public -eq $false)
+            {
+                Write-Warning ('Excluding "Definition" "' + $DefinitionName + '"')
+                $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
+            }
+        }
+        $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+        ForEach ($TextSectionName In $TextSectionNames)
+        {
+            $TextSectionChildNames = ($JsonExport.'x-stoplight'.TextSections.$TextSectionName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+            ForEach ($TextSectionChildName In $TextSectionChildNames)
+            {
+                If ($JsonExport.'x-stoplight'.TextSections.$TextSectionName.$TextSectionChildName.'x-stoplight'.public -eq $false)
+                {
+                    Write-Warning ('Excluding "TextSection" "' + $TextSectionName + '"')
+                    $JsonExport.'x-stoplight'.TextSections = $JsonExport.'x-stoplight'.TextSections | Select-Object * -ExcludeProperty:($TextSectionName)
+                }
+            }
+        }
         # $PathHash = [ordered]@{ }
         # $PathNames | ForEach-Object {
         #     $PathName = $_
