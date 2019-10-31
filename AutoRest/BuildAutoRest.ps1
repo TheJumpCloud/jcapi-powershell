@@ -52,11 +52,11 @@ ForEach ($API In $APIName)
         ###########################################################################
         If ($InstallPreReq)
         {
-            If ($env:USERNAME -ne 'VssAdministrator')
-            {
-                Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
-            }
+            # If ($env:USERNAME -ne 'VssAdministrator')
+            # {
+            Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
+            # }
             # autorest --help
             Write-Host ('[RUN COMMAND] npm.cmd install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             npm.cmd install -g autorest@beta # | Out-Null
