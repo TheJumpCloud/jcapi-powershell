@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// {Policy_Parameters}\n}'\n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Create-Policy=>POST:"/policies"
+    /// [OpenAPI] Policy_Create=>POST:"/policies"
     /// [METADATA]
     /// path: /policies
     /// apiVersions:
@@ -226,7 +226,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'CreatePolicy' operation"))
+                if (ShouldProcess($"Call remote 'PolicyCreate' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -284,7 +284,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.CreatePolicy(Body, onCreated, this, Pipeline);
+                    await this.Client.PolicyCreate(Body, onCreated, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

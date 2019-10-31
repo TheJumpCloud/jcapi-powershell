@@ -21,13 +21,13 @@ Update-JcSdkLdapServer -Id <String> [-XApiKey <String>] [-XOrgId <String>] [-Id1
 
 ### Patch
 ```
-Update-JcSdkLdapServer -Id <String> -Body <IBodyParameterPatchLdapServerRequestBody> [-XApiKey <String>]
+Update-JcSdkLdapServer -Id <String> -Body <IBodyParameterLdapServerPatchRequestBody> [-XApiKey <String>]
  [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PatchViaIdentity
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterPatchLdapServerRequestBody>
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterLdapServerPatchRequestBody>
  [-XApiKey <String>] [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -57,7 +57,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody
+Type: JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody
 Parameter Sets: Patch, PatchViaIdentity
 Aliases:
 
@@ -220,7 +220,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody
+### JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody
 
 ### JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity
 
@@ -237,7 +237,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterPatchLdapServerRequestBody>: HELP MESSAGE MISSING
+#### BODY <IBodyParameterLdapServerPatchRequestBody>: HELP MESSAGE MISSING
   - `[Id <String>]`: 
   - `[UserLockoutAction <String>]`: LDAP Server Action
   - `[UserPasswordExpirationAction <String>]`: LDAP Server Action

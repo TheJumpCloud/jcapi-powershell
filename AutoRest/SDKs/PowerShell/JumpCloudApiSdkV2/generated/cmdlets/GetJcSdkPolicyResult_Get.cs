@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n ```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-PolicyResult=>GET:"/policyresults/{id}"
+    /// [OpenAPI] PolicyResult_Get=>GET:"/policyresults/{id}"
     /// [METADATA]
     /// path: '/policyresults/{id}'
     /// apiVersions:
@@ -252,7 +252,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.GetPolicyResult(Id, onOk, this, Pipeline);
+                    await this.Client.PolicyResultGet(Id, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

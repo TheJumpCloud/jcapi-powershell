@@ -8,7 +8,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \"userLockoutAction\": \"remove\",\n \"userPasswordExpirationAction\": \"disable\"\n }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Patch-LdapServer=>PATCH:"/ldapservers/{id}"
+    /// [OpenAPI] LdapServer_Patch=>PATCH:"/ldapservers/{id}"
     /// [METADATA]
     /// path: '/ldapservers/{id}'
     /// apiVersions:
@@ -39,7 +39,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
-        private JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody _body;
+        private JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody _body;
 
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING", ValueFromPipeline = true)]
         [JumpCloudApiSdkV2.Runtime.Info(
@@ -47,8 +47,8 @@ namespace JumpCloudApiSdkV2.Cmdlets
         ReadOnly = false,
         Description = @"",
         SerializedName = @"body",
-        PossibleTypes = new [] { typeof(JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody) })]
-        public JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody Body { get => this._body; set => this._body = value; }
+        PossibleTypes = new [] { typeof(JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody) })]
+        public JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -241,7 +241,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PatchLdapServer' operation"))
+                if (ShouldProcess($"Call remote 'LdapServerPatch' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -299,7 +299,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.PatchLdapServer(Id, this.InvocationInformation.BoundParameters.ContainsKey("XApiKey") ? XApiKey : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, onBadRequest, this, Pipeline);
+                    await this.Client.LdapServerPatch(Id, this.InvocationInformation.BoundParameters.ContainsKey("XApiKey") ? XApiKey : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, onBadRequest, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n ```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-Policy=>GET:"/policies/{id}"
+    /// [OpenAPI] Policy_Get=>GET:"/policies/{id}"
     /// [METADATA]
     /// path: '/policies/{id}'
     /// apiVersions:
@@ -252,7 +252,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.GetPolicy(InputObject.Id ?? null, onOk, this, Pipeline);
+                    await this.Client.PolicyGet(InputObject.Id ?? null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

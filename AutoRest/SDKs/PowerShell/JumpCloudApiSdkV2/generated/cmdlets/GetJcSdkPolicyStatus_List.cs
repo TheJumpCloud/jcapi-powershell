@@ -3,20 +3,19 @@ namespace JumpCloudApiSdkV2.Cmdlets
     using static JumpCloudApiSdkV2.Runtime.Extensions;
 
     /// <summary>
-    /// This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET
-    /// https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n -H 'Accept: application/json' \\\n -H 'Content-Type:
-    /// application/json' \\\n -H 'x-api-key: {API_KEY}'\n ```
+    /// This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses
+    /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] List-PolicyStatus=>GET:"/policies/{policy_id}/policystatuses"
+    /// [OpenAPI] PolicyStatus_List=>GET:"/systems/{system_id}/policystatuses"
     /// [METADATA]
-    /// path: '/policies/{policy_id}/policystatuses'
+    /// path: '/systems/{system_id}/policystatuses'
     /// apiVersions:
     /// - '2.0'
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1policies~1{policy_id}~1policystatuses'
+    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systems~1{system_id}~1policystatuses'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
@@ -25,7 +24,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkPolicyStatus_List")]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.IPolicyResult))]
-    [JumpCloudApiSdkV2.Description(@"This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```")]
+    [JumpCloudApiSdkV2.Description(@"This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```")]
     [JumpCloudApiSdkV2.Generated]
     public partial class GetJcSdkPolicyStatus_List : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
@@ -123,19 +122,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// </summary>
         private JumpCloudApiSdkV2.Runtime.HttpPipeline Pipeline { get; set; }
 
-        /// <summary>Backing field for <see cref="PolicyId" /> property.</summary>
-        private string _policyId;
-
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Description = @"",
-        SerializedName = @"policy_id",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
-        public string PolicyId { get => this._policyId; set => this._policyId = value; }
-
         /// <summary>The URI for the proxy server to use</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "The URI for the proxy server to use")]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Runtime)]
@@ -185,6 +171,20 @@ namespace JumpCloudApiSdkV2.Cmdlets
         PossibleTypes = new [] { typeof(string) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
         public string[] Sort { get => this._sort; set => this._sort = value; }
+
+        /// <summary>Backing field for <see cref="SystemId" /> property.</summary>
+        private string _systemId;
+
+        /// <summary>ObjectID of the System.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "ObjectID of the System.")]
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"ObjectID of the System.",
+        SerializedName = @"system_id",
+        PossibleTypes = new [] { typeof(string) })]
+        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
+        public string SystemId { get => this._systemId; set => this._systemId = value; }
 
         /// <summary>
         /// <c>overrideOnOk</c> will be called before the regular onOk has been processed, allowing customization of what happens
@@ -335,12 +335,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ListPolicyStatus1(PolicyId, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.PolicyStatusList(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  PolicyId=PolicyId,Fields=this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */,Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Sort=this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  SystemId=SystemId,Fields=this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */,Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Sort=this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */}));
                 }
                 finally
                 {

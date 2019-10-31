@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// {Policy_Parameters}\n}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Put-Policy=>PUT:"/policies/{id}"
+    /// [OpenAPI] Policy_Put=>PUT:"/policies/{id}"
     /// [METADATA]
     /// path: '/policies/{id}'
     /// apiVersions:
@@ -204,7 +204,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutPolicy' operation"))
+                if (ShouldProcess($"Call remote 'PolicyPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -262,7 +262,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.PutPolicy(Id, Body, onOk, this, Pipeline);
+                    await this.Client.PolicyPut(Id, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

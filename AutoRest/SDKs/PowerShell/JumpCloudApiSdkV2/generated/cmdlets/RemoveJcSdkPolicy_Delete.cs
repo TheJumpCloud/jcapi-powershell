@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n ```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Delete-Policy=>DELETE:"/policies/{id}"
+    /// [OpenAPI] Policy_Delete=>DELETE:"/policies/{id}"
     /// [METADATA]
     /// path: '/policies/{id}'
     /// apiVersions:
@@ -195,7 +195,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DeletePolicy' operation"))
+                if (ShouldProcess($"Call remote 'PolicyDelete' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -253,7 +253,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.DeletePolicy(Id, onNoContent, this, Pipeline);
+                    await this.Client.PolicyDelete(Id, onNoContent, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

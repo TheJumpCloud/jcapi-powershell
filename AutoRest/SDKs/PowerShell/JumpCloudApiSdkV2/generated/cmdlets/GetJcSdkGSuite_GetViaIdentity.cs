@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-GSuite=>GET:"/gsuites/{id}"
+    /// [OpenAPI] GSuite_Get=>GET:"/gsuites/{id}"
     /// [METADATA]
     /// path: '/gsuites/{id}'
     /// apiVersions:
@@ -251,7 +251,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.GetGSuite(InputObject.Id ?? null, onOk, this, Pipeline);
+                    await this.Client.GSuiteGet(InputObject.Id ?? null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

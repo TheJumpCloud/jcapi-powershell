@@ -8,7 +8,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// application/json' \\\n -H 'content-type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] List-Group=>GET:"/groups"
+    /// [OpenAPI] Group_List=>GET:"/groups"
     /// [METADATA]
     /// path: /groups
     /// apiVersions:
@@ -333,7 +333,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ListGroup(this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, onDefault, this, Pipeline);
+                    await this.Client.GroupList(this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, onDefault, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

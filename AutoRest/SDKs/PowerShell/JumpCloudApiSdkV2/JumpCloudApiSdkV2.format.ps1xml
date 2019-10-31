@@ -292,9 +292,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV2.Models.BodyParameterPatchLdapServerRequestBody</Name>
+      <Name>JumpCloudApiSdkV2.Models.BodyParameterLdapServerPatchRequestBody</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV2.Models.BodyParameterPatchLdapServerRequestBody</TypeName>
+        <TypeName>JumpCloudApiSdkV2.Models.BodyParameterLdapServerPatchRequestBody</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

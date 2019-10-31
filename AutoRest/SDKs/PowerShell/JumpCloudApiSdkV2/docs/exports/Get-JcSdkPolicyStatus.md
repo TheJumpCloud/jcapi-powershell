@@ -8,17 +8,24 @@ schema: 2.0.0
 # Get-JcSdkPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 
 ## SYNTAX
 
+### List (Default)
+```
+Get-JcSdkPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
+ [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+```
+
+### List1
 ```
 Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
  [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 
 ## EXAMPLES
 
@@ -86,7 +93,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: List1
 Aliases:
 
 Required: True
@@ -123,6 +130,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -SystemId
+ObjectID of the System.
+
+```yaml
+Type: System.String
+Parameter Sets: List
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

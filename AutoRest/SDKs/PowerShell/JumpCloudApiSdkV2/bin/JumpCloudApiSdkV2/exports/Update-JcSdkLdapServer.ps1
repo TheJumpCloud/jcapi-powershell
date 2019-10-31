@@ -6,7 +6,7 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/update-jcsdkldapserver
 .Inputs
-JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody
+JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody
 .Inputs
 JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -17,7 +17,7 @@ System.String
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterPatchLdapServerRequestBody>: HELP MESSAGE MISSING
+BODY <IBodyParameterLdapServerPatchRequestBody>: HELP MESSAGE MISSING
   [Id <String>]: 
   [UserLockoutAction <String>]: LDAP Server Action
   [UserPasswordExpirationAction <String>]: LDAP Server Action
@@ -76,7 +76,7 @@ param(
     [Parameter(ParameterSetName='Patch', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloudApiSdkV2.Category('Body')]
-    [JumpCloudApiSdkV2.Models.IBodyParameterPatchLdapServerRequestBody]
+    [JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

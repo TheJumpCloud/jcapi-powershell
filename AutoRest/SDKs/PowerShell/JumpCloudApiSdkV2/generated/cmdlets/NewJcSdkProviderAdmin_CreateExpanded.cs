@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Create-ProviderAdmin=>POST:"/providers/{provider_id}/administrators"
+    /// [OpenAPI] ProviderAdmin_Create=>POST:"/providers/{provider_id}/administrators"
     /// [METADATA]
     /// path: '/providers/{provider_id}/administrators'
     /// apiVersions:
@@ -260,7 +260,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'CreateProviderAdmin' operation"))
+                if (ShouldProcess($"Call remote 'ProviderAdminCreate' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -318,7 +318,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.CreateProviderAdmin(ProviderId, Body, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.ProviderAdminCreate(ProviderId, Body, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

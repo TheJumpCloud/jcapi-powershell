@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Create-ProviderAdmin=>POST:"/providers/{provider_id}/administrators"
+    /// [OpenAPI] ProviderAdmin_Create=>POST:"/providers/{provider_id}/administrators"
     /// [METADATA]
     /// path: '/providers/{provider_id}/administrators'
     /// apiVersions:
@@ -255,7 +255,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'CreateProviderAdmin' operation"))
+                if (ShouldProcess($"Call remote 'ProviderAdminCreate' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -318,7 +318,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.ProviderId"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.CreateProviderAdmin(InputObject.ProviderId ?? null, Body, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.ProviderAdminCreate(InputObject.ProviderId ?? null, Body, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

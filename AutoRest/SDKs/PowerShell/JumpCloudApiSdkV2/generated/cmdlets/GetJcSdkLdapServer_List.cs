@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] List-LdapServer=>GET:"/ldapservers"
+    /// [OpenAPI] LdapServer_List=>GET:"/ldapservers"
     /// [METADATA]
     /// path: /ldapservers
     /// apiVersions:
@@ -322,7 +322,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ListLdapServer(this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.LdapServerList(this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

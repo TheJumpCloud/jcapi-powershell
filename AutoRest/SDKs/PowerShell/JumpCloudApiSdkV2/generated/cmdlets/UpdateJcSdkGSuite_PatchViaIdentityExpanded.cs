@@ -8,7 +8,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \"userLockoutAction\": \"remove\",\n \"userPasswordExpirationAction\": \"disable\"\n }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Patch-GSuite=>PATCH:"/gsuites/{id}"
+    /// [OpenAPI] GSuite_Patch=>PATCH:"/gsuites/{id}"
     /// [METADATA]
     /// path: '/gsuites/{id}'
     /// apiVersions:
@@ -212,7 +212,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PatchGSuite' operation"))
+                if (ShouldProcess($"Call remote 'GSuitePatch' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -275,7 +275,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.PatchGSuite(InputObject.Id ?? null, Body, onOk, this, Pipeline);
+                    await this.Client.GSuitePatch(InputObject.Id ?? null, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
