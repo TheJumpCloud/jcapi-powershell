@@ -485,7 +485,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         Try
                         {
                             Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                            Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
+                            Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
                             Invoke-Git -Arguments:('add -A')
                             Invoke-Git -Arguments:('status')
                             Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
