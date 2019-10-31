@@ -15,10 +15,9 @@ $UpdateModuleManifest = $true
 $PackModule = $true
 $CommitModule = $true
 $PublishModule = $false
-$ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 ForEach ($API In $APIName)
 {
-    $ConfigFilePath = '{0}/{1}.yaml' -f $ConfigFolderPath, $API
+    $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $API
     If (Test-Path -Path:($ConfigFilePath))
     {
         # Run API Transform step
