@@ -142,28 +142,27 @@ ForEach ($API In $APIName)
             Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
         }
         ###########################################################################
-        Write-Host ('Test 1')
         If ($CommitModule)
         {
 
             If ($env:USERNAME -eq 'VssAdministrator')
             {
-                # Try
-                # {
-                Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
-                Invoke-Git -Arguments:('add -A')
-                Invoke-Git -Arguments:('status')
-                Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                # }
-                # Catch
-                # {
-                #     Write-Error $_
-                # }
+                Try
+                {
+                    Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                    Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
+                    Invoke-Git -Arguments:('config core.autocrlf false')
+                    Invoke-Git -Arguments:('add -A')
+                    Invoke-Git -Arguments:('status')
+                    Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                    Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                }
+                Catch
+                {
+                    Write-Error $_
+                }
             }
         }
-        Write-Host ('Test 2')
         ###########################################################################
         If ($PublishModule)
         {
