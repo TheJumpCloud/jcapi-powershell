@@ -1,0 +1,12 @@
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\bin\JumpCloudApiSdkV1.private.deps.json
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\bin\JumpCloudApiSdkV1.private.dll
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\bin\JumpCloudApiSdkV1.private.pdb
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\bin\Microsoft.CSharp.dll
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\bin\System.Management.Automation.dll
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.csprojAssemblyReference.cache
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.csproj.CoreCompileInputs.cache
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.AssemblyInfoInputs.cache
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.AssemblyInfo.cs
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.csproj.CopyComplete
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.private.dll
+D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV1\obj\Release\JumpCloudApiSdkV1.private.pdb
