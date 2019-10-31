@@ -151,6 +151,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($PublishModule)
     {
+        Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         If ($PSRepoName -eq 'PSGallery')
         {
             Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($env:NuGetApiKey)
