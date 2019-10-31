@@ -148,19 +148,12 @@ ForEach ($API In $APIName)
             {
                 Try
                 {
-                    Write-Host('Here 1')
                     Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                    Write-Host('Here 2')
                     Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                    Write-Host('Here 3')
                     Invoke-Git -Arguments:('add -A')
-                    Write-Host('Here 4')
                     Invoke-Git -Arguments:('status')
-                    Write-Host('Here 5')
                     Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                    Write-Host('Here 6')
                     Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                    Write-Host('Here 7')
                 }
                 Catch
                 {
