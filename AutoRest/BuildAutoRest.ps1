@@ -64,7 +64,7 @@ ForEach ($API In $APIName)
         ###########################################################################
         If ($GenerateModule)
         {
-            # If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
+            If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
             Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             autorest.cmd --reset # | Out-Null
@@ -151,7 +151,6 @@ ForEach ($API In $APIName)
                 {
                     Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
                     Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
-                    Invoke-Git -Arguments:('config core.autocrlf false')
                     Invoke-Git -Arguments:('add -A')
                     Invoke-Git -Arguments:('status')
                     Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
