@@ -480,22 +480,22 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 If (-not [System.String]::IsNullOrEmpty($CompareResults))
                 {
                     $UpdatedSpec = $true
-                    If ($env:USERNAME -eq 'VssAdministrator')
-                    {
-                        Try
-                        {
-                            Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                            Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                            Invoke-Git -Arguments:('add -A')
-                            Invoke-Git -Arguments:('status')
-                            Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
-                            Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                        }
-                        Catch
-                        {
-                            Write-Error $_
-                        }
-                    }
+                    # If ($env:USERNAME -eq 'VssAdministrator')
+                    # {
+                    #     Try
+                    #     {
+                    #         Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                    #         Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                    #         Invoke-Git -Arguments:('add -A')
+                    #         Invoke-Git -Arguments:('status')
+                    #         Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
+                    #         Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                    #     }
+                    #     Catch
+                    #     {
+                    #         Write-Error $_
+                    #     }
+                    # }
                 }
             }
             Else
