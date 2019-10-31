@@ -1,4 +1,7 @@
 #Requires -Modules powershell-yaml, BuildHelpers
+Param(
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+)
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
@@ -14,9 +17,12 @@ $CommitModule = $true
 $PublishModule = $true
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
-.($PSScriptRoot + '/ApiTransform.ps1') | Out-Null
+If ($env:USERNAME -ne 'VssAdministrator')
+{
+    .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) | Out-Null
+}
 # Start SDK generation
-Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | ForEach-Object {
+Get-ChildItem -Path:('{0}/{1}.yaml' -f $ConfigFolderPath, $APIName) -Directory:($false) | ForEach-Object {
     ###########################################################################
     $ConfigFileFullName = $_.FullName
     $BaseFolder = $PSScriptRoot
@@ -41,8 +47,11 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($InstallPreReq)
     {
-        Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-        npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
+        If ($env:USERNAME -ne 'VssAdministrator')
+        {
+            Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
+        }
         # autorest --help
         Write-Host ('[RUN COMMAND] npm.cmd install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         npm.cmd install -g autorest@beta # | Out-Null

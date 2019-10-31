@@ -1,4 +1,7 @@
 #Requires -Modules powershell-yaml
+Param(
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+)
 .($PSScriptRoot + '/Invoke-Git.ps1')
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
@@ -325,178 +328,181 @@ $FindReplaceHash = [Ordered]@{
     'duo_applicationUpdate'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   = 'Update-DuoApplication';
 }
 $ApiHash.GetEnumerator() | ForEach-Object {
-    $OutputFileName = ($_.Name).Split('_')[1] + '.json'
-    $OutputFullPath = $OutputFilePath + $OutputFileName
-    If (-not (Test-Path -Path:($OutputFilePath)))
+    If ($_.Name.Replace('Url_', '') -in $APIName)
     {
-        New-Item -Path:($OutputFilePath) -ItemType:('Directory')
-    }
-    $WebRequest = If ($_.Name -like 'Url_*')
-    {
-        (Invoke-WebRequest -Uri:($_.Value)).Content
-    }
-    Else
-    {
-        Get-Content -Path:($_.Value) -Raw
-    }
-    If ([System.String]::IsNullOrEmpty($WebRequest))
-    {
-        Write-Error ('No content was returned from: ' + $_.Value)
-    }
-    Else
-    {
-        # Prep json for find and replace by flattening string
-        $ReadyForConvert = If ($_.Value -like '*.yaml*')
+        $OutputFileName = ($_.Name).Split('_')[1] + '.json'
+        $OutputFullPath = $OutputFilePath + $OutputFileName
+        If (-not (Test-Path -Path:($OutputFilePath)))
         {
-            $WebRequest | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
+            New-Item -Path:($OutputFilePath) -ItemType:('Directory')
+        }
+        $WebRequest = If ($_.Name -like 'Url_*')
+        {
+            (Invoke-WebRequest -Uri:($_.Value)).Content
         }
         Else
         {
-            $WebRequest
+            Get-Content -Path:($_.Value) -Raw
         }
-        # Manipulate JSON
-        $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
-        $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
-        ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
+        If ([System.String]::IsNullOrEmpty($WebRequest))
         {
-            If (-not $FindReplaceHash.Contains([System.String]$OperationIdMatchesValue))
+            Write-Error ('No content was returned from: ' + $_.Value)
+        }
+        Else
+        {
+            # Prep json for find and replace by flattening string
+            $ReadyForConvert = If ($_.Value -like '*.yaml*')
             {
-                Write-Warning ('Unknown ' + $_.Name + ' operationId: ' + $OperationIdMatchesValue + ';')
+                $WebRequest | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
             }
-        }
-        While ($ReadyForConvert -match "`n ")
-        {
-            $ReadyForConvert = $ReadyForConvert.Replace("`n ", "`n")
-        }
-        $ReadyForConvert = $ReadyForConvert.Replace("`n", "")
-        While ($ReadyForConvert -match "`r ")
-        {
-            $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
-        }
-        $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
-        # Transform file
-        $FindReplaceHash.GetEnumerator() | ForEach-Object {
-            $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
-            If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+            Else
             {
-                $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
-                $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                $WebRequest
             }
-        }
-        # Convert json string to object
-        # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
-        $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
-        # Remove tag elements
-        $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
-        # Remove "public": false elements
-        $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-        ForEach ($PathName In $PathNames)
-        {
-            $PathChildNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-            ForEach ($PathChildName In $PathChildNames)
+            # Manipulate JSON
+            $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
+            $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
+            ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
             {
-                If ($JsonExport.paths.$PathName.$PathChildName.'x-stoplight'.public -eq $false)
+                If (-not $FindReplaceHash.Contains([System.String]$OperationIdMatchesValue))
                 {
-                    Write-Warning ('Excluding "Path" "' + $PathName + '" "' + $PathChildName + '"')
-                    $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:($PathName)
+                    Write-Warning ('Unknown ' + $_.Name + ' operationId: ' + $OperationIdMatchesValue + ';')
                 }
             }
-        }
-        $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-        ForEach ($DefinitionName In $DefinitionNames)
-        {
-            If ($JsonExport.definitions.$DefinitionName.$DefinitionChildName.'x-stoplight'.public -eq $false)
+            While ($ReadyForConvert -match "`n ")
             {
-                Write-Warning ('Excluding "Definition" "' + $DefinitionName + '"')
-                $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
+                $ReadyForConvert = $ReadyForConvert.Replace("`n ", "`n")
             }
-        }
-        $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-        ForEach ($TextSectionName In $TextSectionNames)
-        {
-            $TextSectionChildNames = ($JsonExport.'x-stoplight'.TextSections.$TextSectionName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-            ForEach ($TextSectionChildName In $TextSectionChildNames)
+            $ReadyForConvert = $ReadyForConvert.Replace("`n", "")
+            While ($ReadyForConvert -match "`r ")
             {
-                If ($JsonExport.'x-stoplight'.TextSections.$TextSectionName.$TextSectionChildName.'x-stoplight'.public -eq $false)
+                $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
+            }
+            $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
+            # Transform file
+            $FindReplaceHash.GetEnumerator() | ForEach-Object {
+                $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
+                If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                 {
-                    Write-Warning ('Excluding "TextSection" "' + $TextSectionName + '"')
-                    $JsonExport.'x-stoplight'.TextSections = $JsonExport.'x-stoplight'.TextSections | Select-Object * -ExcludeProperty:($TextSectionName)
+                    $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
+                    $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
                 }
             }
-        }
-        # $PathHash = [ordered]@{ }
-        # $PathNames | ForEach-Object {
-        #     $PathName = $_
-        #     $MethodHash = [ordered]@{ }
-        #     $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) # | Sort-Object)
-        #     $MethodNames | ForEach-Object {
-        #         $MethodName = $_
-        #         $IsPublic = $PathName.$MethodName.x-stoplight.public
-        #         If ($IsPublic -eq 'true')
-        #         {
-        #             $Method = $JsonExport.paths.$PathName.$MethodName
-        #             $MethodHash.Add($MethodName, $Method)
-        #         }
-        #     }
-        #     $JsonExport.paths.$PathName = $MethodHash
-        #     $PathHash.Add($PathName, $JsonExport.paths.$PathName)
-        # }
-        # $JsonExport.paths = $PathHash
+            # Convert json string to object
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
+            $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
+            # Remove tag elements
+            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
+            # Remove "public": false elements
+            $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+            ForEach ($PathName In $PathNames)
+            {
+                $PathChildNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                ForEach ($PathChildName In $PathChildNames)
+                {
+                    If ($JsonExport.paths.$PathName.$PathChildName.'x-stoplight'.public -eq $false)
+                    {
+                        Write-Warning ('Excluding "Path" "' + $PathName + '" "' + $PathChildName + '"')
+                        $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:($PathName)
+                    }
+                }
+            }
+            $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+            ForEach ($DefinitionName In $DefinitionNames)
+            {
+                If ($JsonExport.definitions.$DefinitionName.$DefinitionChildName.'x-stoplight'.public -eq $false)
+                {
+                    Write-Warning ('Excluding "Definition" "' + $DefinitionName + '"')
+                    $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
+                }
+            }
+            $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+            ForEach ($TextSectionName In $TextSectionNames)
+            {
+                $TextSectionChildNames = ($JsonExport.'x-stoplight'.TextSections.$TextSectionName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                ForEach ($TextSectionChildName In $TextSectionChildNames)
+                {
+                    If ($JsonExport.'x-stoplight'.TextSections.$TextSectionName.$TextSectionChildName.'x-stoplight'.public -eq $false)
+                    {
+                        Write-Warning ('Excluding "TextSection" "' + $TextSectionName + '"')
+                        $JsonExport.'x-stoplight'.TextSections = $JsonExport.'x-stoplight'.TextSections | Select-Object * -ExcludeProperty:($TextSectionName)
+                    }
+                }
+            }
+            # $PathHash = [ordered]@{ }
+            # $PathNames | ForEach-Object {
+            #     $PathName = $_
+            #     $MethodHash = [ordered]@{ }
+            #     $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) # | Sort-Object)
+            #     $MethodNames | ForEach-Object {
+            #         $MethodName = $_
+            #         $IsPublic = $PathName.$MethodName.x-stoplight.public
+            #         If ($IsPublic -eq 'true')
+            #         {
+            #             $Method = $JsonExport.paths.$PathName.$MethodName
+            #             $MethodHash.Add($MethodName, $Method)
+            #         }
+            #     }
+            #     $JsonExport.paths.$PathName = $MethodHash
+            #     $PathHash.Add($PathName, $JsonExport.paths.$PathName)
+            # }
+            # $JsonExport.paths = $PathHash
 
-        # $parametersHash = [ordered]@{ }
-        # $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-        # $parametersHash = [ordered]@{ }
-        # $parameterNames | ForEach-Object {
-        #     $parameterName = $_
-        #     $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
-        # }
-        # $JsonExport.parameters = $parametersHash
+            # $parametersHash = [ordered]@{ }
+            # $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+            # $parametersHash = [ordered]@{ }
+            # $parameterNames | ForEach-Object {
+            #     $parameterName = $_
+            #     $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
+            # }
+            # $JsonExport.parameters = $parametersHash
 
 
-        # $definitionsHash = [ordered]@{ }
-        # $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-        # $definitionsHash = [ordered]@{ }
-        # $definitionsNames | ForEach-Object {
-        #     $definitionsName = $_
-        #     $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
-        # }
-        # $JsonExport.definitions = $definitionsHash
+            # $definitionsHash = [ordered]@{ }
+            # $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+            # $definitionsHash = [ordered]@{ }
+            # $definitionsNames | ForEach-Object {
+            #     $definitionsName = $_
+            #     $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
+            # }
+            # $JsonExport.definitions = $definitionsHash
 
-        # Export file
-        # $WebRequest | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
-        $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
-        If (Test-Path -Path:($OutputFullPath))
-        {
-            $CurrentSpec = Get-Content -Path:($OutputFullPath) -Raw
-            $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
-            $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
-            $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
-            $NewSpec | Out-File -FilePath:($OutputFullPath)
-            If (-not [System.String]::IsNullOrEmpty($CompareResults))
+            # Export file
+            # $WebRequest | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
+            $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
+            If (Test-Path -Path:($OutputFullPath))
+            {
+                $CurrentSpec = Get-Content -Path:($OutputFullPath) -Raw
+                $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
+                $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
+                $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
+                $NewSpec | Out-File -FilePath:($OutputFullPath)
+                If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                {
+                    $UpdatedSpec = $true
+                    If ($env:USERNAME -eq 'VssAdministrator')
+                    {
+                        Try
+                        {
+                            Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                            Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
+                            Invoke-Git -Arguments:('add -A')
+                            Invoke-Git -Arguments:('status')
+                            Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
+                            Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                        }
+                        Catch
+                        {
+                            Write-Error $_
+                        }
+                    }
+                }
+            }
+            Else
             {
                 $UpdatedSpec = $true
-                If ($env:USERNAME -eq 'VssAdministrator')
-                {
-                    Try
-                    {
-                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '-AzPipelines";')
-                        Invoke-Git -Arguments:('add -A')
-                        Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
-                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                    }
-                    Catch
-                    {
-                        Write-Error $_
-                    }
-                }
+                $NewSpec | Out-File -FilePath:($OutputFullPath)
             }
-        }
-        Else
-        {
-            $UpdatedSpec = $true
-            $NewSpec | Out-File -FilePath:($OutputFullPath)
         }
     }
 }
