@@ -31,7 +31,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     # $ModuleVersion = $Config.'module-version'
     $nupkgName = '{0}*.nupkg' -f $ModuleName
     $binFolder = '{0}/bin/' -f $OutputFullPath
-    $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
+    $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
     $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
     $CustomFolderPath = '{0}/custom' -f $OutputFullPath
     $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
