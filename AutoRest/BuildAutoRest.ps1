@@ -186,6 +186,7 @@ ForEach ($API In $APIName)
         }
         ###########################################################################
         Set-Location -Path:($OutputFullPath)
+        Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath")
     }
     Else
     {
