@@ -20,8 +20,11 @@ ForEach ($API In $APIName)
     $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $API
     If (Test-Path -Path:($ConfigFilePath))
     {
-        # Run API Transform step
-        .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) | Out-Null
+        If ($env:USERNAME -ne 'VssAdministrator')
+        {
+            # Run API Transform step
+            .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) #| Out-Null
+        }
         # Start SDK generation
         $ConfigFile = Get-Item -Path:($ConfigFilePath)
         ###########################################################################
