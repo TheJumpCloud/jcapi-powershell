@@ -135,11 +135,11 @@ ForEach ($API In $APIName)
                 Write-Error ("Path does not exist: $packModulePath")
             }
             $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
-            Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
-            Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
-            Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
-            Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
-            Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
+            Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath) -Verbose
+            Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force -Verbose
+            Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force -Verbose
+            Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse -Verbose
+            Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force -Verbose
         }
         ###########################################################################
         If ($CommitModule)
