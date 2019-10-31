@@ -22,7 +22,7 @@ ForEach ($API In $APIName)
     {
         # Run API Transform step
         $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) #| Out-Null
-        If ($UpdatedSpec)
+        If ($UpdatedSpec -or $env:USERNAME -ne 'VssAdministrator')
         {
             # Start SDK generation
             $ConfigFile = Get-Item -Path:($ConfigFilePath)
