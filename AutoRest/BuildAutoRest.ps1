@@ -14,7 +14,7 @@ $BuildModule = $true
 $UpdateModuleManifest = $true
 $PackModule = $true
 $CommitModule = $true
-$PublishModule = $true
+$PublishModule = $false
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 ForEach ($API In $APIName)
 {
