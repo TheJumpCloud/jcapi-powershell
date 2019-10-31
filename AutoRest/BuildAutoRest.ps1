@@ -11,7 +11,7 @@ $BuildModule = $true
 $UpdateModuleManifest = $true
 $PackModule = $true
 $CommitModule = $true
-$PublishModule = $false
+$PublishModule = $true
 $ConfigFolderPath = '{0}/Configs' -f $PSScriptRoot
 # Run API Transform step
 .($PSScriptRoot + '/ApiTransform.ps1') | Out-Null
@@ -50,7 +50,7 @@ Get-ChildItem -Path:('{0}/V*.yaml' -f $ConfigFolderPath) -Directory:($false) | F
     ###########################################################################
     If ($GenerateModule)
     {
-        If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
+        # If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
         If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
         Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         autorest.cmd --reset # | Out-Null
