@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n ```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Delete-System=>DELETE:"/systems/{id}"
+    /// [OpenAPI] System_Delete=>DELETE:"/systems/{id}"
     /// [METADATA]
     /// path: '/systems/{id}'
     /// apiVersions:
@@ -213,7 +213,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DeleteSystem' operation"))
+                if (ShouldProcess($"Call remote 'SystemDelete' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -276,7 +276,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.DeleteSystem(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, onOk, this, Pipeline);
+                    await this.Client.SystemDelete(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

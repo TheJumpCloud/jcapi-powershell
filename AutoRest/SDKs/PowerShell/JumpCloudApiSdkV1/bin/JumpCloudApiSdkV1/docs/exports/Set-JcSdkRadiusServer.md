@@ -21,13 +21,13 @@ Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> [-Mf
 
 ### Put
 ```
-Set-JcSdkRadiusServer -Id <String> -Body <IBodyParameterPutRadiusServerRequestBody> [-Confirm] [-WhatIf]
+Set-JcSdkRadiusServer -Id <String> -Body <IBodyParameterRadiusServerPutRequestBody> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterPutRadiusServerRequestBody>
+Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterRadiusServerPutRequestBody>
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -57,7 +57,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloudApiSdkV1.Models.IBodyParameterPutRadiusServerRequestBody
+Type: JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody
 Parameter Sets: Put, PutViaIdentity
 Aliases:
 
@@ -236,7 +236,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloudApiSdkV1.Models.IBodyParameterPutRadiusServerRequestBody
+### JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody
 
 ### JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
 
@@ -251,7 +251,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterPutRadiusServerRequestBody>: HELP MESSAGE MISSING
+#### BODY <IBodyParameterRadiusServerPutRequestBody>: HELP MESSAGE MISSING
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `[Mfa <String>]`: 

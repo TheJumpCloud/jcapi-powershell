@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \"MAINTAIN\"\n}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Put-RadiusServer=>PUT:"/radiusservers/{id}"
+    /// [OpenAPI] RadiusServer_Put=>PUT:"/radiusservers/{id}"
     /// [METADATA]
     /// path: '/radiusservers/{id}'
     /// apiVersions:
@@ -40,9 +40,9 @@ namespace JumpCloudApiSdkV1.Cmdlets
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
-        private JumpCloudApiSdkV1.Models.IBodyParameterPutRadiusServerRequestBody _body= new JumpCloudApiSdkV1.Models.BodyParameterPutRadiusServerRequestBody();
+        private JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody _body= new JumpCloudApiSdkV1.Models.BodyParameterRadiusServerPutRequestBody();
 
-        private JumpCloudApiSdkV1.Models.IBodyParameterPutRadiusServerRequestBody Body { get => this._body; set => this._body = value; }
+        private JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -262,7 +262,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutRadiusServer' operation"))
+                if (ShouldProcess($"Call remote 'RadiusServerPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -320,7 +320,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.PutRadiusServer(Id, Body, onOk, this, Pipeline);
+                    await this.Client.RadiusServerPut(Id, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

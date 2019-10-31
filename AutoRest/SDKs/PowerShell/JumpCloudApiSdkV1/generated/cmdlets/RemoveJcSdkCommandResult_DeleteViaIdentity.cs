@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \n ````
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Delete-CommandResult=>DELETE:"/commandresults/{id}"
+    /// [OpenAPI] CommandResult_Delete=>DELETE:"/commandresults/{id}"
     /// [METADATA]
     /// path: '/commandresults/{id}'
     /// apiVersions:
@@ -200,7 +200,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DeleteCommandResult' operation"))
+                if (ShouldProcess($"Call remote 'CommandResultDelete' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -263,7 +263,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.DeleteCommandResult(InputObject.Id ?? null, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.CommandResultDelete(InputObject.Id ?? null, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Delete-SystemUser=>DELETE:"/systemusers/{id}"
+    /// [OpenAPI] SystemUser_Delete=>DELETE:"/systemusers/{id}"
     /// [METADATA]
     /// path: '/systemusers/{id}'
     /// apiVersions:
@@ -206,7 +206,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DeleteSystemUser' operation"))
+                if (ShouldProcess($"Call remote 'SystemUserDelete' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -264,7 +264,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.DeleteSystemUser(Id, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.SystemUserDelete(Id, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

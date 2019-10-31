@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
 
     /// <summary>The endpoint updates a SSO / SAML Application.</summary>
     /// <remarks>
-    /// [OpenAPI] Put-Application=>PUT:"/applications/{id}"
+    /// [OpenAPI] Application_Put=>PUT:"/applications/{id}"
     /// [METADATA]
     /// path: '/applications/{id}'
     /// apiVersions:
@@ -232,7 +232,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutApplication' operation"))
+                if (ShouldProcess($"Call remote 'ApplicationPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -295,7 +295,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.PutApplication(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, this, Pipeline);
+                    await this.Client.ApplicationPut(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

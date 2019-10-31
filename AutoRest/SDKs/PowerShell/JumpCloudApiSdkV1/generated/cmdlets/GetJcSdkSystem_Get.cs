@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \n ```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-System=>GET:"/systems/{id}"
+    /// [OpenAPI] System_Get=>GET:"/systems/{id}"
     /// [METADATA]
     /// path: '/systems/{id}'
     /// apiVersions:
@@ -311,7 +311,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.GetSystem(Id, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, onOk, this, Pipeline);
+                    await this.Client.SystemGet(Id, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

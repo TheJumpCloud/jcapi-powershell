@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-SystemUser=>GET:"/systemusers/{id}"
+    /// [OpenAPI] SystemUser_Get=>GET:"/systemusers/{id}"
     /// [METADATA]
     /// path: '/systemusers/{id}'
     /// apiVersions:
@@ -301,7 +301,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.GetSystemUser(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.SystemUserGet(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

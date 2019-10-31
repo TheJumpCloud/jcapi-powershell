@@ -10,7 +10,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \"attack\":\"Cross Site Scripting Attempt\" }' \\\n \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Start-CommandTriggerWebhook=>POST:"/command/trigger/{triggername}"
+    /// [OpenAPI] CommandTriggerWebhook_Start=>POST:"/command/trigger/{triggername}"
     /// [METADATA]
     /// path: '/command/trigger/{triggername}'
     /// apiVersions:
@@ -202,7 +202,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'StartCommandTriggerWebhook' operation"))
+                if (ShouldProcess($"Call remote 'CommandTriggerWebhookStart' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -265,7 +265,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Triggername"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.StartCommandTriggerWebhook(InputObject.Triggername ?? null, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.CommandTriggerWebhookStart(InputObject.Triggername ?? null, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

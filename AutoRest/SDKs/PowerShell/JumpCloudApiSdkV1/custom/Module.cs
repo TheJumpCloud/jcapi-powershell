@@ -80,7 +80,7 @@ namespace JumpCloudApiSdkV1
                     System.Environment.SetEnvironmentVariable("JCOrgId", "");
                 }
                 throw new Exception(
-                "MyCustomError:: "
+                "JumpCloudApiSdkError:: "
                 + Environment.NewLine
                 + " StatusCode: "
                 + (int)requestResult.StatusCode

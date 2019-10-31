@@ -12,7 +12,7 @@ Please be aware that if the user does not complete MFA setup before the `exclusi
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1/reset-jcsdksystemusermfa
 .Inputs
-JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody
+JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody
 .Inputs
 JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -21,7 +21,7 @@ System.String
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterResetSystemUserMfaRequestBody>: HELP MESSAGE MISSING
+BODY <IBodyParameterSystemUserMfaResetRequestBody>: HELP MESSAGE MISSING
   [Exclusion <Boolean?>]: 
   [ExclusionUntil <DateTime?>]: 
 
@@ -54,7 +54,7 @@ param(
     [Parameter(ParameterSetName='Reset', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='ResetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloudApiSdkV1.Category('Body')]
-    [JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody]
+    [JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

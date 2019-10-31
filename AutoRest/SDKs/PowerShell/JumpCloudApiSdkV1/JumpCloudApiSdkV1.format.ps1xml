@@ -1750,9 +1750,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.BodyParameterPutRadiusServerRequestBody</Name>
+      <Name>JumpCloudApiSdkV1.Models.BodyParameterRadiusServerPutRequestBody</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.BodyParameterPutRadiusServerRequestBody</TypeName>
+        <TypeName>JumpCloudApiSdkV1.Models.BodyParameterRadiusServerPutRequestBody</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1802,9 +1802,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.BodyParameterResetSystemUserMfaRequestBody</Name>
+      <Name>JumpCloudApiSdkV1.Models.BodyParameterSystemUserMfaResetRequestBody</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.BodyParameterResetSystemUserMfaRequestBody</TypeName>
+        <TypeName>JumpCloudApiSdkV1.Models.BodyParameterSystemUserMfaResetRequestBody</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

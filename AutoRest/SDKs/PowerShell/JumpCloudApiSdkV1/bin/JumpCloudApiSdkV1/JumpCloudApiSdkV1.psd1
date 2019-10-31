@@ -12,13 +12,13 @@
 RootModule = './JumpCloudApiSdkV1.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.6'
+ModuleVersion = '0.0.7'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core', 'Desktop'
 
 # ID used to uniquely identify this module
-GUID = '7fc7faa8-eac0-43dd-bd03-cc6f3dcf708e'
+GUID = 'f1af2497-e0ad-4dc7-b0f1-d0099cafa821'
 
 # Author of this module
 Author = 'JumpCloud Solutions Architect Team'
@@ -71,33 +71,31 @@ FormatsToProcess = './JumpCloudApiSdkV1.format.ps1xml'
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
 FunctionsToExport = 'Get-JcSdkApplication', 'Get-JcSdkApplicationTemplate', 
                'Get-JcSdkCommand', 'Get-JcSdkCommandFile', 'Get-JcSdkCommandResult', 
-               'Get-JcSdkOrganization', 'Get-JcSdkRadiusServer', 'Get-JcSdkSystem', 
-               'Get-JcSdkSystemUser', 'Get-JcSdkSystemUserSshKey', 
-               'New-JcSdkApplication', 'New-JcSdkCommand', 'New-JcSdkRadiusServer', 
-               'New-JcSdkSearchSystemUser', 'New-JcSdkSystemUser', 
-               'New-JcSdkSystemUserSshKey', 'Remove-JcSdkApplication', 
+               'Get-JcSdkOrganization', 'Get-JcSdkRadiusServer', 'Get-JcSdkSshKey', 
+               'Get-JcSdkSystem', 'Get-JcSdkSystemUser', 
+               'Invoke-JcSdkSystemSearchUser', 'New-JcSdkApplication', 
+               'New-JcSdkCommand', 'New-JcSdkRadiusServer', 'New-JcSdkSshKey', 
+               'New-JcSdkSystemUser', 'Remove-JcSdkApplication', 
                'Remove-JcSdkCommand', 'Remove-JcSdkCommandResult', 
-               'Remove-JcSdkSystem', 'Remove-JcSdkSystemUser', 
-               'Remove-JcSdkSystemUserSshKey', 'Reset-JcSdkSystemUserMfa', 
-               'Search-JcSdkSearchOrganization', 'Search-JcSdkSearchSystem', 
-               'Set-JcSdkApplication', 'Set-JcSdkCommand', 'Set-JcSdkRadiusServer', 
-               'Set-JcSdkSystem', 'Set-JcSdkSystemUser', 
+               'Remove-JcSdkSshKey', 'Remove-JcSdkSystem', 'Remove-JcSdkSystemUser', 
+               'Reset-JcSdkSystemUserMfa', 'Search-JcSdkOrganization', 
+               'Search-JcSdkSystem', 'Set-JcSdkApplication', 'Set-JcSdkCommand', 
+               'Set-JcSdkRadiusServer', 'Set-JcSdkSystem', 'Set-JcSdkSystemUser', 
                'Start-JcSdkCommandTriggerWebhook', 'Unlock-JcSdkSystemUser'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = 'Get-JcSdkApplication', 'Get-JcSdkApplicationTemplate', 
                'Get-JcSdkCommand', 'Get-JcSdkCommandFile', 'Get-JcSdkCommandResult', 
-               'Get-JcSdkOrganization', 'Get-JcSdkRadiusServer', 'Get-JcSdkSystem', 
-               'Get-JcSdkSystemUser', 'Get-JcSdkSystemUserSshKey', 
-               'New-JcSdkApplication', 'New-JcSdkCommand', 'New-JcSdkRadiusServer', 
-               'New-JcSdkSearchSystemUser', 'New-JcSdkSystemUser', 
-               'New-JcSdkSystemUserSshKey', 'Remove-JcSdkApplication', 
+               'Get-JcSdkOrganization', 'Get-JcSdkRadiusServer', 'Get-JcSdkSshKey', 
+               'Get-JcSdkSystem', 'Get-JcSdkSystemUser', 
+               'Invoke-JcSdkSystemSearchUser', 'New-JcSdkApplication', 
+               'New-JcSdkCommand', 'New-JcSdkRadiusServer', 'New-JcSdkSshKey', 
+               'New-JcSdkSystemUser', 'Remove-JcSdkApplication', 
                'Remove-JcSdkCommand', 'Remove-JcSdkCommandResult', 
-               'Remove-JcSdkSystem', 'Remove-JcSdkSystemUser', 
-               'Remove-JcSdkSystemUserSshKey', 'Reset-JcSdkSystemUserMfa', 
-               'Search-JcSdkSearchOrganization', 'Search-JcSdkSearchSystem', 
-               'Set-JcSdkApplication', 'Set-JcSdkCommand', 'Set-JcSdkRadiusServer', 
-               'Set-JcSdkSystem', 'Set-JcSdkSystemUser', 
+               'Remove-JcSdkSshKey', 'Remove-JcSdkSystem', 'Remove-JcSdkSystemUser', 
+               'Reset-JcSdkSystemUserMfa', 'Search-JcSdkOrganization', 
+               'Search-JcSdkSystem', 'Set-JcSdkApplication', 'Set-JcSdkCommand', 
+               'Set-JcSdkRadiusServer', 'Set-JcSdkSystem', 'Set-JcSdkSystemUser', 
                'Start-JcSdkCommandTriggerWebhook', 'Unlock-JcSdkSystemUser'
 
 # Variables to export from this module

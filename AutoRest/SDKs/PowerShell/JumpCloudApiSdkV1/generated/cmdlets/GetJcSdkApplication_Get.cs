@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
 
     /// <summary>The endpoint retrieves an SSO / SAML Application.</summary>
     /// <remarks>
-    /// [OpenAPI] Get-Application=>GET:"/applications/{id}"
+    /// [OpenAPI] Application_Get=>GET:"/applications/{id}"
     /// [METADATA]
     /// path: '/applications/{id}'
     /// apiVersions:
@@ -287,7 +287,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.GetApplication(Id, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, onOk, this, Pipeline);
+                    await this.Client.ApplicationGet(Id, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

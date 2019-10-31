@@ -23,14 +23,14 @@ Reset-JcSdkSystemUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] 
 
 ### Reset
 ```
-Reset-JcSdkSystemUserMfa -Id <String> -Body <IBodyParameterResetSystemUserMfaRequestBody> [-PassThru]
+Reset-JcSdkSystemUserMfa -Id <String> -Body <IBodyParameterSystemUserMfaResetRequestBody> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentity
 ```
 Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity>
- -Body <IBodyParameterResetSystemUserMfaRequestBody> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IBodyParameterSystemUserMfaResetRequestBody> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
@@ -61,7 +61,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody
+Type: JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody
 Parameter Sets: Reset, ResetViaIdentity
 Aliases:
 
@@ -192,7 +192,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody
+### JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody
 
 ### JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
 
@@ -207,7 +207,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterResetSystemUserMfaRequestBody>: HELP MESSAGE MISSING
+#### BODY <IBodyParameterSystemUserMfaResetRequestBody>: HELP MESSAGE MISSING
   - `[Exclusion <Boolean?>]`: 
   - `[ExclusionUntil <DateTime?>]`: 
 

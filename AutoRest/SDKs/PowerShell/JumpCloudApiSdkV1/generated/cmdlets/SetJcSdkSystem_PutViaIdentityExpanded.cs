@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \\\n -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Put-System=>PUT:"/systems/{id}"
+    /// [OpenAPI] System_Put=>PUT:"/systems/{id}"
     /// [METADATA]
     /// path: '/systems/{id}'
     /// apiVersions:
@@ -296,7 +296,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutSystem' operation"))
+                if (ShouldProcess($"Call remote 'SystemPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -359,7 +359,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.PutSystem(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, Body, onOk, this, Pipeline);
+                    await this.Client.SystemPut(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \\\n -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Put-SystemUser=>PUT:"/systemusers/{id}"
+    /// [OpenAPI] SystemUser_Put=>PUT:"/systemusers/{id}"
     /// [METADATA]
     /// path: '/systemusers/{id}'
     /// apiVersions:
@@ -219,7 +219,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutSystemUser' operation"))
+                if (ShouldProcess($"Call remote 'SystemUserPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -277,7 +277,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.PutSystemUser(Id, Body, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.SystemUserPut(Id, Body, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
 
     /// <summary>This endpoint allows you to unlock a user's account.</summary>
     /// <remarks>
-    /// [OpenAPI] Unlock-SystemUser=>POST:"/systemusers/{id}/unlock"
+    /// [OpenAPI] SystemUser_Unlock=>POST:"/systemusers/{id}/unlock"
     /// [METADATA]
     /// path: '/systemusers/{id}/unlock'
     /// apiVersions:
@@ -257,7 +257,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'UnlockSystemUser' operation"))
+                if (ShouldProcess($"Call remote 'SystemUserUnlock' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -315,7 +315,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.UnlockSystemUser(Id, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.SystemUserUnlock(Id, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

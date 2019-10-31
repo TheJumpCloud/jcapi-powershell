@@ -1,0 +1,250 @@
+---
+external help file:
+Module Name: JumpCloudApiSdkV1
+online version: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1/search-jcsdkorganization
+schema: 2.0.0
+---
+
+# Search-JcSdkOrganization
+
+## SYNOPSIS
+This endpoint will return Organization data based on your search parameters.
+This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.
+\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
+
+## SYNTAX
+
+### SearchExpanded (Default)
+```
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### Search
+```
+Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [-Limit <Int32>]
+ [-Skip <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+## DESCRIPTION
+This endpoint will return Organization data based on your search parameters.
+This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.
+\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
+
+## EXAMPLES
+
+### -------------------------- EXAMPLE 1 --------------------------
+```powershell
+To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1/search-jcsdkorganization
+```
+
+
+
+## PARAMETERS
+
+### -Body
+Search
+To construct, see NOTES section for BODY properties and create a hash table.
+
+```yaml
+Type: JumpCloudApiSdkV1.Models.ISearch
+Parameter Sets: Search
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Fields
+Use a space seperated string of field parameters to include the data in the response.
+If omitted, the default list of fields will be returned.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Fields1
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.String
+Parameter Sets: SearchExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Filter
+A filter to apply to the query.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Filter1
+HELP MESSAGE MISSING
+
+```yaml
+Type: JumpCloudApiSdkV1.Models.ISearchFilter
+Parameter Sets: SearchExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Limit
+The number of records to return at once.
+Limited to 100.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -SearchFilter
+HELP MESSAGE MISSING
+
+```yaml
+Type: JumpCloudApiSdkV1.Models.ISearchFilter1
+Parameter Sets: SearchExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Skip
+The offset into the records to return.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### CommonParameters
+This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
+
+## INPUTS
+
+### JumpCloudApiSdkV1.Models.ISearch
+
+## OUTPUTS
+
+### JumpCloudApiSdkV1.Models.IOrganizationslist
+
+## ALIASES
+
+## NOTES
+
+### COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+#### BODY <ISearch>: Search
+  - `[Fields <String>]`: 
+  - `[Filter <ISearchFilter>]`: 
+  - `[SearchFilter <ISearchFilter1>]`: 
+
+## RELATED LINKS
+

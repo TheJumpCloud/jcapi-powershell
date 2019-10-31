@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
 
     /// <summary>The endpoint adds a new SSO / SAML Applications.</summary>
     /// <remarks>
-    /// [OpenAPI] Create-Application=>POST:"/applications"
+    /// [OpenAPI] Application_Create=>POST:"/applications"
     /// [METADATA]
     /// path: /applications
     /// apiVersions:
@@ -232,7 +232,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'CreateApplication' operation"))
+                if (ShouldProcess($"Call remote 'ApplicationCreate' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -290,7 +290,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.CreateApplication(this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, this, Pipeline);
+                    await this.Client.ApplicationCreate(this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

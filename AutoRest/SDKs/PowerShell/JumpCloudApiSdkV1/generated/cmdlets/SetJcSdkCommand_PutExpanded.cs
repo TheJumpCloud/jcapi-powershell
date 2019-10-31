@@ -8,7 +8,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// application/json' \\\n -H 'x-api-key: {API_KEY}' \\\n -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Put-Command=>PUT:"/commands/{id}"
+    /// [OpenAPI] Command_Put=>PUT:"/commands/{id}"
     /// [METADATA]
     /// path: '/commands/{id}'
     /// apiVersions:
@@ -388,7 +388,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'PutCommand' operation"))
+                if (ShouldProcess($"Call remote 'CommandPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -446,7 +446,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.PutCommand(Id, Body, onOk, onUnauthorized, this, Pipeline);
+                    await this.Client.CommandPut(Id, Body, onOk, onUnauthorized, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

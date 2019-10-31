@@ -7,7 +7,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Get-ApplicationTemplate=>GET:"/application-templates/{id}"
+    /// [OpenAPI] ApplicationTemplate_Get=>GET:"/application-templates/{id}"
     /// [METADATA]
     /// path: '/application-templates/{id}'
     /// apiVersions:
@@ -323,7 +323,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.GetApplicationTemplate(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, onOk, this, Pipeline);
+                    await this.Client.ApplicationTemplateGet(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
 
     /// <summary>The endpoint retrieves an SSO / SAML Application.</summary>
     /// <remarks>
-    /// [OpenAPI] Get-Application=>GET:"/applications/{id}"
+    /// [OpenAPI] Application_Get=>GET:"/applications/{id}"
     /// [METADATA]
     /// path: '/applications/{id}'
     /// apiVersions:
@@ -287,7 +287,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.Id"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.GetApplication(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, onOk, this, Pipeline);
+                    await this.Client.ApplicationGet(InputObject.Id ?? null, this.InvocationInformation.BoundParameters.ContainsKey("ContentType") ? ContentType : null, this.InvocationInformation.BoundParameters.ContainsKey("Accept") ? Accept : null, this.InvocationInformation.BoundParameters.ContainsKey("XOrgId") ? XOrgId : null, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

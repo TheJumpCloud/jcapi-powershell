@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// \"REMOVE\",\n \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Create-RadiusServer=>POST:"/radiusservers"
+    /// [OpenAPI] RadiusServer_Create=>POST:"/radiusservers"
     /// [METADATA]
     /// path: /radiusservers
     /// apiVersions:
@@ -198,7 +198,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'CreateRadiusServer' operation"))
+                if (ShouldProcess($"Call remote 'RadiusServerCreate' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -256,7 +256,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.CreateRadiusServer(Body, onOk, this, Pipeline);
+                    await this.Client.RadiusServerCreate(Body, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)

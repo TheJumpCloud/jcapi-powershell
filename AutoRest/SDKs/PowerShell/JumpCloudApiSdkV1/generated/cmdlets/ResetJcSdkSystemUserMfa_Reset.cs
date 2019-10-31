@@ -12,7 +12,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
     /// true, \"exclusionUntil\": \"{date-time}\"}'\n \n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] Reset-SystemUserMfa=>POST:"/systemusers/{id}/resetmfa"
+    /// [OpenAPI] SystemUserMfa_Reset=>POST:"/systemusers/{id}/resetmfa"
     /// [METADATA]
     /// path: '/systemusers/{id}/resetmfa'
     /// apiVersions:
@@ -43,7 +43,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
-        private JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody _body;
+        private JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody _body;
 
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING", ValueFromPipeline = true)]
         [JumpCloudApiSdkV1.Runtime.Info(
@@ -51,8 +51,8 @@ namespace JumpCloudApiSdkV1.Cmdlets
         ReadOnly = false,
         Description = @"",
         SerializedName = @"body",
-        PossibleTypes = new [] { typeof(JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody) })]
-        public JumpCloudApiSdkV1.Models.IBodyParameterResetSystemUserMfaRequestBody Body { get => this._body; set => this._body = value; }
+        PossibleTypes = new [] { typeof(JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody) })]
+        public JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -277,7 +277,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'ResetSystemUserMfa' operation"))
+                if (ShouldProcess($"Call remote 'SystemUserMfaReset' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV1.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token) )
                     {
@@ -335,7 +335,7 @@ namespace JumpCloudApiSdkV1.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ResetSystemUserMfa(Id, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.SystemUserMfaReset(Id, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV1.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV1.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV1.Runtime.UndeclaredResponseException urexception)
