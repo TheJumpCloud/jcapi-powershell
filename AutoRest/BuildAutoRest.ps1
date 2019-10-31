@@ -22,10 +22,7 @@ ForEach ($API In $APIName)
     If (Test-Path -Path:($ConfigFilePath))
     {
         # Run API Transform step
-        If ($env:USERNAME -ne 'VssAdministrator')
-        {
-            .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) | Out-Null
-        }
+        .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) | Out-Null
         # Start SDK generation
         $ConfigFile = Get-Item -Path:($ConfigFilePath)
         ###########################################################################
@@ -52,11 +49,8 @@ ForEach ($API In $APIName)
         ###########################################################################
         If ($InstallPreReq)
         {
-            # If ($env:USERNAME -ne 'VssAdministrator')
-            # {
             Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
-            # }
             # autorest --help
             Write-Host ('[RUN COMMAND] npm.cmd install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             npm.cmd install -g autorest@beta # | Out-Null
