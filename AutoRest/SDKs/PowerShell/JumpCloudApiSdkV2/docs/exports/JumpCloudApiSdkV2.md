@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloudApiSdkV2
-Module Guid: 95af3242-4f5d-4263-adc8-b49b4db53ef2
+Module Guid: ea741ac7-afc7-4564-85b0-0a95e7a98e6f
 Download Help Link: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2
 Help Version: 1.0.0.0
 Locale: en-US
