@@ -87,7 +87,6 @@ namespace JumpCloudApiSdkV2.Models
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).ApiHost = (string) content.GetValueForProperty("ApiHost",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).ApiHost, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).IntegrationKey = (string) content.GetValueForProperty("IntegrationKey",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).IntegrationKey, global::System.Convert.ToString);
-            ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).SecretKey = (string) content.GetValueForProperty("SecretKey",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).SecretKey, global::System.Convert.ToString);
             AfterDeserializeDictionary(content);
         }
 
@@ -109,7 +108,6 @@ namespace JumpCloudApiSdkV2.Models
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).ApiHost = (string) content.GetValueForProperty("ApiHost",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).ApiHost, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).IntegrationKey = (string) content.GetValueForProperty("IntegrationKey",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).IntegrationKey, global::System.Convert.ToString);
-            ((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).SecretKey = (string) content.GetValueForProperty("SecretKey",((JumpCloudApiSdkV2.Models.IDuoApplicationInternal)this).SecretKey, global::System.Convert.ToString);
             AfterDeserializePSObject(content);
         }
 

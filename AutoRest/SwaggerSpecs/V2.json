@@ -111,17 +111,13 @@
         },
         "name": {
           "type": "string"
-        },
-        "secretKey": {
-          "type": "string"
         }
       },
       "required": [
         "id",
         "name",
         "apiHost",
-        "integrationKey",
-        "secretKey"
+        "integrationKey"
       ],
       "title": "DuoApplication",
       "type": "object",
