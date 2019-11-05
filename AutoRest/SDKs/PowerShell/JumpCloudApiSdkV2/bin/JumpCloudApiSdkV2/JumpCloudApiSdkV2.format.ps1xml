@@ -592,6 +592,9 @@
           <TableColumnHeader>
             <Label>Name</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SecretKey</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -607,6 +610,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SecretKey</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

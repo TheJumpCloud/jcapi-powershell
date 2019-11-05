@@ -32,6 +32,12 @@ namespace JumpCloudApiSdkV2.Models
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string Name { get => this._name; set => this._name = value; }
 
+        /// <summary>Backing field for <see cref="SecretKey" /> property.</summary>
+        private string _secretKey;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public string SecretKey { get => this._secretKey; set => this._secretKey = value; }
+
         /// <summary>Creates an new <see cref="DuoApplication" /> instance.</summary>
         public DuoApplication()
         {
@@ -74,6 +80,14 @@ namespace JumpCloudApiSdkV2.Models
         PossibleTypes = new [] { typeof(string) })]
         string Name { get; set; }
 
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"secretKey",
+        PossibleTypes = new [] { typeof(string) })]
+        string SecretKey { get; set; }
+
     }
     /// DuoApplication
     internal partial interface IDuoApplicationInternal
@@ -86,6 +100,8 @@ namespace JumpCloudApiSdkV2.Models
         string IntegrationKey { get; set; }
 
         string Name { get; set; }
+
+        string SecretKey { get; set; }
 
     }
 }
