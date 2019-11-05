@@ -62,7 +62,6 @@ namespace JumpCloudApiSdkV2.Models
             {_apiHost = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("apiHost"), out var __jsonApiHost) ? (string)__jsonApiHost : (string)ApiHost;}
             {_id = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("id"), out var __jsonId) ? (string)__jsonId : (string)Id;}
             {_integrationKey = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("integrationKey"), out var __jsonIntegrationKey) ? (string)__jsonIntegrationKey : (string)IntegrationKey;}
-            {_secretKey = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("secretKey"), out var __jsonSecretKey) ? (string)__jsonSecretKey : (string)SecretKey;}
             AfterFromJson(json);
         }
 
@@ -99,7 +98,6 @@ namespace JumpCloudApiSdkV2.Models
             AddIf( null != (((object)this._apiHost)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._apiHost.ToString()) : null, "apiHost" ,container.Add );
             AddIf( null != (((object)this._id)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._id.ToString()) : null, "id" ,container.Add );
             AddIf( null != (((object)this._integrationKey)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._integrationKey.ToString()) : null, "integrationKey" ,container.Add );
-            AddIf( null != (((object)this._secretKey)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._secretKey.ToString()) : null, "secretKey" ,container.Add );
             AfterToJson(ref container);
             return container;
         }
