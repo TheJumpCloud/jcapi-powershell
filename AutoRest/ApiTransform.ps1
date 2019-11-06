@@ -332,8 +332,10 @@ $FindReplaceHash = [Ordered]@{
 $ApiHash.GetEnumerator() | ForEach-Object {
     If ($_.Name.Replace('Url_', '') -in $APIName)
     {
-        $OutputFileName = ($_.Name).Split('_')[1] + '.json'
-        $OutputFullPath = $OutputFilePath + $OutputFileName
+        $OutputFileNameJson = ($_.Name).Split('_')[1] + '.json'
+        $OutputFileNameYaml = ($_.Name).Split('_')[1] + '.yaml'
+        $OutputFullPathJson = $OutputFilePath + $OutputFileNameJson
+        $OutputFullPathYaml = $OutputFilePath + $OutputFileNameYaml
         If (-not (Test-Path -Path:($OutputFilePath)))
         {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
@@ -472,16 +474,17 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             # Export file
             # $WebRequest | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
             $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
-            If (Test-Path -Path:($OutputFullPath))
+            If (Test-Path -Path:($OutputFullPathJson))
             {
-                $CurrentSpec = Get-Content -Path:($OutputFullPath) -Raw
+                $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
                 $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
                 $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
                 $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
                 If (-not [System.String]::IsNullOrEmpty($CompareResults))
                 {
                     $UpdatedSpec = $true
-                    $NewSpec | Out-File -FilePath:($OutputFullPath)
+                    $NewSpec | Out-File -FilePath:($OutputFullPathJson)
+                    $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
                     # If ($env:USERNAME -eq 'VssAdministrator')
                     # {
                     #     Try
@@ -490,7 +493,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     #         Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
                     #         Invoke-Git -Arguments:('add -A')
                     #         Invoke-Git -Arguments:('status')
-                    #         Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileName + ';[skip ci]";')
+                    #         Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileNameJson + ';[skip ci]";')
                     #         Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
                     #     }
                     #     Catch
@@ -503,7 +506,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             Else
             {
                 $UpdatedSpec = $true
-                $NewSpec | Out-File -FilePath:($OutputFullPath)
+                $NewSpec | Out-File -FilePath:($OutputFullPathJson)
+                $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
         }
     }
