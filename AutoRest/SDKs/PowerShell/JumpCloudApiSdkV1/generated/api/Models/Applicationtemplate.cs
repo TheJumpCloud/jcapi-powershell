@@ -44,6 +44,23 @@ namespace JumpCloudApiSdkV1.Models
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
         public string Id { get => this._id; set => this._id = value; }
 
+        /// <summary>Backing field for <see cref="Jit" /> property.</summary>
+        private JumpCloudApiSdkV1.Models.IApplicationtemplateJit _jit;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        internal JumpCloudApiSdkV1.Models.IApplicationtemplateJit Jit { get => (this._jit = this._jit ?? new JumpCloudApiSdkV1.Models.ApplicationtemplateJit()); set => this._jit = value; }
+
+        /// <summary>FIXME: Property JitAttributes is MISSING DESCRIPTION</summary>
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Inlined)]
+        public JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes JitAttributes { get => ((JumpCloudApiSdkV1.Models.IApplicationtemplateJitInternal)Jit).Attributes; set => ((JumpCloudApiSdkV1.Models.IApplicationtemplateJitInternal)Jit).Attributes = value; }
+
+        /// <summary>FIXME: Property JitCreateOnly is MISSING DESCRIPTION</summary>
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Inlined)]
+        public bool? JitCreateOnly { get => ((JumpCloudApiSdkV1.Models.IApplicationtemplateJitInternal)Jit).CreateOnly; set => ((JumpCloudApiSdkV1.Models.IApplicationtemplateJitInternal)Jit).CreateOnly = value; }
+
+        /// <summary>Internal Acessors for Jit</summary>
+        JumpCloudApiSdkV1.Models.IApplicationtemplateJit JumpCloudApiSdkV1.Models.IApplicationtemplateInternal.Jit { get => (this._jit = this._jit ?? new JumpCloudApiSdkV1.Models.ApplicationtemplateJit()); set { {_jit = value;} } }
+
         /// <summary>Backing field for <see cref="LearnMore" /> property.</summary>
         private string _learnMore;
 
@@ -124,6 +141,22 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"attributes",
+        PossibleTypes = new [] { typeof(JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes) })]
+        JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes JitAttributes { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"createOnly",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? JitCreateOnly { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"learnMore",
         PossibleTypes = new [] { typeof(string) })]
         string LearnMore { get; set; }
@@ -160,6 +193,12 @@ namespace JumpCloudApiSdkV1.Models
         string DisplayName { get; set; }
 
         string Id { get; set; }
+
+        JumpCloudApiSdkV1.Models.IApplicationtemplateJit Jit { get; set; }
+
+        JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes JitAttributes { get; set; }
+
+        bool? JitCreateOnly { get; set; }
 
         string LearnMore { get; set; }
 
