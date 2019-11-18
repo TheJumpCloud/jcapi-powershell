@@ -762,6 +762,17 @@
         "displayName": {
           "type": "string"
         },
+        "jit": {
+          "properties": {
+            "attributes": {
+              "type": "object"
+            },
+            "createOnly": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
         "learnMore": {
           "type": "string"
         },

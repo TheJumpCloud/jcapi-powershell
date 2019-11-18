@@ -61,6 +61,7 @@ namespace JumpCloudApiSdkV1.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Jit = (JumpCloudApiSdkV1.Models.IApplicationtemplateJit) content.GetValueForProperty("Jit",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Jit, JumpCloudApiSdkV1.Models.ApplicationtemplateJitTypeConverter.ConvertFrom);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Beta = (bool?) content.GetValueForProperty("Beta",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Beta, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
@@ -70,6 +71,8 @@ namespace JumpCloudApiSdkV1.Models
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).LearnMore = (string) content.GetValueForProperty("LearnMore",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).LearnMore, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).SsoUrl = (string) content.GetValueForProperty("SsoUrl",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).SsoUrl, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Config = (JumpCloudApiSdkV1.Models.IApplicationtemplateConfig) content.GetValueForProperty("Config",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Config, JumpCloudApiSdkV1.Models.ApplicationtemplateConfigTypeConverter.ConvertFrom);
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitAttributes = (JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes) content.GetValueForProperty("JitAttributes",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitAttributes, JumpCloudApiSdkV1.Models.ApplicationtemplateJitAttributesTypeConverter.ConvertFrom);
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitCreateOnly = (bool?) content.GetValueForProperty("JitCreateOnly",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitCreateOnly, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             AfterDeserializeDictionary(content);
         }
 
@@ -87,6 +90,7 @@ namespace JumpCloudApiSdkV1.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Jit = (JumpCloudApiSdkV1.Models.IApplicationtemplateJit) content.GetValueForProperty("Jit",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Jit, JumpCloudApiSdkV1.Models.ApplicationtemplateJitTypeConverter.ConvertFrom);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Beta = (bool?) content.GetValueForProperty("Beta",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Beta, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
@@ -96,6 +100,8 @@ namespace JumpCloudApiSdkV1.Models
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).LearnMore = (string) content.GetValueForProperty("LearnMore",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).LearnMore, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).SsoUrl = (string) content.GetValueForProperty("SsoUrl",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).SsoUrl, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Config = (JumpCloudApiSdkV1.Models.IApplicationtemplateConfig) content.GetValueForProperty("Config",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).Config, JumpCloudApiSdkV1.Models.ApplicationtemplateConfigTypeConverter.ConvertFrom);
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitAttributes = (JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes) content.GetValueForProperty("JitAttributes",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitAttributes, JumpCloudApiSdkV1.Models.ApplicationtemplateJitAttributesTypeConverter.ConvertFrom);
+            ((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitCreateOnly = (bool?) content.GetValueForProperty("JitCreateOnly",((JumpCloudApiSdkV1.Models.IApplicationtemplateInternal)this).JitCreateOnly, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             AfterDeserializePSObject(content);
         }
 

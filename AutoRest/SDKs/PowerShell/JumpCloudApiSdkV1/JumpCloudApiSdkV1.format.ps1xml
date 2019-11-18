@@ -1728,6 +1728,28 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV1.Models.ApplicationtemplateJit</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.ApplicationtemplateJit</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreateOnly</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreateOnly</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV1.Models.Applicationtemplateslist</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Applicationtemplateslist</TypeName>

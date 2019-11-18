@@ -58,6 +58,7 @@ namespace JumpCloudApiSdkV1.Models
             {
                 return;
             }
+            {_jit = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonObject>("jit"), out var __jsonJit) ? JumpCloudApiSdkV1.Models.ApplicationtemplateJit.FromJson(__jsonJit) : Jit;}
             {_name = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)Name;}
             {_id = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("_id"), out var __jsonId) ? (string)__jsonId : (string)Id;}
             {_beta = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("beta"), out var __jsonBeta) ? (bool?)__jsonBeta : Beta;}
@@ -99,6 +100,7 @@ namespace JumpCloudApiSdkV1.Models
             {
                 return container;
             }
+            AddIf( null != this._jit ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) this._jit.ToJson(null,serializationMode) : null, "jit" ,container.Add );
             AddIf( null != (((object)this._name)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._name.ToString()) : null, "name" ,container.Add );
             AddIf( null != (((object)this._id)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._id.ToString()) : null, "_id" ,container.Add );
             AddIf( null != this._beta ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._beta) : null, "beta" ,container.Add );
