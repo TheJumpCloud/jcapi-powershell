@@ -13,7 +13,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'content-type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] ActiveDirectoryTraverseUser_ListGroup=>GET:"/activedirectories/{activedirectory_id}/usergroups"
+    /// [OpenAPI] ActiveDirectoryTraverseUserGroup_List=>GET:"/activedirectories/{activedirectory_id}/usergroups"
     /// [METADATA]
     /// path: '/activedirectories/{activedirectory_id}/usergroups'
     /// apiVersions:
@@ -302,7 +302,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ActiveDirectoryTraverseUserListGroup(ActivedirectoryId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.ActiveDirectoryTraverseUserGroupList(ActivedirectoryId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

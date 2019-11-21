@@ -14,14 +14,14 @@ This endpoint returns the policy results for a particular system.\n\n##### Sampl
 
 ### List (Default)
 ```
-Get-JcSdkPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkPolicyStatus -SystemId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### List1
 ```
-Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkPolicyStatus -PolicyId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,23 +37,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Filter
 Supported operators are: eq, ne, gt, ge, lt, le, between, search, in

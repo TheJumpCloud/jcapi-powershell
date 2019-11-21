@@ -13,8 +13,7 @@ Valid filter fields are `system_id` and `protection_status`.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightsBitlockerInfo [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
+Get-JcSdkSystemInsightsBitlockerInfo [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,22 +29,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Filter
-Supported operators are: eq
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Limit
 HELP MESSAGE MISSING

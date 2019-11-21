@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `bundle_name`.
+Valid filter fields are `groupname`.
 .Description
-Valid filter fields are `bundle_name`.
+Valid filter fields are `groupname`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemgroup
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsApps
+JumpCloudApiSdkV2.Models.ISystemInsightsGroups
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemgroup
 #>
 function Get-JcSdkSystemInsightsSystemGroup {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsApps])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsGroups])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

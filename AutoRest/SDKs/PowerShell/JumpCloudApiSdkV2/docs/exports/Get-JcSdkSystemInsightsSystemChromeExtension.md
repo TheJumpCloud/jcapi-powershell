@@ -8,17 +8,17 @@ schema: 2.0.0
 # Get-JcSdkSystemInsightsSystemChromeExtension
 
 ## SYNOPSIS
-Valid filter fields are `path`.
+Valid filter fields are `name`.
 
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightsSystemChromeExtension -SystemId <String> [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [<CommonParameters>]
+Get-JcSdkSystemInsightsSystemChromeExtension -SystemId <String> [-Limit <Int32>] [-Skip <Int32>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Valid filter fields are `path`.
+Valid filter fields are `name`.
 
 ## EXAMPLES
 
@@ -30,22 +30,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Filter
-Supported operators are: eq
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Limit
 HELP MESSAGE MISSING
@@ -102,7 +86,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloudApiSdkV2.Models.ISystemInsightsMounts
+### JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions
 
 ## ALIASES
 

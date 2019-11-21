@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `version`.
+Valid filter fields are `device_id`.
 .Description
-Valid filter fields are `version`.
+Valid filter fields are `device_id`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemlogicaldrive
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsOSVersion
+JumpCloudApiSdkV2.Models.ISystemInsightsLogicalDrvies
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemlogicaldrive
 #>
 function Get-JcSdkSystemInsightsSystemLogicalDrive {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsOSVersion])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsLogicalDrvies])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

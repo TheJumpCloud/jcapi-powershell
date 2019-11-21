@@ -235,6 +235,12 @@ namespace JumpCloudApiSdkV2.Models
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public bool? Sudo { get => this._sudo; set => this._sudo = value; }
 
+        /// <summary>Backing field for <see cref="Suspended" /> property.</summary>
+        private bool? _suspended;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public bool? Suspended { get => this._suspended; set => this._suspended = value; }
+
         /// <summary>Backing field for <see cref="Tags" /> property.</summary>
         private string[] _tags;
 
@@ -575,6 +581,14 @@ namespace JumpCloudApiSdkV2.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"suspended",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? Suspended { get; set; }
+
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"tags",
         PossibleTypes = new [] { typeof(string) })]
         string[] Tags { get; set; }
@@ -691,6 +705,8 @@ namespace JumpCloudApiSdkV2.Models
         JumpCloudApiSdkV2.Models.ISshkeylist[] SshKeys { get; set; }
 
         bool? Sudo { get; set; }
+
+        bool? Suspended { get; set; }
 
         string[] Tags { get; set; }
 

@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `name`.
+Valid filter fields are `version`.
 .Description
-Valid filter fields are `name`.
+Valid filter fields are `version`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemkernelinfo
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsPrograms
+JumpCloudApiSdkV2.Models.ISystemInsightsKernelInfo
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemkernelinfo
 #>
 function Get-JcSdkSystemInsightsSystemKernelInfo {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsPrograms])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsKernelInfo])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

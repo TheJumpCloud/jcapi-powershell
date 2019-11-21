@@ -12,7 +12,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'accept: application/json' \\\n -H 'content-type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] ApplicationTraverseUser_ListGroup=>GET:"/applications/{application_id}/usergroups"
+    /// [OpenAPI] ApplicationTraverseUserGroup_List=>GET:"/applications/{application_id}/usergroups"
     /// [METADATA]
     /// path: '/applications/{application_id}/usergroups'
     /// apiVersions:
@@ -301,7 +301,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.ApplicationTraverseUserListGroup(ApplicationId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.ApplicationTraverseUserGroupList(ApplicationId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

@@ -10,4 +10,12 @@ Describe 'Get-JcSdkWorkday' {
     It 'List' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
+
+    It 'Get' {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
 }

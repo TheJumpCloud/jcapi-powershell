@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
     /// <summary>This endpoint will return the current (latest) fde key saved for a system.</summary>
     /// <remarks>
-    /// [OpenAPI] System_GetFDEKey=>GET:"/systems/{system_id}/fdekey"
+    /// [OpenAPI] SystemFDEKey_Get=>GET:"/systems/{system_id}/fdekey"
     /// [METADATA]
     /// path: '/systems/{system_id}/fdekey'
     /// apiVersions:
@@ -314,7 +314,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemGetFdeKey(SystemId, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.SystemFdeKeyGet(SystemId, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

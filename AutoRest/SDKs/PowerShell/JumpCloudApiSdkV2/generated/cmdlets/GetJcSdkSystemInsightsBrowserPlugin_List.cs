@@ -42,21 +42,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>The reference to the client API class.</summary>
         public JumpCloudApiSdkV2.JumpCloudApIs Client => JumpCloudApiSdkV2.Module.Instance.ClientAPI;
 
-        /// <summary>Backing field for <see cref="Filter" /> property.</summary>
-        private string[] _filter;
-
-        /// <summary>Supported operators are: eq</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Supported operators are: eq")]
-        [System.Management.Automation.AllowEmptyCollection]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Supported operators are: eq",
-        SerializedName = @"filter",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
-        public string[] Filter { get => this._filter; set => this._filter = value; }
-
         /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "SendAsync Pipeline Steps to be appended to the front of the pipeline")]
         [System.Management.Automation.ValidateNotNull]
@@ -278,12 +263,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemInsightsBrowserPluginsList(this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.SystemInsightsBrowserPluginsList(this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?)}));
                 }
                 finally
                 {

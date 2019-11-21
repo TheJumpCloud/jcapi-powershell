@@ -22,12 +22,6 @@ param(
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
     [System.Int32]
     # HELP MESSAGE MISSING
     ${Limit},

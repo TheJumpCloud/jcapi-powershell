@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `hotfix_id  `.
+Valid filter fields are `disk_index`.
 .Description
-Valid filter fields are `hotfix_id  `.
+Valid filter fields are `disk_index`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemdiskinfo
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsPatches
+JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemdiskinfo
 #>
 function Get-JcSdkSystemInsightsSystemDiskInfo {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsPatches])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

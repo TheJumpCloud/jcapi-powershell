@@ -4,7 +4,6 @@ D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\bin\JumpCloudApiSdkV2.privat
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\bin\Microsoft.CSharp.dll
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\bin\System.Management.Automation.dll
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\obj\Release\JumpCloudApiSdkV2.csprojAssemblyReference.cache
-D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\obj\Release\JumpCloudApiSdkV2.csproj.CoreCompileInputs.cache
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\obj\Release\JumpCloudApiSdkV2.AssemblyInfoInputs.cache
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\obj\Release\JumpCloudApiSdkV2.AssemblyInfo.cs
 D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloudApiSdkV2\obj\Release\JumpCloudApiSdkV2.csproj.CopyComplete

@@ -6,12 +6,12 @@ Valid filter fields are `name`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystembrowserplugin
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions
+JumpCloudApiSdkV2.Models.ISystemInsightsBrowserPlugins
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystembrowserplugin
 #>
 function Get-JcSdkSystemInsightsSystemBrowserPlugin {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsBrowserPlugins])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

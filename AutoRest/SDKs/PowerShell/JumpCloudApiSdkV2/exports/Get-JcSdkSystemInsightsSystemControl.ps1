@@ -6,14 +6,12 @@ Valid filter fields are `system_id` and `name`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemcontrol
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo
-.Outputs
 JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemcontrol
 #>
 function Get-JcSdkSystemInsightsSystemControl {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls], [JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(ParameterSetName='List1', Mandatory)]
@@ -21,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

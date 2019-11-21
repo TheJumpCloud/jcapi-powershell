@@ -25,13 +25,6 @@ param(
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]
     [System.String[]]
-    # The comma separated fields included in the returned records.
-    # If omitted, the default list of fields will be returned.
-    ${Fields},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 

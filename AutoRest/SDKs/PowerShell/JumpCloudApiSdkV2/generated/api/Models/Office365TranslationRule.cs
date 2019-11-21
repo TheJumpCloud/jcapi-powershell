@@ -84,7 +84,7 @@ namespace JumpCloudApiSdkV2.Models
         * `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`
         * `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`
         * `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`
-        * `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
+        * `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user` ",
         SerializedName = @"builtIn",
         PossibleTypes = new [] { typeof(string) })]
         string BuiltIn { get; set; }

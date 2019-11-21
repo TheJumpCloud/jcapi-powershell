@@ -14,9 +14,8 @@ This endpoint returns a specific samba domain for an LDAP server.\n\n##### Sampl
 
 ### List (Default)
 ```
-Get-JcSdkLdapServerSambaDomain -LdapserverId <String> [-Fields <String[]>] [-Filter <String[]>]
- [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>] [-Accept <String>] [-ContentType <String>]
- [<CommonParameters>]
+Get-JcSdkLdapServerSambaDomain -LdapserverId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Sort <String[]>] [-Accept <String>] [-ContentType <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -67,23 +66,6 @@ HELP MESSAGE MISSING
 ```yaml
 Type: System.String
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
-
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
 Aliases:
 
 Required: False
@@ -233,7 +215,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[GroupId <String>]`: ObjectID of the User Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the User Group.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

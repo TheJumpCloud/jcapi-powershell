@@ -12,7 +12,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] SystemTraverseUser_ListGroup=>GET:"/systems/{system_id}/usergroups"
+    /// [OpenAPI] SystemTraverseUserGroup_List=>GET:"/systems/{system_id}/usergroups"
     /// [METADATA]
     /// path: '/systems/{system_id}/usergroups'
     /// apiVersions:
@@ -329,7 +329,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemTraverseUserListGroup(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.SystemTraverseUserGroupList(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Date") ? Date : null, this.InvocationInformation.BoundParameters.ContainsKey("Authorization") ? Authorization : null, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

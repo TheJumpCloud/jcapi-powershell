@@ -101,6 +101,7 @@ namespace JumpCloudApiSdkV2.Models
             {_relationships = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonArray>("relationships"), out var __jsonRelationships) ? If( __jsonRelationships as JumpCloudApiSdkV2.Runtime.Json.JsonArray, out var __g) ? new global::System.Func<JumpCloudApiSdkV2.Models.ISystemuserputpostRelationshipsItem[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__g, (__f)=>(JumpCloudApiSdkV2.Models.ISystemuserputpostRelationshipsItem) (JumpCloudApiSdkV2.Models.SystemuserputpostRelationshipsItem.FromJson(__f) )) ))() : null : Relationships;}
             {_sambaServiceUser = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonBoolean>("samba_service_user"), out var __jsonSambaServiceUser) ? (bool?)__jsonSambaServiceUser : SambaServiceUser;}
             {_sudo = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonBoolean>("sudo"), out var __jsonSudo) ? (bool?)__jsonSudo : Sudo;}
+            {_suspended = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonBoolean>("suspended"), out var __jsonSuspended) ? (bool?)__jsonSuspended : Suspended;}
             {_tags = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonArray>("tags"), out var __jsonTags) ? If( __jsonTags as JumpCloudApiSdkV2.Runtime.Json.JsonArray, out var __b) ? new global::System.Func<string[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__b, (__a)=>(string) (__a is JumpCloudApiSdkV2.Runtime.Json.JsonString ___z ? (string)(___z.ToString()) : null)) ))() : null : Tags;}
             {_unixGuid = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonNumber>("unix_guid"), out var __jsonUnixGuid) ? (int?)__jsonUnixGuid : UnixGuid;}
             {_unixUid = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonNumber>("unix_uid"), out var __jsonUnixUid) ? (int?)__jsonUnixUid : UnixUid;}
@@ -192,6 +193,7 @@ namespace JumpCloudApiSdkV2.Models
             }
             AddIf( null != this._sambaServiceUser ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode)new JumpCloudApiSdkV2.Runtime.Json.JsonBoolean((bool)this._sambaServiceUser) : null, "samba_service_user" ,container.Add );
             AddIf( null != this._sudo ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode)new JumpCloudApiSdkV2.Runtime.Json.JsonBoolean((bool)this._sudo) : null, "sudo" ,container.Add );
+            AddIf( null != this._suspended ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode)new JumpCloudApiSdkV2.Runtime.Json.JsonBoolean((bool)this._suspended) : null, "suspended" ,container.Add );
             if (null != this._tags)
             {
                 var __c = new JumpCloudApiSdkV2.Runtime.Json.XNodeArray();

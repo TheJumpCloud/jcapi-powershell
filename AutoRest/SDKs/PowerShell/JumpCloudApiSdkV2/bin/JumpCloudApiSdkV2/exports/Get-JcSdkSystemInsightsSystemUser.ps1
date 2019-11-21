@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `disk_index`.
+Valid filter fields are `username`.
 .Description
-Valid filter fields are `disk_index`.
+Valid filter fields are `username`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemuser
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo
+JumpCloudApiSdkV2.Models.ISystemInsightsUsers
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemuser
 #>
 function Get-JcSdkSystemInsightsSystemUser {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsBitlockerInfo])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsUsers])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

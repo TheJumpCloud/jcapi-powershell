@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloudApiSdkV2
-Module Guid: 74547174-2866-4aaf-8c65-03cad0340688
+Module Guid: df92cdaa-cb73-4baf-92ea-f6a07ef7ffb2
 Download Help Link: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -11,6 +11,12 @@ Locale: en-US
 The JumpCloud PowerShell SDK
 
 ## JumpCloudApiSdkV2 Cmdlets
+### [Get-JcSdkActiveDirectory](Get-JcSdkActiveDirectory.md)
+This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+
+### [Get-JcSdkActiveDirectoryAssociation](Get-JcSdkActiveDirectoryAssociation.md)
+This endpoint returns the direct associations of this Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
 ### [Get-JcSdkActiveDirectoryTraverseUserGroup](Get-JcSdkActiveDirectoryTraverseUserGroup.md)
 This endpoint will return all Users Groups bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Active Directory instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Active Directory instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/usergroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
@@ -23,6 +29,9 @@ This endpoint will return all Users bound to an Application, either directly or 
 
 ### [Get-JcSdkApplicationTraverseUserGroup](Get-JcSdkApplicationTraverseUserGroup.md)
 This endpoint will return all Users Groups bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates  each path from this Application to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Application.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/applications/{Application_ID}/usergroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Get-JcSdkBulkUsersResult](Get-JcSdkBulkUsersResult.md)
+This endpoint will return the results of particular user import or update job request.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ### [Get-JcSdkCommandAssociation](Get-JcSdkCommandAssociation.md)
 This endpoint will return the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
@@ -126,7 +135,7 @@ This endpoint returns the _direct_ associations of a System.\n\nA direct associa
 This endpoint will return the current (latest) fde key saved for a system.
 
 ### [Get-JcSdkSystemGroup](Get-JcSdkSystemGroup.md)
-This endpoint returns all System Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the details of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkSystemGroupAssociation](Get-JcSdkSystemGroupAssociation.md)
 This endpoint returns the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
@@ -201,67 +210,67 @@ Valid filter fields are `system_id` and `name`.
 Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightsSystemApp](Get-JcSdkSystemInsightsSystemApp.md)
-Valid filter fields are `name`.
+Valid filter fields are `bundle_name`.
 
 ### [Get-JcSdkSystemInsightsSystemBitlockerInfo](Get-JcSdkSystemInsightsSystemBitlockerInfo.md)
-Valid filter fields are `address`.
+Valid filter fields are `protection_status`.
 
 ### [Get-JcSdkSystemInsightsSystemBrowserPlugin](Get-JcSdkSystemInsightsSystemBrowserPlugin.md)
 Valid filter fields are `name`.
 
 ### [Get-JcSdkSystemInsightsSystemChromeExtension](Get-JcSdkSystemInsightsSystemChromeExtension.md)
-Valid filter fields are `path`.
+Valid filter fields are `name`.
 
 ### [Get-JcSdkSystemInsightsSystemControl](Get-JcSdkSystemInsightsSystemControl.md)
 Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightsSystemDiskEncryption](Get-JcSdkSystemInsightsSystemDiskEncryption.md)
-Valid filter fields are `device_id`.
+Valid filter fields are `encryption_status`.
 
 ### [Get-JcSdkSystemInsightsSystemDiskInfo](Get-JcSdkSystemInsightsSystemDiskInfo.md)
-Valid filter fields are `hotfix_id  `.
+Valid filter fields are `disk_index`.
 
 ### [Get-JcSdkSystemInsightsSystemEtcHost](Get-JcSdkSystemInsightsSystemEtcHost.md)
-Valid filter fields are `name`.
+Valid filter fields are `address`.
 
 ### [Get-JcSdkSystemInsightsSystemFirefoxAddon](Get-JcSdkSystemInsightsSystemFirefoxAddon.md)
 Valid filter fields are `name`.
 
 ### [Get-JcSdkSystemInsightsSystemGroup](Get-JcSdkSystemInsightsSystemGroup.md)
-Valid filter fields are `bundle_name`.
+Valid filter fields are `groupname`.
 
 ### [Get-JcSdkSystemInsightsSystemInfo](Get-JcSdkSystemInsightsSystemInfo.md)
-Valid filter fields are `name`.
+Valid filter fields are `cpu_subtype`.
 
 ### [Get-JcSdkSystemInsightsSystemInterfaceAddress](Get-JcSdkSystemInsightsSystemInterfaceAddress.md)
-Valid filter fields are `encryption_status`.
+Valid filter fields are `address`.
 
 ### [Get-JcSdkSystemInsightsSystemKernelInfo](Get-JcSdkSystemInsightsSystemKernelInfo.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemLogicalDrive](Get-JcSdkSystemInsightsSystemLogicalDrive.md)
 Valid filter fields are `version`.
 
-### [Get-JcSdkSystemInsightsSystemMount](Get-JcSdkSystemInsightsSystemMount.md)
-Valid filter fields are `address`.
+### [Get-JcSdkSystemInsightsSystemLogicalDrive](Get-JcSdkSystemInsightsSystemLogicalDrive.md)
+Valid filter fields are `device_id`.
+
+### [Get-JcSdkSystemInsightsSystemLogicalMount](Get-JcSdkSystemInsightsSystemLogicalMount.md)
+Valid filter fields are `path`.
 
 ### [Get-JcSdkSystemInsightsSystemOSVersion](Get-JcSdkSystemInsightsSystemOSVersion.md)
 Valid filter fields are `version`.
 
 ### [Get-JcSdkSystemInsightsSystemPatch](Get-JcSdkSystemInsightsSystemPatch.md)
-Valid filter fields are `groupname`.
+Valid filter fields are `hotfix_id  `.
 
 ### [Get-JcSdkSystemInsightsSystemProgram](Get-JcSdkSystemInsightsSystemProgram.md)
-Valid filter fields are `username`.
+Valid filter fields are `name`.
 
 ### [Get-JcSdkSystemInsightsSystemSafariExtension](Get-JcSdkSystemInsightsSystemSafariExtension.md)
-Valid filter fields are `cpu_subtype`.
+Valid filter fields are `name`.
 
 ### [Get-JcSdkSystemInsightsSystemUptime](Get-JcSdkSystemInsightsSystemUptime.md)
 Valid filter fields are `days`.
 
 ### [Get-JcSdkSystemInsightsSystemUser](Get-JcSdkSystemInsightsSystemUser.md)
-Valid filter fields are `disk_index`.
+Valid filter fields are `username`.
 
 ### [Get-JcSdkSystemInsightsUptime](Get-JcSdkSystemInsightsUptime.md)
 Valid filter fields are `system_id` and `days`.
@@ -288,7 +297,7 @@ This endpoint will return all User Groups bound to a System, either directly or 
 This endpoint returns the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/associations?targets=system_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 
 ### [Get-JcSdkUserGroup](Get-JcSdkUserGroup.md)
-This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkUserGroupAssociation](Get-JcSdkUserGroupAssociation.md)
 This endpoint returns the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations?targets=system \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
@@ -351,7 +360,7 @@ This endpoint will return all Systems bound to a User, either directly or indire
 This endpoint will return all System Groups bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/systemgroups\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkWorkday](Get-JcSdkWorkday.md)
-This endpoint will return  all the available information about all your instances of Workday.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return  all the available information about an instance of Workday.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ### [Get-JcSdkWorkdayWorker](Get-JcSdkWorkdayWorker.md)
 This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n\n```
@@ -369,9 +378,6 @@ This endpoint provides a list of job results from the workday import and will co
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}\n\t\t]\n\t}\n]\n```
-
-### [New-JcSdkBulkUserResult](New-JcSdkBulkUserResult.md)
-This endpoint will return the results of particular user import or update job request.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ### [New-JcSdkGSuiteTranslationRule](New-JcSdkGSuiteTranslationRule.md)
 This endpoint allows you to create a translation rule for a specific G Suite instance.
@@ -416,6 +422,12 @@ These rules specify how JumpCloud attributes translate to [Microsoft Graph](http
 ### [Remove-JcSdkPolicy](Remove-JcSdkPolicy.md)
 This endpoint allows you to delete a policy.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d4291e6b9 \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
+### [Remove-JcSdkSystemGroup](Remove-JcSdkSystemGroup.md)
+This endpoint allows you to delete a System Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+
+### [Remove-JcSdkUserGroup](Remove-JcSdkUserGroup.md)
+This endpoint allows you to delete a User Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+
 ### [Remove-JcSdkWorkdayAuthorization](Remove-JcSdkWorkdayAuthorization.md)
 Removes any and all authorization methods from the workday instance\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
@@ -451,6 +463,9 @@ This endpoint allows you to manage the _direct_ associations of a Radius Server.
 ### [Set-JcSdkSystemAssociation](Set-JcSdkSystemAssociation.md)
 This endpoint allows you to manage the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"UserID\"\n}'\n\n```
 
+### [Set-JcSdkSystemGroup](Set-JcSdkSystemGroup.md)
+This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n \"name\": \"Name_Update\"\n}'\n```
+
 ### [Set-JcSdkSystemGroupAssociation](Set-JcSdkSystemGroupAssociation.md)
 This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n}'\n\n```
 
@@ -460,11 +475,17 @@ This endpoint allows you to manage the system members of a System Group.\n\n####
 ### [Set-JcSdkUserAssociation](Set-JcSdkUserAssociation.md)
 This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n   \"op\": \"add\",\n   \"type\": \"system_group\",\n   \"id\": \"{GroupID}\"\n}'
 
+### [Set-JcSdkUserGroup](Set-JcSdkUserGroup.md)
+This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n \"name\": \"group_update\"\n}'\n\n```
+
 ### [Set-JcSdkUserGroupAssociation](Set-JcSdkUserGroupAssociation.md)
 This endpoint manages the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n}'\n\n```
 
 ### [Set-JcSdkUserGroupMember](Set-JcSdkUserGroupMember.md)
 This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n}'\n```
+
+### [Set-JcSdkWorkday](Set-JcSdkWorkday.md)
+This endpoint allows you to update the name and Custom Report URL for a Workday Instance.\n\nCurrently, the name can not be changed from the default of `Workday Import`.\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"reportUrl\":\"{Report_URL}\",\n\t\"name\":\"{Name}\"\n}\t'\n```
 
 ### [Update-JcSdkBulkUser](Update-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously update users.

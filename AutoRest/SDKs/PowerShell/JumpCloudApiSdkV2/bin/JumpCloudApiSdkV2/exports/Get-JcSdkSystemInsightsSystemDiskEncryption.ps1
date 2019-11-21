@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `device_id`.
+Valid filter fields are `encryption_status`.
 .Description
-Valid filter fields are `device_id`.
+Valid filter fields are `encryption_status`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemdiskencryption
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsLogicalDrvies
+JumpCloudApiSdkV2.Models.ISystemInsightsDiskEncryption
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemdiskencryption
 #>
 function Get-JcSdkSystemInsightsSystemDiskEncryption {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsLogicalDrvies])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsDiskEncryption])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

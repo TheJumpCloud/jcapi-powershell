@@ -24,8 +24,8 @@ Get-JcSdkPolicyResult -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 
 ### List
 ```
-Get-JcSdkPolicyResult -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkPolicyResult -PolicyId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,23 +41,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Filter
 Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
@@ -198,7 +181,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[GroupId <String>]`: ObjectID of the User Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the User Group.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

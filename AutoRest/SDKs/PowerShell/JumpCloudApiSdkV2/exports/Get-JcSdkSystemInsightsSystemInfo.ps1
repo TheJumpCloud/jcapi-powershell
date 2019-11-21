@@ -1,19 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `name`.
+Valid filter fields are `cpu_subtype`.
 .Description
-Valid filter fields are `name`.
+Valid filter fields are `cpu_subtype`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssysteminfo
-.Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls
 .Outputs
 JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssysteminfo
 #>
 function Get-JcSdkSystemInsightsSystemInfo {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls], [JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo])]
 [CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
 param(
     [Parameter(ParameterSetName='List', Mandatory)]
@@ -21,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

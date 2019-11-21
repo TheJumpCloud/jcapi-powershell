@@ -2,17 +2,17 @@ namespace JumpCloudApiSdkV2.Cmdlets
 {
     using static JumpCloudApiSdkV2.Runtime.Extensions;
 
-    /// <summary>Valid filter fields are `path`.</summary>
+    /// <summary>Valid filter fields are `name`.</summary>
     /// <remarks>
-    /// [OpenAPI] SystemInsightsSystemChromeExtensions_List=>GET:"/systeminsights/{system_id}/mounts"
+    /// [OpenAPI] SystemInsightsSystemChromeExtensions_List=>GET:"/systeminsights/{system_id}/chrome_extensions"
     /// [METADATA]
-    /// path: '/systeminsights/{system_id}/mounts'
+    /// path: '/systeminsights/{system_id}/chrome_extensions'
     /// apiVersions:
     /// - '2.0'
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systeminsights~1{system_id}~1mounts'
+    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systeminsights~1{system_id}~1chrome_extensions'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
@@ -20,8 +20,8 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// variant: List
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkSystemInsightsSystemChromeExtension_List")]
-    [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.ISystemInsightsMounts))]
-    [JumpCloudApiSdkV2.Description(@"Valid filter fields are `path`.")]
+    [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions))]
+    [JumpCloudApiSdkV2.Description(@"Valid filter fields are `name`.")]
     [JumpCloudApiSdkV2.Generated]
     public partial class GetJcSdkSystemInsightsSystemChromeExtension_List : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
@@ -41,21 +41,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
         /// <summary>The reference to the client API class.</summary>
         public JumpCloudApiSdkV2.JumpCloudApIs Client => JumpCloudApiSdkV2.Module.Instance.ClientAPI;
-
-        /// <summary>Backing field for <see cref="Filter" /> property.</summary>
-        private string[] _filter;
-
-        /// <summary>Supported operators are: eq</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "Supported operators are: eq")]
-        [System.Management.Automation.AllowEmptyCollection]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"Supported operators are: eq",
-        SerializedName = @"filter",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
-        public string[] Filter { get => this._filter; set => this._filter = value; }
 
         /// <summary>SendAsync Pipeline Steps to be appended to the front of the pipeline</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "SendAsync Pipeline Steps to be appended to the front of the pipeline")]
@@ -146,12 +131,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsMounts[]" /> from the remote
-        /// call</param>
+        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions[]" />
+        /// from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onOk method should be processed, or if the method should return
         /// immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsMounts[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -291,12 +276,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemInsightsSystemChromeExtensionsList(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.SystemInsightsSystemChromeExtensionsList(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  SystemId=SystemId,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  SystemId=SystemId,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?)}));
                 }
                 finally
                 {
@@ -314,12 +299,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsMounts[]" /> from the remote
-        /// call</param>
+        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions[]" />
+        /// from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsMounts[]> response)
+        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions[]> response)
         {
             using( NoSynchronizationContext )
             {

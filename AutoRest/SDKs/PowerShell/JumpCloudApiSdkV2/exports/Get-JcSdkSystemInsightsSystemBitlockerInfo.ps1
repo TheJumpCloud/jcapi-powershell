@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Valid filter fields are `address`.
+Valid filter fields are `protection_status`.
 .Description
-Valid filter fields are `address`.
+Valid filter fields are `protection_status`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystembitlockerinfo
 .Outputs
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

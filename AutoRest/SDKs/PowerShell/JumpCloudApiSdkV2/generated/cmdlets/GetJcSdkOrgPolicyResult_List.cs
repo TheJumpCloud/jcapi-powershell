@@ -45,26 +45,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>The reference to the client API class.</summary>
         public JumpCloudApiSdkV2.JumpCloudApIs Client => JumpCloudApiSdkV2.Module.Instance.ClientAPI;
 
-        /// <summary>Backing field for <see cref="Fields" /> property.</summary>
-        private string[] _fields;
-
-        /// <summary>
-        /// The comma separated fields included in the returned records.
-        /// If omitted, the default list of fields will be returned.
-        /// </summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The comma separated fields included in the returned records.\nIf omitted, the default list of fields will be returned.\n")]
-        [System.Management.Automation.AllowEmptyCollection]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"The comma separated fields included in the returned records.
-        If omitted, the default list of fields will be returned.
-        ",
-        SerializedName = @"fields",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
-        public string[] Fields { get => this._fields; set => this._fields = value; }
-
         /// <summary>Backing field for <see cref="Filter" /> property.</summary>
         private string[] _filter;
 
@@ -321,12 +301,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.OrgPolicyResultList(this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.OrgPolicyResultList(this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  Fields=this.InvocationInformation.BoundParameters.ContainsKey("Fields") ? Fields : null /* arrayOf */,Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Sort=this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  Filter=this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?),Sort=this.InvocationInformation.BoundParameters.ContainsKey("Sort") ? Sort : null /* arrayOf */}));
                 }
                 finally
                 {

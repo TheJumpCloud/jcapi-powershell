@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `encryption_status`.
+Valid filter fields are `address`.
 .Description
-Valid filter fields are `encryption_status`.
+Valid filter fields are `address`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssysteminterfaceaddress
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsDiskEncryption
+JumpCloudApiSdkV2.Models.ISystemInsightsInterfaceAddresses
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssysteminterfaceaddress
 #>
 function Get-JcSdkSystemInsightsSystemInterfaceAddress {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsDiskEncryption])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsInterfaceAddresses])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

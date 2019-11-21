@@ -6,12 +6,12 @@ Valid filter fields are `version`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemosversion
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsKernelInfo
+JumpCloudApiSdkV2.Models.ISystemInsightsOSVersion
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemosversion
 #>
 function Get-JcSdkSystemInsightsSystemOSVersion {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsKernelInfo])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsOSVersion])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
     /// <summary>This endpoint will return the current (latest) fde key saved for a system.</summary>
     /// <remarks>
-    /// [OpenAPI] System_GetFDEKey=>GET:"/systems/{system_id}/fdekey"
+    /// [OpenAPI] SystemFDEKey_Get=>GET:"/systems/{system_id}/fdekey"
     /// [METADATA]
     /// path: '/systems/{system_id}/fdekey'
     /// apiVersions:
@@ -314,7 +314,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                     {
                         ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.SystemId"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
                     }
-                    await this.Client.SystemGetFdeKey(InputObject.SystemId ?? null, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.SystemFdeKeyGet(InputObject.SystemId ?? null, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

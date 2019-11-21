@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `name`.
+Valid filter fields are `bundle_name`.
 .Description
-Valid filter fields are `name`.
+Valid filter fields are `bundle_name`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemapp
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions
+JumpCloudApiSdkV2.Models.ISystemInsightsApps
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemapp
 #>
 function Get-JcSdkSystemInsightsSystemApp {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsChromeExtensions])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsApps])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

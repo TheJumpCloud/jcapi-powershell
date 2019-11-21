@@ -12,7 +12,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \\\n -H 'accept: application/json' \\\n -H 'content-type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] CommandTraverseSystem_ListGroup=>GET:"/commands/{command_id}/systemgroups"
+    /// [OpenAPI] CommandTraverseSystemGroup_List=>GET:"/commands/{command_id}/systemgroups"
     /// [METADATA]
     /// path: '/commands/{command_id}/systemgroups'
     /// apiVersions:
@@ -301,7 +301,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.CommandTraverseSystemListGroup(CommandId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
+                    await this.Client.CommandTraverseSystemGroupList(CommandId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Filter") ? Filter : null /* arrayOf */, onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)

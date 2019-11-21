@@ -1,17 +1,17 @@
 <#
 .Synopsis
-Valid filter fields are `cpu_subtype`.
+Valid filter fields are `name`.
 .Description
-Valid filter fields are `cpu_subtype`.
+Valid filter fields are `name`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemsafariextension
 .Outputs
-JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo
+JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemsafariextension
 #>
 function Get-JcSdkSystemInsightsSystemSafariExtension {
-[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo])]
+[OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
@@ -19,12 +19,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${SystemId},
-
-    [Parameter()]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # Supported operators are: eq
-    ${Filter},
 
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]

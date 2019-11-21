@@ -19,7 +19,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   [CommandId <String>]: ObjectID of the Command.
   [GroupId <String>]: ObjectID of the User Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: 
+  [Id <String>]: ObjectID of the User Group.
   [JobId <String>]: 
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -54,13 +54,6 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${PolicyId},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloudApiSdkV2.Category('Query')]
-    [System.String[]]
-    # The comma separated fields included in the returned records.
-    # If omitted, the default list of fields will be returned.
-    ${Fields},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloudApiSdkV2.Category('Query')]

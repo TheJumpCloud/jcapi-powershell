@@ -13,8 +13,7 @@ This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n###
 ## SYNTAX
 
 ```
-Get-JcSdkDirectory [-Fields <String[]>] [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>]
- [<CommonParameters>]
+Get-JcSdkDirectory [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,23 +29,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Limit
 The number of records to return at once.

@@ -8,23 +8,22 @@ schema: 2.0.0
 # Get-JcSdkSystemInsightsSystemInfo
 
 ## SYNOPSIS
-Valid filter fields are `name`.
+Valid filter fields are `cpu_subtype`.
 
 ## SYNTAX
 
 ### List1 (Default)
 ```
-Get-JcSdkSystemInsightsSystemInfo [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
+Get-JcSdkSystemInsightsSystemInfo [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
 ```
 
 ### List
 ```
-Get-JcSdkSystemInsightsSystemInfo -SystemId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
+Get-JcSdkSystemInsightsSystemInfo -SystemId <String> [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Valid filter fields are `name`.
+Valid filter fields are `cpu_subtype`.
 
 ## EXAMPLES
 
@@ -36,22 +35,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Filter
-Supported operators are: eq
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Limit
 HELP MESSAGE MISSING
@@ -107,8 +90,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ## OUTPUTS
-
-### JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls
 
 ### JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo
 

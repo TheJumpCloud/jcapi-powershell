@@ -45,6 +45,7 @@ namespace JumpCloudApiSdkV2.Models
         /// <summary>Backing field for <see cref="Id" /> property.</summary>
         private string _id;
 
+        /// <summary>ObjectID of the User Group.</summary>
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string Id { get => this._id; set => this._id = value; }
 
@@ -156,11 +157,11 @@ namespace JumpCloudApiSdkV2.Models
         SerializedName = @"gsuite_id",
         PossibleTypes = new [] { typeof(string) })]
         string GsuiteId { get; set; }
-
+        /// <summary>ObjectID of the User Group.</summary>
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
         ReadOnly = false,
-        Description = @"",
+        Description = @"ObjectID of the User Group.",
         SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         string Id { get; set; }
@@ -251,7 +252,7 @@ namespace JumpCloudApiSdkV2.Models
         string GroupId { get; set; }
         /// <summary>ObjectID of the G Suite instance.</summary>
         string GsuiteId { get; set; }
-
+        /// <summary>ObjectID of the User Group.</summary>
         string Id { get; set; }
 
         string JobId { get; set; }

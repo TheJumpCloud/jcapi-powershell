@@ -8,17 +8,28 @@ schema: 2.0.0
 # Get-JcSdkUserGroup
 
 ## SYNOPSIS
-This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## SYNTAX
 
+### List (Default)
 ```
-Get-JcSdkUserGroup [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
- [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkUserGroup [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>]
+ [<CommonParameters>]
+```
+
+### Get
+```
+Get-JcSdkUserGroup -Id <String> [<CommonParameters>]
+```
+
+### GetViaIdentity
+```
+Get-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## EXAMPLES
 
@@ -31,13 +42,12 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 ## PARAMETERS
 
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
+### -Filter
+Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -48,18 +58,35 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
-### -Filter
-Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+### -Id
+ObjectID of the User Group.
 
 ```yaml
-Type: System.String[]
-Parameter Sets: (All)
+Type: System.String
+Parameter Sets: Get
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -InputObject
+Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity
+Parameter Sets: GetViaIdentity
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 Dynamic: False
 ```
@@ -70,7 +97,7 @@ Limited to 100.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -86,7 +113,7 @@ The offset into the records to return.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -103,7 +130,7 @@ Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -119,6 +146,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity
+
 ## OUTPUTS
 
 ### JumpCloudApiSdkV2.Models.IUserGroup
@@ -126,6 +155,26 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## ALIASES
 
 ## NOTES
+
+### COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+#### INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  - `[ActivedirectoryId <String>]`: ObjectID of the Active Directory instance.
+  - `[ApplicationId <String>]`: ObjectID of the Application.
+  - `[CommandId <String>]`: ObjectID of the Command.
+  - `[GroupId <String>]`: ObjectID of the User Group.
+  - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
+  - `[Id <String>]`: ObjectID of the User Group.
+  - `[JobId <String>]`: 
+  - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
+  - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
+  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[ProviderId <String>]`: 
+  - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SystemId <String>]`: 
+  - `[UserId <String>]`: ObjectID of the User.
+  - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS
 

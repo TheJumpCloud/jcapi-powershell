@@ -13,8 +13,8 @@ This endpoint returns a list of the Administrators associated with the Provider.
 ## SYNTAX
 
 ```
-Get-JcSdkProviderAdministrator -ProviderId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkProviderAdministrator -ProviderId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
+ [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,23 +30,6 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 
 
 ## PARAMETERS
-
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-Dynamic: False
-```
 
 ### -Filter
 Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
