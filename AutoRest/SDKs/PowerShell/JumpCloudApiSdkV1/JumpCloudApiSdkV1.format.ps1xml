@@ -2,6 +2,28 @@
 <Configuration>
   <ViewDefinitions>
     <View>
+      <Name>JumpCloudApiSdkV1.Models.ActiveDirectoryInput</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.ActiveDirectoryInput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Domain</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Domain</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV1.Models.Application</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Application</TypeName>
@@ -9,7 +31,7 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>Active</Label>
+            <Label>Beta</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>DisplayLabel</Label>
@@ -37,7 +59,7 @@
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Active</PropertyName>
+                <PropertyName>Beta</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisplayLabel</PropertyName>
@@ -898,6 +920,9 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>IsConfigured</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>LearnMore</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -924,6 +949,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsConfigured</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>LearnMore</PropertyName>
@@ -1852,6 +1880,46 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV1.Models.BulkUserCreate</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.BulkUserCreate</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Email</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Firstname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Lastname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Username</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Email</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Firstname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Lastname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Username</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV1.Models.Command</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Command</TypeName>
@@ -2327,6 +2395,34 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>KeyPresent</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.GsuitePatchInput</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.GsuitePatchInput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>UserLockoutAction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserPasswordExpirationAction</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>UserLockoutAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserPasswordExpirationAction</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -3000,6 +3096,40 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV1.Models.SystemGroupGraphManagementReq</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.SystemGroupGraphManagementReq</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Op</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Op</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV1.Models.Systemput</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Systemput</TypeName>
@@ -3199,6 +3329,9 @@
             <Label>Sudo</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Suspended</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Tags</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3312,6 +3445,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Suspended</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Tags</PropertyName>
@@ -3447,6 +3583,9 @@
             <Label>Sudo</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Suspended</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Tags</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3539,6 +3678,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Suspended</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Tags</PropertyName>
@@ -3741,6 +3883,9 @@
             <Label>Sudo</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Suspended</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Tags</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3839,6 +3984,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Suspended</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Tags</PropertyName>
@@ -4056,6 +4204,9 @@
             <Label>Sudo</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Suspended</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Tags</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4172,6 +4323,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Suspended</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Tags</PropertyName>
@@ -4320,93 +4474,33 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.Tag</Name>
+      <Name>JumpCloudApiSdkV1.Models.UserGraphManagementReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Tag</TypeName>
+        <TypeName>JumpCloudApiSdkV1.Models.UserGraphManagementReq</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
-          <TableColumnHeader>
-            <Label>ExpirationTime</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Expired</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternalDn</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternalSourceType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternallyManaged</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupGid</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupName</Label>
-          </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Name</Label>
+            <Label>Op</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>RegularExpressions</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SendToLdap</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systems</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systemusers</Label>
+            <Label>Type</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>ExpirationTime</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Expired</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternalDn</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternalSourceType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternallyManaged</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupGid</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupName</PropertyName>
-              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Name</PropertyName>
+                <PropertyName>Op</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>RegularExpressions</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SendToLdap</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systems</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systemusers</PropertyName>
+                <PropertyName>Type</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4414,81 +4508,27 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.Tagpost</Name>
+      <Name>JumpCloudApiSdkV1.Models.UserGraphManagementReqAttributesSudo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Tagpost</TypeName>
+        <TypeName>JumpCloudApiSdkV1.Models.UserGraphManagementReqAttributesSudo</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>ExpirationTime</Label>
+            <Label>Enabled</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>ExternalDn</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternalSourceType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternallyManaged</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupGid</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupName</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Name</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>RegularExpressions</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SendToLdap</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systems</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systemusers</Label>
+            <Label>WithoutPassword</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>ExpirationTime</PropertyName>
+                <PropertyName>Enabled</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>ExternalDn</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternalSourceType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternallyManaged</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupGid</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>RegularExpressions</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SendToLdap</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systems</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systemusers</PropertyName>
+                <PropertyName>WithoutPassword</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4496,103 +4536,33 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.Tagput</Name>
+      <Name>JumpCloudApiSdkV1.Models.UserGroupGraphManagementReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Tagput</TypeName>
+        <TypeName>JumpCloudApiSdkV1.Models.UserGroupGraphManagementReq</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>ExpirationTime</Label>
+            <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>ExternalDn</Label>
+            <Label>Op</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>ExternalSourceType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExternallyManaged</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupGid</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>GroupName</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Name</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>RegularExpressions</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SendToLdap</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systems</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Systemusers</Label>
+            <Label>Type</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>ExpirationTime</PropertyName>
+                <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>ExternalDn</PropertyName>
+                <PropertyName>Op</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>ExternalSourceType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExternallyManaged</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupGid</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>GroupName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>RegularExpressions</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SendToLdap</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systems</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Systemusers</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloudApiSdkV1.Models.Tagslist</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Tagslist</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>TotalCount</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>TotalCount</PropertyName>
+                <PropertyName>Type</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

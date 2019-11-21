@@ -63,7 +63,7 @@ namespace JumpCloudApiSdkV1.Models
             // actually deserialize
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Id, global::System.Convert.ToString);
-            ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Active = (bool?) content.GetValueForProperty("Active",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Active, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Beta = (bool?) content.GetValueForProperty("Beta",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Beta, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayLabel = (string) content.GetValueForProperty("DisplayLabel",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayLabel, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayName = (string) content.GetValueForProperty("DisplayName",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayName, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).LearnMore = (string) content.GetValueForProperty("LearnMore",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).LearnMore, global::System.Convert.ToString);
@@ -89,7 +89,7 @@ namespace JumpCloudApiSdkV1.Models
             // actually deserialize
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Id, global::System.Convert.ToString);
-            ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Active = (bool?) content.GetValueForProperty("Active",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Active, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
+            ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Beta = (bool?) content.GetValueForProperty("Beta",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).Beta, (__y)=> (bool) global::System.Convert.ChangeType(__y, typeof(bool)));
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayLabel = (string) content.GetValueForProperty("DisplayLabel",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayLabel, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayName = (string) content.GetValueForProperty("DisplayName",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).DisplayName, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationInternal)this).LearnMore = (string) content.GetValueForProperty("LearnMore",((JumpCloudApiSdkV1.Models.IApplicationInternal)this).LearnMore, global::System.Convert.ToString);

@@ -14,7 +14,7 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkApplication [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Active]
+New-JcSdkApplication [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Beta]
  [-Config <IApplicationConfig>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>]
  [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -56,7 +56,7 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
-### -Active
+### -Beta
 HELP MESSAGE MISSING
 
 ```yaml
@@ -302,7 +302,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 #### BODY <IApplication>: Application
-  - `[Active <Boolean?>]`: 
+  - `[Beta <Boolean?>]`: 
   - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 

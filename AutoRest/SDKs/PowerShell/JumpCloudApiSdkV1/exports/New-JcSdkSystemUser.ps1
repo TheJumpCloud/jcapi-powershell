@@ -70,6 +70,7 @@ BODY <ISystemuserputpost>: SystemUserPost
   [Relationships <ISystemuserputpostRelationshipsItem[]>]: 
   [SambaServiceUser <Boolean?>]: 
   [Sudo <Boolean?>]: 
+  [Suspended <Boolean?>]: 
   [Tags <String[]>]: 
   [UnixGuid <Int32?>]: 
   [UnixUid <Int32?>]: 
@@ -308,6 +309,12 @@ param(
     [System.Management.Automation.SwitchParameter]
     # HELP MESSAGE MISSING
     ${Sudo},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloudApiSdkV1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # HELP MESSAGE MISSING
+    ${Suspended},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloudApiSdkV1.Category('Body')]

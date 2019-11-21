@@ -8,11 +8,11 @@ namespace JumpCloudApiSdkV1.Models
         JumpCloudApiSdkV1.Models.IApplicationInternal
     {
 
-        /// <summary>Backing field for <see cref="Active" /> property.</summary>
-        private bool? _active;
+        /// <summary>Backing field for <see cref="Beta" /> property.</summary>
+        private bool? _beta;
 
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
-        public bool? Active { get => this._active; set => this._active = value; }
+        public bool? Beta { get => this._beta; set => this._beta = value; }
 
         /// <summary>Backing field for <see cref="Config" /> property.</summary>
         private JumpCloudApiSdkV1.Models.IApplicationConfig _config;
@@ -76,9 +76,9 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
-        SerializedName = @"active",
+        SerializedName = @"beta",
         PossibleTypes = new [] { typeof(bool) })]
-        bool? Active { get; set; }
+        bool? Beta { get; set; }
 
         [JumpCloudApiSdkV1.Runtime.Info(
         Required = false,
@@ -149,7 +149,7 @@ namespace JumpCloudApiSdkV1.Models
     internal partial interface IApplicationInternal
 
     {
-        bool? Active { get; set; }
+        bool? Beta { get; set; }
 
         JumpCloudApiSdkV1.Models.IApplicationConfig Config { get; set; }
 

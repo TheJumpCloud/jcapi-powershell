@@ -60,7 +60,7 @@ namespace JumpCloudApiSdkV1.Models
             }
             {_name = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)Name;}
             {_id = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("_id"), out var __jsonId) ? (string)__jsonId : (string)Id;}
-            {_active = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("active"), out var __jsonActive) ? (bool?)__jsonActive : Active;}
+            {_beta = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("beta"), out var __jsonBeta) ? (bool?)__jsonBeta : Beta;}
             {_displayLabel = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("displayLabel"), out var __jsonDisplayLabel) ? (string)__jsonDisplayLabel : (string)DisplayLabel;}
             {_displayName = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("displayName"), out var __jsonDisplayName) ? (string)__jsonDisplayName : (string)DisplayName;}
             {_learnMore = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("learnMore"), out var __jsonLearnMore) ? (string)__jsonLearnMore : (string)LearnMore;}
@@ -101,7 +101,7 @@ namespace JumpCloudApiSdkV1.Models
             }
             AddIf( null != (((object)this._name)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._name.ToString()) : null, "name" ,container.Add );
             AddIf( null != (((object)this._id)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._id.ToString()) : null, "_id" ,container.Add );
-            AddIf( null != this._active ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._active) : null, "active" ,container.Add );
+            AddIf( null != this._beta ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._beta) : null, "beta" ,container.Add );
             AddIf( null != (((object)this._displayLabel)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._displayLabel.ToString()) : null, "displayLabel" ,container.Add );
             AddIf( null != (((object)this._displayName)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._displayName.ToString()) : null, "displayName" ,container.Add );
             AddIf( null != (((object)this._learnMore)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._learnMore.ToString()) : null, "learnMore" ,container.Add );

@@ -54,9 +54,9 @@ namespace JumpCloudApiSdkV1.Cmdlets
         Required = false,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
-        SerializedName = @"active",
+        SerializedName = @"beta",
         PossibleTypes = new [] { typeof(global::System.Management.Automation.SwitchParameter) })]
-        public global::System.Management.Automation.SwitchParameter Active { get => Body.Active ?? default(global::System.Management.Automation.SwitchParameter); set => Body.Active = value; }
+        public global::System.Management.Automation.SwitchParameter Beta { get => Body.Beta ?? default(global::System.Management.Automation.SwitchParameter); set => Body.Beta = value; }
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
         private JumpCloudApiSdkV1.Models.IApplication _body= new JumpCloudApiSdkV1.Models.Application();

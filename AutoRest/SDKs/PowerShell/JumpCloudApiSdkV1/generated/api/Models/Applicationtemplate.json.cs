@@ -65,6 +65,7 @@ namespace JumpCloudApiSdkV1.Models
             {_color = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("color"), out var __jsonColor) ? (string)__jsonColor : (string)Color;}
             {_displayLabel = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("displayLabel"), out var __jsonDisplayLabel) ? (string)__jsonDisplayLabel : (string)DisplayLabel;}
             {_displayName = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("displayName"), out var __jsonDisplayName) ? (string)__jsonDisplayName : (string)DisplayName;}
+            {_isConfigured = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("isConfigured"), out var __jsonIsConfigured) ? (bool?)__jsonIsConfigured : IsConfigured;}
             {_learnMore = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("learnMore"), out var __jsonLearnMore) ? (string)__jsonLearnMore : (string)LearnMore;}
             {_ssoUrl = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("ssoUrl"), out var __jsonSsoUrl) ? (string)__jsonSsoUrl : (string)SsoUrl;}
             {_config = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonObject>("config"), out var __jsonConfig) ? JumpCloudApiSdkV1.Models.ApplicationtemplateConfig.FromJson(__jsonConfig) : Config;}
@@ -107,6 +108,7 @@ namespace JumpCloudApiSdkV1.Models
             AddIf( null != (((object)this._color)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._color.ToString()) : null, "color" ,container.Add );
             AddIf( null != (((object)this._displayLabel)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._displayLabel.ToString()) : null, "displayLabel" ,container.Add );
             AddIf( null != (((object)this._displayName)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._displayName.ToString()) : null, "displayName" ,container.Add );
+            AddIf( null != this._isConfigured ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._isConfigured) : null, "isConfigured" ,container.Add );
             AddIf( null != (((object)this._learnMore)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._learnMore.ToString()) : null, "learnMore" ,container.Add );
             AddIf( null != (((object)this._ssoUrl)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._ssoUrl.ToString()) : null, "ssoUrl" ,container.Add );
             AddIf( null != this._config ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) this._config.ToJson(null,serializationMode) : null, "config" ,container.Add );

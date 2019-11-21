@@ -44,6 +44,12 @@ namespace JumpCloudApiSdkV1.Models
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
         public string Id { get => this._id; set => this._id = value; }
 
+        /// <summary>Backing field for <see cref="IsConfigured" /> property.</summary>
+        private bool? _isConfigured;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public bool? IsConfigured { get => this._isConfigured; set => this._isConfigured = value; }
+
         /// <summary>Backing field for <see cref="Jit" /> property.</summary>
         private JumpCloudApiSdkV1.Models.IApplicationtemplateJit _jit;
 
@@ -141,6 +147,14 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"isConfigured",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? IsConfigured { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"attributes",
         PossibleTypes = new [] { typeof(JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes) })]
         JumpCloudApiSdkV1.Models.IApplicationtemplateJitAttributes JitAttributes { get; set; }
@@ -193,6 +207,8 @@ namespace JumpCloudApiSdkV1.Models
         string DisplayName { get; set; }
 
         string Id { get; set; }
+
+        bool? IsConfigured { get; set; }
 
         JumpCloudApiSdkV1.Models.IApplicationtemplateJit Jit { get; set; }
 

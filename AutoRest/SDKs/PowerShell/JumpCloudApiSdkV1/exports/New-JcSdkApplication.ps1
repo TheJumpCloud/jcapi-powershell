@@ -14,7 +14,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IApplication>: Application
-  [Active <Boolean?>]: 
+  [Beta <Boolean?>]: 
   [Config <IApplicationConfig>]: 
     [AcUrlLabel <String>]: 
     [AcUrlOptions <String>]: 
@@ -219,7 +219,7 @@ param(
     [JumpCloudApiSdkV1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # HELP MESSAGE MISSING
-    ${Active},
+    ${Beta},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloudApiSdkV1.Category('Body')]

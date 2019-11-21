@@ -72,6 +72,7 @@ BODY <ISystemuserput>: SystemUserPut
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
   [Sudo <Boolean?>]: 
+  [Suspended <Boolean?>]: 
   [Tags <String[]>]: 
   [UnixGuid <Int32?>]: 
   [UnixUid <Int32?>]: 
@@ -359,6 +360,13 @@ param(
     [System.Management.Automation.SwitchParameter]
     # HELP MESSAGE MISSING
     ${Sudo},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloudApiSdkV1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # HELP MESSAGE MISSING
+    ${Suspended},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

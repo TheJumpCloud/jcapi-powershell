@@ -14,7 +14,7 @@ The endpoint updates a SSO / SAML Application.
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkApplication -Id <String> [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Active]
+Set-JcSdkApplication -Id <String> [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Beta]
  [-Config <IApplicationConfig>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
  [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -35,7 +35,7 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> 
 ### PutViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Accept <String>]
- [-ContentType <String>] [-XOrgId <String>] [-Active] [-Config <IApplicationConfig>] [-DisplayLabel <String>]
+ [-ContentType <String>] [-XOrgId <String>] [-Beta] [-Config <IApplicationConfig>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -70,7 +70,7 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
-### -Active
+### -Beta
 HELP MESSAGE MISSING
 
 ```yaml
@@ -351,7 +351,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 #### BODY <IApplication>: Application
-  - `[Active <Boolean?>]`: 
+  - `[Beta <Boolean?>]`: 
   - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 

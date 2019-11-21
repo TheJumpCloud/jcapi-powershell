@@ -23,8 +23,8 @@ Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAdd
  [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
- [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
@@ -50,8 +50,8 @@ Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
- [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -681,6 +681,22 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
+### -Suspended
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
 ### -Tags
 HELP MESSAGE MISSING
 
@@ -855,6 +871,7 @@ To create the parameters described below, construct a hash table containing the 
     - `Name <String>`: The name of the SSH key.
     - `PublicKey <String>`: The Public SSH key.
   - `[Sudo <Boolean?>]`: 
+  - `[Suspended <Boolean?>]`: 
   - `[Tags <String[]>]`: 
   - `[UnixGuid <Int32?>]`: 
   - `[UnixUid <Int32?>]`: 

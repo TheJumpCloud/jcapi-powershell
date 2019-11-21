@@ -497,6 +497,17 @@ namespace JumpCloudApiSdkV1.Cmdlets
         public global::System.Management.Automation.SwitchParameter Sudo { get => Body.Sudo ?? default(global::System.Management.Automation.SwitchParameter); set => Body.Sudo = value; }
 
         /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [JumpCloudApiSdkV1.Category(JumpCloudApiSdkV1.ParameterCategory.Body)]
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"HELP MESSAGE MISSING",
+        SerializedName = @"suspended",
+        PossibleTypes = new [] { typeof(global::System.Management.Automation.SwitchParameter) })]
+        public global::System.Management.Automation.SwitchParameter Suspended { get => Body.Suspended ?? default(global::System.Management.Automation.SwitchParameter); set => Body.Suspended = value; }
+
+        /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.AllowEmptyCollection]
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
         [JumpCloudApiSdkV1.Category(JumpCloudApiSdkV1.ParameterCategory.Body)]

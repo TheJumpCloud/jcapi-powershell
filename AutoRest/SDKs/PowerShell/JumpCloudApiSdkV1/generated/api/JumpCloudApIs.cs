@@ -3988,307 +3988,6 @@ namespace JumpCloudApiSdkV1
             }
         }
 
-        /// <summary>
-        /// Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This
-        /// WILL NOT allow you to add a new system user.
-        /// To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body
-        /// of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
-        /// The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being
-        /// an array of query expressions.
-        /// This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If
-        /// the `and` or `or` are not included the default behavior is to match ALL query expressions.
-        /// The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields`
-        /// to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.
-        /// #### Sample Request
-        /// Exact search for a list of system users in a department
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "filter" : [{"department" : "IT"}],
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// Text search for system users with and email on a domain
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "searchFilter" : {
-        /// "searchTerm": "@jumpcloud.com",
-        /// "fields": ["email"]
-        /// },
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// Combining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of
-        /// departments
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "searchFilter": {
-        /// "searchTerm": "@jumpcloud.com",
-        /// "fields": ["email"]
-        /// },
-        /// "filter": {
-        /// "or": [
-        /// {"department" : "IT"},
-        /// {"department" : "Sales"}
-        /// ]
-        /// },
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// </summary>
-        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
-        /// the default list of fields will be returned.
-        /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
-        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
-        /// <param name="skip">The offset into the records to return.</param>
-        /// <param name="body">Search</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
-        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task SearchSystemUserCreate(string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
-        {
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
-                        "https://console.jumpcloud.com/api/search/systemusers"
-                        + "?"
-                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
-                        + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
-                        + "&"
-                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
-                        + "&"
-                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
-
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Post, _url);
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.SearchSystemUserCreate_Call(request,onOk,onUnauthorized,eventListener,sender);
-            }
-        }
-
-        /// <summary>
-        /// Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This
-        /// WILL NOT allow you to add a new system user.
-        /// To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body
-        /// of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
-        /// The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being
-        /// an array of query expressions.
-        /// This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If
-        /// the `and` or `or` are not included the default behavior is to match ALL query expressions.
-        /// The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields`
-        /// to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.
-        /// #### Sample Request
-        /// Exact search for a list of system users in a department
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "filter" : [{"department" : "IT"}],
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// Text search for system users with and email on a domain
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "searchFilter" : {
-        /// "searchTerm": "@jumpcloud.com",
-        /// "fields": ["email"]
-        /// },
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// Combining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of
-        /// departments
-        /// ```
-        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
-        /// -H 'Accept: application/json' \
-        /// -H 'Content-Type: application/json' \
-        /// -H 'x-api-key: {API_KEY}' \
-        /// -d '{
-        /// "searchFilter": {
-        /// "searchTerm": "@jumpcloud.com",
-        /// "fields": ["email"]
-        /// },
-        /// "filter": {
-        /// "or": [
-        /// {"department" : "IT"},
-        /// {"department" : "Sales"}
-        /// ]
-        /// },
-        /// "fields" : "email username sudo"
-        /// }'
-        /// ```
-        /// </summary>
-        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
-        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
-        /// the default list of fields will be returned.
-        /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
-        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
-        /// <param name="skip">The offset into the records to return.</param>
-        /// <param name="body">Search</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
-        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task SearchSystemUserCreateViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
-        {
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // verify that Identity format is an exact match for uri
-
-                var _match = new global::System.Text.RegularExpressions.Regex("^/search/systemusers$").Match(viaIdentity);
-                if (!_match.Success)
-                {
-                    throw new global::System.Exception("Invalid identity for URI '/search/systemusers'");
-                }
-
-                // replace URI parameters with values from identity
-                // construct URL
-                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
-                        "https://console.jumpcloud.com/api/search/systemusers"
-                        + "?"
-                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
-                        + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
-                        + "&"
-                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
-                        + "&"
-                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
-
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Post, _url);
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // set body content
-                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
-                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.SearchSystemUserCreate_Call(request,onOk,onUnauthorized,eventListener,sender);
-            }
-        }
-
-        /// <summary>Actual wire call for <see cref="SearchSystemUserCreate" /> method.</summary>
-        /// <param name="request">the prepared HttpRequestMessage to send.</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
-        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        internal async global::System.Threading.Tasks.Task SearchSystemUserCreate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
-        {
-            using( NoSynchronizationContext )
-            {
-                global::System.Net.Http.HttpResponseMessage _response = null;
-                try
-                {
-                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
-                    _response = await sender.SendAsync(request, eventListener);
-                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
-
-                    switch ( _response.StatusCode )
-                    {
-                        case global::System.Net.HttpStatusCode.OK:
-                        {
-                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV1.Models.Systemuserslist.FromJson(JumpCloudApiSdkV1.Runtime.Json.JsonNode.Parse(body.Result)) ));
-                            break;
-                        }
-                        case global::System.Net.HttpStatusCode.Unauthorized:
-                        {
-                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response);
-                            break;
-                        }
-                        default:
-                        {
-                            throw new JumpCloudApiSdkV1.Runtime.UndeclaredResponseException(_response);
-                        }
-                    }
-                }
-                finally
-                {
-                    // finally statements
-                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.Finally, request, _response);
-                    _response?.Dispose();
-                    request?.Dispose();
-                }
-            }
-        }
-
-        /// <summary>
-        /// Validation method for <see cref="SearchSystemUserCreate" /> method. Call this like the actual call, but you will get validation
-        /// events back.
-        /// </summary>
-        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
-        /// the default list of fields will be returned.
-        /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
-        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
-        /// <param name="skip">The offset into the records to return.</param>
-        /// <param name="body">Search</param>
-        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        internal async global::System.Threading.Tasks.Task SearchSystemUserCreate_Validate(string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
-        {
-            using( NoSynchronizationContext )
-            {
-                await eventListener.AssertNotNull(nameof(fields),fields);
-                await eventListener.AssertNotNull(nameof(filter),filter);
-                await eventListener.AssertNotNull(nameof(body), body);
-                await eventListener.AssertObjectIsValid(nameof(body), body);
-            }
-        }
-
         /// <summary>This endpoint will create a specific System User's Public SSH Key.</summary>
         /// <param name="id"></param>
         /// <param name="body">SSHKeyPost</param>
@@ -6537,9 +6236,10 @@ namespace JumpCloudApiSdkV1
         }
 
         /// <summary>
-        /// This endpoint allows you to reset the MFA TOTP token for a specified system user and put them in an MFA enrollment period.
-        /// This will result in the user being prompted to setup MFA when logging into userportal. Please be aware that if the user
-        /// does not complete MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require MFA.
+        /// This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
+        /// This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the
+        /// user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that
+        /// require TOTP MFA.
         /// Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud)
         /// on setting up MFA for more information.
         /// #### Sample Request
@@ -6597,9 +6297,10 @@ namespace JumpCloudApiSdkV1
         }
 
         /// <summary>
-        /// This endpoint allows you to reset the MFA TOTP token for a specified system user and put them in an MFA enrollment period.
-        /// This will result in the user being prompted to setup MFA when logging into userportal. Please be aware that if the user
-        /// does not complete MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require MFA.
+        /// This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
+        /// This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the
+        /// user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that
+        /// require TOTP MFA.
         /// Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud)
         /// on setting up MFA for more information.
         /// #### Sample Request
@@ -6952,6 +6653,307 @@ namespace JumpCloudApiSdkV1
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(id),id);
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+
+        /// <summary>
+        /// Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This
+        /// WILL NOT allow you to add a new system user.
+        /// To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body
+        /// of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
+        /// The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being
+        /// an array of query expressions.
+        /// This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If
+        /// the `and` or `or` are not included the default behavior is to match ALL query expressions.
+        /// The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields`
+        /// to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.
+        /// #### Sample Request
+        /// Exact search for a list of system users in a department
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "filter" : [{"department" : "IT"}],
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// Text search for system users with and email on a domain
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "searchFilter" : {
+        /// "searchTerm": "@jumpcloud.com",
+        /// "fields": ["email"]
+        /// },
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// Combining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of
+        /// departments
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "searchFilter": {
+        /// "searchTerm": "@jumpcloud.com",
+        /// "fields": ["email"]
+        /// },
+        /// "filter": {
+        /// "or": [
+        /// {"department" : "IT"},
+        /// {"department" : "Sales"}
+        /// ]
+        /// },
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
+        /// <param name="body">Search</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task SystemUserSearch(string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/search/systemusers"
+                        + "?"
+                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
+                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
+                        + "&"
+                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Post, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.SystemUserSearch_Call(request,onOk,onUnauthorized,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This
+        /// WILL NOT allow you to add a new system user.
+        /// To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body
+        /// of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
+        /// The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being
+        /// an array of query expressions.
+        /// This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If
+        /// the `and` or `or` are not included the default behavior is to match ALL query expressions.
+        /// The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields`
+        /// to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.
+        /// #### Sample Request
+        /// Exact search for a list of system users in a department
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "filter" : [{"department" : "IT"}],
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// Text search for system users with and email on a domain
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "searchFilter" : {
+        /// "searchTerm": "@jumpcloud.com",
+        /// "fields": ["email"]
+        /// },
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// Combining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of
+        /// departments
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/search/systemusers \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "searchFilter": {
+        /// "searchTerm": "@jumpcloud.com",
+        /// "fields": ["email"]
+        /// },
+        /// "filter": {
+        /// "or": [
+        /// {"department" : "IT"},
+        /// {"department" : "Sales"}
+        /// ]
+        /// },
+        /// "fields" : "email username sudo"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
+        /// <param name="body">Search</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task SystemUserSearchViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/search/systemusers$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/search/systemusers'");
+                }
+
+                // replace URI parameters with values from identity
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/search/systemusers"
+                        + "?"
+                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
+                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
+                        + "&"
+                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Post, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.SystemUserSearch_Call(request,onOk,onUnauthorized,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="SystemUserSearch" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task SystemUserSearch_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV1.Models.Systemuserslist.FromJson(JumpCloudApiSdkV1.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV1.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="SystemUserSearch" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
+        /// <param name="body">Search</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task SystemUserSearch_Validate(string fields, string filter, int? limit, int? skip, JumpCloudApiSdkV1.Models.ISearch body, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(fields),fields);
+                await eventListener.AssertNotNull(nameof(filter),filter);
                 await eventListener.AssertNotNull(nameof(body), body);
                 await eventListener.AssertObjectIsValid(nameof(body), body);
             }

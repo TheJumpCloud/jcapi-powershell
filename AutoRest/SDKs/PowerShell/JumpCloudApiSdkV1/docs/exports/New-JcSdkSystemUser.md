@@ -23,8 +23,9 @@ New-JcSdkSystemUser -Email <String> -Username <String> [-AccountLocked] [-Activa
  [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion]
  [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordlessSudo]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Tags <String[]>]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
+ [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -641,6 +642,22 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
+### -Suspended
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
 ### -Tags
 HELP MESSAGE MISSING
 
@@ -813,6 +830,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[Sudo <Boolean?>]`: 
+  - `[Suspended <Boolean?>]`: 
   - `[Tags <String[]>]`: 
   - `[UnixGuid <Int32?>]`: 
   - `[UnixUid <Int32?>]`: 
