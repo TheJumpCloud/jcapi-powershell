@@ -654,6 +654,391 @@
         ]
       }
     },
+    "/duo/accounts": {
+      "get": {
+        "operationId": "DuoAccount_List",
+        "summary": "List Duo Acounts",
+        "tags": [
+          "Duo"
+        ],
+        "description": "This endpoint returns all the Duo accounts for your organization. Note: There can currently only be one Duo account for your organization.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DuoAccount"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "DuoAccount_Create",
+        "summary": "Create Duo Account",
+        "tags": [
+          "Duo"
+        ],
+        "description": "Registers a Duo account for an organization. Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoAccount"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/duo/accounts/{account_id}/applications": {
+      "get": {
+        "operationId": "DuoApplication_List",
+        "summary": "List Duo Applications",
+        "tags": [
+          "Duo"
+        ],
+        "description": "This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo application for your organization.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DuoApplication"
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "account_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "DuoApplication_Create",
+        "summary": "Create Duo Application",
+        "tags": [
+          "Duo"
+        ],
+        "description": "Creates a Duo application for your organization and the specified account.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Application Name\",\n    \"apiHost\": \"api-1234.duosecurity.com\",\n    \"integrationKey\": \"1234\",\n    \"secretKey\": \"5678\"\n  }'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DuoApplicationReq"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoApplication"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/duo/accounts/{account_id}/applications/{application_id}": {
+      "delete": {
+        "operationId": "DuoApplication_Delete",
+        "summary": "Delete a Duo Application",
+        "tags": [
+          "Duo"
+        ],
+        "description": "Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.\n\n#### Sample Request\n```\n  curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}''\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoApplication"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "DuoApplication_Get",
+        "summary": "Get a Duo application",
+        "tags": [
+          "Duo"
+        ],
+        "description": "This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoApplication"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "account_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "application_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "DuoApplication_Update",
+        "summary": "Update Duo Application",
+        "tags": [
+          "Duo"
+        ],
+        "description": "Updates the specified Duo application.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Application Name\",\n    \"apiHost\": \"api-1234.duosecurity.com\",\n    \"integrationKey\": \"1234\",\n    \"secretKey\": \"5678\"\n  }'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/DuoApplicationUpdateReq"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoApplication"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/duo/accounts/{id}": {
+      "delete": {
+        "operationId": "DuoAccount_Delete",
+        "summary": "Delete a Duo Account",
+        "tags": [
+          "Duo"
+        ],
+        "description": "Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected resource.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoAccount"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "DuoAccount_Get",
+        "summary": "Get a Duo Acount",
+        "tags": [
+          "Duo"
+        ],
+        "description": "This endpoint returns a specific Duo account.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/DuoAccount"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "description": "ObjectID of the Duo Account",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/groups": {
       "get": {
         "operationId": "Group_List",
@@ -8355,7 +8740,7 @@
         "applescript_enabled": "1",
         "copyright": "",
         "last_opened_time": 1556688963.50383,
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8483,7 +8868,7 @@
         "conversion_status": 0,
         "protection_status": 0,
         "encryption_method": "None",
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8539,7 +8924,7 @@
         "native": 0,
         "path": "/Library/Internet Plug-Ins/nplastpass.plugin/",
         "disabled": 0,
-        "collection_time": "2019-06-03T19:41:30.858+00:00",
+        "collection_time": "2019-06-03T13:41:30.858-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8599,7 +8984,7 @@
         "persistent": 0,
         "path": "/Users/thomas/Library/Application Support/Google/Chrome/Default/Extensions/pkedcjkdefgpdelpbcmbmeomcjbeemfm/7419.311.0.1_0/",
         "permissions": "alarms, cast, cast.streaming, declarativeWebRequest, desktopCapture, gcm, http://*/*, identity, identity.email, management, mdns, mediaRouterPrivate, metricsPrivate, networkingPrivate, processes, storage, system.cpu, settingsPrivate, tabCapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse",
-        "collection_time": "2019-06-03T19:41:31.125+00:00",
+        "collection_time": "2019-06-03T13:41:31.125-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8654,6 +9039,12 @@
         },
         "registers": {
           "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
         }
       }
     },
@@ -8697,7 +9088,7 @@
         "uid": "",
         "user_uuid": "",
         "encryption_status": "undefined",
-        "collection_time": "2019-06-03T19:41:31.557+00:00",
+        "collection_time": "2019-06-03T13:41:31.557-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8757,7 +9148,7 @@
         "name": "\\\\.\\PHYSICALDRIVE0",
         "serial": "",
         "description": "Disk drive",
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8781,7 +9172,7 @@
       "example": {
         "address": "192.168.2.21",
         "hostnames": "hosty hosty.local",
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8853,7 +9244,7 @@
         "autoupdate": 1,
         "location": "app-system-addons",
         "path": "",
-        "collection_time": "2019-06-03T19:41:31.204+00:00",
+        "collection_time": "2019-06-03T13:41:31.204-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8889,7 +9280,7 @@
         "groupname": "1",
         "group_sid": "",
         "comment": "",
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8957,7 +9348,7 @@
         "point_to_point": "::1",
         "type": "unknown",
         "friendly_name": "",
-        "collection_time": "2019-06-03T19:41:31.008+00:00",
+        "collection_time": "2019-06-03T13:41:31.008-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9126,7 +9517,7 @@
         "size": "63778582528",
         "file_system": "NTFS",
         "boot_partition": 0,
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9186,7 +9577,7 @@
         "inodes": "4294967279",
         "inodes_free": "4294966853",
         "flags": "70292505",
-        "collection_time": "2019-06-03T19:41:31.746+00:00",
+        "collection_time": "2019-06-03T13:41:31.746-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9242,7 +9633,7 @@
         "platform_like": "darwin",
         "codename": "",
         "install_date": "",
-        "collection_time": "2019-06-03T19:41:30.933+00:00",
+        "collection_time": "2019-06-03T13:41:30.933-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9290,7 +9681,7 @@
         "installed_by": "NT AUTHORITY\\SYSTEM",
         "install_date": "",
         "installed_on": "7/30/2019",
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9342,7 +9733,7 @@
         "uninstall_string": "MsiExec.exe /X{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9398,7 +9789,7 @@
         "developer_id": "GRYYZR985A",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "path": "/Users/samuelharvanek/Library/Safari/Extensions/Adblock Plus.safariextz",
-        "collection_time": "2019-05-16T18:58:15.673+00:00",
+        "collection_time": "2019-05-16T12:58:15.673-06:00",
         "system_id": "5cdb13e85a0e0719283583c0"
       }
     },
@@ -9507,7 +9898,7 @@
         "hardware_serial": "111111FFFFFF",
         "computer_name": "Johnny’s MacBook Pro (2)",
         "local_hostname": "Jonnys-MacBook-Pro-2",
-        "collection_time": "2019-06-03T19:41:30.771+00:00",
+        "collection_time": "2019-06-03T13:41:30.771-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9656,77 +10047,8 @@
         "shell": "/usr/bin/false",
         "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037",
         "type": "",
-        "collection_time": "2019-06-03T19:41:29.71+00:00",
+        "collection_time": "2019-06-03T13:41:29.71-06:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
-      }
-    },
-    "system-insights-windows-crashes": {
-      "title": "System Insights Windows Crashes",
-      "type": "object",
-      "properties": {
-        "datetime": {
-          "type": "string"
-        },
-        "module": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "pid": {
-          "type": "string"
-        },
-        "tid": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        },
-        "process_uptime": {
-          "type": "string"
-        },
-        "stack_trace": {
-          "type": "string"
-        },
-        "exception_code": {
-          "type": "string"
-        },
-        "exception_message": {
-          "type": "string"
-        },
-        "exception_address": {
-          "type": "string"
-        },
-        "registers": {
-          "type": "string"
-        },
-        "command_line": {
-          "type": "string"
-        },
-        "current_directory": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        },
-        "machine_name": {
-          "type": "string"
-        },
-        "major_version": {
-          "type": "integer"
-        },
-        "minor_version": {
-          "type": "integer"
-        },
-        "build_number": {
-          "type": "integer"
-        },
-        "type": {
-          "type": "string"
-        },
-        "crash_path": {
-          "type": "string"
-        }
       }
     },
     "systemuser": {

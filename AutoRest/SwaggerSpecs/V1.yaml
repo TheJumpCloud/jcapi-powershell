@@ -210,6 +210,44 @@ paths:
       in: path
       required: true
       type: string
+  /case:
+    post:
+      operationId: SupportCase_New
+      summary: Create a Case
+      description: |-
+        This endpoint allows you to open a support case.
+
+        #### Sample Request
+
+        ```
+        curl -X POST https://console.jumpcloud.com/case \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}' \
+          -d '{
+        	"subject":"{subject}",
+        	"description":"{description}",
+        	"firstname":"{firstname}",
+        	"lastname":"{lastname}"
+        }'
+        ```
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/case'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: object
+            properties:
+              caseNumber:
+                type: string
+        "400":
+          description: ""
+      security:
+      - x-api-key: []
   /command/trigger/{triggername}:
     parameters:
     - name: triggername
@@ -1700,6 +1738,26 @@ definitions:
         description: Map of additional attributes.
         items:
           type: object
+  case:
+    title: Case
+    type: object
+    properties:
+      subject:
+        type: string
+        maxLength: 255
+      description:
+        type: string
+      firstname:
+        type: string
+        maxLength: 40
+      lastname:
+        type: string
+        maxLength: 80
+    required:
+    - subject
+    - description
+    - firstname
+    - lastname
   command:
     title: Command
     type: object

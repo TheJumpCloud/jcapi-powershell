@@ -343,6 +343,43 @@
         }
       ]
     },
+    "/case": {
+      "post": {
+        "operationId": "SupportCase_New",
+        "summary": "Create a Case",
+        "description": "This endpoint allows you to open a support case.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/case \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"subject\":\"{subject}\",\n\t\"description\":\"{description}\",\n\t\"firstname\":\"{firstname}\",\n\t\"lastname\":\"{lastname}\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/case"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "caseNumber": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
     "/command/trigger/{triggername}": {
       "parameters": [
         {
@@ -2473,6 +2510,33 @@
           }
         }
       }
+    },
+    "case": {
+      "title": "Case",
+      "type": "object",
+      "properties": {
+        "subject": {
+          "type": "string",
+          "maxLength": 255
+        },
+        "description": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "lastname": {
+          "type": "string",
+          "maxLength": 80
+        }
+      },
+      "required": [
+        "subject",
+        "description",
+        "firstname",
+        "lastname"
+      ]
     },
     "command": {
       "title": "Command",
