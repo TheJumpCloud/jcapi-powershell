@@ -3,9 +3,9 @@ namespace JumpCloudApiSdkV2.Models
     using JumpCloudApiSdkV2.Runtime.PowerShell;
 
     /// <summary>
-    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="SystemInsightsWindowsCrashes" />
+    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="DuoRegistrationApplication" />
     /// </summary>
-    public partial class SystemInsightsWindowsCrashesTypeConverter : System.Management.Automation.PSTypeConverter
+    public partial class DuoRegistrationApplicationTypeConverter : System.Management.Automation.PSTypeConverter
     {
 
         /// <summary>
@@ -24,10 +24,10 @@ namespace JumpCloudApiSdkV2.Models
         /// Determines if the converter can convert the <see cref="sourceValue"/> parameter to the <see cref="destinationType" />
         /// parameter.
         /// </summary>
-        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="SystemInsightsWindowsCrashes"
+        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="DuoRegistrationApplication"
         /// /> type.</param>
         /// <returns>
-        /// <c>true</c> if the instance could be converted to a <see cref="SystemInsightsWindowsCrashes" /> type, otherwise <c>false</c>
+        /// <c>true</c> if the instance could be converted to a <see cref="DuoRegistrationApplication" /> type, otherwise <c>false</c>
         /// </returns>
         public static bool CanConvertFrom(dynamic sourceValue)
         {
@@ -89,7 +89,7 @@ namespace JumpCloudApiSdkV2.Models
         /// <param name="formatProvider">not used by this TypeConverter.</param>
         /// <param name="ignoreCase">when set to <c>true</c>, will ignore the case when converting.</param>
         /// <returns>
-        /// an instance of <see cref="SystemInsightsWindowsCrashes" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="DuoRegistrationApplication" />, or <c>null</c> if there is no suitable conversion.
         /// </returns>
         public override object ConvertFrom(object sourceValue, global::System.Type destinationType, global::System.IFormatProvider formatProvider, bool ignoreCase) => ConvertFrom(sourceValue);
 
@@ -97,24 +97,24 @@ namespace JumpCloudApiSdkV2.Models
         /// Converts the <see cref="sourceValue" /> parameter to the <see cref="destinationType" /> parameter using <see cref="formatProvider"
         /// /> and <see cref="ignoreCase" />
         /// </summary>
-        /// <param name="sourceValue">the value to convert into an instance of <see cref="SystemInsightsWindowsCrashes" />.</param>
+        /// <param name="sourceValue">the value to convert into an instance of <see cref="DuoRegistrationApplication" />.</param>
         /// <returns>
-        /// an instance of <see cref="SystemInsightsWindowsCrashes" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="DuoRegistrationApplication" />, or <c>null</c> if there is no suitable conversion.
         /// </returns>
-        public static JumpCloudApiSdkV2.Models.ISystemInsightsWindowsCrashes ConvertFrom(dynamic sourceValue)
+        public static JumpCloudApiSdkV2.Models.IDuoRegistrationApplication ConvertFrom(dynamic sourceValue)
         {
             if (null == sourceValue)
             {
                 return null;
             }
             global::System.Type type = sourceValue.GetType();
-            if (typeof(JumpCloudApiSdkV2.Models.ISystemInsightsWindowsCrashes).IsAssignableFrom(type))
+            if (typeof(JumpCloudApiSdkV2.Models.IDuoRegistrationApplication).IsAssignableFrom(type))
             {
                 return sourceValue;
             }
             try
             {
-                return SystemInsightsWindowsCrashes.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
+                return DuoRegistrationApplication.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
             }
             catch
             {
@@ -122,11 +122,11 @@ namespace JumpCloudApiSdkV2.Models
             }
             if (typeof(System.Management.Automation.PSObject).IsAssignableFrom(type))
             {
-                return SystemInsightsWindowsCrashes.DeserializeFromPSObject(sourceValue);
+                return DuoRegistrationApplication.DeserializeFromPSObject(sourceValue);
             }
             if (typeof(global::System.Collections.IDictionary).IsAssignableFrom(type))
             {
-                return SystemInsightsWindowsCrashes.DeserializeFromDictionary(sourceValue);
+                return DuoRegistrationApplication.DeserializeFromDictionary(sourceValue);
             }
             return null;
         }

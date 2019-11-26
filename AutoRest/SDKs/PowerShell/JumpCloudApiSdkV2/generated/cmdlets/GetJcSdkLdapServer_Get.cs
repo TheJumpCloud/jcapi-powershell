@@ -60,11 +60,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>Backing field for <see cref="Id" /> property.</summary>
         private string _id;
 
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        /// <summary>Unique identifier of the LDAP server.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Unique identifier of the LDAP server.")]
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = true,
         ReadOnly = false,
-        Description = @"",
+        Description = @"Unique identifier of the LDAP server.",
         SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]

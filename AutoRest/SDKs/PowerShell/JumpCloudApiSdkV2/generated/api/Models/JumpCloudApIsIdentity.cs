@@ -7,6 +7,12 @@ namespace JumpCloudApiSdkV2.Models
         JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal
     {
 
+        /// <summary>Backing field for <see cref="AccountId" /> property.</summary>
+        private string _accountId;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public string AccountId { get => this._accountId; set => this._accountId = value; }
+
         /// <summary>Backing field for <see cref="ActivedirectoryId" /> property.</summary>
         private string _activedirectoryId;
 
@@ -17,7 +23,6 @@ namespace JumpCloudApiSdkV2.Models
         /// <summary>Backing field for <see cref="ApplicationId" /> property.</summary>
         private string _applicationId;
 
-        /// <summary>ObjectID of the Application.</summary>
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string ApplicationId { get => this._applicationId; set => this._applicationId = value; }
 
@@ -117,6 +122,13 @@ namespace JumpCloudApiSdkV2.Models
     public partial interface IJumpCloudApIsIdentity :
         JumpCloudApiSdkV2.Runtime.IJsonSerializable
     {
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"account_id",
+        PossibleTypes = new [] { typeof(string) })]
+        string AccountId { get; set; }
         /// <summary>ObjectID of the Active Directory instance.</summary>
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
@@ -125,11 +137,11 @@ namespace JumpCloudApiSdkV2.Models
         SerializedName = @"activedirectory_id",
         PossibleTypes = new [] { typeof(string) })]
         string ActivedirectoryId { get; set; }
-        /// <summary>ObjectID of the Application.</summary>
+
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
         ReadOnly = false,
-        Description = @"ObjectID of the Application.",
+        Description = @"",
         SerializedName = @"application_id",
         PossibleTypes = new [] { typeof(string) })]
         string ApplicationId { get; set; }
@@ -242,9 +254,10 @@ namespace JumpCloudApiSdkV2.Models
     internal partial interface IJumpCloudApIsIdentityInternal
 
     {
+        string AccountId { get; set; }
         /// <summary>ObjectID of the Active Directory instance.</summary>
         string ActivedirectoryId { get; set; }
-        /// <summary>ObjectID of the Application.</summary>
+
         string ApplicationId { get; set; }
         /// <summary>ObjectID of the Command.</summary>
         string CommandId { get; set; }

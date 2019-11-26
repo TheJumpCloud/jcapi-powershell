@@ -14,8 +14,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [AccountId <String>]: 
   [ActivedirectoryId <String>]: ObjectID of the Active Directory instance.
-  [ApplicationId <String>]: ObjectID of the Application.
+  [ApplicationId <String>]: 
   [CommandId <String>]: ObjectID of the Command.
   [GroupId <String>]: ObjectID of the User Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
@@ -39,7 +40,7 @@ param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # HELP MESSAGE MISSING
+    # Unique identifier of the LDAP server.
     ${Id},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]

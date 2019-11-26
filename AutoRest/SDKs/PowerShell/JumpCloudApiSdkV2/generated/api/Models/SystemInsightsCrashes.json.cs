@@ -70,6 +70,7 @@ namespace JumpCloudApiSdkV2.Models
             }
             {_type = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("type"), out var __jsonType) ? (string)__jsonType : (string)Type;}
             {_path = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("path"), out var __jsonPath) ? (string)__jsonPath : (string)Path;}
+            {_collectionTime = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("collection_time"), out var __jsonCollectionTime) ? (string)__jsonCollectionTime : (string)CollectionTime;}
             {_crashPath = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("crash_path"), out var __jsonCrashPath) ? (string)__jsonCrashPath : (string)CrashPath;}
             {_crashedThread = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("crashed_thread"), out var __jsonCrashedThread) ? (string)__jsonCrashedThread : (string)CrashedThread;}
             {_datetime = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("datetime"), out var __jsonDatetime) ? (string)__jsonDatetime : (string)Datetime;}
@@ -82,6 +83,7 @@ namespace JumpCloudApiSdkV2.Models
             {_registers = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("registers"), out var __jsonRegisters) ? (string)__jsonRegisters : (string)Registers;}
             {_responsible = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("responsible"), out var __jsonResponsible) ? (string)__jsonResponsible : (string)Responsible;}
             {_stackTrace = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("stack_trace"), out var __jsonStackTrace) ? (string)__jsonStackTrace : (string)StackTrace;}
+            {_systemId = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("system_id"), out var __jsonSystemId) ? (string)__jsonSystemId : (string)SystemId;}
             {_uid = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonNumber>("uid"), out var __jsonUid) ? (int?)__jsonUid : Uid;}
             {_version = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("version"), out var __jsonVersion) ? (string)__jsonVersion : (string)Version;}
             AfterFromJson(json);
@@ -108,6 +110,7 @@ namespace JumpCloudApiSdkV2.Models
             }
             AddIf( null != (((object)this._type)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._type.ToString()) : null, "type" ,container.Add );
             AddIf( null != (((object)this._path)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._path.ToString()) : null, "path" ,container.Add );
+            AddIf( null != (((object)this._collectionTime)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._collectionTime.ToString()) : null, "collection_time" ,container.Add );
             AddIf( null != (((object)this._crashPath)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._crashPath.ToString()) : null, "crash_path" ,container.Add );
             AddIf( null != (((object)this._crashedThread)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._crashedThread.ToString()) : null, "crashed_thread" ,container.Add );
             AddIf( null != (((object)this._datetime)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._datetime.ToString()) : null, "datetime" ,container.Add );
@@ -120,6 +123,7 @@ namespace JumpCloudApiSdkV2.Models
             AddIf( null != (((object)this._registers)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._registers.ToString()) : null, "registers" ,container.Add );
             AddIf( null != (((object)this._responsible)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._responsible.ToString()) : null, "responsible" ,container.Add );
             AddIf( null != (((object)this._stackTrace)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._stackTrace.ToString()) : null, "stack_trace" ,container.Add );
+            AddIf( null != (((object)this._systemId)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._systemId.ToString()) : null, "system_id" ,container.Add );
             AddIf( null != this._uid ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode)new JumpCloudApiSdkV2.Runtime.Json.JsonNumber((int)this._uid) : null, "uid" ,container.Add );
             AddIf( null != (((object)this._version)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._version.ToString()) : null, "version" ,container.Add );
             AfterToJson(ref container);

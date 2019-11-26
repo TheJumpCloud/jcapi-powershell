@@ -2,17 +2,17 @@ namespace JumpCloudApiSdkV2.Cmdlets
 {
     using static JumpCloudApiSdkV2.Runtime.Extensions;
 
-    /// <summary>Valid filter fields are `name`.</summary>
+    /// <summary>Valid filter fields are `system_id` and `name`.</summary>
     /// <remarks>
-    /// [OpenAPI] SystemInsightsSystemSystemControls_List=>GET:"/systeminsights/{system_id}/system_controls"
+    /// [OpenAPI] SystemInsightsSystemControls_List=>GET:"/systeminsights/system_controls"
     /// [METADATA]
-    /// path: '/systeminsights/{system_id}/system_controls'
+    /// path: /systeminsights/system_controls
     /// apiVersions:
     /// - '2.0'
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systeminsights~1{system_id}~1system_controls'
+    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systeminsights~1system_controls'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
@@ -21,7 +21,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkSystemInsightsSystemControl_List1")]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls))]
-    [JumpCloudApiSdkV2.Description(@"Valid filter fields are `name`.")]
+    [JumpCloudApiSdkV2.Description(@"Valid filter fields are `system_id` and `name`.")]
     [JumpCloudApiSdkV2.Generated]
     public partial class GetJcSdkSystemInsightsSystemControl_List1 : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
@@ -112,19 +112,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         PossibleTypes = new [] { typeof(int) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
         public int Skip { get => this._skip; set => this._skip = value; }
-
-        /// <summary>Backing field for <see cref="SystemId" /> property.</summary>
-        private string _systemId;
-
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Description = @"",
-        SerializedName = @"system_id",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
-        public string SystemId { get => this._systemId; set => this._systemId = value; }
 
         /// <summary>
         /// <c>overrideOnOk</c> will be called before the regular onOk has been processed, allowing customization of what happens
@@ -276,12 +263,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemInsightsSystemControlsList1(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), onOk, this, Pipeline);
+                    await this.Client.SystemInsightsSystemControlsList1(this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), onOk, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  SystemId=SystemId,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?)}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?)}));
                 }
                 finally
                 {

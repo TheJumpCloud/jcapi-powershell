@@ -442,6 +442,188 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV2.Models.DuoAccount</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.DuoAccount</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV2.Models.DuoApplication</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.DuoApplication</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ApiHost</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IntegrationKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ApiHost</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IntegrationKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV2.Models.DuoApplicationReq</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.DuoApplicationReq</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ApiHost</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IntegrationKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SecretKey</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ApiHost</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IntegrationKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SecretKey</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV2.Models.DuoApplicationUpdateReq</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.DuoApplicationUpdateReq</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ApiHost</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IntegrationKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SecretKey</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ApiHost</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IntegrationKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SecretKey</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV2.Models.DuoRegistrationApplication</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.DuoRegistrationApplication</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ApiHost</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IntegrationKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SecretKey</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ApiHost</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IntegrationKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SecretKey</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV2.Models.Error</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV2.Models.Error</TypeName>
@@ -873,6 +1055,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AccountId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ActivedirectoryId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -921,6 +1106,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AccountId</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ActivedirectoryId</PropertyName>
               </TableColumnItem>
@@ -2691,6 +2879,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>CollectionTime</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>CrashPath</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -2730,6 +2921,9 @@
             <Label>StackTrace</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>SystemId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Type</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -2742,6 +2936,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CollectionTime</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>CrashPath</PropertyName>
               </TableColumnItem>
@@ -2780,6 +2977,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>StackTrace</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -4521,148 +4721,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Uuid</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloudApiSdkV2.Models.SystemInsightsWindowsCrashes</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV2.Models.SystemInsightsWindowsCrashes</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>BuildNumber</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>CommandLine</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>CrashPath</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>CurrentDirectory</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Datetime</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExceptionAddress</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExceptionCode</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ExceptionMessage</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>MachineName</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>MajorVersion</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>MinorVersion</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Module</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Path</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Pid</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>ProcessUptime</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Registers</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>StackTrace</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Tid</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Type</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Username</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Version</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>BuildNumber</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CommandLine</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CrashPath</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>CurrentDirectory</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Datetime</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExceptionAddress</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExceptionCode</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ExceptionMessage</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>MachineName</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>MajorVersion</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>MinorVersion</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Module</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Path</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Pid</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>ProcessUptime</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Registers</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>StackTrace</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Tid</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Type</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Username</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Version</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

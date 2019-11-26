@@ -2789,6 +2789,1732 @@ namespace JumpCloudApiSdkV2
         }
 
         /// <summary>
+        /// Registers a Duo account for an organization. Only one Duo account will be allowed,
+        /// in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+        /// #### Sample Request
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{}'
+        /// ```
+        /// </summary>
+        /// <param name="onCreated">a delegate that is called when the remote service returns 201 (Created).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountCreate(global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onCreated, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Post, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountCreate_Call(request,onCreated,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoAccountCreate" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onCreated">a delegate that is called when the remote service returns 201 (Created).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountCreate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onCreated, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.Created:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoAccount.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoAccountCreate" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountCreate_Validate(JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected
+        /// resource.
+        /// #### Sample Request
+        /// ```
+        /// curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountDelete(string id, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(id)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Delete, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountDelete_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected
+        /// resource.
+        /// #### Sample Request
+        /// ```
+        /// curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountDeleteViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var id = _match.Groups["id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + id
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Delete, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountDelete_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoAccountDelete" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountDelete_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoAccount.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoAccountDelete" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountDelete_Validate(string id, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(id),id);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Duo account.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountGet(string id, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(id)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountGet_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Duo account.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountGetViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var id = _match.Groups["id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + id
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountGet_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoAccountGet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountGet_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoAccount.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoAccountGet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountGet_Validate(string id, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(id),id);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns all the Duo accounts for your organization. Note: There can currently only be one Duo account for
+        /// your organization.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoAccountList(global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoAccountList_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoAccountList" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountList_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoAccount[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloudApiSdkV2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloudApiSdkV2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloudApiSdkV2.Models.IDuoAccount[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloudApiSdkV2.Models.IDuoAccount) (JumpCloudApiSdkV2.Models.DuoAccount.FromJson(__x) )) ))() : null));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoAccountList" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoAccountList_Validate(JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Creates a Duo application for your organization and the specified account.
+        /// #### Sample Request
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "name": "Application Name",
+        /// "apiHost": "api-1234.duosecurity.com",
+        /// "integrationKey": "1234",
+        /// "secretKey": "5678"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="body">DuoApplicationReq</param>
+        /// <param name="onCreated">a delegate that is called when the remote service returns 201 (Created).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationCreate(string accountId, JumpCloudApiSdkV2.Models.IDuoApplicationReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onCreated, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(accountId)
+                        + "/applications"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Post, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationCreate_Call(request,onCreated,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// Creates a Duo application for your organization and the specified account.
+        /// #### Sample Request
+        /// ```
+        /// curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "name": "Application Name",
+        /// "apiHost": "api-1234.duosecurity.com",
+        /// "integrationKey": "1234",
+        /// "secretKey": "5678"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="body">DuoApplicationReq</param>
+        /// <param name="onCreated">a delegate that is called when the remote service returns 201 (Created).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationCreateViaIdentity(global::System.String viaIdentity, JumpCloudApiSdkV2.Models.IDuoApplicationReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onCreated, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<account_id>[^/]+)/applications$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{account_id}/applications'");
+                }
+
+                // replace URI parameters with values from identity
+                var accountId = _match.Groups["account_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + accountId
+                        + "/applications"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Post, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationCreate_Call(request,onCreated,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoApplicationCreate" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onCreated">a delegate that is called when the remote service returns 201 (Created).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationCreate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onCreated, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.Created:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoApplication.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoApplicationCreate" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="body">DuoApplicationReq</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationCreate_Validate(string accountId, JumpCloudApiSdkV2.Models.IDuoApplicationReq body, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(accountId),accountId);
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.
+        /// #### Sample Request
+        /// ```
+        /// curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}''
+        /// ```
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationDelete(string accountId, string applicationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(accountId)
+                        + "/applications/"
+                        + global::System.Uri.EscapeDataString(applicationId)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Delete, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationDelete_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.
+        /// #### Sample Request
+        /// ```
+        /// curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}''
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationDeleteViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<account_id>[^/]+)/applications/(?<application_id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{account_id}/applications/{application_id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var accountId = _match.Groups["account_id"].Value;
+                var applicationId = _match.Groups["application_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + accountId
+                        + "/applications/"
+                        + applicationId
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Delete, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationDelete_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoApplicationDelete" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationDelete_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoApplication.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoApplicationDelete" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationDelete_Validate(string accountId, string applicationId, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(accountId),accountId);
+                await eventListener.AssertNotNull(nameof(applicationId),applicationId);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Duo application that is associated with the specified Duo account.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationGet(string accountId, string applicationId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(accountId)
+                        + "/applications/"
+                        + global::System.Uri.EscapeDataString(applicationId)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationGet_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Duo application that is associated with the specified Duo account.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationGetViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<account_id>[^/]+)/applications/(?<application_id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{account_id}/applications/{application_id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var accountId = _match.Groups["account_id"].Value;
+                var applicationId = _match.Groups["application_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + accountId
+                        + "/applications/"
+                        + applicationId
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationGet_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoApplicationGet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationGet_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoApplication.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoApplicationGet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationGet_Validate(string accountId, string applicationId, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(accountId),accountId);
+                await eventListener.AssertNotNull(nameof(applicationId),applicationId);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo
+        /// application for your organization.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationList(string accountId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication[]>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(accountId)
+                        + "/applications"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationList_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo
+        /// application for your organization.
+        /// #### Sample Request
+        /// ```
+        /// curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationListViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication[]>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<account_id>[^/]+)/applications$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{account_id}/applications'");
+                }
+
+                // replace URI parameters with values from identity
+                var accountId = _match.Groups["account_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + accountId
+                        + "/applications"
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationList_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoApplicationList" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationList_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication[]>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloudApiSdkV2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloudApiSdkV2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloudApiSdkV2.Models.IDuoApplication[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloudApiSdkV2.Models.IDuoApplication) (JumpCloudApiSdkV2.Models.DuoApplication.FromJson(__x) )) ))() : null));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoApplicationList" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationList_Validate(string accountId, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(accountId),accountId);
+            }
+        }
+
+        /// <summary>
+        /// Updates the specified Duo application.
+        /// #### Sample Request
+        /// ```
+        /// curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "name": "Application Name",
+        /// "apiHost": "api-1234.duosecurity.com",
+        /// "integrationKey": "1234",
+        /// "secretKey": "5678"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="body">DuoApplicationUpdateReq</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationUpdate(string accountId, string applicationId, JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + global::System.Uri.EscapeDataString(accountId)
+                        + "/applications/"
+                        + global::System.Uri.EscapeDataString(applicationId)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Put, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationUpdate_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// Updates the specified Duo application.
+        /// #### Sample Request
+        /// ```
+        /// curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \
+        /// -H 'accept: application/json' \
+        /// -H 'content-type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "name": "Application Name",
+        /// "apiHost": "api-1234.duosecurity.com",
+        /// "integrationKey": "1234",
+        /// "secretKey": "5678"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="body">DuoApplicationUpdateReq</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task DuoApplicationUpdateViaIdentity(global::System.String viaIdentity, JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/duo/accounts/(?<account_id>[^/]+)/applications/(?<application_id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/duo/accounts/{account_id}/applications/{application_id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var accountId = _match.Groups["account_id"].Value;
+                var applicationId = _match.Groups["application_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/duo/accounts/"
+                        + accountId
+                        + "/applications/"
+                        + applicationId
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Put, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.DuoApplicationUpdate_Call(request,onOk,onBadRequest,onUnauthorized,onForbidden,onNotFound,onConflict,onInternalServerError,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="DuoApplicationUpdate" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="onNotFound">a delegate that is called when the remote service returns 404 (NotFound).</param>
+        /// <param name="onConflict">a delegate that is called when the remote service returns 409 (Conflict).</param>
+        /// <param name="onInternalServerError">a delegate that is called when the remote service returns 500 (InternalServerError).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationUpdate_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IDuoApplication>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.DuoApplication.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.NotFound:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Conflict:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.InternalServerError:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Errorresponse.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="DuoApplicationUpdate" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="accountId"></param>
+        /// <param name="applicationId"></param>
+        /// <param name="body">DuoApplicationUpdateReq</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task DuoApplicationUpdate_Validate(string accountId, string applicationId, JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq body, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(accountId),accountId);
+                await eventListener.AssertNotNull(nameof(applicationId),applicationId);
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
+            }
+        }
+
+        /// <summary>
         /// This endpoint returns the _direct_ associations of this G Suite instance.
         /// A direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.
         /// #### Sample Request
@@ -5110,7 +6836,7 @@ namespace JumpCloudApiSdkV2
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Unique identifier of the LDAP server.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
@@ -5240,7 +6966,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="LdapServerGet" /> method. Call this like the actual call, but you will get validation
         /// events back.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Unique identifier of the LDAP server.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
@@ -5445,7 +7171,7 @@ namespace JumpCloudApiSdkV2
         /// }'
         /// ```
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Unique identifier of the LDAP server.</param>
         /// <param name="xApiKey"></param>
         /// <param name="xOrgId"></param>
         /// <param name="body"></param>
@@ -5622,7 +7348,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="LdapServerPatch" /> method. Call this like the actual call, but you will get validation
         /// events back.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">Unique identifier of the LDAP server.</param>
         /// <param name="xApiKey"></param>
         /// <param name="xOrgId"></param>
         /// <param name="body"></param>
@@ -18433,41 +20159,6 @@ namespace JumpCloudApiSdkV2
             }
         }
 
-        /// <summary>Valid filter fields are `system_id` and `name`.</summary>
-        /// <param name="limit"></param>
-        /// <param name="skip">The offset into the records to return.</param>
-        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
-        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
-        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
-        /// <returns>
-        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
-        /// </returns>
-        public async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList(int? limit, int? skip, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
-        {
-            // Constant Parameters
-            using( NoSynchronizationContext )
-            {
-                // construct URL
-                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
-                        "https://console.jumpcloud.com/api/v2/systeminsights/system_controls"
-                        + "?"
-                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
-                        + "&"
-                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
-                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
-
-                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                // generate request object
-                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
-                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-
-                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
-                // make the call
-                await this.SystemInsightsSystemControlsList_Call(request,onOk,eventListener,sender);
-            }
-        }
-
         /// <summary>Valid filter fields are `name`.</summary>
         /// <param name="systemId"></param>
         /// <param name="limit"></param>
@@ -18478,7 +20169,7 @@ namespace JumpCloudApiSdkV2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList1(string systemId, int? limit, int? skip, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList(string systemId, int? limit, int? skip, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -18502,11 +20193,46 @@ namespace JumpCloudApiSdkV2
 
                 await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
                 // make the call
+                await this.SystemInsightsSystemControlsList_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>Valid filter fields are `system_id` and `name`.</summary>
+        /// <param name="limit"></param>
+        /// <param name="skip">The offset into the records to return.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList1(int? limit, int? skip, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls[]>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/systeminsights/system_controls"
+                        + "?"
+                        + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
+                        + "&"
+                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
                 await this.SystemInsightsSystemControlsList1_Call(request,onOk,eventListener,sender);
             }
         }
 
-        /// <summary>Valid filter fields are `name`.</summary>
+        /// <summary>Valid filter fields are `system_id` and `name`.</summary>
         /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
         /// <param name="limit"></param>
         /// <param name="skip">The offset into the records to return.</param>
@@ -18523,19 +20249,16 @@ namespace JumpCloudApiSdkV2
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/systeminsights/(?<system_id>[^/]+)/system_controls$").Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/systeminsights/system_controls$").Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/systeminsights/{system_id}/system_controls'");
+                    throw new global::System.Exception("Invalid identity for URI '/systeminsights/system_controls'");
                 }
 
                 // replace URI parameters with values from identity
-                var systemId = _match.Groups["system_id"].Value;
                 // construct URL
                 var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
-                        "https://console.jumpcloud.com/api/v2/systeminsights/"
-                        + systemId
-                        + "/system_controls"
+                        "https://console.jumpcloud.com/api/v2/systeminsights/system_controls"
                         + "?"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
@@ -18602,23 +20325,21 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="SystemInsightsSystemControlsList1" /> method. Call this like the actual call, but you
         /// will get validation events back.
         /// </summary>
-        /// <param name="systemId"></param>
         /// <param name="limit"></param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList1_Validate(string systemId, int? limit, int? skip, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList1_Validate(int? limit, int? skip, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
-                await eventListener.AssertNotNull(nameof(systemId),systemId);
                 await eventListener.AssertIsLessThanOrEqual(nameof(limit),limit,100);
             }
         }
 
-        /// <summary>Valid filter fields are `system_id` and `name`.</summary>
+        /// <summary>Valid filter fields are `name`.</summary>
         /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
         /// <param name="limit"></param>
         /// <param name="skip">The offset into the records to return.</param>
@@ -18635,16 +20356,19 @@ namespace JumpCloudApiSdkV2
             {
                 // verify that Identity format is an exact match for uri
 
-                var _match = new global::System.Text.RegularExpressions.Regex("^/systeminsights/system_controls$").Match(viaIdentity);
+                var _match = new global::System.Text.RegularExpressions.Regex("^/systeminsights/(?<system_id>[^/]+)/system_controls$").Match(viaIdentity);
                 if (!_match.Success)
                 {
-                    throw new global::System.Exception("Invalid identity for URI '/systeminsights/system_controls'");
+                    throw new global::System.Exception("Invalid identity for URI '/systeminsights/{system_id}/system_controls'");
                 }
 
                 // replace URI parameters with values from identity
+                var systemId = _match.Groups["system_id"].Value;
                 // construct URL
                 var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
-                        "https://console.jumpcloud.com/api/v2/systeminsights/system_controls"
+                        "https://console.jumpcloud.com/api/v2/systeminsights/"
+                        + systemId
+                        + "/system_controls"
                         + "?"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
@@ -18711,16 +20435,18 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="SystemInsightsSystemControlsList" /> method. Call this like the actual call, but you
         /// will get validation events back.
         /// </summary>
+        /// <param name="systemId"></param>
         /// <param name="limit"></param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList_Validate(int? limit, int? skip, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task SystemInsightsSystemControlsList_Validate(string systemId, int? limit, int? skip, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
+                await eventListener.AssertNotNull(nameof(systemId),systemId);
                 await eventListener.AssertIsLessThanOrEqual(nameof(limit),limit,100);
             }
         }

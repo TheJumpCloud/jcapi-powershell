@@ -8,22 +8,22 @@ schema: 2.0.0
 # Get-JcSdkSystemInsightsSystemControl
 
 ## SYNOPSIS
-Valid filter fields are `system_id` and `name`.
+Valid filter fields are `name`.
 
 ## SYNTAX
 
-### List (Default)
+### List1 (Default)
 ```
 Get-JcSdkSystemInsightsSystemControl [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
 ```
 
-### List1
+### List
 ```
 Get-JcSdkSystemInsightsSystemControl -SystemId <String> [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Valid filter fields are `system_id` and `name`.
+Valid filter fields are `name`.
 
 ## EXAMPLES
 
@@ -73,7 +73,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: List1
+Parameter Sets: List
 Aliases:
 
 Required: True

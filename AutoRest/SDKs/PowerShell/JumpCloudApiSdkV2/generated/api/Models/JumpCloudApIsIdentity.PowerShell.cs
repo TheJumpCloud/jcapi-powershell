@@ -90,6 +90,7 @@ namespace JumpCloudApiSdkV2.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).AccountId = (string) content.GetValueForProperty("AccountId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).AccountId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ActivedirectoryId = (string) content.GetValueForProperty("ActivedirectoryId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ActivedirectoryId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ApplicationId = (string) content.GetValueForProperty("ApplicationId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ApplicationId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).CommandId = (string) content.GetValueForProperty("CommandId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).CommandId, global::System.Convert.ToString);
@@ -122,6 +123,7 @@ namespace JumpCloudApiSdkV2.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).AccountId = (string) content.GetValueForProperty("AccountId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).AccountId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ActivedirectoryId = (string) content.GetValueForProperty("ActivedirectoryId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ActivedirectoryId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ApplicationId = (string) content.GetValueForProperty("ApplicationId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).ApplicationId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).CommandId = (string) content.GetValueForProperty("CommandId",((JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentityInternal)this).CommandId, global::System.Convert.ToString);
