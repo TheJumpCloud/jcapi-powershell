@@ -650,7 +650,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 }
             }
             # Convert json string to object
-            $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
             # Remove tag elements
             $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
