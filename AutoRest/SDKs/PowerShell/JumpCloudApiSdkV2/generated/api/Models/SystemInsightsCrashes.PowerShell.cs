@@ -92,6 +92,7 @@ namespace JumpCloudApiSdkV2.Models
             // actually deserialize
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Type = (string) content.GetValueForProperty("Type",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Type, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Path = (string) content.GetValueForProperty("Path",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Path, global::System.Convert.ToString);
+            ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CollectionTime = (string) content.GetValueForProperty("CollectionTime",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CollectionTime, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashPath = (string) content.GetValueForProperty("CrashPath",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashPath, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashedThread = (string) content.GetValueForProperty("CrashedThread",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashedThread, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Datetime = (string) content.GetValueForProperty("Datetime",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Datetime, global::System.Convert.ToString);
@@ -104,6 +105,7 @@ namespace JumpCloudApiSdkV2.Models
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Registers = (string) content.GetValueForProperty("Registers",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Registers, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Responsible = (string) content.GetValueForProperty("Responsible",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Responsible, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).StackTrace = (string) content.GetValueForProperty("StackTrace",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).StackTrace, global::System.Convert.ToString);
+            ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).SystemId = (string) content.GetValueForProperty("SystemId",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).SystemId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Uid = (int?) content.GetValueForProperty("Uid",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Uid, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Version = (string) content.GetValueForProperty("Version",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Version, global::System.Convert.ToString);
             AfterDeserializeDictionary(content);
@@ -125,6 +127,7 @@ namespace JumpCloudApiSdkV2.Models
             // actually deserialize
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Type = (string) content.GetValueForProperty("Type",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Type, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Path = (string) content.GetValueForProperty("Path",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Path, global::System.Convert.ToString);
+            ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CollectionTime = (string) content.GetValueForProperty("CollectionTime",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CollectionTime, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashPath = (string) content.GetValueForProperty("CrashPath",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashPath, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashedThread = (string) content.GetValueForProperty("CrashedThread",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).CrashedThread, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Datetime = (string) content.GetValueForProperty("Datetime",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Datetime, global::System.Convert.ToString);
@@ -137,6 +140,7 @@ namespace JumpCloudApiSdkV2.Models
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Registers = (string) content.GetValueForProperty("Registers",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Registers, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Responsible = (string) content.GetValueForProperty("Responsible",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Responsible, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).StackTrace = (string) content.GetValueForProperty("StackTrace",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).StackTrace, global::System.Convert.ToString);
+            ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).SystemId = (string) content.GetValueForProperty("SystemId",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).SystemId, global::System.Convert.ToString);
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Uid = (int?) content.GetValueForProperty("Uid",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Uid, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             ((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Version = (string) content.GetValueForProperty("Version",((JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal)this).Version, global::System.Convert.ToString);
             AfterDeserializePSObject(content);

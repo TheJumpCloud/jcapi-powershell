@@ -8,6 +8,12 @@ namespace JumpCloudApiSdkV2.Models
         JumpCloudApiSdkV2.Models.ISystemInsightsCrashesInternal
     {
 
+        /// <summary>Backing field for <see cref="CollectionTime" /> property.</summary>
+        private string _collectionTime;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public string CollectionTime { get => this._collectionTime; set => this._collectionTime = value; }
+
         /// <summary>Backing field for <see cref="CrashPath" /> property.</summary>
         private string _crashPath;
 
@@ -86,6 +92,12 @@ namespace JumpCloudApiSdkV2.Models
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string StackTrace { get => this._stackTrace; set => this._stackTrace = value; }
 
+        /// <summary>Backing field for <see cref="SystemId" /> property.</summary>
+        private string _systemId;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public string SystemId { get => this._systemId; set => this._systemId = value; }
+
         /// <summary>Backing field for <see cref="Type" /> property.</summary>
         private string _type;
 
@@ -114,6 +126,14 @@ namespace JumpCloudApiSdkV2.Models
     public partial interface ISystemInsightsCrashes :
         JumpCloudApiSdkV2.Runtime.IJsonSerializable
     {
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"collection_time",
+        PossibleTypes = new [] { typeof(string) })]
+        string CollectionTime { get; set; }
+
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
         ReadOnly = false,
@@ -222,6 +242,14 @@ namespace JumpCloudApiSdkV2.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"system_id",
+        PossibleTypes = new [] { typeof(string) })]
+        string SystemId { get; set; }
+
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"type",
         PossibleTypes = new [] { typeof(string) })]
         string Type { get; set; }
@@ -247,6 +275,8 @@ namespace JumpCloudApiSdkV2.Models
     internal partial interface ISystemInsightsCrashesInternal
 
     {
+        string CollectionTime { get; set; }
+
         string CrashPath { get; set; }
 
         string CrashedThread { get; set; }
@@ -272,6 +302,8 @@ namespace JumpCloudApiSdkV2.Models
         string Responsible { get; set; }
 
         string StackTrace { get; set; }
+
+        string SystemId { get; set; }
 
         string Type { get; set; }
 

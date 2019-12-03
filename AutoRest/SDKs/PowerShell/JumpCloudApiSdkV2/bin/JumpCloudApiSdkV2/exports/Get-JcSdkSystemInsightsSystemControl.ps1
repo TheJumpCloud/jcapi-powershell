@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Valid filter fields are `system_id` and `name`.
+Valid filter fields are `name`.
 .Description
-Valid filter fields are `system_id` and `name`.
+Valid filter fields are `name`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssystemcontrol
 .Outputs
@@ -12,9 +12,9 @@ https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksy
 #>
 function Get-JcSdkSystemInsightsSystemControl {
 [OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemControls])]
-[CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+[CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
 param(
-    [Parameter(ParameterSetName='List1', Mandatory)]
+    [Parameter(ParameterSetName='List', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
     # HELP MESSAGE MISSING

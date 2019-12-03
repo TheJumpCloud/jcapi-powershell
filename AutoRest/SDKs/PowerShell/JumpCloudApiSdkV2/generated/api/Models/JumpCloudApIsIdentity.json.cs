@@ -67,6 +67,7 @@ namespace JumpCloudApiSdkV2.Models
             {
                 return;
             }
+            {_accountId = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("account_id"), out var __jsonAccountId) ? (string)__jsonAccountId : (string)AccountId;}
             {_activedirectoryId = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("activedirectory_id"), out var __jsonActivedirectoryId) ? (string)__jsonActivedirectoryId : (string)ActivedirectoryId;}
             {_applicationId = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("application_id"), out var __jsonApplicationId) ? (string)__jsonApplicationId : (string)ApplicationId;}
             {_commandId = If( json?.PropertyT<JumpCloudApiSdkV2.Runtime.Json.JsonString>("command_id"), out var __jsonCommandId) ? (string)__jsonCommandId : (string)CommandId;}
@@ -104,6 +105,7 @@ namespace JumpCloudApiSdkV2.Models
             {
                 return container;
             }
+            AddIf( null != (((object)this._accountId)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._accountId.ToString()) : null, "account_id" ,container.Add );
             AddIf( null != (((object)this._activedirectoryId)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._activedirectoryId.ToString()) : null, "activedirectory_id" ,container.Add );
             AddIf( null != (((object)this._applicationId)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._applicationId.ToString()) : null, "application_id" ,container.Add );
             AddIf( null != (((object)this._commandId)?.ToString()) ? (JumpCloudApiSdkV2.Runtime.Json.JsonNode) new JumpCloudApiSdkV2.Runtime.Json.JsonString(this._commandId.ToString()) : null, "command_id" ,container.Add );

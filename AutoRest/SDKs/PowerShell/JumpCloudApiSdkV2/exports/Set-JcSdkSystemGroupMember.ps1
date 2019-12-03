@@ -20,8 +20,9 @@ BODY <ISystemGroupMembersReq>: SystemGroupMembersReq
   Op <String>: How to modify the membership connection.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [AccountId <String>]: 
   [ActivedirectoryId <String>]: ObjectID of the Active Directory instance.
-  [ApplicationId <String>]: ObjectID of the Application.
+  [ApplicationId <String>]: 
   [CommandId <String>]: ObjectID of the Command.
   [GroupId <String>]: ObjectID of the User Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
