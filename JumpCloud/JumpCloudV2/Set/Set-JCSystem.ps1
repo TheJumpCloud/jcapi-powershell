@@ -6,33 +6,23 @@ Function Set-JCSystem
 		[Parameter(
 			ParameterSetName = 'PutExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Put',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Id,
+		)]
+		[System.String]$Id,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentityExpanded',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity,
-		]$,
-		InputObject,
+		)]
+		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
@@ -47,84 +37,44 @@ Function Set-JCSystem
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Put',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV1.Models.ISystemput,
-		]$,
-		Body,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		JumpCloudApiSdkV1.Models.ISystemputAgentBoundMessagesItem[],
-		]$,
-		AgentBoundMessages,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.Management.Automation.SwitchParameter,
-		]$,
-		AllowMultiFactorAuthentication,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.Management.Automation.SwitchParameter,
-		]$,
-		AllowPublicKeyAuthentication,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.Management.Automation.SwitchParameter,
-		]$,
-		AllowSshPasswordAuthentication,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.Management.Automation.SwitchParameter,
-		]$,
-		AllowSshRootLogin,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		DisplayName,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PutExpanded')],
-		
-		,
-		[,
-		System.String[],
-		]$,
-		Tags,
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[Parameter(ParameterSetName = 'Put')]
+		)]
+		[JumpCloudApiSdkV1.Models.ISystemput]$Body,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[JumpCloudApiSdkV1.Models.ISystemputAgentBoundMessagesItem[]]$AgentBoundMessages,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.Management.Automation.SwitchParameter]$AllowMultiFactorAuthentication,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.Management.Automation.SwitchParameter]$AllowPublicKeyAuthentication,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.Management.Automation.SwitchParameter]$AllowSshPasswordAuthentication,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.Management.Automation.SwitchParameter]$AllowSshRootLogin,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.String]$DisplayName,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.String[]]$Tags,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
 		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[Parameter(ParameterSetName = 'Put')]
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

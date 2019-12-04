@@ -29,10 +29,10 @@ Function Search-JCSystem
 		[JumpCloudApiSdkV1.Models.ISearchFilter1]$SearchFilter,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
 		[Parameter(ParameterSetName = 'Search')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
 		[Parameter(ParameterSetName = 'Search')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

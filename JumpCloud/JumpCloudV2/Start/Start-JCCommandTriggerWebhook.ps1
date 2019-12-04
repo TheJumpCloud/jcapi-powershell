@@ -16,10 +16,10 @@ Function Start-JCCommandTriggerWebhook
 		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Start')]
 		[Parameter(ParameterSetName = 'StartViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'Start')]
 		[Parameter(ParameterSetName = 'StartViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

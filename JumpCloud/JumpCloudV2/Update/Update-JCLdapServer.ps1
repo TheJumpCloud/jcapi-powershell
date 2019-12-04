@@ -3,37 +3,27 @@ Function Update-JCLdapServer
 {
     [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
 	Param(
-		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(
 			ParameterSetName = 'PatchExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Patch',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Id,
+		)]
+		[System.String]$Id,
 		[Parameter(
 			ParameterSetName = 'PatchViaIdentityExpanded',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'PatchViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
-		]$,
-		InputObject,
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'Patch')]
@@ -48,46 +38,31 @@ Function Update-JCLdapServer
 			ParameterSetName = 'PatchViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Patch',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody,
-		]$,
-		Body,
+		)]
+		[JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody]$Body,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[System.String]$Id1,
-		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PatchExpanded')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		UserLockoutAction,
-		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'PatchExpanded')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		UserPasswordExpirationAction,
-		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'Patch')]
-		[Parameter(ParameterSetName = 'PatchViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'PatchExpanded')]
+		[System.String]$UserLockoutAction,
+		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PatchExpanded')]
+		[System.String]$UserPasswordExpirationAction,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'Patch')]
 		[Parameter(ParameterSetName = 'PatchViaIdentity')]
 		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Parameter(ParameterSetName = 'PatchExpanded')]
+		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'Patch')]
+		[Parameter(ParameterSetName = 'PatchViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

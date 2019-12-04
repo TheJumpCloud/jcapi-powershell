@@ -11,17 +11,12 @@ Function Get-JCOffice365TranslationRule
 		[Parameter(
 			ParameterSetName = 'List',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Office365Id,
+		)]
+		[System.String]$Office365Id,
 		[Parameter(
 			ParameterSetName = 'GetViaIdentity',
 			Mandatory = $true,

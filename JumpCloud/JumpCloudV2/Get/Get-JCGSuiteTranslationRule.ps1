@@ -6,17 +6,12 @@ Function Get-JCGSuiteTranslationRule
 		[Parameter(
 			ParameterSetName = 'List',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		GsuiteId,
+		)]
+		[System.String]$GsuiteId,
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true

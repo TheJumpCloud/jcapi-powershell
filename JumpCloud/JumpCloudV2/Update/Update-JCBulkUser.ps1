@@ -10,9 +10,9 @@ Function Update-JCBulkUser
 		)]
 		[JumpCloudApiSdkV2.Models.IBulkUserUpdate[]]$Body,
 		[Parameter(ParameterSetName = 'Update')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-		[Parameter(ParameterSetName = 'Update')]
 		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Parameter(ParameterSetName = 'Update')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

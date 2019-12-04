@@ -27,10 +27,10 @@ Function Import-JCWorkday
 		[JumpCloudApiSdkV2.Models.IBulkUserCreate[]]$Body,
 		[Parameter(ParameterSetName = 'Import')]
 		[Parameter(ParameterSetName = 'ImportViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'Import')]
 		[Parameter(ParameterSetName = 'ImportViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

@@ -11,17 +11,12 @@ Function Get-JCLdapServerSambaDomain
 		[Parameter(
 			ParameterSetName = 'List',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		LdapserverId,
+		)]
+		[System.String]$LdapserverId,
 		[Parameter(
 			ParameterSetName = 'GetViaIdentity',
 			Mandatory = $true,

@@ -16,10 +16,10 @@ Function Remove-JCWorkdayAuthorization
 		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Remove')]
 		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'Remove')]
 		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

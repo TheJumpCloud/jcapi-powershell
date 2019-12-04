@@ -24,30 +24,15 @@ Function Get-JCApplication
 		[System.Int32]$Skip,
 		[Parameter(ParameterSetName = 'List')]
 		[System.String]$Sort,
-		[Parameter(ParameterSetName = 'GetViaIdentity')],
-		[Parameter(ParameterSetName = 'Get')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Accept,
-		[Parameter(ParameterSetName = 'GetViaIdentity')],
-		[Parameter(ParameterSetName = 'Get')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		ContentType,
-		[Parameter(ParameterSetName = 'GetViaIdentity')],
-		[Parameter(ParameterSetName = 'Get')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		XOrgId,
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[Parameter(ParameterSetName = 'Get')]
+		[System.String]$Accept,
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[Parameter(ParameterSetName = 'Get')]
+		[System.String]$ContentType,
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[Parameter(ParameterSetName = 'Get')]
+		[System.String]$XOrgId,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

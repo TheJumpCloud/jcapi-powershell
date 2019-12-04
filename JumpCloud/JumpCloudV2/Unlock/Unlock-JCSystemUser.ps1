@@ -16,10 +16,10 @@ Function Unlock-JCSystemUser
 		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Unlock')]
 		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'Unlock')]
 		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

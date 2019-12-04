@@ -6,33 +6,23 @@ Function New-JCLdapServerSambaDomain
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Create',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		LdapserverId,
+		)]
+		[System.String]$LdapserverId,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
-		]$,
-		InputObject,
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
@@ -47,56 +37,41 @@ Function New-JCLdapServerSambaDomain
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Create',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.ISambaDomainInput,
-		]$,
-		Body,
+		)]
+		[JumpCloudApiSdkV2.Models.ISambaDomainInput]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Name,
+		)]
+		[System.String]$Name,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Sid,
-		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[Parameter(ParameterSetName = 'Create')]
-		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		)]
+		[System.String]$Sid,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
 		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

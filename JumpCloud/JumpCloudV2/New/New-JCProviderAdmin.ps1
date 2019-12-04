@@ -6,97 +6,62 @@ Function New-JCProviderAdmin
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Create',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		ProviderId,
+		)]
+		[System.String]$ProviderId,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
-		]$,
-		InputObject,
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Create',
 			Mandatory = $true,
 			ValueFromPipeline = $true
-		)],
-		
-		,
-		[,
-		JumpCloudApiSdkV2.Models.IProviderAdminReq,
-		]$,
-		Body,
+		)]
+		[JumpCloudApiSdkV2.Models.IProviderAdminReq]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Email,
-		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'CreateExpanded')],
-		
-		,
-		[,
-		System.Management.Automation.SwitchParameter,
-		]$,
-		EnableMultiFactor,
-		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'CreateExpanded')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Firstname,
-		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
-		[Parameter(ParameterSetName = 'CreateExpanded')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Lastname,
-		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[Parameter(ParameterSetName = 'Create')]
+		)]
+		[System.String]$Email,
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$EnableMultiFactor,
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Firstname,
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Lastname,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
 		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

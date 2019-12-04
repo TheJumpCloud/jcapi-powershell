@@ -27,10 +27,10 @@ Function Remove-JCLdapServerSambaDomain
 		[System.String]$ContentType,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

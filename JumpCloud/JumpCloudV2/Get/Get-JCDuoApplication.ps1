@@ -6,17 +6,12 @@ Function Get-JCDuoApplication
 		[Parameter(
 			ParameterSetName = 'List',
 			Mandatory = $true
-		)],
+		)]
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true
-		)],
-		
-		,
-		[,
-		System.String,
-		]$,
-		AccountId,
+		)]
+		[System.String]$AccountId,
 		[Parameter(
 			ParameterSetName = 'Get',
 			Mandatory = $true

@@ -30,22 +30,12 @@ Function Get-JCSystem
 		[System.Int32]$Skip,
 		[Parameter(ParameterSetName = 'List')]
 		[System.String]$Sort,
-		[Parameter(ParameterSetName = 'GetViaIdentity')],
-		[Parameter(ParameterSetName = 'Get')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Authorization,
-		[Parameter(ParameterSetName = 'GetViaIdentity')],
-		[Parameter(ParameterSetName = 'Get')],
-		
-		,
-		[,
-		System.String,
-		]$,
-		Date,
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[Parameter(ParameterSetName = 'Get')]
+		[System.String]$Authorization,
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[Parameter(ParameterSetName = 'Get')]
+		[System.String]$Date,
 		[System.Boolean]$Paginate = $true
 	)
     Begin
