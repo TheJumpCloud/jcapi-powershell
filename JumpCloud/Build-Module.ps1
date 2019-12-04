@@ -2,7 +2,7 @@
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 If (Get-Module -Name($ModuleNames))
 {
-    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -eq 'New-JcSdkSystemUser' }
+    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -eq 'Get-JcSdkSystemUser' }
     ForEach ($Command In $Commands)
     {
         # Create new function name
@@ -10,96 +10,110 @@ If (Get-Module -Name($ModuleNames))
         $CommandName = $Command.Name
         $NewFunctionName = $CommandName.Replace($ModulePrefix, 'JC')
         # Build new function parameters
-        $NewFunctionParameters = @()
-        $CommandParameterSets = $Command.ParameterSets | Select-Object -Property:(@{Name = 'ParameterSetName'; Expression = { $_.Name } }, @{Name = 'IsDefault'; Expression = { $_.IsDefault } }) -ExpandProperty:('Parameters') | Sort-Object Name
-        ForEach ($CommandParameterSet In $CommandParameterSets)
+        $CommandParameterSets = $Command.ParameterSets
+        $CommandParameters = $Command.Parameters
+        $DefaultParameterSet = $CommandParameterSets | Where-Object { $_.IsDefault }
+        # Get the default parameter set
+        $DefaultParameterSetName = If ($DefaultParameterSet) { "[CmdletBinding(DefaultParameterSetName = '$($DefaultParameterSet.Name)')]`n" } # SupportsShouldProcess = `$true,
+        # Build parameters by copying them from the SDK function parameters
+        $NewParameters = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
         {
-            $NewFunctionParameter = [Ordered]@{ }
-            $DefaultParameterSet = If ($CommandParameterSet.IsDefault) { "[CmdletBinding(DefaultParameterSetName = '$($CommandParameterSet.Name)')]`n" }
-            $NewFunctionParameter.Add('ParameterSetName', "'" + $CommandParameterSet.ParameterSetName + "'")
-            $PropertyNames = $CommandParameterSet | Get-Member | Where-Object { $_.MemberType -eq 'Property' -and $_.Name -notin ('Attributes', 'IsDynamic') }
-            ForEach ($PropertyName In $PropertyNames.Name)
+            # $ParameterName = $CommandParameter.Key
+            # $ParameterValue.IsDynamic
+            # $ParameterValue.SwitchParameter
+            # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
+            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters)# + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
+            $ParameterValue = $CommandParameter.Value
+            $ParameterName = $ParameterValue.Name
+            $ParameterType = $ParameterValue.ParameterType.FullName
+            $ParameterAliases = $ParameterValue.Aliases
+            If ($ParameterName -notin $ParametersToExclude)
             {
-                If (-not [System.String]::IsNullOrEmpty($CommandParameterSet.$PropertyName))
+                # Build aliases
+                $Aliases = If (-not [System.string]::IsNullOrEmpty($ParameterAliases))
                 {
-                    $AttributeValue = Switch ($CommandParameterSet.$PropertyName.GetType().Name)
+                    '[Alias(' + $ParameterAliases + ')]'
+                }
+                # Build parameter sets
+                $NewParameterSets = $ParameterValue.ParameterSets.GetEnumerator() | ForEach-Object {
+                    $ParameterSetName = $_.Key
+                    $ParameterSetAttributes = $_.Value
+                    $ParameterSetAttributeProperties = $ParameterSetAttributes.PSObject.Properties
+                    $NewParameterSetAttributes = ForEach ($ParameterSetAttributeProperty In $ParameterSetAttributeProperties)
                     {
-                        'Boolean'
+                        $ParameterSetAttributePropertyName = $ParameterSetAttributeProperty.Name
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetAttributes.$ParameterSetAttributePropertyName))
                         {
-                            '$' + $CommandParameterSet.$PropertyName
-                        }
-                        'string'
-                        {
-                            If ($PropertyName -eq 'Name')
+                            # Format the attribute value
+                            $AttributeValue = Switch ($ParameterSetAttributeProperty.TypeNameOfValue)
                             {
-                                '$' + $CommandParameterSet.$PropertyName
+                                'System.Boolean'
+                                {
+                                    [System.String]('$' + $ParameterSetAttributes.$ParameterSetAttributePropertyName).ToLower()
+                                }
+                                'System.String'
+                                {
+                                    "'" + $ParameterSetAttributes.$ParameterSetAttributePropertyName + "'"
+                                }
+                                'System.Int32'
+                                {
+                                    $ParameterSetAttributes.$ParameterSetAttributePropertyName
+                                }
+                                Default { Write-Error ('Unknown data type: ' + $ParameterSetAttributePropertyName + ' ' + $ParameterSetAttributeProperty.TypeNameOfValue) }
                             }
-                            Else
+                            # Format the attribute name
+                            If ($ParameterSetAttributePropertyName -eq 'IsMandatory')
                             {
-                                "'" + $CommandParameterSet.$PropertyName + "'"
+                                $ParameterSetAttributePropertyName = 'Mandatory'
+                            }
+                            # Return key value pair
+                            If ($AttributeValue -notin ('$false', '-2147483648'))
+                            {
+                                "`n`t`t`t" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
                             }
                         }
-                        'Int32'
-                        {
-                            $CommandParameterSet.$PropertyName
-                        }
-                        'ReadOnlyCollection`1'
-                        {
-                            "'" + $CommandParameterSet.$PropertyName + "'"
-                        }
-                        'RuntimeType'
-                        {
-                            '[' + $CommandParameterSet.$PropertyName + ']'
-                        }
-                        Default { Write-Error ('Unknown data type: ' + $PropertyName + ' ' + $CommandParameterSet.$PropertyName.GetType().Name) }
                     }
-                    If ($PropertyName -eq 'IsMandatory') { $PropertyName = 'Mandatory' }
-                    $NewFunctionParameter.Add($PropertyName, $AttributeValue)
+
+                    $ParameterSets = If ($ParameterSetName -eq '__AllParameterSets')
+                    {
+                        $CommandParameterSets.Name
+                    }
+                    Else
+                    {
+                        $ParameterSetName
+                    }
+                    $FullParameterString = @()
+                    $ParameterSets | ForEach-Object {
+                        $ParameterString = $null
+                        $ParameterString = "`n`t`t`tParameterSetName = '" + $_ + "'"
+                        If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
+                        {
+                            $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n`t`t"
+                        }
+                        Else
+                        {
+                            $ParameterString = $ParameterString.Trim()
+                        }
+                        If (-not [System.String]::IsNullOrEmpty($ParameterString))
+                        {
+                            $ParameterString = "[Parameter(" + $ParameterString + ")]"
+                            $FullParameterString += $ParameterString
+                        }
+                    }
+                    ( $FullParameterString -join "`n`t`t")
                 }
-            }
-            $ParameterName = $NewFunctionParameter.Name
-            $ParameterType = $NewFunctionParameter.ParameterType
-            # If ($ParameterType -like ('*' + $ModuleName + '*Item*'))
-            # {
-            #     Write-Host ("Build-JCObjectTemplate -ModelName:('$ParameterType')") -BackgroundColor Cyan
-            #     # Build-JCObjectTemplate -ModelName:($ParameterType)
-            # }
-            $ParameterSetName = $NewFunctionParameter.ParameterSetName
-            $Aliases = $NewFunctionParameter.Aliases
-            $NewFunctionParameter.Remove('Aliases')
-            $NewFunctionParameter.Remove('Name')
-            $NewFunctionParameter.Remove('ParameterType')
-            $NewFunctionParameters += [pscustomobject]@{
-                ParameterSetName     = $ParameterSetName
-                ParameterName        = $ParameterName
-                ParameterType        = $ParameterType
-                NewFunctionParameter = $NewFunctionParameter
-                Aliases              = $Aliases
+                # Return full parameter set
+                If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
+                {
+                    $NewParameterSets + "`n`t`t" + $Aliases + "[" + $ParameterType + ']$' + $ParameterName
+                }
+                Else
+                {
+                    $Aliases + "[" + $ParameterType + ']$' + $ParameterName
+                }
             }
         }
-        $NewFunctionParametersOut = @()
-        $NewFunctionParameters | Group-Object ParameterName | ForEach-Object {
-            $GroupName = $_.Name
-            $Group = $_.Group | Sort-Object ParameterSetName
-            If ($GroupName.Replace('$', '') -notin ('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable') `
-                    -and $GroupName.Replace('$', '') -notin ('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials'))
-            {
-                $NewFunctionParameterString = @()
-                ForEach ($GroupItem In $Group)
-                {
-                    $NewFunctionParameterString += '[Parameter(' + (($GroupItem.NewFunctionParameter.GetEnumerator() | ForEach-Object {
-                                $_.Key + ' = ' + $_.Value
-                            }) -join ', ') + ')]'
-                }
-                $Aliases = If (-not [System.string]::IsNullOrEmpty($GroupItem.Aliases))
-                {
-                    '[Alias(' + $GroupItem.Aliases + ')]'
-                }
-                $NewFunctionParameterString = ($NewFunctionParameterString -join "`n        ") + "`n        " + $Aliases + $GroupItem.ParameterType + $GroupItem.ParameterName
-                $NewFunctionParametersOut += $NewFunctionParameterString
-            }
-        }
-        $NewFunctionParametersOut = $NewFunctionParametersOut -join ",`n        "
+        $ParamBlock = $DefaultParameterSetName + ("`t" + 'Param(' + "`n`t`t" + ($NewParameters -join ",`n`t`t") + ",`n`t`t" + '[System.Boolean]$Paginate = $true' + "`n`t" + ')')
         # Build function
         $Script = If ($Command.Verb -in ('Get', 'Search'))
         {
@@ -124,38 +138,52 @@ If (Get-Module -Name($ModuleNames))
             "#Requires -modules $($ModuleName)
 Function $NewFunctionName
 {
-    $($DefaultParameterSet)Param(
-        $NewFunctionParametersOut
-    )
-    Begin {
+    $ParamBlock
+    Begin
+    {
         `$Results = @()
-        If([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
         {
             `$PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
         {
             `$PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If (`$PSBoundParameters.Paginate)
         {
-            # Write-Host (`"Skip: `$(`$PSBoundParameters.Skip); Limit: `$(`$PSBoundParameters.Limit); `");
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host (`"Skip: `$(`$PSBoundParameters.Skip); Limit: `$(`$PSBoundParameters.Limit); `");
+                `$Result = $CommandName @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty(`$Result))
+                {
+                    $ResultsLogic
+                    `$PSBoundParameters.Skip += `$ResultCount
+                }
+            }
+            While (`$ResultCount -eq `$PSBoundParameters.Limit)
+        }
+        Else
+        {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
             `$Result = $CommandName @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty(`$Result))
+            If (-not [System.String]::IsNullOrEmpty(`$Result))
             {
                 $ResultsLogic
                 `$PSBoundParameters.Skip += `$ResultCount
             }
         }
-        While (`$ResultCount -eq `$PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return `$Results
     }
-}
-        "
+}"
         }
         ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import'))
         {
@@ -163,20 +191,20 @@ Function $NewFunctionName
             "#Requires -modules $($ModuleName)
 Function $NewFunctionName
 {
-    $($DefaultParameterSet)Param(
-        $NewFunctionParametersOut
-    )
-    Begin {
+    $ParamBlock
+    Begin
+    {
         `$Results = @()
     }
-    Process {
+    Process
+    {
         `$Results = $CommandName @PSBoundParameters
     }
-    End {
+    End
+    {
         Return `$Results
     }
-}
-        "
+}"
         }
         Else
         {
@@ -196,3 +224,131 @@ Function $NewFunctionName
         }
     }
 }
+Else
+{
+    Write-Error ('No modules found.')
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# # Build new function parameters
+# $NewFunctionParameters = @()
+# $CommandParameterSets = $Command.ParameterSets | Select-Object -Property:(@{Name = 'ParameterSetName'; Expression = { $_.Name } }, @{Name = 'IsDefault'; Expression = { $_.IsDefault } }) -ExpandProperty:('Parameters') | Sort-Object Name
+# ForEach ($CommandParameterSet In $CommandParameterSets)
+# {
+#     $NewFunctionParameter = [Ordered]@{ }
+#     $DefaultParameterSet = If ($CommandParameterSet.IsDefault) { "[CmdletBinding(DefaultParameterSetName = '$($CommandParameterSet.Name)')]`n" }
+#     $NewFunctionParameter.Add('ParameterSetName', "'" + $CommandParameterSet.ParameterSetName + "'")
+#     $PropertyNames = $CommandParameterSet | Get-Member | Where-Object { $_.MemberType -eq 'Property' -and $_.Name -notin ('Attributes', 'IsDynamic') }
+#     ForEach ($PropertyName In $PropertyNames.Name)
+#     {
+#         If (-not [System.String]::IsNullOrEmpty($CommandParameterSet.$PropertyName))
+#         {
+#             $AttributeValue = Switch ($CommandParameterSet.$PropertyName.GetType().Name)
+#             {
+#                 'Boolean'
+#                 {
+#                     '$' + $CommandParameterSet.$PropertyName
+#                 }
+#                 'string'
+#                 {
+#                     If ($PropertyName -eq 'Name')
+#                     {
+#                         '$' + $CommandParameterSet.$PropertyName
+#                     }
+#                     Else
+#                     {
+#                         "'" + $CommandParameterSet.$PropertyName + "'"
+#                     }
+#                 }
+#                 'Int32'
+#                 {
+#                     $CommandParameterSet.$PropertyName
+#                 }
+#                 'ReadOnlyCollection`1'
+#                 {
+#                     "'" + $CommandParameterSet.$PropertyName + "'"
+#                 }
+#                 'RuntimeType'
+#                 {
+#                     '[' + $CommandParameterSet.$PropertyName + ']'
+#                 }
+#                 Default { Write-Error ('Unknown data type: ' + $PropertyName + ' ' + $CommandParameterSet.$PropertyName.GetType().Name) }
+#             }
+#             If ($PropertyName -eq 'IsMandatory') { $PropertyName = 'Mandatory' }
+#             $NewFunctionParameter.Add($PropertyName, $AttributeValue)
+#         }
+#     }
+#     $ParameterName = $NewFunctionParameter.Name
+#     $ParameterType = $NewFunctionParameter.ParameterType
+#     # If ($ParameterType -like ('*' + $ModuleName + '*Item*'))
+#     # {
+#     #     Write-Host ("Build-JCObjectTemplate -ModelName:('$ParameterType')") -BackgroundColor Cyan
+#     #     # Build-JCObjectTemplate -ModelName:($ParameterType)
+#     # }
+#     $ParameterSetName = $NewFunctionParameter.ParameterSetName
+#     $Aliases = $NewFunctionParameter.Aliases
+#     $NewFunctionParameter.Remove('Aliases')
+#     $NewFunctionParameter.Remove('Name')
+#     $NewFunctionParameter.Remove('ParameterType')
+#     $NewFunctionParameters += [pscustomobject]@{
+#         ParameterSetName     = $ParameterSetName
+#         ParameterName        = $ParameterName
+#         ParameterType        = $ParameterType
+#         NewFunctionParameter = $NewFunctionParameter
+#         Aliases              = $Aliases
+#     }
+# }
+# $NewFunctionParametersOut = @()
+# $NewFunctionParameters | Group-Object ParameterName | ForEach-Object {
+#     $GroupName = $_.Name
+#     $Group = $_.Group | Sort-Object ParameterSetName
+#     If ($GroupName.Replace('$', '') -notin ('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable') `
+#             -and $GroupName.Replace('$', '') -notin ('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials'))
+#     {
+#         $NewFunctionParameterString = @()
+#         ForEach ($GroupItem In $Group)
+#         {
+#             $NewFunctionParameterString += '[Parameter(' + (($GroupItem.NewFunctionParameter.GetEnumerator() | ForEach-Object {
+#                         $_.Key + ' = ' + $_.Value
+#                     }) -join ', ') + ')]'
+#         }
+#         $Aliases = If (-not [System.string]::IsNullOrEmpty($GroupItem.Aliases))
+#         {
+#             '[Alias(' + $GroupItem.Aliases + ')]'
+#         }
+#         $NewFunctionParameterString = ($NewFunctionParameterString -join "`n        ") + "`n        " + $Aliases + $GroupItem.ParameterType + $GroupItem.ParameterName
+#         $NewFunctionParametersOut += $NewFunctionParameterString
+#     }
+# }
+# $NewFunctionParametersOut = $NewFunctionParametersOut -join ",`n        "
