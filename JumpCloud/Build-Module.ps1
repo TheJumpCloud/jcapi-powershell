@@ -1,8 +1,13 @@
 # $UserAgent = Get-JCUserAgent
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+$OutputPath = $PSScriptRoot + '/JumpCloudV2/'
+If (Test-Path -Path:($OutputPath))
+{
+    Remove-Item -Path:($OutputPath) -Recurse -Force
+}
 If (Get-Module -Name($ModuleNames))
 {
-    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -eq 'Get-JcSdkSystemUser' }
+    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -in ('Set-JcSdkSystemUser', 'Get-JcSdkSystemUser', 'New-JcSdkSystemUser') }
     ForEach ($Command In $Commands)
     {
         # Create new function name
@@ -85,7 +90,10 @@ If (Get-Module -Name($ModuleNames))
                     $FullParameterString = @()
                     $ParameterSets | ForEach-Object {
                         $ParameterString = $null
-                        $ParameterString = "`n`t`t`tParameterSetName = '" + $_ + "'"
+                        If (-not [System.String]::IsNullOrEmpty($_))
+                        {
+                            $ParameterString = "`n`t`t`tParameterSetName = '" + $_ + "'"
+                        }
                         If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
                         {
                             $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n`t`t"
@@ -105,11 +113,11 @@ If (Get-Module -Name($ModuleNames))
                 # Return full parameter set
                 If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
                 {
-                    $NewParameterSets + "`n`t`t" + $Aliases + "[" + $ParameterType + ']$' + $ParameterName
+                    [System.String](($NewParameterSets -join "`n`t`t") + "`n`t`t" + $Aliases + "[" + $ParameterType + "]`$" + $ParameterName)
                 }
                 Else
                 {
-                    $Aliases + "[" + $ParameterType + ']$' + $ParameterName
+                    [System.String]($Aliases + "[" + $ParameterType + "]`$" + $ParameterName)
                 }
             }
         }
@@ -214,13 +222,13 @@ Function $NewFunctionName
         If (-not [System.String]::IsNullOrEmpty($Script))
         {
             # Export the function
-            $OutputPath = $PSScriptRoot + '/JumpCloudV2/' + $Command.Verb
-            Write-Host ("$OutputPath - $CommandName")
-            If (!(Test-Path -Path:($OutputPath)))
+            $OutputFullPath = $OutputPath + $Command.Verb
+            Write-Host ("$OutputFullPath - $CommandName")
+            If (!(Test-Path -Path:($OutputFullPath)))
             {
-                New-Item -Path:($OutputPath) -ItemType:('Directory') | Out-Null
+                New-Item -Path:($OutputFullPath) -ItemType:('Directory') | Out-Null
             }
-            $Script | Out-File -FilePath:($OutputPath + '/' + $NewFunctionName + '.ps1') -Force
+            $Script | Out-File -FilePath:($OutputFullPath + '/' + $NewFunctionName + '.ps1') -Force
         }
     }
 }
