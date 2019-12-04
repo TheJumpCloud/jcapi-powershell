@@ -1,36 +1,35 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Set-JCUserGroup
 {
-    
     Param(
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
+        [JumpCloudApiSdkV2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$AttributeSambaEnabled,
+        [switch]$AttributeSambaEnabled,
         [Parameter(ParameterSetName = 'Put', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV2.Models.IUserGroupPut]$Body,
+        [JumpCloudApiSdkV2.Models.IUserGroupPut]$Body,
         [Parameter(ParameterSetName = 'Put', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'Put', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Id,
+        [string]$Id,
         [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Name,
+        [string]$Name,
         [Parameter(ParameterSetName = 'Put', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf
+        [Alias('wi')][switch]$WhatIf
     )
     Begin {
         $Results = @()
@@ -42,4 +41,4 @@ Function Set-JCUserGroup
         Return $Results
     }
 }
-
+        

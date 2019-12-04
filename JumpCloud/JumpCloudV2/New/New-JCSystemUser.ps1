@@ -1,96 +1,95 @@
 #Requires -modules JumpCloudApiSdkV1
 Function New-JCSystemUser
 {
-    
     Param(
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$AccountLocked,
+        [switch]$AccountLocked,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$Activated,
+        [switch]$Activated,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
+        [JumpCloudApiSdkV1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$AllowPublicKey,
+        [switch]$AllowPublicKey,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
+        [JumpCloudApiSdkV1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
         [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.ISystemuserputpost]$Body,
+        [JumpCloudApiSdkV1.Models.ISystemuserputpost]$Body,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Company,
+        [string]$Company,
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$CostCenter,
+        [string]$CostCenter,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Department,
+        [string]$Department,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Description,
+        [string]$Description,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Displayname,
+        [string]$Displayname,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Email,
+        [string]$Email,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$EmployeeIdentifier,
+        [string]$EmployeeIdentifier,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$EmployeeType,
+        [string]$EmployeeType,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$EnableManagedUid,
+        [switch]$EnableManagedUid,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$EnableUserPortalMultifactor,
+        [switch]$EnableUserPortalMultifactor,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$ExternalDn,
+        [string]$ExternalDn,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$ExternallyManaged,
+        [switch]$ExternallyManaged,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$ExternalSourceType,
+        [string]$ExternalSourceType,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Firstname,
+        [string]$Firstname,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$JobTitle,
+        [string]$JobTitle,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Lastname,
+        [string]$Lastname,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$LdapBindingUser,
+        [switch]$LdapBindingUser,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Location,
+        [string]$Location,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$MfaConfigured,
+        [switch]$MfaConfigured,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$MfaExclusion,
+        [switch]$MfaExclusion,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][datetime]$MfaExclusionUntil,
+        [datetime]$MfaExclusionUntil,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Middlename,
+        [string]$Middlename,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Password,
+        [string]$Password,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$PasswordlessSudo,
+        [switch]$PasswordlessSudo,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$PasswordNeverExpires,
+        [switch]$PasswordNeverExpires,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
+        [JumpCloudApiSdkV1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$PublicKey,
+        [string]$PublicKey,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
+        [JumpCloudApiSdkV1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$SambaServiceUser,
+        [switch]$SambaServiceUser,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$Sudo,
+        [switch]$Sudo,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][switch]$Suspended,
+        [switch]$Suspended,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string[]]$Tags,
+        [string[]]$Tags,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$UnixGuid,
+        [int]$UnixGuid,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$UnixUid,
+        [int]$UnixUid,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Username,
+        [string]$Username,
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf
+        [Alias('wi')][switch]$WhatIf
     )
     Begin {
         $Results = @()
@@ -102,4 +101,4 @@ Function New-JCSystemUser
         Return $Results
     }
 }
-
+        

@@ -2,23 +2,23 @@
 Function Remove-JCSystem
 {
     [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'Delete', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Authorization,
+        [string]$Authorization,
         [Parameter(ParameterSetName = 'Delete', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'Delete', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Date,
+        [string]$Date,
         [Parameter(ParameterSetName = 'Delete', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Id,
+        [string]$Id,
         [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
         [Parameter(ParameterSetName = 'Delete', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf
+        [Alias('wi')][switch]$WhatIf
     )
     Begin {
         $Results = @()
@@ -30,4 +30,4 @@ Function Remove-JCSystem
         Return $Results
     }
 }
-
+        

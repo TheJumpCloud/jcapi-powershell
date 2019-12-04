@@ -2,13 +2,13 @@
 Function Get-JCSystemInsightsSystemLogicalDrive
 {
     [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Limit,
+        [int]$Limit,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Skip,
+        [int]$Skip,
         [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$SystemId
+        [string]$SystemId
     )
     Begin {
         $Results = @()
@@ -39,4 +39,4 @@ Function Get-JCSystemInsightsSystemLogicalDrive
         Return $Results
     }
 }
-
+        

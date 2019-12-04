@@ -1,16 +1,15 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Get-JCSystemInsightsSystemInfo
 {
-    
     Param(
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'List1', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Limit,
+        [int]$Limit,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'List1', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Skip,
+        [int]$Skip,
         [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$SystemId
+        [string]$SystemId
     )
     Begin {
         $Results = @()
@@ -41,4 +40,4 @@ Function Get-JCSystemInsightsSystemInfo
         Return $Results
     }
 }
-
+        

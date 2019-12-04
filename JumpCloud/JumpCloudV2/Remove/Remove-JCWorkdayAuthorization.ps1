@@ -2,17 +2,17 @@
 Function Remove-JCWorkdayAuthorization
 {
     [CmdletBinding(DefaultParameterSetName = 'WorkdayId')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'Remove', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
         [Parameter(ParameterSetName = 'Remove', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf,
+        [Alias('wi')][switch]$WhatIf,
         [Parameter(ParameterSetName = 'Remove', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$WorkdayId
+        [string]$WorkdayId
     )
     Begin {
         $Results = @()
@@ -24,4 +24,4 @@ Function Remove-JCWorkdayAuthorization
         Return $Results
     }
 }
-
+        

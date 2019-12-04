@@ -1,30 +1,29 @@
 #Requires -modules JumpCloudApiSdkV1
 Function New-JCRadiusServer
 {
-    
     Param(
         [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][JumpCloudApiSdkV1.Models.IRadiusserverpost]$Body,
+        [JumpCloudApiSdkV1.Models.IRadiusserverpost]$Body,
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Mfa,
+        [string]$Mfa,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Name,
+        [string]$Name,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$NetworkSourceIP,
+        [string]$NetworkSourceIP,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$SharedSecret,
+        [string]$SharedSecret,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string[]]$TagNames,
+        [string[]]$TagNames,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$UserLockoutAction,
+        [string]$UserLockoutAction,
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$UserPasswordExpirationAction,
+        [string]$UserPasswordExpirationAction,
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
         [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf
+        [Alias('wi')][switch]$WhatIf
     )
     Begin {
         $Results = @()
@@ -36,4 +35,4 @@ Function New-JCRadiusServer
         Return $Results
     }
 }
-
+        

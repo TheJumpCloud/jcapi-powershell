@@ -2,15 +2,15 @@
 Function Get-JCWorkdayWorker
 {
     [CmdletBinding(DefaultParameterSetName = 'WorkdayId')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Limit,
+        [int]$Limit,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Skip,
+        [int]$Skip,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string[]]$Sort,
+        [string[]]$Sort,
         [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$WorkdayId
+        [string]$WorkdayId
     )
     Begin {
         $Results = @()
@@ -41,4 +41,4 @@ Function Get-JCWorkdayWorker
         Return $Results
     }
 }
-
+        

@@ -2,9 +2,9 @@
 Function Get-JCSshKey
 {
     [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$Id
+        [string]$Id
     )
     Begin {
         $Results = @()
@@ -35,4 +35,4 @@ Function Get-JCSshKey
         Return $Results
     }
 }
-
+        

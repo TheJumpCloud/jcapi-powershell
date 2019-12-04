@@ -2,15 +2,15 @@
 Function Get-JCGSuiteTraverseUser
 {
     [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string[]]$Filter,
+        [string[]]$Filter,
         [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][string]$GsuiteId,
+        [string]$GsuiteId,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Limit,
+        [int]$Limit,
         [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias()][int]$Skip
+        [int]$Skip
     )
     Begin {
         $Results = @()
@@ -41,4 +41,4 @@ Function Get-JCGSuiteTraverseUser
         Return $Results
     }
 }
-
+        

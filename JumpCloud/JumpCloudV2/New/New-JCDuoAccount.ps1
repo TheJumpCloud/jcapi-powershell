@@ -2,11 +2,11 @@
 Function New-JCDuoAccount
 {
     [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-    Param(
+Param(
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Confirm,
+        [Alias('cf')][switch]$Confirm,
         [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$WhatIf
+        [Alias('wi')][switch]$WhatIf
     )
     Begin {
         $Results = @()
@@ -18,4 +18,4 @@ Function New-JCDuoAccount
         Return $Results
     }
 }
-
+        
