@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
@@ -194,3 +194,6 @@ ForEach ($API In $APIName)
         Write-Error ('Unable to find file: ' + $ConfigFilePath)
     }
 }
+# .\run-module.ps1 -run
+# Get-Command -Module JumpCloudApiSdkV1
+# Get-JcSdkApplication
