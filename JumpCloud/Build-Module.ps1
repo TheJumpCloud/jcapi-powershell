@@ -2,10 +2,11 @@
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 If (Get-Module -Name($ModuleNames))
 {
-    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -eq 'Get-JcSdkSystemUser' }
+    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -eq 'New-JcSdkSystemUser' }
     ForEach ($Command In $Commands)
     {
         # Create new function name
+        $ModuleName = $Command.Module.Name
         $CommandName = $Command.Name
         $NewFunctionName = $CommandName.Replace($ModulePrefix, 'JC')
         # Build new function parameters
@@ -14,7 +15,7 @@ If (Get-Module -Name($ModuleNames))
         ForEach ($CommandParameterSet In $CommandParameterSets)
         {
             $NewFunctionParameter = [Ordered]@{ }
-            $DefaultParameterSet = If ($CommandParameterSet.IsDefault) { "[CmdletBinding(DefaultParameterSetName = '$($CommandParameterSet.Name)')]" }
+            $DefaultParameterSet = If ($CommandParameterSet.IsDefault) { "[CmdletBinding(DefaultParameterSetName = '$($CommandParameterSet.Name)')]`n" }
             $NewFunctionParameter.Add('ParameterSetName', "'" + $CommandParameterSet.ParameterSetName + "'")
             $PropertyNames = $CommandParameterSet | Get-Member | Where-Object { $_.MemberType -eq 'Property' -and $_.Name -notin ('Attributes', 'IsDynamic') }
             ForEach ($PropertyName In $PropertyNames.Name)
@@ -58,6 +59,11 @@ If (Get-Module -Name($ModuleNames))
             }
             $ParameterName = $NewFunctionParameter.Name
             $ParameterType = $NewFunctionParameter.ParameterType
+            # If ($ParameterType -like ('*' + $ModuleName + '*Item*'))
+            # {
+            #     Write-Host ("Build-JCObjectTemplate -ModelName:('$ParameterType')") -BackgroundColor Cyan
+            #     # Build-JCObjectTemplate -ModelName:($ParameterType)
+            # }
             $ParameterSetName = $NewFunctionParameter.ParameterSetName
             $Aliases = $NewFunctionParameter.Aliases
             $NewFunctionParameter.Remove('Aliases')
@@ -85,7 +91,7 @@ If (Get-Module -Name($ModuleNames))
                                 $_.Key + ' = ' + $_.Value
                             }) -join ', ') + ')]'
                 }
-                $Aliases = If ([System.string]::IsNullOrEmpty($GroupItem.Aliases))
+                $Aliases = If (-not [System.string]::IsNullOrEmpty($GroupItem.Aliases))
                 {
                     '[Alias(' + $GroupItem.Aliases + ')]'
                 }
@@ -95,10 +101,10 @@ If (Get-Module -Name($ModuleNames))
         }
         $NewFunctionParametersOut = $NewFunctionParametersOut -join ",`n        "
         # Build function
-        $Script = If ($Command.Verb -eq 'Get')
+        $Script = If ($Command.Verb -in ('Get', 'Search'))
         {
             # Create results logic
-            $ResultsLogic = Switch ($Command.Module.Name)
+            $ResultsLogic = Switch ($ModuleName)
             {
                 'JumpCloudApiSdkV1'
                 {
@@ -111,15 +117,14 @@ If (Get-Module -Name($ModuleNames))
                 }
                 Default
                 {
-                    Write-Error ('Unknown module $($Command.Module.Name)')
+                    Write-Error ('Unknown module $($ModuleName)')
                 }
             }
             # Script template
-            "#Requires -modules $($Command.Module.Name)
+            "#Requires -modules $($ModuleName)
 Function $NewFunctionName
 {
-    $DefaultParameterSet
-    Param(
+    $($DefaultParameterSet)Param(
         $NewFunctionParametersOut
     )
     Begin {
@@ -150,16 +155,15 @@ Function $NewFunctionName
         Return `$Results
     }
 }
-"
+        "
         }
-        ElseIf ($Command.Verb -in ('New', 'Set', 'Remove'))
+        ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import'))
         {
             # Script template
-            "#Requires -modules $($Command.Module.Name)
+            "#Requires -modules $($ModuleName)
 Function $NewFunctionName
 {
-    $DefaultParameterSet
-    Param(
+    $($DefaultParameterSet)Param(
         $NewFunctionParametersOut
     )
     Begin {
@@ -172,18 +176,18 @@ Function $NewFunctionName
         Return `$Results
     }
 }
-"
+        "
         }
         Else
         {
-            Write-Host ('Unmapped command: ' + $CommandName)
+            Write-Warning ('Unmapped command: ' + $CommandName)
             $null
         }
-        If (![System.String]::IsNullOrEmpty($Script))
+        If (-not [System.String]::IsNullOrEmpty($Script))
         {
             # Export the function
-            Write-Host ("$OutputPath $CommandName")
             $OutputPath = $PSScriptRoot + '/JumpCloudV2/' + $Command.Verb
+            Write-Host ("$OutputPath - $CommandName")
             If (!(Test-Path -Path:($OutputPath)))
             {
                 New-Item -Path:($OutputPath) -ItemType:('Directory') | Out-Null
