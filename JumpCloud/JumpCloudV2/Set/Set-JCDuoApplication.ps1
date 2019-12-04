@@ -1,50 +1,122 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Set-JCDuoApplication
 {
-    Param(
-        [Parameter(ParameterSetName = 'Update', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$AccountId,
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ApiHost,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ApplicationId,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq]$Body,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$IntegrationKey,
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Name,
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$SecretKey,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'UpdateExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'UpdateExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Update',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		AccountId,
+		[Parameter(
+			ParameterSetName = 'UpdateExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Update',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		ApplicationId,
+		[Parameter(
+			ParameterSetName = 'UpdateViaIdentityExpanded',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'UpdateViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
+		]$,
+		InputObject,
+		[Parameter(
+			ParameterSetName = 'UpdateViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Update',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq,
+		]$,
+		Body,
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'UpdateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		ApiHost,
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'UpdateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		IntegrationKey,
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'UpdateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Name,
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'UpdateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		SecretKey,
+		[Parameter(ParameterSetName = 'UpdateExpanded')]
+		[Parameter(ParameterSetName = 'Update')]
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'UpdateViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'UpdateExpanded')]
+		[Parameter(ParameterSetName = 'Update')]
+		[Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'UpdateViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Set-JcSdkDuoApplication @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

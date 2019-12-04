@@ -1,104 +1,118 @@
 #Requires -modules JumpCloudApiSdkV1
 Function New-JCSystemUser
 {
-    Param(
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$AccountLocked,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Activated,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$AllowPublicKey,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.ISystemuserputpost]$Body,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Company,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$CostCenter,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Department,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Description,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Displayname,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Email,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$EmployeeIdentifier,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$EmployeeType,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$EnableManagedUid,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$EnableUserPortalMultifactor,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ExternalDn,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$ExternallyManaged,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ExternalSourceType,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Firstname,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$JobTitle,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Lastname,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$LdapBindingUser,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Location,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$MfaConfigured,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$MfaExclusion,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [datetime]$MfaExclusionUntil,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Middlename,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Password,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$PasswordlessSudo,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$PasswordNeverExpires,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$PublicKey,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$SambaServiceUser,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Sudo,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Suspended,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string[]]$Tags,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$UnixGuid,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$UnixUid,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Username,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Create',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV1.Models.ISystemuserputpost]$Body,
+		[Parameter(
+			ParameterSetName = 'CreateExpanded',
+			Mandatory = $true
+		)]
+		[System.String]$Email,
+		[Parameter(
+			ParameterSetName = 'CreateExpanded',
+			Mandatory = $true
+		)]
+		[System.String]$Username,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$AccountLocked,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$Activated,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[JumpCloudApiSdkV1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$AllowPublicKey,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[JumpCloudApiSdkV1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Company,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$CostCenter,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Department,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Description,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Displayname,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$EmployeeIdentifier,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$EmployeeType,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$EnableManagedUid,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$EnableUserPortalMultifactor,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$ExternalDn,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$ExternalSourceType,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$ExternallyManaged,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Firstname,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$JobTitle,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Lastname,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$LdapBindingUser,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Location,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$MfaConfigured,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$MfaExclusion,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.DateTime]$MfaExclusionUntil,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Middlename,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Password,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$PasswordNeverExpires,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$PasswordlessSudo,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[JumpCloudApiSdkV1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$PublicKey,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[JumpCloudApiSdkV1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$SambaServiceUser,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$Sudo,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$Suspended,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String[]]$Tags,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Int32]$UnixGuid,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Int32]$UnixUid,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = New-JcSdkSystemUser @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

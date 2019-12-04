@@ -1,27 +1,37 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Remove-JCWorkdayAuthorization
 {
-    [CmdletBinding(DefaultParameterSetName = 'WorkdayId')]
-Param(
-        [Parameter(ParameterSetName = 'Remove', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Remove', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'RemoveViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf,
-        [Parameter(ParameterSetName = 'Remove', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$WorkdayId
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Remove')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Remove',
+			Mandatory = $true
+		)]
+		[System.String]$WorkdayId,
+		[Parameter(
+			ParameterSetName = 'RemoveViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[Parameter(ParameterSetName = 'Remove')]
+		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Remove')]
+		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Remove-JcSdkWorkdayAuthorization @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

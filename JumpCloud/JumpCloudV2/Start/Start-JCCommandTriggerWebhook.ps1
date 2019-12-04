@@ -1,27 +1,37 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Start-JCCommandTriggerWebhook
 {
-    [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-Param(
-        [Parameter(ParameterSetName = 'Start', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'StartViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'StartViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Start', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Triggername,
-        [Parameter(ParameterSetName = 'Start', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'StartViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Start')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Start',
+			Mandatory = $true
+		)]
+		[System.String]$Triggername,
+		[Parameter(
+			ParameterSetName = 'StartViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[Parameter(ParameterSetName = 'Start')]
+		[Parameter(ParameterSetName = 'StartViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Start')]
+		[Parameter(ParameterSetName = 'StartViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Start-JcSdkCommandTriggerWebhook @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

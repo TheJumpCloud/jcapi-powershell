@@ -1,42 +1,92 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Reset-JCSystemUserMfa
 {
-    [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-Param(
-        [Parameter(ParameterSetName = 'Reset', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody]$Body,
-        [Parameter(ParameterSetName = 'Reset', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'ResetExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Exclusion,
-        [Parameter(ParameterSetName = 'ResetExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [datetime]$ExclusionUntil,
-        [Parameter(ParameterSetName = 'Reset', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'ResetViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Reset', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'ResetExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'ResetExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Reset',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Id,
+		[Parameter(
+			ParameterSetName = 'ResetViaIdentityExpanded',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'ResetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity,
+		]$,
+		InputObject,
+		[Parameter(
+			ParameterSetName = 'ResetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Reset',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody,
+		]$,
+		Body,
+		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'ResetExpanded')],
+		
+		,
+		[,
+		System.Management.Automation.SwitchParameter,
+		]$,
+		Exclusion,
+		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'ResetExpanded')],
+		
+		,
+		[,
+		System.DateTime,
+		]$,
+		ExclusionUntil,
+		[Parameter(ParameterSetName = 'ResetExpanded')]
+		[Parameter(ParameterSetName = 'Reset')]
+		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'ResetViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'ResetExpanded')]
+		[Parameter(ParameterSetName = 'Reset')]
+		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'ResetViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Reset-JcSdkSystemUserMfa @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

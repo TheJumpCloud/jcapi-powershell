@@ -1,48 +1,69 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Get-JCSystemTraverseUser
 {
-    [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-Param(
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Authorization,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Date,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string[]]$Filter,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Limit,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Skip,
-        [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$SystemId
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'List',
+			Mandatory = $true
+		)]
+		[System.String]$SystemId,
+		[Parameter(ParameterSetName = 'List')]
+		[System.String[]]$Filter,
+		[Parameter(ParameterSetName = 'List')]
+		[System.Int32]$Limit,
+		[Parameter(ParameterSetName = 'List')]
+		[System.Int32]$Skip,
+		[Parameter(ParameterSetName = 'List')]
+		[System.String]$Authorization,
+		[Parameter(ParameterSetName = 'List')]
+		[System.String]$Date,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
             $PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
             $PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If ($PSBoundParameters.Paginate)
         {
-            # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                $Result = Get-JcSdkSystemTraverseUser @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkSystemTraverseUser @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty($Result))
+            If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
                 $PSBoundParameters.Skip += $ResultCount
             }
         }
-        While ($ResultCount -eq $PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

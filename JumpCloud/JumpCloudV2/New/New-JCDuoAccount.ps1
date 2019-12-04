@@ -1,21 +1,24 @@
 #Requires -modules JumpCloudApiSdkV2
 Function New-JCDuoAccount
 {
-    [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-Param(
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Create')]
+	Param(
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = New-JcSdkDuoAccount @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

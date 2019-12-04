@@ -1,51 +1,59 @@
 #Requires -modules JumpCloudApiSdkV1
 Function New-JCApplication
 {
-    Param(
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Accept,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$Beta,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IApplication]$Body,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IApplicationConfig]$Config,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ContentType,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$DisplayLabel,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$DisplayName,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$LearnMore,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Name,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Organization,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$SsoUrl,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$XOrgId
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+	Param(
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[System.String]$Accept,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[System.String]$ContentType,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[System.String]$XOrgId,
+		[Parameter(
+			ParameterSetName = 'Create',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV1.Models.IApplication]$Body,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.Management.Automation.SwitchParameter]$Beta,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[JumpCloudApiSdkV1.Models.IApplicationConfig]$Config,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$DisplayLabel,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$DisplayName,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Id,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$LearnMore,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Name,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Organization,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$SsoUrl,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = New-JcSdkApplication @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

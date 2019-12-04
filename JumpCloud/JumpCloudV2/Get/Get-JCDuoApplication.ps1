@@ -1,43 +1,79 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Get-JCDuoApplication
 {
-    [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-Param(
-        [Parameter(ParameterSetName = 'Get', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'List', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$AccountId,
-        [Parameter(ParameterSetName = 'Get', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ApplicationId,
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'List',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Get',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		AccountId,
+		[Parameter(
+			ParameterSetName = 'Get',
+			Mandatory = $true
+		)]
+		[System.String]$ApplicationId,
+		[Parameter(
+			ParameterSetName = 'GetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
             $PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
             $PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If ($PSBoundParameters.Paginate)
         {
-            # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                $Result = Get-JcSdkDuoApplication @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkDuoApplication @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty($Result))
+            If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
                 $PSBoundParameters.Skip += $ResultCount
             }
         }
-        While ($ResultCount -eq $PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

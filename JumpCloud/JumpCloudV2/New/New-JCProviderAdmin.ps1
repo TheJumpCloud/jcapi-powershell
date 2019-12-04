@@ -1,47 +1,114 @@
 #Requires -modules JumpCloudApiSdkV2
 Function New-JCProviderAdmin
 {
-    Param(
-        [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IProviderAdminReq]$Body,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Email,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [switch]$EnableMultiFactor,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Firstname,
-        [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Lastname,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$ProviderId,
-        [Parameter(ParameterSetName = 'Create', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'CreateExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Create',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		ProviderId,
+		[Parameter(
+			ParameterSetName = 'CreateViaIdentityExpanded',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'CreateViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
+		]$,
+		InputObject,
+		[Parameter(
+			ParameterSetName = 'CreateViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Create',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IProviderAdminReq,
+		]$,
+		Body,
+		[Parameter(
+			ParameterSetName = 'CreateViaIdentityExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'CreateExpanded',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Email,
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'CreateExpanded')],
+		
+		,
+		[,
+		System.Management.Automation.SwitchParameter,
+		]$,
+		EnableMultiFactor,
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'CreateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Firstname,
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'CreateExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Lastname,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'CreateViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = New-JcSdkProviderAdmin @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

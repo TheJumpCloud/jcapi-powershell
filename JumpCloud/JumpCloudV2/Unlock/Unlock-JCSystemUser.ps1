@@ -1,27 +1,37 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Unlock-JCSystemUser
 {
-    [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-Param(
-        [Parameter(ParameterSetName = 'Unlock', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UnlockViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'Unlock', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'UnlockViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Unlock', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'UnlockViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Unlock')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Unlock',
+			Mandatory = $true
+		)]
+		[System.String]$Id,
+		[Parameter(
+			ParameterSetName = 'UnlockViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[Parameter(ParameterSetName = 'Unlock')]
+		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Unlock')]
+		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Unlock-JcSdkSystemUser @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

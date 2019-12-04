@@ -1,48 +1,74 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Get-JCCommandFile
 {
-    Param(
-        [Parameter(ParameterSetName = 'Get', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Fields,
-        [Parameter(ParameterSetName = 'Get', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Get', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Limit,
-        [Parameter(ParameterSetName = 'Get', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Skip
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Get')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Get',
+			Mandatory = $true
+		)]
+		[System.String]$Id,
+		[Parameter(
+			ParameterSetName = 'GetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[Parameter(ParameterSetName = 'Get')]
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[System.String]$Fields,
+		[Parameter(ParameterSetName = 'Get')]
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[System.Int32]$Limit,
+		[Parameter(ParameterSetName = 'Get')]
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
+		[System.Int32]$Skip,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
             $PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
             $PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If ($PSBoundParameters.Paginate)
         {
-            # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                $Result = Get-JcSdkCommandFile @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result.results | Measure-Object).Count;
+                $Results += $Result.results;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkCommandFile @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty($Result))
+            If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result.results | Measure-Object).Count;
                 $Results += $Result.results;
                 $PSBoundParameters.Skip += $ResultCount
             }
         }
-        While ($ResultCount -eq $PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

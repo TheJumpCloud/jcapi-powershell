@@ -1,46 +1,64 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Get-JCRadiusServer
 {
-    [CmdletBinding(DefaultParameterSetName = 'WarningVariable')]
-Param(
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Fields,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Filter,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Limit,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [int]$Skip,
-        [Parameter(ParameterSetName = 'List', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Sort
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'List')]
+	Param(
+		[Parameter(ParameterSetName = 'List')]
+		[System.String]$Fields,
+		[Parameter(ParameterSetName = 'List')]
+		[System.String]$Filter,
+		[Parameter(ParameterSetName = 'List')]
+		[System.Int32]$Limit,
+		[Parameter(ParameterSetName = 'List')]
+		[System.Int32]$Skip,
+		[Parameter(ParameterSetName = 'List')]
+		[System.String]$Sort,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
             $PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
             $PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If ($PSBoundParameters.Paginate)
         {
-            # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                $Result = Get-JcSdkRadiusServer @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result.results | Measure-Object).Count;
+                $Results += $Result.results;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkRadiusServer @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty($Result))
+            If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result.results | Measure-Object).Count;
                 $Results += $Result.results;
                 $PSBoundParameters.Skip += $ResultCount
             }
         }
-        While ($ResultCount -eq $PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

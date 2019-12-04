@@ -1,23 +1,30 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Update-JCBulkUser
 {
-    [CmdletBinding(DefaultParameterSetName = 'WhatIf')]
-Param(
-        [Parameter(ParameterSetName = 'Update', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IBulkUserUpdate[]]$Body,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'Update', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Update')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Update',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV2.Models.IBulkUserUpdate[]]$Body,
+		[Parameter(ParameterSetName = 'Update')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Update')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Update-JcSdkBulkUser @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

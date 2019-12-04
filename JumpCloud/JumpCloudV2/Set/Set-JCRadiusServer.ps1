@@ -1,53 +1,136 @@
 #Requires -modules JumpCloudApiSdkV1
 Function Set-JCRadiusServer
 {
-    Param(
-        [Parameter(ParameterSetName = 'Put', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody]$Body,
-        [Parameter(ParameterSetName = 'Put', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'Put', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Mfa,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Name,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$NetworkSourceIP,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string[]]$Tags,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$UserLockoutAction,
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$UserPasswordExpirationAction,
-        [Parameter(ParameterSetName = 'Put', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'PutExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Put',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Id,
+		[Parameter(
+			ParameterSetName = 'PutViaIdentityExpanded',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'PutViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity,
+		]$,
+		InputObject,
+		[Parameter(
+			ParameterSetName = 'PutViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Put',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody,
+		]$,
+		Body,
+		[Parameter(
+			ParameterSetName = 'PutViaIdentityExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'PutExpanded',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Name,
+		[Parameter(
+			ParameterSetName = 'PutViaIdentityExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'PutExpanded',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		NetworkSourceIP,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'PutExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		Mfa,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'PutExpanded')],
+		
+		,
+		[,
+		System.String[],
+		]$,
+		Tags,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'PutExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		UserLockoutAction,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'PutExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		UserPasswordExpirationAction,
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[Parameter(ParameterSetName = 'Put')]
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[Parameter(ParameterSetName = 'Put')]
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Set-JcSdkRadiusServer @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

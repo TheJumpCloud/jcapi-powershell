@@ -1,39 +1,65 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Get-JCGSuite
 {
-    Param(
-        [Parameter(ParameterSetName = 'Get', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$Id,
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'Get')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'Get',
+			Mandatory = $true
+		)]
+		[System.String]$Id,
+		[Parameter(
+			ParameterSetName = 'GetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
             $PSBoundParameters.Add('Skip',0)
         }
-        If([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
             $PSBoundParameters.Add('Limit',100)
         }
     }
-    Process {
-        Do
+    Process
+    {
+        If ($PSBoundParameters.Paginate)
         {
-            # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                $Result = Get-JcSdkGSuite @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkGSuite @PSBoundParameters
-            If(-not [System.String]::IsNullOrEmpty($Result))
+            If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
                 $PSBoundParameters.Skip += $ResultCount
             }
         }
-        While ($ResultCount -eq $PSBoundParameters.Limit)
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        

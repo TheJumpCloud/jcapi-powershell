@@ -1,45 +1,100 @@
 #Requires -modules JumpCloudApiSdkV2
 Function Grant-JCWorkday
 {
-    [CmdletBinding(DefaultParameterSetName = 'WorkdayId')]
-Param(
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$BasicPassword,
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$BasicUsername,
-        [Parameter(ParameterSetName = 'Authorize', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IAuthInputObject]$Body,
-        [Parameter(ParameterSetName = 'Authorize', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('cf')][switch]$Confirm,
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $True, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$OauthCode,
-        [Parameter(ParameterSetName = 'Authorize', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded', Mandatory = $False, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Alias('wi')][switch]$WhatIf,
-        [Parameter(ParameterSetName = 'Authorize', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded', Mandatory = $True, Position = -2147483648, ValueFromPipeline = $False, ValueFromPipelineByPropertyName = $False, ValueFromRemainingArguments = $False)]
-        [string]$WorkdayId
-    )
-    Begin {
+    [CmdletBinding(DefaultParameterSetName = 'AuthorizeExpanded')]
+	Param(
+		[Parameter(
+			ParameterSetName = 'AuthorizeExpanded',
+			Mandatory = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Authorize',
+			Mandatory = $true
+		)],
+		
+		,
+		[,
+		System.String,
+		]$,
+		WorkdayId,
+		[Parameter(
+			ParameterSetName = 'AuthorizeViaIdentityExpanded',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'AuthorizeViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity,
+		]$,
+		InputObject,
+		[Parameter(
+			ParameterSetName = 'AuthorizeViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		[Parameter(
+			ParameterSetName = 'Authorize',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)],
+		
+		,
+		[,
+		JumpCloudApiSdkV2.Models.IAuthInputObject,
+		]$,
+		Body,
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'AuthorizeExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		BasicPassword,
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'AuthorizeExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		BasicUsername,
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')],
+		[Parameter(ParameterSetName = 'AuthorizeExpanded')],
+		
+		,
+		[,
+		System.String,
+		]$,
+		OauthCode,
+		[Parameter(ParameterSetName = 'AuthorizeExpanded')]
+		[Parameter(ParameterSetName = 'Authorize')]
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'AuthorizeExpanded')]
+		[Parameter(ParameterSetName = 'Authorize')]
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[System.Boolean]$Paginate = $true
+	)
+    Begin
+    {
         $Results = @()
     }
-    Process {
+    Process
+    {
         $Results = Grant-JcSdkWorkday @PSBoundParameters
     }
-    End {
+    End
+    {
         Return $Results
     }
 }
-        
