@@ -27,10 +27,11 @@ If (Get-Module -Name($ModuleNames))
             # $ParameterValue.IsDynamic
             # $ParameterValue.SwitchParameter
             # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
-            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters)# + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
+            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters) # + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
             $ParameterValue = $CommandParameter.Value
             $ParameterName = $ParameterValue.Name
-            $ParameterType = $ParameterValue.ParameterType.FullName
+            $ParameterType = $ParameterValue.ParameterType
+            $ParameterTypeFullName = $ParameterType.FullName
             $ParameterAliases = $ParameterValue.Aliases
             If ($ParameterName -notin $ParametersToExclude)
             {
@@ -113,11 +114,11 @@ If (Get-Module -Name($ModuleNames))
                 # Return full parameter set
                 If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
                 {
-                    [System.String](($NewParameterSets -join "`n`t`t") + "`n`t`t" + $Aliases + "[" + $ParameterType + "]`$" + $ParameterName)
+                    [System.String](($NewParameterSets -join "`n`t`t") + "`n`t`t" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
                 }
                 Else
                 {
-                    [System.String]($Aliases + "[" + $ParameterType + "]`$" + $ParameterName)
+                    [System.String]($Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
                 }
             }
         }
@@ -236,127 +237,3 @@ Else
 {
     Write-Error ('No modules found.')
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# # Build new function parameters
-# $NewFunctionParameters = @()
-# $CommandParameterSets = $Command.ParameterSets | Select-Object -Property:(@{Name = 'ParameterSetName'; Expression = { $_.Name } }, @{Name = 'IsDefault'; Expression = { $_.IsDefault } }) -ExpandProperty:('Parameters') | Sort-Object Name
-# ForEach ($CommandParameterSet In $CommandParameterSets)
-# {
-#     $NewFunctionParameter = [Ordered]@{ }
-#     $DefaultParameterSet = If ($CommandParameterSet.IsDefault) { "[CmdletBinding(DefaultParameterSetName = '$($CommandParameterSet.Name)')]`n" }
-#     $NewFunctionParameter.Add('ParameterSetName', "'" + $CommandParameterSet.ParameterSetName + "'")
-#     $PropertyNames = $CommandParameterSet | Get-Member | Where-Object { $_.MemberType -eq 'Property' -and $_.Name -notin ('Attributes', 'IsDynamic') }
-#     ForEach ($PropertyName In $PropertyNames.Name)
-#     {
-#         If (-not [System.String]::IsNullOrEmpty($CommandParameterSet.$PropertyName))
-#         {
-#             $AttributeValue = Switch ($CommandParameterSet.$PropertyName.GetType().Name)
-#             {
-#                 'Boolean'
-#                 {
-#                     '$' + $CommandParameterSet.$PropertyName
-#                 }
-#                 'string'
-#                 {
-#                     If ($PropertyName -eq 'Name')
-#                     {
-#                         '$' + $CommandParameterSet.$PropertyName
-#                     }
-#                     Else
-#                     {
-#                         "'" + $CommandParameterSet.$PropertyName + "'"
-#                     }
-#                 }
-#                 'Int32'
-#                 {
-#                     $CommandParameterSet.$PropertyName
-#                 }
-#                 'ReadOnlyCollection`1'
-#                 {
-#                     "'" + $CommandParameterSet.$PropertyName + "'"
-#                 }
-#                 'RuntimeType'
-#                 {
-#                     '[' + $CommandParameterSet.$PropertyName + ']'
-#                 }
-#                 Default { Write-Error ('Unknown data type: ' + $PropertyName + ' ' + $CommandParameterSet.$PropertyName.GetType().Name) }
-#             }
-#             If ($PropertyName -eq 'IsMandatory') { $PropertyName = 'Mandatory' }
-#             $NewFunctionParameter.Add($PropertyName, $AttributeValue)
-#         }
-#     }
-#     $ParameterName = $NewFunctionParameter.Name
-#     $ParameterType = $NewFunctionParameter.ParameterType
-#     # If ($ParameterType -like ('*' + $ModuleName + '*Item*'))
-#     # {
-#     #     Write-Host ("Build-JCObjectTemplate -ModelName:('$ParameterType')") -BackgroundColor Cyan
-#     #     # Build-JCObjectTemplate -ModelName:($ParameterType)
-#     # }
-#     $ParameterSetName = $NewFunctionParameter.ParameterSetName
-#     $Aliases = $NewFunctionParameter.Aliases
-#     $NewFunctionParameter.Remove('Aliases')
-#     $NewFunctionParameter.Remove('Name')
-#     $NewFunctionParameter.Remove('ParameterType')
-#     $NewFunctionParameters += [pscustomobject]@{
-#         ParameterSetName     = $ParameterSetName
-#         ParameterName        = $ParameterName
-#         ParameterType        = $ParameterType
-#         NewFunctionParameter = $NewFunctionParameter
-#         Aliases              = $Aliases
-#     }
-# }
-# $NewFunctionParametersOut = @()
-# $NewFunctionParameters | Group-Object ParameterName | ForEach-Object {
-#     $GroupName = $_.Name
-#     $Group = $_.Group | Sort-Object ParameterSetName
-#     If ($GroupName.Replace('$', '') -notin ('Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable') `
-#             -and $GroupName.Replace('$', '') -notin ('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials'))
-#     {
-#         $NewFunctionParameterString = @()
-#         ForEach ($GroupItem In $Group)
-#         {
-#             $NewFunctionParameterString += '[Parameter(' + (($GroupItem.NewFunctionParameter.GetEnumerator() | ForEach-Object {
-#                         $_.Key + ' = ' + $_.Value
-#                     }) -join ', ') + ')]'
-#         }
-#         $Aliases = If (-not [System.string]::IsNullOrEmpty($GroupItem.Aliases))
-#         {
-#             '[Alias(' + $GroupItem.Aliases + ')]'
-#         }
-#         $NewFunctionParameterString = ($NewFunctionParameterString -join "`n        ") + "`n        " + $Aliases + $GroupItem.ParameterType + $GroupItem.ParameterName
-#         $NewFunctionParametersOut += $NewFunctionParameterString
-#     }
-# }
-# $NewFunctionParametersOut = $NewFunctionParametersOut -join ",`n        "
