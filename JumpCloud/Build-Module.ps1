@@ -153,11 +153,11 @@ Function $NewFunctionName
         `$Results = @()
         If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
         {
-            `$PSBoundParameters.Add('Skip',0)
+            `$PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
         {
-            `$PSBoundParameters.Add('Limit',100)
+            `$PSBoundParameters.Add('Limit', 100)
         }
     }
     Process
