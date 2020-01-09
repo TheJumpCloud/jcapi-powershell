@@ -309,7 +309,7 @@ paths:
       type: string
   /bulk/users:
     patch:
-      operationId: BulkUsers_Update
+      operationId: BulkUsers_Patch
       summary: Bulk Users Update
       description: "The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"department\":\"{UPDATED_DEPARTMENT}\",\n		\"attributes\":[\n			{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n		]\n	},\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"costCenter\":\"{UPDATED_COST_CENTER}\",\n		\"phoneNumbers\":[\n			{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n			{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n		]\n	}\n]\n```"
       parameters:
@@ -796,7 +796,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: DuoApplication_Update
+      operationId: DuoApplication_Put
       summary: Update Duo Application
       tags:
       - Duo
@@ -902,6 +902,7 @@ paths:
     parameters:
     - name: id
       in: path
+      description: ObjectID of the Duo Account
       required: true
       type: string
   /groups:
@@ -2193,7 +2194,6 @@ paths:
     parameters:
     - name: policy_id
       in: path
-      description: ObjectID of the Policy.
       required: true
       type: string
     post:
@@ -2783,10 +2783,10 @@ paths:
               $ref: '#/definitions/SystemGroup'
           examples:
             application/json:
-            - id: 000000
+            - id: "000000"
             - type: system_group
             - name: group1
-              id: 000000
+              id: "000000"
         default:
           description: Unexpected error
           schema:
@@ -3230,7 +3230,7 @@ paths:
             $ref: '#/definitions/SystemGroup'
           examples:
             application/json:
-              id: 000000
+              id: "000000"
               type: system_group
               name: group1
       security:
@@ -3271,473 +3271,11 @@ paths:
             $ref: '#/definitions/SystemGroup'
           examples:
             application/json:
-              id: 00000
+              id: "00000"
               type: system_group
               name: group1
       security:
       - x-api-key: []
-  /systeminsights/{system_id}/apps:
-    get:
-      operationId: SystemInsightsSystemApps_List
-      summary: List System Insights System Apps
-      description: Valid filter fields are `bundle_name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-apps'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/bitlocker_info:
-    get:
-      operationId: SystemInsightsSystemBitlockerInfo_List
-      summary: List System Insights System Bitlocker Info
-      description: Valid filter fields are `protection_status`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-bitlocker-info'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/browser_plugins:
-    get:
-      operationId: SystemInsightsSystemBrowserPlugins_List
-      summary: List System Insights System Browser Plugins
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-browser-plugins'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/chrome_extensions:
-    get:
-      operationId: SystemInsightsSystemChromeExtensions_List
-      summary: List System Insights System Chrome Extensions
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-chrome-extensions'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/disk_encryption:
-    get:
-      operationId: SystemInsightsSystemDiskEncryption_List
-      summary: List System Insights System Disk Encryption
-      description: Valid filter fields are `encryption_status`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-disk-encryption'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/disk_info:
-    get:
-      operationId: SystemInsightsSystemDiskInfo_List
-      summary: List System Insights System Disk Info
-      description: Valid filter fields are `disk_index`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-bitlocker-info'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/etc_hosts:
-    get:
-      operationId: SystemInsightsSystemEtcHosts_List
-      summary: List System Insights System Etc Hosts
-      description: Valid filter fields are `address`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-bitlocker-info'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/firefox_addons:
-    get:
-      operationId: SystemInsightsSystemFirefoxAddons_List
-      summary: List System Insights System Firefox Addons
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-firefox-addons'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/groups:
-    get:
-      operationId: SystemInsightsSystemGroups_List
-      summary: List System Insights System Groups
-      description: Valid filter fields are `groupname`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-groups'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/interface_addresses:
-    get:
-      operationId: SystemInsightsSystemInterfaceAddresses_List
-      summary: List System Insights System Interface Addresses
-      description: Valid filter fields are `address`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-interface-addresses'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/kernel_info:
-    get:
-      operationId: SystemInsightsSystemKernelInfo_List
-      summary: List System Insights System Kernel Info
-      description: Valid filter fields are `version`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-kernel-info'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/logical_drives:
-    get:
-      operationId: SystemInsightsSystemLogicalDrives_List
-      summary: List System Insights System Logical Drives
-      description: Valid filter fields are `device_id`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-logical-drvies'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/mounts:
-    get:
-      operationId: SystemInsightsSystemLogicalMounts_List
-      summary: List System Insights System Mounts
-      description: Valid filter fields are `path`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-mounts'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/os_version:
-    get:
-      operationId: SystemInsightsSystemOSVersion_List
-      summary: List System Insights System OS Version
-      description: Valid filter fields are `version`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-os-version'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/patches:
-    get:
-      operationId: SystemInsightsSystemPatches_List
-      summary: List System Insights System Patches
-      description: Valid filter fields are `hotfix_id  `.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-patches'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/programs:
-    get:
-      operationId: SystemInsightsSystemPrograms_List
-      summary: List System Insights System Programs
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-programs'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/safari_extensions:
-    get:
-      operationId: SystemInsightsSystemSafariExtensions_List
-      summary: List System Insights System Safari Extensions
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-safari-extensions'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/system_controls:
-    get:
-      operationId: SystemInsightsSystemSystemControls_List
-      summary: List System Insights System System Controls
-      description: Valid filter fields are `name`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-system-controls'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/system_info:
-    get:
-      operationId: SystemInsightsSystemSystemInfo_List
-      summary: List System Insights System System Info
-      description: Valid filter fields are `cpu_subtype`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-system-info'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/uptime:
-    get:
-      operationId: SystemInsightsSystemUptime_List
-      summary: List System Insights System Uptime
-      description: Valid filter fields are `days`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-uptime'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
-  /systeminsights/{system_id}/users:
-    get:
-      operationId: SystemInsightsSystemUsers_List
-      summary: List System Insights System Users
-      description: Valid filter fields are `username`.
-      parameters:
-      - $ref: '#/parameters/trait:limitMax100:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/system-insights-users'
-      security:
-      - x-api-key: []
-    parameters:
-    - name: system_id
-      in: path
-      required: true
-      type: string
   /systeminsights/apps:
     get:
       operationId: SystemInsightsApps_List
@@ -6650,28 +6188,6 @@ definitions:
         $ref: '#/definitions/Office365BuiltinTranslation'
     example:
       builtIn: user_department
-  organizationslist:
-    title: OrganizationList
-    type: object
-    properties:
-      totalCount:
-        type: integer
-        description: 'The total number of organizations. '
-      results:
-        type: array
-        description: The list of organizations.
-        items:
-          type: object
-          properties:
-            _id:
-              type: string
-              description: The ID of the organization.
-            displayName:
-              type: string
-              description: The name of the organization.
-            logoUrl:
-              type: string
-              description: 'The organization logo image URL. '
   Policy:
     title: Policy
     type: object
@@ -7169,71 +6685,6 @@ definitions:
       last_opened_time: 1556688963.50383
       collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
-  system-insights-battery:
-    title: System Insights Battery
-    type: object
-    properties:
-      manufacturer:
-        type: string
-      manufacture_date:
-        type: integer
-      model:
-        type: string
-      serial_number:
-        type: string
-      cycle_count:
-        type: integer
-      health:
-        type: string
-      condition:
-        type: string
-      state:
-        type: string
-      charging:
-        type: integer
-      charged:
-        type: integer
-      designed_capacity:
-        type: integer
-      max_capacity:
-        type: integer
-      current_capacity:
-        type: integer
-      percent_remaining:
-        type: integer
-      amgerage:
-        type: integer
-      voltage:
-        type: integer
-      minutes_until_empty:
-        type: integer
-      minutes_to_full_charge:
-        type: integer
-      system_id:
-        type: string
-      collection_time:
-        type: string
-    example:
-      manufacturer: laboris
-      manufacture_date: 66625366
-      model: cupidatat quis esse tempor nostr
-      serial_number: est do nisi anim eu
-      cycle_count: -58203101
-      health: ipsum Duis amet magna sint
-      condition: magna Ut dolor laborum
-      state: Duis qui eu labore
-      charging: 6577424
-      charged: 63086136
-      designed_capacity: 51607498
-      max_capacity: 407375
-      current_capacity: 95829126
-      percent_remaining: -77798506
-      amgerage: 93836453
-      voltage: -79728034
-      minutes_until_empty: 56660087
-      minutes_to_full_charge: -43087634
-      system_id: elit nulla cillum et
-      collection_time: anim in dolor
   system-insights-bitlocker-info:
     title: System Insights Bitlocker Info
     type: object
@@ -7348,46 +6799,6 @@ definitions:
       permissions: alarms, cast, cast.streaming, declarativeWebRequest, desktopCapture, gcm, http://*/*, identity, identity.email, management, mdns, mediaRouterPrivate, metricsPrivate, networkingPrivate, processes, storage, system.cpu, settingsPrivate, tabCapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse
       collection_time: 2019-06-03T19:41:31.1250000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
-  system-insights-crashes:
-    title: System Insights Crashes
-    type: object
-    properties:
-      type:
-        type: string
-      pid:
-        type: string
-      path:
-        type: string
-      crash_path:
-        type: string
-      identifier:
-        type: string
-      version:
-        type: string
-      parent:
-        type: string
-      responsible:
-        type: string
-      uid:
-        type: integer
-      datetime:
-        type: string
-      crashed_thread:
-        type: string
-      stack_trace:
-        type: string
-      exception_type:
-        type: string
-      exception_codes:
-        type: string
-      exception_notes:
-        type: string
-      registers:
-        type: string
-      system_id:
-        type: string
-      collection_time:
-        type: string
   system-insights-disk-encryption:
     title: System Insights Disk Encryption
     type: object
@@ -7560,22 +6971,6 @@ definitions:
       comment: ""
       collection_time: 2019-06-03T19:41:31.6730000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
-  system-insights-ie-extensions:
-    title: System Insights IE Extensions
-    type: object
-    properties:
-      name:
-        type: string
-      registry_path:
-        type: string
-      version:
-        type: string
-      path:
-        type: string
-      system_id:
-        type: string
-      collection_time:
-        type: string
   system-insights-interface-addresses:
     title: System Insights Interface Addresses
     type: object
@@ -7620,76 +7015,6 @@ definitions:
         type: string
       device:
         type: string
-      system_id:
-        type: string
-      collection_time:
-        type: string
-  system-insights-launchd:
-    title: System Insights LaunchD
-    type: object
-    properties:
-      path:
-        type: string
-      name:
-        type: string
-      label:
-        type: string
-      program:
-        type: string
-      run_at_load:
-        type: string
-      keep_alive:
-        type: string
-      on_demand:
-        type: string
-      disabled:
-        type: string
-      username:
-        type: string
-      groupname:
-        type: string
-      stdout_path:
-        type: string
-      stderr_path:
-        type: string
-      start_interval:
-        type: string
-      program_arguments:
-        type: string
-      watch_paths:
-        type: string
-      queue_directories:
-        type: string
-      inetd_compatibility:
-        type: string
-      start_on_mount:
-        type: string
-      root_directory:
-        type: string
-      working_directory:
-        type: string
-      process_type:
-        type: string
-      system_id:
-        type: string
-      collection_time:
-        type: string
-  system-insights-logged-in-users:
-    title: System Insights Logged-In Users
-    type: object
-    properties:
-      type:
-        type: string
-      user:
-        type: string
-      tty:
-        type: string
-      host:
-        type: string
-      time:
-        type: integer
-      pid:
-        type: integer
       system_id:
         type: string
       collection_time:
@@ -8013,50 +7338,6 @@ definitions:
       seconds:
         type: integer
       total_seconds:
-        type: string
-      system_id:
-        type: string
-      collection_time:
-        type: string
-  system-insights-usb-devices:
-    title: System Insights USB Devices
-    type: object
-    properties:
-      usb_address:
-        type: integer
-      usb_port:
-        type: integer
-      vendor:
-        type: string
-      vendor_id:
-        type: string
-      version:
-        type: string
-      model:
-        type: string
-      model_id:
-        type: string
-      serial:
-        type: string
-      class:
-        type: string
-      subclass:
-        type: string
-      protocol:
-        type: string
-      removable:
-        type: integer
-      system_id:
-        type: string
-      collection_time:
-        type: string
-  system-insights-user-groups:
-    title: System Insights User Groups
-    type: object
-    properties:
-      uid:
-        type: string
-      gid:
         type: string
       system_id:
         type: string

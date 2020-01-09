@@ -125,12 +125,11 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>Backing field for <see cref="PolicyId" /> property.</summary>
         private string _policyId;
 
-        /// <summary>ObjectID of the Policy.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "ObjectID of the Policy.")]
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = true,
         ReadOnly = false,
-        Description = @"ObjectID of the Policy.",
+        Description = @"",
         SerializedName = @"policy_id",
         PossibleTypes = new [] { typeof(string) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]

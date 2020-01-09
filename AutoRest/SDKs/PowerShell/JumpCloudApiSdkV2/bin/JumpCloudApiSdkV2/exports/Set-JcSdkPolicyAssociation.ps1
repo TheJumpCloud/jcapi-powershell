@@ -32,10 +32,10 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   [JobId <String>]: 
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: 
   [ProviderId <String>]: 
   [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SystemId <String>]: 
+  [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]: 
 .Link
@@ -49,7 +49,7 @@ param(
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # ObjectID of the Policy.
+    # HELP MESSAGE MISSING
     ${PolicyId},
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]

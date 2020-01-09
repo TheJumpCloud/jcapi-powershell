@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \"5678\"\n }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] DuoApplication_Update=>PUT:"/duo/accounts/{account_id}/applications/{application_id}"
+    /// [OpenAPI] DuoApplication_Put=>PUT:"/duo/accounts/{account_id}/applications/{application_id}"
     /// [METADATA]
     /// path: '/duo/accounts/{account_id}/applications/{application_id}'
     /// apiVersions:
@@ -22,13 +22,13 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// verb: Set
     /// subjectPrefix:
     /// subject: DuoApplication
-    /// variant: Update
+    /// variant: Put
     /// </remarks>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Set, @"JcSdkDuoApplication_Update", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Set, @"JcSdkDuoApplication_Put", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.IDuoApplication), typeof(string))]
     [JumpCloudApiSdkV2.Description(@"Updates the specified Duo application.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \""name\"": \""Application Name\"",\n    \""apiHost\"": \""api-1234.duosecurity.com\"",\n    \""integrationKey\"": \""1234\"",\n    \""secretKey\"": \""5678\""\n  }'\n```")]
     [JumpCloudApiSdkV2.Generated]
-    public partial class SetJcSdkDuoApplication_Update : System.Management.Automation.PSCmdlet,
+    public partial class SetJcSdkDuoApplication_Put : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
     {
         /// <summary>A copy of the Invocation Info (necessary to allow asJob to clone this cmdlet)</summary>
@@ -282,7 +282,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DuoApplicationUpdate' operation"))
+                if (ShouldProcess($"Call remote 'DuoApplicationPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -340,7 +340,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.DuoApplicationUpdate(AccountId, ApplicationId, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.DuoApplicationPut(AccountId, ApplicationId, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
@@ -355,9 +355,9 @@ namespace JumpCloudApiSdkV2.Cmdlets
         }
 
         /// <summary>
-        /// Intializes a new instance of the <see cref="SetJcSdkDuoApplication_Update" /> cmdlet class.
+        /// Intializes a new instance of the <see cref="SetJcSdkDuoApplication_Put" /> cmdlet class.
         /// </summary>
-        public SetJcSdkDuoApplication_Update()
+        public SetJcSdkDuoApplication_Put()
         {
 
         }

@@ -17,7 +17,7 @@ param(
     [Parameter(Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # ObjectID of the Policy.
+    # HELP MESSAGE MISSING
     ${PolicyId},
 
     [Parameter(Mandatory)]

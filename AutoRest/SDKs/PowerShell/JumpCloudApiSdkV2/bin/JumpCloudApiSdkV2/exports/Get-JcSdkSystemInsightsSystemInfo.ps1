@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Valid filter fields are `cpu_subtype`.
+Valid filter fields are `system_id` and `cpu_subtype`.
 .Description
-Valid filter fields are `cpu_subtype`.
+Valid filter fields are `system_id` and `cpu_subtype`.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksysteminsightssysteminfo
 .Outputs
@@ -12,14 +12,8 @@ https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/get-jcsdksy
 #>
 function Get-JcSdkSystemInsightsSystemInfo {
 [OutputType([JumpCloudApiSdkV2.Models.ISystemInsightsSystemInfo])]
-[CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
+[CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
-    [Parameter(ParameterSetName='List', Mandatory)]
-    [JumpCloudApiSdkV2.Category('Path')]
-    [System.String]
-    # HELP MESSAGE MISSING
-    ${SystemId},
-
     [Parameter()]
     [JumpCloudApiSdkV2.Category('Query')]
     [System.Int32]
@@ -81,7 +75,6 @@ begin {
         $parameterSet = $PSCmdlet.ParameterSetName
         $mapping = @{
             List = 'JumpCloudApiSdkV2.private\Get-JcSdkSystemInsightsSystemInfo_List';
-            List1 = 'JumpCloudApiSdkV2.private\Get-JcSdkSystemInsightsSystemInfo_List1';
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand(($mapping[$parameterSet]), [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters}

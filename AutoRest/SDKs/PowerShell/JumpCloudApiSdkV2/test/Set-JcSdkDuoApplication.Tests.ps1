@@ -7,19 +7,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkDuoApplication' {
-    It 'UpdateExpanded' {
+    It 'PutExpanded' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Update' {
+    It 'Put' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentityExpanded' {
+    It 'PutViaIdentityExpanded' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentity' {
+    It 'PutViaIdentity' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

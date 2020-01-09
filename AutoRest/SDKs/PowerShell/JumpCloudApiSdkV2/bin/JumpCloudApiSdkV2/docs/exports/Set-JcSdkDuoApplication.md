@@ -12,25 +12,25 @@ Updates the specified Duo application.\n\n#### Sample Request\n```\n  curl -X PU
 
 ## SYNTAX
 
-### UpdateExpanded (Default)
+### PutExpanded (Default)
 ```
 Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> [-ApiHost <String>]
  [-IntegrationKey <String>] [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Update
+### Put
 ```
 Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> -Body <IDuoApplicationUpdateReq>
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### UpdateViaIdentity
+### PutViaIdentity
 ```
 Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -Body <IDuoApplicationUpdateReq> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### UpdateViaIdentityExpanded
+### PutViaIdentityExpanded
 ```
 Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> [-ApiHost <String>] [-IntegrationKey <String>]
  [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -55,7 +55,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Put, PutExpanded
 Aliases:
 
 Required: True
@@ -71,7 +71,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -87,7 +87,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded
+Parameter Sets: Put, PutExpanded
 Aliases:
 
 Required: True
@@ -104,7 +104,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq
-Parameter Sets: Update, UpdateViaIdentity
+Parameter Sets: Put, PutViaIdentity
 Aliases:
 
 Required: True
@@ -121,7 +121,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity
-Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
+Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -137,7 +137,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -153,7 +153,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -169,7 +169,7 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -252,10 +252,10 @@ To create the parameters described below, construct a hash table containing the 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: 
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
-  - `[SystemId <String>]`: 
+  - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 

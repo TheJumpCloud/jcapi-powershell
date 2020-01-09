@@ -9,7 +9,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// \"5678\"\n }'\n```
     /// </summary>
     /// <remarks>
-    /// [OpenAPI] DuoApplication_Update=>PUT:"/duo/accounts/{account_id}/applications/{application_id}"
+    /// [OpenAPI] DuoApplication_Put=>PUT:"/duo/accounts/{account_id}/applications/{application_id}"
     /// [METADATA]
     /// path: '/duo/accounts/{account_id}/applications/{application_id}'
     /// apiVersions:
@@ -22,13 +22,13 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// verb: Set
     /// subjectPrefix:
     /// subject: DuoApplication
-    /// variant: UpdateViaIdentityExpanded
+    /// variant: PutExpanded
     /// </remarks>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Set, @"JcSdkDuoApplication_UpdateViaIdentityExpanded", SupportsShouldProcess = true)]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Set, @"JcSdkDuoApplication_PutExpanded", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.IDuoApplication), typeof(string))]
     [JumpCloudApiSdkV2.Description(@"Updates the specified Duo application.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \""name\"": \""Application Name\"",\n    \""apiHost\"": \""api-1234.duosecurity.com\"",\n    \""integrationKey\"": \""1234\"",\n    \""secretKey\"": \""5678\""\n  }'\n```")]
     [JumpCloudApiSdkV2.Generated]
-    public partial class SetJcSdkDuoApplication_UpdateViaIdentityExpanded : System.Management.Automation.PSCmdlet,
+    public partial class SetJcSdkDuoApplication_PutExpanded : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
     {
         /// <summary>A copy of the Invocation Info (necessary to allow asJob to clone this cmdlet)</summary>
@@ -38,6 +38,19 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// The <see cref="global::System.Threading.CancellationTokenSource" /> for this operation.
         /// </summary>
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
+
+        /// <summary>Backing field for <see cref="AccountId" /> property.</summary>
+        private string _accountId;
+
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"account_id",
+        PossibleTypes = new [] { typeof(string) })]
+        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
+        public string AccountId { get => this._accountId; set => this._accountId = value; }
 
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
@@ -49,6 +62,19 @@ namespace JumpCloudApiSdkV2.Cmdlets
         SerializedName = @"apiHost",
         PossibleTypes = new [] { typeof(string) })]
         public string ApiHost { get => Body.ApiHost ?? null; set => Body.ApiHost = value; }
+
+        /// <summary>Backing field for <see cref="ApplicationId" /> property.</summary>
+        private string _applicationId;
+
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"application_id",
+        PossibleTypes = new [] { typeof(string) })]
+        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
+        public string ApplicationId { get => this._applicationId; set => this._applicationId = value; }
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
         private JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq _body= new JumpCloudApiSdkV2.Models.DuoApplicationUpdateReq();
@@ -75,14 +101,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         [System.Management.Automation.ValidateNotNull]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Runtime)]
         public JumpCloudApiSdkV2.Runtime.SendAsyncStep[] HttpPipelinePrepend { get; set; }
-
-        /// <summary>Backing field for <see cref="InputObject" /> property.</summary>
-        private JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity _inputObject;
-
-        /// <summary>Identity Parameter</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Identity Parameter", ValueFromPipeline = true)]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
-        public JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity InputObject { get => this._inputObject; set => this._inputObject = value; }
 
         /// <summary>HELP MESSAGE MISSING</summary>
         [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
@@ -301,7 +319,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                if (ShouldProcess($"Call remote 'DuoApplicationUpdate' operation"))
+                if (ShouldProcess($"Call remote 'DuoApplicationPut' operation"))
                 {
                     using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
                     {
@@ -359,21 +377,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    // try to call with PATH parameters from Input Object
-                    if (null == InputObject.AccountId)
-                    {
-                        ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.AccountId"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
-                    }
-                    if (null == InputObject.ApplicationId)
-                    {
-                        ThrowTerminatingError( new System.Management.Automation.ErrorRecord(new global::System.Exception("InputObject has null value for InputObject.ApplicationId"),string.Empty, System.Management.Automation.ErrorCategory.InvalidArgument, InputObject) );
-                    }
-                    await this.Client.DuoApplicationUpdate(InputObject.AccountId ?? null, InputObject.ApplicationId ?? null, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
+                    await this.Client.DuoApplicationPut(AccountId, ApplicationId, Body, onOk, onBadRequest, onUnauthorized, onForbidden, onNotFound, onConflict, onInternalServerError, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  body=Body}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  AccountId=AccountId,ApplicationId=ApplicationId,body=Body}));
                 }
                 finally
                 {
@@ -383,9 +392,9 @@ namespace JumpCloudApiSdkV2.Cmdlets
         }
 
         /// <summary>
-        /// Intializes a new instance of the <see cref="SetJcSdkDuoApplication_UpdateViaIdentityExpanded" /> cmdlet class.
+        /// Intializes a new instance of the <see cref="SetJcSdkDuoApplication_PutExpanded" /> cmdlet class.
         /// </summary>
-        public SetJcSdkDuoApplication_UpdateViaIdentityExpanded()
+        public SetJcSdkDuoApplication_PutExpanded()
         {
 
         }

@@ -34,10 +34,10 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   [JobId <String>]: 
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: 
   [ProviderId <String>]: 
   [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SystemId <String>]: 
+  [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]: 
 .Link
@@ -45,61 +45,61 @@ https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/set-jcsdkdu
 #>
 function Set-JcSdkDuoApplication {
 [OutputType([JumpCloudApiSdkV2.Models.IDuoApplication], [System.String])]
-[CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+[CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
-    [Parameter(ParameterSetName='Update', Mandatory)]
-    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Put', Mandatory)]
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
     # HELP MESSAGE MISSING
     ${AccountId},
 
-    [Parameter(ParameterSetName='Update', Mandatory)]
-    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Put', Mandatory)]
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
     # HELP MESSAGE MISSING
     ${ApplicationId},
 
-    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloudApiSdkV2.Category('Path')]
     [JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloudApiSdkV2.Category('Body')]
     [JumpCloudApiSdkV2.Models.IDuoApplicationUpdateReq]
     # DuoApplicationUpdateReq
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
     ${ApiHost},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
     ${IntegrationKey},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
     ${Name},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
@@ -153,10 +153,10 @@ begin {
         }
         $parameterSet = $PSCmdlet.ParameterSetName
         $mapping = @{
-            Update = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_Update';
-            UpdateExpanded = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_UpdateExpanded';
-            UpdateViaIdentity = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_UpdateViaIdentity';
-            UpdateViaIdentityExpanded = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_UpdateViaIdentityExpanded';
+            Put = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_Put';
+            PutExpanded = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_PutExpanded';
+            PutViaIdentity = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_PutViaIdentity';
+            PutViaIdentityExpanded = 'JumpCloudApiSdkV2.private\Set-JcSdkDuoApplication_PutViaIdentityExpanded';
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand(($mapping[$parameterSet]), [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters}

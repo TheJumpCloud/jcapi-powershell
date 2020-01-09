@@ -27,7 +27,7 @@ https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2/update-jcsd
 #>
 function Update-JcSdkBulkUser {
 [OutputType([System.String])]
-[CmdletBinding(DefaultParameterSetName='Update', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+[CmdletBinding(DefaultParameterSetName='Patch', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloudApiSdkV2.Category('Body')]
@@ -84,7 +84,7 @@ begin {
         }
         $parameterSet = $PSCmdlet.ParameterSetName
         $mapping = @{
-            Update = 'JumpCloudApiSdkV2.private\Update-JcSdkBulkUser_Update';
+            Patch = 'JumpCloudApiSdkV2.private\Update-JcSdkBulkUser_Patch';
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand(($mapping[$parameterSet]), [System.Management.Automation.CommandTypes]::Cmdlet)
         $scriptCmd = {& $wrappedCmd @PSBoundParameters}

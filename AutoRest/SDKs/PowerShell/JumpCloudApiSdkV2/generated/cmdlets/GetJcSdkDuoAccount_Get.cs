@@ -60,11 +60,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>Backing field for <see cref="Id" /> property.</summary>
         private string _id;
 
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
+        /// <summary>ObjectID of the Duo Account</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "ObjectID of the Duo Account")]
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = true,
         ReadOnly = false,
-        Description = @"",
+        Description = @"ObjectID of the Duo Account",
         SerializedName = @"id",
         PossibleTypes = new [] { typeof(string) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]

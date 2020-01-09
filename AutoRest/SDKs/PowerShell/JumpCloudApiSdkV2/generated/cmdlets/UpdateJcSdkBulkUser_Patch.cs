@@ -2,28 +2,34 @@ namespace JumpCloudApiSdkV2.Cmdlets
 {
     using static JumpCloudApiSdkV2.Runtime.Extensions;
 
-    /// <summary>Valid filter fields are `name`.</summary>
+    /// <summary>
+    /// The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user)
+    /// for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users
+    /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \\\n -d '[\n\t{\n\t
+    /// \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t
+    /// \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```
+    /// </summary>
     /// <remarks>
-    /// [OpenAPI] SystemInsightsSystemSafariExtensions_List=>GET:"/systeminsights/{system_id}/safari_extensions"
+    /// [OpenAPI] BulkUsers_Patch=>PATCH:"/bulk/users"
     /// [METADATA]
-    /// path: '/systeminsights/{system_id}/safari_extensions'
+    /// path: /bulk/users
     /// apiVersions:
     /// - '2.0'
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systeminsights~1{system_id}~1safari_extensions'
+    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1bulk~1users'
     /// [DETAILS]
-    /// verb: Get
+    /// verb: Update
     /// subjectPrefix:
-    /// subject: SystemInsightsSystemSafariExtension
-    /// variant: List
+    /// subject: BulkUser
+    /// variant: Patch
     /// </remarks>
-    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkSystemInsightsSystemSafariExtension_List")]
-    [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions))]
-    [JumpCloudApiSdkV2.Description(@"Valid filter fields are `name`.")]
+    [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsData.Update, @"JcSdkBulkUser_Patch", SupportsShouldProcess = true)]
+    [System.Management.Automation.OutputType(typeof(string))]
+    [JumpCloudApiSdkV2.Description(@"The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \""id\"":\""5be9fb4ddb01290001e85109\"",\n\t\t\""firstname\"":\""{UPDATED_FIRSTNAME}\"",\n\t\t\""department\"":\""{UPDATED_DEPARTMENT}\"",\n\t\t\""attributes\"":[\n\t\t\t{\""name\"":\""Custom\"",\""value\"":\""{ATTRIBUTE_VALUE}\""}\n\t\t]\n\t},\n\t{\n\t  \""id\"":\""5be9fb4ddb01290001e85109\"",\n\t\t\""firstname\"":\""{UPDATED_FIRSTNAME}\"",\n\t\t\""costCenter\"":\""{UPDATED_COST_CENTER}\"",\n\t\t\""phoneNumbers\"":[\n\t\t\t{\""type\"":\""home\"",\""number\"":\""{HOME_PHONE_NUMBER}\""},\n\t\t\t{\""type\"":\""work\"",\""number\"":\""{WORK_PHONE_NUMBER}\""}\n\t\t]\n\t}\n]\n```")]
     [JumpCloudApiSdkV2.Generated]
-    public partial class GetJcSdkSystemInsightsSystemSafariExtension_List : System.Management.Automation.PSCmdlet,
+    public partial class UpdateJcSdkBulkUser_Patch : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener
     {
         /// <summary>A copy of the Invocation Info (necessary to allow asJob to clone this cmdlet)</summary>
@@ -33,6 +39,19 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// The <see cref="global::System.Threading.CancellationTokenSource" /> for this operation.
         /// </summary>
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
+
+        /// <summary>Backing field for <see cref="Body" /> property.</summary>
+        private JumpCloudApiSdkV2.Models.IBulkUserUpdate[] _body;
+
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING", ValueFromPipeline = true)]
+        [System.Management.Automation.AllowEmptyCollection]
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = true,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"body",
+        PossibleTypes = new [] { typeof(JumpCloudApiSdkV2.Models.IBulkUserUpdate) })]
+        public JumpCloudApiSdkV2.Models.IBulkUserUpdate[] Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -56,19 +75,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
         /// <summary>Accessor for our copy of the InvocationInfo.</summary>
         public System.Management.Automation.InvocationInfo InvocationInformation { get => __invocationInfo = __invocationInfo ?? this.MyInvocation ; set { __invocationInfo = value; } }
-
-        /// <summary>Backing field for <see cref="Limit" /> property.</summary>
-        private int _limit;
-
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"",
-        SerializedName = @"limit",
-        PossibleTypes = new [] { typeof(int) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
-        public int Limit { get => this._limit; set => this._limit = value; }
 
         /// <summary>
         /// <see cref="IEventListener" /> cancellation delegate. Stops the cmdlet when called.
@@ -99,44 +105,16 @@ namespace JumpCloudApiSdkV2.Cmdlets
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Runtime)]
         public System.Management.Automation.SwitchParameter ProxyUseDefaultCredentials { get; set; }
 
-        /// <summary>Backing field for <see cref="Skip" /> property.</summary>
-        private int _skip;
-
-        /// <summary>The offset into the records to return.</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "The offset into the records to return.")]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
-        ReadOnly = false,
-        Description = @"The offset into the records to return.",
-        SerializedName = @"skip",
-        PossibleTypes = new [] { typeof(int) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Query)]
-        public int Skip { get => this._skip; set => this._skip = value; }
-
-        /// <summary>Backing field for <see cref="SystemId" /> property.</summary>
-        private string _systemId;
-
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
-        [JumpCloudApiSdkV2.Runtime.Info(
-        Required = true,
-        ReadOnly = false,
-        Description = @"",
-        SerializedName = @"system_id",
-        PossibleTypes = new [] { typeof(string) })]
-        [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]
-        public string SystemId { get => this._systemId; set => this._systemId = value; }
-
         /// <summary>
-        /// <c>overrideOnOk</c> will be called before the regular onOk has been processed, allowing customization of what happens
-        /// on that response. Implement this method in a partial class to enable this behavior
+        /// <c>overrideOnCreated</c> will be called before the regular onCreated has been processed, allowing customization of what
+        /// happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions[]" />
-        /// from the remote call</param>
-        /// <param name="returnNow">/// Determines if the rest of the onOk method should be processed, or if the method should return
-        /// immediately (set to true to skip further processing )</param>
+        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.IJobId" /> from the remote call</param>
+        /// <param name="returnNow">/// Determines if the rest of the onCreated method should be processed, or if the method should
+        /// return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnCreated(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IJobId> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -155,14 +133,6 @@ namespace JumpCloudApiSdkV2.Cmdlets
         protected override void EndProcessing()
         {
             ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletEndProcessing).Wait(); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-        }
-
-        /// <summary>
-        /// Intializes a new instance of the <see cref="GetJcSdkSystemInsightsSystemSafariExtension_List" /> cmdlet class.
-        /// </summary>
-        public GetJcSdkSystemInsightsSystemSafariExtension_List()
-        {
-
         }
 
         /// <summary>Handles/Dispatches events during the call to the REST service.</summary>
@@ -221,9 +191,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
             try
             {
                 // work
-                using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
+                if (ShouldProcess($"Call remote 'BulkUsersPatch' operation"))
                 {
-                    asyncCommandRuntime.Wait( ProcessRecordAsync(),((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token);
+                    using( var asyncCommandRuntime = new JumpCloudApiSdkV2.Runtime.PowerShell.AsyncCommandRuntime(this, ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token) )
+                    {
+                        asyncCommandRuntime.Wait( ProcessRecordAsync(),((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token);
+                    }
                 }
             }
             catch (global::System.AggregateException aggregateException)
@@ -276,12 +249,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
                 try
                 {
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletBeforeAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
-                    await this.Client.SystemInsightsSystemSafariExtensionsList(SystemId, this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?), this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?), onOk, this, Pipeline);
+                    await this.Client.BulkUsersPatch(Body, onCreated, this, Pipeline);
                     await ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Signal(JumpCloudApiSdkV2.Runtime.Events.CmdletAfterAPICall); if( ((JumpCloudApiSdkV2.Runtime.IEventListener)this).Token.IsCancellationRequested ) { return; }
                 }
                 catch (JumpCloudApiSdkV2.Runtime.UndeclaredResponseException urexception)
                 {
-                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  SystemId=SystemId,Limit=this.InvocationInformation.BoundParameters.ContainsKey("Limit") ? Limit : default(int?),Skip=this.InvocationInformation.BoundParameters.ContainsKey("Skip") ? Skip : default(int?)}));
+                    WriteError(new global::System.Management.Automation.ErrorRecord(urexception, urexception.StatusCode.ToString(), System.Management.Automation.ErrorCategory.InvalidOperation, new {  body=Body}));
                 }
                 finally
                 {
@@ -297,28 +270,34 @@ namespace JumpCloudApiSdkV2.Cmdlets
             base.StopProcessing();
         }
 
-        /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
+        /// <summary>
+        /// Intializes a new instance of the <see cref="UpdateJcSdkBulkUser_Patch" /> cmdlet class.
+        /// </summary>
+        public UpdateJcSdkBulkUser_Patch()
+        {
+
+        }
+
+        /// <summary>a delegate that is called when the remote service returns 201 (Created).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions[]" />
-        /// from the remote call</param>
+        /// <param name="response">the body result as a <see cref="JumpCloudApiSdkV2.Models.IJobId" /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.ISystemInsightsSafariExtensions[]> response)
+        private async global::System.Threading.Tasks.Task onCreated(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IJobId> response)
         {
             using( NoSynchronizationContext )
             {
                 var _returnNow = global::System.Threading.Tasks.Task<bool>.FromResult(false);
-                overrideOnOk(responseMessage, response, ref _returnNow);
-                // if overrideOnOk has returned true, then return right away.
+                overrideOnCreated(responseMessage, response, ref _returnNow);
+                // if overrideOnCreated has returned true, then return right away.
                 if ((null != _returnNow && await _returnNow))
                 {
                     return ;
                 }
-                // onOk - response for 200 / application/json
-                // response should be returning an array of some kind. +Pageable
-                // array / <none> / <none>
-                WriteObject(await response, true);
+                // onCreated - response for 201 / application/json
+                // (await response) // should be JumpCloudApiSdkV2.Models.IJobId
+                WriteObject((await response).Id);
             }
         }
     }

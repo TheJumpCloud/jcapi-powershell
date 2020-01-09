@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloudApiSdkV2
-Module Guid: 8c4ee4cb-5a19-4fa2-9861-db8f6ecfc51e
+Module Guid: 743b31d5-3c52-4f11-89ca-c1b80e28857c
 Download Help Link: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -215,68 +215,11 @@ Valid filter fields are `system_id` and `name`.
 ### [Get-JcSdkSystemInsightsSafariExtension](Get-JcSdkSystemInsightsSafariExtension.md)
 Valid filter fields are `system_id` and `name`.
 
-### [Get-JcSdkSystemInsightsSystemApp](Get-JcSdkSystemInsightsSystemApp.md)
-Valid filter fields are `bundle_name`.
-
-### [Get-JcSdkSystemInsightsSystemBitlockerInfo](Get-JcSdkSystemInsightsSystemBitlockerInfo.md)
-Valid filter fields are `protection_status`.
-
-### [Get-JcSdkSystemInsightsSystemBrowserPlugin](Get-JcSdkSystemInsightsSystemBrowserPlugin.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemChromeExtension](Get-JcSdkSystemInsightsSystemChromeExtension.md)
-Valid filter fields are `name`.
-
 ### [Get-JcSdkSystemInsightsSystemControl](Get-JcSdkSystemInsightsSystemControl.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemDiskEncryption](Get-JcSdkSystemInsightsSystemDiskEncryption.md)
-Valid filter fields are `encryption_status`.
-
-### [Get-JcSdkSystemInsightsSystemDiskInfo](Get-JcSdkSystemInsightsSystemDiskInfo.md)
-Valid filter fields are `disk_index`.
-
-### [Get-JcSdkSystemInsightsSystemEtcHost](Get-JcSdkSystemInsightsSystemEtcHost.md)
-Valid filter fields are `address`.
-
-### [Get-JcSdkSystemInsightsSystemFirefoxAddon](Get-JcSdkSystemInsightsSystemFirefoxAddon.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemGroup](Get-JcSdkSystemInsightsSystemGroup.md)
-Valid filter fields are `groupname`.
+Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightsSystemInfo](Get-JcSdkSystemInsightsSystemInfo.md)
-Valid filter fields are `cpu_subtype`.
-
-### [Get-JcSdkSystemInsightsSystemInterfaceAddress](Get-JcSdkSystemInsightsSystemInterfaceAddress.md)
-Valid filter fields are `address`.
-
-### [Get-JcSdkSystemInsightsSystemKernelInfo](Get-JcSdkSystemInsightsSystemKernelInfo.md)
-Valid filter fields are `version`.
-
-### [Get-JcSdkSystemInsightsSystemLogicalDrive](Get-JcSdkSystemInsightsSystemLogicalDrive.md)
-Valid filter fields are `device_id`.
-
-### [Get-JcSdkSystemInsightsSystemLogicalMount](Get-JcSdkSystemInsightsSystemLogicalMount.md)
-Valid filter fields are `path`.
-
-### [Get-JcSdkSystemInsightsSystemOSVersion](Get-JcSdkSystemInsightsSystemOSVersion.md)
-Valid filter fields are `version`.
-
-### [Get-JcSdkSystemInsightsSystemPatch](Get-JcSdkSystemInsightsSystemPatch.md)
-Valid filter fields are `hotfix_id  `.
-
-### [Get-JcSdkSystemInsightsSystemProgram](Get-JcSdkSystemInsightsSystemProgram.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemSafariExtension](Get-JcSdkSystemInsightsSystemSafariExtension.md)
-Valid filter fields are `name`.
-
-### [Get-JcSdkSystemInsightsSystemUptime](Get-JcSdkSystemInsightsSystemUptime.md)
-Valid filter fields are `days`.
-
-### [Get-JcSdkSystemInsightsSystemUser](Get-JcSdkSystemInsightsSystemUser.md)
-Valid filter fields are `username`.
+Valid filter fields are `system_id` and `cpu_subtype`.
 
 ### [Get-JcSdkSystemInsightsUptime](Get-JcSdkSystemInsightsUptime.md)
 Valid filter fields are `system_id` and `days`.

@@ -77,7 +77,6 @@ namespace JumpCloudApiSdkV2.Models
         /// <summary>Backing field for <see cref="PolicyId" /> property.</summary>
         private string _policyId;
 
-        /// <summary>ObjectID of the Policy.</summary>
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string PolicyId { get => this._policyId; set => this._policyId = value; }
 
@@ -97,6 +96,7 @@ namespace JumpCloudApiSdkV2.Models
         /// <summary>Backing field for <see cref="SystemId" /> property.</summary>
         private string _systemId;
 
+        /// <summary>ObjectID of the System.</summary>
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string SystemId { get => this._systemId; set => this._systemId = value; }
 
@@ -201,11 +201,11 @@ namespace JumpCloudApiSdkV2.Models
         SerializedName = @"office365_id",
         PossibleTypes = new [] { typeof(string) })]
         string Office365Id { get; set; }
-        /// <summary>ObjectID of the Policy.</summary>
+
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
         ReadOnly = false,
-        Description = @"ObjectID of the Policy.",
+        Description = @"",
         SerializedName = @"policy_id",
         PossibleTypes = new [] { typeof(string) })]
         string PolicyId { get; set; }
@@ -225,11 +225,11 @@ namespace JumpCloudApiSdkV2.Models
         SerializedName = @"radiusserver_id",
         PossibleTypes = new [] { typeof(string) })]
         string RadiusserverId { get; set; }
-
+        /// <summary>ObjectID of the System.</summary>
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = false,
         ReadOnly = false,
-        Description = @"",
+        Description = @"ObjectID of the System.",
         SerializedName = @"system_id",
         PossibleTypes = new [] { typeof(string) })]
         string SystemId { get; set; }
@@ -273,13 +273,13 @@ namespace JumpCloudApiSdkV2.Models
         string LdapserverId { get; set; }
         /// <summary>ObjectID of the Office 365 instance.</summary>
         string Office365Id { get; set; }
-        /// <summary>ObjectID of the Policy.</summary>
+
         string PolicyId { get; set; }
 
         string ProviderId { get; set; }
         /// <summary>ObjectID of the Radius Server.</summary>
         string RadiusserverId { get; set; }
-
+        /// <summary>ObjectID of the System.</summary>
         string SystemId { get; set; }
         /// <summary>ObjectID of the User.</summary>
         string UserId { get; set; }
