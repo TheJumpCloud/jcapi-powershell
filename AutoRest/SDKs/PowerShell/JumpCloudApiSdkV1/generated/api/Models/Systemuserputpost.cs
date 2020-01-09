@@ -105,6 +105,12 @@ namespace JumpCloudApiSdkV1.Models
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
         public string ExternalDn { get => this._externalDn; set => this._externalDn = value; }
 
+        /// <summary>Backing field for <see cref="ExternalPasswordExpirationDate" /> property.</summary>
+        private string _externalPasswordExpirationDate;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public string ExternalPasswordExpirationDate { get => this._externalPasswordExpirationDate; set => this._externalPasswordExpirationDate = value; }
+
         /// <summary>Backing field for <see cref="ExternalSourceType" /> property.</summary>
         private string _externalSourceType;
 
@@ -395,6 +401,14 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"external_password_expiration_date",
+        PossibleTypes = new [] { typeof(string) })]
+        string ExternalPasswordExpirationDate { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"external_source_type",
         PossibleTypes = new [] { typeof(string) })]
         string ExternalSourceType { get; set; }
@@ -619,6 +633,8 @@ namespace JumpCloudApiSdkV1.Models
         bool? EnableUserPortalMultifactor { get; set; }
 
         string ExternalDn { get; set; }
+
+        string ExternalPasswordExpirationDate { get; set; }
 
         string ExternalSourceType { get; set; }
 

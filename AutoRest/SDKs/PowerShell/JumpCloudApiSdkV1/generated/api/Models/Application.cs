@@ -20,6 +20,12 @@ namespace JumpCloudApiSdkV1.Models
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
         public JumpCloudApiSdkV1.Models.IApplicationConfig Config { get => (this._config = this._config ?? new JumpCloudApiSdkV1.Models.ApplicationConfig()); set => this._config = value; }
 
+        /// <summary>Backing field for <see cref="Created" /> property.</summary>
+        private string _created;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public string Created { get => this._created; set => this._created = value; }
+
         /// <summary>Backing field for <see cref="DisplayLabel" /> property.</summary>
         private string _displayLabel;
 
@@ -92,6 +98,14 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"created",
+        PossibleTypes = new [] { typeof(string) })]
+        string Created { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"displayLabel",
         PossibleTypes = new [] { typeof(string) })]
         string DisplayLabel { get; set; }
@@ -152,6 +166,8 @@ namespace JumpCloudApiSdkV1.Models
         bool? Beta { get; set; }
 
         JumpCloudApiSdkV1.Models.IApplicationConfig Config { get; set; }
+
+        string Created { get; set; }
 
         string DisplayLabel { get; set; }
 

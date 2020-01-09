@@ -97,6 +97,7 @@ BODY <IApplication>: Application
     [SpEntityIdType <String>]: 
     [SpEntityIdValue <String>]: 
     [SpEntityIdVisible <Boolean?>]: 
+  [Created <String>]: 
   [DisplayLabel <String>]: 
   [DisplayName <String>]: 
   [Id <String>]: 
@@ -253,6 +254,13 @@ param(
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for CONFIG properties and create a hash table.
     ${Config},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloudApiSdkV1.Category('Body')]
+    [System.String]
+    # HELP MESSAGE MISSING
+    ${Created},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

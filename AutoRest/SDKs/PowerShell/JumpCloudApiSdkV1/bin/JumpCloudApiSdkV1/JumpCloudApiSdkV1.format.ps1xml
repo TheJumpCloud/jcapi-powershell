@@ -34,6 +34,9 @@
             <Label>Beta</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Created</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>DisplayLabel</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -60,6 +63,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Beta</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Created</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisplayLabel</PropertyName>
@@ -883,12 +889,18 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>TotalCount</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>TotalCount</PropertyName>
               </TableColumnItem>
@@ -1920,6 +1932,46 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV1.Models.Case</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.Case</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Description</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Firstname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Lastname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Subject</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Description</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Firstname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Lastname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Subject</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV1.Models.Command</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Command</TypeName>
@@ -2467,6 +2519,12 @@
             <Label>DisplayName</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>FileSystem</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>HasServiceAccount</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Hostname</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -2535,6 +2593,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>FileSystem</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>HasServiceAccount</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Hostname</PropertyName>
@@ -2729,6 +2793,642 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExclusionUntil</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.Organization</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.Organization</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Created</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisplayName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>HasStripeCustomerId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LogoUrl</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Provider</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Created</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>HasStripeCustomerId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LogoUrl</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Provider</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.Organizationsettings</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.Organizationsettings</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>BetaFeatures</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ContactEmail</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ContactName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisableLdap</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisableUm</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DuplicateLdapGroups</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EmailDisclaimer</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableGoogleApps</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableManagedUid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableO365</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Logo</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordCompliance</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ShowIntro</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SystemUserPasswordExpirationInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SystemUsersCanEdit</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>BetaFeatures</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ContactEmail</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ContactName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisableLdap</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisableUm</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DuplicateLdapGroups</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EmailDisclaimer</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableGoogleApps</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableManagedUid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableO365</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Logo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordCompliance</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ShowIntro</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemUserPasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemUsersCanEdit</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsFeaturesSystemInsights</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsFeaturesSystemInsights</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Enabled</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Enabled</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsPasswordPolicy</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsPasswordPolicy</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>AllowUsernameSubstring</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DaysAfterExpirationToSelfRecover</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DaysBeforeExpirationToForceReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EffectiveDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableDaysAfterExpirationToSelfRecover</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableDaysBeforeExpirationToForceReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableLockoutTimeInSeconds</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMaxHistory</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMaxLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMinChangePeriodInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMinLength</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnablePasswordExpirationInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LockoutTimeInSeconds</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MaxHistory</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MaxLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MinChangePeriodInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MinLength</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsLowercase</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsNumeric</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsSymbolic</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsUppercase</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordExpirationInDays</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AllowUsernameSubstring</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DaysAfterExpirationToSelfRecover</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EffectiveDate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableDaysAfterExpirationToSelfRecover</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableDaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableLockoutTimeInSeconds</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMaxHistory</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMaxLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMinChangePeriodInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMinLength</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnablePasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LockoutTimeInSeconds</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MaxHistory</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MaxLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MinChangePeriodInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MinLength</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsLowercase</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsNumeric</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsSymbolic</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsUppercase</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.Organizationsettingsput</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.Organizationsettingsput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ContactEmail</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ContactName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisableLdap</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisableUm</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DuplicateLdapGroups</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EmailDisclaimer</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableManagedUid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Logo</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordCompliance</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ShowIntro</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SystemUserPasswordExpirationInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SystemUsersCanEdit</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ContactEmail</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ContactName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisableLdap</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisableUm</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DuplicateLdapGroups</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EmailDisclaimer</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableManagedUid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Logo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordCompliance</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ShowIntro</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemUserPasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemUsersCanEdit</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsputFeaturesSystemInsights</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsputFeaturesSystemInsights</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Enabled</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Enabled</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsputPasswordPolicy</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsputPasswordPolicy</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>AllowUsernameSubstring</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DaysAfterExpirationToSelfRecover</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DaysBeforeExpirationToForceReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableDaysAfterExpirationToSelfRecover</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableDaysBeforeExpirationToForceReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableLockoutTimeInSeconds</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMaxHistory</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMaxLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMinChangePeriodInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableMinLength</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnablePasswordExpirationInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LockoutTimeInSeconds</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MaxHistory</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MaxLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MinChangePeriodInDays</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MinLength</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsLowercase</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsNumeric</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsSymbolic</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NeedsUppercase</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordExpirationInDays</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AllowUsernameSubstring</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DaysAfterExpirationToSelfRecover</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableDaysAfterExpirationToSelfRecover</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableDaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableLockoutTimeInSeconds</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMaxHistory</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMaxLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMinChangePeriodInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableMinLength</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnablePasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LockoutTimeInSeconds</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MaxHistory</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MaxLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MinChangePeriodInDays</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MinLength</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsLowercase</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsNumeric</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsSymbolic</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NeedsUppercase</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordExpirationInDays</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsputUserPortal</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsputUserPortal</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>IdleSessionDurationMinutes</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>IdleSessionDurationMinutes</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV1.Models.OrganizationsettingsUserPortal</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV1.Models.OrganizationsettingsUserPortal</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>IdleSessionDurationMinutes</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>IdleSessionDurationMinutes</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -3470,34 +4170,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloudApiSdkV1.Models.Systemuserbindingsput</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Systemuserbindingsput</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Add</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Remove</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Add</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Remove</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloudApiSdkV1.Models.Systemuserput</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV1.Models.Systemuserput</TypeName>
@@ -3542,6 +4214,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>ExternalDn</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>ExternalSourceType</Label>
@@ -3639,6 +4314,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalSourceType</PropertyName>
@@ -3841,6 +4519,9 @@
             <Label>ExternalDn</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ExternalSourceType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3942,6 +4623,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalSourceType</PropertyName>
@@ -4153,6 +4837,9 @@
             <Label>ExternalDn</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ExternalSourceType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4272,6 +4959,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalSourceType</PropertyName>
@@ -4563,34 +5253,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloudApiSdkV1.Models.Usersystembindingsput</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloudApiSdkV1.Models.Usersystembindingsput</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Add</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Remove</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Add</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Remove</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

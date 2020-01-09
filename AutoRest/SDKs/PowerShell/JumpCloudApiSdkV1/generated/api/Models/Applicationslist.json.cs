@@ -58,6 +58,7 @@ namespace JumpCloudApiSdkV1.Models
             {
                 return;
             }
+            {_name = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("name"), out var __jsonName) ? (string)__jsonName : (string)Name;}
             {_results = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonArray>("results"), out var __jsonResults) ? If( __jsonResults as JumpCloudApiSdkV1.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<JumpCloudApiSdkV1.Models.IApplication[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__v, (__u)=>(JumpCloudApiSdkV1.Models.IApplication) (JumpCloudApiSdkV1.Models.Application.FromJson(__u) )) ))() : null : Results;}
             {_totalCount = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonNumber>("totalCount"), out var __jsonTotalCount) ? (int?)__jsonTotalCount : TotalCount;}
             AfterFromJson(json);
@@ -92,6 +93,7 @@ namespace JumpCloudApiSdkV1.Models
             {
                 return container;
             }
+            AddIf( null != (((object)this._name)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._name.ToString()) : null, "name" ,container.Add );
             if (null != this._results)
             {
                 var __w = new JumpCloudApiSdkV1.Runtime.Json.XNodeArray();

@@ -15,9 +15,9 @@ The endpoint updates a SSO / SAML Application.
 ### PutExpanded (Default)
 ```
 Set-JcSdkApplication -Id <String> [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Beta]
- [-Config <IApplicationConfig>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
- [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Config <IApplicationConfig>] [-Created <String>] [-DisplayLabel <String>] [-DisplayName <String>]
+ [-Id1 <String>] [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
@@ -35,9 +35,9 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> 
 ### PutViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Accept <String>]
- [-ContentType <String>] [-XOrgId <String>] [-Beta] [-Config <IApplicationConfig>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-ContentType <String>] [-XOrgId <String>] [-Beta] [-Config <IApplicationConfig>] [-Created <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-LearnMore <String>] [-Name <String>]
+ [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -126,6 +126,22 @@ HELP MESSAGE MISSING
 ```yaml
 Type: System.String
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Created
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.String
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -432,6 +448,7 @@ To create the parameters described below, construct a hash table containing the 
     - `[SpEntityIdType <String>]`: 
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
+  - `[Created <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 

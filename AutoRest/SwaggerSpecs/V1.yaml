@@ -210,44 +210,6 @@ paths:
       in: path
       required: true
       type: string
-  /case:
-    post:
-      operationId: SupportCase_New
-      summary: Create a Case
-      description: |-
-        This endpoint allows you to open a support case.
-
-        #### Sample Request
-
-        ```
-        curl -X POST https://console.jumpcloud.com/case \
-          -H 'Accept: application/json' \
-          -H 'Content-Type: application/json' \
-          -H 'x-api-key: {API_KEY}' \
-          -d '{
-        	"subject":"{subject}",
-        	"description":"{description}",
-        	"firstname":"{firstname}",
-        	"lastname":"{lastname}"
-        }'
-        ```
-      parameters:
-      - name: body
-        in: body
-        schema:
-          $ref: '#/definitions/case'
-      responses:
-        "200":
-          description: ""
-          schema:
-            type: object
-            properties:
-              caseNumber:
-                type: string
-        "400":
-          description: ""
-      security:
-      - x-api-key: []
   /command/trigger/{triggername}:
     parameters:
     - name: triggername
@@ -304,10 +266,10 @@ paths:
           ```
       parameters:
       - $ref: '#/parameters/trait:fields:fields'
+      - $ref: '#/parameters/trait:filter:filter'
       - $ref: '#/parameters/trait:limit:limit'
       - $ref: '#/parameters/trait:skip:skip'
       - $ref: '#/parameters/trait:sort:sort'
-      - $ref: '#/parameters/trait:filter:filter'
       responses:
         "200":
           description: OK
@@ -369,11 +331,11 @@ paths:
 
         ```
       parameters:
-      - $ref: '#/parameters/trait:skip:skip'
       - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:sort:sort'
       - $ref: '#/parameters/trait:filter:filter'
+      - $ref: '#/parameters/trait:limit:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      - $ref: '#/parameters/trait:sort:sort'
       responses:
         "200":
           description: OK
@@ -532,14 +494,96 @@ paths:
       - $ref: '#/parameters/trait:fields:fields'
       - $ref: '#/parameters/trait:filter:filter'
       - $ref: '#/parameters/trait:limit:limit'
+      - $ref: '#/parameters/trait:search:search'
       - $ref: '#/parameters/trait:skip:skip'
       - $ref: '#/parameters/trait:sort:sort'
-      - $ref: '#/parameters/trait:search:search'
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/organizationslist'
+      security:
+      - x-api-key: []
+  /organizations/{id}:
+    get:
+      operationId: Organization_Get
+      summary: Get an Organization
+      description: |-
+        This endpoint returns a particular Organization.
+
+        #### Sample Request
+
+        ```
+        curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}'
+        ```
+      parameters:
+      - $ref: '#/parameters/trait:fields:fields'
+      - $ref: '#/parameters/trait:filter:filter'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/organization'
+        "401":
+          description: Unauthorized
+        "403":
+          description: ""
+      security:
+      - x-api-key: []
+    parameters:
+    - name: id
+      in: path
+      required: true
+      type: string
+    put:
+      operationId: Organization_Put
+      summary: Update an Organization
+      description: |-
+        This endpoint allows you to update an Organization.
+
+        Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to "custom". We discourage the use of non-custom passwordCompliance values.
+
+        `hasStripeCustomerId` is deprecated and will be removed.
+
+        #### Sample Request
+
+        ```
+        curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}' \
+          -d '{
+          "settings": {
+            "contactName": "Admin Name",
+            "contactEmail": "admin@company.com",
+            "systemUsersCanEdit":true,
+            "passwordPolicy": {
+              "enableMaxHistory": true,
+              "maxHistory": 3
+            }
+          }
+        }'
+        ```
+      parameters:
+      - name: body
+        in: body
+        schema:
+          type: object
+          properties:
+            settings:
+              $ref: '#/definitions/organizationsettingsput'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/organization'
+        "400":
+          description: ""
+        "401":
+          description: Unauthorized
       security:
       - x-api-key: []
   /radiusservers:
@@ -842,8 +886,8 @@ paths:
           If omitted the default list of fields will be returned.
         type: string
         default: ""
-      - $ref: '#/parameters/trait:search:search'
       - $ref: '#/parameters/trait:filter:filter'
+      - $ref: '#/parameters/trait:search:search'
       responses:
         "200":
           description: OK
@@ -1446,6 +1490,8 @@ definitions:
                 type: boolean
               position:
                 type: integer
+      created:
+        type: string
   applicationslist:
     title: ApplicationsList
     type: object
@@ -1458,6 +1504,8 @@ definitions:
         description: The list of applications.
         items:
           $ref: '#/definitions/application'
+      name:
+        type: string
   applicationtemplate:
     title: ApplicationTemplate
     type: object
@@ -2063,6 +2111,10 @@ definitions:
             - enabled
             - disabled
             - deferred
+      fileSystem:
+        type: string
+      hasServiceAccount:
+        type: boolean
   mfa:
     title: mfa
     type: object
@@ -2074,6 +2126,234 @@ definitions:
         format: date-time
       configured:
         type: boolean
+  organization:
+    title: Organization
+    type: object
+    properties:
+      settings:
+        $ref: '#/definitions/organizationsettings'
+      _id:
+        type: string
+      displayName:
+        type: string
+      logoUrl:
+        type: string
+      created:
+        type: string
+      hasStripeCustomerId:
+        type: boolean
+      provider:
+        type: string
+  organizationsettings:
+    title: OrganizationSettings
+    type: object
+    properties:
+      passwordPolicy:
+        type: object
+        properties:
+          enablePasswordExpirationInDays:
+            type: boolean
+          passwordExpirationInDays:
+            type: integer
+            minimum: 1
+          enableDaysBeforeExpirationToForceReset:
+            type: boolean
+          daysBeforeExpirationToForceReset:
+            type: integer
+            minimum: 1
+          enableDaysAfterExpirationToSelfRecover:
+            type: boolean
+          daysAfterExpirationToSelfRecover:
+            type: integer
+            minimum: 1
+          enableMinChangePeriodInDays:
+            type: boolean
+          minChangePeriodInDays:
+            type: integer
+          enableMaxLoginAttempts:
+            type: boolean
+          maxLoginAttempts:
+            type: integer
+            minimum: 0
+          enableLockoutTimeInSeconds:
+            type: boolean
+          lockoutTimeInSeconds:
+            type: integer
+          enableMinLength:
+            type: boolean
+          minLength:
+            type: integer
+          needsLowercase:
+            type: boolean
+          needsUppercase:
+            type: boolean
+          needsNumeric:
+            type: boolean
+          needsSymbolic:
+            type: boolean
+          allowUsernameSubstring:
+            type: boolean
+          enableMaxHistory:
+            type: boolean
+          maxHistory:
+            type: integer
+            minimum: 1
+            maximum: 10
+          effectiveDate:
+            type: string
+      userPortal:
+        type: object
+        properties:
+          idleSessionDurationMinutes:
+            type: integer
+            minimum: 1
+            maximum: 129600
+      systemUserPasswordExpirationInDays:
+        type: integer
+      disableUM:
+        type: boolean
+      disableLdap:
+        type: boolean
+      duplicateLDAPGroups:
+        type: boolean
+      passwordCompliance:
+        type: string
+        enum:
+        - custom
+        - pci3
+        - windows
+      showIntro:
+        type: boolean
+      enableManagedUID:
+        type: boolean
+      systemUsersCanEdit:
+        type: boolean
+      contactName:
+        type: string
+      contactEmail:
+        type: string
+      emailDisclaimer:
+        type: string
+      name:
+        type: string
+      features:
+        type: object
+        properties:
+          systemInsights:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+      logo:
+        type: string
+      enableGoogleApps:
+        type: boolean
+      enableO365:
+        type: boolean
+      betaFeatures:
+        type: array
+        items:
+          type: boolean
+  organizationsettingsput:
+    title: OrganizationSettingsPut
+    type: object
+    properties:
+      passwordPolicy:
+        type: object
+        properties:
+          enablePasswordExpirationInDays:
+            type: boolean
+          passwordExpirationInDays:
+            type: integer
+            minimum: 1
+          enableDaysBeforeExpirationToForceReset:
+            type: boolean
+          daysBeforeExpirationToForceReset:
+            type: integer
+            minimum: 1
+          enableDaysAfterExpirationToSelfRecover:
+            type: boolean
+          daysAfterExpirationToSelfRecover:
+            type: integer
+            minimum: 1
+          enableMinChangePeriodInDays:
+            type: boolean
+          minChangePeriodInDays:
+            type: integer
+          enableMaxLoginAttempts:
+            type: boolean
+          maxLoginAttempts:
+            type: integer
+            minimum: 0
+          enableLockoutTimeInSeconds:
+            type: boolean
+          lockoutTimeInSeconds:
+            type: integer
+          enableMinLength:
+            type: boolean
+          minLength:
+            type: integer
+          needsLowercase:
+            type: boolean
+          needsUppercase:
+            type: boolean
+          needsNumeric:
+            type: boolean
+          needsSymbolic:
+            type: boolean
+          allowUsernameSubstring:
+            type: boolean
+          enableMaxHistory:
+            type: boolean
+          maxHistory:
+            type: integer
+            minimum: 1
+            maximum: 10
+      userPortal:
+        type: object
+        properties:
+          idleSessionDurationMinutes:
+            type: integer
+            minimum: 1
+            maximum: 129600
+      systemUserPasswordExpirationInDays:
+        type: integer
+      disableUM:
+        type: boolean
+      disableLdap:
+        type: boolean
+      duplicateLDAPGroups:
+        type: boolean
+      passwordCompliance:
+        type: string
+        enum:
+        - custom
+        - pci3
+        - windows
+      showIntro:
+        type: boolean
+      enableManagedUID:
+        type: boolean
+      systemUsersCanEdit:
+        type: boolean
+      contactName:
+        type: string
+      contactEmail:
+        type: string
+      emailDisclaimer:
+        type: string
+      name:
+        type: string
+      features:
+        type: object
+        properties:
+          systemInsights:
+            type: object
+            properties:
+              enabled:
+                type: boolean
+      logo:
+        type: string
   organizationslist:
     title: OrganizationList
     type: object
@@ -2414,26 +2694,6 @@ definitions:
         $ref: '#/definitions/mfa'
       suspended:
         type: boolean
-  systemuserbinding:
-    title: SystemUserBinding
-    type: object
-  systemuserbindingsput:
-    title: SystemUserBindingsPut
-    type: object
-    properties:
-      add:
-        type: array
-        description: The list of systemuser ids to be added to this system.
-        items:
-          type: string
-      remove:
-        type: array
-        description: The list of systemuser ids to be removed from this system.
-        items:
-          type: string
-    required:
-    - add
-    - remove
   systemuserput:
     title: SystemUserPut
     type: object
@@ -2574,6 +2834,8 @@ definitions:
         $ref: '#/definitions/mfa'
       suspended:
         type: boolean
+      external_password_expiration_date:
+        type: string
   systemuserputpost:
     title: SystemUserPost
     type: object
@@ -2692,6 +2954,8 @@ definitions:
         $ref: '#/definitions/mfa'
       suspended:
         type: boolean
+      external_password_expiration_date:
+        type: string
     required:
     - email
     - username
@@ -2855,6 +3119,8 @@ definitions:
         type: string
       suspended:
         type: boolean
+      external_password_expiration_date:
+        type: string
   systemuserslist:
     title: SystemUsersList
     type: object
@@ -2944,24 +3210,4 @@ definitions:
     - op
     - type
     - id
-  usersystembinding:
-    title: UserSystemBinding
-    type: object
-  usersystembindingsput:
-    title: UserSystemBindingsPut
-    type: object
-    properties:
-      add:
-        type: array
-        description: The list of system ids to be added to this user.
-        items:
-          type: string
-      remove:
-        type: array
-        description: The list of system ids to be removed from this user.
-        items:
-          type: string
-    required:
-    - add
-    - remove
 

@@ -82,6 +82,8 @@ namespace JumpCloudApiSdkV1.Models
             {_connectionHistory = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonArray>("connectionHistory"), out var __jsonConnectionHistory) ? If( __jsonConnectionHistory as JumpCloudApiSdkV1.Runtime.Json.JsonArray, out var __v) ? new global::System.Func<JumpCloudApiSdkV1.Models.IJcSystemConnectionHistoryItem[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__v, (__u)=>(JumpCloudApiSdkV1.Models.IJcSystemConnectionHistoryItem) (JumpCloudApiSdkV1.Models.JcSystemConnectionHistoryItem.FromJson(__u) )) ))() : null : ConnectionHistory;}
             {_created = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("created"), out var __jsonCreated) ? (string)__jsonCreated : (string)Created;}
             {_displayName = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("displayName"), out var __jsonDisplayName) ? (string)__jsonDisplayName : (string)DisplayName;}
+            {_fileSystem = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("fileSystem"), out var __jsonFileSystem) ? (string)__jsonFileSystem : (string)FileSystem;}
+            {_hasServiceAccount = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("hasServiceAccount"), out var __jsonHasServiceAccount) ? (bool?)__jsonHasServiceAccount : HasServiceAccount;}
             {_hostname = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("hostname"), out var __jsonHostname) ? (string)__jsonHostname : (string)Hostname;}
             {_lastContact = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonString>("lastContact"), out var __jsonLastContact) ? (string)__jsonLastContact : (string)LastContact;}
             {_modifySshdConfig = If( json?.PropertyT<JumpCloudApiSdkV1.Runtime.Json.JsonBoolean>("modifySSHDConfig"), out var __jsonModifySshdConfig) ? (bool?)__jsonModifySshdConfig : ModifySshdConfig;}
@@ -139,6 +141,8 @@ namespace JumpCloudApiSdkV1.Models
             }
             AddIf( null != (((object)this._created)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._created.ToString()) : null, "created" ,container.Add );
             AddIf( null != (((object)this._displayName)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._displayName.ToString()) : null, "displayName" ,container.Add );
+            AddIf( null != (((object)this._fileSystem)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._fileSystem.ToString()) : null, "fileSystem" ,container.Add );
+            AddIf( null != this._hasServiceAccount ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._hasServiceAccount) : null, "hasServiceAccount" ,container.Add );
             AddIf( null != (((object)this._hostname)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._hostname.ToString()) : null, "hostname" ,container.Add );
             AddIf( null != (((object)this._lastContact)?.ToString()) ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode) new JumpCloudApiSdkV1.Runtime.Json.JsonString(this._lastContact.ToString()) : null, "lastContact" ,container.Add );
             AddIf( null != this._modifySshdConfig ? (JumpCloudApiSdkV1.Runtime.Json.JsonNode)new JumpCloudApiSdkV1.Runtime.Json.JsonBoolean((bool)this._modifySshdConfig) : null, "modifySSHDConfig" ,container.Add );

@@ -49,6 +49,7 @@ BODY <ISystemuserput>: SystemUserPut
   [EnableManagedUid <Boolean?>]: 
   [EnableUserPortalMultifactor <Boolean?>]: 
   [ExternalDn <String>]: 
+  [ExternalPasswordExpirationDate <String>]: 
   [ExternalSourceType <String>]: 
   [ExternallyManaged <Boolean?>]: 
   [Firstname <String>]: 
@@ -225,6 +226,13 @@ param(
     [System.String]
     # HELP MESSAGE MISSING
     ${ExternalDn},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloudApiSdkV1.Category('Body')]
+    [System.String]
+    # HELP MESSAGE MISSING
+    ${ExternalPasswordExpirationDate},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

@@ -8,6 +8,12 @@ namespace JumpCloudApiSdkV1.Models
         JumpCloudApiSdkV1.Models.IApplicationslistInternal
     {
 
+        /// <summary>Backing field for <see cref="Name" /> property.</summary>
+        private string _name;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public string Name { get => this._name; set => this._name = value; }
+
         /// <summary>Backing field for <see cref="Results" /> property.</summary>
         private JumpCloudApiSdkV1.Models.IApplication[] _results;
 
@@ -32,6 +38,13 @@ namespace JumpCloudApiSdkV1.Models
     public partial interface IApplicationslist :
         JumpCloudApiSdkV1.Runtime.IJsonSerializable
     {
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"name",
+        PossibleTypes = new [] { typeof(string) })]
+        string Name { get; set; }
         /// <summary>The list of applications.</summary>
         [JumpCloudApiSdkV1.Runtime.Info(
         Required = false,
@@ -54,6 +67,7 @@ namespace JumpCloudApiSdkV1.Models
     internal partial interface IApplicationslistInternal
 
     {
+        string Name { get; set; }
         /// <summary>The list of applications.</summary>
         JumpCloudApiSdkV1.Models.IApplication[] Results { get; set; }
         /// <summary>The total number of applications.</summary>

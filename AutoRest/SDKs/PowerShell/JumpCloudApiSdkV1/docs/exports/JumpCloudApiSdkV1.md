@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloudApiSdkV1
-Module Guid: ad28ee1d-c8fe-423b-98f9-942f8f612aa0
+Module Guid: 8c56327c-f28d-4e68-8ab2-6c06c6b9e031
 Download Help Link: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1
 Help Version: 1.0.0.0
 Locale: en-US
@@ -27,7 +27,7 @@ This endpoint returns the uploaded file(s) associated with a specific command.\n
 This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
 
 ### [Get-JcSdkOrganization](Get-JcSdkOrganization.md)
-This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkRadiusServer](Get-JcSdkRadiusServer.md)
 This endpoint allows you to get a list of all RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
@@ -108,6 +108,10 @@ The endpoint updates a SSO / SAML Application.
 
 ### [Set-JcSdkCommand](Set-JcSdkCommand.md)
 This endpoint Updates a command based on the command ID and returns the modified command record.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+
+### [Set-JcSdkOrganization](Set-JcSdkOrganization.md)
+This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
+We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```
 
 ### [Set-JcSdkRadiusServer](Set-JcSdkRadiusServer.md)
 This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```

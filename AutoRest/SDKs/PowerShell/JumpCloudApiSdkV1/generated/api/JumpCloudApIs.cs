@@ -1955,15 +1955,15 @@ namespace JumpCloudApiSdkV1
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -1971,7 +1971,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CommandList(int? skip, string fields, int? limit, string sort, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CommandList(string fields, string filter, int? limit, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -1980,15 +1980,15 @@ namespace JumpCloudApiSdkV1
                 var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
                         "https://console.jumpcloud.com/api/commands"
                         + "?"
-                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
-                        + "&"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
                         + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
-                        + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
+                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2014,15 +2014,15 @@ namespace JumpCloudApiSdkV1
         /// ```
         /// </summary>
         /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
-        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -2030,7 +2030,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CommandListViaIdentity(global::System.String viaIdentity, int? skip, string fields, int? limit, string sort, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CommandListViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -2048,15 +2048,15 @@ namespace JumpCloudApiSdkV1
                 var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
                         "https://console.jumpcloud.com/api/commands"
                         + "?"
-                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
-                        + "&"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
                         + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
-                        + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
+                        + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2126,26 +2126,26 @@ namespace JumpCloudApiSdkV1
         /// Validation method for <see cref="CommandList" /> method. Call this like the actual call, but you will get validation events
         /// back.
         /// </summary>
-        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task CommandList_Validate(int? skip, string fields, int? limit, string sort, string filter, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task CommandList_Validate(string fields, string filter, int? limit, int? skip, string sort, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(fields),fields);
-                await eventListener.AssertNotNull(nameof(sort),sort);
                 await eventListener.AssertNotNull(nameof(filter),filter);
+                await eventListener.AssertNotNull(nameof(sort),sort);
             }
         }
 
@@ -2695,12 +2695,12 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -2708,7 +2708,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CommandResultList(string fields, int? limit, int? skip, string sort, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandresultslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CommandResultList(string fields, string filter, int? limit, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandresultslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -2719,13 +2719,13 @@ namespace JumpCloudApiSdkV1
                         + "?"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
                         + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
                         + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
                         + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
-                        + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2754,12 +2754,12 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -2767,7 +2767,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CommandResultListViaIdentity(global::System.String viaIdentity, string fields, int? limit, int? skip, string sort, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandresultslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CommandResultListViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ICommandresultslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -2787,13 +2787,13 @@ namespace JumpCloudApiSdkV1
                         + "?"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
                         + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
                         + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
                         + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
-                        + "&"
-                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -2866,23 +2866,23 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
         /// the default list of fields will be returned.
         /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task CommandResultList_Validate(string fields, int? limit, int? skip, string sort, string filter, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task CommandResultList_Validate(string fields, string filter, int? limit, int? skip, string sort, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(fields),fields);
-                await eventListener.AssertNotNull(nameof(sort),sort);
                 await eventListener.AssertNotNull(nameof(filter),filter);
+                await eventListener.AssertNotNull(nameof(sort),sort);
             }
         }
 
@@ -3071,6 +3071,197 @@ namespace JumpCloudApiSdkV1
         }
 
         /// <summary>
+        /// This endpoint returns a particular Organization.
+        /// #### Sample Request
+        /// ```
+        /// curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task OrganizationGet(string id, string fields, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onForbidden, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/organizations/"
+                        + global::System.Uri.EscapeDataString(id)
+                        + "?"
+                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.OrganizationGet_Call(request,onOk,onUnauthorized,onForbidden,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a particular Organization.
+        /// #### Sample Request
+        /// ```
+        /// curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task OrganizationGetViaIdentity(global::System.String viaIdentity, string fields, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onForbidden, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/organizations/(?<id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/organizations/{id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var id = _match.Groups["id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/organizations/"
+                        + id
+                        + "?"
+                        + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
+                        + "&"
+                        + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.OrganizationGet_Call(request,onOk,onUnauthorized,onForbidden,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="OrganizationGet" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="onForbidden">a delegate that is called when the remote service returns 403 (Forbidden).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task OrganizationGet_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onForbidden, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV1.Models.Organization.FromJson(JumpCloudApiSdkV1.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response);
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Forbidden:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onForbidden(_response);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV1.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="OrganizationGet" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="fields">Use a space seperated string of field parameters to include the data in the response. If omitted,
+        /// the default list of fields will be returned.
+        /// </param>
+        /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task OrganizationGet_Validate(string id, string fields, string filter, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(id),id);
+                await eventListener.AssertNotNull(nameof(fields),fields);
+                await eventListener.AssertNotNull(nameof(filter),filter);
+            }
+        }
+
+        /// <summary>
         /// This endpoint returns Organization Details.
         /// #### Sample Request
         /// ```
@@ -3086,18 +3277,18 @@ namespace JumpCloudApiSdkV1
         /// </param>
         /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task OrganizationList(string fields, string filter, int? limit, int? skip, string sort, string search, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganizationslist>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task OrganizationList(string fields, string filter, int? limit, string search, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganizationslist>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -3112,11 +3303,11 @@ namespace JumpCloudApiSdkV1
                         + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
+                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
+                        + "&"
                         + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
                         + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
-                        + "&"
-                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -3148,18 +3339,18 @@ namespace JumpCloudApiSdkV1
         /// </param>
         /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task OrganizationListViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, int? skip, string sort, string search, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganizationslist>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task OrganizationListViaIdentity(global::System.String viaIdentity, string fields, string filter, int? limit, string search, int? skip, string sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganizationslist>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -3183,11 +3374,11 @@ namespace JumpCloudApiSdkV1
                         + "&"
                         + (null == limit ? global::System.String.Empty : "limit=" + global::System.Uri.EscapeDataString(limit.ToString()))
                         + "&"
+                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
+                        + "&"
                         + (null == skip ? global::System.String.Empty : "skip=" + global::System.Uri.EscapeDataString(skip.ToString()))
                         + "&"
                         + (string.IsNullOrEmpty(sort) ? global::System.String.Empty : "sort=" + global::System.Uri.EscapeDataString(sort))
-                        + "&"
-                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -3255,23 +3446,235 @@ namespace JumpCloudApiSdkV1
         /// </param>
         /// <param name="filter">A filter to apply to the query.</param>
         /// <param name="limit">The number of records to return at once. Limited to 100.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="skip">The offset into the records to return.</param>
         /// <param name="sort">Use space separated sort parameters to sort the collection.
         /// Default sort is ascending. Prefix with `-` to sort descending.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task OrganizationList_Validate(string fields, string filter, int? limit, int? skip, string sort, string search, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task OrganizationList_Validate(string fields, string filter, int? limit, string search, int? skip, string sort, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(fields),fields);
                 await eventListener.AssertNotNull(nameof(filter),filter);
-                await eventListener.AssertNotNull(nameof(sort),sort);
                 await eventListener.AssertNotNull(nameof(search),search);
+                await eventListener.AssertNotNull(nameof(sort),sort);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint allows you to update an Organization.
+        /// Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to "custom". We discourage the use of non-custom
+        /// passwordCompliance values.
+        /// `hasStripeCustomerId` is deprecated and will be removed.
+        /// #### Sample Request
+        /// ```
+        /// curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "settings": {
+        /// "contactName": "Admin Name",
+        /// "contactEmail": "admin@company.com",
+        /// "systemUsersCanEdit":true,
+        /// "passwordPolicy": {
+        /// "enableMaxHistory": true,
+        /// "maxHistory": 3
+        /// }
+        /// }
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task OrganizationPut(string id, JumpCloudApiSdkV1.Models.IBodyParameterOrganizationPutRequestBody body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/organizations/"
+                        + global::System.Uri.EscapeDataString(id)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Put, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.OrganizationPut_Call(request,onOk,onBadRequest,onUnauthorized,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint allows you to update an Organization.
+        /// Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to "custom". We discourage the use of non-custom
+        /// passwordCompliance values.
+        /// `hasStripeCustomerId` is deprecated and will be removed.
+        /// #### Sample Request
+        /// ```
+        /// curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "settings": {
+        /// "contactName": "Admin Name",
+        /// "contactEmail": "admin@company.com",
+        /// "systemUsersCanEdit":true,
+        /// "passwordPolicy": {
+        /// "enableMaxHistory": true,
+        /// "maxHistory": 3
+        /// }
+        /// }
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="body"></param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task OrganizationPutViaIdentity(global::System.String viaIdentity, JumpCloudApiSdkV1.Models.IBodyParameterOrganizationPutRequestBody body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/organizations/(?<id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/organizations/{id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var id = _match.Groups["id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/organizations/"
+                        + id
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV1.Runtime.Method.Put, _url);
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.OrganizationPut_Call(request,onOk,onBadRequest,onUnauthorized,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="OrganizationPut" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
+        /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV1.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task OrganizationPut_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.IOrganization>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV1.Models.Organization.FromJson(JumpCloudApiSdkV1.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.BadRequest:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onBadRequest(_response);
+                            break;
+                        }
+                        case global::System.Net.HttpStatusCode.Unauthorized:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onUnauthorized(_response);
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV1.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="OrganizationPut" /> method. Call this like the actual call, but you will get validation
+        /// events back.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="body"></param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task OrganizationPut_Validate(string id, JumpCloudApiSdkV1.Models.IBodyParameterOrganizationPutRequestBody body, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(id),id);
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
             }
         }
 
@@ -6041,8 +6444,8 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">The comma separated fields included in the returned records.
         /// If omitted the default list of fields will be returned.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -6050,7 +6453,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task SystemUserList(int? limit, int? skip, string sort, string fields, string search, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task SystemUserList(int? limit, int? skip, string sort, string fields, string filter, string search, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -6067,9 +6470,9 @@ namespace JumpCloudApiSdkV1
                         + "&"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
                         + "&"
-                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
-                        + "&"
                         + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
+                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -6103,8 +6506,8 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">The comma separated fields included in the returned records.
         /// If omitted the default list of fields will be returned.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
@@ -6112,7 +6515,7 @@ namespace JumpCloudApiSdkV1
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task SystemUserListViaIdentity(global::System.String viaIdentity, int? limit, int? skip, string sort, string fields, string search, string filter, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task SystemUserListViaIdentity(global::System.String viaIdentity, int? limit, int? skip, string sort, string fields, string filter, string search, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV1.Models.ISystemuserslist>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloudApiSdkV1.Runtime.IEventListener eventListener, JumpCloudApiSdkV1.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -6138,9 +6541,9 @@ namespace JumpCloudApiSdkV1
                         + "&"
                         + (string.IsNullOrEmpty(fields) ? global::System.String.Empty : "fields=" + global::System.Uri.EscapeDataString(fields))
                         + "&"
-                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
-                        + "&"
                         + (string.IsNullOrEmpty(filter) ? global::System.String.Empty : "filter=" + global::System.Uri.EscapeDataString(filter))
+                        + "&"
+                        + (string.IsNullOrEmpty(search) ? global::System.String.Empty : "search=" + global::System.Uri.EscapeDataString(search))
                         ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
 
                 await eventListener.Signal(JumpCloudApiSdkV1.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
@@ -6218,20 +6621,20 @@ namespace JumpCloudApiSdkV1
         /// <param name="fields">The comma separated fields included in the returned records.
         /// If omitted the default list of fields will be returned.
         /// </param>
-        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="filter">A filter to apply to the query.</param>
+        /// <param name="search">A nested object containing a string `searchTerm` and a list of `fields` to search on.</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV1.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task SystemUserList_Validate(int? limit, int? skip, string sort, string fields, string search, string filter, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
+        internal async global::System.Threading.Tasks.Task SystemUserList_Validate(int? limit, int? skip, string sort, string fields, string filter, string search, JumpCloudApiSdkV1.Runtime.IEventListener eventListener)
         {
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(sort),sort);
                 await eventListener.AssertNotNull(nameof(fields),fields);
-                await eventListener.AssertNotNull(nameof(search),search);
                 await eventListener.AssertNotNull(nameof(filter),filter);
+                await eventListener.AssertNotNull(nameof(search),search);
             }
         }
 

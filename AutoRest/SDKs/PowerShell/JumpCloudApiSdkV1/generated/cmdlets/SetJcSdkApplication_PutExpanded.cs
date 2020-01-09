@@ -103,6 +103,17 @@ namespace JumpCloudApiSdkV1.Cmdlets
         Required = false,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
+        SerializedName = @"created",
+        PossibleTypes = new [] { typeof(string) })]
+        public string Created { get => Body.Created ?? null; set => Body.Created = value; }
+
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [JumpCloudApiSdkV1.Category(JumpCloudApiSdkV1.ParameterCategory.Body)]
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"HELP MESSAGE MISSING",
         SerializedName = @"displayLabel",
         PossibleTypes = new [] { typeof(string) })]
         public string DisplayLabel { get => Body.DisplayLabel ?? null; set => Body.DisplayLabel = value; }

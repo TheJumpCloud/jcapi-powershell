@@ -1,19 +1,44 @@
 <#
 .Synopsis
-This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Description
-This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1/get-jcsdkorganization
+.Inputs
+JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
+.Outputs
+JumpCloudApiSdkV1.Models.IOrganization
 .Outputs
 JumpCloudApiSdkV1.Models.IOrganizationslist
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv1/get-jcsdkorganization
 #>
 function Get-JcSdkOrganization {
-[OutputType([JumpCloudApiSdkV1.Models.IOrganizationslist])]
+[OutputType([JumpCloudApiSdkV1.Models.IOrganization], [JumpCloudApiSdkV1.Models.IOrganizationslist])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloudApiSdkV1.Category('Path')]
+    [System.String]
+    # HELP MESSAGE MISSING
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloudApiSdkV1.Category('Path')]
+    [JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
     [Parameter()]
     [JumpCloudApiSdkV1.Category('Query')]
     [System.String]
@@ -27,26 +52,26 @@ param(
     # A filter to apply to the query.
     ${Filter},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloudApiSdkV1.Category('Query')]
     [System.Int32]
     # The number of records to return at once.
     # Limited to 100.
     ${Limit},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloudApiSdkV1.Category('Query')]
     [System.String]
     # A nested object containing a string `searchTerm` and a list of `fields` to search on.
     ${Search},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloudApiSdkV1.Category('Query')]
     [System.Int32]
     # The offset into the records to return.
     ${Skip},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloudApiSdkV1.Category('Query')]
     [System.String]
     # Use space separated sort parameters to sort the collection.
@@ -73,6 +98,13 @@ param(
     [JumpCloudApiSdkV1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloudApiSdkV1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloudApiSdkV1.Category('Runtime')]
@@ -102,6 +134,8 @@ begin {
         }
         $parameterSet = $PSCmdlet.ParameterSetName
         $mapping = @{
+            Get = 'JumpCloudApiSdkV1.private\Get-JcSdkOrganization_Get';
+            GetViaIdentity = 'JumpCloudApiSdkV1.private\Get-JcSdkOrganization_GetViaIdentity';
             List = 'JumpCloudApiSdkV1.private\Get-JcSdkOrganization_List';
         }
         $wrappedCmd = $ExecutionContext.InvokeCommand.GetCommand(($mapping[$parameterSet]), [System.Management.Automation.CommandTypes]::Cmdlet)

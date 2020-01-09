@@ -343,43 +343,6 @@
         }
       ]
     },
-    "/case": {
-      "post": {
-        "operationId": "SupportCase_New",
-        "summary": "Create a Case",
-        "description": "This endpoint allows you to open a support case.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/case \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"subject\":\"{subject}\",\n\t\"description\":\"{description}\",\n\t\"firstname\":\"{firstname}\",\n\t\"lastname\":\"{lastname}\"\n}'\n```",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "$ref": "#/definitions/case"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "caseNumber": {
-                  "type": "string"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
     "/command/trigger/{triggername}": {
       "parameters": [
         {
@@ -419,6 +382,9 @@
             "$ref": "#/parameters/trait:fields:fields"
           },
           {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
             "$ref": "#/parameters/trait:limit:limit"
           },
           {
@@ -426,9 +392,6 @@
           },
           {
             "$ref": "#/parameters/trait:sort:sort"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
           }
         ],
         "responses": {
@@ -517,19 +480,19 @@
         "description": "This endpoint returns all commands.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
           {
-            "$ref": "#/parameters/trait:skip:skip"
+            "$ref": "#/parameters/trait:fields:fields"
           },
           {
-            "$ref": "#/parameters/trait:fields:fields"
+            "$ref": "#/parameters/trait:filter:filter"
           },
           {
             "$ref": "#/parameters/trait:limit:limit"
           },
           {
-            "$ref": "#/parameters/trait:sort:sort"
+            "$ref": "#/parameters/trait:skip:skip"
           },
           {
-            "$ref": "#/parameters/trait:filter:filter"
+            "$ref": "#/parameters/trait:sort:sort"
           }
         ],
         "responses": {
@@ -729,13 +692,13 @@
             "$ref": "#/parameters/trait:limit:limit"
           },
           {
+            "$ref": "#/parameters/trait:search:search"
+          },
+          {
             "$ref": "#/parameters/trait:skip:skip"
           },
           {
             "$ref": "#/parameters/trait:sort:sort"
-          },
-          {
-            "$ref": "#/parameters/trait:search:search"
           }
         ],
         "responses": {
@@ -744,6 +707,86 @@
             "schema": {
               "$ref": "#/definitions/organizationslist"
             }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/organizations/{id}": {
+      "get": {
+        "operationId": "Organization_Get",
+        "summary": "Get an Organization",
+        "description": "This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:fields:fields"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/organization"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Organization_Put",
+        "summary": "Update an Organization",
+        "description": "This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\". We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "settings": {
+                  "$ref": "#/definitions/organizationsettingsput"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/organization"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "security": [
@@ -1202,10 +1245,10 @@
             "default": ""
           },
           {
-            "$ref": "#/parameters/trait:search:search"
+            "$ref": "#/parameters/trait:filter:filter"
           },
           {
-            "$ref": "#/parameters/trait:filter:filter"
+            "$ref": "#/parameters/trait:search:search"
           }
         ],
         "responses": {
@@ -2062,6 +2105,9 @@
               }
             }
           }
+        },
+        "created": {
+          "type": "string"
         }
       }
     },
@@ -2079,6 +2125,9 @@
           "items": {
             "$ref": "#/definitions/application"
           }
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
@@ -2970,6 +3019,12 @@
               ]
             }
           }
+        },
+        "fileSystem": {
+          "type": "string"
+        },
+        "hasServiceAccount": {
+          "type": "boolean"
         }
       }
     },
@@ -2986,6 +3041,342 @@
         },
         "configured": {
           "type": "boolean"
+        }
+      }
+    },
+    "organization": {
+      "title": "Organization",
+      "type": "object",
+      "properties": {
+        "settings": {
+          "$ref": "#/definitions/organizationsettings"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "hasStripeCustomerId": {
+          "type": "boolean"
+        },
+        "provider": {
+          "type": "string"
+        }
+      }
+    },
+    "organizationsettings": {
+      "title": "OrganizationSettings",
+      "type": "object",
+      "properties": {
+        "passwordPolicy": {
+          "type": "object",
+          "properties": {
+            "enablePasswordExpirationInDays": {
+              "type": "boolean"
+            },
+            "passwordExpirationInDays": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableDaysBeforeExpirationToForceReset": {
+              "type": "boolean"
+            },
+            "daysBeforeExpirationToForceReset": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableDaysAfterExpirationToSelfRecover": {
+              "type": "boolean"
+            },
+            "daysAfterExpirationToSelfRecover": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableMinChangePeriodInDays": {
+              "type": "boolean"
+            },
+            "minChangePeriodInDays": {
+              "type": "integer"
+            },
+            "enableMaxLoginAttempts": {
+              "type": "boolean"
+            },
+            "maxLoginAttempts": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "enableLockoutTimeInSeconds": {
+              "type": "boolean"
+            },
+            "lockoutTimeInSeconds": {
+              "type": "integer"
+            },
+            "enableMinLength": {
+              "type": "boolean"
+            },
+            "minLength": {
+              "type": "integer"
+            },
+            "needsLowercase": {
+              "type": "boolean"
+            },
+            "needsUppercase": {
+              "type": "boolean"
+            },
+            "needsNumeric": {
+              "type": "boolean"
+            },
+            "needsSymbolic": {
+              "type": "boolean"
+            },
+            "allowUsernameSubstring": {
+              "type": "boolean"
+            },
+            "enableMaxHistory": {
+              "type": "boolean"
+            },
+            "maxHistory": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            },
+            "effectiveDate": {
+              "type": "string"
+            }
+          }
+        },
+        "userPortal": {
+          "type": "object",
+          "properties": {
+            "idleSessionDurationMinutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 129600
+            }
+          }
+        },
+        "systemUserPasswordExpirationInDays": {
+          "type": "integer"
+        },
+        "disableUM": {
+          "type": "boolean"
+        },
+        "disableLdap": {
+          "type": "boolean"
+        },
+        "duplicateLDAPGroups": {
+          "type": "boolean"
+        },
+        "passwordCompliance": {
+          "type": "string",
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ]
+        },
+        "showIntro": {
+          "type": "boolean"
+        },
+        "enableManagedUID": {
+          "type": "boolean"
+        },
+        "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "emailDisclaimer": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "features": {
+          "type": "object",
+          "properties": {
+            "systemInsights": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "logo": {
+          "type": "string"
+        },
+        "enableGoogleApps": {
+          "type": "boolean"
+        },
+        "enableO365": {
+          "type": "boolean"
+        },
+        "betaFeatures": {
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "organizationsettingsput": {
+      "title": "OrganizationSettingsPut",
+      "type": "object",
+      "properties": {
+        "passwordPolicy": {
+          "type": "object",
+          "properties": {
+            "enablePasswordExpirationInDays": {
+              "type": "boolean"
+            },
+            "passwordExpirationInDays": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableDaysBeforeExpirationToForceReset": {
+              "type": "boolean"
+            },
+            "daysBeforeExpirationToForceReset": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableDaysAfterExpirationToSelfRecover": {
+              "type": "boolean"
+            },
+            "daysAfterExpirationToSelfRecover": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "enableMinChangePeriodInDays": {
+              "type": "boolean"
+            },
+            "minChangePeriodInDays": {
+              "type": "integer"
+            },
+            "enableMaxLoginAttempts": {
+              "type": "boolean"
+            },
+            "maxLoginAttempts": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "enableLockoutTimeInSeconds": {
+              "type": "boolean"
+            },
+            "lockoutTimeInSeconds": {
+              "type": "integer"
+            },
+            "enableMinLength": {
+              "type": "boolean"
+            },
+            "minLength": {
+              "type": "integer"
+            },
+            "needsLowercase": {
+              "type": "boolean"
+            },
+            "needsUppercase": {
+              "type": "boolean"
+            },
+            "needsNumeric": {
+              "type": "boolean"
+            },
+            "needsSymbolic": {
+              "type": "boolean"
+            },
+            "allowUsernameSubstring": {
+              "type": "boolean"
+            },
+            "enableMaxHistory": {
+              "type": "boolean"
+            },
+            "maxHistory": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10
+            }
+          }
+        },
+        "userPortal": {
+          "type": "object",
+          "properties": {
+            "idleSessionDurationMinutes": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 129600
+            }
+          }
+        },
+        "systemUserPasswordExpirationInDays": {
+          "type": "integer"
+        },
+        "disableUM": {
+          "type": "boolean"
+        },
+        "disableLdap": {
+          "type": "boolean"
+        },
+        "duplicateLDAPGroups": {
+          "type": "boolean"
+        },
+        "passwordCompliance": {
+          "type": "string",
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ]
+        },
+        "showIntro": {
+          "type": "boolean"
+        },
+        "enableManagedUID": {
+          "type": "boolean"
+        },
+        "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "emailDisclaimer": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "features": {
+          "type": "object",
+          "properties": {
+            "systemInsights": {
+              "type": "object",
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "logo": {
+          "type": "string"
         }
       }
     },
@@ -3470,34 +3861,6 @@
         }
       }
     },
-    "systemuserbinding": {
-      "title": "SystemUserBinding",
-      "type": "object"
-    },
-    "systemuserbindingsput": {
-      "title": "SystemUserBindingsPut",
-      "type": "object",
-      "properties": {
-        "add": {
-          "type": "array",
-          "description": "The list of systemuser ids to be added to this system.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "remove": {
-          "type": "array",
-          "description": "The list of systemuser ids to be removed from this system.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "add",
-        "remove"
-      ]
-    },
     "systemuserput": {
       "title": "SystemUserPut",
       "type": "object",
@@ -3692,6 +4055,9 @@
         },
         "suspended": {
           "type": "boolean"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
         }
       }
     },
@@ -3867,6 +4233,9 @@
         },
         "suspended": {
           "type": "boolean"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
         }
       },
       "required": [
@@ -4098,6 +4467,9 @@
         },
         "suspended": {
           "type": "boolean"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
         }
       }
     },
@@ -4216,34 +4588,6 @@
         "op",
         "type",
         "id"
-      ]
-    },
-    "usersystembinding": {
-      "title": "UserSystemBinding",
-      "type": "object"
-    },
-    "usersystembindingsput": {
-      "title": "UserSystemBindingsPut",
-      "type": "object",
-      "properties": {
-        "add": {
-          "type": "array",
-          "description": "The list of system ids to be added to this user.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "remove": {
-          "type": "array",
-          "description": "The list of system ids to be removed from this user.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "add",
-        "remove"
       ]
     }
   }

@@ -15,9 +15,9 @@ The endpoint adds a new SSO / SAML Applications.
 ### CreateExpanded (Default)
 ```
 New-JcSdkApplication [-Accept <String>] [-ContentType <String>] [-XOrgId <String>] [-Beta]
- [-Config <IApplicationConfig>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>]
- [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Config <IApplicationConfig>] [-Created <String>] [-DisplayLabel <String>] [-DisplayName <String>]
+ [-Id <String>] [-LearnMore <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -112,6 +112,22 @@ HELP MESSAGE MISSING
 ```yaml
 Type: System.String
 Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -Created
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
 Aliases:
 
 Required: False
@@ -383,6 +399,7 @@ To create the parameters described below, construct a hash table containing the 
     - `[SpEntityIdType <String>]`: 
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
+  - `[Created <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 

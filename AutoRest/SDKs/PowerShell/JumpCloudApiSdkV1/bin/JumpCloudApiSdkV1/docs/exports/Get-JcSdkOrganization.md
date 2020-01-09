@@ -8,17 +8,29 @@ schema: 2.0.0
 # Get-JcSdkOrganization
 
 ## SYNOPSIS
-This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## SYNTAX
 
+### List (Default)
 ```
 Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Search <String>]
  [-Skip <Int32>] [-Sort <String>] [<CommonParameters>]
 ```
 
+### Get
+```
+Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+```
+
+### GetViaIdentity
+```
+Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
+ [<CommonParameters>]
+```
+
 ## DESCRIPTION
-This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## EXAMPLES
 
@@ -64,13 +76,62 @@ Accept wildcard characters: False
 Dynamic: False
 ```
 
+### -Id
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -InputObject
+Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+
+```yaml
+Type: JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
+Parameter Sets: GetViaIdentity
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+Dynamic: False
+```
+
 ### -Limit
 The number of records to return at once.
 Limited to 100.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: (All)
+Parameter Sets: List
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: Get, GetViaIdentity
 Aliases:
 
 Required: False
@@ -86,7 +147,7 @@ A nested object containing a string `searchTerm` and a list of `fields` to searc
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -102,7 +163,7 @@ The offset into the records to return.
 
 ```yaml
 Type: System.Int32
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -120,7 +181,7 @@ Prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -136,13 +197,25 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity
+
 ## OUTPUTS
+
+### JumpCloudApiSdkV1.Models.IOrganization
 
 ### JumpCloudApiSdkV1.Models.IOrganizationslist
 
 ## ALIASES
 
 ## NOTES
+
+### COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+#### INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  - `[Id <String>]`: 
+  - `[SystemuserId <String>]`: 
+  - `[Triggername <String>]`: 
 
 ## RELATED LINKS
 

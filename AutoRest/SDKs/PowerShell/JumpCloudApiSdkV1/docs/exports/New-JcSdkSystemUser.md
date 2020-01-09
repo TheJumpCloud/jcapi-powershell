@@ -19,12 +19,12 @@ New-JcSdkSystemUser -Email <String> -Username <String> [-AccountLocked] [-Activa
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-Displayname <String>] [-EmployeeIdentifier <String>]
  [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
- [-ExternallyManaged] [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>]
- [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion]
- [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordlessSudo]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
- [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf]
+ [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>]
+ [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
+ [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo]
+ [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -326,6 +326,22 @@ HELP MESSAGE MISSING
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+Dynamic: False
+```
+
+### -ExternalPasswordExpirationDate
+HELP MESSAGE MISSING
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -809,6 +825,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[EnableManagedUid <Boolean?>]`: 
   - `[EnableUserPortalMultifactor <Boolean?>]`: 
   - `[ExternalDn <String>]`: 
+  - `[ExternalPasswordExpirationDate <String>]`: 
   - `[ExternalSourceType <String>]`: 
   - `[ExternallyManaged <Boolean?>]`: 
   - `[Firstname <String>]`: 

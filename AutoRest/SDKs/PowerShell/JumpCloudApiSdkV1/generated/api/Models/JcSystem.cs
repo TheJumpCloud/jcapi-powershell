@@ -89,6 +89,18 @@ namespace JumpCloudApiSdkV1.Models
         [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Inlined)]
         public bool? FdeKeyPresent { get => ((JumpCloudApiSdkV1.Models.IFdeInternal)Fde).KeyPresent; set => ((JumpCloudApiSdkV1.Models.IFdeInternal)Fde).KeyPresent = value; }
 
+        /// <summary>Backing field for <see cref="FileSystem" /> property.</summary>
+        private string _fileSystem;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public string FileSystem { get => this._fileSystem; set => this._fileSystem = value; }
+
+        /// <summary>Backing field for <see cref="HasServiceAccount" /> property.</summary>
+        private bool? _hasServiceAccount;
+
+        [JumpCloudApiSdkV1.Origin(JumpCloudApiSdkV1.PropertyOrigin.Owned)]
+        public bool? HasServiceAccount { get => this._hasServiceAccount; set => this._hasServiceAccount = value; }
+
         /// <summary>Backing field for <see cref="Hostname" /> property.</summary>
         private string _hostname;
 
@@ -307,6 +319,22 @@ namespace JumpCloudApiSdkV1.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"fileSystem",
+        PossibleTypes = new [] { typeof(string) })]
+        string FileSystem { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
+        SerializedName = @"hasServiceAccount",
+        PossibleTypes = new [] { typeof(bool) })]
+        bool? HasServiceAccount { get; set; }
+
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"hostname",
         PossibleTypes = new [] { typeof(string) })]
         string Hostname { get; set; }
@@ -455,6 +483,10 @@ namespace JumpCloudApiSdkV1.Models
         bool? FdeActive { get; set; }
 
         bool? FdeKeyPresent { get; set; }
+
+        string FileSystem { get; set; }
+
+        bool? HasServiceAccount { get; set; }
 
         string Hostname { get; set; }
 

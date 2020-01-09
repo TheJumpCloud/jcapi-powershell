@@ -61,6 +61,7 @@ namespace JumpCloudApiSdkV1.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Results = (JumpCloudApiSdkV1.Models.IApplication[]) content.GetValueForProperty("Results",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Results, __y => TypeConverterExtensions.SelectToArray<JumpCloudApiSdkV1.Models.IApplication>(__y, JumpCloudApiSdkV1.Models.ApplicationTypeConverter.ConvertFrom));
             ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).TotalCount = (int?) content.GetValueForProperty("TotalCount",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).TotalCount, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             AfterDeserializeDictionary(content);
@@ -80,6 +81,7 @@ namespace JumpCloudApiSdkV1.Models
                 return;
             }
             // actually deserialize
+            ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Results = (JumpCloudApiSdkV1.Models.IApplication[]) content.GetValueForProperty("Results",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).Results, __y => TypeConverterExtensions.SelectToArray<JumpCloudApiSdkV1.Models.IApplication>(__y, JumpCloudApiSdkV1.Models.ApplicationTypeConverter.ConvertFrom));
             ((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).TotalCount = (int?) content.GetValueForProperty("TotalCount",((JumpCloudApiSdkV1.Models.IApplicationslistInternal)this).TotalCount, (__y)=> (int) global::System.Convert.ChangeType(__y, typeof(int)));
             AfterDeserializePSObject(content);

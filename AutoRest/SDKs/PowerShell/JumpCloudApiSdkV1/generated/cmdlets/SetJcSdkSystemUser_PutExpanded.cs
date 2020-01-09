@@ -227,6 +227,17 @@ namespace JumpCloudApiSdkV1.Cmdlets
         Required = false,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
+        SerializedName = @"external_password_expiration_date",
+        PossibleTypes = new [] { typeof(string) })]
+        public string ExternalPasswordExpirationDate { get => Body.ExternalPasswordExpirationDate ?? null; set => Body.ExternalPasswordExpirationDate = value; }
+
+        /// <summary>HELP MESSAGE MISSING</summary>
+        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [JumpCloudApiSdkV1.Category(JumpCloudApiSdkV1.ParameterCategory.Body)]
+        [JumpCloudApiSdkV1.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"HELP MESSAGE MISSING",
         SerializedName = @"external_source_type",
         PossibleTypes = new [] { typeof(string) })]
         public string ExternalSourceType { get => Body.ExternalSourceType ?? null; set => Body.ExternalSourceType = value; }
