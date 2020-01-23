@@ -1,0 +1,168 @@
+namespace JumpCloud.SDK.V2.Models
+{
+    using static JumpCloud.SDK.V2.Runtime.Extensions;
+
+    /// <summary>G Suite Translation Rule</summary>
+    public partial class GSuiteTranslationRule :
+        JumpCloud.SDK.V2.Models.IGSuiteTranslationRule,
+        JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleInternal
+    {
+
+        /// <summary>Backing field for <see cref="BuiltIn" /> property.</summary>
+        private string _builtIn;
+
+        /// <summary>
+        /// Built-in translations for G Suite export:
+        /// * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of
+        /// type `home`
+        /// * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of
+        /// type `work`
+        /// * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses
+        /// of type `other`
+        /// * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones
+        /// of type `home`
+        /// * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones
+        /// of type `mobile`
+        /// * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones
+        /// of type `other`
+        /// * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones
+        /// of type `work`
+        /// * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user
+        /// phones of type `work_fax`
+        /// * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory
+        /// user phones of type `work_mobile`
+        /// * `user_primary_organization_cost_center` - Translate JumpCloud user `costCenter` to G Suite Directory user `costCenter`
+        /// for `primary` organization
+        /// * `user_primary_organization_department` - Translate JumpCloud user `department` to G Suite Directory user `department`
+        /// for `primary` organization
+        /// * `user_primary_organization_description` - Translate JumpCloud user `employeeType` to G Suite Directory user `description`
+        /// for `primary` organization
+        /// * `user_primary_organization_employee_id` - Translate JumpCloud user `employeeIdentifier` to G Suite Directory user `externalIds`
+        /// element of type `organization`
+        /// * `user_primary_organization_title` - Translate JumpCloud user `jobTitle` to G Suite Directory user `title` for `primary`
+        /// organization
+        /// </summary>
+        [JumpCloud.SDK.V2.Origin(JumpCloud.SDK.V2.PropertyOrigin.Owned)]
+        public string BuiltIn { get => this._builtIn; set => this._builtIn = value; }
+
+        /// <summary>Backing field for <see cref="Id" /> property.</summary>
+        private string _id;
+
+        /// <summary>ObjectId uniquely identifying a Translation Rule.</summary>
+        [JumpCloud.SDK.V2.Origin(JumpCloud.SDK.V2.PropertyOrigin.Owned)]
+        public string Id { get => this._id; set => this._id = value; }
+
+        /// <summary>Creates an new <see cref="GSuiteTranslationRule" /> instance.</summary>
+        public GSuiteTranslationRule()
+        {
+
+        }
+    }
+    /// G Suite Translation Rule
+    public partial interface IGSuiteTranslationRule :
+        JumpCloud.SDK.V2.Runtime.IJsonSerializable
+    {
+        /// <summary>
+        /// Built-in translations for G Suite export:
+        /// * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of
+        /// type `home`
+        /// * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of
+        /// type `work`
+        /// * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses
+        /// of type `other`
+        /// * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones
+        /// of type `home`
+        /// * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones
+        /// of type `mobile`
+        /// * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones
+        /// of type `other`
+        /// * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones
+        /// of type `work`
+        /// * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user
+        /// phones of type `work_fax`
+        /// * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory
+        /// user phones of type `work_mobile`
+        /// * `user_primary_organization_cost_center` - Translate JumpCloud user `costCenter` to G Suite Directory user `costCenter`
+        /// for `primary` organization
+        /// * `user_primary_organization_department` - Translate JumpCloud user `department` to G Suite Directory user `department`
+        /// for `primary` organization
+        /// * `user_primary_organization_description` - Translate JumpCloud user `employeeType` to G Suite Directory user `description`
+        /// for `primary` organization
+        /// * `user_primary_organization_employee_id` - Translate JumpCloud user `employeeIdentifier` to G Suite Directory user `externalIds`
+        /// element of type `organization`
+        /// * `user_primary_organization_title` - Translate JumpCloud user `jobTitle` to G Suite Directory user `title` for `primary`
+        /// organization
+        /// </summary>
+        [JumpCloud.SDK.V2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"Built-in translations for G Suite export:
+        * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`
+        * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`
+        * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`
+        * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`
+        * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`
+        * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`
+        * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`
+        * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`
+        * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`
+        * `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization
+        * `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization
+        * `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization
+        * `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`
+        * `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization
+        ",
+        SerializedName = @"builtIn",
+        PossibleTypes = new [] { typeof(string) })]
+        string BuiltIn { get; set; }
+        /// <summary>ObjectId uniquely identifying a Translation Rule.</summary>
+        [JumpCloud.SDK.V2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"ObjectId uniquely identifying a Translation Rule.",
+        SerializedName = @"id",
+        PossibleTypes = new [] { typeof(string) })]
+        string Id { get; set; }
+
+    }
+    /// G Suite Translation Rule
+    internal partial interface IGSuiteTranslationRuleInternal
+
+    {
+        /// <summary>
+        /// Built-in translations for G Suite export:
+        /// * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of
+        /// type `home`
+        /// * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of
+        /// type `work`
+        /// * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses
+        /// of type `other`
+        /// * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones
+        /// of type `home`
+        /// * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones
+        /// of type `mobile`
+        /// * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones
+        /// of type `other`
+        /// * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones
+        /// of type `work`
+        /// * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user
+        /// phones of type `work_fax`
+        /// * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory
+        /// user phones of type `work_mobile`
+        /// * `user_primary_organization_cost_center` - Translate JumpCloud user `costCenter` to G Suite Directory user `costCenter`
+        /// for `primary` organization
+        /// * `user_primary_organization_department` - Translate JumpCloud user `department` to G Suite Directory user `department`
+        /// for `primary` organization
+        /// * `user_primary_organization_description` - Translate JumpCloud user `employeeType` to G Suite Directory user `description`
+        /// for `primary` organization
+        /// * `user_primary_organization_employee_id` - Translate JumpCloud user `employeeIdentifier` to G Suite Directory user `externalIds`
+        /// element of type `organization`
+        /// * `user_primary_organization_title` - Translate JumpCloud user `jobTitle` to G Suite Directory user `title` for `primary`
+        /// organization
+        /// </summary>
+        string BuiltIn { get; set; }
+        /// <summary>ObjectId uniquely identifying a Translation Rule.</summary>
+        string Id { get; set; }
+
+    }
+}
