@@ -42,7 +42,7 @@ param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # ObjectID of the Duo Account
+    # HELP MESSAGE MISSING
     ${Id},
 
     [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]

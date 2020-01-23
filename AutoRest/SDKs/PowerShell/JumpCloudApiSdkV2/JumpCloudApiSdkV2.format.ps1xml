@@ -1268,6 +1268,68 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloudApiSdkV2.Models.Office365Output</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.Office365Output</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserLockoutAction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserPasswordExpirationAction</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserLockoutAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloudApiSdkV2.Models.Office365PatchInput</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloudApiSdkV2.Models.Office365PatchInput</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>UserLockoutAction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserPasswordExpirationAction</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>UserLockoutAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloudApiSdkV2.Models.Office365TranslationRule</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloudApiSdkV2.Models.Office365TranslationRule</TypeName>
@@ -4057,6 +4119,9 @@
             <Label>ExternalDn</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ExternalSourceType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4173,6 +4238,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalSourceType</PropertyName>
@@ -4295,6 +4363,9 @@
             <Label>ExternalDn</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ExternalSourceType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4396,6 +4467,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ExternalSourceType</PropertyName>

@@ -18,9 +18,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IDuoApplicationUpdateReq>: DuoApplicationUpdateReq
-  [ApiHost <String>]: 
-  [IntegrationKey <String>]: 
-  [Name <String>]: 
+  ApiHost <String>: 
+  IntegrationKey <String>: 
+  Name <String>: 
   [SecretKey <String>]: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
@@ -77,22 +77,22 @@ param(
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
     ${ApiHost},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING
     ${IntegrationKey},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Body')]
     [System.String]
     # HELP MESSAGE MISSING

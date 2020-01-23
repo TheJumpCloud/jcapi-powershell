@@ -105,6 +105,12 @@ namespace JumpCloudApiSdkV2.Models
         [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
         public string ExternalDn { get => this._externalDn; set => this._externalDn = value; }
 
+        /// <summary>Backing field for <see cref="ExternalPasswordExpirationDate" /> property.</summary>
+        private global::System.DateTime? _externalPasswordExpirationDate;
+
+        [JumpCloudApiSdkV2.Origin(JumpCloudApiSdkV2.PropertyOrigin.Owned)]
+        public global::System.DateTime? ExternalPasswordExpirationDate { get => this._externalPasswordExpirationDate; set => this._externalPasswordExpirationDate = value; }
+
         /// <summary>Backing field for <see cref="ExternalSourceType" /> property.</summary>
         private string _externalSourceType;
 
@@ -395,6 +401,14 @@ namespace JumpCloudApiSdkV2.Models
         Required = false,
         ReadOnly = false,
         Description = @"",
+        SerializedName = @"external_password_expiration_date",
+        PossibleTypes = new [] { typeof(global::System.DateTime) })]
+        global::System.DateTime? ExternalPasswordExpirationDate { get; set; }
+
+        [JumpCloudApiSdkV2.Runtime.Info(
+        Required = false,
+        ReadOnly = false,
+        Description = @"",
         SerializedName = @"external_source_type",
         PossibleTypes = new [] { typeof(string) })]
         string ExternalSourceType { get; set; }
@@ -619,6 +633,8 @@ namespace JumpCloudApiSdkV2.Models
         bool? EnableUserPortalMultifactor { get; set; }
 
         string ExternalDn { get; set; }
+
+        global::System.DateTime? ExternalPasswordExpirationDate { get; set; }
 
         string ExternalSourceType { get; set; }
 

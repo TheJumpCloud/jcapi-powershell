@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloudApiSdkV2
-Module Guid: 743b31d5-3c52-4f11-89ca-c1b80e28857c
+Module Guid: ba894773-3c6f-4a15-b4cd-a978b8328926
 Download Help Link: https://docs.microsoft.com/en-us/powershell/module/jumpcloudapisdkv2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -86,7 +86,7 @@ This endpoint will return all Users bound to an LDAP Server, either directly or 
 This endpoint will return all Users Groups bound to a LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this LDAP server instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this LDAP server instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkOffice365Association](Get-JcSdkOffice365Association.md)
-This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 
 ### [Get-JcSdkOffice365TranslationRule](Get-JcSdkOffice365TranslationRule.md)
 This endpoint returns a specific translation rule for a specific Office 365 instance.
@@ -324,6 +324,12 @@ The endpoint allows you to create a Workday Import request.\n\n#### Sample Reque
 ### [Import-JcSdkWorkdayResult](Import-JcSdkWorkdayResult.md)
 This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
+### [Invoke-JcSdkOffice365GetSOffice365](Invoke-JcSdkOffice365GetSOffice365.md)
+This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+
+### [Invoke-JcSdkOffice365PatchSOffice365](Invoke-JcSdkOffice365PatchSOffice365.md)
+This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
+
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}\n\t\t]\n\t}\n]\n```
@@ -457,7 +463,7 @@ The endpoint allows you to create a bulk job to asynchronously update users.
 See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```
 
 ### [Update-JcSdkGSuite](Update-JcSdkGSuite.md)
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
 
 ### [Update-JcSdkLdapServer](Update-JcSdkLdapServer.md)
 This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```

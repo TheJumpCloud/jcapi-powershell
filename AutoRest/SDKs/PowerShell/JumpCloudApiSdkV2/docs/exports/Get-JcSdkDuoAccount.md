@@ -42,7 +42,7 @@ To view examples, please use the -Online parameter with Get-Help or navigate to:
 ## PARAMETERS
 
 ### -Id
-ObjectID of the Duo Account
+HELP MESSAGE MISSING
 
 ```yaml
 Type: System.String

@@ -17,7 +17,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1duo~1accounts~1{account_id}~1applications~1{application_id}'
+    /// - 'file:///D:/a/2/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1duo~1accounts~1{account_id}~1applications~1{application_id}'
     /// [DETAILS]
     /// verb: Set
     /// subjectPrefix:
@@ -53,10 +53,10 @@ namespace JumpCloudApiSdkV2.Cmdlets
         public string AccountId { get => this._accountId; set => this._accountId = value; }
 
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Body)]
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
         SerializedName = @"apiHost",
@@ -103,10 +103,10 @@ namespace JumpCloudApiSdkV2.Cmdlets
         public JumpCloudApiSdkV2.Runtime.SendAsyncStep[] HttpPipelinePrepend { get; set; }
 
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Body)]
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
         SerializedName = @"integrationKey",
@@ -125,10 +125,10 @@ namespace JumpCloudApiSdkV2.Cmdlets
         global::System.Threading.CancellationToken JumpCloudApiSdkV2.Runtime.IEventListener.Token => _cancellationTokenSource.Token;
 
         /// <summary>HELP MESSAGE MISSING</summary>
-        [System.Management.Automation.Parameter(Mandatory = false, HelpMessage = "HELP MESSAGE MISSING")]
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING")]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Body)]
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"HELP MESSAGE MISSING",
         SerializedName = @"name",

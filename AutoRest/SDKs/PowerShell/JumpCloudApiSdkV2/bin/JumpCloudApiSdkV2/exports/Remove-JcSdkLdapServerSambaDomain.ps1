@@ -46,7 +46,7 @@ param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # Unique identifier of the LDAP server.
+    # Unique identifier o f the LDAP server.
     ${LdapserverId},
 
     [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]

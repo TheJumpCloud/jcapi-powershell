@@ -126,7 +126,7 @@ Dynamic: False
 ```
 
 ### -LdapserverId
-Unique identifier of the LDAP server.
+Unique identifier o f the LDAP server.
 
 ```yaml
 Type: System.String

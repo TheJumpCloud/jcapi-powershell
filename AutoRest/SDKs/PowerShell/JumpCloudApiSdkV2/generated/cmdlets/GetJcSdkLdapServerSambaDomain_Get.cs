@@ -15,7 +15,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1ldapservers~1{ldapserver_id}~1sambadomains~1{id}'
+    /// - 'file:///D:/a/2/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1ldapservers~1{ldapserver_id}~1sambadomains~1{id}'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
@@ -103,12 +103,12 @@ namespace JumpCloudApiSdkV2.Cmdlets
         /// <summary>Backing field for <see cref="LdapserverId" /> property.</summary>
         private string _ldapserverId;
 
-        /// <summary>Unique identifier of the LDAP server.</summary>
-        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Unique identifier of the LDAP server.")]
+        /// <summary>Unique identifier o f the LDAP server.</summary>
+        [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "Unique identifier o f the LDAP server.")]
         [JumpCloudApiSdkV2.Runtime.Info(
         Required = true,
         ReadOnly = false,
-        Description = @"Unique identifier of the LDAP server.",
+        Description = @"Unique identifier o f the LDAP server.",
         SerializedName = @"ldapserver_id",
         PossibleTypes = new [] { typeof(string) })]
         [JumpCloudApiSdkV2.Category(JumpCloudApiSdkV2.ParameterCategory.Path)]

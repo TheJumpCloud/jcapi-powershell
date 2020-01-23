@@ -5,7 +5,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// <summary>
     /// This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID}
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}' \\\n -d '{\n
-    /// \"userLockoutAction\": \"remove\",\n \"userPasswordExpirationAction\": \"disable\"\n }'\n```
+    /// \"userLockoutAction\": \"suspend\",\n \"userPasswordExpirationAction\": \"maintain\"\n }'\n```
     /// </summary>
     /// <remarks>
     /// [OpenAPI] GSuite_Patch=>PATCH:"/gsuites/{id}"
@@ -16,7 +16,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1gsuites~1{id}'
+    /// - 'file:///D:/a/2/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1gsuites~1{id}'
     /// [DETAILS]
     /// verb: Update
     /// subjectPrefix:
@@ -25,7 +25,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsData.Update, @"JcSdkGSuite_Patch", SupportsShouldProcess = true)]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.IGsuiteOutput))]
-    [JumpCloudApiSdkV2.Description(@"This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \""userLockoutAction\"": \""remove\"",\n    \""userPasswordExpirationAction\"": \""disable\""\n  }'\n```")]
+    [JumpCloudApiSdkV2.Description(@"This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \""userLockoutAction\"": \""suspend\"",\n    \""userPasswordExpirationAction\"": \""maintain\""\n  }'\n```")]
     [JumpCloudApiSdkV2.Generated]
     public partial class UpdateJcSdkGSuite_Patch : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener

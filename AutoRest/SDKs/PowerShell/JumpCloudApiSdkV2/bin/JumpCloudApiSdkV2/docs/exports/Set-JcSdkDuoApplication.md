@@ -14,8 +14,8 @@ Updates the specified Duo application.\n\n#### Sample Request\n```\n  curl -X PU
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> [-ApiHost <String>]
- [-IntegrationKey <String>] [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> -ApiHost <String> -IntegrationKey <String>
+ -Name <String> [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
@@ -32,8 +32,8 @@ Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -Body <IDuoApplica
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> [-ApiHost <String>] [-IntegrationKey <String>]
- [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -ApiHost <String> -IntegrationKey <String>
+ -Name <String> [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -74,7 +74,7 @@ Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -140,7 +140,7 @@ Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -156,7 +156,7 @@ Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -236,9 +236,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 #### BODY <IDuoApplicationUpdateReq>: DuoApplicationUpdateReq
-  - `[ApiHost <String>]`: 
-  - `[IntegrationKey <String>]`: 
-  - `[Name <String>]`: 
+  - `ApiHost <String>`: 
+  - `IntegrationKey <String>`: 
+  - `Name <String>`: 
   - `[SecretKey <String>]`: 
 
 #### INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

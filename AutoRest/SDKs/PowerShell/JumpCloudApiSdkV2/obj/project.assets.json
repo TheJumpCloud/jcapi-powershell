@@ -283,11 +283,11 @@
   "project": {
     "version": "0.0.1",
     "restore": {
-      "projectUniqueName": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\JumpCloudApiSdkV2.csproj",
+      "projectUniqueName": "D:\\a\\2\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\JumpCloudApiSdkV2.csproj",
       "projectName": "JumpCloudApiSdkV2.private",
-      "projectPath": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\JumpCloudApiSdkV2.csproj",
+      "projectPath": "D:\\a\\2\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\JumpCloudApiSdkV2.csproj",
       "packagesPath": "C:\\Users\\VssAdministrator\\.nuget\\packages\\",
-      "outputPath": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\obj\\",
+      "outputPath": "D:\\a\\2\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloudApiSdkV2\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -4,7 +4,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
 
     /// <summary>
     /// This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous
-    /// relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group
+    /// relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group'
     /// \\\n -H 'Accept: application/json' \\\n -H 'Content-Type: application/json' \\\n -H 'x-api-key: {API_KEY}'\n\n```
     /// </summary>
     /// <remarks>
@@ -16,7 +16,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1office365s~1{office365_id}~1associations'
+    /// - 'file:///D:/a/2/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1office365s~1{office365_id}~1associations'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
@@ -25,7 +25,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkOffice365Association_List")]
     [System.Management.Automation.OutputType(typeof(JumpCloudApiSdkV2.Models.IGraphConnection))]
-    [JumpCloudApiSdkV2.Description(@"This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```")]
+    [JumpCloudApiSdkV2.Description(@"This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```")]
     [JumpCloudApiSdkV2.Generated]
     public partial class GetJcSdkOffice365Association_List : System.Management.Automation.PSCmdlet,
         JumpCloudApiSdkV2.Runtime.IEventListener

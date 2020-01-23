@@ -2948,7 +2948,7 @@ namespace JumpCloudApiSdkV2
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="id">ObjectID of the Duo Account</param>
+        /// <param name="id"></param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="onBadRequest">a delegate that is called when the remote service returns 400 (BadRequest).</param>
         /// <param name="onUnauthorized">a delegate that is called when the remote service returns 401 (Unauthorized).</param>
@@ -3133,7 +3133,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="DuoAccountDelete" /> method. Call this like the actual call, but you will get validation
         /// events back.
         /// </summary>
-        /// <param name="id">ObjectID of the Duo Account</param>
+        /// <param name="id"></param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
@@ -3156,7 +3156,7 @@ namespace JumpCloudApiSdkV2
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="id">ObjectID of the Duo Account</param>
+        /// <param name="id"></param>
         /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
@@ -3286,7 +3286,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="DuoAccountGet" /> method. Call this like the actual call, but you will get validation
         /// events back.
         /// </summary>
-        /// <param name="id">ObjectID of the Duo Account</param>
+        /// <param name="id"></param>
         /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
@@ -5038,8 +5038,8 @@ namespace JumpCloudApiSdkV2
         /// -H 'Content-Type: application/json' \
         /// -H 'x-api-key: {API_KEY}' \
         /// -d '{
-        /// "userLockoutAction": "remove",
-        /// "userPasswordExpirationAction": "disable"
+        /// "userLockoutAction": "suspend",
+        /// "userPasswordExpirationAction": "maintain"
         /// }'
         /// ```
         /// </summary>
@@ -5088,8 +5088,8 @@ namespace JumpCloudApiSdkV2
         /// -H 'Content-Type: application/json' \
         /// -H 'x-api-key: {API_KEY}' \
         /// -d '{
-        /// "userLockoutAction": "remove",
-        /// "userPasswordExpirationAction": "disable"
+        /// "userLockoutAction": "suspend",
+        /// "userPasswordExpirationAction": "maintain"
         /// }'
         /// ```
         /// </summary>
@@ -6263,6 +6263,161 @@ namespace JumpCloudApiSdkV2
             using( NoSynchronizationContext )
             {
                 await eventListener.AssertNotNull(nameof(gsuiteId),gsuiteId);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Office 365 instance.
+        /// #####
+        /// Sample Request
+        /// ```
+        /// curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="office365Id">ObjectID of the Office 365 instance.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task GetOffice365SOffice365Id(string office365Id, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/office365s/"
+                        + global::System.Uri.EscapeDataString(office365Id)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.GetOffice365SOffice365Id_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint returns a specific Office 365 instance.
+        /// #####
+        /// Sample Request
+        /// ```
+        /// curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task GetOffice365SOffice365IdViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/office365s/(?<office365_id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/office365s/{office365_id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var office365Id = _match.Groups["office365_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/office365s/"
+                        + office365Id
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Get, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.GetOffice365SOffice365Id_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="GetOffice365SOffice365Id" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task GetOffice365SOffice365Id_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Office365Output.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="GetOffice365SOffice365Id" /> method. Call this like the actual call, but you will get
+        /// validation events back.
+        /// </summary>
+        /// <param name="office365Id">ObjectID of the Office 365 instance.</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task GetOffice365SOffice365Id_Validate(string office365Id, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(office365Id),office365Id);
             }
         }
 
@@ -7582,7 +7737,7 @@ namespace JumpCloudApiSdkV2
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -7751,7 +7906,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="LdapServerSambaDomainDelete" /> method. Call this like the actual call, but you will
         /// get validation events back.
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -7781,7 +7936,7 @@ namespace JumpCloudApiSdkV2
         /// -H 'x-api-key: {API_KEY}'
         /// ```
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -7942,7 +8097,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="LdapServerSambaDomainGet" /> method. Call this like the actual call, but you will get
         /// validation events back.
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -8198,7 +8353,7 @@ namespace JumpCloudApiSdkV2
         /// }'
         /// ```
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -8372,7 +8527,7 @@ namespace JumpCloudApiSdkV2
         /// Validation method for <see cref="LdapServerSambaDomainPut" /> method. Call this like the actual call, but you will get
         /// validation events back.
         /// </summary>
-        /// <param name="ldapserverId">Unique identifier of the LDAP server.</param>
+        /// <param name="ldapserverId">Unique identifier o f the LDAP server.</param>
         /// <param name="id">Unique identifier of the samba domain.</param>
         /// <param name="contentType"></param>
         /// <param name="accept"></param>
@@ -8771,7 +8926,7 @@ namespace JumpCloudApiSdkV2
         /// A direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.
         /// #### Sample Request
         /// ```
-        /// curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group \
+        /// curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \
         /// -H 'Accept: application/json' \
         /// -H 'Content-Type: application/json' \
         /// -H 'x-api-key: {API_KEY}'
@@ -8822,7 +8977,7 @@ namespace JumpCloudApiSdkV2
         /// A direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.
         /// #### Sample Request
         /// ```
-        /// curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group \
+        /// curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \
         /// -H 'Accept: application/json' \
         /// -H 'Content-Type: application/json' \
         /// -H 'x-api-key: {API_KEY}'
@@ -10368,6 +10523,182 @@ namespace JumpCloudApiSdkV2
             using( NoSynchronizationContext )
             {
 
+            }
+        }
+
+        /// <summary>
+        /// This endpoint allows updating some attributes of an Office 365 instance.
+        /// #####
+        /// Sample Request
+        /// ```
+        /// curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "userLockoutAction": "maintain",
+        /// "userPasswordExpirationAction": "suspend"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="office365Id">ObjectID of the Office 365 instance.</param>
+        /// <param name="body">Office 365 Patch Input</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task PatchOffice365SOffice365Id(string office365Id, JumpCloudApiSdkV2.Models.IOffice365PatchInput body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/office365s/"
+                        + global::System.Uri.EscapeDataString(office365Id)
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Patch, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.PatchOffice365SOffice365Id_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>
+        /// This endpoint allows updating some attributes of an Office 365 instance.
+        /// #####
+        /// Sample Request
+        /// ```
+        /// curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        /// -H 'Accept: application/json' \
+        /// -H 'Content-Type: application/json' \
+        /// -H 'x-api-key: {API_KEY}' \
+        /// -d '{
+        /// "userLockoutAction": "maintain",
+        /// "userPasswordExpirationAction": "suspend"
+        /// }'
+        /// ```
+        /// </summary>
+        /// <param name="viaIdentity">FIXME: Parameter viaIdentity is MISSING DESCRIPTION</param>
+        /// <param name="body">Office 365 Patch Input</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        public async global::System.Threading.Tasks.Task PatchOffice365SOffice365IdViaIdentity(global::System.String viaIdentity, JumpCloudApiSdkV2.Models.IOffice365PatchInput body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            // Constant Parameters
+            using( NoSynchronizationContext )
+            {
+                // verify that Identity format is an exact match for uri
+
+                var _match = new global::System.Text.RegularExpressions.Regex("^/office365s/(?<office365_id>[^/]+)$").Match(viaIdentity);
+                if (!_match.Success)
+                {
+                    throw new global::System.Exception("Invalid identity for URI '/office365s/{office365_id}'");
+                }
+
+                // replace URI parameters with values from identity
+                var office365Id = _match.Groups["office365_id"].Value;
+                // construct URL
+                var _url = new global::System.Uri(global::System.Text.RegularExpressions.Regex.Replace(
+                        "https://console.jumpcloud.com/api/v2/office365s/"
+                        + office365Id
+
+                        ,"\\?&*$|&*$|(\\?)&+|(&)&+","$1$2"));
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.URLCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                // generate request object
+                var request =  new global::System.Net.Http.HttpRequestMessage(JumpCloudApiSdkV2.Runtime.Method.Patch, _url);
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.RequestCreated, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.HeaderParametersAdded, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // set body content
+                request.Content = new global::System.Net.Http.StringContent(null != body ? body.ToJson(null).ToString() : @"{}", global::System.Text.Encoding.UTF8);
+                request.Content.Headers.ContentType = global::System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BodyContentSet, _url); if( eventListener.Token.IsCancellationRequested ) { return; }
+                // make the call
+                await this.PatchOffice365SOffice365Id_Call(request,onOk,eventListener,sender);
+            }
+        }
+
+        /// <summary>Actual wire call for <see cref="PatchOffice365SOffice365Id" /> method.</summary>
+        /// <param name="request">the prepared HttpRequestMessage to send.</param>
+        /// <param name="onOk">a delegate that is called when the remote service returns 200 (OK).</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <param name="sender">an instance of an JumpCloudApiSdkV2.Runtime.ISendAsync pipeline to use to make the request.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task PatchOffice365SOffice365Id_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloudApiSdkV2.Models.IOffice365Output>, global::System.Threading.Tasks.Task> onOk, JumpCloudApiSdkV2.Runtime.IEventListener eventListener, JumpCloudApiSdkV2.Runtime.ISendAsync sender)
+        {
+            using( NoSynchronizationContext )
+            {
+                global::System.Net.Http.HttpResponseMessage _response = null;
+                try
+                {
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeCall, request); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    _response = await sender.SendAsync(request, eventListener);
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.ResponseCreated, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                    var _contentType = _response.Content.Headers.ContentType?.MediaType;
+
+                    switch ( _response.StatusCode )
+                    {
+                        case global::System.Net.HttpStatusCode.OK:
+                        {
+                            await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloudApiSdkV2.Models.Office365Output.FromJson(JumpCloudApiSdkV2.Runtime.Json.JsonNode.Parse(body.Result)) ));
+                            break;
+                        }
+                        default:
+                        {
+                            throw new JumpCloudApiSdkV2.Runtime.UndeclaredResponseException(_response);
+                        }
+                    }
+                }
+                finally
+                {
+                    // finally statements
+                    await eventListener.Signal(JumpCloudApiSdkV2.Runtime.Events.Finally, request, _response);
+                    _response?.Dispose();
+                    request?.Dispose();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Validation method for <see cref="PatchOffice365SOffice365Id" /> method. Call this like the actual call, but you will get
+        /// validation events back.
+        /// </summary>
+        /// <param name="office365Id">ObjectID of the Office 365 instance.</param>
+        /// <param name="body">Office 365 Patch Input</param>
+        /// <param name="eventListener">an <see cref="JumpCloudApiSdkV2.Runtime.IEventListener" /> instance that will receive events.</param>
+        /// <returns>
+        /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
+        /// </returns>
+        internal async global::System.Threading.Tasks.Task PatchOffice365SOffice365Id_Validate(string office365Id, JumpCloudApiSdkV2.Models.IOffice365PatchInput body, JumpCloudApiSdkV2.Runtime.IEventListener eventListener)
+        {
+            using( NoSynchronizationContext )
+            {
+                await eventListener.AssertNotNull(nameof(office365Id),office365Id);
+                await eventListener.AssertNotNull(nameof(body), body);
+                await eventListener.AssertObjectIsValid(nameof(body), body);
             }
         }
 

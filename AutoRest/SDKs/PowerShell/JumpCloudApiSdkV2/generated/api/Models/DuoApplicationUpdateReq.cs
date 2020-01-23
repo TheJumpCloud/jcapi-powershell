@@ -43,7 +43,7 @@ namespace JumpCloudApiSdkV2.Models
         JumpCloudApiSdkV2.Runtime.IJsonSerializable
     {
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"",
         SerializedName = @"apiHost",
@@ -51,7 +51,7 @@ namespace JumpCloudApiSdkV2.Models
         string ApiHost { get; set; }
 
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"",
         SerializedName = @"integrationKey",
@@ -59,7 +59,7 @@ namespace JumpCloudApiSdkV2.Models
         string IntegrationKey { get; set; }
 
         [JumpCloudApiSdkV2.Runtime.Info(
-        Required = false,
+        Required = true,
         ReadOnly = false,
         Description = @"",
         SerializedName = @"name",

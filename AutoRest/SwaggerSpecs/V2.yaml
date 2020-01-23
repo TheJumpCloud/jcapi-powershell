@@ -902,7 +902,6 @@ paths:
     parameters:
     - name: id
       in: path
-      description: ObjectID of the Duo Account
       required: true
       type: string
   /groups:
@@ -1262,8 +1261,8 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}' \
           -d '{
-            "userLockoutAction": "remove",
-            "userPasswordExpirationAction": "disable"
+            "userLockoutAction": "suspend",
+            "userPasswordExpirationAction": "maintain"
           }'
         ```
       parameters:
@@ -1611,7 +1610,7 @@ paths:
     parameters:
     - name: ldapserver_id
       in: path
-      description: Unique identifier of the LDAP server.
+      description: Unique identifier o f the LDAP server.
       required: true
       type: string
     - name: id
@@ -1743,6 +1742,71 @@ paths:
       description: ObjectID of the LDAP Server.
       required: true
       type: string
+  /office365s/{office365_id}:
+    get:
+      operationId: GET_office365s-office365_id
+      summary: Get Office 365 instance
+      description: |-
+        This endpoint returns a specific Office 365 instance.
+
+        #####
+
+        Sample Request
+
+        ```
+        curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}'
+
+        ```
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/office365-output'
+      security:
+      - x-api-key: []
+    parameters:
+    - name: office365_id
+      in: path
+      description: ObjectID of the Office 365 instance.
+      required: true
+      type: string
+    patch:
+      operationId: PATCH_office365s-office365_id
+      summary: Update existing Office 365 instance.
+      description: |-
+        This endpoint allows updating some attributes of an Office 365 instance.
+
+        #####
+
+        Sample Request
+
+        ```
+        curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}' \
+          -d '{
+            "userLockoutAction": "maintain",
+            "userPasswordExpirationAction": "suspend"
+          }'
+
+        ```
+      parameters:
+      - name: body
+        in: body
+        schema:
+          $ref: '#/definitions/office365-patch-input'
+      responses:
+        "200":
+          description: ""
+          schema:
+            $ref: '#/definitions/office365-output'
+      security:
+      - x-api-key: []
   /office365s/{office365_id}/associations:
     get:
       operationId: Office365Association_List
@@ -1757,7 +1821,7 @@ paths:
 
         #### Sample Request
         ```
-        curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group \
+        curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -5822,6 +5886,10 @@ definitions:
         type: string
       integrationKey:
         type: string
+    required:
+    - name
+    - apiHost
+    - integrationKey
   DuoRegistrationApplication:
     title: DuoRegistrationApplication
     type: object
@@ -6029,6 +6097,7 @@ definitions:
           enum:
           - suspend
           - maintain
+          - remove_access
     type: object
   gsuite-patch-input:
     title: GSuite Patch Input
@@ -6044,6 +6113,7 @@ definitions:
         enum:
         - suspend
         - maintain
+        - remove_access
   GSuiteTranslationRule:
     title: G Suite Translation Rule
     type: object
@@ -6171,6 +6241,40 @@ definitions:
     - user_job_title
     - user_office_location
     description: "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user` \n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user` \n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user` \n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user` \n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user` \n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user` \n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user` \n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user` "
+  office365-output:
+    title: Office 365 Output
+    type: object
+    properties:
+      id:
+        type: string
+      userLockoutAction:
+        type: string
+        enum:
+        - suspend
+        - maintain
+      userPasswordExpirationAction:
+        type: string
+        enum:
+        - suspend
+        - maintain
+    required:
+    - id
+    - userLockoutAction
+    - userPasswordExpirationAction
+  office365-patch-input:
+    title: Office 365 Patch Input
+    type: object
+    properties:
+      userLockoutAction:
+        type: string
+        enum:
+        - suspend
+        - maintain
+      userPasswordExpirationAction:
+        type: string
+        enum:
+        - suspend
+        - maintain
   Office365TranslationRule:
     title: Office 365 Translation Rule
     type: object
@@ -7494,6 +7598,8 @@ definitions:
         $ref: '#/definitions/mfa'
       suspended:
         type: boolean
+      external_password_expiration_date:
+        type: string
   systemuserputpost:
     title: SystemUserPost
     type: object
@@ -7612,6 +7718,9 @@ definitions:
         $ref: '#/definitions/mfa'
       suspended:
         type: boolean
+      external_password_expiration_date:
+        type: string
+        format: date-time
     required:
     - email
     - username
@@ -7787,13 +7896,14 @@ definitions:
       auth:
         $ref: '#/definitions/auth-input'
     example:
-      reportUrl: eu est sint Lorem
-      name: in voluptate ullamco
+      reportUrl: est sit laboris
+      name: dolore tempor
       auth:
-        auth:
-          credentials:
-            username: mollit ex
-            password: cillum occaecat id eiusmod ullamco
+        oauth:
+          code: non laborum dolore
+        basic:
+          username: mollit ex
+          password: in tempor ipsum quis
   workday-output:
     title: Workday Output
     type: object

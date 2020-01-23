@@ -15,7 +15,7 @@ namespace JumpCloudApiSdkV2.Cmdlets
     /// filename:
     /// - 'mem:///108?tree%20shaken%20doc...'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1ldapservers~1{ldapserver_id}~1sambadomains'
+    /// - 'file:///D:/a/2/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1ldapservers~1{ldapserver_id}~1sambadomains'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:

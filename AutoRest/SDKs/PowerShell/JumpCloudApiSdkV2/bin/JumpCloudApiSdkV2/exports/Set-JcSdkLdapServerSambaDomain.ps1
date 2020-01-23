@@ -54,7 +54,7 @@ param(
     [Parameter(ParameterSetName='PutExpanded', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # Unique identifier of the LDAP server.
+    # Unique identifier o f the LDAP server.
     ${LdapserverId},
 
     [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]

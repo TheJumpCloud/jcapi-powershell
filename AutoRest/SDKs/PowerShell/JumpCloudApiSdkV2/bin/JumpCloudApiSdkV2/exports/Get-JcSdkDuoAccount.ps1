@@ -40,7 +40,7 @@ param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloudApiSdkV2.Category('Path')]
     [System.String]
-    # ObjectID of the Duo Account
+    # HELP MESSAGE MISSING
     ${Id},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
