@@ -6,7 +6,7 @@ Param(
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
 $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
-$PrereleaseName = 'beta'
+$PrereleaseName = '' # Populate to make release a beta
 $InstallPreReq = $true
 $GenerateModule = $true
 $CopyModuleFile = $true
@@ -195,5 +195,5 @@ ForEach ($API In $APIName)
     }
 }
 # .\run-module.ps1 -run
-# Get-Command -Module JumpCloudApiSdkV1
+# Get-Command -Module JumpCloud.SDK.V1
 # Get-JcSdkApplication

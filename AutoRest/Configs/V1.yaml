@@ -5,11 +5,11 @@ powershell: true
 version: latest
 use: "@microsoft.azure/autorest.powershell@beta"
 base-folder: ".."
-module-name: JumpCloudApiSdkV1
+module-name: JumpCloud.SDK.V1
 input-file: SwaggerSpecs/V1.json
 clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloudApiSdkV1
-namespace: JumpCloudApiSdkV1
+output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
+namespace: JumpCloud.SDK.V1
 # subject-prefix: JcSdk
 prefix: JcSdk
 module-version: 0.0.1
