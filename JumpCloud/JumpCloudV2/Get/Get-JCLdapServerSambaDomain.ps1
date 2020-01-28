@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Get-JCLdapServerSambaDomain
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
@@ -22,7 +22,7 @@ Function Get-JCLdapServerSambaDomain
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'List')]
 		[System.String[]]$Filter,
 		[Parameter(ParameterSetName = 'List')]
@@ -46,11 +46,11 @@ Function Get-JCLdapServerSambaDomain
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

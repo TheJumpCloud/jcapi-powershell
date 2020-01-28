@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Set-JCLdapServerSambaDomain
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
@@ -31,7 +31,7 @@ Function Set-JCLdapServerSambaDomain
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
@@ -52,7 +52,7 @@ Function Set-JCLdapServerSambaDomain
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.ISambaDomainInput]$Body,
+		[JumpCloud.SDK.V2.Models.ISambaDomainInput]$Body,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentityExpanded',
 			Mandatory = $true
@@ -75,12 +75,12 @@ Function Set-JCLdapServerSambaDomain
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

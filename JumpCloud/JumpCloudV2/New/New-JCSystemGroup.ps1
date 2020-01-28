@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCSystemGroup
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,7 +8,7 @@ Function New-JCSystemGroup
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.ISystemGroupData]$Body,
+		[JumpCloud.SDK.V2.Models.ISystemGroupData]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
@@ -16,10 +16,10 @@ Function New-JCSystemGroup
 		[System.String]$Name,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

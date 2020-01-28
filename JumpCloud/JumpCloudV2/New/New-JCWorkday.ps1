@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCWorkday
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,7 +8,7 @@ Function New-JCWorkday
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IWorkdayInput]$Body,
+		[JumpCloud.SDK.V2.Models.IWorkdayInput]$Body,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$BasicPassword,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
@@ -21,10 +21,10 @@ Function New-JCWorkday
 		[System.String]$ReportUrl,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

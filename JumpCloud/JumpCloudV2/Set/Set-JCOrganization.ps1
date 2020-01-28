@@ -1,5 +1,5 @@
-#Requires -modules JumpCloud.SDK.V2
-Function Set-JCPolicy
+#Requires -modules JumpCloud.SDK.V1
+Function Set-JCOrganization
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
 	Param(
@@ -22,7 +22,7 @@ Function Set-JCPolicy
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
@@ -33,22 +33,10 @@ Function Set-JCPolicy
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloud.SDK.V2.Models.IPolicyRequest]$Body,
-		[Parameter(
-			ParameterSetName = 'PutViaIdentityExpanded',
-			Mandatory = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'PutExpanded',
-			Mandatory = $true
-		)]
-		[System.String]$Name,
+		[JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody]$Body,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[System.String]$TemplateId,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values,
+		[JumpCloud.SDK.V1.Models.IOrganizationsettingsput]$Settings,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
@@ -67,7 +55,7 @@ Function Set-JCPolicy
     }
     Process
     {
-        $Results = Set-JcSdkPolicy @PSBoundParameters
+        $Results = Set-JcSdkOrganization @PSBoundParameters
     }
     End
     {

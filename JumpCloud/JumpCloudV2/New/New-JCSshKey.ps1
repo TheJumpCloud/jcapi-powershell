@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function New-JCSshKey
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -22,7 +22,7 @@ Function New-JCSshKey
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function New-JCSshKey
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.ISshkeypost]$Body,
+		[JumpCloud.SDK.V1.Models.ISshkeypost]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true
@@ -56,12 +56,12 @@ Function New-JCSshKey
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

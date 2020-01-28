@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Set-JCSystemUser
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
@@ -22,7 +22,7 @@ Function Set-JCSystemUser
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
@@ -33,19 +33,19 @@ Function Set-JCSystemUser
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.ISystemuserput]$Body,
+		[JumpCloud.SDK.V1.Models.ISystemuserput]$Body,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.Management.Automation.SwitchParameter]$AccountLocked,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputAddressesItem[]]$Addresses,
+		[JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]]$Addresses,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.Management.Automation.SwitchParameter]$AllowPublicKey,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputAttributesItem[]]$Attributes,
+		[JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]]$Attributes,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.String]$Company,
@@ -79,6 +79,9 @@ Function Set-JCSystemUser
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.String]$ExternalDn,
+		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'PutExpanded')]
+		[System.String]$ExternalPasswordExpirationDate,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.String]$ExternalSourceType,
@@ -120,19 +123,19 @@ Function Set-JCSystemUser
 		[System.Management.Automation.SwitchParameter]$PasswordNeverExpires,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputPhoneNumbersItem[]]$PhoneNumbers,
+		[JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]]$PhoneNumbers,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.String]$PublicKey,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputRelationshipsItem[]]$Relationships,
+		[JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]$Relationships,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.Management.Automation.SwitchParameter]$SambaServiceUser,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloudApiSdkV1.Models.ISshkeypost[]]$SshKeys,
+		[JumpCloud.SDK.V1.Models.ISshkeypost[]]$SshKeys,
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[System.Management.Automation.SwitchParameter]$Sudo,
@@ -155,12 +158,12 @@ Function Set-JCSystemUser
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

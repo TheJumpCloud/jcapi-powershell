@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Update-JCLdapServer
 {
     [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
@@ -23,7 +23,7 @@ Function Update-JCLdapServer
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'Patch')]
@@ -44,7 +44,7 @@ Function Update-JCLdapServer
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IBodyParameterLdapServerPatchRequestBody]$Body,
+		[JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody]$Body,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[System.String]$Id1,
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
@@ -57,12 +57,12 @@ Function Update-JCLdapServer
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'Patch')]
 		[Parameter(ParameterSetName = 'PatchViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'Patch')]
 		[Parameter(ParameterSetName = 'PatchViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

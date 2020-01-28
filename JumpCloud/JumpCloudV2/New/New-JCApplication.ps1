@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function New-JCApplication
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -17,11 +17,13 @@ Function New-JCApplication
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IApplication]$Body,
+		[JumpCloud.SDK.V1.Models.IApplication]$Body,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$Beta,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV1.Models.IApplicationConfig]$Config,
+		[JumpCloud.SDK.V1.Models.IApplicationConfig]$Config,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$Created,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$DisplayLabel,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
@@ -38,10 +40,10 @@ Function New-JCApplication
 		[System.String]$SsoUrl,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

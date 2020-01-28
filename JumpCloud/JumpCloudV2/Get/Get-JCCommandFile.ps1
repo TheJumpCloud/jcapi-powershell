@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Get-JCCommandFile
 {
     [CmdletBinding(DefaultParameterSetName = 'Get')]
@@ -13,7 +13,7 @@ Function Get-JCCommandFile
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Get')]
 		[Parameter(ParameterSetName = 'GetViaIdentity')]
 		[System.String]$Fields,
@@ -30,11 +30,11 @@ Function Get-JCCommandFile
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

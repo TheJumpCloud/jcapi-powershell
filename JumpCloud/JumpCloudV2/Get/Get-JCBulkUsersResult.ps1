@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Get-JCBulkUsersResult
 {
     [CmdletBinding(DefaultParameterSetName = 'Get')]
@@ -13,7 +13,7 @@ Function Get-JCBulkUsersResult
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Get')]
 		[Parameter(ParameterSetName = 'GetViaIdentity')]
 		[System.Int32]$Limit,
@@ -27,11 +27,11 @@ Function Get-JCBulkUsersResult
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

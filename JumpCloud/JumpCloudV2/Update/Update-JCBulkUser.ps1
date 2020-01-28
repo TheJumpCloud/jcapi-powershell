@@ -1,18 +1,18 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Update-JCBulkUser
 {
-    [CmdletBinding(DefaultParameterSetName = 'Update')]
+    [CmdletBinding(DefaultParameterSetName = 'Patch')]
 	Param(
 		[Parameter(
-			ParameterSetName = 'Update',
+			ParameterSetName = 'Patch',
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IBulkUserUpdate[]]$Body,
-		[Parameter(ParameterSetName = 'Update')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-		[Parameter(ParameterSetName = 'Update')]
+		[JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]$Body,
+		[Parameter(ParameterSetName = 'Patch')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Patch')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

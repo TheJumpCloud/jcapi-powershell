@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Start-JCCommandTriggerWebhook
 {
     [CmdletBinding(DefaultParameterSetName = 'Start')]
@@ -13,13 +13,13 @@ Function Start-JCCommandTriggerWebhook
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(ParameterSetName = 'Start')]
-		[Parameter(ParameterSetName = 'StartViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Start')]
 		[Parameter(ParameterSetName = 'StartViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Start')]
+		[Parameter(ParameterSetName = 'StartViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

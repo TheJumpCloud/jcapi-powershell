@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Search-JCSystemUser
 {
     [CmdletBinding(DefaultParameterSetName = 'SearchExpanded')]
@@ -20,19 +20,19 @@ Function Search-JCSystemUser
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.ISearch]$Body,
+		[JumpCloud.SDK.V1.Models.ISearch]$Body,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
 		[System.String]$Fields1,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
-		[JumpCloudApiSdkV1.Models.ISearchFilter]$Filter1,
+		[JumpCloud.SDK.V1.Models.ISearchFilter]$Filter1,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
-		[JumpCloudApiSdkV1.Models.ISearchFilter1]$SearchFilter,
-		[Parameter(ParameterSetName = 'SearchExpanded')]
-		[Parameter(ParameterSetName = 'Search')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V1.Models.ISearchFilter1]$SearchFilter,
 		[Parameter(ParameterSetName = 'SearchExpanded')]
 		[Parameter(ParameterSetName = 'Search')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'SearchExpanded')]
+		[Parameter(ParameterSetName = 'Search')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin
@@ -40,11 +40,11 @@ Function Search-JCSystemUser
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

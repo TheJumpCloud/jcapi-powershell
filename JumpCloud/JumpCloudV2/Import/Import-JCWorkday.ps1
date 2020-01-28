@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Import-JCWorkday
 {
     [CmdletBinding(DefaultParameterSetName = 'Import')]
@@ -13,7 +13,7 @@ Function Import-JCWorkday
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'Import',
 			Mandatory = $true,
@@ -24,13 +24,13 @@ Function Import-JCWorkday
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IBulkUserCreate[]]$Body,
-		[Parameter(ParameterSetName = 'Import')]
-		[Parameter(ParameterSetName = 'ImportViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V2.Models.IBulkUserCreate[]]$Body,
 		[Parameter(ParameterSetName = 'Import')]
 		[Parameter(ParameterSetName = 'ImportViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Import')]
+		[Parameter(ParameterSetName = 'ImportViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Get-JCDirectory
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
@@ -16,11 +16,11 @@ Function Get-JCDirectory
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

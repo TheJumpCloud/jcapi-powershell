@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Set-JCRadiusServer
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
@@ -22,7 +22,7 @@ Function Set-JCRadiusServer
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Set-JCRadiusServer
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IBodyParameterRadiusServerPutRequestBody]$Body,
+		[JumpCloud.SDK.V1.Models.IBodyParameterRadiusServerPutRequestBody]$Body,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentityExpanded',
 			Mandatory = $true
@@ -68,12 +68,12 @@ Function Set-JCRadiusServer
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

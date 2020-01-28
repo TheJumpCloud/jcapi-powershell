@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function New-JCSystemUser
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,7 +8,7 @@ Function New-JCSystemUser
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.ISystemuserputpost]$Body,
+		[JumpCloud.SDK.V1.Models.ISystemuserputpost]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
@@ -24,11 +24,11 @@ Function New-JCSystemUser
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$Activated,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
+		[JumpCloud.SDK.V1.Models.ISystemuserputpostAddressesItem[]]$Addresses,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$AllowPublicKey,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
+		[JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]]$Attributes,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$Company,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
@@ -49,6 +49,8 @@ Function New-JCSystemUser
 		[System.Management.Automation.SwitchParameter]$EnableUserPortalMultifactor,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$ExternalDn,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[System.String]$ExternalPasswordExpirationDate,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$ExternalSourceType,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
@@ -78,11 +80,11 @@ Function New-JCSystemUser
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$PasswordlessSudo,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
+		[JumpCloud.SDK.V1.Models.ISystemuserputpostPhoneNumbersItem[]]$PhoneNumbers,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$PublicKey,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
+		[JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]$Relationships,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$SambaServiceUser,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
@@ -97,10 +99,10 @@ Function New-JCSystemUser
 		[System.Int32]$UnixUid,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

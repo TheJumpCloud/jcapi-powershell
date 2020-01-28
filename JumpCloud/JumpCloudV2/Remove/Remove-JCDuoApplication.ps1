@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Remove-JCDuoApplication
 {
     [CmdletBinding(DefaultParameterSetName = 'Delete')]
@@ -18,13 +18,13 @@ Function Remove-JCDuoApplication
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(ParameterSetName = 'Delete')]
-		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Delete')]
+		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

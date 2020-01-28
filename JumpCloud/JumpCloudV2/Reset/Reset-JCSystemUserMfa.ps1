@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Reset-JCSystemUserMfa
 {
     [CmdletBinding(DefaultParameterSetName = 'ResetExpanded')]
@@ -22,7 +22,7 @@ Function Reset-JCSystemUserMfa
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'ResetViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Reset-JCSystemUserMfa
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IBodyParameterSystemUserMfaResetRequestBody]$Body,
+		[JumpCloud.SDK.V1.Models.IBodyParameterSystemUserMfaResetRequestBody]$Body,
 		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'ResetExpanded')]
 		[System.Management.Automation.SwitchParameter]$Exclusion,
@@ -44,12 +44,12 @@ Function Reset-JCSystemUserMfa
 		[Parameter(ParameterSetName = 'Reset')]
 		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'ResetViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'ResetExpanded')]
 		[Parameter(ParameterSetName = 'Reset')]
 		[Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'ResetViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

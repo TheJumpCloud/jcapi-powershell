@@ -129,8 +129,8 @@ Function New-JCObject
     [CmdletBinding()]
     param (
         [Parameter()][Switch]$AutoPopulate
-        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 2, HelpMessage = 'The verb of the cmdlet.')][System.String[]]$CommandVerb # [ValidateSet((Get-Command -Module:('JumpCloudApiSdkV1', 'JumpCloudApiSdkV2')).Verb | Select-Object -Unique)]
-        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 3, HelpMessage = 'The noun of the cmdlet.')][System.String[]]$CommandNoun # [ValidateSet((Get-Command -Module:('JumpCloudApiSdkV1', 'JumpCloudApiSdkV2')).Noun | Select-Object -Unique)]
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 2, HelpMessage = 'The verb of the cmdlet.')][System.String[]]$CommandVerb # [ValidateSet((Get-Command -Module:('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')).Verb | Select-Object -Unique)]
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 3, HelpMessage = 'The noun of the cmdlet.')][System.String[]]$CommandNoun # [ValidateSet((Get-Command -Module:('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')).Noun | Select-Object -Unique)]
     )
     Begin
     {

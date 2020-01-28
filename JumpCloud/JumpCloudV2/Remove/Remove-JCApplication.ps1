@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Remove-JCApplication
 {
     [CmdletBinding(DefaultParameterSetName = 'Delete')]
@@ -13,7 +13,7 @@ Function Remove-JCApplication
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
 		[System.String]$Accept,
@@ -25,10 +25,10 @@ Function Remove-JCApplication
 		[System.String]$XOrgId,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'Delete')]
 		[Parameter(ParameterSetName = 'DeleteViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Set-JCOffice365Association
 {
     [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
@@ -22,7 +22,7 @@ Function Set-JCOffice365Association
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'SetViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Set-JCOffice365Association
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IGraphManagementReq]$Body,
+		[JumpCloud.SDK.V2.Models.IGraphManagementReq]$Body,
 		[Parameter(
 			ParameterSetName = 'SetViaIdentityExpanded',
 			Mandatory = $true
@@ -63,17 +63,17 @@ Function Set-JCOffice365Association
 		[System.String]$Type,
 		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'SetExpanded')]
-		[JumpCloudApiSdkV2.Models.IGraphManagementReqAttributes]$Attributes,
-		[Parameter(ParameterSetName = 'SetExpanded')]
-		[Parameter(ParameterSetName = 'Set')]
-		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'SetViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]$Attributes,
 		[Parameter(ParameterSetName = 'SetExpanded')]
 		[Parameter(ParameterSetName = 'Set')]
 		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'SetViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'SetExpanded')]
+		[Parameter(ParameterSetName = 'Set')]
+		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+		[Parameter(ParameterSetName = 'SetViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

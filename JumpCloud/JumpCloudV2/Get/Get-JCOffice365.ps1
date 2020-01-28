@@ -1,17 +1,19 @@
-#Requires -modules JumpCloudApiSdkV2
-Function Get-JCSystemInsightsSystemUser
+#Requires -modules JumpCloud.SDK.V2
+Function Get-JCOffice365
 {
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [CmdletBinding(DefaultParameterSetName = 'Get')]
 	Param(
 		[Parameter(
-			ParameterSetName = 'List',
+			ParameterSetName = 'Get',
 			Mandatory = $true
 		)]
-		[System.String]$SystemId,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Limit,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Skip,
+		[System.String]$Office365Id,
+		[Parameter(
+			ParameterSetName = 'GetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[System.Boolean]$Paginate = $true
 	)
     Begin
@@ -19,11 +21,11 @@ Function Get-JCSystemInsightsSystemUser
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process
@@ -34,7 +36,7 @@ Function Get-JCSystemInsightsSystemUser
             Do
             {
                 # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
-                $Result = Get-JcSdkSystemInsightsSystemUser @PSBoundParameters
+                $Result = Get-JcSdkOffice365 @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
                     $ResultCount = ($Result | Measure-Object).Count;
@@ -47,7 +49,7 @@ Function Get-JCSystemInsightsSystemUser
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = Get-JcSdkSystemInsightsSystemUser @PSBoundParameters
+            $Result = Get-JcSdkOffice365 @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $ResultCount = ($Result | Measure-Object).Count;

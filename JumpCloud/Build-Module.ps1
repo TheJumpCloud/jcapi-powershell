@@ -129,11 +129,11 @@ If (Get-Module -Name($ModuleNames))
             # Create results logic
             $ResultsLogic = Switch ($ModuleName)
             {
-                'JumpCloudApiSdkV1'
+                'JumpCloud.SDK.V1'
                 {
                     ('$ResultCount = ($Result.results | Measure-Object).Count;' + "`n                " + '$Results += $Result.results;')
                 }
-                'JumpCloudApiSdkV2'
+                'JumpCloud.SDK.V2'
                 {
                     ('$ResultCount = ($Result | Measure-Object).Count;' + "`n                " + '$Results += $Result;')
 

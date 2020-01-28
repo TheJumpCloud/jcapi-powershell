@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCGSuiteTranslationRule
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -22,7 +22,7 @@ Function New-JCGSuiteTranslationRule
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function New-JCGSuiteTranslationRule
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IGSuiteTranslationRuleRequest]$Body,
+		[JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest]$Body,
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$BuiltIn,
@@ -41,12 +41,12 @@ Function New-JCGSuiteTranslationRule
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

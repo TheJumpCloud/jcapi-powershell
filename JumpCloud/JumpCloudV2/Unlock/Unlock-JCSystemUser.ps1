@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Unlock-JCSystemUser
 {
     [CmdletBinding(DefaultParameterSetName = 'Unlock')]
@@ -13,13 +13,13 @@ Function Unlock-JCSystemUser
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(ParameterSetName = 'Unlock')]
-		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Unlock')]
 		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Unlock')]
+		[Parameter(ParameterSetName = 'UnlockViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

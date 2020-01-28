@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCUserGroup
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,22 +8,22 @@ Function New-JCUserGroup
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IUserGroupPost]$Body,
+		[JumpCloud.SDK.V2.Models.IUserGroupPost]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
 		)]
 		[System.String]$Name,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
+		[JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.Management.Automation.SwitchParameter]$AttributeSambaEnabled,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

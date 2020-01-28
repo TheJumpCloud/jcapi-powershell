@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Set-JCSystemGroup
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
@@ -22,7 +22,7 @@ Function Set-JCSystemGroup
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Set-JCSystemGroup
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.ISystemGroupData]$Body,
+		[JumpCloud.SDK.V2.Models.ISystemGroupData]$Body,
 		[Parameter(
 			ParameterSetName = 'PutViaIdentityExpanded',
 			Mandatory = $true
@@ -47,12 +47,12 @@ Function Set-JCSystemGroup
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'PutExpanded')]
 		[Parameter(ParameterSetName = 'Put')]
 		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

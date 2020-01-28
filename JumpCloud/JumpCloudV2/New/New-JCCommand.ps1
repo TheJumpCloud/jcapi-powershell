@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function New-JCCommand
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,7 +8,7 @@ Function New-JCCommand
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV1.Models.ICommand]$Body,
+		[JumpCloud.SDK.V1.Models.ICommand]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
@@ -44,10 +44,10 @@ Function New-JCCommand
 		[System.String]$User,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

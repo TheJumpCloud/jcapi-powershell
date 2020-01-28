@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Remove-JCWorkdayAuthorization
 {
     [CmdletBinding(DefaultParameterSetName = 'Remove')]
@@ -13,13 +13,13 @@ Function Remove-JCWorkdayAuthorization
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(ParameterSetName = 'Remove')]
-		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Remove')]
 		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'Remove')]
+		[Parameter(ParameterSetName = 'RemoveViaIdentity')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

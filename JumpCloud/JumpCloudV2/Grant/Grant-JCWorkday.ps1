@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Grant-JCWorkday
 {
     [CmdletBinding(DefaultParameterSetName = 'AuthorizeExpanded')]
@@ -22,7 +22,7 @@ Function Grant-JCWorkday
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(
 			ParameterSetName = 'AuthorizeViaIdentity',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Grant-JCWorkday
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IAuthInputObject]$Body,
+		[JumpCloud.SDK.V2.Models.IAuthInputObject]$Body,
 		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'AuthorizeExpanded')]
 		[System.String]$BasicPassword,
@@ -47,12 +47,12 @@ Function Grant-JCWorkday
 		[Parameter(ParameterSetName = 'Authorize')]
 		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'AuthorizeExpanded')]
 		[Parameter(ParameterSetName = 'Authorize')]
 		[Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

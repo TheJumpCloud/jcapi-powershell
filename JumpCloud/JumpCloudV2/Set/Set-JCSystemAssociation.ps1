@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Set-JCSystemAssociation
 {
     [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
@@ -22,7 +22,7 @@ Function Set-JCSystemAssociation
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'SetExpanded')]
 		[Parameter(ParameterSetName = 'Set')]
 		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
@@ -43,7 +43,7 @@ Function Set-JCSystemAssociation
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.ISystemGraphManagementReq]$Body,
+		[JumpCloud.SDK.V2.Models.ISystemGraphManagementReq]$Body,
 		[Parameter(
 			ParameterSetName = 'SetViaIdentityExpanded',
 			Mandatory = $true
@@ -81,12 +81,12 @@ Function Set-JCSystemAssociation
 		[Parameter(ParameterSetName = 'Set')]
 		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'SetViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'SetExpanded')]
 		[Parameter(ParameterSetName = 'Set')]
 		[Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'SetViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

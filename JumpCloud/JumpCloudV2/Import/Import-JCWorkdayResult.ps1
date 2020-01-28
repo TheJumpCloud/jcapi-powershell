@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Import-JCWorkdayResult
 {
     [CmdletBinding(DefaultParameterSetName = 'Import')]
@@ -18,7 +18,7 @@ Function Import-JCWorkdayResult
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'Import')]
 		[Parameter(ParameterSetName = 'ImportViaIdentity')]
 		[System.Int32]$Limit,

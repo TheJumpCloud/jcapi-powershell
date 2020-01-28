@@ -1,11 +1,26 @@
-#Requires -modules JumpCloudApiSdkV1
+#Requires -modules JumpCloud.SDK.V1
 Function Get-JCOrganization
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
 	Param(
+		[Parameter(
+			ParameterSetName = 'Get',
+			Mandatory = $true
+		)]
+		[System.String]$Id,
+		[Parameter(
+			ParameterSetName = 'GetViaIdentity',
+			Mandatory = $true,
+			ValueFromPipeline = $true
+		)]
+		[JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Get')]
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
 		[System.String]$Fields,
 		[Parameter(ParameterSetName = 'List')]
+		[Parameter(ParameterSetName = 'Get')]
+		[Parameter(ParameterSetName = 'GetViaIdentity')]
 		[System.String]$Filter,
 		[Parameter(ParameterSetName = 'List')]
 		[System.Int32]$Limit,
@@ -22,11 +37,11 @@ Function Get-JCOrganization
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCLdapServerSambaDomain
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -22,7 +22,7 @@ Function New-JCLdapServerSambaDomain
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IJumpCloudApIsIdentity]$InputObject,
+		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
@@ -43,7 +43,7 @@ Function New-JCLdapServerSambaDomain
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.ISambaDomainInput]$Body,
+		[JumpCloud.SDK.V2.Models.ISambaDomainInput]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateViaIdentityExpanded',
 			Mandatory = $true
@@ -66,12 +66,12 @@ Function New-JCLdapServerSambaDomain
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'CreateViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin

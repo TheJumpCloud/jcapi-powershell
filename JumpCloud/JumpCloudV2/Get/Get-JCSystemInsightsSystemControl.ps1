@@ -1,17 +1,10 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function Get-JCSystemInsightsSystemControl
 {
-    [CmdletBinding(DefaultParameterSetName = 'List1')]
+    [CmdletBinding(DefaultParameterSetName = 'List')]
 	Param(
-		[Parameter(
-			ParameterSetName = 'List',
-			Mandatory = $true
-		)]
-		[System.String]$SystemId,
-		[Parameter(ParameterSetName = 'List1')]
 		[Parameter(ParameterSetName = 'List')]
 		[System.Int32]$Limit,
-		[Parameter(ParameterSetName = 'List1')]
 		[Parameter(ParameterSetName = 'List')]
 		[System.Int32]$Skip,
 		[System.Boolean]$Paginate = $true
@@ -21,11 +14,11 @@ Function Get-JCSystemInsightsSystemControl
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
-            $PSBoundParameters.Add('Skip',0)
+            $PSBoundParameters.Add('Skip', 0)
         }
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
         {
-            $PSBoundParameters.Add('Limit',100)
+            $PSBoundParameters.Add('Limit', 100)
         }
     }
     Process

@@ -1,5 +1,5 @@
 #Requires -modules JumpCloud.SDK.V2
-Function Update-JCGSuite
+Function Update-JCOffice365
 {
     [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
 	Param(
@@ -11,7 +11,7 @@ Function Update-JCGSuite
 			ParameterSetName = 'Patch',
 			Mandatory = $true
 		)]
-		[System.String]$Id,
+		[System.String]$Office365Id,
 		[Parameter(
 			ParameterSetName = 'PatchViaIdentityExpanded',
 			Mandatory = $true,
@@ -33,7 +33,7 @@ Function Update-JCGSuite
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloud.SDK.V2.Models.IGsuitePatchInput]$Body,
+		[JumpCloud.SDK.V2.Models.IOffice365PatchInput]$Body,
 		[Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
 		[Parameter(ParameterSetName = 'PatchExpanded')]
 		[System.String]$UserLockoutAction,
@@ -58,7 +58,7 @@ Function Update-JCGSuite
     }
     Process
     {
-        $Results = Update-JcSdkGSuite @PSBoundParameters
+        $Results = Update-JcSdkOffice365 @PSBoundParameters
     }
     End
     {

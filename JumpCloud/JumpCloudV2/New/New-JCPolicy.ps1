@@ -1,4 +1,4 @@
-#Requires -modules JumpCloudApiSdkV2
+#Requires -modules JumpCloud.SDK.V2
 Function New-JCPolicy
 {
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
@@ -8,7 +8,7 @@ Function New-JCPolicy
 			Mandatory = $true,
 			ValueFromPipeline = $true
 		)]
-		[JumpCloudApiSdkV2.Models.IPolicyRequest]$Body,
+		[JumpCloud.SDK.V2.Models.IPolicyRequest]$Body,
 		[Parameter(
 			ParameterSetName = 'CreateExpanded',
 			Mandatory = $true
@@ -17,13 +17,13 @@ Function New-JCPolicy
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[System.String]$TemplateId,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[JumpCloudApiSdkV2.Models.IPolicyValue[]]$Values,
-		[Parameter(ParameterSetName = 'CreateExpanded')]
-		[Parameter(ParameterSetName = 'Create')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+		[JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values,
 		[Parameter(ParameterSetName = 'CreateExpanded')]
 		[Parameter(ParameterSetName = 'Create')]
 		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+		[Parameter(ParameterSetName = 'CreateExpanded')]
+		[Parameter(ParameterSetName = 'Create')]
+		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
 		[System.Boolean]$Paginate = $true
 	)
     Begin
