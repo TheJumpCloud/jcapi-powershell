@@ -54,8 +54,8 @@ ForEach ($API In $APIName)
                 npm.cmd install -g dotnet-sdk-2.1
                 Write-Host ('[RUN COMMAND] npm.cmd install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm.cmd install -g @autorest/autorest
-                Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest.cmd --reset # | Out-Null
+                Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest-beta --reset
                 # autorest --help
             }
             ###########################################################################
@@ -63,8 +63,8 @@ ForEach ($API In $APIName)
             {
                 If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                Write-Host ('[RUN COMMAND] autorest.cmd ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest.cmd $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
             If ($CopyModuleFile)
@@ -182,7 +182,7 @@ ForEach ($API In $APIName)
             }
             ###########################################################################
             Set-Location -Path:($OutputFullPath)
-            Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath")
+            Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         }
         Else
         {
