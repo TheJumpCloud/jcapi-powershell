@@ -2,11 +2,10 @@
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName
 )
-.($PSScriptRoot + '/Invoke-Git.ps1')
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
-    # 'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
-    # 'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
+    # 'V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
+    # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
     'V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
     'V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
     # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
@@ -361,14 +360,20 @@ $OperationIdMapping = [Ordered]@{
     'GET_systemgroups-group_id-users'                            = 'List-SystemGroupTraverseUser'; # V2
     'graph_systemGroupTraverseUserGroup'                         = 'List-SystemGroupTraverseUserGroup'; # V2
     'GET_systemgroups-group_id-usergroups'                       = 'List-SystemGroupTraverseUserGroup'; # V2
+    'systeminsights_list_alf'                                    = 'List-SystemInsightsAlf'; # V2
+    'GET_systeminsights-alf'                                     = 'List-SystemInsightsAlf'; # V2
     'systeminsights_list_apps'                                   = 'List-SystemInsightsApps'; # V2
     'GET_systeminsights-apps'                                    = 'List-SystemInsightsApps'; # V2
+    'systeminsights_list_battery'                                = 'List-SystemInsightsBattery'; # V2
+    'GET_systeminsights-battery'                                 = 'List-SystemInsightsBattery'; # V2
     'systeminsights_list_bitlocker_info'                         = 'List-SystemInsightsBitlockerInfo'; # V2
     'GET_systeminsights-bitlocker_info'                          = 'List-SystemInsightsBitlockerInfo'; # V2
     'systeminsights_list_browser_plugins'                        = 'List-SystemInsightsBrowserPlugins'; # V2
     'GET_systeminsights-browser_plugins'                         = 'List-SystemInsightsBrowserPlugins'; # V2
     'systeminsights_list_chrome_extensions'                      = 'List-SystemInsightsChromeExtensions'; # V2
     'GET_systeminsights-chrome_extensions'                       = 'List-SystemInsightsChromeExtensions'; # V2
+    'systeminsights_list_crashes'                                = 'List-SystemInsightsCrashes'; # V2
+    'GET_systeminsights-crashes'                                 = 'List-SystemInsightsCrashes'; # V2
     'systeminsights_list_disk_encryption'                        = 'List-SystemInsightsDiskEncryption'; # V2
     'GET_systeminsights-disk_encryption'                         = 'List-SystemInsightsDiskEncryption'; # V2
     'systeminsights_list_disk_info'                              = 'List-SystemInsightsDiskInfo'; # V2
@@ -379,12 +384,21 @@ $OperationIdMapping = [Ordered]@{
     'GET_systeminsights-firefox_addons'                          = 'List-SystemInsightsFirefoxAddons'; # V2
     'systeminsights_list_groups'                                 = 'List-SystemInsightsGroups'; # V2
     'GET_systeminsights-groups'                                  = 'List-SystemInsightsGroups'; # V2
+    'GET_systeminsights-user_groups'                             = 'List-SystemInsightsGroups'; # V2
+    'systeminsights_list_ie_extensions'                          = 'List-SystemInsightsIEExtensions'; # V2
+    'GET_systeminsights-ie_extensions'                           = 'List-SystemInsightsIEExtensions'; # V2
     'systeminsights_list_interface_addresses'                    = 'List-SystemInsightsInterfaceAddresses'; # V2
     'GET_systeminsights-interface_addresses'                     = 'List-SystemInsightsInterfaceAddresses'; # V2
     'systeminsights_list_kernel_info'                            = 'List-SystemInsightsKernelInfo'; # V2
     'GET_systeminsights-kernel_info'                             = 'List-SystemInsightsKernelInfo'; # V2
+    'systeminsights_list_launchd'                                = 'List-SystemInsightsLaunchd'; # V2
+    'GET_systeminsights-launchd'                                 = 'List-SystemInsightsLaunchd'; # V2
+    'systeminsights_list_logged_in_users'                        = 'List-SystemInsightsLoggedInUsers'; # V2
+    'GET_systeminsights-logged_in_users'                         = 'List-SystemInsightsLoggedInUsers'; # V2
     'systeminsights_list_logical_drives'                         = 'List-SystemInsightsLogicalDrives'; # V2
     'GET_systeminsights-logical_drives'                          = 'List-SystemInsightsLogicalDrives'; # V2
+    'systeminsights_list_managed_policies'                       = 'List-SystemInsightsManagedPolicies'; # V2
+    'GET_systeminsights-managed_policies'                        = 'List-SystemInsightsManagedPolicies'; # V2
     'systeminsights_list_mounts'                                 = 'List-SystemInsightsMounts'; # V2
     'GET_systeminsights-mounts'                                  = 'List-SystemInsightsMounts'; # V2
     'systeminsights_list_os_version'                             = 'List-SystemInsightsOsVersion'; # V2
@@ -395,6 +409,16 @@ $OperationIdMapping = [Ordered]@{
     'GET_systeminsights-programs'                                = 'List-SystemInsightsPrograms'; # V2
     'systeminsights_list_safari_extensions'                      = 'List-SystemInsightsSafariExtensions'; # V2
     'GET_systeminsights-safari_extensions'                       = 'List-SystemInsightsSafariExtensions'; # V2
+    'systeminsights_list_shadow'                                 = 'List-SystemInsightsShadow'; # V2
+    'GET_systeminsights-shadow'                                  = 'List-SystemInsightsShadow'; # V2
+    'systeminsights_list_shared_folders'                         = 'List-SystemInsightsSharedFolders'; # V2
+    'GET_systeminsights-shared_folders'                          = 'List-SystemInsightsSharedFolders'; # V2
+    'systeminsights_list_shared_resources'                       = 'List-SystemInsightsSharedResources'; # V2
+    'GET_systeminsights-shared_resources'                        = 'List-SystemInsightsSharedResources'; # V2
+    'systeminsights_list_sharing_preferences'                    = 'List-SystemInsightsSharingPreferences'; # V2
+    'GET_systeminsights-sharing_preferences'                     = 'List-SystemInsightsSharingPreferences'; # V2
+    'systeminsights_list_sip_config'                             = 'List-SystemInsightsSipConfig'; # V2
+    'GET_systeminsights-sip_config'                              = 'List-SystemInsightsSipConfig'; # V2
     'systeminsights_list_system_apps'                            = 'List-SystemInsightsSystemApps'; # V2
     'GET_systeminsights-system_id-apps'                          = 'List-SystemInsightsSystemApps'; # V2
     'systeminsights_list_system_bitlocker_info'                  = 'List-SystemInsightsSystemBitlockerInfo'; # V2
@@ -443,8 +467,14 @@ $OperationIdMapping = [Ordered]@{
     'systeminsights_list_system_users'                           = 'List-SystemInsightsSystemUsers'; # V2
     'systeminsights_list_uptime'                                 = 'List-SystemInsightsUptime'; # V2
     'GET_systeminsights-uptime'                                  = 'List-SystemInsightsUptime'; # V2
+    'systeminsights_list_usb_devices'                            = 'List-SystemInsightsUSBDevices'; # V2
+    'GET_systeminsights-usb_devices'                             = 'List-SystemInsightsUSBDevices'; # V2
     'systeminsights_list_users'                                  = 'List-SystemInsightsUsers'; # V2
     'GET_systeminsights-users'                                   = 'List-SystemInsightsUsers'; # V2
+    'systeminsights_list_user_ssh_keys'                          = 'List-SystemInsightsUserSSHKeys'; # V2
+    'GET_systeminsights-user_ssh_keys'                           = 'List-SystemInsightsUserSSHKeys'; # V2
+    'systeminsights_list_windows_crashes'                        = 'List-SystemInsightsWindowsCrashes'; # V2
+    'GET_systeminsights-windows_crashes'                         = 'List-SystemInsightsWindowsCrashes'; # V2
     'graph_systemMemberOf'                                       = 'List-SystemMemberOf'; # V2
     'GET_systems-system_id-memberof'                             = 'List-SystemMemberOf'; # V2
     'graph_systemTraverseCommand'                                = 'List-SystemTraverseCommand'; # V2
@@ -561,22 +591,7 @@ $OperationIdMapping = [Ordered]@{
     'knowledge_salesforceList'                                   = 'List-SalesForceKnowledge'; # V2
     'groups_system_patch'                                        = 'Patch-SystemGroup'; # V2
     'graph_systemGroupMemberOf'                                  = 'List-SystemGroupMemberOf'; # V2
-    'systeminsights_list_alf'                                    = 'List-SystemInsightsAlf'; # V2
-    'systeminsights_list_battery'                                = 'List-SystemInsightsBattery'; # V2
-    'systeminsights_list_crashes'                                = 'List-SystemInsightsCrashes'; # V2
-    'systeminsights_list_ie_extensions'                          = 'List-SystemInsightsIEExtensions'; # V2
-    'systeminsights_list_launchd'                                = 'List-SystemInsightsLaunchd'; # V2
-    'systeminsights_list_logged_in_users'                        = 'List-SystemInsightsLoggedInUsers'; # V2
-    'systeminsights_list_managed_policies'                       = 'List-SystemInsightsManagedPolicies'; # V2
-    'systeminsights_list_shadow'                                 = 'List-SystemInsightsShadow'; # V2
-    'systeminsights_list_shared_folders'                         = 'List-SystemInsightsSharedFolders'; # V2
-    'systeminsights_list_shared_resources'                       = 'List-SystemInsightsSharedResources'; # V2
-    'systeminsights_list_sharing_preferences'                    = 'List-SystemInsightsSharingPreferences'; # V2
-    'systeminsights_list_sip_config'                             = 'List-SystemInsightsSipConfig'; # V2
-    'systeminsights_list_usb_devices'                            = 'List-SystemInsightsUSBDevices'; # V2
     'systeminsights_list_user_groups'                            = 'List-SystemInsightsUserGroups'; # V2
-    'systeminsights_list_user_ssh_keys'                          = 'List-SystemInsightsUserSSHKeys'; # V2
-    'systeminsights_list_windows_crashes'                        = 'List-SystemInsightsWindowsCrashes'; # V2
     'users_sendEmails'                                           = 'Send-UserEmail'; # V2
     'groups_user_patch'                                          = 'Patch-UserGroup'; # V2
     'graph_userGroupMemberOf'                                    = 'List-UserGroupMemberOf'; # V2
@@ -589,8 +604,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
     If ($_.Name -in $APIName)
     {
         # Create output file path
-        $OutputFileNameJson = ($_.Name).Split('_')[1] + '.json'
-        $OutputFileNameYaml = ($_.Name).Split('_')[1] + '.yaml'
+        $OutputFileNameJson = $_.Name + '.json'
+        $OutputFileNameYaml = $_.Name + '.yaml'
         $OutputFullPathJson = $OutputFilePath + $OutputFileNameJson
         $OutputFullPathYaml = $OutputFilePath + $OutputFileNameYaml
         If (-not (Test-Path -Path:($OutputFilePath)))
@@ -774,8 +789,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
             ## Export content for troubleshooting
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
-            # $OASContent | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $_.Name + '_ReadyForConvert.json')
+            # $OASContent | Out-File -FilePath:($OutputFilePath + $_.Name + '_Org.json')
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec
