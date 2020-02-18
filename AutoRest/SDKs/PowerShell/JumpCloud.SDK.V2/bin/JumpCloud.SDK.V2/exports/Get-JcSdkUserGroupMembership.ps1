@@ -6,12 +6,12 @@ This endpoint returns all users members that are a member of this User Group.\n\
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkusergroupmembership
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkusergroupmembership
 #>
 function Get-JcSdkUserGroupMembership {
-[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

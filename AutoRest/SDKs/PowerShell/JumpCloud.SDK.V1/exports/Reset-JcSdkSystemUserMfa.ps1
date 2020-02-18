@@ -12,16 +12,16 @@ Please be aware that if the user does not complete TOTP MFA setup before the `ex
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/reset-jcsdksystemusermfa
 .Inputs
-JumpCloud.SDK.V1.Models.IBodyParameterSystemUserMfaResetRequestBody
-.Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 .Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterSystemUserMfaResetRequestBody>: HELP MESSAGE MISSING
+BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   [Exclusion <Boolean?>]: 
   [ExclusionUntil <DateTime?>]: 
 
@@ -54,7 +54,7 @@ param(
     [Parameter(ParameterSetName='Reset', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='ResetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IBodyParameterSystemUserMfaResetRequestBody]
+    [JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

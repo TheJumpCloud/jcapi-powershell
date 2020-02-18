@@ -90,9 +90,9 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).Id, global::System.Convert.ToString);
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserLockoutAction, global::System.Convert.ToString);
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserPasswordExpirationAction, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserLockoutAction, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserPasswordExpirationAction, global::System.Convert.ToString);
             AfterDeserializeDictionary(content);
         }
 
@@ -110,9 +110,9 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).Id, global::System.Convert.ToString);
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserLockoutAction, global::System.Convert.ToString);
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.IComponentsSchemasGsuiteOutputAllof0Internal)this).UserPasswordExpirationAction, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserLockoutAction, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.IGsuiteOutputInternal)this).UserPasswordExpirationAction, global::System.Convert.ToString);
             AfterDeserializePSObject(content);
         }
 

@@ -1,3 +1,7 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 namespace JumpCloud.SDK.V2.Runtime
 {
@@ -24,7 +28,9 @@ namespace JumpCloud.SDK.V2.Runtime
         public RestException(System.Net.Http.HttpResponseMessage response)
         {
             StatusCode = response.StatusCode;
-            RequestMessage = response.RequestMessage.CloneWithContent().Result;
+            //CloneWithContent will not work here since the content is disposed after sendAsync
+            //Besides, it seems there is no need for the request content cloned here.
+            RequestMessage = response.RequestMessage.Clone();
             ResponseBody = response.Content.ReadAsStringAsync().Result;
             ResponseHeaders = response.Headers;
 
@@ -35,12 +41,16 @@ namespace JumpCloud.SDK.V2.Runtime
             {
                 // try to parse the body as JSON, and see if a code and message are in there.
                 var json = JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(ResponseBody) as JumpCloud.SDK.V2.Runtime.Json.JsonObject;
+
+                // see if there is an error block in the body
+                json = json.Property("error") ?? json;
+
                 { Code = If(json?.PropertyT<JumpCloud.SDK.V2.Runtime.Json.JsonString>("code"), out var c) ? (string)c : (string)StatusCode.ToString(); }
                 { message = If(json?.PropertyT<JumpCloud.SDK.V2.Runtime.Json.JsonString>("message"), out var m) ? (string)m : (string)Message; }
                 { Action = If(json?.PropertyT<JumpCloud.SDK.V2.Runtime.Json.JsonString>("action"), out var a) ? (string)a : (string)Action; }
             }
 #if DEBUG
-            catch(System.Exception E)
+            catch (System.Exception E)
             {
                 System.Console.Error.WriteLine($"{E.GetType().Name}/{E.Message}/{E.StackTrace}");
             }

@@ -10,7 +10,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandfilereturn
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsFilesCommandIdGetResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
@@ -23,7 +23,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/get-jcsdkcommandfile
 #>
 function Get-JcSdkCommandFile {
-[OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPathsFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
+[OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
 [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
 param(
     [Parameter(ParameterSetName='Get', Mandatory)]

@@ -1,3 +1,7 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
 
 namespace JumpCloud.SDK.V1.Runtime
 {
@@ -119,16 +123,16 @@ namespace JumpCloud.SDK.V1.Runtime
             return System.Text.Encoding.UTF8.GetBytes(content);
         }
 
-        public void SaveMessage(string rqKey, HttpResponseMessage response)
+        public void SaveMessage(string rqKey, HttpRequestMessage request, HttpResponseMessage response)
         {
             var messages = System.IO.File.Exists(this.recordingPath) ? Load() : new JsonObject() ?? new JsonObject();
             messages[rqKey] = new JsonObject {
               { "Request",new JsonObject {
-                { "Method", response.RequestMessage.Method.Method },
-                { "RequestUri",response.RequestMessage.RequestUri },
-                { "Content", SerializeContent( response.RequestMessage.Content) },
-                { "Headers", new JsonObject(FilterHeaders(response.RequestMessage.Headers)) },
-                { "ContentHeaders", response.RequestMessage.Content == null ? new JsonObject() : new JsonObject(FilterHeaders(response.RequestMessage.Content.Headers))}
+                { "Method", request.Method.Method },
+                { "RequestUri", request.RequestUri },
+                { "Content", SerializeContent( request.Content) },
+                { "Headers", new JsonObject(FilterHeaders(request.Headers)) },
+                { "ContentHeaders", request.Content == null ? new JsonObject() : new JsonObject(FilterHeaders(request.Content.Headers))}
               } },
               {"Response", new JsonObject {
                 { "StatusCode", (int)response.StatusCode},
@@ -222,11 +226,17 @@ namespace JumpCloud.SDK.V1.Runtime
             switch (Mode)
             {
                 case MockMode.Record:
+                    //Add following code since the request.Content will be released after sendAsync
+                    var requestClone = request;
+                    if (requestClone.Content != null)
+                    {
+                        requestClone = await request.CloneWithContent(request.RequestUri, request.Method);
+                    }
                     // make the call
                     var response = await next.SendAsync(request, callback);
 
                     // save the message to the recording file
-                    SaveMessage(rqkey, response);
+                    SaveMessage(rqkey, requestClone, response);
 
                     // return the response.
                     return response;

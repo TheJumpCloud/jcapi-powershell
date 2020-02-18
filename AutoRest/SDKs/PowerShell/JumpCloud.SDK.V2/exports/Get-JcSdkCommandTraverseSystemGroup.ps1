@@ -6,12 +6,12 @@ This endpoint will return all System Groups bound to a Command, either directly 
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkcommandtraversesystemgroup
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkcommandtraversesystemgroup
 #>
 function Get-JcSdkCommandTraverseSystemGroup {
-[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

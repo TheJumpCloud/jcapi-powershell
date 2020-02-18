@@ -6,14 +6,14 @@ This endpoint returns a list of the Administrators associated with the Provider.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkprovideradministrator
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
 .Outputs
 System.String
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkprovideradministrator
 #>
 function Get-JcSdkProviderAdministrator {
-[OutputType([JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema], [System.String])]
+[OutputType([JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema], [System.String])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

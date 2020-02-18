@@ -10,7 +10,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Notes
@@ -29,7 +29,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/new-jcsdksshkey
 #>
 function New-JcSdkSshKey {
-[OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
+[OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
 [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(ParameterSetName='Create', Mandatory)]

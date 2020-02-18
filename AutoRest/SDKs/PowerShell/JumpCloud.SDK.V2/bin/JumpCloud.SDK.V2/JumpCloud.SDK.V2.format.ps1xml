@@ -188,40 +188,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.BodyParameterLdapServerPatchRequestBody</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BodyParameterLdapServerPatchRequestBody</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserLockoutAction</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserPasswordExpirationAction</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserLockoutAction</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserPasswordExpirationAction</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreate</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreate</TypeName>
@@ -301,106 +267,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Username</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.ComponentsSchemasActiveDirectoryOutputAllof0</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ComponentsSchemasActiveDirectoryOutputAllof0</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.ComponentsSchemasGsuiteOutputAllof0</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ComponentsSchemasGsuiteOutputAllof0</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserLockoutAction</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserPasswordExpirationAction</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserLockoutAction</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserPasswordExpirationAction</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.ComponentsSchemasLdapServerOutputAllof0</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ComponentsSchemasLdapServerOutputAllof0</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.ComponentsSchemasSambaDomainOutputAllof0</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ComponentsSchemasSambaDomainOutputAllof0</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -742,9 +608,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphObjectWithPaths</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphObjectWithPaths1</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphObjectWithPaths</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphObjectWithPaths1</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1201,9 +1067,6 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -1212,13 +1075,13 @@
           <TableColumnHeader>
             <Label>UserPasswordExpirationAction</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
               </TableColumnItem>
@@ -1227,6 +1090,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -1380,9 +1246,31 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsLdapserversIdPatchResponses200ContentApplicationJsonSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsLdapserversIdPatchResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1420,9 +1308,43 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsLdapserversIdPatchResponses400ContentApplicationJsonSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsLdapserversIdPatchResponses400ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserLockoutAction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserPasswordExpirationAction</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserLockoutAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1442,9 +1364,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1464,31 +1386,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Message</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Message</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2079,26 +1979,26 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Sid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Name</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

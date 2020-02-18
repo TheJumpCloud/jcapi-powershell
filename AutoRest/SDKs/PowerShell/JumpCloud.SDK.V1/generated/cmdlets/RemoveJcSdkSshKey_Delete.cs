@@ -10,7 +10,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
     /// apiVersions:
     /// - '1.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V1.json#/paths/~1systemusers~1{systemuser_id}~1sshkeys~1{id}'
     /// [DETAILS]
@@ -20,7 +20,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
     /// variant: Delete
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Remove, @"JcSdkSshKey_Delete", SupportsShouldProcess = true)]
-    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema))]
+    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema))]
     [JumpCloud.SDK.V1.Description(@"This endpoint will delete a specific System User's SSH Key.")]
     [JumpCloud.SDK.V1.Generated]
     public partial class RemoveJcSdkSshKey_Delete : System.Management.Automation.PSCmdlet,
@@ -124,12 +124,12 @@ namespace JumpCloud.SDK.V1.Cmdlets
         /// of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onBadRequest method should be processed, or if the method should
         /// return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// <c>overrideOnOk</c> will be called before the regular onOk has been processed, allowing customization of what happens
@@ -305,12 +305,12 @@ namespace JumpCloud.SDK.V1.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 400 (BadRequest).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema> response)
+        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -322,7 +322,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
                     return ;
                 }
                 // onBadRequest - response for 400 / application/json
-                // (await response) // should be JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
+                // (await response) // should be JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
                 WriteObject((await response));
             }
         }

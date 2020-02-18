@@ -90,7 +90,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasLdapServerOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasLdapServerOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.ILdapServerOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.ILdapServerOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserLockoutAction, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserPasswordExpirationAction, global::System.Convert.ToString);
@@ -111,7 +111,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasLdapServerOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasLdapServerOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.ILdapServerOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.ILdapServerOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserLockoutAction = (string) content.GetValueForProperty("UserLockoutAction",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserLockoutAction, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserPasswordExpirationAction = (string) content.GetValueForProperty("UserPasswordExpirationAction",((JumpCloud.SDK.V2.Models.ILdapServerInputInternal)this).UserPasswordExpirationAction, global::System.Convert.ToString);

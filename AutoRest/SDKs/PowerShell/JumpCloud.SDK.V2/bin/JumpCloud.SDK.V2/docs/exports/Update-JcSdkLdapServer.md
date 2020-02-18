@@ -21,14 +21,16 @@ Update-JcSdkLdapServer -Id <String> [-XApiKey <String>] [-XOrgId <String>] [-Id1
 
 ### Patch
 ```
-Update-JcSdkLdapServer -Id <String> -Body <IBodyParameterLdapServerPatchRequestBody> [-XApiKey <String>]
+Update-JcSdkLdapServer -Id <String>
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-XApiKey <String>]
  [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PatchViaIdentity
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterLdapServerPatchRequestBody>
- [-XApiKey <String>] [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-XApiKey <String>]
+ [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PatchViaIdentityExpanded
@@ -57,7 +59,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody
+Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 Parameter Sets: Patch, PatchViaIdentity
 Aliases:
 
@@ -220,13 +222,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody
-
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+
+### JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
 
 ### System.String
 
@@ -237,7 +239,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterLdapServerPatchRequestBody>: HELP MESSAGE MISSING
+#### BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   - `[Id <String>]`: 
   - `[UserLockoutAction <String>]`: LDAP Server Action
   - `[UserPasswordExpirationAction <String>]`: LDAP Server Action

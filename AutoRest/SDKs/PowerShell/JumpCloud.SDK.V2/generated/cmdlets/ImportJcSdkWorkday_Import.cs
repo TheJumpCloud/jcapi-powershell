@@ -13,7 +13,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// apiVersions:
     /// - '2.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1workdays~1{workday_id}~1import'
     /// [DETAILS]
