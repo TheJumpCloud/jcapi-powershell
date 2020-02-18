@@ -7,12 +7,11 @@ Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     # 'Url_V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
     # 'Url_V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'Url_V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'Url_V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    # 'Url_V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
-    # 'Url_V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
+    'V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
+    'V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
+    # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
-$UpdatedSpec = $false
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FindReplaceHash = [Ordered]@{
@@ -81,512 +80,515 @@ $FindReplaceHash = [Ordered]@{
     "`t"                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      = '\t';
     ',"format": "ipv4"'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       = ''; # Remove StopLight syntax
 }
-$OperationIdHash = [Ordered]@{
+$OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'POST_applications'                                          = 'Application_Create';
-    'applications_post'                                          = 'Application_Create';
-    'applications_delete'                                        = 'Application_Delete';
-    'DELETE_applications-id'                                     = 'Application_Delete';
-    'applications_get'                                           = 'Application_Get';
-    'GET_applications-id'                                        = 'Application_Get';
-    'GET_applications'                                           = 'Application_List';
-    'applications_list'                                          = 'Application_List';
-    'applications_put'                                           = 'Application_Put';
-    'PUT_applications-id'                                        = 'Application_Put';
-    'application_templates_get'                                  = 'ApplicationTemplate_Get';
-    'GET_application-templates-id'                               = 'ApplicationTemplate_Get';
-    'GET_application-templates'                                  = 'ApplicationTemplate_List';
-    'application_templates_list'                                 = 'ApplicationTemplate_List';
-    'POST_commands'                                              = 'Command_Create';
-    'commands_post'                                              = 'Command_Create';
-    'commands_delete'                                            = 'Command_Delete';
-    'DELETE_commands-id'                                         = 'Command_Delete';
-    'commands_get'                                               = 'Command_Get';
-    'GET_commands-id'                                            = 'Command_Get';
-    'GET_commands'                                               = 'Command_List';
-    'commands_list'                                              = 'Command_List';
-    'commands_put'                                               = 'Command_Put';
-    'PUT_commands-id'                                            = 'Command_Put';
-    'command_file_get'                                           = 'CommandFile_Get';
-    'GET_files-command-id'                                       = 'CommandFile_Get';
-    'command_results_delete'                                     = 'CommandResult_Delete';
-    'DELETE_commandresults-id'                                   = 'CommandResult_Delete';
-    'command_results_get'                                        = 'CommandResult_Get';
-    'GET_commandresults-id'                                      = 'CommandResult_Get';
-    'GET_commandresults'                                         = 'CommandResult_List';
-    'command_results_list'                                       = 'CommandResult_List';
-    'command_trigger_webhook_post'                               = 'CommandTriggerWebhook_Start';
-    'POST_command-trigger-triggername'                           = 'CommandTriggerWebhook_Start';
-    'organizations_get'                                          = 'Organization_Get';
-    'GET_organizations-id'                                       = 'Organization_Get';
-    'GET_organizations'                                          = 'Organization_List';
-    'organization_list'                                          = 'Organization_List';
-    'organization_put'                                           = 'Organization_Put';
-    'PUT_organizations-id'                                       = 'Organization_Put';
-    'search_organizations_post'                                  = 'Organization_Search';
-    'POST_search-organizations'                                  = 'Organization_Search';
-    'radius_servers_post'                                        = 'RadiusServer_Create';
-    'POST_radiusservers'                                         = 'RadiusServer_Create';
-    'GET_radiusservers'                                          = 'RadiusServer_List';
-    'radius_servers_list'                                        = 'RadiusServer_List';
-    'radius_servers_put'                                         = 'RadiusServer_Put';
-    'PUT_radiusservers-id'                                       = 'RadiusServer_Put';
-    'sshkey_post'                                                = 'SshKey_Create';
-    'POST_systemusers-id-sshkeys'                                = 'SshKey_Create';
-    'sshkey_delete'                                              = 'SshKey_Delete';
-    'DELETE_systemusers-systemuser_id-sshkeys-id'                = 'SshKey_Delete';
-    'GET_systemusers-id-sshkeys'                                 = 'SshKey_List';
-    'sshkey_list'                                                = 'SshKey_List';
-    'systems_delete'                                             = 'System_Delete';
-    'DELETE_systems-id'                                          = 'System_Delete';
-    'systems_get'                                                = 'System_Get';
-    'GET_systems-id'                                             = 'System_Get';
-    'GET_systems'                                                = 'System_List';
-    'systems_list'                                               = 'System_List';
-    'systems_put'                                                = 'System_Put';
-    'PUT_systems-id'                                             = 'System_Put';
-    'search_systems_post'                                        = 'System_Search';
-    'POST_search-systems'                                        = 'System_Search';
-    'POST_systemusers'                                           = 'SystemUser_Create';
-    'systemusers_post'                                           = 'SystemUser_Create';
-    'systemusers_delete'                                         = 'SystemUser_Delete';
-    'DELETE_systemusers-id'                                      = 'SystemUser_Delete';
-    'systemusers_get'                                            = 'SystemUser_Get';
-    'GET_systemusers-id'                                         = 'SystemUser_Get';
-    'GET_systemusers'                                            = 'SystemUser_List';
-    'systemusers_list'                                           = 'SystemUser_List';
-    'systemusers_put'                                            = 'SystemUser_Put';
-    'PUT_systemusers-id'                                         = 'SystemUser_Put';
-    'search_systemusers_post'                                    = 'SystemUser_Search';
-    'POST_search-systemusers'                                    = 'SystemUser_Search';
-    'POST_systemusers-id-unlock'                                 = 'SystemUser_Unlock';
-    'systemusers_unlock'                                         = 'SystemUser_Unlock';
-    'POST_systemusers-id-resetmfa'                               = 'SystemUserMfa_Reset';
-    'systemusers_resetmfa'                                       = 'SystemUserMfa_Reset';
-    'POST_case'                                                  = 'SupportCase_New';
-    'systems_systemusers_binding_list'                           = 'SystemsSystemUserBinding_List';
-    'systems_systemusers_binding_put'                            = 'SystemsSystemUserBinding_Put';
-    'systemusers_systems_binding_list'                           = 'SystemUsersSystemBinding_List';
-    'systemusers_systems_binding_put'                            = 'SystemUsersSystemBinding_Put';
-    'tags_post'                                                  = 'Tag_Create';
-    'tags_delete'                                                = 'Tag_Delete';
-    'tags_get'                                                   = 'Tag_Get';
-    'tags_list'                                                  = 'Tag_List';
-    'tags_put'                                                   = 'Tag_Put';
-    'activedirectories_get'                                      = 'ActiveDirectory_Get';
-    'GET_activedirectories-id'                                   = 'ActiveDirectory_Get';
-    'activedirectories_list'                                     = 'ActiveDirectory_List';
-    'GET_activedirectories'                                      = 'ActiveDirectory_List';
-    'GET_activedirectories-activedirectory_id-associations'      = 'ActiveDirectoryAssociation_List';
-    'graph_activeDirectoryAssociationsList'                      = 'ActiveDirectoryAssociation_List';
-    'GET_activedirectories-activedirectory_id-usergroups'        = 'ActiveDirectoryTraverseUserGroup_List';
-    'graph_activeDirectoryTraverseUserGroup'                     = 'ActiveDirectoryTraverseUserGroup_List';
-    'GET_applications-application_id-associations'               = 'ApplicationAssociation_List';
-    'graph_applicationAssociationsList'                          = 'ApplicationAssociation_List';
-    'POST_applications-application_id-associations'              = 'ApplicationAssociation_Set';
-    'graph_applicationAssociationsPost'                          = 'ApplicationAssociation_Set';
-    'GET_applications-application_id-users'                      = 'ApplicationTraverseUser_List';
-    'graph_applicationTraverseUser'                              = 'ApplicationTraverseUser_List';
-    'GET_applications-application_id-usergroups'                 = 'ApplicationTraverseUserGroup_List';
-    'graph_applicationTraverseUserGroup'                         = 'ApplicationTraverseUserGroup_List';
-    'bulk_usersCreate'                                           = 'BulkUsers_Create';
-    'POST_bulk-users'                                            = 'BulkUsers_Create';
-    'bulk_usersCreateResults'                                    = 'BulkUsersResult_Get';
-    'GET_bulk-users-job_id-results'                              = 'BulkUsersResult_Get';
-    'GET_commands-command_id-associations'                       = 'CommandAssociation_List';
-    'graph_commandAssociationsList'                              = 'CommandAssociation_List';
-    'POST_commands-command_id-associations'                      = 'CommandAssociation_Set';
-    'graph_commandAssociationsPost'                              = 'CommandAssociation_Set';
-    'GET_commands-command_id-systems'                            = 'CommandTraverseSystem_List';
-    'graph_commandTraverseSystem'                                = 'CommandTraverseSystem_List';
-    'GET_commands-command_id-systemgroups'                       = 'CommandTraverseSystemGroup_List';
-    'graph_commandTraverseSystemGroup'                           = 'CommandTraverseSystemGroup_List';
-    'GET_directories'                                            = 'Directory_List';
-    'directories_list'                                           = 'Directory_List';
-    'duo_accountPost'                                            = 'DuoAccount_Create';
-    'POST_duo-accounts'                                          = 'DuoAccount_Create';
-    'duo_accountDelete'                                          = 'DuoAccount_Delete';
-    'DELETE_duo-accounts-id'                                     = 'DuoAccount_Delete';
-    'duo_accountGet'                                             = 'DuoAccount_Get';
-    'GET_duo-accounts-id'                                        = 'DuoAccount_Get';
-    'GET_duo-accounts'                                           = 'DuoAccount_List';
-    'duo_accountList'                                            = 'DuoAccount_List';
-    'duo_applicationPost'                                        = 'DuoApplication_Create';
-    'POST_duo-accounts-account_id-applications'                  = 'DuoApplication_Create';
-    'duo_applicationDelete'                                      = 'DuoApplication_Delete';
-    'DELETE_duo-accounts-account_id-applications-application_id' = 'DuoApplication_Delete';
-    'duo_applicationGet'                                         = 'DuoApplication_Get';
-    'GET_duo-accounts-account_id-applications-application_id'    = 'DuoApplication_Get';
-    'GET_duo-accounts-account_id-applications'                   = 'DuoApplication_List';
-    'duo_applicationList'                                        = 'DuoApplication_List';
-    'PUT_duo-accounts-account_id-applications-application_id'    = 'DuoApplication_Put';
-    'duo_applicationUpdate'                                      = 'DuoApplication_Put';
-    'GET_groups'                                                 = 'Group_List';
-    'groups_list'                                                = 'Group_List';
-    'gsuites_get'                                                = 'GSuite_Get';
-    'GET_gsuites-id'                                             = 'GSuite_Get';
-    'gsuites_patch'                                              = 'GSuite_Patch';
-    'PATCH_gsuites-id'                                           = 'GSuite_Patch';
-    'graph_gSuiteAssociationsList'                               = 'GSuiteAssociation_List';
-    'GET_gsuites-gsuite_id-associations'                         = 'GSuiteAssociation_List';
-    'graph_gSuiteAssociationsPost'                               = 'GSuiteAssociation_Set';
-    'POST_gsuites-gsuite_id-associations'                        = 'GSuiteAssociation_Set';
-    'POST_gsuites-gsuite_id-translationrules'                    = 'GSuiteTranslationRule_Create';
-    'translationRules_gSuitePost'                                = 'GSuiteTranslationRule_Create';
-    'DELETE_gsuites-gsuite_id-translationrules-id'               = 'GSuiteTranslationRule_Delete';
-    'translationRules_gSuiteDelete'                              = 'GSuiteTranslationRule_Delete';
-    'GET_gsuites-gsuite_id-translationrules-id'                  = 'GSuiteTranslationRule_Get';
-    'translationRules_gSuiteGet'                                 = 'GSuiteTranslationRule_Get';
-    'GET_gsuites-gsuite_id-translationrules'                     = 'GSuiteTranslationRule_List';
-    'translationRules_gSuiteList'                                = 'GSuiteTranslationRule_List';
-    'graph_gSuiteTraverseUser'                                   = 'GSuiteTraverseUser_List';
-    'GET_gsuites-gsuite_id-users'                                = 'GSuiteTraverseUser_List';
-    'graph_gSuiteTraverseUserGroup'                              = 'GSuiteTraverseUserGroup_List';
-    'GET_gsuites-gsuite_id-usergroups'                           = 'GSuiteTraverseUserGroup_List';
-    'ldapservers_get'                                            = 'LdapServer_Get';
-    'GET_ldapservers-id'                                         = 'LdapServer_Get';
-    'GET_ldapservers'                                            = 'LdapServer_List';
-    'ldapservers_list'                                           = 'LdapServer_List';
-    'ldapservers_patch'                                          = 'LdapServer_Patch';
-    'PATCH_ldapservers-id'                                       = 'LdapServer_Patch';
-    'graph_ldapServerAssociationsList'                           = 'LdapServerAssociation_List';
-    'GET_ldapservers-ldapserver_id-associations'                 = 'LdapServerAssociation_List';
-    'graph_ldapServerAssociationsPost'                           = 'LdapServerAssociation_Set';
-    'POST_ldapservers-ldapserver_id-associations'                = 'LdapServerAssociation_Set';
-    'ldapservers_sambaDomainsPost'                               = 'LdapServerSambaDomain_Create';
-    'POST_ldapservers-ldapserver_id-sambadomains'                = 'LdapServerSambaDomain_Create';
-    'ldapservers_sambaDomainsDelete'                             = 'LdapServerSambaDomain_Delete';
-    'DELETE_ldapservers-ldapserver_id-sambadomains-id'           = 'LdapServerSambaDomain_Delete';
-    'ldapservers_sambaDomainsGet'                                = 'LdapServerSambaDomain_Get';
-    'GET_ldapservers-ldapserver_id-sambadomains-id'              = 'LdapServerSambaDomain_Get';
-    'ldapservers_sambaDomainsList'                               = 'LdapServerSambaDomain_List';
-    'GET_ldapservers-ldapserver_id-sambadomains'                 = 'LdapServerSambaDomain_List';
-    'ldapservers_sambaDomainsPut'                                = 'LdapServerSambaDomain_Put';
-    'PUT_ldapservers-ldapserver_id-sambadomains-id'              = 'LdapServerSambaDomain_Put';
-    'graph_ldapServerTraverseUser'                               = 'LdapServerTraverseUser_List';
-    'GET_ldapservers-ldapserver_id-users'                        = 'LdapServerTraverseUser_List';
-    'graph_ldapServerTraverseUserGroup'                          = 'LdapServerTraverseUserGroup_List';
-    'GET_ldapservers-ldapserver_id-usergroups'                   = 'LdapServerTraverseUserGroup_List';
-    'graph_office365AssociationsList'                            = 'Office365Association_List';
-    'GET_office365s-office365_id-associations'                   = 'Office365Association_List';
-    'graph_office365AssociationsPost'                            = 'Office365Association_Set';
-    'POST_office365s-office365_id-associations'                  = 'Office365Association_Set';
-    'POST_office365s-office365_id-translationrules'              = 'Office365TranslationRule_Create';
-    'translationRules_office365Post'                             = 'Office365TranslationRule_Create';
-    'DELETE_office365s-office365_id-translationrules-id'         = 'Office365TranslationRule_Delete';
-    'translationRules_office365Delete'                           = 'Office365TranslationRule_Delete';
-    'GET_office365s-office365_id-translationrules-id'            = 'Office365TranslationRule_Get';
-    'translationRules_office365Get'                              = 'Office365TranslationRule_Get';
-    'GET_office365s-office365_id-translationrules'               = 'Office365TranslationRule_List';
-    'translationRules_office365List'                             = 'Office365TranslationRule_List';
-    'graph_office365TraverseUser'                                = 'Office365TraverseUser_List';
-    'GET_office365s-office365_id-users'                          = 'Office365TraverseUser_List';
-    'graph_office365TraverseUserGroup'                           = 'Office365TraverseUserGroup_List';
-    'GET_office365s-office365_id-usergroups'                     = 'Office365TraverseUserGroup_List';
-    'GET_office365s-office365_id'                                = 'Office365_Get';
-    'PATCH_office365s-office365_id'                              = 'Office365_Patch';
-    'GET_policyresults'                                          = 'OrgPolicyResult_List';
-    'policyresults_org_list'                                     = 'OrgPolicyResult_List';
-    'POST_policies'                                              = 'Policy_Create';
-    'policies_post'                                              = 'Policy_Create';
-    'policies_delete'                                            = 'Policy_Delete';
-    'DELETE_policies-id'                                         = 'Policy_Delete';
-    'policies_get'                                               = 'Policy_Get';
-    'GET_policies-id'                                            = 'Policy_Get';
-    'GET_policies'                                               = 'Policy_List';
-    'policies_list'                                              = 'Policy_List';
-    'policies_put'                                               = 'Policy_Put';
-    'PUT_policies-id'                                            = 'Policy_Put';
-    'graph_policyAssociationsList'                               = 'PolicyAssociation_List';
-    'GET_policies-policy_id-associations'                        = 'PolicyAssociation_List';
-    'graph_policyAssociationsPost'                               = 'PolicyAssociation_Set';
-    'POST_policies-policy_id-associations'                       = 'PolicyAssociation_Set';
-    'policyresults_get'                                          = 'PolicyResult_Get';
-    'GET_policyresults-id'                                       = 'PolicyResult_Get';
-    'GET_policies-policy_id-policyresults'                       = 'PolicyResult_List';
-    'policyresults_list'                                         = 'PolicyResult_List';
-    'GET_policies-policy_id-policystatuses'                      = 'PolicyStatus_List';
-    'policystatuses_list'                                        = 'PolicyStatus_List';
-    'GET_systems-system_id-policystatuses'                       = 'PolicyStatus_List';
-    'policytemplates_get'                                        = 'PolicyTemplate_Get';
-    'GET_policytemplates-id'                                     = 'PolicyTemplate_Get';
-    'GET_policytemplates'                                        = 'PolicyTemplate_List';
-    'policytemplates_list'                                       = 'PolicyTemplate_List';
-    'graph_policyTraverseSystem'                                 = 'PolicyTraverseSystem_List';
-    'GET_policies-policy_id-systems'                             = 'PolicyTraverseSystem_List';
-    'graph_policyTraverseSystemGroup'                            = 'PolicyTraverseSystemGroup_List';
-    'GET_policies-policy_id-systemgroups'                        = 'PolicyTraverseSystemGroup_List';
-    'providers_postAdmins'                                       = 'ProviderAdmin_Create';
-    'POST_providers-provider_id-administrators'                  = 'ProviderAdmin_Create';
-    'providers_listAdministrators'                               = 'ProviderAdministrator_List';
-    'GET_providers-provider_id-administrators'                   = 'ProviderAdministrator_List';
-    'graph_radiusServerAssociationsList'                         = 'RadiusServerAssociation_List';
-    'GET_radiusservers-radiusserver_id-associations'             = 'RadiusServerAssociation_List';
-    'graph_radiusServerAssociationsPost'                         = 'RadiusServerAssociation_Set';
-    'POST_radiusservers-radiusserver_id-associations'            = 'RadiusServerAssociation_Set';
-    'graph_radiusServerTraverseUser'                             = 'RadiusServerTraverseUser_List';
-    'GET_radiusservers-radiusserver_id-users'                    = 'RadiusServerTraverseUser_List';
-    'graph_radiusServerTraverseUserGroup'                        = 'RadiusServerTraverseUserGroup_List';
-    'GET_radiusservers-radiusserver_id-usergroups'               = 'RadiusServerTraverseUserGroup_List';
-    'graph_systemAssociationsList'                               = 'SystemAssociation_List';
-    'GET_systems-system_id-associations'                         = 'SystemAssociation_List';
-    'graph_systemAssociationsPost'                               = 'SystemAssociation_Set';
-    'POST_systems-system_id-associations'                        = 'SystemAssociation_Set';
-    'systems_getFDEKey'                                          = 'SystemFDEKey_Get';
-    'GET_systems-system_id-fdekey'                               = 'SystemFDEKey_Get';
-    'groups_system_post'                                         = 'SystemGroup_Create';
-    'POST_systemgroups'                                          = 'SystemGroup_Create';
-    'groups_system_delete'                                       = 'SystemGroup_Delete';
-    'DELETE_systemgroups-id'                                     = 'SystemGroup_Delete';
-    'groups_system_get'                                          = 'SystemGroup_Get';
-    'GET_systemgroups-id'                                        = 'SystemGroup_Get';
-    'groups_system_list'                                         = 'SystemGroup_List';
-    'GET_systemgroups'                                           = 'SystemGroup_List';
-    'groups_system_put'                                          = 'SystemGroup_Put';
-    'PUT_systemgroups-id'                                        = 'SystemGroup_Put';
-    'graph_systemGroupAssociationsList'                          = 'SystemGroupAssociation_List';
-    'GET_systemgroups-group_id-associations'                     = 'SystemGroupAssociation_List';
-    'graph_systemGroupAssociationsPost'                          = 'SystemGroupAssociation_Set';
-    'POST_systemgroups-group_id-associations'                    = 'SystemGroupAssociation_Set';
-    'graph_systemGroupMembersList'                               = 'SystemGroupMembers_List';
-    'GET_systemgroups-group_id-members'                          = 'SystemGroupMembers_List';
-    'graph_systemGroupMembersPost'                               = 'SystemGroupMembers_Set';
-    'POST_systemgroups-group_id-members'                         = 'SystemGroupMembers_Set';
-    'graph_systemGroupMembership'                                = 'SystemGroupMembership_List';
-    'GET_systemgroups-group_id-membership'                       = 'SystemGroupMembership_List';
-    'graph_systemGroupTraverseCommand'                           = 'SystemGroupTraverseCommand_List';
-    'GET_systemgroups-group_id-commands'                         = 'SystemGroupTraverseCommand_List';
-    'graph_systemGroupTraversePolicy'                            = 'SystemGroupTraversePolicy_List';
-    'GET_systemgroups-group_id-policies'                         = 'SystemGroupTraversePolicy_List';
-    'graph_systemGroupTraverseUser'                              = 'SystemGroupTraverseUser_List';
-    'GET_systemgroups-group_id-users'                            = 'SystemGroupTraverseUser_List';
-    'graph_systemGroupTraverseUserGroup'                         = 'SystemGroupTraverseUserGroup_List';
-    'GET_systemgroups-group_id-usergroups'                       = 'SystemGroupTraverseUserGroup_List';
-    'systeminsights_list_apps'                                   = 'SystemInsightsApps_List';
-    'GET_systeminsights-apps'                                    = 'SystemInsightsApps_List';
-    'systeminsights_list_bitlocker_info'                         = 'SystemInsightsBitlockerInfo_List';
-    'GET_systeminsights-bitlocker_info'                          = 'SystemInsightsBitlockerInfo_List';
-    'systeminsights_list_browser_plugins'                        = 'SystemInsightsBrowserPlugins_List';
-    'GET_systeminsights-browser_plugins'                         = 'SystemInsightsBrowserPlugins_List';
-    'systeminsights_list_chrome_extensions'                      = 'SystemInsightsChromeExtensions_List';
-    'GET_systeminsights-chrome_extensions'                       = 'SystemInsightsChromeExtensions_List';
-    'systeminsights_list_disk_encryption'                        = 'SystemInsightsDiskEncryption_List';
-    'GET_systeminsights-disk_encryption'                         = 'SystemInsightsDiskEncryption_List';
-    'systeminsights_list_disk_info'                              = 'SystemInsightsDiskInfo_List';
-    'GET_systeminsights-disk_info'                               = 'SystemInsightsDiskInfo_List';
-    'systeminsights_list_etc_hosts'                              = 'SystemInsightsEtcHosts_List';
-    'GET_systeminsights-etc_hosts'                               = 'SystemInsightsEtcHosts_List';
-    'systeminsights_list_firefox_addons'                         = 'SystemInsightsFirefoxAddons_List';
-    'GET_systeminsights-firefox_addons'                          = 'SystemInsightsFirefoxAddons_List';
-    'systeminsights_list_groups'                                 = 'SystemInsightsGroups_List';
-    'GET_systeminsights-groups'                                  = 'SystemInsightsGroups_List';
-    'systeminsights_list_interface_addresses'                    = 'SystemInsightsInterfaceAddresses_List';
-    'GET_systeminsights-interface_addresses'                     = 'SystemInsightsInterfaceAddresses_List';
-    'systeminsights_list_kernel_info'                            = 'SystemInsightsKernelInfo_List';
-    'GET_systeminsights-kernel_info'                             = 'SystemInsightsKernelInfo_List';
-    'systeminsights_list_logical_drives'                         = 'SystemInsightsLogicalDrives_List';
-    'GET_systeminsights-logical_drives'                          = 'SystemInsightsLogicalDrives_List';
-    'systeminsights_list_mounts'                                 = 'SystemInsightsMounts_List';
-    'GET_systeminsights-mounts'                                  = 'SystemInsightsMounts_List';
-    'systeminsights_list_os_version'                             = 'SystemInsightsOsVersion_List';
-    'GET_systeminsights-os_version'                              = 'SystemInsightsOsVersion_List';
-    'systeminsights_list_patches'                                = 'SystemInsightsPatches_List';
-    'GET_systeminsights-patches'                                 = 'SystemInsightsPatches_List';
-    'systeminsights_list_programs'                               = 'SystemInsightsPrograms_List';
-    'GET_systeminsights-programs'                                = 'SystemInsightsPrograms_List';
-    'systeminsights_list_safari_extensions'                      = 'SystemInsightsSafariExtensions_List';
-    'GET_systeminsights-safari_extensions'                       = 'SystemInsightsSafariExtensions_List';
-    'systeminsights_list_system_apps'                            = 'SystemInsightsSystemApps_List';
-    'GET_systeminsights-system_id-apps'                          = 'SystemInsightsSystemApps_List';
-    'systeminsights_list_system_bitlocker_info'                  = 'SystemInsightsSystemBitlockerInfo_List';
-    'GET_systeminsights-system_id-bitlocker_info'                = 'SystemInsightsSystemBitlockerInfo_List';
-    'systeminsights_list_system_browser_plugins'                 = 'SystemInsightsSystemBrowserPlugins_List';
-    'GET_systeminsights-system_id-browser_plugins'               = 'SystemInsightsSystemBrowserPlugins_List';
-    'systeminsights_list_system_chrome_extensions'               = 'SystemInsightsSystemChromeExtensions_List';
-    'GET_systeminsights-system_id-chrome_extensions'             = 'SystemInsightsSystemChromeExtensions_List';
-    'systeminsights_list_system_controls'                        = 'SystemInsightsSystemControls_List';
-    'GET_systeminsights-system_controls'                         = 'SystemInsightsSystemControls_List';
-    'systeminsights_list_system_disk_encryption'                 = 'SystemInsightsSystemDiskEncryption_List';
-    'GET_systeminsights-system_id-disk_encryption'               = 'SystemInsightsSystemDiskEncryption_List';
-    'systeminsights_list_system_disk_info'                       = 'SystemInsightsSystemDiskInfo_List';
-    'GET_systeminsights-system_id-disk_info'                     = 'SystemInsightsSystemDiskInfo_List';
-    'systeminsights_list_system_etc_hosts'                       = 'SystemInsightsSystemEtcHosts_List';
-    'GET_systeminsights-system_id-etc_hosts'                     = 'SystemInsightsSystemEtcHosts_List';
-    'systeminsights_list_system_firefox_addons'                  = 'SystemInsightsSystemFirefoxAddons_List';
-    'GET_systeminsights-system_id-firefox_addons'                = 'SystemInsightsSystemFirefoxAddons_List';
-    'systeminsights_list_system_groups'                          = 'SystemInsightsSystemGroups_List';
-    'GET_systeminsights-system_id-groups'                        = 'SystemInsightsSystemGroups_List';
-    'systeminsights_list_system_info'                            = 'SystemInsightsSystemInfo_List';
-    'GET_systeminsights-system_info'                             = 'SystemInsightsSystemInfo_List';
-    'GET_systeminsights-system_id-interface_addresses'           = 'SystemInsightsSystemInterfaceAddresses_List';
-    'systeminsights_list_system_interface_addresses'             = 'SystemInsightsSystemInterfaceAddresses_List';
-    'GET_systeminsights-system_id-kernel_info'                   = 'SystemInsightsSystemKernelInfo_List';
-    'systeminsights_list_system_kernel_info'                     = 'SystemInsightsSystemKernelInfo_List';
-    'GET_systeminsights-system_id-logical_drives'                = 'SystemInsightsSystemLogicalDrives_List';
-    'systeminsights_list_system_logical_drives'                  = 'SystemInsightsSystemLogicalDrives_List';
-    'GET_systeminsights-system_id-mounts'                        = 'SystemInsightsSystemLogicalMounts_List';
-    'systeminsights_list_system_mounts'                          = 'SystemInsightsSystemLogicalMounts_List';
-    'GET_systeminsights-system_id-os_version'                    = 'SystemInsightsSystemOSVersion_List';
-    'systeminsights_list_system_os_version'                      = 'SystemInsightsSystemOSVersion_List';
-    'GET_systeminsights-system_id-patches'                       = 'SystemInsightsSystemPatches_List';
-    'systeminsights_list_system_patches'                         = 'SystemInsightsSystemPatches_List';
-    'GET_systeminsights-system_id-programs'                      = 'SystemInsightsSystemPrograms_List';
-    'systeminsights_list_system_programs'                        = 'SystemInsightsSystemPrograms_List';
-    'GET_systeminsights-system_id-safari_extensions'             = 'SystemInsightsSystemSafariExtensions_List';
-    'systeminsights_list_system_safari_extensions'               = 'SystemInsightsSystemSafariExtensions_List';
-    'GET_systeminsights-system_id-system_controls'               = 'SystemInsightsSystemSystemControls_List';
-    'systeminsights_list_system_system_controls'                 = 'SystemInsightsSystemSystemControls_List';
-    'GET_systeminsights-system_id-system_info'                   = 'SystemInsightsSystemSystemInfo_List';
-    'systeminsights_list_system_system_info'                     = 'SystemInsightsSystemSystemInfo_List';
-    'GET_systeminsights-system_id-uptime'                        = 'SystemInsightsSystemUptime_List';
-    'systeminsights_list_system_uptime'                          = 'SystemInsightsSystemUptime_List';
-    'GET_systeminsights-system_id-users'                         = 'SystemInsightsSystemUsers_List';
-    'systeminsights_list_system_users'                           = 'SystemInsightsSystemUsers_List';
-    'systeminsights_list_uptime'                                 = 'SystemInsightsUptime_List';
-    'GET_systeminsights-uptime'                                  = 'SystemInsightsUptime_List';
-    'systeminsights_list_users'                                  = 'SystemInsightsUsers_List';
-    'GET_systeminsights-users'                                   = 'SystemInsightsUsers_List';
-    'graph_systemMemberOf'                                       = 'SystemMemberOf_List';
-    'GET_systems-system_id-memberof'                             = 'SystemMemberOf_List';
-    'graph_systemTraverseCommand'                                = 'SystemTraverseCommand_List';
-    'GET_systems-system_id-commands'                             = 'SystemTraverseCommand_List';
-    'graph_systemTraversePolicy'                                 = 'SystemTraversePolicy_List';
-    'GET_systems-system_id-policies'                             = 'SystemTraversePolicy_List';
-    'graph_systemTraverseUser'                                   = 'SystemTraverseUser_List';
-    'GET_systems-system_id-users'                                = 'SystemTraverseUser_List';
-    'graph_systemTraverseUserGroup'                              = 'SystemTraverseUserGroup_List';
-    'GET_systems-system_id-usergroups'                           = 'SystemTraverseUserGroup_List';
-    'graph_userAssociationsList'                                 = 'UserAssociation_List';
-    'GET_users-user_id-associations'                             = 'UserAssociation_List';
-    'graph_userAssociationsPost'                                 = 'UserAssociation_Set';
-    'POST_users-user_id-associations'                            = 'UserAssociation_Set';
-    'groups_user_post'                                           = 'UserGroup_Create';
-    'POST_usergroups'                                            = 'UserGroup_Create';
-    'groups_user_delete'                                         = 'UserGroup_Delete';
-    'DELETE_usergroups-id'                                       = 'UserGroup_Delete';
-    'groups_user_get'                                            = 'UserGroup_Get';
-    'GET_usergroups-id'                                          = 'UserGroup_Get';
-    'groups_user_list'                                           = 'UserGroup_List';
-    'GET_usergroups'                                             = 'UserGroup_List';
-    'groups_user_put'                                            = 'UserGroup_Put';
-    'PUT_usergroups-id'                                          = 'UserGroup_Put';
-    'graph_userGroupAssociationsList'                            = 'UserGroupAssociation_List';
-    'GET_usergroups-group_id-associations'                       = 'UserGroupAssociation_List';
-    'graph_userGroupAssociationsPost'                            = 'UserGroupAssociation_Set';
-    'POST_usergroups-group_id-associations'                      = 'UserGroupAssociation_Set';
-    'graph_userGroupMembersList'                                 = 'UserGroupMembers_List';
-    'GET_usergroups-group_id-members'                            = 'UserGroupMembers_List';
-    'graph_userGroupMembersPost'                                 = 'UserGroupMembers_Set';
-    'POST_usergroups-group_id-members'                           = 'UserGroupMembers_Set';
-    'graph_userGroupMembership'                                  = 'UserGroupMembership_List';
-    'GET_usergroups-group_id-membership'                         = 'UserGroupMembership_List';
-    'graph_userGroupTraverseApplication'                         = 'UserGroupTraverseApplication_List';
-    'GET_usergroups-group_id-applications'                       = 'UserGroupTraverseApplication_List';
-    'graph_userGroupTraverseDirectory'                           = 'UserGroupTraverseDirectory_List';
-    'GET_usergroups-group_id-directories'                        = 'UserGroupTraverseDirectory_List';
-    'graph_userGroupTraverseGSuite'                              = 'UserGroupTraverseGSuite_List';
-    'GET_usergroups-group_id-gsuites'                            = 'UserGroupTraverseGSuite_List';
-    'graph_userGroupTraverseLdapServer'                          = 'UserGroupTraverseLdapServer_List';
-    'GET_usergroups-group_id-ldapservers'                        = 'UserGroupTraverseLdapServer_List';
-    'graph_userGroupTraverseOffice365'                           = 'UserGroupTraverseOffice365_List';
-    'GET_usergroups-group_id-office365s'                         = 'UserGroupTraverseOffice365_List';
-    'graph_userGroupTraverseRadiusServer'                        = 'UserGroupTraverseRadiusServer_List';
-    'GET_usergroups-group_id-radiusservers'                      = 'UserGroupTraverseRadiusServer_List';
-    'graph_userGroupTraverseSystem'                              = 'UserGroupTraverseSystem_List';
-    'GET_usergroups-group_id-systems'                            = 'UserGroupTraverseSystem_List';
-    'graph_userGroupTraverseSystemGroup'                         = 'UserGroupTraverseSystemGroup_List';
-    'GET_usergroups-group_id-systemgroups'                       = 'UserGroupTraverseSystemGroup_List';
-    'graph_userMemberOf'                                         = 'UserMemberOf_List';
-    'GET_users-user_id-memberof'                                 = 'UserMemberOf_List';
-    'graph_userTraverseApplication'                              = 'UserTraverseApplication_List';
-    'GET_users-user_id-applications'                             = 'UserTraverseApplication_List';
-    'graph_userTraverseDirectory'                                = 'UserTraverseDirectory_List';
-    'GET_users-user_id-directories'                              = 'UserTraverseDirectory_List';
-    'graph_userTraverseGSuite'                                   = 'UserTraverseGSuite_List';
-    'GET_users-user_id-gsuites'                                  = 'UserTraverseGSuite_List';
-    'graph_userTraverseLdapServer'                               = 'UserTraverseLdapServer_List';
-    'GET_users-user_id-ldapservers'                              = 'UserTraverseLdapServer_List';
-    'graph_userTraverseOffice365'                                = 'UserTraverseOffice365_List';
-    'GET_users-user_id-office365s'                               = 'UserTraverseOffice365_List';
-    'graph_userTraverseRadiusServer'                             = 'UserTraverseRadiusServer_List';
-    'GET_users-user_id-radiusservers'                            = 'UserTraverseRadiusServer_List';
-    'graph_userTraverseSystem'                                   = 'UserTraverseSystem_List';
-    'GET_users-user_id-systems'                                  = 'UserTraverseSystem_List';
-    'graph_userTraverseSystemGroup'                              = 'UserTraverseSystemGroup_List';
-    'GET_users-user_id-systemgroups'                             = 'UserTraverseSystemGroup_List';
-    'workdays_authorize'                                         = 'Workday_Authorize';
-    'POST_workdays-workday_id-auth'                              = 'Workday_Authorize';
-    'POST_workdays'                                              = 'Workday_Create';
-    'workdays_post'                                              = 'Workday_Create';
-    'workdays_get'                                               = 'Workday_Get';
-    'GET_workdays-id'                                            = 'Workday_Get';
-    'workdays_import'                                            = 'Workday_Import';
-    'POST_workdays-workday_id-import'                            = 'Workday_Import';
-    'GET_workdays'                                               = 'Workday_List';
-    'workdays_list'                                              = 'Workday_List';
-    'workdays_put'                                               = 'Workday_Put';
-    'PUT_workdays-id'                                            = 'Workday_Put';
-    'DELETE_workdays-workday_id-auth'                            = 'WorkdayAuthorization_Remove';
-    'workdays_deauthorize'                                       = 'WorkdayAuthorization_Remove';
-    'GET_workdays-id-import-job_id-results'                      = 'WorkdayResult_Import';
-    'workdays_importresults'                                     = 'WorkdayResult_Import';
-    'workdays_workers'                                           = 'WorkdayWorker_List';
-    'GET_workdays-workday_id-workers'                            = 'WorkdayWorker_List';
-    'activedirectories_post'                                     = 'ActiveDirectory_Create';
-    'activedirectories_delete'                                   = 'ActiveDirectory_Delete';
-    'activedirectories_agentsPost'                               = 'ActiveDirectoryAgent_Create';
-    'activedirectories_agentsDelete'                             = 'ActiveDirectoryAgent_Delete';
-    'activedirectories_agentsGet'                                = 'ActiveDirectoryAgent_Get';
-    'activedirectories_agentsList'                               = 'ActiveDirectoryAgent_List';
-    'graph_activeDirectoryAssociationsPost'                      = 'ActiveDirectoryAssociation_Set';
-    'graph_activeDirectoryTraverseUser'                          = 'ActiveDirectoryTraverseUser_List';
-    'applemdms_post'                                             = 'AppleMdm_Create';
-    'applemdms_delete'                                           = 'AppleMdm_Delete';
-    'applemdms_list'                                             = 'AppleMdm_List';
-    'applemdms_put'                                              = 'AppleMdm_Put';
-    'PATCH_bulk-users'                                           = 'BulkUsers_Patch';
-    'bulk_usersUpdate'                                           = 'BulkUsers_Put';
-    'enrollmentprofiles_get'                                     = 'EnrollmentProfiles_Get';
-    'enrollmentprofiles_list'                                    = 'EnrollmentProfiles_List';
-    'jcEnrollmentProfiles_post'                                  = 'JCEnrollmentProfiles_Create';
-    'jcEnrollmentProfiles_delete'                                = 'JCEnrollmentProfiles_Delete';
-    'jcEnrollmentProfiles_get'                                   = 'JCEnrollmentProfiles_Get';
-    'jcEnrollmentProfiles_list'                                  = 'JCEnrollmentProfiles_List';
-    'jcEnrollmentProfiles_put'                                   = 'JCEnrollmentProfiles_Put';
-    'jobs_get'                                                   = 'Job_Get';
-    'jobs_results'                                               = 'JobResult_List';
-    'org_crypto_get'                                             = 'OrgCrypto_Get';
-    'org_crypto_put'                                             = 'OrgCrypto_Put';
-    'knowledge_salesforceList'                                   = 'SalesForceKnowledge_List';
-    'groups_system_patch'                                        = 'SystemGroup_Patch';
-    'graph_systemGroupMemberOf'                                  = 'SystemGroupMemberOf_List';
-    'systeminsights_list_alf'                                    = 'SystemInsightsAlf_List';
-    'systeminsights_list_battery'                                = 'SystemInsightsBattery_List';
-    'systeminsights_list_crashes'                                = 'SystemInsightsCrashes_List';
-    'systeminsights_list_ie_extensions'                          = 'SystemInsightsIEExtensions_List';
-    'systeminsights_list_launchd'                                = 'SystemInsightsLaunchd_List';
-    'systeminsights_list_logged_in_users'                        = 'SystemInsightsLoggedInUsers_List';
-    'systeminsights_list_managed_policies'                       = 'SystemInsightsManagedPolicies_List';
-    'systeminsights_list_shadow'                                 = 'SystemInsightsShadow_List';
-    'systeminsights_list_shared_folders'                         = 'SystemInsightsSharedFolders_List';
-    'systeminsights_list_shared_resources'                       = 'SystemInsightsSharedResources_List';
-    'systeminsights_list_sharing_preferences'                    = 'SystemInsightsSharingPreferences_List';
-    'systeminsights_list_sip_config'                             = 'SystemInsightsSipConfig_List';
-    'systeminsights_list_usb_devices'                            = 'SystemInsightsUSBDevices_List';
-    'systeminsights_list_user_groups'                            = 'SystemInsightsUserGroups_List';
-    'systeminsights_list_user_ssh_keys'                          = 'SystemInsightsUserSSHKeys_List';
-    'systeminsights_list_windows_crashes'                        = 'SystemInsightsWindowsCrashes_List';
-    'users_sendEmails'                                           = 'UserEmail_Send';
-    'groups_user_patch'                                          = 'UserGroup_Patch';
-    'graph_userGroupMemberOf'                                    = 'UserGroupMemberOf_List';
-    'graph_userGroupTraverseActiveDirectory'                     = 'UserGroupTraverseActiveDirectory_List';
-    'graph_userTraverseActiveDirectory'                          = 'UserTraverseActiveDirectory_List';
-    'workdays_delete'                                            = 'Workday_Delete';
-    'workdays_settings'                                          = 'WorkdaySetting_Get';
+    'POST_applications'                                          = 'Create-Application'; # V1
+    'applications_post'                                          = 'Create-Application'; # V1
+    'applications_delete'                                        = 'Delete-Application'; # V1
+    'DELETE_applications-id'                                     = 'Delete-Application'; # V1
+    'applications_get'                                           = 'Get-Application'; # V1
+    'GET_applications-id'                                        = 'Get-Application'; # V1
+    'GET_applications'                                           = 'List-Application'; # V1
+    'applications_list'                                          = 'List-Application'; # V1
+    'applications_put'                                           = 'Put-Application'; # V1
+    'PUT_applications-id'                                        = 'Put-Application'; # V1
+    'application_templates_get'                                  = 'Get-ApplicationTemplate'; # V1
+    'GET_application-templates-id'                               = 'Get-ApplicationTemplate'; # V1
+    'GET_application-templates'                                  = 'List-ApplicationTemplate'; # V1
+    'application_templates_list'                                 = 'List-ApplicationTemplate'; # V1
+    'POST_commands'                                              = 'Create-Command'; # V1
+    'commands_post'                                              = 'Create-Command'; # V1
+    'commands_delete'                                            = 'Delete-Command'; # V1
+    'DELETE_commands-id'                                         = 'Delete-Command'; # V1
+    'commands_get'                                               = 'Get-Command'; # V1
+    'GET_commands-id'                                            = 'Get-Command'; # V1
+    'GET_commands'                                               = 'List-Command'; # V1
+    'commands_list'                                              = 'List-Command'; # V1
+    'commands_put'                                               = 'Put-Command'; # V1
+    'PUT_commands-id'                                            = 'Put-Command'; # V1
+    'command_file_get'                                           = 'Get-CommandFile'; # V1
+    'GET_files-command-id'                                       = 'Get-CommandFile'; # V1
+    'command_results_delete'                                     = 'Delete-CommandResult'; # V1
+    'DELETE_commandresults-id'                                   = 'Delete-CommandResult'; # V1
+    'command_results_get'                                        = 'Get-CommandResult'; # V1
+    'GET_commandresults-id'                                      = 'Get-CommandResult'; # V1
+    'GET_commandresults'                                         = 'List-CommandResult'; # V1
+    'command_results_list'                                       = 'List-CommandResult'; # V1
+    'command_trigger_webhook_post'                               = 'Start-CommandTriggerWebhook'; # V1
+    'POST_command-trigger-triggername'                           = 'Start-CommandTriggerWebhook'; # V1
+    'organizations_get'                                          = 'Get-Organization'; # V1
+    'GET_organizations-id'                                       = 'Get-Organization'; # V1
+    'GET_organizations'                                          = 'List-Organization'; # V1
+    'organization_list'                                          = 'List-Organization'; # V1
+    'organization_put'                                           = 'Put-Organization'; # V1
+    'PUT_organizations-id'                                       = 'Put-Organization'; # V1
+    'search_organizations_post'                                  = 'Search-Organization'; # V1
+    'POST_search-organizations'                                  = 'Search-Organization'; # V1
+    'radius_servers_post'                                        = 'Create-RadiusServer'; # V1
+    'POST_radiusservers'                                         = 'Create-RadiusServer'; # V1
+    'GET_radiusservers'                                          = 'List-RadiusServer'; # V1
+    'radius_servers_list'                                        = 'List-RadiusServer'; # V1
+    'radius_servers_put'                                         = 'Put-RadiusServer'; # V1
+    'PUT_radiusservers-id'                                       = 'Put-RadiusServer'; # V1
+    'sshkey_post'                                                = 'Create-SshKey'; # V1
+    'POST_systemusers-id-sshkeys'                                = 'Create-SshKey'; # V1
+    'sshkey_delete'                                              = 'Delete-SshKey'; # V1
+    'DELETE_systemusers-systemuser_id-sshkeys-id'                = 'Delete-SshKey'; # V1
+    'GET_systemusers-id-sshkeys'                                 = 'List-SshKey'; # V1
+    'sshkey_list'                                                = 'List-SshKey'; # V1
+    'systems_delete'                                             = 'Delete-System'; # V1
+    'DELETE_systems-id'                                          = 'Delete-System'; # V1
+    'systems_get'                                                = 'Get-System'; # V1
+    'GET_systems-id'                                             = 'Get-System'; # V1
+    'GET_systems'                                                = 'List-System'; # V1
+    'systems_list'                                               = 'List-System'; # V1
+    'systems_put'                                                = 'Put-System'; # V1
+    'PUT_systems-id'                                             = 'Put-System'; # V1
+    'search_systems_post'                                        = 'Search-System'; # V1
+    'POST_search-systems'                                        = 'Search-System'; # V1
+    'POST_systemusers'                                           = 'Create-SystemUser'; # V1
+    'systemusers_post'                                           = 'Create-SystemUser'; # V1
+    'systemusers_delete'                                         = 'Delete-SystemUser'; # V1
+    'DELETE_systemusers-id'                                      = 'Delete-SystemUser'; # V1
+    'systemusers_get'                                            = 'Get-SystemUser'; # V1
+    'GET_systemusers-id'                                         = 'Get-SystemUser'; # V1
+    'GET_systemusers'                                            = 'List-SystemUser'; # V1
+    'systemusers_list'                                           = 'List-SystemUser'; # V1
+    'systemusers_put'                                            = 'Put-SystemUser'; # V1
+    'PUT_systemusers-id'                                         = 'Put-SystemUser'; # V1
+    'search_systemusers_post'                                    = 'Search-SystemUser'; # V1
+    'POST_search-systemusers'                                    = 'Search-SystemUser'; # V1
+    'POST_systemusers-id-unlock'                                 = 'Unlock-SystemUser'; # V1
+    'systemusers_unlock'                                         = 'Unlock-SystemUser'; # V1
+    'POST_systemusers-id-resetmfa'                               = 'Reset-SystemUserMfa'; # V1
+    'systemusers_resetmfa'                                       = 'Reset-SystemUserMfa'; # V1
+    'POST_systemusers-id-expire'                                 = 'POST-ExpireSystemUserPassword'; # V1
+    'GET_radiusservers-id'                                       = 'Get-RadiusServer'; # V1
+    'POST_case'                                                  = 'New-SupportCase'; # V1
+    'systems_systemusers_binding_list'                           = 'List-SystemsSystemUserBinding'; # V1
+    'systems_systemusers_binding_put'                            = 'Put-SystemsSystemUserBinding'; # V1
+    'systemusers_systems_binding_list'                           = 'List-SystemUsersSystemBinding'; # V1
+    'systemusers_systems_binding_put'                            = 'Put-SystemUsersSystemBinding'; # V1
+    'tags_post'                                                  = 'Create-Tag'; # V1
+    'tags_delete'                                                = 'Delete-Tag'; # V1
+    'tags_get'                                                   = 'Get-Tag'; # V1
+    'tags_list'                                                  = 'List-Tag'; # V1
+    'tags_put'                                                   = 'Put-Tag'; # V1
+    'activedirectories_get'                                      = 'Get-ActiveDirectory'; # V2
+    'GET_activedirectories-id'                                   = 'Get-ActiveDirectory'; # V2
+    'activedirectories_list'                                     = 'List-ActiveDirectory'; # V2
+    'GET_activedirectories'                                      = 'List-ActiveDirectory'; # V2
+    'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation'; # V2
+    'graph_activeDirectoryAssociationsList'                      = 'List-ActiveDirectoryAssociation'; # V2
+    'GET_activedirectories-activedirectory_id-usergroups'        = 'List-ActiveDirectoryTraverseUserGroup'; # V2
+    'graph_activeDirectoryTraverseUserGroup'                     = 'List-ActiveDirectoryTraverseUserGroup'; # V2
+    'GET_applications-application_id-associations'               = 'List-ApplicationAssociation'; # V2
+    'graph_applicationAssociationsList'                          = 'List-ApplicationAssociation'; # V2
+    'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation'; # V2
+    'graph_applicationAssociationsPost'                          = 'Set-ApplicationAssociation'; # V2
+    'GET_applications-application_id-users'                      = 'List-ApplicationTraverseUser'; # V2
+    'graph_applicationTraverseUser'                              = 'List-ApplicationTraverseUser'; # V2
+    'GET_applications-application_id-usergroups'                 = 'List-ApplicationTraverseUserGroup'; # V2
+    'graph_applicationTraverseUserGroup'                         = 'List-ApplicationTraverseUserGroup'; # V2
+    'bulk_usersCreate'                                           = 'Create-BulkUsers'; # V2
+    'POST_bulk-users'                                            = 'Create-BulkUsers'; # V2
+    'bulk_usersCreateResults'                                    = 'Get-BulkUsersResult'; # V2
+    'GET_bulk-users-job_id-results'                              = 'Get-BulkUsersResult'; # V2
+    'GET_commands-command_id-associations'                       = 'List-CommandAssociation'; # V2
+    'graph_commandAssociationsList'                              = 'List-CommandAssociation'; # V2
+    'POST_commands-command_id-associations'                      = 'Set-CommandAssociation'; # V2
+    'graph_commandAssociationsPost'                              = 'Set-CommandAssociation'; # V2
+    'GET_commands-command_id-systems'                            = 'List-CommandTraverseSystem'; # V2
+    'graph_commandTraverseSystem'                                = 'List-CommandTraverseSystem'; # V2
+    'GET_commands-command_id-systemgroups'                       = 'List-CommandTraverseSystemGroup'; # V2
+    'graph_commandTraverseSystemGroup'                           = 'List-CommandTraverseSystemGroup'; # V2
+    'GET_directories'                                            = 'List-Directory'; # V2
+    'directories_list'                                           = 'List-Directory'; # V2
+    'duo_accountPost'                                            = 'Create-DuoAccount'; # V2
+    'POST_duo-accounts'                                          = 'Create-DuoAccount'; # V2
+    'duo_accountDelete'                                          = 'Delete-DuoAccount'; # V2
+    'DELETE_duo-accounts-id'                                     = 'Delete-DuoAccount'; # V2
+    'duo_accountGet'                                             = 'Get-DuoAccount'; # V2
+    'GET_duo-accounts-id'                                        = 'Get-DuoAccount'; # V2
+    'GET_duo-accounts'                                           = 'List-DuoAccount'; # V2
+    'duo_accountList'                                            = 'List-DuoAccount'; # V2
+    'duo_applicationPost'                                        = 'Create-DuoApplication'; # V2
+    'POST_duo-accounts-account_id-applications'                  = 'Create-DuoApplication'; # V2
+    'duo_applicationDelete'                                      = 'Delete-DuoApplication'; # V2
+    'DELETE_duo-accounts-account_id-applications-application_id' = 'Delete-DuoApplication'; # V2
+    'duo_applicationGet'                                         = 'Get-DuoApplication'; # V2
+    'GET_duo-accounts-account_id-applications-application_id'    = 'Get-DuoApplication'; # V2
+    'GET_duo-accounts-account_id-applications'                   = 'List-DuoApplication'; # V2
+    'duo_applicationList'                                        = 'List-DuoApplication'; # V2
+    'PUT_duo-accounts-account_id-applications-application_id'    = 'Put-DuoApplication'; # V2
+    'duo_applicationUpdate'                                      = 'Put-DuoApplication'; # V2
+    'GET_groups'                                                 = 'List-Group'; # V2
+    'groups_list'                                                = 'List-Group'; # V2
+    'gsuites_get'                                                = 'Get-GSuite'; # V2
+    'GET_gsuites-id'                                             = 'Get-GSuite'; # V2
+    'gsuites_patch'                                              = 'Patch-GSuite'; # V2
+    'PATCH_gsuites-id'                                           = 'Patch-GSuite'; # V2
+    'graph_gSuiteAssociationsList'                               = 'List-GSuiteAssociation'; # V2
+    'GET_gsuites-gsuite_id-associations'                         = 'List-GSuiteAssociation'; # V2
+    'graph_gSuiteAssociationsPost'                               = 'Set-GSuiteAssociation'; # V2
+    'POST_gsuites-gsuite_id-associations'                        = 'Set-GSuiteAssociation'; # V2
+    'POST_gsuites-gsuite_id-translationrules'                    = 'Create-GSuiteTranslationRule'; # V2
+    'translationRules_gSuitePost'                                = 'Create-GSuiteTranslationRule'; # V2
+    'DELETE_gsuites-gsuite_id-translationrules-id'               = 'Delete-GSuiteTranslationRule'; # V2
+    'translationRules_gSuiteDelete'                              = 'Delete-GSuiteTranslationRule'; # V2
+    'GET_gsuites-gsuite_id-translationrules-id'                  = 'Get-GSuiteTranslationRule'; # V2
+    'translationRules_gSuiteGet'                                 = 'Get-GSuiteTranslationRule'; # V2
+    'GET_gsuites-gsuite_id-translationrules'                     = 'List-GSuiteTranslationRule'; # V2
+    'translationRules_gSuiteList'                                = 'List-GSuiteTranslationRule'; # V2
+    'graph_gSuiteTraverseUser'                                   = 'List-GSuiteTraverseUser'; # V2
+    'GET_gsuites-gsuite_id-users'                                = 'List-GSuiteTraverseUser'; # V2
+    'graph_gSuiteTraverseUserGroup'                              = 'List-GSuiteTraverseUserGroup'; # V2
+    'GET_gsuites-gsuite_id-usergroups'                           = 'List-GSuiteTraverseUserGroup'; # V2
+    'ldapservers_get'                                            = 'Get-LdapServer'; # V2
+    'GET_ldapservers-id'                                         = 'Get-LdapServer'; # V2
+    'GET_ldapservers'                                            = 'List-LdapServer'; # V2
+    'ldapservers_list'                                           = 'List-LdapServer'; # V2
+    'ldapservers_patch'                                          = 'Patch-LdapServer'; # V2
+    'PATCH_ldapservers-id'                                       = 'Patch-LdapServer'; # V2
+    'graph_ldapServerAssociationsList'                           = 'List-LdapServerAssociation'; # V2
+    'GET_ldapservers-ldapserver_id-associations'                 = 'List-LdapServerAssociation'; # V2
+    'graph_ldapServerAssociationsPost'                           = 'Set-LdapServerAssociation'; # V2
+    'POST_ldapservers-ldapserver_id-associations'                = 'Set-LdapServerAssociation'; # V2
+    'ldapservers_sambaDomainsPost'                               = 'Create-LdapServerSambaDomain'; # V2
+    'POST_ldapservers-ldapserver_id-sambadomains'                = 'Create-LdapServerSambaDomain'; # V2
+    'ldapservers_sambaDomainsDelete'                             = 'Delete-LdapServerSambaDomain'; # V2
+    'DELETE_ldapservers-ldapserver_id-sambadomains-id'           = 'Delete-LdapServerSambaDomain'; # V2
+    'ldapservers_sambaDomainsGet'                                = 'Get-LdapServerSambaDomain'; # V2
+    'GET_ldapservers-ldapserver_id-sambadomains-id'              = 'Get-LdapServerSambaDomain'; # V2
+    'ldapservers_sambaDomainsList'                               = 'List-LdapServerSambaDomain'; # V2
+    'GET_ldapservers-ldapserver_id-sambadomains'                 = 'List-LdapServerSambaDomain'; # V2
+    'ldapservers_sambaDomainsPut'                                = 'Put-LdapServerSambaDomain'; # V2
+    'PUT_ldapservers-ldapserver_id-sambadomains-id'              = 'Put-LdapServerSambaDomain'; # V2
+    'graph_ldapServerTraverseUser'                               = 'List-LdapServerTraverseUser'; # V2
+    'GET_ldapservers-ldapserver_id-users'                        = 'List-LdapServerTraverseUser'; # V2
+    'graph_ldapServerTraverseUserGroup'                          = 'List-LdapServerTraverseUserGroup'; # V2
+    'GET_ldapservers-ldapserver_id-usergroups'                   = 'List-LdapServerTraverseUserGroup'; # V2
+    'graph_office365AssociationsList'                            = 'List-Office365Association'; # V2
+    'GET_office365s-office365_id-associations'                   = 'List-Office365Association'; # V2
+    'graph_office365AssociationsPost'                            = 'Set-Office365Association'; # V2
+    'POST_office365s-office365_id-associations'                  = 'Set-Office365Association'; # V2
+    'POST_office365s-office365_id-translationrules'              = 'Create-Office365TranslationRule'; # V2
+    'translationRules_office365Post'                             = 'Create-Office365TranslationRule'; # V2
+    'DELETE_office365s-office365_id-translationrules-id'         = 'Delete-Office365TranslationRule'; # V2
+    'translationRules_office365Delete'                           = 'Delete-Office365TranslationRule'; # V2
+    'GET_office365s-office365_id-translationrules-id'            = 'Get-Office365TranslationRule'; # V2
+    'translationRules_office365Get'                              = 'Get-Office365TranslationRule'; # V2
+    'GET_office365s-office365_id-translationrules'               = 'List-Office365TranslationRule'; # V2
+    'translationRules_office365List'                             = 'List-Office365TranslationRule'; # V2
+    'graph_office365TraverseUser'                                = 'List-Office365TraverseUser'; # V2
+    'GET_office365s-office365_id-users'                          = 'List-Office365TraverseUser'; # V2
+    'graph_office365TraverseUserGroup'                           = 'List-Office365TraverseUserGroup'; # V2
+    'GET_office365s-office365_id-usergroups'                     = 'List-Office365TraverseUserGroup'; # V2
+    'GET_policyresults'                                          = 'List-OrgPolicyResult'; # V2
+    'policyresults_org_list'                                     = 'List-OrgPolicyResult'; # V2
+    'POST_policies'                                              = 'Create-Policy'; # V2
+    'policies_post'                                              = 'Create-Policy'; # V2
+    'policies_delete'                                            = 'Delete-Policy'; # V2
+    'DELETE_policies-id'                                         = 'Delete-Policy'; # V2
+    'policies_get'                                               = 'Get-Policy'; # V2
+    'GET_policies-id'                                            = 'Get-Policy'; # V2
+    'GET_policies'                                               = 'List-Policy'; # V2
+    'policies_list'                                              = 'List-Policy'; # V2
+    'policies_put'                                               = 'Put-Policy'; # V2
+    'PUT_policies-id'                                            = 'Put-Policy'; # V2
+    'graph_policyAssociationsList'                               = 'List-PolicyAssociation'; # V2
+    'GET_policies-policy_id-associations'                        = 'List-PolicyAssociation'; # V2
+    'graph_policyAssociationsPost'                               = 'Set-PolicyAssociation'; # V2
+    'POST_policies-policy_id-associations'                       = 'Set-PolicyAssociation'; # V2
+    'policyresults_get'                                          = 'Get-PolicyResult'; # V2
+    'GET_policyresults-id'                                       = 'Get-PolicyResult'; # V2
+    'GET_policies-policy_id-policyresults'                       = 'List-PolicyResult'; # V2
+    'policyresults_list'                                         = 'List-PolicyResult'; # V2
+    'GET_policies-policy_id-policystatuses'                      = 'List-PolicyStatus'; # V2
+    'policystatuses_list'                                        = 'List-PolicyStatus'; # V2
+    'GET_systems-system_id-policystatuses'                       = 'List-PolicyStatus'; # V2
+    'policytemplates_get'                                        = 'Get-PolicyTemplate'; # V2
+    'GET_policytemplates-id'                                     = 'Get-PolicyTemplate'; # V2
+    'GET_policytemplates'                                        = 'List-PolicyTemplate'; # V2
+    'policytemplates_list'                                       = 'List-PolicyTemplate'; # V2
+    'graph_policyTraverseSystem'                                 = 'List-PolicyTraverseSystem'; # V2
+    'GET_policies-policy_id-systems'                             = 'List-PolicyTraverseSystem'; # V2
+    'graph_policyTraverseSystemGroup'                            = 'List-PolicyTraverseSystemGroup'; # V2
+    'GET_policies-policy_id-systemgroups'                        = 'List-PolicyTraverseSystemGroup'; # V2
+    'providers_postAdmins'                                       = 'Create-ProviderAdmin'; # V2
+    'POST_providers-provider_id-administrators'                  = 'Create-ProviderAdmin'; # V2
+    'providers_listAdministrators'                               = 'List-ProviderAdministrator'; # V2
+    'GET_providers-provider_id-administrators'                   = 'List-ProviderAdministrator'; # V2
+    'graph_radiusServerAssociationsList'                         = 'List-RadiusServerAssociation'; # V2
+    'GET_radiusservers-radiusserver_id-associations'             = 'List-RadiusServerAssociation'; # V2
+    'graph_radiusServerAssociationsPost'                         = 'Set-RadiusServerAssociation'; # V2
+    'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation'; # V2
+    'graph_radiusServerTraverseUser'                             = 'List-RadiusServerTraverseUser'; # V2
+    'GET_radiusservers-radiusserver_id-users'                    = 'List-RadiusServerTraverseUser'; # V2
+    'graph_radiusServerTraverseUserGroup'                        = 'List-RadiusServerTraverseUserGroup'; # V2
+    'GET_radiusservers-radiusserver_id-usergroups'               = 'List-RadiusServerTraverseUserGroup'; # V2
+    'graph_systemAssociationsList'                               = 'List-SystemAssociation'; # V2
+    'GET_systems-system_id-associations'                         = 'List-SystemAssociation'; # V2
+    'graph_systemAssociationsPost'                               = 'Set-SystemAssociation'; # V2
+    'POST_systems-system_id-associations'                        = 'Set-SystemAssociation'; # V2
+    'systems_getFDEKey'                                          = 'Get-SystemFDEKey'; # V2
+    'GET_systems-system_id-fdekey'                               = 'Get-SystemFDEKey'; # V2
+    'groups_system_post'                                         = 'Create-SystemGroup'; # V2
+    'POST_systemgroups'                                          = 'Create-SystemGroup'; # V2
+    'groups_system_delete'                                       = 'Delete-SystemGroup'; # V2
+    'DELETE_systemgroups-id'                                     = 'Delete-SystemGroup'; # V2
+    'groups_system_get'                                          = 'Get-SystemGroup'; # V2
+    'GET_systemgroups-id'                                        = 'Get-SystemGroup'; # V2
+    'groups_system_list'                                         = 'List-SystemGroup'; # V2
+    'GET_systemgroups'                                           = 'List-SystemGroup'; # V2
+    'groups_system_put'                                          = 'Put-SystemGroup'; # V2
+    'PUT_systemgroups-id'                                        = 'Put-SystemGroup'; # V2
+    'graph_systemGroupAssociationsList'                          = 'List-SystemGroupAssociation'; # V2
+    'GET_systemgroups-group_id-associations'                     = 'List-SystemGroupAssociation'; # V2
+    'graph_systemGroupAssociationsPost'                          = 'Set-SystemGroupAssociation'; # V2
+    'POST_systemgroups-group_id-associations'                    = 'Set-SystemGroupAssociation'; # V2
+    'graph_systemGroupMembersList'                               = 'List-SystemGroupMembers'; # V2
+    'GET_systemgroups-group_id-members'                          = 'List-SystemGroupMembers'; # V2
+    'graph_systemGroupMembersPost'                               = 'Set-SystemGroupMembers'; # V2
+    'POST_systemgroups-group_id-members'                         = 'Set-SystemGroupMembers'; # V2
+    'graph_systemGroupMembership'                                = 'List-SystemGroupMembership'; # V2
+    'GET_systemgroups-group_id-membership'                       = 'List-SystemGroupMembership'; # V2
+    'graph_systemGroupTraverseCommand'                           = 'List-SystemGroupTraverseCommand'; # V2
+    'GET_systemgroups-group_id-commands'                         = 'List-SystemGroupTraverseCommand'; # V2
+    'graph_systemGroupTraversePolicy'                            = 'List-SystemGroupTraversePolicy'; # V2
+    'GET_systemgroups-group_id-policies'                         = 'List-SystemGroupTraversePolicy'; # V2
+    'graph_systemGroupTraverseUser'                              = 'List-SystemGroupTraverseUser'; # V2
+    'GET_systemgroups-group_id-users'                            = 'List-SystemGroupTraverseUser'; # V2
+    'graph_systemGroupTraverseUserGroup'                         = 'List-SystemGroupTraverseUserGroup'; # V2
+    'GET_systemgroups-group_id-usergroups'                       = 'List-SystemGroupTraverseUserGroup'; # V2
+    'systeminsights_list_apps'                                   = 'List-SystemInsightsApps'; # V2
+    'GET_systeminsights-apps'                                    = 'List-SystemInsightsApps'; # V2
+    'systeminsights_list_bitlocker_info'                         = 'List-SystemInsightsBitlockerInfo'; # V2
+    'GET_systeminsights-bitlocker_info'                          = 'List-SystemInsightsBitlockerInfo'; # V2
+    'systeminsights_list_browser_plugins'                        = 'List-SystemInsightsBrowserPlugins'; # V2
+    'GET_systeminsights-browser_plugins'                         = 'List-SystemInsightsBrowserPlugins'; # V2
+    'systeminsights_list_chrome_extensions'                      = 'List-SystemInsightsChromeExtensions'; # V2
+    'GET_systeminsights-chrome_extensions'                       = 'List-SystemInsightsChromeExtensions'; # V2
+    'systeminsights_list_disk_encryption'                        = 'List-SystemInsightsDiskEncryption'; # V2
+    'GET_systeminsights-disk_encryption'                         = 'List-SystemInsightsDiskEncryption'; # V2
+    'systeminsights_list_disk_info'                              = 'List-SystemInsightsDiskInfo'; # V2
+    'GET_systeminsights-disk_info'                               = 'List-SystemInsightsDiskInfo'; # V2
+    'systeminsights_list_etc_hosts'                              = 'List-SystemInsightsEtcHosts'; # V2
+    'GET_systeminsights-etc_hosts'                               = 'List-SystemInsightsEtcHosts'; # V2
+    'systeminsights_list_firefox_addons'                         = 'List-SystemInsightsFirefoxAddons'; # V2
+    'GET_systeminsights-firefox_addons'                          = 'List-SystemInsightsFirefoxAddons'; # V2
+    'systeminsights_list_groups'                                 = 'List-SystemInsightsGroups'; # V2
+    'GET_systeminsights-groups'                                  = 'List-SystemInsightsGroups'; # V2
+    'systeminsights_list_interface_addresses'                    = 'List-SystemInsightsInterfaceAddresses'; # V2
+    'GET_systeminsights-interface_addresses'                     = 'List-SystemInsightsInterfaceAddresses'; # V2
+    'systeminsights_list_kernel_info'                            = 'List-SystemInsightsKernelInfo'; # V2
+    'GET_systeminsights-kernel_info'                             = 'List-SystemInsightsKernelInfo'; # V2
+    'systeminsights_list_logical_drives'                         = 'List-SystemInsightsLogicalDrives'; # V2
+    'GET_systeminsights-logical_drives'                          = 'List-SystemInsightsLogicalDrives'; # V2
+    'systeminsights_list_mounts'                                 = 'List-SystemInsightsMounts'; # V2
+    'GET_systeminsights-mounts'                                  = 'List-SystemInsightsMounts'; # V2
+    'systeminsights_list_os_version'                             = 'List-SystemInsightsOsVersion'; # V2
+    'GET_systeminsights-os_version'                              = 'List-SystemInsightsOsVersion'; # V2
+    'systeminsights_list_patches'                                = 'List-SystemInsightsPatches'; # V2
+    'GET_systeminsights-patches'                                 = 'List-SystemInsightsPatches'; # V2
+    'systeminsights_list_programs'                               = 'List-SystemInsightsPrograms'; # V2
+    'GET_systeminsights-programs'                                = 'List-SystemInsightsPrograms'; # V2
+    'systeminsights_list_safari_extensions'                      = 'List-SystemInsightsSafariExtensions'; # V2
+    'GET_systeminsights-safari_extensions'                       = 'List-SystemInsightsSafariExtensions'; # V2
+    'systeminsights_list_system_apps'                            = 'List-SystemInsightsSystemApps'; # V2
+    'GET_systeminsights-system_id-apps'                          = 'List-SystemInsightsSystemApps'; # V2
+    'systeminsights_list_system_bitlocker_info'                  = 'List-SystemInsightsSystemBitlockerInfo'; # V2
+    'GET_systeminsights-system_id-bitlocker_info'                = 'List-SystemInsightsSystemBitlockerInfo'; # V2
+    'systeminsights_list_system_browser_plugins'                 = 'List-SystemInsightsSystemBrowserPlugins'; # V2
+    'GET_systeminsights-system_id-browser_plugins'               = 'List-SystemInsightsSystemBrowserPlugins'; # V2
+    'systeminsights_list_system_chrome_extensions'               = 'List-SystemInsightsSystemChromeExtensions'; # V2
+    'GET_systeminsights-system_id-chrome_extensions'             = 'List-SystemInsightsSystemChromeExtensions'; # V2
+    'systeminsights_list_system_controls'                        = 'List-SystemInsightsSystemControls'; # V2
+    'GET_systeminsights-system_controls'                         = 'List-SystemInsightsSystemControls'; # V2
+    'systeminsights_list_system_disk_encryption'                 = 'List-SystemInsightsSystemDiskEncryption'; # V2
+    'GET_systeminsights-system_id-disk_encryption'               = 'List-SystemInsightsSystemDiskEncryption'; # V2
+    'systeminsights_list_system_disk_info'                       = 'List-SystemInsightsSystemDiskInfo'; # V2
+    'GET_systeminsights-system_id-disk_info'                     = 'List-SystemInsightsSystemDiskInfo'; # V2
+    'systeminsights_list_system_etc_hosts'                       = 'List-SystemInsightsSystemEtcHosts'; # V2
+    'GET_systeminsights-system_id-etc_hosts'                     = 'List-SystemInsightsSystemEtcHosts'; # V2
+    'systeminsights_list_system_firefox_addons'                  = 'List-SystemInsightsSystemFirefoxAddons'; # V2
+    'GET_systeminsights-system_id-firefox_addons'                = 'List-SystemInsightsSystemFirefoxAddons'; # V2
+    'systeminsights_list_system_groups'                          = 'List-SystemInsightsSystemGroups'; # V2
+    'GET_systeminsights-system_id-groups'                        = 'List-SystemInsightsSystemGroups'; # V2
+    'systeminsights_list_system_info'                            = 'List-SystemInsightsSystemInfo'; # V2
+    'GET_systeminsights-system_info'                             = 'List-SystemInsightsSystemInfo'; # V2
+    'GET_systeminsights-system_id-interface_addresses'           = 'List-SystemInsightsSystemInterfaceAddresses'; # V2
+    'systeminsights_list_system_interface_addresses'             = 'List-SystemInsightsSystemInterfaceAddresses'; # V2
+    'GET_systeminsights-system_id-kernel_info'                   = 'List-SystemInsightsSystemKernelInfo'; # V2
+    'systeminsights_list_system_kernel_info'                     = 'List-SystemInsightsSystemKernelInfo'; # V2
+    'GET_systeminsights-system_id-logical_drives'                = 'List-SystemInsightsSystemLogicalDrives'; # V2
+    'systeminsights_list_system_logical_drives'                  = 'List-SystemInsightsSystemLogicalDrives'; # V2
+    'GET_systeminsights-system_id-mounts'                        = 'List-SystemInsightsSystemLogicalMounts'; # V2
+    'systeminsights_list_system_mounts'                          = 'List-SystemInsightsSystemLogicalMounts'; # V2
+    'GET_systeminsights-system_id-os_version'                    = 'List-SystemInsightsSystemOSVersion'; # V2
+    'systeminsights_list_system_os_version'                      = 'List-SystemInsightsSystemOSVersion'; # V2
+    'GET_systeminsights-system_id-patches'                       = 'List-SystemInsightsSystemPatches'; # V2
+    'systeminsights_list_system_patches'                         = 'List-SystemInsightsSystemPatches'; # V2
+    'GET_systeminsights-system_id-programs'                      = 'List-SystemInsightsSystemPrograms'; # V2
+    'systeminsights_list_system_programs'                        = 'List-SystemInsightsSystemPrograms'; # V2
+    'GET_systeminsights-system_id-safari_extensions'             = 'List-SystemInsightsSystemSafariExtensions'; # V2
+    'systeminsights_list_system_safari_extensions'               = 'List-SystemInsightsSystemSafariExtensions'; # V2
+    'GET_systeminsights-system_id-system_controls'               = 'List-SystemInsightsSystemSystemControls'; # V2
+    'systeminsights_list_system_system_controls'                 = 'List-SystemInsightsSystemSystemControls'; # V2
+    'GET_systeminsights-system_id-system_info'                   = 'List-SystemInsightsSystemSystemInfo'; # V2
+    'systeminsights_list_system_system_info'                     = 'List-SystemInsightsSystemSystemInfo'; # V2
+    'GET_systeminsights-system_id-uptime'                        = 'List-SystemInsightsSystemUptime'; # V2
+    'systeminsights_list_system_uptime'                          = 'List-SystemInsightsSystemUptime'; # V2
+    'GET_systeminsights-system_id-users'                         = 'List-SystemInsightsSystemUsers'; # V2
+    'systeminsights_list_system_users'                           = 'List-SystemInsightsSystemUsers'; # V2
+    'systeminsights_list_uptime'                                 = 'List-SystemInsightsUptime'; # V2
+    'GET_systeminsights-uptime'                                  = 'List-SystemInsightsUptime'; # V2
+    'systeminsights_list_users'                                  = 'List-SystemInsightsUsers'; # V2
+    'GET_systeminsights-users'                                   = 'List-SystemInsightsUsers'; # V2
+    'graph_systemMemberOf'                                       = 'List-SystemMemberOf'; # V2
+    'GET_systems-system_id-memberof'                             = 'List-SystemMemberOf'; # V2
+    'graph_systemTraverseCommand'                                = 'List-SystemTraverseCommand'; # V2
+    'GET_systems-system_id-commands'                             = 'List-SystemTraverseCommand'; # V2
+    'graph_systemTraversePolicy'                                 = 'List-SystemTraversePolicy'; # V2
+    'GET_systems-system_id-policies'                             = 'List-SystemTraversePolicy'; # V2
+    'graph_systemTraverseUser'                                   = 'List-SystemTraverseUser'; # V2
+    'GET_systems-system_id-users'                                = 'List-SystemTraverseUser'; # V2
+    'graph_systemTraverseUserGroup'                              = 'List-SystemTraverseUserGroup'; # V2
+    'GET_systems-system_id-usergroups'                           = 'List-SystemTraverseUserGroup'; # V2
+    'graph_userAssociationsList'                                 = 'List-UserAssociation'; # V2
+    'GET_users-user_id-associations'                             = 'List-UserAssociation'; # V2
+    'graph_userAssociationsPost'                                 = 'Set-UserAssociation'; # V2
+    'POST_users-user_id-associations'                            = 'Set-UserAssociation'; # V2
+    'groups_user_post'                                           = 'Create-UserGroup'; # V2
+    'POST_usergroups'                                            = 'Create-UserGroup'; # V2
+    'groups_user_delete'                                         = 'Delete-UserGroup'; # V2
+    'DELETE_usergroups-id'                                       = 'Delete-UserGroup'; # V2
+    'groups_user_get'                                            = 'Get-UserGroup'; # V2
+    'GET_usergroups-id'                                          = 'Get-UserGroup'; # V2
+    'groups_user_list'                                           = 'List-UserGroup'; # V2
+    'GET_usergroups'                                             = 'List-UserGroup'; # V2
+    'groups_user_put'                                            = 'Put-UserGroup'; # V2
+    'PUT_usergroups-id'                                          = 'Put-UserGroup'; # V2
+    'graph_userGroupAssociationsList'                            = 'List-UserGroupAssociation'; # V2
+    'GET_usergroups-group_id-associations'                       = 'List-UserGroupAssociation'; # V2
+    'graph_userGroupAssociationsPost'                            = 'Set-UserGroupAssociation'; # V2
+    'POST_usergroups-group_id-associations'                      = 'Set-UserGroupAssociation'; # V2
+    'graph_userGroupMembersList'                                 = 'List-UserGroupMembers'; # V2
+    'GET_usergroups-group_id-members'                            = 'List-UserGroupMembers'; # V2
+    'graph_userGroupMembersPost'                                 = 'Set-UserGroupMembers'; # V2
+    'POST_usergroups-group_id-members'                           = 'Set-UserGroupMembers'; # V2
+    'graph_userGroupMembership'                                  = 'List-UserGroupMembership'; # V2
+    'GET_usergroups-group_id-membership'                         = 'List-UserGroupMembership'; # V2
+    'graph_userGroupTraverseApplication'                         = 'List-UserGroupTraverseApplication'; # V2
+    'GET_usergroups-group_id-applications'                       = 'List-UserGroupTraverseApplication'; # V2
+    'graph_userGroupTraverseDirectory'                           = 'List-UserGroupTraverseDirectory'; # V2
+    'GET_usergroups-group_id-directories'                        = 'List-UserGroupTraverseDirectory'; # V2
+    'graph_userGroupTraverseGSuite'                              = 'List-UserGroupTraverseGSuite'; # V2
+    'GET_usergroups-group_id-gsuites'                            = 'List-UserGroupTraverseGSuite'; # V2
+    'graph_userGroupTraverseLdapServer'                          = 'List-UserGroupTraverseLdapServer'; # V2
+    'GET_usergroups-group_id-ldapservers'                        = 'List-UserGroupTraverseLdapServer'; # V2
+    'graph_userGroupTraverseOffice365'                           = 'List-UserGroupTraverseOffice365'; # V2
+    'GET_usergroups-group_id-office365s'                         = 'List-UserGroupTraverseOffice365'; # V2
+    'graph_userGroupTraverseRadiusServer'                        = 'List-UserGroupTraverseRadiusServer'; # V2
+    'GET_usergroups-group_id-radiusservers'                      = 'List-UserGroupTraverseRadiusServer'; # V2
+    'graph_userGroupTraverseSystem'                              = 'List-UserGroupTraverseSystem'; # V2
+    'GET_usergroups-group_id-systems'                            = 'List-UserGroupTraverseSystem'; # V2
+    'graph_userGroupTraverseSystemGroup'                         = 'List-UserGroupTraverseSystemGroup'; # V2
+    'GET_usergroups-group_id-systemgroups'                       = 'List-UserGroupTraverseSystemGroup'; # V2
+    'graph_userMemberOf'                                         = 'List-UserMemberOf'; # V2
+    'GET_users-user_id-memberof'                                 = 'List-UserMemberOf'; # V2
+    'graph_userTraverseApplication'                              = 'List-UserTraverseApplication'; # V2
+    'GET_users-user_id-applications'                             = 'List-UserTraverseApplication'; # V2
+    'graph_userTraverseDirectory'                                = 'List-UserTraverseDirectory'; # V2
+    'GET_users-user_id-directories'                              = 'List-UserTraverseDirectory'; # V2
+    'graph_userTraverseGSuite'                                   = 'List-UserTraverseGSuite'; # V2
+    'GET_users-user_id-gsuites'                                  = 'List-UserTraverseGSuite'; # V2
+    'graph_userTraverseLdapServer'                               = 'List-UserTraverseLdapServer'; # V2
+    'GET_users-user_id-ldapservers'                              = 'List-UserTraverseLdapServer'; # V2
+    'graph_userTraverseOffice365'                                = 'List-UserTraverseOffice365'; # V2
+    'GET_users-user_id-office365s'                               = 'List-UserTraverseOffice365'; # V2
+    'graph_userTraverseRadiusServer'                             = 'List-UserTraverseRadiusServer'; # V2
+    'GET_users-user_id-radiusservers'                            = 'List-UserTraverseRadiusServer'; # V2
+    'graph_userTraverseSystem'                                   = 'List-UserTraverseSystem'; # V2
+    'GET_users-user_id-systems'                                  = 'List-UserTraverseSystem'; # V2
+    'graph_userTraverseSystemGroup'                              = 'List-UserTraverseSystemGroup'; # V2
+    'GET_users-user_id-systemgroups'                             = 'List-UserTraverseSystemGroup'; # V2
+    'workdays_authorize'                                         = 'Authorize-Workday'; # V2
+    'POST_workdays-workday_id-auth'                              = 'Authorize-Workday'; # V2
+    'POST_workdays'                                              = 'Create-Workday'; # V2
+    'workdays_post'                                              = 'Create-Workday'; # V2
+    'workdays_get'                                               = 'Get-Workday'; # V2
+    'GET_workdays-id'                                            = 'Get-Workday'; # V2
+    'workdays_import'                                            = 'Import-Workday'; # V2
+    'POST_workdays-workday_id-import'                            = 'Import-Workday'; # V2
+    'GET_workdays'                                               = 'List-Workday'; # V2
+    'workdays_list'                                              = 'List-Workday'; # V2
+    'workdays_put'                                               = 'Put-Workday'; # V2
+    'PUT_workdays-id'                                            = 'Put-Workday'; # V2
+    'DELETE_workdays-workday_id-auth'                            = 'Remove-WorkdayAuthorization'; # V2
+    'workdays_deauthorize'                                       = 'Remove-WorkdayAuthorization'; # V2
+    'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult'; # V2
+    'workdays_importresults'                                     = 'Import-WorkdayResult'; # V2
+    'workdays_workers'                                           = 'List-WorkdayWorker'; # V2
+    'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker'; # V2
+    'activedirectories_post'                                     = 'Create-ActiveDirectory'; # V2
+    'activedirectories_delete'                                   = 'Delete-ActiveDirectory'; # V2
+    'activedirectories_agentsPost'                               = 'Create-ActiveDirectoryAgent'; # V2
+    'activedirectories_agentsDelete'                             = 'Delete-ActiveDirectoryAgent'; # V2
+    'activedirectories_agentsGet'                                = 'Get-ActiveDirectoryAgent'; # V2
+    'activedirectories_agentsList'                               = 'List-ActiveDirectoryAgent'; # V2
+    'graph_activeDirectoryAssociationsPost'                      = 'Set-ActiveDirectoryAssociation'; # V2
+    'graph_activeDirectoryTraverseUser'                          = 'List-ActiveDirectoryTraverseUser'; # V2
+    'applemdms_post'                                             = 'Create-AppleMdm'; # V2
+    'applemdms_delete'                                           = 'Delete-AppleMdm'; # V2
+    'applemdms_list'                                             = 'List-AppleMdm'; # V2
+    'applemdms_put'                                              = 'Put-AppleMdm'; # V2
+    'PATCH_bulk-users'                                           = 'Patch-BulkUsers'; # V2
+    'bulk_usersUpdate'                                           = 'Put-BulkUsers'; # V2
+    'enrollmentprofiles_get'                                     = 'Get-EnrollmentProfiles'; # V2
+    'enrollmentprofiles_list'                                    = 'List-EnrollmentProfiles'; # V2
+    'jcEnrollmentProfiles_post'                                  = 'Create-JCEnrollmentProfiles'; # V2
+    'jcEnrollmentProfiles_delete'                                = 'Delete-JCEnrollmentProfiles'; # V2
+    'jcEnrollmentProfiles_get'                                   = 'Get-JCEnrollmentProfiles'; # V2
+    'jcEnrollmentProfiles_list'                                  = 'List-JCEnrollmentProfiles'; # V2
+    'jcEnrollmentProfiles_put'                                   = 'Put-JCEnrollmentProfiles'; # V2
+    'jobs_get'                                                   = 'Get-Job'; # V2
+    'jobs_results'                                               = 'List-JobResult'; # V2
+    'GET_office365s-office365_id'                                = 'Get-Office365'; # V2
+    'PATCH_office365s-office365_id'                              = 'Patch-Office365'; # V2
+    'org_crypto_get'                                             = 'Get-OrgCrypto'; # V2
+    'org_crypto_put'                                             = 'Put-OrgCrypto'; # V2
+    'knowledge_salesforceList'                                   = 'List-SalesForceKnowledge'; # V2
+    'groups_system_patch'                                        = 'Patch-SystemGroup'; # V2
+    'graph_systemGroupMemberOf'                                  = 'List-SystemGroupMemberOf'; # V2
+    'systeminsights_list_alf'                                    = 'List-SystemInsightsAlf'; # V2
+    'systeminsights_list_battery'                                = 'List-SystemInsightsBattery'; # V2
+    'systeminsights_list_crashes'                                = 'List-SystemInsightsCrashes'; # V2
+    'systeminsights_list_ie_extensions'                          = 'List-SystemInsightsIEExtensions'; # V2
+    'systeminsights_list_launchd'                                = 'List-SystemInsightsLaunchd'; # V2
+    'systeminsights_list_logged_in_users'                        = 'List-SystemInsightsLoggedInUsers'; # V2
+    'systeminsights_list_managed_policies'                       = 'List-SystemInsightsManagedPolicies'; # V2
+    'systeminsights_list_shadow'                                 = 'List-SystemInsightsShadow'; # V2
+    'systeminsights_list_shared_folders'                         = 'List-SystemInsightsSharedFolders'; # V2
+    'systeminsights_list_shared_resources'                       = 'List-SystemInsightsSharedResources'; # V2
+    'systeminsights_list_sharing_preferences'                    = 'List-SystemInsightsSharingPreferences'; # V2
+    'systeminsights_list_sip_config'                             = 'List-SystemInsightsSipConfig'; # V2
+    'systeminsights_list_usb_devices'                            = 'List-SystemInsightsUSBDevices'; # V2
+    'systeminsights_list_user_groups'                            = 'List-SystemInsightsUserGroups'; # V2
+    'systeminsights_list_user_ssh_keys'                          = 'List-SystemInsightsUserSSHKeys'; # V2
+    'systeminsights_list_windows_crashes'                        = 'List-SystemInsightsWindowsCrashes'; # V2
+    'users_sendEmails'                                           = 'Send-UserEmail'; # V2
+    'groups_user_patch'                                          = 'Patch-UserGroup'; # V2
+    'graph_userGroupMemberOf'                                    = 'List-UserGroupMemberOf'; # V2
+    'graph_userGroupTraverseActiveDirectory'                     = 'List-UserGroupTraverseActiveDirectory'; # V2
+    'graph_userTraverseActiveDirectory'                          = 'List-UserTraverseActiveDirectory'; # V2
+    'workdays_delete'                                            = 'Delete-Workday'; # V2
+    'workdays_settings'                                          = 'Get-WorkdaySetting'; # V2
 }
 $ApiHash.GetEnumerator() | ForEach-Object {
-    If ($_.Name.Replace('Url_', '') -in $APIName)
+    If ($_.Name -in $APIName)
     {
+        # Create output file path
         $OutputFileNameJson = ($_.Name).Split('_')[1] + '.json'
         $OutputFileNameYaml = ($_.Name).Split('_')[1] + '.yaml'
         $OutputFullPathJson = $OutputFilePath + $OutputFileNameJson
@@ -595,15 +597,9 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
-        $WebRequest = If ($_.Name -like 'Url_*')
-        {
-            (Invoke-WebRequest -Uri:($_.Value)).Content
-        }
-        Else
-        {
-            Get-Content -Path:($_.Value) -Raw
-        }
-        If ([System.String]::IsNullOrEmpty($WebRequest))
+        # Get OAS content
+        $OASContent = (Invoke-WebRequest -Uri:($_.Value)).Content
+        If ([System.String]::IsNullOrEmpty($OASContent))
         {
             Write-Error ('No content was returned from: ' + $_.Value)
         }
@@ -612,13 +608,13 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             # Prep json for find and replace by flattening string
             $ReadyForConvert = If ($_.Value -like '*.yaml*')
             {
-                $WebRequest | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
+                $OASContent | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
             }
             Else
             {
-                $WebRequest
+                $OASContent
             }
-            # Manipulate JSON
+            # Remove line breaks from JSON to make the find and replace easier
             While ($ReadyForConvert -match "`n ")
             {
                 $ReadyForConvert = $ReadyForConvert.Replace("`n ", "`n")
@@ -629,22 +625,32 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
             }
             $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
-            # Update operationIds
+            # Rename operationIds using $OperationIdMapping
             $OperationIdTemplate = '"operationId": "{0}"'
             $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
             $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
+            $UnmappedOperationIds = @{ }
             ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
             {
-                If ($OperationIdHash.Contains([System.String]$OperationIdMatchesValue))
+                If ($OperationIdMapping.Contains([System.String]$OperationIdMatchesValue))
                 {
                     $Find = $OperationIdTemplate -f [System.String]$OperationIdMatchesValue
-                    $Replace = $OperationIdTemplate -f $OperationIdHash.Item($OperationIdMatchesValue)
+                    $Replace = $OperationIdTemplate -f $OperationIdMapping.Item($OperationIdMatchesValue)
                     $ReadyForConvert = $ReadyForConvert.Replace($Find, $Replace)
                 }
                 Else
                 {
-                    Write-Warning ('Unknown ' + $_.Name + ' operationId: ' + $OperationIdMatchesValue + ';')
+                    $UnmappedOperationIds.Add($OperationIdMatchesValue, $_.Name)
                 }
+            }
+            # Check for unmapped operationIds
+            If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
+            {
+                $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
+                    Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
+                }
+                Write-Error ( 'Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
+                Exit
             }
             # Make fixes to file
             $FindReplaceHash.GetEnumerator() | ForEach-Object {
@@ -656,14 +662,13 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 }
             }
             # Convert json string to object
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
             # Remove tag elements
             $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
             # Exclude stoplight sections where the property is hidden
             If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
             {
-                # Remove "public": false elements
+                # Remove "public": false elements from "paths"
                 $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
                 ForEach ($PathName In $PathNames)
                 {
@@ -677,6 +682,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         }
                     }
                 }
+                # Remove "public": false elements from "definitions"
                 $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
                 ForEach ($DefinitionName In $DefinitionNames)
                 {
@@ -686,6 +692,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
                     }
                 }
+                # Remove "public": false elements from "textsections"
                 $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
                 ForEach ($TextSectionName In $TextSectionNames)
                 {
@@ -700,8 +707,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     }
                 }
             }
-
-            # Sort the json properties
+            # Sort the json properties under "path"
             $pathsHash = [ordered]@{ }
             $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
             $pathsHash = [ordered]@{ }
@@ -718,7 +724,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $pathsHash.Add($pathName, $JsonExport.paths.$pathName)
             }
             $JsonExport.paths = $pathsHash
-
+            # Sort the json properties under "parameters"
             $parametersHash = [ordered]@{ }
             $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
             $parametersHash = [ordered]@{ }
@@ -727,8 +733,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
             }
             $JsonExport.parameters = $parametersHash
-
-
+            # Sort the json properties under "definitions"
             $definitionsHash = [ordered]@{ }
             $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
             $definitionsHash = [ordered]@{ }
@@ -737,53 +742,43 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
             }
             $JsonExport.definitions = $definitionsHash
-
-            # Export file
-            # $WebRequest | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
+            # Convert json object to string
             $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
+            # Compare current spec to old spec and if they are diffrent then export the new file
+            $UpdatedSpec = $false
             If (Test-Path -Path:($OutputFullPathJson))
             {
                 $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
                 $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
                 $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
                 $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
-                $NewSpec | Out-File -FilePath:($OutputFullPathJson)
                 If (-not [System.String]::IsNullOrEmpty($CompareResults))
                 {
                     $UpdatedSpec = $true
+                    # Export json
+                    $NewSpec | Out-File -FilePath:($OutputFullPathJson)
+                    # Export yaml
                     $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
-                    # If ($env:USERNAME -eq 'VssAdministrator')
-                    # {
-                    #     Try
-                    #     {
-                    #         Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                    #         Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                    #         Invoke-Git -Arguments:('add -A')
-                    #         Invoke-Git -Arguments:('status')
-                    #         Invoke-Git -Arguments:('commit -m ' + '"Updating OAS spec: ' + $OutputFileNameJson + ';[skip ci]";')
-                    #         Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                    #     }
-                    #     Catch
-                    #     {
-                    #         Write-Error $_
-                    #     }
-                    # }
+                }
+                Else
+                {
+                    $UpdatedSpec = $false
                 }
             }
             Else
             {
                 $UpdatedSpec = $true
+                # Export json
                 $NewSpec | Out-File -FilePath:($OutputFullPathJson)
+                # Export yaml
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
+            ## Export content for troubleshooting
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_ReadyForConvert.json')
+            # $OASContent | Out-File -FilePath:($OutputFilePath + ($_.Name).Split('_')[1] + '_Org.json')
+            # Return variable to Azure Pipelines
+            Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+            Return $UpdatedSpec
         }
     }
 }
-Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
-Return $UpdatedSpec
-
-# Invoke-Git [[-Arguments] <Object>] [-NoWindow <Object>] [-RedirectStandardError <Object>] [-RedirectStandardOutput  <Object>] [-UseShellExecute <Object>] [-Path <Object>] [-Quiet <Object>] [-Split <Object>] [-Raw <Object>] [-GitPath <String>] [<CommonParameters>]
-# Publish-GithubRelease [-AccessToken] <String> [-RepositoryOwner] <String> [[-RepositoryName] <String>] [-TagName]    <String> [[-TargetCommit] <String>] [[-Name] <String>] [[-ReleaseText] <String>] [-Draft] [-PreRelease] [[-Artifact] <String[]>] [<CommonParameters>]
-# Get-GitChangedFile [[-Path] <Object>] [[-Commit] <Object>] [[-Include] <String[]>] [[-Exclude] <String[]>] [-Resolve] [<CommonParameters>]
-
-# Get-GitChangedFile -Path:('C:\Users\epanipinto\Documents\GitHub\jcapi-powershell')
