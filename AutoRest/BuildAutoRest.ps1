@@ -53,10 +53,10 @@ ForEach ($API In $APIName)
                 Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm.cmd install -g dotnet-sdk-2.1
                 Write-Host ('[RUN COMMAND] npm.cmd install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                # autorest --help
                 npm.cmd install -g @autorest/autorest
                 Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest.cmd --reset # | Out-Null
+                # autorest --help
             }
             ###########################################################################
             If ($GenerateModule)
