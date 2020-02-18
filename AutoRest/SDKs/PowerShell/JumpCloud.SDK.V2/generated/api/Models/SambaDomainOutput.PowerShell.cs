@@ -90,7 +90,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasSambaDomainOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasSambaDomainOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.ISambaDomainOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.ISambaDomainOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Sid = (string) content.GetValueForProperty("Sid",((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Sid, global::System.Convert.ToString);
             AfterDeserializeDictionary(content);
@@ -110,7 +110,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasSambaDomainOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasSambaDomainOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.ISambaDomainOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.ISambaDomainOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Name = (string) content.GetValueForProperty("Name",((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Name, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Sid = (string) content.GetValueForProperty("Sid",((JumpCloud.SDK.V2.Models.ISambaDomainInputInternal)this).Sid, global::System.Convert.ToString);
             AfterDeserializePSObject(content);

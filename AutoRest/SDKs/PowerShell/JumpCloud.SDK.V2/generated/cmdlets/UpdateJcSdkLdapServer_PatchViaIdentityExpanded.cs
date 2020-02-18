@@ -14,7 +14,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// apiVersions:
     /// - '2.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1ldapservers~1{id}'
     /// [DETAILS]
@@ -24,7 +24,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// variant: PatchViaIdentityExpanded
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsData.Update, @"JcSdkLdapServer_PatchViaIdentityExpanded", SupportsShouldProcess = true)]
-    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema), typeof(string))]
+    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema), typeof(string))]
     [JumpCloud.SDK.V2.Description(@"This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \""userLockoutAction\"": \""remove\"",\n    \""userPasswordExpirationAction\"": \""disable\""\n  }'\n```")]
     [JumpCloud.SDK.V2.Generated]
     public partial class UpdateJcSdkLdapServer_PatchViaIdentityExpanded : System.Management.Automation.PSCmdlet,
@@ -39,9 +39,9 @@ namespace JumpCloud.SDK.V2.Cmdlets
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
-        private JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody _body= new JumpCloud.SDK.V2.Models.BodyParameterLdapServerPatchRequestBody();
+        private JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema _body= new JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema();
 
-        private JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody Body { get => this._body; set => this._body = value; }
+        private JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]
@@ -167,24 +167,24 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses400ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onBadRequest method should be processed, or if the method should
         /// return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses400ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// <c>overrideOnOk</c> will be called before the regular onOk has been processed, allowing customization of what happens
         /// on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onOk method should be processed, or if the method should return
         /// immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -355,12 +355,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 400 (BadRequest).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses400ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses400ContentApplicationJsonSchema> response)
+        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -372,19 +372,19 @@ namespace JumpCloud.SDK.V2.Cmdlets
                     return ;
                 }
                 // onBadRequest - response for 400 / application/json
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses400ContentApplicationJsonSchema
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema
                 WriteObject((await response).Message);
             }
         }
 
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema> response)
+        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -396,7 +396,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                     return ;
                 }
                 // onOk - response for 200 / application/json
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
                 WriteObject((await response));
             }
         }

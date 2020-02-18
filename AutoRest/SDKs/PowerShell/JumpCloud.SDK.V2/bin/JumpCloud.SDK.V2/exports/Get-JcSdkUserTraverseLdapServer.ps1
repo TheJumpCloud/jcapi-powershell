@@ -6,12 +6,12 @@ This endpoint will return all LDAP Servers bound to a User, either directly or i
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkusertraverseldapserver
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkusertraverseldapserver
 #>
 function Get-JcSdkUserTraverseLdapServer {
-[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

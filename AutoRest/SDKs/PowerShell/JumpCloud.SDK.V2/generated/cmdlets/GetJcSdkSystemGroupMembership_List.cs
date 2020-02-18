@@ -13,7 +13,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// apiVersions:
     /// - '2.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1systemgroups~1{group_id}~1membership'
     /// [DETAILS]
@@ -23,7 +23,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// variant: List
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkSystemGroupMembership_List")]
-    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths))]
+    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1))]
     [JumpCloud.SDK.V2.Description(@"This endpoint returns all Systems that are a member of this System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID/membership \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```")]
     [JumpCloud.SDK.V2.Generated]
     public partial class GetJcSdkSystemGroupMembership_List : System.Management.Automation.PSCmdlet,
@@ -171,12 +171,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]" /> from the remote
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]" /> from the remote
         /// call</param>
         /// <param name="returnNow">/// Determines if the rest of the onOk method should be processed, or if the method should return
         /// immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -339,12 +339,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]" /> from the remote
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]" /> from the remote
         /// call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]> response)
+        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]> response)
         {
             using( NoSynchronizationContext )
             {

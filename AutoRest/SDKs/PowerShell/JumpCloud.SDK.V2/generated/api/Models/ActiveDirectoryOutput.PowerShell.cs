@@ -61,7 +61,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasActiveDirectoryOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasActiveDirectoryOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IActiveDirectoryOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IActiveDirectoryOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.IActiveDirectoryInputInternal)this).Domain = (string) content.GetValueForProperty("Domain",((JumpCloud.SDK.V2.Models.IActiveDirectoryInputInternal)this).Domain, global::System.Convert.ToString);
             AfterDeserializeDictionary(content);
         }
@@ -80,7 +80,7 @@ namespace JumpCloud.SDK.V2.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V2.Models.IComponentsSchemasActiveDirectoryOutputAllof0Internal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IComponentsSchemasActiveDirectoryOutputAllof0Internal)this).Id, global::System.Convert.ToString);
+            ((JumpCloud.SDK.V2.Models.IActiveDirectoryOutputInternal)this).Id = (string) content.GetValueForProperty("Id",((JumpCloud.SDK.V2.Models.IActiveDirectoryOutputInternal)this).Id, global::System.Convert.ToString);
             ((JumpCloud.SDK.V2.Models.IActiveDirectoryInputInternal)this).Domain = (string) content.GetValueForProperty("Domain",((JumpCloud.SDK.V2.Models.IActiveDirectoryInputInternal)this).Domain, global::System.Convert.ToString);
             AfterDeserializePSObject(content);
         }

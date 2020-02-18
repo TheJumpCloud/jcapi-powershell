@@ -6,12 +6,12 @@ This endpoint will return all Systems bound to a Policy, either directly or indi
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkpolicytraversesystem
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/get-jcsdkpolicytraversesystem
 #>
 function Get-JcSdkPolicyTraverseSystem {
-[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+[OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

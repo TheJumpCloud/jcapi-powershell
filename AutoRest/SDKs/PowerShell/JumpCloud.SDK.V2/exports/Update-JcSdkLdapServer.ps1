@@ -6,18 +6,18 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/update-jcsdkldapserver
 .Inputs
-JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody
-.Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
 .Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterLdapServerPatchRequestBody>: HELP MESSAGE MISSING
+BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   [Id <String>]: 
   [UserLockoutAction <String>]: LDAP Server Action
   [UserPasswordExpirationAction <String>]: LDAP Server Action
@@ -43,7 +43,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v2/update-jcsdkldapserver
 #>
 function Update-JcSdkLdapServer {
-[OutputType([JumpCloud.SDK.V2.Models.IPathsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
+[OutputType([JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
 [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(ParameterSetName='Patch', Mandatory)]
@@ -77,7 +77,7 @@ param(
     [Parameter(ParameterSetName='Patch', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBodyParameterLdapServerPatchRequestBody]
+    [JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

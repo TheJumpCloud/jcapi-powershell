@@ -15,7 +15,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// apiVersions:
     /// - '2.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1providers~1{provider_id}~1administrators'
     /// [DETAILS]
@@ -133,12 +133,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onUnauthorized method should be processed, or if the method
         /// should return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -327,12 +327,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 401 (Unauthorized).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response)
+        private async global::System.Threading.Tasks.Task onUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -344,7 +344,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                     return ;
                 }
                 // onUnauthorized - response for 401 / application/json
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema
                 WriteObject((await response).Message);
             }
         }

@@ -18,7 +18,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// apiVersions:
     /// - '2.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V2.json#/paths/~1users~1{user_id}~1office365s'
     /// [DETAILS]
@@ -28,7 +28,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// variant: List
     /// </remarks>
     [System.Management.Automation.Cmdlet(System.Management.Automation.VerbsCommon.Get, @"JcSdkUserTraverseOffice365_List")]
-    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths))]
+    [System.Management.Automation.OutputType(typeof(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1))]
     [JumpCloud.SDK.V2.Description(@"This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Office 365 instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Office 365 instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/office365s \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```")]
     [JumpCloud.SDK.V2.Generated]
     public partial class GetJcSdkUserTraverseOffice365_List : System.Management.Automation.PSCmdlet,
@@ -156,12 +156,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]" /> from the remote
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]" /> from the remote
         /// call</param>
         /// <param name="returnNow">/// Determines if the rest of the onOk method should be processed, or if the method should return
         /// immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in System.Management.Automation.PSCmdlet)
@@ -324,12 +324,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 200 (OK).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]" /> from the remote
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]" /> from the remote
         /// call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]> response)
+        private async global::System.Threading.Tasks.Task onOk(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths1[]> response)
         {
             using( NoSynchronizationContext )
             {
