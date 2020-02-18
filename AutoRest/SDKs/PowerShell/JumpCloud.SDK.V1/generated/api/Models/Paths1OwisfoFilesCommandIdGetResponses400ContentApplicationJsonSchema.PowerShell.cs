@@ -2,9 +2,11 @@ namespace JumpCloud.SDK.V1.Models
 {
     using JumpCloud.SDK.V1.Runtime.PowerShell;
 
-    /// <summary>Bad Request</summary>
-    [System.ComponentModel.TypeConverter(typeof(PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchemaTypeConverter))]
-    public partial class PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
+    /// <summary>
+    /// FIXME: Class Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema is MISSING DESCRIPTION
+    /// </summary>
+    [System.ComponentModel.TypeConverter(typeof(Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchemaTypeConverter))]
+    public partial class Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
     {
 
         /// <summary>
@@ -48,47 +50,47 @@ namespace JumpCloud.SDK.V1.Models
         partial void BeforeDeserializePSObject(System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The global::System.Collections.IDictionary content that should be used.</param>
         /// <returns>
-        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </returns>
-        public static JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema DeserializeFromDictionary(global::System.Collections.IDictionary content)
+        public static JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema DeserializeFromDictionary(global::System.Collections.IDictionary content)
         {
-            return new PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema(content);
+            return new Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema(content);
         }
 
         /// <summary>
-        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The System.Management.Automation.PSObject content that should be used.</param>
         /// <returns>
-        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </returns>
-        public static JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema DeserializeFromPSObject(System.Management.Automation.PSObject content)
+        public static JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema DeserializeFromPSObject(System.Management.Automation.PSObject content)
         {
-            return new PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema(content);
+            return new Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema(content);
         }
 
         /// <summary>
-        /// Creates a new instance of <see cref="PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
-        /// />, deserializing the content from a json string.
+        /// Creates a new instance of <see cref="Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema" />, deserializing
+        /// the content from a json string.
         /// </summary>
         /// <param name="jsonText">a string containing a JSON serialized instance of this model.</param>
         /// <returns>an instance of the <see cref="className" /> model class.</returns>
-        public static JumpCloud.SDK.V1.Models.IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema FromJsonString(string jsonText) => FromJson(JumpCloud.SDK.V1.Runtime.Json.JsonNode.Parse(jsonText));
+        public static JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema FromJsonString(string jsonText) => FromJson(JumpCloud.SDK.V1.Runtime.Json.JsonNode.Parse(jsonText));
 
         /// <summary>
-        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The global::System.Collections.IDictionary content that should be used.</param>
-        internal PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema(global::System.Collections.IDictionary content)
+        internal Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema(global::System.Collections.IDictionary content)
         {
             bool returnNow = false;
             BeforeDeserializeDictionary(content, ref returnNow);
@@ -101,11 +103,11 @@ namespace JumpCloud.SDK.V1.Models
         }
 
         /// <summary>
-        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema"
+        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The System.Management.Automation.PSObject content that should be used.</param>
-        internal PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema(System.Management.Automation.PSObject content)
+        internal Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema(System.Management.Automation.PSObject content)
         {
             bool returnNow = false;
             BeforeDeserializePSObject(content, ref returnNow);
@@ -122,9 +124,9 @@ namespace JumpCloud.SDK.V1.Models
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, JumpCloud.SDK.V1.Runtime.SerializationMode.IncludeAll)?.ToString();
     }
-    /// Bad Request
-    [System.ComponentModel.TypeConverter(typeof(PathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchemaTypeConverter))]
-    public partial interface IPathsSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
+    /// FIXME: Interface IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema is MISSING DESCRIPTION
+    [System.ComponentModel.TypeConverter(typeof(Paths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchemaTypeConverter))]
+    public partial interface IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
 
     {
 

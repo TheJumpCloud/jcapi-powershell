@@ -23,14 +23,16 @@ Reset-JcSdkSystemUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] 
 
 ### Reset
 ```
-Reset-JcSdkSystemUserMfa -Id <String> -Body <IBodyParameterSystemUserMfaResetRequestBody> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -Id <String>
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentity
 ```
 Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity>
- -Body <IBodyParameterSystemUserMfaResetRequestBody> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
@@ -61,7 +63,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IBodyParameterSystemUserMfaResetRequestBody
+Type: JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 Parameter Sets: Reset, ResetViaIdentity
 Aliases:
 
@@ -192,9 +194,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IBodyParameterSystemUserMfaResetRequestBody
-
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+
+### JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 
 ## OUTPUTS
 
@@ -207,7 +209,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterSystemUserMfaResetRequestBody>: HELP MESSAGE MISSING
+#### BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   - `[Exclusion <Boolean?>]`: 
   - `[ExclusionUntil <DateTime?>]`: 
 

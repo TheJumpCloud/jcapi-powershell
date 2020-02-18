@@ -17,7 +17,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
     /// apiVersions:
     /// - '1.0'
     /// filename:
-    /// - 'mem:///108?tree%20shaken%20doc...'
+    /// - 'mem:///116?oai3.shaken.json'
     /// originalLocations:
     /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/V1.json#/paths/~1organizations~1{id}'
     /// [DETAILS]
@@ -42,7 +42,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
         private global::System.Threading.CancellationTokenSource _cancellationTokenSource = new global::System.Threading.CancellationTokenSource();
 
         /// <summary>Backing field for <see cref="Body" /> property.</summary>
-        private JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody _body;
+        private JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema _body;
 
         [System.Management.Automation.Parameter(Mandatory = true, HelpMessage = "HELP MESSAGE MISSING", ValueFromPipeline = true)]
         [JumpCloud.SDK.V1.Runtime.Info(
@@ -50,8 +50,8 @@ namespace JumpCloud.SDK.V1.Cmdlets
         ReadOnly = false,
         Description = @"",
         SerializedName = @"body",
-        PossibleTypes = new [] { typeof(JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody) })]
-        public JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody Body { get => this._body; set => this._body = value; }
+        PossibleTypes = new [] { typeof(JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema) })]
+        public JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema Body { get => this._body; set => this._body = value; }
 
         /// <summary>Wait for .NET debugger to attach</summary>
         [System.Management.Automation.Parameter(Mandatory = false, DontShow = true, HelpMessage = "Wait for .NET debugger to attach")]

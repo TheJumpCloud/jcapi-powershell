@@ -131,7 +131,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.ICommandfilereturn
 
-### JumpCloud.SDK.V1.Models.IPathsFilesCommandIdGetResponses400ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
 
 ## ALIASES
 

@@ -3,10 +3,10 @@ namespace JumpCloud.SDK.V1.Models
     using JumpCloud.SDK.V1.Runtime.PowerShell;
 
     /// <summary>
-    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema"
+    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema"
     /// />
     /// </summary>
-    public partial class PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchemaTypeConverter : System.Management.Automation.PSTypeConverter
+    public partial class PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchemaTypeConverter : System.Management.Automation.PSTypeConverter
     {
 
         /// <summary>
@@ -25,10 +25,10 @@ namespace JumpCloud.SDK.V1.Models
         /// Determines if the converter can convert the <see cref="sourceValue"/> parameter to the <see cref="destinationType" />
         /// parameter.
         /// </summary>
-        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema"
+        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema"
         /// /> type.</param>
         /// <returns>
-        /// <c>true</c> if the instance could be converted to a <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema"
+        /// <c>true</c> if the instance could be converted to a <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema"
         /// /> type, otherwise <c>false</c>
         /// </returns>
         public static bool CanConvertFrom(dynamic sourceValue)
@@ -91,7 +91,7 @@ namespace JumpCloud.SDK.V1.Models
         /// <param name="formatProvider">not used by this TypeConverter.</param>
         /// <param name="ignoreCase">when set to <c>true</c>, will ignore the case when converting.</param>
         /// <returns>
-        /// an instance of <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema" />, or <c>null</c> if
+        /// an instance of <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema" />, or <c>null</c> if
         /// there is no suitable conversion.
         /// </returns>
         public override object ConvertFrom(object sourceValue, global::System.Type destinationType, global::System.IFormatProvider formatProvider, bool ignoreCase) => ConvertFrom(sourceValue);
@@ -100,26 +100,26 @@ namespace JumpCloud.SDK.V1.Models
         /// Converts the <see cref="sourceValue" /> parameter to the <see cref="destinationType" /> parameter using <see cref="formatProvider"
         /// /> and <see cref="ignoreCase" />
         /// </summary>
-        /// <param name="sourceValue">the value to convert into an instance of <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema"
+        /// <param name="sourceValue">the value to convert into an instance of <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema"
         /// />.</param>
         /// <returns>
-        /// an instance of <see cref="PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema" />, or <c>null</c> if
+        /// an instance of <see cref="PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema" />, or <c>null</c> if
         /// there is no suitable conversion.
         /// </returns>
-        public static JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema ConvertFrom(dynamic sourceValue)
+        public static JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema ConvertFrom(dynamic sourceValue)
         {
             if (null == sourceValue)
             {
                 return null;
             }
             global::System.Type type = sourceValue.GetType();
-            if (typeof(JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema).IsAssignableFrom(type))
+            if (typeof(JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema).IsAssignableFrom(type))
             {
                 return sourceValue;
             }
             try
             {
-                return PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
+                return PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
             }
             catch
             {
@@ -127,11 +127,11 @@ namespace JumpCloud.SDK.V1.Models
             }
             if (typeof(System.Management.Automation.PSObject).IsAssignableFrom(type))
             {
-                return PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema.DeserializeFromPSObject(sourceValue);
+                return PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema.DeserializeFromPSObject(sourceValue);
             }
             if (typeof(global::System.Collections.IDictionary).IsAssignableFrom(type))
             {
-                return PathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema.DeserializeFromDictionary(sourceValue);
+                return PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema.DeserializeFromDictionary(sourceValue);
             }
             return null;
         }

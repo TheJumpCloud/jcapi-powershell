@@ -2,9 +2,9 @@ namespace JumpCloud.SDK.V1.Models
 {
     using JumpCloud.SDK.V1.Runtime.PowerShell;
 
-    /// <summary>FIXME: Class BodyParameterOrganizationPutRequestBody is MISSING DESCRIPTION</summary>
-    [System.ComponentModel.TypeConverter(typeof(BodyParameterOrganizationPutRequestBodyTypeConverter))]
-    public partial class BodyParameterOrganizationPutRequestBody
+    /// <summary>Bad Request</summary>
+    [System.ComponentModel.TypeConverter(typeof(PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchemaTypeConverter))]
+    public partial class PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
     {
 
         /// <summary>
@@ -48,11 +48,47 @@ namespace JumpCloud.SDK.V1.Models
         partial void BeforeDeserializePSObject(System.Management.Automation.PSObject content, ref bool returnNow);
 
         /// <summary>
-        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.BodyParameterOrganizationPutRequestBody"
+        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The global::System.Collections.IDictionary content that should be used.</param>
-        internal BodyParameterOrganizationPutRequestBody(global::System.Collections.IDictionary content)
+        /// <returns>
+        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
+        /// />.
+        /// </returns>
+        public static JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema DeserializeFromDictionary(global::System.Collections.IDictionary content)
+        {
+            return new PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema(content);
+        }
+
+        /// <summary>
+        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
+        /// />.
+        /// </summary>
+        /// <param name="content">The System.Management.Automation.PSObject content that should be used.</param>
+        /// <returns>
+        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
+        /// />.
+        /// </returns>
+        public static JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema DeserializeFromPSObject(System.Management.Automation.PSObject content)
+        {
+            return new PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema(content);
+        }
+
+        /// <summary>
+        /// Creates a new instance of <see cref="PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema" />,
+        /// deserializing the content from a json string.
+        /// </summary>
+        /// <param name="jsonText">a string containing a JSON serialized instance of this model.</param>
+        /// <returns>an instance of the <see cref="className" /> model class.</returns>
+        public static JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema FromJsonString(string jsonText) => FromJson(JumpCloud.SDK.V1.Runtime.Json.JsonNode.Parse(jsonText));
+
+        /// <summary>
+        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
+        /// />.
+        /// </summary>
+        /// <param name="content">The global::System.Collections.IDictionary content that should be used.</param>
+        internal PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema(global::System.Collections.IDictionary content)
         {
             bool returnNow = false;
             BeforeDeserializeDictionary(content, ref returnNow);
@@ -61,16 +97,15 @@ namespace JumpCloud.SDK.V1.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBodyInternal)this).Settings = (JumpCloud.SDK.V1.Models.IOrganizationsettingsput) content.GetValueForProperty("Settings",((JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBodyInternal)this).Settings, JumpCloud.SDK.V1.Models.OrganizationsettingsputTypeConverter.ConvertFrom);
             AfterDeserializeDictionary(content);
         }
 
         /// <summary>
-        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.BodyParameterOrganizationPutRequestBody"
+        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into a new instance of <see cref="JumpCloud.SDK.V1.Models.PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema"
         /// />.
         /// </summary>
         /// <param name="content">The System.Management.Automation.PSObject content that should be used.</param>
-        internal BodyParameterOrganizationPutRequestBody(System.Management.Automation.PSObject content)
+        internal PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema(System.Management.Automation.PSObject content)
         {
             bool returnNow = false;
             BeforeDeserializePSObject(content, ref returnNow);
@@ -79,52 +114,17 @@ namespace JumpCloud.SDK.V1.Models
                 return;
             }
             // actually deserialize
-            ((JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBodyInternal)this).Settings = (JumpCloud.SDK.V1.Models.IOrganizationsettingsput) content.GetValueForProperty("Settings",((JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBodyInternal)this).Settings, JumpCloud.SDK.V1.Models.OrganizationsettingsputTypeConverter.ConvertFrom);
             AfterDeserializePSObject(content);
         }
-
-        /// <summary>
-        /// Deserializes a <see cref="global::System.Collections.IDictionary" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.BodyParameterOrganizationPutRequestBody"
-        /// />.
-        /// </summary>
-        /// <param name="content">The global::System.Collections.IDictionary content that should be used.</param>
-        /// <returns>
-        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody" />.
-        /// </returns>
-        public static JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody DeserializeFromDictionary(global::System.Collections.IDictionary content)
-        {
-            return new BodyParameterOrganizationPutRequestBody(content);
-        }
-
-        /// <summary>
-        /// Deserializes a <see cref="System.Management.Automation.PSObject" /> into an instance of <see cref="JumpCloud.SDK.V1.Models.BodyParameterOrganizationPutRequestBody"
-        /// />.
-        /// </summary>
-        /// <param name="content">The System.Management.Automation.PSObject content that should be used.</param>
-        /// <returns>
-        /// an instance of <see cref="JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody" />.
-        /// </returns>
-        public static JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody DeserializeFromPSObject(System.Management.Automation.PSObject content)
-        {
-            return new BodyParameterOrganizationPutRequestBody(content);
-        }
-
-        /// <summary>
-        /// Creates a new instance of <see cref="BodyParameterOrganizationPutRequestBody" />, deserializing the content from a json
-        /// string.
-        /// </summary>
-        /// <param name="jsonText">a string containing a JSON serialized instance of this model.</param>
-        /// <returns>an instance of the <see cref="className" /> model class.</returns>
-        public static JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody FromJsonString(string jsonText) => FromJson(JumpCloud.SDK.V1.Runtime.Json.JsonNode.Parse(jsonText));
 
         /// <summary>Serializes this instance to a json string.</summary>
 
         /// <returns>a <see cref="System.String" /> containing this model serialized to JSON text.</returns>
         public string ToJsonString() => ToJson(null, JumpCloud.SDK.V1.Runtime.SerializationMode.IncludeAll)?.ToString();
     }
-    /// FIXME: Interface IBodyParameterOrganizationPutRequestBody is MISSING DESCRIPTION
-    [System.ComponentModel.TypeConverter(typeof(BodyParameterOrganizationPutRequestBodyTypeConverter))]
-    public partial interface IBodyParameterOrganizationPutRequestBody
+    /// Bad Request
+    [System.ComponentModel.TypeConverter(typeof(PathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchemaTypeConverter))]
+    public partial interface IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 
     {
 

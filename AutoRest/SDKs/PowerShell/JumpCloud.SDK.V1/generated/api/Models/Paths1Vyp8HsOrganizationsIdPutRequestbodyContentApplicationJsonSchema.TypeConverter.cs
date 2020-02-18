@@ -3,10 +3,10 @@ namespace JumpCloud.SDK.V1.Models
     using JumpCloud.SDK.V1.Runtime.PowerShell;
 
     /// <summary>
-    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="BodyParameterOrganizationPutRequestBody"
+    /// A PowerShell PSTypeConverter to support converting to an instance of <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema"
     /// />
     /// </summary>
-    public partial class BodyParameterOrganizationPutRequestBodyTypeConverter : System.Management.Automation.PSTypeConverter
+    public partial class Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchemaTypeConverter : System.Management.Automation.PSTypeConverter
     {
 
         /// <summary>
@@ -25,11 +25,11 @@ namespace JumpCloud.SDK.V1.Models
         /// Determines if the converter can convert the <see cref="sourceValue"/> parameter to the <see cref="destinationType" />
         /// parameter.
         /// </summary>
-        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="BodyParameterOrganizationPutRequestBody"
+        /// <param name="sourceValue">the <see cref="System.Object" /> instance to check if it can be converted to the <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema"
         /// /> type.</param>
         /// <returns>
-        /// <c>true</c> if the instance could be converted to a <see cref="BodyParameterOrganizationPutRequestBody" /> type, otherwise
-        /// <c>false</c>
+        /// <c>true</c> if the instance could be converted to a <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema"
+        /// /> type, otherwise <c>false</c>
         /// </returns>
         public static bool CanConvertFrom(dynamic sourceValue)
         {
@@ -91,7 +91,8 @@ namespace JumpCloud.SDK.V1.Models
         /// <param name="formatProvider">not used by this TypeConverter.</param>
         /// <param name="ignoreCase">when set to <c>true</c>, will ignore the case when converting.</param>
         /// <returns>
-        /// an instance of <see cref="BodyParameterOrganizationPutRequestBody" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema" />, or <c>null</c> if
+        /// there is no suitable conversion.
         /// </returns>
         public override object ConvertFrom(object sourceValue, global::System.Type destinationType, global::System.IFormatProvider formatProvider, bool ignoreCase) => ConvertFrom(sourceValue);
 
@@ -99,25 +100,26 @@ namespace JumpCloud.SDK.V1.Models
         /// Converts the <see cref="sourceValue" /> parameter to the <see cref="destinationType" /> parameter using <see cref="formatProvider"
         /// /> and <see cref="ignoreCase" />
         /// </summary>
-        /// <param name="sourceValue">the value to convert into an instance of <see cref="BodyParameterOrganizationPutRequestBody"
+        /// <param name="sourceValue">the value to convert into an instance of <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema"
         /// />.</param>
         /// <returns>
-        /// an instance of <see cref="BodyParameterOrganizationPutRequestBody" />, or <c>null</c> if there is no suitable conversion.
+        /// an instance of <see cref="Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema" />, or <c>null</c> if
+        /// there is no suitable conversion.
         /// </returns>
-        public static JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody ConvertFrom(dynamic sourceValue)
+        public static JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema ConvertFrom(dynamic sourceValue)
         {
             if (null == sourceValue)
             {
                 return null;
             }
             global::System.Type type = sourceValue.GetType();
-            if (typeof(JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody).IsAssignableFrom(type))
+            if (typeof(JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema).IsAssignableFrom(type))
             {
                 return sourceValue;
             }
             try
             {
-                return BodyParameterOrganizationPutRequestBody.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
+                return Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema.FromJsonString(typeof(string) == sourceValue.GetType() ? sourceValue : sourceValue.ToJsonString());;
             }
             catch
             {
@@ -125,11 +127,11 @@ namespace JumpCloud.SDK.V1.Models
             }
             if (typeof(System.Management.Automation.PSObject).IsAssignableFrom(type))
             {
-                return BodyParameterOrganizationPutRequestBody.DeserializeFromPSObject(sourceValue);
+                return Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema.DeserializeFromPSObject(sourceValue);
             }
             if (typeof(global::System.Collections.IDictionary).IsAssignableFrom(type))
             {
-                return BodyParameterOrganizationPutRequestBody.DeserializeFromDictionary(sourceValue);
+                return Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema.DeserializeFromDictionary(sourceValue);
             }
             return null;
         }

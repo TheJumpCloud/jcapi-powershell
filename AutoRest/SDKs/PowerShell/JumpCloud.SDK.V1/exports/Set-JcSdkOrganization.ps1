@@ -8,16 +8,16 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/set-jcsdkorganization
 .Inputs
-JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody
-.Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
 JumpCloud.SDK.V1.Models.IOrganization
 .Notes
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterOrganizationPutRequestBody>: HELP MESSAGE MISSING
+BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   [Settings <IOrganizationsettingsput>]: OrganizationSettingsPut
     [ContactEmail <String>]: 
     [ContactName <String>]: 
@@ -123,7 +123,7 @@ param(
     [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IBodyParameterOrganizationPutRequestBody]
+    [JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

@@ -21,14 +21,16 @@ Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> [-Mf
 
 ### Put
 ```
-Set-JcSdkRadiusServer -Id <String> -Body <IBodyParameterRadiusServerPutRequestBody> [-Confirm] [-WhatIf]
+Set-JcSdkRadiusServer -Id <String>
+ -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Body <IBodyParameterRadiusServerPutRequestBody>
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity>
+ -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
@@ -57,7 +59,7 @@ HELP MESSAGE MISSING
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IBodyParameterRadiusServerPutRequestBody
+Type: JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
 Parameter Sets: Put, PutViaIdentity
 Aliases:
 
@@ -236,9 +238,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IBodyParameterRadiusServerPutRequestBody
-
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+
+### JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
 
 ## OUTPUTS
 
@@ -251,7 +253,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-#### BODY <IBodyParameterRadiusServerPutRequestBody>: HELP MESSAGE MISSING
+#### BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `[Mfa <String>]`: 

@@ -6,16 +6,16 @@ This endpoint allows you to update RADIUS servers in your organization.\n\n#### 
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/set-jcsdkradiusserver
 .Inputs
-JumpCloud.SDK.V1.Models.IBodyParameterRadiusServerPutRequestBody
-.Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
 JumpCloud.SDK.V1.Models.IRadiusserverput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBodyParameterRadiusServerPutRequestBody>: HELP MESSAGE MISSING
+BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: HELP MESSAGE MISSING
   Name <String>: 
   NetworkSourceIP <String>: 
   [Mfa <String>]: 
@@ -52,7 +52,7 @@ param(
     [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IBodyParameterRadiusServerPutRequestBody]
+    [JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema]
     # HELP MESSAGE MISSING
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

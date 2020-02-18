@@ -6,14 +6,14 @@ This endpoint will return a specific System User's public SSH key.
 .Example
 To view examples, please use the -Online parameter with Get-Help or navigate to: https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/get-jcsdksshkey
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Link
 https://docs.microsoft.com/en-us/powershell/module/jumpcloud.sdk.v1/get-jcsdksshkey
 #>
 function Get-JcSdkSshKey {
-[OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsSystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema])]
+[OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]
