@@ -51,18 +51,18 @@ ForEach ($API In $APIName)
             If ($InstallPreReq)
             {
                 Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm.cmd install -g dotnet-sdk-2.1 # | Out-Null
+                npm.cmd install -g dotnet-sdk-2.1
+                Write-Host ('[RUN COMMAND] npm.cmd install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 # autorest --help
-                Write-Host ('[RUN COMMAND] npm.cmd install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm.cmd install -g autorest@beta # | Out-Null
+                npm.cmd install -g @autorest/autorest
+                Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest.cmd --reset # | Out-Null
             }
             ###########################################################################
             If ($GenerateModule)
             {
                 If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                Write-Host ('[RUN COMMAND] autorest.cmd --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest.cmd --reset # | Out-Null
                 Write-Host ('[RUN COMMAND] autorest.cmd ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest.cmd $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
