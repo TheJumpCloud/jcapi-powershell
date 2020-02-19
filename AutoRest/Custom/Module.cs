@@ -55,6 +55,7 @@ namespace ModuleNameSpace
             {
                 request.Headers.Add("Accept", "application/json");
             }
+            request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
             // request.Headers.Add("Content-Type", "application/json");
             // let it go on.
             var requestResult = await next.SendAsync(request, callback);
