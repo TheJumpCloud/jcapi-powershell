@@ -67,11 +67,26 @@ ForEach ($API In $APIName)
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
+            $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+            If ([System.String]::IsNullOrEmpty($LatestModule))
+            {
+                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+            }
+            If (-not [System.String]::IsNullOrEmpty($LatestModule))
+            {
+                # Increment module version number
+                If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+                {
+                    $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+
+                }
+            }
+            ###########################################################################
             If ($CopyModuleFile)
             {
                 Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
-                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace") | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('ModuleNameSpace', $Namespace).Replace('ModuleVersion', $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
             }
             ###########################################################################
             If ($BuildModule)
@@ -82,26 +97,17 @@ ForEach ($API In $APIName)
             ###########################################################################
             If ($UpdateModuleManifest)
             {
-                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-                If ([System.String]::IsNullOrEmpty($LatestModule))
+                # Increment module version number
+                If (-not [System.String]::IsNullOrEmpty($NextVersion))
                 {
-                    $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+                    Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
                 }
-                If (-not [System.String]::IsNullOrEmpty($LatestModule))
-                {
-                    # Increment module version number
-                    If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-                    {
-                        $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-                        Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-                    }
-                    # # Get existing GUID
-                    # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
-                    # Import-Module -Name:($LatestModule.Name) -Force
-                    # $ExistingModule = Get-Module -Name:($LatestModule.Name)
-                    # $ExistingModule | Remove-Module -Force
-                    # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
-                }
+                # # Get existing GUID
+                # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
+                # Import-Module -Name:($LatestModule.Name) -Force
+                # $ExistingModule = Get-Module -Name:($LatestModule.Name)
+                # $ExistingModule | Remove-Module -Force
+                # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
                 # Update FunctionsToExport with the same as CmdletsToExport
                 $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
                 Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
@@ -194,6 +200,3 @@ ForEach ($API In $APIName)
         Write-Error ('Unable to find file: ' + $ConfigFilePath)
     }
 }
-# .\run-module.ps1 -run
-# Get-Command -Module JumpCloud.SDK.V1
-# Get-JcSdkApplication
