@@ -86,7 +86,7 @@ ForEach ($API In $APIName)
             {
                 Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
-                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('ModuleNameSpace', $Namespace).Replace('ModuleVersion', $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('ModuleNameSpace', $Namespace).Replace('ModuleVersion', $NextVersion).Replace($Namespace + '/', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/') | Set-Content -Path:($CustomFolderPath + '/Module.cs')
             }
             ###########################################################################
             If ($BuildModule)
