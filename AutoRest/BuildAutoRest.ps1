@@ -12,7 +12,7 @@ $GenerateModule = $true
 $CopyModuleFile = $true
 $BuildModule = $true
 $UpdateModuleManifest = $true
-$PackModule = $true
+$PackModule = $false
 $CommitModule = $true
 $PublishModule = $false
 ForEach ($API In $APIName)
