@@ -68,18 +68,6 @@ $FixesMapping = @{
         '["object", "null"]'                                                = '"object"';
         '["string", "null"]'                                                = '"string"';
         '"jobId"'                                                           = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
-        '"collection_time": ''2019-05-16T12:58:15.6730000-06:00'''          = '"collection_time": "2019-05-16T12:58:15.6730000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:29.7100000-06:00'''          = '"collection_time": "2019-06-03T13:41:29.7100000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.7710000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.7710000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.5570000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.5570000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.6580000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.6580000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.8580000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.8580000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.9330000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.9330000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.0080000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.0080000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.2040000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.2040000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.1250000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.1250000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.6730000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.6730000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.7460000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.7460000-06:00"';
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
         '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'              = ''; # This will be passed in later through the Module.cs file.
@@ -491,7 +479,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
-            If (Test-Path -Path:($OutputFullPathJson))
+            If (Test-Path -Path:($OutputFuvllPathJson))
             {
                 $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
                 $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
@@ -519,7 +507,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
             ## Export content for troubleshooting
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentApiName + '_ReadyForConvert.json')
+            $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentApiName + '_ReadyForConvert.json')
             # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentApiName + '_Org.json')
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
