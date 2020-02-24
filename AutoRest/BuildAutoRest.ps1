@@ -52,10 +52,10 @@ ForEach ($API In $APIName)
             {
                 Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm install -g dotnet-sdk-2.1
-                Write-Host ('[RUN COMMAND] npm install -g @autorest/powershell') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g @autorest/powershell
-                Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest --reset
+                Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                npm install -g @autorest/autorest
+                Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest-beta --reset
                 # autorest --help
             }
             ###########################################################################
@@ -63,8 +63,8 @@ ForEach ($API In $APIName)
             {
                 If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
             # $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
