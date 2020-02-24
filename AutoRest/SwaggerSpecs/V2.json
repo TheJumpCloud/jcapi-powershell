@@ -8646,7 +8646,7 @@
         "applescript_enabled": "1",
         "copyright": "",
         "last_opened_time": 1556688963.50383,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8774,7 +8774,7 @@
         "conversion_status": 0,
         "protection_status": 0,
         "encryption_method": "None",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8830,7 +8830,7 @@
         "native": 0,
         "path": "/Library/Internet Plug-Ins/nplastpass.plugin/",
         "disabled": 0,
-        "collection_time": "2019-06-03T13:41:30.858-06:00",
+        "collection_time": "2019-06-03T19:41:30.858+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8890,7 +8890,7 @@
         "persistent": 0,
         "path": "/Users/thomas/Library/Application Support/Google/Chrome/Default/Extensions/pkedcjkdefgpdelpbcmbmeomcjbeemfm/7419.311.0.1_0/",
         "permissions": "alarms, cast, cast.streaming, declarativeWebRequest, desktopCapture, gcm, http://*/*, identity, identity.email, management, mdns, mediaRouterPrivate, metricsPrivate, networkingPrivate, processes, storage, system.cpu, settingsPrivate, tabCapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse",
-        "collection_time": "2019-06-03T13:41:31.125-06:00",
+        "collection_time": "2019-06-03T19:41:31.125+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -8994,7 +8994,7 @@
         "uid": "",
         "user_uuid": "",
         "encryption_status": "undefined",
-        "collection_time": "2019-06-03T13:41:31.557-06:00",
+        "collection_time": "2019-06-03T19:41:31.557+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9054,7 +9054,7 @@
         "name": "\\\\.\\PHYSICALDRIVE0",
         "serial": "",
         "description": "Disk drive",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9078,7 +9078,7 @@
       "example": {
         "address": "192.168.2.21",
         "hostnames": "hosty hosty.local",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9150,7 +9150,7 @@
         "autoupdate": 1,
         "location": "app-system-addons",
         "path": "",
-        "collection_time": "2019-06-03T13:41:31.204-06:00",
+        "collection_time": "2019-06-03T19:41:31.204+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9186,7 +9186,7 @@
         "groupname": "1",
         "group_sid": "",
         "comment": "",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9254,7 +9254,7 @@
         "point_to_point": "::1",
         "type": "unknown",
         "friendly_name": "",
-        "collection_time": "2019-06-03T13:41:31.008-06:00",
+        "collection_time": "2019-06-03T19:41:31.008+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9423,7 +9423,7 @@
         "size": "63778582528",
         "file_system": "NTFS",
         "boot_partition": 0,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9513,7 +9513,7 @@
         "inodes": "4294967279",
         "inodes_free": "4294966853",
         "flags": "70292505",
-        "collection_time": "2019-06-03T13:41:31.746-06:00",
+        "collection_time": "2019-06-03T19:41:31.746+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9569,7 +9569,7 @@
         "platform_like": "darwin",
         "codename": "",
         "install_date": "",
-        "collection_time": "2019-06-03T13:41:30.933-06:00",
+        "collection_time": "2019-06-03T19:41:30.933+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9617,7 +9617,7 @@
         "installed_by": "NT AUTHORITY\\SYSTEM",
         "install_date": "",
         "installed_on": "7/30/2019",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9669,7 +9669,7 @@
         "uninstall_string": "MsiExec.exe /X{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -9725,7 +9725,7 @@
         "developer_id": "GRYYZR985A",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "path": "/Users/samuelharvanek/Library/Safari/Extensions/Adblock Plus.safariextz",
-        "collection_time": "2019-05-16T12:58:15.673-06:00",
+        "collection_time": "2019-05-16T18:58:15.673+00:00",
         "system_id": "5cdb13e85a0e0719283583c0"
       }
     },
@@ -9993,7 +9993,7 @@
         "hardware_serial": "111111FFFFFF",
         "computer_name": "Johnny’s MacBook Pro (2)",
         "local_hostname": "Jonnys-MacBook-Pro-2",
-        "collection_time": "2019-06-03T13:41:30.771-06:00",
+        "collection_time": "2019-06-03T19:41:30.771+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
@@ -10142,7 +10142,7 @@
         "shell": "/usr/bin/false",
         "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037",
         "type": "",
-        "collection_time": "2019-06-03T13:41:29.71-06:00",
+        "collection_time": "2019-06-03T19:41:29.71+00:00",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
     },
