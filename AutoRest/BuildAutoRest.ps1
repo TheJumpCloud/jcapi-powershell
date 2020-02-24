@@ -1,4 +1,4 @@
-#Requires -Modules powershell-yaml
+#Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
 )
