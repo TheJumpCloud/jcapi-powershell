@@ -66,7 +66,7 @@ ForEach ($API In $APIName)
                 Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
-            # ###########################################################################
+            ###########################################################################
             $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
             If ([System.String]::IsNullOrEmpty($LatestModule))
             {
