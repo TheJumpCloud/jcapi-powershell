@@ -2,6 +2,7 @@
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
 )
+# $ErrorActionPreference = 'Stop'
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
@@ -54,8 +55,8 @@ ForEach ($API In $APIName)
                 npm install -g dotnet-sdk-2.1
                 Write-Host ('[RUN COMMAND] npm install -g autorest@beta') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm install -g autorest@beta
-                Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest --reset
+                # Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # autorest --reset
                 # autorest --help
             }
             ###########################################################################
