@@ -145,25 +145,25 @@ ForEach ($API In $APIName)
             #     Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
             # }
             # ###########################################################################
-            # If ($CommitModule)
-            # {
-            #     If ($env:USERNAME -eq 'VssAdministrator')
-            #     {
-            #         Try
-            #         {
-            #             Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-            #             Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-            #             Invoke-Git -Arguments:('add -A')
-            #             Invoke-Git -Arguments:('status')
-            #             Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-            #             Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-            #         }
-            #         Catch
-            #         {
-            #             Write-Error $_
-            #         }
-            #     }
-            # }
+            If ($CommitModule)
+            {
+                If ($env:USERNAME -eq 'VssAdministrator')
+                {
+                    Try
+                    {
+                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                        Invoke-Git -Arguments:('add -A')
+                        Invoke-Git -Arguments:('status')
+                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                    }
+                    Catch
+                    {
+                        Write-Error $_
+                    }
+                }
+            }
             # ###########################################################################
             # If ($PublishModule)
             # {
