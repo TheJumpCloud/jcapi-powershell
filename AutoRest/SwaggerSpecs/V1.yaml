@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: JumpCloud APIs
+  title: JumpCloud APIs Test
   description: ""
 host: console.jumpcloud.com
 basePath: /api/
@@ -3153,4 +3153,3 @@ definitions:
         type: string
       usersTimeZone:
         type: string
-
