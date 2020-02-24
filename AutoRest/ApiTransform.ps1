@@ -479,7 +479,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
-            If (Test-Path -Path:($OutputFuvllPathJson))
+            If (Test-Path -Path:($OutputFullPathJson))
             {
                 $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
                 $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
