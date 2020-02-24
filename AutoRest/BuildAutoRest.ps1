@@ -63,8 +63,8 @@ ForEach ($API In $APIName)
             {
                 If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+                Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
             # $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
@@ -145,25 +145,25 @@ ForEach ($API In $APIName)
             #     Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
             # }
             # ###########################################################################
-            If ($CommitModule)
-            {
-                If ($env:USERNAME -eq 'VssAdministrator')
-                {
-                    Try
-                    {
-                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                        Invoke-Git -Arguments:('add -A')
-                        Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                    }
-                    Catch
-                    {
-                        Write-Error $_
-                    }
-                }
-            }
+            # If ($CommitModule)
+            # {
+            #     If ($env:USERNAME -eq 'VssAdministrator')
+            #     {
+            #         Try
+            #         {
+            #             Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+            #             Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+            #             Invoke-Git -Arguments:('add -A')
+            #             Invoke-Git -Arguments:('status')
+            #             Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+            #             Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+            #         }
+            #         Catch
+            #         {
+            #             Write-Error $_
+            #         }
+            #     }
+            # }
             # ###########################################################################
             # If ($PublishModule)
             # {
