@@ -121,49 +121,49 @@ ForEach ($API In $APIName)
                     }
                 }
             }
-            # ###########################################################################
-            # If ($PackModule)
-            # {
-            #     # Pack module
-            #     If (Test-Path -Path:($packModulePath))
-            #     {
-            #         Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            #         Invoke-Expression -Command:($packModulePath)
-            #     }
-            #     Else
-            #     {
-            #         Write-Error ("Path does not exist: $packModulePath")
-            #     }
-            #     $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
-            #     Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
-            #     Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
-            #     Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
-            #     Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
-            #     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
-            #     Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
-            #     Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
-            # }
-            # ###########################################################################
-            # If ($CommitModule)
-            # {
-            #     If ($env:USERNAME -eq 'VssAdministrator')
-            #     {
-            #         Try
-            #         {
-            #             Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-            #             Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-            #             Invoke-Git -Arguments:('add -A')
-            #             Invoke-Git -Arguments:('status')
-            #             Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-            #             Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-            #         }
-            #         Catch
-            #         {
-            #             Write-Error $_
-            #         }
-            #     }
-            # }
-            # ###########################################################################
+            ###########################################################################
+            If ($PackModule)
+            {
+                # Pack module
+                If (Test-Path -Path:($packModulePath))
+                {
+                    Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Invoke-Expression -Command:($packModulePath)
+                }
+                Else
+                {
+                    Write-Error ("Path does not exist: $packModulePath")
+                }
+                $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
+                Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
+                Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
+                Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
+                Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
+                Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
+                Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
+                Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
+            }
+            ##########################################################################
+            If ($CommitModule)
+            {
+                If ($env:USERNAME -eq 'VssAdministrator')
+                {
+                    Try
+                    {
+                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                        Invoke-Git -Arguments:('add -A')
+                        Invoke-Git -Arguments:('status')
+                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                    }
+                    Catch
+                    {
+                        Write-Error $_
+                    }
+                }
+            }
+            ###########################################################################
             # If ($PublishModule)
             # {
             #     Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
