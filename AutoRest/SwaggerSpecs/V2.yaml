@@ -7081,7 +7081,7 @@ definitions:
       applescript_enabled: "1"
       copyright: ""
       last_opened_time: 1556688963.50383
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-battery:
     title: System Insights Battery
@@ -7175,7 +7175,7 @@ definitions:
       conversion_status: 0
       protection_status: 0
       encryption_method: None
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-browser-plugins:
     title: System Insights Browser Plugins
@@ -7216,7 +7216,7 @@ definitions:
       native: 0
       path: /Library/Internet Plug-Ins/nplastpass.plugin/
       disabled: 0
-      collection_time: 2019-06-03T13:41:30.8580000-06:00
+      collection_time: 2019-06-03T19:41:30.8580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-chrome-extensions:
     title: System Insights Chrome Extensions
@@ -7260,7 +7260,7 @@ definitions:
       persistent: 0
       path: /Users/thomas/Library/Application Support/Google/Chrome/Default/Extensions/pkedcjkdefgpdelpbcmbmeomcjbeemfm/7419.311.0.1_0/
       permissions: alarms, cast, cast.streaming, declarativeWebRequest, desktopCapture, gcm, http://*/*, identity, identity.email, management, mdns, mediaRouterPrivate, metricsPrivate, networkingPrivate, processes, storage, system.cpu, settingsPrivate, tabCapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse
-      collection_time: 2019-06-03T13:41:31.1250000-06:00
+      collection_time: 2019-06-03T19:41:31.1250000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-crashes:
     title: System Insights Crashes
@@ -7332,7 +7332,7 @@ definitions:
       uid: ""
       user_uuid: ""
       encryption_status: undefined
-      collection_time: 2019-06-03T13:41:31.5570000-06:00
+      collection_time: 2019-06-03T19:41:31.5570000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-disk-info:
     title: System Insights Disk Info
@@ -7376,7 +7376,7 @@ definitions:
       name: '\\.\PHYSICALDRIVE0'
       serial: ""
       description: Disk drive
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-etc-hosts:
     title: System Insights Etc Hosts
@@ -7393,7 +7393,7 @@ definitions:
     example:
       address: 192.168.2.21
       hostnames: hosty hosty.local
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-firefox-addons:
     title: System Insights Firefox Addons
@@ -7446,7 +7446,7 @@ definitions:
       autoupdate: 1
       location: app-system-addons
       path: ""
-      collection_time: 2019-06-03T13:41:31.2040000-06:00
+      collection_time: 2019-06-03T19:41:31.2040000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-groups:
     title: System Insights Groups
@@ -7472,7 +7472,7 @@ definitions:
       groupname: "1"
       group_sid: ""
       comment: ""
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-ie-extensions:
     title: System Insights IE Extensions
@@ -7520,7 +7520,7 @@ definitions:
       point_to_point: ::1
       type: unknown
       friendly_name: ""
-      collection_time: 2019-06-03T13:41:31.0080000-06:00
+      collection_time: 2019-06-03T19:41:31.0080000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-kernel-info:
     title: System Insights Kernel Info
@@ -7635,7 +7635,7 @@ definitions:
       size: "63778582528"
       file_system: NTFS
       boot_partition: 0
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-managed-policies:
     title: System Insights Managed Policies
@@ -7699,7 +7699,7 @@ definitions:
       inodes: "4294967279"
       inodes_free: "4294966853"
       flags: "70292505"
-      collection_time: 2019-06-03T13:41:31.7460000-06:00
+      collection_time: 2019-06-03T19:41:31.7460000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-os-version:
     title: System Insights OS Version
@@ -7740,7 +7740,7 @@ definitions:
       platform_like: darwin
       codename: ""
       install_date: ""
-      collection_time: 2019-06-03T13:41:30.9330000-06:00
+      collection_time: 2019-06-03T19:41:30.9330000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-patches:
     title: System Insights Patches
@@ -7775,7 +7775,7 @@ definitions:
       installed_by: NT AUTHORITY\SYSTEM
       install_date: ""
       installed_on: 7/30/2019
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-programs:
     title: System Insights Programs
@@ -7813,7 +7813,7 @@ definitions:
       uninstall_string: MsiExec.exe /X{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}
       install_date: "20190724"
       identifying_number: '{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}'
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-safari-extensions:
     title: System Insights Safari Extensions
@@ -7854,7 +7854,7 @@ definitions:
       developer_id: GRYYZR985A
       description: Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.
       path: /Users/samuelharvanek/Library/Safari/Extensions/Adblock Plus.safariextz
-      collection_time: 2019-05-16T12:58:15.6730000-06:00
+      collection_time: 2019-05-16T18:58:15.6730000+00:00
       system_id: 5cdb13e85a0e0719283583c0
   system-insights-shadow:
     title: System Insights Shadow
@@ -8038,7 +8038,7 @@ definitions:
       hardware_serial: 111111FFFFFF
       computer_name: Johnny’s MacBook Pro (2)
       local_hostname: Jonnys-MacBook-Pro-2
-      collection_time: 2019-06-03T13:41:30.7710000-06:00
+      collection_time: 2019-06-03T19:41:30.7710000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-uptime:
     title: System Insights Uptime
@@ -8141,7 +8141,7 @@ definitions:
       shell: /usr/bin/false
       uuid: FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037
       type: ""
-      collection_time: 2019-06-03T13:41:29.7100000-06:00
+      collection_time: 2019-06-03T19:41:29.7100000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-user-ssh-keys:
     title: System Insights User SSH Keys
