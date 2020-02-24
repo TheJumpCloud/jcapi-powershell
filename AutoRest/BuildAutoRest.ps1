@@ -67,20 +67,19 @@ ForEach ($API In $APIName)
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             # ###########################################################################
-            # $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-            # If ([System.String]::IsNullOrEmpty($LatestModule))
-            # {
-            #     $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
-            # }
-            # If (-not [System.String]::IsNullOrEmpty($LatestModule))
-            # {
-            #     # Increment module version number
-            #     If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-            #     {
-            #         $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-
-            #     }
-            # }
+            $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+            If ([System.String]::IsNullOrEmpty($LatestModule))
+            {
+                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+            }
+            If (-not [System.String]::IsNullOrEmpty($LatestModule))
+            {
+                # Increment module version number
+                If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+                {
+                    $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                }
+            }
             # ###########################################################################
             # If ($CopyModuleFile)
             # {
