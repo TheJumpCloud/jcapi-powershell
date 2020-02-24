@@ -50,10 +50,10 @@ ForEach ($API In $APIName)
             ###########################################################################
             If ($InstallPreReq)
             {
-                Write-Host ('[RUN COMMAND] npm.cmd install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm.cmd install -g dotnet-sdk-2.1
-                Write-Host ('[RUN COMMAND] npm.cmd install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm.cmd install -g @autorest/autorest
+                Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                npm install -g dotnet-sdk-2.1
+                Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                npm install -g @autorest/autorest
                 Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta --reset
                 # autorest --help
@@ -170,7 +170,7 @@ ForEach ($API In $APIName)
                 Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 If ($PSRepoName -eq 'PSGallery')
                 {
-                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($env:NuGetApiKey) -Force -Verbose
+                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
                 }
                 Else
                 {
