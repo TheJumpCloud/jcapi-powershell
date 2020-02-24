@@ -48,6 +48,7 @@ $FixesMapping = @{
         '"basePath": "/api"'                                                                                                                  = '"basePath": "/api/"'; # The extra slash at the end is needed to properly build the url.
         '"command": {"title": "Command", "type": "object", "organization": {"type": "string", "description": "The ID of the organization."},' = '"command": {"title": "Command", "type": "object",'
         '"type": "null"'                                                                                                                      = '"type": "string"'; # A type of null is not valid.
+        ', "format": "email"'                                                                                                                 = ''; # WARNING (LLCS1001/DoesNotSupportEnum): Schema with type:'string and 'format:'email' is not recognized.
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                                          = ''; # This will be passed in later through the Module.cs file.
         '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                                                = ''; # This will be passed in later through the Module.cs file.
