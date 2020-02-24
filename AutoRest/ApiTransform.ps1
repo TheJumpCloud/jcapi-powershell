@@ -14,32 +14,6 @@ $ApiHash = [Ordered]@{
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    # Not In V1 or V2 Issues
-    # ',"/tags/{name}": {"parameters": [{"name": "name","in": "path","required": true,"type": "string"}],"delete": {"operationId": "tags_delete","summary": "Delete a Tag","tags": ["Tags"],"description": "Hidden as Tags is deprecated\n\nDelete a Tag.","parameters": [{"$ref": "#/parameters/trait:requestHeaders:Content-Type"},{"$ref": "#/parameters/trait:requestHeaders:Accept"}],"responses": {"200": {"description": "","schema": {"$ref": "#/definitions/tag"}}},"security": [{"x-api-key": []}]}}' = '' # Prevents PowerShell from parsing json. Within the "paths" section there is "/tags/{name}" and "/Tags/{name}" which causes a duplication error.
-    # '"": {"type": "string"}'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  = ''; # Prevents PowerShell from parsing json. # Property name can not be blank.
-    # '"system": {"properties": {"_id"'                                                                  = '"JcSystem": {"properties": {"_id"';
-    # '"type": "object","organization": {"type": "string","description": "The ID of the organization."}' = '"type":"object"'; # This section is in the wrong place within the json.
-    # '"command": {"organization": {"description": "The ID of the organization.", "type": "string"},'    = '"command": {';
-    # '["string","null"]'                                                                                                                   = '"string"'; # A type of null is not valid.
-    # '["object", "null"]'                                                                                                                  = '"object"';
-    # '["string","number","boolean","null"]'                                                                                                = '"string"'; # A type of null is not valid.
-    # '["string","number","boolean"]'                                                                                                       = '"string"'; # Error: Invalid type 'string,number,boolean' in schema
-    # '["boolean", "null"]'                                                                                                                 = '"boolean"';
-    # '["null", "integer"]'                                                                                                                 = '"integer"';
-    # '"type": ["null","integer"]'                               = '"type": "integer"'; # A type of null is not valid.
-    # '"type": ["null", "integer"]'                              = '"type": "integer"'
-    # '"tags": ["Systemusers"]'                                   = '"tags": ["SystemUsers"]'; # Change casing for pretty cmdlet names
-    # '{"name": "Content-Type","in": "header","type": "string"},' = '';
-    # '{"name": "Accept","in": "header","type": "string"},'       = '';
-    # '{"name": "x-org-id","in": "header","type": "string"}'      = '';
-    # ',,'                                                       = ',';
-    # '{,'                                                       = '{';
-    # '{ ,'                                                      = '{';
-    # ',}'                                                       = '}';
-    # ', }'                                                      = '}';
-    # '[ ,'                                                      = '[';
-    # ',]'                                                                                                                                  = ']';
-    # ',"format": "ipv4"'                                        = ''; # Remove StopLight syntax
     'V1' = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                                              = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
