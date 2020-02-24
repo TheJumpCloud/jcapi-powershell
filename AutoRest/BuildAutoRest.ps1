@@ -148,6 +148,7 @@ ForEach ($API In $APIName)
             {
                 If ($env:USERNAME -eq 'VssAdministrator')
                 {
+                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
                         Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
@@ -164,30 +165,30 @@ ForEach ($API In $APIName)
                 }
             }
             ###########################################################################
-            # If ($PublishModule)
-            # {
-            #     Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            #     If ($PSRepoName -eq 'PSGallery')
-            #     {
-            #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
-            #     }
-            #     Else
-            #     {
-            #         # Create the local PSRepository if it does not exist
-            #         If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
-            #         {
-            #             # Create the local PSRepository path if it does not exist
-            #             If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
-            #             Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
-            #             Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
-            #             # Unregister-PSRepository -Name:($PSRepoName)
-            #         }
-            #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
-            #     }
-            # }
-            # ###########################################################################
-            # Set-Location -Path:($OutputFullPath)
-            # Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            If ($PublishModule)
+            {
+                Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                If ($PSRepoName -eq 'PSGallery')
+                {
+                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
+                }
+                Else
+                {
+                    # Create the local PSRepository if it does not exist
+                    If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
+                    {
+                        # Create the local PSRepository path if it does not exist
+                        If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
+                        Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+                        Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
+                        # Unregister-PSRepository -Name:($PSRepoName)
+                    }
+                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
+                }
+            }
+            ###########################################################################
+            Set-Location -Path:($OutputFullPath)
+            Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         }
         Else
         {
