@@ -14,43 +14,15 @@ $ApiHash = [Ordered]@{
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    # Not In V1 or V2 Issues
-    # ',"/tags/{name}": {"parameters": [{"name": "name","in": "path","required": true,"type": "string"}],"delete": {"operationId": "tags_delete","summary": "Delete a Tag","tags": ["Tags"],"description": "Hidden as Tags is deprecated\n\nDelete a Tag.","parameters": [{"$ref": "#/parameters/trait:requestHeaders:Content-Type"},{"$ref": "#/parameters/trait:requestHeaders:Accept"}],"responses": {"200": {"description": "","schema": {"$ref": "#/definitions/tag"}}},"security": [{"x-api-key": []}]}}' = '' # Prevents PowerShell from parsing json. Within the "paths" section there is "/tags/{name}" and "/Tags/{name}" which causes a duplication error.
-    # '"": {"type": "string"}'                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  = ''; # Prevents PowerShell from parsing json. # Property name can not be blank.
-    # '"system": {"properties": {"_id"'                                                                  = '"JcSystem": {"properties": {"_id"';
-    # '"type": "object","organization": {"type": "string","description": "The ID of the organization."}' = '"type":"object"'; # This section is in the wrong place within the json.
-    # '"command": {"organization": {"description": "The ID of the organization.", "type": "string"},'    = '"command": {';
-    # '["string","null"]'                                                                                                                   = '"string"'; # A type of null is not valid.
-    # '["object", "null"]'                                                                                                                  = '"object"';
-    # '["string","number","boolean","null"]'                                                                                                = '"string"'; # A type of null is not valid.
-    # '["string","number","boolean"]'                                                                                                       = '"string"'; # Error: Invalid type 'string,number,boolean' in schema
-    # '["boolean", "null"]'                                                                                                                 = '"boolean"';
-    # '["null", "integer"]'                                                                                                                 = '"integer"';
-    # '"type": ["null","integer"]'                               = '"type": "integer"'; # A type of null is not valid.
-    # '"type": ["null", "integer"]'                              = '"type": "integer"'
-    # '"tags": ["Systemusers"]'                                   = '"tags": ["SystemUsers"]'; # Change casing for pretty cmdlet names
-    # '{"name": "Content-Type","in": "header","type": "string"},' = '';
-    # '{"name": "Accept","in": "header","type": "string"},'       = '';
-    # '{"name": "x-org-id","in": "header","type": "string"}'      = '';
-    # ',,'                                                       = ',';
-    # '{,'                                                       = '{';
-    # '{ ,'                                                      = '{';
-    # ',}'                                                       = '}';
-    # ', }'                                                      = '}';
-    # '[ ,'                                                      = '[';
-    # ',]'                                                                                                                                  = ']';
-    # ',"format": "ipv4"'                                        = ''; # Remove StopLight syntax
     'V1' = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                                              = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
         '"system": {"title": "System"'                                                                                                        = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
-        # Issues with pulling from Docs - Adding missing definitions
-        '"definitions": {"sshkeylist"'                                                                                                        = '"definitions": {"UserGroupGraphManagementReq": {"title": "UserGroupGraphManagementReq","type": "object","properties": {"attributes": {"type": ["object","null"],"description": "The graph connection''s attributes."},"op": {"type": "string","description": "How to modify the graph connection.","enum": ["add","remove","update"]},"type": {"type": "string","description": "The graph type","enum": ["active_directory","application","command","g_suite","ldap_server","office_365","policy","radius_server","system","system_group"]},"id": {"type": "string","description": "The ObjectID of graph object being added or removed as an association."}},"required": ["op","type","id"]},"SystemGroupGraphManagementReq": {"title": "SystemGroupGraphManagementReq","type": "object","properties": {"attributes": {"type": ["object","null"],"description": "The graph connection''s attributes."},"op": {"type": "string","description": "How to modify the graph connection.","enum": ["add","remove","update"]},"type": {"type": "string","enum": ["active_directory","application","command","g_suite","ldap_server","office_365","policy","radius_server","user","user_group"]},"id": {"type": "string","description": "The ObjectID of graph object being added or removed as an association."}},"required": ["op","type","id"]},"bulk-user-create": {"title": "Bulk User Create","type": "object","description": "See [V1 system user creation](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.","properties": {"username": {"type": "string"},"firstname": {"type": "string"},"lastname": {"type": "string"},"email": {"type": "string"},"attributes": {"type": "array","description": "Map of additional attributes.","items": {"type": "object"}}}},"gsuite-patch-input": {"title": "GSuite Patch Input","type": "object","properties": {"userLockoutAction": {"type": "string","enum": ["suspend","maintain"]},"userPasswordExpirationAction": {"type": "string","enum": ["suspend","maintain"]}}},"UserGraphManagementReq": {"title": "UserGraphManagementReq","type": "object","properties": {"attributes": {"type": ["object","null"],"description": "The graph connection''s attributes","properties": {"sudo": {"type": "object","properties": {"enabled": {"type": "boolean"},"withoutPassword": {"type": "boolean"}}}}},"op": {"type": "string","description": "How to modify the graph connection.","enum": ["add","remove","update"]},"type": {"type": "string","enum": ["active_directory","application","command","g_suite","ldap_server","office_365","policy","radius_server","system","system_group"]},"id": {"type": "string","description": "The ObjectID of graph object being added or removed as an association."}},"required": ["op","type","id"]},"active-directory-input": {"title": "Active Directory Input","type": "object","properties": {"domain": {"type": "string","description": "Domain name for this Active Directory instance."}}},"sshkeylist"'
         # V1 Issues
         '"basePath": "/api"'                                                                                                                  = '"basePath": "/api/"'; # The extra slash at the end is needed to properly build the url.
         '"command": {"title": "Command", "type": "object", "organization": {"type": "string", "description": "The ID of the organization."},' = '"command": {"title": "Command", "type": "object",'
         '"type": "null"'                                                                                                                      = '"type": "string"'; # A type of null is not valid.
-        '["object","null"]'                                                                                                                   = '"object"'; # A type of null is not valid.
+        ', "format": "email"'                                                                                                                 = ''; # WARNING (LLCS1001/DoesNotSupportEnum): Schema with type:'string and 'format:'email' is not recognized.
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                                          = ''; # This will be passed in later through the Module.cs file.
         '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                                                = ''; # This will be passed in later through the Module.cs file.
@@ -68,18 +40,6 @@ $FixesMapping = @{
         '["object", "null"]'                                                = '"object"';
         '["string", "null"]'                                                = '"string"';
         '"jobId"'                                                           = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
-        '"collection_time": ''2019-05-16T12:58:15.6730000-06:00'''          = '"collection_time": "2019-05-16T12:58:15.6730000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:29.7100000-06:00'''          = '"collection_time": "2019-06-03T13:41:29.7100000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.7710000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.7710000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.5570000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.5570000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.6580000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.6580000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.8580000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.8580000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:30.9330000-06:00'''          = '"collection_time": "2019-06-03T13:41:30.9330000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.0080000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.0080000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.2040000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.2040000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.1250000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.1250000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.6730000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.6730000-06:00"';
-        '"collection_time": ''2019-06-03T13:41:31.7460000-06:00'''          = '"collection_time": "2019-06-03T13:41:31.7460000-06:00"';
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
         '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'              = ''; # This will be passed in later through the Module.cs file.

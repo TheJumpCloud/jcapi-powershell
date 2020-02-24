@@ -26,7 +26,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "operationId": "Application_List",
+        "operationId": "List-Application",
         "summary": "Applications",
         "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
         "parameters": [
@@ -73,7 +73,7 @@
         ]
       },
       "post": {
-        "operationId": "Application_Create",
+        "operationId": "Create-Application",
         "summary": "Create an Application",
         "description": "The endpoint adds a new SSO / SAML Applications.",
         "parameters": [
@@ -117,7 +117,7 @@
     },
     "/applications/{id}": {
       "delete": {
-        "operationId": "Application_Delete",
+        "operationId": "Delete-Application",
         "summary": "Delete an Application",
         "description": "The endpoint deletes an SSO / SAML Application.",
         "parameters": [
@@ -152,7 +152,7 @@
         ]
       },
       "get": {
-        "operationId": "Application_Get",
+        "operationId": "Get-Application",
         "summary": "Get an Application",
         "description": "The endpoint retrieves an SSO / SAML Application.",
         "parameters": [
@@ -195,7 +195,7 @@
         }
       ],
       "put": {
-        "operationId": "Application_Put",
+        "operationId": "Put-Application",
         "summary": "Update an Application",
         "description": "The endpoint updates a SSO / SAML Application.",
         "parameters": [
@@ -239,7 +239,7 @@
     },
     "/application-templates": {
       "get": {
-        "operationId": "ApplicationTemplate_List",
+        "operationId": "List-ApplicationTemplate",
         "summary": "List Application Templates",
         "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
         "parameters": [
@@ -288,7 +288,7 @@
     },
     "/application-templates/{id}": {
       "get": {
-        "operationId": "ApplicationTemplate_Get",
+        "operationId": "Get-ApplicationTemplate",
         "summary": "Get an Application Template",
         "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
         "parameters": [
@@ -353,7 +353,7 @@
         }
       ],
       "post": {
-        "operationId": "CommandTriggerWebhook_Start",
+        "operationId": "POST-CommandTrigger",
         "summary": "Launch a command via a Trigger",
         "description": "This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```",
         "parameters": [],
@@ -374,7 +374,7 @@
     },
     "/commandresults": {
       "get": {
-        "operationId": "CommandResult_List",
+        "operationId": "List-CommandResult",
         "summary": "List all Command Results",
         "description": "This endpoint returns all command results.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key:{API_KEY}'\n  ```",
         "parameters": [
@@ -414,7 +414,7 @@
     },
     "/commandresults/{id}": {
       "delete": {
-        "operationId": "CommandResult_Delete",
+        "operationId": "Delete-CommandResult",
         "summary": "Delete a Command result",
         "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````",
         "parameters": [],
@@ -436,7 +436,7 @@
         ]
       },
       "get": {
-        "operationId": "CommandResult_Get",
+        "operationId": "Get-CommandResult",
         "summary": "List an individual Command result",
         "description": "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
         "parameters": [
@@ -475,7 +475,7 @@
     },
     "/commands": {
       "get": {
-        "operationId": "Command_List",
+        "operationId": "List-Command",
         "summary": "List All Commands",
         "description": "This endpoint returns all commands.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -513,7 +513,7 @@
         ]
       },
       "post": {
-        "operationId": "Command_Create",
+        "operationId": "Create-Command",
         "summary": "Create A Command",
         "description": "This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
         "parameters": [
@@ -545,7 +545,7 @@
     },
     "/commands/{id}": {
       "delete": {
-        "operationId": "Command_Delete",
+        "operationId": "Delete-Command",
         "summary": "Delete a Command",
         "description": "This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [],
@@ -564,7 +564,7 @@
         ]
       },
       "get": {
-        "operationId": "Command_Get",
+        "operationId": "Get-Command",
         "summary": "List an individual Command",
         "description": "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
         "parameters": [
@@ -601,7 +601,7 @@
         }
       ],
       "put": {
-        "operationId": "Command_Put",
+        "operationId": "Put-Command",
         "summary": "Update a Command",
         "description": "This endpoint Updates a command based on the command ID and returns the modified command record.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
         "parameters": [
@@ -633,7 +633,7 @@
     },
     "/files/command/{id}": {
       "get": {
-        "operationId": "CommandFile_Get",
+        "operationId": "Get-CommandFile",
         "summary": "Get a Command File",
         "description": "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
         "parameters": [
@@ -678,7 +678,7 @@
     },
     "/organizations": {
       "get": {
-        "operationId": "Organization_List",
+        "operationId": "List-Organization",
         "summary": "Get Organization Details",
         "description": "This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "parameters": [
@@ -718,7 +718,7 @@
     },
     "/organizations/{id}": {
       "get": {
-        "operationId": "Organization_Get",
+        "operationId": "Get-Organization",
         "summary": "Get an Organization",
         "description": "This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -758,7 +758,7 @@
         }
       ],
       "put": {
-        "operationId": "Organization_Put",
+        "operationId": "Put-Organization",
         "summary": "Update an Organization",
         "description": "This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\". We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```",
         "parameters": [
@@ -798,7 +798,7 @@
     },
     "/radiusservers": {
       "get": {
-        "operationId": "RadiusServer_List",
+        "operationId": "List-RadiusServer",
         "summary": "List Radius Servers",
         "description": "This endpoint allows you to get a list of all RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "parameters": [
@@ -833,7 +833,7 @@
         ]
       },
       "post": {
-        "operationId": "RadiusServer_Create",
+        "operationId": "Create-RadiusServer",
         "summary": "Create a Radius Server",
         "description": "This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
         "parameters": [
@@ -861,6 +861,25 @@
       }
     },
     "/radiusservers/{id}": {
+      "get": {
+        "operationId": "Get-RadiusServer",
+        "summary": "Get Radius Server",
+        "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserver"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
       "parameters": [
         {
           "name": "id",
@@ -870,7 +889,7 @@
         }
       ],
       "put": {
-        "operationId": "RadiusServer_Put",
+        "operationId": "Put-RadiusServer",
         "summary": "Update Radius Servers",
         "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
         "parameters": [
@@ -939,7 +958,7 @@
     },
     "/search/organizations": {
       "post": {
-        "operationId": "Organization_Search",
+        "operationId": "Search-Organization",
         "summary": "Search Organizations",
         "description": "This endpoint will return Organization data based on your search parameters. This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request. \n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```",
         "parameters": [
@@ -983,7 +1002,7 @@
     },
     "/search/systems": {
       "post": {
-        "operationId": "System_Search",
+        "operationId": "Search-System",
         "summary": "Search Systems",
         "description": "Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```",
         "parameters": [
@@ -1027,7 +1046,7 @@
     },
     "/search/systemusers": {
       "post": {
-        "operationId": "SystemUser_Search",
+        "operationId": "Search-SystemUser",
         "summary": "Search System Users",
         "description": "Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system user.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of system users in a department\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"department\" : \"IT\"}],\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nText search for system users with and email on a domain\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nCombining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of departments\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"department\" : \"IT\"},\n      {\"department\" : \"Sales\"}\n    ]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```",
         "parameters": [
@@ -1071,7 +1090,7 @@
     },
     "/systems": {
       "get": {
-        "operationId": "System_List",
+        "operationId": "List-System",
         "summary": "List All Systems",
         "description": "This endpoint returns all Systems.\n\n#### Sample Requests\n```\ncurl -X GET https://console.jumpcloud.com/api/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
         "parameters": [
@@ -1111,7 +1130,7 @@
     },
     "/systems/{id}": {
       "delete": {
-        "operationId": "System_Delete",
+        "operationId": "Delete-System",
         "summary": "Delete a System",
         "description": "This endpoint allows you to delete a system. This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute. If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "parameters": [
@@ -1137,7 +1156,7 @@
         ]
       },
       "get": {
-        "operationId": "System_Get",
+        "operationId": "Get-System",
         "summary": "List an individual system",
         "description": "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
         "parameters": [
@@ -1177,7 +1196,7 @@
         }
       ],
       "put": {
-        "operationId": "System_Put",
+        "operationId": "Put-System",
         "summary": "Update a system",
         "description": "This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```",
         "parameters": [
@@ -1212,7 +1231,7 @@
     },
     "/systemusers": {
       "get": {
-        "operationId": "SystemUser_List",
+        "operationId": "List-SystemUser",
         "summary": "List all system users",
         "description": "This endpoint returns all systemusers.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1269,7 +1288,7 @@
         ]
       },
       "post": {
-        "operationId": "SystemUser_Create",
+        "operationId": "Create-SystemUser",
         "summary": "Create a system user",
         "description": "This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"username\":\"{username}\",\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
         "parameters": [
@@ -1304,7 +1323,7 @@
     },
     "/systemusers/{id}": {
       "delete": {
-        "operationId": "SystemUser_Delete",
+        "operationId": "Delete-SystemUser",
         "summary": "Delete a system user",
         "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
         "parameters": [],
@@ -1326,7 +1345,7 @@
         ]
       },
       "get": {
-        "operationId": "SystemUser_Get",
+        "operationId": "Get-SystemUser",
         "summary": "List a system user",
         "description": "This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1363,7 +1382,7 @@
         }
       ],
       "put": {
-        "operationId": "SystemUser_Put",
+        "operationId": "Put-SystemUser",
         "summary": "Update a system user",
         "description": "This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
         "parameters": [
@@ -1393,6 +1412,50 @@
         ]
       }
     },
+    "/systemusers/{id}/expire": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "POST-ExpireSystemUserPassword",
+        "summary": "Expire a system user's password",
+        "description": "This endpoint allows you to expire a user's password.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
     "/systemusers/{id}/resetmfa": {
       "parameters": [
         {
@@ -1403,7 +1466,7 @@
         }
       ],
       "post": {
-        "operationId": "SystemUserMfa_Reset",
+        "operationId": "Reset-SystemUserMfa",
         "summary": "Reset a system user's MFA token",
         "description": "This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period. This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information. \n\n#### Sample Request \n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n  \n\n```",
         "parameters": [
@@ -1456,7 +1519,7 @@
     },
     "/systemusers/{id}/sshkeys": {
       "get": {
-        "operationId": "SshKey_List",
+        "operationId": "List-SystemUsersSshKey",
         "summary": "List a system user's public SSH keys",
         "description": "This endpoint will return a specific System User's public SSH key.",
         "parameters": [],
@@ -1493,7 +1556,7 @@
         }
       ],
       "post": {
-        "operationId": "SshKey_Create",
+        "operationId": "Create-SystemUsersSshKey",
         "summary": "Create a system user's Public SSH Key",
         "description": "This endpoint will create a specific System User's Public SSH Key.",
         "parameters": [
@@ -1537,7 +1600,7 @@
         }
       ],
       "post": {
-        "operationId": "SystemUser_Unlock",
+        "operationId": "Unlock-SystemUser",
         "summary": "Unlock a system user",
         "description": "This endpoint allows you to unlock a user's account.",
         "parameters": [],
@@ -1573,7 +1636,7 @@
     },
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
       "delete": {
-        "operationId": "SshKey_Delete",
+        "operationId": "Delete-SystemUsersSshKey",
         "summary": "Delete a system user's Public SSH Keys",
         "description": "This endpoint will delete a specific System User's SSH Key.",
         "parameters": [],
@@ -1726,16 +1789,6 @@
     }
   },
   "definitions": {
-    "active-directory-input": {
-      "title": "Active Directory Input",
-      "type": "object",
-      "properties": {
-        "domain": {
-          "type": "string",
-          "description": "Domain name for this Active Directory instance."
-        }
-      }
-    },
     "application": {
       "title": "Application",
       "type": "object",
@@ -2534,32 +2587,6 @@
         }
       }
     },
-    "bulk-user-create": {
-      "title": "Bulk User Create",
-      "type": "object",
-      "description": "See [V1 system user creation](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.",
-      "properties": {
-        "username": {
-          "type": "string"
-        },
-        "firstname": {
-          "type": "string"
-        },
-        "lastname": {
-          "type": "string"
-        },
-        "email": {
-          "type": "string"
-        },
-        "attributes": {
-          "type": "array",
-          "description": "Map of additional attributes.",
-          "items": {
-            "type": "object"
-          }
-        }
-      }
-    },
     "case": {
       "title": "Case",
       "type": "object",
@@ -2673,19 +2700,22 @@
           "description": "The total number of commands files"
         },
         "results": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "The file name."
-            },
-            "destination": {
-              "type": "string",
-              "description": "The location where the file will be stored."
-            },
-            "_id": {
-              "type": "string",
-              "description": "The ID of the file."
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "The file name."
+              },
+              "destination": {
+                "type": "string",
+                "description": "The location where the file will be stored."
+              },
+              "_id": {
+                "type": "string",
+                "description": "The ID of the file."
+              }
             }
           }
         }
@@ -2868,26 +2898,6 @@
         },
         "active": {
           "type": "boolean"
-        }
-      }
-    },
-    "gsuite-patch-input": {
-      "title": "GSuite Patch Input",
-      "type": "object",
-      "properties": {
-        "userLockoutAction": {
-          "type": "string",
-          "enum": [
-            "suspend",
-            "maintain"
-          ]
-        },
-        "userPasswordExpirationAction": {
-          "type": "string",
-          "enum": [
-            "suspend",
-            "maintain"
-          ]
         }
       }
     },
@@ -3226,10 +3236,10 @@
           "type": "boolean"
         },
         "betaFeatures": {
-          "type": "array",
-          "items": {
-            "type": "boolean"
-          }
+          "type": "object"
+        },
+        "disableCommandRunner": {
+          "type": "boolean"
         }
       }
     },
@@ -3607,49 +3617,6 @@
         "name"
       ]
     },
-    "SystemGroupGraphManagementReq": {
-      "title": "SystemGroupGraphManagementReq",
-      "type": "object",
-      "properties": {
-        "attributes": {
-          "type": "object",
-          "description": "The graph connection's attributes."
-        },
-        "op": {
-          "type": "string",
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ]
-        },
-        "type": {
-          "type": "string",
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "user",
-            "user_group"
-          ]
-        },
-        "id": {
-          "type": "string",
-          "description": "The ObjectID of graph object being added or removed as an association."
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ]
-    },
     "systemput": {
       "title": "SystemPut",
       "type": "object",
@@ -3858,6 +3825,9 @@
         },
         "suspended": {
           "type": "boolean"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
         }
       }
     },
@@ -4235,7 +4205,8 @@
           "type": "boolean"
         },
         "external_password_expiration_date": {
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
@@ -4490,105 +4461,76 @@
         }
       }
     },
-    "UserGraphManagementReq": {
-      "title": "UserGraphManagementReq",
+    "userput": {
+      "title": "UserPut",
       "type": "object",
       "properties": {
-        "attributes": {
-          "type": "object",
-          "description": "The graph connection's attributes",
-          "properties": {
-            "sudo": {
-              "type": "object",
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "withoutPassword": {
-                  "type": "boolean"
-                }
-              }
-            }
-          }
-        },
-        "op": {
+        "email": {
           "type": "string",
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ]
+          "maxLength": 1024
         },
-        "type": {
-          "type": "string",
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "system",
-            "system_group"
-          ]
+        "enableMultiFactor": {
+          "type": "boolean"
         },
-        "id": {
+        "enableWhatsNew": {
+          "type": "boolean"
+        },
+        "lastWhatsNewChecked": {
           "type": "string",
-          "description": "The ObjectID of graph object being added or removed as an association."
+          "format": "date"
+        },
+        "roleName": {
+          "type": "string"
         }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ]
+      }
     },
-    "UserGroupGraphManagementReq": {
-      "title": "UserGroupGraphManagementReq",
+    "userreturn": {
+      "title": "UserReturn",
       "type": "object",
       "properties": {
-        "attributes": {
-          "type": "object",
-          "description": "The graph connection's attributes."
+        "email": {
+          "type": "string"
         },
-        "op": {
-          "type": "string",
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ]
+        "enableMultiFactor": {
+          "type": "boolean"
         },
-        "type": {
-          "type": "string",
-          "description": "The graph type",
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "system",
-            "system_group"
-          ]
+        "enableWhatsNew": {
+          "type": "boolean"
         },
-        "id": {
-          "type": "string",
-          "description": "The ObjectID of graph object being added or removed as an association."
+        "lastWhatsNewChecked": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "disableIntroduction": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "usersTimeZone": {
+          "type": "string"
         }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ]
+      }
     }
   }
 }

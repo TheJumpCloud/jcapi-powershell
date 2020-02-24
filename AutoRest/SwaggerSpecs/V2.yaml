@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "2.0"
-  title: JumpCloud APIs
+  title: JumpCloud APIs Test
   description: ""
 host: console.jumpcloud.com
 basePath: /api/v2/
@@ -19,7 +19,7 @@ securityDefinitions:
 paths:
   /activedirectories:
     get:
-      operationId: ActiveDirectory_List
+      operationId: List-ActiveDirectory
       summary: List Active Directories
       description: |-
         This endpoint allows you to list all your Active Directory Instances.
@@ -47,7 +47,7 @@ paths:
       - x-api-key: []
   /activedirectories/{activedirectory_id}/associations:
     get:
-      operationId: ActiveDirectoryAssociation_List
+      operationId: List-ActiveDirectoryAssociation
       summary: List the associations of an Active Directory instance
       tags:
       - Graph
@@ -85,7 +85,7 @@ paths:
       type: string
   /activedirectories/{activedirectory_id}/usergroups:
     get:
-      operationId: ActiveDirectoryTraverseUserGroup_List
+      operationId: List-ActiveDirectoryTraverseUserGroup
       summary: List the User Groups bound to an Active Directory instance
       tags:
       - Graph
@@ -128,7 +128,7 @@ paths:
       type: string
   /activedirectories/{id}:
     get:
-      operationId: ActiveDirectory_Get
+      operationId: Get-ActiveDirectory
       summary: Get an Active Directory
       description: |-
         This endpoint returns a specific Active Directory.
@@ -157,7 +157,7 @@ paths:
       type: string
   /applications/{application_id}/associations:
     get:
-      operationId: ApplicationAssociation_List
+      operationId: List-ApplicationAssociation
       summary: List the associations of an Application
       tags:
       - Graph
@@ -192,7 +192,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: ApplicationAssociation_Set
+      operationId: Set-ApplicationAssociation
       summary: Manage the associations of an Application
       tags:
       - Graph
@@ -223,7 +223,7 @@ paths:
       - x-api-key: []
   /applications/{application_id}/usergroups:
     get:
-      operationId: ApplicationTraverseUserGroup_List
+      operationId: List-ApplicationTraverseUserGroup
       summary: List the User Groups bound to an Application
       tags:
       - Graph
@@ -266,7 +266,7 @@ paths:
       type: string
   /applications/{application_id}/users:
     get:
-      operationId: ApplicationTraverseUser_List
+      operationId: List-ApplicationTraverseUser
       summary: List the Users bound to an Application
       tags:
       - Graph
@@ -309,7 +309,7 @@ paths:
       type: string
   /bulk/users:
     patch:
-      operationId: BulkUsers_Patch
+      operationId: Patch-BulkUsers
       summary: Bulk Users Update
       description: "The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"department\":\"{UPDATED_DEPARTMENT}\",\n		\"attributes\":[\n			{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n		]\n	},\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"costCenter\":\"{UPDATED_COST_CENTER}\",\n		\"phoneNumbers\":[\n			{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n			{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n		]\n	}\n]\n```"
       parameters:
@@ -327,7 +327,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: BulkUsers_Create
+      operationId: Create-BulkUsers
       summary: Bulk Users Create
       description: "The endpoint allows you to create a bulk job to asynchronously create users. See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n		\"email\":\"{email}\",\n		\"firstname\":\"{firstname}\",\n		\"lastname\":\"{firstname}\",\n		\"username\":\"{username}\",\n		\"attributes\":[\n			{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n			{\"name\":\"Custom\",\"value\":\"attribute\"}\n		]\n	}\n]\n```"
       parameters:
@@ -346,7 +346,7 @@ paths:
       - x-api-key: []
   /bulk/users/{job_id}/results:
     get:
-      operationId: BulkUsersResult_Get
+      operationId: Get-BulkUsersResult
       summary: List Bulk Users Results
       description: |-
         This endpoint will return the results of particular user import or update job request.
@@ -378,7 +378,7 @@ paths:
       type: string
   /commands/{command_id}/associations:
     get:
-      operationId: CommandAssociation_List
+      operationId: List-CommandAssociation
       summary: List the associations of a Command
       tags:
       - Graph
@@ -415,7 +415,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: CommandAssociation_Set
+      operationId: Set-CommandAssociation
       summary: Manage the associations of a Command
       tags:
       - Graph
@@ -449,7 +449,7 @@ paths:
       - x-api-key: []
   /commands/{command_id}/systemgroups:
     get:
-      operationId: CommandTraverseSystemGroup_List
+      operationId: List-CommandTraverseSystemGroup
       summary: List the System Groups bound to a Command
       tags:
       - Graph
@@ -492,7 +492,7 @@ paths:
       type: string
   /commands/{command_id}/systems:
     get:
-      operationId: CommandTraverseSystem_List
+      operationId: List-CommandTraverseSystem
       summary: List the Systems bound to a Command
       tags:
       - Graph
@@ -535,7 +535,7 @@ paths:
       type: string
   /directories:
     get:
-      operationId: Directory_List
+      operationId: List-Directory
       summary: List All Directories
       description: |-
         This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
@@ -566,7 +566,7 @@ paths:
       - x-api-key: []
   /duo/accounts:
     get:
-      operationId: DuoAccount_List
+      operationId: List-DuoAccount
       summary: List Duo Acounts
       tags:
       - Duo
@@ -591,7 +591,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: DuoAccount_Create
+      operationId: Create-DuoAccount
       summary: Create Duo Account
       tags:
       - Duo
@@ -629,7 +629,7 @@ paths:
       - x-api-key: []
   /duo/accounts/{account_id}/applications:
     get:
-      operationId: DuoApplication_List
+      operationId: List-DuoApplication
       summary: List Duo Applications
       tags:
       - Duo
@@ -671,7 +671,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: DuoApplication_Create
+      operationId: Create-DuoApplication
       summary: Create Duo Application
       tags:
       - Duo
@@ -717,7 +717,7 @@ paths:
       - x-api-key: []
   /duo/accounts/{account_id}/applications/{application_id}:
     delete:
-      operationId: DuoApplication_Delete
+      operationId: Delete-DuoApplication
       summary: Delete a Duo Application
       tags:
       - Duo
@@ -752,7 +752,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: DuoApplication_Get
+      operationId: Get-DuoApplication
       summary: Get a Duo application
       tags:
       - Duo
@@ -796,7 +796,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: DuoApplication_Put
+      operationId: Put-DuoApplication
       summary: Update Duo Application
       tags:
       - Duo
@@ -842,7 +842,7 @@ paths:
       - x-api-key: []
   /duo/accounts/{id}:
     delete:
-      operationId: DuoAccount_Delete
+      operationId: Delete-DuoAccount
       summary: Delete a Duo Account
       tags:
       - Duo
@@ -877,7 +877,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: DuoAccount_Get
+      operationId: Get-DuoAccount
       summary: Get a Duo Acount
       tags:
       - Duo
@@ -906,7 +906,7 @@ paths:
       type: string
   /groups:
     get:
-      operationId: Group_List
+      operationId: List-Group
       summary: List All Groups
       description: |-
         This endpoint returns all Groups that exist in your organization.
@@ -945,7 +945,7 @@ paths:
       - x-api-key: []
   /gsuites/{gsuite_id}/associations:
     get:
-      operationId: GSuiteAssociation_List
+      operationId: List-GSuiteAssociation
       summary: List the associations of a G Suite instance
       tags:
       - Graph
@@ -982,7 +982,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: GSuiteAssociation_Set
+      operationId: Set-GSuiteAssociation
       summary: Manage the associations of a G Suite instance
       tags:
       - Graph
@@ -1016,7 +1016,7 @@ paths:
       - x-api-key: []
   /gsuites/{gsuite_id}/translationrules:
     get:
-      operationId: GSuiteTranslationRule_List
+      operationId: List-GSuiteTranslationRule
       summary: List all the G Suite Translation Rules
       description: |-
         This endpoint returns all graph translation rules for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
@@ -1054,7 +1054,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: GSuiteTranslationRule_Create
+      operationId: Create-GSuiteTranslationRule
       summary: Create a new G Suite Translation Rule
       description: |-
         This endpoint allows you to create a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
@@ -1084,7 +1084,7 @@ paths:
       - x-api-key: []
   /gsuites/{gsuite_id}/translationrules/{id}:
     delete:
-      operationId: GSuiteTranslationRule_Delete
+      operationId: Delete-GSuiteTranslationRule
       summary: Deletes a G Suite translation rule
       description: |-
         This endpoint allows you to delete a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
@@ -1104,7 +1104,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: GSuiteTranslationRule_Get
+      operationId: Get-GSuiteTranslationRule
       summary: Gets a specific G Suite translation rule
       description: |-
         This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
@@ -1136,7 +1136,7 @@ paths:
       type: string
   /gsuites/{gsuite_id}/usergroups:
     get:
-      operationId: GSuiteTraverseUserGroup_List
+      operationId: List-GSuiteTraverseUserGroup
       summary: List the User Groups bound to a G Suite instance
       tags:
       - Graph
@@ -1179,7 +1179,7 @@ paths:
       type: string
   /gsuites/{gsuite_id}/users:
     get:
-      operationId: GSuiteTraverseUser_List
+      operationId: List-GSuiteTraverseUser
       summary: List the Users bound to a G Suite instance
       tags:
       - Graph
@@ -1222,7 +1222,7 @@ paths:
       type: string
   /gsuites/{id}:
     get:
-      operationId: GSuite_Get
+      operationId: Get-GSuite
       summary: Get G Suite
       description: |-
         This endpoint returns a specific G Suite.
@@ -1248,7 +1248,7 @@ paths:
       required: true
       type: string
     patch:
-      operationId: GSuite_Patch
+      operationId: Patch-GSuite
       summary: Update existing G Suite
       description: |-
         This endpoint allows updating some attributes of a G Suite.
@@ -1277,7 +1277,7 @@ paths:
             $ref: '#/definitions/gsuite-output'
   /ldapservers:
     get:
-      operationId: LdapServer_List
+      operationId: List-LdapServer
       summary: List LDAP Servers
       description: |-
         This endpoint returns the object IDs of your LDAP servers.
@@ -1306,7 +1306,7 @@ paths:
       - x-api-key: []
   /ldapservers/{id}:
     get:
-      operationId: LdapServer_Get
+      operationId: Get-LdapServer
       summary: Get LDAP Server
       description: |-
         This endpoint returns a specific LDAP server.
@@ -1334,7 +1334,7 @@ paths:
       required: true
       type: string
     patch:
-      operationId: LdapServer_Patch
+      operationId: Patch-LdapServer
       summary: Update existing LDAP server
       description: |-
         This endpoint allows updating some attributes of an LDAP server.
@@ -1394,7 +1394,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/associations:
     get:
-      operationId: LdapServerAssociation_List
+      operationId: List-LdapServerAssociation
       summary: List the associations of a LDAP Server
       tags:
       - Graph
@@ -1431,7 +1431,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: LdapServerAssociation_Set
+      operationId: Set-LdapServerAssociation
       summary: Manage the associations of a LDAP Server
       tags:
       - Graph
@@ -1464,7 +1464,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/sambadomains:
     get:
-      operationId: LdapServerSambaDomain_List
+      operationId: List-LdapServerSambaDomain
       summary: List Samba Domains
       description: |-
         This endpoint returns all samba domains for an LDAP server.
@@ -1509,7 +1509,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: LdapServerSambaDomain_Create
+      operationId: Create-LdapServerSambaDomain
       summary: Create Samba Domain
       description: |-
         This endpoint allows you to create a samba domain for an LDAP server.
@@ -1547,7 +1547,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/sambadomains/{id}:
     delete:
-      operationId: LdapServerSambaDomain_Delete
+      operationId: Delete-LdapServerSambaDomain
       summary: Delete Samba Domain
       description: |-
         This endpoint allows you to delete a samba domain from an LDAP server.
@@ -1578,7 +1578,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: LdapServerSambaDomain_Get
+      operationId: Get-LdapServerSambaDomain
       summary: Get Samba Domain
       description: |-
         This endpoint returns a specific samba domain for an LDAP server.
@@ -1610,7 +1610,7 @@ paths:
     parameters:
     - name: ldapserver_id
       in: path
-      description: Unique identifier o f the LDAP server.
+      description: Unique identifier of the LDAP server.
       required: true
       type: string
     - name: id
@@ -1619,7 +1619,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: LdapServerSambaDomain_Put
+      operationId: Put-LdapServerSambaDomain
       summary: Update Samba Domain
       description: |-
         This endpoint allows you to update the samba domain information for an LDAP server.
@@ -1658,7 +1658,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/usergroups:
     get:
-      operationId: LdapServerTraverseUserGroup_List
+      operationId: List-LdapServerTraverseUserGroup
       summary: List the User Groups bound to a LDAP Server
       tags:
       - Graph
@@ -1701,7 +1701,7 @@ paths:
       type: string
   /ldapservers/{ldapserver_id}/users:
     get:
-      operationId: LdapServerTraverseUser_List
+      operationId: List-LdapServerTraverseUser
       summary: List the Users bound to a LDAP Server
       tags:
       - Graph
@@ -1744,7 +1744,7 @@ paths:
       type: string
   /office365s/{office365_id}:
     get:
-      operationId: Office365_Get
+      operationId: Get-Office365
       summary: Get Office 365 instance
       description: |-
         This endpoint returns a specific Office 365 instance.
@@ -1775,7 +1775,7 @@ paths:
       required: true
       type: string
     patch:
-      operationId: Office365_Patch
+      operationId: Patch-Office365
       summary: Update existing Office 365 instance.
       description: |-
         This endpoint allows updating some attributes of an Office 365 instance.
@@ -1809,7 +1809,7 @@ paths:
       - x-api-key: []
   /office365s/{office365_id}/associations:
     get:
-      operationId: Office365Association_List
+      operationId: List-Office365Association
       summary: List the associations of an Office 365 instance
       tags:
       - Graph
@@ -1847,7 +1847,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Office365Association_Set
+      operationId: Set-Office365Association
       summary: Manage the associations of an Office 365 instance
       tags:
       - Graph
@@ -1880,7 +1880,7 @@ paths:
       - x-api-key: []
   /office365s/{office365_id}/translationrules:
     get:
-      operationId: Office365TranslationRule_List
+      operationId: List-Office365TranslationRule
       summary: List all the Office 365 Translation Rules
       description: |-
         This endpoint returns all translation rules for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
@@ -1918,7 +1918,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Office365TranslationRule_Create
+      operationId: Create-Office365TranslationRule
       summary: Create a new Office 365 Translation Rule
       description: |-
         This endpoint allows you to create a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
@@ -1948,7 +1948,7 @@ paths:
       - x-api-key: []
   /office365s/{office365_id}/translationrules/{id}:
     delete:
-      operationId: Office365TranslationRule_Delete
+      operationId: Delete-Office365TranslationRule
       summary: Deletes a Office 365 translation rule
       description: |-
         This endpoint allows you to delete a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
@@ -1968,7 +1968,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: Office365TranslationRule_Get
+      operationId: Get-Office365TranslationRule
       summary: Gets a specific Office 365 translation rule
       description: |-
         This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
@@ -2000,7 +2000,7 @@ paths:
       type: string
   /office365s/{office365_id}/usergroups:
     get:
-      operationId: Office365TraverseUserGroup_List
+      operationId: List-Office365TraverseUserGroup
       summary: List the User Groups bound to an Office 365 instance
       tags:
       - Graph
@@ -2043,7 +2043,7 @@ paths:
       type: string
   /office365s/{office365_id}/users:
     get:
-      operationId: Office365TraverseUser_List
+      operationId: List-Office365TraverseUser
       summary: List the Users bound to an Office 365 instance
       tags:
       - Graph
@@ -2086,7 +2086,7 @@ paths:
       type: string
   /policies:
     get:
-      operationId: Policy_List
+      operationId: List-Policy
       summary: Lists all the Policies
       description: |-
         This endpoint returns all policies.
@@ -2118,7 +2118,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: Policy_Create
+      operationId: Create-Policy
       summary: Create a new Policy
       description: |-
         This endpoint allows you to create a policy. Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
@@ -2148,7 +2148,7 @@ paths:
       - x-api-key: []
   /policies/{id}:
     delete:
-      operationId: Policy_Delete
+      operationId: Delete-Policy
       summary: Deletes a Policy
       description: |-
         This endpoint allows you to delete a policy.
@@ -2168,7 +2168,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: Policy_Get
+      operationId: Get-Policy
       summary: Gets a specific Policy.
       description: |-
         This endpoint returns a specific policy.
@@ -2196,7 +2196,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: Policy_Put
+      operationId: Put-Policy
       summary: Update an existing Policy
       description: |-
         This endpoint allows you to update a policy. Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
@@ -2226,7 +2226,7 @@ paths:
       - x-api-key: []
   /policies/{policy_id}/associations:
     get:
-      operationId: PolicyAssociation_List
+      operationId: List-PolicyAssociation
       summary: List the associations of a Policy
       tags:
       - Graph
@@ -2261,7 +2261,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: PolicyAssociation_Set
+      operationId: Set-PolicyAssociation
       summary: Manage the associations of a Policy
       tags:
       - Graph
@@ -2294,7 +2294,7 @@ paths:
       - x-api-key: []
   /policies/{policy_id}/policyresults:
     get:
-      operationId: PolicyResult_List
+      operationId: List-PolicyResult
       summary: Lists all the policy results of a policy.
       description: |-
         This endpoint returns all policies results for a specific policy.
@@ -2328,7 +2328,7 @@ paths:
       type: string
   /policies/{policy_id}/policystatuses:
     get:
-      operationId: PolicyStatus_List
+      operationId: List-PolicyStatus
       summary: Lists the latest policy results of a policy.
       description: |-
         This endpoint returns the latest policies results for a specific policy.
@@ -2362,7 +2362,7 @@ paths:
       type: string
   /policies/{policy_id}/systemgroups:
     get:
-      operationId: PolicyTraverseSystemGroup_List
+      operationId: List-PolicyTraverseSystemGroup
       summary: List the System Groups bound to a Policy
       tags:
       - Graph
@@ -2405,7 +2405,7 @@ paths:
       type: string
   /policies/{policy_id}/systems:
     get:
-      operationId: PolicyTraverseSystem_List
+      operationId: List-PolicyTraverseSystem
       summary: List the Systems bound to a Policy
       tags:
       - Graph
@@ -2448,7 +2448,7 @@ paths:
       type: string
   /policyresults:
     get:
-      operationId: OrgPolicyResult_List
+      operationId: List-PolicyResult
       summary: Lists all the policy results for an organization.
       description: |-
         This endpoint returns all policies results for an organization.
@@ -2477,7 +2477,7 @@ paths:
       - x-api-key: []
   /policyresults/{id}:
     get:
-      operationId: PolicyResult_Get
+      operationId: Get-PolicyResult
       summary: Get a specific Policy Result.
       description: |-
         This endpoint will return the policy results for a specific policy.
@@ -2505,7 +2505,7 @@ paths:
       type: string
   /policytemplates:
     get:
-      operationId: PolicyTemplate_List
+      operationId: List-PolicyTemplate
       summary: Lists all of the Policy Templates
       tags:
       - Policytemplates
@@ -2539,7 +2539,7 @@ paths:
       - x-api-key: []
   /policytemplates/{id}:
     get:
-      operationId: PolicyTemplate_Get
+      operationId: Get-PolicyTemplate
       summary: Get a specific Policy Template
       tags:
       - Policytemplates
@@ -2569,7 +2569,7 @@ paths:
       type: string
   /providers/{provider_id}/administrators:
     get:
-      operationId: ProviderAdministrator_List
+      operationId: List-ProviderAdministrator
       summary: List Provider Administrators
       tags:
       - Providers
@@ -2634,7 +2634,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: ProviderAdmin_Create
+      operationId: Create-ProviderAdmin
       summary: Create a new Provider Administrator
       tags:
       - Providers
@@ -2673,7 +2673,7 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/associations:
     get:
-      operationId: RadiusServerAssociation_List
+      operationId: List-RadiusServerAssociation
       summary: List the associations of a RADIUS  Server
       tags:
       - Graph
@@ -2709,7 +2709,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: RadiusServerAssociation_Set
+      operationId: Set-RadiusServerAssociation
       summary: Manage the associations of a RADIUS Server
       tags:
       - Graph
@@ -2726,7 +2726,7 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/usergroups:
     get:
-      operationId: RadiusServerTraverseUserGroup_List
+      operationId: List-RadiusServerTraverseUserGroup
       summary: List the User Groups bound to a RADIUS  Server
       tags:
       - Graph
@@ -2769,7 +2769,7 @@ paths:
       type: string
   /radiusservers/{radiusserver_id}/users:
     get:
-      operationId: RadiusServerTraverseUser_List
+      operationId: List-RadiusServerTraverseUser
       summary: List the Users bound to a RADIUS  Server
       tags:
       - Graph
@@ -2813,7 +2813,7 @@ paths:
       type: string
   /systemgroups:
     get:
-      operationId: SystemGroup_List
+      operationId: List-SystemGroup
       summary: List all System Groups
       tags:
       - System Groups
@@ -2858,7 +2858,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: SystemGroup_Create
+      operationId: Create-SystemGroup
       summary: Create a new System Group
       tags:
       - System Groups
@@ -2891,7 +2891,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/associations:
     get:
-      operationId: SystemGroupAssociation_List
+      operationId: List-SystemGroupAssociation
       summary: List the associations of a System Group
       tags:
       - Graph
@@ -2929,7 +2929,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: SystemGroupAssociation_Set
+      operationId: Set-SystemGroupAssociation
       summary: Manage the associations of a System Group
       tags:
       - Graph
@@ -2965,7 +2965,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/commands:
     get:
-      operationId: SystemGroupTraverseCommand_List
+      operationId: List-SystemGroupTraverseCommand
       summary: List the Commands bound to a System Group
       tags:
       - Graph
@@ -3008,7 +3008,7 @@ paths:
       type: string
   /systemgroups/{group_id}/members:
     get:
-      operationId: SystemGroupMembers_List
+      operationId: List-SystemGroupMembers
       summary: List the members of a System Group
       tags:
       - Graph
@@ -3043,7 +3043,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: SystemGroupMembers_Set
+      operationId: Set-SystemGroupMembers
       summary: Manage the members of a System Group
       tags:
       - Graph
@@ -3077,7 +3077,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/membership:
     get:
-      operationId: SystemGroupMembership_List
+      operationId: List-SystemGroupMembership
       summary: List the System Group's membership
       tags:
       - Graph
@@ -3115,7 +3115,7 @@ paths:
       type: string
   /systemgroups/{group_id}/policies:
     get:
-      operationId: SystemGroupTraversePolicy_List
+      operationId: List-SystemGroupTraversePolicy
       summary: List the Policies bound to a System Group
       tags:
       - Graph
@@ -3161,7 +3161,7 @@ paths:
       type: string
   /systemgroups/{group_id}/usergroups:
     get:
-      operationId: SystemGroupTraverseUserGroup_List
+      operationId: List-SystemGroupTraverseUserGroup
       summary: List the User Groups bound to a System Group
       tags:
       - Graph
@@ -3206,7 +3206,7 @@ paths:
       type: string
   /systemgroups/{group_id}/users:
     get:
-      operationId: SystemGroupTraverseUser_List
+      operationId: List-SystemGroupTraverseUser
       summary: List the Users bound to a System Group
       tags:
       - Graph
@@ -3250,7 +3250,7 @@ paths:
       type: string
   /systemgroups/{id}:
     delete:
-      operationId: SystemGroup_Delete
+      operationId: Delete-SystemGroup
       summary: Delete a System Group
       tags:
       - System Groups
@@ -3272,7 +3272,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: SystemGroup_Get
+      operationId: Get-SystemGroup
       summary: View an individual System Group details
       tags:
       - System Groups
@@ -3306,7 +3306,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: SystemGroup_Put
+      operationId: Put-SystemGroup
       summary: Update a System Group
       tags:
       - System Groups
@@ -3340,9 +3340,26 @@ paths:
               name: group1
       security:
       - x-api-key: []
+  /systeminsights/alf:
+    get:
+      operationId: List-SystemInsightsAlf
+      summary: List System Insights ALF
+      description: Valid filter fields are `system_id` and `global_state`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-alf'
+      security:
+      - x-api-key: []
   /systeminsights/apps:
     get:
-      operationId: SystemInsightsApps_List
+      operationId: List-SystemInsightsApps
       summary: List System Insights Apps
       description: Valid filter fields are `system_id` and `bundle_name`.
       parameters:
@@ -3357,9 +3374,26 @@ paths:
               $ref: '#/definitions/system-insights-apps'
       security:
       - x-api-key: []
+  /systeminsights/battery:
+    get:
+      operationId: List-SystemInsightsBattery
+      summary: List System Insights Battery
+      description: Valid filter fields are `system_id` and `health`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-battery'
+      security:
+      - x-api-key: []
   /systeminsights/bitlocker_info:
     get:
-      operationId: SystemInsightsBitlockerInfo_List
+      operationId: List-SystemInsightsBitlockerInfo
       summary: List System Insights Bitlocker Info
       description: Valid filter fields are `system_id` and `protection_status`.
       parameters:
@@ -3376,7 +3410,7 @@ paths:
       - x-api-key: []
   /systeminsights/browser_plugins:
     get:
-      operationId: SystemInsightsBrowserPlugins_List
+      operationId: List-SystemInsightsBrowserPlugins
       summary: List System Insights Browser Plugins
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3393,7 +3427,7 @@ paths:
       - x-api-key: []
   /systeminsights/chrome_extensions:
     get:
-      operationId: SystemInsightsChromeExtensions_List
+      operationId: List-SystemInsightsChromeExtensions
       summary: List System Insights Chrome Extensions
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3408,9 +3442,26 @@ paths:
               $ref: '#/definitions/system-insights-chrome-extensions'
       security:
       - x-api-key: []
+  /systeminsights/crashes:
+    get:
+      operationId: List-SystemInsightsCrashes
+      summary: List System Insights Crashes
+      description: Valid filter fields are `system_id` and `identifier`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-crashes'
+      security:
+      - x-api-key: []
   /systeminsights/disk_encryption:
     get:
-      operationId: SystemInsightsDiskEncryption_List
+      operationId: List-SystemInsightsDiskEncryption
       summary: List System Insights Disk Encryption
       description: Valid filter fields are `system_id` and `encryption_status`.
       parameters:
@@ -3427,7 +3478,7 @@ paths:
       - x-api-key: []
   /systeminsights/disk_info:
     get:
-      operationId: SystemInsightsDiskInfo_List
+      operationId: List-SystemInsightsDiskInfo
       summary: List System Insights Disk Info
       description: Valid filter fields are `system_id` and `disk_index`.
       parameters:
@@ -3444,7 +3495,7 @@ paths:
       - x-api-key: []
   /systeminsights/etc_hosts:
     get:
-      operationId: SystemInsightsEtcHosts_List
+      operationId: List-SystemInsightsEtcHosts
       summary: List System Insights Etc Hosts
       description: Valid filter fields are `system_id` and `address`.
       parameters:
@@ -3461,7 +3512,7 @@ paths:
       - x-api-key: []
   /systeminsights/firefox_addons:
     get:
-      operationId: SystemInsightsFirefoxAddons_List
+      operationId: List-SystemInsightsFirefoxAddons
       summary: List System Insights Firefox Addons
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3478,7 +3529,7 @@ paths:
       - x-api-key: []
   /systeminsights/groups:
     get:
-      operationId: SystemInsightsGroups_List
+      operationId: List-SystemInsightsGroups
       summary: List System Insights Groups
       description: Valid filter fields are `system_id` and `groupname`.
       parameters:
@@ -3493,9 +3544,26 @@ paths:
               $ref: '#/definitions/system-insights-groups'
       security:
       - x-api-key: []
+  /systeminsights/ie_extensions:
+    get:
+      operationId: List-SystemInsightsIEExtensions
+      summary: List System Insights IE Extensions
+      description: Valid filter fields are `system_id` and `name`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-ie-extensions'
+      security:
+      - x-api-key: []
   /systeminsights/interface_addresses:
     get:
-      operationId: SystemInsightsInterfaceAddresses_List
+      operationId: List-SystemInsightsInterfaceAddresses
       summary: List System Insights Interface Addresses
       description: Valid filter fields are `system_id` and `address`.
       parameters:
@@ -3512,7 +3580,7 @@ paths:
       - x-api-key: []
   /systeminsights/kernel_info:
     get:
-      operationId: SystemInsightsKernelInfo_List
+      operationId: List-SystemInsightsKernelInfo
       summary: List System Insights Kernel Info
       description: Valid filter fields are `system_id` and `version`.
       parameters:
@@ -3527,9 +3595,43 @@ paths:
               $ref: '#/definitions/system-insights-kernel-info'
       security:
       - x-api-key: []
+  /systeminsights/launchd:
+    get:
+      operationId: List-SystemInsightsLaunchd
+      summary: List System Insights Launchd
+      description: Valid filter fields are `system_id` and `name`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-launchd'
+      security:
+      - x-api-key: []
+  /systeminsights/logged_in_users:
+    get:
+      operationId: List-SystemInsightsLoggedInUsers
+      summary: List System Insights Logged-In Users
+      description: Valid filter fields are `system_id` and `user`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-logged-in-users'
+      security:
+      - x-api-key: []
   /systeminsights/logical_drives:
     get:
-      operationId: SystemInsightsLogicalDrives_List
+      operationId: List-SystemInsightsLogicalDrives
       summary: List System Insights Logical Drives
       description: Valid filter fields are `system_id` and `device_id`.
       parameters:
@@ -3544,9 +3646,26 @@ paths:
               $ref: '#/definitions/system-insights-logical-drvies'
       security:
       - x-api-key: []
+  /systeminsights/managed_policies:
+    get:
+      operationId: List-SystemInsightsManagedPolicies
+      summary: List System Insights Managed Policies
+      description: Valid filter fields are `system_id` and `domain`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-managed-policies'
+      security:
+      - x-api-key: []
   /systeminsights/mounts:
     get:
-      operationId: SystemInsightsMounts_List
+      operationId: List-SystemInsightsMounts
       summary: List System Insights Mounts
       description: Valid filter fields are `system_id` and `path`.
       parameters:
@@ -3563,7 +3682,7 @@ paths:
       - x-api-key: []
   /systeminsights/os_version:
     get:
-      operationId: SystemInsightsOsVersion_List
+      operationId: List-SystemInsightsOsVersion
       summary: List System Insights OS Version
       description: Valid filter fields are `system_id` and `version`.
       parameters:
@@ -3580,7 +3699,7 @@ paths:
       - x-api-key: []
   /systeminsights/patches:
     get:
-      operationId: SystemInsightsPatches_List
+      operationId: List-SystemInsightsPatches
       summary: List System Insights Patches
       description: Valid filter fields are `system_id` and `hotfix_id`.
       parameters:
@@ -3597,7 +3716,7 @@ paths:
       - x-api-key: []
   /systeminsights/programs:
     get:
-      operationId: SystemInsightsPrograms_List
+      operationId: List-SystemInsightsPrograms
       summary: List System Insights Programs
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3614,7 +3733,7 @@ paths:
       - x-api-key: []
   /systeminsights/safari_extensions:
     get:
-      operationId: SystemInsightsSafariExtensions_List
+      operationId: List-SystemInsightsSafariExtensions
       summary: List System Insights Safari Extensions
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3629,9 +3748,92 @@ paths:
               $ref: '#/definitions/system-insights-safari-extensions'
       security:
       - x-api-key: []
+  /systeminsights/shadow:
+    get:
+      operationId: List-SystemInsightsShadow
+      summary: LIst System Insights Shadow
+      description: Valid filter fields are `system_id` and `username`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-shadow'
+      security:
+      - x-api-key: []
+  /systeminsights/shared_folders:
+    get:
+      operationId: List-SystemInsightsSharedFolders
+      summary: List System Insights Shared Folders
+      description: Valid filter fields are `system_id` and `name`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-shared-folders'
+      security:
+      - x-api-key: []
+  /systeminsights/shared_resources:
+    get:
+      operationId: List-SystemInsightsSharedResources
+      summary: List System Insights Shared Resources
+      description: Valid filter fields are `system_id` and `type`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-shared-resources'
+  /systeminsights/sharing_preferences:
+    get:
+      operationId: List-SystemInsightsSharingPreferences
+      summary: List System Insights Sharing Preferences
+      description: Only valid filed field is `system_id`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-sharing-preferences'
+      security:
+      - x-api-key: []
+  /systeminsights/sip_config:
+    get:
+      operationId: List-SystemInsightsSipConfig
+      summary: List System Insights SIP Config
+      description: Valid filter fields are `system_id` and `enabled`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-sip-config'
+      security:
+      - x-api-key: []
   /systeminsights/system_controls:
     get:
-      operationId: SystemInsightsSystemControls_List
+      operationId: List-SystemInsightsSystemControls
       summary: List System Insights System Control
       description: Valid filter fields are `system_id` and `name`.
       parameters:
@@ -3648,7 +3850,7 @@ paths:
       - x-api-key: []
   /systeminsights/system_info:
     get:
-      operationId: SystemInsightsSystemInfo_List
+      operationId: List-SystemInsightsSystemInfo
       summary: List System Insights System Info
       description: Valid filter fields are `system_id` and `cpu_subtype`.
       parameters:
@@ -3665,7 +3867,7 @@ paths:
       - x-api-key: []
   /systeminsights/uptime:
     get:
-      operationId: SystemInsightsUptime_List
+      operationId: List-SystemInsightsUptime
       summary: List System Insights Uptime
       description: Valid filter fields are `system_id` and `days`.
       parameters:
@@ -3680,9 +3882,60 @@ paths:
               $ref: '#/definitions/system-insights-uptime'
       security:
       - x-api-key: []
+  /systeminsights/usb_devices:
+    get:
+      operationId: List-SystemInsightsUSBDevices
+      summary: List System Insights USB Devices
+      description: Valid filter fields are `system_id` and `model`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-usb-devices'
+      security:
+      - x-api-key: []
+  /systeminsights/user_groups:
+    get:
+      operationId: List-SystemInsightsUserGroups
+      summary: List System Insights User Groups
+      description: Only valid filter field is `system_id`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-user-groups'
+      security:
+      - x-api-key: []
+  /systeminsights/user_ssh_keys:
+    get:
+      operationId: List-SystemInsightsUserSSHKeys
+      summary: List System Insights User SSH Keys
+      description: Valid filter fields are `system_id` and `uid`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-user-ssh-keys'
+      security:
+      - x-api-key: []
   /systeminsights/users:
     get:
-      operationId: SystemInsightsUsers_List
+      operationId: List-SystemInsightsUsers
       summary: List System Insights Users
       description: Valid filter fields are `system_id` and `username`.
       parameters:
@@ -3697,9 +3950,26 @@ paths:
               $ref: '#/definitions/system-insights-users'
       security:
       - x-api-key: []
+  /systeminsights/windows_crashes:
+    get:
+      operationId: List-SystemInsightsWindowsCrashes
+      summary: List System Insights Windows Crashes
+      description: Valid filter fields are `system_id` and `type`.
+      parameters:
+      - $ref: '#/parameters/trait:limitMax100:limit'
+      - $ref: '#/parameters/trait:skip:skip'
+      responses:
+        "200":
+          description: ""
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/system-insights-windows-crashes'
+      security:
+      - x-api-key: []
   /systems/{system_id}/associations:
     get:
-      operationId: SystemAssociation_List
+      operationId: List-SystemAssociation
       summary: List the associations of a System
       tags:
       - Graph
@@ -3739,7 +4009,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: SystemAssociation_Set
+      operationId: Set-SystemAssociation
       summary: Manage associations of a System
       tags:
       - Graph
@@ -3782,7 +4052,7 @@ paths:
       - x-api-key: []
   /systems/{system_id}/commands:
     get:
-      operationId: SystemTraverseCommand_List
+      operationId: List-SystemTraverseCommand
       summary: List the Commands bound to a System
       tags:
       - Graph
@@ -3826,7 +4096,7 @@ paths:
       type: string
   /systems/{system_id}/fdekey:
     get:
-      operationId: SystemFDEKey_Get
+      operationId: Get-SystemFDEKey
       summary: Get System FDE Key
       tags:
       - fde
@@ -3861,7 +4131,7 @@ paths:
       type: string
   /systems/{system_id}/memberof:
     get:
-      operationId: SystemMemberOf_List
+      operationId: List-SystemMemberOf
       summary: List the parent Groups of a System
       tags:
       - Graph
@@ -3900,7 +4170,7 @@ paths:
       type: string
   /systems/{system_id}/policies:
     get:
-      operationId: SystemTraversePolicy_List
+      operationId: List-SystemTraversePolicy
       summary: List the Policies bound to a System
       tags:
       - Graph
@@ -3947,7 +4217,7 @@ paths:
       type: string
   /systems/{system_id}/policystatuses:
     get:
-      operationId: PolicyStatus_List
+      operationId: List-PolicyStatus
       summary: List the policy statuses for a system
       tags:
       - Graph
@@ -3985,7 +4255,7 @@ paths:
       type: string
   /systems/{system_id}/usergroups:
     get:
-      operationId: SystemTraverseUserGroup_List
+      operationId: List-SystemTraverseUserGroup
       summary: List the User Groups bound to a System
       tags:
       - Graph
@@ -4031,7 +4301,7 @@ paths:
       type: string
   /systems/{system_id}/users:
     get:
-      operationId: SystemTraverseUser_List
+      operationId: List-SystemTraverseUser
       summary: List the Users bound to a System
       tags:
       - Graph
@@ -4077,7 +4347,7 @@ paths:
       type: string
   /usergroups:
     get:
-      operationId: UserGroup_List
+      operationId: List-UserGroup
       summary: List all User Groups
       tags:
       - User Groups
@@ -4115,7 +4385,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: UserGroup_Create
+      operationId: Create-UserGroup
       summary: Create a new User Group
       tags:
       - User Groups
@@ -4147,7 +4417,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/applications:
     get:
-      operationId: UserGroupTraverseApplication_List
+      operationId: List-UserGroupTraverseApplication
       summary: List the Applications bound to a User Group
       tags:
       - Graph
@@ -4191,7 +4461,7 @@ paths:
       type: string
   /usergroups/{group_id}/associations:
     get:
-      operationId: UserGroupAssociation_List
+      operationId: List-UserGroupAssociation
       summary: List the associations of a User Group.
       tags:
       - Graph
@@ -4229,7 +4499,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: UserGroupAssociation_Set
+      operationId: Set-UserGroupAssociation
       summary: Manage the associations of a User Group
       tags:
       - Graph
@@ -4265,7 +4535,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/directories:
     get:
-      operationId: UserGroupTraverseDirectory_List
+      operationId: List-UserGroupTraverseDirectory
       summary: List the Directories bound to a User Group
       tags:
       - Graph
@@ -4310,7 +4580,7 @@ paths:
       type: string
   /usergroups/{group_id}/gsuites:
     get:
-      operationId: UserGroupTraverseGSuite_List
+      operationId: List-UserGroupTraverseGSuite
       summary: List the G Suite instances bound to a User Group
       tags:
       - Graph
@@ -4355,7 +4625,7 @@ paths:
       type: string
   /usergroups/{group_id}/ldapservers:
     get:
-      operationId: UserGroupTraverseLdapServer_List
+      operationId: List-UserGroupTraverseLdapServer
       summary: List the LDAP Servers bound to a User Group
       tags:
       - Graph
@@ -4399,7 +4669,7 @@ paths:
       type: string
   /usergroups/{group_id}/members:
     get:
-      operationId: UserGroupMembers_List
+      operationId: List-UserGroupMembers
       summary: List the members of a User Group
       tags:
       - Graph
@@ -4433,7 +4703,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: UserGroupMembers_Set
+      operationId: Set-UserGroupMembers
       summary: Manage the members of a User Group
       tags:
       - Graph
@@ -4465,7 +4735,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/membership:
     get:
-      operationId: UserGroupMembership_List
+      operationId: List-UserGroupMembership
       summary: List the User Group's membership
       tags:
       - Graph
@@ -4502,7 +4772,7 @@ paths:
       type: string
   /usergroups/{group_id}/office365s:
     get:
-      operationId: UserGroupTraverseOffice365_List
+      operationId: List-UserGroupTraverseOffice365
       summary: List the Office 365 instances bound to a User Group
       tags:
       - Graph
@@ -4546,7 +4816,7 @@ paths:
       type: string
   /usergroups/{group_id}/radiusservers:
     get:
-      operationId: UserGroupTraverseRadiusServer_List
+      operationId: List-UserGroupTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User Group
       tags:
       - Graph
@@ -4591,7 +4861,7 @@ paths:
       type: string
   /usergroups/{group_id}/systemgroups:
     get:
-      operationId: UserGroupTraverseSystemGroup_List
+      operationId: List-UserGroupTraverseSystemGroup
       summary: List the System Groups bound to User Groups
       tags:
       - Graph
@@ -4635,7 +4905,7 @@ paths:
       type: string
   /usergroups/{group_id}/systems:
     get:
-      operationId: UserGroupTraverseSystem_List
+      operationId: List-UserGroupTraverseSystem
       summary: List the Systems bound to a User Group
       tags:
       - Graph
@@ -4679,7 +4949,7 @@ paths:
       type: string
   /usergroups/{id}:
     delete:
-      operationId: UserGroup_Delete
+      operationId: Delete-UserGroup
       summary: Delete a User Group
       tags:
       - User Groups
@@ -4701,7 +4971,7 @@ paths:
       security:
       - x-api-key: []
     get:
-      operationId: UserGroup_Get
+      operationId: Get-UserGroup
       summary: View an individual User Group details
       tags:
       - User Groups
@@ -4730,7 +5000,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: UserGroup_Put
+      operationId: Put-UserGroup
       summary: Update a User Group
       tags:
       - User Groups
@@ -4762,7 +5032,7 @@ paths:
       - x-api-key: []
   /users/{user_id}/applications:
     get:
-      operationId: UserTraverseApplication_List
+      operationId: List-UserTraverseApplication
       summary: List the Applications bound to a User
       tags:
       - Graph
@@ -4805,7 +5075,7 @@ paths:
       type: string
   /users/{user_id}/associations:
     get:
-      operationId: UserAssociation_List
+      operationId: List-UserAssociation
       summary: List the associations of a User
       tags:
       - Graph
@@ -4843,7 +5113,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: UserAssociation_Set
+      operationId: Set-UserAssociation
       summary: Manage the associations of a User
       tags:
       - Graph
@@ -4882,7 +5152,7 @@ paths:
       - x-api-key: []
   /users/{user_id}/directories:
     get:
-      operationId: UserTraverseDirectory_List
+      operationId: List-UserTraverseDirectory
       summary: List the Directories bound to a User
       tags:
       - Graph
@@ -4925,7 +5195,7 @@ paths:
       type: string
   /users/{user_id}/gsuites:
     get:
-      operationId: UserTraverseGSuite_List
+      operationId: List-UserTraverseGSuite
       summary: List the G Suite instances bound to a User
       tags:
       - Graph
@@ -4968,7 +5238,7 @@ paths:
       type: string
   /users/{user_id}/ldapservers:
     get:
-      operationId: UserTraverseLdapServer_List
+      operationId: List-UserTraverseLdapServer
       summary: List the LDAP servers bound to a User
       tags:
       - Graph
@@ -5011,7 +5281,7 @@ paths:
       type: string
   /users/{user_id}/memberof:
     get:
-      operationId: UserMemberOf_List
+      operationId: List-UserMemberOf
       summary: List the parent Groups of a User
       tags:
       - Graph
@@ -5047,7 +5317,7 @@ paths:
       type: string
   /users/{user_id}/office365s:
     get:
-      operationId: UserTraverseOffice365_List
+      operationId: List-UserTraverseOffice365
       summary: List the Office 365 instances bound to a User
       tags:
       - Graph
@@ -5090,7 +5360,7 @@ paths:
       type: string
   /users/{user_id}/radiusservers:
     get:
-      operationId: UserTraverseRadiusServer_List
+      operationId: List-UserTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User
       tags:
       - Graph
@@ -5133,7 +5403,7 @@ paths:
       type: string
   /users/{user_id}/systemgroups:
     get:
-      operationId: UserTraverseSystemGroup_List
+      operationId: List-UserTraverseSystemGroup
       summary: List the System Groups bound to a User
       tags:
       - Graph
@@ -5176,7 +5446,7 @@ paths:
       type: string
   /users/{user_id}/systems:
     get:
-      operationId: UserTraverseSystem_List
+      operationId: List-UserTraverseSystem
       summary: List the Systems bound to a User
       tags:
       - Graph
@@ -5219,7 +5489,7 @@ paths:
       type: string
   /workdays:
     get:
-      operationId: Workday_List
+      operationId: List-Workday
       summary: List Workdays
       description: |-
         This endpoint will return  all the available information about all your instances of Workday.
@@ -5246,7 +5516,7 @@ paths:
       security:
       - x-api-key: []
     post:
-      operationId: Workday_Create
+      operationId: Create-Workday
       summary: Create new Workday
       description: |-
         This endpoint allows you to create a new workday instance.
@@ -5290,7 +5560,7 @@ paths:
       - x-api-key: []
   /workdays/{id}:
     get:
-      operationId: Workday_Get
+      operationId: Get-Workday
       summary: Get Workday
       description: |-
         This endpoint will return  all the available information about an instance of Workday.
@@ -5317,7 +5587,7 @@ paths:
       required: true
       type: string
     put:
-      operationId: Workday_Put
+      operationId: Put-Workday
       summary: Update Workday
       description: |-
         This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
@@ -5349,7 +5619,7 @@ paths:
       - x-api-key: []
   /workdays/{id}/import/{job_id}/results:
     get:
-      operationId: WorkdayResult_Import
+      operationId: Import-WorkdayResult
       summary: List Import Results
       description: |-
         This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.
@@ -5384,7 +5654,7 @@ paths:
       type: string
   /workdays/{workday_id}/auth:
     delete:
-      operationId: WorkdayAuthorization_Remove
+      operationId: Remove-WorkdayAuthorization
       summary: Deauthorize Workday
       description: |-
         Removes any and all authorization methods from the workday instance
@@ -5408,7 +5678,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Workday_Authorize
+      operationId: Authorize-Workday
       summary: Authorize Workday
       description: "This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.  Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n	\"auth\":{\n	  \"basic\": {\n		\"username\": \"someDeveloper\",	  \n		\"password\": \"notTheRealPassword\"\n\n	  }\n	}\n}'\n\n```"
       parameters:
@@ -5435,7 +5705,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Workday_Import
+      operationId: Import-Workday
       summary: Workday Import
       description: "The endpoint allows you to create a Workday Import request.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n		\"email\":\"{email}\",\n		\"firstname\":\"{firstname}\",\n		\"lastname\":\"{firstname}\",\n		\"username\":\"{username}\",\n		\"attributes\":[\n			{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n			{\"name\":\"WorkdayID\",\"value\":\"name.name\"}\n			]\n		\n	}\n]\n```"
       parameters:
@@ -5454,7 +5724,7 @@ paths:
       - x-api-key: []
   /workdays/{workday_id}/workers:
     get:
-      operationId: WorkdayWorker_List
+      operationId: List-WorkdayWorker
       summary: List Workday Workers
       description: |-
         This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.
@@ -5726,6 +5996,8 @@ definitions:
       enableMultiFactor:
         type: boolean
       registered:
+        type: boolean
+      suspended:
         type: boolean
     example:
       id: 0123456789abcdef01234567
@@ -6721,6 +6993,28 @@ definitions:
       id:
         type: string
         description: The ObjectID of member being added or removed.
+  system-insights-alf:
+    title: System Insights ALF
+    type: object
+    properties:
+      allow_signed_enabled	:
+        type: integer
+      firewall_unload:
+        type: integer
+      global_state:
+        type: integer
+      logging_enabled:
+        type: integer
+      logging_option:
+        type: integer
+      stealth_enabled:
+        type: integer
+      version:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-apps:
     title: System Insights Apps
     type: object
@@ -6789,6 +7083,71 @@ definitions:
       last_opened_time: 1556688963.50383
       collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
+  system-insights-battery:
+    title: System Insights Battery
+    type: object
+    properties:
+      manufacturer:
+        type: string
+      manufacture_date:
+        type: integer
+      model:
+        type: string
+      serial_number:
+        type: string
+      cycle_count:
+        type: integer
+      health:
+        type: string
+      condition:
+        type: string
+      state:
+        type: string
+      charging:
+        type: integer
+      charged:
+        type: integer
+      designed_capacity:
+        type: integer
+      max_capacity:
+        type: integer
+      current_capacity:
+        type: integer
+      percent_remaining:
+        type: integer
+      amgerage:
+        type: integer
+      voltage:
+        type: integer
+      minutes_until_empty:
+        type: integer
+      minutes_to_full_charge:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
+    example:
+      manufacturer: laboris
+      manufacture_date: 66625366
+      model: cupidatat quis esse tempor nostr
+      serial_number: est do nisi anim eu
+      cycle_count: -58203101
+      health: ipsum Duis amet magna sint
+      condition: magna Ut dolor laborum
+      state: Duis qui eu labore
+      charging: 6577424
+      charged: 63086136
+      designed_capacity: 51607498
+      max_capacity: 407375
+      current_capacity: 95829126
+      percent_remaining: -77798506
+      amgerage: 93836453
+      voltage: -79728034
+      minutes_until_empty: 56660087
+      minutes_to_full_charge: -43087634
+      system_id: elit nulla cillum et
+      collection_time: anim in dolor
   system-insights-bitlocker-info:
     title: System Insights Bitlocker Info
     type: object
@@ -6903,6 +7262,46 @@ definitions:
       permissions: alarms, cast, cast.streaming, declarativeWebRequest, desktopCapture, gcm, http://*/*, identity, identity.email, management, mdns, mediaRouterPrivate, metricsPrivate, networkingPrivate, processes, storage, system.cpu, settingsPrivate, tabCapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse
       collection_time: 2019-06-03T19:41:31.1250000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
+  system-insights-crashes:
+    title: System Insights Crashes
+    type: object
+    properties:
+      type:
+        type: string
+      pid:
+        type: string
+      path:
+        type: string
+      crash_path:
+        type: string
+      identifier:
+        type: string
+      version:
+        type: string
+      parent:
+        type: string
+      responsible:
+        type: string
+      uid:
+        type: integer
+      datetime:
+        type: string
+      crashed_thread:
+        type: string
+      stack_trace:
+        type: string
+      exception_type:
+        type: string
+      exception_codes:
+        type: string
+      exception_notes:
+        type: string
+      registers:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-disk-encryption:
     title: System Insights Disk Encryption
     type: object
@@ -7075,6 +7474,22 @@ definitions:
       comment: ""
       collection_time: 2019-06-03T19:41:31.6730000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
+  system-insights-ie-extensions:
+    title: System Insights IE Extensions
+    type: object
+    properties:
+      name:
+        type: string
+      registry_path:
+        type: string
+      version:
+        type: string
+      path:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-interface-addresses:
     title: System Insights Interface Addresses
     type: object
@@ -7123,6 +7538,76 @@ definitions:
         type: string
       collection_time:
         type: string
+  system-insights-launchd:
+    title: System Insights LaunchD
+    type: object
+    properties:
+      path:
+        type: string
+      name:
+        type: string
+      label:
+        type: string
+      program:
+        type: string
+      run_at_load:
+        type: string
+      keep_alive:
+        type: string
+      on_demand:
+        type: string
+      disabled:
+        type: string
+      username:
+        type: string
+      groupname:
+        type: string
+      stdout_path:
+        type: string
+      stderr_path:
+        type: string
+      start_interval:
+        type: string
+      program_arguments:
+        type: string
+      watch_paths:
+        type: string
+      queue_directories:
+        type: string
+      inetd_compatibility:
+        type: string
+      start_on_mount:
+        type: string
+      root_directory:
+        type: string
+      working_directory:
+        type: string
+      process_type:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-logged-in-users:
+    title: System Insights Logged-In Users
+    type: object
+    properties:
+      type:
+        type: string
+      user:
+        type: string
+      tty:
+        type: string
+      host:
+        type: string
+      time:
+        type: integer
+      pid:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-logical-drvies:
     title: System Insights Logical Drvies
     type: object
@@ -7152,6 +7637,26 @@ definitions:
       boot_partition: 0
       collection_time: 2019-06-03T19:41:30.6580000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
+  system-insights-managed-policies:
+    title: System Insights Managed Policies
+    type: object
+    properties:
+      domain:
+        type: string
+      uuid:
+        type: string
+      name:
+        type: string
+      value:
+        type: string
+      username:
+        type: string
+      manual:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-mounts:
     title: System Insights Mounts
     type: object
@@ -7351,6 +7856,112 @@ definitions:
       path: /Users/samuelharvanek/Library/Safari/Extensions/Adblock Plus.safariextz
       collection_time: 2019-05-16T18:58:15.6730000+00:00
       system_id: 5cdb13e85a0e0719283583c0
+  system-insights-shadow:
+    title: System Insights Shadow
+    type: object
+    properties:
+      password_status:
+        type: string
+      hash_alg:
+        type: string
+      last_change:
+        type: string
+      min	:
+        type: string
+      max:
+        type: string
+      warning:
+        type: string
+      inactive:
+        type: string
+      expire:
+        type: string
+      flag:
+        type: string
+      username:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-shared-folders:
+    title: System Insights Shared Folders
+    type: object
+    properties:
+      name:
+        type: string
+      path:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-shared-resources:
+    title: System Insights Shared Resources
+    type: object
+    properties:
+      description:
+        type: string
+      install_date:
+        type: string
+      status:
+        type: string
+      allow_maximum:
+        type: integer
+      maximum_allowed:
+        type: integer
+      name:
+        type: string
+      path:
+        type: string
+      type:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-sharing-preferences:
+    title: System Insights Sharing Preferences
+    type: object
+    properties:
+      screen_sharing:
+        type: integer
+      file_sharing:
+        type: integer
+      printer_sharing:
+        type: integer
+      remote_login:
+        type: integer
+      remote_management:
+        type: integer
+      remote_apple_events:
+        type: integer
+      internet_sharing:
+        type: integer
+      bluetooth_sharing:
+        type: integer
+      disc_sharing:
+        type: integer
+      content_caching:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-sip-config:
+    title: System Insights SIP Config
+    type: object
+    properties:
+      config_flag:
+        type: string
+      enabled:
+        type: integer
+      enabled_nvram:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-system-controls:
     title: System Insights System Controls
     type: object
@@ -7447,6 +8058,50 @@ definitions:
         type: string
       collection_time:
         type: string
+  system-insights-usb-devices:
+    title: System Insights USB Devices
+    type: object
+    properties:
+      usb_address:
+        type: integer
+      usb_port:
+        type: integer
+      vendor:
+        type: string
+      vendor_id:
+        type: string
+      version:
+        type: string
+      model:
+        type: string
+      model_id:
+        type: string
+      serial:
+        type: string
+      class:
+        type: string
+      subclass:
+        type: string
+      protocol:
+        type: string
+      removable:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-user-groups:
+    title: System Insights User Groups
+    type: object
+    properties:
+      uid:
+        type: string
+      gid:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
   system-insights-users:
     title: System Insights Users
     type: object
@@ -7488,6 +8143,70 @@ definitions:
       type: ""
       collection_time: 2019-06-03T19:41:29.7100000+00:00
       system_id: 5c9e51a13c5146f89bae12d9
+  system-insights-user-ssh-keys:
+    title: System Insights User SSH Keys
+    type: object
+    properties:
+      uid:
+        type: string
+      path:
+        type: string
+      encrypted:
+        type: integer
+      system_id:
+        type: string
+      collection_time:
+        type: string
+  system-insights-windows-crashes:
+    title: System Insights Windows Crashes
+    type: object
+    properties:
+      datetime:
+        type: string
+      module:
+        type: string
+      path:
+        type: string
+      pid:
+        type: string
+      tid:
+        type: string
+      version:
+        type: string
+      process_uptime:
+        type: string
+      stack_trace:
+        type: string
+      exception_code:
+        type: string
+      exception_message:
+        type: string
+      exception_address:
+        type: string
+      registers:
+        type: string
+      command_line:
+        type: string
+      current_directory:
+        type: string
+      username:
+        type: string
+      machine_name:
+        type: string
+      major_version:
+        type: integer
+      minor_version:
+        type: integer
+      build_number:
+        type: integer
+      type:
+        type: string
+      crash_path:
+        type: string
+      system_id:
+        type: string
+      collection_time:
+        type: string
   systemuser:
     title: SystemUser
     type: object
@@ -7945,4 +8664,3 @@ definitions:
         type: string
       attributes:
         type: object
-

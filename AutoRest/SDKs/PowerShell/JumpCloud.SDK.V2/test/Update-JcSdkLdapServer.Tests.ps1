@@ -1,3 +1,8 @@
+$loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
+if (-Not (Test-Path -Path $loadEnvPath)) {
+    $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
+}
+. ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Update-JcSdkLdapServer.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
@@ -7,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkLdapServer' {
-    It 'PatchExpanded' {
+    It 'PatchExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' {
+    It 'PatchViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Patch' {
+    It 'Patch' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' {
+    It 'PatchViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

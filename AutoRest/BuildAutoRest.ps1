@@ -56,14 +56,14 @@ ForEach ($API In $APIName)
                 npm install -g @autorest/autorest
                 Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta --reset
-                # autorest --help
+                # autorest-beta --help
             }
             ###########################################################################
             If ($GenerateModule)
             {
                 If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
@@ -78,7 +78,6 @@ ForEach ($API In $APIName)
                 If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
                 {
                     $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-
                 }
             }
             ###########################################################################
@@ -141,22 +140,21 @@ ForEach ($API In $APIName)
                 Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
                 Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
                 Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
             }
-            ###########################################################################
+            ##########################################################################
             If ($CommitModule)
             {
                 If ($env:USERNAME -eq 'VssAdministrator')
                 {
+                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
-                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                        Invoke-Git -Arguments:('add -A')
-                        Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                        ./Invoke-Git.ps1 -Arguments:('add -A')
+                        ./Invoke-Git.ps1 -Arguments:('status')
+                        ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
                     }
                     Catch
                     {

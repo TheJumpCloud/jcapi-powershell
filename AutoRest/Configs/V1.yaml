@@ -3,7 +3,6 @@ verbose: true
 disable-validation: false
 powershell: true
 version: latest
-use: "@microsoft.azure/autorest.powershell@beta"
 base-folder: ".."
 module-name: JumpCloud.SDK.V1
 input-file: SwaggerSpecs/V1.json
