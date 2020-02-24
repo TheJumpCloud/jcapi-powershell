@@ -1,4 +1,4 @@
-$RequiredModules = ('powershell-yaml', 'BuildHelpers')
+$RequiredModules = ('powershell-yaml')
 ForEach ($RequiredModule In $RequiredModules)
 {
     # Check to see if the module is installed

@@ -1,4 +1,4 @@
-#Requires -Modules powershell-yaml, BuildHelpers
+#Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
 )
@@ -149,12 +149,12 @@ ForEach ($API In $APIName)
                     Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
-                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                        Invoke-Git -Arguments:('add -A')
-                        Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                        ./Invoke-Git.ps1 -Arguments:('add -A')
+                        ./Invoke-Git.ps1 -Arguments:('status')
+                        ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
                     }
                     Catch
                     {
