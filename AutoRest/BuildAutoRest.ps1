@@ -66,129 +66,129 @@ ForEach ($API In $APIName)
                 Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
-            ###########################################################################
-            $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-            If ([System.String]::IsNullOrEmpty($LatestModule))
-            {
-                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
-            }
-            If (-not [System.String]::IsNullOrEmpty($LatestModule))
-            {
-                # Increment module version number
-                If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-                {
-                    $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+            # ###########################################################################
+            # $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+            # If ([System.String]::IsNullOrEmpty($LatestModule))
+            # {
+            #     $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+            # }
+            # If (-not [System.String]::IsNullOrEmpty($LatestModule))
+            # {
+            #     # Increment module version number
+            #     If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+            #     {
+            #         $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
 
-                }
-            }
-            ###########################################################################
-            If ($CopyModuleFile)
-            {
-                Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
-                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
-            }
-            ###########################################################################
-            If ($BuildModule)
-            {
-                Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Invoke-Expression -Command:($buildModulePath)
-            }
-            ###########################################################################
-            If ($UpdateModuleManifest)
-            {
-                # Increment module version number
-                If (-not [System.String]::IsNullOrEmpty($NextVersion))
-                {
-                    Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-                }
-                # # Get existing GUID
-                # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
-                # Import-Module -Name:($LatestModule.Name) -Force
-                # $ExistingModule = Get-Module -Name:($LatestModule.Name)
-                # $ExistingModule | Remove-Module -Force
-                # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
-                # Update FunctionsToExport with the same as CmdletsToExport
-                $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
-                Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
-                # Add prerelease tag
-                If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-                {
-                    $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-                    If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
-                    {
-                        $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                        Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
-                    }
-                }
-            }
-            ###########################################################################
-            If ($PackModule)
-            {
-                # Pack module
-                If (Test-Path -Path:($packModulePath))
-                {
-                    Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Invoke-Expression -Command:($packModulePath)
-                }
-                Else
-                {
-                    Write-Error ("Path does not exist: $packModulePath")
-                }
-                $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
-                Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
-                Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
-                Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
-                Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
-                Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
-            }
-            ###########################################################################
-            If ($CommitModule)
-            {
-                If ($env:USERNAME -eq 'VssAdministrator')
-                {
-                    Try
-                    {
-                        Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
-                        Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
-                        Invoke-Git -Arguments:('add -A')
-                        Invoke-Git -Arguments:('status')
-                        Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                    }
-                    Catch
-                    {
-                        Write-Error $_
-                    }
-                }
-            }
-            ###########################################################################
-            If ($PublishModule)
-            {
-                Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                If ($PSRepoName -eq 'PSGallery')
-                {
-                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
-                }
-                Else
-                {
-                    # Create the local PSRepository if it does not exist
-                    If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
-                    {
-                        # Create the local PSRepository path if it does not exist
-                        If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
-                        Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
-                        Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
-                        # Unregister-PSRepository -Name:($PSRepoName)
-                    }
-                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
-                }
-            }
-            ###########################################################################
-            Set-Location -Path:($OutputFullPath)
-            Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            #     }
+            # }
+            # ###########################################################################
+            # If ($CopyModuleFile)
+            # {
+            #     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            #     Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
+            #     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+            # }
+            # ###########################################################################
+            # If ($BuildModule)
+            # {
+            #     Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            #     Invoke-Expression -Command:($buildModulePath)
+            # }
+            # ###########################################################################
+            # If ($UpdateModuleManifest)
+            # {
+            #     # Increment module version number
+            #     If (-not [System.String]::IsNullOrEmpty($NextVersion))
+            #     {
+            #         Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
+            #     }
+            #     # # Get existing GUID
+            #     # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
+            #     # Import-Module -Name:($LatestModule.Name) -Force
+            #     # $ExistingModule = Get-Module -Name:($LatestModule.Name)
+            #     # $ExistingModule | Remove-Module -Force
+            #     # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
+            #     # Update FunctionsToExport with the same as CmdletsToExport
+            #     $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
+            #     Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
+            #     # Add prerelease tag
+            #     If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+            #     {
+            #         $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+            #         If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+            #         {
+            #             $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+            #             Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+            #         }
+            #     }
+            # }
+            # ###########################################################################
+            # If ($PackModule)
+            # {
+            #     # Pack module
+            #     If (Test-Path -Path:($packModulePath))
+            #     {
+            #         Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            #         Invoke-Expression -Command:($packModulePath)
+            #     }
+            #     Else
+            #     {
+            #         Write-Error ("Path does not exist: $packModulePath")
+            #     }
+            #     $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
+            #     Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
+            #     Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
+            #     Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
+            #     Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
+            #     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
+            #     Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
+            #     Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
+            # }
+            # ###########################################################################
+            # If ($CommitModule)
+            # {
+            #     If ($env:USERNAME -eq 'VssAdministrator')
+            #     {
+            #         Try
+            #         {
+            #             Invoke-Git -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
+            #             Invoke-Git -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+            #             Invoke-Git -Arguments:('add -A')
+            #             Invoke-Git -Arguments:('status')
+            #             Invoke-Git -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+            #             Invoke-Git -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+            #         }
+            #         Catch
+            #         {
+            #             Write-Error $_
+            #         }
+            #     }
+            # }
+            # ###########################################################################
+            # If ($PublishModule)
+            # {
+            #     Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            #     If ($PSRepoName -eq 'PSGallery')
+            #     {
+            #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
+            #     }
+            #     Else
+            #     {
+            #         # Create the local PSRepository if it does not exist
+            #         If (!(Get-PSRepository -Name:($PSRepoName) -ErrorAction:('Ignore')))
+            #         {
+            #             # Create the local PSRepository path if it does not exist
+            #             If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
+            #             Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+            #             Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
+            #             # Unregister-PSRepository -Name:($PSRepoName)
+            #         }
+            #         Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags
+            #     }
+            # }
+            # ###########################################################################
+            # Set-Location -Path:($OutputFullPath)
+            # Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         }
         Else
         {
