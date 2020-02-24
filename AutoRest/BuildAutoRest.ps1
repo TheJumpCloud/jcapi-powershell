@@ -80,13 +80,13 @@ ForEach ($API In $APIName)
                     $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
                 }
             }
-            # ###########################################################################
-            # If ($CopyModuleFile)
-            # {
-            #     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            #     Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
-            #     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
-            # }
+            ###########################################################################
+            If ($CopyModuleFile)
+            {
+                Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
+                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+            }
             # ###########################################################################
             # If ($BuildModule)
             # {
