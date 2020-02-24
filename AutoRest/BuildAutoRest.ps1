@@ -94,33 +94,33 @@ ForEach ($API In $APIName)
                 Invoke-Expression -Command:($buildModulePath)
             }
             ###########################################################################
-            # If ($UpdateModuleManifest)
-            # {
-            #     # Increment module version number
-            #     If (-not [System.String]::IsNullOrEmpty($NextVersion))
-            #     {
-            #         Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-            #     }
-            #     # # Get existing GUID
-            #     # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
-            #     # Import-Module -Name:($LatestModule.Name) -Force
-            #     # $ExistingModule = Get-Module -Name:($LatestModule.Name)
-            #     # $ExistingModule | Remove-Module -Force
-            #     # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
-            #     # Update FunctionsToExport with the same as CmdletsToExport
-            #     $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
-            #     Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
-            #     # Add prerelease tag
-            #     If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-            #     {
-            #         $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-            #         If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
-            #         {
-            #             $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-            #             Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
-            #         }
-            #     }
-            # }
+            If ($UpdateModuleManifest)
+            {
+                # Increment module version number
+                If (-not [System.String]::IsNullOrEmpty($NextVersion))
+                {
+                    Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
+                }
+                # # Get existing GUID
+                # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
+                # Import-Module -Name:($LatestModule.Name) -Force
+                # $ExistingModule = Get-Module -Name:($LatestModule.Name)
+                # $ExistingModule | Remove-Module -Force
+                # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
+                # Update FunctionsToExport with the same as CmdletsToExport
+                $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
+                Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
+                # Add prerelease tag
+                If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+                {
+                    $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                    If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+                    {
+                        $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                        Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                    }
+                }
+            }
             # ###########################################################################
             # If ($PackModule)
             # {
