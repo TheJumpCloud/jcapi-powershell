@@ -52,10 +52,10 @@ ForEach ($API In $APIName)
             {
                 Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm install -g dotnet-sdk-2.1
-                Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g @autorest/autorest
-                Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                autorest-beta --reset
+                Write-Host ('[RUN COMMAND] npm install -g @autorest/powershell') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                npm install -g @autorest/powershell
+                Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest --reset
                 # autorest --help
             }
             ###########################################################################
