@@ -140,8 +140,6 @@ ForEach ($API In $APIName)
                 Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
                 Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
                 Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitattributes') -Force
-                Remove-Item -Path:($OutputFullPath + '/.gitignore') -Force
             }
             ##########################################################################
             If ($CommitModule)
