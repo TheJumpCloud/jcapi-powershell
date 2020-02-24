@@ -151,6 +151,7 @@ ForEach ($API In $APIName)
                     {
                         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $env:BUILD_REQUESTEDFOREMAIL + '";')
                         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $env:BUILD_REQUESTEDFOR + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config core.autocrlf true')
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
