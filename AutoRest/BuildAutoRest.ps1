@@ -2,7 +2,6 @@
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
 )
-# $ErrorActionPreference = 'Stop'
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
