@@ -87,13 +87,13 @@ ForEach ($API In $APIName)
                 Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
                 (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
             }
-            # ###########################################################################
-            # If ($BuildModule)
-            # {
-            #     Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            #     Invoke-Expression -Command:($buildModulePath)
-            # }
-            # ###########################################################################
+            ###########################################################################
+            If ($BuildModule)
+            {
+                Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Invoke-Expression -Command:($buildModulePath)
+            }
+            ###########################################################################
             # If ($UpdateModuleManifest)
             # {
             #     # Increment module version number
