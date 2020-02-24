@@ -58,15 +58,15 @@ ForEach ($API In $APIName)
                 autorest-beta --reset
                 # autorest --help
             }
-            # ###########################################################################
-            # If ($GenerateModule)
-            # {
-            #     If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
-            #     If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-            #     Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            #     autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
-            # }
-            # ###########################################################################
+            ###########################################################################
+            If ($GenerateModule)
+            {
+                If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
+                If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
+                Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --verbose --debug --force') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+            }
+            ###########################################################################
             # $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
             # If ([System.String]::IsNullOrEmpty($LatestModule))
             # {
