@@ -276,6 +276,10 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
 };
+# Set initial value for "UpdatedSpec" within Azure Pipelines
+$UpdatedSpec = $false
+Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+# Start script
 $ApiHash.GetEnumerator() | ForEach-Object {
     $CurrentApiName = $_.Name
     If ($CurrentApiName -in $ApiName)
