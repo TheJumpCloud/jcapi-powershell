@@ -149,8 +149,10 @@ ForEach ($API In $APIName)
                     Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
-                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com";')
-                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $env:USERNAME + '";')
+                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '')  + '@FakeEmail.com'}
+                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else {$env:USERNAME}
+                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
