@@ -1330,7 +1330,6 @@ paths:
     parameters:
     - name: id
       in: path
-      description: Unique identifier of the LDAP server.
       required: true
       type: string
     patch:
@@ -1610,7 +1609,7 @@ paths:
     parameters:
     - name: ldapserver_id
       in: path
-      description: Unique identifier of the LDAP server.
+      description: Unique identifier o f the LDAP server.
       required: true
       type: string
     - name: id
