@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$APIName = 'V1'
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
@@ -9,6 +9,7 @@ $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
 $PrereleaseName = '' # Populate to make release a beta
 $InstallPreReq = $true
 $GenerateModule = $true
+$IncrementModuleVersion = $true
 $CopyModuleFile = $true
 $BuildModule = $true
 $UpdateModuleManifest = $true
@@ -67,17 +68,20 @@ ForEach ($API In $APIName)
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
-            $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-            If ([System.String]::IsNullOrEmpty($LatestModule))
+            If ($IncrementModuleVersion)
             {
-                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
-            }
-            If (-not [System.String]::IsNullOrEmpty($LatestModule))
-            {
-                # Increment module version number
-                If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+                $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+                If ([System.String]::IsNullOrEmpty($LatestModule))
                 {
-                    $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                    $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+                }
+                If (-not [System.String]::IsNullOrEmpty($LatestModule))
+                {
+                    # Increment module version number
+                    If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+                    {
+                        $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                    }
                 }
             }
             ###########################################################################
@@ -149,8 +153,8 @@ ForEach ($API In $APIName)
                     Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
-                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '')  + '@FakeEmail.com'}
-                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else {$env:USERNAME}
+                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
                         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
                         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
                         ./Invoke-Git.ps1 -Arguments:('add -A')
