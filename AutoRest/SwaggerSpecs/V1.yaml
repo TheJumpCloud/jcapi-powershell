@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: JumpCloud APIs
-  description: ""
+  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/
 schemes:
@@ -26,20 +26,28 @@ paths:
       - name: fields
         in: query
         description: The comma separated fields included in the returned records. If omitted the default list of fields will be returned.
+        required: false
         type: string
       - name: limit
         in: query
         description: The number of records to return at once.
+        required: false
         type: integer
       - name: skip
         in: query
         description: The offset into the records to return.
+        required: false
         type: integer
       - name: sort
         in: query
+        required: false
         type: string
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: ""
@@ -58,12 +66,15 @@ paths:
           $ref: '#/definitions/application'
       - name: Content-Type
         in: header
+        required: false
         type: string
       - name: Accept
         in: header
+        required: false
         type: string
       - name: x-org-id
         in: header
+        required: false
         type: string
       responses:
         "200":
@@ -80,12 +91,15 @@ paths:
       parameters:
       - name: Content-Type
         in: header
+        required: false
         type: string
       - name: Accept
         in: header
+        required: false
         type: string
       - name: x-org-id
         in: header
+        required: false
         type: string
       responses:
         "200":
@@ -101,12 +115,15 @@ paths:
       parameters:
       - name: Content-Type
         in: header
+        required: false
         type: string
       - name: Accept
         in: header
+        required: false
         type: string
       - name: x-org-id
         in: header
+        required: false
         type: string
       responses:
         "200":
@@ -131,12 +148,15 @@ paths:
           $ref: '#/definitions/application'
       - name: Content-Type
         in: header
+        required: false
         type: string
       - name: Accept
         in: header
+        required: false
         type: string
       - name: x-org-id
         in: header
+        required: false
         type: string
       responses:
         "200":
@@ -154,20 +174,28 @@ paths:
       - name: fields
         in: query
         description: The comma separated fields included in the returned records. If omitted the default list of fields will be returned.
+        required: false
         type: string
       - name: limit
         in: query
         description: The number of records to return at once.
+        required: false
         type: integer
       - name: skip
         in: query
         description: The offset into the records to return.
+        required: false
         type: integer
       - name: sort
         in: query
+        required: false
         type: string
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: ""
@@ -184,20 +212,28 @@ paths:
       - name: fields
         in: query
         description: The comma separated fields included in the returned records. If omitted the default list of fields will be returned.
+        required: false
         type: string
       - name: limit
         in: query
         description: The number of records to return at once.
+        required: false
         type: integer
       - name: skip
         in: query
         description: The offset into the records to return.
+        required: false
         type: integer
       - name: sort
         in: query
+        required: false
         type: string
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: ""
@@ -242,10 +278,11 @@ paths:
              -d '{ "srcip":"192.168.2.32", "attack":"Cross Site Scripting Attempt" }' \
              "https://console.jumpcloud.com/api/command/trigger/{TriggerName}"
         ```
-      parameters: []
       responses:
         "200":
           description: OK
+          schema:
+            $ref: '#/definitions/triggerreturn'
         "401":
           description: ""
       security:
@@ -265,11 +302,39 @@ paths:
           -H 'x-api-key:{API_KEY}'
           ```
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:sort:sort'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: sort
+        in: query
+        description: |
+          Use space separated sort parameters to sort the collection.
+          Default sort is ascending. Prefix with `-` to sort descending.
+        required: false
+        type: string
+        default: ""
       responses:
         "200":
           description: OK
@@ -284,7 +349,6 @@ paths:
       operationId: Delete-CommandResult
       summary: Delete a Command result
       description: "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````"
-      parameters: []
       responses:
         "200":
           description: OK
@@ -299,8 +363,18 @@ paths:
       summary: List an individual Command result
       description: "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: OK
@@ -331,11 +405,39 @@ paths:
 
         ```
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:sort:sort'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: sort
+        in: query
+        description: |
+          Use space separated sort parameters to sort the collection.
+          Default sort is ascending. Prefix with `-` to sort descending.
+        required: false
+        type: string
+        default: ""
       responses:
         "200":
           description: OK
@@ -396,7 +498,6 @@ paths:
           -H 'x-api-key: {API_KEY}'
 
         ```
-      parameters: []
       responses:
         "200":
           description: OK
@@ -409,8 +510,18 @@ paths:
       summary: List an individual Command
       description: "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: OK
@@ -466,9 +577,26 @@ paths:
       summary: Get a Command File
       description: "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
       responses:
         "200":
           description: ""
@@ -491,12 +619,44 @@ paths:
       summary: Get Organization Details
       description: "This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:search:search'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:sort:sort'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: search
+        in: query
+        description: A nested object containing a string `searchTerm` and a list of `fields` to search on.
+        required: false
+        type: string
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: sort
+        in: query
+        description: |
+          Use space separated sort parameters to sort the collection.
+          Default sort is ascending. Prefix with `-` to sort descending.
+        required: false
+        type: string
+        default: ""
       responses:
         "200":
           description: ""
@@ -520,8 +680,18 @@ paths:
           -H 'x-api-key: {API_KEY}'
         ```
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: OK
@@ -571,10 +741,10 @@ paths:
       - name: body
         in: body
         schema:
-          type: object
           properties:
             settings:
               $ref: '#/definitions/organizationsettingsput'
+          type: object
       responses:
         "200":
           description: OK
@@ -601,11 +771,39 @@ paths:
           -H 'x-api-key: {API_KEY}' \
         ```
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:sort:sort'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: sort
+        in: query
+        description: |
+          Use space separated sort parameters to sort the collection.
+          Default sort is ascending. Prefix with `-` to sort descending.
+        required: false
+        type: string
+        default: ""
       responses:
         "200":
           description: ""
@@ -650,7 +848,6 @@ paths:
       operationId: Get-RadiusServer
       summary: Get Radius Server
       description: "This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```"
-      parameters: []
       responses:
         "200":
           description: ""
@@ -671,30 +868,30 @@ paths:
       - name: body
         in: body
         schema:
-          type: object
           properties:
-            name:
-              type: string
-            networkSourceIp:
-              type: string
-            tags:
-              type: array
-              items:
-                type: string
-            userLockoutAction:
-              type: string
-            userPasswordExpirationAction:
-              type: string
             mfa:
-              type: string
               enum:
               - DISABLED
               - ENABLED
               - REQUIRED
               - ALWAYS
+              type: string
+            name:
+              type: string
+            networkSourceIp:
+              type: string
+            tags:
+              items:
+                type: string
+              type: array
+            userLockoutAction:
+              type: string
+            userPasswordExpirationAction:
+              type: string
           required:
           - name
           - networkSourceIp
+          type: object
           example:
             name: test radius
             networkSourceIp: 0.0.0.0
@@ -713,14 +910,35 @@ paths:
       summary: Search Organizations
       description: "This endpoint will return Organization data based on your search parameters. This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request. \n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```"
       parameters:
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
       - name: body
         in: body
         schema:
           $ref: '#/definitions/search'
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
       responses:
         "200":
           description: OK
@@ -736,14 +954,35 @@ paths:
       summary: Search Systems
       description: "Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```"
       parameters:
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       - name: body
         in: body
         schema:
           $ref: '#/definitions/search'
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:filter:filter'
       responses:
         "200":
           description: OK
@@ -759,14 +998,35 @@ paths:
       summary: Search System Users
       description: "Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system user.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of system users in a department\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"department\" : \"IT\"}],\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nText search for system users with and email on a domain\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nCombining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of departments\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"department\" : \"IT\"},\n      {\"department\" : \"Sales\"}\n    ]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```"
       parameters:
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
       - name: body
         in: body
         schema:
           $ref: '#/definitions/search'
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:skip:skip'
       responses:
         "200":
           description: OK
@@ -782,12 +1042,44 @@ paths:
       summary: List All Systems
       description: "This endpoint returns all Systems.\n\n#### Sample Requests\n```\ncurl -X GET https://console.jumpcloud.com/api/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:limit:limit'
-      - $ref: '#/parameters/trait:search:search'
-      - $ref: '#/parameters/trait:skip:skip'
-      - $ref: '#/parameters/trait:sort:sort'
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: search
+        in: query
+        description: A nested object containing a string `searchTerm` and a list of `fields` to search on.
+        required: false
+        type: string
+      - name: skip
+        in: query
+        description: The offset into the records to return.
+        required: false
+        type: integer
+        default: 0
+        minimum: 0
+      - name: sort
+        in: query
+        description: |
+          Use space separated sort parameters to sort the collection.
+          Default sort is ascending. Prefix with `-` to sort descending.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: ""
@@ -809,9 +1101,6 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
-      parameters:
-      - $ref: '#/parameters/trait:systemContextAuth:Date'
-      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
       responses:
         "200":
           description: ""
@@ -824,10 +1113,18 @@ paths:
       summary: List an individual system
       description: "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```"
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:systemContextAuth:Date'
-      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: ""
@@ -849,8 +1146,6 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/systemput'
-      - $ref: '#/parameters/trait:systemContextAuth:Date'
-      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
       responses:
         "200":
           description: ""
@@ -877,11 +1172,13 @@ paths:
       - name: limit
         in: query
         description: The number of records to return at once.
+        required: false
         type: integer
         default: 10
       - name: skip
         in: query
         description: The offset into the records to return.
+        required: false
         type: integer
         default: 0
       - name: sort
@@ -889,6 +1186,7 @@ paths:
         description: |
           The comma separated fields used to sort the collection.
           Default sort is ascending, prefix with `-` to sort descending.
+        required: false
         type: string
         default: ""
       - name: fields
@@ -896,10 +1194,19 @@ paths:
         description: |
           The comma separated fields included in the returned records.
           If omitted the default list of fields will be returned.
+        required: false
         type: string
         default: ""
-      - $ref: '#/parameters/trait:filter:filter'
-      - $ref: '#/parameters/trait:search:search'
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
+      - name: search
+        in: query
+        description: A nested object containing a string `searchTerm` and a list of `fields` to search on.
+        required: false
+        type: string
       responses:
         "200":
           description: OK
@@ -950,7 +1257,6 @@ paths:
       operationId: Delete-SystemUser
       summary: Delete a system user
       description: "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```"
-      parameters: []
       responses:
         "200":
           description: OK
@@ -975,8 +1281,18 @@ paths:
           -H 'x-api-key: {API_KEY}'
         ```
       parameters:
-      - $ref: '#/parameters/trait:fields:fields'
-      - $ref: '#/parameters/trait:filter:filter'
+      - name: fields
+        in: query
+        description: |
+          Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+        required: false
+        type: string
+        default: ""
+      - name: filter
+        in: query
+        description: A filter to apply to the query.
+        required: false
+        type: string
       responses:
         "200":
           description: OK
@@ -1034,7 +1350,6 @@ paths:
       operationId: POST-ExpireSystemUserPassword
       summary: Expire a system user's password
       description: This endpoint allows you to expire a user's password.
-      parameters: []
       responses:
         "200":
           description: ""
@@ -1066,13 +1381,13 @@ paths:
       - name: body
         in: body
         schema:
-          type: object
           properties:
             exclusion:
               type: boolean
             exclusionUntil:
-              type: string
               format: date-time
+              type: string
+          type: object
       responses:
         "200":
           description: ""
@@ -1095,19 +1410,18 @@ paths:
       operationId: List-SystemUsersSshKey
       summary: List a system user's public SSH keys
       description: This endpoint will return a specific System User's public SSH key.
-      parameters: []
       responses:
         "200":
           description: ""
           schema:
-            type: array
             items:
               $ref: '#/definitions/sshkeylist'
+            type: array
         "400":
           description: ""
           schema:
-            type: object
             description: Bad Request
+            type: object
       security:
       - x-api-key: []
     parameters:
@@ -1132,8 +1446,8 @@ paths:
         "400":
           description: ""
           schema:
-            type: object
             description: Bad Request
+            type: object
       security:
       - x-api-key: []
   /systemusers/{id}/unlock:
@@ -1146,7 +1460,6 @@ paths:
       operationId: Unlock-SystemUser
       summary: Unlock a system user
       description: This endpoint allows you to unlock a user's account.
-      parameters: []
       responses:
         "200":
           description: ""
@@ -1169,15 +1482,14 @@ paths:
       operationId: Delete-SystemUsersSshKey
       summary: Delete a system user's Public SSH Keys
       description: This endpoint will delete a specific System User's SSH Key.
-      parameters: []
       responses:
         "200":
           description: ""
         "400":
           description: ""
           schema:
-            type: object
             description: Bad Request
+            type: object
       security:
       - x-api-key: []
     parameters:
@@ -1195,23 +1507,27 @@ parameters:
     in: query
     description: |
       Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.
+    required: false
     type: string
     default: ""
   trait:filter:filter:
     name: filter
     in: query
     description: A filter to apply to the query.
+    required: false
     type: string
   trait:limit:limit:
     name: limit
     in: query
     description: The number of records to return at once. Limited to 100.
+    required: false
     type: integer
     default: 10
   trait:multiTenantRequestHeaders:x-org-id:
     name: x-org-id
     in: header
     description: ""
+    required: false
     type: string
     default: ""
   trait:requestHeaders:Accept:
@@ -1230,11 +1546,13 @@ parameters:
     name: search
     in: query
     description: A nested object containing a string `searchTerm` and a list of `fields` to search on.
+    required: false
     type: string
   trait:skip:skip:
     name: skip
     in: query
     description: The offset into the records to return.
+    required: false
     type: integer
     default: 0
     minimum: 0
@@ -1244,17 +1562,20 @@ parameters:
     description: |
       Use space separated sort parameters to sort the collection.
       Default sort is ascending. Prefix with `-` to sort descending.
+    required: false
     type: string
     default: ""
   trait:systemContextAuth:Authorization:
     name: Authorization
     in: header
     description: Authorization header for the System Context API
+    required: false
     type: string
   trait:systemContextAuth:Date:
     name: Date
     in: header
     description: Current date header for the System Context API
+    required: false
     type: string
 responses:
   trait:standardErrors:400:
@@ -1284,735 +1605,800 @@ responses:
 definitions:
   application:
     title: Application
-    type: object
     properties:
       _id:
         type: string
       beta:
         type: boolean
-      name:
+      color:
+        enum:
+        - ""
+        - '#202D38'
+        - '#005466'
+        - '#3E8696'
+        - '#006CAC'
+        - '#0617AC'
+        - '#7C6ADA'
+        - '#D5779D'
+        - '#9E2F00'
+        - '#FFB000'
+        - '#58C469'
+        - '#57C49F'
+        - '#FF6C03'
+        type: string
+      config:
+        properties:
+          acsUrl:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          constantAttributes:
+            properties:
+              label:
+                type: string
+              mutable:
+                type: boolean
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    readOnly:
+                      type: boolean
+                    required:
+                      type: boolean
+                    value:
+                      type: string
+                    visible:
+                      type: boolean
+                  type: object
+                type: array
+              visible:
+                type: boolean
+            type: object
+          databaseAttributes:
+            properties:
+              position:
+                type: integer
+            type: object
+          idpCertificate:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          idpEntityId:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          idpPrivateKey:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          spEntityId:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+        type: object
+      created:
+        type: string
+      description:
+        maxLength: 256
+        type: string
+      displayLabel:
         type: string
       displayName:
         type: string
-      displayLabel:
+      learnMore:
+        type: string
+      logo:
+        properties:
+          color:
+            enum:
+            - ""
+            - '#202D38'
+            - '#005466'
+            - '#3E8696'
+            - '#006CAC'
+            - '#0617AC'
+            - '#7C6ADA'
+            - '#D5779D'
+            - '#9E2F00'
+            - '#FFB000'
+            - '#58C469'
+            - '#57C49F'
+            - '#FF6C03'
+            type: string
+          url:
+            type: string
+        type: object
+      name:
         type: string
       organization:
         type: string
       ssoUrl:
         type: string
-      learnMore:
-        type: string
-      config:
-        type: object
-        properties:
-          idpEntityId:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          idpCertificate:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          spEntityId:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          acsUrl:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          constantAttributes:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-                    required:
-                      type: boolean
-                    visible:
-                      type: boolean
-                    readOnly:
-                      type: boolean
-              visible:
-                type: boolean
-              options:
-                type: string
-              mutable:
-                type: boolean
-              required:
-                type: boolean
-              position:
-                type: integer
-          databaseAttributes:
-            type: object
-            properties:
-              position:
-                type: integer
-          idpPrivateKey:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-      created:
-        type: string
+    type: object
   applicationslist:
     title: ApplicationsList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of applications.
+      name:
+        type: string
       results:
-        type: array
         description: The list of applications.
         items:
           $ref: '#/definitions/application'
-      name:
-        type: string
+        type: array
+      totalCount:
+        description: The total number of applications.
+        type: integer
+    type: object
   applicationtemplate:
     title: ApplicationTemplate
-    type: object
     properties:
       _id:
         type: string
-      name:
-        type: string
-      displayName:
-        type: string
-      displayLabel:
-        type: string
-      ssoUrl:
-        type: string
-      learnMore:
-        type: string
-      config:
-        type: object
-        properties:
-          idpEntityId:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          idpCertificate:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          spEntityId:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          acsUrl:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
-          constantAttributes:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    name:
-                      type: string
-                    value:
-                      type: string
-                    required:
-                      type: boolean
-                    visible:
-                      type: boolean
-                    readOnly:
-                      type: boolean
-              visible:
-                type: boolean
-              options:
-                type: string
-              mutable:
-                type: boolean
-              required:
-                type: boolean
-              position:
-                type: integer
-          databaseAttributes:
-            type: object
-            properties:
-              position:
-                type: integer
-          idpPrivateKey:
-            type: object
-            properties:
-              label:
-                type: string
-              readOnly:
-                type: boolean
-              toggle:
-                type: string
-              tooltip:
-                type: object
-                properties:
-                  template:
-                    type: string
-                  variables:
-                    type: object
-                    properties:
-                      icon:
-                        type: string
-                      message:
-                        type: string
-              type:
-                type: string
-              value:
-                type: string
-              visible:
-                type: boolean
-              options:
-                type: string
-              required:
-                type: boolean
-              position:
-                type: integer
       beta:
         type: boolean
       color:
+        enum:
+        - ""
+        - '#202D38'
+        - '#005466'
+        - '#3E8696'
+        - '#006CAC'
+        - '#0617AC'
+        - '#7C6ADA'
+        - '#D5779D'
+        - '#9E2F00'
+        - '#FFB000'
+        - '#58C469'
+        - '#57C49F'
+        - '#FF6C03'
         type: string
-      jit:
-        type: object
+      config:
         properties:
-          createOnly:
-            type: boolean
-          attributes:
+          acsUrl:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
             type: object
+          constantAttributes:
+            properties:
+              label:
+                type: string
+              mutable:
+                type: boolean
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                items:
+                  properties:
+                    name:
+                      type: string
+                    readOnly:
+                      type: boolean
+                    required:
+                      type: boolean
+                    value:
+                      type: string
+                    visible:
+                      type: boolean
+                  type: object
+                type: array
+              visible:
+                type: boolean
+            type: object
+          databaseAttributes:
+            properties:
+              position:
+                type: integer
+            type: object
+          idpCertificate:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          idpEntityId:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          idpPrivateKey:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+          spEntityId:
+            properties:
+              label:
+                type: string
+              options:
+                type: string
+              position:
+                type: integer
+              readOnly:
+                type: boolean
+              required:
+                type: boolean
+              toggle:
+                type: string
+              tooltip:
+                properties:
+                  template:
+                    type: string
+                  variables:
+                    properties:
+                      icon:
+                        type: string
+                      message:
+                        type: string
+                    type: object
+                type: object
+              type:
+                type: string
+              value:
+                type: string
+              visible:
+                type: boolean
+            type: object
+        type: object
+      displayLabel:
+        type: string
+      displayName:
+        type: string
       isConfigured:
         type: boolean
+      jit:
+        properties:
+          attributes:
+            type: object
+          createOnly:
+            type: boolean
+        type: object
+      learnMore:
+        type: string
+      logo:
+        properties:
+          url:
+            type: string
+        type: object
+      name:
+        type: string
+      ssoUrl:
+        type: string
+      test:
+        type: string
+      keywords:
+        type: array
+        items:
+          type: string
+    type: object
   applicationtemplateslist:
     title: ApplicationTemplatesList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of applications.
       results:
-        type: array
         description: The list of applications.
         items:
           $ref: '#/definitions/applicationtemplate'
+        type: array
+      totalCount:
+        description: The total number of applications.
+        type: integer
+    type: object
   case:
     title: Case
-    type: object
     properties:
-      subject:
-        type: string
-        maxLength: 255
       description:
         type: string
       firstname:
-        type: string
         maxLength: 40
-      lastname:
         type: string
+      lastname:
         maxLength: 80
+        type: string
+      subject:
+        maxLength: 255
+        type: string
     required:
     - subject
     - description
     - firstname
     - lastname
+    type: object
   command:
     title: Command
-    type: object
     properties:
-      name:
-        type: string
       command:
-        type: string
         description: The command to execute on the server.
-      commandType:
         type: string
-        description: The Command OS
       commandRunners:
-        type: array
         description: An array of IDs of the Command Runner Users that can execute this command.
         items:
           type: string
-      user:
-        type: string
-        description: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
-      sudo:
-        type: boolean
-        description: ""
-      systems:
         type: array
-        description: An array of system IDs to run the command on. Not available if you are using Groups.
-        items:
-          type: string
-      launchType:
+      commandType:
+        description: The Command OS
         type: string
-        description: How the command will execute.
-      listensTo:
-        type: string
-        description: ""
-      scheduleRepeatType:
-        type: string
-        description: When the command will repeat.
-      schedule:
-        type: string
-        description: |
-          A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.
       files:
-        type: array
         description: An array of file IDs to include with the command.
         items:
           type: string
-      timeout:
-        type: string
-        description: The time in seconds to allow the command to run for.
-      organization:
-        type: string
-        description: The ID of the organization.
-      trigger:
-        type: string
-        description: The name of the command trigger.
-    required:
-    - command
-  commandfilereturn:
-    title: CommandFileReturn
-    type: object
-    properties:
-      totalCount:
-        type: integer
-        description: The total number of commands files
-      results:
         type: array
-        items:
-          type: object
-          properties:
-            name:
-              type: string
-              description: The file name.
-            destination:
-              type: string
-              description: The location where the file will be stored.
-            _id:
-              type: string
-              description: The ID of the file.
-  commandresult:
-    title: CommandResult
-    type: object
-    properties:
-      command:
+      launchType:
+        description: How the command will execute.
         type: string
-        description: The command that was executed on the system.
+      listensTo:
+        description: ""
+        type: string
       name:
         type: string
-        description: The name of the command.
-      system:
-        type: string
-        description: The name of the system the command was executed on.
-      systemId:
-        type: string
-        description: The id of the system the command was executed on.
       organization:
-        type: string
         description: The ID of the organization.
+        type: string
+      schedule:
+        description: |
+          A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.
+        type: string
+      scheduleRepeatType:
+        description: When the command will repeat.
+        type: string
+      sudo:
+        description: ""
+        type: boolean
+      systems:
+        description: An array of system IDs to run the command on. Not available if you are using Groups.
+        items:
+          type: string
+        type: array
+      timeout:
+        description: The time in seconds to allow the command to run for.
+        type: string
+      trigger:
+        description: The name of the command trigger.
+        type: string
+      user:
+        description: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
+        type: string
+    required:
+    - command
+    type: object
+  commandfilereturn:
+    title: CommandFileReturn
+    properties:
+      results:
+        items:
+          properties:
+            _id:
+              description: The ID of the file.
+              type: string
+            destination:
+              description: The location where the file will be stored.
+              type: string
+            name:
+              description: The file name.
+              type: string
+          type: object
+        type: array
+      totalCount:
+        description: The total number of commands files
+        type: integer
+    type: object
+  commandresult:
+    title: CommandResult
+    properties:
+      _id:
+        description: The ID of the command.
+        type: string
+      command:
+        description: The command that was executed on the system.
+        type: string
+      files:
+        description: An array of file ids that were included in the command
+        items:
+          type: string
+        type: array
+      name:
+        description: The name of the command.
+        type: string
+      organization:
+        description: The ID of the organization.
+        type: string
+      requestTime:
+        description: The time that the command was sent.
+        type: string
+      response:
+        properties:
+          data:
+            properties:
+              exitCode:
+                description: The stderr output from the command that ran.
+                type: integer
+              output:
+                description: The output of the command that was executed.
+                type: string
+            type: object
+          error:
+            description: The stderr output from the command that ran.
+            type: string
+          id:
+            description: ID of the response.
+            type: string
+        type: object
+      responseTime:
+        description: The time that the command was completed.
+        type: string
+      sudo:
+        description: If the user had sudo rights
+        type: boolean
+      system:
+        description: The name of the system the command was executed on.
+        type: string
+      systemId:
+        description: The id of the system the command was executed on.
+        type: string
+      user:
+        description: The user the command ran as.
+        type: string
       workflowId:
         type: string
       workflowInstanceId:
         type: string
-      user:
-        type: string
-        description: The user the command ran as.
-      sudo:
-        type: boolean
-        description: If the user had sudo rights
-      files:
-        description: An array of file ids that were included in the command
-        type: array
-        items:
-          type: string
-      requestTime:
-        type: string
-        description: The time that the command was sent.
-      responseTime:
-        type: string
-        description: The time that the command was completed.
-      response:
-        type: object
-        properties:
-          id:
-            type: string
-            description: ID of the response.
-          error:
-            type: string
-            description: The stderr output from the command that ran.
-          data:
-            type: object
-            properties:
-              output:
-                type: string
-                description: The output of the command that was executed.
-              exitCode:
-                type: integer
-                description: The stderr output from the command that ran.
-      _id:
-        type: string
-        description: The ID of the command.
+    type: object
   commandresultslist:
     title: CommandResultsList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of command results
       results:
-        type: array
         description: The list of command results
         items:
           $ref: '#/definitions/commandresult'
+        type: array
+      totalCount:
+        description: The total number of command results
+        type: integer
+    type: object
   commandslist:
     title: CommandsList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of commands
       results:
-        type: array
         items:
-          type: object
           properties:
             _id:
-              type: string
               description: The ID of the command.
+              type: string
             command:
-              type: string
               description: The Command to execute.
+              type: string
             commandType:
-              type: string
               description: The Command OS.
-            launchType:
               type: string
+            launchType:
               description: How the Command is executed.
+              type: string
             listensTo:
               type: string
             name:
-              type: string
               description: The name of the Command.
+              type: string
             organization:
-              type: string
               description: The ID of the Organization.
+              type: string
             schedule:
-              type: string
               description: 'A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.'
+              type: string
             scheduleRepeatType:
-              type: string
               description: When the command will repeat.
-            trigger:
               type: string
+            trigger:
               description: Trigger to execute command.
+              type: string
+          type: object
+        type: array
+      totalCount:
+        description: The total number of commands
+        type: integer
+    type: object
   errorresponse:
     title: ErrorResponse
     type: object
@@ -2021,32 +2407,55 @@ definitions:
         type: string
   fde:
     title: FDE
-    type: object
     properties:
-      keyPresent:
-        type: boolean
       active:
         type: boolean
+      keyPresent:
+        type: boolean
+    type: object
   JcSystem:
     title: System
-    type: object
     properties:
-      organization:
+      _id:
         type: string
-      created:
+      active:
+        type: boolean
+      agentVersion:
         type: string
-      lastContact:
-        type: string
-      os:
-        type: string
-      version:
+      allowMultiFactorAuthentication:
+        type: boolean
+      allowPublicKeyAuthentication:
+        type: boolean
+      allowSshPasswordAuthentication:
+        type: boolean
+      allowSshRootLogin:
+        type: boolean
+      amazonInstanceID:
         type: string
       arch:
         type: string
-      networkInterfaces:
-        type: array
+      connectionHistory:
         items:
           type: object
+        type: array
+      created:
+        type: string
+      displayName:
+        type: string
+      fde:
+        $ref: '#/definitions/fde'
+      fileSystem:
+        type: string
+      hasServiceAccount:
+        type: boolean
+      hostname:
+        type: string
+      lastContact:
+        type: string
+      modifySSHDConfig:
+        type: boolean
+      networkInterfaces:
+        items:
           properties:
             address:
               type: string
@@ -2056,68 +2465,45 @@ definitions:
               type: boolean
             name:
               type: string
-      hostname:
+          type: object
+        type: array
+      organization:
         type: string
-      displayName:
-        type: string
-      systemTimezone:
-        type: integer
-      templateName:
+      os:
         type: string
       remoteIP:
         type: string
-      active:
+      sshRootEnabled:
         type: boolean
       sshdParams:
-        type: array
         items:
-          type: object
           properties:
             name:
               type: string
             value:
               type: string
-      allowSshPasswordAuthentication:
-        type: boolean
-      allowSshRootLogin:
-        type: boolean
-      allowMultiFactorAuthentication:
-        type: boolean
-      allowPublicKeyAuthentication:
-        type: boolean
-      modifySSHDConfig:
-        type: boolean
-      agentVersion:
-        type: string
-      connectionHistory:
-        type: array
-        items:
           type: object
-      sshRootEnabled:
-        type: boolean
-      tags:
         type: array
-        items:
-          type: string
-      _id:
-        type: string
-      fde:
-        $ref: '#/definitions/fde'
-      amazonInstanceID:
-        type: string
       systemInsights:
-        type: object
         properties:
           state:
-            type: string
             enum:
             - enabled
             - disabled
             - deferred
-      fileSystem:
+            type: string
+        type: object
+      systemTimezone:
+        type: integer
+      tags:
+        items:
+          type: string
+        type: array
+      templateName:
         type: string
-      hasServiceAccount:
-        type: boolean
+      version:
+        type: string
+    type: object
   mfa:
     title: mfa
     type: object
@@ -2131,682 +2517,704 @@ definitions:
         type: boolean
   organization:
     title: Organization
-    type: object
     properties:
-      settings:
-        $ref: '#/definitions/organizationsettings'
       _id:
-        type: string
-      displayName:
-        type: string
-      logoUrl:
         type: string
       created:
         type: string
+      displayName:
+        type: string
       hasStripeCustomerId:
         type: boolean
+      logoUrl:
+        type: string
       provider:
         type: string
+      settings:
+        $ref: '#/definitions/organizationsettings'
+    type: object
   organizationsettings:
     title: OrganizationSettings
-    type: object
     properties:
-      passwordPolicy:
+      betaFeatures:
         type: object
-        properties:
-          enablePasswordExpirationInDays:
-            type: boolean
-          passwordExpirationInDays:
-            type: integer
-            minimum: 1
-          enableDaysBeforeExpirationToForceReset:
-            type: boolean
-          daysBeforeExpirationToForceReset:
-            type: integer
-            minimum: 1
-          enableDaysAfterExpirationToSelfRecover:
-            type: boolean
-          daysAfterExpirationToSelfRecover:
-            type: integer
-            minimum: 1
-          enableMinChangePeriodInDays:
-            type: boolean
-          minChangePeriodInDays:
-            type: integer
-          enableMaxLoginAttempts:
-            type: boolean
-          maxLoginAttempts:
-            type: integer
-            minimum: 0
-          enableLockoutTimeInSeconds:
-            type: boolean
-          lockoutTimeInSeconds:
-            type: integer
-          enableMinLength:
-            type: boolean
-          minLength:
-            type: integer
-          needsLowercase:
-            type: boolean
-          needsUppercase:
-            type: boolean
-          needsNumeric:
-            type: boolean
-          needsSymbolic:
-            type: boolean
-          allowUsernameSubstring:
-            type: boolean
-          enableMaxHistory:
-            type: boolean
-          maxHistory:
-            type: integer
-            minimum: 1
-            maximum: 10
-          effectiveDate:
-            type: string
-      userPortal:
-        type: object
-        properties:
-          idleSessionDurationMinutes:
-            type: integer
-            minimum: 1
-            maximum: 129600
-      systemUserPasswordExpirationInDays:
-        type: integer
-      disableUM:
+      contactEmail:
+        type: string
+      contactName:
+        type: string
+      disableCommandRunner:
         type: boolean
       disableLdap:
         type: boolean
+      disableUM:
+        type: boolean
       duplicateLDAPGroups:
         type: boolean
-      passwordCompliance:
-        type: string
-        enum:
-        - custom
-        - pci3
-        - windows
-      showIntro:
-        type: boolean
-      enableManagedUID:
-        type: boolean
-      systemUsersCanEdit:
-        type: boolean
-      contactName:
-        type: string
-      contactEmail:
-        type: string
       emailDisclaimer:
-        type: string
-      name:
-        type: string
-      features:
-        type: object
-        properties:
-          systemInsights:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-      logo:
         type: string
       enableGoogleApps:
         type: boolean
+      enableManagedUID:
+        type: boolean
       enableO365:
         type: boolean
-      betaFeatures:
-        type: object
-      disableCommandRunner:
-        type: boolean
-  organizationsettingsput:
-    title: OrganizationSettingsPut
-    type: object
-    properties:
-      passwordPolicy:
-        type: object
+      features:
         properties:
-          enablePasswordExpirationInDays:
-            type: boolean
-          passwordExpirationInDays:
-            type: integer
-            minimum: 1
-          enableDaysBeforeExpirationToForceReset:
-            type: boolean
-          daysBeforeExpirationToForceReset:
-            type: integer
-            minimum: 1
-          enableDaysAfterExpirationToSelfRecover:
+          directoryInsightsPremium:
+            properties:
+              enabled:
+                type: boolean
+            type: object
+          systemInsights:
+            properties:
+              enableNewDarwin:
+                type: boolean
+              enableNewLinux:
+                type: boolean
+              enableNewWindows:
+                type: boolean
+              enabled:
+                type: boolean
+            type: object
+        type: object
+      logo:
+        type: string
+      name:
+        type: string
+      passwordCompliance:
+        enum:
+        - custom
+        - pci3
+        - windows
+        type: string
+      passwordPolicy:
+        properties:
+          allowUsernameSubstring:
             type: boolean
           daysAfterExpirationToSelfRecover:
-            type: integer
             minimum: 1
-          enableMinChangePeriodInDays:
-            type: boolean
-          minChangePeriodInDays:
             type: integer
+          daysBeforeExpirationToForceReset:
+            minimum: 1
+            type: integer
+          effectiveDate:
+            type: string
+          enableDaysAfterExpirationToSelfRecover:
+            type: boolean
+          enableDaysBeforeExpirationToForceReset:
+            type: boolean
+          enableLockoutTimeInSeconds:
+            type: boolean
+          enableMaxHistory:
+            type: boolean
           enableMaxLoginAttempts:
             type: boolean
-          maxLoginAttempts:
-            type: integer
-            minimum: 0
-          enableLockoutTimeInSeconds:
+          enableMinChangePeriodInDays:
+            type: boolean
+          enableMinLength:
+            type: boolean
+          enablePasswordExpirationInDays:
             type: boolean
           lockoutTimeInSeconds:
             type: integer
-          enableMinLength:
-            type: boolean
+          maxHistory:
+            maximum: 10
+            minimum: 1
+            type: integer
+          maxLoginAttempts:
+            minimum: 0
+            type: integer
+          minChangePeriodInDays:
+            type: integer
           minLength:
             type: integer
           needsLowercase:
-            type: boolean
-          needsUppercase:
             type: boolean
           needsNumeric:
             type: boolean
           needsSymbolic:
             type: boolean
-          allowUsernameSubstring:
+          needsUppercase:
             type: boolean
-          enableMaxHistory:
-            type: boolean
-          maxHistory:
-            type: integer
+          passwordExpirationInDays:
             minimum: 1
-            maximum: 10
-      userPortal:
+            type: integer
         type: object
-        properties:
-          idleSessionDurationMinutes:
-            type: integer
-            minimum: 1
-            maximum: 129600
+      showIntro:
+        type: boolean
       systemUserPasswordExpirationInDays:
         type: integer
-      disableUM:
+      systemUsersCanEdit:
         type: boolean
+      userPortal:
+        properties:
+          idleSessionDurationMinutes:
+            maximum: 129600
+            minimum: 1
+            type: integer
+        type: object
+    type: object
+  organizationsettingsput:
+    title: OrganizationSettingsPut
+    properties:
+      contactEmail:
+        type: string
+      contactName:
+        type: string
       disableLdap:
+        type: boolean
+      disableUM:
         type: boolean
       duplicateLDAPGroups:
         type: boolean
-      passwordCompliance:
+      emailDisclaimer:
         type: string
+      enableManagedUID:
+        type: boolean
+      features:
+        properties:
+          directoryInsightsPremium:
+            properties:
+              enabled:
+                type: boolean
+            type: object
+          systemInsights:
+            properties:
+              enableNewDarwin:
+                type: boolean
+              enableNewLinux:
+                type: boolean
+              enableNewWindows:
+                type: boolean
+              enabled:
+                type: boolean
+            type: object
+        type: object
+      logo:
+        type: string
+      name:
+        type: string
+      passwordCompliance:
         enum:
         - custom
         - pci3
         - windows
+        type: string
+      passwordPolicy:
+        properties:
+          allowUsernameSubstring:
+            type: boolean
+          daysAfterExpirationToSelfRecover:
+            minimum: 1
+            type: integer
+          daysBeforeExpirationToForceReset:
+            minimum: 1
+            type: integer
+          enableDaysAfterExpirationToSelfRecover:
+            type: boolean
+          enableDaysBeforeExpirationToForceReset:
+            type: boolean
+          enableLockoutTimeInSeconds:
+            type: boolean
+          enableMaxHistory:
+            type: boolean
+          enableMaxLoginAttempts:
+            type: boolean
+          enableMinChangePeriodInDays:
+            type: boolean
+          enableMinLength:
+            type: boolean
+          enablePasswordExpirationInDays:
+            type: boolean
+          lockoutTimeInSeconds:
+            type: integer
+          maxHistory:
+            maximum: 10
+            minimum: 1
+            type: integer
+          maxLoginAttempts:
+            minimum: 0
+            type: integer
+          minChangePeriodInDays:
+            type: integer
+          minLength:
+            type: integer
+          needsLowercase:
+            type: boolean
+          needsNumeric:
+            type: boolean
+          needsSymbolic:
+            type: boolean
+          needsUppercase:
+            type: boolean
+          passwordExpirationInDays:
+            minimum: 1
+            type: integer
+        type: object
       showIntro:
         type: boolean
-      enableManagedUID:
-        type: boolean
+      systemUserPasswordExpirationInDays:
+        type: integer
       systemUsersCanEdit:
         type: boolean
-      contactName:
-        type: string
-      contactEmail:
-        type: string
-      emailDisclaimer:
-        type: string
-      name:
-        type: string
-      features:
-        type: object
+      userPortal:
         properties:
-          systemInsights:
-            type: object
-            properties:
-              enabled:
-                type: boolean
-      logo:
-        type: string
+          idleSessionDurationMinutes:
+            maximum: 129600
+            minimum: 1
+            type: integer
+        type: object
+    type: object
   organizationslist:
     title: OrganizationList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: 'The total number of organizations. '
       results:
-        type: array
         description: The list of organizations.
         items:
-          type: object
           properties:
             _id:
-              type: string
               description: The ID of the organization.
+              type: string
             displayName:
-              type: string
               description: The name of the organization.
-            logoUrl:
               type: string
+            logoUrl:
               description: 'The organization logo image URL. '
+              type: string
+          type: object
+        type: array
+      totalCount:
+        description: 'The total number of organizations. '
+        type: integer
+    type: object
   radiusserver:
     title: RadiusServer
-    type: object
     properties:
       _id:
         type: string
+      mfa:
+        enum:
+        - DISABLED
+        - ENABLED
+        - REQUIRED
+        - ALWAYS
+        type: string
+      name:
+        type: string
+      networkSourceIp:
+        type: string
       organization:
         type: string
-      networkSourceIp:
-        type: string
       sharedSecret:
         type: string
-      name:
-        type: string
-      tags:
-        type: array
-        items:
-          type: string
       tagNames:
-        type: array
         items:
           type: string
+        type: array
+      tags:
+        items:
+          type: string
+        type: array
       userLockoutAction:
         type: string
       userPasswordExpirationAction:
         type: string
-      mfa:
-        type: string
-        enum:
-        - DISABLED
-        - ENABLED
-        - REQUIRED
-        - ALWAYS
+    type: object
   radiusserverpost:
     title: RadiusServerPost
-    type: object
     properties:
-      networkSourceIp:
-        type: string
-      name:
-        type: string
-      tagNames:
-        type: array
-        items:
-          type: string
-      sharedSecret:
-        type: string
-        description: RADIUS shared secret between the server and client.
-      userLockoutAction:
-        type: string
-      userPasswordExpirationAction:
-        type: string
       mfa:
-        type: string
         enum:
         - DISABLED
         - ENABLED
         - REQUIRED
         - ALWAYS
+        type: string
+      name:
+        type: string
+      networkSourceIp:
+        type: string
+      sharedSecret:
+        description: RADIUS shared secret between the server and client.
+        type: string
+      tagNames:
+        items:
+          type: string
+        type: array
+      userLockoutAction:
+        type: string
+      userPasswordExpirationAction:
+        type: string
     required:
     - networkSourceIp
     - name
     - sharedSecret
+    type: object
   radiusserverput:
     title: RadiusServerPut
-    type: object
     properties:
       _id:
         type: string
-      networkSourceIp:
-        type: string
-      name:
-        type: string
-      tagNames:
-        type: array
-        items:
-          type: string
-      userLockoutAction:
-        type: string
-      userPasswordExpirationAction:
-        type: string
       mfa:
-        type: string
         enum:
         - DISABLED
         - ENABLED
         - REQUIRED
         - ALWAYS
+        type: string
+      name:
+        type: string
+      networkSourceIp:
+        type: string
+      tagNames:
+        items:
+          type: string
+        type: array
+      userLockoutAction:
+        type: string
+      userPasswordExpirationAction:
+        type: string
+    type: object
   radiusserverslist:
     title: RadiusServersList
-    type: object
     properties:
-      totalCount:
-        type: integer
       results:
-        type: array
         items:
           $ref: '#/definitions/radiusserver'
+        type: array
+      totalCount:
+        type: integer
+    type: object
   search:
     title: Search
-    type: object
     properties:
-      filter:
-        type: object
       fields:
         type: string
+      filter:
+        type: object
       searchFilter:
         type: object
+    type: object
   sshkeylist:
     title: SSHKeyList
-    type: object
     properties:
-      create_date:
-        type: string
-        description: The date the SSH key was created.
       _id:
-        type: string
         description: The ID of the SSH key.
-      public_key:
         type: string
-        description: The Public SSH key.
+      create_date:
+        description: The date the SSH key was created.
+        type: string
       name:
-        type: string
         description: The name of the SSH key.
+        type: string
+      public_key:
+        description: The Public SSH key.
+        type: string
+    type: object
   sshkeypost:
     title: SSHKeyPost
-    type: object
     properties:
-      public_key:
-        type: string
-        description: The Public SSH key.
       name:
-        type: string
         description: The name of the SSH key.
+        type: string
+      public_key:
+        description: The Public SSH key.
+        type: string
     required:
     - public_key
     - name
+    type: object
   systemput:
     title: SystemPut
-    type: object
     properties:
-      displayName:
-        type: string
-      allowSshPasswordAuthentication:
-        type: boolean
-      allowSshRootLogin:
-        type: boolean
+      agentBoundMessages:
+        items:
+          properties:
+            cmd:
+              type: string
+          type: object
+        type: array
       allowMultiFactorAuthentication:
         type: boolean
       allowPublicKeyAuthentication:
         type: boolean
-      agentBoundMessages:
-        type: array
-        items:
-          type: object
-          properties:
-            cmd:
-              type: string
+      allowSshPasswordAuthentication:
+        type: boolean
+      allowSshRootLogin:
+        type: boolean
+      displayName:
+        type: string
       tags:
-        type: array
         items:
           type: string
+        type: array
+    type: object
   systemslist:
     title: SystemsList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of systems.
       results:
-        type: array
         description: The list of systems.
         items:
           $ref: '#/definitions/JcSystem'
+        type: array
+      totalCount:
+        description: The total number of systems.
+        type: integer
+    type: object
   systemuser:
     title: SystemUser
-    type: object
     properties:
-      email:
+      _id:
         type: string
-        maxLength: 1024
-      username:
-        type: string
-        maxLength: 1024
-      allow_public_key:
-        type: boolean
-      public_key:
-        type: string
-      ssh_keys:
-        type: array
-        items:
-          $ref: '#/definitions/sshkeylist'
-      sudo:
-        type: boolean
-      enable_managed_uid:
-        type: boolean
-      unix_uid:
-        type: integer
-        minimum: 1
-      unix_guid:
-        type: integer
-        minimum: 1
-      activated:
-        type: boolean
-      tags:
-        type: array
-        items:
-          type: string
-      password_expired:
-        type: boolean
       account_locked:
         type: boolean
-      passwordless_sudo:
+      activated:
         type: boolean
-      externally_managed:
+      allow_public_key:
         type: boolean
-      external_dn:
-        type: string
-      external_source_type:
-        type: string
-      firstname:
-        type: string
+      associatedTagCount:
+        minimum: 0
+        type: integer
+      attributes:
+        items:
+          type: object
+        type: array
+      company:
         maxLength: 1024
-      lastname:
         type: string
+      costCenter:
         maxLength: 1024
-      ldap_binding_user:
+        type: string
+      created:
+        type: string
+      department:
+        maxLength: 1024
+        type: string
+      description:
+        maxLength: 1024
+        type: string
+      displayname:
+        maxLength: 1024
+        type: string
+      email:
+        maxLength: 1024
+        type: string
+      employeeIdentifier:
+        description: 'Must be unique per user. '
+        maxLength: 256
+        type: string
+      employeeType:
+        maxLength: 1024
+        type: string
+      enable_managed_uid:
         type: boolean
       enable_user_portal_multifactor:
         type: boolean
-      associatedTagCount:
-        type: integer
-        minimum: 0
-      totp_enabled:
+      external_dn:
+        type: string
+      external_password_expiration_date:
+        type: string
+      external_source_type:
+        type: string
+      externally_managed:
         type: boolean
+      firstname:
+        maxLength: 1024
+        type: string
+      jobTitle:
+        maxLength: 1024
+        type: string
+      lastname:
+        maxLength: 1024
+        type: string
+      ldap_binding_user:
+        type: boolean
+      location:
+        maxLength: 1024
+        type: string
+      mfa:
+        $ref: '#/definitions/mfa'
+      middlename:
+        maxLength: 1024
+        type: string
       password_expiration_date:
         type: string
-      attributes:
-        type: array
-        items:
-          type: object
-      created:
-        type: string
-      samba_service_user:
+      password_expired:
         type: boolean
       password_never_expires:
         type: boolean
-      _id:
-        type: string
-      middlename:
-        type: string
-        maxLength: 1024
-      displayname:
-        type: string
-        maxLength: 1024
-      description:
-        type: string
-        maxLength: 1024
-      location:
-        type: string
-        maxLength: 1024
-      costCenter:
-        type: string
-        maxLength: 1024
-      employeeType:
-        type: string
-        maxLength: 1024
-      company:
-        type: string
-        maxLength: 1024
-      employeeIdentifier:
-        type: string
-        maxLength: 256
-        description: 'Must be unique per user. '
-      jobTitle:
-        type: string
-        maxLength: 1024
-      department:
-        type: string
-        maxLength: 1024
-      mfa:
-        $ref: '#/definitions/mfa'
-      suspended:
-        type: boolean
-      external_password_expiration_date:
-        type: string
-  systemuserput:
-    title: SystemUserPut
-    type: object
-    properties:
-      email:
-        type: string
-        maxLength: 1024
-      username:
-        type: string
-        maxLength: 1024
-      allow_public_key:
+      passwordless_sudo:
         type: boolean
       public_key:
         type: string
+      samba_service_user:
+        type: boolean
       ssh_keys:
-        type: array
         items:
-          $ref: '#/definitions/sshkeypost'
+          $ref: '#/definitions/sshkeylist'
+        type: array
       sudo:
         type: boolean
-      enable_managed_uid:
+      suspended:
         type: boolean
-      unix_uid:
-        type: integer
-        minimum: 1
-      unix_guid:
-        type: integer
-        minimum: 1
       tags:
-        type: array
         items:
           type: string
+        type: array
+      totp_enabled:
+        type: boolean
+      unix_guid:
+        minimum: 1
+        type: integer
+      unix_uid:
+        minimum: 1
+        type: integer
+      username:
+        maxLength: 1024
+        type: string
+    type: object
+  systemuserput:
+    title: SystemUserPut
+    properties:
       account_locked:
         type: boolean
-      externally_managed:
+      addresses:
+        description: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+        items:
+          properties:
+            country:
+              maxLength: 1024
+              type: string
+            extendedAddress:
+              maxLength: 1024
+              type: string
+            locality:
+              maxLength: 1024
+              type: string
+            poBox:
+              maxLength: 1024
+              type: string
+            postalCode:
+              maxLength: 1024
+              type: string
+            region:
+              maxLength: 1024
+              type: string
+            streetAddress:
+              maxLength: 1024
+              type: string
+            type:
+              maxLength: 1024
+              type: string
+          type: object
+        type: array
+      allow_public_key:
         type: boolean
-      external_dn:
-        type: string
-      external_source_type:
-        type: string
-      firstname:
-        type: string
+      attributes:
+        items:
+          type: object
+        type: array
+      company:
         maxLength: 1024
-      lastname:
         type: string
+      costCenter:
         maxLength: 1024
-      ldap_binding_user:
+        type: string
+      department:
+        maxLength: 1024
+        type: string
+      description:
+        maxLength: 1024
+        type: string
+      displayname:
+        maxLength: 1024
+        type: string
+      email:
+        maxLength: 1024
+        type: string
+      employeeIdentifier:
+        description: 'Must be unique per user. '
+        maxLength: 256
+        type: string
+      employeeType:
+        maxLength: 1024
+        type: string
+      enable_managed_uid:
         type: boolean
       enable_user_portal_multifactor:
         type: boolean
-      attributes:
-        type: array
-        items:
-          type: object
-      samba_service_user:
+      external_dn:
+        type: string
+      external_password_expiration_date:
+        type: string
+      external_source_type:
+        type: string
+      externally_managed:
         type: boolean
-      addresses:
-        type: array
-        description: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
-        items:
-          type: object
-          properties:
-            type:
-              type: string
-              maxLength: 1024
-            poBox:
-              type: string
-              maxLength: 1024
-            extendedAddress:
-              type: string
-              maxLength: 1024
-            streetAddress:
-              type: string
-              maxLength: 1024
-            locality:
-              type: string
-              maxLength: 1024
-            region:
-              type: string
-              maxLength: 1024
-            postalCode:
-              type: string
-              maxLength: 1024
-            country:
-              type: string
-              maxLength: 1024
+      firstname:
+        maxLength: 1024
+        type: string
       jobTitle:
-        type: string
         maxLength: 1024
-      department:
         type: string
+      lastname:
         maxLength: 1024
-      phoneNumbers:
-        type: array
-        items:
-          type: object
-          properties:
-            type:
-              type: string
-              maxLength: 1024
-            number:
-              type: string
-              maxLength: 1024
-      relationships:
-        type: array
-        items:
-          type: object
+        type: string
+      ldap_binding_user:
+        type: boolean
+      location:
+        maxLength: 1024
+        type: string
+      mfa:
+        $ref: '#/definitions/mfa'
+      middlename:
+        maxLength: 1024
+        type: string
       password:
         type: string
       password_never_expires:
         type: boolean
-      middlename:
+      phoneNumbers:
+        items:
+          properties:
+            number:
+              maxLength: 1024
+              type: string
+            type:
+              maxLength: 1024
+              type: string
+          type: object
+        type: array
+      public_key:
         type: string
-        maxLength: 1024
-      displayname:
-        type: string
-        maxLength: 1024
-      description:
-        type: string
-        maxLength: 1024
-      location:
-        type: string
-        maxLength: 1024
-      costCenter:
-        type: string
-        maxLength: 1024
-      employeeType:
-        type: string
-        maxLength: 1024
-      company:
-        type: string
-        maxLength: 1024
-      employeeIdentifier:
-        type: string
-        maxLength: 256
-        description: 'Must be unique per user. '
-      mfa:
-        $ref: '#/definitions/mfa'
+      relationships:
+        items:
+          type: object
+        type: array
+      samba_service_user:
+        type: boolean
+      ssh_keys:
+        items:
+          $ref: '#/definitions/sshkeypost'
+        type: array
+      sudo:
+        type: boolean
       suspended:
         type: boolean
-      external_password_expiration_date:
+      tags:
+        items:
+          type: string
+        type: array
+      unix_guid:
+        minimum: 1
+        type: integer
+      unix_uid:
+        minimum: 1
+        type: integer
+      username:
+        maxLength: 1024
         type: string
+    type: object
   systemuserputpost:
     title: SystemUserPost
     type: object
@@ -2933,215 +3341,224 @@ definitions:
     - username
   systemuserreturn:
     title: SystemUserReturn
-    type: object
     properties:
-      email:
+      _id:
         type: string
-        maxLength: 1024
-      username:
-        type: string
-        maxLength: 1024
-      allow_public_key:
-        type: boolean
-      public_key:
-        type: string
-      ssh_keys:
-        type: array
-        items:
-          $ref: '#/definitions/sshkeylist'
-      sudo:
-        type: boolean
-      enable_managed_uid:
-        type: boolean
-      unix_uid:
-        type: integer
-        minimum: 1
-      unix_guid:
-        type: integer
-        minimum: 1
-      activated:
-        type: boolean
-      tags:
-        type: array
-        items:
-          type: string
-      password_expired:
-        type: boolean
       account_locked:
         type: boolean
-      passwordless_sudo:
+      activated:
         type: boolean
-      externally_managed:
+      addresses:
+        items:
+          properties:
+            country:
+              maxLength: 1024
+              type: string
+            extendedAddress:
+              maxLength: 1024
+              type: string
+            id:
+              type: string
+            locality:
+              maxLength: 1024
+              type: string
+            poBox:
+              maxLength: 1024
+              type: string
+            postalCode:
+              maxLength: 1024
+              type: string
+            region:
+              maxLength: 1024
+              type: string
+            streetAddress:
+              maxLength: 1024
+              type: string
+            type:
+              maxLength: 1024
+              type: string
+          type: object
+        type: array
+      allow_public_key:
         type: boolean
-      external_dn:
-        type: string
-      external_source_type:
-        type: string
-      firstname:
-        type: string
+      attributes:
+        items:
+          type: object
+        type: array
+      badLoginAttempts:
+        minimum: 0
+        type: integer
+      company:
         maxLength: 1024
-      lastname:
         type: string
+      costCenter:
         maxLength: 1024
-      ldap_binding_user:
+        type: string
+      created:
+        type: string
+      department:
+        maxLength: 1024
+        type: string
+      description:
+        maxLength: 1024
+        type: string
+      displayname:
+        maxLength: 1024
+        type: string
+      email:
+        maxLength: 1024
+        type: string
+      employeeIdentifier:
+        description: 'Must be unique per user. '
+        maxLength: 256
+        type: string
+      employeeType:
+        maxLength: 1024
+        type: string
+      enable_managed_uid:
         type: boolean
       enable_user_portal_multifactor:
         type: boolean
-      totp_enabled:
-        type: boolean
-      attributes:
-        type: array
-        items:
-          type: object
-      created:
+      external_dn:
         type: string
-      samba_service_user:
+      external_password_expiration_date:
+        type: string
+      external_source_type:
+        type: string
+      externally_managed:
         type: boolean
-      _id:
+      firstname:
+        maxLength: 1024
+        type: string
+      jobTitle:
+        maxLength: 1024
+        type: string
+      lastname:
+        maxLength: 1024
+        type: string
+      ldap_binding_user:
+        type: boolean
+      location:
+        maxLength: 1024
+        type: string
+      mfa:
+        $ref: '#/definitions/mfa'
+      middlename:
+        maxLength: 1024
         type: string
       organization:
         type: string
-      addresses:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              maxLength: 1024
-            poBox:
-              type: string
-              maxLength: 1024
-            extendedAddress:
-              type: string
-              maxLength: 1024
-            streetAddress:
-              type: string
-              maxLength: 1024
-            locality:
-              type: string
-              maxLength: 1024
-            region:
-              type: string
-              maxLength: 1024
-            postalCode:
-              type: string
-              maxLength: 1024
-            country:
-              type: string
-              maxLength: 1024
-      jobTitle:
-        type: string
-        maxLength: 1024
-      department:
-        type: string
-        maxLength: 1024
-      phoneNumbers:
-        type: array
-        items:
-          type: object
-          properties:
-            id:
-              type: string
-            type:
-              type: string
-              maxLength: 1024
-            number:
-              type: string
-              maxLength: 1024
-      relationships:
-        type: array
-        items:
-          type: object
-      badLoginAttempts:
-        type: integer
-        minimum: 0
-      password_never_expires:
-        type: boolean
-      middlename:
-        type: string
-        maxLength: 1024
-      displayname:
-        type: string
-        maxLength: 1024
-      description:
-        type: string
-        maxLength: 1024
-      location:
-        type: string
-        maxLength: 1024
-      costCenter:
-        type: string
-        maxLength: 1024
-      employeeType:
-        type: string
-        maxLength: 1024
-      company:
-        type: string
-        maxLength: 1024
-      employeeIdentifier:
-        type: string
-        maxLength: 256
-        description: 'Must be unique per user. '
-      mfa:
-        $ref: '#/definitions/mfa'
       password_expiration_date:
         type: string
+      password_expired:
+        type: boolean
+      password_never_expires:
+        type: boolean
+      passwordless_sudo:
+        type: boolean
+      phoneNumbers:
+        items:
+          properties:
+            id:
+              type: string
+            number:
+              maxLength: 1024
+              type: string
+            type:
+              maxLength: 1024
+              type: string
+          type: object
+        type: array
+      public_key:
+        type: string
+      relationships:
+        items:
+          type: object
+        type: array
+      samba_service_user:
+        type: boolean
+      ssh_keys:
+        items:
+          $ref: '#/definitions/sshkeylist'
+        type: array
+      sudo:
+        type: boolean
       suspended:
         type: boolean
-      external_password_expiration_date:
+      tags:
+        items:
+          type: string
+        type: array
+      totp_enabled:
+        type: boolean
+      unix_guid:
+        minimum: 1
+        type: integer
+      unix_uid:
+        minimum: 1
+        type: integer
+      username:
+        maxLength: 1024
         type: string
+    type: object
   systemuserslist:
     title: SystemUsersList
-    type: object
     properties:
-      totalCount:
-        type: integer
-        description: The total number of system users.
       results:
-        type: array
         description: The list of system users.
         items:
           $ref: '#/definitions/systemuserreturn'
+        type: array
+      totalCount:
+        description: The total number of system users.
+        type: integer
+    type: object
+  triggerreturn:
+    title: TriggerReturn
+    properties:
+      triggered:
+        items:
+          type: string
+        type: array
+    type: object
   userput:
     title: UserPut
-    type: object
     properties:
       email:
-        type: string
         maxLength: 1024
+        type: string
       enableMultiFactor:
         type: boolean
       enableWhatsNew:
         type: boolean
-      lastWhatsNewChecked:
+      firstname:
         type: string
+      lastWhatsNewChecked:
         format: date
+        type: string
+      lastname:
+        type: string
       roleName:
         type: string
+    type: object
   userreturn:
     title: UserReturn
-    type: object
     properties:
-      email:
-        type: string
-      enableMultiFactor:
-        type: boolean
-      enableWhatsNew:
-        type: boolean
-      lastWhatsNewChecked:
-        type: string
-      roleName:
-        type: string
       _id:
         type: string
       created:
         type: string
       disableIntroduction:
         type: boolean
+      email:
+        type: string
+      enableMultiFactor:
+        type: boolean
+      enableWhatsNew:
+        type: boolean
       firstname:
+        type: string
+      lastWhatsNewChecked:
         type: string
       lastname:
         type: string
@@ -3151,6 +3568,9 @@ definitions:
         type: string
       role:
         type: string
+      roleName:
+        type: string
       usersTimeZone:
         type: string
+    type: object
 
