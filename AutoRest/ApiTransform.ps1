@@ -39,6 +39,7 @@ $FixesMapping = @{
         '["string", "number", "boolean", "null"]'                           = '"string"';
         '["object", "null"]'                                                = '"object"';
         '["string", "null"]'                                                = '"string"';
+        '["boolean", "null"]'                                               = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
         '"jobId"'                                                           = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
