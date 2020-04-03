@@ -7,6 +7,7 @@ $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
 $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
 $PrereleaseName = '' # Populate to make release a beta
+$FolderExcludeList = @('test') # Excluded folder in root from being removed
 $InstallPreReq = $true
 $GenerateModule = $true
 $IncrementModuleVersion = $true
@@ -62,7 +63,7 @@ ForEach ($API In $APIName)
             ###########################################################################
             If ($GenerateModule)
             {
-                If (Test-Path -Path:($OutputFullPath)) { Remove-Item -Path:($OutputFullPath) -Recurse -Force }
+                If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
                 If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
                 Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
