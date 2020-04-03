@@ -55,7 +55,7 @@ namespace JumpCloud.SDK.V1
             {
                 request.Headers.Add("Accept", "application/json");
             }
-            request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.9");
+            request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.10");
             // request.Headers.Add("Content-Type", "application/json");
             // let it go on.
             var requestResult = await next.SendAsync(request, callback);
