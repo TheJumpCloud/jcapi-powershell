@@ -143,7 +143,7 @@ Try
                     }
                 }
                 ###########################################################################
-                If ($TestModule -eq $true)
+                If ($TestModule)
                 {
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
@@ -165,6 +165,10 @@ Try
                     {
                         Write-Error ('JCApiKey and JCOrgId have not been set.')
                     }
+                }
+                Else
+                {
+                    Write-Warning ('Skipping TestModule.')
                 }
                 ###########################################################################
                 If ($PackModule)
