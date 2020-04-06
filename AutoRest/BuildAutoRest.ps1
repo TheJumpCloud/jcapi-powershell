@@ -152,18 +152,11 @@ Try
                 {
                     Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     # Test module
-                    If (Test-Path -Path:($testModulePath))
-                    {
-                        # ./test-module.ps1 -Isolated # Not sure when to use this yet
-                        # ./test-module.ps1 -Record # Run to create playback files
-                        # ./test-module.ps1 -Playback # Run once playback files have been created
-                        Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Invoke-Expression -Command:($testModulePath) # Run to query against real API
-                    }
-                    Else
-                    {
-                        Write-Error ("Path does not exist: $testModulePath")
-                    }
+                    # ./test-module.ps1 -Isolated # Not sure when to use this yet
+                    # ./test-module.ps1 -Record # Run to create playback files
+                    # ./test-module.ps1 -Playback # Run once playback files have been created
+                    Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Invoke-Expression -Command:($testModulePath) - # Run to query against real API
                 }
                 Else
                 {
