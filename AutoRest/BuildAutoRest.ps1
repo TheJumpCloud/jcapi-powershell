@@ -143,33 +143,33 @@ Try
                     }
                 }
                 ###########################################################################
-                If ($TestModule)
-                {
-                    If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
-                    {
-                        # Test module
-                        If (Test-Path -Path:($testModulePath))
-                        {
-                            # ./test-module.ps1 -Isolated # Not sure when to use this yet
-                            # ./test-module.ps1 -Record # Run to create playback files
-                            # ./test-module.ps1 -Playback # Run once playback files have been created
-                            Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                            Invoke-Expression -Command:($testModulePath + ' -Live') # Run to query against real API
-                        }
-                        Else
-                        {
-                            Write-Error ("Path does not exist: $testModulePath")
-                        }
-                    }
-                    Else
-                    {
-                        Write-Error ('JCApiKey and JCOrgId have not been set.')
-                    }
-                }
-                Else
-                {
-                    Write-Warning ('Skipping TestModule.')
-                }
+                # If ($TestModule)
+                # {
+                #     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
+                #     {
+                #         # Test module
+                #         If (Test-Path -Path:($testModulePath))
+                #         {
+                #             # ./test-module.ps1 -Isolated # Not sure when to use this yet
+                #             # ./test-module.ps1 -Record # Run to create playback files
+                #             # ./test-module.ps1 -Playback # Run once playback files have been created
+                #             Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                #             Invoke-Expression -Command:($testModulePath + ' -Live') # Run to query against real API
+                #         }
+                #         Else
+                #         {
+                #             Write-Error ("Path does not exist: $testModulePath")
+                #         }
+                #     }
+                #     Else
+                #     {
+                #         Write-Error ('JCApiKey and JCOrgId have not been set.')
+                #     }
+                # }
+                # Else
+                # {
+                #     Write-Warning ('Skipping TestModule.')
+                # }
                 ###########################################################################
                 If ($PackModule)
                 {
