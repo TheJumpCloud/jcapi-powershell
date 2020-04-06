@@ -130,6 +130,7 @@ Try
                 # $ExistingModule | Remove-Module -Force
                 # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
                 # Update FunctionsToExport with the same as CmdletsToExport
+                Write-Host ('[RUN COMMAND] Updating module manifest: FunctionsToExport') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
                 Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
                 # Add prerelease tag
@@ -138,6 +139,7 @@ Try
                     $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
                     If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
                     {
+                        Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
                         Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
                     }
