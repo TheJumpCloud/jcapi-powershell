@@ -39,7 +39,7 @@ ForEach ($API In $APIName)
             $ModuleName = $Config.'module-name'
             $Namespace = $Config.'namespace'
             $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
-            # $ModuleVersion = $Config.'module-version'
+            $ModuleVersion = $Config.'module-version'
             $nupkgName = '{0}*.nupkg' -f $ModuleName
             $binFolder = '{0}/bin/' -f $OutputFullPath
             $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
@@ -90,7 +90,15 @@ ForEach ($API In $APIName)
             {
                 Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
-                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $NextVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+                $ModuleVersion = If ([System.String]::IsNullOrEmpty($NextVersion))
+                {
+                    $ModuleVersion
+                }
+                Else
+                {
+                    $NextVersion
+                }
+                (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
             }
             ###########################################################################
             If ($BuildModule)
