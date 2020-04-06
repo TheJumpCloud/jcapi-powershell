@@ -120,6 +120,7 @@ Try
                 # Increment module version number
                 If (-not [System.String]::IsNullOrEmpty($NextVersion))
                 {
+                    Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
                 }
                 # # Get existing GUID
