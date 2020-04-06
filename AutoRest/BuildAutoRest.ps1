@@ -150,6 +150,7 @@ Try
             {
                 If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                 {
+                    Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     # Test module
                     If (Test-Path -Path:($testModulePath))
                     {
