@@ -54,7 +54,7 @@ Try
             $CustomFolderPath = '{0}/custom' -f $OutputFullPath
             $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
             $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
-            $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
+            $testModulePath = '{0}/test-module.ps1 -Live' -f $OutputFullPath
             $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
             Set-Location $BaseFolder
             ###########################################################################
@@ -145,35 +145,29 @@ Try
             ###########################################################################
             If ($TestModule)
             {
-                Write-Host ('Hello: 1') -BackgroundColor Cyan
                 If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                 {
-                    Write-Host ('Hello: 2') -BackgroundColor Cyan
                     # Test module
                     If (Test-Path -Path:($testModulePath))
                     {
-                        Write-Host ('Hello: 3') -BackgroundColor Cyan
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
                         Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Invoke-Expression -Command:($testModulePath + ' -Live') # Run to query against real API
+                        Invoke-Expression -Command:($testModulePath) # Run to query against real API
                     }
                     Else
                     {
-                        Write-Host ('Hello: 4') -BackgroundColor Cyan
                         Write-Error ("Path does not exist: $testModulePath")
                     }
                 }
                 Else
                 {
-                    Write-Host ('Hello: 5') -BackgroundColor Cyan
                     Write-Error ('JCApiKey and JCOrgId have not been set.')
                 }
             }
             Else
             {
-                Write-Host ('Hello: 6') -BackgroundColor Cyan
                 Write-Warning ('Skipping TestModule.')
             }
             ###########################################################################
