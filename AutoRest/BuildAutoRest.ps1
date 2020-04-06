@@ -1,7 +1,11 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
 )
+$env:JCApiKey = $JCApiKey
+$env:JCOrgId = $JCOrgId
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $PSRepoName = 'PSGallery'
 # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
@@ -14,6 +18,7 @@ $IncrementModuleVersion = $true
 $CopyModuleFile = $true
 $BuildModule = $true
 $UpdateModuleManifest = $true
+$TestModule = $true
 $PackModule = $true
 $CommitModule = $true
 $PublishModule = $false
@@ -47,6 +52,7 @@ ForEach ($API In $APIName)
             $CustomFolderPath = '{0}/custom' -f $OutputFullPath
             $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
             $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
+            $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
             $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
             Set-Location $BaseFolder
             ###########################################################################
@@ -132,6 +138,30 @@ ForEach ($API In $APIName)
                         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
                         Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
                     }
+                }
+            }
+            ###########################################################################
+            If ($TestModule -eq $true)
+            {
+                If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
+                {
+                    # Test module
+                    If (Test-Path -Path:($testModulePath))
+                    {
+                        # ./test-module.ps1 -Isolated # Not sure when to use this yet
+                        # ./test-module.ps1 -Record # Run to create playback files
+                        # ./test-module.ps1 -Playback # Run once playback files have been created
+                        Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        Invoke-Expression -Command:($testModulePath + ' -Live') # Run to query against real API
+                    }
+                    Else
+                    {
+                        Write-Error ("Path does not exist: $testModulePath")
+                    }
+                }
+                Else
+                {
+                    Write-Error ('JCApiKey and JCOrgId have not been set.')
                 }
             }
             ###########################################################################
