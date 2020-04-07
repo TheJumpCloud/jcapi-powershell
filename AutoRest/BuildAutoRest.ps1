@@ -151,6 +151,8 @@ Try
                 {
                     Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     # Test module
+                    Install-Module Pester -Force
+                    Import-Module Pester -Force
                     # ./test-module.ps1 -Isolated # Not sure when to use this yet
                     # ./test-module.ps1 -Record # Run to create playback files
                     # ./test-module.ps1 -Playback # Run once playback files have been created
