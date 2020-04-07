@@ -15,7 +15,7 @@ while (-not $mockingPath)
 
 Describe 'Get-JcSdkSystemUser' {
     It 'List' {
-        Get-JcSdkSystemUser | Should -Not -Be $null
+        Get-JcSdkSystemUser | Should -Be $null
     }
 
     It 'Get' -skip {
