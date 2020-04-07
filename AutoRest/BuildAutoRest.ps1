@@ -56,7 +56,6 @@ Try
             $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
             $testModulePath = '{0}/test-module.ps1 -Live' -f $OutputFullPath
             $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
-            Set-Location $BaseFolder
             ###########################################################################
             If ($InstallPreReq)
             {
@@ -199,6 +198,7 @@ Try
                     {
                         $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
                         $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
+                        Set-Location $BaseFolder
                         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
                         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
                         ./Invoke-Git.ps1 -Arguments:('add -A')
