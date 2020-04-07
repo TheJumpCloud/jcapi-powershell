@@ -60,9 +60,9 @@ Try
             If ($InstallPreReq)
             {
                 Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g dotnet-sdk-2.1
+                npm install -g dotnet-sdk-2.1 --force
                 Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g @autorest/autorest
+                npm install -g @autorest/autorest --force
                 Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta --reset
                 # autorest-beta --help
@@ -155,7 +155,7 @@ Try
                     # ./test-module.ps1 -Record # Run to create playback files
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Invoke-Expression -Command:($testModulePath) | %{Write-Host ($_)} # Run to query against real API
+                    Invoke-Expression -Command:($testModulePath) | ForEach-Object { Write-Host ($_) } # Run to query against real API
                     # Set-Location $OutputFullPath
                     # ./test-module.ps1 -Live # Run to query against real API
                 }
