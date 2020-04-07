@@ -155,9 +155,9 @@ Try
                     # ./test-module.ps1 -Record # Run to create playback files
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    # Invoke-Expression -Command:($testModulePath) # Run to query against real API
-                    Set-Location $OutputFullPath
-                    ./test-module.ps1 -Live # Run to query against real API
+                    Invoke-Expression -Command:($testModulePath + ' -Live') | %{Write-Host ($_)} # Run to query against real API
+                    # Set-Location $OutputFullPath
+                    # ./test-module.ps1 -Live # Run to query against real API
                 }
                 Else
                 {
