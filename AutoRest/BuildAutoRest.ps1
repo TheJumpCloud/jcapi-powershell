@@ -59,10 +59,10 @@ Try
             ###########################################################################
             If ($InstallPreReq)
             {
-                Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g dotnet-sdk-2.1 --force
+                # Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # npm install -g dotnet-sdk-2.1
                 Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                npm install -g @autorest/autorest --force
+                npm install -g @autorest/autorest
                 Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 autorest-beta --reset
                 # autorest-beta --help
