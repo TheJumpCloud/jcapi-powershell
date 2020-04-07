@@ -251,5 +251,6 @@ Try
 }
 Catch
 {
+    Write-Host("##vso[task.logissue type=error;]" + $_)
     Write-Error $_
 }
