@@ -156,10 +156,21 @@ Try
                     # ./test-module.ps1 -Isolated # Not sure when to use this yet
                     # ./test-module.ps1 -Record # Run to create playback files
                     # ./test-module.ps1 -Playback # Run once playback files have been created
-                    Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Invoke-Expression -Command:($testModulePath) # Run to query against real API
-                    # Set-Location $OutputFullPath
                     # ./test-module.ps1 -Live # Run to query against real API
+                    Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    $PesterResults = Invoke-Expression -Command:($testModulePath) # Run to query against real API
+                    Write-Host ($PesterResults)
+                    $FailedTests = $PesterResults.TestResult | Where-Object { $_.Passed -eq $false }
+                    If ($FailedTests)
+                    {
+                        Write-Host ('')
+                        Write-Host ('##############################################################################################################')
+                        Write-Host ('##############################Error Description###############################################################')
+                        Write-Host ('##############################################################################################################')
+                        Write-Host ('')
+                        $FailedTests | ForEach-Object { $_.Name + '; ' + $_.FailureMessage + '; ' }
+                        Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                    }
                 }
                 Else
                 {
