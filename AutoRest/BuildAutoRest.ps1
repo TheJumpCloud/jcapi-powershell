@@ -52,9 +52,10 @@ Try
             $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
             $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
             $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+            $TestFolderPath = '{0}/test' -f $OutputFullPath
             $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
             $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
-            $testModulePath = '{0}/test-module.ps1 -Live' -f $OutputFullPath
+            $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
             $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
             ###########################################################################
             If ($InstallPreReq)
@@ -157,10 +158,11 @@ Try
                     # ./test-module.ps1 -Record # Run to create playback files
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     # ./test-module.ps1 -Live # Run to query against real API
-                    Write-Host ('[RUN COMMAND] ' + $testModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    $PesterResults = Invoke-Expression -Command:($testModulePath) # Run to query against real API
-                    Write-Host ($PesterResults)
-                    $FailedTests = $PesterResults.TestResult | Where-Object { $_.Passed -eq $false }
+                    $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
+                    Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Invoke-Expression -Command:($TestModuleCommand)
+                    [xml]$PesterResults = Get-Content -Path:(Join-Path $TestFolderPath "$ModuleName-TestResults.xml")
+                    $FailedTests = $PesterResults.'test-results'.'test-suite'.results.'test-suite' | Where-Object { $_.success -eq 'False' }
                     If ($FailedTests)
                     {
                         Write-Host ('')
@@ -168,7 +170,7 @@ Try
                         Write-Host ('##############################Error Description###############################################################')
                         Write-Host ('##############################################################################################################')
                         Write-Host ('')
-                        $FailedTests | ForEach-Object { $_.Name + '; ' + $_.FailureMessage + '; ' }
+                        $FailedTests | ForEach-Object { $_.InnerText + ';' }
                         Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
                     }
                 }
