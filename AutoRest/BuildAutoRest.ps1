@@ -31,7 +31,7 @@ Try
         {
             # Run API Transform step
             $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) #| Out-Null
-            If ($UpdatedSpec -or $env:USERNAME -ne 'VssAdministrator')
+            If ($env:USERNAME -eq 'VssAdministrator')
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
