@@ -13,7 +13,7 @@ Try
     # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $PrereleaseName = '' # Populate to make release a beta
-    $FolderExcludeList = @('test') # Excluded folder in root from being removed
+    $FolderExcludeList = @('examples','test') # Excluded folder in root from being removed
     $InstallPreReq = $true
     $GenerateModule = $true
     $IncrementModuleVersion = $true
