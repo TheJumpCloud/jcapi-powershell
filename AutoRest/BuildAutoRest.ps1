@@ -6,15 +6,15 @@ Param(
 )
 Try
 {
+    # Create environmental variable so that they can be used by the pester tests later.
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
-    $env:GHtoken = $GHPat
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
     $PSRepoName = 'PSGallery'
     # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $PrereleaseName = '' # Populate to make release a beta
-    $FolderExcludeList = @('examples','test') # Excluded folder in root from being removed
+    $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
     $InstallPreReq = $true
     $GenerateModule = $true
     $IncrementModuleVersion = $true

@@ -1,24 +1,15 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubPAT
 )
 Set-Location $PSScriptRoot
-# copy swagger spec from private github repo using gh access token
-if ('DirectoryInsights' -in $APIName) {
-    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; 
-    $wc = New-Object -TypeName System.Net.WebClient; 
-    $wc.Headers.Add('Authorization', "bearer $env:GHtoken"); 
-    $dl_yaml = $PSScriptRoot + '/SwaggerSpecs/DirectoryInsights.yaml'
-    $dl_json = $PSScriptRoot + '/SwaggerSpecs/DirectoryInsights.json'
-    $wc.DownloadFile('https://raw.githubusercontent.com/TheJumpCloud/jumpcloud-insights-api/master/docs/swagger.json', $dl_json);
-    $wc.DownloadFile('https://raw.githubusercontent.com/TheJumpCloud/jumpcloud-insights-api/master/docs/swagger.yaml', $dl_yaml);
-}
-
 $ApiHash = [Ordered]@{
     # 'V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
     # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    'V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
+    'V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    'DirectoryInsights' = 'https://raw.githubusercontent.com/TheJumpCloud/jumpcloud-insights-api/master/docs/swagger.yaml'
     # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
     # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
@@ -314,7 +305,17 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
         # Get OAS content
-        $OASContent = (Invoke-WebRequest -Uri:($_.Value)).Content
+        $OASContent = If ($APIName -eq 'DirectoryInsights')
+        {
+            $Headers = @{
+                'Authorization' = "bearer $GitHubPAT";
+            }
+            (Invoke-WebRequest -Uri:($_.Value) -Headers:($Headers)).Content
+        }
+        Else
+        {
+            (Invoke-WebRequest -Uri:($_.Value)).Content
+        }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
             Write-Error ('No content was returned from: ' + $_.Value)
