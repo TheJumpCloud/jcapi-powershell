@@ -164,11 +164,6 @@ Try
                     $TestModuleContent.Replace('Invoke-Pester', 'Invoke-Pester -OutputFormat:(''NUnitXML'')') | Set-Content -Path:($testModulePath)
                     Invoke-Expression -Command:($TestModuleCommand)
                     Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    # Copy results to agent root so the results appear in Pipelines GUI
-                    If ($env:USERNAME -eq 'VssAdministrator')
-                    {
-                        Copy-Item -Path:($PesterTestResultPath) -Destination:($env:SYSTEM_DEFAULTWORKINGDIRECTORY) -Force
-                    }
                     [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
                     $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
                     If ($FailedTests)
