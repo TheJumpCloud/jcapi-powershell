@@ -160,8 +160,6 @@ Try
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     # ./test-module.ps1 -Live # Run to query against real API
                     $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                    # $TestModuleContent = Get-Content -Path:($testModulePath) -Raw
-                    # $TestModuleContent.Replace('Invoke-Pester', 'Invoke-Pester -OutputFormat:(''NUnitXML'')') | Set-Content -Path:($testModulePath)
                     Invoke-Expression -Command:($TestModuleCommand)
                     Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
