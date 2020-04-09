@@ -3,9 +3,11 @@ Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
 Try
 {
+    # Create environmental variable so that they can be used by the pester tests later.
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
@@ -30,7 +32,7 @@ Try
         If (Test-Path -Path:($ConfigFilePath))
         {
             # Run API Transform step
-            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) #| Out-Null
+            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) -GitHubAccessToken:($GitHubAccessToken) #| Out-Null
             # If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator')
             # {
             # Start SDK generation
@@ -160,8 +162,8 @@ Try
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     # ./test-module.ps1 -Live # Run to query against real API
                     $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                    Invoke-Expression -Command:($TestModuleCommand)
                     Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Invoke-Expression -Command:($TestModuleCommand)
                     [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
                     $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
                     If ($FailedTests)

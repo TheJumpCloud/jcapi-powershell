@@ -1,13 +1,15 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     # 'V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
     # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'V1' = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'V2' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    'V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
+    'V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
     # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
     # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
@@ -53,7 +55,7 @@ $FixesMapping = @{
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'V1' = [Ordered]@{
+    'V1'                = [Ordered]@{
         'POST_applications'                           = 'Create-Application';
         'DELETE_applications-id'                      = 'Delete-Application';
         'GET_applications-id'                         = 'Get-Application';
@@ -97,7 +99,7 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
         'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
     };
-    'V2' = [Ordered]@{
+    'V2'                = [Ordered]@{
         'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
         'GET_activedirectories'                                      = 'List-ActiveDirectory';
         'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation';
@@ -284,6 +286,9 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
+    'DirectoryInsights' = [Ordered]@{
+        'getEvents' = 'Get-Events'
+    };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
 $UpdatedSpec = $false
@@ -303,7 +308,18 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
         # Get OAS content
-        $OASContent = (Invoke-WebRequest -Uri:($_.Value)).Content
+        $OASContent = If ($APIName -eq 'DirectoryInsights')
+        {
+            $GitHubHeaders = @{
+                'Authorization' = "token $GitHubAccessToken";
+                'Accept'        = 'application/vnd.github.v3.raw';
+            }
+            Invoke-RestMethod -Method:('GET') -Uri:($_.Value) -Headers:($GitHubHeaders)
+        }
+        Else
+        {
+            (Invoke-WebRequest -Uri:($_.Value)).Content
+        }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
             Write-Error ('No content was returned from: ' + $_.Value)
@@ -366,17 +382,20 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 Exit
             }
             # Make fixes to file
-            $VersionFixes = $FixesMapping.Item($CurrentApiName)
-            $VersionFixes.GetEnumerator() | ForEach-Object {
-                $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
-                If (-not [System.String]::IsNullOrEmpty($PatternMatch))
-                {
-                    $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
-                    $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
-                }
-                Else
-                {
-                    Write-Error ('Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+            If ($FixesMapping.ContainsKey($CurrentApiName))
+            {
+                $VersionFixes = $FixesMapping.Item($CurrentApiName)
+                $VersionFixes.GetEnumerator() | ForEach-Object {
+                    $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
+                    If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+                    {
+                        $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
+                        $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                    }
+                    Else
+                    {
+                        Write-Error ('Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+                    }
                 }
             }
             # Convert json string to object
@@ -425,41 +444,50 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     }
                 }
             }
-            # Sort the json properties under "path"
-            $pathsHash = [ordered]@{ }
-            $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-            $pathsHash = [ordered]@{ }
-            $pathNames | ForEach-Object {
-                $pathName = $_
-                $MethodHash = [ordered]@{ }
-                $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) | Sort-Object
-                $MethodNames | ForEach-Object {
-                    $MethodName = $_
-                    $Method = $JsonExport.paths.$PathName.$MethodName
-                    $MethodHash.Add($MethodName, $Method)
+            # Sort the json properties under "paths"
+            If ('paths' -in $JsonExport.PSObject.Properties.Name)
+            {
+                $pathsHash = [ordered]@{ }
+                $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                $pathsHash = [ordered]@{ }
+                $pathNames | ForEach-Object {
+                    $pathName = $_
+                    $MethodHash = [ordered]@{ }
+                    $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) | Sort-Object
+                    $MethodNames | ForEach-Object {
+                        $MethodName = $_
+                        $Method = $JsonExport.paths.$PathName.$MethodName
+                        $MethodHash.Add($MethodName, $Method)
+                    }
+                    $JsonExport.paths.$PathName = $MethodHash
+                    $pathsHash.Add($pathName, $JsonExport.paths.$pathName)
                 }
-                $JsonExport.paths.$PathName = $MethodHash
-                $pathsHash.Add($pathName, $JsonExport.paths.$pathName)
+                $JsonExport.paths = $pathsHash
             }
-            $JsonExport.paths = $pathsHash
             # Sort the json properties under "parameters"
-            $parametersHash = [ordered]@{ }
-            $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-            $parametersHash = [ordered]@{ }
-            $parameterNames | ForEach-Object {
-                $parameterName = $_
-                $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
+            If ('parameters' -in $JsonExport.PSObject.Properties.Name)
+            {
+                $parametersHash = [ordered]@{ }
+                $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                $parametersHash = [ordered]@{ }
+                $parameterNames | ForEach-Object {
+                    $parameterName = $_
+                    $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
+                }
+                $JsonExport.parameters = $parametersHash
             }
-            $JsonExport.parameters = $parametersHash
             # Sort the json properties under "definitions"
-            $definitionsHash = [ordered]@{ }
-            $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-            $definitionsHash = [ordered]@{ }
-            $definitionsNames | ForEach-Object {
-                $definitionsName = $_
-                $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
+            If ('definitions' -in $JsonExport.PSObject.Properties.Name)
+            {
+                $definitionsHash = [ordered]@{ }
+                $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                $definitionsHash = [ordered]@{ }
+                $definitionsNames | ForEach-Object {
+                    $definitionsName = $_
+                    $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
+                }
+                $JsonExport.definitions = $definitionsHash
             }
-            $JsonExport.definitions = $definitionsHash
             # Convert json object to string
             $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
             # Compare current spec to old spec and if they are diffrent then export the new file
