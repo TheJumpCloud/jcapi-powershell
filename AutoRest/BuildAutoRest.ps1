@@ -8,6 +8,7 @@ Try
 {
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
+    $env:GHtoken = $GHPat
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
     $PSRepoName = 'PSGallery'
     # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'

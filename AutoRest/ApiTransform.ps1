@@ -2,7 +2,17 @@
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
 )
-Set-Location $PSScriptRoot
+# copy swagger spec from private github repo using gh access token
+if ('DirectoryInsights' -in $APIName) {
+    [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12; 
+    $wc = New-Object -TypeName System.Net.WebClient; 
+    $wc.Headers.Add('Authorization', "bearer $env:GHtoken"); 
+    $dl_yaml = $PSScriptRoot + '/SwaggerSpecs/DirectoryInsights.yaml'
+    $dl_json = $PSScriptRoot + '/SwaggerSpecs/DirectoryInsights.json'
+    $wc.DownloadFile('https://raw.githubusercontent.com/TheJumpCloud/jumpcloud-insights-api/master/docs/swagger.json', $dl_json);
+    $wc.DownloadFile('https://raw.githubusercontent.com/TheJumpCloud/jumpcloud-insights-api/master/docs/swagger.yaml', $dl_yaml);
+}
+
 $ApiHash = [Ordered]@{
     # 'V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
     # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
