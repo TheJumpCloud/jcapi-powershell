@@ -63,8 +63,8 @@ Try
             ###########################################################################
             If ($InstallPreReq)
             {
-                # Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                # npm install -g dotnet-sdk-2.1
+                Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                npm install -g dotnet-sdk-2.1
                 Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 npm install -g @autorest/autorest
                 Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -132,10 +132,6 @@ Try
                 # $ExistingModule = Get-Module -Name:($LatestModule.Name)
                 # $ExistingModule | Remove-Module -Force
                 # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
-                # Update FunctionsToExport with the same as CmdletsToExport
-                Write-Host ('[RUN COMMAND] Updating module manifest: FunctionsToExport') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                $CurrentCmdletsToExport = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('CmdletsToExport')
-                Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CurrentCmdletsToExport)
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
