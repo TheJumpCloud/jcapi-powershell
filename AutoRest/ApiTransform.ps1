@@ -56,7 +56,7 @@ $FixesMapping = @{
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'V1'                = [Ordered]@{
+    'V1' = [Ordered]@{
         'POST_applications'                           = 'Create-Application';
         'DELETE_applications-id'                      = 'Delete-Application';
         'GET_applications-id'                         = 'Get-Application';
@@ -100,7 +100,7 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
         'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
     };
-    'V2'                = [Ordered]@{
+    'V2' = [Ordered]@{
         'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
         'GET_activedirectories'                                      = 'List-ActiveDirectory';
         'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation';
@@ -287,9 +287,9 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
-    'DirectoryInsights' = [Ordered]@{
-        'getEvents' = 'Get-Events'
-    };
+    # 'DirectoryInsights' = [Ordered]@{
+    #     'getEvents' = 'Get-Event'
+    # };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
 $UpdatedSpec = $false
@@ -351,55 +351,64 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
             }
             $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
-            # Check to see if there are any operationIds not listed in the $OperationIdMapping
-            $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentApiName))
-            $OperationIdTemplate = '"operationId": "{0}"'
-            $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
-            $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
-            $UnmappedOperationIds = @{ }
-            ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
+            If (-not $NoUpdate)
             {
-                If (-not $OperationIdMappingVersion.Contains([System.String]$OperationIdMatchesValue))
+                # Check to see if there are any operationIds not listed in the $OperationIdMapping
+                If ($OperationIdMapping.Contains($CurrentApiName))
                 {
-                    $UnmappedOperationIds.Add($OperationIdMatchesValue, $_.Name)
-                }
-            }
-            # Rename operationIds using $OperationIdMapping
-            $OperationIdMappingVersion.GetEnumerator() | ForEach-Object {
-                $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
-                $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
-                If (($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old))) -or $NoUpdate)
-                {
-                    $ReadyForConvert = $ReadyForConvert.Replace($OperationId_Old, $OperationId_New)
-                }
-                Else
-                {
-                    Write-Error ('Unable to find in "' + $CurrentApiName + '" API an operationId called "' + $_.Name + '".')
-                }
-            }
-            # Check for unmapped operationIds
-            If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys) -and -not $NoUpdate)
-            {
-                $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
-                    Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
-                }
-                Write-Error ( 'New operationId found in "' + $CurrentApiName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
-                Exit
-            }
-            # Make fixes to file
-            If ($FixesMapping.ContainsKey($CurrentApiName))
-            {
-                $VersionFixes = $FixesMapping.Item($CurrentApiName)
-                $VersionFixes.GetEnumerator() | ForEach-Object {
-                    $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
-                    If (-not [System.String]::IsNullOrEmpty($PatternMatch) -and -not $NoUpdate)
+                    $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentApiName))
+                    $OperationIdTemplate = '"operationId": "{0}"'
+                    $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
+                    $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
+                    $UnmappedOperationIds = @{ }
+                    ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
                     {
-                        $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
-                        $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        If (-not $OperationIdMappingVersion.Contains([System.String]$OperationIdMatchesValue))
+                        {
+                            $UnmappedOperationIds.Add($OperationIdMatchesValue, $_.Name)
+                        }
                     }
-                    Else
+                    # Rename operationIds using $OperationIdMapping
+                    $OperationIdMappingVersion.GetEnumerator() | ForEach-Object {
+                        $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
+                        $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
+                        If ($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old)))
+                        {
+                            $ReadyForConvert = $ReadyForConvert.Replace($OperationId_Old, $OperationId_New)
+                        }
+                        Else
+                        {
+                            Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find in "' + $CurrentApiName + '" API an operationId called "' + $_.Name + '".')
+                            Write-Error ('Unable to find in "' + $CurrentApiName + '" API an operationId called "' + $_.Name + '".')
+                        }
+                    }
+                    # Check for unmapped operationIds
+                    If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
                     {
-                        Write-Error ('Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+                        $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
+                            Write-Host("##vso[task.logissue type=error;]" + 'Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
+                            Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
+                        }
+                        Write-Error ( 'New operationId found in "' + $CurrentApiName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
+                        Exit
+                    }
+                }
+                # Make fixes to file
+                If ($FixesMapping.ContainsKey($CurrentApiName))
+                {
+                    $VersionFixes = $FixesMapping.Item($CurrentApiName)
+                    $VersionFixes.GetEnumerator() | ForEach-Object {
+                        $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
+                        If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+                        {
+                            $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
+                            $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        }
+                        Else
+                        {
+                            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+                            Write-Error ('Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+                        }
                     }
                 }
             }
