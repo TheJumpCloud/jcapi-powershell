@@ -14,6 +14,7 @@ Try
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
     $PSRepoName = 'PSGallery'
     # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
+    $NuGetApiKey = ''
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
     $InstallPreReq = $true
@@ -236,7 +237,7 @@ Try
                 Write-Host ('[PUBLISHING MODULE] from "' + $extractedModulePath + '" to "' + $PSRepoName + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 If ($PSRepoName -eq 'PSGallery')
                 {
-                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:('oy2cwzfmucmj6ibyoveaiur3l5ixk23ejhupemqk5nep2u') -Force -Verbose
+                    Publish-Module -Repository:($PSRepoName) -Path:($extractedModulePath) -SkipAutomaticTags -NuGetApiKey:($NuGetApiKey) -Force -Verbose
                 }
                 Else
                 {
