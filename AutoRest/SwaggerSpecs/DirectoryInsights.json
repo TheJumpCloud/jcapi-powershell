@@ -1,0 +1,167 @@
+{
+  "basePath": "/insights/directory/v1",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "ErrorMessage": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "EventQuery": {
+      "description": "EventQuery is the users' command to search our auth logs\nLimit - row count (validated/repaired)\nSearchTerm - see above\nProjection - list of field names to return from document (not validated)",
+      "properties": {
+        "end_time": {
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "search_after": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "sort": {
+          "type": "string"
+        },
+        "start_time": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SearchTerm": {
+      "description": "SearchTerm is the filter portion of the query",
+      "properties": {
+        "and": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TermItem"
+          },
+          "type": "object"
+        },
+        "or": {
+          "additionalProperties": {
+            "$ref": "#/definitions/TermItem"
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "TermItem": {
+      "description": "TermItem  one term in an and/or query, or one in an array of terms\nitems in the Terms array can be\n1) a simple KV pair \"username\": \"root\"\n2) a key-array pair \"username\": [ \"root\", \"admin\"]\nin every case, they are key-value pairs,\nso they can be stored in a map by their parent object",
+      "properties": {
+        "Key": {
+          "description": "what's in it?",
+          "type": "string"
+        },
+        "Value": {
+          "type": "object"
+        },
+        "ValueArray": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "host": "api.jumpcloud.com",
+  "info": {
+    "contact": {
+      "email": "support@jumpcloud.com"
+    },
+    "description": "The purpose of this API is to query Jumpcloud Directory Insights events",
+    "title": "Directory Insights API",
+    "version": "0.35.0"
+  },
+  "paths": {
+    "/events": {
+      "get": {
+        "consumes": [
+          "application/json"
+        ],
+        "description": "Query the API for Directory Insights events",
+        "operationId": "Get-Events",
+        "parameters": [
+          {
+            "description": "JSON event query body",
+            "in": "body",
+            "name": "EventQueryBody",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EventQuery"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Directory Insights events JSON objects"
+          },
+          "400": {
+            "description": "Invalid/unknown query JSON body",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "401": {
+            "description": "Unauthorized (Invalid API Key)",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "402": {
+            "description": "Directory Insights is not enabled for yout organization",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          },
+          "500": {
+            "description": "Technical difficulties processing your request",
+            "schema": {
+              "$ref": "#/definitions/ErrorMessage"
+            }
+          }
+        },
+        "summary": "Query Events",
+        "tags": [
+          "EventQuery"
+        ]
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "swagger": "2.0"
+}
