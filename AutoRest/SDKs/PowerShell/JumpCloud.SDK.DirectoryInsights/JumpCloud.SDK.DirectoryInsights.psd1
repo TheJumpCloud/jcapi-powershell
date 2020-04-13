@@ -12,13 +12,13 @@
 RootModule = './JumpCloud.SDK.DirectoryInsights.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.2'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Core', 'Desktop'
 
 # ID used to uniquely identify this module
-GUID = '833acec7-e42a-44b4-b616-0d9bee47ce8c'
+GUID = '7df82f81-742a-42e3-a6cc-e72f16a04cba'
 
 # Author of this module
 Author = 'JumpCloud Solutions Architect Team'
@@ -69,7 +69,7 @@ FormatsToProcess = './JumpCloud.SDK.DirectoryInsights.format.ps1xml'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = 'Get-JcSdkEventQueryEvent'
+FunctionsToExport = 'Get-JcSdkEvent'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

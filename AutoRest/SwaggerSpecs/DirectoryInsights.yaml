@@ -82,7 +82,7 @@ paths:
       consumes:
       - application/json
       description: Query the API for Directory Insights events
-      operationId: Get-Events
+      operationId: Events_Get
       parameters:
       - description: JSON event query body
         in: body
