@@ -115,8 +115,8 @@ Try
             ###########################################################################
             If ($BuildModule)
             {
-                Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Invoke-Expression -Command:($buildModulePath)
+                Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
             }
             ###########################################################################
             If ($UpdateModuleManifest)
@@ -159,8 +159,8 @@ Try
                     # ./test-module.ps1 -Playback # Run once playback files have been created
                     # ./test-module.ps1 -Live # Run to query against real API
                     $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                    Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Invoke-Expression -Command:($TestModuleCommand)
+                    Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    Invoke-Expression -Command:($TestModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                     [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
                     $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
                     If ($FailedTests)
@@ -191,14 +191,15 @@ Try
                 # Pack module
                 If (Test-Path -Path:($packModulePath))
                 {
-                    Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Invoke-Expression -Command:($packModulePath)
+                    Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 Else
                 {
                     Write-Host("##vso[task.logissue type=error;]" + "Path does not exist: $packModulePath")
                     Write-Error ("Path does not exist: $packModulePath")
                 }
+                # Extract the module and prep for upload to psgallery
                 $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
                 Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
                 Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
