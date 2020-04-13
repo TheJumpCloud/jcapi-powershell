@@ -1,6 +1,7 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to prevent redownload of spec.')][switch]$NoUpdate
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
 Set-Location $PSScriptRoot
@@ -308,7 +309,11 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
         # Get OAS content
-        $OASContent = If ($APIName -eq 'DirectoryInsights')
+        $OASContent = If ($NoUpdate)
+        {
+            Get-Content -Path:($OutputFullPathYaml) -Raw
+        }
+        ElseIf ($APIName -eq 'DirectoryInsights')
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";
@@ -363,7 +368,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $OperationIdMappingVersion.GetEnumerator() | ForEach-Object {
                 $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
                 $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
-                If ($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old)))
+                If (($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old))) -or $NoUpdate)
                 {
                     $ReadyForConvert = $ReadyForConvert.Replace($OperationId_Old, $OperationId_New)
                 }
@@ -373,7 +378,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 }
             }
             # Check for unmapped operationIds
-            If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
+            If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys) -and -not $NoUpdate)
             {
                 $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
                     Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
@@ -387,7 +392,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $VersionFixes = $FixesMapping.Item($CurrentApiName)
                 $VersionFixes.GetEnumerator() | ForEach-Object {
                     $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
-                    If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+                    If (-not [System.String]::IsNullOrEmpty($PatternMatch) -and -not $NoUpdate)
                     {
                         $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
                         $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
