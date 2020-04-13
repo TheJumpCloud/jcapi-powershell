@@ -1,6 +1,7 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][ValidateNotNullOrEmpty()][System.String[]]$PrereleaseName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
@@ -14,7 +15,6 @@ Try
     $PSRepoName = 'PSGallery'
     # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
-    $PrereleaseName = '' # Populate to make release a beta
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
     $InstallPreReq = $true
     $GenerateModule = $true
