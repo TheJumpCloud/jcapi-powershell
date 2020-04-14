@@ -17,7 +17,7 @@ $ApiHash = [Ordered]@{
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    'V1' = [Ordered]@{
+    'V1'                = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                            = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
         '"system": {"title": "System"'                                                                                      = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
@@ -35,7 +35,7 @@ $FixesMapping = @{
         # ', ]'                                                                                                               = ']';
         "`t"                                                                                                                = '\t';
     };
-    'V2' = [Ordered]@{
+    'V2'                = [Ordered]@{
         # V2 Issues
         '"basePath": "/api/v2"'                                             = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
         '["string", "number", "boolean"]'                                   = '"string"';
@@ -53,6 +53,9 @@ $FixesMapping = @{
         # ', ]'                                                               = ']';
         "`t"                                                                = '\t';
     };
+    'DirectoryInsights' = [Ordered]@{
+        '"basePath": "/insights/directory/v1"' = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+    }
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
