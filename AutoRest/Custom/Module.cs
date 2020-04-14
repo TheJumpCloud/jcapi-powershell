@@ -75,6 +75,7 @@ namespace ModuleNameSpace
             }
             else
             {
+                var Content = await requestResult.Content.ReadAsStringAsync();
                 if (requestResult.ReasonPhrase == "Unauthorized")
                 {
                     System.Environment.SetEnvironmentVariable("JCApiKey", "");
@@ -89,7 +90,9 @@ namespace ModuleNameSpace
                 + requestResult.ReasonPhrase
                 + Environment.NewLine
                 + requestResult.RequestMessage
-                + ";"
+                + Environment.NewLine
+                + " Content: "
+                + Content
                  );
             }
         }
