@@ -38,6 +38,13 @@ definitions:
       start_time:
         type: string
     type: object
+  EventResponse:
+    description: |-
+      EventResponse is what we return
+    properties:
+      timestamp:
+        type: string
+    type: object
   SearchTerm:
     description: SearchTerm is the filter portion of the query
     properties:
@@ -75,7 +82,7 @@ info:
     email: support@jumpcloud.com
   description: The purpose of this API is to query Jumpcloud Directory Insights events
   title: Directory Insights API
-  version: 0.35.0
+  version: 0.39.0
 paths:
   /events:
     get:
@@ -95,6 +102,11 @@ paths:
       responses:
         "200":
           description: Array of Directory Insights events JSON objects
+          schema:
+            items:
+              type: object
+              additionalProperties: true
+            type: array
         "400":
           description: Invalid/unknown query JSON body
           schema:
@@ -119,4 +131,3 @@ produces:
 schemes:
 - https
 swagger: "2.0"
-
