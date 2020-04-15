@@ -1,4 +1,4 @@
-basePath: /insights/directory/v1
+basePath: /insights/directory/v1/
 consumes:
 - application/json
 definitions:
