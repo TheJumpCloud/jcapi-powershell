@@ -10,14 +10,14 @@ $ApiHash = [Ordered]@{
     # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
     'V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
     'V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
+    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=DEN-416_swagger_enhancements'
     # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
     # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    'V1'                = [Ordered]@{
+    'V1' = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                            = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
         '"system": {"title": "System"'                                                                                      = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
@@ -35,7 +35,7 @@ $FixesMapping = @{
         # ', ]'                                                                                                               = ']';
         "`t"                                                                                                                = '\t';
     };
-    'V2'                = [Ordered]@{
+    'V2' = [Ordered]@{
         # V2 Issues
         '"basePath": "/api/v2"'                                             = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
         '["string", "number", "boolean"]'                                   = '"string"';
@@ -53,13 +53,10 @@ $FixesMapping = @{
         # ', ]'                                                               = ']';
         "`t"                                                                = '\t';
     };
-    'DirectoryInsights' = [Ordered]@{
-        '"basePath": "/insights/directory/v1"' = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-    }
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'V1'                = [Ordered]@{
+    'V1' = [Ordered]@{
         'POST_applications'                           = 'Create-Application';
         'DELETE_applications-id'                      = 'Delete-Application';
         'GET_applications-id'                         = 'Get-Application';
@@ -103,7 +100,7 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
         'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
     };
-    'V2'                = [Ordered]@{
+    'V2' = [Ordered]@{
         'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
         'GET_activedirectories'                                      = 'List-ActiveDirectory';
         'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation';
@@ -289,9 +286,6 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_workdays-workday_id-auth'                            = 'Remove-WorkdayAuthorization';
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
-    };
-    'DirectoryInsights' = [Ordered]@{
-        'getEvents' = 'Events_Get'
     };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines

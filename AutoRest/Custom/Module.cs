@@ -59,16 +59,6 @@ namespace ModuleNameSpace
             // request.Headers.Add("Content-Type", "application/json");
             // let it go on.
             var requestResult = await next.SendAsync(request, callback);
-            // Console.WriteLine("------------------------------------------------------------------------");
-            // Console.WriteLine("RequestUri : {0}", request.RequestUri);
-            // Console.WriteLine("Content: {0}", requestResult.Content);
-            // Console.WriteLine(requestResult.Content.ToString());
-            // Console.WriteLine("Headers: {0}", requestResult.Headers);
-            // Console.WriteLine("RequestMessage: {0}", requestResult.RequestMessage);
-            // Console.WriteLine("IsSuccessStatusCode: {0}", requestResult.IsSuccessStatusCode);
-            // Console.WriteLine("ReasonPhrase: {0}", requestResult.ReasonPhrase);
-            // Console.WriteLine("StatusCode: {0}", requestResult.StatusCode);
-            // Console.WriteLine("Version: {0}", requestResult.Version);
             if (requestResult.IsSuccessStatusCode)
             {
                 return requestResult;
@@ -95,6 +85,19 @@ namespace ModuleNameSpace
                 + Content
                  );
             }
+            // Console.WriteLine("------------------------------------------------------------------------");
+            // Console.WriteLine("StackTrace: '{0}'", Environment.StackTrace);
+            // Console.WriteLine("Content: {0}", Content);
+            // Console.WriteLine("------------------------------------------------------------------------");
+            // Console.WriteLine("RequestUri : {0}", request.RequestUri);
+            // Console.WriteLine("Content: {0}", Content);
+            // Console.WriteLine(requestResult.Content.ReadAsStringAsync());
+            // Console.WriteLine("Headers: {0}", requestResult.Headers);
+            // Console.WriteLine("RequestMessage: {0}", requestResult.RequestMessage);
+            // Console.WriteLine("IsSuccessStatusCode: {0}", requestResult.IsSuccessStatusCode);
+            // Console.WriteLine("ReasonPhrase: {0}", requestResult.ReasonPhrase);
+            // Console.WriteLine("StatusCode: {0}", requestResult.StatusCode);
+            // Console.WriteLine("Version: {0}", requestResult.Version);
         }
     }
 }
