@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkEvent' {
     It 'Check Output Result exists' {
-        (Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString()| ConvertFrom-Json | Select-Object -First 1 | Should -EQ 1
+        ((Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString()| ConvertFrom-Json | Select-Object -First 1).count | Should -EQ 1
     }
 
     It 'Check Output Client IP ' {
-        ((Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString()| ConvertFrom-Json | Select-Object -First 1).client_ip | Should -Eq 71.33.193.140
+        ((Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString()| ConvertFrom-Json | Select-Object -First 1).client_ip | Should -Eq 76.25.29.226
     }
 }
