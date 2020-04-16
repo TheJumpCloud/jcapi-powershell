@@ -34,7 +34,7 @@ Try
         If (Test-Path -Path:($ConfigFilePath))
         {
             # Run API Transform step
-            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) -GitHubAccessToken:($GitHubAccessToken) -NoUpdate # | Out-Null
+            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -APIName:($APIName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
             If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
             {
                 # Start SDK generation
