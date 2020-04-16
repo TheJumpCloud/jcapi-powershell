@@ -1,4 +1,4 @@
-### Example 1:
+### Example 1: {{ Search All }}
 
 ```powershell
 PS C:\> {{ (Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString()| ConvertFrom-Json }}
