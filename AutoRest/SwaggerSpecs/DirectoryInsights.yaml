@@ -39,8 +39,7 @@ definitions:
         type: string
     type: object
   EventResponse:
-    description: |-
-      EventResponse is what we return
+    description: EventResponse is what we return
     properties:
       timestamp:
         type: string
@@ -131,3 +130,4 @@ produces:
 schemes:
 - https
 swagger: "2.0"
+
