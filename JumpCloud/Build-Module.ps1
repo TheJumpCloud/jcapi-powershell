@@ -1,6 +1,6 @@
 # $UserAgent = Get-JCUserAgent
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-$OutputPath = $PSScriptRoot + '/JumpCloudV2/'
+$OutputPath = $PSScriptRoot + '/JumpCloud/'
 If (Test-Path -Path:($OutputPath))
 {
     Remove-Item -Path:($OutputPath) -Recurse -Force
