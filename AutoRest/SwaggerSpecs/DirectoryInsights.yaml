@@ -38,12 +38,6 @@ definitions:
       start_time:
         type: string
     type: object
-  EventResponse:
-    description: EventResponse is what we return
-    properties:
-      timestamp:
-        type: string
-    type: object
   SearchTerm:
     description: SearchTerm is the filter portion of the query
     properties:
@@ -103,8 +97,8 @@ paths:
           description: Array of Directory Insights events JSON objects
           schema:
             items:
-              type: object
               additionalProperties: true
+              type: object
             type: array
         "400":
           description: Invalid/unknown query JSON body
@@ -115,7 +109,7 @@ paths:
           schema:
             $ref: '#/definitions/ErrorMessage'
         "402":
-          description: Directory Insights is not enabled for yout organization
+          description: Directory Insights is not enabled for your organization
           schema:
             $ref: '#/definitions/ErrorMessage'
         "500":
