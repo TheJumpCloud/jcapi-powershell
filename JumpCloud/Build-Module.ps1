@@ -1,13 +1,15 @@
 # $UserAgent = Get-JCUserAgent
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
+$IndentChar = '    '
+$FunctionTemplate = "#Requires -modules {0}`nFunction {1}`n{{`n$($IndentChar){2}`n$($IndentChar)Param(`n{3}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{4}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n}}"
 If (Test-Path -Path:($OutputPath))
 {
     Remove-Item -Path:($OutputPath) -Recurse -Force
 }
 If (Get-Module -Name($ModuleNames))
 {
-    $Commands = Get-Command -Module:($ModuleNames) #| Where-Object { $_.Name -in ('Set-JcSdkSystemUser', 'Get-JcSdkSystemUser', 'New-JcSdkSystemUser') }
+    $Commands = Get-Command -Module:($ModuleNames)
     ForEach ($Command In $Commands)
     {
         # Create new function name
@@ -19,7 +21,7 @@ If (Get-Module -Name($ModuleNames))
         $CommandParameters = $Command.Parameters
         $DefaultParameterSet = $CommandParameterSets | Where-Object { $_.IsDefault }
         # Get the default parameter set
-        $DefaultParameterSetName = If ($DefaultParameterSet) { "[CmdletBinding(DefaultParameterSetName = '$($DefaultParameterSet.Name)')]`n" } # SupportsShouldProcess = `$true,
+        $DefaultParameterSetName = If ($DefaultParameterSet) { "[CmdletBinding(DefaultParameterSetName = '$($DefaultParameterSet.Name)')]" } Else { '' } # SupportsShouldProcess = `$true,
         # Build parameters by copying them from the SDK function parameters
         $NewParameters = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
         {
@@ -75,7 +77,7 @@ If (Get-Module -Name($ModuleNames))
                             # Return key value pair
                             If ($AttributeValue -notin ('$false', '-2147483648'))
                             {
-                                "`n`t`t`t" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
+                                "`n$($IndentChar)$($IndentChar)$($IndentChar)" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
                             }
                         }
                     }
@@ -93,11 +95,11 @@ If (Get-Module -Name($ModuleNames))
                         $ParameterString = $null
                         If (-not [System.String]::IsNullOrEmpty($_))
                         {
-                            $ParameterString = "`n`t`t`tParameterSetName = '" + $_ + "'"
+                            $ParameterString = "`n$($IndentChar)$($IndentChar)$($IndentChar)ParameterSetName = '" + $_ + "'"
                         }
                         If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
                         {
-                            $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n`t`t"
+                            $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n$($IndentChar)$($IndentChar)"
                         }
                         Else
                         {
@@ -105,16 +107,16 @@ If (Get-Module -Name($ModuleNames))
                         }
                         If (-not [System.String]::IsNullOrEmpty($ParameterString))
                         {
-                            $ParameterString = "[Parameter(" + $ParameterString + ")]"
+                            $ParameterString = "$($IndentChar)$($IndentChar)[Parameter(" + $ParameterString + ")]"
                             $FullParameterString += $ParameterString
                         }
                     }
-                    ( $FullParameterString -join "`n`t`t")
+                    ( $FullParameterString -join "`n")
                 }
                 # Return full parameter set
                 If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
                 {
-                    [System.String](($NewParameterSets -join "`n`t`t") + "`n`t`t" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
+                    [System.String](($NewParameterSets -join "`n") + "`n$($IndentChar)$($IndentChar)" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
                 }
                 Else
                 {
@@ -122,106 +124,137 @@ If (Get-Module -Name($ModuleNames))
                 }
             }
         }
-        $ParamBlock = $DefaultParameterSetName + ("`t" + 'Param(' + "`n`t`t" + ($NewParameters -join ",`n`t`t") + ",`n`t`t" + '[System.Boolean]$Paginate = $true' + "`n`t" + ')')
-        # Build function
-        $Script = If ($Command.Verb -in ('Get', 'Search'))
+        $NewParameters = ($NewParameters -join ",`n") + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true'
+        # $ParamBlock = $DefaultParameterSetName + ("$($IndentChar)" + 'Param(' + "`n$($IndentChar)$($IndentChar)" + ($NewParameters -join ",`n$($IndentChar)$($IndentChar)") + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' + "`n$($IndentChar)" + ')')
+        # Build $BeginContent, $ProcessContent, and $EndContent
+        If ($Command.Verb -in ('Get', 'Search'))
         {
-            # Create results logic
-            $ResultsLogic = Switch ($ModuleName)
+            # Build script body
+            If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
             {
-                'JumpCloud.SDK.V1'
-                {
-                    ('$ResultCount = ($Result.results | Measure-Object).Count;' + "`n                " + '$Results += $Result.results;')
-                }
-                'JumpCloud.SDK.V2'
-                {
-                    ('$ResultCount = ($Result | Measure-Object).Count;' + "`n                " + '$Results += $Result;')
-
-                }
-                Default
-                {
-                    Write-Error ('Unknown module $($ModuleName)')
-                }
+                # Build "Begin" block
+                $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
+$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next )
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask.Result
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar))"
+                # Build "Process" block
+                $ProcessContent = "$($IndentChar)$($IndentChar)Do
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.SearchAfter = `$XResultSearchAfter
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Headers.GetValues('X-Result-Count')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Headers.GetValues('X-Limit')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Warning ('No Results Found')
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit)"
+                # Build "End" block
+                $EndContent = "$($IndentChar)$($IndentChar)# Clean up global variables
+$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq 'JCHttpRequest' })) { Remove-Variable -Name:('JCHttpRequest') -Scope:('Global') }
+$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq 'JCHttpResponse' })) { Remove-Variable -Name:('JCHttpResponse') -Scope:('Global') }
+$($IndentChar)$($IndentChar)Return `$Results"
             }
-            # Script template
-            "#Requires -modules $($ModuleName)
-Function $NewFunctionName
-{
-    $ParamBlock
-    Begin
-    {
-        `$Results = @()
-        If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
-        {
-            `$PSBoundParameters.Add('Skip', 0)
-        }
-        If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
-        {
-            `$PSBoundParameters.Add('Limit', 100)
-        }
-    }
-    Process
-    {
-        If (`$PSBoundParameters.Paginate)
-        {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
+            ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2'))
             {
-                # Write-Host (`"Skip: `$(`$PSBoundParameters.Skip); Limit: `$(`$PSBoundParameters.Limit); `");
-                `$Result = $CommandName @PSBoundParameters
-                If (-not [System.String]::IsNullOrEmpty(`$Result))
+                # Create results logic
+                $ResultsLogic = Switch ($ModuleName)
                 {
-                    $ResultsLogic
-                    `$PSBoundParameters.Skip += `$ResultCount
+                    'JumpCloud.SDK.V1'
+                    {
+                        @('$ResultCount = ($Result.results | Measure-Object).Count;', '$Results += $Result.results;')
+                    }
+                    'JumpCloud.SDK.V2'
+                    {
+                        @('$ResultCount = ($Result | Measure-Object).Count;', '$Results += $Result;')
+                    }
+                    Default
+                    {
+                        Write-Error ("Unknown module $($ModuleName)")
+                    }
                 }
+                # Build "Begin" block
+                $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
+$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
+$($IndentChar)$($IndentChar)}"
+                # Build "Process" block
+                $ProcessContent = "$($IndentChar)$($IndentChar)If (`$PSBoundParameters.Paginate)
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
+$($IndentChar)$($IndentChar)$($IndentChar)Do
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); Limit: `$(`$PSBoundParameters.Limit);`");
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $CommandName @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($ResultsLogic -join "`n$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)")
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit)
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $CommandName @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($ResultsLogic -join "`n$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)")
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)}"
+                # Build "End" block
+                $EndContent = "$($IndentChar)$($IndentChar)Return `$Results"
             }
-            While (`$ResultCount -eq `$PSBoundParameters.Limit)
-        }
-        Else
-        {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$Result = $CommandName @PSBoundParameters
-            If (-not [System.String]::IsNullOrEmpty(`$Result))
+            Else
             {
-                $ResultsLogic
-                `$PSBoundParameters.Skip += `$ResultCount
+                Write-Error ('Unknown module $($ModuleName)')
             }
-        }
-    }
-    End
-    {
-        Return `$Results
-    }
-}"
         }
         ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import'))
         {
-            # Script template
-            "#Requires -modules $($ModuleName)
-Function $NewFunctionName
-{
-    $ParamBlock
-    Begin
-    {
-        `$Results = @()
-    }
-    Process
-    {
-        `$Results = $CommandName @PSBoundParameters
-    }
-    End
-    {
-        Return `$Results
-    }
-}"
+            # Build "Begin" block
+            $BeginContent = "`$Results = @()"
+            # Build "Process" block
+            $ProcessContent = "`$Results = $CommandName @PSBoundParameters"
+            # Build "End" block
+            $EndContent = "Return `$Results"
         }
         Else
         {
             Write-Warning ('Unmapped command: ' + $CommandName)
             $null
         }
-        If (-not [System.String]::IsNullOrEmpty($Script))
+        If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
+            # Build "Function"
+            $NewScript = $FunctionTemplate -f $ModuleName, $NewFunctionName, $DefaultParameterSetName, $NewParameters, $BeginContent, $ProcessContent, $EndContent
             # Export the function
             $OutputFullPath = $OutputPath + $Command.Verb
             Write-Host ("$OutputFullPath - $CommandName")
@@ -229,7 +262,7 @@ Function $NewFunctionName
             {
                 New-Item -Path:($OutputFullPath) -ItemType:('Directory') | Out-Null
             }
-            $Script | Out-File -FilePath:($OutputFullPath + '/' + $NewFunctionName + '.ps1') -Force
+            $NewScript | Out-File -FilePath:($OutputFullPath + '/' + $NewFunctionName + '.ps1') -Force
         }
     }
 }
