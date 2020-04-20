@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Set-JCApplication
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
     Param(
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]

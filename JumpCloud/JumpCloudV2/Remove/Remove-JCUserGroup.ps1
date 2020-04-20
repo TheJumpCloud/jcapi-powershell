@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Remove-JCUserGroup
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Delete')]
     Param(
         [Parameter(

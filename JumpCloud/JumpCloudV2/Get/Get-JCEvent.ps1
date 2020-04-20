@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.DirectoryInsights
 Function Get-JCEvent
 {
+    #Requires -modules JumpCloud.SDK.DirectoryInsights
     [CmdletBinding(DefaultParameterSetName = 'GetExpanded')]
     Param(
         [Parameter(

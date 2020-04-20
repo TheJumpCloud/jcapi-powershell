@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Reset-JCSystemUserMfa
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'ResetExpanded')]
     Param(
         [Parameter(

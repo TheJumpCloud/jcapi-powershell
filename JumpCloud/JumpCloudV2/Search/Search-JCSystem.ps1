@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Search-JCSystem
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'SearchExpanded')]
     Param(
         [Parameter(ParameterSetName = 'SearchExpanded')]

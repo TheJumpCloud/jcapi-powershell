@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Update-JCLdapServer
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
     Param(
         [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]

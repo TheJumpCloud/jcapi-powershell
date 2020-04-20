@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseRadiusServer
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'List')]
     Param(
         [Parameter(

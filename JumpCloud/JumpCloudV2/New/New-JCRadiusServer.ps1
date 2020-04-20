@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function New-JCRadiusServer
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
     Param(
         [Parameter(

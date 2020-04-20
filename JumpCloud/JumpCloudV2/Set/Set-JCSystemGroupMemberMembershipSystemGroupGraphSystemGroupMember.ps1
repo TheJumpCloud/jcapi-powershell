@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Set-JCSystemGroupMemberMembershipSystemGroupGraphSystemGroupMember
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
     Param(
         [Parameter(

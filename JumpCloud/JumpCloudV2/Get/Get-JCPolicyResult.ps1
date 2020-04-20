@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Get-JCPolicyResult
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'List1')]
     Param(
         [Parameter(

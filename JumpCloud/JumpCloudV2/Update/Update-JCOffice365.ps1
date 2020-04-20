@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Update-JCOffice365
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Set-JCSystem
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Get-JCSystemInsightSharedResource
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'List')]
     Param(
         [Parameter(ParameterSetName = 'List')]

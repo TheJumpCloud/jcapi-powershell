@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Remove-JCSystemUserSshKey
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'Delete')]
     Param(
         [Parameter(

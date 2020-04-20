@@ -2,7 +2,7 @@
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
 $IndentChar = '    '
-$FunctionTemplate = "#Requires -modules {0}`nFunction {1}`n{{`n$($IndentChar){2}`n$($IndentChar)Param(`n{3}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{4}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n}}"
+$FunctionTemplate = "Function {0}`n{{`n$($IndentChar)#Requires -modules {1}`n$($IndentChar){2}`n$($IndentChar)Param(`n{3}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{4}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n}}"
 If (Test-Path -Path:($OutputPath))
 {
     Remove-Item -Path:($OutputPath) -Recurse -Force
@@ -254,7 +254,7 @@ $($IndentChar)$($IndentChar)}"
         If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
             # Build "Function"
-            $NewScript = $FunctionTemplate -f $ModuleName, $NewFunctionName, $DefaultParameterSetName, $NewParameters, $BeginContent, $ProcessContent, $EndContent
+            $NewScript = $FunctionTemplate -f $NewFunctionName, $ModuleName, $DefaultParameterSetName, $NewParameters, $BeginContent, $ProcessContent, $EndContent
             # Export the function
             $OutputFullPath = $OutputPath + $Command.Verb
             Write-Host ("$OutputFullPath - $CommandName")

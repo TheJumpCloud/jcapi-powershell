@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Get-JCSystemInsightScheduledTask
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Get')]
     Param(
         [Parameter(ParameterSetName = 'Get')]

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function New-JCSambaDomainLdapServerSambaDomain
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Set-JCSystemGraphSystemAssociation
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
     Param(
         [Parameter(

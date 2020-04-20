@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function New-JCBulkJobRequestBulkUser
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Create')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Get-JCSystem
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'List')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Unlock-JCSystemUser
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'Unlock')]
     Param(
         [Parameter(

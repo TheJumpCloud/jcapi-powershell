@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Update-JCBulkJobRequestBulkUser
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Patch')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Grant-JCWorkdayImportWorkday
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'AuthorizeExpanded')]
     Param(
         [Parameter(

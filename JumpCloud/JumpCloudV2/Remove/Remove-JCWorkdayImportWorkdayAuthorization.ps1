@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Remove-JCWorkdayImportWorkdayAuthorization
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Remove')]
     Param(
         [Parameter(

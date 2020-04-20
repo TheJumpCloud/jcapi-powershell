@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function Invoke-JCCommandTrigger
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'Post')]
     Param(
         [Parameter(

@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Remove-JCSystemGroup
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Delete')]
     Param(
         [Parameter(

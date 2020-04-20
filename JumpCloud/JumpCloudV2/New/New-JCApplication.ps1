@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V1
 Function New-JCApplication
 {
+    #Requires -modules JumpCloud.SDK.V1
     [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
     Param(
         [Parameter(ParameterSetName = 'CreateExpanded')]

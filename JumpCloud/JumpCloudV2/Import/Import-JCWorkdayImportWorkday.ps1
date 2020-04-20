@@ -1,6 +1,6 @@
-#Requires -modules JumpCloud.SDK.V2
 Function Import-JCWorkdayImportWorkday
 {
+    #Requires -modules JumpCloud.SDK.V2
     [CmdletBinding(DefaultParameterSetName = 'Import')]
     Param(
         [Parameter(
