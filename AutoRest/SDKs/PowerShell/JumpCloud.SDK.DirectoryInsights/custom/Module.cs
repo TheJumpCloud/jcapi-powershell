@@ -65,7 +65,7 @@ namespace JumpCloud.SDK.DirectoryInsights
             }
             else
             {
-                var Content = await requestResult.Content.ReadAsStringAsync();
+                var ResponseContent = await requestResult.Content.ReadAsStringAsync();
                 if (requestResult.ReasonPhrase == "Unauthorized")
                 {
                     System.Environment.SetEnvironmentVariable("JCApiKey", "");
@@ -81,16 +81,19 @@ namespace JumpCloud.SDK.DirectoryInsights
                 + Environment.NewLine
                 + requestResult.RequestMessage
                 + Environment.NewLine
-                + " Content: "
-                + Content
+                + " RequestContent: " + request.Content.ReadAsStringAsync().Result
+                + Environment.NewLine
+                + " ResponseContent: " + ResponseContent
                  );
             }
             // Console.WriteLine("------------------------------------------------------------------------");
+            // Console.WriteLine("RequestBody: '{0}'", request.Content.ReadAsStringAsync().Result);
+            // Console.WriteLine("------------------------------------------------------------------------");
+            // Console.WriteLine("------------------------------------------------------------------------");
             // Console.WriteLine("StackTrace: '{0}'", Environment.StackTrace);
-            // Console.WriteLine("Content: {0}", Content);
+            // Console.WriteLine("ResponseContent: {0}", ResponseContent);
             // Console.WriteLine("------------------------------------------------------------------------");
             // Console.WriteLine("RequestUri : {0}", request.RequestUri);
-            // Console.WriteLine("Content: {0}", Content);
             // Console.WriteLine(requestResult.Content.ReadAsStringAsync());
             // Console.WriteLine("Headers: {0}", requestResult.Headers);
             // Console.WriteLine("RequestMessage: {0}", requestResult.RequestMessage);
