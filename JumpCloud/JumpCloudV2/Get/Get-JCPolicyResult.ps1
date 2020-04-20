@@ -1,34 +1,41 @@
 #Requires -modules JumpCloud.SDK.V2
 Function Get-JCPolicyResult
 {
-    [CmdletBinding(DefaultParameterSetName = 'Get')]
-	Param(
-		[Parameter(
-			ParameterSetName = 'Get',
-			Mandatory = $true
-		)]
-		[System.String]$Id,
-		[Parameter(
-			ParameterSetName = 'GetViaIdentity',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(
-			ParameterSetName = 'List',
-			Mandatory = $true
-		)]
-		[System.String]$PolicyId,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String[]]$Filter,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Limit,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Skip,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String[]]$Sort,
-		[System.Boolean]$Paginate = $true
-	)
+    [CmdletBinding(DefaultParameterSetName = 'List1')]
+    Param(
+        [Parameter(
+            ParameterSetName = 'Get',
+            Mandatory = $true
+        )]
+        [System.String]$Id,
+        [Parameter(
+            ParameterSetName = 'GetViaIdentity',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
+        [Parameter(
+            ParameterSetName = 'List',
+            Mandatory = $true
+        )]
+        [System.String]$PolicyId,
+        [Parameter(ParameterSetName = 'List1')]
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Fields,
+        [Parameter(ParameterSetName = 'List1')]
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Filter,
+        [Parameter(ParameterSetName = 'List1')]
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Limit,
+        [Parameter(ParameterSetName = 'List1')]
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Skip,
+        [Parameter(ParameterSetName = 'List1')]
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Sort,
+        [System.Boolean]$Paginate = $true
+    )
     Begin
     {
         $Results = @()
@@ -48,12 +55,12 @@ Function Get-JCPolicyResult
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit);");
                 $Result = Get-JcSdkPolicyResult @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
                     $ResultCount = ($Result | Measure-Object).Count;
-                $Results += $Result;
+                    $Results += $Result;
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }

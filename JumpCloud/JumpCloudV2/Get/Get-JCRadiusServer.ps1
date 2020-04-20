@@ -2,19 +2,30 @@
 Function Get-JCRadiusServer
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
-	Param(
-		[Parameter(ParameterSetName = 'List')]
-		[System.String]$Fields,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String]$Filter,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Limit,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Skip,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String]$Sort,
-		[System.Boolean]$Paginate = $true
-	)
+    Param(
+        [Parameter(
+            ParameterSetName = 'Get',
+            Mandatory = $true
+        )]
+        [System.String]$Id,
+        [Parameter(
+            ParameterSetName = 'GetViaIdentity',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String]$Fields,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String]$Filter,
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Limit,
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Skip,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String]$Sort,
+        [System.Boolean]$Paginate = $true
+    )
     Begin
     {
         $Results = @()
@@ -34,12 +45,12 @@ Function Get-JCRadiusServer
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit);");
                 $Result = Get-JcSdkRadiusServer @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
                     $ResultCount = ($Result.results | Measure-Object).Count;
-                $Results += $Result.results;
+                    $Results += $Result.results;
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }

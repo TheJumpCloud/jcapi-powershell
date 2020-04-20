@@ -2,29 +2,29 @@
 Function Get-JCDuoApplication
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
-	Param(
-		[Parameter(
-			ParameterSetName = 'List',
-			Mandatory = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'Get',
-			Mandatory = $true
-		)]
-		[System.String]$AccountId,
-		[Parameter(
-			ParameterSetName = 'Get',
-			Mandatory = $true
-		)]
-		[System.String]$ApplicationId,
-		[Parameter(
-			ParameterSetName = 'GetViaIdentity',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-		[System.Boolean]$Paginate = $true
-	)
+    Param(
+        [Parameter(
+            ParameterSetName = 'List',
+            Mandatory = $true
+        )]
+        [Parameter(
+            ParameterSetName = 'Get',
+            Mandatory = $true
+        )]
+        [System.String]$AccountId,
+        [Parameter(
+            ParameterSetName = 'Get',
+            Mandatory = $true
+        )]
+        [System.String]$ApplicationId,
+        [Parameter(
+            ParameterSetName = 'GetViaIdentity',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
+        [System.Boolean]$Paginate = $true
+    )
     Begin
     {
         $Results = @()
@@ -44,12 +44,12 @@ Function Get-JCDuoApplication
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit);");
                 $Result = Get-JcSdkDuoApplication @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
                     $ResultCount = ($Result | Measure-Object).Count;
-                $Results += $Result;
+                    $Results += $Result;
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }

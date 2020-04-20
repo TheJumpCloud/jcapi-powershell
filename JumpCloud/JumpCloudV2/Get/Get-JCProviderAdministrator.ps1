@@ -2,22 +2,24 @@
 Function Get-JCProviderAdministrator
 {
     [CmdletBinding(DefaultParameterSetName = 'List')]
-	Param(
-		[Parameter(
-			ParameterSetName = 'List',
-			Mandatory = $true
-		)]
-		[System.String]$ProviderId,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String[]]$Filter,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Limit,
-		[Parameter(ParameterSetName = 'List')]
-		[System.Int32]$Skip,
-		[Parameter(ParameterSetName = 'List')]
-		[System.String[]]$Sort,
-		[System.Boolean]$Paginate = $true
-	)
+    Param(
+        [Parameter(
+            ParameterSetName = 'List',
+            Mandatory = $true
+        )]
+        [System.String]$ProviderId,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Fields,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Filter,
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Limit,
+        [Parameter(ParameterSetName = 'List')]
+        [System.Int32]$Skip,
+        [Parameter(ParameterSetName = 'List')]
+        [System.String[]]$Sort,
+        [System.Boolean]$Paginate = $true
+    )
     Begin
     {
         $Results = @()
@@ -37,12 +39,12 @@ Function Get-JCProviderAdministrator
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                # Write-Host ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit);");
                 $Result = Get-JcSdkProviderAdministrator @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
                     $ResultCount = ($Result | Measure-Object).Count;
-                $Results += $Result;
+                    $Results += $Result;
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }

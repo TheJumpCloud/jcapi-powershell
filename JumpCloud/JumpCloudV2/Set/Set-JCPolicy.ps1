@@ -2,75 +2,75 @@
 Function Set-JCPolicy
 {
     [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
-	Param(
-		[Parameter(
-			ParameterSetName = 'PutExpanded',
-			Mandatory = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'Put',
-			Mandatory = $true
-		)]
-		[System.String]$Id,
-		[Parameter(
-			ParameterSetName = 'PutViaIdentityExpanded',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'PutViaIdentity',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-		[Parameter(
-			ParameterSetName = 'PutViaIdentity',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'Put',
-			Mandatory = $true,
-			ValueFromPipeline = $true
-		)]
-		[JumpCloud.SDK.V2.Models.IPolicyRequest]$Body,
-		[Parameter(
-			ParameterSetName = 'PutViaIdentityExpanded',
-			Mandatory = $true
-		)]
-		[Parameter(
-			ParameterSetName = 'PutExpanded',
-			Mandatory = $true
-		)]
-		[System.String]$Name,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[System.String]$TemplateId,
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values,
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[Parameter(ParameterSetName = 'Put')]
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-		[Parameter(ParameterSetName = 'PutExpanded')]
-		[Parameter(ParameterSetName = 'Put')]
-		[Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-		[Parameter(ParameterSetName = 'PutViaIdentity')]
-		[Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-		[System.Boolean]$Paginate = $true
-	)
+    Param(
+        [Parameter(
+            ParameterSetName = 'PutExpanded',
+            Mandatory = $true
+        )]
+        [Parameter(
+            ParameterSetName = 'Put',
+            Mandatory = $true
+        )]
+        [System.String]$Id,
+        [Parameter(
+            ParameterSetName = 'PutViaIdentityExpanded',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [Parameter(
+            ParameterSetName = 'PutViaIdentity',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
+        [Parameter(
+            ParameterSetName = 'PutViaIdentity',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [Parameter(
+            ParameterSetName = 'Put',
+            Mandatory = $true,
+            ValueFromPipeline = $true
+        )]
+        [JumpCloud.SDK.V2.Models.IPolicyRequest]$Body,
+        [Parameter(
+            ParameterSetName = 'PutViaIdentityExpanded',
+            Mandatory = $true
+        )]
+        [Parameter(
+            ParameterSetName = 'PutExpanded',
+            Mandatory = $true
+        )]
+        [System.String]$Name,
+        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+        [Parameter(ParameterSetName = 'PutExpanded')]
+        [System.String]$TemplateId,
+        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+        [Parameter(ParameterSetName = 'PutExpanded')]
+        [JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values,
+        [Parameter(ParameterSetName = 'PutExpanded')]
+        [Parameter(ParameterSetName = 'Put')]
+        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+        [Parameter(ParameterSetName = 'PutViaIdentity')]
+        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
+        [Parameter(ParameterSetName = 'PutExpanded')]
+        [Parameter(ParameterSetName = 'Put')]
+        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
+        [Parameter(ParameterSetName = 'PutViaIdentity')]
+        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
+        [System.Boolean]$Paginate = $true
+    )
     Begin
     {
-        $Results = @()
+$Results = @()
     }
     Process
     {
-        $Results = Set-JcSdkPolicy @PSBoundParameters
+$Results = Set-JcSdkPolicy @PSBoundParameters
     }
     End
     {
-        Return $Results
+Return $Results
     }
 }
