@@ -17,7 +17,7 @@ $ApiHash = [Ordered]@{
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    'V1' = [Ordered]@{
+    'V1'                = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                            = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
         '"system": {"title": "System"'                                                                                      = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
@@ -27,31 +27,38 @@ $FixesMapping = @{
         '"type": "null"'                                                                                                    = '"type": "string"'; # A type of null is not valid.
         '"format": "email", '                                                                                               = ''; # WARNING (LLCS1001/DoesNotSupportEnum): Schema with type:'string and 'format:'email' is not recognized.
         # Custom Tweaks
-        # '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                        = ''; # This will be passed in later through the Module.cs file.
-        # '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                              = ''; # This will be passed in later through the Module.cs file.
-        # '{"$ref": "#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-        # ', ,'                                                                                                               = ',';
-        # '[,'                                                                                                                = '[';
-        # ', ]'                                                                                                               = ']';
+        '{"name": "Content-Type", "in": "header", "required": false, "type": "string"}'                                     = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "Accept", "in": "header", "required": false, "type": "string"}'                                           = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'                                         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        ', ,'                                                                                                               = ',';
+        '[,'                                                                                                                = '[';
+        ', ]'                                                                                                               = ']';
         "`t"                                                                                                                = '\t';
     };
-    'V2' = [Ordered]@{
+    'V2'                = [Ordered]@{
         # V2 Issues
-        '"basePath": "/api/v2"'                                             = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-        '["string", "number", "boolean"]'                                   = '"string"';
-        '["string", "number", "boolean", "null"]'                           = '"string"';
-        '["object", "null"]'                                                = '"object"';
-        '["string", "null"]'                                                = '"string"';
-        '["boolean", "null"]'                                               = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
-        '"jobId"'                                                           = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
+        '"basePath": "/api/v2"'                                                                                        = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+        '["string", "number", "boolean"]'                                                                              = '"string"';
+        '["string", "number", "boolean", "null"]'                                                                      = '"string"';
+        '["object", "null"]'                                                                                           = '"object"';
+        '["string", "null"]'                                                                                           = '"string"';
+        '["boolean", "null"]'                                                                                          = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
+        '"jobId"'                                                                                                      = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
         # Custom Tweaks
-        '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
-        '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'              = ''; # This will be passed in later through the Module.cs file.
-        '{"$ref": "#/parameters/trait:multiTenantRequestHeaders:x-org-id"}' = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-        ', ,'                                                               = ',';
-        '[,'                                                                = '[';
-        # ', ]'                                                               = ']';
-        "`t"                                                                = '\t';
+        '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                   = ''; # This will be passed in later through the Module.cs file.
+        '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                         = ''; # This will be passed in later through the Module.cs file.
+        '{"$ref": "#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                            = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        '{"name": "Content-Type", "in": "header", "required": false, "type": "string", "default": "application/json"}' = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "Accept", "in": "header", "required": false, "type": "string", "default": "application/json"}'       = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        '{"name": "x-api-key", "in": "header", "required": false, "type": "string"}'                                   = ''; # This will be passed in later through the Module.cs file.
+        ', ,'                                                                                                          = ',';
+        '[,'                                                                                                           = '[';
+        ', ]'                                                                                                          = ']';
+        "`t"                                                                                                           = '\t';
+    };
+    'DirectoryInsights' = [Ordered]@{
+        '"search_after": {"items": {"type": "object"}, "type": "array"}' = '"search_after": {"items": {"type": "string"}, "type": "array"}'
     };
 }
 $OperationIdMapping = [Ordered]@{
