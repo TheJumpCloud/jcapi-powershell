@@ -30,7 +30,7 @@
         },
         "search_after": {
           "items": {
-            "type": "object"
+            "type": "string"
           },
           "type": "array"
         },

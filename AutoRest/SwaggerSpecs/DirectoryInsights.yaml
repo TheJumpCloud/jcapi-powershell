@@ -25,7 +25,7 @@ definitions:
         type: integer
       search_after:
         items:
-          type: object
+          type: string
         type: array
       search_term:
         $ref: '#/definitions/SearchTerm'
