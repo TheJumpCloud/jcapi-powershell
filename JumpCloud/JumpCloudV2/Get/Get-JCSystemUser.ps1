@@ -60,7 +60,7 @@ Function Get-JCSystemUser
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit)
+            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
         }
         Else
         {

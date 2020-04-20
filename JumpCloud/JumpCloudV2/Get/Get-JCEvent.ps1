@@ -67,7 +67,7 @@ Function Get-JCEvent
                     $Results += ($Result).ToJsonString() | ConvertFrom-Json;
                 }
             }
-            While ($XResultCount -eq $XLimit)
+            While ($XResultCount -eq $XLimit -and [System.String]::IsNullOrEmpty($Error)))
         }
         Else
         {
@@ -87,9 +87,3 @@ Function Get-JCEvent
         Return $Results
     }
 }
-
-
-$env:JCApiKey = 'effd8ef389276bc0e39f2a6a8715e711c81f10b0'
-$env:JCOrgId = '5a4bff7ab17d0c9f63bcd277'
-$a = Get-JCEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z') -Limit:(5) #-Debug
-$a.count

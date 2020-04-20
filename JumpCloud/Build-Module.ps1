@@ -167,7 +167,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit =
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit)
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit -and [System.String]::IsNullOrEmpty(`$Error)))
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
@@ -227,7 +227,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results 
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit)
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty(`$Error)))
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
