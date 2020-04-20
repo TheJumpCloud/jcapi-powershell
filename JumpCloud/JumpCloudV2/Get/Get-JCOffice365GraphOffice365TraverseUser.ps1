@@ -30,7 +30,7 @@ Function Get-JCOffice365GraphOffice365TraverseUser
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -52,9 +52,7 @@ Function Get-JCOffice365GraphOffice365TraverseUser
             $Result = Get-JcSdkOffice365GraphOffice365TraverseUser @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

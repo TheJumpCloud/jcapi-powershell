@@ -25,7 +25,7 @@ Function Get-JCSystemInsightDiskInfo
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -47,9 +47,7 @@ Function Get-JCSystemInsightDiskInfo
             $Result = Get-JcSdkSystemInsightDiskInfo @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

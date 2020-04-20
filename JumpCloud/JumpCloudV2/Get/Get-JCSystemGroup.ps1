@@ -40,7 +40,7 @@ Function Get-JCSystemGroup
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -62,9 +62,7 @@ Function Get-JCSystemGroup
             $Result = Get-JcSdkSystemGroup @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

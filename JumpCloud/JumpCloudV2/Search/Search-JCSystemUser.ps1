@@ -49,7 +49,7 @@ Function Search-JCSystemUser
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -71,9 +71,7 @@ Function Search-JCSystemUser
             $Result = Search-JcSdkSystemUser @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result.results | Measure-Object).Count;
                 $Results += $Result.results;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

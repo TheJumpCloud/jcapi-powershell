@@ -33,7 +33,7 @@ Function Get-JCEvent
     {
         $Results = @()
         $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next )
+                param($req, $callback, $next)
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
@@ -44,31 +44,40 @@ Function Get-JCEvent
     }
     Process
     {
-        Do
+        If ($Paginate)
         {
-            Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            Do
+            {
+                Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
+                $Result = Get-JcSdkEvent @PSBoundParameters
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $XResultSearchAfter = ($JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+                    If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
+                    {
+                        $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
+                    }
+                    Else
+                    {
+                        $PSBoundParameters.SearchAfter = $XResultSearchAfter
+                    }
+                    $XResultCount = $JCHttpResponse.Headers.GetValues('X-Result-Count')
+                    $XLimit = $JCHttpResponse.Headers.GetValues('X-Limit')
+                    $Results += ($Result).ToJsonString() | ConvertFrom-Json;
+                }
+            }
+            While ($XResultCount -eq $XLimit)
+        }
+        Else
+        {
+            $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkEvent @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $XResultSearchAfter = ($JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-                If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
-                {
-                    $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
-                }
-                Else
-                {
-                    $PSBoundParameters.SearchAfter = $XResultSearchAfter
-                }
-                $XResultCount = $JCHttpResponse.Headers.GetValues('X-Result-Count')
-                $XLimit = $JCHttpResponse.Headers.GetValues('X-Limit')
                 $Results += ($Result).ToJsonString() | ConvertFrom-Json;
             }
-            Else
-            {
-                Write-Warning ('No Results Found')
-            }
         }
-        While ($XResultCount -eq $XLimit)
     }
     End
     {
@@ -78,3 +87,9 @@ Function Get-JCEvent
         Return $Results
     }
 }
+
+
+$env:JCApiKey = 'effd8ef389276bc0e39f2a6a8715e711c81f10b0'
+$env:JCOrgId = '5a4bff7ab17d0c9f63bcd277'
+$a = Get-JCEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z') -Limit:(5) #-Debug
+$a.count

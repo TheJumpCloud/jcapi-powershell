@@ -33,7 +33,7 @@ Function Get-JCOffice365GraphOffice365Association
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -55,9 +55,7 @@ Function Get-JCOffice365GraphOffice365Association
             $Result = Get-JcSdkOffice365GraphOffice365Association @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

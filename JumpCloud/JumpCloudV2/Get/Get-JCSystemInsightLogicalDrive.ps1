@@ -25,7 +25,7 @@ Function Get-JCSystemInsightLogicalDrive
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -47,9 +47,7 @@ Function Get-JCSystemInsightLogicalDrive
             $Result = Get-JcSdkSystemInsightLogicalDrive @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result | Measure-Object).Count;
                 $Results += $Result;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }

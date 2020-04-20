@@ -135,7 +135,7 @@ If (Get-Module -Name($ModuleNames))
                 # Build "Begin" block
                 $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next )
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
@@ -144,31 +144,40 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                 # Build "Process" block
-                $ProcessContent = "$($IndentChar)$($IndentChar)Do
+                $ProcessContent = "$($IndentChar)$($IndentChar)If (`$Paginate)
 $($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
+$($IndentChar)$($IndentChar)$($IndentChar)Do
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.SearchAfter = `$XResultSearchAfter
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Headers.GetValues('X-Result-Count')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Headers.GetValues('X-Limit')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit)
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.SearchAfter = `$XResultSearchAfter
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Headers.GetValues('X-Result-Count')
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Headers.GetValues('X-Limit')
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
 $($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Warning ('No Results Found')
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit)"
+$($IndentChar)$($IndentChar)}"
                 # Build "End" block
                 $EndContent = "$($IndentChar)$($IndentChar)# Clean up global variables
 $($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq 'JCHttpRequest' })) { Remove-Variable -Name:('JCHttpRequest') -Scope:('Global') }
@@ -182,11 +191,11 @@ $($IndentChar)$($IndentChar)Return `$Results"
                 {
                     'JumpCloud.SDK.V1'
                     {
-                        @('$ResultCount = ($Result.results | Measure-Object).Count;', '$Results += $Result.results;')
+                        '$Result.results'
                     }
                     'JumpCloud.SDK.V2'
                     {
-                        @('$ResultCount = ($Result | Measure-Object).Count;', '$Results += $Result;')
+                        '$Result'
                     }
                     Default
                     {
@@ -204,7 +213,7 @@ $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
 $($IndentChar)$($IndentChar)}"
                 # Build "Process" block
-                $ProcessContent = "$($IndentChar)$($IndentChar)If (`$PSBoundParameters.Paginate)
+                $ProcessContent = "$($IndentChar)$($IndentChar)If (`$Paginate)
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)Do
@@ -213,7 +222,8 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $CommandName @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($ResultsLogic -join "`n$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)")
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = ($ResultsLogic | Measure-Object).Count;
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += $ResultsLogic;
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
@@ -225,8 +235,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate')
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $CommandName @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($ResultsLogic -join "`n$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)")
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += $ResultsLogic;
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
                 # Build "End" block

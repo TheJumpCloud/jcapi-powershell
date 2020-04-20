@@ -46,7 +46,7 @@ Function Get-JCSystem
     }
     Process
     {
-        If ($PSBoundParameters.Paginate)
+        If ($Paginate)
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
@@ -68,9 +68,7 @@ Function Get-JCSystem
             $Result = Get-JcSdkSystem @PSBoundParameters
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $ResultCount = ($Result.results | Measure-Object).Count;
                 $Results += $Result.results;
-                $PSBoundParameters.Skip += $ResultCount
             }
         }
     }
