@@ -135,16 +135,16 @@ Try
                     # $ExistingModule | Remove-Module -Force
                     # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
                     # Add prerelease tag
-                    If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-                    {
-                        $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-                        If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
-                        {
-                            Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                            $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                            Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
-                        }
-                    }
+                    # If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+                    # {
+                    #     $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                    #     If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+                    #     {
+                    #         Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    #         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                    #         Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                    #     }
+                    # }
                 }
                 ###########################################################################
                 If ($TestModule)
