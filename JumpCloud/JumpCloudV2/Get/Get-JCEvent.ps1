@@ -37,7 +37,7 @@ Function Get-JCEvent
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                $global:JCHttpRequestContent = $req
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
                 $global:JCHttpResponse = $ResponseTask
                 Return $ResponseTask
             }
