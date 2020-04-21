@@ -133,7 +133,7 @@ If (Get-Module -Name($ModuleNames))
         # Build $BeginContent, $ProcessContent, and $EndContent
         If ($Command.Verb -in ('Get', 'Search'))
         {
-            If ([System.String]::IsNullOrEmpty($NewParameters)) { $NewParameters = $NewParameters + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' }
+            If (-not [System.String]::IsNullOrEmpty($NewParameters)) { $NewParameters = $NewParameters + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' }
             # Build script body
             If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
             {
