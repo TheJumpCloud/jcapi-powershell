@@ -3,6 +3,7 @@
 $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
 $IndentChar = '    '
 $FunctionTemplate = "Function {0}`n{{`n$($IndentChar)#Requires -modules {1}`n$($IndentChar){2}`n$($IndentChar)Param(`n{3}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{4}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n}}"
+$ScriptAnalyzerResults = @()
 If (Test-Path -Path:($OutputPath))
 {
     Remove-Item -Path:($OutputPath) -Recurse -Force
@@ -19,9 +20,13 @@ If (Get-Module -Name($ModuleNames))
         # Build new function parameters
         $CommandParameterSets = $Command.ParameterSets
         $CommandParameters = $Command.Parameters
-        $DefaultParameterSet = $CommandParameterSets | Where-Object { $_.IsDefault }
-        # Get the default parameter set
-        $DefaultParameterSetName = If ($DefaultParameterSet) { "[CmdletBinding(DefaultParameterSetName = '$($DefaultParameterSet.Name)')]" } Else { '' } # SupportsShouldProcess = `$true,
+        $CommandDefinition = $Command.Definition
+        # Get the CmdletBinding and OutputType
+        $OutputTypeMatch = $CommandDefinition | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')
+        $OutputType = If ($OutputTypeMatch.Matches.Value) { $OutputTypeMatch.Matches.Value } Else { '' }
+        $CmdletBindingMatch = $CommandDefinition | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')
+        $CmdletBinding = If ($CmdletBindingMatch.Matches.Value) { $CmdletBindingMatch.Matches.Value } Else { '' }
+        If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
         # Build parameters by copying them from the SDK function parameters
         $NewParameters = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
         {
@@ -29,7 +34,7 @@ If (Get-Module -Name($ModuleNames))
             # $ParameterValue.IsDynamic
             # $ParameterValue.SwitchParameter
             # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
-            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters) # + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
+            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
             $ParameterValue = $CommandParameter.Value
             $ParameterName = $ParameterValue.Name
             $ParameterType = $ParameterValue.ParameterType
@@ -124,11 +129,11 @@ If (Get-Module -Name($ModuleNames))
                 }
             }
         }
-        $NewParameters = ($NewParameters -join ",`n") + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true'
-        # $ParamBlock = $DefaultParameterSetName + ("$($IndentChar)" + 'Param(' + "`n$($IndentChar)$($IndentChar)" + ($NewParameters -join ",`n$($IndentChar)$($IndentChar)") + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' + "`n$($IndentChar)" + ')')
+        $NewParameters = ($NewParameters -join ",`n")
         # Build $BeginContent, $ProcessContent, and $EndContent
         If ($Command.Verb -in ('Get', 'Search'))
         {
+            If ([System.String]::IsNullOrEmpty($NewParameters)) { $NewParameters = $NewParameters + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' }
             # Build script body
             If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
             {
@@ -139,7 +144,8 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask.Result
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
@@ -149,11 +155,10 @@ $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
@@ -162,17 +167,22 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.SearchAfter = `$XResultSearchAfter
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Headers.GetValues('X-Result-Count')
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Headers.GetValues('X-Limit')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Result.Headers.GetValues('X-Limit')
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit -and [System.String]::IsNullOrEmpty(`$Error)))
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit -and `$Result)
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += (`$Result).ToJsonString() | ConvertFrom-Json;
@@ -180,8 +190,10 @@ $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
                 # Build "End" block
                 $EndContent = "$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq 'JCHttpRequest' })) { Remove-Variable -Name:('JCHttpRequest') -Scope:('Global') }
-$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq 'JCHttpResponse' })) { Remove-Variable -Name:('JCHttpResponse') -Scope:('Global') }
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
+$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
+$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Return `$Results"
             }
             ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2'))
@@ -227,7 +239,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results 
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty(`$Error)))
+$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and `$Result)
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
@@ -249,11 +261,11 @@ $($IndentChar)$($IndentChar)}"
         ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import'))
         {
             # Build "Begin" block
-            $BeginContent = "`$Results = @()"
+            $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()"
             # Build "Process" block
-            $ProcessContent = "`$Results = $CommandName @PSBoundParameters"
+            $ProcessContent = "$($IndentChar)$($IndentChar)`$Results = $CommandName @PSBoundParameters"
             # Build "End" block
-            $EndContent = "Return `$Results"
+            $EndContent = "$($IndentChar)$($IndentChar)Return `$Results"
         }
         Else
         {
@@ -263,7 +275,9 @@ $($IndentChar)$($IndentChar)}"
         If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
             # Build "Function"
-            $NewScript = $FunctionTemplate -f $NewFunctionName, $ModuleName, $DefaultParameterSetName, $NewParameters, $BeginContent, $ProcessContent, $EndContent
+            $NewScript = $FunctionTemplate -f $NewFunctionName, $ModuleName, $CmdletBinding, $NewParameters, $BeginContent, $ProcessContent, $EndContent
+            # Fix line endings
+            $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
             # Export the function
             $OutputFullPath = $OutputPath + $Command.Verb
             Write-Host ("$OutputFullPath - $CommandName")
@@ -271,11 +285,22 @@ $($IndentChar)$($IndentChar)}"
             {
                 New-Item -Path:($OutputFullPath) -ItemType:('Directory') | Out-Null
             }
-            $NewScript | Out-File -FilePath:($OutputFullPath + '/' + $NewFunctionName + '.ps1') -Force
+            $OutputFilePath = $OutputFullPath + '/' + $NewFunctionName + '.ps1'
+            $NewScript | Out-File -FilePath:($OutputFilePath) -Force
+            # Validate script syntax
+            $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+            If ($ScriptAnalyzerResult)
+            {
+                $ScriptAnalyzerResults += $ScriptAnalyzerResult
+            }
         }
     }
 }
 Else
 {
     Write-Error ('No modules found.')
+}
+If ($ScriptAnalyzerResults)
+{
+    $ScriptAnalyzerResults
 }

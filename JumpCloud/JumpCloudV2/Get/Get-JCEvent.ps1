@@ -37,7 +37,8 @@ Function Get-JCEvent
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                $global:JCHttpResponse = $ResponseTask.Result
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpResponse = $ResponseTask
                 Return $ResponseTask
             }
         )
@@ -53,7 +54,7 @@ Function Get-JCEvent
                 $Result = Get-JcSdkEvent @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
-                    $XResultSearchAfter = ($JCHttpResponse.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+                    $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
                     If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
                     {
                         $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
@@ -62,12 +63,12 @@ Function Get-JCEvent
                     {
                         $PSBoundParameters.SearchAfter = $XResultSearchAfter
                     }
-                    $XResultCount = $JCHttpResponse.Headers.GetValues('X-Result-Count')
-                    $XLimit = $JCHttpResponse.Headers.GetValues('X-Limit')
+                    $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
+                    $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
                     $Results += ($Result).ToJsonString() | ConvertFrom-Json;
                 }
             }
-            While ($XResultCount -eq $XLimit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($XResultCount -eq $XLimit -and [System.String]::IsNullOrEmpty($Error))
         }
         Else
         {
@@ -81,9 +82,13 @@ Function Get-JCEvent
     }
     End
     {
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest)
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result)
         # Clean up global variables
-        If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq 'JCHttpRequest' })) { Remove-Variable -Name:('JCHttpRequest') -Scope:('Global') }
-        If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq 'JCHttpResponse' })) { Remove-Variable -Name:('JCHttpResponse') -Scope:('Global') }
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
         Return $Results
     }
 }
