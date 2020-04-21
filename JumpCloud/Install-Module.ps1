@@ -6,11 +6,8 @@ If (Get-Module -Name $ModuleNames) { Get-Module -Name $ModuleNames | Remove-Modu
 If (Get-InstalledModule -Name $ModuleNames -ErrorAction SilentlyContinue) { Get-InstalledModule -Name $ModuleNames -ErrorAction SilentlyContinue | Uninstall-Module -AllVersions -Force }
 ForEach ($ModuleName In $ModuleNames)
 {
-    Install-Module -Name $ModuleName -AllowPrerelease -Force
+    Install-Module -Name $ModuleName -AllowPrerelease -Force -Scope:('CurrentUser')
     Import-Module -Name $ModuleName -Force
     # Get-Module -Name $ModuleName
 }
 $Error.Clear()
-
-
-# Install-Module Plaster -Scope CurrentUser
