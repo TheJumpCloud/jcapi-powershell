@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][System.String[]]$PrereleaseName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
@@ -87,7 +87,7 @@ Try
                     $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
                     If ([System.String]::IsNullOrEmpty($LatestModule))
                     {
-                        $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+                        $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
                     }
                     If (-not [System.String]::IsNullOrEmpty($LatestModule))
                     {
@@ -122,12 +122,12 @@ Try
                 ###########################################################################
                 If ($UpdateModuleManifest)
                 {
-                    # # Increment module version number
-                    # If (-not [System.String]::IsNullOrEmpty($NextVersion))
-                    # {
-                    #     Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    #     Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-                    # }
+                    # Increment module version number
+                    If (-not [System.String]::IsNullOrEmpty($NextVersion))
+                    {
+                        Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
+                    }
                     # # Get existing GUID
                     # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
                     # Import-Module -Name:($LatestModule.Name) -Force
@@ -135,16 +135,16 @@ Try
                     # $ExistingModule | Remove-Module -Force
                     # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
                     # Add prerelease tag
-                    # If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-                    # {
-                    #     $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-                    #     If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
-                    #     {
-                    #         Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    #         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                    #         Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
-                    #     }
-                    # }
+                    If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+                    {
+                        $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                        If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+                        {
+                            Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                            $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                            Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                        }
+                    }
                 }
                 ###########################################################################
                 If ($TestModule)
