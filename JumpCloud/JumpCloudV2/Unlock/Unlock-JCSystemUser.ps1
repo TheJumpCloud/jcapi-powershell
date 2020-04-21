@@ -1,7 +1,8 @@
 Function Unlock-JCSystemUser
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'Unlock')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Unlock', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Unlock',
@@ -13,25 +14,18 @@ Function Unlock-JCSystemUser
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Unlock')]
-        [Parameter(ParameterSetName = 'UnlockViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Unlock')]
-        [Parameter(ParameterSetName = 'UnlockViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Unlock-JcSdkSystemUser @PSBoundParameters
+        $Results = Unlock-JcSdkSystemUser @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function New-JCCommand
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommand])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -41,25 +42,18 @@ Function New-JCCommand
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [System.String]$Trigger,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$User,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$User
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkCommand @PSBoundParameters
+        $Results = New-JcSdkCommand @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

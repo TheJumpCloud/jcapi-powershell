@@ -1,7 +1,8 @@
 Function Grant-JCWorkdayImportWorkday
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'AuthorizeExpanded')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='AuthorizeExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'AuthorizeExpanded',
@@ -42,29 +43,18 @@ Function Grant-JCWorkdayImportWorkday
         [System.String]$BasicUsername,
         [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [System.String]$OauthCode,
-        [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [Parameter(ParameterSetName = 'Authorize')]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [Parameter(ParameterSetName = 'Authorize')]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$OauthCode
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Grant-JcSdkWorkdayImportWorkday @PSBoundParameters
+        $Results = Grant-JcSdkWorkdayImportWorkday @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

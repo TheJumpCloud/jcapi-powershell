@@ -1,7 +1,8 @@
 Function Set-JCOrganization
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.IOrganization])]
+    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PutExpanded',
@@ -36,29 +37,18 @@ Function Set-JCOrganization
         [JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema]$Body,
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PutExpanded')]
-        [JumpCloud.SDK.V1.Models.IOrganizationsettingsput]$Settings,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V1.Models.IOrganizationsettingsput]$Settings
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkOrganization @PSBoundParameters
+        $Results = Set-JcSdkOrganization @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

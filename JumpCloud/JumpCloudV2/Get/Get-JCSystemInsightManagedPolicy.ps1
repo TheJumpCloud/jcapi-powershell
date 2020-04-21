@@ -1,7 +1,8 @@
 Function Get-JCSystemInsightManagedPolicy
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsManagedPolicies])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
         [Parameter(ParameterSetName = 'List')]
         [System.String[]]$Filter,
@@ -39,7 +40,7 @@ Function Get-JCSystemInsightManagedPolicy
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

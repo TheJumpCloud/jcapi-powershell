@@ -1,7 +1,8 @@
 Function Set-JCRadiusServerGraphRadiusServerAssociation
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'SetExpanded',
@@ -63,29 +64,18 @@ Function Set-JCRadiusServerGraphRadiusServerAssociation
         [System.String]$Type,
         [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'SetExpanded')]
-        [JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]$Attributes,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]$Attributes
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkRadiusServerGraphRadiusServerAssociation @PSBoundParameters
+        $Results = Set-JcSdkRadiusServerGraphRadiusServerAssociation @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

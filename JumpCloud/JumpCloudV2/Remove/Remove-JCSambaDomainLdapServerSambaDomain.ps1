@@ -1,7 +1,8 @@
 Function Remove-JCSambaDomainLdapServerSambaDomain
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Delete')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Delete',
@@ -24,25 +25,18 @@ Function Remove-JCSambaDomainLdapServerSambaDomain
         [System.String]$Accept,
         [Parameter(ParameterSetName = 'Delete')]
         [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [System.String]$ContentType,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$ContentType
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Remove-JcSdkSambaDomainLdapServerSambaDomain @PSBoundParameters
+        $Results = Remove-JcSdkSambaDomainLdapServerSambaDomain @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

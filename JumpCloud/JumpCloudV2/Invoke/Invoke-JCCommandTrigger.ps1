@@ -1,7 +1,8 @@
 Function Invoke-JCCommandTrigger
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'Post')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Post',
@@ -13,25 +14,18 @@ Function Invoke-JCCommandTrigger
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Post')]
-        [Parameter(ParameterSetName = 'PostViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Post')]
-        [Parameter(ParameterSetName = 'PostViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Import-JcSdkWorkdayImportWorkdayResult @PSBoundParameters
+        $Results = Import-JcSdkWorkdayImportWorkdayResult @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

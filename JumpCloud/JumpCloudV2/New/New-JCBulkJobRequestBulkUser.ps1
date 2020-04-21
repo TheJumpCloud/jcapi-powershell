@@ -1,30 +1,26 @@
 Function New-JCBulkJobRequestBulkUser
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Create')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]$Body,
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]$Body
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkBulkJobRequestBulkUser @PSBoundParameters
+        $Results = New-JcSdkBulkJobRequestBulkUser @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function Set-JCSystem
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.IJcSystem])]
+    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PutExpanded',
@@ -54,29 +55,18 @@ Function Set-JCSystem
         [System.String]$DisplayName,
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PutExpanded')]
-        [System.String[]]$Tags,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String[]]$Tags
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkSystem @PSBoundParameters
+        $Results = Set-JcSdkSystem @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

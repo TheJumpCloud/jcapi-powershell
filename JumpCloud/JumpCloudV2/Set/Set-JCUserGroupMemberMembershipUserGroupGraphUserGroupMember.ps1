@@ -1,7 +1,8 @@
 Function Set-JCUserGroupMemberMembershipUserGroupGraphUserGroupMember
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'SetExpanded',
@@ -51,29 +52,18 @@ Function Set-JCUserGroupMemberMembershipUserGroupGraphUserGroupMember
             ParameterSetName = 'SetExpanded',
             Mandatory = $true
         )]
-        [System.String]$Op,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$Op
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkUserGroupMemberMembershipUserGroupGraphUserGroupMember @PSBoundParameters
+        $Results = Set-JcSdkUserGroupMemberMembershipUserGroupGraphUserGroupMember @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function Get-JCSystemUser
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn], [JumpCloud.SDK.V1.Models.ISystemuserslist])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -60,7 +61,7 @@ Function Get-JCSystemUser
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

@@ -1,7 +1,8 @@
 Function Get-JCPolicyResult
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'List1')]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult])]
+    [CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -64,7 +65,7 @@ Function Get-JCPolicyResult
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

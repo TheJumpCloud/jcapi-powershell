@@ -1,7 +1,8 @@
 Function Reset-JCSystemUserMfa
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'ResetExpanded')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='ResetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'ResetExpanded',
@@ -39,29 +40,18 @@ Function Reset-JCSystemUserMfa
         [System.Management.Automation.SwitchParameter]$Exclusion,
         [Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'ResetExpanded')]
-        [System.DateTime]$ExclusionUntil,
-        [Parameter(ParameterSetName = 'ResetExpanded')]
-        [Parameter(ParameterSetName = 'Reset')]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'ResetViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'ResetExpanded')]
-        [Parameter(ParameterSetName = 'Reset')]
-        [Parameter(ParameterSetName = 'ResetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'ResetViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.DateTime]$ExclusionUntil
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Reset-JcSdkSystemUserMfa @PSBoundParameters
+        $Results = Reset-JcSdkSystemUserMfa @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function New-JCPolicy
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyWithDetails])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -17,25 +18,18 @@ Function New-JCPolicy
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [System.String]$TemplateId,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkPolicy @PSBoundParameters
+        $Results = New-JcSdkPolicy @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

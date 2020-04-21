@@ -1,7 +1,8 @@
 Function Set-JCRadiusServer
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserverput])]
+    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PutExpanded',
@@ -63,29 +64,18 @@ Function Set-JCRadiusServer
         [System.String]$UserLockoutAction,
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PutExpanded')]
-        [System.String]$UserPasswordExpirationAction,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$UserPasswordExpirationAction
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkRadiusServer @PSBoundParameters
+        $Results = Set-JcSdkRadiusServer @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

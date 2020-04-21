@@ -1,7 +1,8 @@
 Function Set-JCUserGraphUserAssociation
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'SetExpanded',
@@ -66,29 +67,18 @@ Function Set-JCUserGraphUserAssociation
         [System.Management.Automation.SwitchParameter]$SudoEnabled,
         [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'SetExpanded')]
-        [System.Management.Automation.SwitchParameter]$SudoWithoutPassword,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.Management.Automation.SwitchParameter]$SudoWithoutPassword
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkUserGraphUserAssociation @PSBoundParameters
+        $Results = Set-JcSdkUserGraphUserAssociation @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

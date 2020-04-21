@@ -1,7 +1,8 @@
 Function Get-JCSystemInsightStartupItem
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Get')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsStartupItems])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
         [Parameter(ParameterSetName = 'Get')]
         [System.String[]]$Filter,
@@ -39,7 +40,7 @@ Function Get-JCSystemInsightStartupItem
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

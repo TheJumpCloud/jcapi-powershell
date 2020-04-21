@@ -1,7 +1,8 @@
 Function Update-JCGSuite
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
+    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PatchExpanded',
@@ -39,29 +40,18 @@ Function Update-JCGSuite
         [System.String]$UserLockoutAction,
         [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PatchExpanded')]
-        [System.String]$UserPasswordExpirationAction,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$UserPasswordExpirationAction
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Update-JcSdkGSuite @PSBoundParameters
+        $Results = Update-JcSdkGSuite @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

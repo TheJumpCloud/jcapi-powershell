@@ -1,7 +1,8 @@
 Function Update-JCLdapServer
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
         [Parameter(
@@ -52,29 +53,18 @@ Function Update-JCLdapServer
         [System.String]$UserLockoutAction,
         [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PatchExpanded')]
-        [System.String]$UserPasswordExpirationAction,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$UserPasswordExpirationAction
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Update-JcSdkLdapServer @PSBoundParameters
+        $Results = Update-JcSdkLdapServer @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

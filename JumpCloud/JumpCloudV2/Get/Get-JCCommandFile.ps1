@@ -1,7 +1,8 @@
 Function Get-JCCommandFile
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'Get')]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -53,7 +54,7 @@ Function Get-JCCommandFile
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

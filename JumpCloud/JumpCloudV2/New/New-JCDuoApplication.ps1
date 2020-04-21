@@ -1,7 +1,8 @@
 Function New-JCDuoApplication
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'CreateExpanded',
@@ -69,29 +70,18 @@ Function New-JCDuoApplication
             ParameterSetName = 'CreateExpanded',
             Mandatory = $true
         )]
-        [System.String]$SecretKey,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$SecretKey
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkDuoApplication @PSBoundParameters
+        $Results = New-JcSdkDuoApplication @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

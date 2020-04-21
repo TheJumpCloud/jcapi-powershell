@@ -1,7 +1,8 @@
 Function Set-JCWorkdayImportWorkday
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
+    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PutExpanded',
@@ -39,29 +40,18 @@ Function Set-JCWorkdayImportWorkday
         [System.String]$Name,
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PutExpanded')]
-        [System.String]$ReportUrl,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$ReportUrl
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkWorkdayImportWorkday @PSBoundParameters
+        $Results = Set-JcSdkWorkdayImportWorkday @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

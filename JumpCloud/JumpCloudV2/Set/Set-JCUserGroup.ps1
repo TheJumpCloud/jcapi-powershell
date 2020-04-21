@@ -1,7 +1,8 @@
 Function Set-JCUserGroup
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'PutExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
+    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PutExpanded',
@@ -48,29 +49,18 @@ Function Set-JCUserGroup
         [JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
         [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PutExpanded')]
-        [System.Management.Automation.SwitchParameter]$AttributeSambaEnabled,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PutExpanded')]
-        [Parameter(ParameterSetName = 'Put')]
-        [Parameter(ParameterSetName = 'PutViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PutViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.Management.Automation.SwitchParameter]$AttributeSambaEnabled
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkUserGroup @PSBoundParameters
+        $Results = Set-JcSdkUserGroup @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

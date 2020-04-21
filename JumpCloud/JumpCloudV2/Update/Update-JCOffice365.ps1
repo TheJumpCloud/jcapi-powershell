@@ -1,7 +1,8 @@
 Function Update-JCOffice365
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'PatchExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
+    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'PatchExpanded',
@@ -39,29 +40,18 @@ Function Update-JCOffice365
         [System.String]$UserLockoutAction,
         [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'PatchExpanded')]
-        [System.String]$UserPasswordExpirationAction,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'PatchExpanded')]
-        [Parameter(ParameterSetName = 'Patch')]
-        [Parameter(ParameterSetName = 'PatchViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'PatchViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$UserPasswordExpirationAction
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Update-JcSdkOffice365 @PSBoundParameters
+        $Results = Update-JcSdkOffice365 @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

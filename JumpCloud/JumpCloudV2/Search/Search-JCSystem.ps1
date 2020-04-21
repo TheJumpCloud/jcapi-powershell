@@ -1,7 +1,8 @@
 Function Search-JCSystem
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'SearchExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemslist])]
+    [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(ParameterSetName = 'SearchExpanded')]
         [Parameter(ParameterSetName = 'Search')]
@@ -27,12 +28,6 @@ Function Search-JCSystem
         [JumpCloud.SDK.V1.Models.ISearchFilter]$Filter1,
         [Parameter(ParameterSetName = 'SearchExpanded')]
         [JumpCloud.SDK.V1.Models.ISearchFilter1]$SearchFilter,
-        [Parameter(ParameterSetName = 'SearchExpanded')]
-        [Parameter(ParameterSetName = 'Search')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'SearchExpanded')]
-        [Parameter(ParameterSetName = 'Search')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
         [System.Boolean]$Paginate = $true
     )
     Begin
@@ -63,7 +58,7 @@ Function Search-JCSystem
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

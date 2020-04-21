@@ -1,7 +1,8 @@
 Function Get-JCUserGraphUserAssociation
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [OutputType([JumpCloud.SDK.V2.Models.IGraphConnection])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'List',
@@ -47,7 +48,7 @@ Function Get-JCUserGraphUserAssociation
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

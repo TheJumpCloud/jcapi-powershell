@@ -1,7 +1,8 @@
 Function Get-JCSystemInsightLogicalDrive
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrvies])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
         [Parameter(ParameterSetName = 'List')]
         [System.String[]]$Filter,
@@ -39,7 +40,7 @@ Function Get-JCSystemInsightLogicalDrive
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

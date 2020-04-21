@@ -1,7 +1,8 @@
 Function New-JCProviderAdmin
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'CreateExpanded',
@@ -51,29 +52,18 @@ Function New-JCProviderAdmin
         [System.String]$Firstname,
         [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$Lastname,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$Lastname
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkProviderAdmin @PSBoundParameters
+        $Results = New-JcSdkProviderAdmin @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function Get-JCOffice365
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Get')]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -44,7 +45,7 @@ Function Get-JCOffice365
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

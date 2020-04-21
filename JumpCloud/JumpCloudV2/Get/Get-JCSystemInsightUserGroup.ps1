@@ -1,7 +1,8 @@
 Function Get-JCSystemInsightUserGroup
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'List')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUserGroups])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
         [Parameter(ParameterSetName = 'List')]
         [System.String[]]$Filter,
@@ -39,7 +40,7 @@ Function Get-JCSystemInsightUserGroup
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

@@ -1,7 +1,8 @@
 Function Get-JCBulkJobRequestBulkUserResult
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Get')]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobWorkresult])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -50,7 +51,7 @@ Function Get-JCBulkJobRequestBulkUserResult
                     $PSBoundParameters.Skip += $ResultCount
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and [System.String]::IsNullOrEmpty($Error)))
+            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
         }
         Else
         {

@@ -1,7 +1,8 @@
 Function Set-JCSystemGroupAssociationSystemGroupGraphSystemGroupAssociation
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'SetExpanded')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'SetExpanded',
@@ -63,29 +64,18 @@ Function Set-JCSystemGroupAssociationSystemGroupGraphSystemGroupAssociation
         [System.String]$Type,
         [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'SetExpanded')]
-        [JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes]$Attributes,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'SetExpanded')]
-        [Parameter(ParameterSetName = 'Set')]
-        [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'SetViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes]$Attributes
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Set-JcSdkSystemGroupAssociationSystemGroupGraphSystemGroupAssociation @PSBoundParameters
+        $Results = Set-JcSdkSystemGroupAssociationSystemGroupGraphSystemGroupAssociation @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

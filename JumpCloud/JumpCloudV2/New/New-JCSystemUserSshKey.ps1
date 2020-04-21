@@ -1,7 +1,8 @@
 Function New-JCSystemUserSshKey
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'CreateExpanded',
@@ -51,29 +52,18 @@ Function New-JCSystemUserSshKey
             ParameterSetName = 'CreateExpanded',
             Mandatory = $true
         )]
-        [System.String]$PublicKey,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$PublicKey
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkSystemUserSshKey @PSBoundParameters
+        $Results = New-JcSdkSystemUserSshKey @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

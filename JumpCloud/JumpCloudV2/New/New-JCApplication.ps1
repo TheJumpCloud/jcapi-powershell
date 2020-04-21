@@ -1,7 +1,8 @@
 Function New-JCApplication
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [Parameter(ParameterSetName = 'Create')]
@@ -45,25 +46,18 @@ Function New-JCApplication
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [System.String]$Organization,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$SsoUrl,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$SsoUrl
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkApplication @PSBoundParameters
+        $Results = New-JcSdkApplication @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

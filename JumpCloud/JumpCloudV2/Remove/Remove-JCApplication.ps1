@@ -1,7 +1,8 @@
 Function Remove-JCApplication
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'Delete')]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
+    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Delete',
@@ -22,25 +23,18 @@ Function Remove-JCApplication
         [System.String]$ContentType,
         [Parameter(ParameterSetName = 'Delete')]
         [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [System.String]$XOrgId,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$XOrgId
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Remove-JcSdkApplication @PSBoundParameters
+        $Results = Remove-JcSdkApplication @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function Get-JCEvent
 {
     #Requires -modules JumpCloud.SDK.DirectoryInsights
-    [CmdletBinding(DefaultParameterSetName = 'GetExpanded')]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false)]
     Param(
         [Parameter(
             ParameterSetName = 'Get',
@@ -50,7 +51,6 @@ Function Get-JCEvent
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
                 $Result = Get-JcSdkEvent @PSBoundParameters
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
@@ -67,13 +67,18 @@ Function Get-JCEvent
                     $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
                     $Results += ($Result).ToJsonString() | ConvertFrom-Json;
                 }
+                Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             }
-            While ($XResultCount -eq $XLimit -and [System.String]::IsNullOrEmpty($Error))
+            While ($XResultCount -eq $XLimit -and $Result)
         }
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = Get-JcSdkEvent @PSBoundParameters
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $Results += ($Result).ToJsonString() | ConvertFrom-Json;
@@ -82,8 +87,6 @@ Function Get-JCEvent
     }
     End
     {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest)
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result)
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
         $GlobalVars | ForEach-Object {

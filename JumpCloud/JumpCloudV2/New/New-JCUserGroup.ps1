@@ -1,7 +1,8 @@
 Function New-JCUserGroup
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -17,25 +18,18 @@ Function New-JCUserGroup
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]$AttributePosixGroups,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.Management.Automation.SwitchParameter]$AttributeSambaEnabled,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.Management.Automation.SwitchParameter]$AttributeSambaEnabled
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkUserGroup @PSBoundParameters
+        $Results = New-JcSdkUserGroup @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

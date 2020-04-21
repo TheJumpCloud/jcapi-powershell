@@ -1,7 +1,8 @@
 Function New-JCSystemGroup
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISystemGroup])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -13,25 +14,18 @@ Function New-JCSystemGroup
             ParameterSetName = 'CreateExpanded',
             Mandatory = $true
         )]
-        [System.String]$Name,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$Name
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkSystemGroup @PSBoundParameters
+        $Results = New-JcSdkSystemGroup @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

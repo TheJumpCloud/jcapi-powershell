@@ -1,7 +1,8 @@
 Function New-JCSambaDomainLdapServerSambaDomain
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomainOutput])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'CreateExpanded',
@@ -61,29 +62,18 @@ Function New-JCSambaDomainLdapServerSambaDomain
             ParameterSetName = 'CreateExpanded',
             Mandatory = $true
         )]
-        [System.String]$Sid,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$Sid
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkSambaDomainLdapServerSambaDomain @PSBoundParameters
+        $Results = New-JcSdkSambaDomainLdapServerSambaDomain @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

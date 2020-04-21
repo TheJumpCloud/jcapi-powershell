@@ -1,7 +1,8 @@
 Function New-JCGSuiteTranslationRule
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IGSuiteTranslationRule])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'CreateExpanded',
@@ -36,29 +37,18 @@ Function New-JCGSuiteTranslationRule
         [JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest]$Body,
         [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$BuiltIn,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$BuiltIn
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkGSuiteTranslationRule @PSBoundParameters
+        $Results = New-JcSdkGSuiteTranslationRule @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

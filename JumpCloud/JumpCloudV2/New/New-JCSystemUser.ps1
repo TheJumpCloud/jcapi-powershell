@@ -1,7 +1,8 @@
 Function New-JCSystemUser
 {
     #Requires -modules JumpCloud.SDK.V1
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -96,25 +97,18 @@ Function New-JCSystemUser
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [System.Int32]$UnixGuid,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.Int32]$UnixUid,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.Int32]$UnixUid
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkSystemUser @PSBoundParameters
+        $Results = New-JcSdkSystemUser @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

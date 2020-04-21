@@ -1,7 +1,8 @@
 Function New-JCWorkdayImportWorkday
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded')]
+    [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Create',
@@ -18,25 +19,18 @@ Function New-JCWorkdayImportWorkday
         [Parameter(ParameterSetName = 'CreateExpanded')]
         [System.String]$OauthCode,
         [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$ReportUrl,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [System.String]$ReportUrl
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkWorkdayImportWorkday @PSBoundParameters
+        $Results = New-JcSdkWorkdayImportWorkday @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,7 +1,8 @@
 Function Remove-JCDuoAccount
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Delete')]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount])]
+    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Delete',
@@ -13,25 +14,18 @@ Function Remove-JCDuoAccount
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Delete')]
-        [Parameter(ParameterSetName = 'DeleteViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Remove-JcSdkDuoAccount @PSBoundParameters
+        $Results = Remove-JcSdkDuoAccount @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

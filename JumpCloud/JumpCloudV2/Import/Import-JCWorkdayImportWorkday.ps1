@@ -1,7 +1,8 @@
 Function Import-JCWorkdayImportWorkday
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Import')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Import',
@@ -24,25 +25,18 @@ Function Import-JCWorkdayImportWorkday
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]$Body,
-        [Parameter(ParameterSetName = 'Import')]
-        [Parameter(ParameterSetName = 'ImportViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Import')]
-        [Parameter(ParameterSetName = 'ImportViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]$Body
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Import-JcSdkWorkdayImportWorkday @PSBoundParameters
+        $Results = Import-JcSdkWorkdayImportWorkday @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

@@ -1,24 +1,21 @@
 Function New-JCDuoAccount
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Create')]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount])]
+    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Create')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = New-JcSdkDuoAccount @PSBoundParameters
+        $Results = New-JcSdkDuoAccount @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

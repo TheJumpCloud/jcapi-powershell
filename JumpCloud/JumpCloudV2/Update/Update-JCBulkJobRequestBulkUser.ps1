@@ -1,30 +1,26 @@
 Function Update-JCBulkJobRequestBulkUser
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Patch')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Patch', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Patch',
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]$Body,
-        [Parameter(ParameterSetName = 'Patch')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Patch')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]$Body
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Update-JcSdkBulkJobRequestBulkUser @PSBoundParameters
+        $Results = Update-JcSdkBulkJobRequestBulkUser @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }

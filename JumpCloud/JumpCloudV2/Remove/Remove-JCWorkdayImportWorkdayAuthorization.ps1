@@ -1,7 +1,8 @@
 Function Remove-JCWorkdayImportWorkdayAuthorization
 {
     #Requires -modules JumpCloud.SDK.V2
-    [CmdletBinding(DefaultParameterSetName = 'Remove')]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='Remove', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
         [Parameter(
             ParameterSetName = 'Remove',
@@ -13,25 +14,18 @@ Function Remove-JCWorkdayImportWorkdayAuthorization
             Mandatory = $true,
             ValueFromPipeline = $true
         )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Remove')]
-        [Parameter(ParameterSetName = 'RemoveViaIdentity')]
-        [Alias(cf)][System.Management.Automation.SwitchParameter]$Confirm,
-        [Parameter(ParameterSetName = 'Remove')]
-        [Parameter(ParameterSetName = 'RemoveViaIdentity')]
-        [Alias(wi)][System.Management.Automation.SwitchParameter]$WhatIf,
-        [System.Boolean]$Paginate = $true
+        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject
     )
     Begin
     {
-$Results = @()
+        $Results = @()
     }
     Process
     {
-$Results = Remove-JcSdkWorkdayImportWorkdayAuthorization @PSBoundParameters
+        $Results = Remove-JcSdkWorkdayImportWorkdayAuthorization @PSBoundParameters
     }
     End
     {
-Return $Results
+        Return $Results
     }
 }
