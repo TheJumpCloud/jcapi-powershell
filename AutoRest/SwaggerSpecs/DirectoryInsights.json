@@ -72,21 +72,6 @@
     },
     "TermItem": {
       "description": "TermItem  one term in an and/or query, or one in an array of terms\nitems in the Terms array can be\n1) a simple KV pair \"username\": \"root\"\n2) a key-array pair \"username\": [ \"root\", \"admin\"]\nin every case, they are key-value pairs,\nso they can be stored in a map by their parent object",
-      "properties": {
-        "Key": {
-          "description": "what's in it?",
-          "type": "string"
-        },
-        "Value": {
-          "type": "object"
-        },
-        "ValueArray": {
-          "items": {
-            "type": "object"
-          },
-          "type": "array"
-        }
-      },
       "type": "object"
     }
   },

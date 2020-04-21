@@ -58,16 +58,6 @@ definitions:
       2) a key-array pair "username": [ "root", "admin"]
       in every case, they are key-value pairs,
       so they can be stored in a map by their parent object
-    properties:
-      Key:
-        description: what's in it?
-        type: string
-      Value:
-        type: object
-      ValueArray:
-        items:
-          type: object
-        type: array
     type: object
 host: api.jumpcloud.com
 info:
