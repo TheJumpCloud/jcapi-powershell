@@ -1,7 +1,7 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][System.String[]]$PrereleaseName
+    # , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][System.String[]]$PrereleaseName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
@@ -20,10 +20,11 @@ Try
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
     $InstallPreReq = $true
     $GenerateModule = $true
-    $IncrementModuleVersion = $true
     $CopyModuleFile = $true
     $BuildModule = $true
-    $UpdateModuleManifest = $true
+    $PrereleaseName = '' # Beta
+    $IncrementModuleVersion = $true
+    $UpdateModuleGuid = $true
     $TestModule = $true
     $PackModule = $true
     $CommitModule = $true
@@ -82,23 +83,6 @@ Try
                     autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
-                If ($IncrementModuleVersion)
-                {
-                    $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-                    If ([System.String]::IsNullOrEmpty($LatestModule))
-                    {
-                        $LatestModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
-                    }
-                    If (-not [System.String]::IsNullOrEmpty($LatestModule))
-                    {
-                        # Increment module version number
-                        If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-                        {
-                            $NextVersion = Step-Version -Version:(($LatestModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-                        }
-                    }
-                }
-                ###########################################################################
                 If ($CopyModuleFile)
                 {
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -120,30 +104,42 @@ Try
                     Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
-                If ($UpdateModuleManifest)
+                # Check to see if module exists on PowerShellGallery already
+                $PublishedModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+                If ([System.String]::IsNullOrEmpty($PublishedModule))
+                {
+                    $PublishedModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+                }
+                ###########################################################################
+                # Add prerelease tag
+                If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
+                {
+                    $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                    If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+                    {
+                        Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        $CurrentMetaData.Add('Prerelease', $PrereleaseName)
+                        Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                    }
+                }
+                ###########################################################################
+                If (-not [System.String]::IsNullOrEmpty($PublishedModule))
                 {
                     # Increment module version number
-                    If (-not [System.String]::IsNullOrEmpty($NextVersion))
+                    If ($IncrementModuleVersion)
                     {
-                        Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-                    }
-                    # # Get existing GUID
-                    # $LatestModule | Install-Module -Force -Scope:('CurrentUser')
-                    # Import-Module -Name:($LatestModule.Name) -Force
-                    # $ExistingModule = Get-Module -Name:($LatestModule.Name)
-                    # $ExistingModule | Remove-Module -Force
-                    # Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($ExistingModule.Guid)
-                    # Add prerelease tag
-                    If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
-                    {
-                        $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
-                        If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
+                        If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
                         {
-                            Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                            $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                            Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                            $NextVersion = Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                            Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                            Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
                         }
+                    }
+                    # Update module GUID
+                    If ($UpdateModuleGuid)
+                    {
+                        Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
                     }
                 }
                 ###########################################################################
