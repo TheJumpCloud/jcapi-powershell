@@ -105,10 +105,13 @@ Try
                 }
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
-                $PublishedModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-                If ([System.String]::IsNullOrEmpty($PublishedModule))
+                $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
                 {
-                    $PublishedModule = Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+                }
+                Else
+                {
+                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
                 }
                 ###########################################################################
                 # Add prerelease tag
