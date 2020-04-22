@@ -55,7 +55,7 @@ namespace JumpCloud.SDK.DirectoryInsights
             {
                 request.Headers.Add("Accept", "application/json");
             }
-            request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.0.1");
+            request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.0.8");
             // request.Headers.Add("Content-Type", "application/json");
             // let it go on.
             var requestResult = await next.SendAsync(request, callback);
