@@ -2,7 +2,7 @@
 # [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
 $IndentChar = '    '
-$FunctionTemplate = "Function {0}`n{{`n$($IndentChar)#Requires -modules {1}`n$($IndentChar){2}`n$($IndentChar)Param(`n{3}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{4}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n}}"
+$FunctionTemplate = "{0}`nFunction {1}`n{{`n$($IndentChar)#Requires -modules JumpCloud, {2}`n$($IndentChar){3}`n$($IndentChar)Param(`n{4}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{7}`n$($IndentChar)}}`n}}"
 $ScriptAnalyzerResults = @()
 If (Test-Path -Path:($OutputPath))
 {
@@ -27,118 +27,128 @@ If (Get-Module -Name($ModuleNames))
         $CmdletBindingMatch = $CommandDefinition | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')
         $CmdletBinding = If ($CmdletBindingMatch.Matches.Value) { $CmdletBindingMatch.Matches.Value } Else { '' }
         If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
-        # Build parameters by copying them from the SDK function parameters
-        $NewParameters = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
-        {
-            # $ParameterName = $CommandParameter.Key
-            # $ParameterValue.IsDynamic
-            # $ParameterValue.SwitchParameter
-            # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
-            $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
-            $ParameterValue = $CommandParameter.Value
-            $ParameterName = $ParameterValue.Name
-            $ParameterType = $ParameterValue.ParameterType
-            $ParameterTypeFullName = $ParameterType.FullName
-            $ParameterAliases = $ParameterValue.Aliases
-            If ($ParameterName -notin $ParametersToExclude)
-            {
-                # Build aliases
-                $Aliases = If (-not [System.string]::IsNullOrEmpty($ParameterAliases))
-                {
-                    '[Alias(' + $ParameterAliases + ')]'
-                }
-                # Build parameter sets
-                $NewParameterSets = $ParameterValue.ParameterSets.GetEnumerator() | ForEach-Object {
-                    $ParameterSetName = $_.Key
-                    $ParameterSetAttributes = $_.Value
-                    $ParameterSetAttributeProperties = $ParameterSetAttributes.PSObject.Properties
-                    $NewParameterSetAttributes = ForEach ($ParameterSetAttributeProperty In $ParameterSetAttributeProperties)
-                    {
-                        $ParameterSetAttributePropertyName = $ParameterSetAttributeProperty.Name
-                        If (-not [System.String]::IsNullOrEmpty($ParameterSetAttributes.$ParameterSetAttributePropertyName))
-                        {
-                            # Format the attribute value
-                            $AttributeValue = Switch ($ParameterSetAttributeProperty.TypeNameOfValue)
-                            {
-                                'System.Boolean'
-                                {
-                                    [System.String]('$' + $ParameterSetAttributes.$ParameterSetAttributePropertyName).ToLower()
-                                }
-                                'System.String'
-                                {
-                                    "'" + $ParameterSetAttributes.$ParameterSetAttributePropertyName + "'"
-                                }
-                                'System.Int32'
-                                {
-                                    $ParameterSetAttributes.$ParameterSetAttributePropertyName
-                                }
-                                Default { Write-Error ('Unknown data type: ' + $ParameterSetAttributePropertyName + ' ' + $ParameterSetAttributeProperty.TypeNameOfValue) }
-                            }
-                            # Format the attribute name
-                            If ($ParameterSetAttributePropertyName -eq 'IsMandatory')
-                            {
-                                $ParameterSetAttributePropertyName = 'Mandatory'
-                            }
-                            # Return key value pair
-                            If ($AttributeValue -notin ('$false', '-2147483648'))
-                            {
-                                "`n$($IndentChar)$($IndentChar)$($IndentChar)" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
-                            }
-                        }
-                    }
+        # Get content from sdk function
+        $CommandFilePath = $Command.ScriptBlock.File
+        $CommandContent = Get-Content -Path:($CommandFilePath) -Raw
+        $PSScriptInfo = ($CommandContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
+        $Params = $CommandContent | Select-String -Pattern:('(?s)(    \[Parameter)(.*?)(\})') -AllMatches
+        $NewParameters = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
+        # Hacky
+        $PSScriptInfo = $PSScriptInfo.Replace(($PSScriptInfo | Select-String -Pattern:('(?s)(\.Link)(.*?)(docs.microsoft.com)(.*?)(\n)')).Matches.Value, '')
+        $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC')
+        # # Build parameters by copying them from the SDK function parameters
+        # $NewParameters = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
+        # {
+        #     # $ParameterName = $CommandParameter.Key
+        #     # $ParameterValue.IsDynamic
+        #     # $ParameterValue.SwitchParameter
+        #     # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
+        #     $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
+        #     $ParameterValue = $CommandParameter.Value
+        #     $ParameterName = $ParameterValue.Name
+        #     $ParameterType = $ParameterValue.ParameterType
+        #     $ParameterTypeFullName = $ParameterType.FullName
+        #     $ParameterAliases = $ParameterValue.Aliases
+        #     If ($ParameterName -notin $ParametersToExclude)
+        #     {
+        #         # Build aliases
+        #         $Aliases = If (-not [System.string]::IsNullOrEmpty($ParameterAliases))
+        #         {
+        #             '[Alias(' + $ParameterAliases + ')]'
+        #         }
+        #         # Build parameter sets
+        #         $NewParameterSets = $ParameterValue.ParameterSets.GetEnumerator() | ForEach-Object {
+        #             $ParameterSetName = $_.Key
+        #             $ParameterSetAttributes = $_.Value
+        #             $ParameterSetAttributeProperties = $ParameterSetAttributes.PSObject.Properties
+        #             $NewParameterSetAttributes = ForEach ($ParameterSetAttributeProperty In $ParameterSetAttributeProperties)
+        #             {
+        #                 $ParameterSetAttributePropertyName = $ParameterSetAttributeProperty.Name
+        #                 If (-not [System.String]::IsNullOrEmpty($ParameterSetAttributes.$ParameterSetAttributePropertyName))
+        #                 {
+        #                     # Format the attribute value
+        #                     $AttributeValue = Switch ($ParameterSetAttributeProperty.TypeNameOfValue)
+        #                     {
+        #                         'System.Boolean'
+        #                         {
+        #                             [System.String]('$' + $ParameterSetAttributes.$ParameterSetAttributePropertyName).ToLower()
+        #                         }
+        #                         'System.String'
+        #                         {
+        #                             "'" + $ParameterSetAttributes.$ParameterSetAttributePropertyName + "'"
+        #                         }
+        #                         'System.Int32'
+        #                         {
+        #                             $ParameterSetAttributes.$ParameterSetAttributePropertyName
+        #                         }
+        #                         Default { Write-Error ('Unknown data type: ' + $ParameterSetAttributePropertyName + ' ' + $ParameterSetAttributeProperty.TypeNameOfValue) }
+        #                     }
+        #                     # Format the attribute name
+        #                     If ($ParameterSetAttributePropertyName -eq 'IsMandatory')
+        #                     {
+        #                         $ParameterSetAttributePropertyName = 'Mandatory'
+        #                     }
+        #                     # Return key value pair
+        #                     If ($AttributeValue -notin ('$false', '-2147483648'))
+        #                     {
+        #                         "`n$($IndentChar)$($IndentChar)$($IndentChar)" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
+        #                     }
+        #                 }
+        #             }
 
-                    $ParameterSets = If ($ParameterSetName -eq '__AllParameterSets')
-                    {
-                        $CommandParameterSets.Name
-                    }
-                    Else
-                    {
-                        $ParameterSetName
-                    }
-                    $FullParameterString = @()
-                    $ParameterSets | ForEach-Object {
-                        $ParameterString = $null
-                        If (-not [System.String]::IsNullOrEmpty($_))
-                        {
-                            $ParameterString = "`n$($IndentChar)$($IndentChar)$($IndentChar)ParameterSetName = '" + $_ + "'"
-                        }
-                        If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
-                        {
-                            $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n$($IndentChar)$($IndentChar)"
-                        }
-                        Else
-                        {
-                            $ParameterString = $ParameterString.Trim()
-                        }
-                        If (-not [System.String]::IsNullOrEmpty($ParameterString))
-                        {
-                            $ParameterString = "$($IndentChar)$($IndentChar)[Parameter(" + $ParameterString + ")]"
-                            $FullParameterString += $ParameterString
-                        }
-                    }
-                    ( $FullParameterString -join "`n")
-                }
-                # Return full parameter set
-                If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
-                {
-                    [System.String](($NewParameterSets -join "`n") + "`n$($IndentChar)$($IndentChar)" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
-                }
-                Else
-                {
-                    [System.String]($Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
-                }
-            }
-        }
-        $NewParameters = ($NewParameters -join ",`n")
+        #             $ParameterSets = If ($ParameterSetName -eq '__AllParameterSets')
+        #             {
+        #                 $CommandParameterSets.Name
+        #             }
+        #             Else
+        #             {
+        #                 $ParameterSetName
+        #             }
+        #             $FullParameterString = @()
+        #             $ParameterSets | ForEach-Object {
+        #                 $ParameterString = $null
+        #                 If (-not [System.String]::IsNullOrEmpty($_))
+        #                 {
+        #                     $ParameterString = "`n$($IndentChar)$($IndentChar)$($IndentChar)ParameterSetName = '" + $_ + "'"
+        #                 }
+        #                 If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
+        #                 {
+        #                     $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n$($IndentChar)$($IndentChar)"
+        #                 }
+        #                 Else
+        #                 {
+        #                     $ParameterString = $ParameterString.Trim()
+        #                 }
+        #                 If (-not [System.String]::IsNullOrEmpty($ParameterString))
+        #                 {
+        #                     $ParameterString = "$($IndentChar)$($IndentChar)[Parameter(" + $ParameterString + ")]"
+        #                     $FullParameterString += $ParameterString
+        #                 }
+        #             }
+        #             ( $FullParameterString -join "`n")
+        #         }
+        #         # Return full parameter set
+        #         If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
+        #         {
+        #             [System.String](($NewParameterSets -join "`n") + "`n$($IndentChar)$($IndentChar)" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
+        #         }
+        #         Else
+        #         {
+        #             [System.String]($Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
+        #         }
+        #     }
+        # }
+        # $NewParameters = ($NewParameters -join ",`n")
         # Build $BeginContent, $ProcessContent, and $EndContent
         If ($Command.Verb -in ('Get', 'Search'))
         {
-            If (-not [System.String]::IsNullOrEmpty($NewParameters)) { $NewParameters = $NewParameters + ",`n$($IndentChar)$($IndentChar)" + '[System.Boolean]$Paginate = $true' }
-            # Build script body
+            If (-not [System.String]::IsNullOrEmpty($NewParameters)) { $NewParameters = $NewParameters + ",`n`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results.`n$($IndentChar)`$Paginate = `$true" }
+            # Build script content
             If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
             {
                 # Build "Begin" block
-                $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
+                $BeginContent = "$($IndentChar)$($IndentChar)Connect-JCOnline -force | Out-Null
+$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
@@ -215,7 +225,8 @@ $($IndentChar)$($IndentChar)Return `$Results"
                     }
                 }
                 # Build "Begin" block
-                $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
+                $BeginContent = "$($IndentChar)$($IndentChar)Connect-JCOnline -force | Out-Null
+$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
@@ -275,7 +286,7 @@ $($IndentChar)$($IndentChar)}"
         If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
             # Build "Function"
-            $NewScript = $FunctionTemplate -f $NewFunctionName, $ModuleName, $CmdletBinding, $NewParameters, $BeginContent, $ProcessContent, $EndContent
+            $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewFunctionName, $ModuleName, $CmdletBinding, $NewParameters, $BeginContent, $ProcessContent, $EndContent
             # Fix line endings
             $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
             # Export the function
@@ -288,7 +299,7 @@ $($IndentChar)$($IndentChar)}"
             $OutputFilePath = $OutputFullPath + '/' + $NewFunctionName + '.ps1'
             $NewScript | Out-File -FilePath:($OutputFilePath) -Force
             # Validate script syntax
-            $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+            $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
             If ($ScriptAnalyzerResult)
             {
                 $ScriptAnalyzerResults += $ScriptAnalyzerResult
