@@ -63,7 +63,7 @@ host: api.jumpcloud.com
 info:
   contact:
     email: support@jumpcloud.com
-  description: TEST The purpose of this API is to query Jumpcloud Directory Insights events
+  description: The purpose of this API is to query Jumpcloud Directory Insights events
   title: Directory Insights API
   version: 0.39.0
 paths:
@@ -114,3 +114,4 @@ produces:
 schemes:
 - https
 swagger: "2.0"
+
