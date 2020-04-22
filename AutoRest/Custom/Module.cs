@@ -47,15 +47,22 @@ namespace ModuleNameSpace
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
                 request.Headers.Add("x-org-id", JCOrgId);
             }
+            // If headers do not contain an "x-api-key" header add one
             if (request.Headers.Contains("x-api-key") == false)
             {
                 request.Headers.Add("x-api-key", JCApiKey);
             }
+            // If headers do not contain an "Accept" header add one
             if (request.Headers.Contains("Accept") == false)
             {
                 request.Headers.Add("Accept", "application/json");
             }
-            request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
+            // If headers do not contain an "UserAgent" with the correct value fix it
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_ModuleNameSpace/ModuleVersion")
+            {
+                request.Headers.UserAgent.Clear();
+                request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
+            }
             // request.Headers.Add("Content-Type", "application/json");
             // let it go on.
             var requestResult = await next.SendAsync(request, callback);
