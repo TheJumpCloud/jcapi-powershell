@@ -58,7 +58,6 @@ Get all events between a date range and match event_type = admin_login_attempt a
 
 Get all events between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
 
-
 ### Example 7: Filter by SSO service and by username
 
 ```PowerShell
