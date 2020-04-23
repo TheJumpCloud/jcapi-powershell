@@ -58,7 +58,7 @@ $FixesMapping = @{
         "`t"                                                                                                           = '\t';
     };
     'DirectoryInsights' = [Ordered]@{
-        '"search_after": {"items": {"type": "object"}, "type": "array"}' = '"search_after": {"items": {"type": "string"}, "type": "array"}'
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array"}'
     };
 }
 $OperationIdMapping = [Ordered]@{
