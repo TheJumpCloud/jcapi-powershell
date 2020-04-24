@@ -10,7 +10,7 @@ $ApiHash = [Ordered]@{
     # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
     'V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
     'V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=DEN-416_swagger_enhancements'
+    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
     # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
     # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
