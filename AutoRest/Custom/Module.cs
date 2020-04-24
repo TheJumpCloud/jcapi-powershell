@@ -3,10 +3,10 @@ namespace ModuleNameSpace
     using Runtime;
     using System;
     using System.Collections.Generic;
+    using System.Management.Automation;
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Management.Automation;
     /// <summary>A class that contains the module-common code and data.</summary>
     /// <notes>
     /// This class is where you can add things to modify the module.
