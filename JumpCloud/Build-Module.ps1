@@ -41,7 +41,7 @@ If (Get-Module -Name($ModuleNames))
         # Filter/Manipulate extracted content
         $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
         $PSScriptInfo = $PSScriptInfo.Replace(($PSScriptInfo | Select-String -Pattern:('(?s)(\.Link)(.*?)(docs.microsoft.com)(.*?)(\n)')).Matches.Value, '')
-        $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC')
+        $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC').Replace('.ToJsonString() | ConvertFrom-Json', '')
         If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
         # # Build new function parameters
         # $CommandParameterSets = $Command.ParameterSets
@@ -182,7 +182,14 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.EventQueryBody))
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.EventQueryBody.SearchAfter = `$XResultSearchAfter
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
