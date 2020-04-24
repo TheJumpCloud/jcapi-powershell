@@ -14,70 +14,68 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkEvent' {
+    <# ToDo
+        Service - Not sure how to validate yet (Test that results service value matchesparameter parameter value)
+        Paginate - If $Paginate parameter exists then validate it somehow If(((Get-Command Get-JcSdkEvent).Parameters.Paginate)){ DoSomething }
+    #>
+    $ParamHash = @{
+        "StartTime"     = "2020-04-15T00:00:00Z";
+        "EndTime"       = "2020-04-16T23:00:00Z";
+        "Service"       = "all";
+        "Sort"          = "DESC"
+        "Limit"         = 10;
+        "SearchTermAnd" = @{
+            "event_type" = "group_create"
+        }
+    }
     It 'GetExpanded' {
-        $eTest = (Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z') -Limit:(10) -Sort:("DESC") -searchTermAnd:@{"event_type" = "group_create" }).ToJsonString() | ConvertFrom-Json
-        $upper = Get-Date([datetime]'2020-04-16T23:00:00Z')
-        $lower = Get-Date([datetime]'2020-04-15T00:00:00Z')
-        # check valid single result
-        ($eTest | select-object -First 1).count | Should -EQ 1
-        # check valid time, ie. resutls not before or after
-        $eTest[0].timestamp | Should -BeOfType [datetime]
-        # test highest time range (disabled for the time being, issues with time conversion)
-        # $eTest[0].timestamp.Ticks | Should -BeLessOrEqual $upper.Ticks
-        # test lowest time range
-        $eTest[9].timestamp.Ticks | Should -BeGreaterOrEqual $lower.Ticks
-        # test the decending time param
-        $eTest[0].timestamp.Ticks | Should -BeGreaterThan $eTest[9].timestamp.Ticks
-        # check that function does not return more then limit
-        $eTest.count | Should -EQ 10
-        # check that function does not return something outside filter
-        forEach ($rslt in $eTest) {
-            $rslt.event_type | Should -Be "group_create"
+        $eventTest = Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
+        If ([System.String]::IsNullOrEmpty($eventTest))
+        {
+            $eventTest | Should -Not -BeNullOrEmpty
         }
-        # $eTest[0].timestamp.Ticks | Should -BeGreaterThan $eTest[9].timestamp.Ticks
-        # { throw [System.NotImplementedException] } | Should -Not -Throw
+        Else
+        {
+            $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
+            $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
+            $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
+            $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
+            $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
+            # Limit - Test that results count matches parameter value
+            $eventTest.Count | Should -Be $ParamHash.Limit
+            # Sort - Test that results come back in decending DateTime
+            $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
+            # EndTime - Test that results are not newer than EndTime parameter value
+            $MostRecentRecord.Ticks | Should -BeLessOrEqual $EndTime.Ticks
+            # StartTime - Test that results are not older than StartTime parameter value
+            $OldestRecord.Ticks | Should -BeGreaterOrEqual $StartTime.Ticks
+            # SearchTermAnd - Test that results matches parameter value
+            ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
+        }
     }
-
     It 'Get' {
-        $hash = @{
-            "StartTime"     = "2020-04-15T00:00:00Z";
-            "EndTime"       = "2020-04-16T23:00:00Z";
-            "service"       = "all";
-            "Sort"          = "DESC"
-            "Limit"         = 10;
-            "SearchTermAnd" = @{
-                "event_type" = "group_create"
-            }
-
+        $eventTest = Get-JcSdkEvent -EventQueryBody:($ParamHash)
+        If ([System.String]::IsNullOrEmpty($eventTest))
+        {
+            $eventTest | Should -Not -BeNullOrEmpty
         }
-        $hash | ConvertTo-Json
-        $eTest = (Get-JcSdkEvent -EventQueryBody $hash).ToJsonString() | ConvertFrom-Json
-        $upper = Get-Date([datetime]'2020-04-16T23:00:00Z')
-        $lower = Get-Date([datetime]'2020-04-15T00:00:00Z')
-        # check valid single result
-        # ($eTest | select-object -First 1).count | Should -EQ 1
-        # check valid time, ie. resutls not before or after
-        $eTest[0].timestamp | Should -BeOfType [datetime]
-        # test highest time range (disabled for the time being, issues with time conversion)
-        # $eTest[0].timestamp.Ticks | Should -BeLessOrEqual $upper.Ticks
-        # test lowest time range
-        $eTest[9].timestamp.Ticks | Should -BeGreaterOrEqual $lower.Ticks
-        # test the decending time param
-        $eTest[0].timestamp.Ticks | Should -BeGreaterThan $eTest[9].timestamp.Ticks
-        # check that function does not return more then limit
-        $eTest.count | Should -EQ 10
-        # check that function does not return something outside filter
-        forEach ($rslt in $eTest) {
-            $rslt.event_type | Should -Be "group_create"
+        Else
+        {
+            $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
+            $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
+            $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
+            $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
+            $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
+            # Limit - Test that results count matches parameter value
+            $eventTest.Count | Should -Be $ParamHash.Limit
+            # Sort - Test that results come back in decending DateTime
+            $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
+            # EndTime - Test that results are not newer than EndTime parameter value
+            $MostRecentRecord.Ticks | Should -BeLessOrEqual $EndTime.Ticks
+            # StartTime - Test that results are not older than StartTime parameter value
+            $OldestRecord.Ticks | Should -BeGreaterOrEqual $StartTime.Ticks
+            # SearchTermAnd - Test that results matches parameter value
+            ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
         }
-        # { throw [System.NotImplementedException] } | Should -Not -Throw
     }
-
-    # It 'Check Output Result exists' {
-    #     ((Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString() | ConvertFrom-Json | Select-Object -First 1).count | Should -EQ 1
-    # }
-
-    # It 'Check Output Client IP ' {
-    #     ((Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z')).ToJsonString() | ConvertFrom-Json | Select-Object -First 1).client_ip | Should -Eq 76.25.29.226
-    # }
 }
