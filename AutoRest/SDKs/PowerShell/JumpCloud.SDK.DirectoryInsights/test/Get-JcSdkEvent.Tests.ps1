@@ -14,19 +14,39 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkEvent' {
+    #Requires -Modules JumpCloud
     <# ToDo
-        Service - Not sure how to validate yet (Test that results service value matchesparameter parameter value)
-        Paginate - If $Paginate parameter exists then validate it somehow If(((Get-Command Get-JcSdkEvent).Parameters.Paginate)){ DoSomething }
+        Service - Not sure how to validate yet (Test that results service value matches parameter value)
     #>
+    # Define parameters for functions
     $ParamHash = @{
-        "StartTime"     = "2020-04-15T00:00:00Z";
-        "EndTime"       = "2020-04-16T23:00:00Z";
+        "StartTime"     = Get-Date -Date:(((Get-Date).AddMinutes(-10).ToUniversalTime())) -Format:('o');
+        "EndTime"       = Get-Date -Date:(((Get-Date).ToUniversalTime())) -Format:('o');
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 10;
+        "Limit"         = 2;
         "SearchTermAnd" = @{
             "event_type" = "group_create"
         }
+    }
+    $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
+    $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
+    $ContainsPaginate = (Get-Command Get-JcSdkEvent).Parameters.ContainsKey('Paginate')
+  If ($ContainsPaginate)
+    {
+        $ParamHash.Limit = ($ParamHash.Limit * 2)
+    }
+    Else
+    {
+        $ParamHash.Limit
+    }
+    # Create event records for tests
+    Connect-JCOnline -force | Out-Null
+    For ($i = 1; $i -le $ParamHash.Limit; $i++)
+    {
+        $GroupName = 'JCSystemGroupTest-{0}' -f $i
+        Write-Host ("Creating add/delete records for: $GroupName")
+        New-JCSystemGroup -GroupName:($GroupName) | Remove-JCSystemGroup -Force
     }
     It 'GetExpanded' {
         $eventTest = Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
@@ -37,8 +57,6 @@ Describe 'Get-JcSdkEvent' {
         Else
         {
             $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
-            $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
-            $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
             $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
             $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
             # Limit - Test that results count matches parameter value
@@ -62,8 +80,6 @@ Describe 'Get-JcSdkEvent' {
         Else
         {
             $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
-            $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
-            $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
             $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
             $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
             # Limit - Test that results count matches parameter value
