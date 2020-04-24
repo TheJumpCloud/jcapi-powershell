@@ -20,8 +20,8 @@ Describe 'Get-JcSdkEvent' {
     #>
     # Define parameters for functions
     $ParamHash = @{
-        "StartTime"     = Get-Date -Date:(((Get-Date).AddMinutes(-10).ToUniversalTime())) -Format:('o');
-        "EndTime"       = Get-Date -Date:(((Get-Date).ToUniversalTime())) -Format:('o');
+        "StartTime"     = Get-Date -Date:(((Get-Date).ToUniversalTime())) -Format:('o');
+        "EndTime"       = 'PlaceHolderDateTime';
         "Service"       = "all";
         "Sort"          = "DESC"
         "Limit"         = 2;
@@ -29,10 +29,7 @@ Describe 'Get-JcSdkEvent' {
             "event_type" = "group_create"
         }
     }
-    $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
-    $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
-    $ContainsPaginate = (Get-Command Get-JcSdkEvent).Parameters.ContainsKey('Paginate')
-  If ($ContainsPaginate)
+    If ((Get-Command Get-JcSdkEvent).Parameters.ContainsKey('Paginate'))
     {
         $ParamHash.Limit = ($ParamHash.Limit * 2)
     }
@@ -46,8 +43,19 @@ Describe 'Get-JcSdkEvent' {
     {
         $GroupName = 'JCSystemGroupTest-{0}' -f $i
         Write-Host ("Creating add/delete records for: $GroupName")
+        If (Get-JCGroup -Type:('System') | Where-Object { $_.Name -eq $GroupName })
+        {
+            Remove-JCSystemGroup -GroupName:($GroupName) -Force
+        }
         New-JCSystemGroup -GroupName:($GroupName) | Remove-JCSystemGroup -Force
     }
+    # Allow server time to process
+    Start-Sleep -Seconds:(10)
+    # Set EndTime
+    $ParamHash.EndTime = Get-Date -Date:(((Get-Date).ToUniversalTime())) -Format:('o');
+    # Convert times to UTC
+    $StartTime = Get-Date -Date:(([DateTime]$ParamHash.StartTime).ToUniversalTime())
+    $EndTime = Get-Date -Date:(([DateTime]$ParamHash.EndTime).ToUniversalTime())
     It 'GetExpanded' {
         $eventTest = Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
         If ([System.String]::IsNullOrEmpty($eventTest))
