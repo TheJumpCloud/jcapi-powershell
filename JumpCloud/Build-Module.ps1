@@ -2,7 +2,7 @@ $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
 $IndentChar = '    '
 $MSCopyrightHeader = "`n# ----------------------------------------------------------------------------------`n#`n# Copyright Microsoft Corporation`n# Licensed under the Apache License, Version 2.0 (the ""License"");`n# you may not use this file except in compliance with the License.`n# You may obtain a copy of the License at`n# http://www.apache.org/licenses/LICENSE-2.0`n# Unless required by applicable law or agreed to in writing, software`n# distributed under the License is distributed on an ""AS IS"" BASIS,`n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.`n# See the License for the specific language governing permissions and`n# limitations under the License.`n# ----------------------------------------------------------------------------------`n"
 $Divider = '|#|#|#|#|#|#|#|#|#|#|#|#|#|#|#|'
-$FunctionTemplate = "{0}`nFunction {1}`n{{`n$($IndentChar)#Requires -modules {2}`n$($IndentChar){3}`n$($IndentChar)Param(`n{4}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{7}`n$($IndentChar)}}`n}}"
+$FunctionTemplate = "{0}`nFunction {1}`n{{`n$($IndentChar)#Requires {2}`n$($IndentChar){3}`n$($IndentChar)Param(`n{4}`n$($IndentChar))`n$($IndentChar)Begin`n$($IndentChar){{`n{5}`n$($IndentChar)}}`n$($IndentChar)Process`n$($IndentChar){{`n{6}`n$($IndentChar)}}`n$($IndentChar)End`n$($IndentChar){{`n{7}`n$($IndentChar)}}`n}}"
 $ScriptAnalyzerResults = @()
 If (Test-Path -Path:($OutputPath))
 {
@@ -43,6 +43,8 @@ If (Get-Module -Name($ModuleNames))
         $PSScriptInfo = $PSScriptInfo.Replace(($PSScriptInfo | Select-String -Pattern:('(?s)(\.Link)(.*?)(docs.microsoft.com)(.*?)(\n)')).Matches.Value, '')
         $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC').Replace('.ToJsonString() | ConvertFrom-Json', '')
         If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
+        # Build requires statment
+        $Requires = "-PSEdition Core -Modules $ModuleName"
         # # Build new function parameters
         # $CommandParameterSets = $Command.ParameterSets
         # $CommandParameters = $Command.Parameters
@@ -304,7 +306,7 @@ $($IndentChar)$($IndentChar)}"
         If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
             # Build "Function"
-            $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewFunctionName, $ModuleName, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
+            $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewFunctionName, $Requires, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
             # Fix line endings
             $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
             # Export the function
