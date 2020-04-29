@@ -5,37 +5,41 @@ definitions:
   ErrorMessage:
     properties:
       message:
+        description: Text detailed error message returned by the service
         type: string
     type: object
   EventQuery:
-    description: |-
-      EventQuery is the users' command to search our auth logs
-      Limit - row count (validated/repaired)
-      SearchTerm - see above
-      Projection - list of field names to return from document (not validated)
+    description: EventQuery is the users' command to search our auth logs
     properties:
       end_time:
+        description: optional query end time, UTC in RFC3339 format
         type: string
       fields:
+        description: optional list of fields to return from query
         items:
           type: string
         type: array
       limit:
+        description: Max number of rows to return
         format: int64
         type: integer
       search_after:
+        description: Specific query to search after, see x-* response headers for next values
         items:
           type: string
         type: array
       search_term:
         $ref: '#/definitions/SearchTerm'
       service:
+        description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
         items:
           type: string
         type: array
       sort:
+        description: ASC or DESC order for timestamp
         type: string
       start_time:
+        description: query start time, UTC in RFC3339 format
         type: string
     type: object
   SearchTerm:
@@ -44,10 +48,12 @@ definitions:
       and:
         additionalProperties:
           $ref: '#/definitions/TermItem'
+        description: list of event terms. If all terms match the event will be returned by the service.
         type: object
       or:
         additionalProperties:
           $ref: '#/definitions/TermItem'
+        description: list of event terms. If any term matches, the event will be returned by the service.
         type: object
     type: object
   TermItem:
@@ -68,7 +74,7 @@ info:
   version: 0.39.0
 paths:
   /events:
-    get:
+    post:
       consumes:
       - application/json
       description: Query the API for Directory Insights events
