@@ -39,7 +39,7 @@ Get all events filtered by organization_update term between a date range
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem
+JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonItemsItem
 .Outputs
 System.String
 .Notes
@@ -61,9 +61,9 @@ EVENTQUERYBODY <IEventQuery>: EventQuery is the users' command to search our aut
 #>
 Function Get-JCEvent
 {
-    #Requires -PSEdition Core -Modules JumpCloud.SDK.DirectoryInsights
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem], [System.String])]
-    [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false)]
+    #Requires -Modules JumpCloud.SDK.DirectoryInsights
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonItemsItem], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
