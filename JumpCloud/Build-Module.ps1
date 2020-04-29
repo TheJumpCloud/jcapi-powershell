@@ -44,7 +44,7 @@ If (Get-Module -Name($ModuleNames))
         $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC').Replace('.ToJsonString() | ConvertFrom-Json', '')
         If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
         # Build requires statment
-        $Requires = "-PSEdition Core -Modules $ModuleName"
+        $Requires = "-Modules $ModuleName"
         # # Build new function parameters
         # $CommandParameterSets = $Command.ParameterSets
         # $CommandParameters = $Command.Parameters
