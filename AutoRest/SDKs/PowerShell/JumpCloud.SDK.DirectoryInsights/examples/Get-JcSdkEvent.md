@@ -63,10 +63,10 @@ Get all events between a date range and match event_type = admin_login_attempt a
 ```powershell
 PS C:\> (Get-JcSdkEvent -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')  -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"initiated_by.username" = "user.1"}).ToJsonString() | ConvertFrom-Json
 
-Get sso events with the search term initated_by: username with value "user.1"
+Get sso events with the search term initiated_by: username with value "user.1"
 ```
 
-Get sso events with the search term initated_by: username with value "user.1"
+Get sso events with the search term initiated_by: username with value "user.1"
 
 ### Example 8: Filter by Organization updates
 
