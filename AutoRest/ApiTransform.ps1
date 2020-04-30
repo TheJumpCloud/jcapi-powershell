@@ -59,6 +59,8 @@ $FixesMapping = @{
     };
     'DirectoryInsights' = [Ordered]@{
         '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array"}'
+        '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time","description": "query start time, UTC in RFC3339 format", "type": "string"}';
+        '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time","description": "optional query end time, UTC in RFC3339 format", "type": "string"}';
     };
 }
 $OperationIdMapping = [Ordered]@{
