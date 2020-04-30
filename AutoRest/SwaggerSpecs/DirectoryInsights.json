@@ -17,6 +17,7 @@
       "description": "EventQuery is the users' command to search our auth logs",
       "properties": {
         "end_time": {
+          "format": "date-time",
           "description": "optional query end time, UTC in RFC3339 format",
           "type": "string"
         },
@@ -54,6 +55,7 @@
           "type": "string"
         },
         "start_time": {
+          "format": "date-time",
           "description": "query start time, UTC in RFC3339 format",
           "type": "string"
         }
