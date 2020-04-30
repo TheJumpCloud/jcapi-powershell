@@ -26,7 +26,7 @@ Describe 'Get-JcSdkEvent' {
         "Sort"          = "DESC"
         "Limit"         = 2;
         "SearchTermAnd" = @{
-            "event_type" = "group_create"
+            "event_type" = "user_delete"
         }
     }
     If ((Get-Command Get-JcSdkEvent).Parameters.ContainsKey('Paginate'))
@@ -41,13 +41,14 @@ Describe 'Get-JcSdkEvent' {
     Connect-JCOnline -force | Out-Null
     For ($i = 1; $i -le $ParamHash.Limit; $i++)
     {
-        $GroupName = 'JCSystemGroupTest-{0}' -f $i
-        Write-Host ("Creating add/delete records for: $GroupName")
-        If (Get-JCGroup -Type:('System') | Where-Object { $_.Name -eq $GroupName })
+        $UserName = 'JCSystemUserTest-{0}' -f $i
+        Write-Host ("Creating add/delete records for: $UserName")
+        If (Get-JCUser -username:($UserName))
         {
-            Remove-JCSystemGroup -GroupName:($GroupName) -Force
+            Remove-JCUser -username:($UserName) -Force
         }
-        New-JCSystemGroup -GroupName:($GroupName) | Remove-JCSystemGroup -Force
+        New-JCUser -username:($UserName) -firstname:($UserName) -lastname:($UserName) -email:($UserName + '@DeleteMe.com')
+        Remove-JCUser -Username:($UserName) -Force
     }
     # Allow server time to process
     Start-Sleep -Seconds:(10)
