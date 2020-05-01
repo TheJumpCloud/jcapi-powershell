@@ -1,49 +1,75 @@
+<#
+.Synopsis
+This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"auth\":{\n\t  \"basic\": {\n\t\t\"username\": \"someDeveloper\",\t  \n\t\t\"password\": \"notTheRealPassword\"\n\n\t  }\n\t}\n}'\n\n```
+.Description
+This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"auth\":{\n\t  \"basic\": {\n\t\t\"username\": \"someDeveloper\",\t  \n\t\t\"password\": \"notTheRealPassword\"\n\n\t  }\n\t}\n}'\n\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Grant-JCWorkdayImportWorkday
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='AuthorizeExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(
-            ParameterSetName = 'AuthorizeExpanded',
-            Mandatory = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'Authorize',
-            Mandatory = $true
-        )]
-        [System.String]$WorkdayId,
-        [Parameter(
-            ParameterSetName = 'AuthorizeViaIdentityExpanded',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'AuthorizeViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(
-            ParameterSetName = 'AuthorizeViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'Authorize',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IAuthInputObject]$Body,
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [System.String]$BasicPassword,
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [System.String]$BasicUsername,
-        [Parameter(ParameterSetName = 'AuthorizeViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'AuthorizeExpanded')]
-        [System.String]$OauthCode
+    [Parameter(ParameterSetName='Authorize', Mandatory)]
+    [Parameter(ParameterSetName='AuthorizeExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${WorkdayId},
+
+    [Parameter(ParameterSetName='AuthorizeViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter(ParameterSetName='Authorize', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='AuthorizeViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthInputObject]
+    # Auth Input Object
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
+
+    [Parameter(ParameterSetName='AuthorizeExpanded')]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${BasicPassword},
+
+    [Parameter(ParameterSetName='AuthorizeExpanded')]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${BasicUsername},
+
+    [Parameter(ParameterSetName='AuthorizeExpanded')]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${OauthCode},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru}
     )
     Begin
     {

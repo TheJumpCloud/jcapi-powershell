@@ -1,43 +1,55 @@
+<#
+.Synopsis
+This endpoint allows you to create a translation rule for a specific G Suite instance.
+These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  {Translation Rule Parameters}\n}'\n\n```
+.Description
+This endpoint allows you to create a translation rule for a specific G Suite instance.
+These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  {Translation Rule Parameters}\n}'\n\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function New-JCGSuiteTranslationRule
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IGSuiteTranslationRule])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(
-            ParameterSetName = 'CreateExpanded',
-            Mandatory = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'Create',
-            Mandatory = $true
-        )]
-        [System.String]$GsuiteId,
-        [Parameter(
-            ParameterSetName = 'CreateViaIdentityExpanded',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'CreateViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(
-            ParameterSetName = 'CreateViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'Create',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest]$Body,
-        [Parameter(ParameterSetName = 'CreateViaIdentityExpanded')]
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$BuiltIn
+    [Parameter(ParameterSetName='Create', Mandatory)]
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${GsuiteId},
+
+    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest]
+    # G Suite Translation Rule Request
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Built-in translations for G Suite export:* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`* `user_primary_organization_cost_center` - Translate JumpCloud user `costCenter` to G Suite Directory user `costCenter` for `primary` organization* `user_primary_organization_department` - Translate JumpCloud user `department` to G Suite Directory user `department` for `primary` organization* `user_primary_organization_description` - Translate JumpCloud user `employeeType` to G Suite Directory user `description` for `primary` organization* `user_primary_organization_employee_id` - Translate JumpCloud user `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`* `user_primary_organization_title` - Translate JumpCloud user `jobTitle` to G Suite Directory user `title` for `primary` organization
+    ${BuiltIn}
     )
     Begin
     {

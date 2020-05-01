@@ -1,34 +1,77 @@
+<#
+.Synopsis
+This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+.Description
+This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCPolicy
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyWithDetails], [JumpCloud.SDK.V2.Models.IPolicy], [JumpCloud.SDK.V2.Models.IError])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String[]]$Fields,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String[]]$Filter,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String[]]$Sort,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # ObjectID of the Policy object.
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # The comma separated fields included in the returned records.
+    # If omitted, the default list of fields will be returned.
+    ${Fields},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+    ${Filter},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # The comma separated fields used to sort the collection.
+    # Default sort is ascending, prefix with `-` to sort descending.
+    ${Sort},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

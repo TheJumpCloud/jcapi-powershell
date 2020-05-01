@@ -1,24 +1,57 @@
+<#
+.Synopsis
+This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n\n```
+.Description
+This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCWorkdayImportWorkdayWorker
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IWorkdayWorker])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [System.String]$WorkdayId,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String[]]$Sort,
-        [System.Boolean]$Paginate = $true
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${WorkdayId},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # The comma separated fields used to sort the collection.
+    # Default sort is ascending, prefix with `-` to sort descending.
+    ${Sort},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

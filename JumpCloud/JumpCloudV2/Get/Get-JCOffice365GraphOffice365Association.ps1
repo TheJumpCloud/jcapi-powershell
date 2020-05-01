@@ -1,27 +1,56 @@
+<#
+.Synopsis
+This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+.Description
+This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCOffice365GraphOffice365Association
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IGraphConnection])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [System.String]$Office365Id,
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [System.String[]]$Targets,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [System.Boolean]$Paginate = $true
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # ObjectID of the Office 365 instance.
+    ${Office365Id},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # .
+    ${Targets},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

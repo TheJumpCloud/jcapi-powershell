@@ -1,24 +1,51 @@
+<#
+.Synopsis
+This endpoint allows you to create a policy.
+Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  {Policy_Parameters}\n}'\n\n```
+.Description
+This endpoint allows you to create a policy.
+Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  {Policy_Parameters}\n}'\n\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function New-JCPolicy
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyWithDetails])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(
-            ParameterSetName = 'Create',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IPolicyRequest]$Body,
-        [Parameter(
-            ParameterSetName = 'CreateExpanded',
-            Mandatory = $true
-        )]
-        [System.String]$Name,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [System.String]$TemplateId,
-        [Parameter(ParameterSetName = 'CreateExpanded')]
-        [JumpCloud.SDK.V2.Models.IPolicyValue[]]$Values
+    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IPolicyRequest]
+    # An instance of a policy template.
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
+
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The description for this specific Policy.
+    ${Name},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+    ${TemplateId},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IPolicyValue[]]
+    # .
+    # To construct, see NOTES section for VALUES properties and create a hash table.
+    ${Values}
     )
     Begin
     {

@@ -1,33 +1,51 @@
+<#
+.Synopsis
+This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Description
+This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCDuoApplication
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$AccountId,
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$ApplicationId,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [Parameter(ParameterSetName='List', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${AccountId},
+
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${ApplicationId},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

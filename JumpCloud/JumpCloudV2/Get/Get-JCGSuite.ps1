@@ -1,24 +1,44 @@
+<#
+.Synopsis
+This endpoint returns a specific G Suite.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Description
+This endpoint returns a specific G Suite.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCGSuite
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]$InputObject,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # Unique identifier of the GSuite.
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

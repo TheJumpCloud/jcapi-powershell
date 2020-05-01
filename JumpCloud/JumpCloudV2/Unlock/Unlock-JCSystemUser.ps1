@@ -1,20 +1,42 @@
+<#
+.Synopsis
+This endpoint allows you to unlock a user's account.
+.Description
+This endpoint allows you to unlock a user's account.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Unlock-JCSystemUser
 {
-    #Requires -modules JumpCloud.SDK.V1
+    #Requires -Modules JumpCloud.SDK.V1
     [OutputType([System.String])]
     [CmdletBinding(DefaultParameterSetName='Unlock', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(
-            ParameterSetName = 'Unlock',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'UnlockViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject
+    [Parameter(ParameterSetName='Unlock', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [System.String]
+    # .
+    ${Id},
+
+    [Parameter(ParameterSetName='UnlockViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru}
     )
     Begin
     {

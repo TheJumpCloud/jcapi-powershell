@@ -1,40 +1,91 @@
+<#
+.Synopsis
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Description
+This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCOrganization
 {
-    #Requires -modules JumpCloud.SDK.V1
+    #Requires -Modules JumpCloud.SDK.V1
     [OutputType([JumpCloud.SDK.V1.Models.IOrganization], [JumpCloud.SDK.V1.Models.IOrganizationslist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'List')]
-        [Parameter(ParameterSetName = 'Get')]
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [System.String]$Fields,
-        [Parameter(ParameterSetName = 'List')]
-        [Parameter(ParameterSetName = 'Get')]
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [System.String]$Filter,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String]$Search,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String]$Sort,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [System.String]
+    # .
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # Use a space seperated string of field parameters to include the data in the response.
+    # If omitted, the default list of fields will be returned.
+    ${Fields},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # A filter to apply to the query.
+    ${Filter},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # A nested object containing a string `searchTerm` and a list of `fields` to search on.
+    ${Search},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # Use space separated sort parameters to sort the collection.
+    # Default sort is ascending.
+    # Prefix with `-` to sort descending.
+    ${Sort},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

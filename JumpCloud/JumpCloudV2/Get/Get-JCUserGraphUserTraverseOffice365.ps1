@@ -1,24 +1,56 @@
+<#
+.Synopsis
+This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Office 365 instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Office 365 instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/office365s \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Description
+This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Office 365 instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Office 365 instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/office365s \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCUserGraphUserTraverseOffice365
 {
-    #Requires -modules JumpCloud.SDK.V2
+    #Requires -Modules JumpCloud.SDK.V2
     [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [System.String]$UserId,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String[]]$Filter,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [System.Boolean]$Paginate = $true
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # ObjectID of the User.
+    ${UserId},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+    ${Filter},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

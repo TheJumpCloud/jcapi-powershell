@@ -1,43 +1,96 @@
+<#
+.Synopsis
+The endpoint retrieves an SSO / SAML Application.
+.Description
+The endpoint retrieves an SSO / SAML Application.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCApplication
 {
-    #Requires -modules JumpCloud.SDK.V1
+    #Requires -Modules JumpCloud.SDK.V1
     [OutputType([JumpCloud.SDK.V1.Models.IApplication], [JumpCloud.SDK.V1.Models.IApplicationslist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String]$Fields,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String]$Filter,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'List')]
-        [System.Int32]$Skip,
-        [Parameter(ParameterSetName = 'List')]
-        [System.String]$Sort,
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [Parameter(ParameterSetName = 'Get')]
-        [System.String]$Accept,
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [Parameter(ParameterSetName = 'Get')]
-        [System.String]$ContentType,
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [Parameter(ParameterSetName = 'Get')]
-        [System.String]$XOrgId,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [System.String]
+    # .
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # The comma separated fields included in the returned records.
+    # If omitted the default list of fields will be returned.
+    ${Fields},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # A filter to apply to the query.
+    ${Filter},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    ${Limit},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # .
+    ${Sort},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

@@ -1,33 +1,64 @@
+<#
+.Synopsis
+This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+.Description
+This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCCommandFile
 {
-    #Requires -modules JumpCloud.SDK.V1
+    #Requires -Modules JumpCloud.SDK.V1
     [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'Get',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [Parameter(
-            ParameterSetName = 'GetViaIdentity',
-            Mandatory = $true,
-            ValueFromPipeline = $true
-        )]
-        [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]$InputObject,
-        [Parameter(ParameterSetName = 'Get')]
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [System.String]$Fields,
-        [Parameter(ParameterSetName = 'Get')]
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [System.Int32]$Limit,
-        [Parameter(ParameterSetName = 'Get')]
-        [Parameter(ParameterSetName = 'GetViaIdentity')]
-        [System.Int32]$Skip,
-        [System.Boolean]$Paginate = $true
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [System.String]
+    # .
+    ${Id},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # Use a space seperated string of field parameters to include the data in the response.
+    # If omitted, the default list of fields will be returned.
+    ${Fields},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The number of records to return at once.
+    # Limited to 100.
+    ${Limit},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.Int32]
+    # The offset into the records to return.
+    ${Skip},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {

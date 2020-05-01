@@ -1,18 +1,37 @@
+<#
+.Synopsis
+This endpoint will return a specific System User's public SSH key.
+.Description
+This endpoint will return a specific System User's public SSH key.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+#>
 Function Get-JCSystemUserSshKey
 {
-    #Requires -modules JumpCloud.SDK.V1
+    #Requires -Modules JumpCloud.SDK.V1
     [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-        [Parameter(
-            ParameterSetName = 'List',
-            Mandatory = $true
-        )]
-        [System.String]$Id,
-        [System.Boolean]$Paginate = $true
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Path')]
+    [System.String]
+    # .
+    ${Id},
+
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
+        Connect-JCOnline -force | Out-Null
         $Results = @()
         If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
         {
