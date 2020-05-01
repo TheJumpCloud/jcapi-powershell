@@ -1,3 +1,4 @@
+#Requires -PSEdition Core
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$APIName

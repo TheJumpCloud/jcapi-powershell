@@ -4,25 +4,25 @@ Query the API for Directory Insights events
 .Description
 Query the API for Directory Insights events
 .Example
-PS C:\> (Get-JCEvent -Service:('all') -StartTime:('2020-04-15T00:00:00Z') -EndTime:('2020-04-16T23:00:00Z'))
+TESTS PS C:\> (Get-JCEvent -Service:('all') -StartTime:((Get-date).AddDays(-30)))
 
-Pull all event records between Tue, 14 Apr 2020 18:00:00 -0600 to Thu, 16 Apr 2020 17:00:00 -0600
+Pull all event records from the last thirty days
 .Example
-PS C:\> (Get-JCEvent -Service:('directory') -StartTime:('2020-04-15T00:00:00Z') -Limit:('10') -EndTime:('2020-04-16T23:00:00Z'))
+PS C:\> (Get-JCEvent -Service:('directory') -StartTime:((Get-date).AddHours(-1)) -Limit:('10'))
 
-Limit directory results to last 10 in the time range
+Get directory results from the last hour limit to the last 10 results in the time range
 .Example
-PS C:\> (Get-JCEvent -Service:('directory') -StartTime:('2020-04-15T00:00:00Z') -Sort:("DESC") -EndTime:('2020-04-16T23:00:00Z'))
+PS C:\> (Get-JCEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Sort:("DESC") -EndTime:((Get-date).AddDays(-5)))
 
-Sort directory descending results against timestamp value
+Get directory results between 30 and 5 days ago, sort timestamp by descending value
 .Example
-PS C:\> (Get-JCEvent -Service:('directory') -StartTime:('2020-04-15T00:00:00Z') -Limit:('10') -EndTime:('2020-04-16T23:00:00Z') -searchTermAnd:@{"event_type" = "group_create"})
+PS C:\> (Get-JCEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Limit:('10') -searchTermAnd:@{"event_type" = "group_create"})
 
-Get only group_create events during a time range
+Get only group_create from the last thirty days
 .Example
 PS C:\> (Get-JCEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermOr @{"initiated_by.username" = @("user.1", "user.2")})
 
-Get login events initiated by either "user.1" or "user.2"
+Get login events initiated by either "user.1" or "user.2" between a universal time zone range
 .Example
 PS C:\> (Get-JCEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"})
 
@@ -30,7 +30,7 @@ Get all events between a date range and match event_type = admin_login_attempt a
 .Example
 PS C:\> (Get-JCEvent -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')  -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"initiated_by.username" = "user.1"})
 
-Get sso events with the search term initated_by: username with value "user.1"
+Get sso events with the search term initiated_by: username with value "user.1"
 .Example
 PS C:\> (Get-JCEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "organization_update"})
 
@@ -63,77 +63,77 @@ Function Get-JCEvent
 {
     #Requires -Modules JumpCloud.SDK.DirectoryInsights
     [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonItemsItem], [System.String])]
-    [CmdletBinding(DefaultParameterSetName = 'GetExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+    [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(ParameterSetName = 'Get', Mandatory, ValueFromPipeline)]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery]
-        # EventQuery is the users' command to search our auth logs
-        # To construct, see NOTES section for EVENTQUERYBODY properties and create a hash table.
-        ${EventQueryBody},
+    [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery]
+    # EventQuery is the users' command to search our auth logs
+    # To construct, see NOTES section for EVENTQUERYBODY properties and create a hash table.
+    ${EventQueryBody},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.DateTime]
-        # optional query end time, UTC in RFC3339 format
-        ${EndTime},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.DateTime]
+    # optional query end time, UTC in RFC3339 format
+    ${EndTime},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.String[]]
-        # optional list of fields to return from query
-        ${Fields},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String[]]
+    # optional list of fields to return from query
+    ${Fields},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.Int64]
-        # Max number of rows to return
-        ${Limit},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.Int64]
+    # Max number of rows to return
+    ${Limit},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.String[]]
-        # Specific query to search after, see x-* response headers for next values
-        ${SearchAfter},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String[]]
+    # Specific query to search after, see x-* response headers for next values
+    ${SearchAfter},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes = ([JumpCloud.SDK.DirectoryInsights.Models.ISearchTermAnd]))]
-        [System.Collections.Hashtable]
-        # list of event terms.
-        # If all terms match the event will be returned by the service.
-        ${SearchTermAnd},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ISearchTermAnd]))]
+    [System.Collections.Hashtable]
+    # list of event terms.
+    # If all terms match the event will be returned by the service.
+    ${SearchTermAnd},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes = ([JumpCloud.SDK.DirectoryInsights.Models.ISearchTermOr]))]
-        [System.Collections.Hashtable]
-        # list of event terms.
-        # If any term matches, the event will be returned by the service.
-        ${SearchTermOr},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ISearchTermOr]))]
+    [System.Collections.Hashtable]
+    # list of event terms.
+    # If any term matches, the event will be returned by the service.
+    ${SearchTermOr},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.String[]]
-        # service name to query.
-        # Known services: systems,radius,sso,directory,ldap,all
-        ${Service},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String[]]
+    # service name to query.
+    # Known services: systems,radius,sso,directory,ldap,all
+    ${Service},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.String]
-        # ASC or DESC order for timestamp
-        ${Sort},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # ASC or DESC order for timestamp
+    ${Sort},
 
-        [Parameter(ParameterSetName = 'GetExpanded')]
-        [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-        [System.DateTime]
-        # query start time, UTC in RFC3339 format
-        ${StartTime},
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.DateTime]
+    # query start time, UTC in RFC3339 format
+    ${StartTime},
 
-        [System.Boolean]
-        # Set to $true to return all results.
-        $Paginate = $true
+    [System.Boolean]
+    # Set to $true to return all results.
+    $Paginate = $true
     )
     Begin
     {
