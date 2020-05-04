@@ -66,8 +66,8 @@ Describe 'Get-JcSdkEvent' {
         Else
         {
             $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
-            $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
-            $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
+            $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
+            $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
             $eventTest.Count | Should -Be $ParamHash.Limit
             # Sort - Test that results come back in decending DateTime
@@ -89,8 +89,8 @@ Describe 'Get-JcSdkEvent' {
         Else
         {
             $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
-            $MostRecentRecord = ($eventTest | Select-Object -First 1).timestamp
-            $OldestRecord = ($eventTest | Select-Object -Last 1).timestamp
+            $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
+            $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
             $eventTest.Count | Should -Be $ParamHash.Limit
             # Sort - Test that results come back in decending DateTime
