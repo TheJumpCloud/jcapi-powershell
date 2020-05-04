@@ -12,6 +12,18 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.ISystemGroupData
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <ISystemGroupData>: SystemGroupData
+  Name <String>: Display name of a System Group.
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCSystemGroup
 #>
 Function New-JCSystemGroup
 {

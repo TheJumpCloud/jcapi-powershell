@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsCupsDestinations
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightCupDestination
 #>
 Function Get-JCSystemInsightCupDestination
 {

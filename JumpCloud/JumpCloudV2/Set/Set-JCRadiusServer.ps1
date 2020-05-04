@@ -12,6 +12,30 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
+.Outputs
+JumpCloud.SDK.V1.Models.IRadiusserverput
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
+  Name <String>: 
+  NetworkSourceIP <String>: 
+  [Mfa <String>]: 
+  [Tags <String[]>]: 
+  [UserLockoutAction <String>]: 
+  [UserPasswordExpirationAction <String>]: 
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/Set-JCRadiusServer
 #>
 Function Set-JCRadiusServer
 {

@@ -12,6 +12,39 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.ISambaDomainInput
+.Outputs
+JumpCloud.SDK.V2.Models.ISambaDomainOutput
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <ISambaDomainInput>: Samba Domain Input
+  Name <String>: Name of this domain's WorkGroup
+  Sid <String>: Security identifier of this domain
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [AccountId <String>]: 
+  [ActivedirectoryId <String>]: 
+  [ApplicationId <String>]: 
+  [CommandId <String>]: ObjectID of the Command.
+  [GroupId <String>]: ObjectID of the User Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of the User Group.
+  [JobId <String>]: 
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]: 
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCSambaDomainLdapServerSambaDomain
 #>
 Function New-JCSambaDomainLdapServerSambaDomain
 {
@@ -33,18 +66,6 @@ Function New-JCSambaDomainLdapServerSambaDomain
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
 
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]

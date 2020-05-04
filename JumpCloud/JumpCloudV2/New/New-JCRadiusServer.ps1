@@ -12,6 +12,24 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IRadiusserverpost
+.Outputs
+JumpCloud.SDK.V1.Models.IRadiusserver
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IRadiusserverpost>: RadiusServerPost
+  Name <String>: 
+  NetworkSourceIP <String>: 
+  SharedSecret <String>: RADIUS shared secret between the server and client.
+  [Mfa <String>]: 
+  [TagNames <String[]>]: 
+  [UserLockoutAction <String>]: 
+  [UserPasswordExpirationAction <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCRadiusServer
 #>
 Function New-JCRadiusServer
 {

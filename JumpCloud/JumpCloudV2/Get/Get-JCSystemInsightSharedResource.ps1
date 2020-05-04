@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsSharedResources
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightSharedResource
 #>
 Function Get-JCSystemInsightSharedResource
 {

@@ -14,6 +14,23 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
+.Outputs
+System.String
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IBulkUserUpdate[]>: .
+  [Attributes <IBulkUserUpdateAttributesItem[]>]: Map of additional attributes.
+  [Email <String>]: 
+  [Firstname <String>]: 
+  [Id <String>]: Object ID of the systemuser being updated
+  [Lastname <String>]: 
+  [Username <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/Update-JCBulkJobRequestBulkUser
 #>
 Function Update-JCBulkJobRequestBulkUser
 {

@@ -16,6 +16,20 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Outputs
+JumpCloud.SDK.V1.Models.IJcSystem
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/Remove-JCSystem
 #>
 Function Remove-JCSystem
 {

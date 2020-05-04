@@ -12,6 +12,22 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Outputs
+JumpCloud.SDK.V1.Models.IApplication
+.Outputs
+JumpCloud.SDK.V1.Models.IApplicationslist
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCApplication
 #>
 Function Get-JCApplication
 {
@@ -62,27 +78,6 @@ Function Get-JCApplication
     [System.String]
     # .
     ${Sort},
-
-    [Parameter(ParameterSetName='Get')]
-    [Parameter(ParameterSetName='GetViaIdentity')]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter(ParameterSetName='Get')]
-    [Parameter(ParameterSetName='GetViaIdentity')]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
-
-    [Parameter(ParameterSetName='Get')]
-    [Parameter(ParameterSetName='GetViaIdentity')]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${XOrgId},
 
     [System.Boolean]
     # Set to $true to return all results.

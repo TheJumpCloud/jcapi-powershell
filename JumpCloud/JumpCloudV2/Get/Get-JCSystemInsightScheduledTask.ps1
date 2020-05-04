@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsScheduledTasks
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightScheduledTask
 #>
 Function Get-JCSystemInsightScheduledTask
 {

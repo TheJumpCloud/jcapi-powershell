@@ -12,6 +12,26 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IUserGroupPost
+.Outputs
+JumpCloud.SDK.V2.Models.IUserGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>: .
+  [Id <Int32?>]: 
+  [Name <String>]: 
+
+BODY <IUserGroupPost>: UserGroupPost
+  Name <String>: Display name of a User Group.
+  [AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]: 
+    [Id <Int32?>]: 
+    [Name <String>]: 
+  [AttributeSambaEnabled <Boolean?>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCUserGroup
 #>
 Function New-JCUserGroup
 {

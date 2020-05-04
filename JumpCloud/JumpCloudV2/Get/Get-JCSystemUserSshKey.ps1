@@ -12,6 +12,12 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
+.Outputs
+JumpCloud.SDK.V1.Models.ISshkeylist
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemUserSshKey
 #>
 Function Get-JCSystemUserSshKey
 {

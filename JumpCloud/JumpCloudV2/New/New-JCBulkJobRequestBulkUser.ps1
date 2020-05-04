@@ -14,6 +14,22 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+.Outputs
+System.String
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IBulkUserCreate[]>: .
+  [Attributes <IBulkUserCreateAttributesItem[]>]: Map of additional attributes.
+  [Email <String>]: 
+  [Firstname <String>]: 
+  [Lastname <String>]: 
+  [Username <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCBulkJobRequestBulkUser
 #>
 Function New-JCBulkJobRequestBulkUser
 {

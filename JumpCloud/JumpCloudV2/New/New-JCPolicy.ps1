@@ -14,6 +14,26 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IPolicyRequest
+.Outputs
+JumpCloud.SDK.V2.Models.IPolicyWithDetails
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IPolicyRequest>: An instance of a policy template.
+  Name <String>: The description for this specific Policy.
+  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  [Values <IPolicyValue[]>]: 
+    [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
+    [Value <String>]: The value for the configuration field for this Policy instance.
+
+VALUES <IPolicyValue[]>: .
+  [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
+  [Value <String>]: The value for the configuration field for this Policy instance.
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCPolicy
 #>
 Function New-JCPolicy
 {

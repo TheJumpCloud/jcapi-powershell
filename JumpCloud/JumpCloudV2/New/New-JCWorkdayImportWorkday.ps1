@@ -14,6 +14,22 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IWorkdayInput
+.Outputs
+JumpCloud.SDK.V2.Models.IWorkdayOutput
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IWorkdayInput>: Workday Input
+  [BasicPassword <String>]: 
+  [BasicUsername <String>]: 
+  [Name <String>]: 
+  [OauthCode <String>]: 
+  [ReportUrl <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCWorkdayImportWorkday
 #>
 Function New-JCWorkdayImportWorkday
 {

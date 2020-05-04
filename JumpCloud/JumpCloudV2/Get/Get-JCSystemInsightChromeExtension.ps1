@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsChromeExtensions
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightChromeExtension
 #>
 Function Get-JCSystemInsightChromeExtension
 {

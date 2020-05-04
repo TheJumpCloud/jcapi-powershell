@@ -12,6 +12,28 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.ISshkeypost
+.Outputs
+JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
+.Outputs
+JumpCloud.SDK.V1.Models.ISshkeylist
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <ISshkeypost>: SSHKeyPost
+  Name <String>: The name of the SSH key.
+  PublicKey <String>: The Public SSH key.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/New-JCSystemUserSshKey
 #>
 Function New-JCSystemUserSshKey
 {

@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightInterfaceDetail
 #>
 Function Get-JCSystemInsightInterfaceDetail
 {

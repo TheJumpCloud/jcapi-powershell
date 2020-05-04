@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrvies
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCSystemInsightLogicalDrive
 #>
 Function Get-JCSystemInsightLogicalDrive
 {

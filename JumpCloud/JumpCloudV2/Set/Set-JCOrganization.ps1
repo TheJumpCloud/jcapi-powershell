@@ -14,6 +14,107 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
+.Outputs
+JumpCloud.SDK.V1.Models.IOrganization
+.Notes
+COMPLEX PARAMETER PROPERTIES
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
+  [Settings <IOrganizationsettingsput>]: OrganizationSettingsPut
+    [ContactEmail <String>]: 
+    [ContactName <String>]: 
+    [DirectoryInsightPremiumEnabled <Boolean?>]: 
+    [DisableLdap <Boolean?>]: 
+    [DisableUm <Boolean?>]: 
+    [DuplicateLdapGroups <Boolean?>]: 
+    [EmailDisclaimer <String>]: 
+    [EnableManagedUid <Boolean?>]: 
+    [Logo <String>]: 
+    [Name <String>]: 
+    [PasswordCompliance <String>]: 
+    [PasswordPolicyAllowUsernameSubstring <Boolean?>]: 
+    [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: 
+    [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]: 
+    [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]: 
+    [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]: 
+    [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]: 
+    [PasswordPolicyEnableMaxHistory <Boolean?>]: 
+    [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]: 
+    [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]: 
+    [PasswordPolicyEnableMinLength <Boolean?>]: 
+    [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]: 
+    [PasswordPolicyLockoutTimeInSeconds <Int32?>]: 
+    [PasswordPolicyMaxHistory <Int32?>]: 
+    [PasswordPolicyMaxLoginAttempts <Int32?>]: 
+    [PasswordPolicyMinChangePeriodInDays <Int32?>]: 
+    [PasswordPolicyMinLength <Int32?>]: 
+    [PasswordPolicyNeedsLowercase <Boolean?>]: 
+    [PasswordPolicyNeedsNumeric <Boolean?>]: 
+    [PasswordPolicyNeedsSymbolic <Boolean?>]: 
+    [PasswordPolicyNeedsUppercase <Boolean?>]: 
+    [PasswordPolicyPasswordExpirationInDays <Int32?>]: 
+    [ShowIntro <Boolean?>]: 
+    [SystemInsightEnableNewDarwin <Boolean?>]: 
+    [SystemInsightEnableNewLinux <Boolean?>]: 
+    [SystemInsightEnableNewWindows <Boolean?>]: 
+    [SystemInsightEnabled <Boolean?>]: 
+    [SystemUserPasswordExpirationInDays <Int32?>]: 
+    [SystemUsersCanEdit <Boolean?>]: 
+    [UserPortalIdleSessionDurationMinutes <Int32?>]: 
+
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+  [Id <String>]: 
+  [SystemuserId <String>]: 
+  [Triggername <String>]: 
+
+SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
+  [ContactEmail <String>]: 
+  [ContactName <String>]: 
+  [DirectoryInsightPremiumEnabled <Boolean?>]: 
+  [DisableLdap <Boolean?>]: 
+  [DisableUm <Boolean?>]: 
+  [DuplicateLdapGroups <Boolean?>]: 
+  [EmailDisclaimer <String>]: 
+  [EnableManagedUid <Boolean?>]: 
+  [Logo <String>]: 
+  [Name <String>]: 
+  [PasswordCompliance <String>]: 
+  [PasswordPolicyAllowUsernameSubstring <Boolean?>]: 
+  [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: 
+  [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]: 
+  [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]: 
+  [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]: 
+  [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]: 
+  [PasswordPolicyEnableMaxHistory <Boolean?>]: 
+  [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]: 
+  [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]: 
+  [PasswordPolicyEnableMinLength <Boolean?>]: 
+  [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]: 
+  [PasswordPolicyLockoutTimeInSeconds <Int32?>]: 
+  [PasswordPolicyMaxHistory <Int32?>]: 
+  [PasswordPolicyMaxLoginAttempts <Int32?>]: 
+  [PasswordPolicyMinChangePeriodInDays <Int32?>]: 
+  [PasswordPolicyMinLength <Int32?>]: 
+  [PasswordPolicyNeedsLowercase <Boolean?>]: 
+  [PasswordPolicyNeedsNumeric <Boolean?>]: 
+  [PasswordPolicyNeedsSymbolic <Boolean?>]: 
+  [PasswordPolicyNeedsUppercase <Boolean?>]: 
+  [PasswordPolicyPasswordExpirationInDays <Int32?>]: 
+  [ShowIntro <Boolean?>]: 
+  [SystemInsightEnableNewDarwin <Boolean?>]: 
+  [SystemInsightEnableNewLinux <Boolean?>]: 
+  [SystemInsightEnableNewWindows <Boolean?>]: 
+  [SystemInsightEnabled <Boolean?>]: 
+  [SystemUserPasswordExpirationInDays <Int32?>]: 
+  [SystemUsersCanEdit <Boolean?>]: 
+  [UserPortalIdleSessionDurationMinutes <Int32?>]: 
+.Link
+https://github.com/TheJumpCloud/support/wiki/Set-JCOrganization
 #>
 Function Set-JCOrganization
 {

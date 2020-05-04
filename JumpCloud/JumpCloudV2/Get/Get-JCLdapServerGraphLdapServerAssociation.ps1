@@ -12,6 +12,10 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Outputs
+JumpCloud.SDK.V2.Models.IGraphConnection
+.Link
+https://github.com/TheJumpCloud/support/wiki/Get-JCLdapServerGraphLdapServerAssociation
 #>
 Function Get-JCLdapServerGraphLdapServerAssociation
 {
