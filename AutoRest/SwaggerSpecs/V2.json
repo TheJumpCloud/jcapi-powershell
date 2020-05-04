@@ -1892,18 +1892,6 @@
               },
               "type": "object"
             }
-          },
-          {
-            "name": "x-api-key",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-org-id",
-            "in": "header",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -2111,20 +2099,6 @@
             "items": {
               "type": "string"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
           }
         ],
         "responses": {
@@ -2173,20 +2147,6 @@
             "schema": {
               "$ref": "#/definitions/samba-domain-input"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
           }
         ],
         "responses": {
@@ -2212,22 +2172,7 @@
           "Samba Domains"
         ],
         "description": "This endpoint allows you to delete a samba domain from an LDAP server.\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -2252,22 +2197,7 @@
           "Samba Domains"
         ],
         "description": "This endpoint returns a specific samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -2312,20 +2242,6 @@
             "schema": {
               "$ref": "#/definitions/samba-domain-input"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string",
-            "default": "application/json"
           }
         ],
         "responses": {
