@@ -1,23 +1,23 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('V1', 'V2', 'DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to prevent redownload of spec.')][switch]$NoUpdate
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
-    # 'V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
-    # 'V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
-    # 'V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
-    # 'V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
+    # 'JumpCloud.SDK.V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
+    # 'JumpCloud.SDK.V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
+    'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
+    'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
+    'JumpCloud.SDK.DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
+    # 'JumpCloud.SDK.V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
+    # 'JumpCloud.SDK.V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
 $FixesMapping = @{
-    'V1'                = [Ordered]@{
+    'JumpCloud.SDK.V1'                = [Ordered]@{
         # Path Issues
         '"#/definitions/system"'                                                                                            = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
         '"system": {"title": "System"'                                                                                      = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
@@ -35,7 +35,7 @@ $FixesMapping = @{
         ', ]'                                                                                                               = ']';
         "`t"                                                                                                                = '\t';
     };
-    'V2'                = [Ordered]@{
+    'JumpCloud.SDK.V2'                = [Ordered]@{
         # V2 Issues
         '"basePath": "/api/v2"'                                                                                        = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
         '["string", "number", "boolean"]'                                                                              = '"string"';
@@ -57,7 +57,7 @@ $FixesMapping = @{
         ', ]'                                                                                                          = ']';
         "`t"                                                                                                           = '\t';
     };
-    'DirectoryInsights' = [Ordered]@{
+    'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
         '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array"}'
         '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time","description": "query start time, UTC in RFC3339 format", "type": "string"}';
         '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time","description": "optional query end time, UTC in RFC3339 format", "type": "string"}';
@@ -65,7 +65,7 @@ $FixesMapping = @{
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'V1' = [Ordered]@{
+    'JumpCloud.SDK.V1' = [Ordered]@{
         'POST_applications'                           = 'Create-Application';
         'DELETE_applications-id'                      = 'Delete-Application';
         'GET_applications-id'                         = 'Get-Application';
@@ -109,7 +109,7 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
         'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
     };
-    'V2' = [Ordered]@{
+    'JumpCloud.SDK.V2' = [Ordered]@{
         'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
         'GET_activedirectories'                                      = 'List-ActiveDirectory';
         'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation';
@@ -319,7 +319,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         {
             Get-Content -Path:($OutputFullPathYaml) -Raw
         }
-        ElseIf ($APIName -eq 'DirectoryInsights')
+        ElseIf ($APIName -eq 'JumpCloud.SDK.DirectoryInsights')
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";

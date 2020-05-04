@@ -1,3 +1,4 @@
+#Requires -Modules powershell-yaml
 $OutputPath = $PSScriptRoot + '/JumpCloudV2/'
 $IndentChar = '    '
 $MSCopyrightHeader = "`n# ----------------------------------------------------------------------------------`n#`n# Copyright Microsoft Corporation`n# Licensed under the Apache License, Version 2.0 (the ""License"");`n# you may not use this file except in compliance with the License.`n# You may obtain a copy of the License at`n# http://www.apache.org/licenses/LICENSE-2.0`n# Unless required by applicable law or agreed to in writing, software`n# distributed under the License is distributed on an ""AS IS"" BASIS,`n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.`n# See the License for the specific language governing permissions and`n# limitations under the License.`n# ----------------------------------------------------------------------------------`n"
@@ -13,10 +14,17 @@ If (Get-Module -Name($ModuleNames))
     $Commands = Get-Command -Module:($ModuleNames) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
     ForEach ($Command In $Commands)
     {
-        # Create new function name
+        # Get module name
         $ModuleName = $Command.Module.Name
+        # Get config values
+        $ConfigFilePath = '{0}/AutoRest/Configs/{1}.yaml' -f ((Get-Item -Path:($PSScriptRoot)).Parent.FullName), $ModuleName
+        $Config = Get-Content -Path:($ConfigFilePath) | ConvertFrom-Yaml
+        $ModulePrefix = $Config.prefix
+        $ModuleProjectUri = $Config.projectUri
+        $ModuleHelpLinkPrefix = $Config.'help-link-prefix'
+        # Create new function name
         $CommandName = $Command.Name
-        $NewFunctionName = $CommandName.Replace($ModulePrefix, 'JC')
+        $NewCommandName = $CommandName.Replace($ModulePrefix, 'JC')
         # Get content from sdk function
         $CommandFilePath = $Command.ScriptBlock.File
         $CommandFilePathContent = Get-Content -Path:($CommandFilePath) -Raw
@@ -38,120 +46,16 @@ If (Get-Module -Name($ModuleNames))
         $PSScriptInfo = ($FunctionContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
         $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')).Matches.Value
         $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')).Matches.Value
-        # Filter/Manipulate extracted content
+        # Strip out parameters that match "DontShow"
         $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
-        $PSScriptInfo = $PSScriptInfo.Replace(($PSScriptInfo | Select-String -Pattern:('(?s)(\.Link)(.*?)(docs.microsoft.com)(.*?)(\n)')).Matches.Value, '')
+        # Update help info link
+        $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ModuleHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ModuleProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+        # Swap out SDK prefix for module prefix
         $PSScriptInfo = $PSScriptInfo.Replace($ModulePrefix, 'JC').Replace('.ToJsonString() | ConvertFrom-Json', '')
+        # Build CmdletBinding
         If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
         # Build requires statment
         $Requires = "-Modules $ModuleName"
-        # # Build new function parameters
-        # $CommandParameterSets = $Command.ParameterSets
-        # $CommandParameters = $Command.Parameters
-        # $CommandDefinition = $Command.Definition
-        # # Build parameters by copying them from the SDK function parameters
-        # $ParameterContent = ForEach ($CommandParameter In $CommandParameters.GetEnumerator())
-        # {
-        #     # $ParameterName = $CommandParameter.Key
-        #     # $ParameterValue.IsDynamic
-        #     # $ParameterValue.SwitchParameter
-        #     # $ParameterValue.Attributes.GetEnumerator() | ForEach-Object { $_ | Get-Member }
-        #     $ParametersToExclude = @(('Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials') + [System.Management.Automation.PSCmdlet]::CommonParameters + [System.Management.Automation.PSCmdlet]::OptionalCommonParameters)
-        #     $ParameterValue = $CommandParameter.Value
-        #     $ParameterName = $ParameterValue.Name
-        #     $ParameterType = $ParameterValue.ParameterType
-        #     $ParameterTypeFullName = $ParameterType.FullName
-        #     $ParameterAliases = $ParameterValue.Aliases
-        #     If ($ParameterName -notin $ParametersToExclude)
-        #     {
-        #         # Build aliases
-        #         $Aliases = If (-not [System.string]::IsNullOrEmpty($ParameterAliases))
-        #         {
-        #             '[Alias(' + $ParameterAliases + ')]'
-        #         }
-        #         # Build parameter sets
-        #         $NewParameterSets = $ParameterValue.ParameterSets.GetEnumerator() | ForEach-Object {
-        #             $ParameterSetName = $_.Key
-        #             $ParameterSetAttributes = $_.Value
-        #             $ParameterSetAttributeProperties = $ParameterSetAttributes.PSObject.Properties
-        #             $NewParameterSetAttributes = ForEach ($ParameterSetAttributeProperty In $ParameterSetAttributeProperties)
-        #             {
-        #                 $ParameterSetAttributePropertyName = $ParameterSetAttributeProperty.Name
-        #                 If (-not [System.String]::IsNullOrEmpty($ParameterSetAttributes.$ParameterSetAttributePropertyName))
-        #                 {
-        #                     # Format the attribute value
-        #                     $AttributeValue = Switch ($ParameterSetAttributeProperty.TypeNameOfValue)
-        #                     {
-        #                         'System.Boolean'
-        #                         {
-        #                             [System.String]('$' + $ParameterSetAttributes.$ParameterSetAttributePropertyName).ToLower()
-        #                         }
-        #                         'System.String'
-        #                         {
-        #                             "'" + $ParameterSetAttributes.$ParameterSetAttributePropertyName + "'"
-        #                         }
-        #                         'System.Int32'
-        #                         {
-        #                             $ParameterSetAttributes.$ParameterSetAttributePropertyName
-        #                         }
-        #                         Default { Write-Error ('Unknown data type: ' + $ParameterSetAttributePropertyName + ' ' + $ParameterSetAttributeProperty.TypeNameOfValue) }
-        #                     }
-        #                     # Format the attribute name
-        #                     If ($ParameterSetAttributePropertyName -eq 'IsMandatory')
-        #                     {
-        #                         $ParameterSetAttributePropertyName = 'Mandatory'
-        #                     }
-        #                     # Return key value pair
-        #                     If ($AttributeValue -notin ('$false', '-2147483648'))
-        #                     {
-        #                         "`n$($IndentChar)$($IndentChar)$($IndentChar)" + $ParameterSetAttributePropertyName + " = " + $AttributeValue
-        #                     }
-        #                 }
-        #             }
-
-        #             $ParameterSets = If ($ParameterSetName -eq '__AllParameterSets')
-        #             {
-        #                 $CommandParameterSets.Name
-        #             }
-        #             Else
-        #             {
-        #                 $ParameterSetName
-        #             }
-        #             $FullParameterString = @()
-        #             $ParameterSets | ForEach-Object {
-        #                 $ParameterString = $null
-        #                 If (-not [System.String]::IsNullOrEmpty($_))
-        #                 {
-        #                     $ParameterString = "`n$($IndentChar)$($IndentChar)$($IndentChar)ParameterSetName = '" + $_ + "'"
-        #                 }
-        #                 If (-not [System.String]::IsNullOrEmpty($NewParameterSetAttributes))
-        #                 {
-        #                     $ParameterString = $ParameterString + "," + ($NewParameterSetAttributes -join ',') + "`n$($IndentChar)$($IndentChar)"
-        #                 }
-        #                 Else
-        #                 {
-        #                     $ParameterString = $ParameterString.Trim()
-        #                 }
-        #                 If (-not [System.String]::IsNullOrEmpty($ParameterString))
-        #                 {
-        #                     $ParameterString = "$($IndentChar)$($IndentChar)[Parameter(" + $ParameterString + ")]"
-        #                     $FullParameterString += $ParameterString
-        #                 }
-        #             }
-        #             ( $FullParameterString -join "`n")
-        #         }
-        #         # Return full parameter set
-        #         If (-not [System.String]::IsNullOrEmpty($NewParameterSets))
-        #         {
-        #             [System.String](($NewParameterSets -join "`n") + "`n$($IndentChar)$($IndentChar)" + $Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
-        #         }
-        #         Else
-        #         {
-        #             [System.String]($Aliases + "[" + $ParameterTypeFullName + "]`$" + $ParameterName)
-        #         }
-        #     }
-        # }
-        # $ParameterContent = ($ParameterContent -join ",`n")
         # Build $BeginContent, $ProcessContent, and $EndContent
         If ($Command.Verb -in ('Get', 'Search'))
         {
@@ -306,7 +210,7 @@ $($IndentChar)$($IndentChar)}"
         If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
         {
             # Build "Function"
-            $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewFunctionName, $Requires, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
+            $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewCommandName, $Requires, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
             # Fix line endings
             $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
             # Export the function
@@ -316,10 +220,10 @@ $($IndentChar)$($IndentChar)}"
             {
                 New-Item -Path:($OutputFullPath) -ItemType:('Directory') | Out-Null
             }
-            $OutputFilePath = $OutputFullPath + '/' + $NewFunctionName + '.ps1'
+            $OutputFilePath = $OutputFullPath + '/' + $NewCommandName + '.ps1'
             $NewScript | Out-File -FilePath:($OutputFilePath) -Force
             # Validate script syntax
-            $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+            $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
             If ($ScriptAnalyzerResult)
             {
                 $ScriptAnalyzerResults += $ScriptAnalyzerResult

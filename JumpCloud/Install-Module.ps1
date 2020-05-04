@@ -1,8 +1,5 @@
-# $env:JCApiKey = ''
-# $env:JCOrgId = ''
 $OtherModuleNames = @('JumpCloud')
 $global:ModuleNames = @('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')
-$global:ModulePrefix = 'JcSdk'
 # Remove module from session
 If (Get-Module -Name $ModuleNames) { Get-Module -Name $ModuleNames | Remove-Module -Force }
 # Uninstall module from system
