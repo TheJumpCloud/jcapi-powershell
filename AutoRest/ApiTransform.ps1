@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ApiName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to prevent redownload of spec.')][switch]$NoUpdate
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
@@ -302,8 +302,8 @@ $UpdatedSpec = $false
 Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 # Start script
 $ApiHash.GetEnumerator() | ForEach-Object {
-    $CurrentApiName = $_.Name
-    If ($CurrentApiName -in $ApiName)
+    $CurrentSDKName = $_.Name
+    If ($CurrentSDKName -in $SDKName)
     {
         # Create output file path
         $OutputFileNameJson = $_.Name + '.json'
@@ -319,7 +319,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         {
             Get-Content -Path:($OutputFullPathYaml) -Raw
         }
-        ElseIf ($APIName -eq 'JumpCloud.SDK.DirectoryInsights')
+        ElseIf ($SDKName -eq 'JumpCloud.SDK.DirectoryInsights')
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";
@@ -360,9 +360,9 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             If (-not $NoUpdate)
             {
                 # Check to see if there are any operationIds not listed in the $OperationIdMapping
-                If ($OperationIdMapping.Contains($CurrentApiName))
+                If ($OperationIdMapping.Contains($CurrentSDKName))
                 {
-                    $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentApiName))
+                    $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentSDKName))
                     $OperationIdTemplate = '"operationId": "{0}"'
                     $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
                     $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
@@ -384,8 +384,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         }
                         Else
                         {
-                            Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find in "' + $CurrentApiName + '" API an operationId called "' + $_.Name + '".')
-                            Write-Error ('Unable to find in "' + $CurrentApiName + '" API an operationId called "' + $_.Name + '".')
+                            Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
+                            Write-Error ('Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
                         }
                     }
                     # Check for unmapped operationIds
@@ -395,14 +395,14 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                             Write-Host("##vso[task.logissue type=error;]" + 'Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
                             Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
                         }
-                        Write-Error ( 'New operationId found in "' + $CurrentApiName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
+                        Write-Error ( 'New operationId found in "' + $CurrentSDKName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
                         Exit
                     }
                 }
                 # Make fixes to file
-                If ($FixesMapping.ContainsKey($CurrentApiName))
+                If ($FixesMapping.ContainsKey($CurrentSDKName))
                 {
-                    $VersionFixes = $FixesMapping.Item($CurrentApiName)
+                    $VersionFixes = $FixesMapping.Item($CurrentSDKName)
                     $VersionFixes.GetEnumerator() | ForEach-Object {
                         $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
                         If (-not [System.String]::IsNullOrEmpty($PatternMatch))
@@ -412,8 +412,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                         }
                         Else
                         {
-                            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
-                            Write-Error ('Unable to find a match in "' + $CurrentApiName + '" for : ' + $_.Name)
+                            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                            Write-Error ('Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
                         }
                     }
                 }
@@ -540,8 +540,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
             ## Export content for troubleshooting
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentApiName + '_ReadyForConvert.json')
-            # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentApiName + '_Org.json')
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
+            # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_Org.json')
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec

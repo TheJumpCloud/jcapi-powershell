@@ -1,0 +1,4879 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0",
+    "title": "JumpCloud APIs",
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph."
+  },
+  "host": "console.jumpcloud.com",
+  "basePath": "/api/",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "x-api-key": {
+      "name": "x-api-key",
+      "type": "apiKey",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/applications": {
+      "get": {
+        "operationId": "List-Application",
+        "summary": "Applications",
+        "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "Create-Application",
+        "summary": "Create an Application",
+        "description": "The endpoint adds a new SSO / SAML Applications.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/applications/{id}": {
+      "delete": {
+        "operationId": "Delete-Application",
+        "summary": "Delete an Application",
+        "description": "The endpoint deletes an SSO / SAML Application.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Get-Application",
+        "summary": "Get an Application",
+        "description": "The endpoint retrieves an SSO / SAML Application.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-Application",
+        "summary": "Update an Application",
+        "description": "The endpoint updates a SSO / SAML Application.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/application-templates": {
+      "get": {
+        "operationId": "List-ApplicationTemplate",
+        "summary": "List Application Templates",
+        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplateslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/application-templates/{id}": {
+      "get": {
+        "operationId": "Get-ApplicationTemplate",
+        "summary": "Get an Application Template",
+        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending."
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplate"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/command/trigger/{triggername}": {
+      "parameters": [
+        {
+          "name": "triggername",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "POST-CommandTrigger",
+        "summary": "Launch a command via a Trigger",
+        "description": "This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/triggerreturn"
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/commandresults": {
+      "get": {
+        "operationId": "List-CommandResult",
+        "summary": "List all Command Results",
+        "description": "This endpoint returns all command results.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key:{API_KEY}'\n  ```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/commandresultslist"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/commandresults/{id}": {
+      "delete": {
+        "operationId": "Delete-CommandResult",
+        "summary": "Delete a Command result",
+        "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/commandresult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Get-CommandResult",
+        "summary": "List an individual Command result",
+        "description": "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/commandresult"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/commands": {
+      "get": {
+        "operationId": "List-Command",
+        "summary": "List All Commands",
+        "description": "This endpoint returns all commands.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/commandslist"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "Create-Command",
+        "summary": "Create A Command",
+        "description": "This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/command"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/command"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/commands/{id}": {
+      "delete": {
+        "operationId": "Delete-Command",
+        "summary": "Delete a Command",
+        "description": "This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Get-Command",
+        "summary": "List an individual Command",
+        "description": "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/command"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-Command",
+        "summary": "Update a Command",
+        "description": "This endpoint Updates a command based on the command ID and returns the modified command record.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/command"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/command"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/files/command/{id}": {
+      "get": {
+        "operationId": "Get-CommandFile",
+        "summary": "Get a Command File",
+        "description": "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/commandfilereturn"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/organizations": {
+      "get": {
+        "operationId": "List-Organization",
+        "summary": "Get Organization Details",
+        "description": "This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/organizationslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/organizations/{id}": {
+      "get": {
+        "operationId": "Get-Organization",
+        "summary": "Get an Organization",
+        "description": "This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/organization"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-Organization",
+        "summary": "Update an Organization",
+        "description": "This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\". We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "settings": {
+                  "$ref": "#/definitions/organizationsettingsput"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/organization"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/radiusservers": {
+      "get": {
+        "operationId": "List-RadiusServer",
+        "summary": "List Radius Servers",
+        "description": "This endpoint allows you to get a list of all RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserverslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "Create-RadiusServer",
+        "summary": "Create a Radius Server",
+        "description": "This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/radiusserverpost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserver"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/radiusservers/{id}": {
+      "get": {
+        "operationId": "Get-RadiusServer",
+        "summary": "Get Radius Server",
+        "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserver"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-RadiusServer",
+        "summary": "Update Radius Servers",
+        "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "mfa": {
+                  "enum": [
+                    "DISABLED",
+                    "ENABLED",
+                    "REQUIRED",
+                    "ALWAYS"
+                  ],
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "networkSourceIp": {
+                  "type": "string"
+                },
+                "tags": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "userLockoutAction": {
+                  "type": "string"
+                },
+                "userPasswordExpirationAction": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "name",
+                "networkSourceIp"
+              ],
+              "type": "object",
+              "example": {
+                "name": "test radius",
+                "networkSourceIp": "0.0.0.0",
+                "tagsNames": [
+                  "tag1"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/radiusserverput"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/search/organizations": {
+      "post": {
+        "operationId": "Search-Organization",
+        "summary": "Search Organizations",
+        "description": "This endpoint will return Organization data based on your search parameters. This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request. \n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/organizationslist"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/search/systems": {
+      "post": {
+        "operationId": "Search-System",
+        "summary": "Search Systems",
+        "description": "Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemslist"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/search/systemusers": {
+      "post": {
+        "operationId": "Search-SystemUser",
+        "summary": "Search System Users",
+        "description": "Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system user.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of system users in a department\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"department\" : \"IT\"}],\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nText search for system users with and email on a domain\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nCombining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of departments\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"department\" : \"IT\"},\n      {\"department\" : \"Sales\"}\n    ]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/search"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemuserslist"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systems": {
+      "get": {
+        "operationId": "List-System",
+        "summary": "List All Systems",
+        "description": "This endpoint returns all Systems.\n\n#### Sample Requests\n```\ncurl -X GET https://console.jumpcloud.com/api/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/systemslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systems/{id}": {
+      "delete": {
+        "operationId": "Delete-System",
+        "summary": "Delete a System",
+        "description": "This endpoint allows you to delete a system. This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute. If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/JcSystem"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Get-System",
+        "summary": "List an individual system",
+        "description": "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/JcSystem"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-System",
+        "summary": "Update a system",
+        "description": "This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/systemput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/JcSystem"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers": {
+      "get": {
+        "operationId": "List-SystemUser",
+        "summary": "List all system users",
+        "description": "This endpoint returns all systemusers.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "The comma separated fields included in the returned records.\nIf omitted the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemuserslist"
+            }
+          },
+          "401": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "post": {
+        "operationId": "Create-SystemUser",
+        "summary": "Create a system user",
+        "description": "This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"username\":\"{username}\",\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/systemuserputpost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User added successfully",
+            "schema": {
+              "$ref": "#/definitions/systemuserreturn"
+            }
+          },
+          "400": {
+            "description": "User already exists"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{id}": {
+      "delete": {
+        "operationId": "Delete-SystemUser",
+        "summary": "Delete a system user",
+        "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemuserreturn"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "get": {
+        "operationId": "Get-SystemUser",
+        "summary": "List a system user",
+        "description": "This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [
+          {
+            "name": "fields",
+            "in": "query",
+            "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+            "required": false,
+            "type": "string",
+            "default": ""
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "A filter to apply to the query.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemuserreturn"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "operationId": "Put-SystemUser",
+        "summary": "Update a system user",
+        "description": "This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/systemuserput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/systemuserreturn"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{id}/expire": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "POST-ExpireSystemUserPassword",
+        "summary": "Expire a system user's password",
+        "description": "This endpoint allows you to expire a user's password.",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{id}/resetmfa": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "Reset-SystemUserMfa",
+        "summary": "Reset a system user's MFA token",
+        "description": "This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period. This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information. \n\n#### Sample Request \n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n  \n\n```",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "properties": {
+                "exclusion": {
+                  "type": "boolean"
+                },
+                "exclusionUntil": {
+                  "format": "date-time",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{id}/sshkeys": {
+      "get": {
+        "operationId": "List-SystemUsersSshKey",
+        "summary": "List a system user's public SSH keys",
+        "description": "This endpoint will return a specific System User's public SSH key.",
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/sshkeylist"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "description": "Bad Request",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "Create-SystemUsersSshKey",
+        "summary": "Create a system user's Public SSH Key",
+        "description": "This endpoint will create a specific System User's Public SSH Key.",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/sshkeypost"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/sshkeylist"
+            }
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "description": "Bad Request",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{id}/unlock": {
+      "parameters": [
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "operationId": "Unlock-SystemUser",
+        "summary": "Unlock a system user",
+        "description": "This endpoint allows you to unlock a user's account.",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systemusers/{systemuser_id}/sshkeys/{id}": {
+      "delete": {
+        "operationId": "Delete-SystemUsersSshKey",
+        "summary": "Delete a system user's Public SSH Keys",
+        "description": "This endpoint will delete a specific System User's SSH Key.",
+        "responses": {
+          "200": {
+            "description": ""
+          },
+          "400": {
+            "description": "",
+            "schema": {
+              "description": "Bad Request",
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "systemuser_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "trait:fields:fields": {
+      "name": "fields",
+      "in": "query",
+      "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
+      "required": false,
+      "type": "string",
+      "default": ""
+    },
+    "trait:filter:filter": {
+      "name": "filter",
+      "in": "query",
+      "description": "A filter to apply to the query.",
+      "required": false,
+      "type": "string"
+    },
+    "trait:limit:limit": {
+      "name": "limit",
+      "in": "query",
+      "description": "The number of records to return at once. Limited to 100.",
+      "required": false,
+      "type": "integer",
+      "default": 10
+    },
+    "trait:multiTenantRequestHeaders:x-org-id": {
+      "name": "x-org-id",
+      "in": "header",
+      "description": "",
+      "required": false,
+      "type": "string",
+      "default": ""
+    },
+    "trait:requestHeaders:Accept": {
+      "name": "Accept",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "default": "application/json"
+    },
+    "trait:requestHeaders:Content-Type": {
+      "name": "Content-Type",
+      "in": "header",
+      "required": true,
+      "type": "string",
+      "default": "application/json"
+    },
+    "trait:search:search": {
+      "name": "search",
+      "in": "query",
+      "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
+      "required": false,
+      "type": "string"
+    },
+    "trait:skip:skip": {
+      "name": "skip",
+      "in": "query",
+      "description": "The offset into the records to return.",
+      "required": false,
+      "type": "integer",
+      "default": 0,
+      "minimum": 0
+    },
+    "trait:sort:sort": {
+      "name": "sort",
+      "in": "query",
+      "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
+      "required": false,
+      "type": "string",
+      "default": ""
+    },
+    "trait:systemContextAuth:Authorization": {
+      "name": "Authorization",
+      "in": "header",
+      "description": "Authorization header for the System Context API",
+      "required": false,
+      "type": "string"
+    },
+    "trait:systemContextAuth:Date": {
+      "name": "Date",
+      "in": "header",
+      "description": "Current date header for the System Context API",
+      "required": false,
+      "type": "string"
+    }
+  },
+  "responses": {
+    "trait:standardErrors:400": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    },
+    "trait:standardErrors:401": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    },
+    "trait:standardErrors:403": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    },
+    "trait:standardErrors:404": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    },
+    "trait:standardErrors:409": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    },
+    "trait:standardErrors:500": {
+      "description": "",
+      "schema": {
+        "$ref": "#/definitions/errorresponse"
+      }
+    }
+  },
+  "definitions": {
+    "application": {
+      "title": "Application",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "beta": {
+          "type": "boolean"
+        },
+        "color": {
+          "enum": [
+            "",
+            "#202D38",
+            "#005466",
+            "#3E8696",
+            "#006CAC",
+            "#0617AC",
+            "#7C6ADA",
+            "#D5779D",
+            "#9E2F00",
+            "#FFB000",
+            "#58C469",
+            "#57C49F",
+            "#FF6C03"
+          ],
+          "type": "string"
+        },
+        "config": {
+          "properties": {
+            "acsUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "constantAttributes": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "mutable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "databaseAttributes": {
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "idpCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpPrivateKey": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "spEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "created": {
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "displayLabel": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "learnMore": {
+          "type": "string"
+        },
+        "logo": {
+          "properties": {
+            "color": {
+              "enum": [
+                "",
+                "#202D38",
+                "#005466",
+                "#3E8696",
+                "#006CAC",
+                "#0617AC",
+                "#7C6ADA",
+                "#D5779D",
+                "#9E2F00",
+                "#FFB000",
+                "#58C469",
+                "#57C49F",
+                "#FF6C03"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "ssoUrl": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "applicationslist": {
+      "title": "ApplicationsList",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "results": {
+          "description": "The list of applications.",
+          "items": {
+            "$ref": "#/definitions/application"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of applications.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "applicationtemplate": {
+      "title": "ApplicationTemplate",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "beta": {
+          "type": "boolean"
+        },
+        "color": {
+          "enum": [
+            "",
+            "#202D38",
+            "#005466",
+            "#3E8696",
+            "#006CAC",
+            "#0617AC",
+            "#7C6ADA",
+            "#D5779D",
+            "#9E2F00",
+            "#FFB000",
+            "#58C469",
+            "#57C49F",
+            "#FF6C03"
+          ],
+          "type": "string"
+        },
+        "config": {
+          "properties": {
+            "acsUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "constantAttributes": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "mutable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "databaseAttributes": {
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "idpCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpPrivateKey": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "spEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "displayLabel": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "isConfigured": {
+          "type": "boolean"
+        },
+        "jit": {
+          "properties": {
+            "attributes": {
+              "type": "object"
+            },
+            "createOnly": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "learnMore": {
+          "type": "string"
+        },
+        "logo": {
+          "properties": {
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ssoUrl": {
+          "type": "string"
+        },
+        "test": {
+          "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "type": "object"
+    },
+    "applicationtemplateslist": {
+      "title": "ApplicationTemplatesList",
+      "properties": {
+        "results": {
+          "description": "The list of applications.",
+          "items": {
+            "$ref": "#/definitions/applicationtemplate"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of applications.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "case": {
+      "title": "Case",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "firstname": {
+          "maxLength": 40,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 80,
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 255,
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "description",
+        "firstname",
+        "lastname"
+      ],
+      "type": "object"
+    },
+    "command": {
+      "title": "Command",
+      "properties": {
+        "command": {
+          "description": "The command to execute on the server.",
+          "type": "string"
+        },
+        "commandRunners": {
+          "description": "An array of IDs of the Command Runner Users that can execute this command.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "commandType": {
+          "description": "The Command OS",
+          "type": "string"
+        },
+        "files": {
+          "description": "An array of file IDs to include with the command.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "launchType": {
+          "description": "How the command will execute.",
+          "type": "string"
+        },
+        "listensTo": {
+          "description": "",
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "organization": {
+          "description": "The ID of the organization.",
+          "type": "string"
+        },
+        "schedule": {
+          "description": "A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.\n",
+          "type": "string"
+        },
+        "scheduleRepeatType": {
+          "description": "When the command will repeat.",
+          "type": "string"
+        },
+        "sudo": {
+          "description": "",
+          "type": "boolean"
+        },
+        "systems": {
+          "description": "An array of system IDs to run the command on. Not available if you are using Groups.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "timeout": {
+          "description": "The time in seconds to allow the command to run for.",
+          "type": "string"
+        },
+        "trigger": {
+          "description": "The name of the command trigger.",
+          "type": "string"
+        },
+        "user": {
+          "description": "The ID of the system user to run the command as. This field is required when creating a command with a commandType of \"mac\" or \"linux\".",
+          "type": "string"
+        }
+      },
+      "required": [
+        "command"
+      ],
+      "type": "object"
+    },
+    "commandfilereturn": {
+      "title": "CommandFileReturn",
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the file.",
+                "type": "string"
+              },
+              "destination": {
+                "description": "The location where the file will be stored.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The file name.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of commands files",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "commandresult": {
+      "title": "CommandResult",
+      "properties": {
+        "_id": {
+          "description": "The ID of the command.",
+          "type": "string"
+        },
+        "command": {
+          "description": "The command that was executed on the system.",
+          "type": "string"
+        },
+        "files": {
+          "description": "An array of file ids that were included in the command",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of the command.",
+          "type": "string"
+        },
+        "organization": {
+          "description": "The ID of the organization.",
+          "type": "string"
+        },
+        "requestTime": {
+          "description": "The time that the command was sent.",
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "data": {
+              "properties": {
+                "exitCode": {
+                  "description": "The stderr output from the command that ran.",
+                  "type": "integer"
+                },
+                "output": {
+                  "description": "The output of the command that was executed.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "error": {
+              "description": "The stderr output from the command that ran.",
+              "type": "string"
+            },
+            "id": {
+              "description": "ID of the response.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "responseTime": {
+          "description": "The time that the command was completed.",
+          "type": "string"
+        },
+        "sudo": {
+          "description": "If the user had sudo rights",
+          "type": "boolean"
+        },
+        "system": {
+          "description": "The name of the system the command was executed on.",
+          "type": "string"
+        },
+        "systemId": {
+          "description": "The id of the system the command was executed on.",
+          "type": "string"
+        },
+        "user": {
+          "description": "The user the command ran as.",
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "workflowInstanceId": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "commandresultslist": {
+      "title": "CommandResultsList",
+      "properties": {
+        "results": {
+          "description": "The list of command results",
+          "items": {
+            "$ref": "#/definitions/commandresult"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of command results",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "commandslist": {
+      "title": "CommandsList",
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the command.",
+                "type": "string"
+              },
+              "command": {
+                "description": "The Command to execute.",
+                "type": "string"
+              },
+              "commandType": {
+                "description": "The Command OS.",
+                "type": "string"
+              },
+              "launchType": {
+                "description": "How the Command is executed.",
+                "type": "string"
+              },
+              "listensTo": {
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the Command.",
+                "type": "string"
+              },
+              "organization": {
+                "description": "The ID of the Organization.",
+                "type": "string"
+              },
+              "schedule": {
+                "description": "A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.",
+                "type": "string"
+              },
+              "scheduleRepeatType": {
+                "description": "When the command will repeat.",
+                "type": "string"
+              },
+              "trigger": {
+                "description": "Trigger to execute command.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of commands",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "errorresponse": {
+      "title": "ErrorResponse",
+      "type": "object",
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "fde": {
+      "title": "FDE",
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "keyPresent": {
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
+    "JcSystem": {
+      "title": "System",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "allowMultiFactorAuthentication": {
+          "type": "boolean"
+        },
+        "allowPublicKeyAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshPasswordAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshRootLogin": {
+          "type": "boolean"
+        },
+        "amazonInstanceID": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "connectionHistory": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "created": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "fde": {
+          "$ref": "#/definitions/fde"
+        },
+        "fileSystem": {
+          "type": "string"
+        },
+        "hasServiceAccount": {
+          "type": "boolean"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "lastContact": {
+          "type": "string"
+        },
+        "modifySSHDConfig": {
+          "type": "boolean"
+        },
+        "networkInterfaces": {
+          "items": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "internal": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "remoteIP": {
+          "type": "string"
+        },
+        "sshRootEnabled": {
+          "type": "boolean"
+        },
+        "sshdParams": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "systemInsights": {
+          "properties": {
+            "state": {
+              "enum": [
+                "enabled",
+                "disabled",
+                "deferred"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "systemTimezone": {
+          "type": "integer"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "mfa": {
+      "title": "mfa",
+      "type": "object",
+      "properties": {
+        "exclusion": {
+          "type": "boolean"
+        },
+        "exclusionUntil": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "configured": {
+          "type": "boolean"
+        }
+      }
+    },
+    "organization": {
+      "title": "Organization",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "hasStripeCustomerId": {
+          "type": "boolean"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "settings": {
+          "$ref": "#/definitions/organizationsettings"
+        }
+      },
+      "type": "object"
+    },
+    "organizationsettings": {
+      "title": "OrganizationSettings",
+      "properties": {
+        "betaFeatures": {
+          "type": "object"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "disableCommandRunner": {
+          "type": "boolean"
+        },
+        "disableLdap": {
+          "type": "boolean"
+        },
+        "disableUM": {
+          "type": "boolean"
+        },
+        "duplicateLDAPGroups": {
+          "type": "boolean"
+        },
+        "emailDisclaimer": {
+          "type": "string"
+        },
+        "enableGoogleApps": {
+          "type": "boolean"
+        },
+        "enableManagedUID": {
+          "type": "boolean"
+        },
+        "enableO365": {
+          "type": "boolean"
+        },
+        "features": {
+          "properties": {
+            "directoryInsightsPremium": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "systemInsights": {
+              "properties": {
+                "enableNewDarwin": {
+                  "type": "boolean"
+                },
+                "enableNewLinux": {
+                  "type": "boolean"
+                },
+                "enableNewWindows": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "passwordCompliance": {
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ],
+          "type": "string"
+        },
+        "passwordPolicy": {
+          "properties": {
+            "allowUsernameSubstring": {
+              "type": "boolean"
+            },
+            "daysAfterExpirationToSelfRecover": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "daysBeforeExpirationToForceReset": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "effectiveDate": {
+              "type": "string"
+            },
+            "enableDaysAfterExpirationToSelfRecover": {
+              "type": "boolean"
+            },
+            "enableDaysBeforeExpirationToForceReset": {
+              "type": "boolean"
+            },
+            "enableLockoutTimeInSeconds": {
+              "type": "boolean"
+            },
+            "enableMaxHistory": {
+              "type": "boolean"
+            },
+            "enableMaxLoginAttempts": {
+              "type": "boolean"
+            },
+            "enableMinChangePeriodInDays": {
+              "type": "boolean"
+            },
+            "enableMinLength": {
+              "type": "boolean"
+            },
+            "enablePasswordExpirationInDays": {
+              "type": "boolean"
+            },
+            "lockoutTimeInSeconds": {
+              "type": "integer"
+            },
+            "maxHistory": {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "maxLoginAttempts": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "minChangePeriodInDays": {
+              "type": "integer"
+            },
+            "minLength": {
+              "type": "integer"
+            },
+            "needsLowercase": {
+              "type": "boolean"
+            },
+            "needsNumeric": {
+              "type": "boolean"
+            },
+            "needsSymbolic": {
+              "type": "boolean"
+            },
+            "needsUppercase": {
+              "type": "boolean"
+            },
+            "passwordExpirationInDays": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "showIntro": {
+          "type": "boolean"
+        },
+        "systemUserPasswordExpirationInDays": {
+          "type": "integer"
+        },
+        "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "userPortal": {
+          "properties": {
+            "idleSessionDurationMinutes": {
+              "maximum": 129600,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "organizationsettingsput": {
+      "title": "OrganizationSettingsPut",
+      "properties": {
+        "contactEmail": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "disableLdap": {
+          "type": "boolean"
+        },
+        "disableUM": {
+          "type": "boolean"
+        },
+        "duplicateLDAPGroups": {
+          "type": "boolean"
+        },
+        "emailDisclaimer": {
+          "type": "string"
+        },
+        "enableManagedUID": {
+          "type": "boolean"
+        },
+        "features": {
+          "properties": {
+            "directoryInsightsPremium": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "systemInsights": {
+              "properties": {
+                "enableNewDarwin": {
+                  "type": "boolean"
+                },
+                "enableNewLinux": {
+                  "type": "boolean"
+                },
+                "enableNewWindows": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "passwordCompliance": {
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ],
+          "type": "string"
+        },
+        "passwordPolicy": {
+          "properties": {
+            "allowUsernameSubstring": {
+              "type": "boolean"
+            },
+            "daysAfterExpirationToSelfRecover": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "daysBeforeExpirationToForceReset": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "enableDaysAfterExpirationToSelfRecover": {
+              "type": "boolean"
+            },
+            "enableDaysBeforeExpirationToForceReset": {
+              "type": "boolean"
+            },
+            "enableLockoutTimeInSeconds": {
+              "type": "boolean"
+            },
+            "enableMaxHistory": {
+              "type": "boolean"
+            },
+            "enableMaxLoginAttempts": {
+              "type": "boolean"
+            },
+            "enableMinChangePeriodInDays": {
+              "type": "boolean"
+            },
+            "enableMinLength": {
+              "type": "boolean"
+            },
+            "enablePasswordExpirationInDays": {
+              "type": "boolean"
+            },
+            "lockoutTimeInSeconds": {
+              "type": "integer"
+            },
+            "maxHistory": {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "maxLoginAttempts": {
+              "minimum": 0,
+              "type": "integer"
+            },
+            "minChangePeriodInDays": {
+              "type": "integer"
+            },
+            "minLength": {
+              "type": "integer"
+            },
+            "needsLowercase": {
+              "type": "boolean"
+            },
+            "needsNumeric": {
+              "type": "boolean"
+            },
+            "needsSymbolic": {
+              "type": "boolean"
+            },
+            "needsUppercase": {
+              "type": "boolean"
+            },
+            "passwordExpirationInDays": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "showIntro": {
+          "type": "boolean"
+        },
+        "systemUserPasswordExpirationInDays": {
+          "type": "integer"
+        },
+        "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "userPortal": {
+          "properties": {
+            "idleSessionDurationMinutes": {
+              "maximum": 129600,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "organizationslist": {
+      "title": "OrganizationList",
+      "properties": {
+        "results": {
+          "description": "The list of organizations.",
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the organization.",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "The name of the organization.",
+                "type": "string"
+              },
+              "logoUrl": {
+                "description": "The organization logo image URL. ",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of organizations. ",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "radiusserver": {
+      "title": "RadiusServer",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkSourceIp": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "sharedSecret": {
+          "type": "string"
+        },
+        "tagNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userLockoutAction": {
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "radiusserverpost": {
+      "title": "RadiusServerPost",
+      "properties": {
+        "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkSourceIp": {
+          "type": "string"
+        },
+        "sharedSecret": {
+          "description": "RADIUS shared secret between the server and client.",
+          "type": "string"
+        },
+        "tagNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userLockoutAction": {
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "networkSourceIp",
+        "name",
+        "sharedSecret"
+      ],
+      "type": "object"
+    },
+    "radiusserverput": {
+      "title": "RadiusServerPut",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkSourceIp": {
+          "type": "string"
+        },
+        "tagNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "userLockoutAction": {
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "radiusserverslist": {
+      "title": "RadiusServersList",
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/definitions/radiusserver"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "search": {
+      "title": "Search",
+      "properties": {
+        "fields": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "object"
+        },
+        "searchFilter": {
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
+    "sshkeylist": {
+      "title": "SSHKeyList",
+      "properties": {
+        "_id": {
+          "description": "The ID of the SSH key.",
+          "type": "string"
+        },
+        "create_date": {
+          "description": "The date the SSH key was created.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the SSH key.",
+          "type": "string"
+        },
+        "public_key": {
+          "description": "The Public SSH key.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "sshkeypost": {
+      "title": "SSHKeyPost",
+      "properties": {
+        "name": {
+          "description": "The name of the SSH key.",
+          "type": "string"
+        },
+        "public_key": {
+          "description": "The Public SSH key.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "public_key",
+        "name"
+      ],
+      "type": "object"
+    },
+    "systemput": {
+      "title": "SystemPut",
+      "properties": {
+        "agentBoundMessages": {
+          "items": {
+            "properties": {
+              "cmd": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "allowMultiFactorAuthentication": {
+          "type": "boolean"
+        },
+        "allowPublicKeyAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshPasswordAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshRootLogin": {
+          "type": "boolean"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "systemslist": {
+      "title": "SystemsList",
+      "properties": {
+        "results": {
+          "description": "The list of systems.",
+          "items": {
+            "$ref": "#/definitions/JcSystem"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of systems.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "systemuser": {
+      "title": "SystemUser",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "associatedTagCount": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "attributes": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "password_expiration_date": {
+          "type": "string"
+        },
+        "password_expired": {
+          "type": "boolean"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "ssh_keys": {
+          "items": {
+            "$ref": "#/definitions/sshkeylist"
+          },
+          "type": "array"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "totp_enabled": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "username": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "systemuserput": {
+      "title": "SystemUserPut",
+      "properties": {
+        "account_locked": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "description": "type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country",
+          "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "relationships": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "ssh_keys": {
+          "items": {
+            "$ref": "#/definitions/sshkeypost"
+          },
+          "type": "array"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "username": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "systemuserputpost": {
+      "title": "SystemUserPost",
+      "type": "object",
+      "properties": {
+        "email": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "username": {
+          "type": "string"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "unix_uid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unix_guid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "poBox": {
+                "type": "string"
+              },
+              "extendedAddress": {
+                "type": "string"
+              },
+              "streetAddress": {
+                "type": "string"
+              },
+              "locality": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "middlename": {
+          "type": "string"
+        },
+        "displayname": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "location": {
+          "type": "string"
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "employeeType": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Must be unique per user. "
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "external_password_expiration_date": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "email",
+        "username"
+      ]
+    },
+    "systemuserreturn": {
+      "title": "SystemUserReturn",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "badLoginAttempts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "password_expiration_date": {
+          "type": "string"
+        },
+        "password_expired": {
+          "type": "boolean"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "relationships": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "ssh_keys": {
+          "items": {
+            "$ref": "#/definitions/sshkeylist"
+          },
+          "type": "array"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "tags": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "totp_enabled": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "username": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "systemuserslist": {
+      "title": "SystemUsersList",
+      "properties": {
+        "results": {
+          "description": "The list of system users.",
+          "items": {
+            "$ref": "#/definitions/systemuserreturn"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of system users.",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "triggerreturn": {
+      "title": "TriggerReturn",
+      "properties": {
+        "triggered": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "userput": {
+      "title": "UserPut",
+      "properties": {
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enableMultiFactor": {
+          "type": "boolean"
+        },
+        "enableWhatsNew": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastWhatsNewChecked": {
+          "format": "date",
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "userreturn": {
+      "title": "UserReturn",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "disableIntroduction": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "enableMultiFactor": {
+          "type": "boolean"
+        },
+        "enableWhatsNew": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "lastWhatsNewChecked": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
+        "usersTimeZone": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    }
+  }
+}

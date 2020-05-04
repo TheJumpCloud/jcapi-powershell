@@ -4,7 +4,7 @@ disable-validation: false
 powershell: true
 version: latest
 base-folder: ".."
-input-file: SwaggerSpecs/DirectoryInsights.json
+input-file: SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
 clear-output-folder: true
 output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
