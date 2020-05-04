@@ -1,12 +1,14 @@
 #Requires -PSEdition Core
 $GitHubRoot = '' #ex: C:/Users/epanipinto/Documents/GitHub
+$xapikeyPester = ''
+$xapikeyMTP = ''
 $env:moduleRootFolder = "$GitHubRoot/support/PowerShell"
 $env:deployFolder = "$env:moduleRootFolder/Deploy"
 $env:MODULENAME = 'JumpCloud'
 $env:MODULEFOLDERNAME = 'JumpCloud Module'
 $env:RELEASETYPE = 'Minor'
-$env:XAPIKEY_PESTER = 'ff6006d0cd75d4c52eacf9da2aa7205595ef97bf'
-$env:XAPIKEY_MTP = '70a96c7196db6d4dac8a375b32686d07a641d671'
+$env:XAPIKEY_PESTER = $xapikeyPester
+$env:XAPIKEY_MTP = $xapikeyMTP
 ####################################################################################
 ####################################################################################
 $AutoRest_Example = "$GitHubRoot/jcapi-powershell/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/examples/Get-JcSdkEvent.md"
@@ -22,8 +24,8 @@ $JCModule_Tests = "$GitHubRoot/support/PowerShell/JumpCloud Module/Tests/Public/
 ####################################################################################
 .("$GitHubRoot/jcapi-powershell/AutoRest/SetupDependencies.ps1")
 .("$GitHubRoot/jcapi-powershell/AutoRest/BuildAutoRest.ps1")
-# Restart your PowerShell session
 ####################################################################################
+# Restart your PowerShell session
 ####################################################################################
 .("$GitHubRoot/jcapi-powershell/JumpCloud/Install-Module.ps1")
 .("$GitHubRoot/jcapi-powershell/JumpCloud/Build-Module.ps1")
@@ -46,11 +48,14 @@ while (-not $mockingPath)
 
 ', '') | Set-Content -Path:($JCModule_Tests)
 Remove-Item -Path:($JCModule_HelpFile)
+####################################################################################
+# Restart your PowerShell session
+####################################################################################
 # Pipeline Steps
 .("$env:deployFolder/Build-Module.ps1")
 .("$env:deployFolder/Build-HelpFiles.ps1")
 .("$env:deployFolder/Build-PesterTestFiles.ps1")
 .("$env:moduleRootFolder/JumpCloud Module/Tests/InvokePester.ps1") -TestOrgAPIKey:($env:XAPIKEY_PESTER) -MultiTenantAPIKey:($env:XAPIKEY_MTP) -IncludeTagList:('ModuleValidation')
-.("$env:moduleRootFolder/JumpCloud Module/Tests/InvokePester.ps1") -TestOrgAPIKey:($env:XAPIKEY_PESTER) -MultiTenantAPIKey:($env:XAPIKEY_MTP) -ExcludeTagList:('ModuleValidation', 'JCAssociation', 'JCUsersFromCSV') # -IncludeTagList:('')
+# .("$env:moduleRootFolder/JumpCloud Module/Tests/InvokePester.ps1") -TestOrgAPIKey:($env:XAPIKEY_PESTER) -MultiTenantAPIKey:($env:XAPIKEY_MTP) -ExcludeTagList:('ModuleValidation', 'JCAssociation', 'JCUsersFromCSV') # -IncludeTagList:('')
 ####################################################################################
 ####################################################################################
