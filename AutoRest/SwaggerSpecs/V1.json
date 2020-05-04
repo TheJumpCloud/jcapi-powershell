@@ -91,24 +91,6 @@
             "schema": {
               "$ref": "#/definitions/application"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-org-id",
-            "in": "header",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -131,26 +113,7 @@
         "operationId": "Delete-Application",
         "summary": "Delete an Application",
         "description": "The endpoint deletes an SSO / SAML Application.",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-org-id",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -169,26 +132,7 @@
         "operationId": "Get-Application",
         "summary": "Get an Application",
         "description": "The endpoint retrieves an SSO / SAML Application.",
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-org-id",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -222,24 +166,6 @@
             "schema": {
               "$ref": "#/definitions/application"
             }
-          },
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "Accept",
-            "in": "header",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "x-org-id",
-            "in": "header",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
