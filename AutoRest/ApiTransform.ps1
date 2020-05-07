@@ -309,229 +309,251 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
-};
-# Set initial value for "UpdatedSpec" within Azure Pipelines
-$UpdatedSpec = $false
-Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
-# Start script
-$ApiHash.GetEnumerator() | ForEach-Object {
-    $CurrentSDKName = $_.Name
-    If ($CurrentSDKName -in $SDKName)
+    'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
+        'directoryInsights_eventsPost'      = 'Get-JCEvent';
+        'directoryInsights_eventsCountPost' = 'Get-JCEventCount';
+    };
+    # Set initial value for "UpdatedSpec" within Azure Pipelines
+    $UpdatedSpec = $false
+    Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+    # Start script
+    $ApiHash.GetEnumerator() | ForEach-Object
     {
-        # Create output file path
-        $OutputFileNameJson = $_.Name + '.json'
-        $OutputFileNameYaml = $_.Name + '.yaml'
-        $OutputFullPathJson = $OutputFilePath + $OutputFileNameJson
-        $OutputFullPathYaml = $OutputFilePath + $OutputFileNameYaml
-        If (-not (Test-Path -Path:($OutputFilePath)))
+        $CurrentSDKName = $_.Name
+        If ($CurrentSDKName -in $SDKName)
         {
-            New-Item -Path:($OutputFilePath) -ItemType:('Directory')
-        }
-        # Get OAS content
-        $OASContent = If ($NoUpdate)
-        {
-            Get-Content -Path:($OutputFullPathYaml) -Raw
-        }
-        ElseIf ($SDKName -eq 'JumpCloud.SDK.DirectoryInsights')
-        {
-            $GitHubHeaders = @{
-                'Authorization' = "token $GitHubAccessToken";
-                'Accept'        = 'application/vnd.github.v3.raw';
-            }
-            Invoke-RestMethod -Method:('GET') -Uri:($_.Value) -Headers:($GitHubHeaders)
-        }
-        Else
-        {
-            (Invoke-WebRequest -Uri:($_.Value)).Content
-        }
-        If ([System.String]::IsNullOrEmpty($OASContent))
-        {
-            Write-Error ('No content was returned from: ' + $_.Value)
-        }
-        Else
-        {
-            # Prep json for find and replace by flattening string
-            $ReadyForConvert = If ($_.Value -like '*.yaml*')
+            # Create output file path
+            $OutputFileNameJson = $_.Name + '.json'
+            $OutputFileNameYaml = $_.Name + '.yaml'
+            $OutputFullPathJson = $OutputFilePath + $OutputFileNameJson
+            $OutputFullPathYaml = $OutputFilePath + $OutputFileNameYaml
+            If (-not (Test-Path -Path:($OutputFilePath)))
             {
-                $OASContent | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
+                New-Item -Path:($OutputFilePath) -ItemType:('Directory')
+            }
+            # Get OAS content
+            $OASContent = If ($NoUpdate)
+            {
+                Get-Content -Path:($OutputFullPathYaml) -Raw
+            }
+            ElseIf ($SDKName -eq 'JumpCloud.SDK.DirectoryInsights')
+            {
+                $GitHubHeaders = @{
+                    'Authorization' = "token $GitHubAccessToken";
+                    'Accept' = 'application/vnd.github.v3.raw';
+                }
+                Invoke-RestMethod -Method:('GET') -Uri:($_.Value) -Headers:($GitHubHeaders)
             }
             Else
             {
-                $OASContent
+                (Invoke-WebRequest -Uri:($_.Value)).Content
             }
-            # Remove line breaks from JSON to make the find and replace easier
-            While ($ReadyForConvert -match "`n ")
+            If ([System.String]::IsNullOrEmpty($OASContent))
             {
-                $ReadyForConvert = $ReadyForConvert.Replace("`n ", "`n")
+                Write-Error ('No content was returned from: ' + $_.Value)
             }
-            $ReadyForConvert = $ReadyForConvert.Replace("`n", "")
-            While ($ReadyForConvert -match "`r ")
+            Else
             {
-                $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
-            }
-            $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
-            If (-not $NoUpdate)
-            {
-                # Check to see if there are any operationIds not listed in the $OperationIdMapping
-                If ($OperationIdMapping.Contains($CurrentSDKName))
+                # Prep json for find and replace by flattening string
+                $ReadyForConvert = If ($_.Value -like '*.yaml*')
                 {
-                    $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentSDKName))
-                    $OperationIdTemplate = '"operationId": "{0}"'
-                    $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
-                    $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
-                    $UnmappedOperationIds = @{ }
-                    ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
-                    {
-                        If (-not $OperationIdMappingVersion.Contains([System.String]$OperationIdMatchesValue))
-                        {
-                            $UnmappedOperationIds.Add($OperationIdMatchesValue, $_.Name)
-                        }
-                    }
-                    # Rename operationIds using $OperationIdMapping
-                    $OperationIdMappingVersion.GetEnumerator() | ForEach-Object {
-                        $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
-                        $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
-                        If ($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old)))
-                        {
-                            $ReadyForConvert = $ReadyForConvert.Replace($OperationId_Old, $OperationId_New)
-                        }
-                        Else
-                        {
-                            Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
-                            Write-Error ('Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
-                        }
-                    }
-                    # Check for unmapped operationIds
-                    If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
-                    {
-                        $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
-                            Write-Host("##vso[task.logissue type=error;]" + 'Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
-                            Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
-                        }
-                        Write-Error ( 'New operationId found in "' + $CurrentSDKName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
-                        Exit
-                    }
+                    $OASContent | ConvertFrom-Yaml -Ordered | ConvertTo-Yaml -JsonCompatible
                 }
-                # Make fixes to file
-                If ($FixesMapping.ContainsKey($CurrentSDKName))
+                Else
                 {
-                    $VersionFixes = $FixesMapping.Item($CurrentSDKName)
-                    $VersionFixes.GetEnumerator() | ForEach-Object {
-                        $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
-                        If (-not [System.String]::IsNullOrEmpty($PatternMatch))
-                        {
-                            $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
-                            $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
-                        }
-                        Else
-                        {
-                            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
-                            Write-Error ('Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
-                        }
-                    }
+                    $OASContent
                 }
-            }
-            # Convert json string to object
-            $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
-            # Remove tag elements
-            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
-            # Exclude stoplight sections where the property is hidden
-            If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
-            {
-                # Remove "public": false elements from "paths"
-                $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-                ForEach ($PathName In $PathNames)
+                # Remove line breaks from JSON to make the find and replace easier
+                While ($ReadyForConvert -match "`n ")
                 {
-                    $PathChildNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-                    ForEach ($PathChildName In $PathChildNames)
+                    $ReadyForConvert = $ReadyForConvert.Replace("`n ", "`n")
+                }
+                $ReadyForConvert = $ReadyForConvert.Replace("`n", "")
+                While ($ReadyForConvert -match "`r ")
+                {
+                    $ReadyForConvert = $ReadyForConvert.Replace("`r ", "`r")
+                }
+                $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
+                If (-not $NoUpdate)
+                {
+                    # Check to see if there are any operationIds not listed in the $OperationIdMapping
+                    If ($OperationIdMapping.Contains($CurrentSDKName))
                     {
-                        If ($JsonExport.paths.$PathName.$PathChildName.'x-stoplight'.public -eq $false)
+                        $OperationIdMappingVersion = ($OperationIdMapping.Item($CurrentSDKName))
+                        $OperationIdTemplate = '"operationId": "{0}"'
+                        $OperationIdMatches = Select-String -InputObject:($ReadyForConvert) -Pattern:([regex]'(?s)(?<=operationId": ")(.*?)(?=".*?$)') -AllMatches
+                        $OperationIdMatchesValues = $OperationIdMatches.Matches.Value
+                        $UnmappedOperationIds = @{ }
+                        ForEach ($OperationIdMatchesValue In $OperationIdMatchesValues)
                         {
-                            Write-Warning ('Excluding "Path" "' + $PathName + '" "' + $PathChildName + '"')
-                            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:($PathName)
+                            If (-not $OperationIdMappingVersion.Contains([System.String]$OperationIdMatchesValue))
+                            {
+                                $UnmappedOperationIds.Add($OperationIdMatchesValue, $_.Name)
+                            }
+                        }
+                        # Rename operationIds using $OperationIdMapping
+                        $OperationIdMappingVersion.GetEnumerator() | ForEach-Object
+                        {
+                            $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
+                            $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
+                            If ($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old)))
+                            {
+                                $ReadyForConvert = $ReadyForConvert.Replace($OperationId_Old, $OperationId_New)
+                            }
+                            Else
+                            {
+                                Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
+                                Write-Error ('Unable to find in "' + $CurrentSDKName + '" API an operationId called "' + $_.Name + '".')
+                            }
+                        }
+                        # Check for unmapped operationIds
+                        If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
+                        {
+                            $UnmappedOperationIds.GetEnumerator() | ForEach-Object
+                            {
+                                Write-Host("##vso[task.logissue type=error;]" + 'Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
+                                Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
+                            }
+                            Write-Error ( 'New operationId found in "' + $CurrentSDKName + '". Please update the $OperationIdMapping variable within the \ApiTransform.ps1 file.')
+                            Exit
+                        }
+                    }
+                    # Make fixes to file
+                    If ($FixesMapping.ContainsKey($CurrentSDKName))
+                    {
+                        $VersionFixes = $FixesMapping.Item($CurrentSDKName)
+                        $VersionFixes.GetEnumerator() | ForEach-Object
+                        {
+                            $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
+                            If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+                            {
+                                $ReadyForConvert = $ReadyForConvert.Replace([string]$_.Name, [string]$_.Value)
+                                $ReadyForConvert = $ReadyForConvert.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                            }
+                            Else
+                            {
+                                Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                                Write-Error ('Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                            }
                         }
                     }
                 }
-                # Remove "public": false elements from "definitions"
-                $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-                ForEach ($DefinitionName In $DefinitionNames)
+                # Convert json string to object
+                $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
+                # Remove tag elements
+                $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
+                # Exclude stoplight sections where the property is hidden
+                If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
                 {
-                    If ($JsonExport.definitions.$DefinitionName.$DefinitionChildName.'x-stoplight'.public -eq $false)
+                    # Remove "public": false elements from "paths"
+                    $PathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                    ForEach ($PathName In $PathNames)
                     {
-                        Write-Warning ('Excluding "Definition" "' + $DefinitionName + '"')
-                        $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
-                    }
-                }
-                # Remove "public": false elements from "textsections"
-                $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-                ForEach ($TextSectionName In $TextSectionNames)
-                {
-                    $TextSectionChildNames = ($JsonExport.'x-stoplight'.TextSections.$TextSectionName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
-                    ForEach ($TextSectionChildName In $TextSectionChildNames)
-                    {
-                        If ($JsonExport.'x-stoplight'.TextSections.$TextSectionName.$TextSectionChildName.'x-stoplight'.public -eq $false)
+                        $PathChildNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                        ForEach ($PathChildName In $PathChildNames)
                         {
-                            Write-Warning ('Excluding "TextSection" "' + $TextSectionName + '"')
-                            $JsonExport.'x-stoplight'.TextSections = $JsonExport.'x-stoplight'.TextSections | Select-Object * -ExcludeProperty:($TextSectionName)
+                            If ($JsonExport.paths.$PathName.$PathChildName.'x-stoplight'.public -eq $false)
+                            {
+                                Write-Warning ('Excluding "Path" "' + $PathName + '" "' + $PathChildName + '"')
+                                $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:($PathName)
+                            }
+                        }
+                    }
+                    # Remove "public": false elements from "definitions"
+                    $DefinitionNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                    ForEach ($DefinitionName In $DefinitionNames)
+                    {
+                        If ($JsonExport.definitions.$DefinitionName.$DefinitionChildName.'x-stoplight'.public -eq $false)
+                        {
+                            Write-Warning ('Excluding "Definition" "' + $DefinitionName + '"')
+                            $JsonExport.definitions = $JsonExport.definitions | Select-Object * -ExcludeProperty:($DefinitionName)
+                        }
+                    }
+                    # Remove "public": false elements from "textsections"
+                    $TextSectionNames = ($JsonExport.'x-stoplight'.TextSections | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                    ForEach ($TextSectionName In $TextSectionNames)
+                    {
+                        $TextSectionChildNames = ($JsonExport.'x-stoplight'.TextSections.$TextSectionName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } )
+                        ForEach ($TextSectionChildName In $TextSectionChildNames)
+                        {
+                            If ($JsonExport.'x-stoplight'.TextSections.$TextSectionName.$TextSectionChildName.'x-stoplight'.public -eq $false)
+                            {
+                                Write-Warning ('Excluding "TextSection" "' + $TextSectionName + '"')
+                                $JsonExport.'x-stoplight'.TextSections = $JsonExport.'x-stoplight'.TextSections | Select-Object * -ExcludeProperty:($TextSectionName)
+                            }
                         }
                     }
                 }
-            }
-            # Sort the json properties under "paths"
-            If ('paths' -in $JsonExport.PSObject.Properties.Name)
-            {
-                $pathsHash = [ordered]@{ }
-                $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-                $pathsHash = [ordered]@{ }
-                $pathNames | ForEach-Object {
-                    $pathName = $_
-                    $MethodHash = [ordered]@{ }
-                    $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) | Sort-Object
-                    $MethodNames | ForEach-Object {
-                        $MethodName = $_
-                        $Method = $JsonExport.paths.$PathName.$MethodName
-                        $MethodHash.Add($MethodName, $Method)
+                # Sort the json properties under "paths"
+                If ('paths' -in $JsonExport.PSObject.Properties.Name)
+                {
+                    $pathsHash = [ordered]@{ }
+                    $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                    $pathsHash = [ordered]@{ }
+                    $pathNames | ForEach-Object
+                    {
+                        $pathName = $_
+                        $MethodHash = [ordered]@{ }
+                        $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) | Sort-Object
+                        $MethodNames | ForEach-Object
+                        {
+                            $MethodName = $_
+                            $Method = $JsonExport.paths.$PathName.$MethodName
+                            $MethodHash.Add($MethodName, $Method)
+                        }
+                        $JsonExport.paths.$PathName = $MethodHash
+                        $pathsHash.Add($pathName, $JsonExport.paths.$pathName)
                     }
-                    $JsonExport.paths.$PathName = $MethodHash
-                    $pathsHash.Add($pathName, $JsonExport.paths.$pathName)
+                    $JsonExport.paths = $pathsHash
                 }
-                $JsonExport.paths = $pathsHash
-            }
-            # Sort the json properties under "parameters"
-            If ('parameters' -in $JsonExport.PSObject.Properties.Name)
-            {
-                $parametersHash = [ordered]@{ }
-                $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-                $parametersHash = [ordered]@{ }
-                $parameterNames | ForEach-Object {
-                    $parameterName = $_
-                    $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
+                # Sort the json properties under "parameters"
+                If ('parameters' -in $JsonExport.PSObject.Properties.Name)
+                {
+                    $parametersHash = [ordered]@{ }
+                    $parameterNames = ($JsonExport.parameters | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                    $parametersHash = [ordered]@{ }
+                    $parameterNames | ForEach-Object {
+                        $parameterName = $_
+                        $parametersHash.Add($parameterName, $JsonExport.parameters.$parameterName)
+                    }
+                    $JsonExport.parameters = $parametersHash
                 }
-                $JsonExport.parameters = $parametersHash
-            }
-            # Sort the json properties under "definitions"
-            If ('definitions' -in $JsonExport.PSObject.Properties.Name)
-            {
-                $definitionsHash = [ordered]@{ }
-                $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
-                $definitionsHash = [ordered]@{ }
-                $definitionsNames | ForEach-Object {
-                    $definitionsName = $_
-                    $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
+                # Sort the json properties under "definitions"
+                If ('definitions' -in $JsonExport.PSObject.Properties.Name)
+                {
+                    $definitionsHash = [ordered]@{ }
+                    $definitionsNames = ($JsonExport.definitions | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
+                    $definitionsHash = [ordered]@{ }
+                    $definitionsNames | ForEach-Object {
+                        $definitionsName = $_
+                        $definitionsHash.Add($definitionsName, $JsonExport.definitions.$definitionsName)
+                    }
+                    $JsonExport.definitions = $definitionsHash
                 }
-                $JsonExport.definitions = $definitionsHash
-            }
-            # Convert json object to string
-            $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
-            # Compare current spec to old spec and if they are diffrent then export the new file
-            $UpdatedSpec = $false
-            If (Test-Path -Path:($OutputFullPathJson))
-            {
-                $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
-                $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
-                $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
-                $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
-                If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                # Convert json object to string
+                $NewSpec = $JsonExport | ConvertTo-Json -Depth:(99)
+                # Compare current spec to old spec and if they are diffrent then export the new file
+                $UpdatedSpec = $false
+                If (Test-Path -Path:($OutputFullPathJson))
+                {
+                    $CurrentSpec = Get-Content -Path:($OutputFullPathJson) -Raw
+                    $CurrentSpecCompare = [System.String]$CurrentSpec.Trim() -split "`r"
+                    $NewSpecCompare = [System.String]$NewSpec.Trim() -split "`r"
+                    $CompareResults = Compare-Object -ReferenceObject:($CurrentSpecCompare) -DifferenceObject:($NewSpecCompare)
+                    If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                    {
+                        $UpdatedSpec = $true
+                        # Export json
+                        $NewSpec | Out-File -FilePath:($OutputFullPathJson)
+                        # Export yaml
+                        $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
+                    }
+                    Else
+                    {
+                        $UpdatedSpec = $false
+                    }
+                }
+                Else
                 {
                     $UpdatedSpec = $true
                     # Export json
@@ -539,25 +561,12 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     # Export yaml
                     $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
                 }
-                Else
-                {
-                    $UpdatedSpec = $false
-                }
+                ## Export content for troubleshooting
+                # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
+                # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_Org.json')
+                # Return variable to Azure Pipelines
+                Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+                Return $UpdatedSpec
             }
-            Else
-            {
-                $UpdatedSpec = $true
-                # Export json
-                $NewSpec | Out-File -FilePath:($OutputFullPathJson)
-                # Export yaml
-                $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
-            }
-            ## Export content for troubleshooting
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
-            # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_Org.json')
-            # Return variable to Azure Pipelines
-            Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
-            Return $UpdatedSpec
         }
     }
-}
