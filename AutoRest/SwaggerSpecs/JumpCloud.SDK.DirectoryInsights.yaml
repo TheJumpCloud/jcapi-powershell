@@ -8,6 +8,13 @@ definitions:
         description: Text detailed error message returned by the service
         type: string
     type: object
+  EventCount:
+    description: EventCount JSON struct with count of matching events
+    properties:
+      count:
+        format: int64
+        type: integer
+    type: object
   EventQuery:
     description: EventQuery is the users' command to search our auth logs
     properties:
@@ -115,6 +122,45 @@ paths:
           schema:
             $ref: '#/definitions/ErrorMessage'
       summary: Query Events
+      tags:
+      - EventQuery
+  /events/count:
+    post:
+      consumes:
+      - application/json
+      description: Query the API for a count of matching events
+      operationId: EventsCount_Get
+      parameters:
+      - description: JSON event query body
+        in: body
+        name: EventQueryBody
+        required: true
+        schema:
+          $ref: '#/definitions/EventQuery'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Count of matching event rows
+          schema:
+            $ref: '#/definitions/EventCount'
+        "400":
+          description: Invalid/unknown query JSON body
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        "401":
+          description: Unauthorized (Invalid API Key)
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        "402":
+          description: Directory Insights is not enabled for your organization
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+        "500":
+          description: Technical difficulties processing your request
+          schema:
+            $ref: '#/definitions/ErrorMessage'
+      summary: Count Events
       tags:
       - EventQuery
 produces:
