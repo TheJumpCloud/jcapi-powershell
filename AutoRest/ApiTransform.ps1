@@ -318,8 +318,7 @@ $OperationIdMapping = [Ordered]@{
 $UpdatedSpec = $false
 Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 # Start script
-$ApiHash.GetEnumerator() | ForEach-Object
-{
+$ApiHash.GetEnumerator() | ForEach-Object {
     $CurrentSDKName = $_.Name
     If ($CurrentSDKName -in $SDKName)
     {
@@ -393,8 +392,7 @@ $ApiHash.GetEnumerator() | ForEach-Object
                         }
                     }
                     # Rename operationIds using $OperationIdMapping
-                    $OperationIdMappingVersion.GetEnumerator() | ForEach-Object
-                    {
+                    $OperationIdMappingVersion.GetEnumerator() | ForEach-Object {
                         $OperationId_Old = $OperationIdTemplate -f [System.String]$_.Name
                         $OperationId_New = $OperationIdTemplate -f [System.String]$_.Value
                         If ($ReadyForConvert | Select-String -Pattern:([regex]::Escape($OperationId_Old)))
@@ -410,8 +408,7 @@ $ApiHash.GetEnumerator() | ForEach-Object
                     # Check for unmapped operationIds
                     If (-not [System.String]::IsNullOrEmpty($UnmappedOperationIds.Keys))
                     {
-                        $UnmappedOperationIds.GetEnumerator() | ForEach-Object
-                        {
+                        $UnmappedOperationIds.GetEnumerator() | ForEach-Object {
                             Write-Host("##vso[task.logissue type=error;]" + 'Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
                             Write-Error ('Unknown ' + $_.Value + ' operationId: ' + $_.Key + ';')
                         }
@@ -423,8 +420,7 @@ $ApiHash.GetEnumerator() | ForEach-Object
                 If ($FixesMapping.ContainsKey($CurrentSDKName))
                 {
                     $VersionFixes = $FixesMapping.Item($CurrentSDKName)
-                    $VersionFixes.GetEnumerator() | ForEach-Object
-                    {
+                    $VersionFixes.GetEnumerator() | ForEach-Object {
                         $PatternMatch = $ReadyForConvert | Select-String -Pattern:([regex]::Escape($_.Name))
                         If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                         {
@@ -491,13 +487,11 @@ $ApiHash.GetEnumerator() | ForEach-Object
                 $pathsHash = [ordered]@{ }
                 $pathNames = ($JsonExport.paths | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name } | Sort-Object)
                 $pathsHash = [ordered]@{ }
-                $pathNames | ForEach-Object
-                {
+                $pathNames | ForEach-Object {
                     $pathName = $_
                     $MethodHash = [ordered]@{ }
                     $MethodNames = ($JsonExport.paths.$PathName | Get-Member -MemberType NoteProperty | ForEach-Object { $_.Name }) | Sort-Object
-                    $MethodNames | ForEach-Object
-                    {
+                    $MethodNames | ForEach-Object {
                         $MethodName = $_
                         $Method = $JsonExport.paths.$PathName.$MethodName
                         $MethodHash.Add($MethodName, $Method)
