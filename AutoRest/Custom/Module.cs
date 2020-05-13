@@ -64,35 +64,72 @@ namespace ModuleNameSpace
                 request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
             }
             // request.Headers.Add("Content-Type", "application/json");
+            Console.WriteLine("------------------------------------------------------------------------");
+            Console.WriteLine("Request: '{0}'", request);
+            Console.WriteLine("------------------------------------------------------------------------");
+            Console.WriteLine("RequestBody: '{0}'", request.Content.ReadAsStringAsync().Result);
+            Console.WriteLine("------------------------------------------------------------------------");
             // let it go on.
-            var requestResult = await next.SendAsync(request, callback);
-            if (requestResult.IsSuccessStatusCode)
+            System.Net.Http.HttpResponseMessage result = null;
+            var XResultSearchAfter;
+            var XLimit;
+            // System.Collections.ArrayList results = new ArrayList();
+            while (true)
             {
-                return requestResult;
-            }
-            else
-            {
-                var ResponseContent = await requestResult.Content.ReadAsStringAsync();
-                if (requestResult.ReasonPhrase == "Unauthorized")
-                {
-                    System.Environment.SetEnvironmentVariable("JCApiKey", "");
-                    System.Environment.SetEnvironmentVariable("JCOrgId", "");
-                }
-                throw new Exception(
-                "JumpCloudApiSdkError:: "
-                + Environment.NewLine
-                + " StatusCode: "
-                + (int)requestResult.StatusCode
-                + " - "
-                + requestResult.ReasonPhrase
-                + Environment.NewLine
-                + requestResult.RequestMessage
-                + Environment.NewLine
-                + " RequestContent: " + request.Content.ReadAsStringAsync().Result
-                + Environment.NewLine
-                + " ResponseContent: " + ResponseContent
-                 );
-            }
+                // make the call
+                result = await next.SendAsync(request, callback);
+                // results.Add(result);
+                // check to see if we want to retry
+
+                result.Result.Headers.TryGetValues("X-Search_after", XResultSearchAfter);
+                result.Result.Headers.TryGetValues("X-Limit", XLimit);
+                Console.WriteLine(XResultSearchAfter);
+                Console.WriteLine(XLimit);
+                // // While ($XResultCount -eq $XLimit -and $Result)
+
+                // if (result && count-- == XLimit)
+                // {
+                //     // wait before retrying
+                //     await System.Threading.Tasks.Task.Delay(10000);
+                //     continue;
+                // }
+                // else
+                // {
+                //     // apparently not retrying, let's get out.
+                break;
+                // }
+            };
+            // return whatever we have.
+            return result;
+
+            // var result = await next.SendAsync(request, callback);
+            // if (result.IsSuccessStatusCode)
+            // {
+            //     return result;
+            // }
+            // else
+            // {
+            //     var ResponseContent = await result.Content.ReadAsStringAsync();
+            //     if (result.ReasonPhrase == "Unauthorized")
+            //     {
+            //         System.Environment.SetEnvironmentVariable("JCApiKey", "");
+            //         System.Environment.SetEnvironmentVariable("JCOrgId", "");
+            //     }
+            //     throw new Exception(
+            //     "JumpCloudApiSdkError:: "
+            //     + Environment.NewLine
+            //     + " StatusCode: "
+            //     + (int)result.StatusCode
+            //     + " - "
+            //     + result.ReasonPhrase
+            //     + Environment.NewLine
+            //     + result.RequestMessage
+            //     + Environment.NewLine
+            //     + " RequestContent: " + request.Content.ReadAsStringAsync().Result
+            //     + Environment.NewLine
+            //     + " ResponseContent: " + ResponseContent
+            //      );
+            // }
             // Console.WriteLine("------------------------------------------------------------------------");
             // Console.WriteLine("RequestBody: '{0}'", request.Content.ReadAsStringAsync().Result);
             // Console.WriteLine("------------------------------------------------------------------------");
@@ -101,13 +138,13 @@ namespace ModuleNameSpace
             // Console.WriteLine("ResponseContent: {0}", ResponseContent);
             // Console.WriteLine("------------------------------------------------------------------------");
             // Console.WriteLine("RequestUri : {0}", request.RequestUri);
-            // Console.WriteLine(requestResult.Content.ReadAsStringAsync());
-            // Console.WriteLine("Headers: {0}", requestResult.Headers);
-            // Console.WriteLine("RequestMessage: {0}", requestResult.RequestMessage);
-            // Console.WriteLine("IsSuccessStatusCode: {0}", requestResult.IsSuccessStatusCode);
-            // Console.WriteLine("ReasonPhrase: {0}", requestResult.ReasonPhrase);
-            // Console.WriteLine("StatusCode: {0}", requestResult.StatusCode);
-            // Console.WriteLine("Version: {0}", requestResult.Version);
+            // Console.WriteLine(result.Content.ReadAsStringAsync());
+            // Console.WriteLine("Headers: {0}", result.Headers);
+            // Console.WriteLine("RequestMessage: {0}", result.RequestMessage);
+            // Console.WriteLine("IsSuccessStatusCode: {0}", result.IsSuccessStatusCode);
+            // Console.WriteLine("ReasonPhrase: {0}", result.ReasonPhrase);
+            // Console.WriteLine("StatusCode: {0}", result.StatusCode);
+            // Console.WriteLine("Version: {0}", result.Version);
         }
     }
 }
