@@ -31,10 +31,6 @@ namespace ModuleNameSpace
             // this._pipeline.Append(Paginate);
             // this._pipelineWithProxy.Append(Paginate);
         }
-        partial void AfterCreatePipeline(global::System.Management.Automation.InvocationInfo invocationInfo, ref JumpCloud.SDK.DirectoryInsights.Runtime.HttpPipeline pipeline)
-        {
-            pipeline.Append(Paginate);
-        }
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
