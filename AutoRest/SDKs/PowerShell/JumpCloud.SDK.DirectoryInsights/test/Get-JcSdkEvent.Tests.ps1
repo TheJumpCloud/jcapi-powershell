@@ -29,7 +29,7 @@ Describe 'Get-JcSdkEvent' {
             "event_type" = "user_delete"
         }
     }
-    If ((Get-Command Get-JcSdkEvent).Parameters.ContainsKey('Paginate'))
+    If ((Get-Command JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent).Parameters.ContainsKey('Paginate'))
     {
         $ParamHash.Limit = ($ParamHash.Limit * 2)
     }
@@ -58,7 +58,7 @@ Describe 'Get-JcSdkEvent' {
     $StartTime = [DateTime]$ParamHash.StartTime
     $EndTime = [DateTime]$ParamHash.EndTime
     It 'GetExpanded' {
-        $eventTest = Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
         If ([System.String]::IsNullOrEmpty($eventTest))
         {
             $eventTest | Should -Not -BeNullOrEmpty
@@ -81,7 +81,7 @@ Describe 'Get-JcSdkEvent' {
         }
     }
     It 'Get' {
-        $eventTest = Get-JcSdkEvent -EventQueryBody:($ParamHash)
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -EventQueryBody:($ParamHash)
         If ([System.String]::IsNullOrEmpty($eventTest))
         {
             $eventTest | Should -Not -BeNullOrEmpty
