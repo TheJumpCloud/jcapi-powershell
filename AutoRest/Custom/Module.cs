@@ -7,6 +7,35 @@ namespace ModuleNameSpace
     using System.Threading.Tasks;
     using System.Linq;
     // using System.Management.Automation;
+    // using System.Management.Automation.Runspaces;
+    // using System.Threading;
+    // using ModuleNameSpace;
+    // using ModuleNameSpace.Runtime.Json;
+    // using ModuleNameSpace.Runtime.PowerShell;
+    // using Pwsh = System.Management.Automation.PowerShell;
+    // using SendAsyncStepDelegate = System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Action, System.Func<string, System.Threading.CancellationToken, System.Func<System.EventArgs>, System.Threading.Tasks.Task>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Action, System.Func<string, System.Threading.CancellationToken, System.Func<System.EventArgs>, System.Threading.Tasks.Task>, System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>>, System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>>;
+    // using static ModuleNameSpace.Runtime.Extensions;
+    // using static ModuleNameSpace.Runtime.PowerShell.MarkdownRenderer;
+    // using static ModuleNameSpace.Runtime.PowerShell.MarkdownTypesExtensions;
+    // using static ModuleNameSpace.Runtime.PowerShell.PsHelpers;
+    // using static ModuleNameSpace.Runtime.PowerShell.PsHelpOutputExtensions;
+    // using static ModuleNameSpace.Runtime.PowerShell.PsProxyOutputExtensions;
+    // using static ModuleNameSpace.Runtime.PowerShell.PsProxyTypeExtensions;
+    // using System.Collections.Concurrent;
+    // using System.Collections;
+    // using System.Globalization;
+    // using System.IO;
+    // using System.Management.Automation.Host;
+    // using System.Net.Http.Headers;
+    // using System.Net;
+    // using System.Reflection;
+    // using System.Runtime.CompilerServices;
+    // using System.Runtime.Serialization;
+    // using System.Text.RegularExpressions;
+    // using System.Text;
+    // using System.Web;
+    // using System.Xml.Serialization;
+    // using System.Xml;
     /// <summary>A class that contains the module-common code and data.</summary>
     /// <notes>
     /// This class is where you can add things to modify the module.
@@ -21,16 +50,20 @@ namespace ModuleNameSpace
             // Add Headers
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
-            // Add CustomErrors
-            this._pipeline.Prepend(CustomError);
-            this._pipelineWithProxy.Prepend(CustomError);
             // // Add Debugging Messages
             // this._pipeline.Prepend(Debugging);
             // this._pipelineWithProxy.Prepend(Debugging);
+            // Add CustomErrors
+            this._pipeline.Prepend(CustomError);
+            this._pipelineWithProxy.Prepend(CustomError);
             // // Add Paginate
             // this._pipeline.Append(Paginate);
             // this._pipelineWithProxy.Append(Paginate);
         }
+        // partial void AfterCreatePipeline(global::System.Management.Automation.InvocationInfo invocationInfo, ref ModuleNameSpace.Runtime.HttpPipeline pipeline)
+        // {
+        //     pipeline.Append(Paginate);
+        // }
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
@@ -179,5 +212,18 @@ namespace ModuleNameSpace
             // return whatever we have.
             return response;
         }
+
+        // partial void AfterCreatePipeline(System.Management.Automation.InvocationInfo invocationInfo, ref Runtime.HttpPipeline pipeline)
+        // {
+        //     WriteVerbose('test');
+        //     using (var powershell = PowerShell.Create(RunspaceMode.CurrentRunspace))
+        //     {
+        //         powershell.Commands.AddCommand(new Command($"$executioncontext.SessionState.PSVariable.GetValue('{Constants.GraphAuthConfigId}')", true));
+        //         AuthConfig authConfig = powershell.Invoke<AuthConfig>().FirstOrDefault();
+        //         if (authConfig == null)
+        //             throw new Exception("Authentication needed, call Connect-Graph.");
+        //         pipeline = new Runtime.HttpPipeline(new Runtime.HttpClientFactory(HttpHelpers.GetGraphHttpClient(authConfig)));
+        //     }
+        // }
     }
 }
