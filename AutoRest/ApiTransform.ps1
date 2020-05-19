@@ -65,7 +65,7 @@ $FixesMapping = @{
 }
 $OperationIdMapping = [Ordered]@{
     # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
-    'JumpCloud.SDK.V1' = [Ordered]@{
+    'JumpCloud.SDK.V1'                = [Ordered]@{
         'POST_applications'                           = 'Create-Application';
         'DELETE_applications-id'                      = 'Delete-Application';
         'GET_applications-id'                         = 'Get-Application';
@@ -109,7 +109,7 @@ $OperationIdMapping = [Ordered]@{
         'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
         'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
     };
-    'JumpCloud.SDK.V2' = [Ordered]@{
+    'JumpCloud.SDK.V2'                = [Ordered]@{
         'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
         'GET_activedirectories'                                      = 'List-ActiveDirectory';
         'GET_activedirectories-activedirectory_id-associations'      = 'List-ActiveDirectoryAssociation';
@@ -309,10 +309,10 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
-    # 'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-    #     'directoryInsights_eventsPost'      = 'Get-JCEvent';
-    #     'directoryInsights_eventsCountPost' = 'Get-JCEventCount';
-    # };
+    'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
+        'directoryInsights_eventsPost'      = 'Get-JCEvent';
+        'directoryInsights_eventsCountPost' = 'Get-JCEventCount';
+    };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
 $UpdatedSpec = $false
