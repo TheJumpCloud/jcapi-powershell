@@ -19,13 +19,16 @@ Try
     $NuGetApiKey = ''
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
+    $RunApiTransform = $true
     $InstallPreReq = $true
     $GenerateModule = $true
-    $CopyModuleFile = $true
+    $CopyCustomFiles = $true
     $BuildModule = $true
+    $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
+    $UpdateFunctionsToExport = $true
     $TestModule = $true
     $PackModule = $true
     $CommitModule = $true
@@ -36,7 +39,10 @@ Try
         If (Test-Path -Path:($ConfigFilePath))
         {
             # Run API Transform step
-            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+            If ($RunApiTransform)
+            {
+                $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+            }
             If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
             {
                 # Start SDK generation
@@ -58,17 +64,20 @@ Try
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
                 $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+                $CustomFunctionsFolderPath = '{0}/customFunctions' -f $CustomFolderPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
+                $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -SDKName:("{1}") -OutputPath:("{2}") -ConfigPath:("{3}") -moduleManifestPath:("{4}")' -f $BaseFolder, [System.String]$SDKName, [System.String]$CustomFunctionsFolderPath, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
                     Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g dotnet-sdk-2.1
+                    npm install -g dotnet-sdk-3.1-win-x64
                     Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     npm install -g @autorest/autorest
                     Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -84,7 +93,7 @@ Try
                     autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
-                If ($CopyModuleFile)
+                If ($CopyCustomFiles)
                 {
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
@@ -103,6 +112,31 @@ Try
                 {
                     Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                }
+                ###########################################################################
+                If ($BuildCustomFunctions)
+                {
+                    Write-Host ('[RUN COMMAND] ' + $BuildCustomFunctionsPath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    # Run build custom functions script as a job in a new session to avoid "did you forget to close your session?" error
+                    $BuildCustomFunctionsJob = Start-Job -ScriptBlock:( {
+                            param ($BuildCustomFunctionsPath);
+                            Invoke-Expression -Command:($BuildCustomFunctionsPath)
+                        }) -ArgumentList:($BuildCustomFunctionsPath)
+                    $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
+                    If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
+                    {
+                        Write-Error ('Build custom functions job did not return a "Completed" status.')
+                    }
+                    Else
+                    {
+                        $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                        # Rebuild the module with the new custom functions
+                        If ($BuildModule)
+                        {
+                            Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                            Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                        }
+                    }
                 }
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
@@ -145,6 +179,14 @@ Try
                         Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
                     }
+                }
+                ###########################################################################
+                # Update FunctionsToExport
+                If ($UpdateFunctionsToExport)
+                {
+                    $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
+                    Write-Host ('[RUN COMMAND] Updating module FunctionsToExport: ' + $CustomFunctions.BaseName) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CustomFunctions.BaseName)
                 }
                 ###########################################################################
                 If ($TestModule)
@@ -209,6 +251,13 @@ Try
                     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
                 }
                 ##########################################################################
+                # If ($RunLocal)
+                # {
+                #     $gitIgnoreContent = Get-Content -Path:($gitIgnorePath) -Raw
+                #     $gitIgnoreContent.Replace("exports`n", "") | Set-Content -Path:($gitIgnorePath)
+                #     # Remove the auto generated .gitignore so you can see changes
+                #     # Remove-Item -Path:($gitIgnorePath) -Force
+                # }
                 If ($CommitModule)
                 {
                     If ($env:USERNAME -eq 'VssAdministrator')
