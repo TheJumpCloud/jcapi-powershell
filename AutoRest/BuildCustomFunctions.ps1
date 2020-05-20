@@ -68,13 +68,12 @@ Try
             # Build $BeginContent, $ProcessContent, and $EndContent
             If ($Command.Verb -in ('Get', 'Search'))
             {
-                If (-not [System.String]::IsNullOrEmpty($ParameterContent)) { $ParameterContent = $ParameterContent + ",`n`n$($IndentChar)[Parameter(DontShow)]`n`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true" }
+                If (-not [System.String]::IsNullOrEmpty($ParameterContent)) { $ParameterContent = $ParameterContent + ",`n`n$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true" }
                 # Build script content
                 If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
                 {
                     # Build "Begin" block
-                    $BeginContent = "$($IndentChar)$($IndentChar)Connect-JCOnline -force | Out-Null
-$($IndentChar)$($IndentChar)`$Results = @()
+                    $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
@@ -158,8 +157,7 @@ $($IndentChar)$($IndentChar)Return `$Results"
                         }
                     }
                     # Build "Begin" block
-                    $BeginContent = "$($IndentChar)$($IndentChar)Connect-JCOnline -force | Out-Null
-$($IndentChar)$($IndentChar)`$Results = @()
+                    $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
