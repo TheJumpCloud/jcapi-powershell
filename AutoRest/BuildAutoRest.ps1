@@ -28,20 +28,21 @@ Try
     $PrereleaseName = '' # Beta
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
-    $UpdateFunctionsToExport = $true
     $TestModule = $true
+    $UpdateFunctionsToExport = $true
     $PackModule = $true
     $CommitModule = $true
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
+        $ApiTransformPath = '{0}/ApiTransform.ps1' -f $PSScriptRoot
         If (Test-Path -Path:($ConfigFilePath))
         {
             # Run API Transform step
             If ($RunApiTransform)
             {
-                $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
             }
             If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
             {
@@ -72,7 +73,7 @@ Try
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -SDKName:("{1}") -OutputPath:("{2}") -ConfigPath:("{3}") -moduleManifestPath:("{4}")' -f $BaseFolder, [System.String]$SDKName, [System.String]$CustomFunctionsFolderPath, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ModuleName:("{1}") -OutputPath:("{2}") -ConfigPath:("{3}") -moduleManifestPath:("{4}")' -f [System.String]$BaseFolder, [System.String]$ModuleName, [System.String]$CustomFunctionsFolderPath, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
@@ -123,13 +124,13 @@ Try
                             Invoke-Expression -Command:($BuildCustomFunctionsPath)
                         }) -ArgumentList:($BuildCustomFunctionsPath)
                     $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
+                    $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                     If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
                     {
                         Write-Error ('Build custom functions job did not return a "Completed" status.')
                     }
                     Else
                     {
-                        $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         # Rebuild the module with the new custom functions
                         If ($BuildModule)
                         {
@@ -181,14 +182,6 @@ Try
                     }
                 }
                 ###########################################################################
-                # Update FunctionsToExport
-                If ($UpdateFunctionsToExport)
-                {
-                    $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
-                    Write-Host ('[RUN COMMAND] Updating module FunctionsToExport: ' + $CustomFunctions.BaseName) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CustomFunctions.BaseName)
-                }
-                ###########################################################################
                 If ($TestModule)
                 {
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
@@ -196,14 +189,19 @@ Try
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         # Test module
                         Install-Module Pester -Force
-                        Import-Module Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
                         # ./test-module.ps1 -Live # Run to query against real API
                         $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                        Invoke-Expression -Command:($TestModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                        # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
+                        $TestModuleJob = Start-Job -ScriptBlock:( {
+                                param ($TestModuleCommand);
+                                Invoke-Expression -Command:($TestModuleCommand)
+                            }) -ArgumentList:($TestModuleCommand)
+                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
+                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
                         $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
                         If ($FailedTests)
@@ -227,6 +225,14 @@ Try
                 Else
                 {
                     Write-Warning ('Skipping TestModule.')
+                }
+                ###########################################################################
+                # Update FunctionsToExport
+                If ($UpdateFunctionsToExport)
+                {
+                    $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
+                    Write-Host ('[RUN COMMAND] Updating module FunctionsToExport: ' + $CustomFunctions.BaseName) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CustomFunctions.BaseName)
                 }
                 ###########################################################################
                 If ($PackModule)
@@ -258,6 +264,7 @@ Try
                 #     # Remove the auto generated .gitignore so you can see changes
                 #     # Remove-Item -Path:($gitIgnorePath) -Force
                 # }
+                ##########################################################################
                 If ($CommitModule)
                 {
                     If ($env:USERNAME -eq 'VssAdministrator')

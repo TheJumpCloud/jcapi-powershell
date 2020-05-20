@@ -26,6 +26,7 @@ metadata:
   iconUri: https://avatars1.githubusercontent.com/u/4927461?s=200&v=4
 # # Names
 prefix: JcSdk
+customFunctionPrefix: JC
 ## subject-prefix: JcSdk
 module-name: JumpCloud.SDK.DirectoryInsights # $(service-name)
 # dll-name: $(module-name).private

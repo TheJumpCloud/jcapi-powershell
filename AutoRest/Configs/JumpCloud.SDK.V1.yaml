@@ -27,6 +27,7 @@ metadata:
   releaseNotes: https://git.io/jc-pwsh-releasenotes
 # # Names
 prefix: JcSdk
+customFunctionPrefix: JC
 ## subject-prefix: JcSdk
 module-name: JumpCloud.SDK.V1 # $(service-name)
 # dll-name: $(module-name).private
