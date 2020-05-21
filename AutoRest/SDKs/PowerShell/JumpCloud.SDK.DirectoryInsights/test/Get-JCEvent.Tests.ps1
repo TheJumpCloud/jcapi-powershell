@@ -80,7 +80,7 @@ Describe 'Get-JCEvent' {
         }
     }
     It 'Get' {
-        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEvent -EventQueryBody:($ParamHash)
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEvent -Body:($ParamHash)
         If ([System.String]::IsNullOrEmpty($eventTest))
         {
             $eventTest | Should -Not -BeNullOrEmpty
