@@ -65,7 +65,6 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
-            $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
@@ -88,7 +87,6 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
-            $eventTest = ($eventTest).ToJsonString() | ConvertFrom-Json
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
