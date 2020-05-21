@@ -336,7 +336,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         {
             Get-Content -Path:($OutputFullPathYaml) -Raw
         }
-        ElseIf ($SDKName -eq 'JumpCloud.SDK.DirectoryInsights')
+        ElseIf ($_.Value -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";
