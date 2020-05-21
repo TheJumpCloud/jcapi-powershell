@@ -10,7 +10,7 @@ $ApiHash = [Ordered]@{
     # 'JumpCloud.SDK.V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
     'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
     'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'JumpCloud.SDK.DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
+    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/HrqFGikNdFxryitdu/export/oas.yaml' # Docs
     # 'JumpCloud.SDK.V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
     # 'JumpCloud.SDK.V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
 }
@@ -58,9 +58,9 @@ $FixesMapping = @{
         "`t"                                                                                                           = '\t';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array"}'
-        '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time","description": "query start time, UTC in RFC3339 format", "type": "string"}';
-        '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time","description": "optional query end time, UTC in RFC3339 format", "type": "string"}';
+        '"search_after": {"items": {"type": "object"}, "type": "array", "description": "Specific query to search after, see x-* response headers for next values"}' = '"search_after": {"items": {"type": "string"}, "type": "array", "description": "Specific query to search after, see x-* response headers for next values"}';
+        '"start_time": {"type": "string", "description": "query start time, UTC in RFC3339 format"}'                                                                = '"start_time": {"format": "date-time", "type": "string", "description": "query start time, UTC in RFC3339 format"}';
+        '"end_time": {"type": "string", "description": "optional query end time, UTC in RFC3339 format"}'                                                           = '"end_time": {"format": "date-time", "type": "string", "description": "optional query end time, UTC in RFC3339 format"}';
     };
 }
 $OperationIdMapping = [Ordered]@{
@@ -310,8 +310,8 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        'directoryInsights_eventsPost'      = 'Get-JCEvent';
-        'directoryInsights_eventsCountPost' = 'Get-JCEventCount';
+        'POST_events'       = 'Get-Event';
+        'POST_events-count' = 'Get-EventCount';
     };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
