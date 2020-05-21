@@ -42,7 +42,14 @@ Try
             # Run API Transform step
             If ($RunApiTransform)
             {
-                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                $UpdatedSpec = If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
+                {
+                    .($ApiTransformPath) -SDKName:($SDKName) # -NoUpdate # | Out-Null
+                }
+                Else
+                {
+                    .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                }
             }
             If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
             {
@@ -67,6 +74,7 @@ Try
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
                 $CustomFunctionsFolderPath = '{0}/customFunctions' -f $CustomFolderPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
+                $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
@@ -131,6 +139,22 @@ Try
                     }
                     Else
                     {
+                        # Get list of CustomFunctions
+                        $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
+                        # Clean "Examples" folders
+                        (Get-ChildItem -Path:($ExamplesFolderPath) -Recurse | Where-Object { $_.Extension -eq '.md' }) | ForEach-Object {
+                            If (($_.BaseName).Replace($Config.customFunctionPrefix, $Config.prefix) -notin $CustomFunctions.BaseName.Replace($Config.customFunctionPrefix, $Config.prefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
+                            {
+                                Remove-Item -Path:($_.FullName) -Force -Verbose
+                            }
+                        }
+                        # Clean "Tests" folders
+                        (Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }) | ForEach-Object {
+                            If (($_.BaseName).Replace($Config.customFunctionPrefix, $Config.prefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($Config.customFunctionPrefix, $Config.prefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
+                            {
+                                Remove-Item -Path:($_.FullName) -Force -Verbose
+                            }
+                        }
                         # Rebuild the module with the new custom functions
                         If ($BuildModule)
                         {
