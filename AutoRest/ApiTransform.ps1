@@ -58,9 +58,11 @@ $FixesMapping = @{
         "`t"                                                                                                           = '\t';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
+        '"basePath": "/insights/directory/v1"'                                                                                                                      = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
         '"search_after": {"items": {"type": "object"}, "type": "array", "description": "Specific query to search after, see x-* response headers for next values"}' = '"search_after": {"items": {"type": "string"}, "type": "array", "description": "Specific query to search after, see x-* response headers for next values"}';
         '"start_time": {"type": "string", "description": "query start time, UTC in RFC3339 format"}'                                                                = '"start_time": {"format": "date-time", "type": "string", "description": "query start time, UTC in RFC3339 format"}';
         '"end_time": {"type": "string", "description": "optional query end time, UTC in RFC3339 format"}'                                                           = '"end_time": {"format": "date-time", "type": "string", "description": "optional query end time, UTC in RFC3339 format"}';
+        '"tags": ["EventQuery"],'                                                                                                                                   = '';
     };
 }
 $OperationIdMapping = [Ordered]@{
