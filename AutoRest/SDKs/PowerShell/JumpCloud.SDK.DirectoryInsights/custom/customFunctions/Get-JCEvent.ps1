@@ -47,7 +47,9 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-EVENTQUERYBODY <IEventQuery>: EventQuery is the users' command to search our auth logs
+BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
+  Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [Fields <String[]>]: optional list of fields to return from query
   [Limit <Int64?>]: Max number of rows to return
@@ -56,9 +58,7 @@ EVENTQUERYBODY <IEventQuery>: EventQuery is the users' command to search our aut
     [(Any) <Object>]: This indicates any property can be added to this object.
   [SearchTermOr <ISearchTermOr>]: list of event terms. If any term matches, the event will be returned by the service.
     [(Any) <Object>]: This indicates any property can be added to this object.
-  [Service <String[]>]: service name to query. Known services: systems,radius,sso,directory,ldap,all
   [Sort <String>]: ASC or DESC order for timestamp
-  [StartTime <DateTime?>]: query start time, UTC in RFC3339 format
 .Link
 https://github.com/TheJumpCloud/support/wiki/Get-JCEvent
 #>
@@ -71,8 +71,21 @@ Function Get-JCEvent
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery]
     # EventQuery is the users' command to search our auth logs
-    # To construct, see NOTES section for EVENTQUERYBODY properties and create a hash table.
-    ${EventQueryBody},
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
+
+    [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String[]]
+    # service name to query.
+    # Known services: systems,radius,sso,directory,ldap,all
+    ${Service},
+
+    [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.DateTime]
+    # query start time, UTC in RFC3339 format
+    ${StartTime},
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
@@ -116,32 +129,17 @@ Function Get-JCEvent
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [System.String[]]
-    # service name to query.
-    # Known services: systems,radius,sso,directory,ldap,all
-    ${Service},
-
-    [Parameter(ParameterSetName='GetExpanded')]
-    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String]
     # ASC or DESC order for timestamp
     ${Sort},
 
-    [Parameter(ParameterSetName='GetExpanded')]
-    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [System.DateTime]
-    # query start time, UTC in RFC3339 format
-    ${StartTime},
-
     [Parameter(DontShow)]
-
     [System.Boolean]
-    # Set to $true to return all results.
+    # Set to $true to return all results. This will overwrite any skip and limit parameter.
     $Paginate = $true
     )
     Begin
     {
-        Connect-JCOnline -force | Out-Null
         $Results = @()
         $PSBoundParameters.Add('HttpPipelineAppend', {
                 param($req, $callback, $next)
@@ -167,13 +165,13 @@ Function Get-JCEvent
                     $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
                     If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
                     {
-                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.EventQueryBody))
+                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body))
                         {
                             $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
                         }
                         Else
                         {
-                            $PSBoundParameters.EventQueryBody.SearchAfter = $XResultSearchAfter
+                            $PSBoundParameters.Body.SearchAfter = $XResultSearchAfter
                         }
                     }
                     Else

@@ -81,7 +81,7 @@ Describe 'Get-JcSdkEvent' {
         }
     }
     It 'Get' {
-        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -EventQueryBody:($ParamHash)
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -Body:($ParamHash)
         If ([System.String]::IsNullOrEmpty($eventTest))
         {
             $eventTest | Should -Not -BeNullOrEmpty
