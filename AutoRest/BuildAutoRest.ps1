@@ -31,7 +31,7 @@ Try
     $TestModule = $true
     $UpdateFunctionsToExport = $true
     $PackModule = $true
-    $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true }Else { $false }
+    $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
