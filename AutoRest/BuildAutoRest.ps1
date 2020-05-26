@@ -31,7 +31,7 @@ Try
     $TestModule = $true
     $UpdateFunctionsToExport = $true
     $PackModule = $true
-    $CommitModule = $true
+    $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true }Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
@@ -65,6 +65,9 @@ Try
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
+                $ConfigPrefix = $Config.prefix
+                $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
+                $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
@@ -72,16 +75,18 @@ Try
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
                 $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
-                $CustomFunctionsFolderPath = '{0}/customFunctions' -f $CustomFolderPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
+                $CustomFunctionsFolderPath = '{0}/{1}' -f $CustomFolderPath, $ConfigCustomFunctionFolderName
+                $CustomExamplesFolderPath = '{0}/{1}' -f $ExamplesFolderPath, $ConfigCustomFunctionFolderName
+                $CustomTestFolderPath = '{0}/{1}' -f $TestFolderPath, $ConfigCustomFunctionFolderName
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ModuleName:("{1}") -OutputPath:("{2}") -ConfigPath:("{3}") -moduleManifestPath:("{4}")' -f [System.String]$BaseFolder, [System.String]$ModuleName, [System.String]$CustomFunctionsFolderPath, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
@@ -141,25 +146,60 @@ Try
                     {
                         # Get list of CustomFunctions
                         $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
-                        # Clean "Examples" folders
-                        (Get-ChildItem -Path:($ExamplesFolderPath) -Recurse | Where-Object { $_.Extension -eq '.md' }) | ForEach-Object {
-                            If (($_.BaseName).Replace($Config.customFunctionPrefix, $Config.prefix) -notin $CustomFunctions.BaseName.Replace($Config.customFunctionPrefix, $Config.prefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
-                            {
-                                Remove-Item -Path:($_.FullName) -Force -Verbose
-                            }
-                        }
-                        # Clean "Tests" folders
-                        (Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }) | ForEach-Object {
-                            If (($_.BaseName).Replace($Config.customFunctionPrefix, $Config.prefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($Config.customFunctionPrefix, $Config.prefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
-                            {
-                                Remove-Item -Path:($_.FullName) -Force -Verbose
-                            }
-                        }
                         # Rebuild the module with the new custom functions
                         If ($BuildModule)
                         {
                             Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                             Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                        }
+                        # Remove Examples customFunctions folder if it does exist
+                        If (Test-Path -Path:($CustomExamplesFolderPath))
+                        {
+                            Remove-Item -Path:($CustomExamplesFolderPath) -Recurse -Force | Out-Null
+                        }
+                        # Create Examples customFunctions folder if it does not exist
+                        If (-not (Test-Path -Path:($CustomExamplesFolderPath)))
+                        {
+                            New-Item -Path:($CustomExamplesFolderPath) -ItemType:('Directory') -Force | Out-Null
+                        }
+                        # Clean "Examples" folders
+                        (Get-ChildItem -Path:($ExamplesFolderPath) | Where-Object { $_.Extension -eq '.md' }) | ForEach-Object {
+                            # If any files other than the generate functions and custom functions exist remove them
+                            If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
+                            {
+                                Remove-Item -Path:($_.FullName) -Force -Verbose
+                            }
+                            If ($_.BaseName -in $CustomFunctions.BaseName)
+                            {
+                                # Move any custom function files into customFunction folder
+                                Move-Item -Path:($_.FullName) -Destination:("$CustomExamplesFolderPath/$($_.Name)") -Force
+                            }
+                        }
+                        # Remove Test customFunctions folder if it does exist
+                        If (Test-Path -Path:($CustomTestFolderPath))
+                        {
+                            Remove-Item -Path:($CustomTestFolderPath) -Recurse -Force | Out-Null
+                        }
+                        # Create Test customFunctions folder if it does not exist
+                        If (-not (Test-Path -Path:($CustomTestFolderPath)))
+                        {
+                            New-Item -Path:($CustomTestFolderPath) -ItemType:('Directory') -Force | Out-Null
+                        }
+                        # Clean "Tests" folders
+                        (Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }) | ForEach-Object {
+                            # If any files other than the generate functions and custom functions exist remove them
+                            If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
+                            {
+                                Remove-Item -Path:($_.FullName) -Force -Verbose
+                            }
+                            If (($_.BaseName).Replace('.Tests', '') -in $CustomFunctions.BaseName)
+                            {
+                                # Move any custom function files into customFunction folder
+                                Move-Item -Path:($_.FullName) -Destination:("$CustomTestFolderPath/$($_.Name)") -Force
+                                # Fix dot sourced paths
+                                $TestContent = Get-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Raw
+                                $TestContent.Replace('..\', '..\.\') | Set-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Force
+                            }
                         }
                     }
                 }
@@ -291,26 +331,23 @@ Try
                 ##########################################################################
                 If ($CommitModule)
                 {
-                    If ($env:USERNAME -eq 'VssAdministrator')
+                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Try
                     {
-                        Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Try
-                        {
-                            $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-                            $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
-                            Set-Location -Path:($BaseFolder)
-                            ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
-                            ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
-                            ./Invoke-Git.ps1 -Arguments:('add -A')
-                            ./Invoke-Git.ps1 -Arguments:('status')
-                            ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                            ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                        }
-                        Catch
-                        {
-                            Write-Host("##vso[task.logissue type=error;]" + $_)
-                            Write-Error $_
-                        }
+                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
+                        Set-Location -Path:($BaseFolder)
+                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
+                        ./Invoke-Git.ps1 -Arguments:('add -A')
+                        ./Invoke-Git.ps1 -Arguments:('status')
+                        ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                    }
+                    Catch
+                    {
+                        Write-Host("##vso[task.logissue type=error;]" + $_)
+                        Write-Error $_
                     }
                 }
                 ###########################################################################

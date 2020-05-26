@@ -1,9 +1,10 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$ModuleName
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to output files.')][ValidateNotNullOrEmpty()][System.String[]]$OutputPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath
 )
 Try
 {
@@ -14,15 +15,43 @@ Try
     $ScriptAnalyzerResults = @()
     # Get config values
     $Config = Get-Content -Path:($ConfigPath) | ConvertFrom-Yaml
+    $ConfigModuleName = $Config.'module-name'
     $ConfigPrefix = $Config.prefix
     $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
+    $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
     $ConfigProjectUri = $Config.projectUri
     $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
+    # Misc Functions
+    Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix)
+    {
+        # Swap out SDK prefix for customFunction prefix
+        $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
+        # Remove weird output conversion for the customFunctions
+        $OutputMatches = $InputString | Select-String -Pattern:('(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
+        $OutputMatches.Matches | ForEach-Object {
+            $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
+            $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
+        }
+        Return $InputString
+    }
     # Load the module
     Import-Module $moduleManifestPath -Force
-    If (Get-Module -Name($ModuleName))
+    # Start generation
+    If (Get-Module -Name($ConfigModuleName))
     {
-        $Commands = Get-Command -Module:($ModuleName) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
+        $CustomCustomFolderPath = "$CustomFolderPath/$ConfigCustomFunctionFolderName" # "$CustomFolderPath/$ConfigCustomFunctionFolderName/$($Command.Verb)"
+        # Remove custom customFunctions folder if it does exist
+        If (Test-Path -Path:($CustomCustomFolderPath))
+        {
+            Remove-Item -Path:($CustomCustomFolderPath) -Recurse -Force | Out-Null
+        }
+        # Create custom customFunctions folder if it does not exist
+        If (-not (Test-Path -Path:($CustomCustomFolderPath)))
+        {
+            New-Item -Path:($CustomCustomFolderPath) -ItemType:('Directory') -Force | Out-Null
+        }
+        # Get list of commands from module
+        $Commands = Get-Command -Module:($ConfigModuleName) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
         {
             # Get module name
@@ -55,14 +84,8 @@ Try
             $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
             # Update help info link
             $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
-            # Swap out SDK prefix for customFunction prefix
-            $PSScriptInfo = $PSScriptInfo.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
-            # Remove weird output conversion for the customFunctions
-            $OutputMatches = $PSScriptInfo | Select-String -Pattern:('(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
-            $OutputMatches.Matches | ForEach-Object {
-                $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
-                $PSScriptInfo = $PSScriptInfo.Replace($OutputMatchesFind, $_.Value)
-            }
+            # Convert generated function syntax to custom function syntaxt
+            $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
             # Build CmdletBinding
             If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
             # Build $BeginContent, $ProcessContent, and $EndContent
@@ -221,13 +244,8 @@ $($IndentChar)$($IndentChar)}"
                 # Fix line endings
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
                 # Export the function
-                $OutputFullPath = $OutputPath # "$OutputPath/$($Command.Verb)"
                 Write-Host ("[STATUS] Building: $CommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
-                If (!(Test-Path -Path:($OutputFullPath)))
-                {
-                    New-Item -Path:($OutputFullPath) -ItemType:('Directory') | Out-Null
-                }
-                $OutputFilePath = "$OutputFullPath/$NewCommandName.ps1"
+                $OutputFilePath = "$CustomCustomFolderPath/$NewCommandName.ps1"
                 $NewScript | Out-File -FilePath:($OutputFilePath) -Force
                 # Validate script syntax
                 $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
@@ -235,6 +253,29 @@ $($IndentChar)$($IndentChar)}"
                 {
                     $ScriptAnalyzerResults += $ScriptAnalyzerResult
                 }
+            }
+            # Copy docs and tests "JcSdk" version to "JC" version
+            $ExamplesFileNameTemplate = '{0}/{1}.md'
+            $TestFileNameTemplate = '{0}/{1}.Tests.ps1'
+            ForEach ($FolderPath In ($ExamplesFolderPath, $TestFolderPath))
+            {
+                If (Test-Path -Path:($ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
+                {
+                    $CommandNamePath = $ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
+                    $NewCommandNamePath = $ExamplesFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
+                }
+                ElseIf (Test-Path -Path:($TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
+                {
+                    $CommandNamePath = $TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
+                    $NewCommandNamePath = $TestFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
+                }
+                Else
+                {
+                    Write-Error ('Unknown path')
+                }
+                # Do transform on files
+                $JcSdkContent = Convert-GeneratedToCustom -InputString:(Get-Content -Path:($CommandNamePath) -Raw) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
+                $JcSdkContent | Out-File -FilePath:($NewCommandNamePath) -Force
             }
         }
     }

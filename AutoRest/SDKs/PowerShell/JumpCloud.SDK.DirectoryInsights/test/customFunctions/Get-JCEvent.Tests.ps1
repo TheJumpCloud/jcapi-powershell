@@ -1,7 +1,7 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath))
 {
-    $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
+    $loadEnvPath = Join-Path $PSScriptRoot '..\.\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JCEvent.Recording.json'
@@ -65,6 +65,7 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
+            $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
@@ -87,6 +88,7 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
+            $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Limit - Test that results count matches parameter value
@@ -102,3 +104,5 @@ Describe 'Get-JCEvent' {
         }
     }
 }
+
+

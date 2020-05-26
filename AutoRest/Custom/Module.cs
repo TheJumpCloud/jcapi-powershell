@@ -6,36 +6,6 @@ namespace ModuleNameSpace
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Linq;
-    // using System.Management.Automation;
-    // using System.Management.Automation.Runspaces;
-    // using System.Threading;
-    // using ModuleNameSpace;
-    // using ModuleNameSpace.Runtime.Json;
-    // using ModuleNameSpace.Runtime.PowerShell;
-    // using Pwsh = System.Management.Automation.PowerShell;
-    // using SendAsyncStepDelegate = System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Action, System.Func<string, System.Threading.CancellationToken, System.Func<System.EventArgs>, System.Threading.Tasks.Task>, System.Func<System.Net.Http.HttpRequestMessage, System.Threading.CancellationToken, System.Action, System.Func<string, System.Threading.CancellationToken, System.Func<System.EventArgs>, System.Threading.Tasks.Task>, System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>>, System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage>>;
-    // using static ModuleNameSpace.Runtime.Extensions;
-    // using static ModuleNameSpace.Runtime.PowerShell.MarkdownRenderer;
-    // using static ModuleNameSpace.Runtime.PowerShell.MarkdownTypesExtensions;
-    // using static ModuleNameSpace.Runtime.PowerShell.PsHelpers;
-    // using static ModuleNameSpace.Runtime.PowerShell.PsHelpOutputExtensions;
-    // using static ModuleNameSpace.Runtime.PowerShell.PsProxyOutputExtensions;
-    // using static ModuleNameSpace.Runtime.PowerShell.PsProxyTypeExtensions;
-    // using System.Collections.Concurrent;
-    // using System.Collections;
-    // using System.Globalization;
-    // using System.IO;
-    // using System.Management.Automation.Host;
-    // using System.Net.Http.Headers;
-    // using System.Net;
-    // using System.Reflection;
-    // using System.Runtime.CompilerServices;
-    // using System.Runtime.Serialization;
-    // using System.Text.RegularExpressions;
-    // using System.Text;
-    // using System.Web;
-    // using System.Xml.Serialization;
-    // using System.Xml;
     /// <summary>A class that contains the module-common code and data.</summary>
     /// <notes>
     /// This class is where you can add things to modify the module.
@@ -90,10 +60,10 @@ namespace ModuleNameSpace
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
             // If headers do not contain an "x-org-id" header add one
-            if (request.Headers.Contains("x-org-id") == false)
-            {
-                request.Headers.Add("x-org-id", JCOrgId);
-            }
+            // if (request.Headers.Contains("x-org-id") == false)
+            // {
+            //     request.Headers.Add("x-org-id", JCOrgId);
+            // }
             // Organization endpoint does not accept x-org-id as a header so remove it
             if (request.Headers.Contains("x-org-id") && request.RequestUri.ToString() == "https://console.jumpcloud.com/api/organizations")
             {
@@ -167,63 +137,49 @@ namespace ModuleNameSpace
                  );
             }
         }
-        // protected async Task<HttpResponseMessage> Paginate(HttpRequestMessage request, IEventListener callback, ISendAsync next)
-        public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Paginate(System.Net.Http.HttpRequestMessage requestMessage, Runtime.IEventListener listener, Runtime.ISendAsync next)
-        {
-            System.Net.Http.HttpResponseMessage response = null;
-            while (true)
-            {
-                // Make the API call
-                response = await next.SendAsync(requestMessage, listener);
-                // Get ResultCount
-                IEnumerable<string> XResultCount;
-                response.Headers.TryGetValues("X-Result-Count", out XResultCount);
-                var XResultCountString = XResultCount.ToList()[0];
-                // Get Limit
-                IEnumerable<string> XLimit;
-                response.Headers.TryGetValues("X-Limit", out XLimit);
-                var XLimitString = XLimit.ToList()[0];
-                // Get SearchAfter
-                IEnumerable<string> XResultSearchAfter;
-                response.Headers.TryGetValues("X-Search_after", out XResultSearchAfter);
-                var XResultSearchAfterString = XResultSearchAfter.ToList()[0];
-                // Write to host
-                Console.WriteLine("XResultCount: " + XResultCountString);
-                Console.WriteLine("XLimit: " + XLimitString);
-                Console.WriteLine("XResultSearchAfter: " + XResultSearchAfterString);
-                // Modify headers with new XResultSearchAfter
-                if (XResultCountString == XLimitString) // && response == true)
-                {
-                    ////////////////////////////////////////////////////////////////////////////////////
-                    // request.Content.Remove("X-Search_after");
-                    // request.Content.Add("X-Search_after", XResultSearchAfterString);
-                    // .Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}", Encoding.UTF8, "application/json");
-                    ////////////////////////////////////////////////////////////////////////////////////
-                    // wait before getting more results
-                    await System.Threading.Tasks.Task.Delay(5000);
-                    continue;
-                }
-                else
-                {
-                    // no more results, break loop.
-                    break;
-                }
-            };
-            // return whatever we have.
-            return response;
-        }
-
-        // partial void AfterCreatePipeline(System.Management.Automation.InvocationInfo invocationInfo, ref Runtime.HttpPipeline pipeline)
+        // public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Paginate(System.Net.Http.HttpRequestMessage requestMessage, Runtime.IEventListener listener, Runtime.ISendAsync next)
         // {
-        //     WriteVerbose('test');
-        //     using (var powershell = PowerShell.Create(RunspaceMode.CurrentRunspace))
+        //     System.Net.Http.HttpResponseMessage response = null;
+        //     while (true)
         //     {
-        //         powershell.Commands.AddCommand(new Command($"$executioncontext.SessionState.PSVariable.GetValue('{Constants.GraphAuthConfigId}')", true));
-        //         AuthConfig authConfig = powershell.Invoke<AuthConfig>().FirstOrDefault();
-        //         if (authConfig == null)
-        //             throw new Exception("Authentication needed, call Connect-Graph.");
-        //         pipeline = new Runtime.HttpPipeline(new Runtime.HttpClientFactory(HttpHelpers.GetGraphHttpClient(authConfig)));
-        //     }
+        //         // Make the API call
+        //         response = await next.SendAsync(requestMessage, listener);
+        //         // Get ResultCount
+        //         IEnumerable<string> XResultCount;
+        //         response.Headers.TryGetValues("X-Result-Count", out XResultCount);
+        //         var XResultCountString = XResultCount.ToList()[0];
+        //         // Get Limit
+        //         IEnumerable<string> XLimit;
+        //         response.Headers.TryGetValues("X-Limit", out XLimit);
+        //         var XLimitString = XLimit.ToList()[0];
+        //         // Get SearchAfter
+        //         IEnumerable<string> XResultSearchAfter;
+        //         response.Headers.TryGetValues("X-Search_after", out XResultSearchAfter);
+        //         var XResultSearchAfterString = XResultSearchAfter.ToList()[0];
+        //         // Write to host
+        //         Console.WriteLine("XResultCount: " + XResultCountString);
+        //         Console.WriteLine("XLimit: " + XLimitString);
+        //         Console.WriteLine("XResultSearchAfter: " + XResultSearchAfterString);
+        //         // Modify headers with new XResultSearchAfter
+        //         if (XResultCountString == XLimitString) // && response == true)
+        //         {
+        //             ////////////////////////////////////////////////////////////////////////////////////
+        //             // request.Content.Remove("X-Search_after");
+        //             // request.Content.Add("X-Search_after", XResultSearchAfterString);
+        //             // .Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}", Encoding.UTF8, "application/json");
+        //             ////////////////////////////////////////////////////////////////////////////////////
+        //             // wait before getting more results
+        //             await System.Threading.Tasks.Task.Delay(5000);
+        //             continue;
+        //         }
+        //         else
+        //         {
+        //             // no more results, break loop.
+        //             break;
+        //         }
+        //     };
+        //     // return whatever we have.
+        //     return response;
         // }
     }
 }
