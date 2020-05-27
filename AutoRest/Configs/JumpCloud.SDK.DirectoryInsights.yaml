@@ -27,7 +27,6 @@ metadata:
 # # Names
 prefix: JcSdk
 customFunctionPrefix: JC
-customFunctionFolderName: customFunctions
 ## subject-prefix: JcSdk
 module-name: JumpCloud.SDK.DirectoryInsights # $(service-name)
 # dll-name: $(module-name).private

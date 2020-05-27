@@ -1,10 +1,10 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest\Configs\JumpCloud.SDK.DirectoryInsights.yaml"
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/JumpCloud.SDK.DirectoryInsights.internal.psm1"
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom"
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/examples"
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test"
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath
 )
 Try
 {
@@ -17,7 +17,6 @@ Try
     $Config = Get-Content -Path:($ConfigPath) | ConvertFrom-Yaml
     $ConfigPrefix = $Config.prefix | Select-Object -First 1
     $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-    $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
     $ConfigProjectUri = $Config.projectUri
     $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
     # Misc Functions
@@ -38,17 +37,6 @@ Try
     # Start generation
     If (Get-Module -Name($ImportedModule.Name))
     {
-        $CustomCustomFolderPath = "$CustomFolderPath/$ConfigCustomFunctionFolderName" # "$CustomFolderPath/$ConfigCustomFunctionFolderName/$($Command.Verb)"
-        # Remove custom customFunctions folder if it does exist
-        If (Test-Path -Path:($CustomCustomFolderPath))
-        {
-            Remove-Item -Path:($CustomCustomFolderPath) -Recurse -Force | Out-Null
-        }
-        # Create custom customFunctions folder if it does not exist
-        If (-not (Test-Path -Path:($CustomCustomFolderPath)))
-        {
-            New-Item -Path:($CustomCustomFolderPath) -ItemType:('Directory') -Force | Out-Null
-        }
         # Get list of commands from module
         $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
@@ -244,7 +232,7 @@ $($IndentChar)$($IndentChar)}"
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
                 # Export the function
                 Write-Host ("[STATUS] Building: $NewCommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
-                $OutputFilePath = "$CustomCustomFolderPath/$NewCommandName.ps1"
+                $OutputFilePath = "$CustomFolderPath/$NewCommandName.ps1"
                 $NewScript | Out-File -FilePath:($OutputFilePath) -Force
                 # Validate script syntax
                 $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
@@ -253,29 +241,6 @@ $($IndentChar)$($IndentChar)}"
                     $ScriptAnalyzerResults += $ScriptAnalyzerResult
                 }
             }
-            # # Copy docs and tests "JcSdk" version to "JC" version
-            # $ExamplesFileNameTemplate = '{0}/{1}.md'
-            # $TestFileNameTemplate = '{0}/{1}.Tests.ps1'
-            # ForEach ($FolderPath In ($ExamplesFolderPath, $TestFolderPath))
-            # {
-            #     If (Test-Path -Path:($ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
-            #     {
-            #         $CommandNamePath = $ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
-            #         $NewCommandNamePath = $ExamplesFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
-            #     }
-            #     ElseIf (Test-Path -Path:($TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
-            #     {
-            #         $CommandNamePath = $TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
-            #         $NewCommandNamePath = $TestFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
-            #     }
-            #     Else
-            #     {
-            #         Write-Error ('Unknown path: ' + $FolderPath)
-            #     }
-            #     # Do transform on files
-            #     $JcSdkContent = Convert-GeneratedToCustom -InputString:(Get-Content -Path:($CommandNamePath) -Raw) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
-            #     $JcSdkContent | Out-File -FilePath:($NewCommandNamePath) -Force
-            # }
         }
     }
     Else

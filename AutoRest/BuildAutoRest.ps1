@@ -66,7 +66,6 @@ Try
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-                $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
@@ -76,9 +75,6 @@ Try
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
-                $CustomFunctionsFolderPath = '{0}/{1}' -f $CustomFolderPath, $ConfigCustomFunctionFolderName
-                $CustomExamplesFolderPath = '{0}/{1}' -f $ExamplesFolderPath, $ConfigCustomFunctionFolderName
-                $CustomTestFolderPath = '{0}/{1}' -f $TestFolderPath, $ConfigCustomFunctionFolderName
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
