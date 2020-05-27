@@ -1,10 +1,10 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath
+    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest\Configs\JumpCloud.SDK.DirectoryInsights.yaml"
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/JumpCloud.SDK.DirectoryInsights.internal.psm1"
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom"
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/examples"
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath = "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test"
 )
 Try
 {
@@ -15,8 +15,7 @@ Try
     $ScriptAnalyzerResults = @()
     # Get config values
     $Config = Get-Content -Path:($ConfigPath) | ConvertFrom-Yaml
-    $ConfigModuleName = $Config.'module-name'
-    $ConfigPrefix = $Config.prefix
+    $ConfigPrefix = $Config.prefix | Select-Object -First 1
     $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
     $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
     $ConfigProjectUri = $Config.projectUri
@@ -35,9 +34,9 @@ Try
         Return $InputString
     }
     # Load the module
-    Import-Module $moduleManifestPath -Force
+    $ImportedModule = Import-Module $moduleManifestPath -Force -PassThru
     # Start generation
-    If (Get-Module -Name($ConfigModuleName))
+    If (Get-Module -Name($ImportedModule.Name))
     {
         $CustomCustomFolderPath = "$CustomFolderPath/$ConfigCustomFunctionFolderName" # "$CustomFolderPath/$ConfigCustomFunctionFolderName/$($Command.Verb)"
         # Remove custom customFunctions folder if it does exist
@@ -51,11 +50,11 @@ Try
             New-Item -Path:($CustomCustomFolderPath) -ItemType:('Directory') -Force | Out-Null
         }
         # Get list of commands from module
-        $Commands = Get-Command -Module:($ConfigModuleName) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
+        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
         {
             # Get module name
-            $ModuleName = $Command.Module.Name
+            $ModuleName = If ($Command.Module.Name -like '*.internal') { $Command.Module.Name.Replace('.internal', '') } Else { $Command.Module.Name }
             # Create new function name
             $CommandName = $Command.Name
             $NewCommandName = $CommandName.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
@@ -113,7 +112,7 @@ $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ModuleName)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
@@ -145,7 +144,7 @@ $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ModuleName)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
@@ -196,7 +195,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate')
 $($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); Limit: `$(`$PSBoundParameters.Limit);`");
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ModuleName)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = ($ResultsLogic | Measure-Object).Count;
@@ -209,7 +208,7 @@ $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ModuleName)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += $ResultsLogic;
@@ -228,7 +227,7 @@ $($IndentChar)$($IndentChar)}"
                 # Build "Begin" block
                 $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()"
                 # Build "Process" block
-                $ProcessContent = "$($IndentChar)$($IndentChar)`$Results = $($ModuleName)\$($CommandName) @PSBoundParameters"
+                $ProcessContent = "$($IndentChar)$($IndentChar)`$Results = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
                 # Build "End" block
                 $EndContent = "$($IndentChar)$($IndentChar)Return `$Results"
             }
@@ -244,7 +243,7 @@ $($IndentChar)$($IndentChar)}"
                 # Fix line endings
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
                 # Export the function
-                Write-Host ("[STATUS] Building: $CommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
+                Write-Host ("[STATUS] Building: $NewCommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
                 $OutputFilePath = "$CustomCustomFolderPath/$NewCommandName.ps1"
                 $NewScript | Out-File -FilePath:($OutputFilePath) -Force
                 # Validate script syntax
@@ -254,29 +253,29 @@ $($IndentChar)$($IndentChar)}"
                     $ScriptAnalyzerResults += $ScriptAnalyzerResult
                 }
             }
-            # Copy docs and tests "JcSdk" version to "JC" version
-            $ExamplesFileNameTemplate = '{0}/{1}.md'
-            $TestFileNameTemplate = '{0}/{1}.Tests.ps1'
-            ForEach ($FolderPath In ($ExamplesFolderPath, $TestFolderPath))
-            {
-                If (Test-Path -Path:($ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
-                {
-                    $CommandNamePath = $ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
-                    $NewCommandNamePath = $ExamplesFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
-                }
-                ElseIf (Test-Path -Path:($TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
-                {
-                    $CommandNamePath = $TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
-                    $NewCommandNamePath = $TestFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
-                }
-                Else
-                {
-                    Write-Error ('Unknown path')
-                }
-                # Do transform on files
-                $JcSdkContent = Convert-GeneratedToCustom -InputString:(Get-Content -Path:($CommandNamePath) -Raw) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
-                $JcSdkContent | Out-File -FilePath:($NewCommandNamePath) -Force
-            }
+            # # Copy docs and tests "JcSdk" version to "JC" version
+            # $ExamplesFileNameTemplate = '{0}/{1}.md'
+            # $TestFileNameTemplate = '{0}/{1}.Tests.ps1'
+            # ForEach ($FolderPath In ($ExamplesFolderPath, $TestFolderPath))
+            # {
+            #     If (Test-Path -Path:($ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
+            #     {
+            #         $CommandNamePath = $ExamplesFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
+            #         $NewCommandNamePath = $ExamplesFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
+            #     }
+            #     ElseIf (Test-Path -Path:($TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName))
+            #     {
+            #         $CommandNamePath = $TestFileNameTemplate -f [System.String]$FolderPath, [System.String]$CommandName
+            #         $NewCommandNamePath = $TestFileNameTemplate -f [System.String]($FolderPath), [System.String]$NewCommandName
+            #     }
+            #     Else
+            #     {
+            #         Write-Error ('Unknown path: ' + $FolderPath)
+            #     }
+            #     # Do transform on files
+            #     $JcSdkContent = Convert-GeneratedToCustom -InputString:(Get-Content -Path:($CommandNamePath) -Raw) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
+            #     $JcSdkContent | Out-File -FilePath:($NewCommandNamePath) -Force
+            # }
         }
     }
     Else

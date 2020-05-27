@@ -9,7 +9,7 @@ Param(
 )
 Try
 {
-    $RunLocal = $false
+    $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
     # Create environmental variable so that they can be used by the pester tests later.
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
@@ -29,7 +29,6 @@ Try
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
     $TestModule = $true
-    $UpdateFunctionsToExport = $true
     $PackModule = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
@@ -65,7 +64,7 @@ Try
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
-                $ConfigPrefix = $Config.prefix
+                $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
                 $ConfigCustomFunctionFolderName = $Config.customFunctionFolderName
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
@@ -86,7 +85,8 @@ Try
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$moduleManifestPath, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+                $internalPath = '{0}/internal/{1}.internal.psm1' -f $OutputFullPath, $ModuleName
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPath, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
@@ -152,53 +152,41 @@ Try
                             Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                             Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
                         }
-                        # Remove Examples customFunctions folder if it does exist
-                        If (Test-Path -Path:($CustomExamplesFolderPath))
-                        {
-                            Remove-Item -Path:($CustomExamplesFolderPath) -Recurse -Force | Out-Null
-                        }
-                        # Create Examples customFunctions folder if it does not exist
-                        If (-not (Test-Path -Path:($CustomExamplesFolderPath)))
-                        {
-                            New-Item -Path:($CustomExamplesFolderPath) -ItemType:('Directory') -Force | Out-Null
-                        }
                         # Clean "Examples" folders
-                        (Get-ChildItem -Path:($ExamplesFolderPath) | Where-Object { $_.Extension -eq '.md' }) | ForEach-Object {
-                            # If any files other than the generate functions and custom functions exist remove them
-                            If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
-                            {
-                                Remove-Item -Path:($_.FullName) -Force -Verbose
-                            }
-                            If ($_.BaseName -in $CustomFunctions.BaseName)
-                            {
-                                # Move any custom function files into customFunction folder
-                                Move-Item -Path:($_.FullName) -Destination:("$CustomExamplesFolderPath/$($_.Name)") -Force
-                            }
-                        }
-                        # Remove Test customFunctions folder if it does exist
-                        If (Test-Path -Path:($CustomTestFolderPath))
+                        $ExampleFiles = Get-ChildItem -Path:($ExamplesFolderPath) | Where-Object { $_.Extension -eq '.md' }
+                        If (-not [System.String]::IsNullOrEmpty($ExampleFiles))
                         {
-                            Remove-Item -Path:($CustomTestFolderPath) -Recurse -Force | Out-Null
-                        }
-                        # Create Test customFunctions folder if it does not exist
-                        If (-not (Test-Path -Path:($CustomTestFolderPath)))
-                        {
-                            New-Item -Path:($CustomTestFolderPath) -ItemType:('Directory') -Force | Out-Null
+                            $ExampleFiles | ForEach-Object {
+                                # If any files other than the generate functions and custom functions exist remove them
+                                If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
+                                {
+                                    Remove-Item -Path:($_.FullName) -Force -Verbose
+                                }
+                                If ($_.BaseName -in $CustomFunctions.BaseName)
+                                {
+                                    # Move any custom function files into customFunction folder
+                                    Move-Item -Path:($_.FullName) -Destination:("$CustomExamplesFolderPath/$($_.Name)") -Force
+                                }
+                            }
                         }
                         # Clean "Tests" folders
-                        (Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }) | ForEach-Object {
-                            # If any files other than the generate functions and custom functions exist remove them
-                            If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
-                            {
-                                Remove-Item -Path:($_.FullName) -Force -Verbose
-                            }
-                            If (($_.BaseName).Replace('.Tests', '') -in $CustomFunctions.BaseName)
-                            {
-                                # Move any custom function files into customFunction folder
-                                Move-Item -Path:($_.FullName) -Destination:("$CustomTestFolderPath/$($_.Name)") -Force
-                                # Fix dot sourced paths
-                                $TestContent = Get-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Raw
-                                $TestContent.Replace('..\', '..\.\') | Set-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Force
+                        $TestFiles = Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }
+                        If (-not [System.String]::IsNullOrEmpty($TestFiles))
+                        {
+                            $TestFiles | ForEach-Object {
+                                # If any files other than the generate functions and custom functions exist remove them
+                                If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
+                                {
+                                    Remove-Item -Path:($_.FullName) -Force -Verbose
+                                }
+                                If (($_.BaseName).Replace('.Tests', '') -in $CustomFunctions.BaseName)
+                                {
+                                    # Move any custom function files into customFunction folder
+                                    Move-Item -Path:($_.FullName) -Destination:("$CustomTestFolderPath/$($_.Name)") -Force
+                                    # Fix dot sourced paths
+                                    $TestContent = Get-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Raw
+                                    $TestContent.Replace('..\', '..\.\') | Set-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Force
+                                }
                             }
                         }
                     }
@@ -289,14 +277,6 @@ Try
                 Else
                 {
                     Write-Warning ('Skipping TestModule.')
-                }
-                ###########################################################################
-                # Update FunctionsToExport
-                If ($UpdateFunctionsToExport)
-                {
-                    $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
-                    Write-Host ('[RUN COMMAND] Updating module FunctionsToExport: ' + $CustomFunctions.BaseName) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Update-ModuleManifest -Path:($moduleManifestPath) -FunctionsToExport:($CustomFunctions.BaseName)
                 }
                 ###########################################################################
                 If ($PackModule)

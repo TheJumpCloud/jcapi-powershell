@@ -67,6 +67,10 @@ module-name: JumpCloud.SDK.DirectoryInsights # $(service-name)
 #         transform: "$.details.default['skip-inline'] = true;"
 #       };
 #     })()
+directive:
+  - where:
+      prefix: JcSdk
+    hide: true
 ## Cmdlet Names
 # verb-mapping:
 #   Access: Get
