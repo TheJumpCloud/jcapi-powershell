@@ -66,6 +66,8 @@ Try
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
+                $ConfigProjectUri = $Config.projectUri
+                $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
@@ -73,16 +75,18 @@ Try
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
                 $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+                $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
-                $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
+                $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
-                $internalPath = '{0}/internal/{1}.internal.psm1' -f $OutputFullPath, $ModuleName
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPath, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+                $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
+                $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
@@ -120,8 +124,12 @@ Try
                 ###########################################################################
                 If ($BuildModule)
                 {
-                    Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                    Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
+                    $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
+
+                    $BuildModuleCommand = "$buildModulePath -Release"
+                    Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($BuildCustomFunctions)
@@ -145,45 +153,54 @@ Try
                         # Rebuild the module with the new custom functions
                         If ($BuildModule)
                         {
-                            Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                            Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
-                        }
-                        # Clean "Examples" folders
-                        $ExampleFiles = Get-ChildItem -Path:($ExamplesFolderPath) | Where-Object { $_.Extension -eq '.md' }
-                        If (-not [System.String]::IsNullOrEmpty($ExampleFiles))
-                        {
-                            $ExampleFiles | ForEach-Object {
-                                # If any files other than the generate functions and custom functions exist remove them
-                                If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and $_.BaseName -notin $CustomFunctions.BaseName)
-                                {
-                                    Remove-Item -Path:($_.FullName) -Force -Verbose
+                            # Comment out section of build-module script so it does not erase the contents of the export folder
+                            $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
+                            $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
+                            # Build-module
+                            $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                            Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                            Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                            # Build PSScriptInfo - Theres gotta be a better way to do this
+                            Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix)
+                            {
+                                # Swap out SDK prefix for customFunction prefix
+                                $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
+                                # Remove weird output conversion for the customFunctions
+                                $OutputMatches = $InputString | Select-String -Pattern:('(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
+                                $OutputMatches.Matches | ForEach-Object {
+                                    $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
+                                    $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
                                 }
-                                If ($_.BaseName -in $CustomFunctions.BaseName)
+                                Return $InputString
+                            }
+                            $CustomFiles = Get-ChildItem -Path:($CustomFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
+                            ForEach ($CustomFile In $CustomFiles)
+                            {
+                                $CustomFileFullName = $CustomFile.FullName
+                                $CustomFileContent = Get-Content -Path:($CustomFileFullName) -Raw
+                                $ExportFullName = "$exportsFolderPath/$($CustomFile.Name)"
+                                $ExportContent = Get-Content -Path:($ExportFullName) -Raw
+                                $PSScriptInfo = ($ExportContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
+                                # Update help info link
+                                # $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                # Convert generated function syntax to custom function syntax
+                                $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
+
+                                $InternalFullName = "$internalFolderPath/$($CustomFile.Name.Replace($ConfigCustomFunctionPrefix,$ConfigPrefix))"
+                                $InternalContent = Get-Content -Path:($InternalFullName) -Raw
+                                $InternalDescription = ($InternalContent | Select-String -Pattern:('(?s)(\.Synopsis)(.*?)(?=\.Example)')).Matches.Value
+                                $PSScriptInfoDescription = ($PSScriptInfo | Select-String -Pattern:('(?s)(\.Synopsis)(.*?)(?=\.Example)')).Matches.Value
+                                If (-not [System.String]::IsNullOrEmpty($InternalDescription) -and -not [System.String]::IsNullOrEmpty($PSScriptInfoDescription))
                                 {
-                                    # Move any custom function files into customFunction folder
-                                    Move-Item -Path:($_.FullName) -Destination:("$CustomExamplesFolderPath/$($_.Name)") -Force
+                                    $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape($PSScriptInfoDescription), $InternalDescription, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                    $PSScriptInfo = $PSScriptInfo.Replace($PSScriptInfoDescription, $InternalDescription)
+                                    "$PSScriptInfo`n $CustomFileContent" | Set-Content -Path:($CustomFileFullName)
                                 }
                             }
-                        }
-                        # Clean "Tests" folders
-                        $TestFiles = Get-ChildItem -Path:($TestFolderPath) -Recurse | Where-Object { $_.BaseName -like '*.Tests' -and $_.Extension -eq '.ps1' }
-                        If (-not [System.String]::IsNullOrEmpty($TestFiles))
-                        {
-                            $TestFiles | ForEach-Object {
-                                # If any files other than the generate functions and custom functions exist remove them
-                                If (($_.BaseName).Replace($ConfigCustomFunctionPrefix, $ConfigPrefix).Replace('.Tests', '') -notin $CustomFunctions.BaseName.Replace($ConfigCustomFunctionPrefix, $ConfigPrefix) -and ($_.BaseName).Replace('.Tests', '') -notin $CustomFunctions.BaseName)
-                                {
-                                    Remove-Item -Path:($_.FullName) -Force -Verbose
-                                }
-                                If (($_.BaseName).Replace('.Tests', '') -in $CustomFunctions.BaseName)
-                                {
-                                    # Move any custom function files into customFunction folder
-                                    Move-Item -Path:($_.FullName) -Destination:("$CustomTestFolderPath/$($_.Name)") -Force
-                                    # Fix dot sourced paths
-                                    $TestContent = Get-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Raw
-                                    $TestContent.Replace('..\', '..\.\') | Set-Content -Path:("$CustomTestFolderPath/$($_.Name)") -Force
-                                }
-                            }
+                            # Rebuild to distribute the update PSScriptInfo to other locations
+                            $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                            Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                            Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                         }
                     }
                 }
@@ -236,7 +253,7 @@ Try
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         # Test module
-                        Install-Module Pester -Force
+                        Install-Module -Name Pester -RequiredVersion 4.10.1 -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
@@ -250,18 +267,21 @@ Try
                             }) -ArgumentList:($TestModuleCommand)
                         $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
                         $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
-                        [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
-                        $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
-                        If ($FailedTests)
+                        If (Test-Path -Path:($PesterTestResultPath))
                         {
-                            Write-Host ('')
-                            Write-Host ('##############################################################################################################')
-                            Write-Host ('##############################Error Description###############################################################')
-                            Write-Host ('##############################################################################################################')
-                            Write-Host ('')
-                            $FailedTests | ForEach-Object { $_.InnerText + ';' }
-                            Write-Host("##vso[task.logissue type=error;]" + 'Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
-                            Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                            [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
+                            $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
+                            If ($FailedTests)
+                            {
+                                Write-Host ('')
+                                Write-Host ('##############################################################################################################')
+                                Write-Host ('##############################Error Description###############################################################')
+                                Write-Host ('##############################################################################################################')
+                                Write-Host ('')
+                                $FailedTests | ForEach-Object { $_.InnerText + ';' }
+                                Write-Host("##vso[task.logissue type=error;]" + 'Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                                Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                            }
                         }
                     }
                     Else

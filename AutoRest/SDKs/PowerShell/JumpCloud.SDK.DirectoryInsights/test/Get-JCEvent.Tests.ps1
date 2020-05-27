@@ -1,7 +1,7 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath))
 {
-    $loadEnvPath = Join-Path $PSScriptRoot '..\.\loadEnv.ps1'
+    $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JCEvent.Recording.json'
@@ -14,13 +14,21 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JCEvent' {
-    #Requires -Modules JumpCloud
+    It 'GetExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+}
+Describe 'Get-JCEvent' {
     <# ToDo
         Service - Not sure how to validate yet (Test that results service value matches parameter value)
     #>
     # Define parameters for functions
     $ParamHash = @{
-        "StartTime"     = (Get-Date).ToUniversalTime();
+        "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
         "EndTime"       = 'PlaceHolderDateTime';
         "Service"       = "all";
         "Sort"          = "DESC"
@@ -29,29 +37,6 @@ Describe 'Get-JCEvent' {
             "event_type" = "user_delete"
         }
     }
-    If ((Get-Command JumpCloud.SDK.DirectoryInsights\Get-JCEvent).Parameters.ContainsKey('Paginate'))
-    {
-        $ParamHash.Limit = ($ParamHash.Limit * 2)
-    }
-    Else
-    {
-        $ParamHash.Limit
-    }
-    # Create event records for tests
-    Connect-JCOnline -force | Out-Null
-    For ($i = 1; $i -le $ParamHash.Limit; $i++)
-    {
-        $UserName = 'JCSystemUserTest-{0}' -f $i
-        Write-Host ("Creating add/delete records for: $UserName")
-        If (Get-JCUser -username:($UserName))
-        {
-            Remove-JCUser -username:($UserName) -Force
-        }
-        New-JCUser -username:($UserName) -firstname:($UserName) -lastname:($UserName) -email:($UserName + '@DeleteMe.com')
-        Remove-JCUser -Username:($UserName) -Force
-    }
-    # Allow server time to process
-    Start-Sleep -Seconds:(10)
     # Set EndTime
     $ParamHash.EndTime = (Get-Date).ToUniversalTime();
     # Convert times to UTC
@@ -68,8 +53,6 @@ Describe 'Get-JCEvent' {
             $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
-            # Limit - Test that results count matches parameter value
-            $eventTest.Count | Should -Be $ParamHash.Limit
             # Sort - Test that results come back in decending DateTime
             $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
             # EndTime - Test that results are not newer than EndTime parameter value
@@ -91,8 +74,6 @@ Describe 'Get-JCEvent' {
             $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
-            # Limit - Test that results count matches parameter value
-            $eventTest.Count | Should -Be $ParamHash.Limit
             # Sort - Test that results come back in decending DateTime
             $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
             # EndTime - Test that results are not newer than EndTime parameter value
@@ -104,5 +85,3 @@ Describe 'Get-JCEvent' {
         }
     }
 }
-
-

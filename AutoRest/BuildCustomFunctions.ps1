@@ -64,15 +64,10 @@ Try
             }
             # Extract the sections we want to copy over to our new function.
             $Params = $FunctionContent | Select-String -Pattern:('(?s)(    \[Parameter)(.*?)(\})') -AllMatches
-            $PSScriptInfo = ($FunctionContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
             $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')).Matches.Value
             $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')).Matches.Value
             # Strip out parameters that match "DontShow"
             $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
-            # Update help info link
-            $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
-            # Convert generated function syntax to custom function syntaxt
-            $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
             # Build CmdletBinding
             If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
             # Build $BeginContent, $ProcessContent, and $EndContent
@@ -227,7 +222,7 @@ $($IndentChar)$($IndentChar)}"
             If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
             {
                 # Build "Function"
-                $NewScript = $FunctionTemplate -f $PSScriptInfo, $NewCommandName, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
+                $NewScript = $FunctionTemplate -f '', $NewCommandName, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
                 # Fix line endings
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
                 # Export the function
