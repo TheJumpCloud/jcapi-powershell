@@ -12,11 +12,42 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JCEventCount' {
-    It 'GetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    <# ToDo
+        Service - Not sure how to validate yet (Test that results service value matches parameter value)
+    #>
+    # Define parameters for functions
+    $ParamHash = @{
+        "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
+        "EndTime"       = 'PlaceHolderDateTime';
+        "Service"       = "all";
+        "Sort"          = "DESC"
+        "Limit"         = 2;
+        "SearchTermAnd" = @{
+            "event_type" = "user_delete"
+        }
     }
-
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    # Set EndTime
+    $ParamHash.EndTime = (Get-Date).ToUniversalTime();
+    # Convert times to UTC
+    # $StartTime = [DateTime]$ParamHash.StartTime
+    # $EndTime = [DateTime]$ParamHash.EndTime
+    It 'GetExpanded' {
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEventCount -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
+        If ([System.String]::IsNullOrEmpty($eventTest)) {
+            $eventTest | Should -Not -BeNullOrEmpty
+        }
+        Else {
+            $eventTest | Should -BeGreaterThan 0
+        }
+    }
+    It 'Get' {
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEventCount -Body:($ParamHash)
+        If ([System.String]::IsNullOrEmpty($eventTest)) {
+            $eventTest | Should -Not -BeNullOrEmpty
+        }
+        Else {
+            $eventTest | Should -BeGreaterThan 0
+        }
     }
 }
+
