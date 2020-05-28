@@ -65,13 +65,17 @@ Try
             $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')).Matches.Value
             $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')).Matches.Value
             # Strip out parameters that match "DontShow"
-            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' }) -join ",`n`n"
+            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' })
             # Build CmdletBinding
             If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
             # Build $BeginContent, $ProcessContent, and $EndContent
             If ($Command.Verb -in ('Get', 'Search'))
             {
-                If (-not [System.String]::IsNullOrEmpty($ParameterContent)) { $ParameterContent = $ParameterContent + ",`n`n$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true" }
+                If (-not [System.String]::IsNullOrEmpty($ParameterContent))
+                {
+                    # Add paginate parameter
+                    $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                }
                 # Build script content
                 If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
                 {
@@ -249,7 +253,7 @@ $($IndentChar)$($IndentChar)}"
             If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
             {
                 # Build "Function"
-                $NewScript = $FunctionTemplate -f '', $NewCommandName, $CmdletBinding, $ParameterContent, $BeginContent, $ProcessContent, $EndContent
+                $NewScript = $FunctionTemplate -f '', $NewCommandName, $CmdletBinding, ($ParameterContent -join ",`n`n"), $BeginContent, $ProcessContent, $EndContent
                 # Fix line endings
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
                 # Export the function
