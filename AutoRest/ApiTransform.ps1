@@ -6,13 +6,9 @@ Param(
 )
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
-    # 'JumpCloud.SDK.V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
-    # 'JumpCloud.SDK.V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/HrqFGikNdFxryitdu/export/oas.yaml' # Docs
-    # 'JumpCloud.SDK.V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
-    # 'JumpCloud.SDK.V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
+    'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
+    'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
+    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
 }
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
