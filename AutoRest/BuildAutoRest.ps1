@@ -91,7 +91,10 @@ Try
                 If ($InstallPreReq)
                 {
                     Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g dotnet-sdk-3.1-win-x64
+                    If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
+                    ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
+                    ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
+                    Else { Write-Error ('Unknown Operation System') }
                     Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     npm install -g @autorest/autorest
                     Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')

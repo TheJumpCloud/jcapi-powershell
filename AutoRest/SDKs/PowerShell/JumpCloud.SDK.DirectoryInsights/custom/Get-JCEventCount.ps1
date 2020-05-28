@@ -136,31 +136,53 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
             Do
             {
                 $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkEventCount @PSBoundParameters
-                If (-not [System.String]::IsNullOrEmpty($Result))
+                If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
                 {
-                    $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-                    If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
+                    If (-not [System.String]::IsNullOrEmpty($Result))
                     {
-                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body))
+                        $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
                         {
-                            $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
+                            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body))
+                            {
+                                $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
+                            }
+                            Else
+                            {
+                                $PSBoundParameters.Body.SearchAfter = $XResultSearchAfter
+                            }
                         }
                         Else
                         {
-                            $PSBoundParameters.Body.SearchAfter = $XResultSearchAfter
+                            $PSBoundParameters.SearchAfter = $XResultSearchAfter
                         }
+                        $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
+                        $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
+                        $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
+                        {
+                            $Result.ToJsonString() | ConvertFrom-Json;
+                        }
+                        Else
+                        {
+                            $Result
+                        }
+                        Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
+                        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                    }
+                }
+                Else
+                {
+                    $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
+                    {
+                        $Result.ToJsonString() | ConvertFrom-Json;
                     }
                     Else
                     {
-                        $PSBoundParameters.SearchAfter = $XResultSearchAfter
+                        $Result
                     }
-                    $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
-                    $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
-                    $Results += ($Result).ToJsonString() | ConvertFrom-Json;
+                    Break
                 }
-                Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
-                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             }
             While ($XResultCount -eq $XLimit -and $Result)
         }
@@ -172,7 +194,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $Results += ($Result).ToJsonString() | ConvertFrom-Json;
+                $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
+                {
+                    $Result.ToJsonString() | ConvertFrom-Json;
+                }
+                Else
+                {
+                    $Result
+                }
             }
         }
     }
