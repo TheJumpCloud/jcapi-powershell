@@ -8,7 +8,7 @@ Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
     'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
     'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
-    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
+    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml'
 }
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
@@ -55,7 +55,7 @@ $FixesMapping = @{
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
         '"basePath": "/insights/directory/v1"'                                                                                                                      = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-        '"search_after": {"type": "array", "items": {"type": "object"}, "description": "Specific query to search after, see x-* response headers for next values"}' = '"search_after": {"items": {"type": "string"}, "type": "array", "description": "Specific query to search after, see x-* response headers for next values"}';
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "object"}}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "string"}}';
         '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time", "type": "string", "description": "query start time, UTC in RFC3339 format"}';
         '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time", "type": "string", "description": "optional query end time, UTC in RFC3339 format"}';
         '"tags": ["EventQuery"],'                                                                                                                                   = '';
