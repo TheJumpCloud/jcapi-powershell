@@ -36,15 +36,15 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
-            $eventTest = $eventTest
+            # $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Sort - Test that results come back in decending DateTime
-            $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
+            $MostRecentRecord | Should -BeGreaterThan $OldestRecord
             # EndTime - Test that results are not newer than EndTime parameter value
-            $MostRecentRecord.Ticks | Should -BeLessOrEqual [DateTime]$EndTime.Ticks
+            $MostRecentRecord | Should -BeLessOrEqual $ParamHash.EndTime
             # StartTime - Test that results are not older than StartTime parameter value
-            $OldestRecord.Ticks | Should -BeGreaterOrEqual [DateTime]$StartTime.Ticks
+            $OldestRecord | Should -BeGreaterOrEqual $ParamHash.StartTime
             # SearchTermAnd - Test that results matches parameter value
             ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
         }
@@ -57,15 +57,15 @@ Describe 'Get-JCEvent' {
         }
         Else
         {
-            $eventTest = $eventTest
+            # $eventTest = $eventTest
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Sort - Test that results come back in decending DateTime
-            $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
+            $MostRecentRecord | Should -BeGreaterThan $OldestRecord
             # EndTime - Test that results are not newer than EndTime parameter value
-            $MostRecentRecord.Ticks | Should -BeLessOrEqual [DateTime]$EndTime.Ticks
+            $MostRecentRecord | Should -BeLessOrEqual $ParamHash.EndTime
             # StartTime - Test that results are not older than StartTime parameter value
-            $OldestRecord.Ticks | Should -BeGreaterOrEqual [DateTime]$StartTime.Ticks
+            $OldestRecord | Should -BeGreaterOrEqual $ParamHash.StartTime
             # SearchTermAnd - Test that results matches parameter value
             ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
         }
