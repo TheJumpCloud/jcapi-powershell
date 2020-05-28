@@ -19,11 +19,11 @@ Describe 'Get-JCEventCount' {
     #>
     # Define parameters for functions
     $ParamHash = @{
-        "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
+        "StartTime"     = (Get-Date).AddHours(-24).ToUniversalTime();
         "EndTime"       = (Get-Date).ToUniversalTime();
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 100;
+        "Limit"         = 10000;
         "SearchTermAnd" = @{
             "event_type" = "user_delete"
         }
