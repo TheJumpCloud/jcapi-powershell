@@ -1,11 +1,13 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath)) {
+if (-Not (Test-Path -Path $loadEnvPath))
+{
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JCEventCount.Recording.json'
 $currentPath = $PSScriptRoot
-while(-not $mockingPath) {
+while (-not $mockingPath)
+{
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
@@ -18,36 +20,34 @@ Describe 'Get-JCEventCount' {
     # Define parameters for functions
     $ParamHash = @{
         "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
-        "EndTime"       = 'PlaceHolderDateTime';
+        "EndTime"       = (Get-Date).ToUniversalTime();
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 2;
+        "Limit"         = 100;
         "SearchTermAnd" = @{
             "event_type" = "user_delete"
         }
     }
-    # Set EndTime
-    $ParamHash.EndTime = (Get-Date).ToUniversalTime();
-    # Convert times to UTC
-    # $StartTime = [DateTime]$ParamHash.StartTime
-    # $EndTime = [DateTime]$ParamHash.EndTime
     It 'GetExpanded' {
         $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEventCount -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
-        If ([System.String]::IsNullOrEmpty($eventTest)) {
+        If ([System.String]::IsNullOrEmpty($eventTest))
+        {
             $eventTest | Should -Not -BeNullOrEmpty
         }
-        Else {
+        Else
+        {
             $eventTest | Should -BeGreaterThan 0
         }
     }
     It 'Get' {
         $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEventCount -Body:($ParamHash)
-        If ([System.String]::IsNullOrEmpty($eventTest)) {
+        If ([System.String]::IsNullOrEmpty($eventTest))
+        {
             $eventTest | Should -Not -BeNullOrEmpty
         }
-        Else {
+        Else
+        {
             $eventTest | Should -BeGreaterThan 0
         }
     }
 }
-

@@ -29,19 +29,14 @@ Describe 'Get-JCEvent' {
     # Define parameters for functions
     $ParamHash = @{
         "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
-        "EndTime"       = 'PlaceHolderDateTime';
+        "EndTime"       = (Get-Date).ToUniversalTime();
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 2;
+        "Limit"         = 100;
         "SearchTermAnd" = @{
             "event_type" = "user_delete"
         }
     }
-    # Set EndTime
-    $ParamHash.EndTime = (Get-Date).ToUniversalTime();
-    # Convert times to UTC
-    $StartTime = [DateTime]$ParamHash.StartTime
-    $EndTime = [DateTime]$ParamHash.EndTime
     It 'GetExpanded' {
         $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
         If ([System.String]::IsNullOrEmpty($eventTest))
@@ -56,9 +51,9 @@ Describe 'Get-JCEvent' {
             # Sort - Test that results come back in decending DateTime
             $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
             # EndTime - Test that results are not newer than EndTime parameter value
-            $MostRecentRecord.Ticks | Should -BeLessOrEqual $EndTime.Ticks
+            $MostRecentRecord.Ticks | Should -BeLessOrEqual [DateTime]$EndTime.Ticks
             # StartTime - Test that results are not older than StartTime parameter value
-            $OldestRecord.Ticks | Should -BeGreaterOrEqual $StartTime.Ticks
+            $OldestRecord.Ticks | Should -BeGreaterOrEqual [DateTime]$StartTime.Ticks
             # SearchTermAnd - Test that results matches parameter value
             ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
         }
@@ -77,9 +72,9 @@ Describe 'Get-JCEvent' {
             # Sort - Test that results come back in decending DateTime
             $MostRecentRecord.Ticks | Should -BeGreaterThan $OldestRecord.Ticks
             # EndTime - Test that results are not newer than EndTime parameter value
-            $MostRecentRecord.Ticks | Should -BeLessOrEqual $EndTime.Ticks
+            $MostRecentRecord.Ticks | Should -BeLessOrEqual [DateTime]$EndTime.Ticks
             # StartTime - Test that results are not older than StartTime parameter value
-            $OldestRecord.Ticks | Should -BeGreaterOrEqual $StartTime.Ticks
+            $OldestRecord.Ticks | Should -BeGreaterOrEqual [DateTime]$StartTime.Ticks
             # SearchTermAnd - Test that results matches parameter value
             ($eventTest.event_type | Select-Object -Unique) | Should -Be $ParamHash.SearchTermAnd.event_type
         }
