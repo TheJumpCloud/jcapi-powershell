@@ -14,25 +14,16 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JCEvent' {
-    It 'GetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-}
-Describe 'Get-JCEvent' {
     <# ToDo
         Service - Not sure how to validate yet (Test that results service value matches parameter value)
     #>
     # Define parameters for functions
     $ParamHash = @{
-        "StartTime"     = (Get-Date).AddHours(-12).ToUniversalTime();
+        "StartTime"     = (Get-Date).AddHours(-24).ToUniversalTime();
         "EndTime"       = (Get-Date).ToUniversalTime();
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 100;
+        "Limit"         = 10000;
         "SearchTermAnd" = @{
             "event_type" = "user_delete"
         }
