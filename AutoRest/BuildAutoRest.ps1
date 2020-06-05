@@ -255,8 +255,11 @@ Try
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        # Temp workaround untill autorest updates to use Pester V5 syntax
+                        $testModuleContent = Get-Content -Path:($testModulePath) -Raw
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | ConvertTo-NUnitReport -AsString | Out-File -Path "' + $moduleName + '-TestResults.xml)"') | Set-Content -Path:($testModulePath)
                         # Test module
-                        Install-Module -Name Pester -RequiredVersion 4.10.1 -Force
+                        Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created

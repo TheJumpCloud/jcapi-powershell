@@ -12,11 +12,7 @@ while (-not $mockingPath)
     $currentPath = Split-Path -Path $currentPath -Parent
 }
 . ($mockingPath | Select-Object -First 1).FullName
-
-Describe 'Get-JCEventCount' {
-    <# ToDo
-        Service - Not sure how to validate yet (Test that results service value matches parameter value)
-    #>
+BeforeAll {
     # Define parameters for functions
     $ParamHash = @{
         "StartTime"     = (Get-Date).AddHours(-24).ToUniversalTime();
@@ -28,6 +24,11 @@ Describe 'Get-JCEventCount' {
             "event_type" = "user_delete"
         }
     }
+}
+Describe 'Get-JCEventCount' {
+    <# ToDo
+        Service - Not sure how to validate yet (Test that results service value matches parameter value)
+    #>
     It 'GetExpanded' {
         $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JCEventCount -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
         If ([System.String]::IsNullOrEmpty($eventTest))
