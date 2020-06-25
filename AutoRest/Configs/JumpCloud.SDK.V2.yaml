@@ -12,7 +12,7 @@ sanitize-names: false
 # # Values
 module-version: 0.0.1
 # skip-model-cmdlets: false
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/ # https://docs.microsoft.com/en-us/powershell/module/
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/
 metadata:
   authors: JumpCloud Solutions Architect Team
   owners: JumpCloud
@@ -22,9 +22,8 @@ metadata:
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
   companyName: JumpCloud
   licenseUri: https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE
-  projectUri: https://github.com/TheJumpCloud/support/wiki/
-  iconUri: https://avatars1.githubusercontent.com/u/4927461?s=200&v=4
-  releaseNotes: https://git.io/jc-pwsh-releasenotes
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/JumpCloud.SDK.V2/
+  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 # # Names
 prefix: JcSdk
 customFunctionPrefix: JC
@@ -67,6 +66,10 @@ module-name: JumpCloud.SDK.V2 # $(service-name)
 #         transform: "$.details.default['skip-inline'] = true;"
 #       };
 #     })()
+directive:
+  - where:
+      prefix: JcSdk
+    hide: true
 ## Cmdlet Names
 # verb-mapping:
 #   Access: Get
