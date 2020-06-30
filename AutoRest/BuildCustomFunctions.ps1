@@ -36,7 +36,7 @@ Try
     If (Get-Module -Name($ImportedModule.Name))
     {
         # Get list of commands from module
-        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkApplication') # Use to troubleshoot single command
+        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JCSystemUserSshKey') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
         {
             # Get module name
@@ -73,8 +73,15 @@ Try
             {
                 If (-not [System.String]::IsNullOrEmpty($ParameterContent))
                 {
+                    If ($ParameterContent.Count -eq 1)
+                    {
                     # Add paginate parameter
+                        $ParameterContent += ",$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                    }
+                    Else
+                    {
                     $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                }
                 }
                 # Build script content
                 If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
@@ -236,7 +243,7 @@ $($IndentChar)$($IndentChar)}"
                     Write-Error ('Unknown module $($ModuleName)')
                 }
             }
-            ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import'))
+            ElseIf ($Command.Verb -in ('New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop'))
             {
                 # Build "Begin" block
                 $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()"
