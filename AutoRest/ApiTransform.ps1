@@ -39,6 +39,8 @@ $FixesMapping = @{
         '["object", "null"]'                                                                                           = '"object"';
         '["string", "null"]'                                                                                           = '"string"';
         '["boolean", "null"]'                                                                                          = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
+        '["integer", "null"]'                                                                                          = '"integer"'; # Error: Invalid type 'integer,null' in schema
+        '["number", "null"]'                                                                                           = '"number"'; # Error: Invalid type 'number,null' in schema
         '"jobId"'                                                                                                      = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                   = ''; # This will be passed in later through the Module.cs file.
@@ -122,7 +124,7 @@ $OperationIdMapping = [Ordered]@{
         'POST_applemdms-apple_mdm_id-devices-device_id-lock'         = 'Lock-AppleMDMDevice';
         'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Refresh-AppleMDMDevice';
         'POST_applemdms-apple_mdm_id-devices-device_id-restart'      = 'Restart-AppleMDMDevice';
-        'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Shutdown-AppleMDMDevice';
+        'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Stop-AppleMDMDevice';
         'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
         'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
         'GET_applications-application_id-associations'               = 'List-ApplicationAssociation';
@@ -447,7 +449,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             # Convert json string to object
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
             # Remove tag elements
-            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
+            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}', '/applications/{application_id}/logo');
             # Exclude stoplight sections where the property is hidden
             If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
             {
