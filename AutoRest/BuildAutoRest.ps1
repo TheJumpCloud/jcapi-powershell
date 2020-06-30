@@ -9,7 +9,7 @@ Param(
 )
 Try
 {
-    $RunLocal = $false
+    $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
     # Create environmental variable so that they can be used by the pester tests later.
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
@@ -19,24 +19,37 @@ Try
     $NuGetApiKey = ''
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
+    $RunApiTransform = $true
     $InstallPreReq = $true
     $GenerateModule = $true
-    $CopyModuleFile = $true
+    $CopyCustomFiles = $true
     $BuildModule = $true
+    $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
     $TestModule = $true
     $PackModule = $true
-    $CommitModule = $true
+    $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
+        $ApiTransformPath = '{0}/ApiTransform.ps1' -f $PSScriptRoot
         If (Test-Path -Path:($ConfigFilePath))
         {
             # Run API Transform step
-            $UpdatedSpec = .($PSScriptRoot + '/ApiTransform.ps1') -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+            If ($RunApiTransform)
+            {
+                $UpdatedSpec = If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
+                {
+                    .($ApiTransformPath) -SDKName:($SDKName) # -NoUpdate # | Out-Null
+                }
+                Else
+                {
+                    .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                }
+            }
             If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
             {
                 # Start SDK generation
@@ -51,6 +64,10 @@ Try
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
+                $ConfigPrefix = $Config.prefix | Select-Object -First 1
+                $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
+                $ConfigProjectUri = $Config.projectUri
+                $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
@@ -58,17 +75,26 @@ Try
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
                 $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+                $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
+                $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
-                $buildModulePath = '{0}/build-module.ps1 -Docs -Release' -f $OutputFullPath # -Pack
+                $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
+                $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
+                $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 If ($InstallPreReq)
                 {
                     Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g dotnet-sdk-2.1
+                    If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
+                    ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
+                    ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
+                    Else { Write-Error ('Unknown Operation System') }
                     Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     npm install -g @autorest/autorest
                     Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -84,10 +110,12 @@ Try
                     autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
-                If ($CopyModuleFile)
+                If ($CopyCustomFiles)
                 {
+                    # Create folder if it does not exist
+                    If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') | Out-Null }
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
+                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:([System.String]$CustomFolderPath) -Force
                     $ModuleVersion = If ([System.String]::IsNullOrEmpty($NextVersion))
                     {
                         $ModuleVersion
@@ -101,8 +129,85 @@ Try
                 ###########################################################################
                 If ($BuildModule)
                 {
-                    Write-Host ('[RUN COMMAND] ' + $buildModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                    Invoke-Expression -Command:($buildModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
+                    $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
+
+                    $BuildModuleCommand = "$buildModulePath -Release"
+                    Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                }
+                ###########################################################################
+                If ($BuildCustomFunctions)
+                {
+                    Write-Host ('[RUN COMMAND] ' + $BuildCustomFunctionsPath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    # Run build custom functions script as a job in a new session to avoid "did you forget to close your session?" error
+                    $BuildCustomFunctionsJob = Start-Job -ScriptBlock:( {
+                            param ($BuildCustomFunctionsPath);
+                            Invoke-Expression -Command:($BuildCustomFunctionsPath)
+                        }) -ArgumentList:($BuildCustomFunctionsPath)
+                    $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
+                    $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                    If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
+                    {
+                        Write-Error ('Build custom functions job did not return a "Completed" status.')
+                    }
+                    Else
+                    {
+                        # Get list of CustomFunctions
+                        $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
+                        # Rebuild the module with the new custom functions
+                        If ($BuildModule)
+                        {
+                            # Comment out section of build-module script so it does not erase the contents of the export folder
+                            $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
+                            $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
+                            # Build-module
+                            $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                            Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                            Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                            # Build PSScriptInfo - Theres gotta be a better way to do this
+                            Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix)
+                            {
+                                # Swap out SDK prefix for customFunction prefix
+                                $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
+                                # Remove weird output conversion for the customFunctions
+                                $OutputMatches = $InputString | Select-String -Pattern:('(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
+                                $OutputMatches.Matches | ForEach-Object {
+                                    $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
+                                    $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
+                                }
+                                Return $InputString
+                            }
+                            $CustomFiles = Get-ChildItem -Path:($CustomFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
+                            ForEach ($CustomFile In $CustomFiles)
+                            {
+                                $CustomFileFullName = $CustomFile.FullName
+                                $CustomFileContent = Get-Content -Path:($CustomFileFullName) -Raw
+                                $ExportFullName = "$exportsFolderPath/$($CustomFile.Name)"
+                                $ExportContent = Get-Content -Path:($ExportFullName) -Raw
+                                $PSScriptInfo = ($ExportContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
+                                # Update help info link
+                                # $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                # Convert generated function syntax to custom function syntax
+                                $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
+
+                                $InternalFullName = "$internalFolderPath/$($CustomFile.Name.Replace($ConfigCustomFunctionPrefix,$ConfigPrefix))"
+                                $InternalContent = Get-Content -Path:($InternalFullName) -Raw
+                                $InternalDescription = ($InternalContent | Select-String -Pattern:('(?s)(\.Synopsis)(.*?)(?=\.Example)')).Matches.Value
+                                $PSScriptInfoDescription = ($PSScriptInfo | Select-String -Pattern:('(?s)(\.Synopsis)(.*?)(?=\.Example)')).Matches.Value
+                                If (-not [System.String]::IsNullOrEmpty($InternalDescription) -and -not [System.String]::IsNullOrEmpty($PSScriptInfoDescription))
+                                {
+                                    $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape($PSScriptInfoDescription), $InternalDescription, [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                    $PSScriptInfo = $PSScriptInfo.Replace($PSScriptInfoDescription, $InternalDescription)
+                                    "$PSScriptInfo`n $CustomFileContent" | Set-Content -Path:($CustomFileFullName)
+                                }
+                            }
+                            # Rebuild to distribute the update PSScriptInfo to other locations
+                            $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                            Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                            Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                        }
+                    }
                 }
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
@@ -152,28 +257,39 @@ Try
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        # Temp workaround untill autorest updates to use Pester V5 syntax
+                        $testModuleContent = Get-Content -Path:($testModulePath) -Raw
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "' + $moduleName + '-TestResults.xml"') | Set-Content -Path:($testModulePath)
                         # Test module
-                        Install-Module Pester -Force
-                        Import-Module Pester -Force
+                        Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
                         # ./test-module.ps1 -Live # Run to query against real API
                         $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                        Invoke-Expression -Command:($TestModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
-                        [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
-                        $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
-                        If ($FailedTests)
+                        # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
+                        $TestModuleJob = Start-Job -ScriptBlock:( {
+                                param ($TestModuleCommand);
+                                Invoke-Expression -Command:($TestModuleCommand)
+                            }) -ArgumentList:($TestModuleCommand)
+                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
+                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                        If (Test-Path -Path:($PesterTestResultPath))
                         {
-                            Write-Host ('')
-                            Write-Host ('##############################################################################################################')
-                            Write-Host ('##############################Error Description###############################################################')
-                            Write-Host ('##############################################################################################################')
-                            Write-Host ('')
-                            $FailedTests | ForEach-Object { $_.InnerText + ';' }
-                            Write-Host("##vso[task.logissue type=error;]" + 'Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
-                            Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                            [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
+                            $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
+                            If ($FailedTests)
+                            {
+                                Write-Host ('')
+                                Write-Host ('##############################################################################################################')
+                                Write-Host ('##############################Error Description###############################################################')
+                                Write-Host ('##############################################################################################################')
+                                Write-Host ('')
+                                $FailedTests | ForEach-Object { $_.InnerText + ';' }
+                                Write-Host("##vso[task.logissue type=error;]" + 'Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                                Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                            }
                         }
                     }
                     Else
@@ -209,28 +325,33 @@ Try
                     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
                 }
                 ##########################################################################
+                # If ($RunLocal)
+                # {
+                #     $gitIgnoreContent = Get-Content -Path:($gitIgnorePath) -Raw
+                #     $gitIgnoreContent.Replace("exports`n", "") | Set-Content -Path:($gitIgnorePath)
+                #     # Remove the auto generated .gitignore so you can see changes
+                #     # Remove-Item -Path:($gitIgnorePath) -Force
+                # }
+                ##########################################################################
                 If ($CommitModule)
                 {
-                    If ($env:USERNAME -eq 'VssAdministrator')
+                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Try
                     {
-                        Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Try
-                        {
-                            $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-                            $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
-                            Set-Location -Path:($BaseFolder)
-                            ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
-                            ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
-                            ./Invoke-Git.ps1 -Arguments:('add -A')
-                            ./Invoke-Git.ps1 -Arguments:('status')
-                            ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                            ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
-                        }
-                        Catch
-                        {
-                            Write-Host("##vso[task.logissue type=error;]" + $_)
-                            Write-Error $_
-                        }
+                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
+                        Set-Location -Path:($BaseFolder)
+                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
+                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
+                        ./Invoke-Git.ps1 -Arguments:('add -A')
+                        ./Invoke-Git.ps1 -Arguments:('status')
+                        ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                    }
+                    Catch
+                    {
+                        Write-Host("##vso[task.logissue type=error;]" + $_)
+                        Write-Error $_
                     }
                 }
                 ###########################################################################

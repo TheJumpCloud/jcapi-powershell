@@ -11981,14 +11981,14 @@
       "title": "mfa",
       "type": "object",
       "properties": {
-        "configured": {
+        "exclusion": {
           "type": "boolean"
         },
         "exclusionUntil": {
-          "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
-        "exclusion": {
+        "configured": {
           "type": "boolean"
         }
       }
@@ -12693,21 +12693,21 @@
       "title": "SSHKeyList",
       "type": "object",
       "properties": {
-        "create_date": {
+        "public_key": {
           "type": "string",
-          "description": "The date the SSH key was created."
+          "description": "The Public SSH key."
         },
         "_id": {
           "type": "string",
           "description": "The ID of the SSH key."
         },
-        "public_key": {
-          "type": "string",
-          "description": "The Public SSH key."
-        },
         "name": {
           "type": "string",
           "description": "The name of the SSH key."
+        },
+        "create_date": {
+          "type": "string",
+          "description": "The date the SSH key was created."
         }
       }
     },
@@ -14978,104 +14978,16 @@
       "title": "SystemUser",
       "type": "object",
       "properties": {
-        "account_locked": {
-          "type": "boolean"
-        },
-        "firstname": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "suspended": {
-          "type": "boolean"
-        },
-        "external_source_type": {
-          "type": "string"
-        },
-        "password_never_expires": {
-          "type": "boolean"
-        },
-        "displayname": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "_id": {
-          "type": "string"
-        },
-        "mfa": {
-          "$ref": "#/definitions/mfa"
-        },
-        "password_expiration_date": {
-          "type": "string"
-        },
-        "associatedTagCount": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "lastname": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "middlename": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "enable_user_portal_multifactor": {
-          "type": "boolean"
-        },
-        "employeeIdentifier": {
-          "type": "string",
-          "description": "Must be unique per user. ",
-          "maxLength": 256
-        },
-        "costCenter": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "ldap_binding_user": {
-          "type": "boolean"
-        },
-        "totp_enabled": {
-          "type": "boolean"
-        },
-        "unix_guid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "enable_managed_uid": {
-          "type": "boolean"
-        },
-        "jobTitle": {
-          "type": "string",
-          "maxLength": 1024
-        },
-        "external_dn": {
-          "type": "string"
-        },
-        "samba_service_user": {
-          "type": "boolean"
-        },
-        "unix_uid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "password_expired": {
-          "type": "boolean"
-        },
-        "attributes": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
         "email": {
           "type": "string",
           "maxLength": 1024
+        },
+        "username": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "allow_public_key": {
+          "type": "boolean"
         },
         "public_key": {
           "type": "string"
@@ -15086,14 +14998,94 @@
             "$ref": "#/definitions/sshkeylist"
           }
         },
-        "allow_public_key": {
+        "sudo": {
           "type": "boolean"
         },
-        "company": {
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "unix_uid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unix_guid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "password_expired": {
+          "type": "boolean"
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "firstname": {
           "type": "string",
           "maxLength": 1024
         },
-        "location": {
+        "lastname": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "associatedTagCount": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "totp_enabled": {
+          "type": "boolean"
+        },
+        "password_expiration_date": {
+          "type": "string"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "created": {
+          "type": "string"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "middlename": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "displayname": {
           "type": "string",
           "maxLength": 1024
         },
@@ -15101,20 +15093,11 @@
           "type": "string",
           "maxLength": 1024
         },
-        "externally_managed": {
-          "type": "boolean"
-        },
-        "department": {
+        "location": {
           "type": "string",
           "maxLength": 1024
         },
-        "activated": {
-          "type": "boolean"
-        },
-        "passwordless_sudo": {
-          "type": "boolean"
-        },
-        "username": {
+        "costCenter": {
           "type": "string",
           "maxLength": 1024
         },
@@ -15122,14 +15105,31 @@
           "type": "string",
           "maxLength": 1024
         },
-        "created": {
-          "type": "string"
+        "company": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "employeeIdentifier": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Must be unique per user. "
+        },
+        "jobTitle": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "department": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "suspended": {
+          "type": "boolean"
         },
         "external_password_expiration_date": {
           "type": "string"
-        },
-        "sudo": {
-          "type": "boolean"
         }
       }
     },

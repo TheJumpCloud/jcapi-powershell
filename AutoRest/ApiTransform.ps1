@@ -6,13 +6,9 @@ Param(
 )
 Set-Location $PSScriptRoot
 $ApiHash = [Ordered]@{
-    # 'JumpCloud.SDK.V1' = 'https://api.stoplight.io/v1/versions/sNtcAibbBX7Nizrmd/export/oas.yaml'; # StopLight
-    # 'JumpCloud.SDK.V2' = 'https://api.stoplight.io/v1/versions/JWvycPWBDeEZ3R5dF/export/oas.yaml'; # StopLight
-    'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml' # Docs
-    'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml' # Docs
-    'JumpCloud.SDK.DirectoryInsights' = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/swagger.yaml?ref=master'
-    # 'JumpCloud.SDK.V1' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/index.yaml?token=AK5FVUOCYLGLDFEW32YPIKS52VTCS'
-    # 'JumpCloud.SDK.V2' = 'https://raw.githubusercontent.com/TheJumpCloud/SI/master/routes/webui/api/v2/index.yaml?token=AK5FVUKXH6FIFU45LMFJIEC52VTEM'
+    'JumpCloud.SDK.V1'                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
+    'JumpCloud.SDK.V2'                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
+    'JumpCloud.SDK.DirectoryInsights' = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml'
 }
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 # Build Find and Replace table
@@ -43,6 +39,8 @@ $FixesMapping = @{
         '["object", "null"]'                                                                                           = '"object"';
         '["string", "null"]'                                                                                           = '"string"';
         '["boolean", "null"]'                                                                                          = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
+        '["integer", "null"]'                                                                                          = '"integer"'; # Error: Invalid type 'integer,null' in schema
+        '["number", "null"]'                                                                                           = '"number"'; # Error: Invalid type 'number,null' in schema
         '"jobId"'                                                                                                      = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
         # Custom Tweaks
         '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                   = ''; # This will be passed in later through the Module.cs file.
@@ -58,9 +56,11 @@ $FixesMapping = @{
         "`t"                                                                                                           = '\t';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array"}'
-        '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time","description": "query start time, UTC in RFC3339 format", "type": "string"}';
-        '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time","description": "optional query end time, UTC in RFC3339 format", "type": "string"}';
+        '"basePath": "/insights/directory/v1"'                                                                                                                      = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "object"}}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "string"}}';
+        '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time", "type": "string", "description": "query start time, UTC in RFC3339 format"}';
+        '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time", "type": "string", "description": "optional query end time, UTC in RFC3339 format"}';
+        '"tags": ["EventQuery"],'                                                                                                                                   = '';
     };
 }
 $OperationIdMapping = [Ordered]@{
@@ -124,11 +124,13 @@ $OperationIdMapping = [Ordered]@{
         'POST_applemdms-apple_mdm_id-devices-device_id-lock'         = 'Lock-AppleMDMDevice';
         'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Refresh-AppleMDMDevice';
         'POST_applemdms-apple_mdm_id-devices-device_id-restart'      = 'Restart-AppleMDMDevice';
-        'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Shutdown-AppleMDMDevice';
+        'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Stop-AppleMDMDevice';
         'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
         'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
         'GET_applications-application_id-associations'               = 'List-ApplicationAssociation';
         'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
+        'DELETE_applications-application_id-logo'                    = 'Delete-ApplicationLogo';
+        'POST_applications-application_id-logo'                      = 'Set-ApplicationLogo';
         'GET_applications-application_id-users'                      = 'List-ApplicationTraverseUser';
         'GET_applications-application_id-usergroups'                 = 'List-ApplicationTraverseUserGroup';
         'POST_bulk-users'                                            = 'Create-BulkUsers';
@@ -229,14 +231,20 @@ $OperationIdMapping = [Ordered]@{
         'GET_systemgroups-group_id-users'                            = 'List-SystemGroupTraverseUser';
         'GET_systemgroups-group_id-usergroups'                       = 'List-SystemGroupTraverseUserGroup';
         'GET_systeminsights-alf'                                     = 'List-SystemInsightsAlf';
+        'GET_systeminsights-alf_exceptions'                          = 'List-SystemInsightsAlfException';
+        'GET_systeminsights-alf_explicit_auths'                      = 'List-SystemInsightsAlfExplicitAuth';
+        'GET_systeminsights-appcompat_shims'                         = 'List-SystemInsightsAppCompatShim';
         'GET_systeminsights-apps'                                    = 'List-SystemInsightsApps';
+        'GET_systeminsights-authorized_keys'                         = 'List-SystemInsightsAuthorizedKey';
         'GET_systeminsights-battery'                                 = 'List-SystemInsightsBattery';
         'GET_systeminsights-bitlocker_info'                          = 'List-SystemInsightsBitlockerInfo';
         'GET_systeminsights-browser_plugins'                         = 'List-SystemInsightsBrowserPlugins';
         'GET_systeminsights-chrome_extensions'                       = 'List-SystemInsightsChromeExtensions';
+        'GET_systeminsights-connectivity'                            = 'List-SystemInsightsConnectivity';
         'GET_systeminsights-crashes'                                 = 'List-SystemInsightsCrashes';
         'GET_systeminsights-disk_encryption'                         = 'List-SystemInsightsDiskEncryption';
         'GET_systeminsights-disk_info'                               = 'List-SystemInsightsDiskInfo';
+        'GET_systeminsights-dns_resolvers'                           = 'List-SystemInsightsDnsResolver';
         'GET_systeminsights-etc_hosts'                               = 'List-SystemInsightsEtcHosts';
         'GET_systeminsights-firefox_addons'                          = 'List-SystemInsightsFirefoxAddons';
         'GET_systeminsights-groups'                                  = 'List-SystemInsightsGroups';
@@ -264,7 +272,10 @@ $OperationIdMapping = [Ordered]@{
         'GET_systeminsights-user_groups'                             = 'List-SystemInsightsUserGroups';
         'GET_systeminsights-users'                                   = 'List-SystemInsightsUsers';
         'GET_systeminsights-user_ssh_keys'                           = 'List-SystemInsightsUserSSHKeys';
+        'GET_systeminsights-wifi_networks'                           = 'List-SystemInsightsWifiNetwork';
+        'GET_systeminsights-wifi_status'                             = 'List-SystemInsightsWifiStatus';
         'GET_systeminsights-windows_crashes'                         = 'List-SystemInsightsWindowsCrashes';
+        'GET_systeminsights-windows_security_products'               = 'List-SystemInsightsWindowsSecurityProduct';
         'GET_systems-system_id-memberof'                             = 'List-SystemMemberOf';
         'GET_systems-system_id-commands'                             = 'List-SystemTraverseCommand';
         'GET_systems-system_id-policies'                             = 'List-SystemTraversePolicy';
@@ -305,13 +316,13 @@ $OperationIdMapping = [Ordered]@{
         'POST_workdays-workday_id-import'                            = 'Import-Workday';
         'GET_workdays'                                               = 'List-Workday';
         'PUT_workdays-id'                                            = 'Put-Workday';
-        'DELETE_workdays-workday_id-auth'                            = 'Remove-WorkdayAuthorization';
+        'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
         'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        'directoryInsights_eventsPost'      = 'Get-JCEvent';
-        'directoryInsights_eventsCountPost' = 'Get-JCEventCount';
+        'POST_events'       = 'Get-Event';
+        'POST_events-count' = 'Get-EventCount';
     };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
@@ -336,7 +347,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
         {
             Get-Content -Path:($OutputFullPathYaml) -Raw
         }
-        ElseIf ($SDKName -eq 'JumpCloud.SDK.DirectoryInsights')
+        ElseIf ($_.Value -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";
@@ -438,7 +449,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             # Convert json string to object
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
             # Remove tag elements
-            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}');
+            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}', '/applications/{application_id}/logo');
             # Exclude stoplight sections where the property is hidden
             If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
             {
@@ -494,6 +505,10 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                     $MethodNames | ForEach-Object {
                         $MethodName = $_
                         $Method = $JsonExport.paths.$PathName.$MethodName
+                        # If ($JsonExport.paths.$PathName.$MethodName.operationId -like '*Get*')
+                        # {
+                        #     $Method.parameters | Add-Member -MemberType:('NoteProperty') -Name:('Paginate') -Value:($true)
+                        # }
                         $MethodHash.Add($MethodName, $Method)
                     }
                     $JsonExport.paths.$PathName = $MethodHash

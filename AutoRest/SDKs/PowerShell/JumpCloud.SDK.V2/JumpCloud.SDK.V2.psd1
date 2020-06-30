@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+@{
+  GUID = '94bcf7d0-4c14-4182-a387-5803b44d1d7e'
+  RootModule = './JumpCloud.SDK.V2.psm1'
+  ModuleVersion = '0.0.1'
+  CompatiblePSEditions = 'Core', 'Desktop'
+  Author = 'JumpCloud Solutions Architect Team'
+  CompanyName = 'JumpCloud'
+  Copyright = '(c) JumpCloud. All rights reserved.'
+  Description = 'The JumpCloud V2 PowerShell SDK'
+  PowerShellVersion = '5.1'
+  DotNetFrameworkVersion = '4.7.2'
+  RequiredAssemblies = './bin/JumpCloud.SDK.V2.private.dll'
+  FormatsToProcess = './JumpCloud.SDK.V2.format.ps1xml'
+  FunctionsToExport = 'Clear-JCAppleMdmDevice', 'Get-JCActiveDirectory', 'Get-JCActiveDirectoryGraphActiveDirectoryAssociation', 'Get-JCActiveDirectoryGraphActiveDirectoryTraverseUserGroup', 'Get-JCAppleMdm', 'Get-JCAppleMdmCsr', 'Get-JCAppleMdmDepKey', 'Get-JCAppleMdmDevice', 'Get-JCAppleMdmEnrollmentProfile', 'Get-JCApplicationGraphApplicationAssociation', 'Get-JCApplicationGraphApplicationTraverseUser', 'Get-JCApplicationGraphApplicationTraverseUserGroup', 'Get-JCBulkJobRequestBulkUserResult', 'Get-JCCommandGraphCommandAssociation', 'Get-JCCommandGraphCommandTraverseSystem', 'Get-JCCommandGraphCommandTraverseSystemGroup', 'Get-JCDirectory', 'Get-JCDuoAccount', 'Get-JCDuoApplication', 'Get-JCGroup', 'Get-JCGSuite', 'Get-JCGSuiteGraphGSuiteAssociation', 'Get-JCGSuiteGraphGSuiteTraverseUser', 'Get-JCGSuiteGraphGSuiteTraverseUserGroup', 'Get-JCGSuiteTranslationRule', 'Get-JCLdapServer', 'Get-JCLdapServerGraphLdapServerAssociation', 'Get-JCLdapServerGraphLdapServerTraverseUser', 'Get-JCLdapServerGraphLdapServerTraverseUserGroup', 'Get-JCOffice365', 'Get-JCOffice365GraphOffice365Association', 'Get-JCOffice365GraphOffice365TraverseUser', 'Get-JCOffice365GraphOffice365TraverseUserGroup', 'Get-JCOffice365TranslationRule', 'Get-JCPolicy', 'Get-JCPolicyGraphPolicyAssociation', 'Get-JCPolicyGraphPolicyStatus', 'Get-JCPolicyGraphPolicyTraverseSystem', 'Get-JCPolicyGraphPolicyTraverseSystemGroup', 'Get-JCPolicyResult', 'Get-JCPolicyStatus', 'Get-JCPolicyTemplate', 'Get-JCProviderAdministrator', 'Get-JCRadiusServerGraphRadiusServerAssociation', 'Get-JCRadiusServerGraphRadiusServerTraverseUser', 'Get-JCRadiusServerGraphRadiusServerTraverseUserGroup', 'Get-JCSambaDomainLdapServerSambaDomain', 'Get-JCSystemFdeKey', 'Get-JCSystemGraphSystemAssociation', 'Get-JCSystemGraphSystemMember', 'Get-JCSystemGraphSystemTraverseCommand', 'Get-JCSystemGraphSystemTraversePolicy', 'Get-JCSystemGraphSystemTraverseUser', 'Get-JCSystemGraphSystemTraverseUserGroup', 'Get-JCSystemGroup', 'Get-JCSystemGroupAssociationGraphSystemGroupTraverseCommand', 'Get-JCSystemGroupAssociationSystemGroupGraphSystemGroupAssociation', 'Get-JCSystemGroupAssociationSystemGroupGraphSystemGroupTraversePolicy', 'Get-JCSystemGroupAssociationSystemGroupGraphSystemGroupTraverseUser', 'Get-JCSystemGroupAssociationSystemGroupGraphSystemGroupTraverseUserGroup', 'Get-JCSystemGroupMemberMembershipSystemGroupGraphSystemGroupMember', 'Get-JCSystemGroupMemberMembershipSystemGroupGraphSystemGroupMembership', 'Get-JCSystemGroupSystemInsightAlfExplicitAuth', 'Get-JCSystemGroupSystemInsightAppCompatShim', 'Get-JCSystemInsightAlf', 'Get-JCSystemInsightAlfException', 'Get-JCSystemInsightApp', 'Get-JCSystemInsightAuthorizedKey', 'Get-JCSystemInsightBattery', 'Get-JCSystemInsightBitlockerInfo', 'Get-JCSystemInsightBrowserPlugin', 'Get-JCSystemInsightCertificate', 'Get-JCSystemInsightChromeExtension', 'Get-JCSystemInsightConnectivity', 'Get-JCSystemInsightCrash', 'Get-JCSystemInsightCupDestination', 'Get-JCSystemInsightDiskEncryption', 'Get-JCSystemInsightDiskInfo', 'Get-JCSystemInsightDnsResolver', 'Get-JCSystemInsightEtcHost', 'Get-JCSystemInsightFirefoxAddon', 'Get-JCSystemInsightGroup', 'Get-JCSystemInsightIeExtension', 'Get-JCSystemInsightInterfaceAddress', 'Get-JCSystemInsightInterfaceDetail', 'Get-JCSystemInsightKernelInfo', 'Get-JCSystemInsightLaunchd', 'Get-JCSystemInsightLogged', 'Get-JCSystemInsightLogicalDrive', 'Get-JCSystemInsightManagedPolicy', 'Get-JCSystemInsightMount', 'Get-JCSystemInsightOSVersion', 'Get-JCSystemInsightPatch', 'Get-JCSystemInsightProgram', 'Get-JCSystemInsightPythonPackage', 'Get-JCSystemInsightRegistry', 'Get-JCSystemInsightSafariExtension', 'Get-JCSystemInsightScheduledTask', 'Get-JCSystemInsightService', 'Get-JCSystemInsightShadow', 'Get-JCSystemInsightSharedFolder', 'Get-JCSystemInsightSharedResource', 'Get-JCSystemInsightSharingPreference', 'Get-JCSystemInsightSipConfig', 'Get-JCSystemInsightStartupItem', 'Get-JCSystemInsightSystemControl', 'Get-JCSystemInsightSystemInfo', 'Get-JCSystemInsightUptime', 'Get-JCSystemInsightUsbDevice', 'Get-JCSystemInsightUser', 'Get-JCSystemInsightUserGroup', 'Get-JCSystemInsightUserSshKey', 'Get-JCSystemInsightWifiNetwork', 'Get-JCSystemInsightWifiStatus', 'Get-JCSystemInsightWindowCrash', 'Get-JCSystemInsightWindowSecurityProduct', 'Get-JCUserGraphUserAssociation', 'Get-JCUserGraphUserMember', 'Get-JCUserGraphUserTraverseApplication', 'Get-JCUserGraphUserTraverseDirectory', 'Get-JCUserGraphUserTraverseGSuite', 'Get-JCUserGraphUserTraverseLdapServer', 'Get-JCUserGraphUserTraverseOffice365', 'Get-JCUserGraphUserTraverseRadiusServer', 'Get-JCUserGraphUserTraverseSystem', 'Get-JCUserGraphUserTraverseSystemGroup', 'Get-JCUserGroup', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupAssociation', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseApplication', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseDirectory', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseGSuite', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseLdapServer', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseOffice365', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseRadiusServer', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseSystem', 'Get-JCUserGroupAssociationUserGroupGraphUserGroupTraverseSystemGroup', 'Get-JCUserGroupMemberMembershipUserGroupGraphUserGroupMember', 'Get-JCUserGroupMemberMembershipUserGroupGraphUserGroupMembership', 'Get-JCWorkdayImportWorkday', 'Get-JCWorkdayImportWorkdayWorker', 'Grant-JCWorkdayImportWorkday', 'Import-JCWorkdayImportWorkday', 'Import-JCWorkdayImportWorkdayResult', 'Lock-JCAppleMdmDevice', 'New-JCBulkJobRequestBulkUser', 'New-JCDuoAccount', 'New-JCDuoApplication', 'New-JCGSuiteTranslationRule', 'New-JCOffice365TranslationRule', 'New-JCPolicy', 'New-JCProviderAdmin', 'New-JCSambaDomainLdapServerSambaDomain', 'New-JCSystemGroup', 'New-JCUserGroup', 'New-JCWorkdayImportWorkday', 'Remove-JCAppleMdm', 'Remove-JCDuoAccount', 'Remove-JCDuoApplication', 'Remove-JCGSuiteTranslationRule', 'Remove-JCOffice365TranslationRule', 'Remove-JCPolicy', 'Remove-JCSambaDomainLdapServerSambaDomain', 'Remove-JCSystemGroup', 'Remove-JCUserGroup', 'Remove-JCWorkdayImportWorkdayAuthorization', 'Restart-JCAppleMdmDevice', 'Set-JCAppleMdm', 'Set-JCApplicationGraphApplicationAssociation', 'Set-JCCommandGraphCommandAssociation', 'Set-JCDuoApplication', 'Set-JCGSuiteGraphGSuiteAssociation', 'Set-JCLdapServerGraphLdapServerAssociation', 'Set-JCOffice365GraphOffice365Association', 'Set-JCPolicy', 'Set-JCPolicyGraphPolicyAssociation', 'Set-JCRadiusServerGraphRadiusServerAssociation', 'Set-JCSambaDomainLdapServerSambaDomain', 'Set-JCSystemGraphSystemAssociation', 'Set-JCSystemGroup', 'Set-JCSystemGroupAssociationSystemGroupGraphSystemGroupAssociation', 'Set-JCSystemGroupMemberMembershipSystemGroupGraphSystemGroupMember', 'Set-JCUserGraphUserAssociation', 'Set-JCUserGroup', 'Set-JCUserGroupAssociationUserGroupGraphUserGroupAssociation', 'Set-JCUserGroupMemberMembershipUserGroupGraphUserGroupMember', 'Set-JCWorkdayImportWorkday', 'Stop-JCAppleMdmDevice', 'Update-JCAppleMdmDevice', 'Update-JCBulkJobRequestBulkUser', 'Update-JCGSuite', 'Update-JCLdapServer', 'Update-JCOffice365', '*'
+  AliasesToExport = '*'
+  PrivateData = @{
+=======
 #
 # Module manifest for module 'JumpCloud.SDK.V2'
 #
@@ -234,41 +252,12 @@ AliasesToExport = '*'
 # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 PrivateData = @{
 
+>>>>>>> master
     PSData = @{
-
-        # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'JumpCloud,','DaaS,','Jump,','Cloud,','Directory'
-
-        # A URL to the license for this module.
-        LicenseUri = 'https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE'
-
-        # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/TheJumpCloud/support/wiki/'
-
-        # A URL to an icon representing this module.
-        # IconUri = ''
-
-        # ReleaseNotes of this module
-        # ReleaseNotes = ''
-
-        # Prerelease string of this module
-        # Prerelease = ''
-
-        # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-        # RequireLicenseAcceptance = $false
-
-        # External dependent modules of this module
-        # ExternalModuleDependencies = @()
-
-    } # End of PSData hashtable
-
- } # End of PrivateData hashtable
-
-# HelpInfo URI of this module
-# HelpInfoURI = ''
-
-# Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-# DefaultCommandPrefix = ''
-
+      Tags = 'JumpCloud,', 'DaaS,', 'Jump,', 'Cloud,', 'Directory'
+      LicenseUri = 'https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE'
+      ProjectUri = 'https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/JumpCloud.SDK.V2/'
+      ReleaseNotes = ''
+    }
+  }
 }
-
