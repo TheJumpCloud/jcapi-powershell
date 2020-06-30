@@ -25,8 +25,8 @@ metadata:
   projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/JumpCloud.SDK.V2/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 # # Names
-prefix: JcSdk
-customFunctionPrefix: JC
+prefix: JcSdkInternal
+customFunctionPrefix: JcSdk
 ## subject-prefix: JcSdk
 module-name: JumpCloud.SDK.V2 # $(service-name)
 # dll-name: $(module-name).private
