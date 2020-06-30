@@ -112,8 +112,10 @@ Try
                 ###########################################################################
                 If ($CopyCustomFiles)
                 {
+                    # Create folder if it does not exist
+                    If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') | Out-Null }
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:($CustomFolderPath) -Force
+                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:([System.String]$CustomFolderPath) -Force
                     $ModuleVersion = If ([System.String]::IsNullOrEmpty($NextVersion))
                     {
                         $ModuleVersion
