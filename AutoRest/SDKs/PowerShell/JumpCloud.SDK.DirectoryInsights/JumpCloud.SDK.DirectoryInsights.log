@@ -1,4 +1,4 @@
-AutoRest code generation utility [cli version: 3.0.6187; node: v12.16.3, max-memory: 8192 gb]
+AutoRest code generation utility [cli version: 3.0.6187; node: v12.18.1, max-memory: 8192 gb]
 (C) 2018 Microsoft Corporation.
 https://aka.ms/autorest
 Network Enabled: true
@@ -27,530 +27,662 @@ Starting @autorest/core from C:\Users\VssAdministrator\.autorest\@autorest_core@
    Including configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_core@3.0.6282/node_modules/@autorest/core/resources/graphs.md'
    Including configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_core@3.0.6282/node_modules/@autorest/core/resources/help-configuration.md'
    Installing AutoRest extension '@autorest/powershell' (~2.1.327)
-VERBOSE [2.86 s]: Installing @autorest/powershell, 2.1.382
-VERBOSE [9.04 s]: Package Install completed @autorest/powershell, 2.1.382
-   Installed AutoRest extension '@autorest/powershell' (~2.1.327->2.1.382)
-   Including extension configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_powershell@2.1.382/node_modules/@autorest/powershell/readme.md'
-   Including configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_powershell@2.1.382/node_modules/@autorest/powershell/autorest-configuration.md'
+VERBOSE [3.81 s]: Installing @autorest/powershell, 2.1.394
+VERBOSE [31.41 s]: Package Install completed @autorest/powershell, 2.1.394
+   Installed AutoRest extension '@autorest/powershell' (~2.1.327->2.1.394)
+   Including extension configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_powershell@2.1.394/node_modules/@autorest/powershell/readme.md'
+   Including configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_powershell@2.1.394/node_modules/@autorest/powershell/autorest-configuration.md'
    Installing AutoRest extension '@autorest/remodeler' (~2.1.0)
-VERBOSE [10.5 s]: Installing @autorest/remodeler, 2.1.27
-VERBOSE [17.08 s]: Package Install completed @autorest/remodeler, 2.1.27
+VERBOSE [32.82 s]: Installing @autorest/remodeler, 2.1.27
+VERBOSE [46.92 s]: Package Install completed @autorest/remodeler, 2.1.27
    Installed AutoRest extension '@autorest/remodeler' (~2.1.0->2.1.27)
    Including extension configuration file 'file:///C:/Users/VssAdministrator/.autorest/@autorest_remodeler@2.1.27/node_modules/@autorest/remodeler/readme.md'
-DEBUG [18.12 s]: swagger-document/loader-swagger - START inputs = 0
-DEBUG [18.12 s]: openapi-document/loader-openapi - START inputs = 0
-DEBUG [18.12 s]: pipeline-emitter - START inputs = 0
-DEBUG [18.16 s]: configuration-emitter - START inputs = 0
-DEBUG [18.17 s]: pipeline-emitter - END [0.05 s]
-DEBUG [18.17 s]: configuration-emitter - END [0.05 s]
-VERBOSE [18.2 s]: Reading OpenAPI 2.0 file file:///D:/a/1/s/AutoRest/SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
-DEBUG [18.2 s]: openapi-document/loader-openapi - END [0.08 s]
-DEBUG [18.2 s]: openapi-document/individual/transform - SKIPPING
-DEBUG [18.2 s]: openapi-document/individual/schema-validator-openapi - SKIPPING
-DEBUG [18.21 s]: openapi-document/individual/identity - SKIPPING
-DEBUG [18.23 s]: swagger-document/loader-swagger - END [0.11 s]
-DEBUG [18.23 s]: swagger-document/individual/transform - START inputs = 1
-DEBUG [18.26 s]: swagger-document/individual/transform - END [0.02 s]
-DEBUG [18.26 s]: swagger-document/individual/schema-validator-swagger - START inputs = 1
-DEBUG [18.3 s]: swagger-document/individual/schema-validator-swagger - END [0.04 s]
-DEBUG [18.3 s]: swagger-document/identity - START inputs = 1
-DEBUG [18.3 s]: swagger-document/individual/identity - START inputs = 1
-DEBUG [18.3 s]: swagger-document/identity - END [0 s]
-DEBUG [18.3 s]: swagger-document/individual/identity - END [0 s]
-DEBUG [18.3 s]: openapi-document/openapi-document-converter - START inputs = 1
-DEBUG [18.32 s]: openapi-document/openapi-document-converter - END [0.01 s]
-DEBUG [18.32 s]: openapi-document/transform - START inputs = 1
-DEBUG [18.33 s]: openapi-document/transform - END [0 s]
-DEBUG [18.33 s]: openapi-document/allof-cleaner - START inputs = 1
-DEBUG [18.33 s]: openapi-document/allof-cleaner - END [0 s]
-DEBUG [18.33 s]: openapi-document/tree-shaker - START inputs = 1
-DEBUG [18.35 s]: openapi-document/tree-shaker - END [0.02 s]
-DEBUG [18.35 s]: openapi-document/multi-api-merger - START inputs = 1
-DEBUG [18.38 s]: openapi-document/multi-api-merger - END [0.03 s]
-DEBUG [18.38 s]: openapi-document/components-cleaner - START inputs = 1
-DEBUG [18.43 s]: openapi-document/components-cleaner - END [0.04 s]
-DEBUG [18.43 s]: openapi-document/component-modifiers - START inputs = 1
-DEBUG [18.43 s]: openapi-document/component-modifiers - END [0 s]
-DEBUG [18.43 s]: openapi-document/api-version-parameter-handler - START inputs = 1
-DEBUG [18.43 s]: openapi-document/api-version-parameter-handler - END [0 s]
-DEBUG [18.43 s]: openapi-document/profile-filter - START inputs = 1
-DEBUG [18.43 s]: openapi-document/profile-filter - END [0 s]
-DEBUG [18.44 s]: openapi-document/model-deduplicator - START inputs = 1
-DEBUG [18.44 s]: openapi-document/emitter - START inputs = 1
-DEBUG [18.44 s]: openapi-document/emitter - END [0 s]
-DEBUG [18.45 s]: openapi-document/model-deduplicator - END [0.01 s]
-DEBUG [18.45 s]: openapi-document/enum-deduplicator - START inputs = 1
-DEBUG [18.49 s]: openapi-document/enum-deduplicator - END [0.03 s]
-DEBUG [18.49 s]: openapi-document/subset-reducer - START inputs = 1
-DEBUG [18.51 s]: openapi-document/subset-reducer - END [0.01 s]
-DEBUG [18.51 s]: openapi-document/quick-check - START inputs = 1
-DEBUG [18.51 s]: openapi-document/multi-api/reset-identity - START inputs = 1
-DEBUG [18.51 s]: openapi-document/quick-check - END [0 s]
-DEBUG [18.51 s]: openapi-document/multi-api/reset-identity - END [0 s]
-DEBUG [18.51 s]: openapi-document/multi-api/identity - START inputs = 1
-DEBUG [18.51 s]: openapi-document/multi-api/identity - END [0 s]
-DEBUG [18.51 s]: openapi-document/multi-api/emitter - START inputs = 1
-DEBUG [18.51 s]: remodeler - START inputs = 1
-DEBUG [18.51 s]: openapi-document/multi-api/emitter - END [0 s]
-DEBUG [18.6 s]: remodeler - END [0.08 s]
-DEBUG [18.6 s]: remodeler/new-transform - START inputs = 1
-DEBUG [18.6 s]: remodeler/new-transform - END [0 s]
-DEBUG [18.6 s]: tweakcodemodel - START inputs = 1
-DEBUG [18.7 s]: tweakcodemodel - END [0.1 s]
-DEBUG [18.7 s]: tweakcodemodelazure - START inputs = 1
-DEBUG [18.75 s]: tweakcodemodelazure - END [0.04 s]
-DEBUG [18.75 s]: create-commands - START inputs = 1
-DEBUG [18.87 s]: [CMDLET-PREFIX] => 'JcSdk'
-DEBUG [18.87 s]: [SERVICE-NAME] => 'DirectoryInsightsApi'
-DEBUG [18.87 s]: [SUBJECT-PREFIX] => ''
-DEBUG [18.87 s]: detecting high level commands...
-DEBUG [18.87 s]: Get-Event //  Events_Get => {"alias":[],"subject":"Event","variant":"","verb":"Get","subjectPrefix":"","action":"Get"} taking ;  ; end_time, fields, limit, search_after, search_term, service, sort, start_time 
-DEBUG [18.87 s]: Get-EventsCount //  EventsCount_Get => {"alias":[],"subject":"EventsCount","variant":"","verb":"Get","subjectPrefix":"","action":"Get"} taking ;  ; end_time, fields, limit, search_after, search_term, service, sort, start_time 
-DEBUG [18.93 s]: create-commands - END [0.17 s]
-DEBUG [18.93 s]: create-virtual-properties - START inputs = 1
-DEBUG [18.98 s]: create-virtual-properties - END [0.05 s]
-DEBUG [18.98 s]: csnamer - START inputs = 1
-DEBUG [19.09 s]: csnamer - END [0.11 s]
-DEBUG [19.1 s]: psnamer - START inputs = 1
-DEBUG [19.17 s]: psnamer - END [0.07 s]
-DEBUG [19.17 s]: modifiers - START inputs = 1
-DEBUG [19.21 s]: modifiers - END [0.03 s]
-DEBUG [19.21 s]: add-azure-completers - START inputs = 1
-DEBUG [19.21 s]: llcsharp - START inputs = 1
-DEBUG [19.25 s]: add-azure-completers - END [0.04 s]
-DEBUG [19.25 s]: powershell - START inputs = 1
-DEBUG [19.65 s]: llcsharp - END [0.44 s]
-DEBUG [19.65 s]: llcsharp/text-transform - START inputs = 106
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///126?generated%5Capi%5CDirectoryInsightsApi.cs 
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///127?generated%5Capi%5CModels%5CErrorMessage.cs 
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///128?generated%5Capi%5CModels%5CErrorMessage.json.cs 
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///129?generated%5Capi%5CModels%5CSearchTerm.cs 
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///130?generated%5Capi%5CModels%5CSearchTermAnd.cs 
-DEBUG [19.65 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///131?generated%5Capi%5CModels%5CSearchTermAnd.dictionary.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///132?generated%5Capi%5CModels%5CSearchTermAnd.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///133?generated%5Capi%5CModels%5CSearchTermOr.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///134?generated%5Capi%5CModels%5CSearchTermOr.dictionary.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///135?generated%5Capi%5CModels%5CSearchTermOr.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///136?generated%5Capi%5CModels%5CSearchTerm.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///137?generated%5Capi%5CModels%5CTermItem.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///138?generated%5Capi%5CModels%5CTermItem.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///139?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///140?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.dictionary.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///141?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///142?generated%5Capi%5CModels%5CEventCount.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///143?generated%5Capi%5CModels%5CEventCount.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///144?generated%5Capi%5CModels%5CEventQuery.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///145?generated%5Capi%5CModels%5CEventQuery.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///146?generated%5Capi%5CModels%5CDirectoryInsightsApiIdentity.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///147?generated%5Capi%5CModels%5CDirectoryInsightsApiIdentity.json.cs 
-DEBUG [19.66 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///148?generated%5Cruntime%5CCmdInfoHandler.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///149?generated%5Cruntime%5CExtensions.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///150?generated%5Cruntime%5CIAssociativeArray.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///151?generated%5Cruntime%5CIHeaderSerializable.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///152?generated%5Cruntime%5CInfoAttribute.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///153?generated%5Cruntime%5CMethod.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///154?generated%5Cruntime%5CSerializationMode.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///155?generated%5Cruntime%5CUndeclaredResponseException.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///156?generated%5Cruntime%5Cdelegates.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///157?generated%5Cruntime%5CEventData.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///158?generated%5Cruntime%5CEventListener.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///159?generated%5Cruntime%5CEvents.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///160?generated%5Cruntime%5CISendAsync.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///161?generated%5Cruntime%5CPipelineMocking.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///162?generated%5Cruntime%5CResponse.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///163?generated%5Cruntime%5CConversions%5CConversionException.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///164?generated%5Cruntime%5CCustomizations%5CIJsonSerializable.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///165?generated%5Cruntime%5CConversions%5CIJsonConverter.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///166?generated%5Cruntime%5CJsonType.cs 
-DEBUG [19.67 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///167?generated%5Cruntime%5CHelpers%5CSeperator.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///168?generated%5Cruntime%5CIso%5CIsoDate.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///169?generated%5Cruntime%5CCustomizations%5CJsonArray.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///170?generated%5Cruntime%5CHelpers%5CExtensions%5CStringBuilderExtensions.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///194?generated%5Cruntime%5CHelpers%5CTypeDetails.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///195?generated%5Cruntime%5CConversions%5CJsonConverter.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///196?generated%5Cruntime%5CCustomizations%5CJsonBoolean.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///197?generated%5Cruntime%5CHelpers%5CExtensions%5CTypeExtensions.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///198?generated%5Cruntime%5CConversions%5CInstances%5CBinaryConverter.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///199?generated%5Cruntime%5CModels%5CJsonMember.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///200?generated%5Cruntime%5CHelpers%5CXHelper.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///201?generated%5Cruntime%5CConversions%5CJsonConverterAttribute.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///202?generated%5Cruntime%5CCustomizations%5CJsonNode.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///203?generated%5Cruntime%5CNodes%5CJsonBoolean.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///204?generated%5Cruntime%5CConversions%5CInstances%5CBooleanConverter.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///205?generated%5Cruntime%5CModels%5CJsonModel.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///206?generated%5Cruntime%5CSerialization%5CJsonSerializer.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///207?generated%5Cruntime%5CParser%5CJsonParser.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///208?generated%5Cruntime%5CNodes%5CCollections%5CJsonArray.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///209?generated%5Cruntime%5CParser%5CExceptions%5CParseException.cs 
-DEBUG [19.68 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///210?generated%5Cruntime%5CWriters%5CJsonWriter.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///211?generated%5Cruntime%5CConversions%5CJsonConverterFactory.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///212?generated%5Cruntime%5CCustomizations%5CJsonNumber.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///213?generated%5Cruntime%5CConversions%5CInstances%5CDateTimeConverter.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///214?generated%5Cruntime%5CNodes%5CJsonDate.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///215?generated%5Cruntime%5CModels%5CJsonModelCache.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///216?generated%5Cruntime%5CSerialization%5CPropertyTransformation.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///217?generated%5Cruntime%5CParser%5CJsonToken.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///218?generated%5Cruntime%5CNodes%5CCollections%5CXImmutableArray.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///219?generated%5Cruntime%5CConversions%5CStringLikeConverter.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///220?generated%5Cruntime%5CCustomizations%5CJsonObject.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///221?generated%5Cruntime%5CNodes%5CJsonNode.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///222?generated%5Cruntime%5CConversions%5CInstances%5CDateTimeOffsetConverter.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///223?generated%5Cruntime%5CSerialization%5CSerializationOptions.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///224?generated%5Cruntime%5CParser%5CJsonTokenizer.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///225?generated%5Cruntime%5CNodes%5CCollections%5CXList.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///227?generated%5Cruntime%5CCustomizations%5CJsonString.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///228?generated%5Cruntime%5CNodes%5CJsonNumber.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///229?generated%5Cruntime%5CConversions%5CInstances%5CDecimalConverter.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///230?generated%5Cruntime%5CParser%5CLocation.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///232?generated%5Cruntime%5CNodes%5CCollections%5CXNodeArray.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///233?generated%5Cruntime%5CCustomizations%5CXNodeArray.cs 
-DEBUG [19.69 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///236?generated%5Cruntime%5CNodes%5CJsonObject.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///237?generated%5Cruntime%5CConversions%5CInstances%5CDoubleConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///239?generated%5Cruntime%5CNodes%5CCollections%5CXSet.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///240?generated%5Cruntime%5CParser%5CTokenReader.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///241?generated%5Cruntime%5CNodes%5CJsonString.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///242?generated%5Cruntime%5CParser%5CReaders%5CSourceReader.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///243?generated%5Cruntime%5CConversions%5CInstances%5CEnumConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///244?generated%5Cruntime%5CNodes%5CXBinary.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///245?generated%5Cruntime%5CConversions%5CInstances%5CGuidConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///246?generated%5Cruntime%5CNodes%5CXNull.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///247?generated%5Cruntime%5CConversions%5CInstances%5CHashSet%271Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///250?generated%5Cruntime%5CConversions%5CInstances%5CInt16Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///252?generated%5Cruntime%5CConversions%5CInstances%5CInt32Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///256?generated%5Cruntime%5CConversions%5CInstances%5CInt64Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///259?generated%5Cruntime%5CConversions%5CInstances%5CJsonArrayConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///261?generated%5Cruntime%5CConversions%5CInstances%5CJsonObjectConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///265?generated%5Cruntime%5CConversions%5CInstances%5CSingleConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///267?generated%5Cruntime%5CConversions%5CInstances%5CStringConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///268?generated%5Cruntime%5CConversions%5CInstances%5CTimeSpanConverter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///272?generated%5Cruntime%5CConversions%5CInstances%5CUInt16Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///274?generated%5Cruntime%5CConversions%5CInstances%5CUInt32Converter.cs 
-DEBUG [19.7 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///275?generated%5Cruntime%5CConversions%5CInstances%5CUInt64Converter.cs 
-DEBUG [19.71 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///278?generated%5Cruntime%5CConversions%5CInstances%5CUriConverter.cs 
-DEBUG [19.71 s]: llcsharp/text-transform - END [0.05 s]
-DEBUG [19.71 s]: llcsharp/emitter - START inputs = 106
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/DirectoryInsightsApi.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.json.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.dictionary.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.json.cs
-DEBUG [19.71 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.dictionary.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.json.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.json.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.json.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.dictionary.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.json.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.json.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.cs
-DEBUG [19.72 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.json.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.json.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/CmdInfoHandler.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Extensions.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/IAssociativeArray.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/IHeaderSerializable.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/InfoAttribute.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Method.cs
-DEBUG [19.73 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/SerializationMode.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/UndeclaredResponseException.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/delegates.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventData.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventListener.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Events.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/ISendAsync.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/PipelineMocking.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Response.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/ConversionException.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/IJsonSerializable.cs
-DEBUG [19.74 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/IJsonConverter.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/JsonType.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Seperator.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Iso/IsoDate.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonArray.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Extensions/StringBuilderExtensions.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/TypeDetails.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverter.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonBoolean.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Extensions/TypeExtensions.cs
-DEBUG [19.75 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/BinaryConverter.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonMember.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/XHelper.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverterAttribute.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonNode.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonBoolean.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/BooleanConverter.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonModel.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/JsonSerializer.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonParser.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/JsonArray.cs
-DEBUG [19.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Exceptions/ParseException.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Writers/JsonWriter.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverterFactory.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonNumber.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DateTimeConverter.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonDate.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonModelCache.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/PropertyTransformation.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonToken.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XImmutableArray.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/StringLikeConverter.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonObject.cs
-DEBUG [19.77 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonNode.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DateTimeOffsetConverter.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/SerializationOptions.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonTokenizer.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XList.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonString.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonNumber.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DecimalConverter.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Location.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XNodeArray.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/XNodeArray.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonObject.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DoubleConverter.cs
-DEBUG [19.78 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XSet.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/TokenReader.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonString.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Readers/SourceReader.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/EnumConverter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/XBinary.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/GuidConverter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/XNull.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/HashSet%271Converter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int16Converter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int32Converter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int64Converter.cs
-DEBUG [19.79 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/JsonArrayConverter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/JsonObjectConverter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/SingleConverter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/StringConverter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/TimeSpanConverter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt16Converter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt32Converter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt64Converter.cs
-DEBUG [19.8 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UriConverter.cs
-DEBUG [19.8 s]: llcsharp/emitter - END [0.09 s]
-DEBUG [20.52 s]: powershell - END [1.27 s]
-DEBUG [20.52 s]: powershell/text-transform - START inputs = 147
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///171?.%2Fgenerated%2FModule.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///172?generated%5Capi%5CModels%2FErrorMessage.PowerShell.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///173?.%2Fgenerated%2Fcmdlets%2FGetJcSdkEvent_Get.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///174?generated%5Capi%5CModels%2FErrorMessage.TypeConverter.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///175?.%2Fgenerated%2Fcmdlets%2FGetJcSdkEvent_GetExpanded.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///176?generated%5Capi%5CModels%2FSearchTerm.PowerShell.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///177?.%2Fgenerated%2Fcmdlets%2FGetJcSdkEventsCount_Get.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///178?generated%5Capi%5CModels%2FSearchTerm.TypeConverter.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///179?.%2Fgenerated%2Fcmdlets%2FGetJcSdkEventsCount_GetExpanded.cs 
-DEBUG [20.52 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///180?generated%5Capi%5CModels%2FSearchTermAnd.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///181?generated%5Capi%5CModels%2FSearchTermAnd.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///182?generated%5Capi%5CModels%2FSearchTermOr.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///183?generated%5Capi%5CModels%2FSearchTermOr.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///184?generated%5Capi%5CModels%2FTermItem.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///185?generated%5Capi%5CModels%2FTermItem.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///186?generated%5Capi%5CModels%2FPost200ApplicationJsonItemsItem.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///187?generated%5Capi%5CModels%2FPost200ApplicationJsonItemsItem.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///188?generated%5Capi%5CModels%2FEventCount.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///189?generated%5Capi%5CModels%2FEventCount.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///190?generated%5Capi%5CModels%2FEventQuery.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///191?generated%5Capi%5CModels%2FEventQuery.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///192?generated%5Capi%5CModels%2FDirectoryInsightsApiIdentity.PowerShell.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///193?generated%5Capi%5CModels%2FDirectoryInsightsApiIdentity.TypeConverter.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///389?generated%5Cruntime%5CAsyncCommandRuntime.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///390?generated%5Cruntime%5CAsyncJob.cs 
-DEBUG [20.53 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///391?generated%5Cruntime%5CAsyncOperationResponse.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///392?generated%5Cruntime%5CDebugging.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///393?generated%5Cruntime%5CBuildTime%5CCollectionExtensions.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///394?generated%5Cruntime%5CDictionaryExtensions.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///395?generated%5Cruntime%5CBuildTime%5CMarkdownRenderer.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///396?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportCmdletSurface.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///397?generated%5Cruntime%5CEventDataExtensions.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///398?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportExampleStub.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///399?generated%5Cruntime%5CEventsExtensions.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///400?generated%5Cruntime%5CBuildTime%5CPsAttributes.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///401?generated%5Cruntime%5CBuildTime%5CModels%5CPsFormatTypes.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///402?generated%5Cruntime%5CHttpPipeline.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///403?generated%5Cruntime%5CBuildTime%5CPsExtensions.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///404?generated%5Cruntime%5CBuildTime%5CModels%5CPsHelpMarkdownOutputs.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///405?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportHelpMarkdown.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///406?generated%5Cruntime%5CBuildTime%5CModels%5CPsHelpTypes.cs 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///407?generated%5Cruntime%5CHttpPipelineMocking.ps1 
-DEBUG [20.54 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///408?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportFormatPs1xml.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///409?generated%5Cruntime%5CTypeConverterExtensions.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///410?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportModelSurface.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///411?generated%5Cruntime%5CBuildTime%5CModels%5CPsMarkdownTypes.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///412?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportProxyCmdlet.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///413?generated%5Cruntime%5CBuildTime%5CPsHelpers.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///414?generated%5Cruntime%5CBuildTime%5CModels%5CPsProxyOutputs.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///415?generated%5Cruntime%5CBuildTime%5CStringExtensions.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///416?generated%5Cruntime%5CBuildTime%5CModels%5CPsProxyTypes.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///417?generated%5Cruntime%5CBuildTime%5CXmlExtensions.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///418?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportTestStub.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///419?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetCommonParameter.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///420?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportPsd1.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///421?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetModuleGuid.cs 
-DEBUG [20.55 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///422?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetScriptCmdlet.cs 
-DEBUG [20.56 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///477?.%2FJumpCloud.SDK.DirectoryInsights.csproj 
-DEBUG [20.56 s]: powershell/text-transform - END [0.04 s]
-DEBUG [20.56 s]: powershell/emitter - START inputs = 147
-DEBUG [20.56 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/Module.cs
-DEBUG [20.56 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.PowerShell.cs
-DEBUG [20.56 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkEvent_Get.cs
-DEBUG [20.56 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.TypeConverter.cs
-DEBUG [20.56 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkEvent_GetExpanded.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.PowerShell.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkEventsCount_Get.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.TypeConverter.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkEventsCount_GetExpanded.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.PowerShell.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.TypeConverter.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.PowerShell.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.TypeConverter.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.PowerShell.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.TypeConverter.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.PowerShell.cs
-DEBUG [20.57 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.TypeConverter.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.PowerShell.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.TypeConverter.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.PowerShell.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.TypeConverter.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.PowerShell.cs
-DEBUG [20.58 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.TypeConverter.cs
-DEBUG [20.58 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/check-dependencies.ps1
-DEBUG [20.58 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/build-module.ps1
-DEBUG [20.58 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/readme.md
-DEBUG [20.58 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/export-surface.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/examples/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/license.txt
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/pack-module.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generate-help.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/exports/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/run-module.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/resources/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test/loadEnv.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/how-to.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test-module.ps1
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test/readme.md
-DEBUG [20.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/.gitattributes
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/docs/readme.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/how-to.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/examples/readme.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/license.txt
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/readme.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/custom/New-AzDeployment.ps1
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/CmdletSurface-latest-2019-04-30.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/test/readme.md
-DEBUG [20.6 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/ModelSurface.md
-DEBUG [20.61 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/readme.md
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncCommandRuntime.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncJob.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncOperationResponse.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Debugging.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/CollectionExtensions.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/DictionaryExtensions.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/MarkdownRenderer.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportCmdletSurface.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventDataExtensions.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportExampleStub.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventsExtensions.cs
-DEBUG [20.61 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsAttributes.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsFormatTypes.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/HttpPipeline.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsExtensions.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsHelpMarkdownOutputs.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportHelpMarkdown.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsHelpTypes.cs
-DEBUG [20.62 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/HttpPipelineMocking.ps1
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportFormatPs1xml.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/TypeConverterExtensions.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportModelSurface.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsMarkdownTypes.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportProxyCmdlet.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsHelpers.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsProxyOutputs.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/StringExtensions.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsProxyTypes.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/XmlExtensions.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportTestStub.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetCommonParameter.cs
-DEBUG [20.63 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportPsd1.cs
-DEBUG [20.64 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetModuleGuid.cs
-DEBUG [20.64 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetScriptCmdlet.cs
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Accounts.format.ps1xml
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Accounts.generated.format.ps1xml
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Accounts.types.ps1xml
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Az.Accounts.nuspec
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Az.Accounts.psd1
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Az.Accounts.psm1
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Hyak.Common.dll
-DEBUG [20.64 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.ApplicationInsights.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.Common.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Authentication.Abstractions.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Authentication.deps.json
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Authentication.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Authentication.ResourceManager.deps.json
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Authentication.ResourceManager.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Aks.dll
-DEBUG [20.65 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Authorization.dll
-DEBUG [20.66 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Graph.Rbac.dll
-DEBUG [20.66 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Compute.dll
-DEBUG [20.67 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.KeyVault.dll
-DEBUG [20.67 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Monitor.dll
-DEBUG [20.67 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Network.dll
-DEBUG [20.68 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.PolicyInsights.dll
-DEBUG [20.68 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.ResourceManager.dll
-DEBUG [20.69 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Storage.Management.dll
-DEBUG [20.69 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Cmdlets.Accounts.deps.json
-DEBUG [20.69 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Clients.Websites.dll
-DEBUG [20.71 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Cmdlets.Accounts.dll
-DEBUG [20.71 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Cmdlets.Accounts.dll-Help.xml
-DEBUG [20.71 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Common.dll
-DEBUG [20.71 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Storage.dll
-DEBUG [20.72 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Azure.PowerShell.Strategies.dll
-DEBUG [20.72 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Rest.ClientRuntime.Azure.dll
-DEBUG [20.72 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.Rest.ClientRuntime.dll
-DEBUG [20.72 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.WindowsAzure.Storage.DataMovement.dll
-DEBUG [20.72 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/Microsoft.WindowsAzure.Storage.dll
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/NetCoreAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.dll
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PostImportScripts/LoadAuthenticators.ps1
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/NetCoreAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/StartupScripts/AzError.ps1
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/%5BContent_Types%5D.xml
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/Microsoft.Azure.PowerShell.Authenticators.dll
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/package/services/metadata/core-properties/14a2e5dcca424832934ab543719a1374.psmdcp
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.dll
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/_rels/.rels
-DEBUG [20.73 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
-DEBUG [20.74 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/Newtonsoft.Json.10.dll
-DEBUG [20.74 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Buffers.dll
-DEBUG [20.74 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Net.Http.WinHttpHandler.dll
-DEBUG [20.74 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Reflection.DispatchProxy.dll
-DEBUG [20.74 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Private.ServiceModel.dll
-DEBUG [20.75 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Security.AccessControl.dll
-DEBUG [20.75 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Security.Permissions.dll
-DEBUG [20.75 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.Security.Principal.Windows.dll
-DEBUG [20.76 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.7.4/PreloadAssemblies/System.ServiceModel.Primitives.dll
-DEBUG [20.76 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.csproj
-DEBUG [20.76 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psm1
-DEBUG [20.76 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom/JumpCloud.SDK.DirectoryInsights.custom.psm1
-DEBUG [20.76 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/JumpCloud.SDK.DirectoryInsights.internal.psm1
-DEBUG [20.76 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.nuspec
-DEBUG [20.76 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/.gitignore
-DEBUG [20.76 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/.gitattributes
-DEBUG [20.76 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/readme.md
-DEBUG [20.76 s]: powershell/emitter - END [0.2 s]
-[20.76 s] Clearing Folders.
-[20.86 s] Writing Outputs.
-[20.86 s] Generation Complete
-[20.86 s] Shutting Down.
-[20.86 s] Exiting.
+DEBUG [48.09 s]: swagger-document/loader-swagger - START inputs = 0
+DEBUG [48.09 s]: openapi-document/loader-openapi - START inputs = 0
+DEBUG [48.09 s]: pipeline-emitter - START inputs = 0
+DEBUG [48.21 s]: configuration-emitter - START inputs = 0
+DEBUG [48.22 s]: pipeline-emitter - END [0.13 s]
+DEBUG [48.22 s]: configuration-emitter - END [0.13 s]
+VERBOSE [48.29 s]: Reading OpenAPI 2.0 file file:///D:/a/1/s/AutoRest/SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
+DEBUG [48.31 s]: openapi-document/loader-openapi - END [0.21 s]
+DEBUG [48.31 s]: openapi-document/individual/transform - SKIPPING
+DEBUG [48.31 s]: openapi-document/individual/schema-validator-openapi - SKIPPING
+DEBUG [48.31 s]: openapi-document/individual/identity - SKIPPING
+DEBUG [48.35 s]: swagger-document/loader-swagger - END [0.25 s]
+DEBUG [48.35 s]: swagger-document/individual/transform - START inputs = 1
+DEBUG [48.39 s]: swagger-document/individual/transform - END [0.04 s]
+DEBUG [48.39 s]: swagger-document/individual/schema-validator-swagger - START inputs = 1
+DEBUG [48.46 s]: swagger-document/individual/schema-validator-swagger - END [0.06 s]
+DEBUG [48.46 s]: swagger-document/identity - START inputs = 1
+DEBUG [48.46 s]: swagger-document/individual/identity - START inputs = 1
+DEBUG [48.46 s]: swagger-document/identity - END [0 s]
+DEBUG [48.46 s]: swagger-document/individual/identity - END [0 s]
+DEBUG [48.46 s]: openapi-document/openapi-document-converter - START inputs = 1
+DEBUG [48.5 s]: openapi-document/openapi-document-converter - END [0.03 s]
+DEBUG [48.5 s]: openapi-document/transform - START inputs = 1
+DEBUG [48.5 s]: openapi-document/transform - END [0 s]
+DEBUG [48.5 s]: openapi-document/allof-cleaner - START inputs = 1
+DEBUG [48.51 s]: openapi-document/allof-cleaner - END [0 s]
+DEBUG [48.51 s]: openapi-document/tree-shaker - START inputs = 1
+DEBUG [48.58 s]: openapi-document/tree-shaker - END [0.07 s]
+DEBUG [48.58 s]: openapi-document/multi-api-merger - START inputs = 1
+DEBUG [48.7 s]: openapi-document/multi-api-merger - END [0.12 s]
+DEBUG [48.7 s]: openapi-document/components-cleaner - START inputs = 1
+DEBUG [48.79 s]: openapi-document/components-cleaner - END [0.08 s]
+DEBUG [48.79 s]: openapi-document/component-modifiers - START inputs = 1
+DEBUG [48.81 s]: openapi-document/component-modifiers - END [0.01 s]
+DEBUG [48.81 s]: openapi-document/api-version-parameter-handler - START inputs = 1
+DEBUG [48.81 s]: openapi-document/api-version-parameter-handler - END [0 s]
+DEBUG [48.81 s]: openapi-document/profile-filter - START inputs = 1
+DEBUG [48.81 s]: openapi-document/profile-filter - END [0 s]
+DEBUG [48.81 s]: openapi-document/model-deduplicator - START inputs = 1
+DEBUG [48.81 s]: openapi-document/emitter - START inputs = 1
+DEBUG [48.81 s]: openapi-document/emitter - END [0 s]
+DEBUG [48.96 s]: openapi-document/model-deduplicator - END [0.14 s]
+DEBUG [48.96 s]: openapi-document/enum-deduplicator - START inputs = 1
+DEBUG [49.04 s]: openapi-document/enum-deduplicator - END [0.08 s]
+DEBUG [49.04 s]: openapi-document/subset-reducer - START inputs = 1
+DEBUG [49.09 s]: openapi-document/subset-reducer - END [0.05 s]
+DEBUG [49.09 s]: openapi-document/quick-check - START inputs = 1
+DEBUG [49.09 s]: openapi-document/multi-api/reset-identity - START inputs = 1
+DEBUG [49.11 s]: openapi-document/quick-check - END [0.01 s]
+DEBUG [49.11 s]: openapi-document/multi-api/reset-identity - END [0.01 s]
+DEBUG [49.11 s]: openapi-document/multi-api/identity - START inputs = 1
+DEBUG [49.11 s]: openapi-document/multi-api/identity - END [0 s]
+DEBUG [49.11 s]: openapi-document/multi-api/emitter - START inputs = 1
+DEBUG [49.11 s]: remodeler - START inputs = 1
+DEBUG [49.12 s]: openapi-document/multi-api/emitter - END [0 s]
+DEBUG [49.36 s]: remodeler - END [0.24 s]
+DEBUG [49.36 s]: remodeler/new-transform - START inputs = 1
+DEBUG [49.36 s]: remodeler/new-transform - END [0 s]
+DEBUG [49.36 s]: tweakcodemodel - START inputs = 1
+DEBUG [49.62 s]: tweakcodemodel - END [0.25 s]
+DEBUG [49.62 s]: tweakcodemodelazure - START inputs = 1
+DEBUG [49.68 s]: tweakcodemodelazure - END [0.06 s]
+DEBUG [49.69 s]: create-commands - START inputs = 1
+DEBUG [49.87 s]: [CMDLET-PREFIX] => 'JcSdkInternal'
+DEBUG [49.87 s]: [SERVICE-NAME] => 'DirectoryInsightsApi'
+DEBUG [49.87 s]: [SUBJECT-PREFIX] => ''
+DEBUG [49.87 s]: detecting high level commands...
+DEBUG [49.87 s]: Get-Event //  Get-Event => {"alias":[],"subject":"Event","variant":"","verb":"Get","subjectPrefix":"","action":"get"} taking ;  ; end_time, fields, limit, search_after, search_term, service, sort, start_time 
+DEBUG [49.88 s]: Get-EventCount //  Get-EventCount => {"alias":[],"subject":"EventCount","variant":"","verb":"Get","subjectPrefix":"","action":"get"} taking ;  ; end_time, fields, limit, search_after, search_term, service, sort, start_time 
+DEBUG [49.96 s]: create-commands - END [0.27 s]
+DEBUG [49.97 s]: create-virtual-properties - START inputs = 1
+DEBUG [50.08 s]: create-virtual-properties - END [0.11 s]
+DEBUG [50.08 s]: csnamer - START inputs = 1
+DEBUG [50.29 s]: csnamer - END [0.2 s]
+DEBUG [50.29 s]: psnamer - START inputs = 1
+DEBUG [50.41 s]: psnamer - END [0.12 s]
+DEBUG [50.42 s]: modifiers - START inputs = 1
+DEBUG [50.5 s]: modifiers - END [0.08 s]
+DEBUG [50.5 s]: add-azure-completers - START inputs = 1
+DEBUG [50.5 s]: llcsharp - START inputs = 1
+DEBUG [50.6 s]: add-azure-completers - END [0.09 s]
+DEBUG [50.6 s]: powershell - START inputs = 1
+DEBUG [50.93 s]: [DIRECTIVE] Applied 'hidden' directive to Get-Event_Get. Added attribute global::Microsoft.Rest.InternalExport to cmdlet.
+DEBUG [50.94 s]: [DIRECTIVE] Applied 'hidden' directive to Get-Event_GetExpanded. Added attribute global::Microsoft.Rest.InternalExport to cmdlet.
+DEBUG [50.95 s]: [DIRECTIVE] Applied 'hidden' directive to Get-EventCount_Get. Added attribute global::Microsoft.Rest.InternalExport to cmdlet.
+DEBUG [50.96 s]: [DIRECTIVE] Applied 'hidden' directive to Get-EventCount_GetExpanded. Added attribute global::Microsoft.Rest.InternalExport to cmdlet.
+DEBUG [51.17 s]: llcsharp - END [0.66 s]
+DEBUG [51.17 s]: llcsharp/text-transform - START inputs = 126
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///126?generated%5Capi%5CDirectoryInsightsApi.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///127?generated%5Capi%5CModels%5CErrorMessage.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///128?generated%5Capi%5CModels%5CErrorMessage.json.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///129?generated%5Capi%5CModels%5CMfa.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///130?generated%5Capi%5CModels%5CMfa.json.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///131?generated%5Capi%5CModels%5CSearchTerm.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///132?generated%5Capi%5CModels%5CSearchTermAnd.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///133?generated%5Capi%5CModels%5CSearchTermAnd.dictionary.cs 
+DEBUG [51.17 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///134?generated%5Capi%5CModels%5CSearchTermAnd.json.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///135?generated%5Capi%5CModels%5CSearchTermOr.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///136?generated%5Capi%5CModels%5CSearchTermOr.dictionary.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///137?generated%5Capi%5CModels%5CSearchTermOr.json.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///138?generated%5Capi%5CModels%5CSearchTerm.json.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///139?generated%5Capi%5CModels%5CErrorresponse.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///140?generated%5Capi%5CModels%5CErrorresponse.json.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///141?generated%5Capi%5CModels%5CSshkeylist.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///142?generated%5Capi%5CModels%5CSshkeylist.json.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///143?generated%5Capi%5CModels%5CSystemuser.cs 
+DEBUG [51.18 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///144?generated%5Capi%5CModels%5CSystemuser.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///145?generated%5Capi%5CModels%5CSystemuserAttributesItem.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///146?generated%5Capi%5CModels%5CSystemuserAttributesItem.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///147?generated%5Capi%5CModels%5CEventCount.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///148?generated%5Capi%5CModels%5CEventCount.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///149?generated%5Capi%5CModels%5CEventQuery.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///150?generated%5Capi%5CModels%5CEventQuery.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///151?generated%5Capi%5CModels%5CSystemuserputpost.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///152?generated%5Capi%5CModels%5CSystemuserputpost.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///153?generated%5Capi%5CModels%5CSystemuserputpostAttributesItem.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///154?generated%5Capi%5CModels%5CSystemuserputpostAttributesItem.json.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///155?generated%5Capi%5CModels%5CSystemuserputpostAddressesItem.cs 
+DEBUG [51.19 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///156?generated%5Capi%5CModels%5CSystemuserputpostAddressesItem.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///157?generated%5Capi%5CModels%5CSystemuserputpostPhoneNumbersItem.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///158?generated%5Capi%5CModels%5CSystemuserputpostPhoneNumbersItem.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///159?generated%5Capi%5CModels%5CSystemuserputpostRelationshipsItem.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///160?generated%5Capi%5CModels%5CSystemuserputpostRelationshipsItem.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///161?generated%5Capi%5CModels%5CTermItem.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///162?generated%5Capi%5CModels%5CTermItem.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///163?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///164?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.dictionary.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///165?generated%5Capi%5CModels%5CPost200ApplicationJsonItemsItem.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///166?generated%5Capi%5CModels%5CDirectoryInsightsApiIdentity.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///167?generated%5Capi%5CModels%5CDirectoryInsightsApiIdentity.json.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///168?generated%5Cruntime%5CCmdInfoHandler.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///169?generated%5Cruntime%5CExtensions.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///170?generated%5Cruntime%5CIAssociativeArray.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///171?generated%5Cruntime%5CIHeaderSerializable.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///172?generated%5Cruntime%5CInfoAttribute.cs 
+DEBUG [51.2 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///173?generated%5Cruntime%5CMethod.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///174?generated%5Cruntime%5CSerializationMode.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///175?generated%5Cruntime%5CUndeclaredResponseException.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///176?generated%5Cruntime%5Cdelegates.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///177?generated%5Cruntime%5CEventData.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///178?generated%5Cruntime%5CEventListener.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///179?generated%5Cruntime%5CEvents.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///180?generated%5Cruntime%5CISendAsync.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///181?generated%5Cruntime%5CPipelineMocking.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///182?generated%5Cruntime%5CResponse.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///183?generated%5Cruntime%5CConversions%5CConversionException.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///184?generated%5Cruntime%5CCustomizations%5CIJsonSerializable.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///185?generated%5Cruntime%5CConversions%5CIJsonConverter.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///186?generated%5Cruntime%5CJsonType.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///187?generated%5Cruntime%5CHelpers%5CSeperator.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///188?generated%5Cruntime%5CIso%5CIsoDate.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///189?generated%5Cruntime%5CCustomizations%5CJsonArray.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///190?generated%5Cruntime%5CHelpers%5CExtensions%5CStringBuilderExtensions.cs 
+DEBUG [51.21 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///191?generated%5Cruntime%5CHelpers%5CTypeDetails.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///192?generated%5Cruntime%5CCustomizations%5CJsonBoolean.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///193?generated%5Cruntime%5CConversions%5CJsonConverter.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///194?generated%5Cruntime%5CHelpers%5CExtensions%5CTypeExtensions.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///195?generated%5Cruntime%5CConversions%5CInstances%5CBinaryConverter.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///196?generated%5Cruntime%5CModels%5CJsonMember.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///240?generated%5Cruntime%5CHelpers%5CXHelper.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///241?generated%5Cruntime%5CCustomizations%5CJsonNode.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///242?generated%5Cruntime%5CConversions%5CJsonConverterAttribute.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///243?generated%5Cruntime%5CConversions%5CInstances%5CBooleanConverter.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///244?generated%5Cruntime%5CNodes%5CJsonBoolean.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///245?generated%5Cruntime%5CModels%5CJsonModel.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///246?generated%5Cruntime%5CNodes%5CCollections%5CJsonArray.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///247?generated%5Cruntime%5CParser%5CJsonParser.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///248?generated%5Cruntime%5CSerialization%5CJsonSerializer.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///249?generated%5Cruntime%5CParser%5CExceptions%5CParseException.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///250?generated%5Cruntime%5CCustomizations%5CJsonNumber.cs 
+DEBUG [51.22 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///251?generated%5Cruntime%5CWriters%5CJsonWriter.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///252?generated%5Cruntime%5CConversions%5CJsonConverterFactory.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///253?generated%5Cruntime%5CConversions%5CInstances%5CDateTimeConverter.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///254?generated%5Cruntime%5CNodes%5CJsonDate.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///255?generated%5Cruntime%5CModels%5CJsonModelCache.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///256?generated%5Cruntime%5CNodes%5CCollections%5CXImmutableArray.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///257?generated%5Cruntime%5CParser%5CJsonToken.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///258?generated%5Cruntime%5CSerialization%5CPropertyTransformation.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///259?generated%5Cruntime%5CCustomizations%5CJsonObject.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///260?generated%5Cruntime%5CConversions%5CStringLikeConverter.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///261?generated%5Cruntime%5CConversions%5CInstances%5CDateTimeOffsetConverter.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///262?generated%5Cruntime%5CNodes%5CJsonNode.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///263?generated%5Cruntime%5CNodes%5CCollections%5CXList.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///264?generated%5Cruntime%5CParser%5CJsonTokenizer.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///265?generated%5Cruntime%5CSerialization%5CSerializationOptions.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///266?generated%5Cruntime%5CCustomizations%5CJsonString.cs 
+DEBUG [51.23 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///267?generated%5Cruntime%5CConversions%5CInstances%5CDecimalConverter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///268?generated%5Cruntime%5CNodes%5CJsonNumber.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///269?generated%5Cruntime%5CNodes%5CCollections%5CXNodeArray.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///270?generated%5Cruntime%5CParser%5CLocation.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///272?generated%5Cruntime%5CCustomizations%5CXNodeArray.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///273?generated%5Cruntime%5CConversions%5CInstances%5CDoubleConverter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///274?generated%5Cruntime%5CNodes%5CJsonObject.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///275?generated%5Cruntime%5CNodes%5CCollections%5CXSet.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///276?generated%5Cruntime%5CParser%5CTokenReader.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///277?generated%5Cruntime%5CConversions%5CInstances%5CEnumConverter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///278?generated%5Cruntime%5CNodes%5CJsonString.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///279?generated%5Cruntime%5CParser%5CReaders%5CSourceReader.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///281?generated%5Cruntime%5CConversions%5CInstances%5CGuidConverter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///282?generated%5Cruntime%5CNodes%5CXBinary.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///283?generated%5Cruntime%5CConversions%5CInstances%5CHashSet%271Converter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///284?generated%5Cruntime%5CNodes%5CXNull.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///285?generated%5Cruntime%5CConversions%5CInstances%5CInt16Converter.cs 
+DEBUG [51.24 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///287?generated%5Cruntime%5CConversions%5CInstances%5CInt32Converter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///290?generated%5Cruntime%5CConversions%5CInstances%5CInt64Converter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///292?generated%5Cruntime%5CConversions%5CInstances%5CJsonArrayConverter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///293?generated%5Cruntime%5CConversions%5CInstances%5CJsonObjectConverter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///295?generated%5Cruntime%5CConversions%5CInstances%5CSingleConverter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///297?generated%5Cruntime%5CConversions%5CInstances%5CStringConverter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///300?generated%5Cruntime%5CConversions%5CInstances%5CTimeSpanConverter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///302?generated%5Cruntime%5CConversions%5CInstances%5CUInt16Converter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///305?generated%5Cruntime%5CConversions%5CInstances%5CUInt32Converter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///308?generated%5Cruntime%5CConversions%5CInstances%5CUInt64Converter.cs 
+DEBUG [51.25 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///310?generated%5Cruntime%5CConversions%5CInstances%5CUriConverter.cs 
+DEBUG [51.25 s]: llcsharp/text-transform - END [0.08 s]
+DEBUG [51.25 s]: llcsharp/emitter - START inputs = 126
+DEBUG [51.25 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/DirectoryInsightsApi.cs
+DEBUG [51.25 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.json.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Mfa.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Mfa.json.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.dictionary.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.json.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.dictionary.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.json.cs
+DEBUG [51.26 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.json.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Errorresponse.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Errorresponse.json.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Sshkeylist.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Sshkeylist.json.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuser.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuser.json.cs
+DEBUG [51.27 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserAttributesItem.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserAttributesItem.json.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.json.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.json.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuserputpost.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuserputpost.json.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAttributesItem.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAttributesItem.json.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAddressesItem.cs
+DEBUG [51.28 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAddressesItem.json.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostPhoneNumbersItem.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostPhoneNumbersItem.json.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostRelationshipsItem.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostRelationshipsItem.json.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.json.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.dictionary.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.json.cs
+DEBUG [51.29 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.json.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/CmdInfoHandler.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Extensions.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/IAssociativeArray.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/IHeaderSerializable.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/InfoAttribute.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Method.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/SerializationMode.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/UndeclaredResponseException.cs
+DEBUG [51.3 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/delegates.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventData.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventListener.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Events.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/ISendAsync.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/PipelineMocking.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Response.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/ConversionException.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/IJsonSerializable.cs
+DEBUG [51.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/IJsonConverter.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/JsonType.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Seperator.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Iso/IsoDate.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonArray.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Extensions/StringBuilderExtensions.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/TypeDetails.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonBoolean.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverter.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/Extensions/TypeExtensions.cs
+DEBUG [51.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/BinaryConverter.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonMember.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Helpers/XHelper.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonNode.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverterAttribute.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/BooleanConverter.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonBoolean.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonModel.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/JsonArray.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonParser.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/JsonSerializer.cs
+DEBUG [51.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Exceptions/ParseException.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonNumber.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Writers/JsonWriter.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/JsonConverterFactory.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DateTimeConverter.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonDate.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Models/JsonModelCache.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XImmutableArray.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonToken.cs
+DEBUG [51.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/PropertyTransformation.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonObject.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/StringLikeConverter.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DateTimeOffsetConverter.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonNode.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XList.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/JsonTokenizer.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Serialization/SerializationOptions.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/JsonString.cs
+DEBUG [51.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DecimalConverter.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonNumber.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XNodeArray.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Location.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Customizations/XNodeArray.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/DoubleConverter.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonObject.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/Collections/XSet.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/TokenReader.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/EnumConverter.cs
+DEBUG [51.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/JsonString.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Parser/Readers/SourceReader.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/GuidConverter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/XBinary.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/HashSet%271Converter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Nodes/XNull.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int16Converter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int32Converter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/Int64Converter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/JsonArrayConverter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/JsonObjectConverter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/SingleConverter.cs
+DEBUG [51.37 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/StringConverter.cs
+DEBUG [51.38 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/TimeSpanConverter.cs
+DEBUG [51.38 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt16Converter.cs
+DEBUG [51.38 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt32Converter.cs
+DEBUG [51.38 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UInt64Converter.cs
+DEBUG [51.38 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Conversions/Instances/UriConverter.cs
+DEBUG [51.38 s]: llcsharp/emitter - END [0.12 s]
+DEBUG [52.25 s]: powershell - END [1.65 s]
+DEBUG [52.25 s]: powershell/text-transform - START inputs = 188
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///197?.%2Fgenerated%2FModule.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///198?generated%5Capi%5CModels%2FErrorMessage.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///199?.%2Fgenerated%2Fcmdlets%2FGetJcSdkInternalEvent_Get.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///200?generated%5Capi%5CModels%2FErrorMessage.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///201?.%2Fgenerated%2Fcmdlets%2FGetJcSdkInternalEvent_GetExpanded.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///202?generated%5Capi%5CModels%2FMfa.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///203?.%2Fgenerated%2Fcmdlets%2FGetJcSdkInternalEventCount_Get.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///204?generated%5Capi%5CModels%2FMfa.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///205?.%2Fgenerated%2Fcmdlets%2FGetJcSdkInternalEventCount_GetExpanded.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///206?generated%5Capi%5CModels%2FSearchTerm.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///207?generated%5Capi%5CModels%2FSearchTerm.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///208?generated%5Capi%5CModels%2FSearchTermAnd.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///209?generated%5Capi%5CModels%2FSearchTermAnd.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///210?generated%5Capi%5CModels%2FSearchTermOr.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///211?generated%5Capi%5CModels%2FSearchTermOr.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///212?generated%5Capi%5CModels%2FErrorresponse.PowerShell.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///213?generated%5Capi%5CModels%2FErrorresponse.TypeConverter.cs 
+DEBUG [52.26 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///214?generated%5Capi%5CModels%2FSshkeylist.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///215?generated%5Capi%5CModels%2FSshkeylist.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///216?generated%5Capi%5CModels%2FSystemuser.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///217?generated%5Capi%5CModels%2FSystemuser.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///218?generated%5Capi%5CModels%2FSystemuserAttributesItem.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///219?generated%5Capi%5CModels%2FSystemuserAttributesItem.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///220?generated%5Capi%5CModels%2FEventCount.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///221?generated%5Capi%5CModels%2FEventCount.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///222?generated%5Capi%5CModels%2FEventQuery.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///223?generated%5Capi%5CModels%2FEventQuery.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///224?generated%5Capi%5CModels%2FSystemuserputpost.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///225?generated%5Capi%5CModels%2FSystemuserputpost.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///226?generated%5Capi%5CModels%2FSystemuserputpostAttributesItem.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///227?generated%5Capi%5CModels%2FSystemuserputpostAttributesItem.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///228?generated%5Capi%5CModels%2FSystemuserputpostAddressesItem.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///229?generated%5Capi%5CModels%2FSystemuserputpostAddressesItem.TypeConverter.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///230?generated%5Capi%5CModels%2FSystemuserputpostPhoneNumbersItem.PowerShell.cs 
+DEBUG [52.27 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///231?generated%5Capi%5CModels%2FSystemuserputpostPhoneNumbersItem.TypeConverter.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///232?generated%5Capi%5CModels%2FSystemuserputpostRelationshipsItem.PowerShell.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///233?generated%5Capi%5CModels%2FSystemuserputpostRelationshipsItem.TypeConverter.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///234?generated%5Capi%5CModels%2FTermItem.PowerShell.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///235?generated%5Capi%5CModels%2FTermItem.TypeConverter.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///236?generated%5Capi%5CModels%2FPost200ApplicationJsonItemsItem.PowerShell.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///237?generated%5Capi%5CModels%2FPost200ApplicationJsonItemsItem.TypeConverter.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///238?generated%5Capi%5CModels%2FDirectoryInsightsApiIdentity.PowerShell.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///239?generated%5Capi%5CModels%2FDirectoryInsightsApiIdentity.TypeConverter.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///449?generated%5Cruntime%5CAsyncCommandRuntime.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///450?generated%5Cruntime%5CAsyncJob.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///451?generated%5Cruntime%5CAsyncOperationResponse.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///452?generated%5Cruntime%5CDebugging.cs 
+DEBUG [52.28 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///453?generated%5Cruntime%5CBuildTime%5CCollectionExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///454?generated%5Cruntime%5CDictionaryExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///455?generated%5Cruntime%5CBuildTime%5CMarkdownRenderer.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///456?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportCmdletSurface.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///457?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportExampleStub.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///458?generated%5Cruntime%5CEventDataExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///459?generated%5Cruntime%5CBuildTime%5CPsAttributes.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///460?generated%5Cruntime%5CBuildTime%5CModels%5CPsFormatTypes.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///461?generated%5Cruntime%5CEventsExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///462?generated%5Cruntime%5CBuildTime%5CPsExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///463?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportHelpMarkdown.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///464?generated%5Cruntime%5CHttpPipeline.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///465?generated%5Cruntime%5CBuildTime%5CPsHelpers.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///466?generated%5Cruntime%5CBuildTime%5CModels%5CPsHelpTypes.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///467?generated%5Cruntime%5CBuildTime%5CStringExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///468?generated%5Cruntime%5CBuildTime%5CModels%5CPsMarkdownTypes.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///469?generated%5Cruntime%5CTypeConverterExtensions.cs 
+DEBUG [52.29 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///470?generated%5Cruntime%5CBuildTime%5CModels%5CPsHelpMarkdownOutputs.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///471?generated%5Cruntime%5CBuildTime%5CXmlExtensions.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///472?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportFormatPs1xml.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///473?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportProxyCmdlet.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///474?generated%5Cruntime%5CHttpPipelineMocking.ps1 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///475?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportTestStub.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///476?generated%5Cruntime%5CBuildTime%5CModels%5CPsProxyTypes.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///477?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetCommonParameter.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///478?generated%5Cruntime%5CBuildTime%5CModels%5CPsProxyOutputs.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///479?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetModuleGuid.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///480?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportModelSurface.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///481?generated%5Cruntime%5CBuildTime%5CCmdlets%5CGetScriptCmdlet.cs 
+DEBUG [52.3 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///482?generated%5Cruntime%5CBuildTime%5CCmdlets%5CExportPsd1.cs 
+DEBUG [52.31 s]: Running text transform 'source-file-csharp/FixFromXML' on mem:///558?.%2FJumpCloud.SDK.DirectoryInsights.csproj 
+DEBUG [52.31 s]: powershell/text-transform - END [0.05 s]
+DEBUG [52.31 s]: powershell/emitter - START inputs = 188
+DEBUG [52.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/Module.cs
+DEBUG [52.31 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.PowerShell.cs
+DEBUG [52.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkInternalEvent_Get.cs
+DEBUG [52.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/ErrorMessage.TypeConverter.cs
+DEBUG [52.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkInternalEvent_GetExpanded.cs
+DEBUG [52.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Mfa.PowerShell.cs
+DEBUG [52.32 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkInternalEventCount_Get.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Mfa.TypeConverter.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/cmdlets/GetJcSdkInternalEventCount_GetExpanded.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.PowerShell.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTerm.TypeConverter.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.PowerShell.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermAnd.TypeConverter.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.PowerShell.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SearchTermOr.TypeConverter.cs
+DEBUG [52.33 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Errorresponse.PowerShell.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Errorresponse.TypeConverter.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Sshkeylist.PowerShell.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Sshkeylist.TypeConverter.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuser.PowerShell.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuser.TypeConverter.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserAttributesItem.PowerShell.cs
+DEBUG [52.34 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserAttributesItem.TypeConverter.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.PowerShell.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventCount.TypeConverter.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.PowerShell.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/EventQuery.TypeConverter.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuserputpost.PowerShell.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Systemuserputpost.TypeConverter.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAttributesItem.PowerShell.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAttributesItem.TypeConverter.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAddressesItem.PowerShell.cs
+DEBUG [52.35 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostAddressesItem.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostPhoneNumbersItem.PowerShell.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostPhoneNumbersItem.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostRelationshipsItem.PowerShell.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/SystemuserputpostRelationshipsItem.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.PowerShell.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/TermItem.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.PowerShell.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/Post200ApplicationJsonItemsItem.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.PowerShell.cs
+DEBUG [52.36 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/api/Models/DirectoryInsightsApiIdentity.TypeConverter.cs
+DEBUG [52.36 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/check-dependencies.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/examples/readme.md
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/license.txt
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/export-surface.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/pack-module.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/readme.md
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test/loadEnv.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/build-module.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/.gitattributes
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/resources/readme.md
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generate-help.ps1
+DEBUG [52.37 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/docs/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/how-to.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/examples/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/license.txt
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/CmdletSurface-latest-2019-04-30.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/test/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/ModelSurface.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/resources/readme.md
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test-module.ps1
+DEBUG [52.38 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/exports/readme.md
+DEBUG [52.39 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/run-module.ps1
+DEBUG [52.39 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/readme.md
+DEBUG [52.39 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom/readme.md
+DEBUG [52.39 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/tools/Resources/custom/New-AzDeployment.ps1
+DEBUG [52.39 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/how-to.md
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncCommandRuntime.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncJob.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/AsyncOperationResponse.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/Debugging.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/CollectionExtensions.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/DictionaryExtensions.cs
+DEBUG [52.39 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/MarkdownRenderer.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportCmdletSurface.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportExampleStub.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventDataExtensions.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsAttributes.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsFormatTypes.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/EventsExtensions.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsExtensions.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportHelpMarkdown.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/HttpPipeline.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/PsHelpers.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsHelpTypes.cs
+DEBUG [52.4 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/StringExtensions.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsMarkdownTypes.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/TypeConverterExtensions.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsHelpMarkdownOutputs.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/XmlExtensions.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportFormatPs1xml.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportProxyCmdlet.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/HttpPipelineMocking.ps1
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportTestStub.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsProxyTypes.cs
+DEBUG [52.41 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetCommonParameter.cs
+DEBUG [52.42 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Models/PsProxyOutputs.cs
+DEBUG [52.42 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetModuleGuid.cs
+DEBUG [52.42 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportModelSurface.cs
+DEBUG [52.42 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/GetScriptCmdlet.cs
+DEBUG [52.42 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/runtime/BuildTime/Cmdlets/ExportPsd1.cs
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Accounts.format.ps1xml
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Accounts.generated.format.ps1xml
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Accounts.types.ps1xml
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Az.Accounts.nuspec
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Az.Accounts.psd1
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Az.Accounts.psm1
+DEBUG [52.42 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Hyak.Common.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.ApplicationInsights.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.Common.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Authentication.Abstractions.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Authentication.deps.json
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Authentication.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Authentication.ResourceManager.deps.json
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Authentication.ResourceManager.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Aks.dll
+DEBUG [52.43 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Authorization.dll
+DEBUG [52.44 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Compute.dll
+DEBUG [52.45 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Graph.Rbac.dll
+DEBUG [52.45 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.KeyVault.dll
+DEBUG [52.45 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Monitor.dll
+DEBUG [52.46 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.PolicyInsights.dll
+DEBUG [52.46 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Network.dll
+DEBUG [52.47 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.ResourceManager.dll
+DEBUG [52.48 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Storage.Management.dll
+DEBUG [52.48 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Cmdlets.Accounts.deps.json
+DEBUG [52.48 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Cmdlets.Accounts.dll
+DEBUG [52.48 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Clients.Websites.dll
+DEBUG [52.51 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Cmdlets.Accounts.dll-Help.xml
+DEBUG [52.51 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Common.dll
+DEBUG [52.51 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Storage.dll
+DEBUG [52.52 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Azure.PowerShell.Strategies.dll
+DEBUG [52.52 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Rest.ClientRuntime.Azure.dll
+DEBUG [52.52 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.Rest.ClientRuntime.dll
+DEBUG [52.52 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.WindowsAzure.Storage.DataMovement.dll
+DEBUG [52.52 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/Microsoft.WindowsAzure.Storage.dll
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/Azure.Core.dll
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PostImportScripts/LoadAuthenticators.ps1
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Azure.Core.dll
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/Microsoft.Bcl.AsyncInterfaces.dll
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/%5BContent_Types%5D.xml
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/StartupScripts/AzError.ps1
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/package/services/metadata/core-properties/b4e383786e734eb49545960a9feff173.psmdcp
+DEBUG [52.53 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Microsoft.Azure.PowerShell.Authenticators.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Microsoft.Bcl.AsyncInterfaces.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/_rels/.rels
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/System.Numerics.Vectors.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/System.Runtime.CompilerServices.Unsafe.dll
+DEBUG [52.54 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.dll
+DEBUG [52.55 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/System.Text.Encodings.Web.dll
+DEBUG [52.55 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/Newtonsoft.Json.10.dll
+DEBUG [52.55 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Buffers.dll
+DEBUG [52.55 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/System.Text.Json.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/NetCoreAssemblies/System.Threading.Tasks.Extensions.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Diagnostics.DiagnosticSource.4.0.4.0.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Diagnostics.DiagnosticSource.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Memory.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Net.Http.WinHttpHandler.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Numerics.Vectors.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Reflection.DispatchProxy.dll
+DEBUG [52.56 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Private.ServiceModel.dll
+DEBUG [52.57 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Runtime.CompilerServices.Unsafe.4.0.4.0.dll
+DEBUG [52.57 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Runtime.CompilerServices.Unsafe.4.0.4.1.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Runtime.CompilerServices.Unsafe.4.0.5.0.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Security.AccessControl.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Security.Permissions.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Security.Principal.Windows.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.ServiceModel.Primitives.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Text.Encodings.Web.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Text.Json.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Threading.Tasks.Extensions.4.2.0.0.dll
+DEBUG [52.58 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Threading.Tasks.Extensions.4.3.1.0.dll
+DEBUG [52.59 s]: Emitting 'binary-file' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/generated/modules/Az.Accounts/1.8.1/PreloadAssemblies/System.Xml.ReaderWriter.dll
+DEBUG [52.59 s]: Emitting 'source-file-csharp' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.csproj
+DEBUG [52.59 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psm1
+DEBUG [52.59 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/custom/JumpCloud.SDK.DirectoryInsights.custom.psm1
+DEBUG [52.59 s]: Emitting 'source-file-powershell' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/internal/JumpCloud.SDK.DirectoryInsights.internal.psm1
+DEBUG [52.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.nuspec
+DEBUG [52.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/.gitignore
+DEBUG [52.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/.gitattributes
+DEBUG [52.59 s]: Emitting 'source-file-other' at file:///D:/a/1/s/AutoRest/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/readme.md
+DEBUG [52.59 s]: powershell/emitter - END [0.28 s]
+[52.6 s] Clearing Folders.
+[52.86 s] Writing Outputs.
+[52.86 s] Generation Complete
+[52.86 s] Shutting Down.
+[52.87 s] Exiting.
+Cleaning build folders...
+Compiling module...
+
+Welcome to .NET Core 3.1!
+---------------------
+SDK Version: 3.1.301
+
+Telemetry
+---------
+The .NET Core tools collect usage data in order to help us improve your experience. The data is anonymous. It is collected by Microsoft and shared with the community. You can opt-out of telemetry by setting the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to '1' or 'true' using your favorite shell.
+
+Read more about .NET Core CLI Tools telemetry: https://aka.ms/dotnet-cli-telemetry
+
+----------------
+Explore documentation: https://aka.ms/dotnet-docs
+Report issues and find source on GitHub: https://github.com/dotnet/core
+Find out what's new: https://aka.ms/dotnet-whats-new
+Learn about the installed HTTPS developer cert: https://aka.ms/aspnet-core-https
+Use 'dotnet --help' to see available commands or visit: https://aka.ms/dotnet-cli-docs
+Write your first app: https://aka.ms/first-net-core-app
+--------------------------------------------------------------------------------------
+Creating exports and docs...
+Creating format.ps1xml...
+Creating psd1...
+Creating test stubs...
+Creating example stubs...
+-------------Done-------------
 Cleaning build folders...
 Compiling module...
 Creating exports and docs...
@@ -561,25 +693,28 @@ Creating example stubs...
 -------------Done-------------
 Created documentation in 'D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\docs\exports'
 -------------Done-------------
-Pester v4.10.1
-Executing all tests in 'D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test'
+Cleaning build folders...
+Compiling module...
+Creating exports and docs...
+Creating format.ps1xml...
+Creating psd1...
+Creating test stubs...
+Creating example stubs...
+-------------Done-------------
+Created documentation in 'D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\docs\exports'
+-------------Done-------------
+Building local Resource module used for test...
+Creating isolated process...
+To run this module in an isolated PowerShell session, run the 'run-module.ps1' script or provide the '-Run' parameter to this script.
+WARNING: Both Az and AzureRM modules were detected on this machine. Az and AzureRM modules cannot be imported in the same session or used in the same script or runbook. If you are running PowerShell in an environment you control you can use the 'Uninstall-AzureRm' cmdlet to remove all AzureRm modules from your machine. If you are running in Azure Automation, take care that none of your runbooks import both Az and AzureRM modules. More information can be found here: https://aka.ms/azps-migration-guide
 
-Executing script D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1
+Starting discovery in 3 files.
 Running 'live' mode...
-
-  Describing Get-JcSdkEvent
-Creating add/delete records for: JCSystemUserTest-1
-Creating add/delete records for: JCSystemUserTest-2
-    [+] GetExpanded 385ms
-    [+] Get 122ms
-
-Executing script D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventsCount.Tests.ps1
 Running 'live' mode...
-
-  Describing Get-JcSdkEventsCount
-    [!] GetExpanded, is skipped 0ms
-    [!] Get, is skipped 0ms
-Tests completed in 19.15s
-Tests Passed: 2, Failed: 0, Skipped: 2, Pending: 0, Inconclusive: 0 
+Discovery finished in 590ms.
+[+] D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1 888ms (2ms|528ms)
+[+] D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventCount.Tests.ps1 244ms (1ms|70ms)
+Tests completed in 1.19s
+Tests Passed: 0, Failed: 0, Skipped: 4 NotRun: 0
 -------------Done-------------
   Successfully created package 'D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\bin\JumpCloud.SDK.DirectoryInsights.0.0.1.nupkg'.

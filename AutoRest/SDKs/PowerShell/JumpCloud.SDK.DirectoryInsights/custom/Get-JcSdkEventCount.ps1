@@ -4,21 +4,13 @@ Query the API for a count of matching events
 .Description
 Query the API for a count of matching events
 .Example
-PS C:\> Get-JCEventCount -Service:('all') -StartTime:((Get-date).AddDays(-30))
+PS C:\> {{ Add code here }}
 
-Pull all event records from a specified time and count the results
+{{ Add output here }}
 .Example
-PS C:\> Get-JCEventCount -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')
+PS C:\> {{ Add code here }}
 
-Pull all SSO event records from a specified time and count the results
-.Example
-PS C:\> Get-JCEventCount -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-
-Get all events counts between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-.Example
-PS C:\> Get-JCEventCount -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -searchTermAnd:@{"event_type" = "group_create"}
-
-Get only group_create event counts the last thirty days
+{{ Add output here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
@@ -44,9 +36,9 @@ BODY <IEventQuery>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [Sort <String>]: ASC or DESC order for timestamp
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/jumpcloud.sdk.directoryinsights/get-jceventcount
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/jumpcloud.sdk.directoryinsights/get-jcsdkeventcount
 #>
- Function Get-JCEventCount
+ Function Get-JcSdkEventCount
 {
     [OutputType([System.Int64], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -143,7 +135,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkEventCount @PSBoundParameters
+                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
                 If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
                 {
                     If (-not [System.String]::IsNullOrEmpty($Result))
@@ -197,7 +189,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkEventCount @PSBoundParameters
+            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             If (-not [System.String]::IsNullOrEmpty($Result))
