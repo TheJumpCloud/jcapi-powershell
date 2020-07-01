@@ -14,10 +14,6 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemUser' {
-    It 'List' {
-        Get-JcSdkSystemUser | Should -Not -Be $null
-    }
-
     It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
