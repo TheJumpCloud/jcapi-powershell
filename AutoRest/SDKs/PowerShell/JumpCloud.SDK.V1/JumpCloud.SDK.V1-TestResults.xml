@@ -1,126 +1,116 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="91" errors="0" failures="1" not-run="0" inconclusive="0" ignored="0" skipped="90" invalid="0" date="2020-07-01" time="16:01:43">
-  <environment user="VssAdministrator" machine-name="WIN-BRM6R053O21" clr-version="Unknown" platform="Microsoft Windows Server 2019 Datacenter|C:\windows|\Device\Harddisk0\Partition2" nunit-version="2.5.8.0" user-domain="WIN-BRM6R053O21" cwd="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1" os-version="10.0.17763" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="90" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="90" invalid="0" date="2020-07-01" time="16:17:37">
+  <environment user="VssAdministrator" cwd="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1" platform="Microsoft Windows Server 2019 Datacenter|C:\windows|\Device\Harddisk0\Partition2" machine-name="WIN-1I7ARQ0TBSJ" nunit-version="2.5.8.0" clr-version="Unknown" os-version="10.0.17763" user-domain="WIN-1I7ARQ0TBSJ" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Failure" success="False" time="10.612" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Ignored" success="True" time="12.0986" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.9953" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplication.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="1.0694" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplication.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.4715" asserts="0" description="Get-JcSdkApplication">
+          <test-suite type="TestFixture" name="Get-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.4245" asserts="0" description="Get-JcSdkApplication">
             <results>
-              <test-case description="List" name="Get-JcSdkApplication.List" time="0.055" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkApplication.Get" time="0.0399" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkApplication.GetViaIdentity" time="0.0056" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkApplication.List" time="0.0585" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkApplication.Get" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkApplication.GetViaIdentity" time="0.0048" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplicationTemplate.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2805" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplicationTemplate.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplicationTemplate.Tests.ps1" executed="True" result="Ignored" success="True" time="0.333" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkApplicationTemplate.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkApplicationTemplate" executed="True" result="Ignored" success="True" time="0.1028" asserts="0" description="Get-JcSdkApplicationTemplate">
+          <test-suite type="TestFixture" name="Get-JcSdkApplicationTemplate" executed="True" result="Ignored" success="True" time="0.0579" asserts="0" description="Get-JcSdkApplicationTemplate">
             <results>
-              <test-case description="List" name="Get-JcSdkApplicationTemplate.List" time="0.0087" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkApplicationTemplate.Get" time="0.0041" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkApplicationTemplate.GetViaIdentity" time="0.0038" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkApplicationTemplate.List" time="0.0033" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkApplicationTemplate.Get" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkApplicationTemplate.GetViaIdentity" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2872" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommand.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.32" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommand.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0612" asserts="0" description="Get-JcSdkCommand">
+          <test-suite type="TestFixture" name="Get-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.1413" asserts="0" description="Get-JcSdkCommand">
             <results>
-              <test-case description="List" name="Get-JcSdkCommand.List" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkCommand.Get" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkCommand.GetViaIdentity" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkCommand.List" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkCommand.Get" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkCommand.GetViaIdentity" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandFile.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3994" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandFile.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandFile.Tests.ps1" executed="True" result="Ignored" success="True" time="0.698" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandFile.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkCommandFile" executed="True" result="Ignored" success="True" time="0.2115" asserts="0" description="Get-JcSdkCommandFile">
+          <test-suite type="TestFixture" name="Get-JcSdkCommandFile" executed="True" result="Ignored" success="True" time="0.0782" asserts="0" description="Get-JcSdkCommandFile">
             <results>
-              <test-case description="Get" name="Get-JcSdkCommandFile.Get" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkCommandFile.GetViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkCommandFile.Get" time="0.003" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkCommandFile.GetViaIdentity" time="0.0102" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandResult.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2981" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandResult.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandResult.Tests.ps1" executed="True" result="Ignored" success="True" time="0.4064" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkCommandResult.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkCommandResult" executed="True" result="Ignored" success="True" time="0.0656" asserts="0" description="Get-JcSdkCommandResult">
+          <test-suite type="TestFixture" name="Get-JcSdkCommandResult" executed="True" result="Ignored" success="True" time="0.0569" asserts="0" description="Get-JcSdkCommandResult">
             <results>
-              <test-case description="List" name="Get-JcSdkCommandResult.List" time="0.0023" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkCommandResult.Get" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkCommandResult.GetViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkCommandResult.List" time="0.003" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkCommandResult.Get" time="0.0023" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkCommandResult.GetViaIdentity" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2612" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkOrganization.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3536" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkOrganization.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.089" asserts="0" description="Get-JcSdkOrganization">
+          <test-suite type="TestFixture" name="Get-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.0667" asserts="0" description="Get-JcSdkOrganization">
             <results>
-              <test-case description="List" name="Get-JcSdkOrganization.List" time="0.0044" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkOrganization.Get" time="0.0027" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkOrganization.GetViaIdentity" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkOrganization.List" time="0.004" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkOrganization.Get" time="0.0029" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkOrganization.GetViaIdentity" time="0.0029" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2831" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkRadiusServer.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3511" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkRadiusServer.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.0828" asserts="0" description="Get-JcSdkRadiusServer">
+          <test-suite type="TestFixture" name="Get-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.0766" asserts="0" description="Get-JcSdkRadiusServer">
             <results>
-              <test-case description="List" name="Get-JcSdkRadiusServer.List" time="0.0023" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkRadiusServer.List" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
               <test-case description="Get" name="Get-JcSdkRadiusServer.Get" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkRadiusServer.GetViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkRadiusServer.GetViaIdentity" time="0.0036" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.1927" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystem.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3519" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystem.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0461" asserts="0" description="Get-JcSdkSystem">
+          <test-suite type="TestFixture" name="Get-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0479" asserts="0" description="Get-JcSdkSystem">
             <results>
-              <test-case description="List" name="Get-JcSdkSystem.List" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkSystem.Get" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkSystem.GetViaIdentity" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkSystem.List" time="0.0023" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkSystem.Get" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkSystem.GetViaIdentity" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUser.Tests.ps1" executed="True" result="Failure" success="False" time="0.6119" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3262" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkSystemUser" executed="True" result="Failure" success="False" time="0.4709" asserts="0" description="Get-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="Get-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0502" asserts="0" description="Get-JcSdkSystemUser">
             <results>
-              <test-case description="List" name="Get-JcSdkSystemUser.List" time="0.4349" asserts="0" success="False" result="Failure" executed="True">
-                <failure>
-                  <message>NullReferenceException: Object reference not set to an instance of an object.
-AggregateException: One or more errors occurred. (Object reference not set to an instance of an object.)</message>
-                  <stack-trace>at Get-JcSdkInternalSystemUser&lt;Begin&gt;, D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\internal\ProxyCmdletDefinitions.ps1:1514
-at Get-JcSdkSystemUser&lt;Process&gt;, D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\custom\Get-JcSdkSystemUser.ps1:120
-at Get-JcSdkSystemUser&lt;Process&gt;, D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\exports\ProxyCmdletDefinitions.ps1:1294
-at &lt;ScriptBlock&gt;, D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUser.Tests.ps1:18</stack-trace>
-                </failure>
-              </test-case>
-              <test-case description="Get" name="Get-JcSdkSystemUser.Get" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="GetViaIdentity" name="Get-JcSdkSystemUser.GetViaIdentity" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkSystemUser.Get" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetViaIdentity" name="Get-JcSdkSystemUser.GetViaIdentity" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.224" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUserSshKey.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3823" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Get-JcSdkSystemUserSshKey.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0323" asserts="0" description="Get-JcSdkSystemUserSshKey">
+          <test-suite type="TestFixture" name="Get-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0479" asserts="0" description="Get-JcSdkSystemUserSshKey">
             <results>
-              <test-case description="List" name="Get-JcSdkSystemUserSshKey.List" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="List" name="Get-JcSdkSystemUserSshKey.List" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.4828" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\HelpFiles.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.4538" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\HelpFiles.Tests.ps1">
         <results>
           <test-suite type="TestFixture" name="Help File Tests" executed="True" result="Success" success="True" time="0" asserts="0" description="Help File Tests">
             <results>
@@ -131,263 +121,263 @@ at &lt;ScriptBlock&gt;, D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkCommandTrigger.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2343" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkCommandTrigger.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkCommandTrigger.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3998" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkCommandTrigger.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Invoke-JcSdkCommandTrigger" executed="True" result="Ignored" success="True" time="0.0499" asserts="0" description="Invoke-JcSdkCommandTrigger">
+          <test-suite type="TestFixture" name="Invoke-JcSdkCommandTrigger" executed="True" result="Ignored" success="True" time="0.0432" asserts="0" description="Invoke-JcSdkCommandTrigger">
             <results>
               <test-case description="Post" name="Invoke-JcSdkCommandTrigger.Post" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PostViaIdentity" name="Invoke-JcSdkCommandTrigger.PostViaIdentity" time="0.0014" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PostViaIdentity" name="Invoke-JcSdkCommandTrigger.PostViaIdentity" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkExpireSystemUserPassword.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2081" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkExpireSystemUserPassword.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkExpireSystemUserPassword.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3646" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Invoke-JcSdkExpireSystemUserPassword.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Invoke-JcSdkExpireSystemUserPassword" executed="True" result="Ignored" success="True" time="0.0362" asserts="0" description="Invoke-JcSdkExpireSystemUserPassword">
+          <test-suite type="TestFixture" name="Invoke-JcSdkExpireSystemUserPassword" executed="True" result="Ignored" success="True" time="0.0503" asserts="0" description="Invoke-JcSdkExpireSystemUserPassword">
             <results>
-              <test-case description="Post" name="Invoke-JcSdkExpireSystemUserPassword.Post" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PostViaIdentity" name="Invoke-JcSdkExpireSystemUserPassword.PostViaIdentity" time="0.0014" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Post" name="Invoke-JcSdkExpireSystemUserPassword.Post" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PostViaIdentity" name="Invoke-JcSdkExpireSystemUserPassword.PostViaIdentity" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2471" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkApplication.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2774" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkApplication.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.0856" asserts="0" description="New-JcSdkApplication">
+          <test-suite type="TestFixture" name="New-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.0541" asserts="0" description="New-JcSdkApplication">
             <results>
               <test-case description="CreateExpanded" name="New-JcSdkApplication.CreateExpanded" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Create" name="New-JcSdkApplication.Create" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Create" name="New-JcSdkApplication.Create" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.234" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkCommand.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3426" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkCommand.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0745" asserts="0" description="New-JcSdkCommand">
+          <test-suite type="TestFixture" name="New-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0799" asserts="0" description="New-JcSdkCommand">
             <results>
-              <test-case description="CreateExpanded" name="New-JcSdkCommand.CreateExpanded" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Create" name="New-JcSdkCommand.Create" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateExpanded" name="New-JcSdkCommand.CreateExpanded" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Create" name="New-JcSdkCommand.Create" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.248" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkRadiusServer.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3229" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkRadiusServer.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.067" asserts="0" description="New-JcSdkRadiusServer">
+          <test-suite type="TestFixture" name="New-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.0505" asserts="0" description="New-JcSdkRadiusServer">
             <results>
-              <test-case description="CreateExpanded" name="New-JcSdkRadiusServer.CreateExpanded" time="0.003" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Create" name="New-JcSdkRadiusServer.Create" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateExpanded" name="New-JcSdkRadiusServer.CreateExpanded" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Create" name="New-JcSdkRadiusServer.Create" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2454" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3648" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0552" asserts="0" description="New-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="New-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0946" asserts="0" description="New-JcSdkSystemUser">
             <results>
-              <test-case description="CreateExpanded" name="New-JcSdkSystemUser.CreateExpanded" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Create" name="New-JcSdkSystemUser.Create" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateExpanded" name="New-JcSdkSystemUser.CreateExpanded" time="0.003" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Create" name="New-JcSdkSystemUser.Create" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2514" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUserSshKey.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2913" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\New-JcSdkSystemUserSshKey.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="New-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0635" asserts="0" description="New-JcSdkSystemUserSshKey">
+          <test-suite type="TestFixture" name="New-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0877" asserts="0" description="New-JcSdkSystemUserSshKey">
             <results>
-              <test-case description="CreateExpanded" name="New-JcSdkSystemUserSshKey.CreateExpanded" time="0.0029" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Create" name="New-JcSdkSystemUserSshKey.Create" time="0.0026" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="CreateViaIdentityExpanded" name="New-JcSdkSystemUserSshKey.CreateViaIdentityExpanded" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="CreateViaIdentity" name="New-JcSdkSystemUserSshKey.CreateViaIdentity" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateExpanded" name="New-JcSdkSystemUserSshKey.CreateExpanded" time="0.0028" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Create" name="New-JcSdkSystemUserSshKey.Create" time="0.0027" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateViaIdentityExpanded" name="New-JcSdkSystemUserSshKey.CreateViaIdentityExpanded" time="0.0027" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="CreateViaIdentity" name="New-JcSdkSystemUserSshKey.CreateViaIdentity" time="0.0027" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2275" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkApplication.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2745" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkApplication.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.0597" asserts="0" description="Remove-JcSdkApplication">
+          <test-suite type="TestFixture" name="Remove-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.089" asserts="0" description="Remove-JcSdkApplication">
             <results>
-              <test-case description="Delete" name="Remove-JcSdkApplication.Delete" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="DeleteViaIdentity" name="Remove-JcSdkApplication.DeleteViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Delete" name="Remove-JcSdkApplication.Delete" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="DeleteViaIdentity" name="Remove-JcSdkApplication.DeleteViaIdentity" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2526" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommand.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2811" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommand.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0601" asserts="0" description="Remove-JcSdkCommand">
+          <test-suite type="TestFixture" name="Remove-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0581" asserts="0" description="Remove-JcSdkCommand">
             <results>
-              <test-case description="Delete" name="Remove-JcSdkCommand.Delete" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="DeleteViaIdentity" name="Remove-JcSdkCommand.DeleteViaIdentity" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Delete" name="Remove-JcSdkCommand.Delete" time="0.0026" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="DeleteViaIdentity" name="Remove-JcSdkCommand.DeleteViaIdentity" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommandResult.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2475" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommandResult.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommandResult.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2521" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkCommandResult.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkCommandResult" executed="True" result="Ignored" success="True" time="0.0534" asserts="0" description="Remove-JcSdkCommandResult">
+          <test-suite type="TestFixture" name="Remove-JcSdkCommandResult" executed="True" result="Ignored" success="True" time="0.0693" asserts="0" description="Remove-JcSdkCommandResult">
             <results>
-              <test-case description="Delete" name="Remove-JcSdkCommandResult.Delete" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="DeleteViaIdentity" name="Remove-JcSdkCommandResult.DeleteViaIdentity" time="0.0014" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Delete" name="Remove-JcSdkCommandResult.Delete" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="DeleteViaIdentity" name="Remove-JcSdkCommandResult.DeleteViaIdentity" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2236" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystem.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.233" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystem.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0453" asserts="0" description="Remove-JcSdkSystem">
+          <test-suite type="TestFixture" name="Remove-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0438" asserts="0" description="Remove-JcSdkSystem">
             <results>
-              <test-case description="Delete" name="Remove-JcSdkSystem.Delete" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="DeleteViaIdentity" name="Remove-JcSdkSystem.DeleteViaIdentity" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Delete" name="Remove-JcSdkSystem.Delete" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="DeleteViaIdentity" name="Remove-JcSdkSystem.DeleteViaIdentity" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2446" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2299" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0534" asserts="0" description="Remove-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="Remove-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0422" asserts="0" description="Remove-JcSdkSystemUser">
             <results>
-              <test-case description="Delete" name="Remove-JcSdkSystemUser.Delete" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Delete" name="Remove-JcSdkSystemUser.Delete" time="0.0015" asserts="0" success="False" result="Ignored" executed="False" />
               <test-case description="DeleteViaIdentity" name="Remove-JcSdkSystemUser.DeleteViaIdentity" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2037" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUserSshKey.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUserSshKey.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2052" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Remove-JcSdkSystemUserSshKey.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Remove-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0444" asserts="0" description="Remove-JcSdkSystemUserSshKey">
+          <test-suite type="TestFixture" name="Remove-JcSdkSystemUserSshKey" executed="True" result="Ignored" success="True" time="0.0552" asserts="0" description="Remove-JcSdkSystemUserSshKey">
             <results>
               <test-case description="Delete" name="Remove-JcSdkSystemUserSshKey.Delete" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="DeleteViaIdentity" name="Remove-JcSdkSystemUserSshKey.DeleteViaIdentity" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="DeleteViaIdentity" name="Remove-JcSdkSystemUserSshKey.DeleteViaIdentity" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Reset-JcSdkSystemUserMfa.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2094" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Reset-JcSdkSystemUserMfa.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Reset-JcSdkSystemUserMfa.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2713" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Reset-JcSdkSystemUserMfa.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Reset-JcSdkSystemUserMfa" executed="True" result="Ignored" success="True" time="0.042" asserts="0" description="Reset-JcSdkSystemUserMfa">
+          <test-suite type="TestFixture" name="Reset-JcSdkSystemUserMfa" executed="True" result="Ignored" success="True" time="0.0698" asserts="0" description="Reset-JcSdkSystemUserMfa">
             <results>
-              <test-case description="ResetExpanded" name="Reset-JcSdkSystemUserMfa.ResetExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Reset" name="Reset-JcSdkSystemUserMfa.Reset" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="ResetViaIdentityExpanded" name="Reset-JcSdkSystemUserMfa.ResetViaIdentityExpanded" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="ResetViaIdentity" name="Reset-JcSdkSystemUserMfa.ResetViaIdentity" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="ResetExpanded" name="Reset-JcSdkSystemUserMfa.ResetExpanded" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Reset" name="Reset-JcSdkSystemUserMfa.Reset" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="ResetViaIdentityExpanded" name="Reset-JcSdkSystemUserMfa.ResetViaIdentityExpanded" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="ResetViaIdentity" name="Reset-JcSdkSystemUserMfa.ResetViaIdentity" time="0.0027" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2259" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkOrganization.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2218" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkOrganization.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Search-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.0558" asserts="0" description="Search-JcSdkOrganization">
+          <test-suite type="TestFixture" name="Search-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.0528" asserts="0" description="Search-JcSdkOrganization">
             <results>
-              <test-case description="SearchExpanded" name="Search-JcSdkOrganization.SearchExpanded" time="0.0059" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Search" name="Search-JcSdkOrganization.Search" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="SearchExpanded" name="Search-JcSdkOrganization.SearchExpanded" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Search" name="Search-JcSdkOrganization.Search" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2578" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystem.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2507" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystem.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Search-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0384" asserts="0" description="Search-JcSdkSystem">
+          <test-suite type="TestFixture" name="Search-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0644" asserts="0" description="Search-JcSdkSystem">
             <results>
-              <test-case description="SearchExpanded" name="Search-JcSdkSystem.SearchExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Search" name="Search-JcSdkSystem.Search" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="SearchExpanded" name="Search-JcSdkSystem.SearchExpanded" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Search" name="Search-JcSdkSystem.Search" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.1891" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2223" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Search-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Search-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0418" asserts="0" description="Search-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="Search-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0437" asserts="0" description="Search-JcSdkSystemUser">
             <results>
-              <test-case description="SearchExpanded" name="Search-JcSdkSystemUser.SearchExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Search" name="Search-JcSdkSystemUser.Search" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="SearchExpanded" name="Search-JcSdkSystemUser.SearchExpanded" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Search" name="Search-JcSdkSystemUser.Search" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2109" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkApplication.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkApplication.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2748" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkApplication.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.0373" asserts="0" description="Set-JcSdkApplication">
+          <test-suite type="TestFixture" name="Set-JcSdkApplication" executed="True" result="Ignored" success="True" time="0.067" asserts="0" description="Set-JcSdkApplication">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkApplication.PutExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkApplication.PutViaIdentityExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkApplication.Put" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkApplication.PutViaIdentity" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkApplication.PutExpanded" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkApplication.PutViaIdentityExpanded" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkApplication.Put" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkApplication.PutViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2123" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkCommand.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkCommand.Tests.ps1" executed="True" result="Ignored" success="True" time="0.235" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkCommand.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0388" asserts="0" description="Set-JcSdkCommand">
+          <test-suite type="TestFixture" name="Set-JcSdkCommand" executed="True" result="Ignored" success="True" time="0.0708" asserts="0" description="Set-JcSdkCommand">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkCommand.PutExpanded" time="0.0013" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkCommand.Put" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkCommand.PutViaIdentityExpanded" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkCommand.PutViaIdentity" time="0.0012" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkCommand.PutExpanded" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkCommand.Put" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkCommand.PutViaIdentityExpanded" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkCommand.PutViaIdentity" time="0.0019" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2479" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkOrganization.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkOrganization.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2471" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkOrganization.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.0858" asserts="0" description="Set-JcSdkOrganization">
+          <test-suite type="TestFixture" name="Set-JcSdkOrganization" executed="True" result="Ignored" success="True" time="0.0542" asserts="0" description="Set-JcSdkOrganization">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkOrganization.PutExpanded" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkOrganization.Put" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkOrganization.PutViaIdentityExpanded" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkOrganization.PutViaIdentity" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkOrganization.PutExpanded" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkOrganization.Put" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkOrganization.PutViaIdentityExpanded" time="0.0017" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkOrganization.PutViaIdentity" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2596" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkRadiusServer.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkRadiusServer.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2351" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkRadiusServer.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.0884" asserts="0" description="Set-JcSdkRadiusServer">
+          <test-suite type="TestFixture" name="Set-JcSdkRadiusServer" executed="True" result="Ignored" success="True" time="0.0575" asserts="0" description="Set-JcSdkRadiusServer">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkRadiusServer.PutExpanded" time="0.0036" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkRadiusServer.Put" time="0.0031" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkRadiusServer.PutViaIdentityExpanded" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkRadiusServer.PutViaIdentity" time="0.0029" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkRadiusServer.PutExpanded" time="0.0022" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkRadiusServer.Put" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkRadiusServer.PutViaIdentityExpanded" time="0.003" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkRadiusServer.PutViaIdentity" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3029" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystem.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystem.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2569" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystem.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0496" asserts="0" description="Set-JcSdkSystem">
+          <test-suite type="TestFixture" name="Set-JcSdkSystem" executed="True" result="Ignored" success="True" time="0.0823" asserts="0" description="Set-JcSdkSystem">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkSystem.PutExpanded" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkSystem.Put" time="0.0018" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkSystem.PutViaIdentityExpanded" time="0.0016" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkSystem.PutViaIdentity" time="0.0014" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkSystem.PutExpanded" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkSystem.Put" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkSystem.PutViaIdentityExpanded" time="0.0024" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkSystem.PutViaIdentity" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3371" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2919" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Set-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Set-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0644" asserts="0" description="Set-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="Set-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0996" asserts="0" description="Set-JcSdkSystemUser">
             <results>
-              <test-case description="PutExpanded" name="Set-JcSdkSystemUser.PutExpanded" time="0.0021" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Put" name="Set-JcSdkSystemUser.Put" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkSystemUser.PutViaIdentityExpanded" time="0.004" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="PutViaIdentity" name="Set-JcSdkSystemUser.PutViaIdentity" time="0.0041" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutExpanded" name="Set-JcSdkSystemUser.PutExpanded" time="0.0025" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Put" name="Set-JcSdkSystemUser.Put" time="0.0034" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentityExpanded" name="Set-JcSdkSystemUser.PutViaIdentityExpanded" time="0.0081" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="PutViaIdentity" name="Set-JcSdkSystemUser.PutViaIdentity" time="0.0039" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Unlock-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2805" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Unlock-JcSdkSystemUser.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Unlock-JcSdkSystemUser.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2302" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Unlock-JcSdkSystemUser.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Unlock-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0538" asserts="0" description="Unlock-JcSdkSystemUser">
+          <test-suite type="TestFixture" name="Unlock-JcSdkSystemUser" executed="True" result="Ignored" success="True" time="0.0602" asserts="0" description="Unlock-JcSdkSystemUser">
             <results>
               <test-case description="Unlock" name="Unlock-JcSdkSystemUser.Unlock" time="0.0023" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="UnlockViaIdentity" name="Unlock-JcSdkSystemUser.UnlockViaIdentity" time="0.002" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="UnlockViaIdentity" name="Unlock-JcSdkSystemUser.UnlockViaIdentity" time="0.0034" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Common\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.4945" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Common\HelpFiles.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Common\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.4764" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\Common\HelpFiles.Tests.ps1">
         <results>
           <test-suite type="TestFixture" name="Help File Tests" executed="True" result="Success" success="True" time="0" asserts="0" description="Help File Tests">
             <results>
