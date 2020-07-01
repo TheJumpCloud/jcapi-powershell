@@ -20,11 +20,11 @@ Describe 'Reset-JcSdkSystemUserMfa' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'ResetViaIdentityExpanded' -skip {
+    It 'ResetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'ResetViaIdentity' -skip {
+    It 'ResetViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

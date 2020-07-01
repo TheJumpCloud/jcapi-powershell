@@ -16,11 +16,11 @@ Describe 'Set-JcSdkApplication' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
+    It 'Put' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
+    It 'PutViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
