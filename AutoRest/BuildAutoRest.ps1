@@ -82,7 +82,6 @@ Try
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
-                $gitIgnorePath = '{0}/.gitignore' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
@@ -153,8 +152,6 @@ Try
                     }
                     Else
                     {
-                        # Get list of CustomFunctions
-                        $CustomFunctions = Get-ChildItem -Path:($CustomFunctionsFolderPath) -Recurse | Where-Object { $_.Extension -eq '.ps1' }
                         # Rebuild the module with the new custom functions
                         If ($BuildModule)
                         {
@@ -324,14 +321,6 @@ Try
                     Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
                     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
                 }
-                ##########################################################################
-                # If ($RunLocal)
-                # {
-                #     $gitIgnoreContent = Get-Content -Path:($gitIgnorePath) -Raw
-                #     $gitIgnoreContent.Replace("exports`n", "") | Set-Content -Path:($gitIgnorePath)
-                #     # Remove the auto generated .gitignore so you can see changes
-                #     # Remove-Item -Path:($gitIgnorePath) -Force
-                # }
                 ##########################################################################
                 If ($CommitModule)
                 {
