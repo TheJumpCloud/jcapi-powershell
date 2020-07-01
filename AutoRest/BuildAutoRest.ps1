@@ -199,6 +199,13 @@ Try
                                     "$PSScriptInfo`n $CustomFileContent" | Set-Content -Path:($CustomFileFullName)
                                 }
                             }
+                            # Clean tests folder
+                            $UnusedTestFiles = Get-ChildItem -Path:($TestFolderPath) -Recurse -File | Where-Object { `
+                                    $_.Name -notin ('loadEnv.ps1', 'localEnv.json', 'readme.md', 'utils.ps1') <# AutoRest generated #> `
+                                    -and $_.Name -notin ('HelpFiles.Tests.ps1') <# Common tests #> `
+                                    -and $_.Name -notin ($CustomFiles.Name).Replace('.ps1', '.Tests.ps1') <# Remove tests that correlate to functions which don't exist #> `
+                            }
+                            If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                             # Rebuild to distribute the update PSScriptInfo to other locations
                             $BuildModuleCommand = "$buildModulePath -Docs -Release"
                             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
