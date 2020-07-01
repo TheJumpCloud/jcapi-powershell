@@ -1,110 +1,44 @@
+swagger: "2.0"
+info:
+  version: "1.0"
+  title: Directory Insights API
+  description: The purpose of this API is to query Jumpcloud Directory Insights events
+host: api.jumpcloud.com
 basePath: /insights/directory/v1/
+schemes:
+- https
 consumes:
 - application/json
-definitions:
-  ErrorMessage:
-    properties:
-      message:
-        description: Text detailed error message returned by the service
-        type: string
-    type: object
-  EventCount:
-    description: EventCount JSON struct with count of matching events
-    properties:
-      count:
-        format: int64
-        type: integer
-    type: object
-  EventQuery:
-    description: EventQuery is the users' command to search our auth logs
-    properties:
-      end_time:
-        format: date-time
-        description: optional query end time, UTC in RFC3339 format
-        type: string
-      fields:
-        description: optional list of fields to return from query
-        items:
-          type: string
-        type: array
-      limit:
-        description: Max number of rows to return
-        format: int64
-        type: integer
-      search_after:
-        description: Specific query to search after, see x-* response headers for next values
-        items:
-          type: string
-        type: array
-      search_term:
-        $ref: '#/definitions/SearchTerm'
-      service:
-        description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
-        items:
-          type: string
-        type: array
-      sort:
-        description: ASC or DESC order for timestamp
-        type: string
-      start_time:
-        format: date-time
-        description: query start time, UTC in RFC3339 format
-        type: string
-    type: object
-  SearchTerm:
-    description: SearchTerm is the filter portion of the query
-    properties:
-      and:
-        additionalProperties:
-          $ref: '#/definitions/TermItem'
-        description: list of event terms. If all terms match the event will be returned by the service.
-        type: object
-      or:
-        additionalProperties:
-          $ref: '#/definitions/TermItem'
-        description: list of event terms. If any term matches, the event will be returned by the service.
-        type: object
-    type: object
-  TermItem:
-    description: |-
-      TermItem  one term in an and/or query, or one in an array of terms
-      items in the Terms array can be
-      1) a simple KV pair "username": "root"
-      2) a key-array pair "username": [ "root", "admin"]
-      in every case, they are key-value pairs,
-      so they can be stored in a map by their parent object
-    type: object
-host: api.jumpcloud.com
-info:
-  contact:
-    email: support@jumpcloud.com
-  description: The purpose of this API is to query Jumpcloud Directory Insights events
-  title: Directory Insights API
-  version: 0.39.0
+produces:
+- application/json
+securityDefinitions:
+  x-api-key:
+    name: x-api-key
+    type: apiKey
+    in: header
+  x-org-id:
+    name: x-org-id
+    type: apiKey
+    in: header
 paths:
   /events:
     post:
-      consumes:
-      - application/json
+      operationId: Get-Event
+      summary: Query Events
       description: Query the API for Directory Insights events
-      operationId: Events_Get
       parameters:
-      - description: JSON event query body
+      - name: body
         in: body
-        name: EventQueryBody
-        required: true
         schema:
           $ref: '#/definitions/EventQuery'
-      produces:
-      - application/json
       responses:
         "200":
           description: Array of Directory Insights events JSON objects
           schema:
-            items:
-              additionalProperties: true
-              type: object
             type: array
+            items:
+              type: object
+              additionalProperties: true
         "400":
           description: Invalid/unknown query JSON body
           schema:
@@ -121,24 +55,19 @@ paths:
           description: Technical difficulties processing your request
           schema:
             $ref: '#/definitions/ErrorMessage'
-      summary: Query Events
-      tags:
-      - EventQuery
+      security:
+      - x-api-key: []
+      - x-org-id: []
   /events/count:
     post:
-      consumes:
-      - application/json
+      operationId: Get-EventCount
+      summary: Count Events
       description: Query the API for a count of matching events
-      operationId: EventsCount_Get
       parameters:
-      - description: JSON event query body
+      - name: body
         in: body
-        name: EventQueryBody
-        required: true
         schema:
           $ref: '#/definitions/EventQuery'
-      produces:
-      - application/json
       responses:
         "200":
           description: Count of matching event rows
@@ -160,12 +89,382 @@ paths:
           description: Technical difficulties processing your request
           schema:
             $ref: '#/definitions/ErrorMessage'
-      summary: Count Events
+      security:
+      - x-api-key: []
+      - x-org-id: []
+responses:
+  trait:standardErrors:400:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+  trait:standardErrors:401:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+  trait:standardErrors:403:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+  trait:standardErrors:404:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+  trait:standardErrors:409:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+  trait:standardErrors:500:
+    description: ""
+    schema:
+      $ref: '#/definitions/errorresponse'
+definitions:
+  ErrorMessage:
+    title: ErrorMessage
+    type: object
+    properties:
+      message:
+        description: Text detailed error message returned by the service
+        type: string
+  errorresponse:
+    title: ErrorResponse
+    type: object
+    properties:
+      message:
+        type: string
+  EventCount:
+    title: EventCount
+    description: EventCount JSON struct with count of matching events
+    type: object
+    properties:
+      count:
+        type: integer
+        format: int64
+  EventQuery:
+    title: EventQuery
+    description: EventQuery is the users' command to search our auth logs
+    type: object
+    required:
+    - service
+    - start_time
+    properties:
+      end_time:
+        format: date-time
+        type: string
+        description: optional query end time, UTC in RFC3339 format
+      fields:
+        description: optional list of fields to return from query
+        type: array
+        items:
+          type: string
+      limit:
+        description: Max number of rows to return
+        type: integer
+        format: int64
+      search_after:
+        description: Specific query to search after, see x-* response headers for next values
+        type: array
+        items:
+          type: string
+      search_term:
+        $ref: '#/definitions/SearchTerm'
+      service:
+        description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
+        type: array
+        items:
+          type: string
+      sort:
+        description: ASC or DESC order for timestamp
+        type: string
+      start_time:
+        format: date-time
+        type: string
+        description: query start time, UTC in RFC3339 format
+  mfa:
+    title: mfa
+    type: object
+    properties:
+      exclusion:
+        type: boolean
+      exclusionUntil:
+        type: string
+        format: date-time
+      configured:
+        type: boolean
+  SearchTerm:
+    title: SearchTerm
+    description: SearchTerm is the filter portion of the query
+    type: object
+    properties:
+      and:
+        description: list of event terms. If all terms match the event will be returned by the service.
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/TermItem'
+      or:
+        description: list of event terms. If any term matches, the event will be returned by the service.
+        type: object
+        additionalProperties:
+          $ref: '#/definitions/TermItem'
+  sshkeylist:
+    title: SSHKeyList
+    type: object
+    properties:
+      create_date:
+        type: string
+        description: The date the SSH key was created.
+      _id:
+        type: string
+        description: The ID of the SSH key.
+      public_key:
+        type: string
+        description: The Public SSH key.
+      name:
+        type: string
+        description: The name of the SSH key.
+  systemuser:
+    title: SystemUser
+    type: object
+    properties:
+      email:
+        type: string
+        maxLength: 1024
+      username:
+        type: string
+        maxLength: 1024
+      allow_public_key:
+        type: boolean
+      public_key:
+        type: string
+      ssh_keys:
+        type: array
+        items:
+          $ref: '#/definitions/sshkeylist'
+      sudo:
+        type: boolean
+      enable_managed_uid:
+        type: boolean
+      unix_uid:
+        type: integer
+        minimum: 1
+      unix_guid:
+        type: integer
+        minimum: 1
+      activated:
+        type: boolean
       tags:
-      - EventQuery
-produces:
-- application/json
-schemes:
-- https
-swagger: "2.0"
+        type: array
+        items:
+          type: string
+      password_expired:
+        type: boolean
+      account_locked:
+        type: boolean
+      passwordless_sudo:
+        type: boolean
+      externally_managed:
+        type: boolean
+      external_dn:
+        type: string
+      external_source_type:
+        type: string
+      firstname:
+        type: string
+        maxLength: 1024
+      lastname:
+        type: string
+        maxLength: 1024
+      ldap_binding_user:
+        type: boolean
+      enable_user_portal_multifactor:
+        type: boolean
+      associatedTagCount:
+        type: integer
+        minimum: 0
+      totp_enabled:
+        type: boolean
+      password_expiration_date:
+        type: string
+      attributes:
+        type: array
+        items:
+          type: object
+      created:
+        type: string
+      samba_service_user:
+        type: boolean
+      password_never_expires:
+        type: boolean
+      _id:
+        type: string
+      middlename:
+        type: string
+        maxLength: 1024
+      displayname:
+        type: string
+        maxLength: 1024
+      description:
+        type: string
+        maxLength: 1024
+      location:
+        type: string
+        maxLength: 1024
+      costCenter:
+        type: string
+        maxLength: 1024
+      employeeType:
+        type: string
+        maxLength: 1024
+      company:
+        type: string
+        maxLength: 1024
+      employeeIdentifier:
+        type: string
+        maxLength: 256
+        description: 'Must be unique per user. '
+      jobTitle:
+        type: string
+        maxLength: 1024
+      department:
+        type: string
+        maxLength: 1024
+      mfa:
+        $ref: '#/definitions/mfa'
+      suspended:
+        type: boolean
+      external_password_expiration_date:
+        type: string
+  systemuserputpost:
+    title: SystemUserPost
+    type: object
+    properties:
+      email:
+        type: string
+        maxLength: 1024
+      username:
+        type: string
+      allow_public_key:
+        type: boolean
+      public_key:
+        type: string
+      sudo:
+        type: boolean
+      enable_managed_uid:
+        type: boolean
+      unix_uid:
+        type: integer
+        minimum: 1
+      unix_guid:
+        type: integer
+        minimum: 1
+      activated:
+        type: boolean
+      tags:
+        type: array
+        items:
+          type: string
+      account_locked:
+        type: boolean
+      passwordless_sudo:
+        type: boolean
+      externally_managed:
+        type: boolean
+      external_dn:
+        type: string
+      external_source_type:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      ldap_binding_user:
+        type: boolean
+      enable_user_portal_multifactor:
+        type: boolean
+      attributes:
+        type: array
+        items:
+          type: object
+      samba_service_user:
+        type: boolean
+      addresses:
+        type: array
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+            poBox:
+              type: string
+            extendedAddress:
+              type: string
+            streetAddress:
+              type: string
+            locality:
+              type: string
+            region:
+              type: string
+            postalCode:
+              type: string
+            country:
+              type: string
+      jobTitle:
+        type: string
+      department:
+        type: string
+      phoneNumbers:
+        type: array
+        items:
+          type: object
+          properties:
+            type:
+              type: string
+            number:
+              type: string
+      relationships:
+        type: array
+        items:
+          type: object
+      password:
+        type: string
+      password_never_expires:
+        type: boolean
+      middlename:
+        type: string
+      displayname:
+        type: string
+      description:
+        type: string
+        maxLength: 1024
+      location:
+        type: string
+      costCenter:
+        type: string
+      employeeType:
+        type: string
+      company:
+        type: string
+      employeeIdentifier:
+        type: string
+        maxLength: 256
+        description: 'Must be unique per user. '
+      mfa:
+        $ref: '#/definitions/mfa'
+      suspended:
+        type: boolean
+      external_password_expiration_date:
+        type: string
+        format: date-time
+    required:
+    - email
+    - username
+  TermItem:
+    title: TermItem
+    description: |-
+      TermItem  one term in an and/or query, or one in an array of terms
+      items in the Terms array can be
+      1) a simple KV pair "username": "root"
+      2) a key-array pair "username": [ "root", "admin"]
+      in every case, they are key-value pairs,
+      so they can be stored in a map by their parent object
+    type: object
 
