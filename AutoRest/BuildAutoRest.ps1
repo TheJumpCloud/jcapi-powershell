@@ -30,6 +30,7 @@ Try
     $UpdateModuleGuid = $true
     $TestModule = $true
     $UpdateNuspec = $true
+    $RemoveGitIgnore = $true
     $PackModule = $false
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
@@ -315,6 +316,16 @@ Try
                 {
                     [System.String]$nuspec = Get-Content -Path:($nuspecPath) -Raw
                     $nuspec.Replace('licenseUrl', 'license').Replace('</metadata>', '<dependencies><group targetFramework="netstandard2.0"></dependencies></metadata>') | Out-File -FilePath:($nuspecPath)
+                }
+                ###########################################################################
+                # Remove auto generated .gitignore files
+                If ($RemoveGitIgnore)
+                {
+                    $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File | Where-Object { $_.Extension -eq '.gitignore' }
+                    If ($GitIgnoreFiles)
+                    {
+                        $GitIgnoreFiles | Remove-Item -Force
+                    }
                 }
                 ###########################################################################
                 If ($PackModule)
