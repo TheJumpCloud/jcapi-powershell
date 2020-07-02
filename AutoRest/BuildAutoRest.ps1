@@ -1,10 +1,10 @@
 #Requires -PSEdition Core
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName = 'JumpCloud.SDK.DirectoryInsights'
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     # , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][System.String[]]$PrereleaseName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey = 'ff6006d0cd75d4c52eacf9da2aa7205595ef97bf'
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId = '5a4bff7ab17d0c9f63bcd277'
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
 )
 Try
@@ -14,8 +14,8 @@ Try
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
-    $PSRepoName = 'LocalRepository'
-    $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
+    $PSRepoName = 'PSGallery'
+    # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
     $NuGetApiKey = ''
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
@@ -31,7 +31,7 @@ Try
     $TestModule = $true
     $PackModule = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
-    $PublishModule = $true
+    $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
@@ -212,6 +212,16 @@ Try
                             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                             Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                         }
+                    }
+                }
+                ###########################################################################
+                # Remove Microsoft generated sub modules
+                If ($RemoveMicrosoftStuff)
+                {
+                    $AzModulePath = "$generatedFolderPath/modules/Az.Accounts"
+                    If (Test-Path -Path:($AzModulePath))
+                    {
+                        Remove-Item -Path:($AzModulePath) -Force -Recurse
                     }
                 }
                 ###########################################################################
