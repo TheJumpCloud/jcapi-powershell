@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
-<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="2" invalid="0" date="2020-07-02" time="17:57:52">
-  <environment platform="Microsoft Windows Server 2019 Datacenter|C:\windows|\Device\Harddisk0\Partition2" os-version="10.0.17763" machine-name="WIN-1I7ARQ0TBSJ" user-domain="WIN-1I7ARQ0TBSJ" clr-version="Unknown" cwd="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights" user="VssAdministrator" nunit-version="2.5.8.0" />
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="4" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="2" invalid="0" date="2020-07-02" time="22:38:06">
+  <environment machine-name="WIN-1I7ARQ0TBSJ" clr-version="Unknown" os-version="10.0.17763" cwd="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights" user="VssAdministrator" nunit-version="2.5.8.0" platform="Microsoft Windows Server 2019 Datacenter|C:\windows|\Device\Harddisk0\Partition2" user-domain="WIN-1I7ARQ0TBSJ" />
   <culture-info current-culture="en-US" current-uiculture="en-US" />
-  <test-suite type="TestFixture" name="Pester" executed="True" result="Ignored" success="True" time="3.8935" asserts="0" description="Pester">
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Ignored" success="True" time="3.7595" asserts="0" description="Pester">
     <results>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1" executed="True" result="Success" success="True" time="3.6145" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1" executed="True" result="Success" success="True" time="3.3981" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEvent.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkEvent" executed="True" result="Success" success="True" time="3.1035" asserts="0" description="Get-JcSdkEvent">
+          <test-suite type="TestFixture" name="Get-JcSdkEvent" executed="True" result="Success" success="True" time="2.7445" asserts="0" description="Get-JcSdkEvent">
             <results>
-              <test-case description="GetExpanded" name="Get-JcSdkEvent.GetExpanded" time="1.7925" asserts="0" success="True" result="Success" executed="True" />
-              <test-case description="Get" name="Get-JcSdkEvent.Get" time="1.0836" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="GetExpanded" name="Get-JcSdkEvent.GetExpanded" time="1.5263" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="Get" name="Get-JcSdkEvent.Get" time="0.9021" asserts="0" success="True" result="Success" executed="True" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventCount.Tests.ps1" executed="True" result="Ignored" success="True" time="0.2547" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventCount.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventCount.Tests.ps1" executed="True" result="Ignored" success="True" time="0.3296" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Get-JcSdkEventCount.Tests.ps1">
         <results>
-          <test-suite type="TestFixture" name="Get-JcSdkEventCount" executed="True" result="Ignored" success="True" time="0.0906" asserts="0" description="Get-JcSdkEventCount">
+          <test-suite type="TestFixture" name="Get-JcSdkEventCount" executed="True" result="Ignored" success="True" time="0.0844" asserts="0" description="Get-JcSdkEventCount">
             <results>
-              <test-case description="GetExpanded" name="Get-JcSdkEventCount.GetExpanded" time="0.0078" asserts="0" success="False" result="Ignored" executed="False" />
-              <test-case description="Get" name="Get-JcSdkEventCount.Get" time="0.0049" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="GetExpanded" name="Get-JcSdkEventCount.GetExpanded" time="0.0094" asserts="0" success="False" result="Ignored" executed="False" />
+              <test-case description="Get" name="Get-JcSdkEventCount.Get" time="0.007" asserts="0" success="False" result="Ignored" executed="False" />
             </results>
           </test-suite>
         </results>
       </test-suite>
-      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Common\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.0243" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Common\HelpFiles.Tests.ps1">
+      <test-suite type="TestFixture" name="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Common\HelpFiles.Tests.ps1" executed="True" result="Success" success="True" time="0.0318" asserts="0" description="D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\Common\HelpFiles.Tests.ps1">
         <results>
           <test-suite type="TestFixture" name="Help File Tests" executed="True" result="Success" success="True" time="0" asserts="0" description="Help File Tests">
             <results>
