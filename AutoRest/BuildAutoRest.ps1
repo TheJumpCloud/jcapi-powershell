@@ -29,7 +29,7 @@ Try
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
     $TestModule = $true
-    $PackModule = $true
+    $PackModule = $false
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
