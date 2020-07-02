@@ -84,6 +84,7 @@ Try
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
+                $generatedFolderPath = '{0}/generated' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
@@ -211,6 +212,16 @@ Try
                             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                             Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                         }
+                    }
+                }
+                ###########################################################################
+                # Remove Microsoft generated sub modules
+                If ($RemoveMicrosoftStuff)
+                {
+                    $AzModulePath = "$generatedFolderPath/modules/Az.Accounts"
+                    If (Test-Path -Path:($AzModulePath))
+                    {
+                        Remove-Item -Path:($AzModulePath) -Force -Recurse
                     }
                 }
                 ###########################################################################
