@@ -29,6 +29,7 @@ Try
     $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
     $TestModule = $true
+    $UpdateNuspec = $true
     $PackModule = $false
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
@@ -84,7 +85,8 @@ Try
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
-                $generatedFolderPath = '{0}/generated' -f $OutputFullPath, $ModuleName
+                $nuspecName = '{0}.nuspec' -f $ModuleName
+                $nuspecPath = '{0}/{1}' -f $OutputFullPath, $nuspecName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
@@ -215,16 +217,6 @@ Try
                     }
                 }
                 ###########################################################################
-                # Remove Microsoft generated sub modules
-                If ($RemoveMicrosoftStuff)
-                {
-                    $AzModulePath = "$generatedFolderPath/modules/Az.Accounts"
-                    If (Test-Path -Path:($AzModulePath))
-                    {
-                        Remove-Item -Path:($AzModulePath) -Force -Recurse
-                    }
-                }
-                ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
                 $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
                 {
@@ -316,6 +308,13 @@ Try
                 Else
                 {
                     Write-Warning ('Skipping TestModule.')
+                }
+                ###########################################################################
+                # Update nuspec to address nuget pack pipeline errors
+                If ($UpdateNuspec)
+                {
+                    [System.String]$nuspec = Get-Content -Path:($nuspecPath) -Raw
+                    $nuspec.Replace('licenseUrl', 'license').Replace('</metadata>', '<dependencies><group targetFramework="netstandard2.0"></dependencies></metadata>') | Out-File -FilePath:($nuspecPath)
                 }
                 ###########################################################################
                 If ($PackModule)
