@@ -374,7 +374,11 @@ Try
                 }
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
+                [System.Version]$CurrentVersion = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('ModuleVersion')
                 Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=VersionMajor]$($CurrentVersion.Major)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=VersionMinor]$($CurrentVersion.Minor)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=VersionPatch]$($CurrentVersion.Build)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
