@@ -321,7 +321,9 @@ Try
                         Write-Error ("Path does not exist: $packModulePath")
                     }
                     # Extract the module and prep for upload to psgallery
-                    $nupkg = Get-ChildItem -Path:($binFolder + $nupkgName)
+                    $nupkg = Get-Item -Path:($binFolder + $nupkgName)
+                    If ($env:USERNAME -eq 'VssAdministrator') { Copy-Item -Path:($nupkg) -Destination:($env:BUILD_ARTIFACTSTAGINGDIRECTORY) }
+                    # Manual steps to be able to upload to PSGallery (Should not be needed but unable to get it to work otherwise)
                     Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
                     Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
                     Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
