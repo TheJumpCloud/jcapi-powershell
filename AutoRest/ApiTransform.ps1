@@ -92,6 +92,7 @@ $OperationIdMapping = [Ordered]@{
         'GET_radiusservers-id'                        = 'Get-RadiusServer';
         'GET_radiusservers'                           = 'List-RadiusServer';
         'PUT_radiusservers-id'                        = 'Put-RadiusServer';
+        'DELETE_radiusservers-id'                     = 'Delete-RadiusServer';
         'DELETE_systems-id'                           = 'Delete-System';
         'GET_systems-id'                              = 'Get-System';
         'GET_systems'                                 = 'List-System';
