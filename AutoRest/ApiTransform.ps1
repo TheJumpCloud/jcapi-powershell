@@ -15,21 +15,21 @@ $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs/'
 $FixesMapping = @{
     'JumpCloud.SDK.V1'                = [Ordered]@{
         # Path Issues
-        '"#/definitions/system"'                                                                                            = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
-        '"system": {"title": "System"'                                                                                      = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
+        '"#/definitions/system"'                                                         = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
+        '"system": {"title": "System"'                                                   = '"JcSystem": {"title": "System"'; # The "system" class is a reserved word.
         # V1 Issues
-        '"basePath": "/api"'                                                                                                = '"basePath": "/api/"'; # The extra slash at the end is needed to properly build the url.
-        '"command": {"title": "Command", "organization": {"description": "The ID of the organization.", "type": "string"},' = '"command": {"title": "Command", "type": "object",'
-        '"type": "null"'                                                                                                    = '"type": "string"'; # A type of null is not valid.
-        '"format": "email", '                                                                                               = ''; # WARNING (LLCS1001/DoesNotSupportEnum): Schema with type:'string and 'format:'email' is not recognized.
+        '"basePath": "/api"'                                                             = '"basePath": "/api/"'; # The extra slash at the end is needed to properly build the url.
+        '"type": "null"'                                                                 = '"type": "string"'; # A type of null is not valid.
+        '"format": "email", '                                                            = ''; # WARNING (LLCS1001/DoesNotSupportEnum): Schema with type:'string and 'format:'email' is not recognized.
+        '"internal": {"type": "object", "properties": {"deviceId": {"type": "string"}}}' = ''
         # Custom Tweaks
-        '{"name": "Content-Type", "in": "header", "required": false, "type": "string"}'                                     = ''; # This will be passed in later through the Module.cs file.
-        '{"name": "Accept", "in": "header", "required": false, "type": "string"}'                                           = ''; # This will be passed in later through the Module.cs file.
-        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'                                         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-        ', ,'                                                                                                               = ',';
-        '[,'                                                                                                                = '[';
-        ', ]'                                                                                                               = ']';
-        "`t"                                                                                                                = '\t';
+        '{"name": "Content-Type", "in": "header", "required": false, "type": "string"}'  = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "Accept", "in": "header", "required": false, "type": "string"}'        = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        ', ,'                                                                            = ',';
+        '[,'                                                                             = '[';
+        ', ]'                                                                            = ']';
+        "`t"                                                                             = '\t';
     };
     'JumpCloud.SDK.V2'                = [Ordered]@{
         # V2 Issues
