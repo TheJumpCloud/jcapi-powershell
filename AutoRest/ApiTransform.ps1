@@ -88,6 +88,7 @@ $OperationIdMapping = [Ordered]@{
         'GET_organizations'                           = 'List-Organization';
         'PUT_organizations-id'                        = 'Put-Organization';
         'POST_search-organizations'                   = 'Search-Organization';
+        'POST_runCommand'                             = 'Invoke-Command';
         'POST_radiusservers'                          = 'Create-RadiusServer';
         'GET_radiusservers-id'                        = 'Get-RadiusServer';
         'GET_radiusservers'                           = 'List-RadiusServer';
