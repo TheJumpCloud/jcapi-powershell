@@ -5,7 +5,7 @@
   },
   "projects": {
     "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj": {
-      "version": "0.0.1",
+      "version": "0.0.5",
       "restore": {
         "projectUniqueName": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
         "projectName": "JumpCloud.SDK.DirectoryInsights.private",

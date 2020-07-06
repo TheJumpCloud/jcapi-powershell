@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "JumpCloud.SDK.DirectoryInsights.private/0.0.1": {
+      "JumpCloud.SDK.DirectoryInsights.private/0.0.5": {
         "dependencies": {
           "Microsoft.CSharp": "4.4.1",
           "NETStandard.Library": "2.0.3",
@@ -42,7 +42,7 @@
     }
   },
   "libraries": {
-    "JumpCloud.SDK.DirectoryInsights.private/0.0.1": {
+    "JumpCloud.SDK.DirectoryInsights.private/0.0.5": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
