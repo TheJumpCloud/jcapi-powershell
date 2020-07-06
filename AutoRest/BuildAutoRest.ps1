@@ -30,6 +30,7 @@ Try
     $UpdateModuleGuid = $true
     $TestModule = $true
     $RemoveGitIgnore = $true
+    $RemoveAzAccounts = $true
     $PackModule = $false
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
@@ -86,6 +87,7 @@ Try
                 $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
+                $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 If ($InstallPreReq)
@@ -315,6 +317,15 @@ Try
                     If ($GitIgnoreFiles)
                     {
                         $GitIgnoreFiles | Remove-Item -Force
+                    }
+                }
+                ###########################################################################
+                # Remove auto generated Az module
+                If ($RemoveAzAccounts)
+                {
+                    If (Test-Path -Path:($AzAccountsPath))
+                    {
+                        Remove-Item -Path:($AzAccountsPath) -Force -Recurse
                     }
                 }
                 ###########################################################################
