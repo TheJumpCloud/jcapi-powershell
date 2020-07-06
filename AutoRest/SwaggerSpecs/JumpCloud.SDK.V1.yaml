@@ -796,6 +796,26 @@ paths:
       security:
       - x-api-key: []
   /radiusservers/{id}:
+    delete:
+      operationId: Delete-RadiusServer
+      summary: Delete Radius Server
+      tags:
+      - Radius Servers
+      description: |-
+        This endpoint allows you to delete RADIUS servers in your organization.
+        ```
+        curl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \
+          -H 'Accept: application/json' \
+          -H 'Content-Type: application/json' \
+          -H 'x-api-key: {API_KEY}' \
+        ```
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/radiusserverput'
+      security:
+      - x-api-key: []
     get:
       operationId: Get-RadiusServer
       summary: Get Radius Server
@@ -815,7 +835,7 @@ paths:
     put:
       operationId: Put-RadiusServer
       summary: Update Radius Servers
-      description: "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```"
+      description: "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```"
       parameters:
       - name: body
         in: body
@@ -840,13 +860,17 @@ paths:
               type: string
             userPasswordExpirationAction:
               type: string
+            sharedSecret:
+              type: string
           required:
           - name
           - networkSourceIp
+          - sharedSecret
           type: object
           example:
             name: test radius
             networkSourceIp: 0.0.0.0
+            sharedSecret: secretradiuspassword
             tagsNames:
             - tag1
       responses:
@@ -854,6 +878,17 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/radiusserverput'
+      security:
+      - x-api-key: []
+  /runCommand:
+    post:
+      operationId: Invoke-Command
+      tags:
+      - Commands
+      description: This endpoint allows you to run a command.
+      responses:
+        "200":
+          description: OK
       security:
       - x-api-key: []
   /search/organizations:
@@ -1801,6 +1836,10 @@ definitions:
         type: object
       created:
         type: string
+      databaseAttributes:
+        type: array
+        items:
+          type: object
       description:
         maxLength: 256
         type: string
@@ -2367,6 +2406,7 @@ definitions:
     type: object
   JcSystem:
     title: System
+    type: object
     properties:
       _id:
         type: string
@@ -2387,9 +2427,9 @@ definitions:
       arch:
         type: string
       connectionHistory:
+        type: array
         items:
           type: object
-        type: array
       created:
         type: string
       displayName:
@@ -2407,7 +2447,9 @@ definitions:
       modifySSHDConfig:
         type: boolean
       networkInterfaces:
+        type: array
         items:
+          type: object
           properties:
             address:
               type: string
@@ -2417,8 +2459,6 @@ definitions:
               type: boolean
             name:
               type: string
-          type: object
-        type: array
       organization:
         type: string
       os:
@@ -2428,15 +2468,16 @@ definitions:
       sshRootEnabled:
         type: boolean
       sshdParams:
+        type: array
         items:
+          type: object
           properties:
             name:
               type: string
             value:
               type: string
-          type: object
-        type: array
       systemInsights:
+        type: object
         properties:
           state:
             enum:
@@ -2444,18 +2485,32 @@ definitions:
             - disabled
             - deferred
             type: string
-        type: object
       systemTimezone:
         type: integer
       tags:
+        type: array
         items:
           type: string
-        type: array
       templateName:
         type: string
       version:
         type: string
-    type: object
+      mdm:
+        type: object
+        properties:
+          vendor:
+            type: string
+            enum:
+            - unknown
+            - none
+            - internal
+            - external
+          profileIdentifier:
+            type: string
+          dep:
+            type: boolean
+          userApproved:
+            type: boolean
   mfa:
     title: mfa
     properties:
@@ -2509,6 +2564,8 @@ definitions:
       enableManagedUID:
         type: boolean
       enableO365:
+        type: boolean
+      enableUserPortalAgentInstall:
         type: boolean
       features:
         properties:
@@ -2592,11 +2649,15 @@ definitions:
             minimum: 1
             type: integer
         type: object
+      pendingDelete:
+        type: boolean
       showIntro:
         type: boolean
       systemUserPasswordExpirationInDays:
         type: integer
       systemUsersCanEdit:
+        type: boolean
+      disableGoogleLogin:
         type: boolean
       userPortal:
         properties:
@@ -2606,6 +2667,7 @@ definitions:
             type: integer
         type: object
     type: object
+    description: ""
   organizationsettingsput:
     title: OrganizationSettingsPut
     properties:
@@ -2708,6 +2770,8 @@ definitions:
       systemUserPasswordExpirationInDays:
         type: integer
       systemUsersCanEdit:
+        type: boolean
+      disableGoogleLogin:
         type: boolean
       userPortal:
         properties:
@@ -2849,20 +2913,20 @@ definitions:
     type: object
   sshkeylist:
     title: SSHKeyList
-    properties:
-      _id:
-        description: The ID of the SSH key.
-        type: string
-      create_date:
-        description: The date the SSH key was created.
-        type: string
-      name:
-        description: The name of the SSH key.
-        type: string
-      public_key:
-        description: The Public SSH key.
-        type: string
     type: object
+    properties:
+      create_date:
+        type: string
+        description: The date the SSH key was created.
+      _id:
+        type: string
+        description: The ID of the SSH key.
+      public_key:
+        type: string
+        description: The Public SSH key.
+      name:
+        type: string
+        description: The name of the SSH key.
   sshkeypost:
     title: SSHKeyPost
     properties:
@@ -2915,116 +2979,116 @@ definitions:
     type: object
   systemuser:
     title: SystemUser
+    type: object
     properties:
-      _id:
-        type: string
-      account_locked:
-        type: boolean
-      activated:
-        type: boolean
-      allow_public_key:
-        type: boolean
-      associatedTagCount:
-        minimum: 0
-        type: integer
-      attributes:
-        items:
-          type: object
-        type: array
-      company:
-        maxLength: 1024
-        type: string
-      costCenter:
-        maxLength: 1024
-        type: string
-      created:
-        type: string
-      department:
-        maxLength: 1024
-        type: string
-      description:
-        maxLength: 1024
-        type: string
-      displayname:
-        maxLength: 1024
-        type: string
       email:
+        type: string
         maxLength: 1024
+      username:
         type: string
-      employeeIdentifier:
-        description: 'Must be unique per user. '
-        maxLength: 256
-        type: string
-      employeeType:
         maxLength: 1024
-        type: string
-      enable_managed_uid:
-        type: boolean
-      enable_user_portal_multifactor:
-        type: boolean
-      external_dn:
-        type: string
-      external_password_expiration_date:
-        type: string
-      external_source_type:
-        type: string
-      externally_managed:
-        type: boolean
-      firstname:
-        maxLength: 1024
-        type: string
-      jobTitle:
-        maxLength: 1024
-        type: string
-      lastname:
-        maxLength: 1024
-        type: string
-      ldap_binding_user:
-        type: boolean
-      location:
-        maxLength: 1024
-        type: string
-      mfa:
-        $ref: '#/definitions/mfa'
-      middlename:
-        maxLength: 1024
-        type: string
-      password_expiration_date:
-        type: string
-      password_expired:
-        type: boolean
-      password_never_expires:
-        type: boolean
-      passwordless_sudo:
+      allow_public_key:
         type: boolean
       public_key:
         type: string
-      samba_service_user:
-        type: boolean
       ssh_keys:
+        type: array
         items:
           $ref: '#/definitions/sshkeylist'
-        type: array
       sudo:
         type: boolean
-      suspended:
+      enable_managed_uid:
+        type: boolean
+      unix_uid:
+        type: integer
+        minimum: 1
+      unix_guid:
+        type: integer
+        minimum: 1
+      activated:
         type: boolean
       tags:
+        type: array
         items:
           type: string
-        type: array
+      password_expired:
+        type: boolean
+      account_locked:
+        type: boolean
+      passwordless_sudo:
+        type: boolean
+      externally_managed:
+        type: boolean
+      external_dn:
+        type: string
+      external_source_type:
+        type: string
+      firstname:
+        type: string
+        maxLength: 1024
+      lastname:
+        type: string
+        maxLength: 1024
+      ldap_binding_user:
+        type: boolean
+      enable_user_portal_multifactor:
+        type: boolean
+      associatedTagCount:
+        type: integer
+        minimum: 0
       totp_enabled:
         type: boolean
-      unix_guid:
-        minimum: 1
-        type: integer
-      unix_uid:
-        minimum: 1
-        type: integer
-      username:
-        maxLength: 1024
+      password_expiration_date:
         type: string
-    type: object
+      attributes:
+        type: array
+        items:
+          type: object
+      created:
+        type: string
+      samba_service_user:
+        type: boolean
+      password_never_expires:
+        type: boolean
+      _id:
+        type: string
+      middlename:
+        type: string
+        maxLength: 1024
+      displayname:
+        type: string
+        maxLength: 1024
+      description:
+        type: string
+        maxLength: 1024
+      location:
+        type: string
+        maxLength: 1024
+      costCenter:
+        type: string
+        maxLength: 1024
+      employeeType:
+        type: string
+        maxLength: 1024
+      company:
+        type: string
+        maxLength: 1024
+      employeeIdentifier:
+        type: string
+        maxLength: 256
+        description: 'Must be unique per user. '
+      jobTitle:
+        type: string
+        maxLength: 1024
+      department:
+        type: string
+        maxLength: 1024
+      mfa:
+        $ref: '#/definitions/mfa'
+      suspended:
+        type: boolean
+      external_password_expiration_date:
+        type: string
   systemuserput:
     title: SystemUserPut
     properties:
@@ -3475,13 +3539,12 @@ definitions:
     type: object
   userput:
     title: UserPut
+    type: object
     properties:
       email:
         maxLength: 1024
         type: string
       enableMultiFactor:
-        type: boolean
-      enableWhatsNew:
         type: boolean
       firstname:
         type: string
@@ -3494,9 +3557,9 @@ definitions:
         type: string
       roleName:
         type: string
-    type: object
   userreturn:
     title: UserReturn
+    type: object
     properties:
       _id:
         type: string
@@ -3507,8 +3570,6 @@ definitions:
       email:
         type: string
       enableMultiFactor:
-        type: boolean
-      enableWhatsNew:
         type: boolean
       firstname:
         type: string
@@ -3528,5 +3589,4 @@ definitions:
         type: string
       usersTimeZone:
         type: string
-    type: object
 
