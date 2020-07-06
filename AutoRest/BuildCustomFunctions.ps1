@@ -243,7 +243,7 @@ $($IndentChar)$($IndentChar)}"
                     Write-Error ('Unknown module $($ModuleName)')
                 }
             }
-            ElseIf ($Command.Verb -in ('Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop'))
+            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop'))
             {
                 # Build "Begin" block
                 $BeginContent = "$($IndentChar)$($IndentChar)`$Results = @()"
@@ -254,7 +254,8 @@ $($IndentChar)$($IndentChar)}"
             }
             Else
             {
-                Write-Warning ('Unmapped command: ' + $CommandName)
+                Write-Host ("##vso[task.logissue type=error;]" + 'Unmapped command: ' + $CommandName)
+                Write-Error ('Unmapped command: ' + $CommandName)
                 $null
             }
             If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
