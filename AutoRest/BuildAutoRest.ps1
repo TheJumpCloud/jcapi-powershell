@@ -20,13 +20,13 @@ Try
     $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
     $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
     $RunApiTransform = $true
+    $IncrementModuleVersion = $true
     $InstallPreReq = $true
     $GenerateModule = $true
     $CopyCustomFiles = $true
     $BuildModule = $true
     $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
-    $IncrementModuleVersion = $true
     $UpdateModuleGuid = $true
     $TestModule = $true
     $RemoveGitIgnore = $true
@@ -56,12 +56,13 @@ Try
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
-                ###########################################################################
                 $ConfigFileFullName = $ConfigFile.FullName
+                $ConfigContent = Get-Content -Path:($ConfigFileFullName) -Raw
                 $BaseFolder = $PSScriptRoot
                 Set-Location $BaseFolder
+                ###########################################################################
                 # Get config values
-                $Config = Get-Content -Path:($ConfigFileFullName) | ConvertFrom-Yaml
+                $Config = $ConfigContent | ConvertFrom-Yaml
                 # $InputFile = $BaseFolder + $Config.'input-file'
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
                 $ModuleName = $Config.'module-name'
@@ -90,9 +91,34 @@ Try
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
+                # Check to see if module exists on PowerShellGallery already
+                $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
+                {
+                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
+                }
+                Else
+                {
+                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
+                }
+                ###########################################################################
+                If (-not [System.String]::IsNullOrEmpty($PublishedModule))
+                {
+                    # Increment module version number
+                    If ($IncrementModuleVersion)
+                    {
+                        If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
+                        {
+                            $ModuleVersion = Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
+                            Write-Host ('[RUN COMMAND] Increment module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                            $ConfigContent = $ConfigContent -Replace ("(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)")
+                            $ConfigContent | Out-File -FilePath:($ConfigFilePath) -Force
+                        }
+                    }
+                }
+                ###########################################################################
                 If ($InstallPreReq)
                 {
-                    Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-2.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-3.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
                     ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
                     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
@@ -118,14 +144,6 @@ Try
                     If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') | Out-Null }
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Copy-Item -Path:($CustomFolderSourcePath) -Destination:([System.String]$CustomFolderPath) -Force
-                    $ModuleVersion = If ([System.String]::IsNullOrEmpty($NextVersion))
-                    {
-                        $ModuleVersion
-                    }
-                    Else
-                    {
-                        $NextVersion
-                    }
                     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
                 }
                 ###########################################################################
@@ -217,16 +235,6 @@ Try
                     }
                 }
                 ###########################################################################
-                # Check to see if module exists on PowerShellGallery already
-                $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
-                {
-                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue')
-                }
-                Else
-                {
-                    Find-Module -Name:($ModuleName) -Repository:($PSRepoName) -ErrorAction:('SilentlyContinue') -AllowPrerelease
-                }
-                ###########################################################################
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
@@ -241,16 +249,6 @@ Try
                 ###########################################################################
                 If (-not [System.String]::IsNullOrEmpty($PublishedModule))
                 {
-                    # Increment module version number
-                    If ($IncrementModuleVersion)
-                    {
-                        If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-                        {
-                            $NextVersion = Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-                            Write-Host ('[RUN COMMAND] Increment module version number to: ' + $NextVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                            Update-ModuleManifest -Path:($moduleManifestPath) -ModuleVersion:($NextVersion)
-                        }
-                    }
                     # Update module GUID
                     If ($UpdateModuleGuid)
                     {
