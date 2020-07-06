@@ -247,15 +247,12 @@ Try
                     }
                 }
                 ###########################################################################
-                If (-not [System.String]::IsNullOrEmpty($PublishedModule))
-                {
                     # Update module GUID
-                    If ($UpdateModuleGuid)
+                If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
                     {
                         Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
                     }
-                }
                 ###########################################################################
                 If ($TestModule)
                 {
