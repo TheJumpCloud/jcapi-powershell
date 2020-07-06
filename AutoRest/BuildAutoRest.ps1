@@ -27,6 +27,7 @@ Try
     $BuildModule = $true
     $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
+    $PrereleaseSuffix = '' # $Current-Version + (Get-Date)
     $UpdateModuleGuid = $true
     $TestModule = $true
     $RemoveGitIgnore = $true
@@ -392,6 +393,7 @@ Try
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
                 [System.Version]$CurrentVersion = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('ModuleVersion')
+                $PrereleaseSuffix = "$CurrentVersion" + "-" + (Get-Date -Format "yyyyMMddHHmmss")
                 If ($PackModule)
                 {
                     Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -403,6 +405,7 @@ Try
                 Write-Host ("##vso[task.setvariable variable=VersionMajor]$($CurrentVersion.Major)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Write-Host ("##vso[task.setvariable variable=VersionMinor]$($CurrentVersion.Minor)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Write-Host ("##vso[task.setvariable variable=VersionPatch]$($CurrentVersion.Build)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=PrereleaseSuffix]$($PrereleaseSuffix)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
