@@ -75,13 +75,13 @@ Try
                 {
                     If ($ParameterContent.Count -eq 1)
                     {
-                    # Add paginate parameter
+                        # Add paginate parameter
                         $ParameterContent += ",$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
                     }
                     Else
                     {
-                    $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
-                }
+                        $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                    }
                 }
                 # Build script content
                 If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
