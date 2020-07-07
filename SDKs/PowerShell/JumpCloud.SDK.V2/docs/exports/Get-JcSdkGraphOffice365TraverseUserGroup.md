@@ -13,8 +13,7 @@ This endpoint will return all Users Groups bound to an Office 365 instance, eith
 ## SYNTAX
 
 ```
-Get-JcSdkGraphOffice365TraverseUserGroup -Office365Id <String> [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [<CommonParameters>]
+Get-JcSdkGraphOffice365TraverseUserGroup -Office365Id <String> [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,22 +52,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Office365Id
 ObjectID of the Office 365 suite.
 
@@ -78,21 +61,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -13,8 +13,8 @@ This endpoint returns the latest policies results for a specific policy.\n\n####
 ## SYNTAX
 
 ```
-Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,22 +69,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PolicyId
 .
 
@@ -94,21 +78,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

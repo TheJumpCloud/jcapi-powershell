@@ -48,19 +48,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]

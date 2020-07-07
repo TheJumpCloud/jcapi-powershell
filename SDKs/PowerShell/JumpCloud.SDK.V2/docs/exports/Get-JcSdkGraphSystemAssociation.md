@@ -13,8 +13,8 @@ This endpoint returns the _direct_ associations of a System.\n\nA direct associa
 ## SYNTAX
 
 ```
-Get-JcSdkGraphSystemAssociation -SystemId <String> -Targets <String[]> [-Limit <Int32>] [-Skip <Int32>]
- [-Authorization <String>] [-Date <String>] [<CommonParameters>]
+Get-JcSdkGraphSystemAssociation -SystemId <String> -Targets <String[]> [-Authorization <String>]
+ [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,37 +58,6 @@ Current date header for the System Context API
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 

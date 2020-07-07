@@ -19,7 +19,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// filename:
     /// - 'mem:///109?oai3.shaken.json'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/JumpCloud.SDK.V2.json#/paths/~1workdays~1{id}~1import~1{job_id}~1results'
+    /// - 'file:///D:/a/1/s/SwaggerSpecs/JumpCloud.SDK.V2.json#/paths/~1workdays~1{id}~1import~1{job_id}~1results'
     /// [DETAILS]
     /// verb: Import
     /// subjectPrefix:

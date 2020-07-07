@@ -16,7 +16,7 @@ These rules specify how JumpCloud attributes translate to [Microsoft Graph](http
 ### List (Default)
 ```
 Get-JcSdkOffice365TranslationRule -Office365Id <String> [-Fields <String[]>] [-Filter <String[]>]
- [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>] [<CommonParameters>]
+ [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### Get
@@ -113,22 +113,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Office365Id
 .
 
@@ -138,21 +122,6 @@ Parameter Sets: Get, List
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
