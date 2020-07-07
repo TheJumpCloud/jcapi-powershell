@@ -15,8 +15,8 @@ Query the API for a count of matching events
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventCount -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-Limit <Int64>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>]
- [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -81,21 +81,6 @@ optional list of fields to return from query
 
 ```yaml
 Type: System.String[]
-Parameter Sets: GetExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-Max number of rows to return
-
-```yaml
-Type: System.Int64
 Parameter Sets: GetExpanded
 Aliases:
 

@@ -84,12 +84,6 @@ param(
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [System.Int64]
-    # Max number of rows to return
-    ${Limit},
-
-    [Parameter(ParameterSetName='GetExpanded')]
-    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # Specific query to search after, see x-* response headers for next values
     ${SearchAfter},
