@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: Directory Insights API Test
+  title: Directory Insights API
   description: The purpose of this API is to query Jumpcloud Directory Insights events
 host: api.jumpcloud.com
 basePath: /insights/directory/v1/
@@ -467,3 +467,4 @@ definitions:
       in every case, they are key-value pairs,
       so they can be stored in a map by their parent object
     type: object
+
