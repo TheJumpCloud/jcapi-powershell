@@ -112,18 +112,18 @@ Try
                             Write-Host ('[RUN COMMAND] Increment module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                             $ConfigContent = $ConfigContent -Replace ("(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)")
                             $ConfigContent | Out-File -FilePath:($ConfigFilePath) -Force
-                            $env:BUILD_BUILDNUMBER = If ([System.String]::IsNullOrEmpty($env:BUILD_BUILDNUMBER))
-                            {
-                                '0000'
-                            }
-                            Else
-                            {
-                                $env:BUILD_BUILDNUMBER
-                            }
-                            $BuildVersion = "$($ModuleVersion)-$($env:BUILD_BUILDNUMBER)"
                         }
                     }
                 }
+                $env:BUILD_BUILDNUMBER = If ([System.String]::IsNullOrEmpty($env:BUILD_BUILDNUMBER))
+                {
+                    '0000'
+                }
+                Else
+                {
+                    $env:BUILD_BUILDNUMBER
+                }
+                $BuildVersion = "$($ModuleVersion)-$($env:BUILD_BUILDNUMBER)"
                 ###########################################################################
                 If ($InstallPreReq)
                 {
