@@ -113,12 +113,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onBadRequest method should be processed, or if the method should
         /// return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// <c>overrideOnConflict</c> will be called before the regular onConflict has been processed, allowing customization of what
@@ -147,12 +147,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// customization of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onInternalServerError method should be processed, or if the
         /// method should return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnInternalServerError(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnInternalServerError(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// <c>overrideOnNoContent</c> will be called before the regular onNoContent has been processed, allowing customization of
@@ -357,12 +357,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 400 (BadRequest).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema> response)
+        private async global::System.Threading.Tasks.Task onBadRequest(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -373,8 +373,8 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onBadRequest - response for 400 / */*
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema
+                // onBadRequest - response for 400 / application/json
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema
                 WriteObject((await response).Message);
             }
         }
@@ -396,7 +396,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onConflict - response for 409 / */*
+                // onConflict - response for 409 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -419,7 +419,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onForbidden - response for 403 / */*
+                // onForbidden - response for 403 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -429,12 +429,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// a delegate that is called when the remote service returns 500 (InternalServerError).
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onInternalServerError(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema> response)
+        private async global::System.Threading.Tasks.Task onInternalServerError(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -445,8 +445,8 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onInternalServerError - response for 500 / */*
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema
+                // onInternalServerError - response for 500 / application/json
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema
                 WriteObject((await response).Message);
             }
         }
@@ -492,7 +492,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onNotFound - response for 404 / */*
+                // onNotFound - response for 404 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -515,7 +515,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onUnauthorized - response for 401 / */*
+                // onUnauthorized - response for 401 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }

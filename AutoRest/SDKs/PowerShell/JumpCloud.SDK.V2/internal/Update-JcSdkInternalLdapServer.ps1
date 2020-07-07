@@ -32,7 +32,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsD2Bhs5LdapserversIdPatchResponses200ContentSchema
+JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
 .Outputs
 System.String
 .Notes
@@ -68,7 +68,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/jumpcloud.sdk.v2/update-jcsdkinternalldapserver
 #>
 function Update-JcSdkInternalLdapServer {
-[OutputType([JumpCloud.SDK.V2.Models.IPathsD2Bhs5LdapserversIdPatchResponses200ContentSchema], [System.String])]
+[OutputType([JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
 [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
 param(
     [Parameter(ParameterSetName='Patch', Mandatory)]

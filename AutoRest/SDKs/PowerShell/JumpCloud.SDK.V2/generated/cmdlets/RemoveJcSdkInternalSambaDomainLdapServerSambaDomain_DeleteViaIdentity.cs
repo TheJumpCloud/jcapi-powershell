@@ -340,7 +340,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // (await response) // should be string
                 WriteObject((await response));
             }

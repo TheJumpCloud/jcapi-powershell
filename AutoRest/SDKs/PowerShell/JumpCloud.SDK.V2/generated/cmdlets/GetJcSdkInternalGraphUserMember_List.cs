@@ -357,7 +357,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);

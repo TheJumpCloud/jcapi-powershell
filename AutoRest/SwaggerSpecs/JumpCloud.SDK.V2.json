@@ -10,6 +10,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "x-api-key": {
       "name": "x-api-key",
@@ -2374,6 +2380,15 @@
                 "$ref": "#/definitions/GSuiteTranslationRule"
               },
               "type": "array"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "field": "g_suite_work_addresses",
+                  "id": "object_id_1",
+                  "source_type": "user"
+                }
+              ]
             }
           }
         },
@@ -3541,6 +3556,15 @@
                 "$ref": "#/definitions/Office365TranslationRule"
               },
               "type": "array"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "field": "office_365_state",
+                  "id": "object_id_1",
+                  "source_type": "user"
+                }
+              ]
             }
           }
         },
@@ -4691,6 +4715,29 @@
                 }
               },
               "type": "object"
+            },
+            "examples": {
+              "application/json": {
+                "results": [
+                  {
+                    "_id": "5c3536e9e0a6840001872782",
+                    "email": "joe@example.com",
+                    "enableMultiFactor": false,
+                    "firstname": "",
+                    "lastname": "",
+                    "registered": true
+                  },
+                  {
+                    "_id": "5c35370ae0a6840001872784",
+                    "email": "mildred@example.com",
+                    "enableMultiFactor": false,
+                    "firstname": "",
+                    "lastname": "",
+                    "registered": true
+                  }
+                ],
+                "totalCount": 2
+              }
             }
           },
           "401": {
@@ -4702,6 +4749,11 @@
                 }
               },
               "type": "object"
+            },
+            "examples": {
+              "application/json": {
+                "message": "Unauthorized"
+              }
             }
           }
         },
@@ -5068,6 +5120,20 @@
                 "$ref": "#/definitions/SystemGroup"
               },
               "type": "array"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "id": "000000"
+                },
+                {
+                  "type": "system_group"
+                },
+                {
+                  "id": "000000",
+                  "name": "group1"
+                }
+              ]
             }
           },
           "default": {
@@ -5690,6 +5756,13 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SystemGroup"
+            },
+            "examples": {
+              "application/json": {
+                "id": "000000",
+                "name": "group1",
+                "type": "system_group"
+              }
             }
           }
         },
@@ -5729,6 +5802,13 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SystemGroup"
+            },
+            "examples": {
+              "application/json": {
+                "id": "00000",
+                "name": "group1",
+                "type": "system_group"
+              }
             }
           }
         },
@@ -9606,6 +9686,11 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/systemfdekey"
+            },
+            "examples": {
+              "application/json": {
+                "key": "cupidatat consequat occaecat proident"
+              }
             }
           },
           "400": {
@@ -12109,6 +12194,27 @@
                 "$ref": "#/definitions/workday-worker"
               },
               "type": "array"
+            },
+            "examples": {
+              "application/json": [
+                {
+                  "lastName": "sint dolore Excepteur ad"
+                },
+                {
+                  "attributes": {},
+                  "email": "nostrud tempor anim ips",
+                  "firstName": "et ad",
+                  "username": "Excepteur culpa nulla aliqua"
+                },
+                {
+                  "attributes": {},
+                  "email": "veniam ullamco"
+                },
+                {},
+                {
+                  "lastName": "do"
+                }
+              ]
             }
           }
         },
@@ -12910,12 +13016,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "GraphConnection": {
       "title": "GraphConnection",

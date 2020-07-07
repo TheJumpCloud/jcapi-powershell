@@ -1552,6 +1552,28 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.Paths150W1C8ApplemdmsAppleMdmIdCsrGetResponses201ContentApplicationOctetStreamSchema</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.Paths150W1C8ApplemdmsAppleMdmIdCsrGetResponses201ContentApplicationOctetStreamSchema</TypeName>
@@ -1574,9 +1596,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1596,21 +1618,39 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1Caqy6NProvidersProviderIdAdministratorsGetResponses401ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Caqy6NProvidersProviderIdAdministratorsGetResponses401ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>Message</Label>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserLockoutAction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UserPasswordExpirationAction</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Message</PropertyName>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserLockoutAction</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UserPasswordExpirationAction</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -1633,6 +1673,94 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Pin</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -1674,9 +1802,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1MuphavApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1MuphavApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1696,9 +1824,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1Myn4OmApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Myn4OmApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1718,9 +1846,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1QicolfApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1QicolfApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1740,9 +1868,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1Tsv2JbLdapserversIdPatchResponses400ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.Paths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Tsv2JbLdapserversIdPatchResponses400ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1762,115 +1890,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>TotalCount</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>TotalCount</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Message</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Message</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsD2Bhs5LdapserversIdPatchResponses200ContentSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsD2Bhs5LdapserversIdPatchResponses200ContentSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Name</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserLockoutAction</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserPasswordExpirationAction</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserLockoutAction</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserPasswordExpirationAction</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsDxuzbcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsDxuzbcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Message</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Message</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsFpnlueApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsFpnlueApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1912,9 +1934,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsMdc7AmApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsMdc7AmApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1934,21 +1956,21 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsOhxgnoApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsOhxgnoApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>Message</Label>
+            <Label>TotalCount</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>Message</PropertyName>
+                <PropertyName>TotalCount</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -1956,31 +1978,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsVobadkApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentSchema</Name>
+      <Name>JumpCloud.SDK.V2.Models.PathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsVobadkApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Message</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Message</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

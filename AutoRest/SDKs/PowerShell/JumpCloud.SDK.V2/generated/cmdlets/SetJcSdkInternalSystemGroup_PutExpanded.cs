@@ -313,7 +313,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.ISystemGroup
                 WriteObject((await response));
             }

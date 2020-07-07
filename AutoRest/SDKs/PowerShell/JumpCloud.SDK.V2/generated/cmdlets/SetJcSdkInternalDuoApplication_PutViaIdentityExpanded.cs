@@ -416,7 +416,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onBadRequest - response for 400 / */*
+                // onBadRequest - response for 400 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -439,7 +439,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onConflict - response for 409 / */*
+                // onConflict - response for 409 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -462,7 +462,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onForbidden - response for 403 / */*
+                // onForbidden - response for 403 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -487,7 +487,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onInternalServerError - response for 500 / */*
+                // onInternalServerError - response for 500 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -510,7 +510,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onNotFound - response for 404 / */*
+                // onNotFound - response for 404 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }
@@ -533,7 +533,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IDuoApplication
                 WriteObject((await response));
             }
@@ -556,7 +556,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onUnauthorized - response for 401 / */*
+                // onUnauthorized - response for 401 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IErrorresponse
                 WriteObject((await response).Message);
             }

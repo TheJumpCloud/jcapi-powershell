@@ -283,7 +283,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.JobId.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -401,43 +401,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoAccount.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -631,43 +631,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoApplication.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -843,7 +843,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.GSuiteTranslationRule.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1019,7 +1019,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SambaDomainOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1195,7 +1195,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Office365TranslationRule.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1307,7 +1307,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PolicyWithDetails.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1366,7 +1366,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CreateProviderAdmin(string providerId, JumpCloud.SDK.V2.Models.IProviderAdminReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CreateProviderAdmin(string providerId, JumpCloud.SDK.V2.Models.IProviderAdminReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -1417,7 +1417,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task CreateProviderAdminViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IProviderAdminReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task CreateProviderAdminViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IProviderAdminReq body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -1465,7 +1465,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task CreateProviderAdmin_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task CreateProviderAdmin_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IAdministrator>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -1482,13 +1482,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Administrator.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1599,7 +1599,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SystemGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1708,7 +1708,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.UserGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -1828,7 +1828,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.WorkdayOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -2004,43 +2004,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.AppleMdm.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -2213,43 +2213,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoAccount.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -2426,43 +2426,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoApplication.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -2789,7 +2789,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\string.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result) is JumpCloud.SDK.V2.Runtime.Json.JsonString __y ? (string)(__y.ToString()) : null));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NoContent:
@@ -3636,7 +3636,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task EraseAppleMdmDevice(string appleMdmId, string deviceId, JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsFpnlueApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Myn4OmApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task EraseAppleMdmDevice(string appleMdmId, string deviceId, JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -3692,7 +3692,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task EraseAppleMdmDeviceViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsFpnlueApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Myn4OmApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task EraseAppleMdmDeviceViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -3748,7 +3748,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task EraseAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsFpnlueApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Myn4OmApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task EraseAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -3771,37 +3771,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Gpc93NApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Olu3W2ApplemdmsAppleMdmIdDevicesDeviceIdErasePostResponses500ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -3959,7 +3959,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.ActiveDirectoryOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -4140,37 +4140,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -4331,37 +4331,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -4691,7 +4691,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IJobWorkresult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IJobWorkresult) (JumpCloud.SDK.V2.Models.JobWorkresult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -4850,7 +4850,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsCertificates[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsCertificates) (JumpCloud.SDK.V2.Models.SystemInsightsCertificates.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -5012,7 +5012,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsCupsDestinations[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsCupsDestinations) (JumpCloud.SDK.V2.Models.SystemInsightsCupsDestinations.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -5170,7 +5170,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoAccount.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -5347,43 +5347,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoApplication.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -5587,7 +5587,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.GSuiteTranslationRule.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -5701,7 +5701,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.GsuiteOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -5858,7 +5858,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails) (JumpCloud.SDK.V2.Models.SystemInsightsInterfaceDetails.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -6065,7 +6065,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SambaDomainOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6179,7 +6179,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.LdapServerOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6382,7 +6382,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Office365TranslationRule.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6497,7 +6497,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Office365Output.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6691,7 +6691,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PolicyResult.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6844,7 +6844,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PolicyTemplateWithDetails.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -6956,7 +6956,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PolicyWithDetails.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -7113,7 +7113,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsPythonPackages[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsPythonPackages) (JumpCloud.SDK.V2.Models.SystemInsightsPythonPackages.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -7275,7 +7275,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsRegistry[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsRegistry) (JumpCloud.SDK.V2.Models.SystemInsightsRegistry.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -7437,7 +7437,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsScheduledTasks[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsScheduledTasks) (JumpCloud.SDK.V2.Models.SystemInsightsScheduledTasks.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -7599,7 +7599,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsServices[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsServices) (JumpCloud.SDK.V2.Models.SystemInsightsServices.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -7761,7 +7761,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsStartupItems[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsStartupItems) (JumpCloud.SDK.V2.Models.SystemInsightsStartupItems.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -7921,43 +7921,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Systemfdekey.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -8110,7 +8110,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SystemGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -8263,7 +8263,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.UserGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -8416,7 +8416,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.WorkdayOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -8647,7 +8647,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IJobWorkresult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IJobWorkresult) (JumpCloud.SDK.V2.Models.JobWorkresult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -8782,7 +8782,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.JobId.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -9020,7 +9020,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -9216,7 +9216,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -9347,7 +9347,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IActiveDirectoryOutput[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IActiveDirectoryOutput) (JumpCloud.SDK.V2.Models.ActiveDirectoryOutput.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -9625,43 +9625,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IAppleMdmDevice[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IAppleMdmDevice) (JumpCloud.SDK.V2.Models.AppleMdmDevice.FromJson(__x) )) ))() : null));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -9825,7 +9825,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IAppleMdm[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IAppleMdm) (JumpCloud.SDK.V2.Models.AppleMdm.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -9886,7 +9886,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IAppleMdm[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IAppleMdm) (JumpCloud.SDK.V2.Models.AppleMdm.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10058,7 +10058,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10306,7 +10306,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10436,7 +10436,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10614,7 +10614,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10862,7 +10862,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -10992,7 +10992,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -11180,13 +11180,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IDirectory[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IDirectory) (JumpCloud.SDK.V2.Models.Directory.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onDefault(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                     }
@@ -11290,7 +11290,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IDuoAccount[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IDuoAccount) (JumpCloud.SDK.V2.Models.DuoAccount.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -11464,43 +11464,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IDuoApplication[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IDuoApplication) (JumpCloud.SDK.V2.Models.DuoApplication.FromJson(__x) )) ))() : null));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -11673,7 +11673,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -11875,7 +11875,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGSuiteTranslationRule[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGSuiteTranslationRule) (JumpCloud.SDK.V2.Models.GSuiteTranslationRule.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -12123,7 +12123,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -12253,7 +12253,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -12457,13 +12457,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGroup[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGroup) (JumpCloud.SDK.V2.Models.Group.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onDefault(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                     }
@@ -12696,7 +12696,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -12902,13 +12902,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISambaDomainOutput[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISambaDomainOutput) (JumpCloud.SDK.V2.Models.SambaDomainOutput.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onDefault(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                     }
@@ -13152,7 +13152,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -13282,7 +13282,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -13412,7 +13412,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ILdapServerOutput[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ILdapServerOutput) (JumpCloud.SDK.V2.Models.LdapServerOutput.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -13593,7 +13593,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -13795,7 +13795,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IOffice365TranslationRule[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IOffice365TranslationRule) (JumpCloud.SDK.V2.Models.Office365TranslationRule.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -14043,7 +14043,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -14173,7 +14173,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -14407,7 +14407,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -14661,7 +14661,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicyResult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicyResult) (JumpCloud.SDK.V2.Models.PolicyResult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -14800,7 +14800,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicyResult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicyResult) (JumpCloud.SDK.V2.Models.PolicyResult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -15060,7 +15060,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicyResult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicyResult) (JumpCloud.SDK.V2.Models.PolicyResult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -15200,7 +15200,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicyResult[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicyResult) (JumpCloud.SDK.V2.Models.PolicyResult.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -15397,13 +15397,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicyTemplate[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicyTemplate) (JumpCloud.SDK.V2.Models.PolicyTemplate.FromJson(__x) )) ))() : null));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -15650,7 +15650,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -15780,7 +15780,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -15913,13 +15913,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IPolicy[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IPolicy) (JumpCloud.SDK.V2.Models.Policy.FromJson(__x) )) ))() : null));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -15991,7 +15991,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task ListProviderAdministrator(string providerId, string[] fields, string[] filter, int? limit, int? skip, string[] sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Caqy6NProvidersProviderIdAdministratorsGetResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task ListProviderAdministrator(string providerId, string[] fields, string[] filter, int? limit, int? skip, string[] sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -16053,7 +16053,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task ListProviderAdministratorViaIdentity(global::System.String viaIdentity, string[] fields, string[] filter, int? limit, int? skip, string[] sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Caqy6NProvidersProviderIdAdministratorsGetResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task ListProviderAdministratorViaIdentity(global::System.String viaIdentity, string[] fields, string[] filter, int? limit, int? skip, string[] sort, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -16106,7 +16106,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task ListProviderAdministrator_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Caqy6NProvidersProviderIdAdministratorsGetResponses401ContentSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task ListProviderAdministrator_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onUnauthorized, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -16123,13 +16123,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PathsZ2RnkiProvidersProviderIdAdministratorsGetResponses401ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -16313,7 +16313,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -16561,7 +16561,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -16691,7 +16691,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -16891,7 +16891,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -17142,7 +17142,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -17316,7 +17316,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -17499,7 +17499,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -17688,7 +17688,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -17876,7 +17876,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -18118,7 +18118,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -18248,7 +18248,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -18387,13 +18387,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemGroup[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemGroup) (JumpCloud.SDK.V2.Models.SystemGroup.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onDefault(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                     }
@@ -18597,7 +18597,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsAlfExceptions[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsAlfExceptions) (JumpCloud.SDK.V2.Models.SystemInsightsAlfExceptions.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -18759,7 +18759,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsAlfExplicitAuths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsAlfExplicitAuths) (JumpCloud.SDK.V2.Models.SystemInsightsAlfExplicitAuths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -18878,7 +18878,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsAlf[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsAlf) (JumpCloud.SDK.V2.Models.SystemInsightsAlf.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19040,7 +19040,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsAppcompatShims[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsAppcompatShims) (JumpCloud.SDK.V2.Models.SystemInsightsAppcompatShims.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19202,7 +19202,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsApps[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsApps) (JumpCloud.SDK.V2.Models.SystemInsightsApps.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19364,7 +19364,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsAuthorizedKeys[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsAuthorizedKeys) (JumpCloud.SDK.V2.Models.SystemInsightsAuthorizedKeys.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19526,7 +19526,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsBattery[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsBattery) (JumpCloud.SDK.V2.Models.SystemInsightsBattery.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19688,7 +19688,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsBitlockerInfo[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsBitlockerInfo) (JumpCloud.SDK.V2.Models.SystemInsightsBitlockerInfo.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -19850,7 +19850,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsBrowserPlugins[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsBrowserPlugins) (JumpCloud.SDK.V2.Models.SystemInsightsBrowserPlugins.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20012,7 +20012,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsChromeExtensions[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsChromeExtensions) (JumpCloud.SDK.V2.Models.SystemInsightsChromeExtensions.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20174,7 +20174,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsConnectivity[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsConnectivity) (JumpCloud.SDK.V2.Models.SystemInsightsConnectivity.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20336,7 +20336,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsCrashes[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsCrashes) (JumpCloud.SDK.V2.Models.SystemInsightsCrashes.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20498,7 +20498,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsDiskEncryption[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsDiskEncryption) (JumpCloud.SDK.V2.Models.SystemInsightsDiskEncryption.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20660,7 +20660,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsDiskInfo[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsDiskInfo) (JumpCloud.SDK.V2.Models.SystemInsightsDiskInfo.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20822,7 +20822,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsDnsResolvers[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsDnsResolvers) (JumpCloud.SDK.V2.Models.SystemInsightsDnsResolvers.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -20984,7 +20984,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsEtcHosts[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsEtcHosts) (JumpCloud.SDK.V2.Models.SystemInsightsEtcHosts.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21146,7 +21146,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsFirefoxAddons[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsFirefoxAddons) (JumpCloud.SDK.V2.Models.SystemInsightsFirefoxAddons.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21308,7 +21308,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsGroups[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsGroups) (JumpCloud.SDK.V2.Models.SystemInsightsGroups.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21470,7 +21470,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsIeExtensions[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsIeExtensions) (JumpCloud.SDK.V2.Models.SystemInsightsIeExtensions.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21634,7 +21634,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceAddresses[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceAddresses) (JumpCloud.SDK.V2.Models.SystemInsightsInterfaceAddresses.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21796,7 +21796,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsKernelInfo[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsKernelInfo) (JumpCloud.SDK.V2.Models.SystemInsightsKernelInfo.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -21958,7 +21958,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd) (JumpCloud.SDK.V2.Models.SystemInsightsLaunchd.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22120,7 +22120,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers) (JumpCloud.SDK.V2.Models.SystemInsightsLoggedInUsers.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22282,7 +22282,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrives[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrives) (JumpCloud.SDK.V2.Models.SystemInsightsLogicalDrives.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22444,7 +22444,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsManagedPolicies[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsManagedPolicies) (JumpCloud.SDK.V2.Models.SystemInsightsManagedPolicies.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22606,7 +22606,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsMounts[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsMounts) (JumpCloud.SDK.V2.Models.SystemInsightsMounts.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22768,7 +22768,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsOSVersion[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsOSVersion) (JumpCloud.SDK.V2.Models.SystemInsightsOSVersion.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -22930,7 +22930,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsPatches[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsPatches) (JumpCloud.SDK.V2.Models.SystemInsightsPatches.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23092,7 +23092,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsPrograms[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsPrograms) (JumpCloud.SDK.V2.Models.SystemInsightsPrograms.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23254,7 +23254,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSafariExtensions[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSafariExtensions) (JumpCloud.SDK.V2.Models.SystemInsightsSafariExtensions.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23416,7 +23416,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsShadow[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsShadow) (JumpCloud.SDK.V2.Models.SystemInsightsShadow.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23578,7 +23578,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSharedFolders[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSharedFolders) (JumpCloud.SDK.V2.Models.SystemInsightsSharedFolders.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23740,7 +23740,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSharedResources[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSharedResources) (JumpCloud.SDK.V2.Models.SystemInsightsSharedResources.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -23904,7 +23904,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSharingPreferences[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSharingPreferences) (JumpCloud.SDK.V2.Models.SystemInsightsSharingPreferences.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24066,7 +24066,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSipConfig[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSipConfig) (JumpCloud.SDK.V2.Models.SystemInsightsSipConfig.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24228,7 +24228,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSystemControls[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSystemControls) (JumpCloud.SDK.V2.Models.SystemInsightsSystemControls.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24390,7 +24390,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo) (JumpCloud.SDK.V2.Models.SystemInsightsSystemInfo.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24552,7 +24552,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsUptime[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsUptime) (JumpCloud.SDK.V2.Models.SystemInsightsUptime.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24714,7 +24714,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsUsbDevices[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsUsbDevices) (JumpCloud.SDK.V2.Models.SystemInsightsUsbDevices.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -24876,7 +24876,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsUserGroups[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsUserGroups) (JumpCloud.SDK.V2.Models.SystemInsightsUserGroups.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25038,7 +25038,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsUserSshKeys[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsUserSshKeys) (JumpCloud.SDK.V2.Models.SystemInsightsUserSshKeys.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25200,7 +25200,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsUsers[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsUsers) (JumpCloud.SDK.V2.Models.SystemInsightsUsers.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25362,7 +25362,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsWifiNetworks[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsWifiNetworks) (JumpCloud.SDK.V2.Models.SystemInsightsWifiNetworks.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25524,7 +25524,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsWifiStatus[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsWifiStatus) (JumpCloud.SDK.V2.Models.SystemInsightsWifiStatus.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25686,7 +25686,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsWindowsCrashes[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsWindowsCrashes) (JumpCloud.SDK.V2.Models.SystemInsightsWindowsCrashes.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -25850,7 +25850,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts) (JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityProducts.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -26060,7 +26060,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -26253,7 +26253,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -26441,7 +26441,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -26719,7 +26719,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -26865,7 +26865,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -27045,7 +27045,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -27290,7 +27290,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -27464,7 +27464,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphConnection[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphConnection) (JumpCloud.SDK.V2.Models.GraphConnection.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -27647,7 +27647,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -27836,7 +27836,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -28022,7 +28022,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -28208,7 +28208,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -28394,7 +28394,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -28580,7 +28580,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -28766,7 +28766,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -29008,7 +29008,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -29138,7 +29138,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -29277,13 +29277,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IUserGroup[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IUserGroup) (JumpCloud.SDK.V2.Models.UserGroup.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onDefault(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onDefault(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Error.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                     }
@@ -29468,7 +29468,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -29657,7 +29657,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -29843,7 +29843,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30029,7 +30029,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30215,7 +30215,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30401,7 +30401,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30587,7 +30587,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30829,7 +30829,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -30959,7 +30959,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IGraphObjectWithPaths[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IGraphObjectWithPaths) (JumpCloud.SDK.V2.Models.GraphObjectWithPaths.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -31263,7 +31263,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IWorkdayWorker[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IWorkdayWorker) (JumpCloud.SDK.V2.Models.WorkdayWorker.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -31329,7 +31329,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\array.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => If( JumpCloud.SDK.V2.Runtime.Json.JsonArray.Parse(body.Result) as JumpCloud.SDK.V2.Runtime.Json.JsonArray, out var __y) ? new global::System.Func<JumpCloud.SDK.V2.Models.IWorkdayOutput[]>(()=> global::System.Linq.Enumerable.ToArray(global::System.Linq.Enumerable.Select(__y, (__x)=>(JumpCloud.SDK.V2.Models.IWorkdayOutput) (JumpCloud.SDK.V2.Models.WorkdayOutput.FromJson(__x) )) ))() : null));
                             break;
                         }
                         default:
@@ -31399,7 +31399,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task LockAppleMdmDevice(string appleMdmId, string deviceId, JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1QicolfApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsOhxgnoApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task LockAppleMdmDevice(string appleMdmId, string deviceId, JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -31455,7 +31455,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task LockAppleMdmDeviceViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1QicolfApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsOhxgnoApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task LockAppleMdmDeviceViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -31511,7 +31511,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task LockAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1QicolfApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsOhxgnoApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task LockAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -31534,37 +31534,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1U8L7T3ApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1G8V22LApplemdmsAppleMdmIdDevicesDeviceIdLockPostResponses500ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -31694,7 +31694,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.Created:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onCreated(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onCreated(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.JobId.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -31869,7 +31869,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.GsuiteOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -31931,7 +31931,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task PatchLdapServer(string id, JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsD2Bhs5LdapserversIdPatchResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Tsv2JbLdapserversIdPatchResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task PatchLdapServer(string id, JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -31982,7 +31982,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task PatchLdapServerViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsD2Bhs5LdapserversIdPatchResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Tsv2JbLdapserversIdPatchResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task PatchLdapServerViaIdentity(global::System.String viaIdentity, JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema body, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -32029,7 +32029,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task PatchLdapServer_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsD2Bhs5LdapserversIdPatchResponses200ContentSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Tsv2JbLdapserversIdPatchResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task PatchLdapServer_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onOk, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -32046,13 +32046,13 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Lb0C0ZLdapserversIdPatchResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -32228,7 +32228,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Office365Output.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -32430,43 +32430,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.DuoApplication.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -32648,7 +32648,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SambaDomainOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -32824,7 +32824,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Policy.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -32996,7 +32996,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.SystemGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -33168,7 +33168,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.UserGroup.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -33344,7 +33344,7 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.WorkdayOutput.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -33408,7 +33408,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RefreshAppleMdmDevice(string appleMdmId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsDxuzbcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsMdc7AmApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RefreshAppleMdmDevice(string appleMdmId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -33458,7 +33458,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RefreshAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsDxuzbcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsMdc7AmApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RefreshAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -33507,7 +33507,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RefreshAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsDxuzbcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsMdc7AmApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RefreshAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -33530,37 +33530,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Fqk6ZcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1ChrdfcApplemdmsAppleMdmIdRefreshdepdevicesPostResponses500ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -33621,7 +33621,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RestartAppleMdmDevice(string appleMdmId, string deviceId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RestartAppleMdmDevice(string appleMdmId, string deviceId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -33672,7 +33672,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task RestartAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task RestartAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -33724,7 +33724,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task RestartAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths188JmwsApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsB1N5M2ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task RestartAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -33747,37 +33747,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Vg4I5JApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PathsSwzghkApplemdmsAppleMdmIdDevicesDeviceIdRestartPostResponses500ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -36264,7 +36264,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task StopAppleMdmDevice(string appleMdmId, string deviceId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1MuphavApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsVobadkApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task StopAppleMdmDevice(string appleMdmId, string deviceId, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -36315,7 +36315,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        public async global::System.Threading.Tasks.Task StopAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1MuphavApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsVobadkApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        public async global::System.Threading.Tasks.Task StopAppleMdmDeviceViaIdentity(global::System.String viaIdentity, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             // Constant Parameters
             using( NoSynchronizationContext )
@@ -36367,7 +36367,7 @@ namespace JumpCloud.SDK.V2
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the response is completed.
         /// </returns>
-        internal async global::System.Threading.Tasks.Task StopAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1MuphavApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsVobadkApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
+        internal async global::System.Threading.Tasks.Task StopAppleMdmDevice_Call(global::System.Net.Http.HttpRequestMessage request, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task> onNoContent, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onBadRequest, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onUnauthorized, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onForbidden, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onNotFound, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IErrorresponse>, global::System.Threading.Tasks.Task> onConflict, global::System.Func<global::System.Net.Http.HttpResponseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema>, global::System.Threading.Tasks.Task> onInternalServerError, JumpCloud.SDK.V2.Runtime.IEventListener eventListener, JumpCloud.SDK.V2.Runtime.ISendAsync sender)
         {
             using( NoSynchronizationContext )
             {
@@ -36390,37 +36390,37 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Paths1Iwge1VApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses400ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.PathsAmfik7ApplemdmsAppleMdmIdDevicesDeviceIdShutdownPostResponses500ContentApplicationJsonSchema.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
@@ -36615,43 +36615,43 @@ namespace JumpCloud.SDK.V2
                         case global::System.Net.HttpStatusCode.OK:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onOk(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onOk(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.AppleMdm.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.BadRequest:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onBadRequest(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onBadRequest(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Unauthorized:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onUnauthorized(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onUnauthorized(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Forbidden:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onForbidden(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onForbidden(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.NotFound:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onNotFound(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onNotFound(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.Conflict:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onConflict(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onConflict(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         case global::System.Net.HttpStatusCode.InternalServerError:
                         {
                             await eventListener.Signal(JumpCloud.SDK.V2.Runtime.Events.BeforeResponseDispatch, _response); if( eventListener.Token.IsCancellationRequested ) { return; }
-                            await onInternalServerError(_response,null /* deserializeFromResponse doesn't support '-none-' C:\Users\VssAdministrator\.autorest\@autorest_powershell@2.1.396\node_modules\@autorest\powershell\dist\llcsharp\schema\object.js*/);
+                            await onInternalServerError(_response,_response.Content.ReadAsStringAsync().ContinueWith( body => JumpCloud.SDK.V2.Models.Errorresponse.FromJson(JumpCloud.SDK.V2.Runtime.Json.JsonNode.Parse(body.Result)) ));
                             break;
                         }
                         default:
