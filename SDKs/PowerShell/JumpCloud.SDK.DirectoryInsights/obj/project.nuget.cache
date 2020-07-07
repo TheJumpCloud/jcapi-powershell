@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "cHG1Lmcl6eOJNWUHOJMnASx9Pvyj3Ju/DJaPpjlCM+9pPI96dqphXkoMTHkFWtx0j43LXzbP2Qu5joXMqRfkJQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\epanipinto\\.nuget\\packages\\microsoft.csharp\\4.4.1\\microsoft.csharp.4.4.1.nupkg.sha512",
+    "C:\\Users\\epanipinto\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Users\\epanipinto\\.nuget\\packages\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\epanipinto\\.nuget\\packages\\powershellstandard.library\\5.1.0\\powershellstandard.library.5.1.0.nupkg.sha512"
+  ],
+  "logs": []
+}
