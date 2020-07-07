@@ -79,7 +79,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Remove-JcSdkInternalWorkdayImportWorkdayAuthorization @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Restart-JcSdkInternalAppleMdmDevice @PSBoundParameters
     }
     End
     {
