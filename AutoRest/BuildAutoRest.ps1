@@ -27,7 +27,6 @@ Try
     $BuildModule = $true
     $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
-    $PrereleaseSuffix = '' # $Current-Version + (Get-Date)
     $UpdateModuleGuid = $true
     $TestModule = $true
     $RemoveGitIgnore = $true
@@ -248,12 +247,12 @@ Try
                     }
                 }
                 ###########################################################################
-                    # Update module GUID
+                # Update module GUID
                 If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
-                    {
-                        Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
-                    }
+                {
+                    Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
+                }
                 ###########################################################################
                 If ($TestModule)
                 {
@@ -393,19 +392,15 @@ Try
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
                 [System.Version]$CurrentVersion = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('ModuleVersion')
-                $PrereleaseSuffix = "$CurrentVersion" + "-" + (Get-Date -Format "yyyyMMddHHmmss")
                 If ($PackModule)
                 {
                     Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 }
                 Else
                 {
-                Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 }
-                Write-Host ("##vso[task.setvariable variable=VersionMajor]$($CurrentVersion.Major)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Write-Host ("##vso[task.setvariable variable=VersionMinor]$($CurrentVersion.Minor)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Write-Host ("##vso[task.setvariable variable=VersionPatch]$($CurrentVersion.Build)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Write-Host ("##vso[task.setvariable variable=PrereleaseSuffix]$($PrereleaseSuffix)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=BuildVersion]$CurrentVersion-$(Get-Date -Format 'yyyyMMddHHmmss')") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
