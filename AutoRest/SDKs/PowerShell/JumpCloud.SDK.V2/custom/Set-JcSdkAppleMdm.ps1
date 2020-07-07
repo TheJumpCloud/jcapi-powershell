@@ -20,6 +20,8 @@ JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdm
+.Outputs
+System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -54,7 +56,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
 #>
  Function Set-JcSdkAppleMdm
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm], [System.String])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]

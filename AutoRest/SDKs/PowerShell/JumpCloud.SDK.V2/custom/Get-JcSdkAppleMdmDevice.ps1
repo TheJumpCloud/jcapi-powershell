@@ -14,12 +14,14 @@ PS C:\> {{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdmDevice
+.Outputs
+System.String
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdkapplemdmdevice
 #>
  Function Get-JcSdkAppleMdmDevice
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice], [System.String])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
