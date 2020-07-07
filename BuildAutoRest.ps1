@@ -109,7 +109,7 @@ Try
                             $ModuleVersion = Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
                             Write-Host ('[RUN COMMAND] Increment module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                             $ConfigContent = $ConfigContent -Replace ("(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)")
-                            $ConfigContent | Out-File -FilePath:($ConfigFilePath) -Force
+                            $ConfigContent.Trim() | Out-File -FilePath:($ConfigFilePath) -Force
                         }
                     }
                 }
