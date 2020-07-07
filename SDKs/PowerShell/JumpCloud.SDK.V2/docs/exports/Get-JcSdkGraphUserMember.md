@@ -13,8 +13,7 @@ This endpoint returns all the User Groups a User is a member of.\n\n#### Sample 
 ## SYNTAX
 
 ```
-Get-JcSdkGraphUserMember -UserId <String> [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>]
- [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkGraphUserMember -UserId <String> [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,37 +42,6 @@ Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 

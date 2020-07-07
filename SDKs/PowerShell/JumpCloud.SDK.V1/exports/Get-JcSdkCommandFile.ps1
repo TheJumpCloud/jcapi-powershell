@@ -69,19 +69,6 @@ param(
     # If omitted, the default list of fields will be returned.
     ${Fields},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Boolean]

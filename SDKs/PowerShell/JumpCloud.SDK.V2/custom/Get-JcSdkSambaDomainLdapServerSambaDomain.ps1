@@ -83,19 +83,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.

@@ -14,8 +14,7 @@ This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncu
 
 ### List (Default)
 ```
-Get-JcSdkCommandResult [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Skip <Int32>] [-Sort <String>]
- [-PassThru] [<CommonParameters>]
+Get-JcSdkCommandResult [-Fields <String>] [-Filter <String>] [-Sort <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### Get
@@ -112,43 +111,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PassThru
 Returns true when the command succeeds
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
 Aliases:
 
 Required: False

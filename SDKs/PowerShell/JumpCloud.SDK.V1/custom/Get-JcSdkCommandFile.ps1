@@ -55,19 +55,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     # If omitted, the default list of fields will be returned.
     ${Fields},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [System.Boolean]
     # Set to $true to return all results. This will overwrite any skip and limit parameter.

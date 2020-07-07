@@ -14,8 +14,7 @@ This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X
 
 ### List (Default)
 ```
-Get-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Search <String>] [-Skip <Int32>]
- [-Sort <String>] [<CommonParameters>]
+Get-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -112,42 +111,11 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Search
 A nested object containing a string `searchTerm` and a list of `fields` to search on.
 
 ```yaml
 Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
 Parameter Sets: List
 Aliases:
 

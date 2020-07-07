@@ -14,8 +14,8 @@ This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\n
 
 ### List (Default)
 ```
-Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Search <String>]
- [-Skip <Int32>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>]
+ [<CommonParameters>]
 ```
 
 ### Get
@@ -112,22 +112,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PassThru
 Returns true when the command succeeds
 
@@ -148,21 +132,6 @@ A nested object containing a string `searchTerm` and a list of `fields` to searc
 
 ```yaml
 Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
 Parameter Sets: List
 Aliases:
 

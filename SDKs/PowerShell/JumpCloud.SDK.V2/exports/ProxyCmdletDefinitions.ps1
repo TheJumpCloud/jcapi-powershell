@@ -241,19 +241,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -678,19 +665,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -953,19 +927,6 @@ param(
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -1054,19 +1015,6 @@ param(
     # The comma separated fields included in the returned records.
     # If omitted, the default list of fields will be returned.
     ${Fields},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -1542,19 +1490,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -1647,19 +1582,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -1756,19 +1678,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -1861,19 +1770,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -1968,19 +1864,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -2073,19 +1956,6 @@ param(
     [System.String[]]
     # .
     ${Targets},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -2180,19 +2050,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -2285,19 +2142,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -2392,19 +2236,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -2497,19 +2328,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -2604,19 +2422,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -2709,19 +2514,6 @@ param(
     [System.String[]]
     # .
     ${Targets},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -2816,19 +2608,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -2921,19 +2700,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -3028,19 +2794,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -3133,19 +2886,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -3240,19 +2980,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -3345,19 +3072,6 @@ param(
     [System.String[]]
     # .
     ${Targets},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -3461,19 +3175,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -3572,19 +3273,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -3677,19 +3365,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -3784,19 +3459,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -3889,19 +3551,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -3996,19 +3645,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -4101,19 +3737,6 @@ param(
     [System.String[]]
     # .
     ${Targets},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
@@ -4220,19 +3843,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -4325,19 +3935,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -4432,19 +4029,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -4537,19 +4121,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -4644,19 +4215,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -4743,19 +4301,6 @@ param(
     [System.String]
     # ObjectID of the System Group.
     ${GroupId},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -4849,19 +4394,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -4962,19 +4494,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -5088,19 +4607,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -5194,19 +4700,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -5299,19 +4792,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
@@ -5419,19 +4899,6 @@ param(
     ${Filter},
 
     [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.String]
     # Authorization header for the System Context API
@@ -5536,19 +5003,6 @@ param(
     # .
     ${Targets},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -5641,19 +5095,6 @@ param(
     [System.String[]]
     # .
     ${Targets},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -5748,19 +5189,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -5853,19 +5281,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -5960,19 +5375,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -6065,19 +5467,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -6172,19 +5561,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -6277,19 +5653,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -6384,19 +5747,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -6490,19 +5840,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -6589,19 +5926,6 @@ param(
     [System.String]
     # ObjectID of the User Group.
     ${GroupId},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -6695,19 +6019,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -6811,19 +6122,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -6922,19 +6220,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -7027,19 +6312,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -7134,19 +6406,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -7239,19 +6498,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -7346,19 +6592,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -7451,19 +6684,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -7558,19 +6778,6 @@ param(
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Boolean]
@@ -7663,19 +6870,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -7770,19 +6964,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -8056,19 +7237,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -8208,19 +7376,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -8496,19 +7651,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -8652,19 +7794,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -8819,21 +7948,6 @@ param(
     [Parameter(ParameterSetName='List1')]
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List1')]
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List1')]
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -8941,19 +8055,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -9101,19 +8202,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -9224,19 +8312,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -9387,19 +8462,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -9542,19 +8604,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -9648,18 +8697,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -9757,18 +8794,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -9860,18 +8885,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -9969,18 +8982,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -10072,18 +9073,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -10181,18 +9170,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -10284,18 +9261,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -10393,18 +9358,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -10496,18 +9449,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -10605,18 +9546,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -10708,18 +9637,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -10817,18 +9734,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -10920,18 +9825,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -11029,18 +9922,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -11132,18 +10013,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -11241,18 +10110,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -11344,18 +10201,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -11453,18 +10298,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -11556,18 +10389,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -11665,18 +10486,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -11768,18 +10577,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -11877,18 +10674,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -11980,18 +10765,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -12089,18 +10862,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -12192,18 +10953,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -12301,18 +11050,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -12404,18 +11141,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -12513,18 +11238,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -12616,18 +11329,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -12725,18 +11426,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -12828,18 +11517,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -12937,18 +11614,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -13040,18 +11705,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -13149,18 +11802,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -13252,18 +11893,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -13361,18 +11990,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -13464,18 +12081,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -13573,18 +12178,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -13676,18 +12269,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -13785,18 +12366,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -13888,18 +12457,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -13997,18 +12554,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -14100,18 +12645,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -14209,18 +12742,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -14312,18 +12833,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -14421,18 +12930,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -14524,18 +13021,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -14633,18 +13118,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -14736,18 +13209,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -14845,18 +13306,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -14948,18 +13397,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -15057,18 +13494,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -15163,18 +13588,6 @@ param(
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -15266,18 +13679,6 @@ param(
     [System.String[]]
     # Supported operators are: eq
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # .
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -15418,19 +13819,6 @@ param(
     [System.String[]]
     # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
     ${Filter},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -15576,19 +13964,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
@@ -15682,19 +14057,6 @@ param(
     [System.String]
     # .
     ${WorkdayId},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -16119,20 +14481,7 @@ param(
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip}
+    ${InputObject}
 )
 
 begin {

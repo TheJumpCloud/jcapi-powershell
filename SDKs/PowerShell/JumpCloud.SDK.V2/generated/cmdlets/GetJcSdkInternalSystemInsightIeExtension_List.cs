@@ -15,7 +15,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
     /// filename:
     /// - 'mem:///109?oai3.shaken.json'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/JumpCloud.SDK.V2.json#/paths/~1systeminsights~1ie_extensions'
+    /// - 'file:///D:/a/1/s/SwaggerSpecs/JumpCloud.SDK.V2.json#/paths/~1systeminsights~1ie_extensions'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:

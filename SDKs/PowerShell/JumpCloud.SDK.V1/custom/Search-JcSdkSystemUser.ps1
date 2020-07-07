@@ -56,19 +56,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     # A filter to apply to the query.
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]

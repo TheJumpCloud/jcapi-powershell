@@ -14,8 +14,7 @@ This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl
 
 ### List (Default)
 ```
-Get-JcSdkPolicy [-Fields <String[]>] [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>]
- [<CommonParameters>]
+Get-JcSdkPolicy [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### Get
@@ -108,37 +107,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

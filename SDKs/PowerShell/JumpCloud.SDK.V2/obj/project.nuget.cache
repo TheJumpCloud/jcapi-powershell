@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0KD6XRg7uNBFgj85zzNH3uxhNqHM77/1PptV2hSnMMdZvjJ2VeqGXoZZsHv1Prq+zqpeMY1QiuSoo1odJ2bCCA==",
+  "dgSpecHash": "XR/SVOJColA78/J13hVIQAP9vKDkum25xCHqGGEIqK6JRHfS/vnBOqxMMesgMc4k/4F9yLerX+9rcPzPcGsH6A==",
   "success": true,
-  "projectFilePath": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V2\\JumpCloud.SDK.V2.csproj",
+  "projectFilePath": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V2\\JumpCloud.SDK.V2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\VssAdministrator\\.nuget\\packages\\microsoft.csharp\\4.4.1\\microsoft.csharp.4.4.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",

@@ -13,8 +13,7 @@ Valid filter fields are `system_id` and `version`.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightOSVersion [-Filter <String[]>] [-Limit <Int32>] [-Skip <Int32>] [-Sort <String[]>]
- [<CommonParameters>]
+Get-JcSdkSystemInsightOSVersion [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,36 +42,6 @@ Supported operators are: eq
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj": {}
+    "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj": {}
   },
   "projects": {
-    "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj": {
+    "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj": {
       "version": "0.0.12",
       "restore": {
-        "projectUniqueName": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj",
+        "projectUniqueName": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj",
         "projectName": "JumpCloud.SDK.V1.private",
-        "projectPath": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj",
+        "projectPath": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\JumpCloud.SDK.V1.csproj",
         "packagesPath": "C:\\Users\\VssAdministrator\\.nuget\\packages\\",
-        "outputPath": "D:\\a\\1\\s\\AutoRest\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\obj\\",
+        "outputPath": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.V1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

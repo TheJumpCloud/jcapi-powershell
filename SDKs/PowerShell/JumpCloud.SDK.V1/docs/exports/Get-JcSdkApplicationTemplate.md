@@ -14,20 +14,19 @@ The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample 
 
 ### List (Default)
 ```
-Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Skip <Int32>]
- [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String>] [-Limit <Int32>]
- [-Skip <Int32>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String>] [-Sort <String>]
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
 Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
- [-Limit <Int32>] [-Skip <Int32>] [-Sort <String>] [<CommonParameters>]
+ [-Sort <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -110,36 +109,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

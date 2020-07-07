@@ -77,19 +77,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # Use space separated sort parameters to sort the collection.
     # Default sort is ascending.

@@ -13,8 +13,7 @@ This endpoint will return all Users Groups bound to a LDAP Server, either direct
 ## SYNTAX
 
 ```
-Get-JcSdkGraphLdapServerTraverseUserGroup -LdapserverId <String> [-Filter <String[]>] [-Limit <Int32>]
- [-Skip <Int32>] [<CommonParameters>]
+Get-JcSdkGraphLdapServerTraverseUserGroup -LdapserverId <String> [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,37 +61,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

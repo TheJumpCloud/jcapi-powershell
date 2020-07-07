@@ -14,14 +14,12 @@ This endpoint provides a list of job results from the workday import and will co
 
 ### Import (Default)
 ```
-Import-JcSdkWorkdayImportWorkdayResult -Id <String> -JobId <String> [-Limit <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
+Import-JcSdkWorkdayImportWorkdayResult -Id <String> -JobId <String> [<CommonParameters>]
 ```
 
 ### ImportViaIdentity
 ```
-Import-JcSdkWorkdayImportWorkdayResult -InputObject <IJumpCloudApIsIdentity> [-Limit <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
+Import-JcSdkWorkdayImportWorkdayResult -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,37 +83,6 @@ Parameter Sets: Import
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
