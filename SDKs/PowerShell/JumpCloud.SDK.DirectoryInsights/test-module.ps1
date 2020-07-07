@@ -56,7 +56,7 @@ try {
     setupEnv
   }
   $testFolder = Join-Path $PSScriptRoot 'test'
-  Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\JumpCloud.SDK.DirectoryInsights-TestResults.xml"
+  Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "D:\a\1\s\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\test\JumpCloud.SDK.DirectoryInsights-TestResults.xml"
 }
 Finally
 {

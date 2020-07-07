@@ -15,7 +15,7 @@ namespace JumpCloud.SDK.DirectoryInsights.Cmdlets
     /// filename:
     /// - 'mem:///109?oai3.shaken.json'
     /// originalLocations:
-    /// - 'file:///C:/Users/epanipinto/Documents/GitHub/jcapi-powershell/SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json#/paths/~1events'
+    /// - 'file:///D:/a/1/s/SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json#/paths/~1events'
     /// [DETAILS]
     /// verb: Get
     /// subjectPrefix:
