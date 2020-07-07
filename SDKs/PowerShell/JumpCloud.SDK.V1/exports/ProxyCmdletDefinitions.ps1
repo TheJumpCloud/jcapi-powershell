@@ -77,18 +77,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # .
     ${Sort},
@@ -214,18 +202,6 @@ param(
     [System.String]
     # A filter to apply to the query.
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter()]
     [JumpCloud.SDK.V1.Category('Query')]
@@ -357,19 +333,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # Use space separated sort parameters to sort the collection.
     # Default sort is ascending.
@@ -498,19 +461,6 @@ param(
     # If omitted, the default list of fields will be returned.
     ${Fields},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Boolean]
@@ -631,19 +581,6 @@ param(
     [System.String]
     # A filter to apply to the query.
     ${Filter},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
@@ -783,22 +720,9 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A nested object containing a string `searchTerm` and a list of `fields` to search on.
     ${Search},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
@@ -939,19 +863,6 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # Use space separated sort parameters to sort the collection.
     # Default sort is ascending.
@@ -1082,22 +993,9 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A nested object containing a string `searchTerm` and a list of `fields` to search on.
     ${Search},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
@@ -1231,21 +1129,9 @@ param(
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    ${Limit},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A nested object containing a string `searchTerm` and a list of `fields` to search on.
     ${Search},
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
@@ -3861,19 +3747,6 @@ param(
     # A filter to apply to the query.
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
@@ -4021,19 +3894,6 @@ param(
     # A filter to apply to the query.
     ${Filter},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
-
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
@@ -4180,19 +4040,6 @@ param(
     [System.String]
     # A filter to apply to the query.
     ${Filter},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The number of records to return at once.
-    # Limited to 100.
-    ${Limit},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.Int32]
-    # The offset into the records to return.
-    ${Skip},
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

@@ -16,15 +16,14 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Limit <Int32>] [-Skip <Int32>]
- [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
+ [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [-Limit <Int32>]
- [-Skip <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -127,22 +126,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -PassThru
 Returns true when the command succeeds
 
@@ -164,21 +147,6 @@ Accept wildcard characters: False
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISearchFilter1
 Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
 Aliases:
 
 Required: False

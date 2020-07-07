@@ -19,7 +19,7 @@ namespace JumpCloud.SDK.V1.Cmdlets
     /// filename:
     /// - 'mem:///109?oai3.shaken.json'
     /// originalLocations:
-    /// - 'file:///D:/a/1/s/AutoRest/SwaggerSpecs/JumpCloud.SDK.V1.json#/paths/~1commands'
+    /// - 'file:///D:/a/1/s/SwaggerSpecs/JumpCloud.SDK.V1.json#/paths/~1commands'
     /// [DETAILS]
     /// verb: New
     /// subjectPrefix:

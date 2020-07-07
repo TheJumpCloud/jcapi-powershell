@@ -56,7 +56,7 @@ try {
     setupEnv
   }
   $testFolder = Join-Path $PSScriptRoot 'test'
-  Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "D:\a\1\s\AutoRest\SDKs\PowerShell\JumpCloud.SDK.V1\test\JumpCloud.SDK.V1-TestResults.xml"
+  Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "D:\a\1\s\SDKs\PowerShell\JumpCloud.SDK.V1\test\JumpCloud.SDK.V1-TestResults.xml"
 }
 Finally
 {

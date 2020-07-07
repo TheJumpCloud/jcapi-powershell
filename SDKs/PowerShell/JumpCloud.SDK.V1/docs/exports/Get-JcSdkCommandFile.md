@@ -14,13 +14,12 @@ This endpoint returns the uploaded file(s) associated with a specific command.\n
 
 ### Get (Default)
 ```
-Get-JcSdkCommandFile -Id <String> [-Fields <String>] [-Limit <Int32>] [-Skip <Int32>] [<CommonParameters>]
+Get-JcSdkCommandFile -Id <String> [-Fields <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandFile -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Limit <Int32>] [-Skip <Int32>]
- [<CommonParameters>]
+Get-JcSdkCommandFile -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -88,37 +87,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Limit
-The number of records to return at once.
-Limited to 100.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-The offset into the records to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
