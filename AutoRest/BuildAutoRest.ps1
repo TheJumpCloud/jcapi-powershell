@@ -31,7 +31,7 @@ Try
     $TestModule = $true
     $RemoveGitIgnore = $true
     $RemoveAzAccounts = $true
-    $PackModule = $false
+    # $PackModule = $false
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
@@ -112,6 +112,15 @@ Try
                             Write-Host ('[RUN COMMAND] Increment module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                             $ConfigContent = $ConfigContent -Replace ("(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)")
                             $ConfigContent | Out-File -FilePath:($ConfigFilePath) -Force
+                            $env:BUILD_BUILDNUMBER = If ([System.String]::IsNullOrEmpty($env:BUILD_BUILDNUMBER))
+                            {
+                                '0000'
+                            }
+                            Else
+                            {
+                                $env:BUILD_BUILDNUMBER
+                            }
+                            $BuildVersion = "$($ModuleVersion)-$($env:BUILD_BUILDNUMBER)"
                         }
                     }
                 }
@@ -324,27 +333,27 @@ Try
                     }
                 }
                 ###########################################################################
-                If ($PackModule)
-                {
-                    # Pack module
-                    If (Test-Path -Path:($packModulePath))
-                    {
-                        Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                        Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
-                    }
-                    Else
-                    {
-                        Write-Host("##vso[task.logissue type=error;]" + "Path does not exist: $packModulePath")
-                        Write-Error ("Path does not exist: $packModulePath")
-                    }
-                    # Manual steps to be able to upload to PSGallery (Should not be needed but unable to get it to work otherwise)
-                    $nupkg = Get-Item -Path:($binFolder + $nupkgName)
-                    Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
-                    Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
-                    Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
-                    Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
-                    Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
-                }
+                # If ($PackModule)
+                # {
+                #     # Pack module
+                #     If (Test-Path -Path:($packModulePath))
+                #     {
+                #         Write-Host ('[RUN COMMAND] ' + $packModulePath ) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                #         Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
+                #     }
+                #     Else
+                #     {
+                #         Write-Host("##vso[task.logissue type=error;]" + "Path does not exist: $packModulePath")
+                #         Write-Error ("Path does not exist: $packModulePath")
+                #     }
+                #     # Manual steps to be able to upload to PSGallery (Should not be needed but unable to get it to work otherwise)
+                #     $nupkg = Get-Item -Path:($binFolder + $nupkgName)
+                #     Expand-Archive -Path:($nupkg.FullName) -DestinationPath:($extractedModulePath)
+                #     Remove-Item -Path:($extractedModulePath + '/_rels') -Recurse -Force
+                #     Remove-Item -Path:($extractedModulePath + '/*Content*Types*.xml') -Force
+                #     Remove-Item -Path:($extractedModulePath + '/package') -Force -Recurse
+                #     Remove-Item -Path:($extractedModulePath + '/' + $ModuleName + '.nuspec') -Force
+                # }
                 ##########################################################################
                 If ($CommitModule)
                 {
@@ -391,16 +400,16 @@ Try
                 }
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
-                [System.Version]$CurrentVersion = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('ModuleVersion')
-                If ($PackModule)
-                {
-                    Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                }
-                Else
-                {
-                    Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                }
-                Write-Host ("##vso[task.setvariable variable=BuildVersion]$($CurrentVersion).$($env:BUILD_BUILDNUMBER)") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # If ($PackModule)
+                # {
+                #     Write-Host ("##vso[task.setvariable variable=ModuleFolder]$extractedModulePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # }
+                # Else
+                # {
+                # Invoke-Expression -Command:("$BaseFolder/nuget.exe pack $OutputFullPath\$ModuleName.csproj -NonInteractive -OutputDirectory $BaseFolder -Symbols -version $BuildVersion -Verbosity Detailed") | Tee-Object -FilePath:($LogFilePath) -Append
+                Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # }
+                Write-Host ("##vso[task.setvariable variable=BuildVersion]$BuildVersion") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
