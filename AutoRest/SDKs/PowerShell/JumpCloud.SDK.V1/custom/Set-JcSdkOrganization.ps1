@@ -30,6 +30,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [ContactEmail <String>]: 
     [ContactName <String>]: 
     [DirectoryInsightPremiumEnabled <Boolean?>]: 
+    [DisableGoogleLogin <Boolean?>]: 
     [DisableLdap <Boolean?>]: 
     [DisableUm <Boolean?>]: 
     [DuplicateLdapGroups <Boolean?>]: 
@@ -77,6 +78,7 @@ SETTINGS <IOrganizationsettingsput>:
   [ContactEmail <String>]: 
   [ContactName <String>]: 
   [DirectoryInsightPremiumEnabled <Boolean?>]: 
+  [DisableGoogleLogin <Boolean?>]: 
   [DisableLdap <Boolean?>]: 
   [DisableUm <Boolean?>]: 
   [DuplicateLdapGroups <Boolean?>]: 

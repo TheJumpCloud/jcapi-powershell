@@ -55,42 +55,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     Begin
     {
         $Results = @()
-        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
-        {
-            $PSBoundParameters.Add('Skip', 0)
-        }
-        If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
-        {
-            $PSBoundParameters.Add('Limit', 100)
-        }
     }
     Process
     {
-        If ($Paginate)
-        {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
-            {
-                Write-Debug ("Skip: $($PSBoundParameters.Skip); Limit: $($PSBoundParameters.Limit);");
-                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
-                If (-not [System.String]::IsNullOrEmpty($Result))
-                {
-                    $ResultCount = ($Result.results | Measure-Object).Count;
-                    $Results += $Result.results;
-                    $PSBoundParameters.Skip += $ResultCount
-                }
-            }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and $Result)
-        }
-        Else
-        {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
-                $Results += $Result.results;
-            }
-        }
+        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalCommandTrigger @PSBoundParameters
     }
     End
     {

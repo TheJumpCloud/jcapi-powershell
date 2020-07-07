@@ -10,12 +10,6 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "securityDefinitions": {
     "x-api-key": {
       "name": "x-api-key",
@@ -107,8 +101,8 @@
         "operationId": "List-ActiveDirectoryAssociation",
         "summary": "List the associations of an Active Directory instance",
         "tags": [
-          "Active Directory",
-          "Graph"
+          "Graph",
+          "Active Directory"
         ],
         "description": "This endpoint returns the direct associations of this Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -185,8 +179,8 @@
         "operationId": "List-ActiveDirectoryTraverseUserGroup",
         "summary": "List the User Groups bound to an Active Directory instance",
         "tags": [
-          "Active Directory",
-          "Graph"
+          "Graph",
+          "Active Directory"
         ],
         "description": "This endpoint will return all Users Groups bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Active Directory instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Active Directory instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/usergroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -287,6 +281,7 @@
           "Apple MDM"
         ],
         "description": "Get a list of all Apple MDM configurations.  An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -328,6 +323,24 @@
               },
               "type": "object"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -363,6 +376,24 @@
             "schema": {
               "$ref": "#/definitions/apple-mdm-public-key-cert"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -441,6 +472,24 @@
                 "$ref": "#/definitions/apple-mdm-device"
               }
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -514,6 +563,18 @@
               },
               "type": "object"
             }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
           },
           "500": {
             "description": "",
@@ -591,6 +652,18 @@
               "type": "object"
             }
           },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
           "500": {
             "description": "",
             "schema": {
@@ -647,6 +720,18 @@
               },
               "type": "object"
             }
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
           },
           "500": {
             "description": "",
@@ -705,6 +790,18 @@
               "type": "object"
             }
           },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
           "500": {
             "description": "",
             "schema": {
@@ -732,6 +829,7 @@
           "Apple MDM"
         ],
         "description": "Get a list of enrollment profiles for an apple mdm.\n\nNote: currently only one enrollment profile is supported.\n\n#### Sample Request\n```\n curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -831,6 +929,18 @@
               "type": "object"
             }
           },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
           "500": {
             "description": "",
             "schema": {
@@ -865,6 +975,24 @@
             "schema": {
               "$ref": "#/definitions/AppleMDM"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -903,6 +1031,24 @@
             "schema": {
               "$ref": "#/definitions/AppleMDM"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -917,8 +1063,8 @@
         "operationId": "List-ApplicationAssociation",
         "summary": "List the associations of an Application",
         "tags": [
-          "Applications",
-          "Graph"
+          "Graph",
+          "Applications"
         ],
         "description": "This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -994,8 +1140,8 @@
         "operationId": "Set-ApplicationAssociation",
         "summary": "Manage the associations of an Application",
         "tags": [
-          "Applications",
-          "Graph"
+          "Graph",
+          "Applications"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
         "parameters": [
@@ -1024,8 +1170,8 @@
         "operationId": "List-ApplicationTraverseUserGroup",
         "summary": "List the User Groups bound to an Application",
         "tags": [
-          "Applications",
-          "Graph"
+          "Graph",
+          "Applications"
         ],
         "description": "This endpoint will return all Users Groups bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates  each path from this Application to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Application.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/applications/{Application_ID}/usergroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1090,8 +1236,8 @@
         "operationId": "List-ApplicationTraverseUser",
         "summary": "List the Users bound to an Application",
         "tags": [
-          "Applications",
-          "Graph"
+          "Graph",
+          "Applications"
         ],
         "description": "This endpoint will return all Users bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Application to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Application.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/applications/{Application_ID}/users \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1277,8 +1423,8 @@
         "operationId": "List-CommandAssociation",
         "summary": "List the associations of a Command",
         "tags": [
-          "Commands",
-          "Graph"
+          "Graph",
+          "Commands"
         ],
         "description": "This endpoint will return the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1354,8 +1500,8 @@
         "operationId": "Set-CommandAssociation",
         "summary": "Manage the associations of a Command",
         "tags": [
-          "Commands",
-          "Graph"
+          "Graph",
+          "Commands"
         ],
         "description": "This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n}'\n```",
         "parameters": [
@@ -1384,8 +1530,8 @@
         "operationId": "List-CommandTraverseSystemGroup",
         "summary": "List the System Groups bound to a Command",
         "tags": [
-          "Commands",
-          "Graph"
+          "Graph",
+          "Commands"
         ],
         "description": "This endpoint will return all System Groups bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Command to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Command.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/systemgroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1450,8 +1596,8 @@
         "operationId": "List-CommandTraverseSystem",
         "summary": "List the Systems bound to a Command",
         "tags": [
-          "Commands",
-          "Graph"
+          "Graph",
+          "Commands"
         ],
         "description": "This endpoint will return all Systems bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Command to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Command.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/systems \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -1592,6 +1738,7 @@
           "Duo"
         ],
         "description": "This endpoint returns all the Duo accounts for your organization. Note: There can currently only be one Duo account for your organization.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -1616,12 +1763,31 @@
           "Duo"
         ],
         "description": "Registers a Duo account for an organization. Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/DuoAccount"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1639,6 +1805,7 @@
           "Duo"
         ],
         "description": "This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo application for your organization.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -1648,6 +1815,24 @@
               },
               "type": "array"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1686,6 +1871,24 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1703,12 +1906,31 @@
           "Duo"
         ],
         "description": "Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.\n\n#### Sample Request\n```\n  curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}''\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1724,12 +1946,31 @@
           "Duo"
         ],
         "description": "This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1774,6 +2015,24 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1791,12 +2050,31 @@
           "Duo"
         ],
         "description": "Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected resource.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/DuoAccount"
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -1812,6 +2090,7 @@
           "Duo"
         ],
         "description": "This endpoint returns a specific Duo account.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -1925,8 +2204,8 @@
         "operationId": "List-GSuiteAssociation",
         "summary": "List the associations of a G Suite instance",
         "tags": [
-          "G Suite",
-          "Graph"
+          "Graph",
+          "G Suite"
         ],
         "description": "This endpoint returns the _direct_ associations of this G Suite instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -2002,8 +2281,8 @@
         "operationId": "Set-GSuiteAssociation",
         "summary": "Manage the associations of a G Suite instance",
         "tags": [
-          "G Suite",
-          "Graph"
+          "Graph",
+          "G Suite"
         ],
         "description": "This endpoint returns the _direct_ associations of this G Suite instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
         "parameters": [
@@ -2095,15 +2374,6 @@
                 "$ref": "#/definitions/GSuiteTranslationRule"
               },
               "type": "array"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "field": "g_suite_work_addresses",
-                  "id": "object_id_1",
-                  "source_type": "user"
-                }
-              ]
             }
           }
         },
@@ -2160,6 +2430,7 @@
           "G Suite"
         ],
         "description": "This endpoint allows you to delete a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": ""
@@ -2178,6 +2449,7 @@
           "G Suite"
         ],
         "description": "This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -2212,8 +2484,8 @@
         "operationId": "List-GSuiteTraverseUserGroup",
         "summary": "List the User Groups bound to a G Suite instance",
         "tags": [
-          "G Suite",
-          "Graph"
+          "Graph",
+          "G Suite"
         ],
         "description": "This endpoint will return all User Groups bound to an G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this G Suite instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this G Suite instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{GSuite_ID}/usergroups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -2278,8 +2550,8 @@
         "operationId": "List-GSuiteTraverseUser",
         "summary": "List the Users bound to a G Suite instance",
         "tags": [
-          "G Suite",
-          "Graph"
+          "Graph",
+          "G Suite"
         ],
         "description": "This endpoint will return all Users bound to a G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this G Suite instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this G Suite instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/users \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -2347,6 +2619,7 @@
           "G Suite"
         ],
         "description": "This endpoint returns a specific G Suite.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -2354,7 +2627,12 @@
               "$ref": "#/definitions/gsuite-output"
             }
           }
-        }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
       },
       "parameters": [
         {
@@ -2477,6 +2755,7 @@
           "LDAP Servers"
         ],
         "description": "This endpoint returns a specific LDAP server.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -2572,8 +2851,8 @@
         "operationId": "List-LdapServerAssociation",
         "summary": "List the associations of a LDAP Server",
         "tags": [
-          "LDAP Servers",
-          "Graph"
+          "Graph",
+          "LDAP Servers"
         ],
         "description": "This endpoint returns the _direct_ associations of this LDAP Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example LDAP and Users.\n\n#### Sample Request\n\n```\n curl -X GET 'https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -2649,8 +2928,8 @@
         "operationId": "Set-LdapServerAssociation",
         "summary": "Manage the associations of a LDAP Server",
         "tags": [
-          "LDAP Servers",
-          "Graph"
+          "Graph",
+          "LDAP Servers"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a LDAP Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example LDAP and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n}'\n```",
         "parameters": [
@@ -2897,8 +3176,8 @@
         "operationId": "List-LdapServerTraverseUserGroup",
         "summary": "List the User Groups bound to a LDAP Server",
         "tags": [
-          "LDAP Servers",
-          "Graph"
+          "Graph",
+          "LDAP Servers"
         ],
         "description": "This endpoint will return all Users Groups bound to a LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this LDAP server instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this LDAP server instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -2963,8 +3242,8 @@
         "operationId": "List-LdapServerTraverseUser",
         "summary": "List the Users bound to a LDAP Server",
         "tags": [
-          "LDAP Servers",
-          "Graph"
+          "Graph",
+          "LDAP Servers"
         ],
         "description": "This endpoint will return all Users bound to an LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this LDAP server instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this LDAP server instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -3032,6 +3311,7 @@
           "Office 365"
         ],
         "description": "This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3091,8 +3371,8 @@
         "operationId": "List-Office365Association",
         "summary": "List the associations of an Office 365 instance",
         "tags": [
-          "Office 365",
-          "Graph"
+          "Graph",
+          "Office 365"
         ],
         "description": "This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -3168,8 +3448,8 @@
         "operationId": "Set-Office365Association",
         "summary": "Manage the associations of an Office 365 instance",
         "tags": [
-          "Office 365",
-          "Graph"
+          "Graph",
+          "Office 365"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a Office 365 instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
         "parameters": [
@@ -3261,15 +3541,6 @@
                 "$ref": "#/definitions/Office365TranslationRule"
               },
               "type": "array"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "field": "office_365_state",
-                  "id": "object_id_1",
-                  "source_type": "user"
-                }
-              ]
             }
           }
         },
@@ -3326,6 +3597,7 @@
           "Office 365"
         ],
         "description": "This endpoint allows you to delete a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": ""
@@ -3344,6 +3616,7 @@
           "Office 365"
         ],
         "description": "This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3378,8 +3651,8 @@
         "operationId": "List-Office365TraverseUserGroup",
         "summary": "List the User Groups bound to an Office 365 instance",
         "tags": [
-          "Office 365",
-          "Graph"
+          "Graph",
+          "Office 365"
         ],
         "description": "This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -3444,8 +3717,8 @@
         "operationId": "List-Office365TraverseUser",
         "summary": "List the Users bound to an Office 365 instance",
         "tags": [
-          "Office 365",
-          "Graph"
+          "Graph",
+          "Office 365"
         ],
         "description": "This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -3627,6 +3900,7 @@
           "Policies"
         ],
         "description": "This endpoint allows you to delete a policy.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d4291e6b9 \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
@@ -3645,6 +3919,7 @@
           "Policies"
         ],
         "description": "This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3704,8 +3979,8 @@
         "operationId": "List-PolicyAssociation",
         "summary": "List the associations of a Policy",
         "tags": [
-          "Policies",
-          "Graph"
+          "Graph",
+          "Policies"
         ],
         "description": "This endpoint returns the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations?targets=system_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -3781,8 +4056,8 @@
         "operationId": "Set-PolicyAssociation",
         "summary": "Manage the associations of a Policy",
         "tags": [
-          "Policies",
-          "Graph"
+          "Graph",
+          "Policies"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
         "parameters": [
@@ -3983,8 +4258,8 @@
         "operationId": "List-PolicyTraverseSystemGroup",
         "summary": "List the System Groups bound to a Policy",
         "tags": [
-          "Policies",
-          "Graph"
+          "Graph",
+          "Policies"
         ],
         "description": "This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Policy to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -4049,8 +4324,8 @@
         "operationId": "List-PolicyTraverseSystem",
         "summary": "List the Systems bound to a Policy",
         "tags": [
-          "Policies",
-          "Graph"
+          "Graph",
+          "Policies"
         ],
         "description": "This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Policy to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -4196,6 +4471,7 @@
           "Policies"
         ],
         "description": "This endpoint will return the policy results for a specific policy.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -4225,6 +4501,7 @@
         "operationId": "List-PolicyTemplate",
         "summary": "Lists all of the Policy Templates",
         "tags": [
+          "Policytemplates",
           "Policies"
         ],
         "description": "This endpoint returns all policy templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policytemplates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -4309,9 +4586,11 @@
         "operationId": "Get-PolicyTemplate",
         "summary": "Get a specific Policy Template",
         "tags": [
+          "Policytemplates",
           "Policies"
         ],
         "description": "This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -4412,29 +4691,6 @@
                 }
               },
               "type": "object"
-            },
-            "examples": {
-              "application/json": {
-                "results": [
-                  {
-                    "_id": "5c3536e9e0a6840001872782",
-                    "email": "joe@example.com",
-                    "enableMultiFactor": false,
-                    "firstname": "",
-                    "lastname": "",
-                    "registered": true
-                  },
-                  {
-                    "_id": "5c35370ae0a6840001872784",
-                    "email": "mildred@example.com",
-                    "enableMultiFactor": false,
-                    "firstname": "",
-                    "lastname": "",
-                    "registered": true
-                  }
-                ],
-                "totalCount": 2
-              }
             }
           },
           "401": {
@@ -4446,11 +4702,6 @@
                 }
               },
               "type": "object"
-            },
-            "examples": {
-              "application/json": {
-                "message": "Unauthorized"
-              }
             }
           }
         },
@@ -4515,8 +4766,8 @@
         "operationId": "List-RadiusServerAssociation",
         "summary": "List the associations of a RADIUS  Server",
         "tags": [
-          "RADIUS Servers",
-          "Graph"
+          "Graph",
+          "RADIUS Servers"
         ],
         "description": "This endpoint returns the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -4592,8 +4843,8 @@
         "operationId": "Set-RadiusServerAssociation",
         "summary": "Manage the associations of a RADIUS Server",
         "tags": [
-          "RADIUS Servers",
-          "Graph"
+          "Graph",
+          "RADIUS Servers"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\n\"type\":\"user\", \n\"id\":\"{USER_ID}\", \n\"op\":\"add\"\n\t\n}'\n```",
         "parameters": [
@@ -4622,8 +4873,8 @@
         "operationId": "List-RadiusServerTraverseUserGroup",
         "summary": "List the User Groups bound to a RADIUS  Server",
         "tags": [
-          "RADIUS Servers",
-          "Graph"
+          "Graph",
+          "RADIUS Servers"
         ],
         "description": "This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this RADIUS server instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this RADIUS server instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -4688,8 +4939,8 @@
         "operationId": "List-RadiusServerTraverseUser",
         "summary": "List the Users bound to a RADIUS  Server",
         "tags": [
-          "RADIUS Servers",
-          "Graph"
+          "Graph",
+          "RADIUS Servers"
         ],
         "description": "This endpoint will return all Users bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this RADIUS server instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this RADIUS server instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "parameters": [
@@ -4817,20 +5068,6 @@
                 "$ref": "#/definitions/SystemGroup"
               },
               "type": "array"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "id": "000000"
-                },
-                {
-                  "type": "system_group"
-                },
-                {
-                  "id": "000000",
-                  "name": "group1"
-                }
-              ]
             }
           },
           "default": {
@@ -4882,9 +5119,9 @@
         "operationId": "List-SystemGroupAssociation",
         "summary": "List the associations of a System Group",
         "tags": [
-          "System Group Associations",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Associations"
         ],
         "description": "This endpoint returns the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -4958,9 +5195,9 @@
         "operationId": "Set-SystemGroupAssociation",
         "summary": "Manage the associations of a System Group",
         "tags": [
-          "System Group Associations",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Associations"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n}'\n\n```",
         "parameters": [
@@ -4989,8 +5226,8 @@
         "operationId": "List-SystemGroupTraverseCommand",
         "summary": "List the Commands bound to a System Group",
         "tags": [
-          "System Group Associations",
-          "Graph"
+          "Graph",
+          "System Group Associations"
         ],
         "description": "This endpoint will return all Commands bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Command; this array represents all grouping and/or associations that would have to be removed to deprovision the Command from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -5055,9 +5292,9 @@
         "operationId": "List-SystemGroupMembers",
         "summary": "List the members of a System Group",
         "tags": [
-          "System Group Members & Membership",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Members & Membership"
         ],
         "description": "This endpoint returns the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -5109,9 +5346,9 @@
         "operationId": "Set-SystemGroupMembers",
         "summary": "Manage the members of a System Group",
         "tags": [
-          "System Group Members & Membership",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Members & Membership"
         ],
         "description": "This endpoint allows you to manage the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{System_ID}\"\n}'\n```",
         "parameters": [
@@ -5121,6 +5358,12 @@
             "schema": {
               "$ref": "#/definitions/SystemGroupMembersReq"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -5140,9 +5383,9 @@
         "operationId": "List-SystemGroupMembership",
         "summary": "List the System Group's membership",
         "tags": [
-          "System Group Members & Membership",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Members & Membership"
         ],
         "description": "This endpoint returns all Systems that are a member of this System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID/membership \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -5218,9 +5461,9 @@
         "operationId": "List-SystemGroupTraversePolicy",
         "summary": "List the Policies bound to a System Group",
         "tags": [
-          "System Group Associations",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Associations"
         ],
         "description": "This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not public yet as we haven't finished the code.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -5285,9 +5528,9 @@
         "operationId": "List-SystemGroupTraverseUserGroup",
         "summary": "List the User Groups bound to a System Group",
         "tags": [
-          "System Group Associations",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Associations"
         ],
         "description": "This endpoint will return all User Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -5352,9 +5595,9 @@
         "operationId": "List-SystemGroupTraverseUser",
         "summary": "List the Users bound to a System Group",
         "tags": [
-          "System Group Associations",
+          "Graph",
           "System Groups",
-          "Graph"
+          "System Group Associations"
         ],
         "description": "This endpoint will return all Users bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -5422,6 +5665,7 @@
           "System Groups"
         ],
         "description": "This endpoint allows you to delete a System Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
@@ -5440,18 +5684,12 @@
           "System Groups"
         ],
         "description": "This endpoint returns the details of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SystemGroup"
-            },
-            "examples": {
-              "application/json": {
-                "id": "000000",
-                "name": "group1",
-                "type": "system_group"
-              }
             }
           }
         },
@@ -5491,13 +5729,6 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/SystemGroup"
-            },
-            "examples": {
-              "application/json": {
-                "id": "00000",
-                "name": "group1",
-                "type": "system_group"
-              }
             }
           }
         },
@@ -9182,8 +9413,8 @@
         "operationId": "List-SystemAssociation",
         "summary": "List the associations of a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint returns the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9225,6 +9456,12 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -9257,8 +9494,8 @@
         "operationId": "Set-SystemAssociation",
         "summary": "Manage associations of a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"UserID\"\n}'\n\n```",
         "parameters": [
@@ -9268,6 +9505,12 @@
             "schema": {
               "$ref": "#/definitions/SystemGraphManagementReq"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -9287,8 +9530,8 @@
         "operationId": "List-SystemTraverseCommand",
         "summary": "List the Commands bound to a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint will return all Commands bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Command; this array represents all grouping and/or associations that would have to be removed to deprovision the Command from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9353,20 +9596,35 @@
         "operationId": "Get-SystemFDEKey",
         "summary": "Get System FDE Key",
         "tags": [
+          "fde",
           "Systems"
         ],
         "description": "This endpoint will return the current (latest) fde key saved for a system.",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "$ref": "#/definitions/systemfdekey"
-            },
-            "examples": {
-              "application/json": {
-                "key": "cupidatat consequat occaecat proident"
-              }
             }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -9389,8 +9647,8 @@
         "operationId": "List-SystemMemberOf",
         "summary": "List the parent Groups of a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9432,6 +9690,12 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -9466,8 +9730,8 @@
         "operationId": "List-SystemTraversePolicy",
         "summary": "List the Policies bound to a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not yet public as we have finish the code.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9532,8 +9796,8 @@
         "operationId": "List-PolicyStatus",
         "summary": "List the policy statuses for a system",
         "tags": [
-          "Policies",
-          "Graph"
+          "Graph",
+          "Policies"
         ],
         "description": "This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9620,8 +9884,8 @@
         "operationId": "List-SystemTraverseUserGroup",
         "summary": "List the User Groups bound to a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint will return all User Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9652,6 +9916,12 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -9686,8 +9956,8 @@
         "operationId": "List-SystemTraverseUser",
         "summary": "List the Users bound to a System",
         "tags": [
-          "Systems",
-          "Graph"
+          "Graph",
+          "Systems"
         ],
         "description": "This endpoint will return all Users bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -9718,6 +9988,12 @@
             "items": {
               "type": "string"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
           }
         ],
         "responses": {
@@ -9866,9 +10142,9 @@
         "operationId": "List-UserGroupTraverseApplication",
         "summary": "List the Applications bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding Application; this array represents all grouping and/or associations that would have to be removed to deprovision the Application from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -9933,9 +10209,9 @@
         "operationId": "List-UserGroupAssociation",
         "summary": "List the associations of a User Group.",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint returns the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations?targets=system \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10009,9 +10285,9 @@
         "operationId": "Set-UserGroupAssociation",
         "summary": "Manage the associations of a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint manages the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n}'\n\n```",
         "parameters": [
@@ -10040,9 +10316,9 @@
         "operationId": "List-UserGroupTraverseDirectory",
         "summary": "List the Directories bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all Directories bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding Directory; this array represents all grouping and/or associations that would have to be removed to deprovision the Directories from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/directories \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -10107,9 +10383,9 @@
         "operationId": "List-UserGroupTraverseGSuite",
         "summary": "List the G Suite instances bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all G Suite Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding G Suite instance; this array represents all grouping and/or associations that would have to be removed to deprovision the G Suite instance from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID/gsuites \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -10174,9 +10450,9 @@
         "operationId": "List-UserGroupTraverseLdapServer",
         "summary": "List the LDAP Servers bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all LDAP Servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding LDAP Server; this array represents all grouping and/or associations that would have to be removed to deprovision the LDAP Server from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/ldapservers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10241,9 +10517,9 @@
         "operationId": "List-UserGroupMembers",
         "summary": "List the members of a User Group",
         "tags": [
-          "User Group Members & Membership",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Members & Membership"
         ],
         "description": "This endpoint returns the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10295,9 +10571,9 @@
         "operationId": "Set-UserGroupMembers",
         "summary": "Manage the members of a User Group",
         "tags": [
-          "User Group Members & Membership",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Members & Membership"
         ],
         "description": "This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n}'\n```",
         "parameters": [
@@ -10326,9 +10602,9 @@
         "operationId": "List-UserGroupMembership",
         "summary": "List the User Group's membership",
         "tags": [
-          "User Group Members & Membership",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Members & Membership"
         ],
         "description": "This endpoint returns all users members that are a member of this User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/membership \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10404,9 +10680,9 @@
         "operationId": "List-UserGroupTraverseOffice365",
         "summary": "List the Office 365 instances bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all Office 365 instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding Office 365 instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Office 365 instance from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/office365s \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10471,9 +10747,9 @@
         "operationId": "List-UserGroupTraverseRadiusServer",
         "summary": "List the RADIUS Servers bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all RADIUS servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding RADIUS Server; this array represents all grouping and/or associations that would have to be removed to deprovision the RADIUS Server from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/radiusservers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -10538,9 +10814,9 @@
         "operationId": "List-UserGroupTraverseSystemGroup",
         "summary": "List the System Groups bound to User Groups",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all System Groups bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10605,9 +10881,9 @@
         "operationId": "List-UserGroupTraverseSystem",
         "summary": "List the Systems bound to a User Group",
         "tags": [
-          "User Group Associations",
+          "Graph",
           "User Groups",
-          "Graph"
+          "User Group Associations"
         ],
         "description": "This endpoint will return all Systems bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10675,6 +10951,7 @@
           "User Groups"
         ],
         "description": "This endpoint allows you to delete a User Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": "No Content"
@@ -10693,6 +10970,7 @@
           "User Groups"
         ],
         "description": "This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -10752,8 +11030,8 @@
         "operationId": "List-UserTraverseApplication",
         "summary": "List the Applications bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all Applications bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Application; this array represents all grouping and/or associations that would have to be removed to deprovision the Application from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10818,8 +11096,8 @@
         "operationId": "List-UserAssociation",
         "summary": "List the associations of a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint returns the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/associations?targets=system_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
@@ -10893,8 +11171,8 @@
         "operationId": "Set-UserAssociation",
         "summary": "Manage the associations of a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n   \"op\": \"add\",\n   \"type\": \"system_group\",\n   \"id\": \"{GroupID}\"\n}'",
         "parameters": [
@@ -10923,8 +11201,8 @@
         "operationId": "List-UserTraverseDirectory",
         "summary": "List the Directories bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all Directories bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Directory; this array represents all grouping and/or associations that would have to be removed to deprovision the Directory from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/directories \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -10989,8 +11267,8 @@
         "operationId": "List-UserTraverseGSuite",
         "summary": "List the G Suite instances bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all G-Suite Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding G Suite instance; this array represents all grouping and/or associations that would have to be removed to deprovision the G Suite instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/gsuites \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11055,8 +11333,8 @@
         "operationId": "List-UserTraverseLdapServer",
         "summary": "List the LDAP servers bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all LDAP Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding LDAP Server; this array represents all grouping and/or associations that would have to be removed to deprovision the LDAP Server from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/ldapservers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11121,8 +11399,8 @@
         "operationId": "List-UserMemberOf",
         "summary": "List the parent Groups of a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11198,8 +11476,8 @@
         "operationId": "List-UserTraverseOffice365",
         "summary": "List the Office 365 instances bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Office 365 instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Office 365 instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/office365s \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11264,8 +11542,8 @@
         "operationId": "List-UserTraverseRadiusServer",
         "summary": "List the RADIUS Servers bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all RADIUS Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding RADIUS Server; this array represents all grouping and/or associations that would have to be removed to deprovision the RADIUS Server from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/radiusservers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11330,8 +11608,8 @@
         "operationId": "List-UserTraverseSystemGroup",
         "summary": "List the System Groups bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all System Groups bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/systemgroups\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11396,8 +11674,8 @@
         "operationId": "List-UserTraverseSystem",
         "summary": "List the Systems bound to a User",
         "tags": [
-          "Users",
-          "Graph"
+          "Graph",
+          "Users"
         ],
         "description": "This endpoint will return all Systems bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/systems\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
@@ -11551,12 +11829,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/workday-output"
-            }
-          },
           "201": {
             "description": "",
             "schema": {
@@ -11579,6 +11851,7 @@
           "Workday Import"
         ],
         "description": "This endpoint will return  all the available information about an instance of Workday.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -11699,6 +11972,7 @@
           "Workday Import"
         ],
         "description": "Removes any and all authorization methods from the workday instance\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "parameters": [],
         "responses": {
           "204": {
             "description": ""
@@ -11835,27 +12109,6 @@
                 "$ref": "#/definitions/workday-worker"
               },
               "type": "array"
-            },
-            "examples": {
-              "application/json": [
-                {
-                  "lastName": "sint dolore Excepteur ad"
-                },
-                {
-                  "attributes": {},
-                  "email": "nostrud tempor anim ips",
-                  "firstName": "et ad",
-                  "username": "Excepteur culpa nulla aliqua"
-                },
-                {
-                  "attributes": {},
-                  "email": "veniam ullamco"
-                },
-                {},
-                {
-                  "lastName": "do"
-                }
-              ]
             }
           }
         },

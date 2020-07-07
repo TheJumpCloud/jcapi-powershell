@@ -107,6 +107,7 @@ BODY <IApplication>:
     [SpEntityIdValue <String>]: 
     [SpEntityIdVisible <Boolean?>]: 
   [Created <String>]: 
+  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]: 
   [Description <String>]: 
   [DisplayLabel <String>]: 
   [DisplayName <String>]: 
@@ -263,6 +264,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     [System.String]
     # .
     ${Created},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
+    # .
+    ${DatabaseAttributes},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

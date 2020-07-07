@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
 .Description
-This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -26,6 +26,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: 
   Name <String>: 
   NetworkSourceIP <String>: 
+  SharedSecret <String>: 
   [Mfa <String>]: 
   [Tags <String[]>]: 
   [UserLockoutAction <String>]: 
@@ -79,6 +80,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
     [System.String]
     # .
     ${NetworkSourceIP},
+
+    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SharedSecret},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

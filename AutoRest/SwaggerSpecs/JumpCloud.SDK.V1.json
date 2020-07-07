@@ -970,6 +970,27 @@
       }
     },
     "/radiusservers/{id}": {
+      "delete": {
+        "operationId": "Delete-RadiusServer",
+        "summary": "Delete Radius Server",
+        "tags": [
+          "Radius Servers"
+        ],
+        "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/radiusserverput"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
       "get": {
         "operationId": "Get-RadiusServer",
         "summary": "Get Radius Server",
@@ -999,7 +1020,7 @@
       "put": {
         "operationId": "Put-RadiusServer",
         "summary": "Update Radius Servers",
-        "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
+        "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
         "parameters": [
           {
             "name": "body",
@@ -1032,16 +1053,21 @@
                 },
                 "userPasswordExpirationAction": {
                   "type": "string"
+                },
+                "sharedSecret": {
+                  "type": "string"
                 }
               },
               "required": [
                 "name",
-                "networkSourceIp"
+                "networkSourceIp",
+                "sharedSecret"
               ],
               "type": "object",
               "example": {
                 "name": "test radius",
                 "networkSourceIp": "0.0.0.0",
+                "sharedSecret": "secretradiuspassword",
                 "tagsNames": [
                   "tag1"
                 ]
@@ -1055,6 +1081,25 @@
             "schema": {
               "$ref": "#/definitions/radiusserverput"
             }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/runCommand": {
+      "post": {
+        "operationId": "Invoke-Command",
+        "tags": [
+          "Commands"
+        ],
+        "description": "This endpoint allows you to run a command.",
+        "responses": {
+          "200": {
+            "description": "OK"
           }
         },
         "security": [
@@ -2372,6 +2417,12 @@
         "created": {
           "type": "string"
         },
+        "databaseAttributes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
         "description": {
           "maxLength": 256,
           "type": "string"
@@ -3194,6 +3245,7 @@
     },
     "JcSystem": {
       "title": "System",
+      "type": "object",
       "properties": {
         "_id": {
           "type": "string"
@@ -3223,10 +3275,10 @@
           "type": "string"
         },
         "connectionHistory": {
+          "type": "array",
           "items": {
             "type": "object"
-          },
-          "type": "array"
+          }
         },
         "created": {
           "type": "string"
@@ -3253,7 +3305,9 @@
           "type": "boolean"
         },
         "networkInterfaces": {
+          "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "address": {
                 "type": "string"
@@ -3267,10 +3321,8 @@
               "name": {
                 "type": "string"
               }
-            },
-            "type": "object"
-          },
-          "type": "array"
+            }
+          }
         },
         "organization": {
           "type": "string"
@@ -3285,7 +3337,9 @@
           "type": "boolean"
         },
         "sshdParams": {
+          "type": "array",
           "items": {
+            "type": "object",
             "properties": {
               "name": {
                 "type": "string"
@@ -3293,12 +3347,11 @@
               "value": {
                 "type": "string"
               }
-            },
-            "type": "object"
-          },
-          "type": "array"
+            }
+          }
         },
         "systemInsights": {
+          "type": "object",
           "properties": {
             "state": {
               "enum": [
@@ -3308,26 +3361,47 @@
               ],
               "type": "string"
             }
-          },
-          "type": "object"
+          }
         },
         "systemTimezone": {
           "type": "integer"
         },
         "tags": {
+          "type": "array",
           "items": {
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "templateName": {
           "type": "string"
         },
         "version": {
           "type": "string"
+        },
+        "mdm": {
+          "type": "object",
+          "properties": {
+            "vendor": {
+              "type": "string",
+              "enum": [
+                "unknown",
+                "none",
+                "internal",
+                "external"
+              ]
+            },
+            "profileIdentifier": {
+              "type": "string"
+            },
+            "dep": {
+              "type": "boolean"
+            },
+            "userApproved": {
+              "type": "boolean"
+            }
+          }
         }
-      },
-      "type": "object"
+      }
     },
     "mfa": {
       "title": "mfa",
@@ -3406,6 +3480,9 @@
           "type": "boolean"
         },
         "enableO365": {
+          "type": "boolean"
+        },
+        "enableUserPortalAgentInstall": {
           "type": "boolean"
         },
         "features": {
@@ -3529,6 +3606,9 @@
           },
           "type": "object"
         },
+        "pendingDelete": {
+          "type": "boolean"
+        },
         "showIntro": {
           "type": "boolean"
         },
@@ -3536,6 +3616,9 @@
           "type": "integer"
         },
         "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "disableGoogleLogin": {
           "type": "boolean"
         },
         "userPortal": {
@@ -3549,7 +3632,8 @@
           "type": "object"
         }
       },
-      "type": "object"
+      "type": "object",
+      "description": ""
     },
     "organizationsettingsput": {
       "title": "OrganizationSettingsPut",
@@ -3700,6 +3784,9 @@
           "type": "integer"
         },
         "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "disableGoogleLogin": {
           "type": "boolean"
         },
         "userPortal": {
@@ -3904,25 +3991,25 @@
     },
     "sshkeylist": {
       "title": "SSHKeyList",
+      "type": "object",
       "properties": {
-        "_id": {
-          "description": "The ID of the SSH key.",
-          "type": "string"
-        },
         "create_date": {
-          "description": "The date the SSH key was created.",
-          "type": "string"
+          "type": "string",
+          "description": "The date the SSH key was created."
         },
-        "name": {
-          "description": "The name of the SSH key.",
-          "type": "string"
+        "_id": {
+          "type": "string",
+          "description": "The ID of the SSH key."
         },
         "public_key": {
-          "description": "The Public SSH key.",
-          "type": "string"
+          "type": "string",
+          "description": "The Public SSH key."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the SSH key."
         }
-      },
-      "type": "object"
+      }
     },
     "sshkeypost": {
       "title": "SSHKeyPost",
@@ -3999,162 +4086,162 @@
     },
     "systemuser": {
       "title": "SystemUser",
+      "type": "object",
       "properties": {
-        "_id": {
-          "type": "string"
+        "email": {
+          "type": "string",
+          "maxLength": 1024
         },
-        "account_locked": {
-          "type": "boolean"
-        },
-        "activated": {
-          "type": "boolean"
+        "username": {
+          "type": "string",
+          "maxLength": 1024
         },
         "allow_public_key": {
-          "type": "boolean"
-        },
-        "associatedTagCount": {
-          "minimum": 0,
-          "type": "integer"
-        },
-        "attributes": {
-          "items": {
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "company": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "costCenter": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "created": {
-          "type": "string"
-        },
-        "department": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "description": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "displayname": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "email": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "employeeIdentifier": {
-          "description": "Must be unique per user. ",
-          "maxLength": 256,
-          "type": "string"
-        },
-        "employeeType": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "enable_managed_uid": {
-          "type": "boolean"
-        },
-        "enable_user_portal_multifactor": {
-          "type": "boolean"
-        },
-        "external_dn": {
-          "type": "string"
-        },
-        "external_password_expiration_date": {
-          "type": "string"
-        },
-        "external_source_type": {
-          "type": "string"
-        },
-        "externally_managed": {
-          "type": "boolean"
-        },
-        "firstname": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "jobTitle": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "lastname": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "ldap_binding_user": {
-          "type": "boolean"
-        },
-        "location": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "mfa": {
-          "$ref": "#/definitions/mfa"
-        },
-        "middlename": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "password_expiration_date": {
-          "type": "string"
-        },
-        "password_expired": {
-          "type": "boolean"
-        },
-        "password_never_expires": {
-          "type": "boolean"
-        },
-        "passwordless_sudo": {
           "type": "boolean"
         },
         "public_key": {
           "type": "string"
         },
-        "samba_service_user": {
-          "type": "boolean"
-        },
         "ssh_keys": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/sshkeylist"
-          },
-          "type": "array"
+          }
         },
         "sudo": {
           "type": "boolean"
         },
-        "suspended": {
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "unix_uid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unix_guid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activated": {
           "type": "boolean"
         },
         "tags": {
+          "type": "array",
           "items": {
             "type": "string"
-          },
-          "type": "array"
+          }
+        },
+        "password_expired": {
+          "type": "boolean"
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "lastname": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "associatedTagCount": {
+          "type": "integer",
+          "minimum": 0
         },
         "totp_enabled": {
           "type": "boolean"
         },
-        "unix_guid": {
-          "minimum": 1,
-          "type": "integer"
+        "password_expiration_date": {
+          "type": "string"
         },
-        "unix_uid": {
-          "minimum": 1,
-          "type": "integer"
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         },
-        "username": {
-          "maxLength": 1024,
+        "created": {
+          "type": "string"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "_id": {
+          "type": "string"
+        },
+        "middlename": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "displayname": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "location": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "costCenter": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "employeeType": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "company": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "employeeIdentifier": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Must be unique per user. "
+        },
+        "jobTitle": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "department": {
+          "type": "string",
+          "maxLength": 1024
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "external_password_expiration_date": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "systemuserput": {
       "title": "SystemUserPut",
@@ -4800,15 +4887,13 @@
     },
     "userput": {
       "title": "UserPut",
+      "type": "object",
       "properties": {
         "email": {
           "maxLength": 1024,
           "type": "string"
         },
         "enableMultiFactor": {
-          "type": "boolean"
-        },
-        "enableWhatsNew": {
           "type": "boolean"
         },
         "firstname": {
@@ -4827,11 +4912,11 @@
         "roleName": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "userreturn": {
       "title": "UserReturn",
+      "type": "object",
       "properties": {
         "_id": {
           "type": "string"
@@ -4846,9 +4931,6 @@
           "type": "string"
         },
         "enableMultiFactor": {
-          "type": "boolean"
-        },
-        "enableWhatsNew": {
           "type": "boolean"
         },
         "firstname": {
@@ -4878,8 +4960,7 @@
         "usersTimeZone": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     }
   }
 }

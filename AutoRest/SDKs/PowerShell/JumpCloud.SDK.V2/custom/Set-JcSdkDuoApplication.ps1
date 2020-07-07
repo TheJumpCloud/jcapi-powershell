@@ -18,6 +18,8 @@ JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IDuoApplication
+.Outputs
+System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -53,7 +55,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/Power
 #>
  Function Set-JcSdkDuoApplication
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication])]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication], [System.String])]
     [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Put', Mandatory)]

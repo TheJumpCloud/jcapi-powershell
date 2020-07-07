@@ -7,10 +7,6 @@ host: console.jumpcloud.com
 basePath: /api/v2/
 schemes:
 - https
-consumes:
-- application/json
-produces:
-- application/json
 securityDefinitions:
   x-api-key:
     name: x-api-key
@@ -89,8 +85,8 @@ paths:
       operationId: List-ActiveDirectoryAssociation
       summary: List the associations of an Active Directory instance
       tags:
-      - Active Directory
       - Graph
+      - Active Directory
       description: |-
         This endpoint returns the direct associations of this Active Directory instance.
 
@@ -157,8 +153,8 @@ paths:
       operationId: List-ActiveDirectoryTraverseUserGroup
       summary: List the User Groups bound to an Active Directory instance
       tags:
-      - Active Directory
       - Graph
+      - Active Directory
       description: |-
         This endpoint will return all Users Groups bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -263,6 +259,7 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -299,6 +296,18 @@ paths:
               signedCsrPlist:
                 type: string
             type: object
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -321,6 +330,18 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/apple-mdm-public-key-cert'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -393,6 +414,18 @@ paths:
             type: array
             items:
               $ref: '#/definitions/apple-mdm-device'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -449,6 +482,14 @@ paths:
               message:
                 type: string
             type: object
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
         "500":
           description: ""
           schema:
@@ -507,6 +548,14 @@ paths:
               message:
                 type: string
             type: object
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
         "500":
           description: ""
           schema:
@@ -553,6 +602,14 @@ paths:
               message:
                 type: string
             type: object
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
         "500":
           description: ""
           schema:
@@ -599,6 +656,14 @@ paths:
               message:
                 type: string
             type: object
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
         "500":
           description: ""
           schema:
@@ -626,6 +691,7 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -711,6 +777,14 @@ paths:
               message:
                 type: string
             type: object
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
         "500":
           description: ""
           schema:
@@ -744,6 +818,18 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/AppleMDM'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -781,6 +867,18 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/AppleMDM'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
   /applications/{application_id}/associations:
@@ -788,8 +886,8 @@ paths:
       operationId: List-ApplicationAssociation
       summary: List the associations of an Application
       tags:
-      - Applications
       - Graph
+      - Applications
       description: |-
         This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.
 
@@ -854,8 +952,8 @@ paths:
       operationId: Set-ApplicationAssociation
       summary: Manage the associations of an Application
       tags:
-      - Applications
       - Graph
+      - Applications
       description: |-
         This endpoint allows you to manage the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.
 
@@ -886,8 +984,8 @@ paths:
       operationId: List-ApplicationTraverseUserGroup
       summary: List the User Groups bound to an Application
       tags:
-      - Applications
       - Graph
+      - Applications
       description: |-
         This endpoint will return all Users Groups bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -948,8 +1046,8 @@ paths:
       operationId: List-ApplicationTraverseUser
       summary: List the Users bound to an Application
       tags:
-      - Applications
       - Graph
+      - Applications
       description: |-
         This endpoint will return all Users bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1096,8 +1194,8 @@ paths:
       operationId: List-CommandAssociation
       summary: List the associations of a Command
       tags:
-      - Commands
       - Graph
+      - Commands
       description: |-
         This endpoint will return the _direct_ associations of this Command.
 
@@ -1164,8 +1262,8 @@ paths:
       operationId: Set-CommandAssociation
       summary: Manage the associations of a Command
       tags:
-      - Commands
       - Graph
+      - Commands
       description: |-
         This endpoint will allow you to manage the _direct_ associations of this Command.
 
@@ -1199,8 +1297,8 @@ paths:
       operationId: List-CommandTraverseSystemGroup
       summary: List the System Groups bound to a Command
       tags:
-      - Commands
       - Graph
+      - Commands
       description: |-
         This endpoint will return all System Groups bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1261,8 +1359,8 @@ paths:
       operationId: List-CommandTraverseSystem
       summary: List the Systems bound to a Command
       tags:
-      - Commands
       - Graph
+      - Commands
       description: |-
         This endpoint will return all Systems bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1397,6 +1495,7 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -1423,11 +1522,24 @@ paths:
           -H 'x-api-key: {API_KEY}' \
           -d '{}'
         ```
+      parameters: []
       responses:
         "201":
           description: ""
           schema:
             $ref: '#/definitions/DuoAccount'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
   /duo/accounts/{account_id}/applications:
@@ -1446,6 +1558,7 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -1453,6 +1566,18 @@ paths:
             items:
               $ref: '#/definitions/DuoApplication'
             type: array
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -1491,6 +1616,18 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/DuoApplication'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
   /duo/accounts/{account_id}/applications/{application_id}:
@@ -1509,11 +1646,24 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}''
         ```
+      parameters: []
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/DuoApplication'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     get:
@@ -1531,11 +1681,24 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/DuoApplication'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -1578,6 +1741,18 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/DuoApplication'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
   /duo/accounts/{id}:
@@ -1596,11 +1771,24 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/DuoAccount'
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     get:
@@ -1618,6 +1806,7 @@ paths:
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -1714,8 +1903,8 @@ paths:
       operationId: List-GSuiteAssociation
       summary: List the associations of a G Suite instance
       tags:
-      - G Suite
       - Graph
+      - G Suite
       description: |-
         This endpoint returns the _direct_ associations of this G Suite instance.
 
@@ -1782,8 +1971,8 @@ paths:
       operationId: Set-GSuiteAssociation
       summary: Manage the associations of a G Suite instance
       tags:
-      - G Suite
       - Graph
+      - G Suite
       description: |-
         This endpoint returns the _direct_ associations of this G Suite instance.
 
@@ -1878,11 +2067,6 @@ paths:
             items:
               $ref: '#/definitions/GSuiteTranslationRule'
             type: array
-          examples:
-            application/json:
-            - field: g_suite_work_addresses
-              id: object_id_1
-              source_type: user
       security:
       - x-api-key: []
     parameters:
@@ -1938,6 +2122,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "204":
           description: ""
@@ -1959,6 +2144,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -1980,8 +2166,8 @@ paths:
       operationId: List-GSuiteTraverseUserGroup
       summary: List the User Groups bound to a G Suite instance
       tags:
-      - G Suite
       - Graph
+      - G Suite
       description: |-
         This endpoint will return all User Groups bound to an G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2042,8 +2228,8 @@ paths:
       operationId: List-GSuiteTraverseUser
       summary: List the Users bound to a G Suite instance
       tags:
-      - G Suite
       - Graph
+      - G Suite
       description: |-
         This endpoint will return all Users bound to a G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2116,11 +2302,14 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/gsuite-output'
+      security:
+      - x-api-key: []
     parameters:
     - name: id
       in: path
@@ -2242,6 +2431,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -2315,8 +2505,8 @@ paths:
       operationId: List-LdapServerAssociation
       summary: List the associations of a LDAP Server
       tags:
-      - LDAP Servers
       - Graph
+      - LDAP Servers
       description: |-
         This endpoint returns the _direct_ associations of this LDAP Server.
 
@@ -2383,8 +2573,8 @@ paths:
       operationId: Set-LdapServerAssociation
       summary: Manage the associations of a LDAP Server
       tags:
-      - LDAP Servers
       - Graph
+      - LDAP Servers
       description: |-
         This endpoint allows you to manage the _direct_ associations of a LDAP Server.
 
@@ -2618,8 +2808,8 @@ paths:
       operationId: List-LdapServerTraverseUserGroup
       summary: List the User Groups bound to a LDAP Server
       tags:
-      - LDAP Servers
       - Graph
+      - LDAP Servers
       description: |-
         This endpoint will return all Users Groups bound to a LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2680,8 +2870,8 @@ paths:
       operationId: List-LdapServerTraverseUser
       summary: List the Users bound to a LDAP Server
       tags:
-      - LDAP Servers
       - Graph
+      - LDAP Servers
       description: |-
         This endpoint will return all Users bound to an LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2757,6 +2947,7 @@ paths:
           -H 'x-api-key: {API_KEY}'
 
         ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -2810,8 +3001,8 @@ paths:
       operationId: List-Office365Association
       summary: List the associations of an Office 365 instance
       tags:
-      - Office 365
       - Graph
+      - Office 365
       description: |-
         This endpoint returns _direct_ associations of an Office 365 instance.
 
@@ -2879,8 +3070,8 @@ paths:
       operationId: Set-Office365Association
       summary: Manage the associations of an Office 365 instance
       tags:
-      - Office 365
       - Graph
+      - Office 365
       description: |-
         This endpoint allows you to manage the _direct_ associations of a Office 365 instance.
 
@@ -2974,11 +3165,6 @@ paths:
             items:
               $ref: '#/definitions/Office365TranslationRule'
             type: array
-          examples:
-            application/json:
-            - field: office_365_state
-              id: object_id_1
-              source_type: user
       security:
       - x-api-key: []
     parameters:
@@ -3034,6 +3220,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "204":
           description: ""
@@ -3055,6 +3242,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -3076,8 +3264,8 @@ paths:
       operationId: List-Office365TraverseUserGroup
       summary: List the User Groups bound to an Office 365 instance
       tags:
-      - Office 365
       - Graph
+      - Office 365
       description: |-
         This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3138,8 +3326,8 @@ paths:
       operationId: List-Office365TraverseUser
       summary: List the Users bound to an Office 365 instance
       tags:
-      - Office 365
       - Graph
+      - Office 365
       description: |-
         This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3315,6 +3503,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "204":
           description: No Content
@@ -3336,6 +3525,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "200":
           description: OK
@@ -3385,8 +3575,8 @@ paths:
       operationId: List-PolicyAssociation
       summary: List the associations of a Policy
       tags:
-      - Policies
       - Graph
+      - Policies
       description: |-
         This endpoint returns the _direct_ associations of a Policy.
 
@@ -3452,8 +3642,8 @@ paths:
       operationId: Set-PolicyAssociation
       summary: Manage the associations of a Policy
       tags:
-      - Policies
       - Graph
+      - Policies
       description: |-
         This endpoint allows you to manage the _direct_ associations of a Policy.
 
@@ -3632,8 +3822,8 @@ paths:
       operationId: List-PolicyTraverseSystemGroup
       summary: List the System Groups bound to a Policy
       tags:
-      - Policies
       - Graph
+      - Policies
       description: |-
         This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3694,8 +3884,8 @@ paths:
       operationId: List-PolicyTraverseSystem
       summary: List the Systems bound to a Policy
       tags:
-      - Policies
       - Graph
+      - Policies
       description: |-
         This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3835,6 +4025,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "200":
           description: OK
@@ -3853,6 +4044,7 @@ paths:
       operationId: List-PolicyTemplate
       summary: Lists all of the Policy Templates
       tags:
+      - Policytemplates
       - Policies
       description: |-
         This endpoint returns all policy templates.
@@ -3924,6 +4116,7 @@ paths:
       operationId: Get-PolicyTemplate
       summary: Get a specific Policy Template
       tags:
+      - Policytemplates
       - Policies
       description: |-
         This endpoint returns a specific policy template.
@@ -3935,6 +4128,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: OK
@@ -4018,22 +4212,6 @@ paths:
               totalCount:
                 type: integer
             type: object
-          examples:
-            application/json:
-              results:
-              - _id: 5c3536e9e0a6840001872782
-                email: joe@example.com
-                enableMultiFactor: false
-                firstname: ""
-                lastname: ""
-                registered: true
-              - _id: 5c35370ae0a6840001872784
-                email: mildred@example.com
-                enableMultiFactor: false
-                firstname: ""
-                lastname: ""
-                registered: true
-              totalCount: 2
         "401":
           description: ""
           schema:
@@ -4041,9 +4219,6 @@ paths:
               message:
                 type: string
             type: object
-          examples:
-            application/json:
-              message: Unauthorized
       security:
       - x-api-key: []
     parameters:
@@ -4093,8 +4268,8 @@ paths:
       operationId: List-RadiusServerAssociation
       summary: List the associations of a RADIUS  Server
       tags:
-      - RADIUS Servers
       - Graph
+      - RADIUS Servers
       description: |-
         This endpoint returns the _direct_ associations of a Radius Server.
 
@@ -4160,8 +4335,8 @@ paths:
       operationId: Set-RadiusServerAssociation
       summary: Manage the associations of a RADIUS Server
       tags:
-      - RADIUS Servers
       - Graph
+      - RADIUS Servers
       description: "This endpoint allows you to manage the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n	\n\"type\":\"user\", \n\"id\":\"{USER_ID}\", \n\"op\":\"add\"\n	\n}'\n```"
       parameters:
       - name: body
@@ -4178,8 +4353,8 @@ paths:
       operationId: List-RadiusServerTraverseUserGroup
       summary: List the User Groups bound to a RADIUS  Server
       tags:
-      - RADIUS Servers
       - Graph
+      - RADIUS Servers
       description: |-
         This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4240,8 +4415,8 @@ paths:
       operationId: List-RadiusServerTraverseUser
       summary: List the Users bound to a RADIUS  Server
       tags:
-      - RADIUS Servers
       - Graph
+      - RADIUS Servers
       description: |-
         This endpoint will return all Users bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4369,12 +4544,6 @@ paths:
             items:
               $ref: '#/definitions/SystemGroup'
             type: array
-          examples:
-            application/json:
-            - id: "000000"
-            - type: system_group
-            - id: "000000"
-              name: group1
         default:
           description: Unexpected error
           schema:
@@ -4418,9 +4587,9 @@ paths:
       operationId: List-SystemGroupAssociation
       summary: List the associations of a System Group
       tags:
-      - System Group Associations
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Associations
       description: |-
         This endpoint returns the _direct_ associations of a System Group.
 
@@ -4485,9 +4654,9 @@ paths:
       operationId: Set-SystemGroupAssociation
       summary: Manage the associations of a System Group
       tags:
-      - System Group Associations
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Associations
       description: |-
         This endpoint allows you to manage the _direct_ associations of a System Group.
 
@@ -4522,8 +4691,8 @@ paths:
       operationId: List-SystemGroupTraverseCommand
       summary: List the Commands bound to a System Group
       tags:
-      - System Group Associations
       - Graph
+      - System Group Associations
       description: |-
         This endpoint will return all Commands bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4584,9 +4753,9 @@ paths:
       operationId: List-SystemGroupMembers
       summary: List the members of a System Group
       tags:
-      - System Group Members & Membership
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Members & Membership
       description: |-
         This endpoint returns the system members of a System Group.
 
@@ -4631,9 +4800,9 @@ paths:
       operationId: Set-SystemGroupMembers
       summary: Manage the members of a System Group
       tags:
-      - System Group Members & Membership
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Members & Membership
       description: |-
         This endpoint allows you to manage the system members of a System Group.
 
@@ -4654,6 +4823,8 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/SystemGroupMembersReq'
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "204":
           description: OK
@@ -4664,9 +4835,9 @@ paths:
       operationId: List-SystemGroupMembership
       summary: List the System Group's membership
       tags:
-      - System Group Members & Membership
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Members & Membership
       description: |-
         This endpoint returns all Systems that are a member of this System Group.
 
@@ -4730,9 +4901,9 @@ paths:
       operationId: List-SystemGroupTraversePolicy
       summary: List the Policies bound to a System Group
       tags:
-      - System Group Associations
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Associations
       description: |-
         This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4795,9 +4966,9 @@ paths:
       operationId: List-SystemGroupTraverseUserGroup
       summary: List the User Groups bound to a System Group
       tags:
-      - System Group Associations
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Associations
       description: |-
         This endpoint will return all User Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4859,9 +5030,9 @@ paths:
       operationId: List-SystemGroupTraverseUser
       summary: List the Users bound to a System Group
       tags:
-      - System Group Associations
-      - System Groups
       - Graph
+      - System Groups
+      - System Group Associations
       description: |-
         This endpoint will return all Users bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4934,6 +5105,7 @@ paths:
           -H 'x-api-key: {API_KEY}'
 
         ```
+      parameters: []
       responses:
         "204":
           description: No Content
@@ -4954,16 +5126,12 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: OK
           schema:
             $ref: '#/definitions/SystemGroup'
-          examples:
-            application/json:
-              id: "000000"
-              name: group1
-              type: system_group
       security:
       - x-api-key: []
     parameters:
@@ -5000,11 +5168,6 @@ paths:
           description: OK
           schema:
             $ref: '#/definitions/SystemGroup'
-          examples:
-            application/json:
-              id: "00000"
-              name: group1
-              type: system_group
       security:
       - x-api-key: []
   /systeminsights/alf:
@@ -7658,8 +7821,8 @@ paths:
       operationId: List-SystemAssociation
       summary: List the associations of a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint returns the _direct_ associations of a System.
 
@@ -7706,6 +7869,8 @@ paths:
           - user
           - user_group
           type: string
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "200":
           description: OK
@@ -7725,8 +7890,8 @@ paths:
       operationId: Set-SystemAssociation
       summary: Manage associations of a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint allows you to manage the _direct_ associations of a System.
 
@@ -7757,6 +7922,8 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/SystemGraphManagementReq'
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "204":
           description: OK
@@ -7767,8 +7934,8 @@ paths:
       operationId: List-SystemTraverseCommand
       summary: List the Commands bound to a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint will return all Commands bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -7830,16 +7997,27 @@ paths:
       operationId: Get-SystemFDEKey
       summary: Get System FDE Key
       tags:
+      - fde
       - Systems
       description: This endpoint will return the current (latest) fde key saved for a system.
+      parameters: []
       responses:
         "200":
           description: ""
           schema:
             $ref: '#/definitions/systemfdekey'
-          examples:
-            application/json:
-              key: cupidatat consequat occaecat proident
+        "400":
+          $ref: '#/responses/trait:standardErrors:400'
+        "401":
+          $ref: '#/responses/trait:standardErrors:401'
+        "403":
+          $ref: '#/responses/trait:standardErrors:403'
+        "404":
+          $ref: '#/responses/trait:standardErrors:404'
+        "409":
+          $ref: '#/responses/trait:standardErrors:409'
+        "500":
+          $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
     parameters:
@@ -7852,8 +8030,8 @@ paths:
       operationId: List-SystemMemberOf
       summary: List the parent Groups of a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint returns all the System Groups a System is a member of.
 
@@ -7897,6 +8075,8 @@ paths:
         default: []
         items:
           type: string
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "200":
           description: OK
@@ -7917,8 +8097,8 @@ paths:
       operationId: List-SystemTraversePolicy
       summary: List the Policies bound to a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -7983,8 +8163,8 @@ paths:
       operationId: List-PolicyStatus
       summary: List the policy statuses for a system
       tags:
-      - Policies
       - Graph
+      - Policies
       description: |-
         This endpoint returns the policy results for a particular system.
 
@@ -8059,8 +8239,8 @@ paths:
       operationId: List-SystemTraverseUserGroup
       summary: List the User Groups bound to a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint will return all User Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8102,6 +8282,8 @@ paths:
         default: []
         items:
           type: string
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "200":
           description: OK
@@ -8122,8 +8304,8 @@ paths:
       operationId: List-SystemTraverseUser
       summary: List the Users bound to a System
       tags:
-      - Systems
       - Graph
+      - Systems
       description: |-
         This endpoint will return all Users bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8165,6 +8347,8 @@ paths:
         default: []
         items:
           type: string
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
       responses:
         "200":
           description: OK
@@ -8292,9 +8476,9 @@ paths:
       operationId: List-UserGroupTraverseApplication
       summary: List the Applications bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8355,9 +8539,9 @@ paths:
       operationId: List-UserGroupAssociation
       summary: List the associations of a User Group.
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint returns the _direct_ associations of this User Group.
 
@@ -8422,9 +8606,9 @@ paths:
       operationId: Set-UserGroupAssociation
       summary: Manage the associations of a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint manages the _direct_ associations of this User Group.
 
@@ -8459,9 +8643,9 @@ paths:
       operationId: List-UserGroupTraverseDirectory
       summary: List the Directories bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all Directories bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8523,9 +8707,9 @@ paths:
       operationId: List-UserGroupTraverseGSuite
       summary: List the G Suite instances bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all G Suite Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8587,9 +8771,9 @@ paths:
       operationId: List-UserGroupTraverseLdapServer
       summary: List the LDAP Servers bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all LDAP Servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8650,9 +8834,9 @@ paths:
       operationId: List-UserGroupMembers
       summary: List the members of a User Group
       tags:
-      - User Group Members & Membership
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Members & Membership
       description: |-
         This endpoint returns the user members of a User Group.
 
@@ -8696,9 +8880,9 @@ paths:
       operationId: Set-UserGroupMembers
       summary: Manage the members of a User Group
       tags:
-      - User Group Members & Membership
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Members & Membership
       description: |-
         This endpoint allows you to manage the user members of a User Group.
 
@@ -8729,9 +8913,9 @@ paths:
       operationId: List-UserGroupMembership
       summary: List the User Group's membership
       tags:
-      - User Group Members & Membership
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Members & Membership
       description: |-
         This endpoint returns all users members that are a member of this User Group.
 
@@ -8794,9 +8978,9 @@ paths:
       operationId: List-UserGroupTraverseOffice365
       summary: List the Office 365 instances bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all Office 365 instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8857,9 +9041,9 @@ paths:
       operationId: List-UserGroupTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all RADIUS servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8921,9 +9105,9 @@ paths:
       operationId: List-UserGroupTraverseSystemGroup
       summary: List the System Groups bound to User Groups
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all System Groups bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8984,9 +9168,9 @@ paths:
       operationId: List-UserGroupTraverseSystem
       summary: List the Systems bound to a User Group
       tags:
-      - User Group Associations
-      - User Groups
       - Graph
+      - User Groups
+      - User Group Associations
       description: |-
         This endpoint will return all Systems bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9059,6 +9243,7 @@ paths:
           -H 'x-api-key: {API_KEY}'
 
         ```
+      parameters: []
       responses:
         "204":
           description: No Content
@@ -9079,6 +9264,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "200":
           description: OK
@@ -9128,8 +9314,8 @@ paths:
       operationId: List-UserTraverseApplication
       summary: List the Applications bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all Applications bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9190,8 +9376,8 @@ paths:
       operationId: List-UserAssociation
       summary: List the associations of a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint returns the _direct_ associations of a User.
 
@@ -9257,8 +9443,8 @@ paths:
       operationId: Set-UserAssociation
       summary: Manage the associations of a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint allows you to manage the _direct_ associations of a User.
 
@@ -9297,8 +9483,8 @@ paths:
       operationId: List-UserTraverseDirectory
       summary: List the Directories bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all Directories bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9359,8 +9545,8 @@ paths:
       operationId: List-UserTraverseGSuite
       summary: List the G Suite instances bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all G-Suite Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9421,8 +9607,8 @@ paths:
       operationId: List-UserTraverseLdapServer
       summary: List the LDAP servers bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all LDAP Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9483,8 +9669,8 @@ paths:
       operationId: List-UserMemberOf
       summary: List the parent Groups of a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint returns all the User Groups a User is a member of.
 
@@ -9547,8 +9733,8 @@ paths:
       operationId: List-UserTraverseOffice365
       summary: List the Office 365 instances bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9609,8 +9795,8 @@ paths:
       operationId: List-UserTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all RADIUS Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9671,8 +9857,8 @@ paths:
       operationId: List-UserTraverseSystemGroup
       summary: List the System Groups bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all System Groups bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9733,8 +9919,8 @@ paths:
       operationId: List-UserTraverseSystem
       summary: List the Systems bound to a User
       tags:
-      - Users
       - Graph
+      - Users
       description: |-
         This endpoint will return all Systems bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9894,10 +10080,6 @@ paths:
         schema:
           $ref: '#/definitions/workday-input'
       responses:
-        "200":
-          description: ""
-          schema:
-            $ref: '#/definitions/workday-output'
         "201":
           description: ""
           schema:
@@ -9921,6 +10103,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters: []
       responses:
         "200":
           description: ""
@@ -10030,6 +10213,7 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
         ```
+      parameters: []
       responses:
         "204":
           description: ""
@@ -10132,17 +10316,6 @@ paths:
             items:
               $ref: '#/definitions/workday-worker'
             type: array
-          examples:
-            application/json:
-            - lastName: sint dolore Excepteur ad
-            - attributes: {}
-              email: nostrud tempor anim ips
-              firstName: et ad
-              username: Excepteur culpa nulla aliqua
-            - attributes: {}
-              email: veniam ullamco
-            - {}
-            - lastName: do
       security:
       - x-api-key: []
     parameters:
