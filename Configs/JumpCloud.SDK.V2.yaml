@@ -12,7 +12,7 @@ sanitize-names: false
 # # Values
 module-version: 0.0.17
 # skip-model-cmdlets: false
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/
 metadata:
   authors: JumpCloud Solutions Architect Team
   owners: JumpCloud
@@ -22,7 +22,7 @@ metadata:
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
   companyName: JumpCloud
   licenseUri: https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/JumpCloud.SDK.V2/
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 # # Names
 prefix: JcSdkInternal
