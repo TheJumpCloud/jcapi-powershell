@@ -400,7 +400,7 @@ Try
                 {
                     Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 }
-                Write-Host ("##vso[task.setvariable variable=BuildVersion]$CurrentVersion-$(Get-Date -Format 'yyyyMMddHHmmss')") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("##vso[task.setvariable variable=BuildVersion]$($CurrentVersion).$($env:BUILD_BUILDNUMBER)-$(Get-Date -Format 'yyyyMMddHHmmss')") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
