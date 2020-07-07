@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj": {}
+    "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj": {}
   },
   "projects": {
-    "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj": {
+    "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj": {
       "version": "0.0.5",
       "restore": {
-        "projectUniqueName": "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
+        "projectUniqueName": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
         "projectName": "JumpCloud.SDK.DirectoryInsights.private",
-        "projectPath": "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
-        "packagesPath": "C:\\Users\\epanipinto\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\epanipinto\\Documents\\GitHub\\jcapi-powershell\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\obj\\",
+        "projectPath": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\JumpCloud.SDK.DirectoryInsights.csproj",
+        "packagesPath": "C:\\Users\\VssAdministrator\\.nuget\\packages\\",
+        "outputPath": "D:\\a\\1\\s\\SDKs\\PowerShell\\JumpCloud.SDK.DirectoryInsights\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\epanipinto\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\VssAdministrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netstandard2.0"
