@@ -358,7 +358,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onBadRequest - response for 400 / */*
+                // onBadRequest - response for 400 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -382,7 +382,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onConflict - response for 409 / */*
+                // onConflict - response for 409 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -406,7 +406,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onForbidden - response for 403 / */*
+                // onForbidden - response for 403 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -432,7 +432,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onInternalServerError - response for 500 / */*
+                // onInternalServerError - response for 500 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -456,7 +456,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onNotFound - response for 404 / */*
+                // onNotFound - response for 404 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -480,7 +480,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);
@@ -504,7 +504,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onUnauthorized - response for 401 / */*
+                // onUnauthorized - response for 401 / application/json
                 // response should be returning an array of some kind. +Pageable
                 // array / <none> / <none>
                 WriteObject(await response, true);

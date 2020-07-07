@@ -169,12 +169,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
         /// of what happens on that response. Implement this method in a partial class to enable this behavior
         /// </summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <param name="returnNow">/// Determines if the rest of the onUnauthorized method should be processed, or if the method
         /// should return immediately (set to true to skip further processing )</param>
 
-        partial void overrideOnUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
+        partial void overrideOnUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response, ref global::System.Threading.Tasks.Task<bool> returnNow);
 
         /// <summary>
         /// (overrides the default BeginProcessing method in global::System.Management.Automation.PSCmdlet)
@@ -358,7 +358,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IAdministrator
                 WriteObject((await response));
             }
@@ -366,12 +366,12 @@ namespace JumpCloud.SDK.V2.Cmdlets
 
         /// <summary>a delegate that is called when the remote service returns 401 (Unauthorized).</summary>
         /// <param name="responseMessage">the raw response message as an global::System.Net.Http.HttpResponseMessage.</param>
-        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema"
+        /// <param name="response">the body result as a <see cref="JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema"
         /// /> from the remote call</param>
         /// <returns>
         /// A <see cref="global::System.Threading.Tasks.Task" /> that will be complete when handling of the method is completed.
         /// </returns>
-        private async global::System.Threading.Tasks.Task onUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema> response)
+        private async global::System.Threading.Tasks.Task onUnauthorized(global::System.Net.Http.HttpResponseMessage responseMessage, global::System.Threading.Tasks.Task<JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema> response)
         {
             using( NoSynchronizationContext )
             {
@@ -382,8 +382,8 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onUnauthorized - response for 401 / */*
-                // (await response) // should be JumpCloud.SDK.V2.Models.IPathsZ8Y5PeProvidersProviderIdAdministratorsPostResponses401ContentSchema
+                // onUnauthorized - response for 401 / application/json
+                // (await response) // should be JumpCloud.SDK.V2.Models.IPaths11UphleProvidersProviderIdAdministratorsPostResponses401ContentApplicationJsonSchema
                 WriteObject((await response).Message);
             }
         }

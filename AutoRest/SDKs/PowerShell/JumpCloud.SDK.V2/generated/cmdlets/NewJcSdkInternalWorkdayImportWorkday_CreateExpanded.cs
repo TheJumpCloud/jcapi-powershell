@@ -347,7 +347,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onCreated - response for 201 / */*
+                // onCreated - response for 201 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IWorkdayOutput
                 WriteObject((await response));
             }

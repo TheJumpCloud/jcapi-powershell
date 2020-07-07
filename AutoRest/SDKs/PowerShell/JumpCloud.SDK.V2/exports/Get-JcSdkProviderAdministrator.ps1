@@ -30,14 +30,14 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.IPaths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema
+JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
 .Outputs
 System.String
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/AutoRest/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdkprovideradministrator
 #>
 function Get-JcSdkProviderAdministrator {
-[OutputType([JumpCloud.SDK.V2.Models.IPaths1U9GsrpProvidersProviderIdAdministratorsGetResponses200ContentSchema], [System.String])]
+[OutputType([JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema], [System.String])]
 [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
 param(
     [Parameter(Mandatory)]

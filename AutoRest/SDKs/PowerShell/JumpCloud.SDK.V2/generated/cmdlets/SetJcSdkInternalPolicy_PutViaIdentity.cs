@@ -309,7 +309,7 @@ namespace JumpCloud.SDK.V2.Cmdlets
                 {
                     return ;
                 }
-                // onOk - response for 200 / */*
+                // onOk - response for 200 / application/json
                 // (await response) // should be JumpCloud.SDK.V2.Models.IPolicy
                 WriteObject((await response));
             }
