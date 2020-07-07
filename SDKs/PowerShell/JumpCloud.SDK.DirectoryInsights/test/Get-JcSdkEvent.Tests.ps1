@@ -19,7 +19,6 @@ BeforeAll {
         "EndTime"       = (Get-Date).ToUniversalTime();
         "Service"       = "all";
         "Sort"          = "DESC"
-        "Limit"         = 10000;
         "SearchTermAnd" = @{
             "event_type" = "user_delete"
         }
@@ -30,7 +29,7 @@ Describe 'Get-JcSdkEvent' {
         Service - Not sure how to validate yet (Test that results service value matches parameter value)
     #>
     It 'GetExpanded' {
-        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Limit:($ParamHash.Limit) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
+        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEvent -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
         If ([System.String]::IsNullOrEmpty($eventTest))
         {
             $eventTest | Should -Not -BeNullOrEmpty
