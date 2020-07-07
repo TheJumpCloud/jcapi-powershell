@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0",
     "title": "JumpCloud APIs",
-    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph. Test"
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph."
   },
   "host": "console.jumpcloud.com",
   "basePath": "/api/v2/",
