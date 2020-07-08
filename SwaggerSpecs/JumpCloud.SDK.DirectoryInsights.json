@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0",
-    "title": "Directory Insights API Test",
+    "title": "Directory Insights API",
     "description": "The purpose of this API is to query Jumpcloud Directory Insights events"
   },
   "host": "api.jumpcloud.com",
