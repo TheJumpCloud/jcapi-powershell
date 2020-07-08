@@ -29,7 +29,7 @@ Try
     $PrereleaseName = '' # Beta
     $UpdateModuleGuid = $true
     $TestModule = $true
-    $RemoveGitIgnore = $true
+    $RemoveGitIgnore = $false
     $RemoveAzAccounts = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
