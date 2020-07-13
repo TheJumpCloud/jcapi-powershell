@@ -211,8 +211,11 @@ Try
                                 $ExportFullName = "$exportsFolderPath/$($CustomFile.Name)"
                                 $ExportContent = Get-Content -Path:($ExportFullName) -Raw
                                 $PSScriptInfo = ($ExportContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
+                                # $CamelCase = ($CustomFile).BaseName
+                                $baseNameCustom  = (Get-Item $ExportFullName).BaseName
+                                $baseNameExport = (Get-Item $CustomFileFullName).BaseName
                                 # Update help info link
-                                # $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($baseNameExport)"), "$($ConfigHelpLinkPrefix)$($ModuleName)/examples/$($baseNameCustom).md", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                                 # Convert generated function syntax to custom function syntax
                                 $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
 
