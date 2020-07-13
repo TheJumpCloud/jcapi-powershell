@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 System.Boolean
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1/invoke-jcsdkinvokecommand
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Invoke-JcSdkInvokeCommand.md
 #>
  Function Invoke-JcSdkInvokeCommand
 {
