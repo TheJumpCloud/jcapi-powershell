@@ -30,7 +30,7 @@ BODY <ISearch>:
   [Filter <ISearchFilter>]: 
   [SearchFilter <ISearchFilter1>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1/search-jcsdkorganization
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Search-JcSdkOrganization.md
 #>
  Function Search-JcSdkOrganization
 {
