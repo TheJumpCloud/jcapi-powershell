@@ -215,7 +215,7 @@ Try
                                 $baseNameCustom  = (Get-Item $ExportFullName).BaseName
                                 $baseNameExport = (Get-Item $CustomFileFullName).BaseName
                                 # Update help info link
-                                $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($baseNameExport)"), "$($ConfigHelpLinkPrefix)$($ModuleName)/examples/$($baseNameCustom).md", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                                $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($baseNameExport)"), "$($ConfigHelpLinkPrefix)$($ModuleName)/docs/exports/$($baseNameCustom).md", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                                 # Convert generated function syntax to custom function syntax
                                 $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
 
