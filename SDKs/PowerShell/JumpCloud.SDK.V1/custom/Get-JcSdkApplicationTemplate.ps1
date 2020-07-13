@@ -28,7 +28,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]: 
   [Triggername <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Get-JcSdkApplicationTemplate.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkApplicationTemplate.md
 #>
  Function Get-JcSdkApplicationTemplate
 {

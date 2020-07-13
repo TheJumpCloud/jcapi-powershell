@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentAp
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Get-JcSdkSystemUserSshKey.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkSystemUserSshKey.md
 #>
  Function Get-JcSdkSystemUserSshKey
 {

@@ -38,7 +38,7 @@ BODY <ICommand>:
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/New-JcSdkCommand.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkCommand.md
 #>
  Function New-JcSdkCommand
 {

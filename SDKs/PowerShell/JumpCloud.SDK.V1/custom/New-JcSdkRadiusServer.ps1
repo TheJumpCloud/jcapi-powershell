@@ -30,7 +30,7 @@ BODY <IRadiusserverpost>:
   [UserLockoutAction <String>]: 
   [UserPasswordExpirationAction <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/New-JcSdkRadiusServer.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkRadiusServer.md
 #>
  Function New-JcSdkRadiusServer
 {

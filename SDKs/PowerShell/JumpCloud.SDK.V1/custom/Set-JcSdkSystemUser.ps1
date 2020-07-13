@@ -100,7 +100,7 @@ SSHKEYS <ISshkeypost[]>:
   Name <String>: The name of the SSH key.
   PublicKey <String>: The Public SSH key.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Set-JcSdkSystemUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkSystemUser.md
 #>
  Function Set-JcSdkSystemUser
 {

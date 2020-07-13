@@ -198,7 +198,7 @@ CONFIG <IApplicationConfig>:
   [SpEntityIdValue <String>]: 
   [SpEntityIdVisible <Boolean?>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/New-JcSdkApplication.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkApplication.md
 #>
  Function New-JcSdkApplication
 {

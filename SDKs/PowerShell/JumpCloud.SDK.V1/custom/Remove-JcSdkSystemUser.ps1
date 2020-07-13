@@ -26,7 +26,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]: 
   [Triggername <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/examples/Remove-JcSdkSystemUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkSystemUser.md
 #>
  Function Remove-JcSdkSystemUser
 {
