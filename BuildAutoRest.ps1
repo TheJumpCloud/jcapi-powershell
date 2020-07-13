@@ -51,7 +51,7 @@ Try
                     .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
                 }
             }
-            If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
+            If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
