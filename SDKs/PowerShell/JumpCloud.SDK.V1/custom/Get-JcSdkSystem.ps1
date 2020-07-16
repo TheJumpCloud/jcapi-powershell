@@ -28,7 +28,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]: 
   [Triggername <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1/get-jcsdksystem
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkSystem.md
 #>
  Function Get-JcSdkSystem
 {

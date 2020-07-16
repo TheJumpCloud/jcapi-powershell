@@ -117,7 +117,7 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemUsersCanEdit <Boolean?>]: 
   [UserPortalIdleSessionDurationMinutes <Int32?>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1/set-jcsdkorganization
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md
 #>
  Function Set-JcSdkOrganization
 {
