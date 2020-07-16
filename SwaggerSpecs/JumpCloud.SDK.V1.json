@@ -3150,20 +3150,65 @@
     },
     "commandresultslist": {
       "title": "CommandResultsList",
+      "type": "object",
       "properties": {
-        "results": {
-          "description": "The list of command results",
-          "items": {
-            "$ref": "#/definitions/commandresult"
-          },
-          "type": "array"
-        },
         "totalCount": {
-          "description": "The total number of command results",
+          "description": "The total number of command results.",
           "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "The command that was executed on the system."
+              },
+              "exitCode": {
+                "type": "integer",
+                "description": "The stderr output from the command that ran."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the command."
+              },
+              "requestTime": {
+                "type": "string",
+                "description": "The time (UTC) that the command was sent."
+              },
+              "responseTime": {
+                "type": "string",
+                "description": "The time (UTC) that the command was completed."
+              },
+              "sudo": {
+                "type": "boolean",
+                "description": "If the user had sudo rights."
+              },
+              "system": {
+                "type": "string",
+                "description": "The display name of the system the command was executed on."
+              },
+              "systemId": {
+                "type": "string",
+                "description": "The id of the system the command was executed on."
+              },
+              "user": {
+                "type": "string",
+                "description": "The user the command ran as."
+              },
+              "workflowId": {
+                "type": "string",
+                "description": "The id for the command that ran on the system."
+              },
+              "_id": {
+                "type": "string",
+                "description": "The ID of the command result."
+              }
+            }
+          }
         }
-      },
-      "type": "object"
+      }
     },
     "commandslist": {
       "title": "CommandsList",
@@ -3991,25 +4036,25 @@
     },
     "sshkeylist": {
       "title": "SSHKeyList",
-      "type": "object",
       "properties": {
-        "create_date": {
-          "type": "string",
-          "description": "The date the SSH key was created."
-        },
         "_id": {
-          "type": "string",
-          "description": "The ID of the SSH key."
+          "description": "The ID of the SSH key.",
+          "type": "string"
         },
-        "public_key": {
-          "type": "string",
-          "description": "The Public SSH key."
+        "create_date": {
+          "description": "The date the SSH key was created.",
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "description": "The name of the SSH key."
+          "description": "The name of the SSH key.",
+          "type": "string"
+        },
+        "public_key": {
+          "description": "The Public SSH key.",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "sshkeypost": {
       "title": "SSHKeyPost",
@@ -4445,105 +4490,60 @@
     },
     "systemuserputpost": {
       "title": "SystemUserPost",
+      "type": "object",
       "properties": {
-        "account_locked": {
-          "type": "boolean"
+        "email": {
+          "type": "string",
+          "maxLength": 1024
         },
-        "activated": {
-          "type": "boolean"
-        },
-        "addresses": {
-          "items": {
-            "properties": {
-              "country": {
-                "type": "string"
-              },
-              "extendedAddress": {
-                "type": "string"
-              },
-              "locality": {
-                "type": "string"
-              },
-              "poBox": {
-                "type": "string"
-              },
-              "postalCode": {
-                "type": "string"
-              },
-              "region": {
-                "type": "string"
-              },
-              "streetAddress": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
+        "username": {
+          "type": "string"
         },
         "allow_public_key": {
           "type": "boolean"
         },
-        "attributes": {
-          "items": {
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "company": {
+        "public_key": {
           "type": "string"
         },
-        "costCenter": {
-          "type": "string"
-        },
-        "department": {
-          "type": "string"
-        },
-        "description": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "displayname": {
-          "type": "string"
-        },
-        "email": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "employeeIdentifier": {
-          "description": "Must be unique per user. ",
-          "maxLength": 256,
-          "type": "string"
-        },
-        "employeeType": {
-          "type": "string"
+        "sudo": {
+          "type": "boolean"
         },
         "enable_managed_uid": {
           "type": "boolean"
         },
-        "enable_user_portal_multifactor": {
+        "unix_uid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "unix_guid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "externally_managed": {
           "type": "boolean"
         },
         "external_dn": {
           "type": "string"
         },
-        "external_password_expiration_date": {
-          "format": "date-time",
-          "type": "string"
-        },
         "external_source_type": {
           "type": "string"
         },
-        "externally_managed": {
-          "type": "boolean"
-        },
         "firstname": {
-          "type": "string"
-        },
-        "jobTitle": {
           "type": "string"
         },
         "lastname": {
@@ -4552,14 +4552,75 @@
         "ldap_binding_user": {
           "type": "boolean"
         },
-        "location": {
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "poBox": {
+                "type": "string"
+              },
+              "extendedAddress": {
+                "type": "string"
+              },
+              "streetAddress": {
+                "type": "string"
+              },
+              "locality": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "country": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "jobTitle": {
           "type": "string"
         },
-        "mfa": {
-          "$ref": "#/definitions/mfa"
-        },
-        "middlename": {
+        "department": {
           "type": "string"
+        },
+        "phoneNumbers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "relationships": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
         },
         "password": {
           "type": "string"
@@ -4567,64 +4628,48 @@
         "password_never_expires": {
           "type": "boolean"
         },
-        "passwordless_sudo": {
-          "type": "boolean"
-        },
-        "phoneNumbers": {
-          "items": {
-            "properties": {
-              "number": {
-                "type": "string"
-              },
-              "type": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "public_key": {
+        "middlename": {
           "type": "string"
         },
-        "relationships": {
-          "items": {
-            "type": "object"
-          },
-          "type": "array"
+        "displayname": {
+          "type": "string"
         },
-        "samba_service_user": {
-          "type": "boolean"
+        "description": {
+          "type": "string",
+          "maxLength": 1024
         },
-        "sudo": {
-          "type": "boolean"
+        "location": {
+          "type": "string"
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "employeeType": {
+          "type": "string"
+        },
+        "company": {
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Must be unique per user. "
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
         },
         "suspended": {
           "type": "boolean"
         },
-        "tags": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
-        },
-        "unix_guid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "unix_uid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "username": {
-          "type": "string"
+        "external_password_expiration_date": {
+          "type": "string",
+          "format": "date-time"
         }
       },
       "required": [
         "email",
         "username"
-      ],
-      "type": "object"
+      ]
     },
     "systemuserreturn": {
       "title": "SystemUserReturn",
