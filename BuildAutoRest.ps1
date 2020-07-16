@@ -68,7 +68,7 @@ Try
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-                $ConfigProjectUri = $Config.projectUri
+                $ConfigProjectUri = $Config.metadata.projectUri
                 $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
@@ -87,6 +87,7 @@ Try
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
+                $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
@@ -161,6 +162,11 @@ Try
 
                     $BuildModuleCommand = "$buildModulePath -Release"
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                    # fix docs help link
+                    $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
+                    $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
+                    Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
+                    # build the module
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
@@ -211,11 +217,8 @@ Try
                                 $ExportFullName = "$exportsFolderPath/$($CustomFile.Name)"
                                 $ExportContent = Get-Content -Path:($ExportFullName) -Raw
                                 $PSScriptInfo = ($ExportContent | Select-String -Pattern:('(?s)(<#)(.*?)(#>)')).Matches.Value
-                                # Update help info link
-                                # $PSScriptInfo = [Regex]::Replace($PSScriptInfo, [regex]::Escape("$($ConfigHelpLinkPrefix)$($ModuleName)/$($CommandName)"), "$($ConfigProjectUri)$($NewCommandName)", [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                                 # Convert generated function syntax to custom function syntax
                                 $PSScriptInfo = Convert-GeneratedToCustom -InputString:($PSScriptInfo) -ConfigPrefix:($ConfigPrefix) -ConfigCustomFunctionPrefix:($ConfigCustomFunctionPrefix)
-
                                 $InternalFullName = "$internalFolderPath/$($CustomFile.Name.Replace($ConfigCustomFunctionPrefix,$ConfigPrefix))"
                                 $InternalContent = Get-Content -Path:($InternalFullName) -Raw
                                 $InternalDescription = ($InternalContent | Select-String -Pattern:('(?s)(\.Synopsis)(.*?)(?=\.Example)')).Matches.Value
