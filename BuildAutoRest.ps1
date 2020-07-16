@@ -29,7 +29,7 @@ Try
     $PrereleaseName = '' # Beta
     $UpdateModuleGuid = $true
     $TestModule = $true
-    $RemoveGitIgnore = $false
+    $ModifyGitIgnore = $true
     $RemoveAzAccounts = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
@@ -51,7 +51,7 @@ Try
                     .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
                 }
             }
-            If ($UpdatedSpec -or $env:USERNAME -eq 'VssAdministrator' -or $RunLocal)
+            If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
@@ -316,12 +316,13 @@ Try
                 }
                 ###########################################################################
                 # Remove auto generated .gitignore files
-                If ($RemoveGitIgnore)
+                If ($ModifyGitIgnore)
                 {
                     $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File | Where-Object { $_.Extension -eq '.gitignore' }
-                    If ($GitIgnoreFiles)
-                    {
-                        $GitIgnoreFiles | Remove-Item -Force
+                    $GitIgnoreFiles | ForEach-Object {
+                        $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
+                        $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
+                        $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
                 }
                 ###########################################################################
