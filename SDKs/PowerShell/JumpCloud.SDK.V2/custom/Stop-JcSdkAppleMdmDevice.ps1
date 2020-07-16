@@ -41,7 +41,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/stop-jcsdkapplemdmdevice
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Stop-JcSdkAppleMdmDevice.md
 #>
  Function Stop-JcSdkAppleMdmDevice
 {

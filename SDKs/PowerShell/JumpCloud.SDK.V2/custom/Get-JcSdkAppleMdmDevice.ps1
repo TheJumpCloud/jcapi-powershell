@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IAppleMdmDevice
 .Outputs
 System.String
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdkapplemdmdevice
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDevice.md
 #>
  Function Get-JcSdkAppleMdmDevice
 {

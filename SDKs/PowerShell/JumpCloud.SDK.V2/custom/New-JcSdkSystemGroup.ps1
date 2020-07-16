@@ -24,7 +24,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISystemGroupData>: 
   Name <String>: Display name of a System Group.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/new-jcsdksystemgroup
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSystemGroup.md
 #>
  Function New-JcSdkSystemGroup
 {

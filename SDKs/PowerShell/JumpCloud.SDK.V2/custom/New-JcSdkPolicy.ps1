@@ -34,7 +34,7 @@ VALUES <IPolicyValue[]>:
   [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
   [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/new-jcsdkpolicy
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
 #>
  Function New-JcSdkPolicy
 {

@@ -8065,74 +8065,6 @@
         ]
       }
     },
-    "/systeminsights/registry": {
-      "get": {
-        "operationId": "Get-Registry",
-        "summary": "List System Insights Registry",
-        "tags": [
-          "System Insights"
-        ],
-        "description": "Valid filter fields are `system_id` and `key`.",
-        "parameters": [
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset into the records to return.",
-            "required": false,
-            "type": "integer",
-            "default": 0,
-            "minimum": 0
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
-            "required": false,
-            "type": "array",
-            "default": [],
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Supported operators are: eq",
-            "required": false,
-            "type": "array",
-            "default": [],
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "default": 10,
-            "maximum": 1000,
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/system-insights-registry"
-              },
-              "type": "array"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
     "/systeminsights/safari_extensions": {
       "get": {
         "operationId": "List-SystemInsightsSafariExtensions",
@@ -13016,12 +12948,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
-      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "GraphConnection": {
       "title": "GraphConnection",
@@ -15820,32 +15752,6 @@
           "type": "string"
         },
         "directory": {
-          "type": "string"
-        },
-        "system_id": {
-          "type": "string"
-        }
-      }
-    },
-    "system-insights-registry": {
-      "title": "System Insights registry",
-      "properties": {
-        "key": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "data": {
-          "type": "string"
-        },
-        "mtime": {
           "type": "string"
         },
         "system_id": {

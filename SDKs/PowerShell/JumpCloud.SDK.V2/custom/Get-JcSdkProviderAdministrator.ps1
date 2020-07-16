@@ -19,7 +19,7 @@ JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponse
 .Outputs
 System.String
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdkprovideradministrator
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkProviderAdministrator.md
 #>
  Function Get-JcSdkProviderAdministrator
 {

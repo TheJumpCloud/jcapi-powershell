@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.ISystemInsightsAlfExplicitAuths
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdksystemgroupsysteminsightalfexplicitauth
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemGroupSystemInsightAlfExplicitAuth.md
 #>
  Function Get-JcSdkSystemGroupSystemInsightAlfExplicitAuth
 {
