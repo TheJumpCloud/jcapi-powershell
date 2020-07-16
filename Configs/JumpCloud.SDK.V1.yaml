@@ -21,7 +21,7 @@ metadata:
   copyright: (c) JumpCloud. All rights reserved.
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
   companyName: JumpCloud
-  licenseUri: https://github.com/TheJumpCloud/support/blob/master/PowerShell/LICENSE
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/master/LICENSE
   projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 # # Names
