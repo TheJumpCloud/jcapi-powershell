@@ -1,9 +1,5 @@
 # jcapi-powershell
 
-https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V1
-https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V2
-https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.DirectoryInsights
-
 ## Description
 
 This repository contains the PowerShell client code for the JumpCloud V1, V2 and DirectoryInsights APIs. It also provides the tools necessary to generate this code from the API Yaml files using AutoRest. [AutoRest](https://github.com/Azure/autorest), simply put is a tool used to generate client libraries for accessing RESTful web services.
