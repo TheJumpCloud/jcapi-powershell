@@ -1,10 +1,8 @@
 # jcapi-powershell
 
-[![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V1)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=33)
-
-[![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V2)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=34)
-
-[![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.DirectoryInsights)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=35)
+|                                                                                                    V1                                                                                                     |                                                                                                    V2                                                                                                     |                                                                                                    DirectoryInsights                                                                                                     |
+| :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V1)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=33) | [![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.V2)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=34) | [![Build status](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_apis/build/status/JumpCloud.SDK.DirectoryInsights)](https://dev.azure.com/JumpCloudPowershell/JumpCloudApiSdk/_build/latest?definitionId=35) |
 
 ## Description
 
