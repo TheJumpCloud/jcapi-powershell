@@ -30,7 +30,7 @@ BODY <IBulkUserCreate[]>:
   [Lastname <String>]: 
   [Username <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/new-jcsdkbulkjobrequestbulkuser
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkJobRequestBulkUser.md
 #>
  Function New-JcSdkBulkJobRequestBulkUser
 {

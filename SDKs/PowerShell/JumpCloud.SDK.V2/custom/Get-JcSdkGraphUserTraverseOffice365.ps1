@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdkgraphusertraverseoffice365
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGraphUserTraverseOffice365.md
 #>
  Function Get-JcSdkGraphUserTraverseOffice365
 {

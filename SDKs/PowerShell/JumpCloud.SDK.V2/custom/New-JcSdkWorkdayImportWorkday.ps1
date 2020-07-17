@@ -30,7 +30,7 @@ BODY <IWorkdayInput>:
   [OauthCode <String>]: 
   [ReportUrl <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/new-jcsdkworkdayimportworkday
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkWorkdayImportWorkday.md
 #>
  Function New-JcSdkWorkdayImportWorkday
 {

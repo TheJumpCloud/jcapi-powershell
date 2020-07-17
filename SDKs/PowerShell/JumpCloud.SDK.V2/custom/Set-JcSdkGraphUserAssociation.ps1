@@ -50,7 +50,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/set-jcsdkgraphuserassociation
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkGraphUserAssociation.md
 #>
  Function Set-JcSdkGraphUserAssociation
 {

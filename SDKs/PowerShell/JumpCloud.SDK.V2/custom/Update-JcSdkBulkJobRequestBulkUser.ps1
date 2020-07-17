@@ -31,7 +31,7 @@ BODY <IBulkUserUpdate[]>:
   [Lastname <String>]: 
   [Username <String>]: 
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/update-jcsdkbulkjobrequestbulkuser
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkJobRequestBulkUser.md
 #>
  Function Update-JcSdkBulkJobRequestBulkUser
 {

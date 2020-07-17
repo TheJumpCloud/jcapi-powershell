@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2/get-jcsdksysteminsightlogged
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLogged.md
 #>
  Function Get-JcSdkSystemInsightLogged
 {
