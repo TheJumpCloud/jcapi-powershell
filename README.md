@@ -43,7 +43,7 @@ Documentation is generated but the examples per each function need to be populat
 
 During SDK generation, a transform step is applied to the swagger spec data, think of it like a dictionary of user-friendly translations. The [ApiTansform.ps1](ApiTransform.ps1) script contains those translation definitions and will need to be updated if new endpoints require a custom translation.
 
-These [https://www.powershellgallery.com/packages?q=JumpCloud.SDK](SDKs) contain all the functionality of the [https://docs.jumpcloud.com](JumpCloudAPIs) in addition to the following added features that have been applied during SDK generation by the [BuildCustomFunctions.ps1](BuildCustomFunctions.ps1) script:
+These [SDKs](https://www.powershellgallery.com/packages?q=JumpCloud.SDK) contain all the functionality of the [JumpCloudAPIs](https://docs.jumpcloud.com) in addition to the following added features that have been applied during SDK generation by the [BuildCustomFunctions.ps1](BuildCustomFunctions.ps1) script:
 * Authentication through environment variables `$env:JCApiKey` and `$env:JCOrgId`. If these are not set the SDK will prompt the user to set them and in turn append the `x-api-key` and `x-org-id` headers to each API call.
 * Normalization of endpoint output. The multiple APIs return data in different ways which have been normalized through the SDKs.
 * Auto pagination and removal of `Skip` and `Limit` parameters. This enables the functions to return all data from API endpoint.
