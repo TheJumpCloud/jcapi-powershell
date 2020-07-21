@@ -3,7 +3,7 @@
   "info": {
     "version": "1.0",
     "title": "Directory Insights API",
-    "description": "The purpose of this API is to query Jumpcloud Directory Insights events"
+    "description": "The purpose of this API is to query Jumpcloud Directory Insights events test"
   },
   "host": "api.jumpcloud.com",
   "basePath": "/insights/directory/v1/",
