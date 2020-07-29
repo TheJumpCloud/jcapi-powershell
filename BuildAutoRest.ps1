@@ -54,7 +54,7 @@ Try
             If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
             {
                 # Mark Updated Spec in Pipelie
-                Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+                Write-Output ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
                 $ConfigFileFullName = $ConfigFile.FullName
@@ -389,7 +389,7 @@ Try
             Else
             {
                 Write-Warning ($SDK + ' spec is up to date.')
-                Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+                Write-Output ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 
             }
         }
