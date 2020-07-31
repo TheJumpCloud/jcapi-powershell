@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "2.0",
-    "title": "JumpCloud APIs",
+    "title": "JumpCloud APIs test",
     "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph."
   },
   "host": "console.jumpcloud.com",
@@ -12586,46 +12586,6 @@
         "registered": false
       }
     },
-    "AppleMDM": {
-      "title": "AppleMDM",
-      "type": "object",
-      "properties": {
-        "apnsPushTopic": {
-          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist.",
-          "type": "string"
-        },
-        "depServerTokenState": {
-          "description": "The state of the dep server token, presence and expiry.",
-          "enum": [
-            "unknown",
-            "missing",
-            "valid",
-            "expired"
-          ],
-          "type": "string"
-        },
-        "id": {
-          "description": "ObjectId uniquely identifying an MDM Enrollment,",
-          "type": "string"
-        },
-        "name": {
-          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
-          "maxLength": 255,
-          "type": "string"
-        },
-        "apnsCertExpiry": {
-          "type": "string",
-          "description": "The expiration date and time for the APNS Certificate."
-        },
-        "depAccessTokenExpiry": {
-          "type": "string",
-          "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
     "apple-mdm-device": {
       "title": "Apple MDM Device",
       "type": "object",
@@ -12675,6 +12635,46 @@
     "apple-mdm-public-key-cert": {
       "title": "Apple MDM Public Key Certificate",
       "type": "string"
+    },
+    "AppleMDM": {
+      "title": "AppleMDM",
+      "type": "object",
+      "properties": {
+        "apnsPushTopic": {
+          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist.",
+          "type": "string"
+        },
+        "depServerTokenState": {
+          "description": "The state of the dep server token, presence and expiry.",
+          "enum": [
+            "unknown",
+            "missing",
+            "valid",
+            "expired"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying an MDM Enrollment,",
+          "type": "string"
+        },
+        "name": {
+          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
+          "maxLength": 255,
+          "type": "string"
+        },
+        "apnsCertExpiry": {
+          "type": "string",
+          "description": "The expiration date and time for the APNS Certificate."
+        },
+        "depAccessTokenExpiry": {
+          "type": "string",
+          "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State."
+        }
+      },
+      "required": [
+        "id"
+      ]
     },
     "auth-info": {
       "title": "Auth Info",
@@ -13109,27 +13109,6 @@
       ],
       "type": "string"
     },
-    "GSuiteBuiltinTranslation": {
-      "title": "G Suite BuiltIn Translation",
-      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
-      "enum": [
-        "user_home_addresses",
-        "user_work_addresses",
-        "user_other_addresses",
-        "user_home_phone_numbers",
-        "user_mobile_phone_numbers",
-        "user_other_phone_numbers",
-        "user_work_phone_numbers",
-        "user_work_fax_phone_numbers",
-        "user_work_mobile_phone_numbers",
-        "user_primary_organization_cost_center",
-        "user_primary_organization_department",
-        "user_primary_organization_description",
-        "user_primary_organization_employee_id",
-        "user_primary_organization_title"
-      ],
-      "type": "string"
-    },
     "gsuite-output": {
       "title": "GSuite Output",
       "allOf": [
@@ -13184,6 +13163,27 @@
         }
       },
       "type": "object"
+    },
+    "GSuiteBuiltinTranslation": {
+      "title": "G Suite BuiltIn Translation",
+      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
+      "enum": [
+        "user_home_addresses",
+        "user_work_addresses",
+        "user_other_addresses",
+        "user_home_phone_numbers",
+        "user_mobile_phone_numbers",
+        "user_other_phone_numbers",
+        "user_work_phone_numbers",
+        "user_work_fax_phone_numbers",
+        "user_work_mobile_phone_numbers",
+        "user_primary_organization_cost_center",
+        "user_primary_organization_department",
+        "user_primary_organization_description",
+        "user_primary_organization_employee_id",
+        "user_primary_organization_title"
+      ],
+      "type": "string"
     },
     "GSuiteTranslationRule": {
       "title": "G Suite Translation Rule",
@@ -13282,14 +13282,6 @@
       },
       "type": "object"
     },
-    "LdapServerAction": {
-      "title": "LDAP Server Action",
-      "enum": [
-        "disable",
-        "remove"
-      ],
-      "type": "string"
-    },
     "ldap-server-input": {
       "title": "LDAP Server Input",
       "properties": {
@@ -13336,6 +13328,14 @@
         }
       ]
     },
+    "LdapServerAction": {
+      "title": "LDAP Server Action",
+      "enum": [
+        "disable",
+        "remove"
+      ],
+      "type": "string"
+    },
     "mfa": {
       "title": "mfa",
       "type": "object",
@@ -13354,23 +13354,6 @@
     },
     "mobileconfig": {
       "title": "mobileconfig",
-      "type": "string"
-    },
-    "Office365BuiltinTranslation": {
-      "title": "Office 365 BuiltIn Translation",
-      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user` \n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user` \n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user` \n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user` \n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user` \n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user` \n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user` \n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user` ",
-      "enum": [
-        "user_street_address",
-        "user_city",
-        "user_state",
-        "user_country",
-        "user_postal_code",
-        "user_business_phones",
-        "user_mobile_phone",
-        "user_department",
-        "user_job_title",
-        "user_office_location"
-      ],
       "type": "string"
     },
     "office365-output": {
@@ -13420,6 +13403,23 @@
         }
       },
       "type": "object"
+    },
+    "Office365BuiltinTranslation": {
+      "title": "Office 365 BuiltIn Translation",
+      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user` \n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user` \n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user` \n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user` \n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user` \n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user` \n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user` \n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user` ",
+      "enum": [
+        "user_street_address",
+        "user_city",
+        "user_state",
+        "user_country",
+        "user_postal_code",
+        "user_business_phones",
+        "user_mobile_phone",
+        "user_department",
+        "user_job_title",
+        "user_office_location"
+      ],
+      "type": "string"
     },
     "Office365TranslationRule": {
       "title": "Office 365 Translation Rule",
@@ -14048,185 +14048,6 @@
         }
       }
     },
-    "systemfdekey": {
-      "title": "SystemFDEKey",
-      "properties": {
-        "key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key"
-      ],
-      "type": "object"
-    },
-    "SystemGraphManagementReq": {
-      "title": "SystemGraphManagementReq",
-      "properties": {
-        "attributes": {
-          "description": "The graph connection's attributes",
-          "properties": {
-            "sudo": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "withoutPassword": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "type": "object"
-    },
-    "SystemGroup": {
-      "title": "SystemGroup",
-      "properties": {
-        "attributes": {
-          "description": "The group object's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "ObjectId uniquely identifying a System Group.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Display name of a System Group.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the group; always 'system' for a System Group.",
-          "enum": [
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "SystemGroupData": {
-      "title": "SystemGroupData",
-      "properties": {
-        "name": {
-          "description": "Display name of a System Group.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "type": "object"
-    },
-    "SystemGroupGraphManagementReq": {
-      "title": "SystemGroupGraphManagementReq",
-      "properties": {
-        "attributes": {
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "type": "object"
-    },
-    "SystemGroupMembersReq": {
-      "title": "SystemGroupMembersReq",
-      "properties": {
-        "id": {
-          "description": "The ObjectID of member being added or removed.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the membership connection.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The member type.",
-          "enum": [
-            "system"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "type": "object"
-    },
     "system-insights-alf": {
       "title": "System Insights ALF",
       "properties": {
@@ -14400,7 +14221,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -14557,7 +14378,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -14609,7 +14430,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:30.858+00:00",
+        "collection_time": "2019-06-03T13:41:30.858-06:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -14740,7 +14561,7 @@
       "type": "object",
       "example": {
         "author": "",
-        "collection_time": "2019-06-03T19:41:31.125+00:00",
+        "collection_time": "2019-06-03T13:41:31.125-06:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -14903,7 +14724,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:31.557+00:00",
+        "collection_time": "2019-06-03T13:41:31.557-06:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -14959,7 +14780,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -15020,7 +14841,7 @@
       "type": "object",
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       }
@@ -15081,7 +14902,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T19:41:31.204+00:00",
+        "collection_time": "2019-06-03T13:41:31.204-06:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -15124,7 +14945,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -15192,7 +15013,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T19:41:31.008+00:00",
+        "collection_time": "2019-06-03T13:41:31.008-06:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -15475,7 +15296,7 @@
       "type": "object",
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -15563,7 +15384,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T19:41:31.746+00:00",
+        "collection_time": "2019-06-03T13:41:31.746-06:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -15618,7 +15439,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T19:41:30.933+00:00",
+        "collection_time": "2019-06-03T13:41:30.933-06:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -15667,7 +15488,7 @@
       "type": "object",
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -15717,7 +15538,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -15802,7 +15623,7 @@
       "type": "object",
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T18:58:15.673+00:00",
+        "collection_time": "2019-05-16T12:58:15.673-06:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -16177,7 +15998,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:30.771+00:00",
+        "collection_time": "2019-06-03T13:41:30.771-06:00",
         "computer_name": "Johnny’s MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -16289,6 +16110,27 @@
       },
       "type": "object"
     },
+    "system-insights-user-ssh-keys": {
+      "title": "System Insights User SSH Keys",
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "system-insights-users": {
       "title": "System Insights Users",
       "properties": {
@@ -16331,7 +16173,7 @@
       },
       "type": "object",
       "example": {
-        "collection_time": "2019-06-03T19:41:29.71+00:00",
+        "collection_time": "2019-06-03T13:41:29.71-06:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -16344,27 +16186,6 @@
         "username": "_appleevents",
         "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037"
       }
-    },
-    "system-insights-user-ssh-keys": {
-      "title": "System Insights User SSH Keys",
-      "properties": {
-        "collection_time": {
-          "type": "string"
-        },
-        "encrypted": {
-          "type": "integer"
-        },
-        "path": {
-          "type": "string"
-        },
-        "system_id": {
-          "type": "string"
-        },
-        "uid": {
-          "type": "string"
-        }
-      },
-      "type": "object"
     },
     "system-insights-wifi-networks": {
       "title": "System Insights WiFi Networks",
@@ -16568,6 +16389,185 @@
           "type": "string"
         }
       },
+      "type": "object"
+    },
+    "systemfdekey": {
+      "title": "SystemFDEKey",
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "type": "object"
+    },
+    "SystemGraphManagementReq": {
+      "title": "SystemGraphManagementReq",
+      "properties": {
+        "attributes": {
+          "description": "The graph connection's attributes",
+          "properties": {
+            "sudo": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "withoutPassword": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "active_directory",
+            "application",
+            "command",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "policy",
+            "radius_server",
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "type",
+        "id"
+      ],
+      "type": "object"
+    },
+    "SystemGroup": {
+      "title": "SystemGroup",
+      "properties": {
+        "attributes": {
+          "description": "The group object's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a System Group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of a System Group.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the group; always 'system' for a System Group.",
+          "enum": [
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "SystemGroupData": {
+      "title": "SystemGroupData",
+      "properties": {
+        "name": {
+          "description": "Display name of a System Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object"
+    },
+    "SystemGroupGraphManagementReq": {
+      "title": "SystemGroupGraphManagementReq",
+      "properties": {
+        "attributes": {
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "active_directory",
+            "application",
+            "command",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "policy",
+            "radius_server",
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "type",
+        "id"
+      ],
+      "type": "object"
+    },
+    "SystemGroupMembersReq": {
+      "title": "SystemGroupMembersReq",
+      "properties": {
+        "id": {
+          "description": "The ObjectID of member being added or removed.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the membership connection.",
+          "enum": [
+            "add",
+            "remove"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "The member type.",
+          "enum": [
+            "system"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "op",
+        "type",
+        "id"
+      ],
       "type": "object"
     },
     "systemuser": {
