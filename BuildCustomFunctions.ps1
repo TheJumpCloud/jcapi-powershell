@@ -62,18 +62,29 @@ Try
             }
             # Extract the sections we want to copy over to our new function.
             $Params = $FunctionContent | Select-String -Pattern:('(?s)(    \[Parameter)(.*?)(\})') -AllMatches
-            $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')).Matches.Value
-            $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')).Matches.Value
+            $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\)\])')).Matches.Value
+            $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\])')).Matches.Value
+            # # Write- Host ('OutPut: ' + $OutputType)
+            # # Write-Host ('CmdletBinding: ' + $CmdletBinding)
+            $DefaultCmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\])')).Matches.Value
+            $DefaultCmdletBindingValue = ( $DefaultCmdletBinding | Select-String -Pattern:("(?<=DefaultParameterSetName=')(.*?)(?=')")).Matches.Value
             # Strip out parameters that match "DontShow"
             $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' -and $_ -notlike '*Limit*' -and $_ -notlike '*Skip*' })
             $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
             $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
+            # # Write-Host ('Contains Limit and Skip: ' + $ContainsLimit + $ContainsSkip)
             $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:("(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             $ParameterSetSkip = ($ContainsSkip | Select-String -Pattern:("(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             $ParameterSetLimitSkip = "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
+            if ($ContainsSkip -And $ContainsLimit -And -Not $ParameterSetLimit -And -Not $ParameterSetSkip) {
+                $ParameterSetLimitSkip = "'" + ($DefaultCmdletBindingValue -join "','") + "'"
+                Write-Host ('Setting SetLimitSkip Manually: ' + $ParameterSetLimitSkip)
+            }
+            # # Write-Host ('Param Limit: ' + $ParameterSetLimitSkip)
             # Build CmdletBinding
             If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
             # Build $BeginContent, $ProcessContent, and $EndContent
+            # # Write-Host ('CmdletBindingROUNDTWO: ' + $CmdletBinding)
             $BeginContent = @()
             $ProcessContent = @()
             $EndContent = @()
