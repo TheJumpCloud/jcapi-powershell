@@ -23,12 +23,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IWorkdayInput>: 
-  [BasicPassword <String>]: 
-  [BasicUsername <String>]: 
-  [Name <String>]: 
-  [OauthCode <String>]: 
-  [ReportUrl <String>]: 
+BODY <IWorkdayInput>:
+  [BasicPassword <String>]:
+  [BasicUsername <String>]:
+  [Name <String>]:
+  [OauthCode <String>]:
+  [ReportUrl <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkWorkdayImportWorkday.md
 #>

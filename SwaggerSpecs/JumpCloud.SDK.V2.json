@@ -6435,7 +6435,7 @@
     },
     "/systeminsights/certificates": {
       "get": {
-        "operationId": "Get-Certificates",
+        "operationId": "List-Certificates",
         "summary": "List System Insights Certificates",
         "tags": [
           "System Insights"
@@ -6707,7 +6707,7 @@
     },
     "/systeminsights/cups_destinations": {
       "get": {
-        "operationId": "Get-CupsDestinations",
+        "operationId": "List-CupsDestinations",
         "summary": "List System Insights CUPS Destinations",
         "tags": [
           "System Insights"
@@ -7319,7 +7319,7 @@
     },
     "/systeminsights/interface_details": {
       "get": {
-        "operationId": "Get-InterfaceDetails",
+        "operationId": "List-InterfaceDetails",
         "summary": "List System Insights Interface Details",
         "tags": [
           "System Insights"
@@ -7999,7 +7999,7 @@
     },
     "/systeminsights/python_packages": {
       "get": {
-        "operationId": "Get-PythonPackages",
+        "operationId": "List-PythonPackages",
         "summary": "List System Insights Python Packages",
         "tags": [
           "System Insights"
@@ -8135,7 +8135,7 @@
     },
     "/systeminsights/scheduled_tasks": {
       "get": {
-        "operationId": "Get-ScheduledTasks",
+        "operationId": "List-ScheduledTasks",
         "summary": "List System Insights Scheduled Tasks",
         "tags": [
           "System Insights"
@@ -8203,7 +8203,7 @@
     },
     "/systeminsights/services": {
       "get": {
-        "operationId": "Get-Services",
+        "operationId": "List-Services",
         "summary": "List System Insights Services",
         "tags": [
           "System Insights"
@@ -8606,7 +8606,7 @@
     },
     "/systeminsights/startup_items": {
       "get": {
-        "operationId": "Get-StartupItems",
+        "operationId": "List-StartupItems",
         "summary": "List System Insights Startup Items",
         "tags": [
           "System Insights"
