@@ -51,8 +51,12 @@ Try
                 {
                     .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
                 }
+                If ($PSBoundParameters.BuildModuleOverride)
+                {
+                    $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
+                }
             }
-            If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal -or $PSBoundParameters.BuildModuleOverride)
+            If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
