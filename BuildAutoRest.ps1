@@ -53,8 +53,6 @@ Try
             }
             If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
             {
-                # Mark Updated Spec in Pipelie
-                Write-Output ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
                 $ConfigFileFullName = $ConfigFile.FullName
@@ -209,6 +207,7 @@ Try
                                     $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
                                     $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
                                 }
+                                $InputString = $InputString -replace (" `r", "`r") -replace (" `n", "`n")
                                 Return $InputString
                             }
                             $CustomFiles = Get-ChildItem -Path:($CustomFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
@@ -373,7 +372,7 @@ Try
                         {
                             # Create the local PSRepository path if it does not exist
                             If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
-                            Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+                            Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackgroundColor:('Black') -ForegroundColor:('Green')
                             Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
                             # Unregister-PSRepository -Name:($PSRepoName)
                         }
@@ -389,19 +388,20 @@ Try
             Else
             {
                 Write-Warning ($SDK + ' spec is up to date.')
-                Write-Output ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
 
             }
         }
         Else
         {
-            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find file: ' + $ConfigFilePath)
+            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find file: ' + $ConfigFilePath) -BackgroundColor:('Black') -ForegroundColor:('Red')
             Write-Error ('Unable to find file: ' + $ConfigFilePath)
         }
+        # Mark Updated Spec in Pipeline
+        Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
     }
 }
 Catch
 {
-    Write-Host("##vso[task.logissue type=error;]" + $_)
+    Write-Host("##vso[task.logissue type=error;]" + $_) -BackgroundColor:('Black') -ForegroundColor:('Red')
     Write-Error $_
 }
