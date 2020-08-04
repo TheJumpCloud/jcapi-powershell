@@ -25,14 +25,14 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISshkeypost>: 
+BODY <ISshkeypost>:
   Name <String>: The name of the SSH key.
   PublicKey <String>: The Public SSH key.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: 
-  [Id <String>]: 
-  [SystemuserId <String>]: 
-  [Triggername <String>]: 
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [Id <String>]:
+  [SystemuserId <String>]:
+  [Triggername <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkSystemUserSshKey.md
 #>

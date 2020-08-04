@@ -23,80 +23,80 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ADDRESSES <ISystemuserputAddressesItem[]>: 
-  [Country <String>]: 
-  [ExtendedAddress <String>]: 
-  [Locality <String>]: 
-  [PoBox <String>]: 
-  [PostalCode <String>]: 
-  [Region <String>]: 
-  [StreetAddress <String>]: 
-  [Type <String>]: 
+ADDRESSES <ISystemuserputAddressesItem[]>:
+  [Country <String>]:
+  [ExtendedAddress <String>]:
+  [Locality <String>]:
+  [PoBox <String>]:
+  [PostalCode <String>]:
+  [Region <String>]:
+  [StreetAddress <String>]:
+  [Type <String>]:
 
-BODY <ISystemuserput>: 
-  [AccountLocked <Boolean?>]: 
+BODY <ISystemuserput>:
+  [AccountLocked <Boolean?>]:
   [Addresses <ISystemuserputAddressesItem[]>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
-    [Country <String>]: 
-    [ExtendedAddress <String>]: 
-    [Locality <String>]: 
-    [PoBox <String>]: 
-    [PostalCode <String>]: 
-    [Region <String>]: 
-    [StreetAddress <String>]: 
-    [Type <String>]: 
-  [AllowPublicKey <Boolean?>]: 
-  [Attributes <ISystemuserputAttributesItem[]>]: 
-  [Company <String>]: 
-  [CostCenter <String>]: 
-  [Department <String>]: 
-  [Description <String>]: 
-  [Displayname <String>]: 
-  [Email <String>]: 
-  [EmployeeIdentifier <String>]: Must be unique per user. 
-  [EmployeeType <String>]: 
-  [EnableManagedUid <Boolean?>]: 
-  [EnableUserPortalMultifactor <Boolean?>]: 
-  [ExternalDn <String>]: 
-  [ExternalPasswordExpirationDate <String>]: 
-  [ExternalSourceType <String>]: 
-  [ExternallyManaged <Boolean?>]: 
-  [Firstname <String>]: 
-  [JobTitle <String>]: 
-  [Lastname <String>]: 
-  [LdapBindingUser <Boolean?>]: 
-  [Location <String>]: 
-  [MfaConfigured <Boolean?>]: 
-  [MfaExclusion <Boolean?>]: 
-  [MfaExclusionUntil <DateTime?>]: 
-  [Middlename <String>]: 
-  [Password <String>]: 
-  [PasswordNeverExpires <Boolean?>]: 
-  [PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]: 
-    [Number <String>]: 
-    [Type <String>]: 
-  [PublicKey <String>]: 
-  [Relationships <ISystemuserputRelationshipsItem[]>]: 
-  [SambaServiceUser <Boolean?>]: 
-  [SshKeys <ISshkeypost[]>]: 
+    [Country <String>]:
+    [ExtendedAddress <String>]:
+    [Locality <String>]:
+    [PoBox <String>]:
+    [PostalCode <String>]:
+    [Region <String>]:
+    [StreetAddress <String>]:
+    [Type <String>]:
+  [AllowPublicKey <Boolean?>]:
+  [Attributes <ISystemuserputAttributesItem[]>]:
+  [Company <String>]:
+  [CostCenter <String>]:
+  [Department <String>]:
+  [Description <String>]:
+  [Displayname <String>]:
+  [Email <String>]:
+  [EmployeeIdentifier <String>]: Must be unique per user.
+  [EmployeeType <String>]:
+  [EnableManagedUid <Boolean?>]:
+  [EnableUserPortalMultifactor <Boolean?>]:
+  [ExternalDn <String>]:
+  [ExternalPasswordExpirationDate <String>]:
+  [ExternalSourceType <String>]:
+  [ExternallyManaged <Boolean?>]:
+  [Firstname <String>]:
+  [JobTitle <String>]:
+  [Lastname <String>]:
+  [LdapBindingUser <Boolean?>]:
+  [Location <String>]:
+  [MfaConfigured <Boolean?>]:
+  [MfaExclusion <Boolean?>]:
+  [MfaExclusionUntil <DateTime?>]:
+  [Middlename <String>]:
+  [Password <String>]:
+  [PasswordNeverExpires <Boolean?>]:
+  [PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]:
+    [Number <String>]:
+    [Type <String>]:
+  [PublicKey <String>]:
+  [Relationships <ISystemuserputRelationshipsItem[]>]:
+  [SambaServiceUser <Boolean?>]:
+  [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
-  [Sudo <Boolean?>]: 
-  [Suspended <Boolean?>]: 
-  [Tags <String[]>]: 
-  [UnixGuid <Int32?>]: 
-  [UnixUid <Int32?>]: 
-  [Username <String>]: 
+  [Sudo <Boolean?>]:
+  [Suspended <Boolean?>]:
+  [Tags <String[]>]:
+  [UnixGuid <Int32?>]:
+  [UnixUid <Int32?>]:
+  [Username <String>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: 
-  [Id <String>]: 
-  [SystemuserId <String>]: 
-  [Triggername <String>]: 
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [Id <String>]:
+  [SystemuserId <String>]:
+  [Triggername <String>]:
 
-PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: 
-  [Number <String>]: 
-  [Type <String>]: 
+PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:
+  [Number <String>]:
+  [Type <String>]:
 
-SSHKEYS <ISshkeypost[]>: 
+SSHKEYS <ISshkeypost[]>:
   Name <String>: The name of the SSH key.
   PublicKey <String>: The Public SSH key.
 .Link
