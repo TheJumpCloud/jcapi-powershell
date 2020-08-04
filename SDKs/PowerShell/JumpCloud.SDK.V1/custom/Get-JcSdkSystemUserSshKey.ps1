@@ -28,10 +28,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},    [Parameter(DontShow)]
-    [System.Boolean]
-    # Set to $true to return all results. This will overwrite any skip and limit parameter.
-    $Paginate = $true
+    ${Id}
     )
     Begin
     {
@@ -39,43 +36,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in (''))
+        $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
+        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
-            {
-                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
-                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-                {
-                    $Result.results
-                }
-                Else
-                {
-                    $Result
-                }
-                If (-not [System.String]::IsNullOrEmpty($Result))
-                {
-                    $Results += $Result;
-                }
-            }
-            While (-not [System.String]::IsNullOrEmpty($Result))
-         }
+            $Result.results
+        }
         Else
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
-            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-            {
-                $Result.results
-            }
-            Else
-            {
-                $Result
-            }
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
-                $Results += $Result;
-            }
+            $Result
+        }
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result;
         }
     }
     End

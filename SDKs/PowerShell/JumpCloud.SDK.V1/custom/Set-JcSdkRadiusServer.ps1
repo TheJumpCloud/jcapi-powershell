@@ -23,19 +23,19 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: 
-  Name <String>: 
-  NetworkSourceIP <String>: 
-  SharedSecret <String>: 
-  [Mfa <String>]: 
-  [Tags <String[]>]: 
-  [UserLockoutAction <String>]: 
-  [UserPasswordExpirationAction <String>]: 
+BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>:
+  Name <String>:
+  NetworkSourceIP <String>:
+  SharedSecret <String>:
+  [Mfa <String>]:
+  [Tags <String[]>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: 
-  [Id <String>]: 
-  [SystemuserId <String>]: 
-  [Triggername <String>]: 
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [Id <String>]:
+  [SystemuserId <String>]:
+  [Triggername <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkRadiusServer.md
 #>

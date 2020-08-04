@@ -21,72 +21,72 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ADDRESSES <ISystemuserputpostAddressesItem[]>: 
-  [Country <String>]: 
-  [ExtendedAddress <String>]: 
-  [Locality <String>]: 
-  [PoBox <String>]: 
-  [PostalCode <String>]: 
-  [Region <String>]: 
-  [StreetAddress <String>]: 
-  [Type <String>]: 
+ADDRESSES <ISystemuserputpostAddressesItem[]>:
+  [Country <String>]:
+  [ExtendedAddress <String>]:
+  [Locality <String>]:
+  [PoBox <String>]:
+  [PostalCode <String>]:
+  [Region <String>]:
+  [StreetAddress <String>]:
+  [Type <String>]:
 
-BODY <ISystemuserputpost>: 
-  Email <String>: 
-  Username <String>: 
-  [AccountLocked <Boolean?>]: 
-  [Activated <Boolean?>]: 
-  [Addresses <ISystemuserputpostAddressesItem[]>]: 
-    [Country <String>]: 
-    [ExtendedAddress <String>]: 
-    [Locality <String>]: 
-    [PoBox <String>]: 
-    [PostalCode <String>]: 
-    [Region <String>]: 
-    [StreetAddress <String>]: 
-    [Type <String>]: 
-  [AllowPublicKey <Boolean?>]: 
-  [Attributes <ISystemuserputpostAttributesItem[]>]: 
-  [Company <String>]: 
-  [CostCenter <String>]: 
-  [Department <String>]: 
-  [Description <String>]: 
-  [Displayname <String>]: 
-  [EmployeeIdentifier <String>]: Must be unique per user. 
-  [EmployeeType <String>]: 
-  [EnableManagedUid <Boolean?>]: 
-  [EnableUserPortalMultifactor <Boolean?>]: 
-  [ExternalDn <String>]: 
-  [ExternalPasswordExpirationDate <DateTime?>]: 
-  [ExternalSourceType <String>]: 
-  [ExternallyManaged <Boolean?>]: 
-  [Firstname <String>]: 
-  [JobTitle <String>]: 
-  [Lastname <String>]: 
-  [LdapBindingUser <Boolean?>]: 
-  [Location <String>]: 
-  [MfaConfigured <Boolean?>]: 
-  [MfaExclusion <Boolean?>]: 
-  [MfaExclusionUntil <DateTime?>]: 
-  [Middlename <String>]: 
-  [Password <String>]: 
-  [PasswordNeverExpires <Boolean?>]: 
-  [PasswordlessSudo <Boolean?>]: 
-  [PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]: 
-    [Number <String>]: 
-    [Type <String>]: 
-  [PublicKey <String>]: 
-  [Relationships <ISystemuserputpostRelationshipsItem[]>]: 
-  [SambaServiceUser <Boolean?>]: 
-  [Sudo <Boolean?>]: 
-  [Suspended <Boolean?>]: 
-  [Tags <String[]>]: 
-  [UnixGuid <Int32?>]: 
-  [UnixUid <Int32?>]: 
+BODY <ISystemuserputpost>:
+  Email <String>:
+  Username <String>:
+  [AccountLocked <Boolean?>]:
+  [Activated <Boolean?>]:
+  [Addresses <ISystemuserputpostAddressesItem[]>]:
+    [Country <String>]:
+    [ExtendedAddress <String>]:
+    [Locality <String>]:
+    [PoBox <String>]:
+    [PostalCode <String>]:
+    [Region <String>]:
+    [StreetAddress <String>]:
+    [Type <String>]:
+  [AllowPublicKey <Boolean?>]:
+  [Attributes <ISystemuserputpostAttributesItem[]>]:
+  [Company <String>]:
+  [CostCenter <String>]:
+  [Department <String>]:
+  [Description <String>]:
+  [Displayname <String>]:
+  [EmployeeIdentifier <String>]: Must be unique per user.
+  [EmployeeType <String>]:
+  [EnableManagedUid <Boolean?>]:
+  [EnableUserPortalMultifactor <Boolean?>]:
+  [ExternalDn <String>]:
+  [ExternalPasswordExpirationDate <DateTime?>]:
+  [ExternalSourceType <String>]:
+  [ExternallyManaged <Boolean?>]:
+  [Firstname <String>]:
+  [JobTitle <String>]:
+  [Lastname <String>]:
+  [LdapBindingUser <Boolean?>]:
+  [Location <String>]:
+  [MfaConfigured <Boolean?>]:
+  [MfaExclusion <Boolean?>]:
+  [MfaExclusionUntil <DateTime?>]:
+  [Middlename <String>]:
+  [Password <String>]:
+  [PasswordNeverExpires <Boolean?>]:
+  [PasswordlessSudo <Boolean?>]:
+  [PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]:
+    [Number <String>]:
+    [Type <String>]:
+  [PublicKey <String>]:
+  [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+  [SambaServiceUser <Boolean?>]:
+  [Sudo <Boolean?>]:
+  [Suspended <Boolean?>]:
+  [Tags <String[]>]:
+  [UnixGuid <Int32?>]:
+  [UnixUid <Int32?>]:
 
-PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: 
-  [Number <String>]: 
-  [Type <String>]: 
+PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
+  [Number <String>]:
+  [Type <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkSystemUser.md
 #>

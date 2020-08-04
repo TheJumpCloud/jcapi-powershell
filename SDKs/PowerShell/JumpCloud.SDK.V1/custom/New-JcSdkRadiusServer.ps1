@@ -21,14 +21,14 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IRadiusserverpost>: 
-  Name <String>: 
-  NetworkSourceIP <String>: 
+BODY <IRadiusserverpost>:
+  Name <String>:
+  NetworkSourceIP <String>:
   SharedSecret <String>: RADIUS shared secret between the server and client.
-  [Mfa <String>]: 
-  [TagNames <String[]>]: 
-  [UserLockoutAction <String>]: 
-  [UserPasswordExpirationAction <String>]: 
+  [Mfa <String>]:
+  [TagNames <String[]>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkRadiusServer.md
 #>
