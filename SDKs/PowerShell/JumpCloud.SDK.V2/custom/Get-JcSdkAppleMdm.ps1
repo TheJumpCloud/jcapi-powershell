@@ -32,43 +32,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in (''))
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
-            {
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
-                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-                {
-                    $Result.results
-                }
-                Else
-                {
-                    $Result
-                }
-                If (-not [System.String]::IsNullOrEmpty($Result))
-                {
-                    $Results += $Result;
-                }
-            }
-            While (-not [System.String]::IsNullOrEmpty($Result))
-         }
+            $Result.results
+        }
         Else
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
-            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-            {
-                $Result.results
-            }
-            Else
-            {
-                $Result
-            }
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
-                $Results += $Result;
-            }
+            $Result
+        }
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result;
         }
     }
     End
