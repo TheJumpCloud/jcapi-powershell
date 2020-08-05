@@ -1,54 +1,31 @@
-# Populate values for function parameters
-$SystemInsightsPrefix = 'Get-JcSdkSystemInsight'
-$SystemInsightsTables = @{}
-$Commands = Get-Command -Module:('JumpCloud.SDK.V2') | Where-Object { $_.Name -like "$($SystemInsightsPrefix)*" -and $_.Name -ne "$($SystemInsightsPrefix)s" }
-ForEach ($Command In $Commands)
-{
-    $Help = Get-Help -Name:($Command)
-    $SystemInsightsTables.Add($Command.Name.Replace($SystemInsightsPrefix, ''), $Help.Description.Text + ' ' + $Help.parameters.parameter.Where( { $_.Name -eq 'filter' }).Description.Text + ' EX: {field}:{operator}:{searchValue}' )
-}
-Register-ArgumentCompleter -CommandName Get-JcSdkSystemInsights -ParameterName Table -ScriptBlock {
-    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    $FilterFilter = $fakeBoundParameter.Filter
-    $SystemInsightsTables.Keys | Where-Object { $_ -like "${wordToComplete}*" } | Where-Object {
-        $SystemInsightsTables.$_ -like "${FilterFilter}*"
-    } | ForEach-Object {
-        New-Object System.Management.Automation.CompletionResult (
-            $_,
-            $_,
-            'ParameterValue',
-            $_
-        )
-    }
-}
-Register-ArgumentCompleter -CommandName Get-JcSdkSystemInsights -ParameterName Filter -ScriptBlock {
-    param($commandName, $parameterName, $wordToComplete, $commandAst, $fakeBoundParameter)
-    $TypeFilter = $fakeBoundParameter.Table
-    $SystemInsightsTables.Keys | Where-Object { $_ -like "${TypeFilter}*" } | ForEach-Object { $SystemInsightsTables.$_ |
-        Where-Object { $_ -like "${wordToComplete}*" } } |
-    Sort-Object -Unique | ForEach-Object {
-        New-Object System.Management.Automation.CompletionResult (
-            $_,
-            $_,
-            'ParameterValue',
-            $_
-        )
-    }
-}
 Function Get-JcSdkSystemInsights
 {
     [CmdletBinding(DefaultParameterSetName = 'List', PositionalBinding = $false)]
     Param(
         [Parameter(Mandatory)]
-        [JumpCloud.SDK.V2.Category('Query')]
-        [System.String[]]
+        [System.String]
         # Name of the SystemInsights table to query. See docs.jumpcloud.com for list of avalible table endpoints.
+        [ArgumentCompleter( { param ( $CommandName, $ParameterName, $WordToComplete, $CommandAst, $FakeBoundParameters )
+                $SystemInsightsPrefix = 'Get-JcSdkSystemInsight';
+                $SystemInsightsTables = @{};
+                $Commands = Get-Command -Module:('JumpCloud.SDK.V2') | Where-Object { $_.Name -like "$($SystemInsightsPrefix)*" -and $_.Name -ne "$($SystemInsightsPrefix)s" };
+                $Commands | ForEach-Object { $Help = Get-Help -Name:($_.Name); $SystemInsightsTables.Add($_.Name.Replace($SystemInsightsPrefix, ''), $Help.Description.Text + ' ' + $Help.parameters.parameter.Where( { $_.Name -eq 'filter' }).Description.Text + ' EX: {field}:{operator}:{searchValue}' ); };
+                $FilterFilter = $fakeBoundParameter.Filter;
+                $SystemInsightsTables.Keys | Where-Object { $_ -like "${wordToComplete}*" } | Where-Object { $SystemInsightsTables.$_ -like "${FilterFilter}*" };
+            })]
         $Table,
 
         [Parameter()]
         [JumpCloud.SDK.V2.Category('Query')]
-        [System.String[]]
-        # Supported operators are: eq
+        [System.String]
+        [ArgumentCompleter( { param ( $CommandName, $ParameterName, $WordToComplete, $CommandAst, $FakeBoundParameters )
+                $SystemInsightsPrefix = 'Get-JcSdkSystemInsight';
+                $SystemInsightsTables = @{};
+                $Commands = Get-Command -Module:('JumpCloud.SDK.V2') | Where-Object { $_.Name -like "$($SystemInsightsPrefix)*" -and $_.Name -ne "$($SystemInsightsPrefix)s" };
+                $Commands | ForEach-Object { $Help = Get-Help -Name:($_.Name); $SystemInsightsTables.Add($_.Name.Replace($SystemInsightsPrefix, ''), $Help.Description.Text + ' ' + $Help.parameters.parameter.Where( { $_.Name -eq 'filter' }).Description.Text + ' EX: {field}:{operator}:{searchValue}' ); };
+                $TypeFilter = $fakeBoundParameter.Table;
+                return $SystemInsightsTables.Keys | Where-Object { $_ -like "${TypeFilter}*" } | ForEach-Object { $SystemInsightsTables.$_ | Where-Object { $_ -like "${wordToComplete}*" } } | Sort-Object -Unique;
+            })]
         ${Filter},
 
         [Parameter()]

@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsights -Table <String[]> [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkSystemInsights -Table <String> [-Filter <String>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,7 +41,7 @@ Get-JcSdkSystemInsights -Table <String[]> [-Filter <String[]>] [-Sort <String[]>
 
 
 ```yaml
-Type: System.String[]
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -71,7 +71,7 @@ Accept wildcard characters: False
 
 
 ```yaml
-Type: System.String[]
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
