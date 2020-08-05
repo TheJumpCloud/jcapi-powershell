@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Stop-JcSdkAppleMdmDevice' {
-    It 'Shutdown' -skip {
+    It 'Stop' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'ShutdownViaIdentity' -skip {
+    It 'StopViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

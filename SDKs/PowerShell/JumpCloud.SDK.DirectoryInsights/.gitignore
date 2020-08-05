@@ -2,6 +2,7 @@ bin
 obj
 .vs
 generated
+!custom/generated
 internal
 exports
 !docs/exports

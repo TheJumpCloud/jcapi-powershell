@@ -20,11 +20,11 @@ Describe 'Update-JcSdkGSuite' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
+    It 'PatchViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' -skip {
+    It 'PatchViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

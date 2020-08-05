@@ -20,11 +20,11 @@ Describe 'Grant-JcSdkWorkdayImportWorkday' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'AuthorizeViaIdentityExpanded' -skip {
+    It 'AuthorizeViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'AuthorizeViaIdentity' -skip {
+    It 'AuthorizeViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

@@ -20,11 +20,11 @@ Describe 'Clear-JcSdkAppleMdmDevice' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentityExpanded' -skip {
+    It 'EraseViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentity' -skip {
+    It 'EraseViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

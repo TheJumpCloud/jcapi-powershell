@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: cf061c5a-fd88-48d9-9228-72ec9af353fc
+Module Guid: 1418b125-af86-446f-a8a9-000409cdc2f4
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -364,6 +364,9 @@ Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightPythonPackage](Get-JcSdkSystemInsightPythonPackage.md)
 Valid filter fields are `system_id` and `name`.
+
+### [Get-JcSdkSystemInsights](Get-JcSdkSystemInsights.md)
+
 
 ### [Get-JcSdkSystemInsightSafariExtension](Get-JcSdkSystemInsightSafariExtension.md)
 Valid filter fields are `system_id` and `name`.

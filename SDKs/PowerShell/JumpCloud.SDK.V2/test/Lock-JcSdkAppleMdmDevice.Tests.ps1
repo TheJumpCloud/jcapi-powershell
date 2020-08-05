@@ -20,11 +20,11 @@ Describe 'Lock-JcSdkAppleMdmDevice' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'LockViaIdentityExpanded' -skip {
+    It 'LockViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'LockViaIdentity' -skip {
+    It 'LockViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

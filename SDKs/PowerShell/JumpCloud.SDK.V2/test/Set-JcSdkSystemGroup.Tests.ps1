@@ -20,11 +20,11 @@ Describe 'Set-JcSdkSystemGroup' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
+    It 'PutViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
+    It 'PutViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

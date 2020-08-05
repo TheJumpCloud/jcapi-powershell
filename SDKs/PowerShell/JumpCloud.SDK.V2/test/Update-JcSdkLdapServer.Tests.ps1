@@ -16,11 +16,11 @@ Describe 'Update-JcSdkLdapServer' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
+    It 'Patch' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Patch' -skip {
+    It 'PatchViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
