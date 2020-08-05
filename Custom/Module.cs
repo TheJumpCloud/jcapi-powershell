@@ -60,10 +60,10 @@ namespace ModuleNameSpace
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
             // If headers do not contain an "x-org-id" header add one
-            // if (request.Headers.Contains("x-org-id") == false)
-            // {
-            //     request.Headers.Add("x-org-id", JCOrgId);
-            // }
+            if (request.Headers.Contains("x-org-id") == false)
+            {
+                request.Headers.Add("x-org-id", JCOrgId);
+            }
             // Organization endpoint does not accept x-org-id as a header so remove it
             if (request.Headers.Contains("x-org-id") && request.RequestUri.ToString() == "https://console.jumpcloud.com/api/organizations")
             {
