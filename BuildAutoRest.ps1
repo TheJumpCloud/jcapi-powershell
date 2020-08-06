@@ -80,8 +80,9 @@ Try
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
                 $binFolder = '{0}/bin/' -f $OutputFullPath
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
-                $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
+                $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+                $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
                 $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
@@ -93,7 +94,7 @@ Try
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
                 $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
@@ -156,7 +157,7 @@ Try
                     # Create folder if it does not exist
                     If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') | Out-Null }
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:([System.String]$CustomFolderPath) -Force
+                    Copy-Item -Path:("$($CustomFolderSourcePath)/*") -Destination:([System.String]$CustomFolderPath) -Force
                     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
                 }
                 ###########################################################################
@@ -215,7 +216,7 @@ Try
                                 $InputString = $InputString -replace (" `r", "`r") -replace (" `n", "`n")
                                 Return $InputString
                             }
-                            $CustomFiles = Get-ChildItem -Path:($CustomFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
+                            $CustomFiles = Get-ChildItem -Path:($GeneratedFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
                             ForEach ($CustomFile In $CustomFiles)
                             {
                                 $CustomFileFullName = $CustomFile.FullName
@@ -328,6 +329,7 @@ Try
                     $GitIgnoreFiles | ForEach-Object {
                         $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                         $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
+                        $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
                         $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
                 }
