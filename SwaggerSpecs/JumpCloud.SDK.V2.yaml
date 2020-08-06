@@ -5664,7 +5664,7 @@ paths:
       - x-api-key: []
   /systeminsights/certificates:
     get:
-      operationId: List-Certificates
+      operationId: List-SystemInsightsCertificates
       summary: List System Insights Certificates
       tags:
       - System Insights
@@ -5860,7 +5860,7 @@ paths:
       - x-api-key: []
   /systeminsights/cups_destinations:
     get:
-      operationId: List-CupsDestinations
+      operationId: List-SystemInsightsCupsDestinations
       summary: List System Insights CUPS Destinations
       tags:
       - System Insights
@@ -6301,7 +6301,7 @@ paths:
       - x-api-key: []
   /systeminsights/interface_details:
     get:
-      operationId: List-InterfaceDetails
+      operationId: List-SystemInsightsInterfaceDetails
       summary: List System Insights Interface Details
       tags:
       - System Insights
@@ -6791,7 +6791,7 @@ paths:
       - x-api-key: []
   /systeminsights/python_packages:
     get:
-      operationId: List-PythonPackages
+      operationId: List-SystemInsightsPythonPackages
       summary: List System Insights Python Packages
       tags:
       - System Insights
@@ -6889,7 +6889,7 @@ paths:
       - x-api-key: []
   /systeminsights/scheduled_tasks:
     get:
-      operationId: List-ScheduledTasks
+      operationId: List-SystemInsightsScheduledTasks
       summary: List System Insights Scheduled Tasks
       tags:
       - System Insights
@@ -6938,7 +6938,7 @@ paths:
       - x-api-key: []
   /systeminsights/services:
     get:
-      operationId: List-Services
+      operationId: List-SystemInsightsServices
       summary: List System Insights Services
       tags:
       - System Insights
@@ -7230,7 +7230,7 @@ paths:
       - x-api-key: []
   /systeminsights/startup_items:
     get:
-      operationId: List-StartupItems
+      operationId: List-SystemInsightsStartupItems
       summary: List System Insights Startup Items
       tags:
       - System Insights
