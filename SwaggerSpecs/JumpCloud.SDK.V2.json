@@ -6435,7 +6435,7 @@
     },
     "/systeminsights/certificates": {
       "get": {
-        "operationId": "List-Certificates",
+        "operationId": "List-SystemInsightsCertificates",
         "summary": "List System Insights Certificates",
         "tags": [
           "System Insights"
@@ -6707,7 +6707,7 @@
     },
     "/systeminsights/cups_destinations": {
       "get": {
-        "operationId": "List-CupsDestinations",
+        "operationId": "List-SystemInsightsCupsDestinations",
         "summary": "List System Insights CUPS Destinations",
         "tags": [
           "System Insights"
@@ -7319,7 +7319,7 @@
     },
     "/systeminsights/interface_details": {
       "get": {
-        "operationId": "List-InterfaceDetails",
+        "operationId": "List-SystemInsightsInterfaceDetails",
         "summary": "List System Insights Interface Details",
         "tags": [
           "System Insights"
@@ -7999,7 +7999,7 @@
     },
     "/systeminsights/python_packages": {
       "get": {
-        "operationId": "List-PythonPackages",
+        "operationId": "List-SystemInsightsPythonPackages",
         "summary": "List System Insights Python Packages",
         "tags": [
           "System Insights"
@@ -8135,7 +8135,7 @@
     },
     "/systeminsights/scheduled_tasks": {
       "get": {
-        "operationId": "List-ScheduledTasks",
+        "operationId": "List-SystemInsightsScheduledTasks",
         "summary": "List System Insights Scheduled Tasks",
         "tags": [
           "System Insights"
@@ -8203,7 +8203,7 @@
     },
     "/systeminsights/services": {
       "get": {
-        "operationId": "List-Services",
+        "operationId": "List-SystemInsightsServices",
         "summary": "List System Insights Services",
         "tags": [
           "System Insights"
@@ -8606,7 +8606,7 @@
     },
     "/systeminsights/startup_items": {
       "get": {
-        "operationId": "List-StartupItems",
+        "operationId": "List-SystemInsightsStartupItems",
         "summary": "List System Insights Startup Items",
         "tags": [
           "System Insights"
@@ -9272,74 +9272,6 @@
             "schema": {
               "items": {
                 "$ref": "#/definitions/system-insights-wifi-status"
-              },
-              "type": "array"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ]
-      }
-    },
-    "/systeminsights/windows_crashes": {
-      "get": {
-        "operationId": "List-SystemInsightsWindowsCrashes",
-        "summary": "List System Insights Windows Crashes",
-        "tags": [
-          "System Insights"
-        ],
-        "description": "Valid filter fields are `system_id` and `type`.",
-        "parameters": [
-          {
-            "name": "skip",
-            "in": "query",
-            "description": "The offset into the records to return.",
-            "required": false,
-            "type": "integer",
-            "default": 0,
-            "minimum": 0
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
-            "required": false,
-            "type": "array",
-            "default": [],
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "filter",
-            "in": "query",
-            "description": "Supported operators are: eq",
-            "required": false,
-            "type": "array",
-            "default": [],
-            "items": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "default": 10,
-            "maximum": 1000,
-            "minimum": 0
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/system-insights-windows-crashes"
               },
               "type": "array"
             }
