@@ -1,5 +1,5 @@
 Describe -Tag:('ModuleValidation') 'Help File Tests' {
-    $ModuleRoot = (Get-Item -Path:($PSScriptRoot)).Parent.Parent.Parent
+    $ModuleRoot = (Get-Item -Path:($PSScriptRoot)).Parent.Parent
     $ModuleRootFullName = $ModuleRoot.FullName
     $Regex_FillInThe = '(\{\{)(.*?)(\}\})'
     #$Regex_FillInThePester = [regex]('{{.*?}}')
