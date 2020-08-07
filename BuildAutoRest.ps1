@@ -32,6 +32,7 @@ Try
     $TestModule = $true
     $ModifyGitIgnore = $true
     $RemoveAzAccounts = $true
+    $CommentFormatPs1Xml = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
@@ -89,12 +90,13 @@ Try
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
-                $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $nuspecPath = '{0}/{1}.nuspec' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
                 $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
@@ -255,12 +257,12 @@ Try
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
-                    $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                    $CurrentMetaData = Get-Metadata -Path:($psd1Path) -PropertyName:('PSData')
                     If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
                     {
                         Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                        Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                        Update-ModuleManifest -Path:($psd1Path) -PrivateData:($CurrentMetaData)
                     }
                 }
                 ###########################################################################
@@ -268,7 +270,7 @@ Try
                 If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
                 {
                     Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
+                    Update-ModuleManifest -Path:($psd1Path) -Guid:($PublishedModule.AdditionalMetadata.GUID)
                 }
                 ###########################################################################
                 If ($TestModule)
@@ -341,6 +343,13 @@ Try
                     {
                         Remove-Item -Path:($AzAccountsPath) -Force -Recurse
                     }
+                }
+                ###########################################################################
+                # Comment out refs to .format.ps1xml
+                If ($CommentFormatPs1Xml)
+                {
+                    (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
+                    (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force
                 }
                 ##########################################################################
                 If ($CommitModule)
