@@ -1,13 +1,14 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK config file.')][ValidateNotNullOrEmpty()][System.String[]]$ConfigPath
-    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$moduleManifestPath
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to SDK module manifest.')][ValidateNotNullOrEmpty()][System.String[]]$psd1Path
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to custom files.')][ValidateNotNullOrEmpty()][System.String[]]$CustomFolderPath
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath
 )
 Try
 {
+    If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') }
     $IndentChar = '    '
     $MSCopyrightHeader = "`n# ----------------------------------------------------------------------------------`n#`n# Copyright Microsoft Corporation`n# Licensed under the Apache License, Version 2.0 (the ""License"");`n# you may not use this file except in compliance with the License.`n# You may obtain a copy of the License at`n# http://www.apache.org/licenses/LICENSE-2.0`n# Unless required by applicable law or agreed to in writing, software`n# distributed under the License is distributed on an ""AS IS"" BASIS,`n# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.`n# See the License for the specific language governing permissions and`n# limitations under the License.`n# ----------------------------------------------------------------------------------`n"
     $Divider = '|#|#|#|#|#|#|#|#|#|#|#|#|#|#|#|'
@@ -23,7 +24,7 @@ Try
         # Swap out SDK prefix for customFunction prefix
         $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
         # Remove weird output conversion for the customFunctions
-        $OutputMatches = $InputString | Select-String -Pattern:('(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
+        $OutputMatches = $InputString | Select-String -Pattern:([regex]'(?<=\()(.*?)(?=\)\.ToJsonString\(\) \| ConvertFrom-Json)') -AllMatches
         $OutputMatches.Matches | ForEach-Object {
             $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
             $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
@@ -31,12 +32,12 @@ Try
         Return $InputString
     }
     # Load the module
-    $ImportedModule = Import-Module $moduleManifestPath -Force -PassThru
+    $ImportedModule = Import-Module $psd1Path -Force -PassThru
     # Start generation
     If (Get-Module -Name($ImportedModule.Name))
     {
         # Get list of commands from module
-        $Commands = Get-Command -Module:($ImportedModule.Name) #-Verb:('Get') -Noun:('JcSdkInternalSystemUser') # Use to troubleshoot single command
+        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkInternalAppleMdmDepKey') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
         {
             # Get module name
@@ -61,16 +62,16 @@ Try
                 $CommandFilePathContent
             }
             # Extract the sections we want to copy over to our new function.
-            $Params = $FunctionContent | Select-String -Pattern:('(?s)(    \[Parameter)(.*?)(\})') -AllMatches
-            $OutputType = ($FunctionContent | Select-String -Pattern:('(\[OutputType)(.*?)(\]\r)')).Matches.Value
-            $CmdletBinding = ($FunctionContent | Select-String -Pattern:('(\[CmdletBinding)(.*?)(\]\r)')).Matches.Value
+            $Params = $FunctionContent | Select-String -Pattern:([regex]'(?s)(    \[Parameter)(.*?)(\})') -AllMatches
+            $OutputType = (($FunctionContent | Select-String -Pattern:([regex]'(\[OutputType)(.*?)(\]\s+)')).Matches.Value).TrimEnd()
+            $CmdletBinding = (($FunctionContent | Select-String -Pattern:([regex]'(\[CmdletBinding)(.*?)(\]\s+)')).Matches.Value).TrimEnd()
+            $DefaultParameterSetName = ($CmdletBinding | Select-String -Pattern:([regex]"(?<=DefaultParameterSetName=')(.*?)(?=')")).Matches.Value
             # Strip out parameters that match "DontShow"
             $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' -and $_ -notlike '*Limit*' -and $_ -notlike '*Skip*' })
             $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
             $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
-            $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:("(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
-            $ParameterSetSkip = ($ContainsSkip | Select-String -Pattern:("(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
-            $ParameterSetLimitSkip = "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
+            $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
+            $ParameterSetSkip = ($ContainsSkip | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             # Build CmdletBinding
             If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
             # Build $BeginContent, $ProcessContent, and $EndContent
@@ -79,16 +80,28 @@ Try
             $EndContent = @()
             If ($Command.Verb -in ('Get', 'Search'))
             {
-                If (-not [System.String]::IsNullOrEmpty($ParameterContent))
+                # Add paginate parameter if function contains Limit or Skip parameters
+                If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
                 {
-                    If ($ParameterContent.Count -eq 1)
+                    $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip))
                     {
-                        # Add paginate parameter
-                        $ParameterContent += ",$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                        "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
                     }
                     Else
                     {
-                        $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                        "'" + ($DefaultParameterSetName -join "','") + "'"
+                    }
+                    If (-not [System.String]::IsNullOrEmpty($ParameterContent))
+                    {
+                        If ($ParameterContent.Count -eq 1)
+                        {
+                            # Add paginate parameter
+                            $ParameterContent += ",$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                        }
+                        Else
+                        {
+                            $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
+                        }
                     }
                 }
                 # Build script content
@@ -107,7 +120,10 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                     # Build "Process" block
-                    $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
+                    # Add paginate logic if function contains Limit and Skip parameters
+                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
+                    {
+                        $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)Do
@@ -181,6 +197,24 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
+                    }
+                    Else
+                    {
+                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.ToJsonString() | ConvertFrom-Json;
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)}"
+                    }
                     # Build "End" block
                     $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
 $($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
@@ -194,34 +228,37 @@ $($IndentChar)$($IndentChar)Return `$Results"
                     # Build "Begin" block
                     $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()"
                     # Build "Process" block
-                    $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
+                    # Add paginate logic if function contains Limit and Skip parameters
+                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
+                    {
+                        $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null"
-                    If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
-                    }
-                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
+                        }
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
-                    }
-                    $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)Do
+                        }
+                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){"
-                    If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
-                    }
-                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
-                    }
-                    $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
+                        }
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
+                        }
+                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -232,26 +269,26 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){"
-                    If (-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result | Measure-Object).Count;"
-                    }
-                    $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
-                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                    {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount"
-                    }
-                    $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result | Measure-Object).Count;"
+                        }
+                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
+                        {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount"
+                        }
+                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}"
-                    $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                    {
-                        "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
-                    }
-                    Else
-                    {
-                        "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
-                    }
-                    $ProcessContent += "$($IndentChar)$($IndentChar) }
+                        $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
+                        {
+                            "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
+                        }
+                        Else
+                        {
+                            "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
+                        }
+                        $ProcessContent += "$($IndentChar)$($IndentChar) }
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
@@ -269,6 +306,23 @@ $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
+                    }
+                    Else
+                    {
+                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
+$($IndentChar)$($IndentChar)}"
+                    }
                     # Build "End" block
                     $EndContent += "$($IndentChar)$($IndentChar)Return `$Results"
                 }

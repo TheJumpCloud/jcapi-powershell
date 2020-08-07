@@ -23,12 +23,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserCreate[]>: 
+BODY <IBulkUserCreate[]>:
   [Attributes <IBulkUserCreateAttributesItem[]>]: Map of additional attributes.
-  [Email <String>]: 
-  [Firstname <String>]: 
-  [Lastname <String>]: 
-  [Username <String>]: 
+  [Email <String>]:
+  [Firstname <String>]:
+  [Lastname <String>]:
+  [Username <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkJobRequestBulkUser.md
 #>

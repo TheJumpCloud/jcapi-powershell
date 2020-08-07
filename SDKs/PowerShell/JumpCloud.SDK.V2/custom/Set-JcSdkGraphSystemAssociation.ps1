@@ -23,32 +23,32 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISystemGraphManagementReq>: 
+BODY <ISystemGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <String>: 
-  [SudoEnabled <Boolean?>]: 
-  [SudoWithoutPassword <Boolean?>]: 
+  Type <String>:
+  [SudoEnabled <Boolean?>]:
+  [SudoWithoutPassword <Boolean?>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: 
-  [AccountId <String>]: 
-  [ActivedirectoryId <String>]: 
-  [AppleMdmId <String>]: 
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
-  [DeviceId <String>]: 
+  [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of the System Group.
-  [JobId <String>]: 
+  [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
   [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]: 
+  [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]: 
+  [WorkdayId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkGraphSystemAssociation.md
 #>

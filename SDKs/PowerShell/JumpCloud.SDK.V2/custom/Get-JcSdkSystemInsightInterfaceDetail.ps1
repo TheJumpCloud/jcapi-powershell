@@ -20,7 +20,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Get-JcSdkSystemInsightInterfaceDetail
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails])]
-    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -46,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in (''))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))

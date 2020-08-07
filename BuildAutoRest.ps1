@@ -6,6 +6,7 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String[]]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String[]]$GitHubAccessToken
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][bool]$BuildModuleOverride = $false
 )
 Try
 {
@@ -31,6 +32,7 @@ Try
     $TestModule = $true
     $ModifyGitIgnore = $true
     $RemoveAzAccounts = $true
+    $CommentFormatPs1Xml = $true
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     $PublishModule = $false
     ForEach ($SDK In $SDKName)
@@ -49,6 +51,10 @@ Try
                 Else
                 {
                     .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                }
+                If ($PSBoundParameters.BuildModuleOverride)
+                {
+                    $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
                 }
             }
             If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
@@ -75,20 +81,22 @@ Try
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
                 $binFolder = '{0}/bin/' -f $OutputFullPath
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
-                $CustomFolderSourcePath = '{0}/Custom/*' -f $PSScriptRoot
+                $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+                $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
                 $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
-                $moduleManifestPath = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
+                $nuspecPath = '{0}/{1}.nuspec' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
-                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -moduleManifestPath:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$CustomFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+                $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
                 # Check to see if module exists on PowerShellGallery already
                 $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
@@ -151,7 +159,7 @@ Try
                     # Create folder if it does not exist
                     If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') | Out-Null }
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Copy-Item -Path:($CustomFolderSourcePath) -Destination:([System.String]$CustomFolderPath) -Force
+                    Copy-Item -Path:("$($CustomFolderSourcePath)/*") -Destination:([System.String]$CustomFolderPath) -Force
                     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
                 }
                 ###########################################################################
@@ -207,9 +215,10 @@ Try
                                     $OutputMatchesFind = '({0}).ToJsonString() | ConvertFrom-Json' -f ($_.Value)
                                     $InputString = $InputString.Replace($OutputMatchesFind, $_.Value)
                                 }
+                                $InputString = $InputString -replace (" `r", "`r") -replace (" `n", "`n")
                                 Return $InputString
                             }
-                            $CustomFiles = Get-ChildItem -Path:($CustomFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
+                            $CustomFiles = Get-ChildItem -Path:($GeneratedFolderPath) -File | Where-Object { $_.Extension -eq '.ps1' }
                             ForEach ($CustomFile In $CustomFiles)
                             {
                                 $CustomFileFullName = $CustomFile.FullName
@@ -248,12 +257,12 @@ Try
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
-                    $CurrentMetaData = Get-Metadata -Path:($moduleManifestPath) -PropertyName:('PSData')
+                    $CurrentMetaData = Get-Metadata -Path:($psd1Path) -PropertyName:('PSData')
                     If ([System.String]::IsNullOrEmpty($CurrentMetaData.Prerelease))
                     {
                         Write-Host ('[RUN COMMAND] Updating module manifest: Prerelease') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         $CurrentMetaData.Add('Prerelease', $PrereleaseName)
-                        Update-ModuleManifest -Path:($moduleManifestPath) -PrivateData:($CurrentMetaData)
+                        Update-ModuleManifest -Path:($psd1Path) -PrivateData:($CurrentMetaData)
                     }
                 }
                 ###########################################################################
@@ -261,7 +270,7 @@ Try
                 If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
                 {
                     Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Update-ModuleManifest -Path:($moduleManifestPath) -Guid:($PublishedModule.AdditionalMetadata.GUID)
+                    Update-ModuleManifest -Path:($psd1Path) -Guid:($PublishedModule.AdditionalMetadata.GUID)
                 }
                 ###########################################################################
                 If ($TestModule)
@@ -322,6 +331,7 @@ Try
                     $GitIgnoreFiles | ForEach-Object {
                         $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                         $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
+                        $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
                         $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
                 }
@@ -333,6 +343,13 @@ Try
                     {
                         Remove-Item -Path:($AzAccountsPath) -Force -Recurse
                     }
+                }
+                ###########################################################################
+                # Comment out refs to .format.ps1xml
+                If ($CommentFormatPs1Xml)
+                {
+                    (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
+                    (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force
                 }
                 ##########################################################################
                 If ($CommitModule)
@@ -371,7 +388,7 @@ Try
                         {
                             # Create the local PSRepository path if it does not exist
                             If (!(Test-Path -Path:($PSRepoPath))) { New-Item -Path:($PSRepoPath) -ItemType:('Directory') | Out-Null }
-                            Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackGroundColor:('Black') -ForegroundColor:('Green')
+                            Write-Host ('Creating new PSRepository: ' + $PSRepoName) -BackgroundColor:('Black') -ForegroundColor:('Green')
                             Register-PSRepository -Name:($PSRepoName) -SourceLocation:($PSRepoPath) -ScriptSourceLocation:($PSRepoPath) -InstallationPolicy:('Trusted')
                             # Unregister-PSRepository -Name:($PSRepoName)
                         }
@@ -387,17 +404,20 @@ Try
             Else
             {
                 Write-Warning ($SDK + ' spec is up to date.')
+
             }
         }
         Else
         {
-            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find file: ' + $ConfigFilePath)
+            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find file: ' + $ConfigFilePath) -BackgroundColor:('Black') -ForegroundColor:('Red')
             Write-Error ('Unable to find file: ' + $ConfigFilePath)
         }
+        # Mark Updated Spec in Pipeline
+        Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
     }
 }
 Catch
 {
-    Write-Host("##vso[task.logissue type=error;]" + $_)
+    Write-Host("##vso[task.logissue type=error;]" + $_) -BackgroundColor:('Black') -ForegroundColor:('Red')
     Write-Error $_
 }
