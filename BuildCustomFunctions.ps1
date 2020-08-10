@@ -37,7 +37,7 @@ Try
     If (Get-Module -Name($ImportedModule.Name))
     {
         # Get list of commands from module
-        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkInternalAppleMdmDepKey') # Use to troubleshoot single command
+        $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkInternalEvent') # Use to troubleshoot single command
         ForEach ($Command In $Commands)
         {
             # Get module name
@@ -67,7 +67,7 @@ Try
             $CmdletBinding = (($FunctionContent | Select-String -Pattern:([regex]'(\[CmdletBinding)(.*?)(\]\s+)')).Matches.Value).TrimEnd()
             $DefaultParameterSetName = ($CmdletBinding | Select-String -Pattern:([regex]"(?<=DefaultParameterSetName=')(.*?)(?=')")).Matches.Value
             # Strip out parameters that match "DontShow"
-            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' -and $_ -notlike '*Limit*' -and $_ -notlike '*Skip*' })
+            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' -and $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
             $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
             $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
             $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
