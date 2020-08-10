@@ -16,8 +16,8 @@ This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\
 ```
 New-JcSdkCommand -Command <String> [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
  [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
- [-ScheduleRepeatType <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>] [-Trigger <String>]
- [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
+ [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -228,6 +228,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Shell
+The shell used to run the command.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Sudo
 .
 
@@ -367,6 +382,7 @@ BODY <ICommand>: Command
   - `[Organization <String>]`: The ID of the organization.
   - `[Schedule <String>]`: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.         
   - `[ScheduleRepeatType <String>]`: When the command will repeat.
+  - `[Shell <String>]`: The shell used to run the command.
   - `[Sudo <Boolean?>]`: 
   - `[Systems <String[]>]`: An array of system IDs to run the command on. Not available if you are using Groups.
   - `[Timeout <String>]`: The time in seconds to allow the command to run for.
