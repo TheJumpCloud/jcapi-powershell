@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: JumpCloud APIs Test
+  title: JumpCloud APIs
   description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/
@@ -3628,3 +3628,4 @@ definitions:
         type: string
       usersTimeZone:
         type: string
+
