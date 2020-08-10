@@ -89,7 +89,7 @@ Try
                     }
                     Else
                     {
-                        "'" + ($DefaultParameterSetName -join "','") + "'"
+                        "'" + (($DefaultParameterSetName | Select-Object -Unique) -join "','") + "'"
                     }
                     If (-not [System.String]::IsNullOrEmpty($ParameterContent))
                     {
