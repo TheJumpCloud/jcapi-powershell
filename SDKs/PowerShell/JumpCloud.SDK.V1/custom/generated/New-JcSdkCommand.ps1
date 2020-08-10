@@ -32,6 +32,7 @@ BODY <ICommand>:
   [Organization <String>]: The ID of the organization.
   [Schedule <String>]: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.        
   [ScheduleRepeatType <String>]: When the command will repeat.
+  [Shell <String>]: The shell used to run the command.
   [Sudo <Boolean?>]:
   [Systems <String[]>]: An array of system IDs to run the command on. Not available if you are using Groups.
   [Timeout <String>]: The time in seconds to allow the command to run for.
@@ -112,6 +113,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # When the command will repeat.
     ${ScheduleRepeatType},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # The shell used to run the command.
+    ${Shell},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
