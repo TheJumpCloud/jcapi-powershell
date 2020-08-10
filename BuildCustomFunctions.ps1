@@ -85,7 +85,7 @@ Try
                 {
                     $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip))
                     {
-                        "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
+                        "'" + ((@($ParameterSetLimit + $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
                     }
                     Else
                     {
