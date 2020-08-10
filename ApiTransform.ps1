@@ -56,11 +56,9 @@ $FixesMapping = @{
         "`t"                                                                                                           = '\t';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        '"basePath": "/insights/directory/v1"'                                                                                                                      = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "object"}}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "type": "array", "items": {"type": "string"}}';
-        '"start_time": {"description": "query start time, UTC in RFC3339 format", "type": "string"}'                                                                = '"start_time": {"format": "date-time", "type": "string", "description": "query start time, UTC in RFC3339 format"}';
-        '"end_time": {"description": "optional query end time, UTC in RFC3339 format", "type": "string"}'                                                           = '"end_time": {"format": "date-time", "type": "string", "description": "optional query end time, UTC in RFC3339 format"}';
-        '"tags": ["EventQuery"],'                                                                                                                                   = '';
+        '"basePath": "/insights/directory/v1"'                                                                                                                                                  = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array", "x-go-name": "SearchAfter"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array", "x-go-name": "SearchAfter"}'
+        '"tags": ["EventQuery"],'                                                                                                                                                               = '';
     };
 }
 $OperationIdMapping = [Ordered]@{
@@ -323,8 +321,10 @@ $OperationIdMapping = [Ordered]@{
         'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
-        'POST_events'       = 'Get-Event';
-        'POST_events-count' = 'Get-EventCount';
+        'POST_events'          = 'Get-Event';
+        'POST_events-count'    = 'Get-EventCount';
+        'POST_events-interval' = 'Get-EventInterval';
+        'POST_events-distinct' = 'Get-EventDistinct';
     };
 };
 # Set initial value for "UpdatedSpec" within Azure Pipelines
@@ -574,7 +574,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
             ## Export content for troubleshooting
-            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
+            $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
             # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_Org.json')
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
