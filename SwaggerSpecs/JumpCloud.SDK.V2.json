@@ -467,6 +467,9 @@
           },
           {
             "$ref": "#/parameters/trait:listCount:x-total-count"
+          },
+          {
+            "$ref": "#/parameters/trait:listCount:x-unfiltered-total-count"
           }
         ],
         "responses": {
@@ -12266,6 +12269,13 @@
       "required": false,
       "type": "integer"
     },
+    "trait:listCount:x-unfiltered-total-count": {
+      "name": "x-unfiltered-total-count",
+      "in": "header",
+      "description": "If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account",
+      "required": false,
+      "type": "integer"
+    },
     "trait:multiTenantRequestHeaders:x-org-id": {
       "name": "x-org-id",
       "in": "header",
@@ -12552,6 +12562,9 @@
         "depAccessTokenExpiry": {
           "type": "string",
           "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State."
+        },
+        "dep": {
+          "$ref": "#/definitions/DEP"
         }
       },
       "required": [
@@ -12724,6 +12737,36 @@
       },
       "type": "object"
     },
+    "DEP": {
+      "title": "DEP",
+      "type": "object",
+      "properties": {
+        "welcome_screen": {
+          "$ref": "#/definitions/DEPWelcomeScreen"
+        }
+      }
+    },
+    "DEPWelcomeScreen": {
+      "title": "DEPWelcomeScreen",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "maxLength": 255,
+          "description": "The title to display on the DEP Welcome Screen."
+        },
+        "paragraph": {
+          "type": "string",
+          "maxLength": 1024,
+          "description": "A message to display on the DEP Welcome Screen."
+        },
+        "button": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "Text to display on the button on the DEP Welcome Screen."
+        }
+      }
+    },
     "Directory": {
       "title": "Directory",
       "type": "object",
@@ -12880,12 +12923,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "GraphConnection": {
       "title": "GraphConnection",
@@ -13307,6 +13350,7 @@
     },
     "office365-output": {
       "title": "Office 365 Output",
+      "type": "object",
       "properties": {
         "id": {
           "type": "string"
@@ -13324,17 +13368,20 @@
             "maintain"
           ],
           "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
       },
       "required": [
         "id",
         "userLockoutAction",
         "userPasswordExpirationAction"
-      ],
-      "type": "object"
+      ]
     },
     "office365-patch-input": {
       "title": "Office 365 Patch Input",
+      "type": "object",
       "properties": {
         "userLockoutAction": {
           "enum": [
@@ -13349,9 +13396,11 @@
             "maintain"
           ],
           "type": "string"
+        },
+        "name": {
+          "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "Office365TranslationRule": {
       "title": "Office 365 Translation Rule",
@@ -13883,6 +13932,26 @@
         "email"
       ],
       "type": "object"
+    },
+    "ProvisionCallbackReq": {
+      "title": "Post provision activate callback Request",
+      "type": "object",
+      "description": "Request to insert provision in SCIM service.",
+      "properties": {
+        "api_key": {
+          "type": "string"
+        },
+        "vanity_url": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "api_key",
+        "state"
+      ]
     },
     "salesforce-knowledge-list-output": {
       "title": "Salesforce Knowledge List Output",
@@ -16392,81 +16461,6 @@
           "type": "string"
         },
         "collection_time": {
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "system-insights-windows-crashes": {
-      "title": "System Insights Windows Crashes",
-      "properties": {
-        "build_number": {
-          "type": "integer"
-        },
-        "collection_time": {
-          "type": "string"
-        },
-        "command_line": {
-          "type": "string"
-        },
-        "crash_path": {
-          "type": "string"
-        },
-        "current_directory": {
-          "type": "string"
-        },
-        "datetime": {
-          "type": "string"
-        },
-        "exception_address": {
-          "type": "string"
-        },
-        "exception_code": {
-          "type": "string"
-        },
-        "exception_message": {
-          "type": "string"
-        },
-        "machine_name": {
-          "type": "string"
-        },
-        "major_version": {
-          "type": "integer"
-        },
-        "minor_version": {
-          "type": "integer"
-        },
-        "module": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "pid": {
-          "type": "string"
-        },
-        "process_uptime": {
-          "type": "string"
-        },
-        "registers": {
-          "type": "string"
-        },
-        "stack_trace": {
-          "type": "string"
-        },
-        "system_id": {
-          "type": "string"
-        },
-        "tid": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        },
-        "username": {
-          "type": "string"
-        },
-        "version": {
           "type": "string"
         }
       },

@@ -14,7 +14,7 @@ This endpoint allows updating some attributes of an Office 365 instance.\n\n####
 
 ### PatchExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-UserLockoutAction <String>]
+Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -32,7 +32,7 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365Pat
 
 ### PatchViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-UserLockoutAction <String>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -86,6 +86,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Name
+.
+
+```yaml
+Type: System.String
+Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -188,6 +203,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
+  - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 

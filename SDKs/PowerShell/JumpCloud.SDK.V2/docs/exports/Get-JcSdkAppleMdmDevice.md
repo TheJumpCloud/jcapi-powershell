@@ -14,7 +14,7 @@ Lists all Apple MDM devices.\n\nThe filter and sort queries will allow the follo
 
 ```
 Get-JcSdkAppleMdmDevice -AppleMdmId <String> [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
- [<CommonParameters>]
+ [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -86,6 +86,21 @@ Accept wildcard characters: False
 
 ### -XTotalCount
 .
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XUnfilteredTotalCount
+If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
 
 ```yaml
 Type: System.Int32

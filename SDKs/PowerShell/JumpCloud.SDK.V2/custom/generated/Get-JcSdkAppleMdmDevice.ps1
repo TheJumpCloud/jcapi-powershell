@@ -49,6 +49,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     ${XTotalCount},
 
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+    ${XUnfilteredTotalCount},
+
     [Parameter(DontShow)]
     [System.Boolean]
     # Set to $true to return all results. This will overwrite any skip and limit parameter.
