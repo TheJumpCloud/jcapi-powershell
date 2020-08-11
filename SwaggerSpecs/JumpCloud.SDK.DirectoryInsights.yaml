@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "1.0"
-  title: Directory Insights API Test
+  title: Directory Insights API
   description: The purpose of this API is to query Jumpcloud Directory Insights events
 host: api.jumpcloud.com
 basePath: /insights/directory/v1/
@@ -629,9 +629,6 @@ definitions:
     - username
   TermConjunction:
     title: TermConjunction
-    description: |-
-      TermConjunction represents a conjunction (and/or)
-      NOTE: the validator limits what the operator can be, not the object
-      for future-proof-ness
-      and a list of sub-values
     type: object
+    additionalProperties: true
+
