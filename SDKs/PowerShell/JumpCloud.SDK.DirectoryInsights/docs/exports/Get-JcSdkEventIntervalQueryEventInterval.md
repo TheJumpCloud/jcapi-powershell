@@ -1,98 +1,56 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventIntervalQueryEventInterval.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkEvent
+# Get-JcSdkEventIntervalQueryEventInterval
 
 ## SYNOPSIS
-Query the API for Directory Insights events
+Query the API for a list of counts by time interval
 
 ## SYNTAX
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventIntervalQueryEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime>
+ [-EndTime <DateTime>] [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>]
+ [-Timezone <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEvent -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventIntervalQueryEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Query the API for Directory Insights events
+Query the API for a list of counts by time interval
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:((Get-date).AddDays(-30))
+{{ Add code here }}
 ```
 
-Pull all event records from the last thirty days
+{{ Add output here }}
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddHours(-1)) -Limit:('10')
+{{ Add code here }}
 ```
 
-Get directory results from the last hour limit to the last 10 results in the time range
-
-### -------------------------- EXAMPLE 3 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Sort:("DESC") -EndTime:((Get-date).AddDays(-5))
-```
-
-Get directory results between 30 and 5 days ago, sort timestamp by descending value
-
-### -------------------------- EXAMPLE 4 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Limit:('10') -searchTermAnd:@{"event_type" = "group_create"}
-```
-
-Get only group_create from the last thirty days
-
-### -------------------------- EXAMPLE 5 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermOr @{"initiated_by.username" = @("user.1", "user.2")}
-```
-
-Get login events initiated by either "user.1" or "user.2" between a universal time zone range
-
-### -------------------------- EXAMPLE 6 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-```
-
-Get all events between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-
-### -------------------------- EXAMPLE 7 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')  -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"initiated_by.username" = "user.1"}
-```
-
-Get sso events with the search term initiated_by: username with value "user.1"
-
-### -------------------------- EXAMPLE 8 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "organization_update"}
-```
-
-Get all events filtered by organization_update term between a date range
+{{ Add output here }}
 
 ## PARAMETERS
 
 ### -Body
-EventQuery is the users' command to search our auth logs
+EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
+Type: JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 Parameter Sets: Get
 Aliases:
 
@@ -118,26 +76,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Fields
-optional list of fields to return from query
+### -IntervalUnit
+.
 
 ```yaml
-Type: System.String[]
+Type: System.String
 Parameter Sets: GetExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SearchAfter
-Specific query to search after, see x-* response headers for next values
+### -IntervalValue
+Interval Value.
+This specifies how many units you want to bucket the event counts byoptional
 
 ```yaml
-Type: System.String[]
+Type: System.String
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -194,21 +153,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Sort
-ASC or DESC order for timestamp
-
-```yaml
-Type: System.String
-Parameter Sets: GetExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -StartTime
 query start time, UTC in RFC3339 format
 
@@ -218,6 +162,22 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Timezone
+TimeZone.
+Specify the timezone in which the user is inoptional
+
+```yaml
+Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -260,11 +220,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
+### JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonItemsItem
+### JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems
 
 ### System.String
 
@@ -277,17 +237,16 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
+BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
+  - `IntervalUnit <String>`: 
   - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[Fields <String[]>]`: optional list of fields to return from query
-  - `[Limit <Int64?>]`: Max number of rows to return
-  - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
+  - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by         optional
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction
-  - `[Sort <String>]`: ASC or DESC order for timestamp
+  - `[Timezone <String>]`: TimeZone. Specify the timezone in which the user is in         optional
 
 ## RELATED LINKS
 

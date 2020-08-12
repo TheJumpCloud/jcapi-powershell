@@ -121,8 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermAnd
-list of event terms.
-If all terms match the event will be returned by the service.
+TermConjunction
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -137,8 +136,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermOr
-list of event terms.
-If any term matches, the event will be returned by the service.
+TermConjunction
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -258,10 +256,9 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
-  - `[SearchTermAnd <ISearchTermAnd>]`: list of event terms. If all terms match the event will be returned by the service.
+  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ISearchTermOr>]`: list of event terms. If any term matches, the event will be returned by the service.
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermOr <ITermConjunction>]`: TermConjunction
   - `[Sort <String>]`: ASC or DESC order for timestamp
 
 ## RELATED LINKS
