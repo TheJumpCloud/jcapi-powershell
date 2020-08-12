@@ -905,8 +905,8 @@
     },
     "TermConjunction": {
       "title": "TermConjunction",
-      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-      "type": "object"
+      "type": "object",
+      "additionalProperties": true
     }
   }
 }

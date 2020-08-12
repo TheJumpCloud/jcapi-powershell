@@ -629,9 +629,4 @@ definitions:
     - username
   TermConjunction:
     title: TermConjunction
-    description: |-
-      TermConjunction represents a conjunction (and/or)
-      NOTE: the validator limits what the operator can be, not the object
-      for future-proof-ness
-      and a list of sub-values
     type: object
