@@ -15,4 +15,11 @@ Describe 'Get-JcSdkAppleMdm' {
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
+    It 'Valid MDM Server' {
+        $mdm = Get-JcSdkAppleMdm
+        $mdm.DepServerTokenState | Should -Be "valid"
+        $mdm.Id | Should -BeOfType System.String
+        $mdm.DepAccessTokenExpiry | Should -BeOfType System.String
+        $mdm.ApnsCertExpiry | Should -BeOfType System.String
+    }
 }
