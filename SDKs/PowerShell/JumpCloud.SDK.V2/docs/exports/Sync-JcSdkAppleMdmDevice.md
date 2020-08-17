@@ -1,25 +1,25 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAppleMdmDevice.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Sync-JcSdkAppleMdmDevice.md
 schema: 2.0.0
 ---
 
-# Update-JcSdkAppleMdmDevice
+# Sync-JcSdkAppleMdmDevice
 
 ## SYNOPSIS
 Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
 
 ## SYNTAX
 
-### Refresh (Default)
+### Sync (Default)
 ```
-Update-JcSdkAppleMdmDevice -AppleMdmId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Sync-JcSdkAppleMdmDevice -AppleMdmId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### RefreshViaIdentity
+### SyncViaIdentity
 ```
-Update-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+Sync-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -49,7 +49,7 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
 
 ```yaml
 Type: System.String
-Parameter Sets: Refresh
+Parameter Sets: Sync
 Aliases:
 
 Required: True
@@ -65,7 +65,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: RefreshViaIdentity
+Parameter Sets: SyncViaIdentity
 Aliases:
 
 Required: True
