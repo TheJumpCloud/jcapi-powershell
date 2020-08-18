@@ -1,18 +1,18 @@
 ### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
 
-{{ Add output here }}
+Get a list of enrollment profiles for an apple mdm
 ```
 
-{{ Add description here }}
+Get a list of enrollment profiles for an apple mdm
 
 ### Example 2: {{ Add title here }}
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
 
-{{ Add output here }}
+Get an enrollment profile by Id
 ```
 
-{{ Add description here }}
+Get an enrollment profile by Id
 
