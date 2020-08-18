@@ -293,7 +293,7 @@ paths:
       - application/octet-stream
       parameters: []
       responses:
-        "201":
+        "200":
           description: ""
           schema:
             properties:
@@ -449,7 +449,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Erase-AppleMDMDevice
+      operationId: Clear-AppleMDMDevice
       summary: Erase Device
       tags:
       - Apple MDM
