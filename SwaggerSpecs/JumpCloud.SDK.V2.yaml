@@ -756,7 +756,7 @@ paths:
       required: true
       type: string
     post:
-      operationId: Refresh-AppleMDMDevice
+      operationId: Sync-AppleMDMDevice
       summary: Refresh DEP Devices
       tags:
       - Apple MDM

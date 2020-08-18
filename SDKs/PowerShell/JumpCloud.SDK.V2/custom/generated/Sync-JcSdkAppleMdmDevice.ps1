@@ -41,20 +41,20 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAppleMdmDevice.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Sync-JcSdkAppleMdmDevice.md
 #>
- Function Update-JcSdkAppleMdmDevice
+ Function Sync-JcSdkAppleMdmDevice
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Refresh', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Sync', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Refresh', Mandatory)]
+    [Parameter(ParameterSetName='Sync', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
     ${AppleMdmId},
 
-    [Parameter(ParameterSetName='RefreshViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SyncViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -73,7 +73,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalAppleMdmDevice @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Sync-JcSdkInternalAppleMdmDevice @PSBoundParameters
     }
     End
     {

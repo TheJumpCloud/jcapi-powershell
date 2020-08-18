@@ -15,4 +15,9 @@ Describe 'Get-JcSdkAppleMdmDevice' {
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
+    It 'Get Device Results' {
+        $mdmId = Get-JcSdkAppleMdm | Select-Object Id
+        $mdmResults = Get-JcSdkAppleMdmDevice -AppleMdmId $mdmId.Id
+        $mdmResults.Count | Should -BeGreaterThan 0
+    }
 }
