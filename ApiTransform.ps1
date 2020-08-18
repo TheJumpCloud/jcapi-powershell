@@ -577,7 +577,7 @@ $ApiHash.GetEnumerator() | ForEach-Object {
                 $NewSpec | ConvertFrom-Json -Depth:(99) | ConvertTo-Yaml | Out-File -FilePath:($OutputFullPathYaml) -Force
             }
             ## Export content for troubleshooting
-            $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
+            # $ReadyForConvert | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_ReadyForConvert.json')
             # $OASContent | Out-File -FilePath:($OutputFilePath + $CurrentSDKName + '_Org.json')
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
