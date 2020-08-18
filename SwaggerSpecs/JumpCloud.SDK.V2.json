@@ -319,7 +319,7 @@
         ],
         "parameters": [],
         "responses": {
-          "201": {
+          "200": {
             "description": "",
             "schema": {
               "properties": {
@@ -532,7 +532,7 @@
         }
       ],
       "post": {
-        "operationId": "Erase-AppleMDMDevice",
+        "operationId": "Clear-AppleMDMDevice",
         "summary": "Erase Device",
         "tags": [
           "Apple MDM"
