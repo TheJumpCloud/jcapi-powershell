@@ -12,7 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAppleMdmDevice' {
-    It 'List' {
+    It 'List' -skip {
+        #WIP
         $mdmId = Get-JcSdkAppleMdm | Select-Object Id
         $mdmResults = Get-JcSdkAppleMdmDevice -AppleMdmId $mdmId.Id
         $mdmResults.Count | Should -BeGreaterThan 0
