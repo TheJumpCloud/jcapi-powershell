@@ -4,13 +4,13 @@ Get an enrollment profile\n\nCurrently only requesting the mobileconfig is suppo
 .Description
 Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
 
-{{ Add output here }}
+Get a list of enrollment profiles for an apple mdm
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
 
-{{ Add output here }}
+Get an enrollment profile by Id
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
@@ -73,10 +73,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Begin
     {
         $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpResponse = $ResponseTask
+                Return $ResponseTask
+            }
+        )
     }
     Process
     {
         $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmEnrollmentProfile @PSBoundParameters
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
             $Result.results
@@ -92,6 +104,11 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     End
     {
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
         Return $Results
     }
 }

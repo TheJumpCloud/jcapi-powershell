@@ -88,6 +88,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Begin
     {
         $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpResponse = $ResponseTask
+                Return $ResponseTask
+            }
+        )
     }
     Process
     {
@@ -95,6 +105,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     End
     {
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
         Return $Results
     }
 }

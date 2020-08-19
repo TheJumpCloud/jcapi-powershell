@@ -6,13 +6,9 @@ An empty topic indicates that a signed certificate from Apple has not been provi
 Get a list of all Apple MDM configurations.
 An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAppleMdm
 
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
+Get Apple MDM Server information within a JumpCloud Tenant
 
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdm
@@ -29,10 +25,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Begin
     {
         $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpResponse = $ResponseTask
+                Return $ResponseTask
+            }
+        )
     }
     Process
     {
         $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
             $Result.results
@@ -48,6 +56,11 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     End
     {
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
         Return $Results
     }
 }

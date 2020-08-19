@@ -42,6 +42,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Begin
     {
         $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpResponse = $ResponseTask
+                Return $ResponseTask
+            }
+        )
     }
     Process
     {
@@ -61,6 +71,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
                 $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGraphSystemGroupAssociationSystemGroupTraverseUser @PSBoundParameters
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 $Result = If ('Results' -in $Result.PSObject.Properties.Name)
                 {
                     $Result.results
@@ -82,6 +94,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGraphSystemGroupAssociationSystemGroupTraverseUser @PSBoundParameters
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             $Result = If ('Results' -in $Result.PSObject.Properties.Name)
             {
                 $Result.results
@@ -98,6 +112,11 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     End
     {
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
         Return $Results
     }
 }

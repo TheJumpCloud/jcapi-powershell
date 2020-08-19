@@ -34,17 +34,17 @@ Get an enrollment profile\n\nCurrently only requesting the mobileconfig is suppo
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
 ```
 
-{{ Add output here }}
+Get a list of enrollment profiles for an apple mdm
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
 ```
 
-{{ Add output here }}
+Get an enrollment profile by Id
 
 ## PARAMETERS
 

@@ -25,17 +25,10 @@ An empty topic indicates that a signed certificate from Apple has not been provi
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAppleMdm
 ```
 
-{{ Add output here }}
-
-### -------------------------- EXAMPLE 2 --------------------------
-```powershell
-{{ Add code here }}
-```
-
-{{ Add output here }}
+Get Apple MDM Server information within a JumpCloud Tenant
 
 ## PARAMETERS
 
