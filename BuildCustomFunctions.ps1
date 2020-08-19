@@ -226,7 +226,17 @@ $($IndentChar)$($IndentChar)Return `$Results"
                 ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2'))
                 {
                     # Build "Begin" block
-                    $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()"
+                    $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
+$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar))"
                     # Build "Process" block
                     # Add paginate logic if function contains Limit and Skip parameters
                     If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
@@ -259,6 +269,8 @@ $($IndentChar)$($IndentChar)$($IndentChar){"
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -293,6 +305,8 @@ $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -310,6 +324,8 @@ $($IndentChar)$($IndentChar)}"
                     Else
                     {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -324,21 +340,43 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
 $($IndentChar)$($IndentChar)}"
                     }
                     # Build "End" block
-                    $EndContent += "$($IndentChar)$($IndentChar)Return `$Results"
+                    $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
+$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Return `$Results"
                 }
                 Else
                 {
                     Write-Error ('Unknown module $($ModuleName)')
                 }
             }
-            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop'))
+            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync'))
             {
                 # Build "Begin" block
-                $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()"
+                $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
+$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar))"
                 # Build "Process" block
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
                 # Build "End" block
-                $EndContent += "$($IndentChar)$($IndentChar)Return `$Results"
+                $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)# Clean up global variables
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
+$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
+$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Return `$Results"
             }
             Else
             {

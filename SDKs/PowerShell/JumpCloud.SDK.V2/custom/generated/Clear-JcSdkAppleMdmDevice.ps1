@@ -51,40 +51,40 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Clear-JcSdkAppleMdmDevice
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='EraseExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='ClearExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Erase', Mandatory)]
-    [Parameter(ParameterSetName='EraseExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Clear', Mandatory)]
+    [Parameter(ParameterSetName='ClearExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
     ${AppleMdmId},
 
-    [Parameter(ParameterSetName='Erase', Mandatory)]
-    [Parameter(ParameterSetName='EraseExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Clear', Mandatory)]
+    [Parameter(ParameterSetName='ClearExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
     ${DeviceId},
 
-    [Parameter(ParameterSetName='EraseViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='EraseViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='ClearViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='ClearViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Erase', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='EraseViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Clear', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='ClearViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='EraseExpanded', Mandatory)]
-    [Parameter(ParameterSetName='EraseViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='ClearExpanded', Mandatory)]
+    [Parameter(ParameterSetName='ClearViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # 6-digit PIN required to erase the device

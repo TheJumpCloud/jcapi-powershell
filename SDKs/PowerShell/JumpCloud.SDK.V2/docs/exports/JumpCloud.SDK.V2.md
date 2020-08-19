@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: 0e4c17bc-b9a6-4359-9184-593c056ba3dd
+Module Guid: ca9731ce-a815-40c6-8e8e-9433acd608f5
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -586,7 +586,7 @@ This endpoint allows you to update the name and Custom Report URL for a Workday 
 ### [Stop-JcSdkAppleMdmDevice](Stop-JcSdkAppleMdmDevice.md)
 Shuts down a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/shutdown \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
 
-### [Update-JcSdkAppleMdmDevice](Update-JcSdkAppleMdmDevice.md)
+### [Sync-JcSdkAppleMdmDevice](Sync-JcSdkAppleMdmDevice.md)
 Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
 
 ### [Update-JcSdkBulkJobRequestBulkUser](Update-JcSdkBulkJobRequestBulkUser.md)

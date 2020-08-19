@@ -12,27 +12,27 @@ Erases a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https:
 
 ## SYNTAX
 
-### EraseExpanded (Default)
+### ClearExpanded (Default)
 ```
 Clear-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> -Pin <String> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### Erase
+### Clear
 ```
 Clear-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String>
  -Body <IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### EraseViaIdentity
+### ClearViaIdentity
 ```
 Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### EraseViaIdentityExpanded
+### ClearViaIdentityExpanded
 ```
 Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> -Pin <String> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -64,7 +64,7 @@ Erases a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https:
 
 ```yaml
 Type: System.String
-Parameter Sets: Erase, EraseExpanded
+Parameter Sets: Clear, ClearExpanded
 Aliases:
 
 Required: True
@@ -80,7 +80,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema
-Parameter Sets: Erase, EraseViaIdentity
+Parameter Sets: Clear, ClearViaIdentity
 Aliases:
 
 Required: True
@@ -95,7 +95,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Erase, EraseExpanded
+Parameter Sets: Clear, ClearExpanded
 Aliases:
 
 Required: True
@@ -111,7 +111,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: EraseViaIdentity, EraseViaIdentityExpanded
+Parameter Sets: ClearViaIdentity, ClearViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -141,7 +141,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: EraseExpanded, EraseViaIdentityExpanded
+Parameter Sets: ClearExpanded, ClearViaIdentityExpanded
 Aliases:
 
 Required: True

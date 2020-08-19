@@ -12,7 +12,9 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAppleMdmDevice' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        $mdmId = Get-JcSdkAppleMdm | Select-Object Id
+        $mdmResults = Get-JcSdkAppleMdmDevice -AppleMdmId $mdmId.Id
+        $mdmResults.Count | Should -BeGreaterThan 0
     }
 }
