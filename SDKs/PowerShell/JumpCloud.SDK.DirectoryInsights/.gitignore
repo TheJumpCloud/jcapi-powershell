@@ -6,6 +6,7 @@ generated
 internal
 exports
 !docs/exports
+tools
 custom/*.psm1
 test/*-TestResults.xml
 /*.ps1
