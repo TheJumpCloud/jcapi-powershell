@@ -114,7 +114,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
@@ -162,6 +162,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentC
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
@@ -185,6 +186,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate')
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
@@ -203,6 +205,7 @@ $($IndentChar)$($IndentChar)}"
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
@@ -232,7 +235,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
@@ -271,6 +274,7 @@ $($IndentChar)$($IndentChar)$($IndentChar){"
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -307,6 +311,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate')
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -326,6 +331,7 @@ $($IndentChar)$($IndentChar)}"
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -361,7 +367,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = `$req.Content.ReadAsStringAsync()
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
@@ -371,6 +377,7 @@ $($IndentChar)$($IndentChar))"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Clean up global variables
 $($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
