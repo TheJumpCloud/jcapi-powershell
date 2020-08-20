@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   version: "2.0"
-  title: JumpCloud APIs (Force Refresh)
+  title: JumpCloud APIs
   description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/v2/
@@ -11977,7 +11977,7 @@ definitions:
       bundle_short_version: "2.4"
       bundle_version: "658.1"
       category: public.app-category.utilities
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       compiler: com.apple.compilers.llvm.clang.1_0
       copyright: ""
       development_region: English
@@ -12092,7 +12092,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       conversion_status: 0
       devide_id: '\\\\?\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\'
       drive_letter: 'C:'
@@ -12129,7 +12129,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:30.8580000-06:00
+      collection_time: 2019-06-03T19:41:30.8580000+00:00
       description: LastPass Plugin
       development_region: en-US
       disabled: 0
@@ -12220,7 +12220,7 @@ definitions:
     type: object
     example:
       author: ""
-      collection_time: 2019-06-03T13:41:31.1250000-06:00
+      collection_time: 2019-06-03T19:41:31.1250000+00:00
       description: provider for discovery and services for mirroring of chrome media router
       identifier: pkedcjkdefgpdelpbcmbmeomcjbeemfm
       locale: en
@@ -12332,7 +12332,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:31.5570000-06:00
+      collection_time: 2019-06-03T19:41:31.5570000+00:00
       encrypted: 0
       encryption_status: undefined
       name: /dev/disk8
@@ -12372,7 +12372,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       description: Disk drive
       disk_index: 0
       disk_size: "64420392960"
@@ -12417,7 +12417,7 @@ definitions:
     type: object
     example:
       address: 192.168.2.21
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       hostnames: hosty hosty.local
       system_id: 5c9e51a13c5146f89bae12d9
   system-insights-firefox-addons:
@@ -12459,7 +12459,7 @@ definitions:
     example:
       active: 1
       autoupdate: 1
-      collection_time: 2019-06-03T13:41:31.2040000-06:00
+      collection_time: 2019-06-03T19:41:31.2040000+00:00
       creator: "null"
       description: ""
       disabled: 0
@@ -12492,7 +12492,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       comment: ""
       gid: "701"
       gid_signed: "701"
@@ -12540,7 +12540,7 @@ definitions:
     example:
       address: ::1
       broadcast: ""
-      collection_time: 2019-06-03T13:41:31.0080000-06:00
+      collection_time: 2019-06-03T19:41:31.0080000+00:00
       friendly_name: ""
       interface: lo0
       mask: ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
@@ -12731,7 +12731,7 @@ definitions:
     type: object
     example:
       boot_partition: 0
-      collection_time: 2019-06-03T13:41:30.6580000-06:00
+      collection_time: 2019-06-03T19:41:30.6580000+00:00
       device_id: 'C:'
       file_system: NTFS
       free_space: "43194331136"
@@ -12793,7 +12793,7 @@ definitions:
       blocks_available: "95135"
       blocks_free: "95135"
       blocks_size: "4096"
-      collection_time: 2019-06-03T13:41:31.7460000-06:00
+      collection_time: 2019-06-03T19:41:31.7460000+00:00
       device: /dev/disk5s1
       device_alias: /dev/disk5s1
       flags: "70292505"
@@ -12833,7 +12833,7 @@ definitions:
     example:
       build: 17G65
       codename: ""
-      collection_time: 2019-06-03T13:41:30.9330000-06:00
+      collection_time: 2019-06-03T19:41:30.9330000+00:00
       install_date: ""
       major: 10
       minor: 13
@@ -12869,7 +12869,7 @@ definitions:
     type: object
     example:
       caption: http://support.microsoft.com/?kbid=4503308
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       csname: DESKTOP-B17DUKP
       description: Security Update
       fix_comments: ""
@@ -12905,7 +12905,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:31.6730000-06:00
+      collection_time: 2019-06-03T19:41:31.6730000+00:00
       identifying_number: '{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}'
       install_date: "20190724"
       install_location: ""
@@ -12965,7 +12965,7 @@ definitions:
     type: object
     example:
       author: Eyeo GmbH
-      collection_time: 2019-05-16T12:58:15.6730000-06:00
+      collection_time: 2019-05-16T18:58:15.6730000+00:00
       description: Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.
       developer_id: GRYYZR985A
       identifier: org.adblockplus.adblockplussafari
@@ -13218,7 +13218,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:30.7710000-06:00
+      collection_time: 2019-06-03T19:41:30.7710000+00:00
       computer_name: Johnny’s MacBook Pro (2)
       cpu_brand: Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz
       cpu_logical_cores: 8
@@ -13326,7 +13326,7 @@ definitions:
         type: string
     type: object
     example:
-      collection_time: 2019-06-03T13:41:29.7100000-06:00
+      collection_time: 2019-06-03T19:41:29.7100000+00:00
       description: AppleEvents Daemon
       directory: /var/empty
       gid: "55"
@@ -14049,3 +14049,4 @@ definitions:
       username:
         type: string
     type: object
+
