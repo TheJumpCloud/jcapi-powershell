@@ -304,7 +304,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)}"
                         {
                             "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar) }
+                        $ProcessContent += "$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
