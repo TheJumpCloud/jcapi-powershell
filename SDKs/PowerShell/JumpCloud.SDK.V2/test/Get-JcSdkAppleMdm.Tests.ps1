@@ -14,8 +14,7 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAppleMdm' {
-    It 'List' -Skip {
-        #WIP
+    It 'List' {
         (Get-JcSdkAppleMdm).Count | Should -BeGreaterThan 0
     }
 }
