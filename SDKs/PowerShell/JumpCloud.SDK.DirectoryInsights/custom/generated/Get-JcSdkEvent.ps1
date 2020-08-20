@@ -137,7 +137,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
                 Return $ResponseTask
             }
@@ -184,6 +184,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                         Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
                         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                     }
                 }
                 Else
@@ -207,6 +208,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
                 $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)

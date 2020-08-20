@@ -103,7 +103,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                $global:JCHttpRequestContent = $req.Content.ReadAsStringAsync()
+                $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
                 Return $ResponseTask
             }
@@ -129,6 +129,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyResult @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                 $Result = If ('Results' -in $Result.PSObject.Properties.Name)
                 {
                     $Result.results
@@ -145,13 +146,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 }
             }
             While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
-         }
+        }
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyResult @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             $Result = If ('Results' -in $Result.PSObject.Properties.Name)
             {
                 $Result.results
