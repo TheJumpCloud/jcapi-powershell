@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.DirectoryInsights
-Module Guid: 62d9fafa-a7e3-4d27-9a1f-a6615efcd9af
+Module Guid: 8bf094ff-a47f-4489-8d2e-f76e504897e5
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.directoryinsights
 Help Version: 1.0.0.0
 Locale: en-US
