@@ -12923,12 +12923,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
-      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "GraphConnection": {
       "title": "GraphConnection",
