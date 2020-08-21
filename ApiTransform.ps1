@@ -59,8 +59,7 @@ $FixesMapping = @{
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
         '"basePath": "/insights/directory/v1"'                                                                                                                                                  = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array", "x-go-name": "SearchAfter"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array", "x-go-name": "SearchAfter"}'
-        '"tags": ["EventQuery"],'                                                                                                                                                               = '';
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array", "x-go-name": "SearchAfter"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array", "x-go-name": "SearchAfter"}' = '';
         '"TermConjunction": {"title": "TermConjunction", "type": "object"}'                                                                                                                     = '"TermConjunction": {"title": "TermConjunction", "type": "object", "additionalProperties": true}'
     };
 }
@@ -392,6 +391,11 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             $ReadyForConvert = $ReadyForConvert.Replace("`r", "")
             If (-not $NoUpdate)
             {
+                # Remove tag elements
+                $TagMatches = $ReadyForConvert | Select-String -Pattern:('("tags"\: \[)(.*?)(\])') -AllMatches
+                $TagMatches.Matches.Value | ForEach-Object {
+                    $ReadyForConvert = $ReadyForConvert.Replace($_, '')
+                }
                 # Check to see if there are any operationIds not listed in the $OperationIdMapping
                 If ($OperationIdMapping.Contains($CurrentSDKName))
                 {
@@ -453,8 +457,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             }
             # Convert json string to object
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
-            # Remove tag elements
-            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/tags', '/Tag/{name}', '/Tags/{name}', '/applications/{application_id}/logo');
+            # Remove paths
+            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/applications/{application_id}/logo');
             # Exclude stoplight sections where the property is hidden
             If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
             {
