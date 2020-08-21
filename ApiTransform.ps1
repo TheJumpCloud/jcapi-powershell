@@ -59,7 +59,7 @@ $FixesMapping = @{
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
         '"basePath": "/insights/directory/v1"'                                                                                                                                                  = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array", "x-go-name": "SearchAfter"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array", "x-go-name": "SearchAfter"}' = '';
+        '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "object"}, "type": "array", "x-go-name": "SearchAfter"}' = '"search_after": {"description": "Specific query to search after, see x-* response headers for next values", "items": {"type": "string"}, "type": "array", "x-go-name": "SearchAfter"}'
         '"TermConjunction": {"title": "TermConjunction", "type": "object"}'                                                                                                                     = '"TermConjunction": {"title": "TermConjunction", "type": "object", "additionalProperties": true}'
     };
 }
