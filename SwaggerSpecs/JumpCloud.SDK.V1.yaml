@@ -799,8 +799,6 @@ paths:
     delete:
       operationId: Delete-RadiusServer
       summary: Delete Radius Server
-      tags:
-      - Radius Servers
       description: |-
         This endpoint allows you to delete RADIUS servers in your organization.
         ```
@@ -883,8 +881,6 @@ paths:
   /runCommand:
     post:
       operationId: Invoke-Command
-      tags:
-      - Commands
       description: This endpoint allows you to run a command.
       responses:
         "200":
