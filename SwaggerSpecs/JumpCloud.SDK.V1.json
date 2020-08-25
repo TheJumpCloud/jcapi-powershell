@@ -973,9 +973,6 @@
       "delete": {
         "operationId": "Delete-RadiusServer",
         "summary": "Delete Radius Server",
-        "tags": [
-          "Radius Servers"
-        ],
         "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "responses": {
           "200": {
@@ -1093,9 +1090,6 @@
     "/runCommand": {
       "post": {
         "operationId": "Invoke-Command",
-        "tags": [
-          "Commands"
-        ],
         "description": "This endpoint allows you to run a command.",
         "responses": {
           "200": {
