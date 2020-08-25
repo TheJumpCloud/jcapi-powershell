@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinctQueryEventDistinct.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkEventDistinctQueryEventDistinct
+# Get-JcSdkEventDistinct
 
 ## SYNOPSIS
 Query the API for a list of distinct values for a field
@@ -14,13 +14,13 @@ Query the API for a list of distinct values for a field
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventDistinctQueryEventDistinct -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-Field <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventDistinct -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Field <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventDistinctQueryEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

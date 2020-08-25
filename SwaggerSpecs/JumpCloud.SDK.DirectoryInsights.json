@@ -149,9 +149,6 @@
       "post": {
         "operationId": "Get-EventDistinct",
         "summary": "Query event distinct field values",
-        "tags": [
-          "EventDistinctQuery"
-        ],
         "description": "Query the API for a list of distinct values for a field",
         "parameters": [
           {
@@ -208,9 +205,6 @@
       "post": {
         "operationId": "Get-EventInterval",
         "summary": "Query event counts by bucketed by a time interval",
-        "tags": [
-          "EventIntervalQuery"
-        ],
         "description": "Query the API for a list of counts by time interval",
         "parameters": [
           {

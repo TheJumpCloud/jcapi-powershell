@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventIntervalQueryEventInterval.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkEventIntervalQueryEventInterval
+# Get-JcSdkEventInterval
 
 ## SYNOPSIS
 Query the API for a list of counts by time interval
@@ -14,14 +14,14 @@ Query the API for a list of counts by time interval
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventIntervalQueryEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime>
- [-EndTime <DateTime>] [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>]
- [-Timezone <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
+ [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Timezone <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventIntervalQueryEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

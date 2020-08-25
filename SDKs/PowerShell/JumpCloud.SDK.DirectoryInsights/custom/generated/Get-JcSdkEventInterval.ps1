@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Query the API for a list of distinct values for a field
+Query the API for a list of counts by time interval
 .Description
-Query the API for a list of distinct values for a field
+Query the API for a list of counts by time interval
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,9 +13,9 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery
+JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
-System.Int64
+JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems
 .Outputs
 System.String
 .Notes
@@ -23,25 +23,36 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IEventDistinctQuery>:
+BODY <IEventIntervalQuery>:
+  IntervalUnit <String>:
   Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
-  [Field <String>]: field is what they wish to query on
+  [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by         optional
+  [SearchTermAnd <ITermConjunction>]: TermConjunction
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [SearchTermOr <ITermConjunction>]: TermConjunction
+  [Timezone <String>]: TimeZone. Specify the timezone in which the user is in         optional
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinctQueryEventDistinct.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
 #>
- Function Get-JcSdkEventDistinctQueryEventDistinct
+ Function Get-JcSdkEventInterval
 {
-    [OutputType([System.Int64], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery]
-    # EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
+    [JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery]
+    # EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
+
+    [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # .
+    ${IntervalUnit},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
@@ -65,8 +76,30 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String]
-    # field is what they wish to query on
-    ${Field}
+    # Interval Value.
+    # This specifies how many units you want to bucket the event counts byoptional
+    ${IntervalValue},
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [System.Collections.Hashtable]
+    # TermConjunction
+    ${SearchTermAnd},
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [System.Collections.Hashtable]
+    # TermConjunction
+    ${SearchTermOr},
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # TimeZone.
+    # Specify the timezone in which the user is inoptional
+    ${Timezone}
     )
     Begin
     {
@@ -84,7 +117,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventDistinctQueryEventDistinct @PSBoundParameters
+        $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
