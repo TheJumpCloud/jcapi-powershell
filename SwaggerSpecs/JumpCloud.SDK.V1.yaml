@@ -2431,10 +2431,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
-    type: object
     properties:
       message:
         type: string
+    type: object
   fde:
     title: FDE
     properties:
