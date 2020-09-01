@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.DirectoryInsights
-Module Guid: 8860033d-48ff-437f-8d77-2fe2f49fdcd7
+Module Guid: b22e2a97-3a22-4fab-acd0-d27bb1858521
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.directoryinsights
 Help Version: 1.0.0.0
 Locale: en-US
@@ -22,4 +22,3 @@ Query the API for a list of distinct values for a field
 
 ### [Get-JcSdkEventInterval](Get-JcSdkEventInterval.md)
 Query the API for a list of counts by time interval
-

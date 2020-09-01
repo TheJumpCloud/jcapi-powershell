@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V1
-Module Guid: 6dd50627-262e-417e-86c7-ebdac3628986
+Module Guid: 64515120-1792-485d-adab-499f23b1c37c
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1
 Help Version: 1.0.0.0
 Locale: en-US
@@ -136,4 +136,3 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ### [Unlock-JcSdkSystemUser](Unlock-JcSdkSystemUser.md)
 This endpoint allows you to unlock a user's account.
-
