@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: 1b4d3705-1e33-44c7-b37d-1d4a62977d7c
+Module Guid: f1c6e231-b2be-4d32-a115-af90a2d99815
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -598,3 +598,4 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 
 ### [Update-JcSdkOffice365](Update-JcSdkOffice365.md)
 This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
+

@@ -84,7 +84,7 @@ paths:
       - x-api-key: []
   /activedirectories/{activedirectory_id}/associations:
     get:
-      operationId: List-ActiveDirectoryAssociation
+      operationId: Get-ActiveDirectoryAssociation
       summary: List the associations of an Active Directory instance
       description: |-
         This endpoint returns the direct associations of this Active Directory instance.
@@ -149,7 +149,7 @@ paths:
       type: string
   /activedirectories/{activedirectory_id}/usergroups:
     get:
-      operationId: List-ActiveDirectoryTraverseUserGroup
+      operationId: Get-ActiveDirectoryTraverseUserGroup
       summary: List the User Groups bound to an Active Directory instance
       description: |-
         This endpoint will return all Users Groups bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -852,7 +852,7 @@ paths:
       - x-api-key: []
   /applications/{application_id}/associations:
     get:
-      operationId: List-ApplicationAssociation
+      operationId: Get-ApplicationAssociation
       summary: List the associations of an Application
       description: |-
         This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.
@@ -944,7 +944,7 @@ paths:
       - x-api-key: []
   /applications/{application_id}/usergroups:
     get:
-      operationId: List-ApplicationTraverseUserGroup
+      operationId: Get-ApplicationTraverseUserGroup
       summary: List the User Groups bound to an Application
       description: |-
         This endpoint will return all Users Groups bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1003,7 +1003,7 @@ paths:
       type: string
   /applications/{application_id}/users:
     get:
-      operationId: List-ApplicationTraverseUser
+      operationId: Get-ApplicationTraverseUser
       summary: List the Users bound to an Application
       description: |-
         This endpoint will return all Users bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1142,7 +1142,7 @@ paths:
       type: string
   /commands/{command_id}/associations:
     get:
-      operationId: List-CommandAssociation
+      operationId: Get-CommandAssociation
       summary: List the associations of a Command
       description: |-
         This endpoint will return the _direct_ associations of this Command.
@@ -1239,7 +1239,7 @@ paths:
       - x-api-key: []
   /commands/{command_id}/systemgroups:
     get:
-      operationId: List-CommandTraverseSystemGroup
+      operationId: Get-CommandTraverseSystemGroup
       summary: List the System Groups bound to a Command
       description: |-
         This endpoint will return all System Groups bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1298,7 +1298,7 @@ paths:
       type: string
   /commands/{command_id}/systems:
     get:
-      operationId: List-CommandTraverseSystem
+      operationId: Get-CommandTraverseSystem
       summary: List the Systems bound to a Command
       description: |-
         This endpoint will return all Systems bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1817,7 +1817,7 @@ paths:
       - x-api-key: []
   /gsuites/{gsuite_id}/associations:
     get:
-      operationId: List-GSuiteAssociation
+      operationId: Get-GSuiteAssociation
       summary: List the associations of a G Suite instance
       description: |-
         This endpoint returns the _direct_ associations of this G Suite instance.
@@ -2071,7 +2071,7 @@ paths:
       type: string
   /gsuites/{gsuite_id}/usergroups:
     get:
-      operationId: List-GSuiteTraverseUserGroup
+      operationId: Get-GSuiteTraverseUserGroup
       summary: List the User Groups bound to a G Suite instance
       description: |-
         This endpoint will return all User Groups bound to an G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -2130,7 +2130,7 @@ paths:
       type: string
   /gsuites/{gsuite_id}/users:
     get:
-      operationId: List-GSuiteTraverseUser
+      operationId: Get-GSuiteTraverseUser
       summary: List the Users bound to a G Suite instance
       description: |-
         This endpoint will return all Users bound to a G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -2394,7 +2394,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/associations:
     get:
-      operationId: List-LdapServerAssociation
+      operationId: Get-LdapServerAssociation
       summary: List the associations of a LDAP Server
       description: |-
         This endpoint returns the _direct_ associations of this LDAP Server.
@@ -2681,7 +2681,7 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/usergroups:
     get:
-      operationId: List-LdapServerTraverseUserGroup
+      operationId: Get-LdapServerTraverseUserGroup
       summary: List the User Groups bound to a LDAP Server
       description: |-
         This endpoint will return all Users Groups bound to a LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -2740,7 +2740,7 @@ paths:
       type: string
   /ldapservers/{ldapserver_id}/users:
     get:
-      operationId: List-LdapServerTraverseUser
+      operationId: Get-LdapServerTraverseUser
       summary: List the Users bound to a LDAP Server
       description: |-
         This endpoint will return all Users bound to an LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -2864,7 +2864,7 @@ paths:
       - x-api-key: []
   /office365s/{office365_id}/associations:
     get:
-      operationId: List-Office365Association
+      operationId: Get-Office365Association
       summary: List the associations of an Office 365 instance
       description: |-
         This endpoint returns _direct_ associations of an Office 365 instance.
@@ -3118,7 +3118,7 @@ paths:
       type: string
   /office365s/{office365_id}/usergroups:
     get:
-      operationId: List-Office365TraverseUserGroup
+      operationId: Get-Office365TraverseUserGroup
       summary: List the User Groups bound to an Office 365 instance
       description: |-
         This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -3177,7 +3177,7 @@ paths:
       type: string
   /office365s/{office365_id}/users:
     get:
-      operationId: List-Office365TraverseUser
+      operationId: Get-Office365TraverseUser
       summary: List the Users bound to an Office 365 instance
       description: |-
         This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -3413,7 +3413,7 @@ paths:
       - x-api-key: []
   /policies/{policy_id}/associations:
     get:
-      operationId: List-PolicyAssociation
+      operationId: Get-PolicyAssociation
       summary: List the associations of a Policy
       description: |-
         This endpoint returns the _direct_ associations of a Policy.
@@ -3650,7 +3650,7 @@ paths:
       type: string
   /policies/{policy_id}/systemgroups:
     get:
-      operationId: List-PolicyTraverseSystemGroup
+      operationId: Get-PolicyTraverseSystemGroup
       summary: List the System Groups bound to a Policy
       description: |-
         This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -3709,7 +3709,7 @@ paths:
       type: string
   /policies/{policy_id}/systems:
     get:
-      operationId: List-PolicyTraverseSystem
+      operationId: Get-PolicyTraverseSystem
       summary: List the Systems bound to a Policy
       description: |-
         This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4095,7 +4095,7 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/associations:
     get:
-      operationId: List-RadiusServerAssociation
+      operationId: Get-RadiusServerAssociation
       summary: List the associations of a RADIUS  Server
       description: |-
         This endpoint returns the _direct_ associations of a Radius Server.
@@ -4174,7 +4174,7 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/usergroups:
     get:
-      operationId: List-RadiusServerTraverseUserGroup
+      operationId: Get-RadiusServerTraverseUserGroup
       summary: List the User Groups bound to a RADIUS  Server
       description: |-
         This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4233,7 +4233,7 @@ paths:
       type: string
   /radiusservers/{radiusserver_id}/users:
     get:
-      operationId: List-RadiusServerTraverseUser
+      operationId: Get-RadiusServerTraverseUser
       summary: List the Users bound to a RADIUS  Server
       description: |-
         This endpoint will return all Users bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4404,7 +4404,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/associations:
     get:
-      operationId: List-SystemGroupAssociation
+      operationId: Get-SystemGroupAssociation
       summary: List the associations of a System Group
       description: |-
         This endpoint returns the _direct_ associations of a System Group.
@@ -4500,7 +4500,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/commands:
     get:
-      operationId: List-SystemGroupTraverseCommand
+      operationId: Get-SystemGroupTraverseCommand
       summary: List the Commands bound to a System Group
       description: |-
         This endpoint will return all Commands bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4559,7 +4559,7 @@ paths:
       type: string
   /systemgroups/{group_id}/members:
     get:
-      operationId: List-SystemGroupMembers
+      operationId: Get-SystemGroupMembers
       summary: List the members of a System Group
       description: |-
         This endpoint returns the system members of a System Group.
@@ -4633,7 +4633,7 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/membership:
     get:
-      operationId: List-SystemGroupMembership
+      operationId: Get-SystemGroupMembership
       summary: List the System Group's membership
       description: |-
         This endpoint returns all Systems that are a member of this System Group.
@@ -4695,7 +4695,7 @@ paths:
       type: string
   /systemgroups/{group_id}/policies:
     get:
-      operationId: List-SystemGroupTraversePolicy
+      operationId: Get-SystemGroupTraversePolicy
       summary: List the Policies bound to a System Group
       description: |-
         This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4756,7 +4756,7 @@ paths:
       type: string
   /systemgroups/{group_id}/usergroups:
     get:
-      operationId: List-SystemGroupTraverseUserGroup
+      operationId: Get-SystemGroupTraverseUserGroup
       summary: List the User Groups bound to a System Group
       description: |-
         This endpoint will return all User Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -4816,7 +4816,7 @@ paths:
       type: string
   /systemgroups/{group_id}/users:
     get:
-      operationId: List-SystemGroupTraverseUser
+      operationId: Get-SystemGroupTraverseUser
       summary: List the Users bound to a System Group
       description: |-
         This endpoint will return all Users bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -7403,7 +7403,7 @@ paths:
       - x-api-key: []
   /systems/{system_id}/associations:
     get:
-      operationId: List-SystemAssociation
+      operationId: Get-SystemAssociation
       summary: List the associations of a System
       description: |-
         This endpoint returns the _direct_ associations of a System.
@@ -7510,7 +7510,7 @@ paths:
       - x-api-key: []
   /systems/{system_id}/commands:
     get:
-      operationId: List-SystemTraverseCommand
+      operationId: Get-SystemTraverseCommand
       summary: List the Commands bound to a System
       description: |-
         This endpoint will return all Commands bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -7603,7 +7603,7 @@ paths:
       type: string
   /systems/{system_id}/memberof:
     get:
-      operationId: List-SystemMemberOf
+      operationId: Get-SystemMemberOf
       summary: List the parent Groups of a System
       description: |-
         This endpoint returns all the System Groups a System is a member of.
@@ -7667,7 +7667,7 @@ paths:
       type: string
   /systems/{system_id}/policies:
     get:
-      operationId: List-SystemTraversePolicy
+      operationId: Get-SystemTraversePolicy
       summary: List the Policies bound to a System
       description: |-
         This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -7803,7 +7803,7 @@ paths:
       type: string
   /systems/{system_id}/usergroups:
     get:
-      operationId: List-SystemTraverseUserGroup
+      operationId: Get-SystemTraverseUserGroup
       summary: List the User Groups bound to a System
       description: |-
         This endpoint will return all User Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
@@ -7865,7 +7865,7 @@ paths:
       type: string
   /systems/{system_id}/users:
     get:
-      operationId: List-SystemTraverseUser
+      operationId: Get-SystemTraverseUser
       summary: List the Users bound to a System
       description: |-
         This endpoint will return all Users bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
@@ -8030,7 +8030,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/applications:
     get:
-      operationId: List-UserGroupTraverseApplication
+      operationId: Get-UserGroupTraverseApplication
       summary: List the Applications bound to a User Group
       description: |-
         This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8089,7 +8089,7 @@ paths:
       type: string
   /usergroups/{group_id}/associations:
     get:
-      operationId: List-UserGroupAssociation
+      operationId: Get-UserGroupAssociation
       summary: List the associations of a User Group.
       description: |-
         This endpoint returns the _direct_ associations of this User Group.
@@ -8185,7 +8185,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/directories:
     get:
-      operationId: List-UserGroupTraverseDirectory
+      operationId: Get-UserGroupTraverseDirectory
       summary: List the Directories bound to a User Group
       description: |-
         This endpoint will return all Directories bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8245,7 +8245,7 @@ paths:
       type: string
   /usergroups/{group_id}/gsuites:
     get:
-      operationId: List-UserGroupTraverseGSuite
+      operationId: Get-UserGroupTraverseGSuite
       summary: List the G Suite instances bound to a User Group
       description: |-
         This endpoint will return all G Suite Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8305,7 +8305,7 @@ paths:
       type: string
   /usergroups/{group_id}/ldapservers:
     get:
-      operationId: List-UserGroupTraverseLdapServer
+      operationId: Get-UserGroupTraverseLdapServer
       summary: List the LDAP Servers bound to a User Group
       description: |-
         This endpoint will return all LDAP Servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8364,7 +8364,7 @@ paths:
       type: string
   /usergroups/{group_id}/members:
     get:
-      operationId: List-UserGroupMembers
+      operationId: Get-UserGroupMembers
       summary: List the members of a User Group
       description: |-
         This endpoint returns the user members of a User Group.
@@ -8435,7 +8435,7 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/membership:
     get:
-      operationId: List-UserGroupMembership
+      operationId: Get-UserGroupMembership
       summary: List the User Group's membership
       description: |-
         This endpoint returns all users members that are a member of this User Group.
@@ -8496,7 +8496,7 @@ paths:
       type: string
   /usergroups/{group_id}/office365s:
     get:
-      operationId: List-UserGroupTraverseOffice365
+      operationId: Get-UserGroupTraverseOffice365
       summary: List the Office 365 instances bound to a User Group
       description: |-
         This endpoint will return all Office 365 instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8555,7 +8555,7 @@ paths:
       type: string
   /usergroups/{group_id}/radiusservers:
     get:
-      operationId: List-UserGroupTraverseRadiusServer
+      operationId: Get-UserGroupTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User Group
       description: |-
         This endpoint will return all RADIUS servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8615,7 +8615,7 @@ paths:
       type: string
   /usergroups/{group_id}/systemgroups:
     get:
-      operationId: List-UserGroupTraverseSystemGroup
+      operationId: Get-UserGroupTraverseSystemGroup
       summary: List the System Groups bound to User Groups
       description: |-
         This endpoint will return all System Groups bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8674,7 +8674,7 @@ paths:
       type: string
   /usergroups/{group_id}/systems:
     get:
-      operationId: List-UserGroupTraverseSystem
+      operationId: Get-UserGroupTraverseSystem
       summary: List the Systems bound to a User Group
       description: |-
         This endpoint will return all Systems bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8810,7 +8810,7 @@ paths:
       - x-api-key: []
   /users/{user_id}/applications:
     get:
-      operationId: List-UserTraverseApplication
+      operationId: Get-UserTraverseApplication
       summary: List the Applications bound to a User
       description: |-
         This endpoint will return all Applications bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -8869,7 +8869,7 @@ paths:
       type: string
   /users/{user_id}/associations:
     get:
-      operationId: List-UserAssociation
+      operationId: Get-UserAssociation
       summary: List the associations of a User
       description: |-
         This endpoint returns the _direct_ associations of a User.
@@ -8970,7 +8970,7 @@ paths:
       - x-api-key: []
   /users/{user_id}/directories:
     get:
-      operationId: List-UserTraverseDirectory
+      operationId: Get-UserTraverseDirectory
       summary: List the Directories bound to a User
       description: |-
         This endpoint will return all Directories bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9029,7 +9029,7 @@ paths:
       type: string
   /users/{user_id}/gsuites:
     get:
-      operationId: List-UserTraverseGSuite
+      operationId: Get-UserTraverseGSuite
       summary: List the G Suite instances bound to a User
       description: |-
         This endpoint will return all G-Suite Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9088,7 +9088,7 @@ paths:
       type: string
   /users/{user_id}/ldapservers:
     get:
-      operationId: List-UserTraverseLdapServer
+      operationId: Get-UserTraverseLdapServer
       summary: List the LDAP servers bound to a User
       description: |-
         This endpoint will return all LDAP Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9147,7 +9147,7 @@ paths:
       type: string
   /users/{user_id}/memberof:
     get:
-      operationId: List-UserMemberOf
+      operationId: Get-UserMemberOf
       summary: List the parent Groups of a User
       description: |-
         This endpoint returns all the User Groups a User is a member of.
@@ -9208,7 +9208,7 @@ paths:
       type: string
   /users/{user_id}/office365s:
     get:
-      operationId: List-UserTraverseOffice365
+      operationId: Get-UserTraverseOffice365
       summary: List the Office 365 instances bound to a User
       description: |-
         This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9267,7 +9267,7 @@ paths:
       type: string
   /users/{user_id}/radiusservers:
     get:
-      operationId: List-UserTraverseRadiusServer
+      operationId: Get-UserTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User
       description: |-
         This endpoint will return all RADIUS Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9326,7 +9326,7 @@ paths:
       type: string
   /users/{user_id}/systemgroups:
     get:
-      operationId: List-UserTraverseSystemGroup
+      operationId: Get-UserTraverseSystemGroup
       summary: List the System Groups bound to a User
       description: |-
         This endpoint will return all System Groups bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -9385,7 +9385,7 @@ paths:
       type: string
   /users/{user_id}/systems:
     get:
-      operationId: List-UserTraverseSystem
+      operationId: Get-UserTraverseSystem
       summary: List the Systems bound to a User
       description: |-
         This endpoint will return all Systems bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.

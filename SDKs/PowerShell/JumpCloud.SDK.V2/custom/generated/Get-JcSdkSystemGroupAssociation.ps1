@@ -12,21 +12,54 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IGraphConnection
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [CommandId <String>]: ObjectID of the Command.
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the System Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of the System Group.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemGroupAssociation.md
 #>
  Function Get-JcSdkSystemGroupAssociation
 {
     [OutputType([JumpCloud.SDK.V2.Models.IGraphConnection])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-    [Parameter(Mandatory)]
+    [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the System Group.
     ${GroupId},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
 
     [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -55,7 +88,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
