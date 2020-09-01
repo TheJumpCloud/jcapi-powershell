@@ -17,6 +17,7 @@ Function Get-SwaggerItem($FilePath, $JsonPath)
     Return $Definition
 }
 # Load swagger file
+Set-Location $PSScriptRoot
 $SwaggerFilePath = '..\SwaggerSpecs\JumpCloud.SDK.V2.json'
 $OutputObject = @()
 $SwaggerJson = Get-Content -Path:($SwaggerFilePath) -Raw
@@ -32,12 +33,16 @@ $Paths.PSObject.Properties.Name | ForEach-Object {
             $MethodName = $_
             $MethodProperties = $PathProperties.$_
             $operationId = $MethodProperties.operationId
-            $AssociationEndpoints = $MethodProperties | Where-Object { $_.operationId -like '*Association*' `
-                    -or $_.operationId -like '*Membership*' `
+            # $AssociationEndpoints = $MethodProperties | Where-Object { $_.operationId -like '*Association*' `
+            #         -or $_.operationId -like '*Membership*' `
+            #         -or $_.operationId -like '*MemberOf*' `
+            #         -or $_.operationId -like '*Member*' `
+            #         -or $_.operationId -like '*Traverse*' }
+            $AssociationEndpoints = $MethodProperties | Where-Object { $_.operationId -like '*Membership*' `
                     -or $_.operationId -like '*MemberOf*' `
                     -or $_.operationId -like '*Member*' `
                     -or $_.operationId -like '*Traverse*' }
-            # $AssociationEndpoints = $MethodProperties | Where-Object { $_.operationId -like '*Set*Association*' }
+            # $AssociationEndpoints = $MethodProperties | Where-Object { $_.operationId -like '*Get-ActiveDirectory*' }
             If ($AssociationEndpoints)
             {
                 If ($MethodName -eq 'get')
@@ -127,9 +132,17 @@ $Paths.PSObject.Properties.Name | ForEach-Object {
 $AssociationCommands = $OutputObject | Select-Object -Property:*, `
 @{Name = 'FunctionType'; Expression = { ($_.operationId | Select-String -Pattern:('(^.*?-)(.*?)(Association|Membership|Member|Traverse)(.*?$)')).Matches.Groups[2].Value } }, `
 @{Name = 'FunctionTargetType'; Expression = { ($_.operationId | Select-String -Pattern:('(^.*?-)(.*?)(Traverse)(.*?$)')).Matches.Groups[4].Value } }
-# # $AssociationCommands | ForEach-Object { $_.enum = $_.enum -join ', ' }
-# # $AssociationCommands | Export-Csv -Path:('temp.csv') -Force
-
+$AssociationCommandsExport = $AssociationCommands
+$AssociationCommandsExport | ForEach-Object { $_.enum = $_.enum -join ', ' }
+$AssociationCommandsExport | ForEach-Object {
+    If ($_.operationId -eq 'Get-SystemGroupMembers' ) { $_.FunctionTargetType = 'system' }
+    If ($_.operationId -eq 'Get-SystemGroupMembership' ) { $_.FunctionTargetType = 'system' }
+    If ($_.operationId -eq 'Get-SystemMemberOf' ) { $_.FunctionTargetType = 'system_group' }
+    If ($_.operationId -eq 'Get-UserGroupMembers' ) { $_.FunctionTargetType = 'user' }
+    If ($_.operationId -eq 'Get-UserGroupMembership' ) { $_.FunctionTargetType = 'user' }
+    If ($_.operationId -eq 'Get-UserMemberOf' ) { $_.FunctionTargetType = 'user_group' }
+}
+$AssociationCommandsExport | Export-Csv -Path:('temp.csv') -Force
 # Build list of types and target types from the SDK
 $SDKOutputObject = @()
 $AssociationCommands | Where-Object { $_.ParameterName -ne 'op' } | ForEach-Object {
@@ -158,39 +171,46 @@ $AssociationCommands | Where-Object { $_.ParameterName -ne 'op' } | ForEach-Obje
         }
     }
 }
-$SDKOutputObject | Select-Object -Unique Type, TargetType | Sort-Object Type, TargetType | Export-Csv -Path:('Combos-SDK.csv') -Force
+$SDKOutputObject = $SDKOutputObject | Select-Object -Unique Type, TargetType | Sort-Object Type, TargetType
+$SDKOutputObject | Export-Csv -Path:('Combos-SDK.csv') -Force
 
-# # Build list of types and target types from the JumpCloud module
-# $PSModuleOutputObject = @()
-# $JCTypePath = '\support\PowerShell\JumpCloud Module\Private\NestedFunctions\JCTypes.json'
-# $JCTypes = Get-Content -Path:($JCTypePath) -Raw | ConvertFrom-Json -Depth:99
-# ForEach ($JCType In $JCTypes | Where-Object { $_.Category -eq 'JumpCloud' })
-# {
-#     $JCType.Targets.TargetSingular | ForEach-Object {
-#         $PSModuleOutputObject += [PSCustomObject]@{
-#             Method     = $null
-#             Type       = $JCType.TypeName.TypeNameSingular
-#             TargetType = $_
-#         }
-#     }
-# }
-# $PSModuleOutputObject | Select-Object -Unique Type, TargetType | Sort-Object Type, TargetType | Export-Csv -Path:('Combos-PSModule.csv') -Force
+# Build list of types and target types from the JumpCloud module
+$PSModuleOutputObject = @()
+$JCTypePath = '\support\PowerShell\JumpCloud Module\Private\NestedFunctions\JCTypesOrg.json'
+$JCTypes = Get-Content -Path:($JCTypePath) -Raw | ConvertFrom-Json -Depth:99
+ForEach ($JCType In $JCTypes | Where-Object { $_.Category -eq 'JumpCloud' })
+{
+    $JCType.Targets.TargetSingular | ForEach-Object {
+        $PSModuleOutputObject += [PSCustomObject]@{
+            Method     = $null
+            Type       = $JCType.TypeName.TypeNameSingular
+            TargetType = $_
+        }
+    }
+}
+$PSModuleOutputObject = $PSModuleOutputObject | Select-Object -Unique Type, TargetType | Sort-Object Type, TargetType
+$PSModuleOutputObject | Export-Csv -Path:('Combos-PSModule.csv') -Force
 
-# # Update JCTypes from SDK function names
-# $JCTypePath = '\support\PowerShell\JumpCloud Module\Private\NestedFunctions\JCTypes.json'
-# $JCType = Get-Content -Path:($JCTypePath) -Raw | ConvertFrom-Json -Depth:99
-# $JCType | ForEach-Object {
-#     $_.PSObject.Properties.Remove('Targets')
-#     $_.PSObject.Properties.Remove('TargetsExcluded')
-#     $_ | Add-Member -MemberType:('NoteProperty') -Name:('Targets') -Value:(@())
-# }
-# ForEach ($SDKOutputRecord In $SDKOutputObject)
-# {
-#     $JCType | Where-Object { $_.TypeName.TypeNameSingular -eq $SDKOutputRecord.Type } | ForEach-Object {
-#         $_.Targets += [PSCustomObject]@{
-#             TargetSingular = $SDKOutputRecord.TargetType
-#             TargetPlural   = ($JCType.TypeName | Where-Object { $_.TypeNameSingular -eq $SDKOutputRecord.TargetType } ).TypeNamePlural
-#         }
-#     }
-# }
-# $JCType | ConvertTo-Json -Depth:99 | Out-File -FilePath:($JCTypePath) -Force
+# Update JCTypes from SDK function names
+$JCTypePath = '\support\PowerShell\JumpCloud Module\Private\NestedFunctions\JCTypes.json'
+$JCType = Get-Content -Path:($JCTypePath) -Raw | ConvertFrom-Json -Depth:99
+$JCType | ForEach-Object {
+    $_.Targets = @()
+    $_.PSObject.Properties.Remove('TargetsExcluded')
+}
+ForEach ($SDKOutputRecord In $SDKOutputObject)
+{
+    $JCType | Where-Object { $_.TypeName.TypeNameSingular -eq $SDKOutputRecord.Type } | ForEach-Object {
+        If ($SDKOutputRecord.TargetType -ne $SDKOutputRecord.Type)
+        {
+            If (-not [system.string]::IsNullOrEmpty($SDKOutputRecord.TargetType))
+            {
+                $_.Targets += [PSCustomObject]@{
+                    TargetSingular = $SDKOutputRecord.TargetType
+                    TargetPlural   = ($JCType.TypeName | Where-Object { $_.TypeNameSingular -eq $SDKOutputRecord.TargetType } ).TypeNamePlural
+                }
+            }
+        }
+    }
+}
+$JCType | ConvertTo-Json -Depth:99 | Out-File -FilePath:($JCTypePath) -Force
