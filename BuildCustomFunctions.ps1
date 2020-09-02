@@ -116,6 +116,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
@@ -163,7 +164,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentC
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
@@ -188,7 +189,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
@@ -208,7 +209,7 @@ $($IndentChar)$($IndentChar)}"
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
@@ -223,7 +224,7 @@ $($IndentChar)$($IndentChar)}"
                     }
                     # Build "End" block
                     $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
@@ -240,6 +241,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
@@ -278,7 +280,7 @@ $($IndentChar)$($IndentChar)$($IndentChar){"
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -316,7 +318,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -337,7 +339,7 @@ $($IndentChar)$($IndentChar)}"
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
@@ -353,7 +355,7 @@ $($IndentChar)$($IndentChar)}"
                     }
                     # Build "End" block
                     $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
@@ -375,6 +377,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
@@ -384,9 +387,9 @@ $($IndentChar)$($IndentChar))"
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponse.Result.Content.ReadAsStringAsync().Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
