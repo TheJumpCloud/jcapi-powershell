@@ -457,8 +457,8 @@ $ApiHash.GetEnumerator() | ForEach-Object {
             # Convert json string to object
             $JsonExport = $ReadyForConvert | ConvertFrom-Json -Depth:(99);
             # Remove paths
-            $JsonExport.paths = $JsonExport.paths | Select-Object * -ExcludeProperty:('/applications/{application_id}/logo');
-            # Exclude stoplight sections where the property is hidden
+            $IncludePathList = $JsonExport.paths.PSObject.Properties.Name | Where-Object { $_ -notin '/applications/{application_id}/logo' } #  [Debugging] Filter paths for testing here
+            $JsonExport.paths = $JsonExport.paths | Select-Object $IncludePathList;
             If ($JsonExport | Get-Member -MemberType NoteProperty | Where-Object { $_.Name -eq 'x-stoplight' })
             {
                 # Remove "public": false elements from "paths"
