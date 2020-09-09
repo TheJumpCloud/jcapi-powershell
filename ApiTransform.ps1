@@ -225,6 +225,7 @@ $OperationIdMapping = [Ordered]@{
         'GET_systemgroups-group_id-policies'                         = 'Get-SystemGroupTraversePolicy';
         'GET_systemgroups-group_id-users'                            = 'Get-SystemGroupTraverseUser';
         'GET_systemgroups-group_id-usergroups'                       = 'Get-SystemGroupTraverseUserGroup';
+        'GET_systeminsights-windows_crashes'                         = 'List-SystemInsightsWindowsCrashes';
         'GET_systeminsights-alf'                                     = 'List-SystemInsightsAlf';
         'GET_systeminsights-alf_exceptions'                          = 'List-SystemInsightsAlfException';
         'GET_systeminsights-alf_explicit_auths'                      = 'List-SystemInsightsAlfExplicitAuth';
