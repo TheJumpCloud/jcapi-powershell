@@ -30,7 +30,7 @@ Try
     $BuildCustomFunctions = $true
     $PrereleaseName = '' # Beta
     $UpdateModuleGuid = $true
-    $TestModule = $true
+    $TestModule = $false
     $ModifyGitIgnore = $true
     $RemoveAzAccounts = $true
     $CommentFormatPs1Xml = $true
