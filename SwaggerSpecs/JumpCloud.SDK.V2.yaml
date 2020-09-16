@@ -266,11 +266,11 @@ paths:
       operationId: Get-AppleMDMCsr
       summary: Get Apple MDM CSR Plist
       description: |-
-        Retrieves an Apple MDM CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+        Retrieves an Apple MDM signed CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
 
         #### Sample Request
         ```
-          curl -X GET https://console.jumpcloud.com/api/v2/organizations/{Organization_ID}/mdm/{Apple_MDM_ID}/csr \
+          curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \
           -H 'accept: application/json' \
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -279,13 +279,10 @@ paths:
       - application/octet-stream
       parameters: []
       responses:
-        "200":
+        "201":
           description: ""
           schema:
-            properties:
-              signedCsrPlist:
-                type: string
-            type: object
+            $ref: '#/definitions/apple-mdm-signed-csr-plist'
         "400":
           $ref: '#/responses/trait:standardErrors:400'
         "401":
@@ -812,7 +809,7 @@ paths:
       operationId: Update-AppleMDM
       summary: Update an Apple MDM
       description: |-
-        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
+        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.  It may also be used to update the DEP Settings.
 
         #### Sample Request
         ```
@@ -823,7 +820,14 @@ paths:
           -d '{
             "name": "MDM name",
             "appleSignedCert": "{CERTIFICATE}",
-            "encryptedDepServerToken": "{SERVER_TOKEN}"
+            "encryptedDepServerToken": "{SERVER_TOKEN}",
+            "dep": {
+              "welcomeScreen": {
+                "title": "Welcome",
+                "paragraph": "In just a few steps, you will be working securely from your Mac.",
+                "button": "continue",
+              },
+            },
           }'
         ```
       parameters:
@@ -7354,53 +7358,6 @@ paths:
             type: array
       security:
       - x-api-key: []
-  /systeminsights/windows_crashes:
-    get:
-      operationId: List-SystemInsightsWindowsCrashes
-      summary: List System Insights Windows Crashes
-      description: Valid filter fields are `system_id` and `type`.
-      parameters:
-      - name: skip
-        in: query
-        description: The offset into the records to return.
-        required: false
-        type: integer
-        default: 0
-        minimum: 0
-      - name: sort
-        in: query
-        description: |
-          The comma separated fields used to sort the collection.
-          Default sort is ascending, prefix with `-` to sort descending.
-        required: false
-        type: array
-        default: []
-        items:
-          type: string
-      - name: filter
-        in: query
-        description: 'Supported operators are: eq'
-        required: false
-        type: array
-        default: []
-        items:
-          type: string
-      - name: limit
-        in: query
-        required: false
-        type: integer
-        default: 10
-        maximum: 1000
-        minimum: 0
-      responses:
-        "200":
-          description: ""
-          schema:
-            items:
-              $ref: '#/definitions/system-insights-windows-crashes'
-            type: array
-      security:
-      - x-api-key: []
   /systeminsights/windows_security_products:
     get:
       operationId: List-SystemInsightsWindowsSecurityProduct
@@ -9993,7 +9950,7 @@ parameters:
     in: header
     required: true
     type: string
-    default: application/json
+    default: application/x-pem-file
   trait:requestHeaders:Content-Type:
     name: Content-Type
     in: header
@@ -10242,9 +10199,14 @@ definitions:
         description: A new name for the Apple MDM configuration.
         maxLength: 255
         type: string
+      dep:
+        $ref: '#/definitions/DEP'
     type: object
   apple-mdm-public-key-cert:
     title: Apple MDM Public Key Certificate
+    type: string
+  apple-mdm-signed-csr-plist:
+    title: Apple MDM Signed CSR PList
     type: string
   application:
     title: Application
@@ -10518,10 +10480,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
-    type: object
     properties:
       message:
         type: string
+    type: object
   GraphConnection:
     title: GraphConnection
     description: Represents an edge between two graph objects. From can be omitted if it is clear from context.
@@ -13028,56 +12990,6 @@ definitions:
       system_id:
         type: string
       collection_time:
-        type: string
-    type: object
-  system-insights-windows-crashes:
-    title: System Insights Windows Crashes
-    properties:
-      build_number:
-        type: integer
-      collection_time:
-        type: string
-      command_line:
-        type: string
-      crash_path:
-        type: string
-      current_directory:
-        type: string
-      datetime:
-        type: string
-      exception_address:
-        type: string
-      exception_code:
-        type: string
-      exception_message:
-        type: string
-      machine_name:
-        type: string
-      major_version:
-        type: integer
-      minor_version:
-        type: integer
-      module:
-        type: string
-      path:
-        type: string
-      pid:
-        type: string
-      process_uptime:
-        type: string
-      registers:
-        type: string
-      stack_trace:
-        type: string
-      system_id:
-        type: string
-      tid:
-        type: string
-      type:
-        type: string
-      username:
-        type: string
-      version:
         type: string
     type: object
   system-insights-windows-security-products:
