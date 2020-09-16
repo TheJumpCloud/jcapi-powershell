@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: c05a6183-f993-4d70-9314-4fe5e7d54d0b
+Module Guid: b5b209fc-d4e3-492e-b0c4-347247a803fd
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -337,6 +337,9 @@ Valid filter fields are `system_id` and `security_type`.
 
 ### [Get-JcSdkSystemInsightWifiStatus](Get-JcSdkSystemInsightWifiStatus.md)
 Valid filter fields are `system_id` and `security_type`.
+
+### [Get-JcSdkSystemInsightWindowCrash](Get-JcSdkSystemInsightWindowCrash.md)
+Valid filter fields are `system_id` and `type`.
 
 ### [Get-JcSdkSystemInsightWindowSecurityProduct](Get-JcSdkSystemInsightWindowSecurityProduct.md)
 Valid filter fields are `system_id` and `state`.

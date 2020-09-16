@@ -8765,6 +8765,71 @@
         ]
       }
     },
+    "/systeminsights/windows_crashes": {
+      "get": {
+        "operationId": "List-SystemInsightsWindowsCrashes",
+        "summary": "List System Insights Windows Crashes",
+        "description": "Valid filter fields are `system_id` and `type`.",
+        "parameters": [
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset into the records to return.",
+            "required": false,
+            "type": "integer",
+            "default": 0,
+            "minimum": 0
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
+            "required": false,
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "Supported operators are: eq",
+            "required": false,
+            "type": "array",
+            "default": [],
+            "items": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "default": 10,
+            "maximum": 1000,
+            "minimum": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/system-insights-windows-crashes"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
     "/systeminsights/windows_security_products": {
       "get": {
         "operationId": "List-SystemInsightsWindowsSecurityProduct",
@@ -11680,6 +11745,23 @@
     }
   },
   "definitions": {
+    "ActivateProvisionUpdateReq": {
+      "title": "Put activate state Request",
+      "type": "object",
+      "description": "Request to update session state.",
+      "properties": {
+        "vanity_url": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "vanity_url",
+        "state"
+      ]
+    },
     "active-directory-agent-get-output": {
       "title": "Active Directory Agent Get Output",
       "properties": {
@@ -11909,6 +11991,91 @@
       "title": "Apple MDM Public Key Certificate",
       "type": "string"
     },
+    "application": {
+      "title": "Application",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "catalogItem": {
+          "type": "string"
+        },
+        "color": {
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 256,
+          "type": "string"
+        },
+        "displayLabel": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "logo": {
+          "properties": {
+            "color": {
+              "enum": [
+                "",
+                "#202D38",
+                "#005466",
+                "#3E8696",
+                "#006CAC",
+                "#0617AC",
+                "#7C6ADA",
+                "#D5779D",
+                "#9E2F00",
+                "#FFB000",
+                "#58C469",
+                "#57C49F",
+                "#FF6C03"
+              ],
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "provision": {
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "beta": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "sso": {
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "type": {
+              "type": "string"
+            },
+            "jit": {
+              "type": "boolean"
+            },
+            "beta": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "type": "object"
+    },
     "auth-info": {
       "title": "Auth Info",
       "properties": {
@@ -12029,7 +12196,7 @@
       "title": "DEP",
       "type": "object",
       "properties": {
-        "welcome_screen": {
+        "welcomeScreen": {
           "$ref": "#/definitions/DEPWelcomeScreen"
         }
       }
@@ -12211,12 +12378,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "GraphConnection": {
       "title": "GraphConnection",
@@ -15749,6 +15916,81 @@
           "type": "string"
         },
         "collection_time": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "system-insights-windows-crashes": {
+      "title": "System Insights Windows Crashes",
+      "properties": {
+        "build_number": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "command_line": {
+          "type": "string"
+        },
+        "crash_path": {
+          "type": "string"
+        },
+        "current_directory": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "exception_address": {
+          "type": "string"
+        },
+        "exception_code": {
+          "type": "string"
+        },
+        "exception_message": {
+          "type": "string"
+        },
+        "machine_name": {
+          "type": "string"
+        },
+        "major_version": {
+          "type": "integer"
+        },
+        "minor_version": {
+          "type": "integer"
+        },
+        "module": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "string"
+        },
+        "process_uptime": {
+          "type": "string"
+        },
+        "registers": {
+          "type": "string"
+        },
+        "stack_trace": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "tid": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "version": {
           "type": "string"
         }
       },
