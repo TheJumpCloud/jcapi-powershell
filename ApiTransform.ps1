@@ -33,29 +33,27 @@ $FixesMapping = @{
     };
     'JumpCloud.SDK.V2'                = [Ordered]@{
         # V2 Issues
-        '"basePath": "/api/v2"'                                                                                                        = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-        '["string", "number", "boolean", "array"]'                                                                                     = '"string"'; # FAILURE  {} Error: Invalid type 'string,number,boolean,array' in schema
-        '["string", "number", "boolean", "array", "null"]'                                                                             = '"string"' #  FAILURE  {} Error: Invalid type 'string,number,boolean,array,null' in schema
-        '["object", "null"]'                                                                                                           = '"object"';
-        '["string", "null"]'                                                                                                           = '"string"';
-        '["boolean", "null"]'                                                                                                          = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
-        '["integer", "null"]'                                                                                                          = '"integer"'; # Error: Invalid type 'integer,null' in schema
-        '["number", "null"]'                                                                                                           = '"number"'; # Error: Invalid type 'number,null' in schema
-        '"jobId"'                                                                                                                      = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
+        '"basePath": "/api/v2"'                                                                                        = '"basePath": "/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+        '["string", "number", "boolean", "array"]'                                                                     = '"string"'; # FAILURE  {} Error: Invalid type 'string,number,boolean,array' in schema
+        '["string", "number", "boolean", "array", "null"]'                                                             = '"string"' #  FAILURE  {} Error: Invalid type 'string,number,boolean,array,null' in schema
+        '["object", "null"]'                                                                                           = '"object"';
+        '["string", "null"]'                                                                                           = '"string"';
+        '["boolean", "null"]'                                                                                          = '"boolean"'; # Error: Invalid type 'boolean,null' in schema
+        '["integer", "null"]'                                                                                          = '"integer"'; # Error: Invalid type 'integer,null' in schema
+        '["number", "null"]'                                                                                           = '"number"'; # Error: Invalid type 'number,null' in schema
+        '"jobId"'                                                                                                      = '"id"'; # The transform removes the "-" in the parent objects name, "job-id", which makes the parent name the same as the child.
         # Custom Tweaks
-        '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                                   = ''; # This will be passed in later through the Module.cs file.
-        '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                                         = ''; # This will be passed in later through the Module.cs file.
-        '{"$ref": "#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                                            = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-        '{"name": "Content-Type", "in": "header", "required": false, "type": "string", "default": "application/json"}'                 = ''; # This will be passed in later through the Module.cs file.
-        '{"name": "Accept", "in": "header", "required": false, "type": "string", "default": "application/json"}'                       = ''; # This will be passed in later through the Module.cs file.
-        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'                                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-        '{"name": "x-api-key", "in": "header", "required": false, "type": "string"}'                                                   = ''; # This will be passed in later through the Module.cs file.
-        ', ,'                                                                                                                          = ',';
-        '[,'                                                                                                                           = '[';
-        ', ]'                                                                                                                          = ']';
-        "`t"                                                                                                                           = '\t';
-        # Bugs in progress
-        '"responses": {"201": {"description": "", "schema": {"properties": {"signedCsrPlist": {"type": "string"}}, "type": "object"}}' = '"responses": {"200": {"description": "", "schema": {"properties": {"signedCsrPlist": {"type": "string"}}, "type": "object"}}'; # https://jumpcloud.atlassian.net/browse/AL-609
+        '{"$ref": "#/parameters/trait:requestHeaders:Content-Type"}'                                                   = ''; # This will be passed in later through the Module.cs file.
+        '{"$ref": "#/parameters/trait:requestHeaders:Accept"}'                                                         = ''; # This will be passed in later through the Module.cs file.
+        '{"$ref": "#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                            = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        '{"name": "Content-Type", "in": "header", "required": false, "type": "string", "default": "application/json"}' = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "Accept", "in": "header", "required": false, "type": "string", "default": "application/json"}'       = ''; # This will be passed in later through the Module.cs file.
+        '{"name": "x-org-id", "in": "header", "required": false, "type": "string"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+        '{"name": "x-api-key", "in": "header", "required": false, "type": "string"}'                                   = ''; # This will be passed in later through the Module.cs file.
+        ', ,'                                                                                                          = ',';
+        '[,'                                                                                                           = '[';
+        ', ]'                                                                                                          = ']';
+        "`t"                                                                                                           = '\t';
     };
     'JumpCloud.SDK.DirectoryInsights' = [Ordered]@{
         '"basePath": "/insights/directory/v1"'                                                                                                                                                  = '"basePath": "/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
