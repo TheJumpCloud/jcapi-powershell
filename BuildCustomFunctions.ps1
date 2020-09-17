@@ -67,7 +67,7 @@ Try
             $CmdletBinding = (($FunctionContent | Select-String -Pattern:([regex]'(\[CmdletBinding)(.*?)(\]\s+)')).Matches.Value).TrimEnd()
             $DefaultParameterSetName = ($CmdletBinding | Select-String -Pattern:([regex]"(?<=DefaultParameterSetName=')(.*?)(?=')")).Matches.Value
             # Strip out parameters that match "DontShow"
-            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*DontShow*' -and $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
+            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
             $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
             $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
             $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
@@ -375,7 +375,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
@@ -385,7 +385,7 @@ $($IndentChar)$($IndentChar))"
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)# Clean up global variables

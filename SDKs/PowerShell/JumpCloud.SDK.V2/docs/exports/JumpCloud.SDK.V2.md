@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: c05a6183-f993-4d70-9314-4fe5e7d54d0b
+Module Guid: cc1d6b9b-2e70-4849-b51e-33d6ca9f4f66
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
@@ -28,8 +28,8 @@ Get a list of all Apple MDM configurations.
 An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkAppleMdmCsr](Get-JcSdkAppleMdmCsr.md)
-Retrieves an Apple MDM CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/organizations/{Organization_ID}/mdm/{Apple_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Retrieves an Apple MDM signed CSR Plist for an organization.
+The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkAppleMdmDepKey](Get-JcSdkAppleMdmDepKey.md)
 Retrieves an Apple MDM DEP Public Key.
@@ -519,7 +519,8 @@ Restarts a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST http
 
 ### [Set-JcSdkAppleMdm](Set-JcSdkAppleMdm.md)
 Updates an Apple MDM configuration.
-This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"MDM name\",\n    \"appleSignedCert\": \"{CERTIFICATE}\",\n    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\"\n  }'\n```
+This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
+It may also be used to update the DEP Settings.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"MDM name\",\n    \"appleSignedCert\": \"{CERTIFICATE}\",\n    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\",\n    \"dep\": {\n      \"welcomeScreen\": {\n        \"title\": \"Welcome\",\n        \"paragraph\": \"In just a few steps, you will be working securely from your Mac.\",\n        \"button\": \"continue\",\n      },\n    },\n  }'\n```
 
 ### [Set-JcSdkApplicationAssociation](Set-JcSdkApplicationAssociation.md)
 This endpoint allows you to manage the _direct_ associations of an Application.

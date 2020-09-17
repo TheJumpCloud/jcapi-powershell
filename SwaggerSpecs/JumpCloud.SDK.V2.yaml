@@ -266,11 +266,11 @@ paths:
       operationId: Get-AppleMDMCsr
       summary: Get Apple MDM CSR Plist
       description: |-
-        Retrieves an Apple MDM CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+        Retrieves an Apple MDM signed CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
 
         #### Sample Request
         ```
-          curl -X GET https://console.jumpcloud.com/api/v2/organizations/{Organization_ID}/mdm/{Apple_MDM_ID}/csr \
+          curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \
           -H 'accept: application/json' \
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -279,13 +279,10 @@ paths:
       - application/octet-stream
       parameters: []
       responses:
-        "200":
+        "201":
           description: ""
           schema:
-            properties:
-              signedCsrPlist:
-                type: string
-            type: object
+            $ref: '#/definitions/apple-mdm-signed-csr-plist'
         "400":
           $ref: '#/responses/trait:standardErrors:400'
         "401":
@@ -812,7 +809,7 @@ paths:
       operationId: Update-AppleMDM
       summary: Update an Apple MDM
       description: |-
-        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
+        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.  It may also be used to update the DEP Settings.
 
         #### Sample Request
         ```
@@ -823,7 +820,14 @@ paths:
           -d '{
             "name": "MDM name",
             "appleSignedCert": "{CERTIFICATE}",
-            "encryptedDepServerToken": "{SERVER_TOKEN}"
+            "encryptedDepServerToken": "{SERVER_TOKEN}",
+            "dep": {
+              "welcomeScreen": {
+                "title": "Welcome",
+                "paragraph": "In just a few steps, you will be working securely from your Mac.",
+                "button": "continue",
+              },
+            },
           }'
         ```
       parameters:
@@ -9946,7 +9950,7 @@ parameters:
     in: header
     required: true
     type: string
-    default: application/json
+    default: application/x-pem-file
   trait:requestHeaders:Content-Type:
     name: Content-Type
     in: header
@@ -10027,6 +10031,18 @@ responses:
     schema:
       $ref: '#/definitions/errorresponse'
 definitions:
+  ActivateProvisionUpdateReq:
+    title: Put activate state Request
+    type: object
+    description: Request to update session state.
+    properties:
+      vanity_url:
+        type: string
+      state:
+        type: string
+    required:
+    - vanity_url
+    - state
   active-directory-agent-get-output:
     title: Active Directory Agent Get Output
     properties:
@@ -10183,10 +10199,75 @@ definitions:
         description: A new name for the Apple MDM configuration.
         maxLength: 255
         type: string
+      dep:
+        $ref: '#/definitions/DEP'
     type: object
   apple-mdm-public-key-cert:
     title: Apple MDM Public Key Certificate
     type: string
+  apple-mdm-signed-csr-plist:
+    title: Apple MDM Signed CSR PList
+    type: string
+  application:
+    title: Application
+    properties:
+      _id:
+        type: string
+      catalogItem:
+        type: string
+      color:
+        type: string
+      description:
+        maxLength: 256
+        type: string
+      displayLabel:
+        type: string
+      displayName:
+        type: string
+      logo:
+        properties:
+          color:
+            enum:
+            - ""
+            - '#202D38'
+            - '#005466'
+            - '#3E8696'
+            - '#006CAC'
+            - '#0617AC'
+            - '#7C6ADA'
+            - '#D5779D'
+            - '#9E2F00'
+            - '#FFB000'
+            - '#58C469'
+            - '#57C49F'
+            - '#FF6C03'
+            type: string
+          url:
+            type: string
+        type: object
+      name:
+        type: string
+      provision:
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+          beta:
+            type: boolean
+        type: object
+      sso:
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+          jit:
+            type: boolean
+          beta:
+            type: boolean
+        type: object
+    type: object
   auth-info:
     title: Auth Info
     properties:
@@ -10269,7 +10350,7 @@ definitions:
     title: DEP
     type: object
     properties:
-      welcome_screen:
+      welcomeScreen:
         $ref: '#/definitions/DEPWelcomeScreen'
   DEPWelcomeScreen:
     title: DEPWelcomeScreen
