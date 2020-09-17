@@ -77,9 +77,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Process
     {
         $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
-        #Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        #Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        #Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
         # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
         $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
