@@ -19,13 +19,12 @@ Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [-PassTh
 
 ### Get
 ```
-Get-JcSdkCommand -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand -Id <String> [-Fields <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,7 +69,7 @@ A filter to apply to the query.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False

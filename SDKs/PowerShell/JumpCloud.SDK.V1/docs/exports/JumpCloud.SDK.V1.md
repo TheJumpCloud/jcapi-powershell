@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V1
-Module Guid: 0281135c-b8a4-4007-b4de-4b5ea0c60dd9
+Module Guid: 97111647-e8cd-4aad-a963-da99e3935dd8
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1
 Help Version: 1.0.0.0
 Locale: en-US
@@ -46,9 +46,6 @@ This endpoint allows you to launch a command based on a defined trigger.\n\n####
 
 ### [Invoke-JcSdkExpireSystemUserPassword](Invoke-JcSdkExpireSystemUserPassword.md)
 This endpoint allows you to expire a user's password.
-
-### [Invoke-JcSdkInvokeCommand](Invoke-JcSdkInvokeCommand.md)
-This endpoint allows you to run a command.
 
 ### [New-JcSdkApplication](New-JcSdkApplication.md)
 The endpoint adds a new SSO / SAML Applications.
