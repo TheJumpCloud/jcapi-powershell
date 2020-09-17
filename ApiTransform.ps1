@@ -75,7 +75,6 @@ $OperationIdMapping = [Ordered]@{
         'POST_commands'                               = 'Create-Command';
         'DELETE_commands-id'                          = 'Delete-Command';
         'GET_commands-id'                             = 'Get-Command';
-        'POST_runCommand'                             = 'Invoke-Command';
         'GET_commands'                                = 'List-Command';
         'PUT_commands-id'                             = 'Put-Command';
         'GET_files-command-id'                        = 'Get-CommandFile';
