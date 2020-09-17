@@ -155,12 +155,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             }
             Do
             {
-                #Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
-                #Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
+                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
                 $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalWorkday @PSBoundParameters
-                #Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-                #Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-                #Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                 # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
                 $Result = If ('Results' -in $Result.PSObject.Properties.Name)
                 {
@@ -183,9 +183,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalWorkday @PSBoundParameters
-            #Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-            #Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-            #Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
             $Result = If ('Results' -in $Result.PSObject.Properties.Name)
             {
