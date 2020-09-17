@@ -15,7 +15,7 @@ Query the API for a list of distinct values for a field
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventDistinct -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Field <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -80,6 +80,36 @@ field is what they wish to query on
 
 ```yaml
 Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SearchTermAnd
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SearchTermOr
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+
+```yaml
+Type: System.Collections.Hashtable
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -179,6 +209,9 @@ BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search o
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Field <String>]`: field is what they wish to query on
+  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS
 
