@@ -160,10 +160,10 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentC
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
@@ -186,9 +186,9 @@ $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
@@ -206,9 +206,9 @@ $($IndentChar)$($IndentChar)}"
                     Else
                     {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar){
@@ -270,16 +270,16 @@ $($IndentChar)$($IndentChar)$($IndentChar)}"
 $($IndentChar)$($IndentChar)$($IndentChar){"
                         If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
                         {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
                         }
                         If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
                         {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
@@ -315,9 +315,9 @@ $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar)$($IndentChar){
@@ -336,9 +336,9 @@ $($IndentChar)$($IndentChar)}"
                     Else
                     {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
 $($IndentChar)$($IndentChar){
@@ -375,7 +375,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback,
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)#`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
@@ -384,9 +384,9 @@ $($IndentChar)$($IndentChar))"
                 # Build "Process" block
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
                 # Build "End" block
-                $EndContent += "$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)#Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+                $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)# Clean up global variables
 $($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
