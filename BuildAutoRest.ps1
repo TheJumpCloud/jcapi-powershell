@@ -77,6 +77,7 @@ Try
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
                 $ConfigProjectUri = $Config.metadata.projectUri
                 $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
+                $ConfigInputFile = '{0}/{1}' -f $BaseFolder, $Config.'input-file'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
                 $nupkgName = '{0}*.nupkg' -f $ModuleName
@@ -169,6 +170,8 @@ Try
                     Write-Host ('[COPYING] custom files.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Copy-Item -Path:("$($CustomFolderSourcePath)/*") -Destination:([System.String]$CustomFolderPath) -Force
                     (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
+                    # Copy swagger spec to SDK directory
+                    Copy-Item -Path:("$ConfigInputFile") -Destination:([System.String]$CustomFolderPath) -Force
                 }
                 ###########################################################################
                 If ($BuildModule)
