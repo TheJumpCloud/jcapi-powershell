@@ -35,10 +35,10 @@ paths:
         "200":
           description: Array of Directory Insights events JSON objects
           schema:
-            items:
-              additionalProperties: true
-              type: object
             type: array
+            items:
+              type: object
+              additionalProperties: true
         "400":
           description: Invalid/unknown query JSON body
           schema:
@@ -140,10 +140,10 @@ paths:
         "200":
           description: List of bucketed event counts
           schema:
-            items:
-              additionalProperties: true
-              type: object
             type: array
+            items:
+              type: object
+              additionalProperties: true
         "400":
           description: Invalid/unknown query JSON body
           schema:
@@ -191,11 +191,11 @@ responses:
 definitions:
   ErrorMessage:
     title: ErrorMessage
+    type: object
     properties:
       message:
         description: Text detailed error message returned by the service
         type: string
-    type: object
   errorresponse:
     title: ErrorResponse
     type: object
@@ -205,47 +205,54 @@ definitions:
   EventCount:
     title: EventCount
     description: EventCount JSON struct with count of matching events
+    type: object
     properties:
       count:
-        format: int64
         type: integer
+        format: int64
         x-go-name: Count
-    type: object
   EventDistinctQuery:
     title: EventDistinctQuery
     description: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
+    type: object
+    required:
+    - service
+    - start_time
     properties:
       end_time:
         description: optional query end time, UTC in RFC3339 format
-        format: date-time
         type: string
+        format: date-time
       field:
         description: field is what they wish to query on
         type: string
         x-go-name: Field
+      search_term:
+        $ref: '#/definitions/SearchTerm'
       service:
         description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
-        example: '[systems,radius,sso,directory,ldap,mdm,all]'
+        type: array
         items:
           type: string
-        type: array
         x-go-name: Service
+        example: '[systems,radius,sso,directory,ldap,mdm,all]'
       start_time:
         description: query start time, UTC in RFC3339 format
-        format: date-time
         type: string
-    required:
-    - service
-    - start_time
-    type: object
+        format: date-time
   EventIntervalQuery:
     title: EventIntervalQuery
     description: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
+    type: object
+    required:
+    - service
+    - start_time
+    - interval_unit
     properties:
       end_time:
         description: optional query end time, UTC in RFC3339 format
-        format: date-time
         type: string
+        format: date-time
       interval_unit:
         type: string
         x-go-name: IntervalUnit
@@ -259,96 +266,91 @@ definitions:
         $ref: '#/definitions/SearchTerm'
       service:
         description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
-        example: '[systems,radius,sso,directory,ldap,mdm,all]'
+        type: array
         items:
           type: string
-        type: array
         x-go-name: Service
+        example: '[systems,radius,sso,directory,ldap,mdm,all]'
       start_time:
         description: query start time, UTC in RFC3339 format
-        format: date-time
         type: string
+        format: date-time
       timezone:
         description: |-
           TimeZone. Specify the timezone in which the user is in
           optional
         type: string
-    required:
-    - service
-    - start_time
-    - interval_unit
-    type: object
   EventQuery:
     title: EventQuery
     description: EventQuery is the users' command to search our auth logs
+    type: object
+    required:
+    - service
+    - start_time
     properties:
       end_time:
         description: optional query end time, UTC in RFC3339 format
-        format: date-time
         type: string
+        format: date-time
       fields:
         description: optional list of fields to return from query
+        type: array
         items:
           type: string
-        type: array
         x-go-name: Projection
       limit:
         description: Max number of rows to return
-        format: int64
         type: integer
+        format: int64
         x-go-name: Limit
       search_after:
         description: Specific query to search after, see x-* response headers for next values
+        type: array
         items:
           type: string
-        type: array
         x-go-name: SearchAfter
       search_term:
         $ref: '#/definitions/SearchTerm'
       service:
         description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
-        example: '[systems,radius,sso,directory,ldap,mdm,all]'
+        type: array
         items:
           type: string
-        type: array
         x-go-name: Service
+        example: '[systems,radius,sso,directory,ldap,mdm,all]'
       sort:
         description: ASC or DESC order for timestamp
         type: string
         x-go-name: Sort
       start_time:
         description: query start time, UTC in RFC3339 format
-        format: date-time
         type: string
-    required:
-    - service
-    - start_time
-    type: object
+        format: date-time
   EventServiceTimeQuery:
     title: EventServiceTimeQuery
     description: |-
       EventServiceTimeQuery is the base struct for most event queries
       it includes the minimum-required fields of service and start/end times
-    properties:
-      end_time:
-        description: optional query end time, UTC in RFC3339 format
-        format: date-time
-        type: string
-      service:
-        description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
-        example: '[systems,radius,sso,directory,ldap,mdm,all]'
-        items:
-          type: string
-        type: array
-        x-go-name: Service
-      start_time:
-        description: query start time, UTC in RFC3339 format
-        format: date-time
-        type: string
+    type: object
     required:
     - service
     - start_time
-    type: object
+    properties:
+      end_time:
+        description: optional query end time, UTC in RFC3339 format
+        type: string
+        format: date-time
+      service:
+        description: 'service name to query. Known services: systems,radius,sso,directory,ldap,all'
+        type: array
+        items:
+          type: string
+        x-go-name: Service
+        example: '[systems,radius,sso,directory,ldap,mdm,all]'
+      start_time:
+        description: query start time, UTC in RFC3339 format
+        type: string
+        format: date-time
   mfa:
     title: mfa
     type: object
@@ -365,12 +367,12 @@ definitions:
     description: |-
       SearchTerm is the filter portion of the query
       it contains only one of 'and' or 'or' conjunction maps
+    type: object
     properties:
       and:
         $ref: '#/definitions/TermConjunction'
       or:
         $ref: '#/definitions/TermConjunction'
-    type: object
   sshkeylist:
     title: SSHKeyList
     type: object
@@ -625,6 +627,11 @@ definitions:
     - username
   TermConjunction:
     title: TermConjunction
+    description: |-
+      TermConjunction represents a conjunction (and/or)
+      NOTE: the validator limits what the operator can be, not the object
+      for future-proof-ness
+      and a list of sub-values
     type: object
     additionalProperties: true
 

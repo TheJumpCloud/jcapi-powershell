@@ -196,6 +196,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
   - `[Settings <IOrganizationsettingsput>]`: OrganizationSettingsPut
     - `[ContactEmail <String>]`: 
     - `[ContactName <String>]`: 
+    - `[DirectoryInsightEnabled <Boolean?>]`: 
     - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
     - `[DisableGoogleLogin <Boolean?>]`: 
     - `[DisableLdap <Boolean?>]`: 
@@ -244,6 +245,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[ContactEmail <String>]`: 
   - `[ContactName <String>]`: 
+  - `[DirectoryInsightEnabled <Boolean?>]`: 
   - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
   - `[DisableGoogleLogin <Boolean?>]`: 
   - `[DisableLdap <Boolean?>]`: 

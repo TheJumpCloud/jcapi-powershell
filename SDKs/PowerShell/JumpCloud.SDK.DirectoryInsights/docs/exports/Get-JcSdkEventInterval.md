@@ -108,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermAnd
-TermConjunction
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -123,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermOr
-TermConjunction
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -243,9 +243,9 @@ BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search o
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by         optional
-  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction
+  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ITermConjunction>]`: TermConjunction
+  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[Timezone <String>]`: TimeZone. Specify the timezone in which the user is in         optional
 
 ## RELATED LINKS

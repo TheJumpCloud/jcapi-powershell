@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: JumpCloud APIs
-  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
+  description: JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.
 host: console.jumpcloud.com
 basePath: /api/
 schemes:
@@ -469,11 +469,6 @@ paths:
         required: false
         type: string
         default: ""
-      - name: filter
-        in: query
-        description: A filter to apply to the query.
-        required: false
-        type: string
       responses:
         "200":
           description: OK
@@ -876,15 +871,6 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/radiusserverput'
-      security:
-      - x-api-key: []
-  /runCommand:
-    post:
-      operationId: Invoke-Command
-      description: This endpoint allows you to run a command.
-      responses:
-        "200":
-          description: OK
       security:
       - x-api-key: []
   /search/organizations:
@@ -1894,6 +1880,13 @@ definitions:
         type: string
       beta:
         type: boolean
+      status:
+        enum:
+        - ""
+        - end_of_life
+        - end_of_support
+        - beta
+        type: string
       color:
         enum:
         - ""
@@ -2548,15 +2541,15 @@ definitions:
             type: boolean
   mfa:
     title: mfa
+    type: object
     properties:
-      configured:
-        type: boolean
       exclusion:
         type: boolean
       exclusionUntil:
-        format: date-time
         type: string
-    type: object
+        format: date-time
+      configured:
+        type: boolean
   organization:
     title: Organization
     properties:
@@ -2617,6 +2610,11 @@ definitions:
                 type: boolean
               enableNewWindows:
                 type: boolean
+              enabled:
+                type: boolean
+            type: object
+          directoryInsights:
+            properties:
               enabled:
                 type: boolean
             type: object
@@ -2735,6 +2733,11 @@ definitions:
                 type: boolean
               enableNewWindows:
                 type: boolean
+              enabled:
+                type: boolean
+            type: object
+          directoryInsights:
+            properties:
               enabled:
                 type: boolean
             type: object
