@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLogged.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLoggedinUser.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkSystemInsightLogged
+# Get-JcSdkSystemInsightLoggedinUser
 
 ## SYNOPSIS
 Valid filter fields are `system_id` and `user`.
@@ -13,7 +13,7 @@ Valid filter fields are `system_id` and `user`.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightLogged [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkSystemInsightLoggedinUser [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION

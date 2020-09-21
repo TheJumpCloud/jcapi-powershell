@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLogged.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLoggedinUser.md
 #>
- Function Get-JcSdkSystemInsightLogged
+ Function Get-JcSdkSystemInsightLoggedinUser
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -111,7 +111,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightLogged @PSBoundParameters
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightLoggedinUser @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -136,7 +136,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightLogged @PSBoundParameters
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightLoggedinUser @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
