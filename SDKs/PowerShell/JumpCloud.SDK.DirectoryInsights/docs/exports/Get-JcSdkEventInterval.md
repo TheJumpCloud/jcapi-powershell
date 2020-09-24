@@ -93,7 +93,7 @@ Accept wildcard characters: False
 
 ### -IntervalValue
 Interval Value.
-This specifies how many units you want to bucket the event counts by optional
+This specifies how many units you want to bucket the event counts byoptional
 
 ```yaml
 Type: System.String
@@ -108,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermAnd
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the object for future-proof-ness and a list of sub-values
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -123,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermOr
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the object for future-proof-ness and a list of sub-values
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
 Type: System.Collections.Hashtable
