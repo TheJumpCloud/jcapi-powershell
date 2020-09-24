@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "2.0"
   title: JumpCloud APIs
-  description: JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.
+  description: ""
 host: console.jumpcloud.com
 basePath: /api/v2/
 schemes:
@@ -10480,10 +10480,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
+    type: object
     properties:
       message:
         type: string
-    type: object
   GraphConnection:
     title: GraphConnection
     description: Represents an edge between two graph objects. From can be omitted if it is clear from context.

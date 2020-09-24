@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0",
     "title": "JumpCloud APIs",
-    "description": "JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users."
+    "description": ""
   },
   "host": "console.jumpcloud.com",
   "basePath": "/api/v2/",
@@ -12315,12 +12315,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "GraphConnection": {
       "title": "GraphConnection",
