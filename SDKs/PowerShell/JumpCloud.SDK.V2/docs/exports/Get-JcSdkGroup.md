@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkGroup
 
 ## SYNOPSIS
-This endpoint returns all Groups that exist in your organization.\n\n#### Available filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n\n```\n  curl -X GET \\\n  https://console.jumpcloud.com/api/v2/groups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all Groups that exist in your organization.\r\n\r\n#### Available filter fields:\r\n  - `name`\r\n  - `disabled`\r\n  - `type`\r\n\r\n#### Sample Request\r\n\r\n```\r\n  curl -X GET \\\r\n  https://console.jumpcloud.com/api/v2/groups \\\r\n  -H 'accept: application/json' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'x-api-key: {API_KEY}'\r\n```
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-JcSdkGroup [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<Co
 ```
 
 ## DESCRIPTION
-This endpoint returns all Groups that exist in your organization.\n\n#### Available filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n\n```\n  curl -X GET \\\n  https://console.jumpcloud.com/api/v2/groups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all Groups that exist in your organization.\r\n\r\n#### Available filter fields:\r\n  - `name`\r\n  - `disabled`\r\n  - `type`\r\n\r\n#### Sample Request\r\n\r\n```\r\n  curl -X GET \\\r\n  https://console.jumpcloud.com/api/v2/groups \\\r\n  -H 'accept: application/json' \\\r\n  -H 'content-type: application/json' \\\r\n  -H 'x-api-key: {API_KEY}'\r\n```
 
 ## EXAMPLES
 
