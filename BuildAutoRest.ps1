@@ -149,7 +149,7 @@ Try
                     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
                     Else { Write-Error ('Unknown Operation System') }
                     Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g autorest@latest
+                    npm install -g @autorest/autorest
                     Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     autorest-beta --reset
                     # autorest-beta --help

@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "2.0"
   title: JumpCloud APIs
-  description: JumpCloud's V1 and V2 API contain a set of endpoints that allow JumpCloud customers to manage their organization. The V1 API is a set of endpoints that allows JumpCloud customers to manage commands, systems, & system users. The V2 API is a set of endpoints that allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
+  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/v2/
 schemes:
