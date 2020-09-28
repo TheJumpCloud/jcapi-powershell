@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "2.0"
   title: JumpCloud APIs
-  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
+  description: JumpCloud's V1 and V2 API contain a set of endpoints that allow JumpCloud customers to manage their organization. The V1 API is a set of endpoints that allows JumpCloud customers to manage commands, systems, & system users. The V2 API is a set of endpoints that allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/v2/
 schemes:
@@ -21,8 +21,6 @@ paths:
     get:
       operationId: List-ActiveDirectory
       summary: List Active Directories
-      tags:
-      - Active Directory
       description: |-
         This endpoint allows you to list all your Active Directory Instances.
 
@@ -86,11 +84,8 @@ paths:
       - x-api-key: []
   /activedirectories/{activedirectory_id}/associations:
     get:
-      operationId: List-ActiveDirectoryAssociation
+      operationId: Get-ActiveDirectoryAssociation
       summary: List the associations of an Active Directory instance
-      tags:
-      - Graph
-      - Active Directory
       description: |-
         This endpoint returns the direct associations of this Active Directory instance.
 
@@ -154,11 +149,8 @@ paths:
       type: string
   /activedirectories/{activedirectory_id}/usergroups:
     get:
-      operationId: List-ActiveDirectoryTraverseUserGroup
+      operationId: Get-ActiveDirectoryTraverseUserGroup
       summary: List the User Groups bound to an Active Directory instance
-      tags:
-      - Graph
-      - Active Directory
       description: |-
         This endpoint will return all Users Groups bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -218,8 +210,6 @@ paths:
     get:
       operationId: Get-ActiveDirectory
       summary: Get an Active Directory
-      tags:
-      - Active Directory
       description: |-
         This endpoint returns a specific Active Directory.
 
@@ -249,8 +239,6 @@ paths:
     get:
       operationId: List-AppleMDM
       summary: List Apple MDMs
-      tags:
-      - Apple MDM
       description: |-
         Get a list of all Apple MDM configurations.  An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
 
@@ -277,14 +265,12 @@ paths:
     get:
       operationId: Get-AppleMDMCsr
       summary: Get Apple MDM CSR Plist
-      tags:
-      - Apple MDM
       description: |-
-        Retrieves an Apple MDM CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+        Retrieves an Apple MDM signed CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
 
         #### Sample Request
         ```
-          curl -X GET https://console.jumpcloud.com/api/v2/organizations/{Organization_ID}/mdm/{Apple_MDM_ID}/csr \
+          curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \
           -H 'accept: application/json' \
           -H 'content-type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -293,13 +279,10 @@ paths:
       - application/octet-stream
       parameters: []
       responses:
-        "200":
+        "201":
           description: ""
           schema:
-            properties:
-              signedCsrPlist:
-                type: string
-            type: object
+            $ref: '#/definitions/apple-mdm-signed-csr-plist'
         "400":
           $ref: '#/responses/trait:standardErrors:400'
         "401":
@@ -323,8 +306,6 @@ paths:
     get:
       operationId: Get-AppleMDMDepKey
       summary: Get Apple MDM DEP Public Key
-      tags:
-      - Apple MDM
       description: Retrieves an Apple MDM DEP Public Key.
       produces:
       - application/x-pem-file
@@ -357,8 +338,6 @@ paths:
     get:
       operationId: List-AppleMDMDevice
       summary: List AppleMDM Devices
-      tags:
-      - Apple MDM
       description: |-
         Lists all Apple MDM devices.
 
@@ -451,8 +430,6 @@ paths:
     post:
       operationId: Clear-AppleMDMDevice
       summary: Erase Device
-      tags:
-      - Apple MDM
       description: |-
         Erases a DEP-enrolled device.
 
@@ -517,8 +494,6 @@ paths:
     post:
       operationId: Lock-AppleMDMDevice
       summary: Lock Device
-      tags:
-      - Apple MDM
       description: |-
         Locks a DEP-enrolled device.
 
@@ -583,8 +558,6 @@ paths:
     post:
       operationId: Restart-AppleMDMDevice
       summary: Restart Device
-      tags:
-      - Apple MDM
       description: |-
         Restarts a DEP-enrolled device.
 
@@ -637,8 +610,6 @@ paths:
     post:
       operationId: Stop-AppleMDMDevice
       summary: Shut Down Device
-      tags:
-      - Apple MDM
       description: |-
         Shuts down a DEP-enrolled device.
 
@@ -682,8 +653,6 @@ paths:
     get:
       operationId: List-AppleMDMEnrollmentProfile
       summary: List Apple MDM Enrollment Profiles
-      tags:
-      - Apple MDM
       description: |-
         Get a list of enrollment profiles for an apple mdm.
 
@@ -715,8 +684,6 @@ paths:
     get:
       operationId: Get-AppleMDMEnrollmentProfile
       summary: Get an Apple MDM Enrollment Profile
-      tags:
-      - Apple MDM
       description: |-
         Get an enrollment profile
 
@@ -758,8 +725,6 @@ paths:
     post:
       operationId: Sync-AppleMDMDevice
       summary: Refresh DEP Devices
-      tags:
-      - Apple MDM
       description: |-
         Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.
 
@@ -803,8 +768,6 @@ paths:
     delete:
       operationId: Delete-AppleMDM
       summary: Delete an Apple MDM
-      tags:
-      - Apple MDM
       description: |-
         Removes an Apple MDM configuration.
 
@@ -845,10 +808,8 @@ paths:
     put:
       operationId: Update-AppleMDM
       summary: Update an Apple MDM
-      tags:
-      - Apple MDM
       description: |-
-        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
+        Updates an Apple MDM configuration.  This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.  It may also be used to update the DEP Settings.
 
         #### Sample Request
         ```
@@ -859,7 +820,14 @@ paths:
           -d '{
             "name": "MDM name",
             "appleSignedCert": "{CERTIFICATE}",
-            "encryptedDepServerToken": "{SERVER_TOKEN}"
+            "encryptedDepServerToken": "{SERVER_TOKEN}",
+            "dep": {
+              "welcomeScreen": {
+                "title": "Welcome",
+                "paragraph": "In just a few steps, you will be working securely from your Mac.",
+                "button": "continue",
+              },
+            },
           }'
         ```
       parameters:
@@ -888,11 +856,8 @@ paths:
       - x-api-key: []
   /applications/{application_id}/associations:
     get:
-      operationId: List-ApplicationAssociation
+      operationId: Get-ApplicationAssociation
       summary: List the associations of an Application
-      tags:
-      - Graph
-      - Applications
       description: |-
         This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.
 
@@ -956,9 +921,6 @@ paths:
     post:
       operationId: Set-ApplicationAssociation
       summary: Manage the associations of an Application
-      tags:
-      - Graph
-      - Applications
       description: |-
         This endpoint allows you to manage the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.
 
@@ -986,11 +948,8 @@ paths:
       - x-api-key: []
   /applications/{application_id}/usergroups:
     get:
-      operationId: List-ApplicationTraverseUserGroup
+      operationId: Get-ApplicationTraverseUserGroup
       summary: List the User Groups bound to an Application
-      tags:
-      - Graph
-      - Applications
       description: |-
         This endpoint will return all Users Groups bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1048,11 +1007,8 @@ paths:
       type: string
   /applications/{application_id}/users:
     get:
-      operationId: List-ApplicationTraverseUser
+      operationId: Get-ApplicationTraverseUser
       summary: List the Users bound to an Application
-      tags:
-      - Graph
-      - Applications
       description: |-
         This endpoint will return all Users bound to an Application, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1112,8 +1068,6 @@ paths:
     patch:
       operationId: Patch-BulkUsers
       summary: Bulk Users Update
-      tags:
-      - Bulk Job Requests
       description: "The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"department\":\"{UPDATED_DEPARTMENT}\",\n		\"attributes\":[\n			{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n		]\n	},\n	{\n	  \"id\":\"5be9fb4ddb01290001e85109\",\n		\"firstname\":\"{UPDATED_FIRSTNAME}\",\n		\"costCenter\":\"{UPDATED_COST_CENTER}\",\n		\"phoneNumbers\":[\n			{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n			{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n		]\n	}\n]\n```"
       parameters:
       - name: body
@@ -1132,8 +1086,6 @@ paths:
     post:
       operationId: Create-BulkUsers
       summary: Bulk Users Create
-      tags:
-      - Bulk Job Requests
       description: "The endpoint allows you to create a bulk job to asynchronously create users. See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n		\"email\":\"{email}\",\n		\"firstname\":\"{firstname}\",\n		\"lastname\":\"{firstname}\",\n		\"username\":\"{username}\",\n		\"attributes\":[\n			{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n			{\"name\":\"Custom\",\"value\":\"attribute\"}\n		]\n	}\n]\n```"
       parameters:
       - name: body
@@ -1153,8 +1105,6 @@ paths:
     get:
       operationId: Get-BulkUsersResult
       summary: List Bulk Users Results
-      tags:
-      - Bulk Job Requests
       description: |-
         This endpoint will return the results of particular user import or update job request.
 
@@ -1196,11 +1146,8 @@ paths:
       type: string
   /commands/{command_id}/associations:
     get:
-      operationId: List-CommandAssociation
+      operationId: Get-CommandAssociation
       summary: List the associations of a Command
-      tags:
-      - Graph
-      - Commands
       description: |-
         This endpoint will return the _direct_ associations of this Command.
 
@@ -1266,9 +1213,6 @@ paths:
     post:
       operationId: Set-CommandAssociation
       summary: Manage the associations of a Command
-      tags:
-      - Graph
-      - Commands
       description: |-
         This endpoint will allow you to manage the _direct_ associations of this Command.
 
@@ -1299,11 +1243,8 @@ paths:
       - x-api-key: []
   /commands/{command_id}/systemgroups:
     get:
-      operationId: List-CommandTraverseSystemGroup
+      operationId: Get-CommandTraverseSystemGroup
       summary: List the System Groups bound to a Command
-      tags:
-      - Graph
-      - Commands
       description: |-
         This endpoint will return all System Groups bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1361,11 +1302,8 @@ paths:
       type: string
   /commands/{command_id}/systems:
     get:
-      operationId: List-CommandTraverseSystem
+      operationId: Get-CommandTraverseSystem
       summary: List the Systems bound to a Command
-      tags:
-      - Graph
-      - Commands
       description: |-
         This endpoint will return all Systems bound to a Command, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1425,8 +1363,6 @@ paths:
     get:
       operationId: List-Directory
       summary: List All Directories
-      tags:
-      - Directories
       description: |-
         This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
 
@@ -1488,8 +1424,6 @@ paths:
     get:
       operationId: List-DuoAccount
       summary: List Duo Accounts
-      tags:
-      - Duo
       description: |-
         This endpoint returns all the Duo accounts for your organization. Note: There can currently only be one Duo account for your organization.
 
@@ -1513,8 +1447,6 @@ paths:
     post:
       operationId: Create-DuoAccount
       summary: Create Duo Account
-      tags:
-      - Duo
       description: |-
         Registers a Duo account for an organization. Only one Duo account will be allowed,
         in case an organization has a Duo account already a 409 (Conflict) code will be returned.
@@ -1551,8 +1483,6 @@ paths:
     get:
       operationId: List-DuoApplication
       summary: List Duo Applications
-      tags:
-      - Duo
       description: |-
         This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo application for your organization.
 
@@ -1593,8 +1523,6 @@ paths:
     post:
       operationId: Create-DuoApplication
       summary: Create Duo Application
-      tags:
-      - Duo
       description: |-
         Creates a Duo application for your organization and the specified account.
 
@@ -1639,8 +1567,6 @@ paths:
     delete:
       operationId: Delete-DuoApplication
       summary: Delete a Duo Application
-      tags:
-      - Duo
       description: |-
         Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.
 
@@ -1674,8 +1600,6 @@ paths:
     get:
       operationId: Get-DuoApplication
       summary: Get a Duo application
-      tags:
-      - Duo
       description: |-
         This endpoint returns a specific Duo application that is associated with the specified Duo account.
 
@@ -1718,8 +1642,6 @@ paths:
     put:
       operationId: Put-DuoApplication
       summary: Update Duo Application
-      tags:
-      - Duo
       description: |-
         Updates the specified Duo application.
 
@@ -1764,8 +1686,6 @@ paths:
     delete:
       operationId: Delete-DuoAccount
       summary: Delete a Duo Account
-      tags:
-      - Duo
       description: |-
         Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected resource.
 
@@ -1799,8 +1719,6 @@ paths:
     get:
       operationId: Get-DuoAccount
       summary: Get a Duo Acount
-      tags:
-      - Duo
       description: |-
         This endpoint returns a specific Duo account.
 
@@ -1829,8 +1747,6 @@ paths:
     get:
       operationId: List-Group
       summary: List All Groups
-      tags:
-      - Groups
       description: |-
         This endpoint returns all Groups that exist in your organization.
 
@@ -1905,11 +1821,8 @@ paths:
       - x-api-key: []
   /gsuites/{gsuite_id}/associations:
     get:
-      operationId: List-GSuiteAssociation
+      operationId: Get-GSuiteAssociation
       summary: List the associations of a G Suite instance
-      tags:
-      - Graph
-      - G Suite
       description: |-
         This endpoint returns the _direct_ associations of this G Suite instance.
 
@@ -1975,9 +1888,6 @@ paths:
     post:
       operationId: Set-GSuiteAssociation
       summary: Manage the associations of a G Suite instance
-      tags:
-      - Graph
-      - G Suite
       description: |-
         This endpoint returns the _direct_ associations of this G Suite instance.
 
@@ -2010,8 +1920,6 @@ paths:
     get:
       operationId: List-GSuiteTranslationRule
       summary: List all the G Suite Translation Rules
-      tags:
-      - G Suite
       description: |-
         This endpoint returns all graph translation rules for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
 
@@ -2087,8 +1995,6 @@ paths:
     post:
       operationId: Create-GSuiteTranslationRule
       summary: Create a new G Suite Translation Rule
-      tags:
-      - G Suite
       description: |-
         This endpoint allows you to create a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
 
@@ -2119,8 +2025,6 @@ paths:
     delete:
       operationId: Delete-GSuiteTranslationRule
       summary: Deletes a G Suite translation rule
-      tags:
-      - G Suite
       description: |-
         This endpoint allows you to delete a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
 
@@ -2141,8 +2045,6 @@ paths:
     get:
       operationId: Get-GSuiteTranslationRule
       summary: Gets a specific G Suite translation rule
-      tags:
-      - G Suite
       description: |-
         This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
 
@@ -2173,11 +2075,8 @@ paths:
       type: string
   /gsuites/{gsuite_id}/usergroups:
     get:
-      operationId: List-GSuiteTraverseUserGroup
+      operationId: Get-GSuiteTraverseUserGroup
       summary: List the User Groups bound to a G Suite instance
-      tags:
-      - Graph
-      - G Suite
       description: |-
         This endpoint will return all User Groups bound to an G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2235,11 +2134,8 @@ paths:
       type: string
   /gsuites/{gsuite_id}/users:
     get:
-      operationId: List-GSuiteTraverseUser
+      operationId: Get-GSuiteTraverseUser
       summary: List the Users bound to a G Suite instance
-      tags:
-      - Graph
-      - G Suite
       description: |-
         This endpoint will return all Users bound to a G Suite instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2299,8 +2195,6 @@ paths:
     get:
       operationId: Get-GSuite
       summary: Get G Suite
-      tags:
-      - G Suite
       description: |-
         This endpoint returns a specific G Suite.
 
@@ -2329,8 +2223,6 @@ paths:
     patch:
       operationId: Patch-GSuite
       summary: Update existing G Suite
-      tags:
-      - G Suite
       description: |-
         This endpoint allows updating some attributes of a G Suite.
 
@@ -2360,8 +2252,6 @@ paths:
     get:
       operationId: List-LdapServer
       summary: List LDAP Servers
-      tags:
-      - LDAP Servers
       description: |-
         This endpoint returns the object IDs of your LDAP servers.
 
@@ -2428,8 +2318,6 @@ paths:
     get:
       operationId: Get-LdapServer
       summary: Get LDAP Server
-      tags:
-      - LDAP Servers
       description: |-
         This endpoint returns a specific LDAP server.
 
@@ -2458,8 +2346,6 @@ paths:
     patch:
       operationId: Patch-LdapServer
       summary: Update existing LDAP server
-      tags:
-      - LDAP Servers
       description: |-
         This endpoint allows updating some attributes of an LDAP server.
 
@@ -2512,11 +2398,8 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/associations:
     get:
-      operationId: List-LdapServerAssociation
+      operationId: Get-LdapServerAssociation
       summary: List the associations of a LDAP Server
-      tags:
-      - Graph
-      - LDAP Servers
       description: |-
         This endpoint returns the _direct_ associations of this LDAP Server.
 
@@ -2582,9 +2465,6 @@ paths:
     post:
       operationId: Set-LdapServerAssociation
       summary: Manage the associations of a LDAP Server
-      tags:
-      - Graph
-      - LDAP Servers
       description: |-
         This endpoint allows you to manage the _direct_ associations of a LDAP Server.
 
@@ -2616,8 +2496,6 @@ paths:
     get:
       operationId: List-LdapServerSambaDomain
       summary: List Samba Domains
-      tags:
-      - Samba Domains
       description: |-
         This endpoint returns all samba domains for an LDAP server.
 
@@ -2692,8 +2570,6 @@ paths:
     post:
       operationId: Create-LdapServerSambaDomain
       summary: Create Samba Domain
-      tags:
-      - Samba Domains
       description: |-
         This endpoint allows you to create a samba domain for an LDAP server.
 
@@ -2724,8 +2600,6 @@ paths:
     delete:
       operationId: Delete-LdapServerSambaDomain
       summary: Delete Samba Domain
-      tags:
-      - Samba Domains
       description: |-
         This endpoint allows you to delete a samba domain from an LDAP server.
 
@@ -2749,8 +2623,6 @@ paths:
     get:
       operationId: Get-LdapServerSambaDomain
       summary: Get Samba Domain
-      tags:
-      - Samba Domains
       description: |-
         This endpoint returns a specific samba domain for an LDAP server.
 
@@ -2784,8 +2656,6 @@ paths:
     put:
       operationId: Put-LdapServerSambaDomain
       summary: Update Samba Domain
-      tags:
-      - Samba Domains
       description: |-
         This endpoint allows you to update the samba domain information for an LDAP server.
 
@@ -2815,11 +2685,8 @@ paths:
       - x-api-key: []
   /ldapservers/{ldapserver_id}/usergroups:
     get:
-      operationId: List-LdapServerTraverseUserGroup
+      operationId: Get-LdapServerTraverseUserGroup
       summary: List the User Groups bound to a LDAP Server
-      tags:
-      - Graph
-      - LDAP Servers
       description: |-
         This endpoint will return all Users Groups bound to a LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2877,11 +2744,8 @@ paths:
       type: string
   /ldapservers/{ldapserver_id}/users:
     get:
-      operationId: List-LdapServerTraverseUser
+      operationId: Get-LdapServerTraverseUser
       summary: List the Users bound to a LDAP Server
-      tags:
-      - Graph
-      - LDAP Servers
       description: |-
         This endpoint will return all Users bound to an LDAP Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -2941,8 +2805,6 @@ paths:
     get:
       operationId: Get-Office365
       summary: Get Office 365 instance
-      tags:
-      - Office 365
       description: |-
         This endpoint returns a specific Office 365 instance.
 
@@ -2974,8 +2836,6 @@ paths:
     patch:
       operationId: Patch-Office365
       summary: Update existing Office 365 instance.
-      tags:
-      - Office 365
       description: |-
         This endpoint allows updating some attributes of an Office 365 instance.
 
@@ -3008,11 +2868,8 @@ paths:
       - x-api-key: []
   /office365s/{office365_id}/associations:
     get:
-      operationId: List-Office365Association
+      operationId: Get-Office365Association
       summary: List the associations of an Office 365 instance
-      tags:
-      - Graph
-      - Office 365
       description: |-
         This endpoint returns _direct_ associations of an Office 365 instance.
 
@@ -3079,9 +2936,6 @@ paths:
     post:
       operationId: Set-Office365Association
       summary: Manage the associations of an Office 365 instance
-      tags:
-      - Graph
-      - Office 365
       description: |-
         This endpoint allows you to manage the _direct_ associations of a Office 365 instance.
 
@@ -3113,8 +2967,6 @@ paths:
     get:
       operationId: List-Office365TranslationRule
       summary: List all the Office 365 Translation Rules
-      tags:
-      - Office 365
       description: |-
         This endpoint returns all translation rules for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
 
@@ -3190,8 +3042,6 @@ paths:
     post:
       operationId: Create-Office365TranslationRule
       summary: Create a new Office 365 Translation Rule
-      tags:
-      - Office 365
       description: |-
         This endpoint allows you to create a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
 
@@ -3222,8 +3072,6 @@ paths:
     delete:
       operationId: Delete-Office365TranslationRule
       summary: Deletes a Office 365 translation rule
-      tags:
-      - Office 365
       description: |-
         This endpoint allows you to delete a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
 
@@ -3244,8 +3092,6 @@ paths:
     get:
       operationId: Get-Office365TranslationRule
       summary: Gets a specific Office 365 translation rule
-      tags:
-      - Office 365
       description: |-
         This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
 
@@ -3276,11 +3122,8 @@ paths:
       type: string
   /office365s/{office365_id}/usergroups:
     get:
-      operationId: List-Office365TraverseUserGroup
+      operationId: Get-Office365TraverseUserGroup
       summary: List the User Groups bound to an Office 365 instance
-      tags:
-      - Graph
-      - Office 365
       description: |-
         This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3338,11 +3181,8 @@ paths:
       type: string
   /office365s/{office365_id}/users:
     get:
-      operationId: List-Office365TraverseUser
+      operationId: Get-Office365TraverseUser
       summary: List the Users bound to an Office 365 instance
-      tags:
-      - Graph
-      - Office 365
       description: |-
         This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3402,8 +3242,6 @@ paths:
     get:
       operationId: List-Policy
       summary: Lists all the Policies
-      tags:
-      - Policies
       description: |-
         This endpoint returns all policies.
 
@@ -3473,8 +3311,6 @@ paths:
     post:
       operationId: Create-Policy
       summary: Create a new Policy
-      tags:
-      - Policies
       description: |-
         This endpoint allows you to create a policy. Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
 
@@ -3505,8 +3341,6 @@ paths:
     delete:
       operationId: Delete-Policy
       summary: Deletes a Policy
-      tags:
-      - Policies
       description: |-
         This endpoint allows you to delete a policy.
 
@@ -3527,8 +3361,6 @@ paths:
     get:
       operationId: Get-Policy
       summary: Gets a specific Policy.
-      tags:
-      - Policies
       description: |-
         This endpoint returns a specific policy.
 
@@ -3557,8 +3389,6 @@ paths:
     put:
       operationId: Put-Policy
       summary: Update an existing Policy
-      tags:
-      - Policies
       description: |-
         This endpoint allows you to update a policy. Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
 
@@ -3587,11 +3417,8 @@ paths:
       - x-api-key: []
   /policies/{policy_id}/associations:
     get:
-      operationId: List-PolicyAssociation
+      operationId: Get-PolicyAssociation
       summary: List the associations of a Policy
-      tags:
-      - Graph
-      - Policies
       description: |-
         This endpoint returns the _direct_ associations of a Policy.
 
@@ -3656,9 +3483,6 @@ paths:
     post:
       operationId: Set-PolicyAssociation
       summary: Manage the associations of a Policy
-      tags:
-      - Graph
-      - Policies
       description: |-
         This endpoint allows you to manage the _direct_ associations of a Policy.
 
@@ -3690,8 +3514,6 @@ paths:
     get:
       operationId: List-PolicyResult
       summary: Lists all the policy results of a policy.
-      tags:
-      - Policies
       description: |-
         This endpoint returns all policies results for a specific policy.
 
@@ -3763,8 +3585,6 @@ paths:
     get:
       operationId: List-PolicyStatus
       summary: Lists the latest policy results of a policy.
-      tags:
-      - Policies
       description: |-
         This endpoint returns the latest policies results for a specific policy.
 
@@ -3834,11 +3654,8 @@ paths:
       type: string
   /policies/{policy_id}/systemgroups:
     get:
-      operationId: List-PolicyTraverseSystemGroup
+      operationId: Get-PolicyTraverseSystemGroup
       summary: List the System Groups bound to a Policy
-      tags:
-      - Graph
-      - Policies
       description: |-
         This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3896,11 +3713,8 @@ paths:
       type: string
   /policies/{policy_id}/systems:
     get:
-      operationId: List-PolicyTraverseSystem
+      operationId: Get-PolicyTraverseSystem
       summary: List the Systems bound to a Policy
-      tags:
-      - Graph
-      - Policies
       description: |-
         This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -3960,8 +3774,6 @@ paths:
     get:
       operationId: List-PolicyResult
       summary: Lists all the policy results for an organization.
-      tags:
-      - Policies
       description: |-
         This endpoint returns all policies results for an organization.
 
@@ -4028,8 +3840,6 @@ paths:
     get:
       operationId: Get-PolicyResult
       summary: Get a specific Policy Result.
-      tags:
-      - Policies
       description: |-
         This endpoint will return the policy results for a specific policy.
 
@@ -4058,9 +3868,6 @@ paths:
     get:
       operationId: List-PolicyTemplate
       summary: Lists all of the Policy Templates
-      tags:
-      - Policytemplates
-      - Policies
       description: |-
         This endpoint returns all policy templates.
 
@@ -4130,9 +3937,6 @@ paths:
     get:
       operationId: Get-PolicyTemplate
       summary: Get a specific Policy Template
-      tags:
-      - Policytemplates
-      - Policies
       description: |-
         This endpoint returns a specific policy template.
 
@@ -4161,8 +3965,6 @@ paths:
     get:
       operationId: List-ProviderAdministrator
       summary: List Provider Administrators
-      tags:
-      - Providers
       description: |-
         This endpoint returns a list of the Administrators associated with the Provider. You must be associated with the provider to use this route.
 
@@ -4263,8 +4065,6 @@ paths:
     post:
       operationId: Create-ProviderAdmin
       summary: Create a new Provider Administrator
-      tags:
-      - Providers
       description: |-
         This endpoint allows you to create a provider administrator. You must be associated with the provider to use this route.
 
@@ -4299,11 +4099,8 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/associations:
     get:
-      operationId: List-RadiusServerAssociation
+      operationId: Get-RadiusServerAssociation
       summary: List the associations of a RADIUS  Server
-      tags:
-      - Graph
-      - RADIUS Servers
       description: |-
         This endpoint returns the _direct_ associations of a Radius Server.
 
@@ -4368,9 +4165,6 @@ paths:
     post:
       operationId: Set-RadiusServerAssociation
       summary: Manage the associations of a RADIUS Server
-      tags:
-      - Graph
-      - RADIUS Servers
       description: "This endpoint allows you to manage the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n	\n\"type\":\"user\", \n\"id\":\"{USER_ID}\", \n\"op\":\"add\"\n	\n}'\n```"
       parameters:
       - name: body
@@ -4384,11 +4178,8 @@ paths:
       - x-api-key: []
   /radiusservers/{radiusserver_id}/usergroups:
     get:
-      operationId: List-RadiusServerTraverseUserGroup
+      operationId: Get-RadiusServerTraverseUserGroup
       summary: List the User Groups bound to a RADIUS  Server
-      tags:
-      - Graph
-      - RADIUS Servers
       description: |-
         This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4446,11 +4237,8 @@ paths:
       type: string
   /radiusservers/{radiusserver_id}/users:
     get:
-      operationId: List-RadiusServerTraverseUser
+      operationId: Get-RadiusServerTraverseUser
       summary: List the Users bound to a RADIUS  Server
-      tags:
-      - Graph
-      - RADIUS Servers
       description: |-
         This endpoint will return all Users bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4511,8 +4299,6 @@ paths:
     get:
       operationId: List-SystemGroup
       summary: List all System Groups
-      tags:
-      - System Groups
       description: |-
         This endpoint returns all System Groups.
 
@@ -4593,8 +4379,6 @@ paths:
     post:
       operationId: Create-SystemGroup
       summary: Create a new System Group
-      tags:
-      - System Groups
       description: |-
         This endpoint allows you to create a new System Group.
 
@@ -4624,12 +4408,8 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/associations:
     get:
-      operationId: List-SystemGroupAssociation
+      operationId: Get-SystemGroupAssociation
       summary: List the associations of a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Associations
       description: |-
         This endpoint returns the _direct_ associations of a System Group.
 
@@ -4693,10 +4473,6 @@ paths:
     post:
       operationId: Set-SystemGroupAssociation
       summary: Manage the associations of a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Associations
       description: |-
         This endpoint allows you to manage the _direct_ associations of a System Group.
 
@@ -4728,11 +4504,8 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/commands:
     get:
-      operationId: List-SystemGroupTraverseCommand
+      operationId: Get-SystemGroupTraverseCommand
       summary: List the Commands bound to a System Group
-      tags:
-      - Graph
-      - System Group Associations
       description: |-
         This endpoint will return all Commands bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -4790,12 +4563,8 @@ paths:
       type: string
   /systemgroups/{group_id}/members:
     get:
-      operationId: List-SystemGroupMembers
+      operationId: Get-SystemGroupMembers
       summary: List the members of a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Members & Membership
       description: |-
         This endpoint returns the system members of a System Group.
 
@@ -4839,10 +4608,6 @@ paths:
     post:
       operationId: Set-SystemGroupMembers
       summary: Manage the members of a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Members & Membership
       description: |-
         This endpoint allows you to manage the system members of a System Group.
 
@@ -4872,12 +4637,8 @@ paths:
       - x-api-key: []
   /systemgroups/{group_id}/membership:
     get:
-      operationId: List-SystemGroupMembership
+      operationId: Get-SystemGroupMembership
       summary: List the System Group's membership
-      tags:
-      - Graph
-      - System Groups
-      - System Group Members & Membership
       description: |-
         This endpoint returns all Systems that are a member of this System Group.
 
@@ -4938,12 +4699,8 @@ paths:
       type: string
   /systemgroups/{group_id}/policies:
     get:
-      operationId: List-SystemGroupTraversePolicy
+      operationId: Get-SystemGroupTraversePolicy
       summary: List the Policies bound to a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Associations
       description: |-
         This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -5003,12 +4760,8 @@ paths:
       type: string
   /systemgroups/{group_id}/usergroups:
     get:
-      operationId: List-SystemGroupTraverseUserGroup
+      operationId: Get-SystemGroupTraverseUserGroup
       summary: List the User Groups bound to a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Associations
       description: |-
         This endpoint will return all User Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -5067,12 +4820,8 @@ paths:
       type: string
   /systemgroups/{group_id}/users:
     get:
-      operationId: List-SystemGroupTraverseUser
+      operationId: Get-SystemGroupTraverseUser
       summary: List the Users bound to a System Group
-      tags:
-      - Graph
-      - System Groups
-      - System Group Associations
       description: |-
         This endpoint will return all Users bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -5132,8 +4881,6 @@ paths:
     delete:
       operationId: Delete-SystemGroup
       summary: Delete a System Group
-      tags:
-      - System Groups
       description: |-
         This endpoint allows you to delete a System Group.
 
@@ -5154,8 +4901,6 @@ paths:
     get:
       operationId: Get-SystemGroup
       summary: View an individual System Group details
-      tags:
-      - System Groups
       description: |-
         This endpoint returns the details of a System Group.
 
@@ -5188,8 +4933,6 @@ paths:
     put:
       operationId: Put-SystemGroup
       summary: Update a System Group
-      tags:
-      - System Groups
       description: |-
         This endpoint allows you to do a full update of the System Group.
 
@@ -5224,8 +4967,6 @@ paths:
     get:
       operationId: List-SystemInsightsAlf
       summary: List System Insights ALF
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `global_state`.
       parameters:
       - name: filter
@@ -5273,8 +5014,6 @@ paths:
     get:
       operationId: List-SystemInsightsAlfException
       summary: List System Insights ALF Exceptions
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `state`.
       parameters:
       - name: filter
@@ -5322,9 +5061,6 @@ paths:
     get:
       operationId: List-SystemInsightsAlfExplicitAuth
       summary: List System Insights ALF Explicit Authentications
-      tags:
-      - System Groups
-      - System Insights
       description: Valid filter fields are `system_id` and `process`.
       parameters:
       - name: filter
@@ -5372,9 +5108,6 @@ paths:
     get:
       operationId: List-SystemInsightsAppCompatShim
       summary: List System Insights Application Compatibility Shims
-      tags:
-      - System Groups
-      - System Insights
       description: Valid filter fields are `system_id` and `enabled`.
       parameters:
       - name: skip
@@ -5422,8 +5155,6 @@ paths:
     get:
       operationId: List-SystemInsightsApps
       summary: List System Insights Apps
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `bundle_name`.
       parameters:
       - name: skip
@@ -5471,8 +5202,6 @@ paths:
     get:
       operationId: List-SystemInsightsAuthorizedKey
       summary: List System Insights Authorized Keys
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `uid`.
       parameters:
       - name: skip
@@ -5520,8 +5249,6 @@ paths:
     get:
       operationId: List-SystemInsightsBattery
       summary: List System Insights Battery
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `health`.
       parameters:
       - name: skip
@@ -5569,8 +5296,6 @@ paths:
     get:
       operationId: List-SystemInsightsBitlockerInfo
       summary: List System Insights Bitlocker Info
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `protection_status`.
       parameters:
       - name: skip
@@ -5618,8 +5343,6 @@ paths:
     get:
       operationId: List-SystemInsightsBrowserPlugins
       summary: List System Insights Browser Plugins
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -5667,8 +5390,6 @@ paths:
     get:
       operationId: List-SystemInsightsCertificates
       summary: List System Insights Certificates
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `common_name`.
       parameters:
       - name: skip
@@ -5716,8 +5437,6 @@ paths:
     get:
       operationId: List-SystemInsightsChromeExtensions
       summary: List System Insights Chrome Extensions
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -5765,8 +5484,6 @@ paths:
     get:
       operationId: List-SystemInsightsConnectivity
       summary: List System Insights Connectivity
-      tags:
-      - System Insights
       description: The only valid filter field is `system_id`.
       parameters:
       - name: skip
@@ -5814,8 +5531,6 @@ paths:
     get:
       operationId: List-SystemInsightsCrashes
       summary: List System Insights Crashes
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `identifier`.
       parameters:
       - name: skip
@@ -5863,8 +5578,6 @@ paths:
     get:
       operationId: List-SystemInsightsCupsDestinations
       summary: List System Insights CUPS Destinations
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -5912,8 +5625,6 @@ paths:
     get:
       operationId: List-SystemInsightsDiskEncryption
       summary: List System Insights Disk Encryption
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `encryption_status`.
       parameters:
       - name: skip
@@ -5961,8 +5672,6 @@ paths:
     get:
       operationId: List-SystemInsightsDiskInfo
       summary: List System Insights Disk Info
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `disk_index`.
       parameters:
       - name: skip
@@ -6010,8 +5719,6 @@ paths:
     get:
       operationId: List-SystemInsightsDnsResolver
       summary: List System Insights DNS Resolvers
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `type`.
       parameters:
       - name: skip
@@ -6059,8 +5766,6 @@ paths:
     get:
       operationId: List-SystemInsightsEtcHosts
       summary: List System Insights Etc Hosts
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `address`.
       parameters:
       - name: skip
@@ -6108,8 +5813,6 @@ paths:
     get:
       operationId: List-SystemInsightsFirefoxAddons
       summary: List System Insights Firefox Addons
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6157,8 +5860,6 @@ paths:
     get:
       operationId: List-SystemInsightsGroups
       summary: List System Insights Groups
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `groupname`.
       parameters:
       - name: skip
@@ -6206,8 +5907,6 @@ paths:
     get:
       operationId: List-SystemInsightsIEExtensions
       summary: List System Insights IE Extensions
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6255,8 +5954,6 @@ paths:
     get:
       operationId: List-SystemInsightsInterfaceAddresses
       summary: List System Insights Interface Addresses
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `address`.
       parameters:
       - name: skip
@@ -6304,8 +6001,6 @@ paths:
     get:
       operationId: List-SystemInsightsInterfaceDetails
       summary: List System Insights Interface Details
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `interface`.
       parameters:
       - name: skip
@@ -6353,8 +6048,6 @@ paths:
     get:
       operationId: List-SystemInsightsKernelInfo
       summary: List System Insights Kernel Info
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `version`.
       parameters:
       - name: skip
@@ -6402,8 +6095,6 @@ paths:
     get:
       operationId: List-SystemInsightsLaunchd
       summary: List System Insights Launchd
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6449,10 +6140,8 @@ paths:
       - x-api-key: []
   /systeminsights/logged_in_users:
     get:
-      operationId: List-SystemInsightsLoggedInUsers
+      operationId: List-SystemInsightsLoggedinUsers
       summary: List System Insights Logged-In Users
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `user`.
       parameters:
       - name: skip
@@ -6500,8 +6189,6 @@ paths:
     get:
       operationId: List-SystemInsightsLogicalDrives
       summary: List System Insights Logical Drives
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `device_id`.
       parameters:
       - name: skip
@@ -6549,8 +6236,6 @@ paths:
     get:
       operationId: List-SystemInsightsManagedPolicies
       summary: List System Insights Managed Policies
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `domain`.
       parameters:
       - name: skip
@@ -6598,8 +6283,6 @@ paths:
     get:
       operationId: List-SystemInsightsMounts
       summary: List System Insights Mounts
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `path`.
       parameters:
       - name: skip
@@ -6647,8 +6330,6 @@ paths:
     get:
       operationId: List-SystemInsightsOsVersion
       summary: List System Insights OS Version
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `version`.
       parameters:
       - name: skip
@@ -6696,8 +6377,6 @@ paths:
     get:
       operationId: List-SystemInsightsPatches
       summary: List System Insights Patches
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `hotfix_id`.
       parameters:
       - name: skip
@@ -6745,8 +6424,6 @@ paths:
     get:
       operationId: List-SystemInsightsPrograms
       summary: List System Insights Programs
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6794,8 +6471,6 @@ paths:
     get:
       operationId: List-SystemInsightsPythonPackages
       summary: List System Insights Python Packages
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6843,8 +6518,6 @@ paths:
     get:
       operationId: List-SystemInsightsSafariExtensions
       summary: List System Insights Safari Extensions
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6892,8 +6565,6 @@ paths:
     get:
       operationId: List-SystemInsightsScheduledTasks
       summary: List System Insights Scheduled Tasks
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `enabled`.
       parameters:
       - name: skip
@@ -6941,8 +6612,6 @@ paths:
     get:
       operationId: List-SystemInsightsServices
       summary: List System Insights Services
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -6990,8 +6659,6 @@ paths:
     get:
       operationId: List-SystemInsightsShadow
       summary: LIst System Insights Shadow
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `username`.
       parameters:
       - name: skip
@@ -7039,8 +6706,6 @@ paths:
     get:
       operationId: List-SystemInsightsSharedFolders
       summary: List System Insights Shared Folders
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -7088,8 +6753,6 @@ paths:
     get:
       operationId: List-SystemInsightsSharedResources
       summary: List System Insights Shared Resources
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `type`.
       parameters:
       - name: skip
@@ -7135,8 +6798,6 @@ paths:
     get:
       operationId: List-SystemInsightsSharingPreferences
       summary: List System Insights Sharing Preferences
-      tags:
-      - System Insights
       description: Only valid filed field is `system_id`.
       parameters:
       - name: skip
@@ -7184,8 +6845,6 @@ paths:
     get:
       operationId: List-SystemInsightsSipConfig
       summary: List System Insights SIP Config
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `enabled`.
       parameters:
       - name: skip
@@ -7233,8 +6892,6 @@ paths:
     get:
       operationId: List-SystemInsightsStartupItems
       summary: List System Insights Startup Items
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -7282,8 +6939,6 @@ paths:
     get:
       operationId: List-SystemInsightsSystemControls
       summary: List System Insights System Control
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `name`.
       parameters:
       - name: skip
@@ -7331,8 +6986,6 @@ paths:
     get:
       operationId: List-SystemInsightsSystemInfo
       summary: List System Insights System Info
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `cpu_subtype`.
       parameters:
       - name: skip
@@ -7380,8 +7033,6 @@ paths:
     get:
       operationId: List-SystemInsightsUptime
       summary: List System Insights Uptime
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `days`.
       parameters:
       - name: skip
@@ -7429,8 +7080,6 @@ paths:
     get:
       operationId: List-SystemInsightsUSBDevices
       summary: List System Insights USB Devices
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `model`.
       parameters:
       - name: skip
@@ -7478,8 +7127,6 @@ paths:
     get:
       operationId: List-SystemInsightsUserGroups
       summary: List System Insights User Groups
-      tags:
-      - System Insights
       description: Only valid filter field is `system_id`.
       parameters:
       - name: skip
@@ -7527,8 +7174,6 @@ paths:
     get:
       operationId: List-SystemInsightsUserSSHKeys
       summary: List System Insights User SSH Keys
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `uid`.
       parameters:
       - name: skip
@@ -7576,8 +7221,6 @@ paths:
     get:
       operationId: List-SystemInsightsUsers
       summary: List System Insights Users
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `username`.
       parameters:
       - name: skip
@@ -7625,8 +7268,6 @@ paths:
     get:
       operationId: List-SystemInsightsWifiNetwork
       summary: List System Insights WiFi Networks
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `security_type`.
       parameters:
       - name: skip
@@ -7674,8 +7315,6 @@ paths:
     get:
       operationId: List-SystemInsightsWifiStatus
       summary: List System Insights WiFi Status
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `security_type`.
       parameters:
       - name: skip
@@ -7723,8 +7362,6 @@ paths:
     get:
       operationId: List-SystemInsightsWindowsSecurityProduct
       summary: List System Insights Windows Security Products
-      tags:
-      - System Insights
       description: Valid filter fields are `system_id` and `state`.
       parameters:
       - name: skip
@@ -7770,11 +7407,8 @@ paths:
       - x-api-key: []
   /systems/{system_id}/associations:
     get:
-      operationId: List-SystemAssociation
+      operationId: Get-SystemAssociation
       summary: List the associations of a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint returns the _direct_ associations of a System.
 
@@ -7841,9 +7475,6 @@ paths:
     post:
       operationId: Set-SystemAssociation
       summary: Manage associations of a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint allows you to manage the _direct_ associations of a System.
 
@@ -7883,11 +7514,8 @@ paths:
       - x-api-key: []
   /systems/{system_id}/commands:
     get:
-      operationId: List-SystemTraverseCommand
+      operationId: Get-SystemTraverseCommand
       summary: List the Commands bound to a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint will return all Commands bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -7948,9 +7576,6 @@ paths:
     get:
       operationId: Get-SystemFDEKey
       summary: Get System FDE Key
-      tags:
-      - fde
-      - Systems
       description: This endpoint will return the current (latest) fde key saved for a system.
       parameters: []
       responses:
@@ -7982,11 +7607,8 @@ paths:
       type: string
   /systems/{system_id}/memberof:
     get:
-      operationId: List-SystemMemberOf
+      operationId: Get-SystemMemberOf
       summary: List the parent Groups of a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint returns all the System Groups a System is a member of.
 
@@ -8049,11 +7671,8 @@ paths:
       type: string
   /systems/{system_id}/policies:
     get:
-      operationId: List-SystemTraversePolicy
+      operationId: Get-SystemTraversePolicy
       summary: List the Policies bound to a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8117,9 +7736,6 @@ paths:
     get:
       operationId: List-PolicyStatus
       summary: List the policy statuses for a system
-      tags:
-      - Graph
-      - Policies
       description: |-
         This endpoint returns the policy results for a particular system.
 
@@ -8191,11 +7807,8 @@ paths:
       type: string
   /systems/{system_id}/usergroups:
     get:
-      operationId: List-SystemTraverseUserGroup
+      operationId: Get-SystemTraverseUserGroup
       summary: List the User Groups bound to a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint will return all User Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8256,11 +7869,8 @@ paths:
       type: string
   /systems/{system_id}/users:
     get:
-      operationId: List-SystemTraverseUser
+      operationId: Get-SystemTraverseUser
       summary: List the Users bound to a System
-      tags:
-      - Graph
-      - Systems
       description: |-
         This endpoint will return all Users bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8323,8 +7933,6 @@ paths:
     get:
       operationId: List-UserGroup
       summary: List all User Groups
-      tags:
-      - User Groups
       description: |-
         This endpoint returns all User Groups.
 
@@ -8398,8 +8006,6 @@ paths:
     post:
       operationId: Create-UserGroup
       summary: Create a new User Group
-      tags:
-      - User Groups
       description: |-
         This endpoint allows you to create a new User Group.
 
@@ -8428,12 +8034,8 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/applications:
     get:
-      operationId: List-UserGroupTraverseApplication
+      operationId: Get-UserGroupTraverseApplication
       summary: List the Applications bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8491,12 +8093,8 @@ paths:
       type: string
   /usergroups/{group_id}/associations:
     get:
-      operationId: List-UserGroupAssociation
+      operationId: Get-UserGroupAssociation
       summary: List the associations of a User Group.
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint returns the _direct_ associations of this User Group.
 
@@ -8560,10 +8158,6 @@ paths:
     post:
       operationId: Set-UserGroupAssociation
       summary: Manage the associations of a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint manages the _direct_ associations of this User Group.
 
@@ -8595,12 +8189,8 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/directories:
     get:
-      operationId: List-UserGroupTraverseDirectory
+      operationId: Get-UserGroupTraverseDirectory
       summary: List the Directories bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all Directories bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8659,12 +8249,8 @@ paths:
       type: string
   /usergroups/{group_id}/gsuites:
     get:
-      operationId: List-UserGroupTraverseGSuite
+      operationId: Get-UserGroupTraverseGSuite
       summary: List the G Suite instances bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all G Suite Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8723,12 +8309,8 @@ paths:
       type: string
   /usergroups/{group_id}/ldapservers:
     get:
-      operationId: List-UserGroupTraverseLdapServer
+      operationId: Get-UserGroupTraverseLdapServer
       summary: List the LDAP Servers bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all LDAP Servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8786,12 +8368,8 @@ paths:
       type: string
   /usergroups/{group_id}/members:
     get:
-      operationId: List-UserGroupMembers
+      operationId: Get-UserGroupMembers
       summary: List the members of a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Members & Membership
       description: |-
         This endpoint returns the user members of a User Group.
 
@@ -8834,10 +8412,6 @@ paths:
     post:
       operationId: Set-UserGroupMembers
       summary: Manage the members of a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Members & Membership
       description: |-
         This endpoint allows you to manage the user members of a User Group.
 
@@ -8865,12 +8439,8 @@ paths:
       - x-api-key: []
   /usergroups/{group_id}/membership:
     get:
-      operationId: List-UserGroupMembership
+      operationId: Get-UserGroupMembership
       summary: List the User Group's membership
-      tags:
-      - Graph
-      - User Groups
-      - User Group Members & Membership
       description: |-
         This endpoint returns all users members that are a member of this User Group.
 
@@ -8930,12 +8500,8 @@ paths:
       type: string
   /usergroups/{group_id}/office365s:
     get:
-      operationId: List-UserGroupTraverseOffice365
+      operationId: Get-UserGroupTraverseOffice365
       summary: List the Office 365 instances bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all Office 365 instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -8993,12 +8559,8 @@ paths:
       type: string
   /usergroups/{group_id}/radiusservers:
     get:
-      operationId: List-UserGroupTraverseRadiusServer
+      operationId: Get-UserGroupTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all RADIUS servers bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9057,12 +8619,8 @@ paths:
       type: string
   /usergroups/{group_id}/systemgroups:
     get:
-      operationId: List-UserGroupTraverseSystemGroup
+      operationId: Get-UserGroupTraverseSystemGroup
       summary: List the System Groups bound to User Groups
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all System Groups bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9120,12 +8678,8 @@ paths:
       type: string
   /usergroups/{group_id}/systems:
     get:
-      operationId: List-UserGroupTraverseSystem
+      operationId: Get-UserGroupTraverseSystem
       summary: List the Systems bound to a User Group
-      tags:
-      - Graph
-      - User Groups
-      - User Group Associations
       description: |-
         This endpoint will return all Systems bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9185,8 +8739,6 @@ paths:
     delete:
       operationId: Delete-UserGroup
       summary: Delete a User Group
-      tags:
-      - User Groups
       description: |-
         This endpoint allows you to delete a User Group.
 
@@ -9207,8 +8759,6 @@ paths:
     get:
       operationId: Get-UserGroup
       summary: View an individual User Group details
-      tags:
-      - User Groups
       description: |-
         This endpoint returns the details of a User Group.
 
@@ -9236,8 +8786,6 @@ paths:
     put:
       operationId: Put-UserGroup
       summary: Update a User Group
-      tags:
-      - User Groups
       description: |-
         This endpoint allows you to do a full update of the User Group.
 
@@ -9266,11 +8814,8 @@ paths:
       - x-api-key: []
   /users/{user_id}/applications:
     get:
-      operationId: List-UserTraverseApplication
+      operationId: Get-UserTraverseApplication
       summary: List the Applications bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all Applications bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9328,11 +8873,8 @@ paths:
       type: string
   /users/{user_id}/associations:
     get:
-      operationId: List-UserAssociation
+      operationId: Get-UserAssociation
       summary: List the associations of a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint returns the _direct_ associations of a User.
 
@@ -9397,9 +8939,6 @@ paths:
     post:
       operationId: Set-UserAssociation
       summary: Manage the associations of a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint allows you to manage the _direct_ associations of a User.
 
@@ -9435,11 +8974,8 @@ paths:
       - x-api-key: []
   /users/{user_id}/directories:
     get:
-      operationId: List-UserTraverseDirectory
+      operationId: Get-UserTraverseDirectory
       summary: List the Directories bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all Directories bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9497,11 +9033,8 @@ paths:
       type: string
   /users/{user_id}/gsuites:
     get:
-      operationId: List-UserTraverseGSuite
+      operationId: Get-UserTraverseGSuite
       summary: List the G Suite instances bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all G-Suite Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9559,11 +9092,8 @@ paths:
       type: string
   /users/{user_id}/ldapservers:
     get:
-      operationId: List-UserTraverseLdapServer
+      operationId: Get-UserTraverseLdapServer
       summary: List the LDAP servers bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all LDAP Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9621,11 +9151,8 @@ paths:
       type: string
   /users/{user_id}/memberof:
     get:
-      operationId: List-UserMemberOf
+      operationId: Get-UserMemberOf
       summary: List the parent Groups of a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint returns all the User Groups a User is a member of.
 
@@ -9685,11 +9212,8 @@ paths:
       type: string
   /users/{user_id}/office365s:
     get:
-      operationId: List-UserTraverseOffice365
+      operationId: Get-UserTraverseOffice365
       summary: List the Office 365 instances bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all Office 365 Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9747,11 +9271,8 @@ paths:
       type: string
   /users/{user_id}/radiusservers:
     get:
-      operationId: List-UserTraverseRadiusServer
+      operationId: Get-UserTraverseRadiusServer
       summary: List the RADIUS Servers bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all RADIUS Servers bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9809,11 +9330,8 @@ paths:
       type: string
   /users/{user_id}/systemgroups:
     get:
-      operationId: List-UserTraverseSystemGroup
+      operationId: Get-UserTraverseSystemGroup
       summary: List the System Groups bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all System Groups bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9871,11 +9389,8 @@ paths:
       type: string
   /users/{user_id}/systems:
     get:
-      operationId: List-UserTraverseSystem
+      operationId: Get-UserTraverseSystem
       summary: List the Systems bound to a User
-      tags:
-      - Graph
-      - Users
       description: |-
         This endpoint will return all Systems bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -9935,8 +9450,6 @@ paths:
     get:
       operationId: List-Workday
       summary: List Workdays
-      tags:
-      - Workday Import
       description: |-
         This endpoint will return  all the available information about all your instances of Workday.
 
@@ -10001,8 +9514,6 @@ paths:
     post:
       operationId: Create-Workday
       summary: Create new Workday
-      tags:
-      - Workday Import
       description: |-
         This endpoint allows you to create a new workday instance.
 
@@ -10045,8 +9556,6 @@ paths:
     get:
       operationId: Get-Workday
       summary: Get Workday
-      tags:
-      - Workday Import
       description: |-
         This endpoint will return  all the available information about an instance of Workday.
 
@@ -10074,8 +9583,6 @@ paths:
     put:
       operationId: Put-Workday
       summary: Update Workday
-      tags:
-      - Workday Import
       description: |-
         This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
 
@@ -10108,8 +9615,6 @@ paths:
     get:
       operationId: Import-WorkdayResult
       summary: List Import Results
-      tags:
-      - Workday Import
       description: |-
         This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.
 
@@ -10156,8 +9661,6 @@ paths:
     delete:
       operationId: Delete-WorkdayAuthorization
       summary: Deauthorize Workday
-      tags:
-      - Workday Import
       description: |-
         Removes any and all authorization methods from the workday instance
 
@@ -10182,8 +9685,6 @@ paths:
     post:
       operationId: Authorize-Workday
       summary: Authorize Workday
-      tags:
-      - Workday Import
       description: "This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.  Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n	\"auth\":{\n	  \"basic\": {\n		\"username\": \"someDeveloper\",	  \n		\"password\": \"notTheRealPassword\"\n\n	  }\n	}\n}'\n\n```"
       parameters:
       - name: body
@@ -10204,8 +9705,6 @@ paths:
     post:
       operationId: Import-Workday
       summary: Workday Import
-      tags:
-      - Workday Import
       description: "The endpoint allows you to create a Workday Import request.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n	{\n		\"email\":\"{email}\",\n		\"firstname\":\"{firstname}\",\n		\"lastname\":\"{firstname}\",\n		\"username\":\"{username}\",\n		\"attributes\":[\n			{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n			{\"name\":\"WorkdayID\",\"value\":\"name.name\"}\n			]\n		\n	}\n]\n```"
       parameters:
       - name: body
@@ -10225,8 +9724,6 @@ paths:
     get:
       operationId: List-WorkdayWorker
       summary: List Workday Workers
-      tags:
-      - Workday Import
       description: |-
         This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.
 
@@ -10453,7 +9950,7 @@ parameters:
     in: header
     required: true
     type: string
-    default: application/json
+    default: application/x-pem-file
   trait:requestHeaders:Content-Type:
     name: Content-Type
     in: header
@@ -10534,6 +10031,18 @@ responses:
     schema:
       $ref: '#/definitions/errorresponse'
 definitions:
+  ActivateProvisionUpdateReq:
+    title: Put activate state Request
+    type: object
+    description: Request to update session state.
+    properties:
+      vanity_url:
+        type: string
+      state:
+        type: string
+    required:
+    - vanity_url
+    - state
   active-directory-agent-get-output:
     title: Active Directory Agent Get Output
     properties:
@@ -10690,10 +10199,75 @@ definitions:
         description: A new name for the Apple MDM configuration.
         maxLength: 255
         type: string
+      dep:
+        $ref: '#/definitions/DEP'
     type: object
   apple-mdm-public-key-cert:
     title: Apple MDM Public Key Certificate
     type: string
+  apple-mdm-signed-csr-plist:
+    title: Apple MDM Signed CSR PList
+    type: string
+  application:
+    title: Application
+    properties:
+      _id:
+        type: string
+      catalogItem:
+        type: string
+      color:
+        type: string
+      description:
+        maxLength: 256
+        type: string
+      displayLabel:
+        type: string
+      displayName:
+        type: string
+      logo:
+        properties:
+          color:
+            enum:
+            - ""
+            - '#202D38'
+            - '#005466'
+            - '#3E8696'
+            - '#006CAC'
+            - '#0617AC'
+            - '#7C6ADA'
+            - '#D5779D'
+            - '#9E2F00'
+            - '#FFB000'
+            - '#58C469'
+            - '#57C49F'
+            - '#FF6C03'
+            type: string
+          url:
+            type: string
+        type: object
+      name:
+        type: string
+      provision:
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+          beta:
+            type: boolean
+        type: object
+      sso:
+        properties:
+          _id:
+            type: string
+          type:
+            type: string
+          jit:
+            type: boolean
+          beta:
+            type: boolean
+        type: object
+    type: object
   auth-info:
     title: Auth Info
     properties:
@@ -10776,7 +10350,7 @@ definitions:
     title: DEP
     type: object
     properties:
-      welcome_screen:
+      welcomeScreen:
         $ref: '#/definitions/DEPWelcomeScreen'
   DEPWelcomeScreen:
     title: DEPWelcomeScreen
@@ -10906,10 +10480,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
+    type: object
     properties:
       message:
         type: string
-    type: object
   GraphConnection:
     title: GraphConnection
     description: Represents an edge between two graph objects. From can be omitted if it is clear from context.

@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 .Description
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -22,7 +22,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-    [Parameter(Mandatory)]
+    [Parameter(ParameterSetName='List', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # ObjectID of the System.
+    ${SystemId},
+
+    [Parameter(ParameterSetName='List1', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
@@ -49,6 +55,45 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Sort},
 
     [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Wait for .NET debugger to attach
+    ${Break},
+
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be appended to the front of the pipeline
+    ${HttpPipelineAppend},
+
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be prepended to the front of the pipeline
+    ${HttpPipelinePrepend},
+
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Uri]
+    # The URI for the proxy server to use
+    ${Proxy},
+
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.PSCredential]
+    # Credentials for a proxy server to use for the remote call
+    ${ProxyCredential},
+
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Use the default credentials for the proxy
+    ${ProxyUseDefaultCredentials},
+
+    [Parameter(DontShow)]
     [System.Boolean]
     # Set to $true to return all results. This will overwrite any skip and limit parameter.
     $Paginate = $true
@@ -63,6 +108,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $global:JCHttpRequest = $req
                 $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
+                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
                 Return $ResponseTask
             }
         )
@@ -88,6 +134,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
                 $Result = If ('Results' -in $Result.PSObject.Properties.Name)
                 {
                     $Result.results
@@ -112,6 +159,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
             $Result = If ('Results' -in $Result.PSObject.Properties.Name)
             {
                 $Result.results
@@ -129,7 +177,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     End
     {
         # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse')
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
             If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
         }
