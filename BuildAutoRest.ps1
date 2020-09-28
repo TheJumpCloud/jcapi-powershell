@@ -150,8 +150,8 @@ Try
                     Else { Write-Error ('Unknown Operation System') }
                     Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     npm install -g autorest@latest
-                    Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    autorest-beta --reset
+                    Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    autorest --reset
                     # autorest-beta --help
                 }
                 ###########################################################################
@@ -159,8 +159,8 @@ Try
                 {
                     If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
                     If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                    Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+                    Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($CopyCustomFiles)
