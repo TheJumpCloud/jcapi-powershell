@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: JumpCloud APIs
-  description: JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.
+  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/
 schemes:
@@ -2541,15 +2541,15 @@ definitions:
             type: boolean
   mfa:
     title: mfa
-    type: object
     properties:
+      configured:
+        type: boolean
       exclusion:
         type: boolean
       exclusionUntil:
-        type: string
         format: date-time
-      configured:
-        type: boolean
+        type: string
+    type: object
   organization:
     title: Organization
     properties:
@@ -2699,6 +2699,8 @@ definitions:
             minimum: 1
             type: integer
         type: object
+      deviceIdentificationEnabled:
+        type: boolean
     type: object
     description: ""
   organizationsettingsput:
