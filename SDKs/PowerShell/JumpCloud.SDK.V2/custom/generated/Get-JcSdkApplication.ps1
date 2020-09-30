@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
+The endpoint retrieves an Application.
 .Description
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
+The endpoint retrieves an Application.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -14,19 +14,12 @@ PS C:\> {{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-.Inputs
-JumpCloud.SDK.V2.Models.IOffice365PatchInput
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365Output
+JumpCloud.SDK.V2.Models.IPathsBs2E5YApplicationsApplicationIdGetResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IOffice365PatchInput>:
-  [Name <String>]:
-  [UserLockoutAction <String>]:
-  [UserPasswordExpirationAction <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -48,56 +41,25 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkOffice365.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkApplication.md
 #>
- Function Update-JcSdkOffice365
+ Function Get-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
-    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.IPathsBs2E5YApplicationsApplicationIdGetResponses200ContentApplicationJsonSchema])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-    [Parameter(ParameterSetName='Patch', Mandatory)]
-    [Parameter(ParameterSetName='PatchExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Office 365 instance.
-    ${Office365Id},
+    # ObjectID of the Application.
+    ${ApplicationId},
 
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(ParameterSetName='Patch', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IOffice365PatchInput]
-    # Office 365 Patch Input
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
-
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${Name},
-
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${UserLockoutAction},
-
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${UserPasswordExpirationAction},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -146,7 +108,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+                $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
                 # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
                 Return $ResponseTask
@@ -155,14 +117,26 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalOffice365 @PSBoundParameters
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalApplication @PSBoundParameters
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+        {
+            $Result.results
+        }
+        Else
+        {
+            $Result
+        }
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result;
+        }
     }
     End
     {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
         $GlobalVars | ForEach-Object {

@@ -3,7 +3,7 @@
   "info": {
     "version": "2.0",
     "title": "JumpCloud APIs",
-    "description": "JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users."
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph."
   },
   "host": "console.jumpcloud.com",
   "basePath": "/api/v2/",
@@ -1008,6 +1008,36 @@
           }
         ]
       }
+    },
+    "/applications/{application_id}": {
+      "get": {
+        "operationId": "Get-Application",
+        "summary": "Get an Application",
+        "description": "The endpoint retrieves an Application.",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "application_id",
+          "in": "path",
+          "description": "ObjectID of the Application.",
+          "required": true,
+          "type": "string"
+        }
+      ]
     },
     "/applications/{application_id}/associations": {
       "get": {
@@ -2175,6 +2205,79 @@
         ]
       }
     },
+    "/gsuites/{gsuite_id}/import/users": {
+      "get": {
+        "operationId": "List-GSuiteUsersToImport",
+        "summary": "Get a list of users to import",
+        "description": "Lists G Suite users available for import.",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "The number of records to return at once. Limited to 100.",
+            "required": false,
+            "type": "integer",
+            "default": 10
+          },
+          {
+            "name": "pageToken",
+            "in": "query",
+            "description": "Token used to access next page of results.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "nextPageToken": {
+                  "type": "string"
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "primaryEmail": {
+                        "type": "string"
+                      },
+                      "givenName": {
+                        "type": "string"
+                      },
+                      "familyName": {
+                        "type": "string"
+                      },
+                      "thumbnailPhotoUrl": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "name": "gsuite_id",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/gsuites/{gsuite_id}/translationrules": {
       "get": {
         "operationId": "List-GSuiteTranslationRule",
@@ -3119,7 +3222,7 @@
       "get": {
         "operationId": "Get-Office365",
         "summary": "Get Office 365 instance",
-        "description": "This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "description": "This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [],
         "responses": {
           "200": {
@@ -3147,7 +3250,7 @@
       "patch": {
         "operationId": "Patch-Office365",
         "summary": "Update existing Office 365 instance.",
-        "description": "This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```",
+        "description": "This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```",
         "parameters": [
           {
             "name": "body",
@@ -3176,7 +3279,7 @@
       "get": {
         "operationId": "Get-Office365Association",
         "summary": "List the associations of an Office 365 instance",
-        "description": "This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "description": "This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "parameters": [
           {
             "name": "targets",
@@ -3249,7 +3352,7 @@
       "post": {
         "operationId": "Set-Office365Association",
         "summary": "Manage the associations of an Office 365 instance",
-        "description": "This endpoint allows you to manage the _direct_ associations of a Office 365 instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
+        "description": "This endpoint allows you to manage the _direct_ associations of a Office 365 instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```",
         "parameters": [
           {
             "name": "body",
@@ -3445,7 +3548,7 @@
       "get": {
         "operationId": "Get-Office365TraverseUserGroup",
         "summary": "List the User Groups bound to an Office 365 instance",
-        "description": "This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Users Groups bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
           {
             "name": "limit",
@@ -3507,7 +3610,7 @@
       "get": {
         "operationId": "Get-Office365TraverseUser",
         "summary": "List the Users bound to an Office 365 instance",
-        "description": "This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Users bound to an Office 365 instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Office 365 instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Office 365 instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "parameters": [
           {
             "name": "limit",
@@ -12135,8 +12238,23 @@
       "properties": {
         "welcomeScreen": {
           "$ref": "#/definitions/DEPWelcomeScreen"
+        },
+        "setupAssistantOptions": {
+          "items": {
+            "$ref": "#/definitions/DEPSetupAssistantOption"
+          },
+          "type": "array"
         }
       }
+    },
+    "DEPSetupAssistantOption": {
+      "title": "DEP Setup Assistant Option",
+      "properties": {
+        "option": {
+          "$ref": "#/definitions/SetupAssistantOption"
+        }
+      },
+      "type": "object"
     },
     "DEPWelcomeScreen": {
       "title": "DEPWelcomeScreen",
@@ -12315,12 +12433,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
-      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "GraphConnection": {
       "title": "GraphConnection",
@@ -13418,6 +13536,29 @@
           "$ref": "#/definitions/samba-domain-input"
         }
       ]
+    },
+    "SetupAssistantOption": {
+      "title": "Setup Assistant Option",
+      "description": "Options to skip screens during MacOS setup:\n* `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.\n* `appearance` - Skips the Choose Your Look screen.\n* `appleID` - Skips Apple ID setup.\n* `biometric` - Skips biometric setup.\n* `diagnostics` - Skips the App Analytics pane.\n* `displayTone` - Skips display tone setup.\n* `fileVault` - Skips FileVault setup assistant screen.\n* `icloudDiagnostics` - Skips iCloud analytics screen.\n* `icloudStorage` - Skips iCloud documents and desktop screen.\n* `location` - Skips location services setup.\n* `payment` - Skips Apple Pay setup.\n* `privacy` - Skips the Privacy setup.\n* `restore` - Skips restoring from backup.\n* `screenTime` - Skips screen time setup.\n* `siri` - Skips Siri setup.\n* `tos` - Skips terms and conditions.\n",
+      "enum": [
+        "accessibility",
+        "appearance",
+        "appleID",
+        "biometric",
+        "diagnostics",
+        "displayTone",
+        "fileVault",
+        "icloudDiagnostics",
+        "icloudStorage",
+        "location",
+        "payment",
+        "privacy",
+        "restore",
+        "screenTime",
+        "siri",
+        "tos"
+      ],
+      "type": "string"
     },
     "sshkeylist": {
       "title": "SSHKeyList",
@@ -16438,240 +16579,6 @@
         "name"
       ],
       "type": "object"
-    },
-    "WebAuthnConfiguration": {
-      "title": "WebAuthnConfiguration",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "allowSelfRegistration": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "id",
-        "allowSelfRegistration"
-      ]
-    },
-    "WebAuthnConfigurationPut": {
-      "title": "WebAuthnConfigurationPut",
-      "type": "object",
-      "properties": {
-        "allowSelfRegistration": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "allowSelfRegistration"
-      ]
-    },
-    "WebAuthnCredentialCreationOptions": {
-      "title": "WebAuthnCredentialCreationOptions",
-      "type": "object",
-      "description": "Creation options for a WebAuthn credential.",
-      "properties": {
-        "publicKey": {
-          "type": "object",
-          "required": [
-            "challenge",
-            "rp",
-            "user",
-            "pubKeyCredParams"
-          ],
-          "properties": {
-            "challenge": {
-              "type": "string"
-            },
-            "rp": {
-              "type": "object",
-              "required": [
-                "name"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                }
-              }
-            },
-            "user": {
-              "type": "object",
-              "required": [
-                "id",
-                "name",
-                "displayName"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "icon": {
-                  "type": "string"
-                },
-                "displayName": {
-                  "type": "string"
-                }
-              }
-            },
-            "pubKeyCredParams": {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "type": {
-                    "type": "string",
-                    "enum": [
-                      "public-key"
-                    ]
-                  },
-                  "alg": {
-                    "type": "integer"
-                  }
-                },
-                "required": [
-                  "type",
-                  "alg"
-                ]
-              }
-            },
-            "authenticatorSelection": {
-              "type": "object",
-              "properties": {
-                "authenticatorAttachment": {
-                  "type": "string",
-                  "enum": [
-                    "platform",
-                    "cross-platform"
-                  ]
-                },
-                "requireResidentKey": {
-                  "type": "boolean"
-                },
-                "userVerification": {
-                  "type": "string",
-                  "enum": [
-                    "required",
-                    "preferred",
-                    "discouraged"
-                  ]
-                }
-              }
-            },
-            "timeout": {
-              "type": "integer"
-            },
-            "attestation": {
-              "type": "string",
-              "enum": [
-                "none",
-                "indirect",
-                "direct"
-              ]
-            }
-          }
-        },
-        "token": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "publicKey",
-        "token"
-      ]
-    },
-    "WebAuthnCredentialRequest": {
-      "title": "WebAuthnCredentialRequest",
-      "type": "object",
-      "description": "A WebAuthn credential request for the auth service.",
-      "properties": {
-        "token": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "credential": {
-          "type": "object",
-          "required": [
-            "id",
-            "type",
-            "response"
-          ],
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "rawId": {
-              "type": "string"
-            },
-            "type": {
-              "type": "string",
-              "enum": [
-                "public-key"
-              ]
-            },
-            "response": {
-              "type": "object",
-              "required": [
-                "attestationObject",
-                "clientDataJSON"
-              ],
-              "properties": {
-                "attestationObject": {
-                  "type": "string"
-                },
-                "clientDataJSON": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "required": [
-        "token",
-        "credential"
-      ]
-    },
-    "WebAuthnCredentialResponse": {
-      "title": "WebAuthnCredentialResponse",
-      "type": "object",
-      "description": "A WebAuthn credential response from the auth service.",
-      "properties": {
-        "id": {
-          "type": "string"
-        },
-        "credentialId": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "registrationDate": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "selfRegistered": {
-          "type": "boolean"
-        }
-      },
-      "required": [
-        "id",
-        "credentialId",
-        "name",
-        "registrationDate",
-        "selfRegistered"
-      ]
     },
     "workday-fields": {
       "title": "Workday Fields",

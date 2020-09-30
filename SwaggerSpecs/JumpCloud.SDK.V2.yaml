@@ -2,7 +2,7 @@ swagger: "2.0"
 info:
   version: "2.0"
   title: JumpCloud APIs
-  description: JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.
+  description: JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.
 host: console.jumpcloud.com
 basePath: /api/v2/
 schemes:
@@ -854,6 +854,25 @@ paths:
           $ref: '#/responses/trait:standardErrors:500'
       security:
       - x-api-key: []
+  /applications/{application_id}:
+    get:
+      operationId: Get-Application
+      summary: Get an Application
+      description: The endpoint retrieves an Application.
+      parameters: []
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+      security:
+      - x-api-key: []
+    parameters:
+    - name: application_id
+      in: path
+      description: ObjectID of the Application.
+      required: true
+      type: string
   /applications/{application_id}/associations:
     get:
       operationId: Get-ApplicationAssociation
@@ -1916,6 +1935,53 @@ paths:
           description: OK
       security:
       - x-api-key: []
+  /gsuites/{gsuite_id}/import/users:
+    get:
+      operationId: List-GSuiteUsersToImport
+      summary: Get a list of users to import
+      description: Lists G Suite users available for import.
+      parameters:
+      - name: limit
+        in: query
+        description: The number of records to return at once. Limited to 100.
+        required: false
+        type: integer
+        default: 10
+      - name: pageToken
+        in: query
+        description: Token used to access next page of results.
+        required: false
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: object
+            properties:
+              nextPageToken:
+                type: string
+              users:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    primaryEmail:
+                      type: string
+                    givenName:
+                      type: string
+                    familyName:
+                      type: string
+                    thumbnailPhotoUrl:
+                      type: string
+      security:
+      - x-api-key: []
+    parameters:
+    - name: gsuite_id
+      in: path
+      required: true
+      type: string
   /gsuites/{gsuite_id}/translationrules:
     get:
       operationId: List-GSuiteTranslationRule
@@ -2813,7 +2879,7 @@ paths:
         Sample Request
 
         ```
-        curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -2844,7 +2910,7 @@ paths:
         Sample Request
 
         ```
-        curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{O365_ID} \
+        curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}' \
@@ -2878,7 +2944,7 @@ paths:
 
         #### Sample Request
         ```
-        curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations?targets=user_group' \
+        curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -2943,7 +3009,7 @@ paths:
 
         #### Sample Request
         ```
-        curl -X POST https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/associations \
+        curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}' \
@@ -3137,7 +3203,7 @@ paths:
 
         #### Sample Request
         ```
-          curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID/usergroups \
+          curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID/usergroups \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -3196,7 +3262,7 @@ paths:
 
         #### Sample Request
         ```
-        curl -X GET https://console.jumpcloud.com/api/v2/office365s/{O365_ID}/users \
+        curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/users \
           -H 'Accept: application/json' \
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
@@ -10352,6 +10418,16 @@ definitions:
     properties:
       welcomeScreen:
         $ref: '#/definitions/DEPWelcomeScreen'
+      setupAssistantOptions:
+        items:
+          $ref: '#/definitions/DEPSetupAssistantOption'
+        type: array
+  DEPSetupAssistantOption:
+    title: DEP Setup Assistant Option
+    properties:
+      option:
+        $ref: '#/definitions/SetupAssistantOption'
+    type: object
   DEPWelcomeScreen:
     title: DEPWelcomeScreen
     type: object
@@ -10480,10 +10556,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
-    type: object
     properties:
       message:
         type: string
+    type: object
   GraphConnection:
     title: GraphConnection
     description: Represents an edge between two graph objects. From can be omitted if it is clear from context.
@@ -11283,6 +11359,44 @@ definitions:
       - id
       type: object
     - $ref: '#/definitions/samba-domain-input'
+  SetupAssistantOption:
+    title: Setup Assistant Option
+    description: |
+      Options to skip screens during MacOS setup:
+      * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.
+      * `appearance` - Skips the Choose Your Look screen.
+      * `appleID` - Skips Apple ID setup.
+      * `biometric` - Skips biometric setup.
+      * `diagnostics` - Skips the App Analytics pane.
+      * `displayTone` - Skips display tone setup.
+      * `fileVault` - Skips FileVault setup assistant screen.
+      * `icloudDiagnostics` - Skips iCloud analytics screen.
+      * `icloudStorage` - Skips iCloud documents and desktop screen.
+      * `location` - Skips location services setup.
+      * `payment` - Skips Apple Pay setup.
+      * `privacy` - Skips the Privacy setup.
+      * `restore` - Skips restoring from backup.
+      * `screenTime` - Skips screen time setup.
+      * `siri` - Skips Siri setup.
+      * `tos` - Skips terms and conditions.
+    enum:
+    - accessibility
+    - appearance
+    - appleID
+    - biometric
+    - diagnostics
+    - displayTone
+    - fileVault
+    - icloudDiagnostics
+    - icloudStorage
+    - location
+    - payment
+    - privacy
+    - restore
+    - screenTime
+    - siri
+    - tos
+    type: string
   sshkeylist:
     title: SSHKeyList
     type: object
@@ -13401,168 +13515,6 @@ definitions:
     required:
     - name
     type: object
-  WebAuthnConfiguration:
-    title: WebAuthnConfiguration
-    type: object
-    properties:
-      id:
-        type: string
-      allowSelfRegistration:
-        type: boolean
-    required:
-    - id
-    - allowSelfRegistration
-  WebAuthnConfigurationPut:
-    title: WebAuthnConfigurationPut
-    type: object
-    properties:
-      allowSelfRegistration:
-        type: boolean
-    required:
-    - allowSelfRegistration
-  WebAuthnCredentialCreationOptions:
-    title: WebAuthnCredentialCreationOptions
-    type: object
-    description: Creation options for a WebAuthn credential.
-    properties:
-      publicKey:
-        type: object
-        required:
-        - challenge
-        - rp
-        - user
-        - pubKeyCredParams
-        properties:
-          challenge:
-            type: string
-          rp:
-            type: object
-            required:
-            - name
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              icon:
-                type: string
-          user:
-            type: object
-            required:
-            - id
-            - name
-            - displayName
-            properties:
-              id:
-                type: string
-              name:
-                type: string
-              icon:
-                type: string
-              displayName:
-                type: string
-          pubKeyCredParams:
-            type: array
-            items:
-              type: object
-              properties:
-                type:
-                  type: string
-                  enum:
-                  - public-key
-                alg:
-                  type: integer
-              required:
-              - type
-              - alg
-          authenticatorSelection:
-            type: object
-            properties:
-              authenticatorAttachment:
-                type: string
-                enum:
-                - platform
-                - cross-platform
-              requireResidentKey:
-                type: boolean
-              userVerification:
-                type: string
-                enum:
-                - required
-                - preferred
-                - discouraged
-          timeout:
-            type: integer
-          attestation:
-            type: string
-            enum:
-            - none
-            - indirect
-            - direct
-      token:
-        type: string
-    required:
-    - publicKey
-    - token
-  WebAuthnCredentialRequest:
-    title: WebAuthnCredentialRequest
-    type: object
-    description: A WebAuthn credential request for the auth service.
-    properties:
-      token:
-        type: string
-      name:
-        type: string
-      credential:
-        type: object
-        required:
-        - id
-        - type
-        - response
-        properties:
-          id:
-            type: string
-          rawId:
-            type: string
-          type:
-            type: string
-            enum:
-            - public-key
-          response:
-            type: object
-            required:
-            - attestationObject
-            - clientDataJSON
-            properties:
-              attestationObject:
-                type: string
-              clientDataJSON:
-                type: string
-    required:
-    - token
-    - credential
-  WebAuthnCredentialResponse:
-    title: WebAuthnCredentialResponse
-    type: object
-    description: A WebAuthn credential response from the auth service.
-    properties:
-      id:
-        type: string
-      credentialId:
-        type: string
-      name:
-        type: string
-      registrationDate:
-        type: string
-        format: date-time
-      selfRegistered:
-        type: boolean
-    required:
-    - id
-    - credentialId
-    - name
-    - registrationDate
-    - selfRegistered
   workday-fields:
     title: Workday Fields
     properties:
