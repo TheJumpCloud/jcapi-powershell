@@ -1,6 +1,6 @@
 ---
 Module Name: JumpCloud.SDK.V2
-Module Guid: cb17e06e-c99b-420e-94bf-8ca94c68f769
+Module Guid: d2f60b40-7c55-46fe-b215-e764d0f475e1
 Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
