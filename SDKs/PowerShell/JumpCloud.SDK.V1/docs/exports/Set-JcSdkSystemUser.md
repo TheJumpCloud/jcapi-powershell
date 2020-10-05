@@ -14,34 +14,7 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>]
- [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-Displayname <String>] [-Email <String>]
- [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
- [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
- [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
- [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
- [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Put
-```
-Set-JcSdkSystemUser -Id <String> -Body <ISystemuserput> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### PutViaIdentity
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
-```
-
-### PutViaIdentityExpanded
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
+Set-JcSdkSystemUser -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>] [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
  [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
  [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
@@ -50,6 +23,35 @@ Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
  [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
+ [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### Put
+```
+Set-JcSdkSystemUser -Id <String> -Accept <String> -ContentType <String> -Body <ISystemuserput>
+ [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### PutViaIdentity
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ -Body <ISystemuserput> [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### PutViaIdentityExpanded
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-XOrgId <String>] [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey]
+ [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+ [-Department <String>] [-Description <String>] [-Displayname <String>] [-Email <String>]
+ [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
+ [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
+ [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
+ [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
+ [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
  [-Suspended] [-Tags <String[]>] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -75,6 +77,21 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -AccountLocked
 .
@@ -162,6 +179,21 @@ Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -732,6 +764,21 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

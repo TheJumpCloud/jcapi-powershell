@@ -14,19 +14,20 @@ This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\nc
 
 ### List (Default)
 ```
-Get-JcSdkSystemUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkSystemUser -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Search <String>] [-Sort <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkSystemUser -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkSystemUser -Id <String> -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Fields <String>] [-Filter <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,6 +50,36 @@ This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\nc
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
@@ -149,6 +180,21 @@ Default sort is ascending, prefix with `-` to sort descending.
 ```yaml
 Type: System.String
 Parameter Sets: List
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

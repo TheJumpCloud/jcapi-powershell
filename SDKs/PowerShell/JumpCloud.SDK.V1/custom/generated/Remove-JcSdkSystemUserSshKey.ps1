@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPathsU1ErlkSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -30,7 +30,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPathsU1ErlkSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentSchema])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -51,6 +51,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

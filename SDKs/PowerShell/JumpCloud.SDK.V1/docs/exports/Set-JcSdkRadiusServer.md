@@ -14,30 +14,32 @@ This endpoint allows you to update RADIUS servers in your organization.\n\n#### 
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-Mfa <String>] [-Tags <String[]>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServer -Id <String> -Accept <String> -ContentType <String> -Name <String>
+ -NetworkSourceIP <String> -SharedSecret <String> [-XOrgId <String>] [-Mfa <String>] [-Tags <String[]>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Put
 ```
-Set-JcSdkRadiusServer -Id <String>
- -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkRadiusServer -Id <String> -Accept <String> -ContentType <String>
+ -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-XOrgId <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity>
- -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-XOrgId <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-Mfa <String>] [-Tags <String[]>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-XOrgId <String>] [-Mfa <String>]
+ [-Tags <String[]>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,6 +63,21 @@ This endpoint allows you to update RADIUS servers in your organization.\n\n#### 
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 .
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -74,6 +91,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -204,6 +236,21 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

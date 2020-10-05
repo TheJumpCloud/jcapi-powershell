@@ -14,19 +14,20 @@ The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample 
 
 ### List (Default)
 ```
-Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String>] [-Sort <String>]
- [<CommonParameters>]
+Get-JcSdkApplicationTemplate -Id <String> -Accept <String> -ContentType <String> [-Fields <String>]
+ [-Filter <String>] [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
- [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Fields <String>] [-Filter <String>] [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,6 +50,36 @@ The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample 
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Fields
 The comma separated fields included in the returned records.
@@ -113,6 +144,21 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
 .
 
 ```yaml

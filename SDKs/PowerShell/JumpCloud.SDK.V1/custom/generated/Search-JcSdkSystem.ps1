@@ -56,10 +56,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # A filter to apply to the query.
     ${Filter},
 
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
+
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]
-    # Search
+    # search
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

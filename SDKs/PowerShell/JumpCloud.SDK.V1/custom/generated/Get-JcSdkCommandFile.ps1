@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandfilereturn
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPaths1Ni0OmqFilesCommandIdGetResponses400ContentSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommandFile
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1Ni0OmqFilesCommandIdGetResponses400ContentSchema])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -54,6 +54,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Use a space seperated string of field parameters to include the data in the response.
     # If omitted, the default list of fields will be returned.
     ${Fields},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPaths1WhlyhhSystemusersIdSshkeysPostResponses400ContentSchema
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Notes
@@ -38,7 +38,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPaths1WhlyhhSystemusersIdSshkeysPostResponses400ContentSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
@@ -55,6 +55,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
 
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]

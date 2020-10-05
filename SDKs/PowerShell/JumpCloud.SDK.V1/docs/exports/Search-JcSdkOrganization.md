@@ -16,14 +16,15 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
- [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization -Accept <String> -ContentType <String> -Body <ISearch> [-Fields <String>]
+ [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,8 +50,23 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
-Search
+search
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -62,6 +78,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -207,7 +238,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISearch>: Search
+BODY <ISearch>: search
   - `[Fields <String>]`: 
   - `[Filter <ISearchFilter>]`: 
   - `[SearchFilter <ISearchFilter1>]`: 

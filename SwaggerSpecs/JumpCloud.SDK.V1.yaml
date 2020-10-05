@@ -7,10 +7,6 @@ host: console.jumpcloud.com
 basePath: /api/
 schemes:
 - https
-consumes:
-- application/json
-produces:
-- application/json
 securityDefinitions:
   x-api-key:
     name: x-api-key
@@ -48,6 +44,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -148,6 +147,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -186,6 +188,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -230,6 +235,10 @@ paths:
              -d '{ "srcip":"192.168.2.32", "attack":"Cross Site Scripting Attempt" }' \
              "https://console.jumpcloud.com/api/command/trigger/{TriggerName}"
         ```
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -287,6 +296,9 @@ paths:
         required: false
         type: string
         default: ""
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -301,6 +313,10 @@ paths:
       operationId: Delete-CommandResult
       summary: Delete a Command result
       description: "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````"
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -327,6 +343,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -390,6 +409,9 @@ paths:
         required: false
         type: string
         default: ""
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -426,6 +448,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/command'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -450,6 +475,10 @@ paths:
           -H 'x-api-key: {API_KEY}'
 
         ```
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -469,6 +498,9 @@ paths:
         required: false
         type: string
         default: ""
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -509,6 +541,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/command'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -544,6 +579,9 @@ paths:
         type: integer
         default: 0
         minimum: 0
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: ""
@@ -604,6 +642,8 @@ paths:
         required: false
         type: string
         default: ""
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: ""
@@ -639,6 +679,8 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -692,6 +734,8 @@ paths:
             settings:
               $ref: '#/definitions/organizationsettingsput'
           type: object
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -751,6 +795,9 @@ paths:
         required: false
         type: string
         default: ""
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -783,6 +830,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/radiusserverpost'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -802,6 +852,10 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}' \
         ```
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -813,6 +867,10 @@ paths:
       operationId: Get-RadiusServer
       summary: Get Radius Server
       description: "This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```"
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -866,6 +924,9 @@ paths:
             sharedSecret: secretradiuspassword
             tagsNames:
             - tag1
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -908,6 +969,8 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/search'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -952,6 +1015,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/search'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -996,6 +1062,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/search'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -1049,6 +1118,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: ""
@@ -1070,6 +1142,12 @@ paths:
           -H 'Content-Type: application/json' \
           -H 'x-api-key: {API_KEY}'
           ```
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1094,6 +1172,11 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1115,6 +1198,11 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/systemput'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:systemContextAuth:Authorization'
+      - $ref: '#/parameters/trait:systemContextAuth:Date'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1176,6 +1264,9 @@ paths:
         description: A nested object containing a string `searchTerm` and a list of `fields` to search on.
         required: false
         type: string
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: OK
@@ -1210,6 +1301,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/systemuserputpost'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: User added successfully
@@ -1226,6 +1320,10 @@ paths:
       operationId: Delete-SystemUser
       summary: Delete a system user
       description: "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```"
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -1262,6 +1360,9 @@ paths:
         description: A filter to apply to the query.
         required: false
         type: string
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -1300,6 +1401,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/systemuserput'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: OK
@@ -1319,6 +1423,10 @@ paths:
       operationId: POST-ExpireSystemUserPassword
       summary: Expire a system user's password
       description: This endpoint allows you to expire a user's password.
+      parameters:
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: ""
@@ -1357,6 +1465,9 @@ paths:
               format: date-time
               type: string
           type: object
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1379,6 +1490,10 @@ paths:
       operationId: List-SystemUsersSshKey
       summary: List a system user's public SSH keys
       description: This endpoint will return a specific System User's public SSH key.
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1407,6 +1522,9 @@ paths:
         in: body
         schema:
           $ref: '#/definitions/sshkeypost'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -1429,6 +1547,10 @@ paths:
       operationId: Unlock-SystemUser
       summary: Unlock a system user
       description: This endpoint allows you to unlock a user's account.
+      parameters:
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
       responses:
         "200":
           description: ""
@@ -1451,6 +1573,10 @@ paths:
       operationId: Delete-SystemUsersSshKey
       summary: Delete a system user's Public SSH Keys
       description: This endpoint will delete a specific System User's SSH Key.
+      parameters:
+      - $ref: '#/parameters/trait:requestHeaders:Accept'
+      - $ref: '#/parameters/trait:requestHeaders:Content-Type'
+      - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
       responses:
         "200":
           description: ""
@@ -2820,6 +2946,8 @@ definitions:
             minimum: 1
             type: integer
         type: object
+      deviceIdentificationEnabled:
+        type: boolean
     type: object
   organizationslist:
     title: OrganizationList
@@ -2942,7 +3070,7 @@ definitions:
         type: integer
     type: object
   search:
-    title: Search
+    title: search
     properties:
       fields:
         type: string
@@ -2953,20 +3081,20 @@ definitions:
     type: object
   sshkeylist:
     title: SSHKeyList
-    properties:
-      _id:
-        description: The ID of the SSH key.
-        type: string
-      create_date:
-        description: The date the SSH key was created.
-        type: string
-      name:
-        description: The name of the SSH key.
-        type: string
-      public_key:
-        description: The Public SSH key.
-        type: string
     type: object
+    properties:
+      create_date:
+        type: string
+        description: The date the SSH key was created.
+      _id:
+        type: string
+        description: The ID of the SSH key.
+      public_key:
+        type: string
+        description: The Public SSH key.
+      name:
+        type: string
+        description: The name of the SSH key.
   sshkeypost:
     title: SSHKeyPost
     properties:
@@ -3273,128 +3401,128 @@ definitions:
     type: object
   systemuserputpost:
     title: SystemUserPost
-    type: object
     properties:
-      email:
-        type: string
-        maxLength: 1024
-      username:
-        type: string
-      allow_public_key:
-        type: boolean
-      public_key:
-        type: string
-      sudo:
-        type: boolean
-      enable_managed_uid:
-        type: boolean
-      unix_uid:
-        type: integer
-        minimum: 1
-      unix_guid:
-        type: integer
-        minimum: 1
-      activated:
-        type: boolean
-      tags:
-        type: array
-        items:
-          type: string
       account_locked:
         type: boolean
-      passwordless_sudo:
+      activated:
         type: boolean
-      externally_managed:
+      addresses:
+        items:
+          properties:
+            country:
+              type: string
+            extendedAddress:
+              type: string
+            locality:
+              type: string
+            poBox:
+              type: string
+            postalCode:
+              type: string
+            region:
+              type: string
+            streetAddress:
+              type: string
+            type:
+              type: string
+          type: object
+        type: array
+      allow_public_key:
+        type: boolean
+      attributes:
+        items:
+          type: object
+        type: array
+      company:
+        type: string
+      costCenter:
+        type: string
+      department:
+        type: string
+      description:
+        maxLength: 1024
+        type: string
+      displayname:
+        type: string
+      email:
+        maxLength: 1024
+        type: string
+      employeeIdentifier:
+        description: 'Must be unique per user. '
+        maxLength: 256
+        type: string
+      employeeType:
+        type: string
+      enable_managed_uid:
+        type: boolean
+      enable_user_portal_multifactor:
         type: boolean
       external_dn:
         type: string
+      external_password_expiration_date:
+        format: date-time
+        type: string
       external_source_type:
         type: string
+      externally_managed:
+        type: boolean
       firstname:
+        type: string
+      jobTitle:
         type: string
       lastname:
         type: string
       ldap_binding_user:
         type: boolean
-      enable_user_portal_multifactor:
-        type: boolean
-      attributes:
-        type: array
-        items:
-          type: object
-      samba_service_user:
-        type: boolean
-      addresses:
-        type: array
-        items:
-          type: object
-          properties:
-            type:
-              type: string
-            poBox:
-              type: string
-            extendedAddress:
-              type: string
-            streetAddress:
-              type: string
-            locality:
-              type: string
-            region:
-              type: string
-            postalCode:
-              type: string
-            country:
-              type: string
-      jobTitle:
+      location:
         type: string
-      department:
+      mfa:
+        $ref: '#/definitions/mfa'
+      middlename:
         type: string
-      phoneNumbers:
-        type: array
-        items:
-          type: object
-          properties:
-            type:
-              type: string
-            number:
-              type: string
-      relationships:
-        type: array
-        items:
-          type: object
       password:
         type: string
       password_never_expires:
         type: boolean
-      middlename:
+      passwordless_sudo:
+        type: boolean
+      phoneNumbers:
+        items:
+          properties:
+            number:
+              type: string
+            type:
+              type: string
+          type: object
+        type: array
+      public_key:
         type: string
-      displayname:
-        type: string
-      description:
-        type: string
-        maxLength: 1024
-      location:
-        type: string
-      costCenter:
-        type: string
-      employeeType:
-        type: string
-      company:
-        type: string
-      employeeIdentifier:
-        type: string
-        maxLength: 256
-        description: 'Must be unique per user. '
-      mfa:
-        $ref: '#/definitions/mfa'
+      relationships:
+        items:
+          type: object
+        type: array
+      samba_service_user:
+        type: boolean
+      sudo:
+        type: boolean
       suspended:
         type: boolean
-      external_password_expiration_date:
+      tags:
+        items:
+          type: string
+        type: array
+      unix_guid:
+        minimum: 1
+        type: integer
+      unix_uid:
+        minimum: 1
+        type: integer
+      username:
         type: string
-        format: date-time
     required:
     - email
     - username
+    type: object
   systemuserreturn:
     title: SystemUserReturn
     properties:

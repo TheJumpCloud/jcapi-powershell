@@ -33,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Get-JcSdkApplication
 {
     [OutputType([JumpCloud.SDK.V1.Models.IApplication], [JumpCloud.SDK.V1.Models.IApplicationslist])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -66,6 +66,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Sort},
+
+    [Parameter(ParameterSetName='List', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(ParameterSetName='List', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${XOrgId},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

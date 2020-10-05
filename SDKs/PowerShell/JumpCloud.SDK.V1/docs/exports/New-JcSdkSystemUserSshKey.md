@@ -14,25 +14,26 @@ This endpoint will create a specific System User's Public SSH Key.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSystemUserSshKey -Id <String> -Name <String> -PublicKey <String> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkSystemUserSshKey -Id <String> -Accept <String> -ContentType <String> -Name <String>
+ -PublicKey <String> [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkSystemUserSshKey -Id <String> -Body <ISshkeypost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemUserSshKey -Id <String> -Accept <String> -ContentType <String> -Body <ISshkeypost>
+ [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Body <ISshkeypost> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ -Body <ISshkeypost> [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Name <String> -PublicKey <String> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ -Name <String> -PublicKey <String> [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,6 +57,21 @@ This endpoint will create a specific System User's Public SSH Key.
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 SSHKeyPost
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -69,6 +85,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -133,6 +164,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -175,7 +221,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IPaths1WhlyhhSystemusersIdSshkeysPostResponses400ContentSchema
 
 ### JumpCloud.SDK.V1.Models.ISshkeylist
 

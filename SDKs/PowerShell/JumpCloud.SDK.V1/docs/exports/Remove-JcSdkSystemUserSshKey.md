@@ -14,14 +14,14 @@ This endpoint will delete a specific System User's SSH Key.
 
 ### Delete (Default)
 ```
-Remove-JcSdkSystemUserSshKey -Id <String> -SystemuserId <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkSystemUserSshKey -Id <String> -SystemuserId <String> -Accept <String> -ContentType <String>
+ [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,6 +44,36 @@ This endpoint will delete a specific System User's SSH Key.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 .
@@ -106,6 +136,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -146,7 +191,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IPathsU1ErlkSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentSchema
 
 ## NOTES
 

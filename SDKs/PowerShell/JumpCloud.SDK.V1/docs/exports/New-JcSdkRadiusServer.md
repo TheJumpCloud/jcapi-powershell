@@ -14,14 +14,16 @@ This endpoint allows you to create RADIUS servers in your organization.\n\n#### 
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <String>]
- [-TagNames <String[]>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkRadiusServer -Accept <String> -ContentType <String> -Name <String> -NetworkSourceIP <String>
+ -SharedSecret <String> [-XOrgId <String>] [-Mfa <String>] [-TagNames <String[]>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkRadiusServer -Body <IRadiusserverpost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkRadiusServer -Accept <String> -ContentType <String> -Body <IRadiusserverpost> [-XOrgId <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +47,21 @@ This endpoint allows you to create RADIUS servers in your organization.\n\n#### 
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 RadiusServerPost
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -58,6 +75,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -157,6 +189,21 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

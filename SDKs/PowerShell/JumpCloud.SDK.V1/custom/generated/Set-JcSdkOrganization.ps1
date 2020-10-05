@@ -29,6 +29,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
   [Settings <IOrganizationsettingsput>]: OrganizationSettingsPut
     [ContactEmail <String>]:
     [ContactName <String>]:
+    [DeviceIdentificationEnabled <Boolean?>]:
     [DirectoryInsightEnabled <Boolean?>]:
     [DirectoryInsightPremiumEnabled <Boolean?>]:
     [DisableGoogleLogin <Boolean?>]:
@@ -78,6 +79,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 SETTINGS <IOrganizationsettingsput>:
   [ContactEmail <String>]:
   [ContactName <String>]:
+  [DeviceIdentificationEnabled <Boolean?>]:
   [DirectoryInsightEnabled <Boolean?>]:
   [DirectoryInsightPremiumEnabled <Boolean?>]:
   [DisableGoogleLogin <Boolean?>]:
@@ -140,6 +142,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${Accept},
+
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Header')]
+    [System.String]
+    # .
+    ${ContentType},
 
     [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
