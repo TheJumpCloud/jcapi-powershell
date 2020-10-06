@@ -2,7 +2,6 @@ debug: true
 verbose: true
 disable-validation: false
 powershell: true
-version: latest
 base-folder: ".."
 input-file: SwaggerSpecs/JumpCloud.SDK.V1.json
 clear-output-folder: true
