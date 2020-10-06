@@ -32,7 +32,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
-    # Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+    # A filter to apply to the query.
+    # **Filter structure**: `<field>:<operator>:<value>`.
+    # **field** = Populate with a valid field from an endpoint response.
+    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # **value** = Populate with the value you want to search for.
+    # Is case sensitive.
+    # Supports wild cards.
+    # **EX:** `GET /users?username=eq:testuser`
     ${Filter},
 
     [Parameter()]
@@ -41,6 +48,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # .
+    ${XTotalCount},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+    ${XUnfilteredTotalCount},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

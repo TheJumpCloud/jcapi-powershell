@@ -13,7 +13,8 @@ This endpoint returns all Groups that exist in your organization.\n\n#### Availa
 ## SYNTAX
 
 ```
-Get-JcSdkGroup [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkGroup [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
+ [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,7 +55,14 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String[]
@@ -74,6 +82,36 @@ Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XTotalCount
+.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XUnfilteredTotalCount
+If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+
+```yaml
+Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 

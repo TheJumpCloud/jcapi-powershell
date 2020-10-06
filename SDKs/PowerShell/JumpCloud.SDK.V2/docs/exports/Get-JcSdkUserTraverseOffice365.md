@@ -44,7 +44,14 @@ This endpoint will return all Office 365 Instances bound to a User, either direc
 ## PARAMETERS
 
 ### -Filter
-Supported operators are: eq, ne, gt, ge, lt, le, between, search, in
+A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String[]

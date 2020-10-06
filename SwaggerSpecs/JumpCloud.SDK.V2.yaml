@@ -44,7 +44,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -185,7 +185,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -279,7 +279,7 @@ paths:
       - application/octet-stream
       parameters: []
       responses:
-        "201":
+        "200":
           description: ""
           schema:
             $ref: '#/definitions/apple-mdm-signed-csr-plist'
@@ -373,7 +373,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1003,7 +1003,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1062,7 +1062,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1298,7 +1298,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1357,7 +1357,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1796,7 +1796,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -1825,6 +1825,8 @@ paths:
         default: []
         items:
           type: string
+      - $ref: '#/parameters/trait:listCount:x-total-count'
+      - $ref: '#/parameters/trait:listCount:x-unfiltered-total-count'
       responses:
         "200":
           description: OK
@@ -2010,7 +2012,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2177,7 +2179,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2236,7 +2238,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2342,7 +2344,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2585,7 +2587,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2787,7 +2789,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -2846,7 +2848,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3057,7 +3059,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3224,7 +3226,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3283,7 +3285,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3332,7 +3334,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3604,7 +3606,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3675,7 +3677,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3756,7 +3758,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3815,7 +3817,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3864,7 +3866,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -3957,7 +3959,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4054,7 +4056,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4280,7 +4282,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4340,7 +4342,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4394,7 +4396,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4606,7 +4608,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4742,7 +4744,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4803,7 +4805,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4863,7 +4865,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -4922,7 +4924,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7617,7 +7619,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7689,7 +7691,7 @@ paths:
       parameters:
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7777,7 +7779,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7827,7 +7829,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7910,7 +7912,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -7972,7 +7974,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8027,7 +8029,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8136,7 +8138,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8292,7 +8294,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8352,7 +8354,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8411,7 +8413,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8520,7 +8522,7 @@ paths:
       parameters:
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8602,7 +8604,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8662,7 +8664,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8721,7 +8723,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8780,7 +8782,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -8916,7 +8918,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9076,7 +9078,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9135,7 +9137,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9194,7 +9196,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9232,7 +9234,7 @@ paths:
       parameters:
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9314,7 +9316,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9373,7 +9375,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9432,7 +9434,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9491,7 +9493,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9562,7 +9564,7 @@ paths:
           type: string
       - name: filter
         in: query
-        description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: array
         default: []
@@ -9875,7 +9877,7 @@ parameters:
   trait:filter:filter:
     name: filter
     in: query
-    description: 'Supported operators are: eq, ne, gt, ge, lt, le, between, search, in'
+    description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
     required: false
     type: array
     default: []
@@ -10098,7 +10100,7 @@ responses:
       $ref: '#/definitions/errorresponse'
 definitions:
   ActivateProvisionUpdateReq:
-    title: Put activate state Request
+    title: ActivateProvisionUpdateReq
     type: object
     description: Request to update session state.
     properties:
@@ -11032,14 +11034,6 @@ definitions:
         postalCode: Example postal code
         region: Example region
       transactionId: tok_example
-  PaymentParams:
-    title: PaymentParams
-    type: object
-    properties:
-      publishableKey:
-        type: string
-    example:
-      publishableKey: pk_live_example
   Policy:
     title: Policy
     description: An instance of a policy template.
@@ -11298,7 +11292,7 @@ definitions:
     - email
     type: object
   ProvisionCallbackReq:
-    title: Post provision activate callback Request
+    title: ProvisionCallbackReq
     type: object
     description: Request to insert provision in SCIM service.
     properties:
