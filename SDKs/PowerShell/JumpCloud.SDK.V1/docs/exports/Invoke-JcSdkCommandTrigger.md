@@ -14,13 +14,14 @@ This endpoint allows you to launch a command based on a defined trigger.\n\n####
 
 ### Post (Default)
 ```
-Invoke-JcSdkCommandTrigger -Triggername <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -Triggername <String> -Accept <String> -ContentType <String> [-XOrgId <String>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PostViaIdentity
 ```
-Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,6 +44,36 @@ This endpoint allows you to launch a command based on a defined trigger.\n\n####
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -InputObject
 Identity Parameter
@@ -84,6 +115,21 @@ Parameter Sets: Post
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -1,4 +1,4 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get Apple MDM Server information within a JumpCloud Tenant
 ```powershell
 PS C:\> Get-JcSdkAppleMdm
 

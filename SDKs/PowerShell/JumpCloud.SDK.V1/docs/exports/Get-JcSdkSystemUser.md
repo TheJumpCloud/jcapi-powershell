@@ -14,19 +14,20 @@ This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\nc
 
 ### List (Default)
 ```
-Get-JcSdkSystemUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkSystemUser -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Search <String>] [-Sort <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkSystemUser -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkSystemUser -Id <String> -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Fields <String>] [-Filter <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +51,36 @@ This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\nc
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
 If omitted, the default list of fields will be returned.
@@ -68,6 +99,13 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String
@@ -149,6 +187,21 @@ Default sort is ascending, prefix with `-` to sort descending.
 ```yaml
 Type: System.String
 Parameter Sets: List
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

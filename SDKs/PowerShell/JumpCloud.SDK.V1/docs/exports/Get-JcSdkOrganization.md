@@ -14,19 +14,20 @@ This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\n
 
 ### List (Default)
 ```
-Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>]
- [<CommonParameters>]
+Get-JcSdkOrganization -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String> [-Fields <String>]
+ [-Filter <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +51,36 @@ This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\n
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
 If omitted, the default list of fields will be returned.
@@ -68,6 +99,13 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String

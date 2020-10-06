@@ -15,28 +15,28 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String>
+ [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
 ```
-Set-JcSdkOrganization -Id <String>
+Set-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,6 +61,21 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 .
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -74,6 +89,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -196,6 +226,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
   - `[Settings <IOrganizationsettingsput>]`: OrganizationSettingsPut
     - `[ContactEmail <String>]`: 
     - `[ContactName <String>]`: 
+    - `[DeviceIdentificationEnabled <Boolean?>]`: 
     - `[DirectoryInsightEnabled <Boolean?>]`: 
     - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
     - `[DisableGoogleLogin <Boolean?>]`: 
@@ -245,6 +276,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[ContactEmail <String>]`: 
   - `[ContactName <String>]`: 
+  - `[DeviceIdentificationEnabled <Boolean?>]`: 
   - `[DirectoryInsightEnabled <Boolean?>]`: 
   - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
   - `[DisableGoogleLogin <Boolean?>]`: 

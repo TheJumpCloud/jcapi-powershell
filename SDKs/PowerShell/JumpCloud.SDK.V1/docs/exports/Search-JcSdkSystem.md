@@ -19,14 +19,15 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
- [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-XOrgId <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystem -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Search-JcSdkSystem -Accept <String> -ContentType <String> -Body <ISearch> [-Fields <String>]
+ [-Filter <String>] [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,8 +56,23 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
-Search
+search
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -68,6 +84,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -104,6 +135,13 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String
@@ -153,6 +191,21 @@ Accept wildcard characters: False
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISearchFilter1
 Parameter Sets: SearchExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -213,7 +266,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISearch>: Search
+BODY <ISearch>: search
   - `[Fields <String>]`: 
   - `[Filter <ISearchFilter>]`: 
   - `[SearchFilter <ISearchFilter1>]`: 

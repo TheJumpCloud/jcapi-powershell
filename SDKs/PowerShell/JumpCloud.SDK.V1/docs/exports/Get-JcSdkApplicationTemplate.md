@@ -14,19 +14,20 @@ The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample 
 
 ### List (Default)
 ```
-Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
+ [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String>] [-Sort <String>]
- [<CommonParameters>]
+Get-JcSdkApplicationTemplate -Id <String> -Accept <String> -ContentType <String> [-Fields <String>]
+ [-Filter <String>] [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
- [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-Fields <String>] [-Filter <String>] [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +51,36 @@ The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample 
 
 ## PARAMETERS
 
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 The comma separated fields included in the returned records.
 If omitted the default list of fields will be returned.
@@ -68,6 +99,13 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+**field** = Populate with a valid field from an endpoint response.
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+**EX:** `GET /users?username=eq:testuser`
 
 ```yaml
 Type: System.String
@@ -113,6 +151,21 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
 .
 
 ```yaml

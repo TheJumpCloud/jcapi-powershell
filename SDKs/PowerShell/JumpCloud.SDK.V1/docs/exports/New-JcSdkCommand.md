@@ -14,15 +14,17 @@ This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkCommand -Command <String> [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
- [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
+New-JcSdkCommand -Accept <String> -ContentType <String> -Command <String> [-XOrgId <String>]
+ [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>]
+ [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
  [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
  [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkCommand -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -Accept <String> -ContentType <String> -Body <ICommand> [-XOrgId <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -45,6 +47,21 @@ This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 Command
@@ -101,6 +118,21 @@ Parameter Sets: CreateExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -311,6 +343,21 @@ This field is required when creating a command with a commandType of "mac" or "l
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

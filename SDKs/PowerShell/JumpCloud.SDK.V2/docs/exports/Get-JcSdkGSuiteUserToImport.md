@@ -1,24 +1,23 @@
 ---
 external help file:
-Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkSystemUserSshKey.md
+Module Name: JumpCloud.SDK.V2
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGSuiteUserToImport.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkSystemUserSshKey
+# Get-JcSdkGSuiteUserToImport
 
 ## SYNOPSIS
-This endpoint will return a specific System User's public SSH key.
+Lists G Suite users available for import.
 
 ## SYNTAX
 
 ```
-Get-JcSdkSystemUserSshKey -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>]
- [<CommonParameters>]
+Get-JcSdkGSuiteUserToImport -GsuiteId <String> [-PageToken <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint will return a specific System User's public SSH key.
+Lists G Suite users available for import.
 
 ## EXAMPLES
 
@@ -38,7 +37,7 @@ This endpoint will return a specific System User's public SSH key.
 
 ## PARAMETERS
 
-### -Accept
+### -GsuiteId
 .
 
 ```yaml
@@ -53,38 +52,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
+### -PageToken
+Token used to access next page of results.
 
 ```yaml
 Type: System.String
@@ -105,9 +74,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
-
-### JumpCloud.SDK.V1.Models.ISshkeylist
+### JumpCloud.SDK.V2.Models.IPaths1Xhb3B2GsuitesGsuiteIdImportUsersGetResponses200ContentSchema
 
 ## NOTES
 

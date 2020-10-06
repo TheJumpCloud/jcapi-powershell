@@ -14,13 +14,14 @@ This endpoint allows you to delete a particular system user.\n\n#### Sample Requ
 
 ### Delete (Default)
 ```
-Remove-JcSdkSystemUser -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkSystemUser -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+ [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,6 +44,36 @@ This endpoint allows you to delete a particular system user.\n\n#### Sample Requ
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Accept
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ContentType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 .
@@ -80,6 +111,21 @@ Returns true when the command succeeds
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XOrgId
+.
+
+```yaml
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
