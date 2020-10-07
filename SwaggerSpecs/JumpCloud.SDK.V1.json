@@ -10,6 +10,12 @@
   "schemes": [
     "https"
   ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "x-api-key": {
       "name": "x-api-key",
@@ -55,7 +61,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -223,7 +229,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -289,7 +295,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -385,7 +391,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -491,7 +497,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -548,7 +554,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -849,7 +855,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -924,7 +930,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1025,7 +1031,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1281,7 +1287,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1368,7 +1374,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1424,7 +1430,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1529,7 +1535,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1610,7 +1616,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1736,7 +1742,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -1866,7 +1872,7 @@
           {
             "name": "filter",
             "in": "query",
-            "description": "A filter to apply to the query.",
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "required": false,
             "type": "string"
           },
@@ -2277,7 +2283,7 @@
     "trait:filter:filter": {
       "name": "filter",
       "in": "query",
-      "description": "A filter to apply to the query.",
+      "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
       "required": false,
       "type": "string"
     },
@@ -3630,12 +3636,12 @@
     },
     "errorresponse": {
       "title": "ErrorResponse",
+      "type": "object",
       "properties": {
         "message": {
           "type": "string"
         }
-      },
-      "type": "object"
+      }
     },
     "fde": {
       "title": "FDE",
@@ -3811,19 +3817,19 @@
     },
     "mfa": {
       "title": "mfa",
+      "type": "object",
       "properties": {
-        "configured": {
-          "type": "boolean"
-        },
         "exclusion": {
           "type": "boolean"
         },
         "exclusionUntil": {
-          "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
+        },
+        "configured": {
+          "type": "boolean"
         }
-      },
-      "type": "object"
+      }
     },
     "organization": {
       "title": "Organization",
@@ -4419,25 +4425,25 @@
     },
     "sshkeylist": {
       "title": "SSHKeyList",
-      "type": "object",
       "properties": {
-        "create_date": {
-          "type": "string",
-          "description": "The date the SSH key was created."
-        },
         "_id": {
-          "type": "string",
-          "description": "The ID of the SSH key."
+          "description": "The ID of the SSH key.",
+          "type": "string"
         },
-        "public_key": {
-          "type": "string",
-          "description": "The Public SSH key."
+        "create_date": {
+          "description": "The date the SSH key was created.",
+          "type": "string"
         },
         "name": {
-          "type": "string",
-          "description": "The name of the SSH key."
+          "description": "The name of the SSH key.",
+          "type": "string"
+        },
+        "public_key": {
+          "description": "The Public SSH key.",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "sshkeypost": {
       "title": "SSHKeyPost",

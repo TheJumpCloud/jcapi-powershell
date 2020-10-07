@@ -54,6 +54,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A filter to apply to the query.
+    # **Filter structure**: `<field>:<operator>:<value>`.
+    # **field** = Populate with a valid field from an endpoint response.
+    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # **value** = Populate with the value you want to search for.
+    # Is case sensitive.
+    # Supports wild cards.
+    # **EX:** `GET /users?username=eq:testuser`
     ${Filter},
 
     [Parameter(Mandatory)]

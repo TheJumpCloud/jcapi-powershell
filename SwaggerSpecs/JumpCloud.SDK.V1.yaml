@@ -7,6 +7,10 @@ host: console.jumpcloud.com
 basePath: /api/
 schemes:
 - https
+consumes:
+- application/json
+produces:
+- application/json
 securityDefinitions:
   x-api-key:
     name: x-api-key
@@ -41,7 +45,7 @@ paths:
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -144,7 +148,7 @@ paths:
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -185,7 +189,7 @@ paths:
         default: The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -272,7 +276,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -340,7 +344,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
@@ -385,7 +389,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -613,7 +617,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -676,7 +680,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -771,7 +775,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -949,7 +953,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -1008,7 +1012,7 @@ paths:
         minimum: 0
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: body
@@ -1042,7 +1046,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: limit
@@ -1115,7 +1119,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:multiTenantRequestHeaders:x-org-id'
@@ -1169,7 +1173,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -1256,7 +1260,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - name: search
@@ -1357,7 +1361,7 @@ paths:
         default: ""
       - name: filter
         in: query
-        description: A filter to apply to the query.
+        description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
         required: false
         type: string
       - $ref: '#/parameters/trait:requestHeaders:Accept'
@@ -1608,7 +1612,7 @@ parameters:
   trait:filter:filter:
     name: filter
     in: query
-    description: A filter to apply to the query.
+    description: 'A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`'
     required: false
     type: string
   trait:limit:limit:
@@ -2546,10 +2550,10 @@ definitions:
     type: object
   errorresponse:
     title: ErrorResponse
+    type: object
     properties:
       message:
         type: string
-    type: object
   fde:
     title: FDE
     properties:
@@ -2667,15 +2671,15 @@ definitions:
             type: boolean
   mfa:
     title: mfa
+    type: object
     properties:
-      configured:
-        type: boolean
       exclusion:
         type: boolean
       exclusionUntil:
-        format: date-time
         type: string
-    type: object
+        format: date-time
+      configured:
+        type: boolean
   organization:
     title: Organization
     properties:
@@ -3081,20 +3085,20 @@ definitions:
     type: object
   sshkeylist:
     title: SSHKeyList
-    type: object
     properties:
-      create_date:
-        type: string
-        description: The date the SSH key was created.
       _id:
-        type: string
         description: The ID of the SSH key.
-      public_key:
         type: string
-        description: The Public SSH key.
+      create_date:
+        description: The date the SSH key was created.
+        type: string
       name:
-        type: string
         description: The name of the SSH key.
+        type: string
+      public_key:
+        description: The Public SSH key.
+        type: string
+    type: object
   sshkeypost:
     title: SSHKeyPost
     properties:
