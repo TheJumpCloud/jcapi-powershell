@@ -10,12 +10,6 @@
   "schemes": [
     "https"
   ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
   "securityDefinitions": {
     "x-api-key": {
       "name": "x-api-key",
@@ -3817,19 +3811,19 @@
     },
     "mfa": {
       "title": "mfa",
-      "type": "object",
       "properties": {
+        "configured": {
+          "type": "boolean"
+        },
         "exclusion": {
           "type": "boolean"
         },
         "exclusionUntil": {
-          "type": "string",
-          "format": "date-time"
-        },
-        "configured": {
-          "type": "boolean"
+          "format": "date-time",
+          "type": "string"
         }
-      }
+      },
+      "type": "object"
     },
     "organization": {
       "title": "Organization",

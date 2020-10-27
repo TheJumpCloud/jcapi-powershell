@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandfilereturn
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IPaths1Ni0OmqFilesCommandIdGetResponses400ContentSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommandFile
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1OwisfoFilesCommandIdGetResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandfilereturn], [JumpCloud.SDK.V1.Models.IPaths1Ni0OmqFilesCommandIdGetResponses400ContentSchema])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
