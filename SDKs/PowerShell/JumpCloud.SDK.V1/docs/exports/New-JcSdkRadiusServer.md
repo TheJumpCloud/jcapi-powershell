@@ -14,7 +14,7 @@ This endpoint allows you to create RADIUS servers in your organization.\n\n#### 
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <String>]
+New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <Mfa>]
  [-TagNames <String[]>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
@@ -65,7 +65,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V1.Support.Mfa
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -221,7 +221,7 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: RADIUS shared secret between the server and client.
-  - `[Mfa <String>]`: 
+  - `[Mfa <Mfa?>]`: 
   - `[TagNames <String[]>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
