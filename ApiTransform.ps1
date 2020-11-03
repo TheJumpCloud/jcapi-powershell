@@ -383,8 +383,13 @@ Function Update-SwaggerObject
                             modelAsString = $true
                             values        = @(
                                 $ThisObject.enum | ForEach-Object {
-                                    [PSCustomObject]@{
-                                        Value = $_
+                                    $EnumItem = $_
+                                    If (-not [System.String]::IsNullOrEmpty($EnumItem))
+                                    {
+                                        [PSCustomObject]@{
+                                            name  = $EnumItem.Replace('#', '')
+                                            value = $EnumItem
+                                        }
                                     }
                                 }
                             )
