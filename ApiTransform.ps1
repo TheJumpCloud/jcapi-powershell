@@ -35,6 +35,9 @@ $TransformConfig = [Ordered]@{
             '"format":"email",'                                                        = ''; # WARNING (LLCS1001/DoesNotSupportEnum):Schema with type:'string and 'format:'email' is not recognized.
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''
             # Custom Tweaks
+            '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                = ''; # This will be passed in later through the Module.cs file.
+            '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                      = ''; # This will be passed in later through the Module.cs file.
+            '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             '{"name":"Content-Type","in":"header","required":false,"type":"string"}'   = ''; # This will be passed in later through the Module.cs file.
             '{"name":"Accept","in":"header","required":false,"type":"string"}'         = ''; # This will be passed in later through the Module.cs file.
             '{"name":"x-org-id","in":"header","required":false,"type":"string"}'       = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -333,11 +336,12 @@ $TransformConfig = [Ordered]@{
 Function Update-SwaggerObject
 {
     Param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An Object representing a swagger file.')]$CurrentObject
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = 'root'
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
     )
-    $CurrentObject | ForEach-Object {
+    $InputObject | ForEach-Object {
         $ThisObject = $_
         # Get child objects
         If (-not [System.String]::IsNullOrEmpty($ThisObject))
@@ -347,10 +351,6 @@ Function Update-SwaggerObject
             {
                 $ThisObject.PSObject.Properties.Name
             }
-            # Else
-            # {
-            #     ($ThisObject | Get-Member -MemberType:('NoteProperty')).Name
-            # }
             # Sort attribute names
             If (-not [System.String]::IsNullOrEmpty($AttributeNames) -and $Sort -eq $true)
             {
@@ -379,7 +379,7 @@ Function Update-SwaggerObject
                     {
                         # Write-Host ($ThisObject)
                         $xMsEnum = [PSCustomObject]@{
-                            # name          = $AttributeName
+                            name          = $InputObjectName
                             modelAsString = $true
                             values        = @(
                                 $ThisObject.enum | ForEach-Object {
@@ -422,7 +422,7 @@ Function Update-SwaggerObject
                     Else
                     {
                         # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
-                        $ModifiedObject = Update-SwaggerObject -CurrentObject:($ThisObject.$AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
                         # If it was an array of objects before reapply the parent array.
                         If ($ThisObjectAttributeNameType -eq 'System.Object[]')
                         {
@@ -442,7 +442,7 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -CurrentObject:($ThisObject.$AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
                     # If it was an array of objects before reapply the parent array.
                     If ($ThisObjectAttributeNameType -eq 'System.Object[]')
                     {
@@ -463,15 +463,15 @@ Function Update-SwaggerObject
         }
     }
     # Return modified object
-    Return $CurrentObject
+    Return $InputObject
 }
 Function Format-SwaggerObject
 {
     Param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An Object representing a swagger file.')]$CurrentObject
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An Object representing a swagger file.')]$InputObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $true
     )
-    $SortedSwaggerObject = Update-SwaggerObject -CurrentObject:($CurrentObject) -Sort:($Sort) -NoUpdate:($true)
+    $SortedSwaggerObject = Update-SwaggerObject -InputObject:($InputObject) -Sort:($Sort) -NoUpdate:($true)
     Return $SortedSwaggerObject
 }
 # Start script
@@ -522,7 +522,7 @@ $SDKName | ForEach-Object {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
             # Get the original version
-            $SwaggerObjectOrg = Format-SwaggerObject -CurrentObject:($SwaggerObject | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
+            $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObject | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
@@ -542,7 +542,7 @@ $SDKName | ForEach-Object {
             }
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $SwaggerString = Update-SwaggerObject -CurrentObject:($SwaggerObject) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
+            $SwaggerString = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
             # Validate that all operationIds in mapping have been found in spec
             If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
