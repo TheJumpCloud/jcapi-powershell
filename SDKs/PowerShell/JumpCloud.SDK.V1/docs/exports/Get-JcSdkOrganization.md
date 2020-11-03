@@ -14,20 +14,19 @@ This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\n
 
 ### List (Default)
 ```
-Get-JcSdkOrganization -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Search <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>]
+ [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String> [-Fields <String>]
- [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,36 +49,6 @@ This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\n
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.

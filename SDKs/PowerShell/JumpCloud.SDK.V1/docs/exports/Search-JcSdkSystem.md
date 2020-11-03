@@ -19,15 +19,14 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkSystem -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-XOrgId <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
+ [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystem -Accept <String> -ContentType <String> -Body <ISearch> [-Fields <String>]
- [-Filter <String>] [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,21 +55,6 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 search
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -84,21 +68,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -191,21 +160,6 @@ Accept wildcard characters: False
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISearchFilter1
 Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

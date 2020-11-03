@@ -14,20 +14,17 @@ This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n
 
 ### List (Default)
 ```
-Get-JcSdkRadiusServer -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
+Get-JcSdkRadiusServer [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkRadiusServer -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>]
- [<CommonParameters>]
+Get-JcSdkRadiusServer -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-XOrgId <String>] [<CommonParameters>]
+Get-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,36 +47,6 @@ This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
@@ -158,21 +125,6 @@ Prefix with `-` to sort descending.
 ```yaml
 Type: System.String
 Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

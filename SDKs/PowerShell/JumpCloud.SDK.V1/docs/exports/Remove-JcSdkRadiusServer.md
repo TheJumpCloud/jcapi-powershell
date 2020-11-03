@@ -14,14 +14,12 @@ This endpoint allows you to delete RADIUS servers in your organization.\n```\ncu
 
 ### Delete (Default)
 ```
-Remove-JcSdkRadiusServer -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Remove-JcSdkRadiusServer -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,36 +42,6 @@ This endpoint allows you to delete RADIUS servers in your organization.\n```\ncu
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Id
 .
@@ -103,21 +71,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

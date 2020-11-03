@@ -14,32 +14,31 @@ This endpoint Updates a command based on the command ID and returns the modified
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkCommand -Id <String> -Accept <String> -ContentType <String> -Command <String> [-XOrgId <String>]
- [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>]
- [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
- [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
- [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -Id <String> -Command <String> [-CommandRunners <String[]>] [-CommandType <String>]
+ [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>]
+ [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>]
+ [-Timeout <String>] [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Put
 ```
-Set-JcSdkCommand -Id <String> -Accept <String> -ContentType <String> -Body <ICommand> [-XOrgId <String>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -Id <String> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String> -Body <ICommand>
- [-XOrgId <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- -Command <String> [-XOrgId <String>] [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
- [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
- [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
- [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Command <String> [-CommandRunners <String[]>]
+ [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
+ [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo]
+ [-Systems <String[]>] [-Timeout <String>] [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,21 +61,6 @@ This endpoint Updates a command based on the command ID and returns the modified
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Body
 Command
@@ -133,21 +117,6 @@ Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -389,21 +358,6 @@ This field is required when creating a command with a commandType of "mac" or "l
 ```yaml
 Type: System.String
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

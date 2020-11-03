@@ -16,15 +16,14 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Fields1 <String>] [-Filter1 <ISearchFilter>] [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
+ [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkOrganization -Accept <String> -ContentType <String> -Body <ISearch> [-Fields <String>]
- [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,21 +49,6 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 search
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -78,21 +62,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

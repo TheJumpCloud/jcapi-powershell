@@ -14,20 +14,18 @@ This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncu
 
 ### List (Default)
 ```
-Get-JcSdkCommandResult -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Sort <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommandResult [-Fields <String>] [-Filter <String>] [-Sort <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkCommandResult -Id <String> -Accept <String> -ContentType <String> [-Fields <String>]
- [-Filter <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommandResult -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Fields <String>] [-Filter <String>] [-XOrgId <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,36 +48,6 @@ This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncu
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
@@ -173,21 +141,6 @@ Prefix with `-` to sort descending.
 ```yaml
 Type: System.String
 Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

@@ -14,32 +14,30 @@ This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl 
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkSystem -Id <String> -Accept <String> -ContentType <String> [-Authorization <String>] [-Date <String>]
- [-XOrgId <String>] [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]
- [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication]
- [-AllowSshRootLogin] [-DisplayName <String>] [-Tags <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> [-Authorization <String>] [-Date <String>]
+ [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
+ [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
+ [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
 ```
-Set-JcSdkSystem -Id <String> -Accept <String> -ContentType <String> -Body <ISystemput>
- [-Authorization <String>] [-Date <String>] [-XOrgId <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Authorization <String>] [-Date <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- -Body <ISystemput> [-Authorization <String>] [-Date <String>] [-XOrgId <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Authorization <String>]
+ [-Date <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Authorization <String>] [-Date <String>] [-XOrgId <String>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Authorization <String>] [-Date <String>]
  [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
- [-DisplayName <String>] [-Tags <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,21 +60,6 @@ This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl 
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -AgentBoundMessages
 .
@@ -185,21 +168,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Date
 Current date header for the System Context API
 
@@ -258,36 +226,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Tags
-.
-
-```yaml
-Type: System.String[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -355,7 +293,6 @@ BODY <ISystemput>: SystemPut
   - `[AllowSshPasswordAuthentication <Boolean?>]`: 
   - `[AllowSshRootLogin <Boolean?>]`: 
   - `[DisplayName <String>]`: 
-  - `[Tags <String[]>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
