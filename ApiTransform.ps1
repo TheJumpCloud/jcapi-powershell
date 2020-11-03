@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String]$SDKName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$SortAttributes = $true
 )
@@ -381,7 +381,13 @@ Function Update-SwaggerObject
                         $xMsEnum = [PSCustomObject]@{
                             # name          = $AttributeName
                             modelAsString = $true
-                            values        = @($ThisObject.enum)
+                            values        = @(
+                                $ThisObject.enum | ForEach-Object {
+                                    [PSCustomObject]@{
+                                        Value = $_
+                                    }
+                                }
+                            )
                         }
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
                     }
@@ -469,103 +475,106 @@ Function Format-SwaggerObject
     Return $SortedSwaggerObject
 }
 # Start script
-If ($TransformConfig.Contains($SDKName))
-{
-    $Config = $TransformConfig.($SDKName)
-    $CurrentSDKName = $SDKName
-    $global:OperationIdMapping = $Config.OperationIdMapping
-    $global:ExcludedPaths = $Config.ExcludedPaths
-    # Create output file path
-    $OutputFullPathJson = "$($OutputFilePath)/$($SDKName).json"
-    If (-not (Test-Path -Path:($OutputFilePath)))
+$SDKName | ForEach-Object {
+    $SDKNameItem = $_
+    If ($TransformConfig.Contains($SDKNameItem))
     {
-        New-Item -Path:($OutputFilePath) -ItemType:('Directory')
-    }
-    # Get OAS content
-    $OASContent = If ($Config.Url -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
-    {
-        $GitHubHeaders = @{
-            'Authorization' = "token $GitHubAccessToken";
-            'Accept'        = 'application/vnd.github.v3.raw';
-        }
-        Invoke-RestMethod -Method:('GET') -Uri:($Config.Url) -Headers:($GitHubHeaders)
-    }
-    ElseIf ($Config.Url -like '*https*')
-    {
-        (Invoke-WebRequest -Uri:($Config.Url)).Content
-    }
-    Else
-    {
-        Get-Content -Path:($Config.Url) -Raw
-    }
-    If ([System.String]::IsNullOrEmpty($OASContent))
-    {
-        Write-Error ('No content was returned from: ' + $($Config.Url))
-    }
-    Else
-    {
-        # Prep json for find and replace by flattening string
-        $SwaggerObject = If ($Config.Url -like '*.yaml*')
+        $Config = $TransformConfig.($SDKNameItem)
+        $CurrentSDKName = $SDKNameItem
+        $global:OperationIdMapping = $Config.OperationIdMapping
+        $global:ExcludedPaths = $Config.ExcludedPaths
+        # Create output file path
+        $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
+        If (-not (Test-Path -Path:($OutputFilePath)))
         {
-            $OASContent | ConvertFrom-Yaml -Ordered # | ConvertTo-Yaml -JsonCompatible
+            New-Item -Path:($OutputFilePath) -ItemType:('Directory')
+        }
+        # Get OAS content
+        $OASContent = If ($Config.Url -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
+        {
+            $GitHubHeaders = @{
+                'Authorization' = "token $GitHubAccessToken";
+                'Accept'        = 'application/vnd.github.v3.raw';
+            }
+            Invoke-RestMethod -Method:('GET') -Uri:($Config.Url) -Headers:($GitHubHeaders)
+        }
+        ElseIf ($Config.Url -like '*https*')
+        {
+            (Invoke-WebRequest -Uri:($Config.Url)).Content
         }
         Else
         {
-            $OASContent | ConvertFrom-Json -Depth:(100)
+            Get-Content -Path:($Config.Url) -Raw
         }
-        # Get the original version
-        $SwaggerObjectOrg = Format-SwaggerObject -CurrentObject:($SwaggerObject | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
-        # Find and replace on file
-        $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
-        If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
+        If ([System.String]::IsNullOrEmpty($OASContent))
         {
-            ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
-                $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
-                If (-not [System.String]::IsNullOrEmpty($PatternMatch))
-                {
-                    $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
-                    $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
-                }
-                Else
-                {
-                    Write-Error("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
-                }
+            Write-Error ('No content was returned from: ' + $($Config.Url))
+        }
+        Else
+        {
+            # Prep json for find and replace by flattening string
+            $SwaggerObject = If ($Config.Url -like '*.yaml*')
+            {
+                $OASContent | ConvertFrom-Yaml -Ordered # | ConvertTo-Yaml -JsonCompatible
             }
-        }
-        # Update swagger object
-        $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-        $SwaggerString = Update-SwaggerObject -CurrentObject:($SwaggerObject) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
-        # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
-        # Validate that all operationIds in mapping have been found in spec
-        If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
-        {
-            ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
-                Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' unable to find operationId '$($_.Key)'.")
+            Else
+            {
+                $OASContent | ConvertFrom-Json -Depth:(100)
             }
-        }
-        # Validate that all "excludedPaths" in mapping have been removed from spec
-        If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
-        {
-            ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
-                If ($SwaggerString -match $_)
-                {
-                    Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' the path '$($_)' has not been excluded.")
+            # Get the original version
+            $SwaggerObjectOrg = Format-SwaggerObject -CurrentObject:($SwaggerObject | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
+            # Find and replace on file
+            $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
+            If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
+            {
+                ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
+                    $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
+                    If (-not [System.String]::IsNullOrEmpty($PatternMatch))
+                    {
+                        $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
+                        $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                    }
+                    Else
+                    {
+                        Write-Error("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                    }
                 }
             }
+            # Update swagger object
+            $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            $SwaggerString = Update-SwaggerObject -CurrentObject:($SwaggerObject) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
+            # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
+            # Validate that all operationIds in mapping have been found in spec
+            If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
+            {
+                ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
+                    Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' unable to find operationId '$($_.Key)'.")
+                }
+            }
+            # Validate that all "excludedPaths" in mapping have been removed from spec
+            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
+            {
+                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
+                    If ($SwaggerString -match $_)
+                    {
+                        Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' the path '$($_)' has not been excluded.")
+                    }
+                }
+            }
+            # Validate that "tags" have been removed
+            $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
+            If ($Tags.Matches.Value)
+            {
+                Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
+            }
+            # Output new file
+            $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
+            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
+            # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
         }
-        # Validate that "tags" have been removed
-        $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
-        If ($Tags.Matches.Value)
-        {
-            Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
-        }
-        # Output new file
-        $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
-        # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
-        # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
     }
-}
-Else
-{
-    Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKName)'.")
+    Else
+    {
+        Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
+    }
 }
