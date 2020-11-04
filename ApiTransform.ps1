@@ -377,7 +377,6 @@ Function Update-SwaggerObject
                     # Append "x-ms-enum" to "enum" section
                     If ($AttributeName -eq 'enum')
                     {
-                        # Write-Host ($ThisObject)
                         $xMsEnum = [PSCustomObject]@{
                             name          = $InputObjectName
                             modelAsString = $true
@@ -387,7 +386,7 @@ Function Update-SwaggerObject
                                     If (-not [System.String]::IsNullOrEmpty($EnumItem))
                                     {
                                         [PSCustomObject]@{
-                                            name  = $EnumItem.Replace('#', '')
+                                            name  = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
                                             value = $EnumItem
                                         }
                                     }
@@ -395,6 +394,33 @@ Function Update-SwaggerObject
                             )
                         }
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                        # Make x-ms-enum names unique
+                        # See if x-ms-enum already exists by name
+                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
+                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                        {
+                            $xMsEnumObjectFilteredId = 0
+                            $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                        }
+                        Else
+                        {
+                            # See if x-ms-enum already exists by name and value
+                            $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
+                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                            {
+                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                                $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                            }
+                            Else
+                            {
+                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                            }
+                        }
+                        If ($xMsEnumObjectFilteredId -gt 0)
+                        {
+                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                        }
+                        # Write-Host ("$($InputObjectName) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
                     }
                     # Map operationIds
                     If ($AttributeName -eq 'operationId')
@@ -482,6 +508,7 @@ Function Format-SwaggerObject
 # Start script
 $SDKName | ForEach-Object {
     $SDKNameItem = $_
+    $global:xMsEnumObject = @()
     If ($TransformConfig.Contains($SDKNameItem))
     {
         $Config = $TransformConfig.($SDKNameItem)
@@ -518,7 +545,7 @@ $SDKName | ForEach-Object {
         Else
         {
             # Prep json for find and replace by flattening string
-            $SwaggerObject = If ($Config.Url -like '*.yaml*')
+            $SwaggerObjectContent = If ($Config.Url -like '*.yaml*')
             {
                 $OASContent | ConvertFrom-Yaml -Ordered # | ConvertTo-Yaml -JsonCompatible
             }
@@ -526,10 +553,8 @@ $SDKName | ForEach-Object {
             {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
-            # Get the original version
-            $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObject | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # Find and replace on file
-            $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
+            $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
             {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
@@ -574,7 +599,9 @@ $SDKName | ForEach-Object {
             }
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
-            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
+            # For comparing before and after
+            # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
+            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
         }
     }
