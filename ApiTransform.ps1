@@ -379,14 +379,15 @@ Function Update-SwaggerObject
                     {
                         $xMsEnum = [PSCustomObject]@{
                             name          = $InputObjectName
-                            modelAsString = $true
+                            modelAsString = $false
                             values        = @(
                                 $ThisObject.enum | ForEach-Object {
                                     $EnumItem = $_
+                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
                                     If (-not [System.String]::IsNullOrEmpty($EnumItem))
                                     {
                                         [PSCustomObject]@{
-                                            name  = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                                            name  = $EnumItemName
                                             value = $EnumItem
                                         }
                                     }
@@ -421,6 +422,11 @@ Function Update-SwaggerObject
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
                         # Write-Host ("$($InputObjectName) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
+                        # TODO: Figure out error " error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
+                        If ($ThisObject.'x-ms-enum'.name -in ('items1', 'items2', 'items3'))
+                        {
+                            $ThisObject.PSObject.Properties.Remove('x-ms-enum')
+                        }
                     }
                     # Map operationIds
                     If ($AttributeName -eq 'operationId')
