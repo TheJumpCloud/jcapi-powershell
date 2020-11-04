@@ -31,6 +31,8 @@ BODY <IUserGroupPost>:
     [Id <Int32?>]:
     [Name <String>]:
   [AttributeSambaEnabled <Boolean?>]:
+  [Description <String>]: Description of a User Group
+  [Email <String>]: Email address of a User Group
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkUserGroup.md
 #>
@@ -64,6 +66,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${AttributeSambaEnabled},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Description of a User Group
+    ${Description},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Email address of a User Group
+    ${Email},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

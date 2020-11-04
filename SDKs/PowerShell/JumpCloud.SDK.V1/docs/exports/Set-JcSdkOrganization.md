@@ -207,7 +207,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[EnableManagedUid <Boolean?>]`: 
     - `[Logo <String>]`: 
     - `[Name <String>]`: 
-    - `[PasswordCompliance <PasswordCompliance?>]`: 
+    - `[PasswordCompliance <String>]`: 
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
     - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
@@ -257,7 +257,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[EnableManagedUid <Boolean?>]`: 
   - `[Logo <String>]`: 
   - `[Name <String>]`: 
-  - `[PasswordCompliance <PasswordCompliance?>]`: 
+  - `[PasswordCompliance <String>]`: 
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
   - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 

@@ -25,7 +25,7 @@ BODY <IRadiusserverpost>:
   Name <String>:
   NetworkSourceIP <String>:
   SharedSecret <String>: RADIUS shared secret between the server and client.
-  [Mfa <Mfa?>]:
+  [Mfa <String>]:
   [TagNames <String[]>]:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
@@ -63,9 +63,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${SharedSecret},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Mfa])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Mfa]
+    [System.String]
     # .
     ${Mfa},
 

@@ -25,7 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>:
   [Beta <Boolean?>]:
-  [Color <Color?>]:
+  [Color <String>]:
   [Config <IApplicationConfig>]:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
@@ -113,7 +113,7 @@ BODY <IApplication>:
   [DisplayName <String>]:
   [Id <String>]:
   [LearnMore <String>]:
-  [LogoColor <Color?>]:
+  [LogoColor <String>]:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
@@ -245,9 +245,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${Color},
 
@@ -309,9 +308,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${LogoColor},
 

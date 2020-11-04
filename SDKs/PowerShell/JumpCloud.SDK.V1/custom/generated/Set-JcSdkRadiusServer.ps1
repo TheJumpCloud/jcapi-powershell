@@ -27,7 +27,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>:
   Name <String>:
   NetworkSourceIP <String>:
   SharedSecret <String>:
-  [Mfa <Mfa?>]:
+  [Mfa <String>]:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
 
@@ -89,9 +89,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Mfa])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Mfa]
+    [System.String]
     # .
     ${Mfa},
 

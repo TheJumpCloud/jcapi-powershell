@@ -1,43 +1,241 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "version": "1.0",
-    "title": "Directory Insights API",
-    "description": "The purpose of this API is to query Jumpcloud Directory Insights events"
-  },
-  "host": "api.jumpcloud.com",
   "basePath": "/insights/directory/v1/",
-  "schemes": [
-    "https"
-  ],
   "consumes": [
     "application/json"
   ],
-  "produces": [
-    "application/json"
-  ],
-  "securityDefinitions": {
-    "x-api-key": {
-      "name": "x-api-key",
-      "type": "apiKey",
-      "in": "header"
+  "definitions": {
+    "ErrorMessage": {
+      "properties": {
+        "message": {
+          "description": "Text detailed error message returned by the service",
+          "type": "string"
+        }
+      },
+      "title": "ErrorMessage",
+      "type": "object"
     },
-    "x-org-id": {
-      "name": "x-org-id",
-      "type": "apiKey",
-      "in": "header"
+    "EventCount": {
+      "description": "EventCount JSON struct with count of matching events",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Count"
+        }
+      },
+      "title": "EventCount",
+      "type": "object"
+    },
+    "EventDistinctQuery": {
+      "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "field": {
+          "description": "field is what they wish to query on",
+          "type": "string",
+          "x-go-name": "Field"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventDistinctQuery",
+      "type": "object"
+    },
+    "EventIntervalQuery": {
+      "description": "EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "interval_unit": {
+          "type": "string",
+          "x-go-name": "IntervalUnit"
+        },
+        "interval_value": {
+          "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
+          "type": "string",
+          "x-go-name": "IntervalValue"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezone": {
+          "description": "TimeZone. Specify the timezone in which the user is in\noptional",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time",
+        "interval_unit"
+      ],
+      "title": "EventIntervalQuery",
+      "type": "object"
+    },
+    "EventQuery": {
+      "description": "EventQuery is the users' command to search our auth logs",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "fields": {
+          "description": "optional list of fields to return from query",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Projection"
+        },
+        "limit": {
+          "description": "Max number of rows to return",
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Limit"
+        },
+        "search_after": {
+          "description": "Specific query to search after, see x-* response headers for next values",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "SearchAfter"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "sort": {
+          "description": "ASC or DESC order for timestamp",
+          "type": "string",
+          "x-go-name": "Sort"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventQuery",
+      "type": "object"
+    },
+    "EventServiceTimeQuery": {
+      "description": "EventServiceTimeQuery is the base struct for most event queries\nit includes the minimum-required fields of service and start/end times",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventServiceTimeQuery",
+      "type": "object"
+    },
+    "SearchTerm": {
+      "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
+      "properties": {
+        "and": {
+          "$ref": "#/definitions/TermConjunction"
+        },
+        "or": {
+          "$ref": "#/definitions/TermConjunction"
+        }
+      },
+      "title": "SearchTerm",
+      "type": "object"
+    },
+    "TermConjunction": {
+      "additionalProperties": true,
+      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
+      "title": "TermConjunction",
+      "type": "object"
     }
+  },
+  "host": "api.jumpcloud.com",
+  "info": {
+    "description": "The purpose of this API is to query Jumpcloud Directory Insights events",
+    "title": "Directory Insights API",
+    "version": "1.0"
   },
   "paths": {
     "/events": {
       "post": {
-        "operationId": "Get-Event",
-        "summary": "Query Events",
         "description": "Query the API for Directory Insights events",
+        "operationId": "Get-Event",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/EventQuery"
             }
@@ -47,11 +245,11 @@
           "200": {
             "description": "Array of Directory Insights events JSON objects",
             "schema": {
-              "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": true
-              }
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "400": {
@@ -86,18 +284,18 @@
           {
             "x-org-id": []
           }
-        ]
+        ],
+        "summary": "Query Events"
       }
     },
     "/events/count": {
       "post": {
-        "operationId": "Get-EventCount",
-        "summary": "Count Events",
         "description": "Query the API for a count of matching events",
+        "operationId": "Get-EventCount",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/EventQuery"
             }
@@ -142,18 +340,18 @@
           {
             "x-org-id": []
           }
-        ]
+        ],
+        "summary": "Count Events"
       }
     },
     "/events/distinct": {
       "post": {
-        "operationId": "Get-EventDistinct",
-        "summary": "Query event distinct field values",
         "description": "Query the API for a list of distinct values for a field",
+        "operationId": "Get-EventDistinct",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/EventDistinctQuery"
             }
@@ -198,18 +396,18 @@
           {
             "x-org-id": []
           }
-        ]
+        ],
+        "summary": "Query event distinct field values"
       }
     },
     "/events/interval": {
       "post": {
-        "operationId": "Get-EventInterval",
-        "summary": "Query event counts by bucketed by a time interval",
         "description": "Query the API for a list of counts by time interval",
+        "operationId": "Get-EventInterval",
         "parameters": [
           {
-            "name": "body",
             "in": "body",
+            "name": "body",
             "schema": {
               "$ref": "#/definitions/EventIntervalQuery"
             }
@@ -219,11 +417,11 @@
           "200": {
             "description": "List of bucketed event counts",
             "schema": {
-              "type": "array",
               "items": {
-                "type": "object",
-                "additionalProperties": true
-              }
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "400": {
@@ -258,226 +456,28 @@
           {
             "x-org-id": []
           }
-        ]
+        ],
+        "summary": "Query event counts by bucketed by a time interval"
       }
     }
   },
-  "definitions": {
-    "ErrorMessage": {
-      "title": "ErrorMessage",
-      "type": "object",
-      "properties": {
-        "message": {
-          "description": "Text detailed error message returned by the service",
-          "type": "string"
-        }
-      }
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "x-api-key": {
+      "in": "header",
+      "name": "x-api-key",
+      "type": "apiKey"
     },
-    "EventCount": {
-      "title": "EventCount",
-      "description": "EventCount JSON struct with count of matching events",
-      "type": "object",
-      "properties": {
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "x-go-name": "Count"
-        }
-      }
-    },
-    "EventDistinctQuery": {
-      "title": "EventDistinctQuery",
-      "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
-      "type": "object",
-      "required": [
-        "service",
-        "start_time"
-      ],
-      "properties": {
-        "end_time": {
-          "description": "optional query end time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        },
-        "field": {
-          "description": "field is what they wish to query on",
-          "type": "string",
-          "x-go-name": "Field"
-        },
-        "search_term": {
-          "$ref": "#/definitions/SearchTerm"
-        },
-        "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Service",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]"
-        },
-        "start_time": {
-          "description": "query start time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "EventIntervalQuery": {
-      "title": "EventIntervalQuery",
-      "description": "EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field",
-      "type": "object",
-      "required": [
-        "service",
-        "start_time",
-        "interval_unit"
-      ],
-      "properties": {
-        "end_time": {
-          "description": "optional query end time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        },
-        "interval_unit": {
-          "type": "string",
-          "x-go-name": "IntervalUnit"
-        },
-        "interval_value": {
-          "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
-          "type": "string",
-          "x-go-name": "IntervalValue"
-        },
-        "search_term": {
-          "$ref": "#/definitions/SearchTerm"
-        },
-        "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Service",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]"
-        },
-        "start_time": {
-          "description": "query start time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        },
-        "timezone": {
-          "description": "TimeZone. Specify the timezone in which the user is in\noptional",
-          "type": "string"
-        }
-      }
-    },
-    "EventQuery": {
-      "title": "EventQuery",
-      "description": "EventQuery is the users' command to search our auth logs",
-      "type": "object",
-      "required": [
-        "service",
-        "start_time"
-      ],
-      "properties": {
-        "end_time": {
-          "description": "optional query end time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        },
-        "fields": {
-          "description": "optional list of fields to return from query",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Projection"
-        },
-        "limit": {
-          "description": "Max number of rows to return",
-          "type": "integer",
-          "format": "int64",
-          "x-go-name": "Limit"
-        },
-        "search_after": {
-          "description": "Specific query to search after, see x-* response headers for next values",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "SearchAfter"
-        },
-        "search_term": {
-          "$ref": "#/definitions/SearchTerm"
-        },
-        "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Service",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]"
-        },
-        "sort": {
-          "description": "ASC or DESC order for timestamp",
-          "type": "string",
-          "x-go-name": "Sort"
-        },
-        "start_time": {
-          "description": "query start time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "EventServiceTimeQuery": {
-      "title": "EventServiceTimeQuery",
-      "description": "EventServiceTimeQuery is the base struct for most event queries\nit includes the minimum-required fields of service and start/end times",
-      "type": "object",
-      "required": [
-        "service",
-        "start_time"
-      ],
-      "properties": {
-        "end_time": {
-          "description": "optional query end time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        },
-        "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-go-name": "Service",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]"
-        },
-        "start_time": {
-          "description": "query start time, UTC in RFC3339 format",
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    },
-    "SearchTerm": {
-      "title": "SearchTerm",
-      "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
-      "type": "object",
-      "properties": {
-        "and": {
-          "$ref": "#/definitions/TermConjunction"
-        },
-        "or": {
-          "$ref": "#/definitions/TermConjunction"
-        }
-      }
-    },
-    "TermConjunction": {
-      "title": "TermConjunction",
-      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-      "type": "object",
-      "additionalProperties": true
+    "x-org-id": {
+      "in": "header",
+      "name": "x-org-id",
+      "type": "apiKey"
     }
-  }
+  },
+  "swagger": "2.0"
 }

@@ -15,7 +15,7 @@ This endpoint allows you to do a full update of the User Group.\n\n#### Sample R
 ### PutExpanded (Default)
 ```
 Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
- [-AttributeSambaEnabled] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
@@ -32,8 +32,8 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [
 ### PutViaIdentityExpanded
 ```
 Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
- [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled]
+ [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -101,6 +101,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Description
+Description of a User Group
+
+```yaml
+Type: System.String
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Email
+Email address of a User Group
+
+```yaml
+Type: System.String
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -213,6 +243,8 @@ BODY <IUserGroupPut>: UserGroupPut
     - `[Id <Int32?>]`: 
     - `[Name <String>]`: 
   - `[AttributeSambaEnabled <Boolean?>]`: 
+  - `[Description <String>]`: Description of a User Group
+  - `[Email <String>]`: Email address of a User Group
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -230,6 +262,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
