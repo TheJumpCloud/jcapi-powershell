@@ -452,6 +452,11 @@ Function Update-SwaggerObject
                     {
                         $ThisObject.PSObject.Properties.Remove('tags')
                     }
+                    # Remove tagnames
+                    ElseIf ($AttributeName -eq 'tagnames')
+                    {
+                        $ThisObject.PSObject.Properties.Remove('tagnames')
+                    }
                     # ElseIf ($AttributeName -eq 'enum')
                     # {
                     #     $ThisObject.PSObject.Properties.Remove('enum')
