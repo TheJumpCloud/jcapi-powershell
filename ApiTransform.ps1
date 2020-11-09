@@ -343,6 +343,12 @@ Function Update-SwaggerObject
     )
     $InputObject | ForEach-Object {
         $ThisObject = $_
+        # # Use for debugging. Specify the attribute path you want to troubleshoot and add break point.
+        # If ($InputObjectName -eq 'root.paths./users/{user_id}/associations.get.parameters')
+        # {
+        #     Write-Host "Break Point"
+        #     $ThisObject.description = 'Test'
+        # }
         # Get child objects
         If (-not [System.String]::IsNullOrEmpty($ThisObject))
         {
@@ -367,18 +373,16 @@ Function Update-SwaggerObject
             # Write-Host ("AttributeNames: $AttributeNames")
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
+                $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
+                $ThisObjectName = $InputObjectName.split('.') | Select-Object -Last 1
                 $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
-                # If ($AttributeName -eq 'tags') # Use for debugging. Specify the attribute you want to troubleshoot and add break point.
-                # {
-                #     Write-Host "Break Point"
-                # }
                 If ($NoUpdate -eq $false)
                 {
                     # Append "x-ms-enum" to "enum" section
-                    If ($AttributeName -eq 'enum')
+                    If ($AttributePath -like '*.enum')
                     {
                         $xMsEnum = [PSCustomObject]@{
-                            name          = $InputObjectName
+                            name          = $ThisObjectName
                             modelAsString = $false
                             values        = @(
                                 $ThisObject.enum | ForEach-Object {
@@ -387,8 +391,9 @@ Function Update-SwaggerObject
                                     If (-not [System.String]::IsNullOrEmpty($EnumItem))
                                     {
                                         [PSCustomObject]@{
-                                            name  = $EnumItemName
-                                            value = $EnumItem
+                                            name        = $EnumItemName;
+                                            value       = $EnumItem;
+                                            description = $EnumItem;
                                         }
                                     }
                                 }
@@ -421,15 +426,15 @@ Function Update-SwaggerObject
                         {
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
-                        # Write-Host ("$($InputObjectName) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
+                        # Write-Host ("$($AttributePath) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
                         # TODO: Figure out error " error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
-                        If ($ThisObject.'x-ms-enum'.name -in ('items1', 'items2', 'items3'))
+                        If ($AttributePath -like '*.get.*')
                         {
                             $ThisObject.PSObject.Properties.Remove('x-ms-enum')
                         }
                     }
                     # Map operationIds
-                    If ($AttributeName -eq 'operationId')
+                    If ($AttributePath -like '*.operationId')
                     {
                         If (($global:OperationIdMapping).Contains($ThisObject.operationId))
                         {
@@ -448,23 +453,23 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                     }
                     # Remove tags
-                    ElseIf ($AttributeName -eq 'tags')
+                    ElseIf ($AttributePath -like '*.tags')
                     {
                         $ThisObject.PSObject.Properties.Remove('tags')
                     }
                     # Remove tagnames
-                    ElseIf ($AttributeName -eq 'tagnames')
+                    ElseIf ($AttributePath -like '*.tagnames')
                     {
                         $ThisObject.PSObject.Properties.Remove('tagnames')
                     }
-                    # ElseIf ($AttributeName -eq 'enum')
+                    # ElseIf ($AttributePath -like '*.enum')
                     # {
                     #     $ThisObject.PSObject.Properties.Remove('enum')
                     # }
                     Else
                     {
                         # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
                         # If it was an array of objects before reapply the parent array.
                         If ($ThisObjectAttributeNameType -eq 'System.Object[]')
                         {
@@ -484,7 +489,7 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributeName) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
                     # If it was an array of objects before reapply the parent array.
                     If ($ThisObjectAttributeNameType -eq 'System.Object[]')
                     {
@@ -611,6 +616,7 @@ $SDKName | ForEach-Object {
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # For comparing before and after
+            # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
