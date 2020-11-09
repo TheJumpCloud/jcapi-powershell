@@ -613,6 +613,21 @@ $SDKName | ForEach-Object {
             {
                 Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
             }
+            # Compare current spec to old spec and if they are diffrent then export the new file
+            $UpdatedSpec = $false
+            If (Test-Path -Path:($OutputFullPathJson))
+            {
+                $OldSpec = Get-Content -Path:($OutputFullPathJson) -Raw | ConvertFrom-Json -Depth:(100) | ConvertTo-Json -Depth:(100)
+                $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
+                If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                {
+                    $UpdatedSpec = $true
+                }
+            }
+            Else
+            {
+                $UpdatedSpec = $true
+            }
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # For comparing before and after
@@ -620,6 +635,10 @@ $SDKName | ForEach-Object {
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
+
+            # Return variable to Azure Pipelines
+            Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
+            Return $UpdatedSpec
         }
     }
     Else
