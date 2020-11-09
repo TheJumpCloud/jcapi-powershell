@@ -15,7 +15,7 @@ This endpoint allows you to update RADIUS servers in your organization.\n\n#### 
 ### PutExpanded (Default)
 ```
 Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [-Mfa <Mfa>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -36,7 +36,7 @@ Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity>
 ### PutViaIdentityExpanded
 ```
 Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
+ -SharedSecret <String> [-Mfa <Mfa>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V1.Support.Mfa
 Parameter Sets: PutExpanded, PutViaIdentityExpanded
 Aliases:
 
@@ -255,7 +255,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: 
-  - `[Mfa <String>]`: 
+  - `[Mfa <Mfa?>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
