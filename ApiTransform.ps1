@@ -444,7 +444,7 @@ Function Update-SwaggerObject
                         }
                         Else
                         {
-                            Write-Error ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
+                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
                     # Exclude paths
@@ -556,7 +556,7 @@ $SDKName | ForEach-Object {
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
-            Write-Error ('No content was returned from: ' + $($Config.Url))
+            Write-Host("##vso[task.logissue type=error;]No content was returned from: $($Config.Url)")
         }
         Else
         {
@@ -582,7 +582,7 @@ $SDKName | ForEach-Object {
                     }
                     Else
                     {
-                        Write-Error("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                        Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
                     }
                 }
             }
@@ -594,7 +594,7 @@ $SDKName | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
             {
                 ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
-                    Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' unable to find operationId '$($_.Key)'.")
+                    Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' unable to find operationId '$($_.Key)'.")
                 }
             }
             # Validate that all "excludedPaths" in mapping have been removed from spec
@@ -603,7 +603,7 @@ $SDKName | ForEach-Object {
                 ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
                     If ($SwaggerString -match $_)
                     {
-                        Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' the path '$($_)' has not been excluded.")
+                        Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' the path '$($_)' has not been excluded.")
                     }
                 }
             }
@@ -611,7 +611,7 @@ $SDKName | ForEach-Object {
             $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
             If ($Tags.Matches.Value)
             {
-                Write-Error ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
+                Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
             }
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
@@ -643,6 +643,6 @@ $SDKName | ForEach-Object {
     }
     Else
     {
-        Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
+        Write-Host("##vso[task.logissue type=error;]Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }
