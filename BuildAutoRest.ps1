@@ -297,7 +297,7 @@ Try
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         # Tmp workaround
                         $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
-                        $checkDependenciesModuleContent.Replace('autorest-beta'.'autorest') | Set-Content -Path:($checkDependenciesModulePath)
+                        $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
