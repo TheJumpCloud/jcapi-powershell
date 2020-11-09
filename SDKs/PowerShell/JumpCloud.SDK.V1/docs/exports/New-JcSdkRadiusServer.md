@@ -14,9 +14,9 @@ This endpoint allows you to create RADIUS servers in your organization.\n\n#### 
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <String>]
- [-TagNames <String[]>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <Mfa>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -65,7 +65,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V1.Support.Mfa
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -115,21 +115,6 @@ Parameter Sets: CreateExpanded
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -TagNames
-.
-
-```yaml
-Type: System.String[]
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -221,8 +206,7 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: RADIUS shared secret between the server and client.
-  - `[Mfa <String>]`: 
-  - `[TagNames <String[]>]`: 
+  - `[Mfa <Mfa?>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 

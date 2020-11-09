@@ -14,9 +14,9 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkApplication [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
+New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
+ [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
  [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -81,7 +81,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V1.Support.Color
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -217,7 +217,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V1.Support.Color
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -341,7 +341,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
-  - `[Color <String>]`: 
+  - `[Color <Color?>]`: 
   - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
@@ -429,7 +429,7 @@ BODY <IApplication>: Application
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[LearnMore <String>]`: 
-  - `[LogoColor <String>]`: 
+  - `[LogoColor <Color?>]`: 
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 

@@ -14,7 +14,7 @@ This endpoint allows you to manage the _direct_ associations of a Radius Server.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <String> -Type <String>
+Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <Op> -Type <GraphType>
  [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -32,9 +32,8 @@ Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IG
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
- -Type <String> [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
+ [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -124,7 +123,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Op
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -169,7 +168,7 @@ Accept wildcard characters: False
 The graph type.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.GraphType
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -235,8 +234,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: The graph type.
+  - `Op <Op>`: How to modify the graph connection.
+  - `Type <GraphType>`: The graph type.
   - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
