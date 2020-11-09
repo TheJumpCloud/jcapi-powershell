@@ -93,6 +93,7 @@ Try
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
+                $checkDependenciesModulePath = '{0}/check-dependencies.ps1' -f $OutputFullPath
                 $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $nuspecPath = '{0}/{1}.nuspec' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
@@ -294,6 +295,9 @@ Try
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        # Tmp workaround
+                        $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
+                        $checkDependenciesModuleContent.Replace('autorest-beta'.'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
