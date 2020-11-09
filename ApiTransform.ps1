@@ -383,7 +383,7 @@ Function Update-SwaggerObject
                     {
                         $xMsEnum = [PSCustomObject]@{
                             name          = $ThisObjectName
-                            modelAsString = $false
+                            modelAsString = $true
                             values        = @(
                                 $ThisObject.enum | ForEach-Object {
                                     $EnumItem = $_
