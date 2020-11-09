@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 
 ### PatchExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+ [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Patch
@@ -31,8 +31,9 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInpu
 
 ### PatchViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
+ [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -122,7 +123,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserLockoutAction
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -137,7 +138,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -203,8 +204,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IGsuitePatchInput>: GSuite Patch Input
   - `[Name <String>]`: 
-  - `[UserLockoutAction <String>]`: 
-  - `[UserPasswordExpirationAction <String>]`: 
+  - `[UserLockoutAction <UserLockoutAction?>]`: 
+  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

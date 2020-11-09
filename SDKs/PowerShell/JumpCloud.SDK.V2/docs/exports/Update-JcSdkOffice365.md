@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of an Office 365 instance.\n\n####
 
 ### PatchExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+ [-UserPasswordExpirationAction <UserPasswordExpirationAction2>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Patch
@@ -32,8 +32,9 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365Pat
 
 ### PatchViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
+ [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction2>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,7 +124,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserLockoutAction
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -138,7 +139,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -204,8 +205,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
   - `[Name <String>]`: 
-  - `[UserLockoutAction <String>]`: 
-  - `[UserPasswordExpirationAction <String>]`: 
+  - `[UserLockoutAction <UserLockoutAction?>]`: 
+  - `[UserPasswordExpirationAction <UserPasswordExpirationAction2?>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
