@@ -391,9 +391,8 @@ Function Update-SwaggerObject
                                     If (-not [System.String]::IsNullOrEmpty($EnumItem))
                                     {
                                         [PSCustomObject]@{
-                                            name        = $EnumItemName;
-                                            value       = $EnumItem;
-                                            description = $EnumItem;
+                                            name  = $EnumItemName;
+                                            value = $EnumItem;
                                         }
                                     }
                                 }
