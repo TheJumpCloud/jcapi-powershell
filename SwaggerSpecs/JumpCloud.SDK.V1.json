@@ -12,67 +12,55 @@
         "color": {
           "x-ms-enum": {
             "name": "color",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "202D38",
-                "value": "#202D38",
-                "description": "#202D38"
+                "value": "#202D38"
               },
               {
                 "name": "005466",
-                "value": "#005466",
-                "description": "#005466"
+                "value": "#005466"
               },
               {
                 "name": "3E8696",
-                "value": "#3E8696",
-                "description": "#3E8696"
+                "value": "#3E8696"
               },
               {
                 "name": "006CAC",
-                "value": "#006CAC",
-                "description": "#006CAC"
+                "value": "#006CAC"
               },
               {
                 "name": "0617AC",
-                "value": "#0617AC",
-                "description": "#0617AC"
+                "value": "#0617AC"
               },
               {
                 "name": "7C6ADA",
-                "value": "#7C6ADA",
-                "description": "#7C6ADA"
+                "value": "#7C6ADA"
               },
               {
                 "name": "D5779D",
-                "value": "#D5779D",
-                "description": "#D5779D"
+                "value": "#D5779D"
               },
               {
                 "name": "9E2F00",
-                "value": "#9E2F00",
-                "description": "#9E2F00"
+                "value": "#9E2F00"
               },
               {
                 "name": "FFB000",
-                "value": "#FFB000",
-                "description": "#FFB000"
+                "value": "#FFB000"
               },
               {
                 "name": "58C469",
-                "value": "#58C469",
-                "description": "#58C469"
+                "value": "#58C469"
               },
               {
                 "name": "57C49F",
-                "value": "#57C49F",
-                "description": "#57C49F"
+                "value": "#57C49F"
               },
               {
                 "name": "FF6C03",
-                "value": "#FF6C03",
-                "description": "#FF6C03"
+                "value": "#FF6C03"
               }
             ]
           },
@@ -462,67 +450,55 @@
             "color": {
               "x-ms-enum": {
                 "name": "color",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "202D38",
-                    "value": "#202D38",
-                    "description": "#202D38"
+                    "value": "#202D38"
                   },
                   {
                     "name": "005466",
-                    "value": "#005466",
-                    "description": "#005466"
+                    "value": "#005466"
                   },
                   {
                     "name": "3E8696",
-                    "value": "#3E8696",
-                    "description": "#3E8696"
+                    "value": "#3E8696"
                   },
                   {
                     "name": "006CAC",
-                    "value": "#006CAC",
-                    "description": "#006CAC"
+                    "value": "#006CAC"
                   },
                   {
                     "name": "0617AC",
-                    "value": "#0617AC",
-                    "description": "#0617AC"
+                    "value": "#0617AC"
                   },
                   {
                     "name": "7C6ADA",
-                    "value": "#7C6ADA",
-                    "description": "#7C6ADA"
+                    "value": "#7C6ADA"
                   },
                   {
                     "name": "D5779D",
-                    "value": "#D5779D",
-                    "description": "#D5779D"
+                    "value": "#D5779D"
                   },
                   {
                     "name": "9E2F00",
-                    "value": "#9E2F00",
-                    "description": "#9E2F00"
+                    "value": "#9E2F00"
                   },
                   {
                     "name": "FFB000",
-                    "value": "#FFB000",
-                    "description": "#FFB000"
+                    "value": "#FFB000"
                   },
                   {
                     "name": "58C469",
-                    "value": "#58C469",
-                    "description": "#58C469"
+                    "value": "#58C469"
                   },
                   {
                     "name": "57C49F",
-                    "value": "#57C49F",
-                    "description": "#57C49F"
+                    "value": "#57C49F"
                   },
                   {
                     "name": "FF6C03",
-                    "value": "#FF6C03",
-                    "description": "#FF6C03"
+                    "value": "#FF6C03"
                   }
                 ]
               },
@@ -593,67 +569,55 @@
         "color": {
           "x-ms-enum": {
             "name": "color",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "202D38",
-                "value": "#202D38",
-                "description": "#202D38"
+                "value": "#202D38"
               },
               {
                 "name": "005466",
-                "value": "#005466",
-                "description": "#005466"
+                "value": "#005466"
               },
               {
                 "name": "3E8696",
-                "value": "#3E8696",
-                "description": "#3E8696"
+                "value": "#3E8696"
               },
               {
                 "name": "006CAC",
-                "value": "#006CAC",
-                "description": "#006CAC"
+                "value": "#006CAC"
               },
               {
                 "name": "0617AC",
-                "value": "#0617AC",
-                "description": "#0617AC"
+                "value": "#0617AC"
               },
               {
                 "name": "7C6ADA",
-                "value": "#7C6ADA",
-                "description": "#7C6ADA"
+                "value": "#7C6ADA"
               },
               {
                 "name": "D5779D",
-                "value": "#D5779D",
-                "description": "#D5779D"
+                "value": "#D5779D"
               },
               {
                 "name": "9E2F00",
-                "value": "#9E2F00",
-                "description": "#9E2F00"
+                "value": "#9E2F00"
               },
               {
                 "name": "FFB000",
-                "value": "#FFB000",
-                "description": "#FFB000"
+                "value": "#FFB000"
               },
               {
                 "name": "58C469",
-                "value": "#58C469",
-                "description": "#58C469"
+                "value": "#58C469"
               },
               {
                 "name": "57C49F",
-                "value": "#57C49F",
-                "description": "#57C49F"
+                "value": "#57C49F"
               },
               {
                 "name": "FF6C03",
-                "value": "#FF6C03",
-                "description": "#FF6C03"
+                "value": "#FF6C03"
               }
             ]
           },
@@ -1062,22 +1026,19 @@
         "status": {
           "x-ms-enum": {
             "name": "status",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "end_of_life",
-                "value": "end_of_life",
-                "description": "end_of_life"
+                "value": "end_of_life"
               },
               {
                 "name": "end_of_support",
-                "value": "end_of_support",
-                "description": "end_of_support"
+                "value": "end_of_support"
               },
               {
                 "name": "beta",
-                "value": "beta",
-                "description": "beta"
+                "value": "beta"
               }
             ]
           },
@@ -1550,27 +1511,23 @@
             "vendor": {
               "x-ms-enum": {
                 "name": "vendor",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "unknown",
-                    "value": "unknown",
-                    "description": "unknown"
+                    "value": "unknown"
                   },
                   {
                     "name": "none",
-                    "value": "none",
-                    "description": "none"
+                    "value": "none"
                   },
                   {
                     "name": "internal",
-                    "value": "internal",
-                    "description": "internal"
+                    "value": "internal"
                   },
                   {
                     "name": "external",
-                    "value": "external",
-                    "description": "external"
+                    "value": "external"
                   }
                 ]
               },
@@ -1639,22 +1596,19 @@
             "state": {
               "x-ms-enum": {
                 "name": "state",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "enabled",
-                    "value": "enabled",
-                    "description": "enabled"
+                    "value": "enabled"
                   },
                   {
                     "name": "disabled",
-                    "value": "disabled",
-                    "description": "disabled"
+                    "value": "disabled"
                   },
                   {
                     "name": "deferred",
-                    "value": "deferred",
-                    "description": "deferred"
+                    "value": "deferred"
                   }
                 ]
               },
@@ -1816,22 +1770,19 @@
         "passwordCompliance": {
           "x-ms-enum": {
             "name": "passwordCompliance",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "custom",
-                "value": "custom",
-                "description": "custom"
+                "value": "custom"
               },
               {
                 "name": "pci3",
-                "value": "pci3",
-                "description": "pci3"
+                "value": "pci3"
               },
               {
                 "name": "windows",
-                "value": "windows",
-                "description": "windows"
+                "value": "windows"
               }
             ]
           },
@@ -2021,22 +1972,19 @@
         "passwordCompliance": {
           "x-ms-enum": {
             "name": "passwordCompliance",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "custom",
-                "value": "custom",
-                "description": "custom"
+                "value": "custom"
               },
               {
                 "name": "pci3",
-                "value": "pci3",
-                "description": "pci3"
+                "value": "pci3"
               },
               {
                 "name": "windows",
-                "value": "windows",
-                "description": "windows"
+                "value": "windows"
               }
             ]
           },
@@ -2183,27 +2131,23 @@
         "mfa": {
           "x-ms-enum": {
             "name": "mfa",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "DISABLED",
-                "value": "DISABLED",
-                "description": "DISABLED"
+                "value": "DISABLED"
               },
               {
                 "name": "ENABLED",
-                "value": "ENABLED",
-                "description": "ENABLED"
+                "value": "ENABLED"
               },
               {
                 "name": "REQUIRED",
-                "value": "REQUIRED",
-                "description": "REQUIRED"
+                "value": "REQUIRED"
               },
               {
                 "name": "ALWAYS",
-                "value": "ALWAYS",
-                "description": "ALWAYS"
+                "value": "ALWAYS"
               }
             ]
           },
@@ -2242,27 +2186,23 @@
         "mfa": {
           "x-ms-enum": {
             "name": "mfa",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "DISABLED",
-                "value": "DISABLED",
-                "description": "DISABLED"
+                "value": "DISABLED"
               },
               {
                 "name": "ENABLED",
-                "value": "ENABLED",
-                "description": "ENABLED"
+                "value": "ENABLED"
               },
               {
                 "name": "REQUIRED",
-                "value": "REQUIRED",
-                "description": "REQUIRED"
+                "value": "REQUIRED"
               },
               {
                 "name": "ALWAYS",
-                "value": "ALWAYS",
-                "description": "ALWAYS"
+                "value": "ALWAYS"
               }
             ]
           },
@@ -2307,27 +2247,23 @@
         "mfa": {
           "x-ms-enum": {
             "name": "mfa",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "DISABLED",
-                "value": "DISABLED",
-                "description": "DISABLED"
+                "value": "DISABLED"
               },
               {
                 "name": "ENABLED",
-                "value": "ENABLED",
-                "description": "ENABLED"
+                "value": "ENABLED"
               },
               {
                 "name": "REQUIRED",
-                "value": "REQUIRED",
-                "description": "REQUIRED"
+                "value": "REQUIRED"
               },
               {
                 "name": "ALWAYS",
-                "value": "ALWAYS",
-                "description": "ALWAYS"
+                "value": "ALWAYS"
               }
             ]
           },
@@ -4276,27 +4212,23 @@
                 "mfa": {
                   "x-ms-enum": {
                     "name": "mfa",
-                    "modelAsString": false,
+                    "modelAsString": true,
                     "values": [
                       {
                         "name": "DISABLED",
-                        "value": "DISABLED",
-                        "description": "DISABLED"
+                        "value": "DISABLED"
                       },
                       {
                         "name": "ENABLED",
-                        "value": "ENABLED",
-                        "description": "ENABLED"
+                        "value": "ENABLED"
                       },
                       {
                         "name": "REQUIRED",
-                        "value": "REQUIRED",
-                        "description": "REQUIRED"
+                        "value": "REQUIRED"
                       },
                       {
                         "name": "ALWAYS",
-                        "value": "ALWAYS",
-                        "description": "ALWAYS"
+                        "value": "ALWAYS"
                       }
                     ]
                   },
