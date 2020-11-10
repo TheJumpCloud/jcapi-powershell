@@ -349,6 +349,23 @@ Function Update-SwaggerObject
         #     Write-Host "Break Point"
         #     $ThisObject.description = 'Test'
         # }
+        # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
+        # TODO: If left as is in an array autorest throws error " error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
+        If ($InputObjectName -like '*.get.parameters')
+        {
+            If ($ThisObject | Get-Member -Name type)
+            {
+                If ($ThisObject | Get-Member -Name name)
+                {
+                    If ($ThisObject.name -eq "targets")
+                    {
+                        $ThisObject.type = 'string'
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('enum') -Value:($ThisObject.items.enum) -Force
+                        $ThisObject.PSObject.Properties.Remove('items')
+                    }
+                }
+            }
+        }
         # Get child objects
         If (-not [System.String]::IsNullOrEmpty($ThisObject))
         {
@@ -374,7 +391,14 @@ Function Update-SwaggerObject
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                $ThisObjectName = $InputObjectName.split('.') | Select-Object -Last 1
+                $ThisObjectName = If ($InputObjectName -like '*.get.parameters')
+                {
+                    $ThisObject.name
+                }
+                Else
+                {
+                    $InputObjectName.split('.') | Select-Object -Last 1
+                }
                 $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
@@ -426,11 +450,6 @@ Function Update-SwaggerObject
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
                         # Write-Host ("$($AttributePath) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
-                        # TODO: Figure out error " error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
-                        If ($AttributePath -like '*.get.*')
-                        {
-                            $ThisObject.PSObject.Properties.Remove('x-ms-enum')
-                        }
                     }
                     # Map operationIds
                     If ($AttributePath -like '*.operationId')
