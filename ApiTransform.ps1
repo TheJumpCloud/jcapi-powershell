@@ -135,7 +135,6 @@ $TransformConfig = [Ordered]@{
             'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Sync-AppleMDMDevice';
             'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
             'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
-            'GET_applications-application_id'                            = 'Get-Application';
             'GET_applications-application_id-associations'               = 'Get-ApplicationAssociation';
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
             'GET_applications-application_id-users'                      = 'Get-ApplicationTraverseUser';
@@ -330,21 +329,21 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedPaths      = @('/applications/{id}', '/applications/{application_id}/logo');
+        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo');
     }
 }
 Function Update-SwaggerObject
 {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
-        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = 'root'
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
     )
     $InputObject | ForEach-Object {
         $ThisObject = $_
         # # Use for debugging. Specify the attribute path you want to troubleshoot and add break point.
-        # If ($InputObjectName -eq 'root.paths./users/{user_id}/associations.get.parameters')
+        # If ($InputObjectName -eq '.paths./users/{user_id}/associations.get.parameters')
         # {
         #     Write-Host "Break Point"
         #     $ThisObject.description = 'Test'
@@ -402,6 +401,21 @@ Function Update-SwaggerObject
                 $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
+                    # Map operationIds
+                    If ($AttributePath -like '*.operationId')
+                    {
+                        If (($global:OperationIdMapping).Contains($ThisObject.operationId))
+                        {
+                            $OperationId = $ThisObject.operationId
+                            $ThisObject.operationId = $global:OperationIdMapping.($ThisObject.operationId)
+                            $global:OperationIdMapping.Remove($OperationId)
+                            $NewOperationId = $ThisObject.operationId
+                        }
+                        Else
+                        {
+                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
+                        }
+                    }
                     # Append "x-ms-enum" to "enum" section
                     If ($AttributePath -like '*.enum')
                     {
@@ -449,26 +463,13 @@ Function Update-SwaggerObject
                         {
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
-                        # Write-Host ("$($AttributePath) - $($xMsEnumObjectFilteredId) - $($ThisObject.'x-ms-enum'.values.value -join ',')")
-                    }
-                    # Map operationIds
-                    If ($AttributePath -like '*.operationId')
-                    {
-                        If (($global:OperationIdMapping).Contains($ThisObject.operationId))
-                        {
-                            $OperationId = $ThisObject.operationId
-                            $ThisObject.operationId = $global:OperationIdMapping.($ThisObject.operationId)
-                            $global:OperationIdMapping.Remove($OperationId)
-                        }
-                        Else
-                        {
-                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
-                        }
+                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
                     }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedPaths)
                     {
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        $global:ExcludedPaths.Remove($AttributeName)
                     }
                     # Remove tags
                     ElseIf ($AttributePath -like '*.tags')
@@ -548,7 +549,7 @@ $SDKName | ForEach-Object {
         $Config = $TransformConfig.($SDKNameItem)
         $CurrentSDKName = $SDKNameItem
         $global:OperationIdMapping = $Config.OperationIdMapping
-        $global:ExcludedPaths = $Config.ExcludedPaths
+        $global:ExcludedPaths = [System.Collections.ArrayList]$Config.ExcludedPaths
         # Create output file path
         $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
         If (-not (Test-Path -Path:($OutputFilePath)))
@@ -612,16 +613,22 @@ $SDKName | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
             {
                 ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
-                    Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' unable to find operationId '$($_.Key)'.")
+                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
                 }
             }
             # Validate that all "excludedPaths" in mapping have been removed from spec
             If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
             {
                 ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
+                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
+                }
+            }
+            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
+            {
+                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
                     If ($SwaggerString -match $_)
                     {
-                        Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' the path '$($_)' has not been excluded.")
+                        Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the path '$($_)' has not been excluded.")
                     }
                 }
             }
@@ -629,7 +636,7 @@ $SDKName | ForEach-Object {
             $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
             If ($Tags.Matches.Value)
             {
-                Write-Host ("##vso[task.logissue type=error;]In '$CurrentSDKName' still has '$($Tags.Matches.Value)' in it.")
+                Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' still has '$($Tags.Matches.Value)' in it.")
             }
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
@@ -653,7 +660,6 @@ $SDKName | ForEach-Object {
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
-
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec
