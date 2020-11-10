@@ -430,7 +430,16 @@ Function Update-SwaggerObject
                                     {
                                         [PSCustomObject]@{
                                             name  = $EnumItemName;
-                                            value = $EnumItem;
+                                            value = $EnumItem | ForEach-Object {
+                                                If ($_ -match [regex]'(\#|\s)')
+                                                {
+                                                    "'$($_)'"
+                                                }
+                                                Else
+                                                {
+                                                    $_
+                                                };
+                                            };
                                         }
                                     }
                                 }
