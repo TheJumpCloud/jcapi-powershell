@@ -189,7 +189,12 @@ Try
                     $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                     Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
                     # build the module
-                    Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildModuleCommandJob = Start-Job -ScriptBlock:( {
+                            param ($BuildModuleCommand);
+                            Invoke-Expression -Command:($BuildModuleCommand)
+                        }) -ArgumentList:($BuildModuleCommand)
+                    $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
+                    $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($BuildCustomFunctions)
