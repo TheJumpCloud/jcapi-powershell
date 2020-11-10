@@ -15,12 +15,12 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### Get (Default)
 ```
-Get-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,7 +80,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

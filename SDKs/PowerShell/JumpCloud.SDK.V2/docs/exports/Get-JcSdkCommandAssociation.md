@@ -14,12 +14,12 @@ This endpoint will return the _direct_ associations of this Command.\n\nA direct
 
 ### Get (Default)
 ```
-Get-JcSdkCommandAssociation -CommandId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkCommandAssociation -CommandId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

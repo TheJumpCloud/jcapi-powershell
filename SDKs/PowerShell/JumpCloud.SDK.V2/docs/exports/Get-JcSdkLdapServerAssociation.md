@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of this LDAP Server.\n\nA direct
 
 ### Get (Default)
 ```
-Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

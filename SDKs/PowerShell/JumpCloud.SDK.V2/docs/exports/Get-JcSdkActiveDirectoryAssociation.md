@@ -14,12 +14,12 @@ This endpoint returns the direct associations of this Active Directory instance.
 
 ### Get (Default)
 ```
-Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]>
+Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets>
  [<CommonParameters>]
 ```
 
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

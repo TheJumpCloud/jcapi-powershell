@@ -14,12 +14,12 @@ This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA di
 
 ### Get (Default)
 ```
-Get-JcSdkOffice365Association -Office365Id <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkOffice365Association -Office365Id <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

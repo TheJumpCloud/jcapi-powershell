@@ -43,22 +43,19 @@
         "state": {
           "x-ms-enum": {
             "name": "state",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "unsealed",
-                "value": "unsealed",
-                "description": "unsealed"
+                "value": "unsealed"
               },
               {
                 "name": "active",
-                "value": "active",
-                "description": "active"
+                "value": "active"
               },
               {
                 "name": "inactive",
-                "value": "inactive",
-                "description": "inactive"
+                "value": "inactive"
               }
             ]
           },
@@ -101,22 +98,19 @@
         "state": {
           "x-ms-enum": {
             "name": "state",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "unsealed",
-                "value": "unsealed",
-                "description": "unsealed"
+                "value": "unsealed"
               },
               {
                 "name": "active",
-                "value": "active",
-                "description": "active"
+                "value": "active"
               },
               {
                 "name": "inactive",
-                "value": "inactive",
-                "description": "inactive"
+                "value": "inactive"
               }
             ]
           },
@@ -224,27 +218,23 @@
           "description": "The state of the dep server token, presence and expiry.",
           "x-ms-enum": {
             "name": "depServerTokenState",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "unknown",
-                "value": "unknown",
-                "description": "unknown"
+                "value": "unknown"
               },
               {
                 "name": "missing",
-                "value": "missing",
-                "description": "missing"
+                "value": "missing"
               },
               {
                 "name": "valid",
-                "value": "valid",
-                "description": "valid"
+                "value": "valid"
               },
               {
                 "name": "expired",
-                "value": "expired",
-                "description": "expired"
+                "value": "expired"
               }
             ]
           },
@@ -355,67 +345,55 @@
             "color": {
               "x-ms-enum": {
                 "name": "color",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "202D38",
-                    "value": "#202D38",
-                    "description": "#202D38"
+                    "value": "#202D38"
                   },
                   {
                     "name": "005466",
-                    "value": "#005466",
-                    "description": "#005466"
+                    "value": "#005466"
                   },
                   {
                     "name": "3E8696",
-                    "value": "#3E8696",
-                    "description": "#3E8696"
+                    "value": "#3E8696"
                   },
                   {
                     "name": "006CAC",
-                    "value": "#006CAC",
-                    "description": "#006CAC"
+                    "value": "#006CAC"
                   },
                   {
                     "name": "0617AC",
-                    "value": "#0617AC",
-                    "description": "#0617AC"
+                    "value": "#0617AC"
                   },
                   {
                     "name": "7C6ADA",
-                    "value": "#7C6ADA",
-                    "description": "#7C6ADA"
+                    "value": "#7C6ADA"
                   },
                   {
                     "name": "D5779D",
-                    "value": "#D5779D",
-                    "description": "#D5779D"
+                    "value": "#D5779D"
                   },
                   {
                     "name": "9E2F00",
-                    "value": "#9E2F00",
-                    "description": "#9E2F00"
+                    "value": "#9E2F00"
                   },
                   {
                     "name": "FFB000",
-                    "value": "#FFB000",
-                    "description": "#FFB000"
+                    "value": "#FFB000"
                   },
                   {
                     "name": "58C469",
-                    "value": "#58C469",
-                    "description": "#58C469"
+                    "value": "#58C469"
                   },
                   {
                     "name": "57C49F",
-                    "value": "#57C49F",
-                    "description": "#57C49F"
+                    "value": "#57C49F"
                   },
                   {
                     "name": "FF6C03",
-                    "value": "#FF6C03",
-                    "description": "#FF6C03"
+                    "value": "#FF6C03"
                   }
                 ]
               },
@@ -660,32 +638,27 @@
           "description": "The type of directory.",
           "x-ms-enum": {
             "name": "type",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "active_directory",
-                "value": "active_directory",
-                "description": "active_directory"
+                "value": "active_directory"
               },
               {
                 "name": "g_suite",
-                "value": "g_suite",
-                "description": "g_suite"
+                "value": "g_suite"
               },
               {
                 "name": "ldap_server",
-                "value": "ldap_server",
-                "description": "ldap_server"
+                "value": "ldap_server"
               },
               {
                 "name": "office_365",
-                "value": "office_365",
-                "description": "office_365"
+                "value": "office_365"
               },
               {
                 "name": "workday",
-                "value": "workday",
-                "description": "workday"
+                "value": "workday"
               }
             ]
           },
@@ -891,12 +864,11 @@
         "emailType": {
           "x-ms-enum": {
             "name": "emailType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "activation",
-                "value": "activation",
-                "description": "activation"
+                "value": "activation"
               }
             ]
           },
@@ -968,22 +940,19 @@
           "description": "How to modify the graph connection.",
           "x-ms-enum": {
             "name": "op",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               },
               {
                 "name": "update",
-                "value": "update",
-                "description": "update"
+                "value": "update"
               }
             ]
           },
@@ -1064,67 +1033,55 @@
       "description": "The graph type.",
       "x-ms-enum": {
         "name": "GraphType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "active_directory",
-            "value": "active_directory",
-            "description": "active_directory"
+            "value": "active_directory"
           },
           {
             "name": "application",
-            "value": "application",
-            "description": "application"
+            "value": "application"
           },
           {
             "name": "command",
-            "value": "command",
-            "description": "command"
+            "value": "command"
           },
           {
             "name": "g_suite",
-            "value": "g_suite",
-            "description": "g_suite"
+            "value": "g_suite"
           },
           {
             "name": "ldap_server",
-            "value": "ldap_server",
-            "description": "ldap_server"
+            "value": "ldap_server"
           },
           {
             "name": "office_365",
-            "value": "office_365",
-            "description": "office_365"
+            "value": "office_365"
           },
           {
             "name": "policy",
-            "value": "policy",
-            "description": "policy"
+            "value": "policy"
           },
           {
             "name": "radius_server",
-            "value": "radius_server",
-            "description": "radius_server"
+            "value": "radius_server"
           },
           {
             "name": "systems",
-            "value": "system",
-            "description": "system"
+            "value": "system"
           },
           {
             "name": "systems_group",
-            "value": "system_group",
-            "description": "system_group"
+            "value": "system_group"
           },
           {
             "name": "user",
-            "value": "user",
-            "description": "user"
+            "value": "user"
           },
           {
             "name": "user_group",
-            "value": "user_group",
-            "description": "user_group"
+            "value": "user_group"
           }
         ]
       },
@@ -1178,17 +1135,15 @@
       "description": "The group type.",
       "x-ms-enum": {
         "name": "GroupType",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "systems_group",
-            "value": "system_group",
-            "description": "system_group"
+            "value": "system_group"
           },
           {
             "name": "user_group",
-            "value": "user_group",
-            "description": "user_group"
+            "value": "user_group"
           }
         ]
       },
@@ -1203,77 +1158,63 @@
       "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
       "x-ms-enum": {
         "name": "GSuiteBuiltinTranslation",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "user_home_addresses",
-            "value": "user_home_addresses",
-            "description": "user_home_addresses"
+            "value": "user_home_addresses"
           },
           {
             "name": "user_work_addresses",
-            "value": "user_work_addresses",
-            "description": "user_work_addresses"
+            "value": "user_work_addresses"
           },
           {
             "name": "user_other_addresses",
-            "value": "user_other_addresses",
-            "description": "user_other_addresses"
+            "value": "user_other_addresses"
           },
           {
             "name": "user_home_phone_numbers",
-            "value": "user_home_phone_numbers",
-            "description": "user_home_phone_numbers"
+            "value": "user_home_phone_numbers"
           },
           {
             "name": "user_mobile_phone_numbers",
-            "value": "user_mobile_phone_numbers",
-            "description": "user_mobile_phone_numbers"
+            "value": "user_mobile_phone_numbers"
           },
           {
             "name": "user_other_phone_numbers",
-            "value": "user_other_phone_numbers",
-            "description": "user_other_phone_numbers"
+            "value": "user_other_phone_numbers"
           },
           {
             "name": "user_work_phone_numbers",
-            "value": "user_work_phone_numbers",
-            "description": "user_work_phone_numbers"
+            "value": "user_work_phone_numbers"
           },
           {
             "name": "user_work_fax_phone_numbers",
-            "value": "user_work_fax_phone_numbers",
-            "description": "user_work_fax_phone_numbers"
+            "value": "user_work_fax_phone_numbers"
           },
           {
             "name": "user_work_mobile_phone_numbers",
-            "value": "user_work_mobile_phone_numbers",
-            "description": "user_work_mobile_phone_numbers"
+            "value": "user_work_mobile_phone_numbers"
           },
           {
             "name": "user_primary_organization_cost_center",
-            "value": "user_primary_organization_cost_center",
-            "description": "user_primary_organization_cost_center"
+            "value": "user_primary_organization_cost_center"
           },
           {
             "name": "user_primary_organization_department",
-            "value": "user_primary_organization_department",
-            "description": "user_primary_organization_department"
+            "value": "user_primary_organization_department"
           },
           {
             "name": "user_primary_organization_description",
-            "value": "user_primary_organization_description",
-            "description": "user_primary_organization_description"
+            "value": "user_primary_organization_description"
           },
           {
             "name": "user_primary_organization_employee_id",
-            "value": "user_primary_organization_employee_id",
-            "description": "user_primary_organization_employee_id"
+            "value": "user_primary_organization_employee_id"
           },
           {
             "name": "user_primary_organization_title",
-            "value": "user_primary_organization_title",
-            "description": "user_primary_organization_title"
+            "value": "user_primary_organization_title"
           }
         ]
       },
@@ -1309,17 +1250,15 @@
             "userLockoutAction": {
               "x-ms-enum": {
                 "name": "userLockoutAction",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "suspend",
-                    "value": "suspend",
-                    "description": "suspend"
+                    "value": "suspend"
                   },
                   {
                     "name": "maintain",
-                    "value": "maintain",
-                    "description": "maintain"
+                    "value": "maintain"
                   }
                 ]
               },
@@ -1332,22 +1271,19 @@
             "userPasswordExpirationAction": {
               "x-ms-enum": {
                 "name": "userPasswordExpirationAction",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values": [
                   {
                     "name": "suspend",
-                    "value": "suspend",
-                    "description": "suspend"
+                    "value": "suspend"
                   },
                   {
                     "name": "maintain",
-                    "value": "maintain",
-                    "description": "maintain"
+                    "value": "maintain"
                   },
                   {
                     "name": "remove_access",
-                    "value": "remove_access",
-                    "description": "remove_access"
+                    "value": "remove_access"
                   }
                 ]
               },
@@ -1372,17 +1308,15 @@
         "userLockoutAction": {
           "x-ms-enum": {
             "name": "userLockoutAction",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               }
             ]
           },
@@ -1395,22 +1329,19 @@
         "userPasswordExpirationAction": {
           "x-ms-enum": {
             "name": "userPasswordExpirationAction",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               },
               {
                 "name": "remove_access",
-                "value": "remove_access",
-                "description": "remove_access"
+                "value": "remove_access"
               }
             ]
           },
@@ -1525,17 +1456,15 @@
     "LdapServerAction": {
       "x-ms-enum": {
         "name": "LdapServerAction",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "disable",
-            "value": "disable",
-            "description": "disable"
+            "value": "disable"
           },
           {
             "name": "remove",
-            "value": "remove",
-            "description": "remove"
+            "value": "remove"
           }
         ]
       },
@@ -1556,17 +1485,15 @@
           "description": "action to take; one of 'remove' or 'disable'",
           "x-ms-enum": {
             "name": "userLockoutAction1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "disable",
-                "value": "disable",
-                "description": "disable"
+                "value": "disable"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               }
             ]
           },
@@ -1580,17 +1507,15 @@
           "description": "action to take; one of 'remove' or 'disable'",
           "x-ms-enum": {
             "name": "userPasswordExpirationAction1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "disable",
-                "value": "disable",
-                "description": "disable"
+                "value": "disable"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               }
             ]
           },
@@ -1632,57 +1557,47 @@
       "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user` \n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user` \n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user` \n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user` \n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user` \n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user` \n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user` \n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user` ",
       "x-ms-enum": {
         "name": "Office365BuiltinTranslation",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "user_street_address",
-            "value": "user_street_address",
-            "description": "user_street_address"
+            "value": "user_street_address"
           },
           {
             "name": "user_city",
-            "value": "user_city",
-            "description": "user_city"
+            "value": "user_city"
           },
           {
             "name": "user_state",
-            "value": "user_state",
-            "description": "user_state"
+            "value": "user_state"
           },
           {
             "name": "user_country",
-            "value": "user_country",
-            "description": "user_country"
+            "value": "user_country"
           },
           {
             "name": "user_postal_code",
-            "value": "user_postal_code",
-            "description": "user_postal_code"
+            "value": "user_postal_code"
           },
           {
             "name": "user_business_phones",
-            "value": "user_business_phones",
-            "description": "user_business_phones"
+            "value": "user_business_phones"
           },
           {
             "name": "user_mobile_phone",
-            "value": "user_mobile_phone",
-            "description": "user_mobile_phone"
+            "value": "user_mobile_phone"
           },
           {
             "name": "user_department",
-            "value": "user_department",
-            "description": "user_department"
+            "value": "user_department"
           },
           {
             "name": "user_job_title",
-            "value": "user_job_title",
-            "description": "user_job_title"
+            "value": "user_job_title"
           },
           {
             "name": "user_office_location",
-            "value": "user_office_location",
-            "description": "user_office_location"
+            "value": "user_office_location"
           }
         ]
       },
@@ -1712,17 +1627,15 @@
         "userLockoutAction": {
           "x-ms-enum": {
             "name": "userLockoutAction",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               }
             ]
           },
@@ -1735,17 +1648,15 @@
         "userPasswordExpirationAction": {
           "x-ms-enum": {
             "name": "userPasswordExpirationAction2",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               }
             ]
           },
@@ -1772,17 +1683,15 @@
         "userLockoutAction": {
           "x-ms-enum": {
             "name": "userLockoutAction",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               }
             ]
           },
@@ -1795,17 +1704,15 @@
         "userPasswordExpirationAction": {
           "x-ms-enum": {
             "name": "userPasswordExpirationAction2",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "suspend",
-                "value": "suspend",
-                "description": "suspend"
+                "value": "suspend"
               },
               {
                 "name": "maintain",
-                "value": "maintain",
-                "description": "maintain"
+                "value": "maintain"
               }
             ]
           },
@@ -2106,17 +2013,15 @@
             "default": "agent",
             "x-ms-enum": {
               "name": "items",
-              "modelAsString": false,
+              "modelAsString": true,
               "values": [
                 {
                   "name": "agent",
-                  "value": "agent",
-                  "description": "agent"
+                  "value": "agent"
                 },
                 {
                   "name": "mdm",
-                  "value": "mdm",
-                  "description": "mdm"
+                  "value": "mdm"
                 }
               ]
             },
@@ -2147,22 +2052,19 @@
         "osMetaFamily": {
           "x-ms-enum": {
             "name": "osMetaFamily",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "linux",
-                "value": "linux",
-                "description": "linux"
+                "value": "linux"
               },
               {
                 "name": "darwin",
-                "value": "darwin",
-                "description": "darwin"
+                "value": "darwin"
               },
               {
                 "name": "windows",
-                "value": "windows",
-                "description": "windows"
+                "value": "windows"
               }
             ]
           },
@@ -2200,62 +2102,51 @@
           "description": "The default rendering for this field.",
           "x-ms-enum": {
             "name": "displayType",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "checkbox",
-                "value": "checkbox",
-                "description": "checkbox"
+                "value": "checkbox"
               },
               {
                 "name": "date",
-                "value": "date",
-                "description": "date"
+                "value": "date"
               },
               {
                 "name": "email",
-                "value": "email",
-                "description": "email"
+                "value": "email"
               },
               {
                 "name": "file",
-                "value": "file",
-                "description": "file"
+                "value": "file"
               },
               {
                 "name": "number",
-                "value": "number",
-                "description": "number"
+                "value": "number"
               },
               {
                 "name": "select",
-                "value": "select",
-                "description": "select"
+                "value": "select"
               },
               {
                 "name": "text",
-                "value": "text",
-                "description": "text"
+                "value": "text"
               },
               {
                 "name": "textarea",
-                "value": "textarea",
-                "description": "textarea"
+                "value": "textarea"
               },
               {
                 "name": "singlelistbox",
-                "value": "singlelistbox",
-                "description": "singlelistbox"
+                "value": "singlelistbox"
               },
               {
                 "name": "doublelistbox",
-                "value": "doublelistbox",
-                "description": "doublelistbox"
+                "value": "doublelistbox"
               },
               {
                 "name": "table",
-                "value": "table",
-                "description": "table"
+                "value": "table"
               }
             ]
           },
@@ -2362,22 +2253,19 @@
         "osMetaFamily": {
           "x-ms-enum": {
             "name": "osMetaFamily",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "linux",
-                "value": "linux",
-                "description": "linux"
+                "value": "linux"
               },
               {
                 "name": "darwin",
-                "value": "darwin",
-                "description": "darwin"
+                "value": "darwin"
               },
               {
                 "name": "windows",
-                "value": "windows",
-                "description": "windows"
+                "value": "windows"
               }
             ]
           },
@@ -2555,87 +2443,71 @@
       "description": "Options to skip screens during MacOS setup:\n* `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.\n* `appearance` - Skips the Choose Your Look screen.\n* `appleID` - Skips Apple ID setup.\n* `biometric` - Skips biometric setup.\n* `diagnostics` - Skips the App Analytics pane.\n* `displayTone` - Skips display tone setup.\n* `fileVault` - Skips FileVault setup assistant screen.\n* `icloudDiagnostics` - Skips iCloud analytics screen.\n* `icloudStorage` - Skips iCloud documents and desktop screen.\n* `location` - Skips location services setup.\n* `payment` - Skips Apple Pay setup.\n* `privacy` - Skips the Privacy setup.\n* `restore` - Skips restoring from backup.\n* `screenTime` - Skips screen time setup.\n* `siri` - Skips Siri setup.\n* `tos` - Skips terms and conditions.\n",
       "x-ms-enum": {
         "name": "SetupAssistantOption",
-        "modelAsString": false,
+        "modelAsString": true,
         "values": [
           {
             "name": "accessibility",
-            "value": "accessibility",
-            "description": "accessibility"
+            "value": "accessibility"
           },
           {
             "name": "appearance",
-            "value": "appearance",
-            "description": "appearance"
+            "value": "appearance"
           },
           {
             "name": "appleID",
-            "value": "appleID",
-            "description": "appleID"
+            "value": "appleID"
           },
           {
             "name": "biometric",
-            "value": "biometric",
-            "description": "biometric"
+            "value": "biometric"
           },
           {
             "name": "diagnostics",
-            "value": "diagnostics",
-            "description": "diagnostics"
+            "value": "diagnostics"
           },
           {
             "name": "displayTone",
-            "value": "displayTone",
-            "description": "displayTone"
+            "value": "displayTone"
           },
           {
             "name": "fileVault",
-            "value": "fileVault",
-            "description": "fileVault"
+            "value": "fileVault"
           },
           {
             "name": "icloudDiagnostics",
-            "value": "icloudDiagnostics",
-            "description": "icloudDiagnostics"
+            "value": "icloudDiagnostics"
           },
           {
             "name": "icloudStorage",
-            "value": "icloudStorage",
-            "description": "icloudStorage"
+            "value": "icloudStorage"
           },
           {
             "name": "location",
-            "value": "location",
-            "description": "location"
+            "value": "location"
           },
           {
             "name": "payment",
-            "value": "payment",
-            "description": "payment"
+            "value": "payment"
           },
           {
             "name": "privacy",
-            "value": "privacy",
-            "description": "privacy"
+            "value": "privacy"
           },
           {
             "name": "restore",
-            "value": "restore",
-            "description": "restore"
+            "value": "restore"
           },
           {
             "name": "screenTime",
-            "value": "screenTime",
-            "description": "screenTime"
+            "value": "screenTime"
           },
           {
             "name": "siri",
-            "value": "siri",
-            "description": "siri"
+            "value": "siri"
           },
           {
             "name": "tos",
-            "value": "tos",
-            "description": "tos"
+            "value": "tos"
           }
         ]
       },
@@ -2699,22 +2571,19 @@
           "description": "How to modify the graph connection.",
           "x-ms-enum": {
             "name": "op",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               },
               {
                 "name": "update",
-                "value": "update",
-                "description": "update"
+                "value": "update"
               }
             ]
           },
@@ -2728,57 +2597,47 @@
         "type": {
           "x-ms-enum": {
             "name": "type1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "active_directory",
-                "value": "active_directory",
-                "description": "active_directory"
+                "value": "active_directory"
               },
               {
                 "name": "application",
-                "value": "application",
-                "description": "application"
+                "value": "application"
               },
               {
                 "name": "command",
-                "value": "command",
-                "description": "command"
+                "value": "command"
               },
               {
                 "name": "g_suite",
-                "value": "g_suite",
-                "description": "g_suite"
+                "value": "g_suite"
               },
               {
                 "name": "ldap_server",
-                "value": "ldap_server",
-                "description": "ldap_server"
+                "value": "ldap_server"
               },
               {
                 "name": "office_365",
-                "value": "office_365",
-                "description": "office_365"
+                "value": "office_365"
               },
               {
                 "name": "policy",
-                "value": "policy",
-                "description": "policy"
+                "value": "policy"
               },
               {
                 "name": "radius_server",
-                "value": "radius_server",
-                "description": "radius_server"
+                "value": "radius_server"
               },
               {
                 "name": "user",
-                "value": "user",
-                "description": "user"
+                "value": "user"
               },
               {
                 "name": "user_group",
-                "value": "user_group",
-                "description": "user_group"
+                "value": "user_group"
               }
             ]
           },
@@ -2831,12 +2690,11 @@
           "description": "The type of the group; always 'system' for a System Group.",
           "x-ms-enum": {
             "name": "type2",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "systems_group",
-                "value": "system_group",
-                "description": "system_group"
+                "value": "system_group"
               }
             ]
           },
@@ -2876,22 +2734,19 @@
           "description": "How to modify the graph connection.",
           "x-ms-enum": {
             "name": "op",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               },
               {
                 "name": "update",
-                "value": "update",
-                "description": "update"
+                "value": "update"
               }
             ]
           },
@@ -2905,57 +2760,47 @@
         "type": {
           "x-ms-enum": {
             "name": "type1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "active_directory",
-                "value": "active_directory",
-                "description": "active_directory"
+                "value": "active_directory"
               },
               {
                 "name": "application",
-                "value": "application",
-                "description": "application"
+                "value": "application"
               },
               {
                 "name": "command",
-                "value": "command",
-                "description": "command"
+                "value": "command"
               },
               {
                 "name": "g_suite",
-                "value": "g_suite",
-                "description": "g_suite"
+                "value": "g_suite"
               },
               {
                 "name": "ldap_server",
-                "value": "ldap_server",
-                "description": "ldap_server"
+                "value": "ldap_server"
               },
               {
                 "name": "office_365",
-                "value": "office_365",
-                "description": "office_365"
+                "value": "office_365"
               },
               {
                 "name": "policy",
-                "value": "policy",
-                "description": "policy"
+                "value": "policy"
               },
               {
                 "name": "radius_server",
-                "value": "radius_server",
-                "description": "radius_server"
+                "value": "radius_server"
               },
               {
                 "name": "user",
-                "value": "user",
-                "description": "user"
+                "value": "user"
               },
               {
                 "name": "user_group",
-                "value": "user_group",
-                "description": "user_group"
+                "value": "user_group"
               }
             ]
           },
@@ -2992,17 +2837,15 @@
           "description": "How to modify the membership connection.",
           "x-ms-enum": {
             "name": "op1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               }
             ]
           },
@@ -3016,12 +2859,11 @@
           "description": "The member type.",
           "x-ms-enum": {
             "name": "type3",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "systems",
-                "value": "system",
-                "description": "system"
+                "value": "system"
               }
             ]
           },
@@ -5334,22 +5176,19 @@
           "description": "How to modify the graph connection.",
           "x-ms-enum": {
             "name": "op",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               },
               {
                 "name": "update",
-                "value": "update",
-                "description": "update"
+                "value": "update"
               }
             ]
           },
@@ -5363,57 +5202,47 @@
         "type": {
           "x-ms-enum": {
             "name": "type4",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "active_directory",
-                "value": "active_directory",
-                "description": "active_directory"
+                "value": "active_directory"
               },
               {
                 "name": "application",
-                "value": "application",
-                "description": "application"
+                "value": "application"
               },
               {
                 "name": "command",
-                "value": "command",
-                "description": "command"
+                "value": "command"
               },
               {
                 "name": "g_suite",
-                "value": "g_suite",
-                "description": "g_suite"
+                "value": "g_suite"
               },
               {
                 "name": "ldap_server",
-                "value": "ldap_server",
-                "description": "ldap_server"
+                "value": "ldap_server"
               },
               {
                 "name": "office_365",
-                "value": "office_365",
-                "description": "office_365"
+                "value": "office_365"
               },
               {
                 "name": "policy",
-                "value": "policy",
-                "description": "policy"
+                "value": "policy"
               },
               {
                 "name": "radius_server",
-                "value": "radius_server",
-                "description": "radius_server"
+                "value": "radius_server"
               },
               {
                 "name": "systems",
-                "value": "system",
-                "description": "system"
+                "value": "system"
               },
               {
                 "name": "systems_group",
-                "value": "system_group",
-                "description": "system_group"
+                "value": "system_group"
               }
             ]
           },
@@ -5465,12 +5294,11 @@
           "description": "The type of the group.",
           "x-ms-enum": {
             "name": "type5",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "user_group",
-                "value": "user_group",
-                "description": "user_group"
+                "value": "user_group"
               }
             ]
           },
@@ -5520,22 +5348,19 @@
           "description": "How to modify the graph connection.",
           "x-ms-enum": {
             "name": "op",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               },
               {
                 "name": "update",
-                "value": "update",
-                "description": "update"
+                "value": "update"
               }
             ]
           },
@@ -5550,57 +5375,47 @@
           "description": "The graph type",
           "x-ms-enum": {
             "name": "type4",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "active_directory",
-                "value": "active_directory",
-                "description": "active_directory"
+                "value": "active_directory"
               },
               {
                 "name": "application",
-                "value": "application",
-                "description": "application"
+                "value": "application"
               },
               {
                 "name": "command",
-                "value": "command",
-                "description": "command"
+                "value": "command"
               },
               {
                 "name": "g_suite",
-                "value": "g_suite",
-                "description": "g_suite"
+                "value": "g_suite"
               },
               {
                 "name": "ldap_server",
-                "value": "ldap_server",
-                "description": "ldap_server"
+                "value": "ldap_server"
               },
               {
                 "name": "office_365",
-                "value": "office_365",
-                "description": "office_365"
+                "value": "office_365"
               },
               {
                 "name": "policy",
-                "value": "policy",
-                "description": "policy"
+                "value": "policy"
               },
               {
                 "name": "radius_server",
-                "value": "radius_server",
-                "description": "radius_server"
+                "value": "radius_server"
               },
               {
                 "name": "systems",
-                "value": "system",
-                "description": "system"
+                "value": "system"
               },
               {
                 "name": "systems_group",
-                "value": "system_group",
-                "description": "system_group"
+                "value": "system_group"
               }
             ]
           },
@@ -5637,17 +5452,15 @@
           "description": "How to modify the membership connection.",
           "x-ms-enum": {
             "name": "op1",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "add",
-                "value": "add",
-                "description": "add"
+                "value": "add"
               },
               {
                 "name": "remove",
-                "value": "remove",
-                "description": "remove"
+                "value": "remove"
               }
             ]
           },
@@ -5661,12 +5474,11 @@
           "description": "The member type.",
           "x-ms-enum": {
             "name": "type6",
-            "modelAsString": false,
+            "modelAsString": true,
             "values": [
               {
                 "name": "user",
-                "value": "user",
-                "description": "user"
+                "value": "user"
               }
             ]
           },
@@ -5868,57 +5680,47 @@
       "items": {
         "x-ms-enum": {
           "name": "items1",
-          "modelAsString": false,
+          "modelAsString": true,
           "values": [
             {
               "name": "active_directory",
-              "value": "active_directory",
-              "description": "active_directory"
+              "value": "active_directory"
             },
             {
               "name": "application",
-              "value": "application",
-              "description": "application"
+              "value": "application"
             },
             {
               "name": "command",
-              "value": "command",
-              "description": "command"
+              "value": "command"
             },
             {
               "name": "g_suite",
-              "value": "g_suite",
-              "description": "g_suite"
+              "value": "g_suite"
             },
             {
               "name": "ldap_server",
-              "value": "ldap_server",
-              "description": "ldap_server"
+              "value": "ldap_server"
             },
             {
               "name": "office_365",
-              "value": "office_365",
-              "description": "office_365"
+              "value": "office_365"
             },
             {
               "name": "policy",
-              "value": "policy",
-              "description": "policy"
+              "value": "policy"
             },
             {
               "name": "radius_server",
-              "value": "radius_server",
-              "description": "radius_server"
+              "value": "radius_server"
             },
             {
               "name": "user",
-              "value": "user",
-              "description": "user"
+              "value": "user"
             },
             {
               "name": "user_group",
-              "value": "user_group",
-              "description": "user_group"
+              "value": "user_group"
             }
           ]
         },
@@ -5946,57 +5748,47 @@
       "items": {
         "x-ms-enum": {
           "name": "items1",
-          "modelAsString": false,
+          "modelAsString": true,
           "values": [
             {
               "name": "active_directory",
-              "value": "active_directory",
-              "description": "active_directory"
+              "value": "active_directory"
             },
             {
               "name": "application",
-              "value": "application",
-              "description": "application"
+              "value": "application"
             },
             {
               "name": "command",
-              "value": "command",
-              "description": "command"
+              "value": "command"
             },
             {
               "name": "g_suite",
-              "value": "g_suite",
-              "description": "g_suite"
+              "value": "g_suite"
             },
             {
               "name": "ldap_server",
-              "value": "ldap_server",
-              "description": "ldap_server"
+              "value": "ldap_server"
             },
             {
               "name": "office_365",
-              "value": "office_365",
-              "description": "office_365"
+              "value": "office_365"
             },
             {
               "name": "policy",
-              "value": "policy",
-              "description": "policy"
+              "value": "policy"
             },
             {
               "name": "radius_server",
-              "value": "radius_server",
-              "description": "radius_server"
+              "value": "radius_server"
             },
             {
               "name": "user",
-              "value": "user",
-              "description": "user"
+              "value": "user"
             },
             {
               "name": "user_group",
-              "value": "user_group",
-              "description": "user_group"
+              "value": "user_group"
             }
           ]
         },
@@ -6024,67 +5816,55 @@
       "items": {
         "x-ms-enum": {
           "name": "items2",
-          "modelAsString": false,
+          "modelAsString": true,
           "values": [
             {
               "name": "active_directory",
-              "value": "active_directory",
-              "description": "active_directory"
+              "value": "active_directory"
             },
             {
               "name": "application",
-              "value": "application",
-              "description": "application"
+              "value": "application"
             },
             {
               "name": "command",
-              "value": "command",
-              "description": "command"
+              "value": "command"
             },
             {
               "name": "g_suite",
-              "value": "g_suite",
-              "description": "g_suite"
+              "value": "g_suite"
             },
             {
               "name": "ldap_server",
-              "value": "ldap_server",
-              "description": "ldap_server"
+              "value": "ldap_server"
             },
             {
               "name": "office_365",
-              "value": "office_365",
-              "description": "office_365"
+              "value": "office_365"
             },
             {
               "name": "policy",
-              "value": "policy",
-              "description": "policy"
+              "value": "policy"
             },
             {
               "name": "radius_server",
-              "value": "radius_server",
-              "description": "radius_server"
+              "value": "radius_server"
             },
             {
               "name": "systems",
-              "value": "system",
-              "description": "system"
+              "value": "system"
             },
             {
               "name": "systems_group",
-              "value": "system_group",
-              "description": "system_group"
+              "value": "system_group"
             },
             {
               "name": "user",
-              "value": "user",
-              "description": "user"
+              "value": "user"
             },
             {
               "name": "user_group",
-              "value": "user_group",
-              "description": "user_group"
+              "value": "user_group"
             }
           ]
         },
@@ -6114,57 +5894,47 @@
       "items": {
         "x-ms-enum": {
           "name": "items3",
-          "modelAsString": false,
+          "modelAsString": true,
           "values": [
             {
               "name": "active_directory",
-              "value": "active_directory",
-              "description": "active_directory"
+              "value": "active_directory"
             },
             {
               "name": "application",
-              "value": "application",
-              "description": "application"
+              "value": "application"
             },
             {
               "name": "command",
-              "value": "command",
-              "description": "command"
+              "value": "command"
             },
             {
               "name": "g_suite",
-              "value": "g_suite",
-              "description": "g_suite"
+              "value": "g_suite"
             },
             {
               "name": "ldap_server",
-              "value": "ldap_server",
-              "description": "ldap_server"
+              "value": "ldap_server"
             },
             {
               "name": "office_365",
-              "value": "office_365",
-              "description": "office_365"
+              "value": "office_365"
             },
             {
               "name": "policy",
-              "value": "policy",
-              "description": "policy"
+              "value": "policy"
             },
             {
               "name": "radius_server",
-              "value": "radius_server",
-              "description": "radius_server"
+              "value": "radius_server"
             },
             {
               "name": "systems",
-              "value": "system",
-              "description": "system"
+              "value": "system"
             },
             {
               "name": "systems_group",
-              "value": "system_group",
-              "description": "system_group"
+              "value": "system_group"
             }
           ]
         },
@@ -6192,57 +5962,47 @@
       "items": {
         "x-ms-enum": {
           "name": "items3",
-          "modelAsString": false,
+          "modelAsString": true,
           "values": [
             {
               "name": "active_directory",
-              "value": "active_directory",
-              "description": "active_directory"
+              "value": "active_directory"
             },
             {
               "name": "application",
-              "value": "application",
-              "description": "application"
+              "value": "application"
             },
             {
               "name": "command",
-              "value": "command",
-              "description": "command"
+              "value": "command"
             },
             {
               "name": "g_suite",
-              "value": "g_suite",
-              "description": "g_suite"
+              "value": "g_suite"
             },
             {
               "name": "ldap_server",
-              "value": "ldap_server",
-              "description": "ldap_server"
+              "value": "ldap_server"
             },
             {
               "name": "office_365",
-              "value": "office_365",
-              "description": "office_365"
+              "value": "office_365"
             },
             {
               "name": "policy",
-              "value": "policy",
-              "description": "policy"
+              "value": "policy"
             },
             {
               "name": "radius_server",
-              "value": "radius_server",
-              "description": "radius_server"
+              "value": "radius_server"
             },
             {
               "name": "systems",
-              "value": "system",
-              "description": "system"
+              "value": "system"
             },
             {
               "name": "systems_group",
-              "value": "system_group",
-              "description": "system_group"
+              "value": "system_group"
             }
           ]
         },
@@ -6454,27 +6214,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -7394,27 +7205,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -7729,27 +7591,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -8467,27 +8380,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -9153,27 +9117,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -9636,27 +9651,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -10210,27 +10276,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -10983,27 +11100,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -11206,27 +11374,78 @@
         "parameters": [
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "default": 10,
@@ -11568,25 +11787,68 @@
           },
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets1",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           }
         ],
         "responses": {
@@ -15529,25 +15791,68 @@
           },
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "user",
-                "user_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets1",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "user",
+                  "value": "user"
+                },
+                {
+                  "name": "user_group",
+                  "value": "user_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -16283,25 +16588,68 @@
           },
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets2",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           }
         ],
         "responses": {
@@ -17097,25 +17445,68 @@
           },
           {
             "description": "",
-            "in": "query",
-            "items": {
-              "enum": [
-                "active_directory",
-                "application",
-                "command",
-                "g_suite",
-                "ldap_server",
-                "office_365",
-                "policy",
-                "radius_server",
-                "system",
-                "system_group"
-              ],
-              "type": "string"
+            "x-ms-enum": {
+              "name": "targets2",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "command",
+                  "value": "command"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "policy",
+                  "value": "policy"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
             },
+            "enum": [
+              "active_directory",
+              "application",
+              "command",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "policy",
+              "radius_server",
+              "system",
+              "system_group"
+            ],
+            "in": "query",
             "name": "targets",
             "required": true,
-            "type": "array"
+            "type": "string"
           }
         ],
         "responses": {

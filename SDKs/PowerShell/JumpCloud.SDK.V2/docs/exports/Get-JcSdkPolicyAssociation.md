@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of a Policy.\n\nA direct associa
 
 ### Get (Default)
 ```
-Get-JcSdkPolicyAssociation -PolicyId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkPolicyAssociation -PolicyId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

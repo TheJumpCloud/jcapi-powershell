@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of this G Suite instance.\n\nA d
 
 ### Get (Default)
 ```
-Get-JcSdkGSuiteAssociation -GsuiteId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkGSuiteAssociation -GsuiteId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

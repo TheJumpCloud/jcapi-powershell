@@ -14,13 +14,12 @@ This endpoint returns the _direct_ associations of a Radius Server.\n\nA direct 
 
 ### Get (Default)
 ```
-Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]>
- [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -79,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

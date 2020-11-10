@@ -14,13 +14,13 @@ This endpoint returns the _direct_ associations of a System.\n\nA direct associa
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <String[]> [-Authorization <String>] [-Date <String>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets1> [-Authorization <String>] [-Date <String>]
  [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [-Authorization <String>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [-Authorization <String>]
  [-Date <String>] [<CommonParameters>]
 ```
 
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets1
 Parameter Sets: (All)
 Aliases:
 
