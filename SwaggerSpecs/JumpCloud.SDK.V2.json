@@ -7168,36 +7168,6 @@
         "summary": "Update an Apple MDM"
       }
     },
-    "/applications/{application_id}": {
-      "get": {
-        "description": "The endpoint retrieves an Application.",
-        "operationId": "Get-Application",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get an Application"
-      },
-      "parameters": [
-        {
-          "description": "ObjectID of the Application.",
-          "in": "path",
-          "name": "application_id",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
     "/applications/{application_id}/associations": {
       "get": {
         "description": "This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",

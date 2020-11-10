@@ -40,9 +40,6 @@ Lists all Apple MDM devices.\n\nThe filter and sort queries will allow the follo
 ### [Get-JcSdkAppleMdmEnrollmentProfile](Get-JcSdkAppleMdmEnrollmentProfile.md)
 Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
-### [Get-JcSdkApplication](Get-JcSdkApplication.md)
-The endpoint retrieves an Application.
-
 ### [Get-JcSdkApplicationAssociation](Get-JcSdkApplicationAssociation.md)
 This endpoint will return the _direct_ associations of an Application.
 A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
