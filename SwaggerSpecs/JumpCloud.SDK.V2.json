@@ -295,6 +295,10 @@
           "description": "A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.",
           "type": "string"
         },
+        "defaultSystemGroupID": {
+          "description": "ObjectId uniquely identifying the MDM default System Group.",
+          "type": "string"
+        },
         "dep": {
           "$ref": "#/definitions/DEP"
         },
@@ -1241,6 +1245,9 @@
       "allOf": [
         {
           "properties": {
+            "groupsEnabled": {
+              "type": "boolean"
+            },
             "id": {
               "type": "string"
             },
@@ -1302,6 +1309,9 @@
     },
     "gsuite-patch-input": {
       "properties": {
+        "groupsEnabled": {
+          "type": "boolean"
+        },
         "name": {
           "type": "string"
         },
@@ -2531,6 +2541,367 @@
       ],
       "title": "Setup Assistant Option",
       "type": "string"
+    },
+    "SSOPostReq": {
+      "description": "Request to insert SSO configuration for application.",
+      "properties": {
+        "config": {
+          "properties": {
+            "acsUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "constantAttributes": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "mutable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "databaseAttributes": {
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "idpCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpPrivateKey": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "spEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "databaseAttributes": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        },
+        "ssoUrl": {
+          "type": "string"
+        }
+      },
+      "title": "SSOPostReq",
+      "type": "object"
     },
     "systemfdekey": {
       "properties": {
@@ -11337,9 +11708,9 @@
         }
       ]
     },
-    "/software_apps/{software_app_id}/associations": {
+    "/softwareapps/{software_app_id}/associations": {
       "get": {
-        "description": "This endpoint will return the _direct_ associations of a Software Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return the _direct_ associations of a Software Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SoftwareAppAssociation",
         "parameters": [
           {
@@ -11463,7 +11834,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```",
+        "description": "This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```",
         "operationId": "Set-SoftwareAppAssociation",
         "parameters": [
           {
@@ -11487,9 +11858,9 @@
         "summary": "Manage the associations of a software application."
       }
     },
-    "/software_apps/{software_app_id}/systemgroups": {
+    "/softwareapps/{software_app_id}/systemgroups": {
       "get": {
-        "description": "This endpoint will return all Systems Groups bound to a Software App, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Software App to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Software App.\n\nSee `/associations` endpoint to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Systems Groups bound to a Software App, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Software App to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Software App.\n\nSee `/associations` endpoint to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SoftwareAppTraverseSystemGroup",
         "parameters": [
           {
@@ -11549,9 +11920,9 @@
         }
       ]
     },
-    "/software_apps/{software_app_id}/systems": {
+    "/softwareapps/{software_app_id}/systems": {
       "get": {
-        "description": "This endpoint will return all Systems bound to a Software App, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Software App to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Software App.\n\nSee `/associations` endpoint to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Systems bound to a Software App, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Software App to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Software App.\n\nSee `/associations` endpoint to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SoftwareAppTraverseSystem",
         "parameters": [
           {

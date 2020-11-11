@@ -14,7 +14,7 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 
 ### PatchExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
  [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -31,7 +31,7 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInpu
 
 ### PatchViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
+Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
  [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -70,6 +70,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -GroupsEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -203,6 +218,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IGsuitePatchInput>: GSuite Patch Input
+  - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <UserLockoutAction?>]`: 
   - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 

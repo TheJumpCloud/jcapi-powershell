@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
 .Description
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/software_apps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
 .Example
 PS C:\> {{ Add code here }}
 

@@ -31,6 +31,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IAppleMdmPatchInput>:
   [AppleSignedCert <String>]: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
+  [DefaultSystemGroupId <String>]: ObjectId uniquely identifying the MDM default System Group.
   [DepSetupAssistantOptions <IDepSetupAssistantOption[]>]:
     [Option <SetupAssistantOption?>]: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.        
   [EncryptedDepServerToken <String>]: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
@@ -99,6 +100,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
     ${AppleSignedCert},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # ObjectId uniquely identifying the MDM default System Group.
+    ${DefaultSystemGroupId},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
