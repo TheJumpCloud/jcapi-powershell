@@ -349,20 +349,28 @@ Function Update-SwaggerObject
         #     $ThisObject.description = 'Test'
         # }
         # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
-        # TODO: If left as is in an array autorest throws error " error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
-        If ($InputObjectName -like '*.get.parameters')
+        # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
+        If ($NoUpdate -eq $false)
         {
-            If ($ThisObject | Get-Member -Name type)
+            If ($InputObjectName -like '*.get.parameters')
             {
-                If ($ThisObject | Get-Member -Name name)
+                $ThisObjectName = $ThisObject.name
+                If ($ThisObject | Get-Member -Name type)
                 {
-                    If ($ThisObject.name -eq "targets")
+                    If ($ThisObject | Get-Member -Name name)
                     {
-                        $ThisObject.type = 'string'
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('enum') -Value:($ThisObject.items.enum) -Force
-                        $ThisObject.PSObject.Properties.Remove('items')
+                        If ($ThisObject.name -eq "targets")
+                        {
+                            $ThisObject.type = 'string'
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('enum') -Value:($ThisObject.items.enum) -Force
+                            $ThisObject.PSObject.Properties.Remove('items')
+                        }
                     }
                 }
+            }
+            Else
+            {
+                $ThisObjectName = $InputObjectName.split('.') | Select-Object -Last 1
             }
         }
         # Get child objects
@@ -390,14 +398,6 @@ Function Update-SwaggerObject
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                $ThisObjectName = If ($InputObjectName -like '*.get.parameters')
-                {
-                    $ThisObject.name
-                }
-                Else
-                {
-                    $InputObjectName.split('.') | Select-Object -Last 1
-                }
                 $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
