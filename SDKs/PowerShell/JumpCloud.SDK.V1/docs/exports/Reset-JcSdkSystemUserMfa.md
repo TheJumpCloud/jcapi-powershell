@@ -17,29 +17,28 @@ Please be aware that if the user does not complete TOTP MFA setup before the `ex
 
 ### ResetExpanded (Default)
 ```
-Reset-JcSdkSystemUserMfa -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>] [-Exclusion]
- [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Reset
 ```
-Reset-JcSdkSystemUserMfa -Id <String> -Accept <String> -ContentType <String>
- -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-XOrgId <String>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -Id <String>
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentity
 ```
-Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-XOrgId <String>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity>
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
 ```
-Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-XOrgId <String>] [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity> [-Exclusion] [-ExclusionUntil <DateTime>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,21 +65,6 @@ Please be aware that if the user does not complete TOTP MFA setup before the `ex
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 .
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -94,21 +78,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -178,21 +147,6 @@ Returns true when the command succeeds
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
 Parameter Sets: (All)
 Aliases:
 

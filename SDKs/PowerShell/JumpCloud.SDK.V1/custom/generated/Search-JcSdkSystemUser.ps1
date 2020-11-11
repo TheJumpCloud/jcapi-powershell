@@ -63,24 +63,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **EX:** `GET /users?username=eq:testuser`
     ${Filter},
 
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${XOrgId},
-
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]

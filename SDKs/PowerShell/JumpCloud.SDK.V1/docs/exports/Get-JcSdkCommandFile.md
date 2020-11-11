@@ -14,14 +14,12 @@ This endpoint returns the uploaded file(s) associated with a specific command.\n
 
 ### Get (Default)
 ```
-Get-JcSdkCommandFile -Id <String> -Accept <String> -ContentType <String> [-Fields <String>] [-XOrgId <String>]
- [<CommonParameters>]
+Get-JcSdkCommandFile -Id <String> [-Fields <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandFile -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Fields <String>] [-XOrgId <String>] [<CommonParameters>]
+Get-JcSdkCommandFile -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,36 +42,6 @@ This endpoint returns the uploaded file(s) associated with a specific command.\n
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
@@ -119,21 +87,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

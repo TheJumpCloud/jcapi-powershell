@@ -13,8 +13,7 @@ This endpoint will return a specific System User's public SSH key.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemUserSshKey -Id <String> -Accept <String> -ContentType <String> [-XOrgId <String>]
- [<CommonParameters>]
+Get-JcSdkSystemUserSshKey -Id <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,36 +37,6 @@ This endpoint will return a specific System User's public SSH key.
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Id
 .
 
@@ -77,21 +46,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

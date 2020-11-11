@@ -25,8 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>:
   [Name <String>]:
-  [UserLockoutAction <String>]:
-  [UserPasswordExpirationAction <String>]:
+  [UserLockoutAction <UserLockoutAction?>]:
+  [UserPasswordExpirationAction <UserPasswordExpirationAction2?>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -44,6 +44,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
@@ -87,15 +88,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='PatchExpanded')]
     [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserLockoutAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.UserLockoutAction]
     # .
     ${UserLockoutAction},
 
     [Parameter(ParameterSetName='PatchExpanded')]
     [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2]
     # .
     ${UserPasswordExpirationAction},
 

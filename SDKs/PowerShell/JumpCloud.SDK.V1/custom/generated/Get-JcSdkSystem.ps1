@@ -82,18 +82,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Prefix with `-` to sort descending.
     ${Sort},
 
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
-
     [Parameter(ParameterSetName='Get')]
     [Parameter(ParameterSetName='GetViaIdentity')]
     [JumpCloud.SDK.V1.Category('Header')]
@@ -107,12 +95,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Current date header for the System Context API
     ${Date},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${XOrgId},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

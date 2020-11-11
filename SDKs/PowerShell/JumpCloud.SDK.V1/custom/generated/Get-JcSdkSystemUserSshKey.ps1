@@ -30,24 +30,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     ${Id},
 
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${XOrgId},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]

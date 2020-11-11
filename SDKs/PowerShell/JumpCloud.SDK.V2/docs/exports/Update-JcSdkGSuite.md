@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 
 ### PatchExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+ [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Patch
@@ -31,8 +31,9 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInpu
 
 ### PatchViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
+ [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,6 +70,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -GroupsEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -122,7 +138,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserLockoutAction
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -137,7 +153,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
 Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
 Aliases:
 
@@ -202,9 +218,10 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IGsuitePatchInput>: GSuite Patch Input
+  - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
-  - `[UserLockoutAction <String>]`: 
-  - `[UserPasswordExpirationAction <String>]`: 
+  - `[UserLockoutAction <UserLockoutAction?>]`: 
+  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -222,6 +239,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 

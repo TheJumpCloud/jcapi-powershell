@@ -12,7 +12,12 @@ The endpoint retrieves an SSO / SAML Application.
 
 ## SYNTAX
 
-### Get (Default)
+### List (Default)
+```
+Get-JcSdkApplication [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+```
+
+### Get
 ```
 Get-JcSdkApplication -Id <String> [<CommonParameters>]
 ```
@@ -20,12 +25,6 @@ Get-JcSdkApplication -Id <String> [<CommonParameters>]
 ### GetViaIdentity
 ```
 Get-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
-```
-
-### List
-```
-Get-JcSdkApplication -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,36 +47,6 @@ The endpoint retrieves an SSO / SAML Application.
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 The comma separated fields included in the returned records.
@@ -149,21 +118,6 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-.
-
-```yaml
-Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
 .
 
 ```yaml

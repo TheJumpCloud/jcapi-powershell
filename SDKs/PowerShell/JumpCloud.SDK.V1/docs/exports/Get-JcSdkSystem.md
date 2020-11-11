@@ -14,21 +14,19 @@ This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X
 
 ### List (Default)
 ```
-Get-JcSdkSystem -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Search <String>] [-Sort <String>] [-XOrgId <String>] [<CommonParameters>]
+Get-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkSystem -Id <String> -Accept <String> -ContentType <String> [-Fields <String>] [-Filter <String>]
- [-Authorization <String>] [-Date <String>] [-XOrgId <String>] [<CommonParameters>]
+Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [-Authorization <String>] [-Date <String>]
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Fields <String>] [-Filter <String>] [-Authorization <String>] [-Date <String>] [-XOrgId <String>]
- [<CommonParameters>]
+Get-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,21 +50,6 @@ This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Authorization
 Authorization header for the System Context API
 
@@ -76,21 +59,6 @@ Parameter Sets: Get, GetViaIdentity
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -204,21 +172,6 @@ Prefix with `-` to sort descending.
 ```yaml
 Type: System.String
 Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XOrgId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

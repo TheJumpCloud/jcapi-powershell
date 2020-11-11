@@ -14,9 +14,8 @@ This endpoint allows you to manage the _direct_ associations of a System.\n\nA d
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <String> -Type <String>
- [-Authorization <String>] [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <Op> -Type <Type1> [-Authorization <String>]
+ [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,7 +32,7 @@ Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISystemG
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type1>
  [-Authorization <String>] [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
@@ -140,7 +139,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Op
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -215,7 +214,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Type1
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -281,8 +280,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISystemGraphManagementReq>: SystemGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: 
+  - `Op <Op>`: How to modify the graph connection.
+  - `Type <Type1>`: 
   - `[SudoEnabled <Boolean?>]`: 
   - `[SudoWithoutPassword <Boolean?>]`: 
 
@@ -302,6 +301,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 

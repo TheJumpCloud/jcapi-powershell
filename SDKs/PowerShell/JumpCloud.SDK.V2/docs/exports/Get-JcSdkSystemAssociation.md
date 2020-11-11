@@ -14,13 +14,13 @@ This endpoint returns the _direct_ associations of a System.\n\nA direct associa
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <String[]> [-Authorization <String>] [-Date <String>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets1> [-Authorization <String>] [-Date <String>]
  [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]> [-Authorization <String>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [-Authorization <String>]
  [-Date <String>] [<CommonParameters>]
 ```
 
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets1
 Parameter Sets: (All)
 Aliases:
 
@@ -157,6 +157,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 

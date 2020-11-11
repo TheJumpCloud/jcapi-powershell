@@ -40,9 +40,9 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [EnableManagedUid <Boolean?>]:
     [Logo <String>]:
     [Name <String>]:
-    [PasswordCompliance <String>]:
+    [PasswordCompliance <PasswordCompliance?>]:
     [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-    [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]:
+    [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
     [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
     [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
     [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
@@ -90,9 +90,9 @@ SETTINGS <IOrganizationsettingsput>:
   [EnableManagedUid <Boolean?>]:
   [Logo <String>]:
   [Name <String>]:
-  [PasswordCompliance <String>]:
+  [PasswordCompliance <PasswordCompliance?>]:
   [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-  [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]:
+  [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
   [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
   [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
   [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
@@ -142,18 +142,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${Accept},
-
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # .
-    ${ContentType},
 
     [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]

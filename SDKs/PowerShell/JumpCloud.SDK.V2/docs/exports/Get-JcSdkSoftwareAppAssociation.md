@@ -1,29 +1,31 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkApplication.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSoftwareAppAssociation.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkApplication
+# Get-JcSdkSoftwareAppAssociation
 
 ## SYNOPSIS
-The endpoint retrieves an Application.
+This endpoint will return the _direct_ associations of a Software Application.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## SYNTAX
 
 ### Get (Default)
 ```
-Get-JcSdkApplication -ApplicationId <String> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The endpoint retrieves an Application.
+This endpoint will return the _direct_ associations of a Software Application.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## EXAMPLES
 
@@ -43,21 +45,6 @@ The endpoint retrieves an Application.
 
 ## PARAMETERS
 
-### -ApplicationId
-ObjectID of the Application.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
@@ -74,6 +61,36 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -SoftwareAppId
+ObjectID of the Software App.
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Targets
+.
+
+```yaml
+Type: JumpCloud.SDK.V2.Support.Targets
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -83,7 +100,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPathsBs2E5YApplicationsApplicationIdGetResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
 
@@ -110,6 +127,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 

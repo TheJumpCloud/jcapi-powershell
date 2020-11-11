@@ -15,28 +15,28 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ### PutExpanded (Default)
 ```
-Set-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String>
- [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Put
 ```
-Set-JcSdkOrganization -Id <String> -Accept <String> -ContentType <String>
+Set-JcSdkOrganization -Id <String>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentity
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### PutViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> -Accept <String> -ContentType <String>
- [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,21 +61,6 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ## PARAMETERS
 
-### -Accept
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 .
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -89,21 +74,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ContentType
-.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -237,9 +207,9 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[EnableManagedUid <Boolean?>]`: 
     - `[Logo <String>]`: 
     - `[Name <String>]`: 
-    - `[PasswordCompliance <String>]`: 
+    - `[PasswordCompliance <PasswordCompliance?>]`: 
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
-    - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
+    - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
     - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
     - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 
@@ -287,9 +257,9 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[EnableManagedUid <Boolean?>]`: 
   - `[Logo <String>]`: 
   - `[Name <String>]`: 
-  - `[PasswordCompliance <String>]`: 
+  - `[PasswordCompliance <PasswordCompliance?>]`: 
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
-  - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
+  - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
   - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
   - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 

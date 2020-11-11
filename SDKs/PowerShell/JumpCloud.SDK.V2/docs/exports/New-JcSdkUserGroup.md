@@ -15,7 +15,7 @@ This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```
 ### CreateExpanded (Default)
 ```
 New-JcSdkUserGroup -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
- [-AttributeSambaEnabled] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -88,6 +88,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Description
+Description of a User Group
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Email
+Email address of a User Group
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -167,6 +197,8 @@ BODY <IUserGroupPost>: UserGroupPost
     - `[Id <Int32?>]`: 
     - `[Name <String>]`: 
   - `[AttributeSambaEnabled <Boolean?>]`: 
+  - `[Description <String>]`: Description of a User Group
+  - `[Email <String>]`: Email address of a User Group
 
 ## RELATED LINKS
 

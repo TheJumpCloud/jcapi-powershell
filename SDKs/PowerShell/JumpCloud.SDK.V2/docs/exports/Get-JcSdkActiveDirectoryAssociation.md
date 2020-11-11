@@ -14,12 +14,12 @@ This endpoint returns the direct associations of this Active Directory instance.
 
 ### Get (Default)
 ```
-Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <String[]> [<CommonParameters>]
+Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String[]>
+Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets>
  [<CommonParameters>]
 ```
 
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 
@@ -126,6 +126,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
+  - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 

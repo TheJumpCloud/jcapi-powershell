@@ -39,6 +39,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
@@ -64,8 +65,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(Mandatory)]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets])]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Support.Targets]
     # .
     ${Targets},
 

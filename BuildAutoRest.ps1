@@ -89,13 +89,16 @@ Try
                 $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
+                $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
+                $checkDependenciesModulePath = '{0}/check-dependencies.ps1' -f $OutputFullPath
                 $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
                 $nuspecPath = '{0}/{1}.nuspec' -f $OutputFullPath, $ModuleName
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
+                $moduleMdPath = '{0}/{1}.md' -f $DocsFolderPath, $ModuleName
                 $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
@@ -148,19 +151,19 @@ Try
                     ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
                     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
                     Else { Write-Error ('Unknown Operation System') }
-                    Write-Host ('[RUN COMMAND] npm install -g @autorest/autorest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g @autorest/autorest
-                    Write-Host ('[RUN COMMAND] autorest-beta --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    autorest-beta --reset
-                    # autorest-beta --help
+                    Write-Host ('[RUN COMMAND] npm install -g autorest@latest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    npm install -g autorest@latest
+                    Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    autorest --reset
+                    # autorest --help
                 }
                 ###########################################################################
                 If ($GenerateModule)
                 {
                     If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
                     If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-                    Write-Host ('[RUN COMMAND] autorest-beta ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    autorest-beta $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+                    Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($CopyCustomFiles)
@@ -186,7 +189,12 @@ Try
                     $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                     Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
                     # build the module
-                    Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildModuleCommandJob = Start-Job -ScriptBlock:( {
+                            param ($BuildModuleCommand);
+                            Invoke-Expression -Command:($BuildModuleCommand)
+                        }) -ArgumentList:($BuildModuleCommand)
+                    $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
+                    $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($BuildCustomFunctions)
@@ -282,6 +290,9 @@ Try
                 {
                     Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Update-ModuleManifest -Path:($psd1Path) -Guid:($PublishedModule.AdditionalMetadata.GUID)
+                    $moduleMdContent = Get-Content -Path:($moduleMdPath) -Raw
+                    $GuidMatch = $moduleMdContent | Select-String -Pattern:([regex]'(Module Guid:)(.*?)(\n)')
+                    $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
                 }
                 ###########################################################################
                 If ($TestModule)
@@ -289,6 +300,9 @@ Try
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        # Tmp workaround
+                        $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
+                        $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)

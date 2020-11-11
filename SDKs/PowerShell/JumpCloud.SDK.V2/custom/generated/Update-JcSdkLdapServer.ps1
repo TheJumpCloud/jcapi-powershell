@@ -27,8 +27,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>:
   [Id <String>]:
-  [UserLockoutAction <String>]: LDAP Server Action
-  [UserPasswordExpirationAction <String>]: LDAP Server Action
+  [UserLockoutAction <LdapServerAction?>]: LDAP Server Action
+  [UserPasswordExpirationAction <LdapServerAction?>]: LDAP Server Action
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -46,6 +46,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
@@ -89,15 +90,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='PatchExpanded')]
     [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.LdapServerAction]
     # LDAP Server Action
     ${UserLockoutAction},
 
     [Parameter(ParameterSetName='PatchExpanded')]
     [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.LdapServerAction]
     # LDAP Server Action
     ${UserPasswordExpirationAction},
 
