@@ -209,7 +209,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[Name <String>]`: 
     - `[PasswordCompliance <PasswordCompliance?>]`: 
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
-    - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
+    - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
     - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
     - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 
@@ -259,7 +259,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[Name <String>]`: 
   - `[PasswordCompliance <PasswordCompliance?>]`: 
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
-  - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: 
+  - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
   - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
   - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 

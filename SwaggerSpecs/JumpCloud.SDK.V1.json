@@ -1799,7 +1799,7 @@
               "type": "boolean"
             },
             "daysAfterExpirationToSelfRecover": {
-              "minimum": 1,
+              "description": "Deprecated field used for the legacy grace period feature.",
               "type": "integer"
             },
             "daysBeforeExpirationToForceReset": {
@@ -2001,7 +2001,7 @@
               "type": "boolean"
             },
             "daysAfterExpirationToSelfRecover": {
-              "minimum": 1,
+              "description": "Deprecated field used for the legacy grace period feature.",
               "type": "integer"
             },
             "daysBeforeExpirationToForceReset": {
