@@ -212,10 +212,16 @@ $TransformConfig = [Ordered]@{
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
             'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
             'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            'GET_software_apps-software_app_id-associations'             = 'Get-SoftwareAppAssociation';
-            'POST_software_apps-software_app_id-associations'            = 'Set-SoftwareAppAssociation';
-            'GET_software_apps-software_app_id-systems'                  = 'Get-SoftwareAppTraverseSystem';
-            'GET_software_apps-software_app_id-systemgroups'             = 'Get-SoftwareAppTraverseSystemGroup';
+            'POST_softwareapps'                                          = 'Create-SoftwareApp';
+            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
+            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
+            'GET_softwareapps'                                           = 'List-SoftwareApp';
+            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
+            'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
+            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
+            'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
+            'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
             'POST_systems-system_id-associations'                        = 'Set-SystemAssociation';
             'GET_systems-system_id-fdekey'                               = 'Get-SystemFDEKey';
@@ -665,9 +671,8 @@ $SDKName | ForEach-Object {
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # For comparing before and after
-            # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
-            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
+            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
