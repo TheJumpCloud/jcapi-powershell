@@ -105,6 +105,7 @@ $TransformConfig = [Ordered]@{
             '["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
             '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
+            '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
@@ -212,14 +213,14 @@ $TransformConfig = [Ordered]@{
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
             'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
             'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            'POST_softwareapps'                                          = 'Create-SoftwareApp';
-            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
-            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
-            'GET_softwareapps'                                           = 'List-SoftwareApp';
-            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            # 'POST_softwareapps'                                          = 'Create-SoftwareApp';
+            # 'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
+            # 'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
+            # 'GET_softwareapps'                                           = 'List-SoftwareApp';
+            # 'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
             'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
             'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
-            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
+            # 'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
@@ -335,7 +336,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo');
+        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo', '/softwareapps', '/softwareapps/{id}', '/softwareapps/{software_app_id}/statuses', 'software-app', 'software-app-status');
     }
 }
 Function Update-SwaggerObject
@@ -622,7 +623,8 @@ $SDKName | ForEach-Object {
             }
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $SwaggerString = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
+            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes)
+            $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
             # Validate that all operationIds in mapping have been found in spec
             If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
@@ -673,7 +675,7 @@ $SDKName | ForEach-Object {
             # For comparing before and after
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
-            # $SwaggerString  | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
+            # $UpdatedSwagger | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec
