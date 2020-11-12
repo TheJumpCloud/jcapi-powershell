@@ -9,7 +9,7 @@ output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
 namespace: JumpCloud.SDK.V1
 sanitize-names: false
 # # Values
-module-version: 0.0.19
+module-version: 0.0.20
 # skip-model-cmdlets: false
 help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/
 metadata:
