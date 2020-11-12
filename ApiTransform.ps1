@@ -21,7 +21,7 @@ $TransformConfig = [Ordered]@{
             'POST_events-interval' = 'Get-EventInterval';
             'POST_events-distinct' = 'Get-EventDistinct';
         };
-        ExcludedPaths      = @();
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
@@ -90,7 +90,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
             'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
         };
-        ExcludedPaths      = @();
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
@@ -213,14 +213,14 @@ $TransformConfig = [Ordered]@{
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
             'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
             'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            # 'POST_softwareapps'                                          = 'Create-SoftwareApp';
-            # 'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
-            # 'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
-            # 'GET_softwareapps'                                           = 'List-SoftwareApp';
-            # 'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            'POST_softwareapps'                                          = 'Create-SoftwareApp';
+            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
+            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
+            'GET_softwareapps'                                           = 'List-SoftwareApp';
+            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
             'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
             'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
-            # 'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
+            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
@@ -336,7 +336,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo', '/softwareapps', '/softwareapps/{id}', '/softwareapps/{software_app_id}/statuses', 'software-app', 'software-app-status');
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', 'software-app-settings')
     }
 }
 Function Update-SwaggerObject
@@ -481,27 +481,34 @@ Function Update-SwaggerObject
                         }
                         # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
                     }
+                    # Exclude $ref
+                    If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
+                    {
+                        Write-Host "$($AttributeName): $($ThisObject.$AttributeName)"
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
+                    }
                     # Exclude paths
-                    If ($AttributeName -in $global:ExcludedPaths)
+                    If ($AttributeName -in $global:ExcludedList)
                     {
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        $global:ExcludedPaths.Remove($AttributeName)
+                        $global:ExcludedList.Remove($AttributeName)
                     }
                     # Remove tags
-                    ElseIf ($AttributePath -like '*.tags')
+                    If ($AttributePath -like '*.tags')
                     {
                         $ThisObject.PSObject.Properties.Remove('tags')
                     }
                     # Remove tagnames
-                    ElseIf ($AttributePath -like '*.tagnames')
+                    If ($AttributePath -like '*.tagnames')
                     {
                         $ThisObject.PSObject.Properties.Remove('tagnames')
                     }
-                    # ElseIf ($AttributePath -like '*.enum')
+                    # If ($AttributePath -like '*.enum')
                     # {
                     #     $ThisObject.PSObject.Properties.Remove('enum')
                     # }
-                    Else
+                    If ($ThisObject.$AttributeName)
                     {
                         # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
@@ -565,7 +572,8 @@ $SDKName | ForEach-Object {
         $Config = $TransformConfig.($SDKNameItem)
         $CurrentSDKName = $SDKNameItem
         $global:OperationIdMapping = $Config.OperationIdMapping
-        $global:ExcludedPaths = [System.Collections.ArrayList]$Config.ExcludedPaths
+        $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
+        $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
         # Create output file path
         $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
         If (-not (Test-Path -Path:($OutputFilePath)))
@@ -633,20 +641,17 @@ $SDKName | ForEach-Object {
                     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
                 }
             }
-            # Validate that all "excludedPaths" in mapping have been removed from spec
-            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
+            # Validate that all "ExcludedList" in mapping have been removed from spec
+            If (-not [System.String]::IsNullOrEmpty($global:ExcludedList))
             {
-                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
+                $global:ExcludedList | ForEach-Object {
                     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
                 }
             }
-            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
-            {
-                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
-                    If ($SwaggerString -match $_)
-                    {
-                        Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the path '$($_)' has not been excluded.")
-                    }
+            $global:ExcludedListOrg | ForEach-Object {
+                If ($SwaggerString -match """$($_)""" -or $SwaggerString -match [regex]("(""\`$ref"": ""\#\/)(.*?)($($_)"")"))
+                {
+                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the item '$($_)' has not been excluded.")
                 }
             }
             # Validate that "tags" have been removed
