@@ -2542,6 +2542,14 @@
       "title": "Setup Assistant Option",
       "type": "string"
     },
+    "software-app-settings": {
+      "properties": {
+        "packageId": {
+          "type": "string"
+        }
+      },
+      "title": "Software Application Package Setting Object"
+    },
     "SSOPostReq": {
       "description": "Request to insert SSO configuration for application.",
       "properties": {
