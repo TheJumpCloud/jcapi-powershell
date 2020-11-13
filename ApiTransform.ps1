@@ -356,10 +356,10 @@ Function Update-SwaggerObject
         #     Write-Host "Break Point"
         #     $ThisObject.description = 'Test'
         # }
-        # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
-        # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
         If ($NoUpdate -eq $false)
         {
+            # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
+            # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
             If ($InputObjectName -like '*.get.parameters')
             {
                 $ThisObjectName = $ThisObject.name
