@@ -21,14 +21,14 @@ $TransformConfig = [Ordered]@{
             'POST_events-interval' = 'Get-EventInterval';
             'POST_events-distinct' = 'Get-EventDistinct';
         };
-        ExcludedPaths      = @();
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
-            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"System"'; # The "system" class is a reserved word.
+            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"System"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
             '"basePath":"/api"'                                                        = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
@@ -90,7 +90,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
             'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
         };
-        ExcludedPaths      = @();
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
@@ -106,6 +106,7 @@ $TransformConfig = [Ordered]@{
             '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
+            'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
@@ -213,14 +214,14 @@ $TransformConfig = [Ordered]@{
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
             'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
             'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            # 'POST_softwareapps'                                          = 'Create-SoftwareApp';
-            # 'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
-            # 'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
-            # 'GET_softwareapps'                                           = 'List-SoftwareApp';
-            # 'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            'POST_softwareapps'                                          = 'Create-SoftwareApp';
+            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
+            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
+            'GET_softwareapps'                                           = 'List-SoftwareApp';
+            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
             'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
             'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
-            # 'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
+            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
@@ -336,7 +337,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo', '/softwareapps', '/softwareapps/{id}', '/softwareapps/{software_app_id}/statuses', 'software-app', 'software-app-status');
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo')
     }
 }
 Function Update-SwaggerObject
@@ -355,10 +356,10 @@ Function Update-SwaggerObject
         #     Write-Host "Break Point"
         #     $ThisObject.description = 'Test'
         # }
-        # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
-        # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
         If ($NoUpdate -eq $false)
         {
+            # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
+            # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
             If ($InputObjectName -like '*.get.parameters')
             {
                 $ThisObjectName = $ThisObject.name
@@ -481,27 +482,34 @@ Function Update-SwaggerObject
                         }
                         # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
                     }
+                    # Exclude $ref
+                    If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
+                    {
+                        Write-Host "$($AttributeName): $($ThisObject.$AttributeName)"
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
+                    }
                     # Exclude paths
-                    If ($AttributeName -in $global:ExcludedPaths)
+                    If ($AttributeName -in $global:ExcludedList)
                     {
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        $global:ExcludedPaths.Remove($AttributeName)
+                        $global:ExcludedList.Remove($AttributeName)
                     }
                     # Remove tags
-                    ElseIf ($AttributePath -like '*.tags')
+                    If ($AttributePath -like '*.tags')
                     {
                         $ThisObject.PSObject.Properties.Remove('tags')
                     }
                     # Remove tagnames
-                    ElseIf ($AttributePath -like '*.tagnames')
+                    If ($AttributePath -like '*.tagnames')
                     {
                         $ThisObject.PSObject.Properties.Remove('tagnames')
                     }
-                    # ElseIf ($AttributePath -like '*.enum')
+                    # If ($AttributePath -like '*.enum')
                     # {
                     #     $ThisObject.PSObject.Properties.Remove('enum')
                     # }
-                    Else
+                    If ($ThisObject.$AttributeName)
                     {
                         # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
@@ -565,7 +573,8 @@ $SDKName | ForEach-Object {
         $Config = $TransformConfig.($SDKNameItem)
         $CurrentSDKName = $SDKNameItem
         $global:OperationIdMapping = $Config.OperationIdMapping
-        $global:ExcludedPaths = [System.Collections.ArrayList]$Config.ExcludedPaths
+        $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
+        $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
         # Create output file path
         $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
         If (-not (Test-Path -Path:($OutputFilePath)))
@@ -633,20 +642,17 @@ $SDKName | ForEach-Object {
                     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
                 }
             }
-            # Validate that all "excludedPaths" in mapping have been removed from spec
-            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
+            # Validate that all "ExcludedList" in mapping have been removed from spec
+            If (-not [System.String]::IsNullOrEmpty($global:ExcludedList))
             {
-                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
+                $global:ExcludedList | ForEach-Object {
                     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
                 }
             }
-            If (-not [System.String]::IsNullOrEmpty($global:ExcludedPaths))
-            {
-                ($global:ExcludedPaths).GetEnumerator() | ForEach-Object {
-                    If ($SwaggerString -match $_)
-                    {
-                        Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the path '$($_)' has not been excluded.")
-                    }
+            $global:ExcludedListOrg | ForEach-Object {
+                If ($SwaggerString -match """$($_)""" -or $SwaggerString -match [regex]("(""\`$ref"": ""\#\/)(.*?)($($_)"")"))
+                {
+                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the item '$($_)' has not been excluded.")
                 }
             }
             # Validate that "tags" have been removed
