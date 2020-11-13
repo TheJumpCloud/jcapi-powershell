@@ -27,8 +27,8 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # The "system" class is a reserved word.
-            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"System"'; # The "system" class is a reserved word.
+            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"System"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
             '"basePath":"/api"'                                                        = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
