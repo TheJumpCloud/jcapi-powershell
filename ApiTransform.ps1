@@ -106,6 +106,7 @@ $TransformConfig = [Ordered]@{
             '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
+            'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
@@ -336,7 +337,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', 'software-app-settings')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo')
     }
 }
 Function Update-SwaggerObject
