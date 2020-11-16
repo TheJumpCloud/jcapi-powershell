@@ -240,6 +240,7 @@ $TransformConfig = [Ordered]@{
             'GET_systemgroups-group_id-policies'                         = 'Get-SystemGroupTraversePolicy';
             'GET_systemgroups-group_id-users'                            = 'Get-SystemGroupTraverseUser';
             'GET_systemgroups-group_id-usergroups'                       = 'Get-SystemGroupTraverseUserGroup';
+            'List-SystemInsights'                                        = 'List-SystemInsights';
             'GET_systeminsights-alf'                                     = 'List-SystemInsightsAlf';
             'GET_systeminsights-alf_exceptions'                          = 'List-SystemInsightsAlfException';
             'GET_systeminsights-alf_explicit_auths'                      = 'List-SystemInsightsAlfExplicitAuth';
@@ -606,6 +607,7 @@ $SDKName | ForEach-Object {
             }
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
+            # Perform find and replace
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
             {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
@@ -623,6 +625,53 @@ $SDKName | ForEach-Object {
             }
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            ###########################################################################
+            If ($SDKName -eq 'JumpCloud.SDK.V2')
+            {
+                $SystemInsights = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(?<="\/systeminsights\/)(.*?)(?=")') -AllMatches
+                $SystemInsightsEndpoint = [PSCustomObject]@{
+                    "/systemInsights/{table}" = [PSCustomObject]@{
+                        "get"        = [PSCustomObject]@{
+                            "description" = "Valid filter fields are unique to each table.";
+                            "operationId" = "List-SystemInsights";
+                            "summary"     = "List System Insights";
+                            "responses"   = [PSCustomObject]@{
+                                "200" = [PSCustomObject]@{
+                                    "description" = "Array of SystemInsights records";
+                                    "schema"      = [PSCustomObject]@{
+                                        "items" = [PSCustomObject]@{
+                                            "additionalProperties" = $true;
+                                            "type"                 = "object";
+                                        }
+                                        "type"  = "array";
+                                    };
+                                };
+                            };
+                            "security"    = @(
+                                [PSCustomObject]@{
+                                    "x-api-key" = @();
+                                };
+                            );
+                        };
+                        "parameters" = @(
+                            [PSCustomObject]@{
+                                "required"    = $true;
+                                "description" = "SystemInsights table to query";
+                                "in"          = "path";
+                                "name"        = "table";
+                                "type"        = "string";
+                                "enum"        = @($SystemInsights.Matches.Value | Select-Object -Unique | Sort-Object);
+                            },
+                            [PSCustomObject]@{'$ref' = '#/parameters/trait:systemInsightsFilter:filter'; },
+                            [PSCustomObject]@{'$ref' = '#/parameters/trait:skip:skip'; },
+                            [PSCustomObject]@{'$ref' = '#/parameters/trait:sort:sort'; },
+                            [PSCustomObject]@{'$ref' = '#/parameters/trait:systemInsightsLimit:limit'; }
+                        );
+                    }
+                };
+                Add-Member -InputObject:($SwaggerObject.paths) -MemberType:('NoteProperty') -Name:($SystemInsightsEndpoint.PSObject.Properties.name) -Value:($SystemInsightsEndpoint.($SystemInsightsEndpoint.PSObject.Properties.name)) -Force
+            }
+            ###########################################################################
             $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes)
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
