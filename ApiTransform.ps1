@@ -213,14 +213,14 @@ $TransformConfig = [Ordered]@{
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
             'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
             'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            # 'POST_softwareapps'                                          = 'Create-SoftwareApp';
-            # 'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
-            # 'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
-            # 'GET_softwareapps'                                           = 'List-SoftwareApp';
-            # 'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            'POST_softwareapps'                                          = 'Create-SoftwareApp';
+            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
+            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
+            'GET_softwareapps'                                           = 'List-SoftwareApp';
+            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
             'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
             'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
-            # 'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
+            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
@@ -337,7 +337,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
         };
-        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo', '/softwareapps', '/softwareapps/{id}', '/softwareapps/{software_app_id}/statuses', 'software-app', 'software-app-status');
+        ExcludedPaths      = @('/applications/{application_id}', '/applications/{application_id}/logo');
     }
 }
 Function Update-SwaggerObject
