@@ -13,7 +13,8 @@ Lists G Suite users available for import.
 ## SYNTAX
 
 ```
-Get-JcSdkGSuiteUserToImport -GsuiteId <String> [-PageToken <String>] [<CommonParameters>]
+Get-JcSdkGSuiteUserToImport -GsuiteId <String> [-MaxResults <Int32>] [-PageToken <String>] [-Query <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,8 +53,39 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MaxResults
+Maximum number of results per page.
+
+```yaml
+Type: System.Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PageToken
 Token used to access next page of results.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Query
+Google Directory API search parameter.
+See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
 
 ```yaml
 Type: System.String

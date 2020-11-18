@@ -30,9 +30,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
+    [System.Int32]
+    # Maximum number of results per page.
+    ${MaxResults},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Token used to access next page of results.
     ${PageToken},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API search parameter.
+    # See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
+    ${Query},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

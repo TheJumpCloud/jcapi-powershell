@@ -8933,9 +8933,23 @@
           },
           {
             "required": false,
+            "description": "Maximum number of results per page.",
+            "in": "query",
+            "name": "maxResults",
+            "type": "integer"
+          },
+          {
+            "required": false,
             "description": "Token used to access next page of results.",
             "in": "query",
             "name": "pageToken",
+            "type": "string"
+          },
+          {
+            "required": false,
+            "description": "Google Directory API search parameter. See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.",
+            "in": "query",
+            "name": "query",
             "type": "string"
           }
         ],
