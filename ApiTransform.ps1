@@ -489,49 +489,30 @@ Function Update-SwaggerObject
                         Write-Host "$($AttributeName): $($ThisObject.$AttributeName)"
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
-                        # Exclude paths
-                        If ($AttributeName -in $global:ExcludedList)
-                        {
-                            $ThisObject.PSObject.Properties.Remove($AttributeName)
-                            $global:ExcludedList.Remove($AttributeName)
-                        }
-                        # Remove tags
-                        If ($AttributePath -like '*.tags')
-                        {
-                            $ThisObject.PSObject.Properties.Remove('tags')
-                        }
-                        # Remove tagnames
-                        If ($AttributePath -like '*.tagnames')
-                        {
-                            $ThisObject.PSObject.Properties.Remove('tagnames')
-                        }
-                        # If ($AttributePath -like '*.enum')
-                        # {
-                        #     $ThisObject.PSObject.Properties.Remove('enum')
-                        # }
-                        If ($ThisObject.$AttributeName)
-                        {
-                            # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
-                            $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
-                            # If it was an array of objects before reapply the parent array.
-                            If ($ThisObjectAttributeNameType -eq 'System.Object[]')
-                            {
-                                $ModifiedObject = @($ModifiedObject)
-                            }
-                            # Sort object
-                            If ($Sort)
-                            {
-                                $ThisObject.PSObject.Properties.Remove($AttributeName)
-                                Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
-                            }
-                            Else
-                            {
-                                $ThisObject.$AttributeName = $ModifiedObject
-                            }
-                        }
                     }
-                    Else
+                    # Exclude paths
+                    If ($AttributeName -in $global:ExcludedList)
                     {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        $global:ExcludedList.Remove($AttributeName)
+                    }
+                    # Remove tags
+                    If ($AttributePath -like '*.tags')
+                    {
+                        $ThisObject.PSObject.Properties.Remove('tags')
+                    }
+                    # Remove tagnames
+                    If ($AttributePath -like '*.tagnames')
+                    {
+                        $ThisObject.PSObject.Properties.Remove('tagnames')
+                    }
+                    # If ($AttributePath -like '*.enum')
+                    # {
+                    #     $ThisObject.PSObject.Properties.Remove('enum')
+                    # }
+                    If ($ThisObject.$AttributeName)
+                    {
+                        # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
                         # If it was an array of objects before reapply the parent array.
                         If ($ThisObjectAttributeNameType -eq 'System.Object[]')
@@ -550,11 +531,30 @@ Function Update-SwaggerObject
                         }
                     }
                 }
+                Else
+                {
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    # If it was an array of objects before reapply the parent array.
+                    If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                    {
+                        $ModifiedObject = @($ModifiedObject)
+                    }
+                    # Sort object
+                    If ($Sort)
+                    {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
+                    }
+                    Else
+                    {
+                        $ThisObject.$AttributeName = $ModifiedObject
+                    }
+                }
             }
         }
-        # Return modified object
-        Return $InputObject
     }
+    # Return modified object
+    Return $InputObject
 }
 Function Format-SwaggerObject
 {
