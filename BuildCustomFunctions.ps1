@@ -94,7 +94,21 @@ Try
                 {
                     $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip))
                     {
-                        "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
+                        $ParameterSetLimitSkipArray = @()
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit))
+                        {
+                            $ParameterSetLimit | ForEach-Object {
+                                $ParameterSetLimitSkipArray += $_.Trim()
+                            }
+                        }
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetSkip))
+                        {
+                            $ParameterSetSkip | ForEach-Object {
+                                $ParameterSetLimitSkipArray += $_.Trim()
+                            }
+                        }
+                        "'$(($ParameterSetLimitSkipArray | Select-Object -Unique ) -join "','")'"
+
                     }
                     Else
                     {
