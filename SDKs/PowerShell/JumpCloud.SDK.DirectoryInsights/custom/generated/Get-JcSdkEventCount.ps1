@@ -169,7 +169,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('GetExpanded'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('GetExpanded','GetExpanded','GetExpanded'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
