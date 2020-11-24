@@ -65,7 +65,7 @@ namespace JumpCloud.SDK.V1
                 request.Headers.Add("x-org-id", JCOrgId);
             }
             // Organization endpoint does not accept x-org-id as a header so remove it
-            if (request.Headers.Contains("x-org-id") && request.RequestUri.ToString() == "https://console.jumpcloud.com/api/organizations")
+            if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith("/api/organizations") == true)
             {
                 request.Headers.Remove("x-org-id");
             }
@@ -75,10 +75,10 @@ namespace JumpCloud.SDK.V1
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.20")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.21")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.20");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.21");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);
