@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Description
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -42,9 +42,9 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemMember.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkUserMemberof.md
 #>
- Function Get-JcSdkSystemMember
+ Function Get-JcSdkUserMemberof
 {
     [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
@@ -52,8 +52,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the System.
-    ${SystemId},
+    # ObjectID of the User.
+    ${UserId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -81,18 +81,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # Authorization header for the System Context API
-    ${Authorization},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # Current date header for the System Context API
-    ${Date},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -170,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemMember @PSBoundParameters
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserMemberof @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -195,7 +183,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemMember @PSBoundParameters
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserMemberof @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
