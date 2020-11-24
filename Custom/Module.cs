@@ -65,7 +65,7 @@ namespace ModuleNameSpace
                 request.Headers.Add("x-org-id", JCOrgId);
             }
             // Organization endpoint does not accept x-org-id as a header so remove it
-            if (request.Headers.Contains("x-org-id") && request.RequestUri.ToString() == "https://console.jumpcloud.com/api/organizations")
+            if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith("/api/organizations") == true)
             {
                 request.Headers.Remove("x-org-id");
             }
