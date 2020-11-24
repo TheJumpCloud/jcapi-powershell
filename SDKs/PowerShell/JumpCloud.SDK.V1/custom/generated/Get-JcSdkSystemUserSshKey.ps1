@@ -13,7 +13,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsKnpzxaSystemusersIdSshkeysGetResponses400ContentSchema
+JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Link
@@ -21,7 +21,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsKnpzxaSystemusersIdSshkeysGetResponses400ContentSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]

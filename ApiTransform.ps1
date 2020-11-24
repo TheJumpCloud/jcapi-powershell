@@ -615,6 +615,7 @@ $SDKName | ForEach-Object {
             }
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
+            # Perform find and replace
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
             {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
