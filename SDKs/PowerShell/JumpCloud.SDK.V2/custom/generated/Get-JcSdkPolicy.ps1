@@ -154,7 +154,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('ListList'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
