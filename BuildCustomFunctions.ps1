@@ -78,6 +78,15 @@ Try
             $BeginContent = @()
             $ProcessContent = @()
             $EndContent = @()
+            # Results logic - If the output model is undefined in the swagger spec
+            $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*JsonItemsItem")
+            {
+                "($($ImportedModule.Name)\$($CommandName) @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
+            }
+            Else
+            {
+                "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
+            }
             If ($Command.Verb -in ('Get', 'Search'))
             {
                 # Add paginate parameter if function contains Limit or Skip parameters
@@ -85,11 +94,25 @@ Try
                 {
                     $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip))
                     {
-                        "'" + ((@($ParameterSetLimit, $ParameterSetSkip) | Select-Object -Unique) -join "','") + "'"
+                        $ParameterSetLimitSkipArray = @()
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit))
+                        {
+                            $ParameterSetLimit | ForEach-Object {
+                                $ParameterSetLimitSkipArray += $_.Trim()
+                            }
+                        }
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetSkip))
+                        {
+                            $ParameterSetSkip | ForEach-Object {
+                                $ParameterSetLimitSkipArray += $_.Trim()
+                            }
+                        }
+                        "'$(($ParameterSetLimitSkipArray | Select-Object -Unique ) -join "','")'"
+
                     }
                     Else
                     {
-                        "'" + (($DefaultParameterSetName | Select-Object -Unique) -join "','") + "'"
+                        "'$(($DefaultParameterSetName | Select-Object -Unique) -join "','")'"
                     }
                     If (-not [System.String]::IsNullOrEmpty($ParameterContent))
                     {
@@ -129,7 +152,7 @@ $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
 $($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after'))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
@@ -152,14 +175,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentC
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Result.Headers.GetValues('X-Limit')
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.ToJsonString() | ConvertFrom-Json;
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -169,14 +185,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.ToJsonString() | ConvertFrom-Json;
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Break
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}
@@ -185,41 +194,27 @@ $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.ToJsonString() | ConvertFrom-Json;
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
                     }
                     Else
                     {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$Results += If ('ToJsonString' -in (`$Result | Get-Member ).Name)
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.ToJsonString() | ConvertFrom-Json;
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
 $($IndentChar)$($IndentChar)}"
                     }
                     # Build "End" block
@@ -276,7 +271,7 @@ $($IndentChar)$($IndentChar)$($IndentChar){"
                         {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -314,7 +309,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)}"
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -335,7 +330,7 @@ $($IndentChar)$($IndentChar)}"
                     }
                     Else
                     {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters
+                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -382,14 +377,14 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                 # Build "Process" block
-                $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
+                $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $ResultsLogic"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
 $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
 $($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}

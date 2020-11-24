@@ -190,14 +190,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                         }
                         $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
                         $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
-                        $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
-                        {
-                            $Result.ToJsonString() | ConvertFrom-Json;
-                        }
-                        Else
-                        {
-                            $Result
-                        }
+                        $Results += $Result
                         Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
                         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
@@ -207,14 +200,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 }
                 Else
                 {
-                    $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
-                    {
-                        $Result.ToJsonString() | ConvertFrom-Json;
-                    }
-                    Else
-                    {
-                        $Result
-                    }
+                    $Results += $Result
                     Break
                 }
             }
@@ -230,14 +216,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $Results += If ('ToJsonString' -in ($Result | Get-Member ).Name)
-                {
-                    $Result.ToJsonString() | ConvertFrom-Json;
-                }
-                Else
-                {
-                    $Result
-                }
+                $Results += $Result
             }
         }
     }

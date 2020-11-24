@@ -1,3 +1,4 @@
 **/*.vs
 **/*-TestResults.xml
 **/*JumpCloud.SDK.*.log
+**/localEnv.json
