@@ -360,7 +360,7 @@ Valid filter fields are `system_id` and `security_type`.
 ### [Get-JcSdkSystemInsightWindowSecurityProduct](Get-JcSdkSystemInsightWindowSecurityProduct.md)
 Valid filter fields are `system_id` and `state`.
 
-### [Get-JcSdkSystemMemberof](Get-JcSdkSystemMemberof.md)
+### [Get-JcSdkSystemMember](Get-JcSdkSystemMember.md)
 This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
 
 ### [Get-JcSdkSystemTraverseCommand](Get-JcSdkSystemTraverseCommand.md)
@@ -414,7 +414,7 @@ This endpoint will return all Systems bound to a User Group, either directly or 
 ### [Get-JcSdkUserGroupTraverseSystemGroup](Get-JcSdkUserGroupTraverseSystemGroup.md)
 This endpoint will return all System Groups bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
-### [Get-JcSdkUserMemberof](Get-JcSdkUserMemberof.md)
+### [Get-JcSdkUserMember](Get-JcSdkUserMember.md)
 This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ### [Get-JcSdkUserTraverseApplication](Get-JcSdkUserTraverseApplication.md)
