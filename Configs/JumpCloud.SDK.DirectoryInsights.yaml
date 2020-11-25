@@ -9,7 +9,7 @@ output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
 sanitize-names: false
 # # Values
-module-version: 0.0.13
+module-version: 0.0.14
 # skip-model-cmdlets: false
 help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/
 metadata:
