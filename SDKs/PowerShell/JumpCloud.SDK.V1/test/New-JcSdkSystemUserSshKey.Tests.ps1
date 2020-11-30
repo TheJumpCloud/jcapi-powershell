@@ -1,5 +1,5 @@
-$PesterTestSystemUserSshKeyName = 'PesterTestSystemUserSshKeyName'
-$PesterTestSystemUserSshKeyPublicKey = 'PesterTestSystemUserSshKeyPublicKey'
+$global:PesterTestSystemUserSshKeyName = 'PesterTestSystemUserSshKeyName'
+$global:PesterTestSystemUserSshKeyPublicKey = 'PesterTestSystemUserSshKeyPublicKey'
 Describe 'New-JcSdkSystemUserSshKey' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
@@ -14,7 +14,7 @@ Describe 'New-JcSdkSystemUserSshKey' {
                 Remove-JcSdkSystemUserSshKey -Id:($_) -SystemuserId:($SystemUser.Id)
             }
         }
-        New-JcSdkSystemUserSshKey -Id:($SystemUser.Id) -Name:($PesterTestSystemUserSshKeyName) -PublicKey:($PesterTestSystemUserSshKeyPublicKey) | Should -Not -BeNullOrEmpty
+        New-JcSdkSystemUserSshKey -Id:($SystemUser.Id) -Name:($global:PesterTestSystemUserSshKeyName) -PublicKey:($global:PesterTestSystemUserSshKeyPublicKey) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -Skip {
