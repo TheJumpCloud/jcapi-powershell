@@ -1,30 +1,27 @@
-$loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath)) {
-    $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
-}
-. ($loadEnvPath)
-$TestRecordingFile = Join-Path $PSScriptRoot 'New-JcSdkSystemUserSshKey.Recording.json'
-$currentPath = $PSScriptRoot
-while(-not $mockingPath) {
-    $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
-    $currentPath = Split-Path -Path $currentPath -Parent
-}
-. ($mockingPath | Select-Object -First 1).FullName
-
+$PesterTestSystemUserSshKeyName = 'PesterTestSystemUserSshKeyName'
+$PesterTestSystemUserSshKeyPublicKey = 'PesterTestSystemUserSshKeyPublicKey'
 Describe 'New-JcSdkSystemUserSshKey' {
-    It 'CreateExpanded' -skip {
+    It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' -skip {
+    It 'Create' {
+        $SystemUser = (Get-JcSdkSystemUser)[0]
+        $SshKey = Get-JcSdkSystemUserSshKey -Id:($SystemUser.Id)
+        If (-not [System.String]::IsNullOrEmpty($SshKey))
+        {
+            $SshKey.Id | ForEach-Object {
+                Remove-JcSdkSystemUserSshKey -Id:($_) -SystemuserId:($SystemUser.Id)
+            }
+        }
+        New-JcSdkSystemUserSshKey -Id:($SystemUser.Id) -Name:($PesterTestSystemUserSshKeyName) -PublicKey:($PesterTestSystemUserSshKeyPublicKey) | Should -Not -BeNullOrEmpty
+    }
+
+    It 'CreateViaIdentity' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'CreateViaIdentityExpanded' -skip {
+    It 'CreateViaIdentityExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
