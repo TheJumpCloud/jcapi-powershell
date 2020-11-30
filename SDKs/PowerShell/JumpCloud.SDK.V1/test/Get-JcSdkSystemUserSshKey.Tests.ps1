@@ -1,18 +1,11 @@
-$loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath)) {
-    $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
-}
-. ($loadEnvPath)
-$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkSystemUserSshKey.Recording.json'
-$currentPath = $PSScriptRoot
-while(-not $mockingPath) {
-    $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
-    $currentPath = Split-Path -Path $currentPath -Parent
-}
-. ($mockingPath | Select-Object -First 1).FullName
-
 Describe 'Get-JcSdkSystemUserSshKey' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        $SystemUser = (Get-JcSdkSystemUser)[0]
+        If ([System.String]::IsNullOrEmpty($SystemUser.SshKeys))
+        {
+            New-JcSdkSystemUserSshKey -Id:($SystemUser.Id) -Name:('TestName') -PublicKey:('TestPublicKey')
+            Start-Sleep 10
+        }
+        Get-JcSdkSystemUserSshKey -Id:($SystemUser.Id) | Should -Not -BeNullOrEmpty
     }
 }
