@@ -1023,6 +1023,20 @@
         "name": {
           "type": "string"
         },
+        "sso": {
+          "properties": {
+            "beta": {
+              "type": "boolean"
+            },
+            "jit": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "ssoUrl": {
           "type": "string"
         },
@@ -1840,12 +1854,12 @@
               "type": "integer"
             },
             "maxHistory": {
-              "maximum": 10,
+              "maximum": 24,
               "minimum": 1,
               "type": "integer"
             },
             "maxLoginAttempts": {
-              "minimum": 0,
+              "minimum": 1,
               "type": "integer"
             },
             "minChangePeriodInDays": {
@@ -2039,12 +2053,12 @@
               "type": "integer"
             },
             "maxHistory": {
-              "maximum": 10,
+              "maximum": 24,
               "minimum": 1,
               "type": "integer"
             },
             "maxLoginAttempts": {
-              "minimum": 0,
+              "minimum": 1,
               "type": "integer"
             },
             "minChangePeriodInDays": {
@@ -2785,40 +2799,6 @@
       "type": "object"
     },
     "systemuserreturn": {
-      "example": {
-        "account_locked": false,
-        "addresses": [],
-        "attributes": [],
-        "enable_managed_uid": false,
-        "enable_user_portal_multifactor": false,
-        "ldap_binding_user": false,
-        "password_never_expires": false,
-        "passwordless_sudo": false,
-        "phoneNumbers": [],
-        "samba_service_user": false,
-        "ssh_keys": [],
-        "sudo": false,
-        "suspended": false,
-        "password_expired": false,
-        "totp_enabled": false,
-        "_id": "5fb6299a5b39b163bd2a3e7c",
-        "activated": true,
-        "allow_public_key": true,
-        "created": "2020-11-19T08:15:22.45+00:00",
-        "email": "dxhoxnol@pestertest11-19-2020.com",
-        "externally_managed": true,
-        "firstname": "Pester",
-        "id": "5fb6299a5b39b163bd2a3e7c",
-        "lastname": "Test",
-        "mfa": {
-          "exclusion": false,
-          "configured": false
-        },
-        "password_expiration_date": "2021-02-17T08:15:22.642+00:00",
-        "unix_guid": 180486,
-        "unix_uid": 180486,
-        "username": "DXHOxNol"
-      },
       "properties": {
         "_id": {
           "type": "string"
@@ -2831,6 +2811,43 @@
         },
         "addresses": {
           "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -2844,10 +2861,44 @@
           },
           "type": "array"
         },
+        "badLoginAttempts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
         "created": {
           "type": "string"
         },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
         "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
           "type": "string"
         },
         "enable_managed_uid": {
@@ -2856,31 +2907,46 @@
         "enable_user_portal_multifactor": {
           "type": "boolean"
         },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
         "externally_managed": {
           "type": "boolean"
         },
         "firstname": {
+          "maxLength": 1024,
           "type": "string"
         },
-        "id": {
+        "jobTitle": {
+          "maxLength": 1024,
           "type": "string"
         },
         "lastname": {
+          "maxLength": 1024,
           "type": "string"
         },
         "ldap_binding_user": {
           "type": "boolean"
         },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
         "mfa": {
-          "properties": {
-            "configured": {
-              "type": "boolean"
-            },
-            "exclusion": {
-              "type": "boolean"
-            }
-          },
-          "type": "object"
+          "$ref": "#/definitions/mfa"
+        },
+        "middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
         },
         "password_expiration_date": {
           "type": "string"
@@ -2896,6 +2962,28 @@
         },
         "phoneNumbers": {
           "items": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "relationships": {
+          "items": {
             "type": "object"
           },
           "type": "array"
@@ -2905,7 +2993,7 @@
         },
         "ssh_keys": {
           "items": {
-            "type": "object"
+            "$ref": "#/definitions/sshkeylist"
           },
           "type": "array"
         },
@@ -2919,12 +3007,15 @@
           "type": "boolean"
         },
         "unix_guid": {
+          "minimum": 1,
           "type": "integer"
         },
         "unix_uid": {
+          "minimum": 1,
           "type": "integer"
         },
         "username": {
+          "maxLength": 1024,
           "type": "string"
         }
       },
