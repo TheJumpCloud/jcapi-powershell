@@ -677,6 +677,8 @@ $SDKName | ForEach-Object {
             {
                 $UpdatedSpec = $true
             }
+            # Format the results
+            $SwaggerString = Format-SwaggerObject -InputObject:($SwaggerString | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # For comparing before and after
