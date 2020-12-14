@@ -313,7 +313,8 @@ Try
                         # ./test-module.ps1 -Playback # Run once playback files have been created
                         # ./test-module.ps1 -Live # Run to query against real API
                         # $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                        $TestModuleCommand = "Import-Module -Name $($psd1Path); Invoke-Pester -Path '$($TestFolderPath)' -PassThru | Export-NUnitReport -Path '$($PesterTestResultPath)'"
+                        Import-Module -Name $psd1Path;
+                        $TestModuleCommand = "Invoke-Pester -Path '$($TestFolderPath)' -PassThru | Export-NUnitReport -Path '$($PesterTestResultPath)'"
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
                         $TestModuleJob = Start-Job -ScriptBlock:( {
