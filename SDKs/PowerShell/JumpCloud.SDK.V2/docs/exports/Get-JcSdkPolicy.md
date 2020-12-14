@@ -142,11 +142,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IError
+### JumpCloud.SDK.V2.Models.IError2
 
-### JumpCloud.SDK.V2.Models.IPolicy
+### JumpCloud.SDK.V2.Models.IPaths13XluwaPoliciesGetResponses200ContentApplicationJsonSchemaItems
 
-### JumpCloud.SDK.V2.Models.IPolicyWithDetails
+### JumpCloud.SDK.V2.Models.IPolicyWithDetails0
 
 ## NOTES
 

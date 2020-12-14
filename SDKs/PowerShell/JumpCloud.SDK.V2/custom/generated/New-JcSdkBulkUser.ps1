@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+JumpCloud.SDK.V2.Models.IPostContentSchemaItem[]
 .Outputs
 System.String
 .Notes
@@ -23,8 +23,8 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserCreate[]>:
-  [Attributes <IBulkUserCreateAttributesItem[]>]: Map of additional attributes.
+BODY <IPostContentSchemaItem[]>:
+  [Attributes <IPostContentSchemaPropertiesItemsItem[]>]: Map of additional attributes.
   [Email <String>]:
   [Firstname <String>]:
   [Lastname <String>]:
@@ -39,7 +39,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]
+    [JumpCloud.SDK.V2.Models.IPostContentSchemaItem[]]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

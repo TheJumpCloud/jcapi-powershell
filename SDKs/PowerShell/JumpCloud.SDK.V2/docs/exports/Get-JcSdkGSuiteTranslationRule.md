@@ -160,7 +160,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGSuiteTranslationRule
+### JumpCloud.SDK.V2.Models.IGSuiteTranslationRule0
+
+### JumpCloud.SDK.V2.Models.IPathsBrgojiGsuitesGsuiteIdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems
 
 ## NOTES
 

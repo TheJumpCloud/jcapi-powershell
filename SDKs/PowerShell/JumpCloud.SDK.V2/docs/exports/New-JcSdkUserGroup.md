@@ -14,7 +14,7 @@ This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUserGroup -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
+New-JcSdkUserGroup -Name <String> [-AttributePosixGroups <IPostContentSchemaAttributesPosixGroupsItem[]>]
  [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -49,7 +49,7 @@ This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```
 To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]
+Type: JumpCloud.SDK.V2.Models.IPostContentSchemaAttributesPosixGroupsItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -187,13 +187,13 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>: .
+ATTRIBUTEPOSIXGROUPS <IPostContentSchemaAttributesPosixGroupsItem[]>: .
   - `[Id <Int32?>]`: 
   - `[Name <String>]`: 
 
 BODY <IUserGroupPost>: UserGroupPost
   - `Name <String>`: Display name of a User Group.
-  - `[AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]`: 
+  - `[AttributePosixGroups <IPostContentSchemaAttributesPosixGroupsItem[]>]`: 
     - `[Id <Int32?>]`: 
     - `[Name <String>]`: 
   - `[AttributeSambaEnabled <Boolean?>]`: 

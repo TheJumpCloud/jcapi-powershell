@@ -83,7 +83,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuiteOutput
+### JumpCloud.SDK.V2.Models.IGSuiteOutput
 
 ## NOTES
 

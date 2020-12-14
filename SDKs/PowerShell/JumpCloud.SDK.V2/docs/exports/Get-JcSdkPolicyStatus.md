@@ -8,24 +8,17 @@ schema: 2.0.0
 # Get-JcSdkPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ## SYNTAX
 
-### List (Default)
-```
-Get-JcSdkPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>]
- [<CommonParameters>]
-```
-
-### List1
 ```
 Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ## EXAMPLES
 
@@ -88,7 +81,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: List1
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -114,21 +107,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SystemId
-ObjectID of the System.
-
-```yaml
-Type: System.String
-Parameter Sets: List
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -136,7 +114,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyResult
+### JumpCloud.SDK.V2.Models.IPaths17JygjrPoliciesPolicyIdPolicystatusesGetResponses200ContentApplicationJsonSchemaItems
 
 ## NOTES
 

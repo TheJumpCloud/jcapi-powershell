@@ -105,7 +105,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+### JumpCloud.SDK.V2.Models.IPathsElrdovOffice365SOffice365IdUsersGetResponses200ContentApplicationJsonSchemaItems
 
 ## NOTES
 

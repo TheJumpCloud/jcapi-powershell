@@ -158,7 +158,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISambaDomainOutput
+### JumpCloud.SDK.V2.Models.IPathsDzyitwLdapserversLdapserverIdSambadomainsGetResponses200ContentApplicationJsonSchemaItems
+
+### JumpCloud.SDK.V2.Models.ISambaDomainOutput0
 
 ## NOTES
 

@@ -15,7 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IDuoApplication
+JumpCloud.SDK.V2.Models.IDuoApplication1
+.Outputs
+JumpCloud.SDK.V2.Models.IPaths1Oh4NhdDuoAccountsAccountIdApplicationsGetResponses200ContentApplicationJsonSchemaItems
 .Outputs
 System.String
 .Notes
@@ -48,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkDuoApplication
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication1], [System.String], [JumpCloud.SDK.V2.Models.IPaths1Oh4NhdDuoAccountsAccountIdApplicationsGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -127,7 +129,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalDuoApplication @PSBoundParameters
+        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalDuoApplication @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

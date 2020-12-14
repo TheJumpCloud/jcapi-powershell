@@ -15,8 +15,8 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 ### SetExpanded (Default)
 ```
 Set-JcSdkSystemGroupAssociation -GroupId <String> -Id <String> -Op <Op> -Type <Type1>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Attributes <IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -34,8 +34,8 @@ Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISy
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type1>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Attributes <IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +63,7 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -238,7 +238,7 @@ BODY <ISystemGroupGraphManagementReq>: SystemGroupGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <Op>`: How to modify the graph connection.
   - `Type <Type1>`: 
-  - `[Attributes <ISystemGroupGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
