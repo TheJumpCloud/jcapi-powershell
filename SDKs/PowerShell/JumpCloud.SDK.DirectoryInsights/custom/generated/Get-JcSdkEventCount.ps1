@@ -21,7 +21,7 @@ PS C:\> Get-JcSdkEventCount -Service:('directory') -StartTime:((Get-date).AddDay
 Get only group_create event counts the last thirty days
 
 .Inputs
-JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
+JumpCloud.SDK.DirectoryInsights.Models.IEventQuery0
 .Outputs
 System.Int64
 .Outputs
@@ -31,16 +31,17 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IEventQuery>:
+BODY <IEventQuery0>:
   Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [Fields <String[]>]: optional list of fields to return from query
   [Limit <Int64?>]: Max number of rows to return
   [SearchAfter <String[]>]: Specific query to search after, see x-* response headers for next values
-  [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  [SearchTermAnd <IPaths1L6I55XEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
-  [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  [SearchTermOr <IPaths7Rk3SjEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    [(Any) <Object>]: This indicates any property can be added to this object.
   [Sort <String>]: ASC or DESC order for timestamp
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventCount.md
@@ -52,7 +53,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery]
+    [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery0]
     # EventQuery is the users' command to search our auth logs
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -90,14 +91,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.IPaths1L6I55XEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
     ${SearchTermAnd},
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.IPaths7Rk3SjEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
     ${SearchTermOr},
