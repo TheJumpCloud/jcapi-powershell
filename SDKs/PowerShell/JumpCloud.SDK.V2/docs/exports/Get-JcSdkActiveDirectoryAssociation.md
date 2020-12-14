@@ -99,7 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnection
+### JumpCloud.SDK.V2.Models.IPathsXiesrcActivedirectoriesActivedirectoryIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
 
 ## NOTES
 

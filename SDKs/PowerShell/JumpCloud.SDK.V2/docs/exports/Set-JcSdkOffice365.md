@@ -1,46 +1,44 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkLdapServer.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkOffice365.md
 schema: 2.0.0
 ---
 
-# Update-JcSdkLdapServer
+# Set-JcSdkOffice365
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### SetExpanded (Default)
 ```
-Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <LdapServerAction>]
- [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+ [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Set
 ```
-Update-JcSdkLdapServer -Id <String>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+Set-JcSdkOffice365 -Office365Id <String> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### SetViaIdentity
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+Set-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
- [-UserLockoutAction <LdapServerAction>] [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
+ [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n\n```
 
 ## EXAMPLES
 
@@ -61,48 +59,18 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 ## PARAMETERS
 
 ### -Body
-.
+Office 365 Patch Input
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
-Parameter Sets: Patch, PatchViaIdentity
+Type: JumpCloud.SDK.V2.Models.IOffice365PatchInput
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Id
-Unique identifier of the LDAP server.
-
-```yaml
-Type: System.String
-Parameter Sets: Patch, PatchExpanded, PatchViaIdentityExpanded
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id1
-.
-
-```yaml
-Type: System.String
-Parameter Sets: PatchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -112,7 +80,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -122,12 +90,42 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -UserLockoutAction
-LDAP Server Action
+### -Name
+.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Office365Id
+ObjectID of the Office 365 instance.
+
+```yaml
+Type: System.String
+Parameter Sets: Set, SetExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserLockoutAction
+.
+
+```yaml
+Type: JumpCloud.SDK.V2.Support.UserLockoutAction
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -138,11 +136,11 @@ Accept wildcard characters: False
 ```
 
 ### -UserPasswordExpirationAction
-LDAP Server Action
+.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -190,13 +188,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.IOffice365PatchInput
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
-
-### System.String
+### JumpCloud.SDK.V2.Models.IOffice365Output0
 
 ## NOTES
 
@@ -207,10 +203,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
-  - `[Id <String>]`: 
-  - `[UserLockoutAction <LdapServerAction?>]`: LDAP Server Action
-  - `[UserPasswordExpirationAction <LdapServerAction?>]`: LDAP Server Action
+BODY <IOffice365PatchInput>: Office 365 Patch Input
+  - `[Name <String>]`: 
+  - `[UserLockoutAction <UserLockoutAction?>]`: 
+  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

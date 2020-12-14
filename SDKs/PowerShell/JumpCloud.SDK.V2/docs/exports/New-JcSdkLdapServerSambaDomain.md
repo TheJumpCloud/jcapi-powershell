@@ -20,13 +20,13 @@ New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Name <String> -Sid <Strin
 
 ### Create
 ```
-New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Body <ISambaDomainInput> [-Confirm] [-WhatIf]
+New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Body <ISambaDomainInput0> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Body <ISambaDomainInput> [-Confirm]
+New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Body <ISambaDomainInput0> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -62,7 +62,7 @@ Samba Domain Input
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISambaDomainInput
+Type: JumpCloud.SDK.V2.Models.ISambaDomainInput0
 Parameter Sets: Create, CreateViaIdentity
 Aliases:
 
@@ -172,7 +172,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V2.Models.ISambaDomainInput
+### JumpCloud.SDK.V2.Models.ISambaDomainInput0
 
 ## OUTPUTS
 
@@ -187,7 +187,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISambaDomainInput>: Samba Domain Input
+BODY <ISambaDomainInput0>: Samba Domain Input
   - `Name <String>`: Name of this domain's WorkGroup
   - `Sid <String>`: Security identifier of this domain
 

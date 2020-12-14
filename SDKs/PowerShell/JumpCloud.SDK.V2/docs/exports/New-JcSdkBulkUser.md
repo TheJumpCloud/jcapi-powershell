@@ -14,7 +14,7 @@ See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-s
 ## SYNTAX
 
 ```
-New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkBulkUser -Body <IPostContentSchemaItem[]> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,7 +44,7 @@ See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-s
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+Type: JumpCloud.SDK.V2.Models.IPostContentSchemaItem[]
 Parameter Sets: (All)
 Aliases:
 
@@ -91,7 +91,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+### JumpCloud.SDK.V2.Models.IPostContentSchemaItem[]
 
 ## OUTPUTS
 
@@ -106,8 +106,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkUserCreate[]>: .
-  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
+BODY <IPostContentSchemaItem[]>: .
+  - `[Attributes <IPostContentSchemaPropertiesItemsItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
   - `[Lastname <String>]`: 

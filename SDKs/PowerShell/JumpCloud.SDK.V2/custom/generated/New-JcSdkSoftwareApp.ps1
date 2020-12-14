@@ -13,33 +13,33 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.ISoftwareApp
+JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject
 .Outputs
-JumpCloud.SDK.V2.Models.ISoftwareApp
+JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject0
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISoftwareApp>:
+BODY <ISoftwareApplicationPackageObject>:
   [DisplayName <String>]:
   [Id <String>]:
-  [Settings <IJcSoftwareAppSettings[]>]:
+  [Settings <IPostContentSchemaSettingsItem[]>]:
     [PackageId <String>]:
 
-SETTINGS <IJcSoftwareAppSettings[]>:
+SETTINGS <IPostContentSchemaSettingsItem[]>:
   [PackageId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSoftwareApp.md
 #>
  Function New-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApp])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject0])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISoftwareApp]
+    [JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject]
     # Software Application Package Object
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -58,7 +58,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]]
+    [JumpCloud.SDK.V2.Models.IPostContentSchemaSettingsItem[]]
     # .
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings},

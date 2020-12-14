@@ -14,13 +14,13 @@ This endpoint allows you to create a Software Application that will be managed b
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSoftwareApp [-DisplayName <String>] [-Id <String>] [-Settings <IJcSoftwareAppSettings[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkSoftwareApp [-DisplayName <String>] [-Id <String>] [-Settings <IPostContentSchemaSettingsItem[]>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkSoftwareApp -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSoftwareApp -Body <ISoftwareApplicationPackageObject> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,7 +49,7 @@ Software Application Package Object
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISoftwareApp
+Type: JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject
 Parameter Sets: Create
 Aliases:
 
@@ -95,7 +95,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]
+Type: JumpCloud.SDK.V2.Models.IPostContentSchemaSettingsItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -142,11 +142,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.ISoftwareApp
+### JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISoftwareApp
+### JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject0
 
 ## NOTES
 
@@ -157,13 +157,13 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISoftwareApp>: Software Application Package Object
+BODY <ISoftwareApplicationPackageObject>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
-  - `[Settings <IJcSoftwareAppSettings[]>]`: 
+  - `[Settings <IPostContentSchemaSettingsItem[]>]`: 
     - `[PackageId <String>]`: 
 
-SETTINGS <IJcSoftwareAppSettings[]>: .
+SETTINGS <IPostContentSchemaSettingsItem[]>: .
   - `[PackageId <String>]`: 
 
 ## RELATED LINKS

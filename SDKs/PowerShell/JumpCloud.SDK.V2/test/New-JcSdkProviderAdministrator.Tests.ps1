@@ -3,7 +3,7 @@ if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
-$TestRecordingFile = Join-Path $PSScriptRoot 'Update-JcSdkGSuite.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'New-JcSdkProviderAdministrator.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -11,20 +11,20 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Update-JcSdkGSuite' {
-    It 'PatchExpanded' -skip {
+Describe 'New-JcSdkProviderAdministrator' {
+    It 'CreateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Patch' -skip {
+    It 'Create' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
+    It 'CreateViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' -skip {
+    It 'CreateViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

@@ -11,13 +11,13 @@ PS C:\> Get-JcSdkAppleMdm
 Get Apple MDM Server information within a JumpCloud Tenant
 
 .Outputs
-JumpCloud.SDK.V2.Models.IAppleMdm
+JumpCloud.SDK.V2.Models.IPaths1Nth2RqApplemdmsGetResponses200ContentApplicationJsonSchemaItems
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdm.md
 #>
  Function Get-JcSdkAppleMdm
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Nth2RqApplemdmsGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(DontShow)]
@@ -76,7 +76,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

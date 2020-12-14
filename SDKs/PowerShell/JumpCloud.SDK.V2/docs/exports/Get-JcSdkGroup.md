@@ -129,7 +129,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGroup
+### JumpCloud.SDK.V2.Models.IPathsA0Plg7GroupsGetResponses200ContentApplicationJsonSchemaItems
 
 ## NOTES
 

@@ -14,26 +14,28 @@ This endpoint allows you to associate or disassociate a software application to 
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Id <String> -Op <Op> -Type <Type>
+ [-Attributes <IPaths14Vbin7SoftwareappsSoftwareAppIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphManagementReq> [-PassThru] [-Confirm]
+Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphManagementReq6> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq> [-PassThru]
+Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq6> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type>
+ [-Attributes <IPaths14Vbin7SoftwareappsSoftwareAppIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,7 +63,7 @@ This endpoint allows you to associate or disassociate a software application to 
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IPaths14Vbin7SoftwareappsSoftwareAppIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -77,7 +79,7 @@ GraphManagementReq
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReq
+Type: JumpCloud.SDK.V2.Models.IGraphManagementReq6
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -168,7 +170,7 @@ Accept wildcard characters: False
 The graph type.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphType
+Type: JumpCloud.SDK.V2.Support.Type
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -215,7 +217,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphManagementReq
+### JumpCloud.SDK.V2.Models.IGraphManagementReq6
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +234,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphManagementReq>: GraphManagementReq
+BODY <IGraphManagementReq6>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <Op>`: How to modify the graph connection.
-  - `Type <GraphType>`: The graph type.
-  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `Type <Type>`: The graph type.
+  - `[Attributes <IPaths14Vbin7SoftwareappsSoftwareAppIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

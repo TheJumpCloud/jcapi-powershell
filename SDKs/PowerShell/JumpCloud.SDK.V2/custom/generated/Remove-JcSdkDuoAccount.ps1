@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IDuoAccount
+JumpCloud.SDK.V2.Models.IDuoAccount0
 .Outputs
 System.String
 .Notes
@@ -48,7 +48,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkDuoAccount
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount0], [System.String])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
