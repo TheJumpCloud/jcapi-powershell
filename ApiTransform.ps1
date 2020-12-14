@@ -673,7 +673,7 @@ $SDKName | ForEach-Object {
                 }
             } While ($SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches)
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $SwaggerObject.PSObject.Properties.Remove('definitions')
+            $SwaggerObject.definitions = @{}
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
             #######################################################################
             # Update swagger object
