@@ -79,7 +79,7 @@ Try
             $ProcessContent = @()
             $EndContent = @()
             # Results logic - If the output model is undefined in the swagger spec
-            $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*JsonItemsItem")
+            $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*")
             {
                 "($($ImportedModule.Name)\$($CommandName) @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
             }
