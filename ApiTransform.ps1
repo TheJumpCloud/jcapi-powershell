@@ -385,7 +385,7 @@ Function Update-SwaggerObject
         If (-not [System.String]::IsNullOrEmpty($ThisObject))
         {
             $AttributeType = $ThisObject.GetType()
-            $AttributeNames = If ($AttributeType.FullName -in ( 'System.Management.Automation.PSCustomObject'))
+            $AttributeNames = If ($AttributeType.FullName -in ('System.Management.Automation.PSCustomObject'))
             {
                 $ThisObject.PSObject.Properties.Name
             }
