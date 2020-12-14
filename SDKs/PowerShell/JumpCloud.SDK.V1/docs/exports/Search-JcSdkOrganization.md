@@ -16,8 +16,9 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
- [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>]
+ [-Filter1 <IPostContentSchemaFilter>] [-SearchFilter <IPostContentSchemaSearchFilter>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
@@ -122,7 +123,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter
+Type: JumpCloud.SDK.V1.Models.IPostContentSchemaFilter
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -152,7 +153,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter1
+Type: JumpCloud.SDK.V1.Models.IPostContentSchemaSearchFilter
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -203,7 +204,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganizationslist
+### JumpCloud.SDK.V1.Models.IOrganizationList0
 
 ## NOTES
 
@@ -216,8 +217,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>: search
   - `[Fields <String>]`: 
-  - `[Filter <ISearchFilter>]`: 
-  - `[SearchFilter <ISearchFilter1>]`: 
+  - `[Filter <IPostContentSchemaFilter>]`: 
+  - `[SearchFilter <IPostContentSchemaSearchFilter>]`: 
 
 ## RELATED LINKS
 

@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserver
+JumpCloud.SDK.V1.Models.IRadiusServer0
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserverslist
+JumpCloud.SDK.V1.Models.IRadiusServersList
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver], [JumpCloud.SDK.V1.Models.IRadiusserverslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.IRadiusServer0], [JumpCloud.SDK.V1.Models.IRadiusServersList])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

@@ -13,30 +13,30 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
-Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkOrganization -Id <String> [-Settings <IPutContentSchemaSettings>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkOrganization -Id <String>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IPutContentSchemaSettings>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,7 +67,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -98,7 +98,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -128,8 +128,8 @@ OrganizationSettingsPut
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IOrganizationsettingsput
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaSettings
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -181,7 +181,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganization
+### JumpCloud.SDK.V1.Models.IOrganization0
 
 ## NOTES
 
@@ -193,7 +193,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
-  - `[Settings <IOrganizationsettingsput>]`: OrganizationSettingsPut
+  - `[Settings <IPutContentSchemaSettings>]`: OrganizationSettingsPut
     - `[ContactEmail <String>]`: 
     - `[ContactName <String>]`: 
     - `[DeviceIdentificationEnabled <Boolean?>]`: 
@@ -243,7 +243,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
-SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
+SETTINGS <IPutContentSchemaSettings>: OrganizationSettingsPut
   - `[ContactEmail <String>]`: 
   - `[ContactName <String>]`: 
   - `[DeviceIdentificationEnabled <Boolean?>]`: 

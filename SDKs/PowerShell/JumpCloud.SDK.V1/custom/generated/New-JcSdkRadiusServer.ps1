@@ -13,15 +13,15 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IRadiusserverpost
+JumpCloud.SDK.V1.Models.IRadiusServerPost
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserver
+JumpCloud.SDK.V1.Models.IRadiusServer
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IRadiusserverpost>:
+BODY <IRadiusServerPost>:
   Name <String>:
   NetworkSourceIP <String>:
   SharedSecret <String>: RADIUS shared secret between the server and client.
@@ -33,12 +33,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver])]
+    [OutputType([JumpCloud.SDK.V1.Models.IRadiusServer])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IRadiusserverpost]
+    [JumpCloud.SDK.V1.Models.IRadiusServerPost]
     # RadiusServerPost
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

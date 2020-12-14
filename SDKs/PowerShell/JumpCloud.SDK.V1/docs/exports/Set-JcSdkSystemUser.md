@@ -12,47 +12,48 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
-Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>]
- [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <IPutContentSchemaAddressesItem[]>]
+ [-AllowPublicKey] [-Attributes <IPutContentSchemaAttributesItem[]>] [-Company <String>]
+ [-CostCenter <String>] [-Department <String>] [-Description <String>] [-Displayname <String>]
+ [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
+ [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordNeverExpires] [-PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <IPutContentSchemaRelationshipsItem[]>] [-SambaServiceUser]
+ [-SshKeys <IPutContentSchemaSshKeysItem[]>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### Set
+```
+Set-JcSdkSystemUser -Id <String> -Body <ISystemUserPut> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentity
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemUserPut> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentityExpanded
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
+ [-Addresses <IPutContentSchemaAddressesItem[]>] [-AllowPublicKey]
+ [-Attributes <IPutContentSchemaAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-Displayname <String>] [-Email <String>]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
  [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
  [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
- [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
-```
-
-### Put
-```
-Set-JcSdkSystemUser -Id <String> -Body <ISystemuserput> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### PutViaIdentity
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
-```
-
-### PutViaIdentityExpanded
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
- [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
- [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
- [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
- [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
- [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <IPutContentSchemaRelationshipsItem[]>] [-SambaServiceUser]
+ [-SshKeys <IPutContentSchemaSshKeysItem[]>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,7 +82,7 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -96,8 +97,8 @@ type, poBox, extendedAddress, streetAddress, locality, region, postalCode, count
 To construct, see NOTES section for ADDRESSES properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaAddressesItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -112,7 +113,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -126,8 +127,8 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaAttributesItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -142,8 +143,8 @@ SystemUserPut
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserput
-Parameter Sets: Put, PutViaIdentity
+Type: JumpCloud.SDK.V1.Models.ISystemUserPut
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -158,7 +159,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -173,7 +174,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -188,7 +189,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -203,7 +204,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -218,7 +219,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -233,7 +234,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -248,7 +249,7 @@ Must be unique per user.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -263,7 +264,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -278,7 +279,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -293,7 +294,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -308,7 +309,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -323,7 +324,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -338,7 +339,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -353,7 +354,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -368,7 +369,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -383,7 +384,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -399,7 +400,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -414,7 +415,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -429,7 +430,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -444,7 +445,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -459,7 +460,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -474,7 +475,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -489,7 +490,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -504,7 +505,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.DateTime
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -519,7 +520,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -549,7 +550,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -564,7 +565,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -579,8 +580,8 @@ Accept wildcard characters: False
 To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaPhoneNumbersItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -595,7 +596,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -609,8 +610,8 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaRelationshipsItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -625,7 +626,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -640,8 +641,8 @@ Accept wildcard characters: False
 To construct, see NOTES section for SSHKEYS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISshkeypost[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaSshKeysItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -656,7 +657,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -671,7 +672,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -686,7 +687,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Int32
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -701,7 +702,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Int32
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -716,7 +717,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -764,11 +765,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V1.Models.ISystemuserput
+### JumpCloud.SDK.V1.Models.ISystemUserPut
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemuserreturn
+### JumpCloud.SDK.V1.Models.ISystemUserReturn2
 
 ## NOTES
 
@@ -779,7 +780,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+ADDRESSES <IPutContentSchemaAddressesItem[]>: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
   - `[Country <String>]`: 
   - `[ExtendedAddress <String>]`: 
   - `[Locality <String>]`: 
@@ -789,9 +790,9 @@ ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetA
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
-BODY <ISystemuserput>: SystemUserPut
+BODY <ISystemUserPut>: SystemUserPut
   - `[AccountLocked <Boolean?>]`: 
-  - `[Addresses <ISystemuserputAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  - `[Addresses <IPutContentSchemaAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -801,7 +802,7 @@ BODY <ISystemuserput>: SystemUserPut
     - `[StreetAddress <String>]`: 
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
-  - `[Attributes <ISystemuserputAttributesItem[]>]`: 
+  - `[Attributes <IPutContentSchemaAttributesItem[]>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
   - `[Department <String>]`: 
@@ -827,13 +828,13 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
-  - `[PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
+  - `[Relationships <IPutContentSchemaRelationshipsItem[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
-  - `[SshKeys <ISshkeypost[]>]`: 
+  - `[SshKeys <IPutContentSchemaSshKeysItem[]>]`: 
     - `Name <String>`: The name of the SSH key.
     - `PublicKey <String>`: The Public SSH key.
   - `[Sudo <Boolean?>]`: 
@@ -847,11 +848,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
-PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
+PHONENUMBERS <IPutContentSchemaPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
 
-SSHKEYS <ISshkeypost[]>: .
+SSHKEYS <IPutContentSchemaSshKeysItem[]>: .
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 

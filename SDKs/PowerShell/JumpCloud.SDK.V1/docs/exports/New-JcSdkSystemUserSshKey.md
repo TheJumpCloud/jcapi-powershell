@@ -20,12 +20,12 @@ New-JcSdkSystemUserSshKey -Id <String> -Name <String> -PublicKey <String> [-Conf
 
 ### Create
 ```
-New-JcSdkSystemUserSshKey -Id <String> -Body <ISshkeypost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemUserSshKey -Id <String> -Body <ISshKeyPost> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Body <ISshkeypost> [-Confirm] [-WhatIf]
+New-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> -Body <ISshKeyPost> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -61,7 +61,7 @@ SSHKeyPost
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISshkeypost
+Type: JumpCloud.SDK.V1.Models.ISshKeyPost
 Parameter Sets: Create, CreateViaIdentity
 Aliases:
 
@@ -171,13 +171,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V1.Models.ISshkeypost
+### JumpCloud.SDK.V1.Models.ISshKeyPost
 
 ## OUTPUTS
 
 ### JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 
-### JumpCloud.SDK.V1.Models.ISshkeylist
+### JumpCloud.SDK.V1.Models.ISshKeyList
 
 ## NOTES
 
@@ -188,7 +188,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISshkeypost>: SSHKeyPost
+BODY <ISshKeyPost>: SSHKeyPost
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 

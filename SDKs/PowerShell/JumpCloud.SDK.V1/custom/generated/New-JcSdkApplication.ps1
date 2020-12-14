@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IApplication
 .Outputs
-JumpCloud.SDK.V1.Models.IApplication
+JumpCloud.SDK.V1.Models.IApplication0
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -24,7 +24,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IApplication>:
   [Beta <Boolean?>]:
   [Color <Color?>]:
-  [Config <IApplicationConfig>]:
+  [Config <IPostContentSchemaConfig>]:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
     [AcUrlPosition <Int32?>]:
@@ -45,7 +45,7 @@ BODY <IApplication>:
     [ConstantAttributeRequired <Boolean?>]:
     [ConstantAttributeToggle <String>]:
     [ConstantAttributeType <String>]:
-    [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+    [ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]:
       [Name <String>]:
       [ReadOnly <Boolean?>]:
       [Required <Boolean?>]:
@@ -105,7 +105,7 @@ BODY <IApplication>:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
   [Created <String>]:
-  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
+  [DatabaseAttributes <IPostContentSchemaDatabaseAttributesItem[]>]:
   [Description <String>]:
   [DisplayLabel <String>]:
   [DisplayName <String>]:
@@ -117,7 +117,7 @@ BODY <IApplication>:
   [Organization <String>]:
   [SsoUrl <String>]:
 
-CONFIG <IApplicationConfig>:
+CONFIG <IPostContentSchemaConfig>:
   [AcUrlLabel <String>]:
   [AcUrlOptions <String>]:
   [AcUrlPosition <Int32?>]:
@@ -138,7 +138,7 @@ CONFIG <IApplicationConfig>:
   [ConstantAttributeRequired <Boolean?>]:
   [ConstantAttributeToggle <String>]:
   [ConstantAttributeType <String>]:
-  [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+  [ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]:
     [Name <String>]:
     [ReadOnly <Boolean?>]:
     [Required <Boolean?>]:
@@ -202,7 +202,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication0])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -227,7 +227,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationConfig]
+    [JumpCloud.SDK.V1.Models.IPostContentSchemaConfig]
     # .
     # To construct, see NOTES section for CONFIG properties and create a hash table.
     ${Config},
@@ -240,7 +240,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
+    [JumpCloud.SDK.V1.Models.IPostContentSchemaDatabaseAttributesItem[]]
     # .
     ${DatabaseAttributes},
 
