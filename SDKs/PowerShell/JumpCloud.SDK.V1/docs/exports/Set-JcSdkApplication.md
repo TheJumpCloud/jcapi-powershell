@@ -12,32 +12,34 @@ The endpoint updates a SSO / SAML Application.
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
-Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Put
-```
-Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### PutViaIdentity
-```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
+Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IPutContentSchemaConfig>]
+ [-Created <String>] [-DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>]
+ [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### Set
+```
+Set-JcSdkApplication -Id <String> -Body <IApplication3> [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentity
+```
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication3> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### SetViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <Color>]
- [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>] [-Name <String>]
- [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Config <IPutContentSchemaConfig>] [-Created <String>]
+ [-DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>]
+ [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,7 +68,7 @@ The endpoint updates a SSO / SAML Application.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -81,8 +83,8 @@ Application
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplication
-Parameter Sets: Put, PutViaIdentity
+Type: JumpCloud.SDK.V1.Models.IApplication3
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -97,7 +99,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V1.Support.Color
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -112,8 +114,8 @@ Accept wildcard characters: False
 To construct, see NOTES section for CONFIG properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationConfig
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaConfig
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -128,7 +130,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -142,8 +144,8 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Type: JumpCloud.SDK.V1.Models.IPutContentSchemaDatabaseAttributesItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -158,7 +160,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -173,7 +175,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -188,7 +190,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -203,7 +205,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded, PutViaIdentityExpanded
+Parameter Sets: Set, SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -218,7 +220,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -234,7 +236,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -249,7 +251,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -264,7 +266,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V1.Support.Color
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -279,7 +281,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -294,7 +296,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -309,7 +311,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -324,7 +326,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -370,13 +372,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication
+### JumpCloud.SDK.V1.Models.IApplication3
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication
+### JumpCloud.SDK.V1.Models.IApplication4
 
 ## NOTES
 
@@ -387,10 +389,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IApplication>: Application
+BODY <IApplication3>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <Color?>]`: 
-  - `[Config <IApplicationConfig>]`: 
+  - `[Config <IPutContentSchemaConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -411,7 +413,7 @@ BODY <IApplication>: Application
     - `[ConstantAttributeRequired <Boolean?>]`: 
     - `[ConstantAttributeToggle <String>]`: 
     - `[ConstantAttributeType <String>]`: 
-    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+    - `[ConstantAttributeValue <IPutContentSchemaConfigConstantAttributesValueItem[]>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -471,7 +473,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
@@ -483,7 +485,7 @@ BODY <IApplication>: Application
   - `[Organization <String>]`: 
   - `[SsoUrl <String>]`: 
 
-CONFIG <IApplicationConfig>: .
+CONFIG <IPutContentSchemaConfig>: .
   - `[AcUrlLabel <String>]`: 
   - `[AcUrlOptions <String>]`: 
   - `[AcUrlPosition <Int32?>]`: 
@@ -504,7 +506,7 @@ CONFIG <IApplicationConfig>: .
   - `[ConstantAttributeRequired <Boolean?>]`: 
   - `[ConstantAttributeToggle <String>]`: 
   - `[ConstantAttributeType <String>]`: 
-  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+  - `[ConstantAttributeValue <IPutContentSchemaConfigConstantAttributesValueItem[]>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 

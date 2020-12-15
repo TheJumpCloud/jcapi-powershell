@@ -19,13 +19,15 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkSystemUser [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
- [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystemUser [-Fields <String>] [-Filter <String>] [-Fields1 <String>]
+ [-Filter1 <IPaths1Wfkie2SearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesFilter>]
+ [-SearchFilter <IPaths18DltyiSearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesSearchfilter>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystemUser -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
+Search-JcSdkSystemUser -Body <ISearch1> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -60,7 +62,7 @@ search
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearch
+Type: JumpCloud.SDK.V1.Models.ISearch1
 Parameter Sets: Search
 Aliases:
 
@@ -128,7 +130,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter
+Type: JumpCloud.SDK.V1.Models.IPaths1Wfkie2SearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesFilter
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -158,7 +160,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter1
+Type: JumpCloud.SDK.V1.Models.IPaths18DltyiSearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesSearchfilter
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -205,11 +207,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.ISearch
+### JumpCloud.SDK.V1.Models.ISearch1
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemuserslist
+### JumpCloud.SDK.V1.Models.ISystemUsersList
 
 ## NOTES
 
@@ -220,10 +222,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISearch>: search
+BODY <ISearch1>: search
   - `[Fields <String>]`: 
-  - `[Filter <ISearchFilter>]`: 
-  - `[SearchFilter <ISearchFilter1>]`: 
+  - `[Filter <IPaths1Wfkie2SearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesFilter>]`: 
+  - `[SearchFilter <IPaths18DltyiSearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesSearchfilter>]`: 
 
 ## RELATED LINKS
 

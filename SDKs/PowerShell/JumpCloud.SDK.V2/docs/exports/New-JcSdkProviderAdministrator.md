@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdmin.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdministrator.md
 schema: 2.0.0
 ---
 
-# New-JcSdkProviderAdmin
+# New-JcSdkProviderAdministrator
 
 ## SYNOPSIS
 This endpoint allows you to create a provider administrator.
@@ -15,25 +15,25 @@ You must be associated with the provider to use this route.\n\n#### Sample Reque
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkProviderAdmin -ProviderId <String> -Email <String> [-EnableMultiFactor] [-Firstname <String>]
+New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-EnableMultiFactor] [-Firstname <String>]
  [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkProviderAdmin -ProviderId <String> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
+New-JcSdkProviderAdministrator -ProviderId <String> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkProviderAdmin -InputObject <IJumpCloudApIsIdentity> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Body <IProviderAdminReq> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkProviderAdmin -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
  [-Firstname <String>] [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 

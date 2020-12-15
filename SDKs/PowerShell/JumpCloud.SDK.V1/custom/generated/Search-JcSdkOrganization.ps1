@@ -19,7 +19,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch
 .Outputs
-JumpCloud.SDK.V1.Models.IOrganizationslist
+JumpCloud.SDK.V1.Models.IOrganizationList0
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -27,14 +27,14 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>:
   [Fields <String>]:
-  [Filter <ISearchFilter>]:
-  [SearchFilter <ISearchFilter1>]:
+  [Filter <IPostContentSchemaFilter>]:
+  [SearchFilter <IPostContentSchemaSearchFilter>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkOrganization.md
 #>
  Function Search-JcSdkOrganization
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IOrganizationslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.IOrganizationList0])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter()]
@@ -72,13 +72,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter]
+    [JumpCloud.SDK.V1.Models.IPostContentSchemaFilter]
     # .
     ${Filter1},
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter1]
+    [JumpCloud.SDK.V1.Models.IPostContentSchemaSearchFilter]
     # .
     ${SearchFilter},
 

@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.ICommandresult
+JumpCloud.SDK.V1.Models.ICommandResult
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -30,7 +30,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkCommandResult
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandResult])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]

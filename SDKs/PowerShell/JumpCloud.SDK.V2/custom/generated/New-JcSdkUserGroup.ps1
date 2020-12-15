@@ -21,13 +21,13 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>:
+ATTRIBUTEPOSIXGROUPS <IPostContentSchemaAttributesPosixGroupsItem[]>:
   [Id <Int32?>]:
   [Name <String>]:
 
 BODY <IUserGroupPost>:
   Name <String>: Display name of a User Group.
-  [AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]:
+  [AttributePosixGroups <IPostContentSchemaAttributesPosixGroupsItem[]>]:
     [Id <Int32?>]:
     [Name <String>]:
   [AttributeSambaEnabled <Boolean?>]:
@@ -56,7 +56,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]
+    [JumpCloud.SDK.V2.Models.IPostContentSchemaAttributesPosixGroupsItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
     ${AttributePosixGroups},

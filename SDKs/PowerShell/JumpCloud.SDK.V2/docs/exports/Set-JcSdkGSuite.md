@@ -1,37 +1,37 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkGSuite.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkGSuite.md
 schema: 2.0.0
 ---
 
-# Update-JcSdkGSuite
+# Set-JcSdkGSuite
 
 ## SYNOPSIS
 This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### SetExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
+Set-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
  [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Set
 ```
-Update-JcSdkGSuite -Id <String> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkGSuite -Id <String> -Body <IGSuitePatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### SetViaIdentity
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf]
+Set-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGSuitePatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
+Set-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
  [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -62,8 +62,8 @@ GSuite Patch Input
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGsuitePatchInput
-Parameter Sets: Patch, PatchViaIdentity
+Type: JumpCloud.SDK.V2.Models.IGSuitePatchInput
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -93,7 +93,7 @@ Unique identifier of the GSuite.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -109,7 +109,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -139,7 +139,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserLockoutAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -154,7 +154,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -200,13 +200,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuitePatchInput
+### JumpCloud.SDK.V2.Models.IGSuitePatchInput
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuiteOutput
+### JumpCloud.SDK.V2.Models.IGSuiteOutput0
 
 ## NOTES
 
@@ -217,7 +217,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGsuitePatchInput>: GSuite Patch Input
+BODY <IGSuitePatchInput>: GSuite Patch Input
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <UserLockoutAction?>]`: 

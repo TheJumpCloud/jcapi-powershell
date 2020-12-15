@@ -130,7 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IDuoApplication
+### JumpCloud.SDK.V2.Models.IDuoApplication0
 
 ### System.String
 

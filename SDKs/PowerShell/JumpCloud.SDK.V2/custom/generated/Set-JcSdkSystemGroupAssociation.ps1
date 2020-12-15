@@ -27,7 +27,7 @@ BODY <ISystemGroupGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <Op>: How to modify the graph connection.
   Type <Type1>:
-  [Attributes <ISystemGroupGraphManagementReqAttributes>]: The graph connection's attributes.
+  [Attributes <IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -106,7 +106,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes]
+    [JumpCloud.SDK.V2.Models.IPaths132J2K3SystemgroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes]
     # The graph connection's attributes.
     ${Attributes},
 

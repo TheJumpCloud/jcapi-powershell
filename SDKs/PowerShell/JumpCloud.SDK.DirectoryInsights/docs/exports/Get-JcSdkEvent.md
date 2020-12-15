@@ -284,9 +284,10 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
-  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTermAnd <IPostContentSchemaSearchTermAnd>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTermOr <IPostContentSchemaSearchTermOr>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Sort <String>]`: ASC or DESC order for timestamp
 
 ## RELATED LINKS

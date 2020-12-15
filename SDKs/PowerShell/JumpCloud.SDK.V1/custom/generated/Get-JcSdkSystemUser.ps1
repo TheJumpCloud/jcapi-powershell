@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemuserreturn
+JumpCloud.SDK.V1.Models.ISystemUserReturn1
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemuserslist
+JumpCloud.SDK.V1.Models.ISystemUsersList0
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn], [JumpCloud.SDK.V1.Models.ISystemuserslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserReturn1], [JumpCloud.SDK.V1.Models.ISystemUsersList0])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

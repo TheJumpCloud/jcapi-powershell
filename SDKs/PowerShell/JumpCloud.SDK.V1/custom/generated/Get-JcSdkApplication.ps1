@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IApplication
+JumpCloud.SDK.V1.Models.IApplication2
 .Outputs
-JumpCloud.SDK.V1.Models.IApplicationslist
+JumpCloud.SDK.V1.Models.IApplicationsList
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IApplication], [JumpCloud.SDK.V1.Models.IApplicationslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication2], [JumpCloud.SDK.V1.Models.IApplicationsList])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

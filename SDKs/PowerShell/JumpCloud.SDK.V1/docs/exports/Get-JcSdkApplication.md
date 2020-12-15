@@ -141,9 +141,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication
+### JumpCloud.SDK.V1.Models.IApplication2
 
-### JumpCloud.SDK.V1.Models.IApplicationslist
+### JumpCloud.SDK.V1.Models.IApplicationsList
 
 ## NOTES
 

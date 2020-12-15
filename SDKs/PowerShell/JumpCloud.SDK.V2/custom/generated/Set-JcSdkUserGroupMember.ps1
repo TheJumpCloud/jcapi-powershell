@@ -25,7 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IUserGroupMembersReq>:
   Id <String>: The ObjectID of member being added or removed.
-  Op <Op1>: How to modify the membership connection.
+  Op <Op>: How to modify the membership connection.
+  Type <Type1>: The member type.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -87,11 +88,19 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Op1])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Op])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Op1]
+    [JumpCloud.SDK.V2.Support.Op]
     # How to modify the membership connection.
     ${Op},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type1])]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Support.Type1]
+    # The member type.
+    ${Type},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

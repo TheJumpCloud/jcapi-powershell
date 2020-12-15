@@ -177,7 +177,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IOrganization
 
-### JumpCloud.SDK.V1.Models.IOrganizationslist
+### JumpCloud.SDK.V1.Models.IOrganizationList
 
 ## NOTES
 

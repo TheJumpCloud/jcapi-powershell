@@ -163,6 +163,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### JumpCloud.SDK.V2.Models.IPaths14PfqflPoliciesPolicyIdPolicyresultsGetResponses200ContentApplicationJsonSchemaItems
+
+### JumpCloud.SDK.V2.Models.IPathsVvavtwPolicyresultsGetResponses200ContentApplicationJsonSchemaItems
+
 ### JumpCloud.SDK.V2.Models.IPolicyResult
 
 ## NOTES

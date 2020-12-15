@@ -143,9 +143,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IRadiusserver
+### JumpCloud.SDK.V1.Models.IRadiusServer0
 
-### JumpCloud.SDK.V1.Models.IRadiusserverslist
+### JumpCloud.SDK.V1.Models.IRadiusServersList
 
 ## NOTES
 

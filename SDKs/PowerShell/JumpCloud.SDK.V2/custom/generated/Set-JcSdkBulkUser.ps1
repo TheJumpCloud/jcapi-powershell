@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
+JumpCloud.SDK.V2.Models.IPatchContentSchemaItem[]
 .Outputs
 System.String
 .Notes
@@ -23,24 +23,24 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserUpdate[]>:
-  [Attributes <IBulkUserUpdateAttributesItem[]>]: Map of additional attributes.
+BODY <IPatchContentSchemaItem[]>:
+  [Attributes <IPatchContentSchemaPropertiesItemsItem[]>]: Map of additional attributes.
   [Email <String>]:
   [Firstname <String>]:
   [Id <String>]: Object ID of the systemuser being updated
   [Lastname <String>]:
   [Username <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkBulkUser.md
 #>
- Function Update-JcSdkBulkUser
+ Function Set-JcSdkBulkUser
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Patch', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Set', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]
+    [JumpCloud.SDK.V2.Models.IPatchContentSchemaItem[]]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -101,7 +101,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalBulkUser @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalBulkUser @PSBoundParameters
     }
     End
     {

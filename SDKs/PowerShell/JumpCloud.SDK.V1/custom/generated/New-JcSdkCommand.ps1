@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ICommand
 .Outputs
-JumpCloud.SDK.V1.Models.ICommand
+JumpCloud.SDK.V1.Models.ICommand0
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -43,7 +43,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommand])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommand0])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]

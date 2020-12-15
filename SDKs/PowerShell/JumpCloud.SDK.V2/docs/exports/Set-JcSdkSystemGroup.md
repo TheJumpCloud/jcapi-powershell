@@ -12,23 +12,23 @@ This endpoint allows you to do a full update of the System Group.\n\n#### Sample
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkSystemGroup -Id <String> -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
-Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData0> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData0> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -60,8 +60,8 @@ SystemGroupData
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupData
-Parameter Sets: Put, PutViaIdentity
+Type: JumpCloud.SDK.V2.Models.ISystemGroupData0
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -76,7 +76,7 @@ ObjectID of the System Group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -92,7 +92,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -107,7 +107,7 @@ Display name of a System Group.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -155,11 +155,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V2.Models.ISystemGroupData
+### JumpCloud.SDK.V2.Models.ISystemGroupData0
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISystemGroup
+### JumpCloud.SDK.V2.Models.ISystemGroup1
 
 ## NOTES
 
@@ -170,7 +170,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGroupData>: SystemGroupData
+BODY <ISystemGroupData0>: SystemGroupData
   - `Name <String>`: Display name of a System Group.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

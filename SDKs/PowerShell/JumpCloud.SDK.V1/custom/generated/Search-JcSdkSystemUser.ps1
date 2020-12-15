@@ -23,24 +23,24 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.ISearch
+JumpCloud.SDK.V1.Models.ISearch1
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemuserslist
+JumpCloud.SDK.V1.Models.ISystemUsersList
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISearch>:
+BODY <ISearch1>:
   [Fields <String>]:
-  [Filter <ISearchFilter>]:
-  [SearchFilter <ISearchFilter1>]:
+  [Filter <IPaths1Wfkie2SearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesFilter>]:
+  [SearchFilter <IPaths18DltyiSearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesSearchfilter>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkSystemUser.md
 #>
  Function Search-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUsersList])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter()]
@@ -65,7 +65,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearch]
+    [JumpCloud.SDK.V1.Models.ISearch1]
     # search
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -78,13 +78,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter]
+    [JumpCloud.SDK.V1.Models.IPaths1Wfkie2SearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesFilter]
     # .
     ${Filter1},
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter1]
+    [JumpCloud.SDK.V1.Models.IPaths18DltyiSearchSystemusersPostRequestbodyContentApplicationJsonSchemaPropertiesSearchfilter]
     # .
     ${SearchFilter},
 

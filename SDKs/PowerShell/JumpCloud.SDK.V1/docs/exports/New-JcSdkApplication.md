@@ -14,10 +14,11 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IPostContentSchemaConfig>] [-Created <String>]
+ [-DatabaseAttributes <IPostContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>]
+ [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -97,7 +98,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for CONFIG properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationConfig
+Type: JumpCloud.SDK.V1.Models.IPostContentSchemaConfig
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -127,7 +128,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.IPostContentSchemaDatabaseAttributesItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -328,7 +329,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication
+### JumpCloud.SDK.V1.Models.IApplication0
 
 ## NOTES
 
@@ -342,7 +343,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <Color?>]`: 
-  - `[Config <IApplicationConfig>]`: 
+  - `[Config <IPostContentSchemaConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -363,7 +364,7 @@ BODY <IApplication>: Application
     - `[ConstantAttributeRequired <Boolean?>]`: 
     - `[ConstantAttributeToggle <String>]`: 
     - `[ConstantAttributeType <String>]`: 
-    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+    - `[ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -423,7 +424,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IPostContentSchemaDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
@@ -435,7 +436,7 @@ BODY <IApplication>: Application
   - `[Organization <String>]`: 
   - `[SsoUrl <String>]`: 
 
-CONFIG <IApplicationConfig>: .
+CONFIG <IPostContentSchemaConfig>: .
   - `[AcUrlLabel <String>]`: 
   - `[AcUrlOptions <String>]`: 
   - `[AcUrlPosition <Int32?>]`: 
@@ -456,7 +457,7 @@ CONFIG <IApplicationConfig>: .
   - `[ConstantAttributeRequired <Boolean?>]`: 
   - `[ConstantAttributeToggle <String>]`: 
   - `[ConstantAttributeType <String>]`: 
-  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+  - `[ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 
