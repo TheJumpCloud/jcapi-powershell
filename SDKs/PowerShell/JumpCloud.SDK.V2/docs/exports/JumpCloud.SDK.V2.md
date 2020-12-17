@@ -457,6 +457,39 @@ The endpoint allows you to create a Workday Import request.\n\n#### Sample Reque
 ### [Import-JcSdkWorkdayResult](Import-JcSdkWorkdayResult.md)
 This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
+### [Invoke-JcSdkAuthnDeletePolicyId](Invoke-JcSdkAuthnDeletePolicyId.md)
+Delete the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkAuthnGetPolicy](Invoke-JcSdkAuthnGetPolicy.md)
+Get a list of all authentication policies.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkAuthnGetPolicyId](Invoke-JcSdkAuthnGetPolicyId.md)
+Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkAuthnPatchPolicyId](Invoke-JcSdkAuthnPatchPolicyId.md)
+Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
+
+### [Invoke-JcSdkAuthnPostPolicy](Invoke-JcSdkAuthnPostPolicy.md)
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+
+### [Invoke-JcSdkIplistDeleteId](Invoke-JcSdkIplistDeleteId.md)
+Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkIplistGet](Invoke-JcSdkIplistGet.md)
+Retrieve all IP lists.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkIplistGetId](Invoke-JcSdkIplistGetId.md)
+Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+
+### [Invoke-JcSdkIplistPatchId](Invoke-JcSdkIplistPatchId.md)
+Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```
+
+### [Invoke-JcSdkIplistPost](Invoke-JcSdkIplistPost.md)
+Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.12\",\n    \"192.168.10.20 - 192.168.10.30\",\n    \"123.225.10.0/32\"\n  ]\n}'\n```
+
+### [Invoke-JcSdkIplistPutId](Invoke-JcSdkIplistPutId.md)
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
+
 ### [Lock-JcSdkAppleMdmDevice](Lock-JcSdkAppleMdmDevice.md)
 Locks a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
 

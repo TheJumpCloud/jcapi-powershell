@@ -25,9 +25,11 @@ BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
   [Settings <IJcSoftwareAppSettings[]>]:
+    [AutoUpdate <Boolean?>]:
     [PackageId <String>]:
 
 SETTINGS <IJcSoftwareAppSettings[]>:
+  [AutoUpdate <Boolean?>]:
   [PackageId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSoftwareApp.md

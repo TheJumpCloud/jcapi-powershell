@@ -161,9 +161,11 @@ BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <IJcSoftwareAppSettings[]>]`: 
+    - `[AutoUpdate <Boolean?>]`: 
     - `[PackageId <String>]`: 
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
+  - `[AutoUpdate <Boolean?>]`: 
   - `[PackageId <String>]`: 
 
 ## RELATED LINKS

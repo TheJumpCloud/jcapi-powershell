@@ -31,6 +31,7 @@ BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
   [Settings <IJcSoftwareAppSettings[]>]:
+    [AutoUpdate <Boolean?>]:
     [PackageId <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -42,7 +43,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -55,6 +56,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [WorkdayId <String>]:
 
 SETTINGS <IJcSoftwareAppSettings[]>:
+  [AutoUpdate <Boolean?>]:
   [PackageId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md

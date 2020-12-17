@@ -210,6 +210,7 @@ BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <IJcSoftwareAppSettings[]>]`: 
+    - `[AutoUpdate <Boolean?>]`: 
     - `[PackageId <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
@@ -221,7 +222,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
@@ -234,6 +235,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[WorkdayId <String>]`: 
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
+  - `[AutoUpdate <Boolean?>]`: 
   - `[PackageId <String>]`: 
 
 ## RELATED LINKS

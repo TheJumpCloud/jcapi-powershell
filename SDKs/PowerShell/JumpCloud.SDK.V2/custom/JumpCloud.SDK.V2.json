@@ -186,6 +186,12 @@
         "registered": {
           "type": "boolean"
         },
+        "role": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
         "suspended": {
           "type": "boolean"
         }
@@ -522,6 +528,174 @@
       "title": "Auth Input Object",
       "type": "object"
     },
+    "AuthnPolicy": {
+      "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.\n\nConditions may be added to an authentication policy using the following conditional language:\n\n```\n<conditions> ::= <expression>\n<expression> ::= <ipAddressIn> | <deviceManaged> | <notExpression> | <allExpression> | <anyExpression>\n<ipAddressIn> ::= { \"ipAddressIn\": [ <objectId>, ... ] }\n<deviceManaged> ::= { \"deviceManaged\": <boolean> }\n<notExpression> ::= { \"not\": <expression> }\n<allExpression> ::= { \"all\": [ <expression>, ... ] }\n<anyExpression> ::= { \"any\": [ <expression>, ... ] }\n```\n\nFor example, to add a condition that applies to IP address in a given list the following condition can be added:\n\n`{\"ipAddressIn\": [ <ip_list_object_id> ]}`\n\nIf you would rather exclude IP addresses in the given lists, the following condition could be added:\n\n`{\n  \"not\": {\n    \"ipAddressIn\": [ <ip_list_object_id_1>, <ip_list_object_id_2> ]\n  }\n}`\n\nYou may also include more than one condition and choose whether \"all\" or \"any\" of them must be met for the policy to apply.\n\n`{\n  \"all\": [\n    {\n      \"ipAddressIn\": [ <ip_list_object_id>, ... ]\n    },\n    {\n      \"deviceManaged\": true\n    }\n  ]\n}`",
+      "properties": {
+        "conditions": {
+          "type": "object"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "effect": {
+          "$ref": "#/definitions/AuthnPolicyEffect"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "targets": {
+          "$ref": "#/definitions/AuthnPolicyTargets"
+        }
+      },
+      "title": "AuthnPolicy",
+      "type": "object"
+    },
+    "AuthnPolicyEffect": {
+      "properties": {
+        "action": {
+          "x-ms-enum": {
+            "name": "action",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "allow",
+                "value": "allow"
+              },
+              {
+                "name": "deny",
+                "value": "deny"
+              },
+              {
+                "name": "unknown",
+                "value": "unknown"
+              }
+            ]
+          },
+          "enum": [
+            "allow",
+            "deny",
+            "unknown"
+          ],
+          "type": "string"
+        },
+        "obligations": {
+          "$ref": "#/definitions/AuthnPolicyObligations"
+        }
+      },
+      "required": [
+        "action"
+      ],
+      "title": "AuthnPolicyEffect",
+      "type": "object"
+    },
+    "AuthnPolicyInput": {
+      "properties": {
+        "conditions": {
+          "type": "object"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "boolean"
+        },
+        "effect": {
+          "$ref": "#/definitions/AuthnPolicyEffect"
+        },
+        "name": {
+          "type": "string"
+        },
+        "targets": {
+          "$ref": "#/definitions/AuthnPolicyTargets"
+        }
+      },
+      "title": "AuthnPolicyInput",
+      "type": "object"
+    },
+    "AuthnPolicyObligations": {
+      "properties": {
+        "mfa": {
+          "properties": {
+            "required": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "title": "AuthnPolicyObligations",
+      "type": "object"
+    },
+    "AuthnPolicyResourceTarget": {
+      "properties": {
+        "type": {
+          "x-ms-enum": {
+            "name": "type",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "user_portal",
+                "value": "user_portal"
+              }
+            ]
+          },
+          "enum": [
+            "user_portal"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "AuthnPolicyResourceTarget",
+      "type": "object"
+    },
+    "AuthnPolicyTargets": {
+      "properties": {
+        "resources": {
+          "items": {
+            "$ref": "#/definitions/AuthnPolicyResourceTarget"
+          },
+          "type": "array"
+        },
+        "userGroups": {
+          "$ref": "#/definitions/AuthnPolicyUserGroupTarget"
+        },
+        "users": {
+          "$ref": "#/definitions/AuthnPolicyUserTarget"
+        }
+      },
+      "title": "AuthnPolicyTargets",
+      "type": "object"
+    },
+    "AuthnPolicyUserGroupTarget": {
+      "properties": {
+        "inclusions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "AuthnPolicyUserGroupTarget",
+      "type": "object"
+    },
+    "AuthnPolicyUserTarget": {
+      "properties": {
+        "inclusions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "AuthnPolicyUserTarget",
+      "type": "object"
+    },
     "bulk-user-create": {
       "description": "See [V1 system user creation](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.",
       "properties": {
@@ -641,7 +815,7 @@
         "type": {
           "description": "The type of directory.",
           "x-ms-enum": {
-            "name": "type",
+            "name": "type1",
             "modelAsString": true,
             "values": [
               {
@@ -1391,8 +1565,51 @@
       "title": "G Suite Translation Rule Request",
       "type": "object"
     },
+    "IPList": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "ips": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "IPList",
+      "type": "object"
+    },
+    "IPListRequest": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "ips": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "IPListRequest",
+      "type": "object"
+    },
     "JcSoftware-app-settings": {
       "properties": {
+        "autoUpdate": {
+          "default": false,
+          "type": "boolean"
+        },
         "packageId": {
           "type": "string"
         }
@@ -3021,7 +3238,7 @@
         },
         "type": {
           "x-ms-enum": {
-            "name": "type1",
+            "name": "type2",
             "modelAsString": true,
             "values": [
               {
@@ -3114,7 +3331,7 @@
         "type": {
           "description": "The type of the group; always 'system' for a System Group.",
           "x-ms-enum": {
-            "name": "type2",
+            "name": "type3",
             "modelAsString": true,
             "values": [
               {
@@ -3184,7 +3401,7 @@
         },
         "type": {
           "x-ms-enum": {
-            "name": "type1",
+            "name": "type2",
             "modelAsString": true,
             "values": [
               {
@@ -3283,7 +3500,7 @@
         "type": {
           "description": "The member type.",
           "x-ms-enum": {
-            "name": "type3",
+            "name": "type4",
             "modelAsString": true,
             "values": [
               {
@@ -5626,7 +5843,7 @@
         },
         "type": {
           "x-ms-enum": {
-            "name": "type4",
+            "name": "type5",
             "modelAsString": true,
             "values": [
               {
@@ -5718,7 +5935,7 @@
         "type": {
           "description": "The type of the group.",
           "x-ms-enum": {
-            "name": "type5",
+            "name": "type6",
             "modelAsString": true,
             "values": [
               {
@@ -5799,7 +6016,7 @@
         "type": {
           "description": "The graph type",
           "x-ms-enum": {
-            "name": "type4",
+            "name": "type5",
             "modelAsString": true,
             "values": [
               {
@@ -5898,7 +6115,7 @@
         "type": {
           "description": "The member type.",
           "x-ms-enum": {
-            "name": "type6",
+            "name": "type7",
             "modelAsString": true,
             "values": [
               {
@@ -6062,7 +6279,7 @@
   },
   "host": "console.jumpcloud.com",
   "info": {
-    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.",
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its Syste",
     "title": "JumpCloud APIs",
     "version": "2.0"
   },
@@ -7867,6 +8084,269 @@
         }
       ]
     },
+    "/authn/policies": {
+      "get": {
+        "description": "Get a list of all authentication policies.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "GET_authn-policies",
+        "parameters": [
+          {
+            "required": false,
+            "default": 10,
+            "description": "The number of records to return at once. Limited to 100.",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "required": false,
+            "default": 0,
+            "minimum": 0,
+            "description": "The offset into the records to return.",
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "required": false,
+            "default": [],
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "filter",
+            "type": "array"
+          },
+          {
+            "required": false,
+            "default": [],
+            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "sort",
+            "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:listCount:x-total-count"
+          },
+          {
+            "$ref": "#/parameters/trait:listCount:x-unfiltered-total-count"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/AuthnPolicy"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List Authentication Policies"
+      },
+      "post": {
+        "description": "Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```",
+        "operationId": "POST_authn-policies",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicyInput"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicy"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create an Authentication Policy"
+      }
+    },
+    "/authn/policies/{id}": {
+      "delete": {
+        "parameters": [],
+        "description": "Delete the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "DELETE_authn-policies-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicy"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete Authentication Policy"
+      },
+      "get": {
+        "parameters": [],
+        "description": "Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "GET_authn-policies-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicy"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get an authentication policy"
+      },
+      "parameters": [
+        {
+          "description": "Unique identifier of the authentication policy",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```",
+        "operationId": "PATCH_authn-policies-id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicyInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AuthnPolicy"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Patch Authentication Policy"
+      }
+    },
     "/bulk/users": {
       "patch": {
         "description": "The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```",
@@ -9349,6 +9829,313 @@
           }
         },
         "summary": "Update existing G Suite"
+      }
+    },
+    "/iplists": {
+      "get": {
+        "description": "Retrieve all IP lists.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "GET_iplists",
+        "parameters": [
+          {
+            "required": false,
+            "default": 10,
+            "description": "The number of records to return at once. Limited to 100.",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "required": false,
+            "default": 0,
+            "minimum": 0,
+            "description": "The offset into the records to return.",
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "required": false,
+            "default": [],
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "filter",
+            "type": "array"
+          },
+          {
+            "required": false,
+            "default": [],
+            "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
+            "in": "query",
+            "items": {
+              "type": "string"
+            },
+            "name": "sort",
+            "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:listCount:x-total-count"
+          },
+          {
+            "$ref": "#/parameters/trait:listCount:x-unfiltered-total-count"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/IPList"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List IP Lists"
+      },
+      "post": {
+        "description": "Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.12\",\n    \"192.168.10.20 - 192.168.10.30\",\n    \"123.225.10.0/32\"\n  ]\n}'\n```",
+        "operationId": "POST_iplists",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/IPListRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IPList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create IP List"
+      }
+    },
+    "/iplists/{id}": {
+      "delete": {
+        "parameters": [],
+        "description": "Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "DELETE_iplists-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IPList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete an IP list"
+      },
+      "get": {
+        "parameters": [],
+        "description": "Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "GET_iplists-id",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IPList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get an IP list"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "patch": {
+        "description": "Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```",
+        "operationId": "PATCH_iplists-id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/IPListRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IPList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Update an IP list"
+      },
+      "put": {
+        "description": "Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```",
+        "operationId": "PUT_iplists-id",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/IPListRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IPList"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Replace an IP list"
       }
     },
     "/ldapservers": {
@@ -11402,7 +12189,9 @@
                     "lastname": "",
                     "_id": "5c3536e9e0a6840001872782",
                     "email": "joe@example.com",
-                    "registered": true
+                    "registered": true,
+                    "role": "5c3536e9e0a6840001872788",
+                    "roleName": "Help Desk"
                   },
                   {
                     "enableMultiFactor": false,
@@ -11410,7 +12199,9 @@
                     "lastname": "",
                     "_id": "5c35370ae0a6840001872784",
                     "email": "mildred@example.com",
-                    "registered": true
+                    "registered": true,
+                    "role": "5c3536e9e0a6840001872799",
+                    "roleName": "Administrator"
                   }
                 ],
                 "totalCount": 2
