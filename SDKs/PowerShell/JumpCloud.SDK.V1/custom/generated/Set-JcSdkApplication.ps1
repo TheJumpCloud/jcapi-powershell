@@ -117,6 +117,9 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
+  [SsoBeta <Boolean?>]:
+  [SsoJit <Boolean?>]:
+  [SsoType <String>]:
   [SsoUrl <String>]:
 
 CONFIG <IApplicationConfig>:
@@ -202,6 +205,7 @@ CONFIG <IApplicationConfig>:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -335,6 +339,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Organization},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoBeta},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoJit},
+
+    [Parameter(ParameterSetName='PutExpanded')]
+    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoType},
 
     [Parameter(ParameterSetName='PutExpanded')]
     [Parameter(ParameterSetName='PutViaIdentityExpanded')]

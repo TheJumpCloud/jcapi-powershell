@@ -534,6 +534,20 @@
         "organization": {
           "type": "string"
         },
+        "sso": {
+          "properties": {
+            "beta": {
+              "type": "boolean"
+            },
+            "jit": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "ssoUrl": {
           "type": "string"
         }
@@ -1486,6 +1500,62 @@
         },
         "arch": {
           "type": "string"
+        },
+        "builtInCommands": {
+          "items": {
+            "properties": {
+              "name": {
+                "x-ms-enum": {
+                  "name": "name",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "erase",
+                      "value": "erase"
+                    },
+                    {
+                      "name": "lock",
+                      "value": "lock"
+                    },
+                    {
+                      "name": "restart",
+                      "value": "restart"
+                    },
+                    {
+                      "name": "shutdown",
+                      "value": "shutdown"
+                    }
+                  ]
+                },
+                "enum": [
+                  "erase",
+                  "lock",
+                  "restart",
+                  "shutdown"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "x-ms-enum": {
+                  "name": "type",
+                  "modelAsString": true,
+                  "values": [
+                    {
+                      "name": "security",
+                      "value": "security"
+                    }
+                  ]
+                },
+                "enum": [
+                  "security"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
         },
         "connectionHistory": {
           "items": {
@@ -3131,7 +3201,7 @@
   },
   "host": "console.jumpcloud.com",
   "info": {
-    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.",
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its Syste",
     "title": "JumpCloud APIs",
     "version": "1.0"
   },
@@ -3223,7 +3293,7 @@
   "paths": {
     "/applications": {
       "get": {
-        "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "List-Application",
         "parameters": [
           {
@@ -3382,7 +3452,7 @@
     },
     "/application-templates": {
       "get": {
-        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "List-ApplicationTemplate",
         "parameters": [
           {
@@ -3439,7 +3509,7 @@
     },
     "/application-templates/{id}": {
       "get": {
-        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Get-ApplicationTemplate",
         "parameters": [
           {
@@ -3602,7 +3672,7 @@
     "/commandresults/{id}": {
       "delete": {
         "parameters": [],
-        "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````",
+        "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
         "operationId": "Delete-CommandResult",
         "responses": {
           "200": {
@@ -3623,7 +3693,7 @@
         "summary": "Delete a Command result"
       },
       "get": {
-        "description": "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "description": "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-CommandResult",
         "parameters": [
           {
@@ -3785,7 +3855,7 @@
         "summary": "Delete a Command"
       },
       "get": {
-        "description": "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
+        "description": "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-Command",
         "parameters": [
           {
@@ -3856,7 +3926,7 @@
     },
     "/files/command/{id}": {
       "get": {
-        "description": "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "description": "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-CommandFile",
         "parameters": [
           {
@@ -3917,7 +3987,7 @@
     },
     "/organizations": {
       "get": {
-        "description": "This endpoint returns Organization Details.\n\n#### Sample Request \n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns Organization Details.\n\n#### Sample Request\n\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-Organization",
         "parameters": [
           {
@@ -4184,7 +4254,7 @@
       },
       "get": {
         "parameters": [],
-        "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "Get-RadiusServer",
         "responses": {
           "200": {
@@ -4210,7 +4280,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
+        "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
         "operationId": "Put-RadiusServer",
         "parameters": [
           {
@@ -4300,7 +4370,7 @@
     },
     "/search/organizations": {
       "post": {
-        "description": "This endpoint will return Organization data based on your search parameters. This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request. \n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```",
+        "description": "This endpoint will return Organization data based on your search parameters. This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```",
         "operationId": "Search-Organization",
         "parameters": [
           {
@@ -4364,7 +4434,7 @@
     },
     "/search/systems": {
       "post": {
-        "description": "Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```",
+        "description": "Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```",
         "operationId": "Search-System",
         "parameters": [
           {
@@ -4428,7 +4498,7 @@
     },
     "/search/systemusers": {
       "post": {
-        "description": "Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system user.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions. \n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of system users in a department\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"department\" : \"IT\"}],\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nText search for system users with and email on a domain\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nCombining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of departments\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"department\" : \"IT\"},\n      {\"department\" : \"Sales\"}\n    ]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```",
+        "description": "Return System Users in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new system user.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of system users in a department\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"department\" : \"IT\"}],\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nText search for system users with and email on a domain\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```\n\nCombining `filter` and `searchFilter` to text search for system users with and email on a domain who are in a list of departments\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"@jumpcloud.com\",\n    \"fields\": [\"email\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"department\" : \"IT\"},\n      {\"department\" : \"Sales\"}\n    ]\n  },\n  \"fields\" : \"email username sudo\"\n}'\n```",
         "operationId": "Search-SystemUser",
         "parameters": [
           {
@@ -4492,7 +4562,7 @@
     },
     "/systems": {
       "get": {
-        "description": "This endpoint returns all Systems.\n\n#### Sample Requests\n```\ncurl -X GET https://console.jumpcloud.com/api/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n\n```",
+        "description": "This endpoint returns all Systems.\n\n#### Sample Requests\n```\ncurl -X GET https://console.jumpcloud.com/api/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "List-System",
         "parameters": [
           {
@@ -4587,7 +4657,7 @@
         "summary": "Delete a System"
       },
       "get": {
-        "description": "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```",
+        "description": "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-System",
         "parameters": [
           {
@@ -4667,6 +4737,182 @@
           }
         ],
         "summary": "Update a system"
+      }
+    },
+    "/systems/{system_id}/command/builtin/erase": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "system_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "POST_systems-system_id-command-builtin-erase",
+        "responses": {
+          "201": {
+            "description": "Command created"
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Erase a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/lock": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "system_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "POST_systems-system_id-command-builtin-lock",
+        "responses": {
+          "201": {
+            "description": "Command created"
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Lock a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/restart": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "system_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "POST_systems-system_id-command-builtin-restart",
+        "responses": {
+          "201": {
+            "description": "Command created"
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Restart a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/shutdown": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "system_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "POST_systems-system_id-command-builtin-shutdown",
+        "responses": {
+          "201": {
+            "description": "Command created"
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Shutdown a System"
       }
     },
     "/systemusers": {
@@ -4776,7 +5022,7 @@
     "/systemusers/{id}": {
       "delete": {
         "parameters": [],
-        "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n```",
+        "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-SystemUser",
         "responses": {
           "200": {
@@ -4927,7 +5173,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period. This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information. \n\n#### Sample Request \n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n  \n\n```",
+        "description": "This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period. This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```",
         "operationId": "Reset-SystemUserMfa",
         "parameters": [
           {

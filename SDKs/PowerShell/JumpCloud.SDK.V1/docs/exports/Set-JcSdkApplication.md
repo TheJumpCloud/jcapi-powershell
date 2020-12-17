@@ -17,7 +17,8 @@ The endpoint updates a SSO / SAML Application.
 Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Put
@@ -37,7 +38,8 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta
  [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>] [-Name <String>]
- [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -319,6 +321,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoBeta
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoJit
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoUrl
 .
 
@@ -481,6 +528,9 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 
+  - `[SsoBeta <Boolean?>]`: 
+  - `[SsoJit <Boolean?>]`: 
+  - `[SsoType <String>]`: 
   - `[SsoUrl <String>]`: 
 
 CONFIG <IApplicationConfig>: .
@@ -566,6 +616,7 @@ CONFIG <IApplicationConfig>: .
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

@@ -1,8 +1,10 @@
 <#
 .Synopsis
-This endpoint allows you to expire a user's password.
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Description
-This endpoint allows you to expire a user's password.
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -27,20 +29,26 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireSystemUserPassword.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkSystemPostSystem.md
 #>
- Function Invoke-JcSdkExpireSystemUserPassword
+ Function Invoke-JcSdkSystemPostSystem
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Systems', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Post', Mandatory)]
+    [Parameter(ParameterSetName='Systems', Mandatory)]
+    [Parameter(ParameterSetName='Systems1', Mandatory)]
+    [Parameter(ParameterSetName='Systems2', Mandatory)]
+    [Parameter(ParameterSetName='Systems3', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${SystemId},
 
-    [Parameter(ParameterSetName='PostViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity1', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity2', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity3', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -109,7 +117,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalExpireSystemUserPassword @PSBoundParameters
+        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalSystemPostSystem @PSBoundParameters
     }
     End
     {

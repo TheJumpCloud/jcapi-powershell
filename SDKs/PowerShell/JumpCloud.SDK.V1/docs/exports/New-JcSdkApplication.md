@@ -17,7 +17,8 @@ The endpoint adds a new SSO / SAML Applications.
 New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -273,6 +274,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoBeta
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoJit
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoUrl
 .
 
@@ -433,6 +479,9 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 
+  - `[SsoBeta <Boolean?>]`: 
+  - `[SsoJit <Boolean?>]`: 
+  - `[SsoType <String>]`: 
   - `[SsoUrl <String>]`: 
 
 CONFIG <IApplicationConfig>: .
