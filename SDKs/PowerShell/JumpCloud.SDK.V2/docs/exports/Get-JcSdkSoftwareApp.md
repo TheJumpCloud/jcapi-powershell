@@ -128,7 +128,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IPaths7V9L3KSoftwareappsGetResponses200ContentApplicationJsonSchemaItems
 
-### JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject1
+### JumpCloud.SDK.V2.Models.ISoftwareAppGetApplicationJsonResponse
 
 ### System.String
 
@@ -150,7 +150,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

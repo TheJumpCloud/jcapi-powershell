@@ -19,12 +19,12 @@ Set-JcSdkSystemGroup -Id <String> -Name <String> [-Confirm] [-WhatIf] [<CommonPa
 
 ### Set
 ```
-Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData0> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData0> [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -60,7 +60,7 @@ SystemGroupData
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupData0
+Type: JumpCloud.SDK.V2.Models.ISystemGroupData
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -155,11 +155,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V2.Models.ISystemGroupData0
+### JumpCloud.SDK.V2.Models.ISystemGroupData
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISystemGroup1
+### JumpCloud.SDK.V2.Models.ISystemGroupSetApplicationJsonResponse
 
 ## NOTES
 
@@ -170,7 +170,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGroupData0>: SystemGroupData
+BODY <ISystemGroupData>: SystemGroupData
   - `Name <String>`: Display name of a System Group.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
@@ -182,7 +182,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

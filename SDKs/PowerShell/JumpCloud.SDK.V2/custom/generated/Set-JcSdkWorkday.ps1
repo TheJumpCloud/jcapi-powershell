@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IWorkdayFields
 .Outputs
-JumpCloud.SDK.V2.Models.IWorkdayOutput1
+JumpCloud.SDK.V2.Models.IWorkdaySetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -36,7 +36,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -52,7 +52,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkWorkday
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput1])]
+    [OutputType([JumpCloud.SDK.V2.Models.IWorkdaySetApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -148,7 +148,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkday @PSBoundParameters
+        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkday @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

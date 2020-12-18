@@ -19,7 +19,7 @@ JumpCloud.SDK.V2.Models.IPaths14PfqflPoliciesPolicyIdPolicyresultsGetResponses20
 .Outputs
 JumpCloud.SDK.V2.Models.IPathsVvavtwPolicyresultsGetResponses200ContentApplicationJsonSchemaItems
 .Outputs
-JumpCloud.SDK.V2.Models.IPolicyResult
+JumpCloud.SDK.V2.Models.IPolicyResultGetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -34,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -50,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkPolicyResult
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult], [JumpCloud.SDK.V2.Models.IPaths14PfqflPoliciesPolicyIdPolicyresultsGetResponses200ContentApplicationJsonSchemaItems], [JumpCloud.SDK.V2.Models.IPathsVvavtwPolicyresultsGetResponses200ContentApplicationJsonSchemaItems])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyResultGetApplicationJsonResponse], [JumpCloud.SDK.V2.Models.IPaths14PfqflPoliciesPolicyIdPolicyresultsGetResponses200ContentApplicationJsonSchemaItems], [JumpCloud.SDK.V2.Models.IPathsVvavtwPolicyresultsGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

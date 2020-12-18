@@ -15,8 +15,8 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <Op> -Type <Type>
- [-Attributes <IPostContentSchemaAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <Op> -Type <GraphType>
+ [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,8 +33,8 @@ Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGr
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type>
- [-Attributes <IPostContentSchemaAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
+ [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPostContentSchemaAttributes
+Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -170,7 +170,7 @@ Accept wildcard characters: False
 The graph type.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphType
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -237,8 +237,8 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type>`: The graph type.
-  - `[Attributes <IPostContentSchemaAttributes>]`: The graph connection's attributes.
+  - `Type <GraphType>`: The graph type.
+  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -249,7 +249,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IPaths7V9L3KSoftwareappsGetResponses200ContentApplicationJsonSchemaItems
 .Outputs
-JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject1
+JumpCloud.SDK.V2.Models.ISoftwareAppGetApplicationJsonResponse
 .Outputs
 System.String
 .Notes
@@ -34,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -50,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject1], [System.String], [JumpCloud.SDK.V2.Models.IPaths7V9L3KSoftwareappsGetResponses200ContentApplicationJsonSchemaItems])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppGetApplicationJsonResponse], [System.String], [JumpCloud.SDK.V2.Models.IPaths7V9L3KSoftwareappsGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

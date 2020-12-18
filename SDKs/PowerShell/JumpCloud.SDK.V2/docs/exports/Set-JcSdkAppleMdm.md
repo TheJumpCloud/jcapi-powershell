@@ -17,9 +17,9 @@ It may also be used to update the DEP Settings.\n\n#### Sample Request\n```\n  c
 ### SetExpanded (Default)
 ```
 Set-JcSdkAppleMdm -Id <String> [-AppleSignedCert <String>] [-DefaultSystemGroupId <String>]
- [-DepSetupAssistantOptions <IPutContentSchemaDepSetupAssistantOptionsItem[]>]
- [-EncryptedDepServerToken <String>] [-Name <String>] [-WelcomeScreenButton <String>]
- [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>] [-Name <String>]
+ [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -36,8 +36,7 @@ Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> -Body <IAppleMdmPatchInp
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-AppleSignedCert <String>]
- [-DefaultSystemGroupId <String>]
- [-DepSetupAssistantOptions <IPutContentSchemaDepSetupAssistantOptionsItem[]>]
+ [-DefaultSystemGroupId <String>] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
  [-EncryptedDepServerToken <String>] [-Name <String>] [-WelcomeScreenButton <String>]
  [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -116,7 +115,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for DEPSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPutContentSchemaDepSetupAssistantOptionsItem[]
+Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -275,7 +274,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAppleMdm0
+### JumpCloud.SDK.V2.Models.IAppleMdmSetApplicationJsonResponse
 
 ### System.String
 
@@ -291,16 +290,16 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IAppleMdmPatchInput>: Apple MDM Patch Input
   - `[AppleSignedCert <String>]`: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   - `[DefaultSystemGroupId <String>]`: ObjectId uniquely identifying the MDM default System Group.
-  - `[DepSetupAssistantOptions <IPutContentSchemaDepSetupAssistantOptionsItem[]>]`: 
-    - `[Option <Option?>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
+  - `[DepSetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
+    - `[Option <SetupAssistantOption?>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
   - `[EncryptedDepServerToken <String>]`: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
   - `[Name <String>]`: A new name for the Apple MDM configuration.
   - `[WelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
   - `[WelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[WelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
 
-DEPSETUPASSISTANTOPTIONS <IPutContentSchemaDepSetupAssistantOptionsItem[]>: .
-  - `[Option <Option?>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
+DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
+  - `[Option <SetupAssistantOption?>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -311,7 +310,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

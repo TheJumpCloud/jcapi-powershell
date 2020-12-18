@@ -17,7 +17,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365TranslationRule0
+JumpCloud.SDK.V2.Models.IOffice365TranslationRuleGetApplicationJsonResponse
 .Outputs
 JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems
 .Notes
@@ -34,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -50,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkOffice365TranslationRule
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365TranslationRule0], [JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems])]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365TranslationRuleGetApplicationJsonResponse], [JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

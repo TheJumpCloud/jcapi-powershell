@@ -14,9 +14,8 @@ This endpoint allows you to do a full update of the User Group.\n\n#### Sample R
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroup -Id <String> -Name <String>
- [-AttributePosixGroups <IPutContentSchemaAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled]
- [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
+ [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,7 +32,7 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
- [-AttributePosixGroups <IPutContentSchemaAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled]
+ [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled]
  [-Description <String>] [-Email <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -63,7 +62,7 @@ This endpoint allows you to do a full update of the User Group.\n\n#### Sample R
 To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPutContentSchemaAttributesPosixGroupsItem[]
+Type: JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -223,7 +222,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IUserGroup1
+### JumpCloud.SDK.V2.Models.IUserGroupSetApplicationJsonResponse
 
 ## NOTES
 
@@ -234,13 +233,13 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTEPOSIXGROUPS <IPutContentSchemaAttributesPosixGroupsItem[]>: .
+ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>: .
   - `[Id <Int32?>]`: 
   - `[Name <String>]`: 
 
 BODY <IUserGroupPut>: UserGroupPut
   - `Name <String>`: Display name of a User Group.
-  - `[AttributePosixGroups <IPutContentSchemaAttributesPosixGroupsItem[]>]`: 
+  - `[AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]`: 
     - `[Id <Int32?>]`: 
     - `[Name <String>]`: 
   - `[AttributeSambaEnabled <Boolean?>]`: 
@@ -256,7 +255,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

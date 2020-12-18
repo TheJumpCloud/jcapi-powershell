@@ -26,8 +26,8 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IUserGroupGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <Op>: How to modify the graph connection.
-  Type <Type3>: The graph type
-  [Attributes <IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]: The graph connection's attributes.
+  Type <Type2>: The graph type
+  [Attributes <IUserGroupGraphManagementReqAttributes>]: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -38,7 +38,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -97,16 +97,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type3])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type2])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type3]
+    [JumpCloud.SDK.V2.Support.Type2]
     # The graph type
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes]
+    [JumpCloud.SDK.V2.Models.IUserGroupGraphManagementReqAttributes]
     # The graph connection's attributes.
     ${Attributes},
 

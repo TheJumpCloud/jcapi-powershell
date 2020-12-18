@@ -14,28 +14,26 @@ This endpoint returns the _direct_ associations of this G Suite instance.\n\nA d
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkGSuiteAssociation -GsuiteId <String> -Id <String> -Op <Op> -Type <Type>
- [-Attributes <IPaths1K8Xu69GsuitesGsuiteIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkGSuiteAssociation -GsuiteId <String> -Id <String> -Op <Op> -Type <GraphType>
+ [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkGSuiteAssociation -GsuiteId <String> -Body <IGraphManagementReq1> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkGSuiteAssociation -GsuiteId <String> -Body <IGraphManagementReq> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq1> [-PassThru]
+Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type>
- [-Attributes <IPaths1K8Xu69GsuitesGsuiteIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
+ [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +61,7 @@ This endpoint returns the _direct_ associations of this G Suite instance.\n\nA d
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPaths1K8Xu69GsuitesGsuiteIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes
+Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -79,7 +77,7 @@ GraphManagementReq
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReq1
+Type: JumpCloud.SDK.V2.Models.IGraphManagementReq
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -170,7 +168,7 @@ Accept wildcard characters: False
 The graph type.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphType
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -217,7 +215,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphManagementReq1
+### JumpCloud.SDK.V2.Models.IGraphManagementReq
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -234,11 +232,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphManagementReq1>: GraphManagementReq
+BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type>`: The graph type.
-  - `[Attributes <IPaths1K8Xu69GsuitesGsuiteIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]`: The graph connection's attributes.
+  - `Type <GraphType>`: The graph type.
+  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -249,7 +247,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

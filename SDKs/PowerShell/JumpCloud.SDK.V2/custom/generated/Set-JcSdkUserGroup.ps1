@@ -17,19 +17,19 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IUserGroupPut
 .Outputs
-JumpCloud.SDK.V2.Models.IUserGroup1
+JumpCloud.SDK.V2.Models.IUserGroupSetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ATTRIBUTEPOSIXGROUPS <IPutContentSchemaAttributesPosixGroupsItem[]>:
+ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>:
   [Id <Int32?>]:
   [Name <String>]:
 
 BODY <IUserGroupPut>:
   Name <String>: Display name of a User Group.
-  [AttributePosixGroups <IPutContentSchemaAttributesPosixGroupsItem[]>]:
+  [AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]:
     [Id <Int32?>]:
     [Name <String>]:
   [AttributeSambaEnabled <Boolean?>]:
@@ -45,7 +45,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -61,7 +61,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkUserGroup
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup1])]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroupSetApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -97,7 +97,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPutContentSchemaAttributesPosixGroupsItem[]]
+    [JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
     ${AttributePosixGroups},
@@ -179,7 +179,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters
+        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

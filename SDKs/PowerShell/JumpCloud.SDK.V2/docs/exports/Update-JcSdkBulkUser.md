@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkBulkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
 schema: 2.0.0
 ---
 
-# Set-JcSdkBulkUser
+# Update-JcSdkBulkUser
 
 ## SYNOPSIS
 The endpoint allows you to create a bulk job to asynchronously update users.
@@ -14,7 +14,7 @@ See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-s
 ## SYNTAX
 
 ```
-Set-JcSdkBulkUser -Body <IPatchContentSchemaItem[]> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkBulkUser -Body <IBulkUserUpdate[]> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,7 +44,7 @@ See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-s
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPatchContentSchemaItem[]
+Type: JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
 Parameter Sets: (All)
 Aliases:
 
@@ -91,7 +91,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IPatchContentSchemaItem[]
+### JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
 
 ## OUTPUTS
 
@@ -106,8 +106,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPatchContentSchemaItem[]>: .
-  - `[Attributes <IPatchContentSchemaPropertiesItemsItem[]>]`: Map of additional attributes.
+BODY <IBulkUserUpdate[]>: .
+  - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
   - `[Id <String>]`: Object ID of the systemuser being updated

@@ -1,43 +1,46 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkGSuite.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkLdapServer.md
 schema: 2.0.0
 ---
 
-# Set-JcSdkGSuite
+# Update-JcSdkLdapServer
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
 
 ## SYNTAX
 
-### SetExpanded (Default)
+### UpdateExpanded (Default)
 ```
-Set-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
- [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Set
-```
-Set-JcSdkGSuite -Id <String> -Body <IGSuitePatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <LdapServerAction>]
+ [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### SetViaIdentity
+### Update
 ```
-Set-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGSuitePatchInput> [-Confirm] [-WhatIf]
+Update-JcSdkLdapServer -Id <String>
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### SetViaIdentityExpanded
+### UpdateViaIdentity
 ```
-Set-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
- [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### UpdateViaIdentityExpanded
+```
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
+ [-UserLockoutAction <LdapServerAction>] [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
 
 ## EXAMPLES
 
@@ -58,12 +61,12 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 ## PARAMETERS
 
 ### -Body
-GSuite Patch Input
+.
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGSuitePatchInput
-Parameter Sets: Set, SetViaIdentity
+Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -73,30 +76,30 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -GroupsEnabled
-.
+### -Id
+Unique identifier of the LDAP server.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Type: System.String
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
-Unique identifier of the GSuite.
+### -Id1
+.
 
 ```yaml
 Type: System.String
-Parameter Sets: Set, SetExpanded
+Parameter Sets: UpdateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -109,7 +112,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -119,27 +122,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Name
-.
-
-```yaml
-Type: System.String
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -UserLockoutAction
-.
+LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserLockoutAction
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Type: JumpCloud.SDK.V2.Support.LdapServerAction
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -150,11 +138,11 @@ Accept wildcard characters: False
 ```
 
 ### -UserPasswordExpirationAction
-.
+LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Type: JumpCloud.SDK.V2.Support.LdapServerAction
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -200,13 +188,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGSuitePatchInput
-
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+
+### JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGSuiteOutput0
+### JumpCloud.SDK.V2.Models.ILdapServerUpdateApplicationJsonResponse
+
+### System.String
 
 ## NOTES
 
@@ -217,11 +207,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGSuitePatchInput>: GSuite Patch Input
-  - `[GroupsEnabled <Boolean?>]`: 
-  - `[Name <String>]`: 
-  - `[UserLockoutAction <UserLockoutAction?>]`: 
-  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
+BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
+  - `[Id <String>]`: 
+  - `[UserLockoutAction <LdapServerAction?>]`: LDAP Server Action
+  - `[UserPasswordExpirationAction <LdapServerAction?>]`: LDAP Server Action
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -232,7 +221,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

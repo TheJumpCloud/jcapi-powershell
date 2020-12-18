@@ -17,9 +17,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
-JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject2
+JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
-JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject3
+JumpCloud.SDK.V2.Models.ISoftwareAppSetApplicationJsonResponse
 .Outputs
 System.String
 .Notes
@@ -27,10 +27,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISoftwareApplicationPackageObject2>:
+BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
-  [Settings <IPutContentSchemaSettingsItem[]>]:
+  [Settings <IJcSoftwareAppSettings[]>]:
+    [AutoUpdate <Boolean?>]:
     [PackageId <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -42,7 +43,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -54,14 +55,15 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 
-SETTINGS <IPutContentSchemaSettingsItem[]>:
+SETTINGS <IJcSoftwareAppSettings[]>:
+  [AutoUpdate <Boolean?>]:
   [PackageId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 #>
  Function Set-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject3], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppSetApplicationJsonResponse], [System.String])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -83,7 +85,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject2]
+    [JumpCloud.SDK.V2.Models.ISoftwareApp]
     # Software Application Package Object
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -104,7 +106,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPutContentSchemaSettingsItem[]]
+    [JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]]
     # .
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings},
@@ -165,7 +167,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters
+        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

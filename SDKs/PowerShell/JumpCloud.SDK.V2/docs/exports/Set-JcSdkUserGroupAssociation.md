@@ -14,9 +14,8 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <Op> -Type <Type3>
- [-Attributes <IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <Op> -Type <Type2>
+ [-Attributes <IUserGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,9 +32,8 @@ Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IUser
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type3>
- [-Attributes <IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type2>
+ [-Attributes <IUserGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +61,7 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes
+Type: JumpCloud.SDK.V2.Models.IUserGroupGraphManagementReqAttributes
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -170,7 +168,7 @@ Accept wildcard characters: False
 The graph type
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type3
+Type: JumpCloud.SDK.V2.Support.Type2
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -237,8 +235,8 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IUserGroupGraphManagementReq>: UserGroupGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type3>`: The graph type
-  - `[Attributes <IPathsMvbwtfUsergroupsGroupIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]`: The graph connection's attributes.
+  - `Type <Type2>`: The graph type
+  - `[Attributes <IUserGroupGraphManagementReqAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -249,7 +247,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

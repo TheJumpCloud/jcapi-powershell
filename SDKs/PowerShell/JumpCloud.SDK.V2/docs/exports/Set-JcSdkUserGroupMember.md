@@ -14,8 +14,8 @@ This endpoint allows you to manage the user members of a User Group.\n\n#### Sam
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <Op> -Type <Type1> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <Op> -Type <Type> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -32,7 +32,7 @@ Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroup
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type1> [-PassThru]
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -153,7 +153,7 @@ Accept wildcard characters: False
 The member type.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type1
+Type: JumpCloud.SDK.V2.Support.Type
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -220,7 +220,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IUserGroupMembersReq>: UserGroupMembersReq
   - `Id <String>`: The ObjectID of member being added or removed.
   - `Op <Op>`: How to modify the membership connection.
-  - `Type <Type1>`: The member type.
+  - `Type <Type>`: The member type.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -231,7 +231,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

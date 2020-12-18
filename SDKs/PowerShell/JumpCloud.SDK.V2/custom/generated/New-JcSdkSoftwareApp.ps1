@@ -13,33 +13,35 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject
+JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
-JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject0
+JumpCloud.SDK.V2.Models.ISoftwareApp
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISoftwareApplicationPackageObject>:
+BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
-  [Settings <IPostContentSchemaSettingsItem[]>]:
+  [Settings <IJcSoftwareAppSettings[]>]:
+    [AutoUpdate <Boolean?>]:
     [PackageId <String>]:
 
-SETTINGS <IPostContentSchemaSettingsItem[]>:
+SETTINGS <IJcSoftwareAppSettings[]>:
+  [AutoUpdate <Boolean?>]:
   [PackageId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSoftwareApp.md
 #>
  Function New-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject0])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApp])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISoftwareApplicationPackageObject]
+    [JumpCloud.SDK.V2.Models.ISoftwareApp]
     # Software Application Package Object
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -58,7 +60,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPostContentSchemaSettingsItem[]]
+    [JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]]
     # .
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings},

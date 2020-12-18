@@ -1,46 +1,42 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkLdapServer.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkIPList.md
 schema: 2.0.0
 ---
 
-# Set-JcSdkLdapServer
+# Set-JcSdkIPList
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <UserLockoutAction>]
- [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -Id <String> [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkLdapServer -Id <String>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkIPList -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
- [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-Ips <String[]>]
+ [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
 
 ## EXAMPLES
 
@@ -61,11 +57,11 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 ## PARAMETERS
 
 ### -Body
-.
+IPListRequest
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
+Type: JumpCloud.SDK.V2.Models.IIPListRequest
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -76,30 +72,30 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Id
-Unique identifier of the LDAP server.
+### -Description
+.
 
 ```yaml
 Type: System.String
-Parameter Sets: Set, SetExpanded, SetViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id1
+### -Id
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: SetExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -122,11 +118,11 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -UserLockoutAction
+### -Ips
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserLockoutAction
+Type: System.String[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -137,11 +133,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserPasswordExpirationAction
+### -Name
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -188,13 +184,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IIPListRequest
 
-### JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.IIPListSetApplicationJsonResponse
 
 ### System.String
 
@@ -207,10 +203,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
-  - `[Id <String>]`: 
-  - `[UserLockoutAction <UserLockoutAction?>]`: 
-  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
+BODY <IIPListRequest>: IPListRequest
+  - `[Description <String>]`: 
+  - `[Ips <String[]>]`: 
+  - `[Name <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -221,7 +217,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

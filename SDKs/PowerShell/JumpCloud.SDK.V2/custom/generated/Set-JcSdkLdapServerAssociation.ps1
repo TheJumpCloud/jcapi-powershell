@@ -13,7 +13,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphManagementReq2
+JumpCloud.SDK.V2.Models.IGraphManagementReq
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,11 +23,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphManagementReq2>:
+BODY <IGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <Op>: How to modify the graph connection.
-  Type <Type>: The graph type.
-  [Attributes <IPaths11BfmcmLdapserversLdapserverIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes>]: The graph connection's attributes.
+  Type <GraphType>: The graph type.
+  [Attributes <IGraphManagementReqAttributes>]: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -38,7 +38,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -75,7 +75,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphManagementReq2]
+    [JumpCloud.SDK.V2.Models.IGraphManagementReq]
     # GraphManagementReq
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -97,16 +97,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphType])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type]
+    [JumpCloud.SDK.V2.Support.GraphType]
     # The graph type.
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPaths11BfmcmLdapserversLdapserverIdAssociationsPostRequestbodyContentApplicationJsonSchemaPropertiesAttributes]
+    [JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]
     # The graph connection's attributes.
     ${Attributes},
 
