@@ -46,49 +46,53 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'POST_applications'                           = 'Create-Application';
-            'DELETE_applications-id'                      = 'Delete-Application';
-            'GET_applications-id'                         = 'Get-Application';
-            'GET_applications'                            = 'List-Application';
-            'PUT_applications-id'                         = 'Set-Application';
-            'GET_application-templates-id'                = 'Get-ApplicationTemplate';
-            'GET_application-templates'                   = 'List-ApplicationTemplate';
-            'POST_commands'                               = 'Create-Command';
-            'DELETE_commands-id'                          = 'Delete-Command';
-            'GET_commands-id'                             = 'Get-Command';
-            'GET_commands'                                = 'List-Command';
-            'PUT_commands-id'                             = 'Set-Command';
-            'GET_files-command-id'                        = 'Get-CommandFile';
-            'DELETE_commandresults-id'                    = 'Delete-CommandResult';
-            'GET_commandresults-id'                       = 'Get-CommandResult';
-            'GET_commandresults'                          = 'List-CommandResult';
-            'POST_command-trigger-triggername'            = 'POST-CommandTrigger';
-            'POST_systemusers-id-expire'                  = 'POST-ExpireSystemUserPassword';
-            'GET_organizations-id'                        = 'Get-Organization';
-            'GET_organizations'                           = 'List-Organization';
-            'POST_search-organizations'                   = 'Search-Organization';
-            'PUT_organizations-id'                        = 'Set-Organization';
-            'POST_radiusservers'                          = 'Create-RadiusServer';
-            'DELETE_radiusservers-id'                     = 'Delete-RadiusServer';
-            'GET_radiusservers-id'                        = 'Get-RadiusServer';
-            'GET_radiusservers'                           = 'List-RadiusServer';
-            'PUT_radiusservers-id'                        = 'Set-RadiusServer';
-            'DELETE_systems-id'                           = 'Delete-System';
-            'GET_systems-id'                              = 'Get-System';
-            'GET_systems'                                 = 'List-System';
-            'POST_search-systems'                         = 'Search-System';
-            'PUT_systems-id'                              = 'Set-System';
-            'POST_systemusers'                            = 'Create-SystemUser';
-            'DELETE_systemusers-id'                       = 'Delete-SystemUser';
-            'GET_systemusers-id'                          = 'Get-SystemUser';
-            'GET_systemusers'                             = 'List-SystemUser';
-            'POST_search-systemusers'                     = 'Search-SystemUser';
-            'PUT_systemusers-id'                          = 'Set-SystemUser';
-            'POST_systemusers-id-unlock'                  = 'Unlock-SystemUser';
-            'POST_systemusers-id-resetmfa'                = 'Reset-SystemUserMfa';
-            'POST_systemusers-id-sshkeys'                 = 'Create-SystemUsersSshKey';
-            'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
-            'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
+            'POST_applications'                               = 'Create-Application';
+            'DELETE_applications-id'                          = 'Delete-Application';
+            'GET_applications-id'                             = 'Get-Application';
+            'GET_applications'                                = 'List-Application';
+            'PUT_applications-id'                             = 'Set-Application';
+            'GET_application-templates-id'                    = 'Get-ApplicationTemplate';
+            'GET_application-templates'                       = 'List-ApplicationTemplate';
+            'POST_commands'                                   = 'Create-Command';
+            'DELETE_commands-id'                              = 'Delete-Command';
+            'GET_commands-id'                                 = 'Get-Command';
+            'GET_commands'                                    = 'List-Command';
+            'PUT_commands-id'                                 = 'Set-Command';
+            'GET_files-command-id'                            = 'Get-CommandFile';
+            'DELETE_commandresults-id'                        = 'Delete-CommandResult';
+            'GET_commandresults-id'                           = 'Get-CommandResult';
+            'GET_commandresults'                              = 'List-CommandResult';
+            'POST_command-trigger-triggername'                = 'POST-CommandTrigger';
+            'POST_systemusers-id-expire'                      = 'POST-ExpireSystemUserPassword';
+            'GET_organizations-id'                            = 'Get-Organization';
+            'GET_organizations'                               = 'List-Organization';
+            'POST_search-organizations'                       = 'Search-Organization';
+            'PUT_organizations-id'                            = 'Set-Organization';
+            'POST_radiusservers'                              = 'Create-RadiusServer';
+            'DELETE_radiusservers-id'                         = 'Delete-RadiusServer';
+            'GET_radiusservers-id'                            = 'Get-RadiusServer';
+            'GET_radiusservers'                               = 'List-RadiusServer';
+            'PUT_radiusservers-id'                            = 'Set-RadiusServer';
+            'POST_systems-system_id-command-builtin-erase'    = 'Clear-System';
+            'DELETE_systems-id'                               = 'Delete-System';
+            'GET_systems-id'                                  = 'Get-System';
+            'GET_systems'                                     = 'List-System';
+            'POST_systems-system_id-command-builtin-lock'     = 'Lock-System';
+            'POST_systems-system_id-command-builtin-restart'  = 'Restart-System';
+            'POST_search-systems'                             = 'Search-System';
+            'PUT_systems-id'                                  = 'Set-System';
+            'POST_systems-system_id-command-builtin-shutdown' = 'Stop-System';
+            'POST_systemusers'                                = 'Create-SystemUser';
+            'DELETE_systemusers-id'                           = 'Delete-SystemUser';
+            'GET_systemusers-id'                              = 'Get-SystemUser';
+            'GET_systemusers'                                 = 'List-SystemUser';
+            'POST_search-systemusers'                         = 'Search-SystemUser';
+            'PUT_systemusers-id'                              = 'Set-SystemUser';
+            'POST_systemusers-id-unlock'                      = 'Unlock-SystemUser';
+            'POST_systemusers-id-resetmfa'                    = 'Reset-SystemUserMfa';
+            'POST_systemusers-id-sshkeys'                     = 'Create-SystemUsersSshKey';
+            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-SystemUsersSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'List-SystemUsersSshKey';
         };
         ExcludedList       = @();
     }
@@ -141,8 +145,13 @@ $TransformConfig = [Ordered]@{
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
             'GET_applications-application_id-users'                      = 'Get-ApplicationTraverseUser';
             'GET_applications-application_id-usergroups'                 = 'Get-ApplicationTraverseUserGroup';
+            'POST_authn-policies'                                        = 'Create-AuthenticationPolicy';
+            'DELETE_authn-policies-id'                                   = 'Delete-AuthenticationPolicy';
+            'GET_authn-policies-id'                                      = 'Get-AuthenticationPolicy';
+            'GET_authn-policies'                                         = 'List-AuthenticationPolicy';
+            'PATCH_authn-policies-id'                                    = 'Update-AuthenticationPolicy';
             'POST_bulk-users'                                            = 'Create-BulkUsers';
-            'PATCH_bulk-users'                                           = 'Set-BulkUsers';
+            'PATCH_bulk-users'                                           = 'Update-BulkUsers';
             'GET_bulk-users-job_id-results'                              = 'Get-BulkUsersResult';
             'GET_commands-command_id-associations'                       = 'Get-CommandAssociation';
             'POST_commands-command_id-associations'                      = 'Set-CommandAssociation';
@@ -160,7 +169,7 @@ $TransformConfig = [Ordered]@{
             'PUT_duo-accounts-account_id-applications-application_id'    = 'Set-DuoApplication';
             'GET_groups'                                                 = 'List-Group';
             'GET_gsuites-id'                                             = 'Get-GSuite';
-            'PATCH_gsuites-id'                                           = 'Set-GSuite';
+            'PATCH_gsuites-id'                                           = 'Update-GSuite';
             'GET_gsuites-gsuite_id-associations'                         = 'Get-GSuiteAssociation';
             'POST_gsuites-gsuite_id-associations'                        = 'Set-GSuiteAssociation';
             'POST_gsuites-gsuite_id-translationrules'                    = 'Create-GSuiteTranslationRule';
@@ -170,9 +179,15 @@ $TransformConfig = [Ordered]@{
             'GET_gsuites-gsuite_id-users'                                = 'Get-GSuiteTraverseUser';
             'GET_gsuites-gsuite_id-usergroups'                           = 'Get-GSuiteTraverseUserGroup';
             'GET_gsuites-gsuite_id-import-users'                         = 'List-GSuiteUsersToImport';
+            'POST_iplists'                                               = 'Create-IpList';
+            'DELETE_iplists-id'                                          = 'Delete-IpList';
+            'GET_iplists-id'                                             = 'Get-IpList';
+            'GET_iplists'                                                = 'List-IpList';
+            'PUT_iplists-id'                                             = 'Set-IpList';
+            'PATCH_iplists-id'                                           = 'Update-IpList';
             'GET_ldapservers-id'                                         = 'Get-LdapServer';
             'GET_ldapservers'                                            = 'List-LdapServer';
-            'PATCH_ldapservers-id'                                       = 'Set-LdapServer';
+            'PATCH_ldapservers-id'                                       = 'Update-LdapServer';
             'GET_ldapservers-ldapserver_id-associations'                 = 'Get-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-associations'                = 'Set-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-sambadomains'                = 'Create-LdapServerSambaDomain';
@@ -183,7 +198,7 @@ $TransformConfig = [Ordered]@{
             'GET_ldapservers-ldapserver_id-users'                        = 'Get-LdapServerTraverseUser';
             'GET_ldapservers-ldapserver_id-usergroups'                   = 'Get-LdapServerTraverseUserGroup';
             'GET_office365s-office365_id'                                = 'Get-Office365';
-            'PATCH_office365s-office365_id'                              = 'Set-Office365';
+            'PATCH_office365s-office365_id'                              = 'Update-Office365';
             'GET_office365s-office365_id-associations'                   = 'Get-Office365Association';
             'POST_office365s-office365_id-associations'                  = 'Set-Office365Association';
             'POST_office365s-office365_id-translationrules'              = 'Create-Office365TranslationRule';
@@ -367,6 +382,7 @@ Function Update-SwaggerObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The original input object which will be used as a reference', DontShow)]$InputObjectOrg
     )
     $InputObject | ForEach-Object {
         $ThisObject = $_
@@ -426,7 +442,6 @@ Function Update-SwaggerObject
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
                     # Map operationIds
@@ -448,7 +463,7 @@ Function Update-SwaggerObject
                     If ($AttributePath -like '*.enum' -and $AttributePath -notlike '*.responses*')
                     {
                         $xMsEnum = [PSCustomObject]@{
-                            name = "$($ThisObjectName)"
+                            name = $ThisObjectName
                             # modelAsString = $true
                         }
                         # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
@@ -519,6 +534,25 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
                     }
+                    # Generalize responses for when operation returns an object or an array of objects
+                    If ($AttributePath -like '*.responses.200.schema')
+                    {
+                        $GeneralObject = [PSCustomObject]@{
+                            additionalProperties = $true
+                            title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])Response"
+                            type                 = 'object'
+                        }
+                        If ($ThisObject.$AttributeName.type -eq 'array')
+                        {
+                            $ThisObject.$AttributeName.PSObject.Properties.Remove('items')
+                            Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('items') -Value:($GeneralObject)
+                        }
+                        Else
+                        {
+                            $ThisObject.PSObject.Properties.Remove($AttributeName)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
+                        }
+                    }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
                     {
@@ -541,10 +575,9 @@ Function Update-SwaggerObject
                     # }
                     If ($ThisObject.$AttributeName)
                     {
-                        # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
-                        If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
                         }
@@ -562,9 +595,9 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                     # If it was an array of objects before reapply the parent array.
-                    If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                    If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                     {
                         $ModifiedObject = @($ModifiedObject)
                     }
@@ -643,6 +676,8 @@ $SDKName | ForEach-Object {
             {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
+            # Format the spec
+            $SwaggerObjectContent = Format-SwaggerObject -InputObject:($SwaggerObjectContent) -Sort:($SortAttributes)
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -662,23 +697,49 @@ $SDKName | ForEach-Object {
                 }
             }
             #######################################################################
-            # Resolve the swagger references ($ref)/flatten
-            $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            Do
-            {
-                $RefMatches = $SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches
-                $RefMatches.Matches | ForEach-Object {
-                    $RefItem = Get-SwaggerItem -InputObject:($SwaggerObjectRefMatches) -Path:($_.Groups[2].Value)
-                    $SwaggerObject = $SwaggerObject.Replace($_.Groups[0].Value, ($RefItem | ConvertTo-Json -Depth:(100) -Compress))
-                }
-            } While ($SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches)
-            $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $SwaggerObject.definitions = @{}
-            $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
+            # # Resolve the swagger references ($ref)/flatten
+            # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # Do
+            # {
+            #     $RefMatches = $SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches
+            #     $RefMatches.Matches | ForEach-Object {
+            #         $RefItem = Get-SwaggerItem -InputObject:($SwaggerObjectRefMatches) -Path:($_.Groups[2].Value)
+            #         $SwaggerObject = $SwaggerObject.Replace($_.Groups[0].Value, ($RefItem | ConvertTo-Json -Depth:(100) -Compress))
+            #     }
+            # } While ($SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches)
+            # $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # $SwaggerObject.definitions = @{}
+            # $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes)
+            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) -InputObjectOrg:($SwaggerObject)
+            #region Clean up unused definitions and parameters
+            Do
+            {
+                $UsedRefs = ($UpdatedSwagger | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches).Matches
+                $UsedDefinitions = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*definitions*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
+                $UsedParameters = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*parameters*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
+                # Remove unused definitions
+                $AllDefinitions = $UpdatedSwagger.definitions.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
+                $AllDefinitions | ForEach-Object {
+                    If ($UsedDefinitions -notcontains $_)
+                    {
+                        Write-Warning ("Removing unused definition: $_")
+                        $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
+                    }
+                }
+                # Remove unused parameters
+                $AllParameters = $UpdatedSwagger.parameters.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
+                $AllParameters | ForEach-Object {
+                    If ($UsedParameters -notcontains $_)
+                    {
+                        Write-Warning ("Removing unused parameter: $_")
+                        $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
+                    }
+                }
+            } While ((Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions) -or (Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters))
+            #endregion
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
             # Validate that all operationIds in mapping have been found in spec
