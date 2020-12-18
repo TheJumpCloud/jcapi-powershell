@@ -15,8 +15,6 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths17T55AkSystemusersIdUnlockPostResponses200ContentApplicationJsonSchema
-.Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
@@ -33,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Unlock-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths17T55AkSystemusersIdUnlockPostResponses200ContentApplicationJsonSchema], [System.String])]
+    [OutputType([System.String])]
     [CmdletBinding(DefaultParameterSetName='Unlock', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Unlock', Mandatory)]
@@ -68,6 +66,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -105,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Unlock-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Unlock-JcSdkInternalSystemUser @PSBoundParameters
     }
     End
     {

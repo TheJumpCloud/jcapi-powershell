@@ -19,7 +19,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsRjmg8QOrganizationsIdPutResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.IOrganizationSetResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -126,34 +126,34 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkOrganization
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsRjmg8QOrganizationsIdPutResponses200ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V1.Models.IOrganizationSetResponse])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Put', Mandatory)]
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Set', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Id},
 
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IOrganizationsettingsput]
     # OrganizationSettingsPut
@@ -222,7 +222,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters
     }
     End
     {

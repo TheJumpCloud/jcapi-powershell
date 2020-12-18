@@ -13,9 +13,25 @@
           "type": "boolean"
         },
         "color": {
+          "enum": [
+            "",
+            "#202D38",
+            "#005466",
+            "#3E8696",
+            "#006CAC",
+            "#0617AC",
+            "#7C6ADA",
+            "#D5779D",
+            "#9E2F00",
+            "#FFB000",
+            "#58C469",
+            "#57C49F",
+            "#FF6C03"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "color",
             "modelAsString": true,
+            "name": "color",
             "values": [
               {
                 "name": "202D38",
@@ -66,23 +82,7 @@
                 "value": "'#FF6C03'"
               }
             ]
-          },
-          "enum": [
-            "",
-            "#202D38",
-            "#005466",
-            "#3E8696",
-            "#006CAC",
-            "#0617AC",
-            "#7C6ADA",
-            "#D5779D",
-            "#9E2F00",
-            "#FFB000",
-            "#58C469",
-            "#57C49F",
-            "#FF6C03"
-          ],
-          "type": "string"
+          }
         },
         "config": {
           "properties": {
@@ -451,9 +451,25 @@
         "logo": {
           "properties": {
             "color": {
+              "enum": [
+                "",
+                "#202D38",
+                "#005466",
+                "#3E8696",
+                "#006CAC",
+                "#0617AC",
+                "#7C6ADA",
+                "#D5779D",
+                "#9E2F00",
+                "#FFB000",
+                "#58C469",
+                "#57C49F",
+                "#FF6C03"
+              ],
+              "type": "string",
               "x-ms-enum": {
-                "name": "color",
                 "modelAsString": true,
+                "name": "color",
                 "values": [
                   {
                     "name": "202D38",
@@ -504,23 +520,7 @@
                     "value": "'#FF6C03'"
                   }
                 ]
-              },
-              "enum": [
-                "",
-                "#202D38",
-                "#005466",
-                "#3E8696",
-                "#006CAC",
-                "#0617AC",
-                "#7C6ADA",
-                "#D5779D",
-                "#9E2F00",
-                "#FFB000",
-                "#58C469",
-                "#57C49F",
-                "#FF6C03"
-              ],
-              "type": "string"
+              }
             },
             "url": {
               "type": "string"
@@ -584,9 +584,25 @@
           "type": "boolean"
         },
         "color": {
+          "enum": [
+            "",
+            "#202D38",
+            "#005466",
+            "#3E8696",
+            "#006CAC",
+            "#0617AC",
+            "#7C6ADA",
+            "#D5779D",
+            "#9E2F00",
+            "#FFB000",
+            "#58C469",
+            "#57C49F",
+            "#FF6C03"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "color",
             "modelAsString": true,
+            "name": "color",
             "values": [
               {
                 "name": "202D38",
@@ -637,23 +653,7 @@
                 "value": "'#FF6C03'"
               }
             ]
-          },
-          "enum": [
-            "",
-            "#202D38",
-            "#005466",
-            "#3E8696",
-            "#006CAC",
-            "#0617AC",
-            "#7C6ADA",
-            "#D5779D",
-            "#9E2F00",
-            "#FFB000",
-            "#58C469",
-            "#57C49F",
-            "#FF6C03"
-          ],
-          "type": "string"
+          }
         },
         "config": {
           "properties": {
@@ -1055,9 +1055,16 @@
           "type": "string"
         },
         "status": {
+          "enum": [
+            "",
+            "end_of_life",
+            "end_of_support",
+            "beta"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "status",
             "modelAsString": true,
+            "name": "status",
             "values": [
               {
                 "name": "end_of_life",
@@ -1072,14 +1079,7 @@
                 "value": "beta"
               }
             ]
-          },
-          "enum": [
-            "",
-            "end_of_life",
-            "end_of_support",
-            "beta"
-          ],
-          "type": "string"
+          }
         },
         "test": {
           "type": "string"
@@ -1505,9 +1505,16 @@
           "items": {
             "properties": {
               "name": {
+                "enum": [
+                  "erase",
+                  "lock",
+                  "restart",
+                  "shutdown"
+                ],
+                "type": "string",
                 "x-ms-enum": {
-                  "name": "name",
                   "modelAsString": true,
+                  "name": "name",
                   "values": [
                     {
                       "name": "erase",
@@ -1526,30 +1533,23 @@
                       "value": "shutdown"
                     }
                   ]
-                },
-                "enum": [
-                  "erase",
-                  "lock",
-                  "restart",
-                  "shutdown"
-                ],
-                "type": "string"
+                }
               },
               "type": {
+                "enum": [
+                  "security"
+                ],
+                "type": "string",
                 "x-ms-enum": {
-                  "name": "type",
                   "modelAsString": true,
+                  "name": "type",
                   "values": [
                     {
                       "name": "security",
                       "value": "security"
                     }
                   ]
-                },
-                "enum": [
-                  "security"
-                ],
-                "type": "string"
+                }
               }
             },
             "type": "object"
@@ -1596,9 +1596,16 @@
               "type": "boolean"
             },
             "vendor": {
+              "enum": [
+                "unknown",
+                "none",
+                "internal",
+                "external"
+              ],
+              "type": "string",
               "x-ms-enum": {
-                "name": "vendor",
                 "modelAsString": true,
+                "name": "vendor",
                 "values": [
                   {
                     "name": "unknown",
@@ -1617,14 +1624,7 @@
                     "value": "external"
                   }
                 ]
-              },
-              "enum": [
-                "unknown",
-                "none",
-                "internal",
-                "external"
-              ],
-              "type": "string"
+              }
             }
           },
           "type": "object"
@@ -1681,9 +1681,15 @@
         "systemInsights": {
           "properties": {
             "state": {
+              "enum": [
+                "enabled",
+                "disabled",
+                "deferred"
+              ],
+              "type": "string",
               "x-ms-enum": {
-                "name": "state",
                 "modelAsString": true,
+                "name": "state",
                 "values": [
                   {
                     "name": "enabled",
@@ -1698,13 +1704,7 @@
                     "value": "deferred"
                   }
                 ]
-              },
-              "enum": [
-                "enabled",
-                "disabled",
-                "deferred"
-              ],
-              "type": "string"
+              }
             }
           },
           "type": "object"
@@ -1719,7 +1719,7 @@
           "type": "string"
         }
       },
-      "title": "System",
+      "title": "JcSystem",
       "type": "object"
     },
     "mfa": {
@@ -1855,9 +1855,15 @@
           "type": "string"
         },
         "passwordCompliance": {
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "passwordCompliance",
             "modelAsString": true,
+            "name": "passwordCompliance",
             "values": [
               {
                 "name": "custom",
@@ -1872,13 +1878,7 @@
                 "value": "windows"
               }
             ]
-          },
-          "enum": [
-            "custom",
-            "pci3",
-            "windows"
-          ],
-          "type": "string"
+          }
         },
         "passwordPolicy": {
           "properties": {
@@ -2057,9 +2057,15 @@
           "type": "string"
         },
         "passwordCompliance": {
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "passwordCompliance",
             "modelAsString": true,
+            "name": "passwordCompliance",
             "values": [
               {
                 "name": "custom",
@@ -2074,13 +2080,7 @@
                 "value": "windows"
               }
             ]
-          },
-          "enum": [
-            "custom",
-            "pci3",
-            "windows"
-          ],
-          "type": "string"
+          }
         },
         "passwordPolicy": {
           "properties": {
@@ -2216,9 +2216,16 @@
           "type": "string"
         },
         "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "mfa",
             "modelAsString": true,
+            "name": "mfa",
             "values": [
               {
                 "name": "DISABLED",
@@ -2237,14 +2244,7 @@
                 "value": "ALWAYS"
               }
             ]
-          },
-          "enum": [
-            "DISABLED",
-            "ENABLED",
-            "REQUIRED",
-            "ALWAYS"
-          ],
-          "type": "string"
+          }
         },
         "name": {
           "type": "string"
@@ -2271,9 +2271,16 @@
     "radiusserverpost": {
       "properties": {
         "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "mfa",
             "modelAsString": true,
+            "name": "mfa",
             "values": [
               {
                 "name": "DISABLED",
@@ -2292,14 +2299,7 @@
                 "value": "ALWAYS"
               }
             ]
-          },
-          "enum": [
-            "DISABLED",
-            "ENABLED",
-            "REQUIRED",
-            "ALWAYS"
-          ],
-          "type": "string"
+          }
         },
         "name": {
           "type": "string"
@@ -2332,9 +2332,16 @@
           "type": "string"
         },
         "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string",
           "x-ms-enum": {
-            "name": "mfa",
             "modelAsString": true,
+            "name": "mfa",
             "values": [
               {
                 "name": "DISABLED",
@@ -2353,14 +2360,7 @@
                 "value": "ALWAYS"
               }
             ]
-          },
-          "enum": [
-            "DISABLED",
-            "ENABLED",
-            "REQUIRED",
-            "ALWAYS"
-          ],
-          "type": "string"
+          }
         },
         "name": {
           "type": "string"
@@ -3207,34 +3207,34 @@
   },
   "parameters": {
     "trait:fields:fields": {
-      "required": false,
       "default": "",
       "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
       "in": "query",
       "name": "fields",
+      "required": false,
       "type": "string"
     },
     "trait:filter:filter": {
-      "required": false,
       "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
       "in": "query",
       "name": "filter",
+      "required": false,
       "type": "string"
     },
     "trait:limit:limit": {
-      "required": false,
       "default": 10,
       "description": "The number of records to return at once. Limited to 100.",
       "in": "query",
       "name": "limit",
+      "required": false,
       "type": "integer"
     },
     "trait:multiTenantRequestHeaders:x-org-id": {
-      "description": "",
-      "required": false,
       "default": "",
+      "description": "",
       "in": "header",
       "name": "x-org-id",
+      "required": false,
       "type": "string"
     },
     "trait:requestHeaders:Accept": {
@@ -3252,41 +3252,41 @@
       "type": "string"
     },
     "trait:search:search": {
-      "required": false,
       "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
       "in": "query",
       "name": "search",
+      "required": false,
       "type": "string"
     },
     "trait:skip:skip": {
-      "required": false,
       "default": 0,
-      "minimum": 0,
       "description": "The offset into the records to return.",
       "in": "query",
+      "minimum": 0,
       "name": "skip",
+      "required": false,
       "type": "integer"
     },
     "trait:sort:sort": {
-      "required": false,
       "default": "",
       "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
       "in": "query",
       "name": "sort",
+      "required": false,
       "type": "string"
     },
     "trait:systemContextAuth:Authorization": {
-      "required": false,
       "description": "Authorization header for the System Context API",
       "in": "header",
       "name": "Authorization",
+      "required": false,
       "type": "string"
     },
     "trait:systemContextAuth:Date": {
-      "required": false,
       "description": "Current date header for the System Context API",
       "in": "header",
       "name": "Date",
+      "required": false,
       "type": "string"
     }
   },
@@ -3297,38 +3297,38 @@
         "operationId": "List-Application",
         "parameters": [
           {
-            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3337,6 +3337,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationListResponse",
               "type": "object"
             }
           }
@@ -3365,6 +3366,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationCreateResponse",
               "type": "object"
             }
           }
@@ -3379,14 +3381,15 @@
     },
     "/applications/{id}": {
       "delete": {
-        "parameters": [],
         "description": "The endpoint deletes an SSO / SAML Application.",
         "operationId": "Delete-Application",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationDeleteResponse",
               "type": "object"
             }
           }
@@ -3399,14 +3402,15 @@
         "summary": "Delete an Application"
       },
       "get": {
-        "parameters": [],
         "description": "The endpoint retrieves an SSO / SAML Application.",
         "operationId": "Get-Application",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationGetResponse",
               "type": "object"
             }
           }
@@ -3428,7 +3432,7 @@
       ],
       "put": {
         "description": "The endpoint updates a SSO / SAML Application.",
-        "operationId": "Put-Application",
+        "operationId": "Set-Application",
         "parameters": [
           {
             "in": "body",
@@ -3443,6 +3447,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationSetResponse",
               "type": "object"
             }
           }
@@ -3461,38 +3466,38 @@
         "operationId": "List-ApplicationTemplate",
         "parameters": [
           {
-            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3501,6 +3506,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationTemplateListResponse",
               "type": "object"
             }
           }
@@ -3519,38 +3525,38 @@
         "operationId": "Get-ApplicationTemplate",
         "parameters": [
           {
-            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3559,6 +3565,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "ApplicationTemplateGetResponse",
               "type": "object"
             }
           }
@@ -3589,14 +3596,15 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```",
         "operationId": "POST-CommandTrigger",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandTriggerPOSTResponse",
               "type": "object"
             }
           },
@@ -3618,43 +3626,43 @@
         "operationId": "List-CommandResult",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3663,6 +3671,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandResultListResponse",
               "type": "object"
             }
           },
@@ -3680,14 +3689,15 @@
     },
     "/commandresults/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
         "operationId": "Delete-CommandResult",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandResultDeleteResponse",
               "type": "object"
             }
           },
@@ -3707,18 +3717,18 @@
         "operationId": "Get-CommandResult",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3727,6 +3737,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandResultGetResponse",
               "type": "object"
             }
           },
@@ -3756,43 +3767,43 @@
         "operationId": "List-Command",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3801,6 +3812,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandListResponse",
               "type": "object"
             }
           },
@@ -3832,6 +3844,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandCreateResponse",
               "type": "object"
             }
           },
@@ -3849,16 +3862,12 @@
     },
     "/commands/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Delete-Command",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "OK",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
-            }
+            "description": "OK"
           },
           "401": {
             "description": "Unauthorized"
@@ -3876,11 +3885,11 @@
         "operationId": "Get-Command",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           }
         ],
@@ -3889,6 +3898,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandGetResponse",
               "type": "object"
             }
           },
@@ -3913,7 +3923,7 @@
       ],
       "put": {
         "description": "This endpoint Updates a command based on the command ID and returns the modified command record.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
-        "operationId": "Put-Command",
+        "operationId": "Set-Command",
         "parameters": [
           {
             "in": "body",
@@ -3928,6 +3938,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandSetResponse",
               "type": "object"
             }
           },
@@ -3949,28 +3960,28 @@
         "operationId": "Get-CommandFile",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           }
         ],
@@ -3979,6 +3990,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "CommandFileGetResponse",
               "type": "object"
             }
           },
@@ -4011,50 +4023,50 @@
         "operationId": "List-Organization",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           }
         ],
@@ -4063,6 +4075,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "OrganizationListResponse",
               "type": "object"
             }
           }
@@ -4081,18 +4094,18 @@
         "operationId": "Get-Organization",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -4101,6 +4114,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "OrganizationGetResponse",
               "type": "object"
             }
           },
@@ -4128,7 +4142,7 @@
       ],
       "put": {
         "description": "This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\". We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```",
-        "operationId": "Put-Organization",
+        "operationId": "Set-Organization",
         "parameters": [
           {
             "in": "body",
@@ -4148,6 +4162,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "OrganizationSetResponse",
               "type": "object"
             }
           },
@@ -4172,43 +4187,43 @@
         "operationId": "List-RadiusServer",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           }
         ],
@@ -4217,6 +4232,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "RadiusServerListResponse",
               "type": "object"
             }
           }
@@ -4245,6 +4261,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "RadiusServerCreateResponse",
               "type": "object"
             }
           }
@@ -4259,14 +4276,15 @@
     },
     "/radiusservers/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "Delete-RadiusServer",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "RadiusServerDeleteResponse",
               "type": "object"
             }
           }
@@ -4279,14 +4297,15 @@
         "summary": "Delete Radius Server"
       },
       "get": {
-        "parameters": [],
         "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "Get-RadiusServer",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "RadiusServerGetResponse",
               "type": "object"
             }
           }
@@ -4308,7 +4327,7 @@
       ],
       "put": {
         "description": "This endpoint allows you to update RADIUS servers in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
-        "operationId": "Put-RadiusServer",
+        "operationId": "Set-RadiusServer",
         "parameters": [
           {
             "in": "body",
@@ -4324,9 +4343,16 @@
               },
               "properties": {
                 "mfa": {
+                  "enum": [
+                    "DISABLED",
+                    "ENABLED",
+                    "REQUIRED",
+                    "ALWAYS"
+                  ],
+                  "type": "string",
                   "x-ms-enum": {
-                    "name": "mfa",
                     "modelAsString": true,
+                    "name": "mfa",
                     "values": [
                       {
                         "name": "DISABLED",
@@ -4345,14 +4371,7 @@
                         "value": "ALWAYS"
                       }
                     ]
-                  },
-                  "enum": [
-                    "DISABLED",
-                    "ENABLED",
-                    "REQUIRED",
-                    "ALWAYS"
-                  ],
-                  "type": "string"
+                  }
                 },
                 "name": {
                   "type": "string"
@@ -4384,6 +4403,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "RadiusServerSetResponse",
               "type": "object"
             }
           }
@@ -4402,35 +4422,35 @@
         "operationId": "Search-Organization",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
@@ -4446,6 +4466,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "OrganizationSearchResponse",
               "type": "object"
             }
           },
@@ -4467,35 +4488,35 @@
         "operationId": "Search-System",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
@@ -4511,6 +4532,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemSearchResponse",
               "type": "object"
             }
           },
@@ -4532,35 +4554,35 @@
         "operationId": "Search-SystemUser",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
@@ -4576,6 +4598,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserSearchResponse",
               "type": "object"
             }
           },
@@ -4597,50 +4620,50 @@
         "operationId": "List-System",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": 0,
-            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
+            "minimum": 0,
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -4649,6 +4672,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemListResponse",
               "type": "object"
             }
           }
@@ -4678,6 +4702,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemDeleteResponse",
               "type": "object"
             }
           }
@@ -4694,18 +4719,18 @@
         "operationId": "Get-System",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
@@ -4720,6 +4745,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemGetResponse",
               "type": "object"
             }
           }
@@ -4741,7 +4767,7 @@
       ],
       "put": {
         "description": "This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```",
-        "operationId": "Put-System",
+        "operationId": "Set-System",
         "parameters": [
           {
             "in": "body",
@@ -4762,6 +4788,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemSetResponse",
               "type": "object"
             }
           }
@@ -4784,9 +4811,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "POST_systems-system_id-command-builtin-erase",
+        "operationId": "Clear-System",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4828,9 +4855,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "POST_systems-system_id-command-builtin-lock",
+        "operationId": "Lock-System",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4872,9 +4899,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "POST_systems-system_id-command-builtin-restart",
+        "operationId": "Restart-System",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4916,9 +4943,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "POST_systems-system_id-command-builtin-shutdown",
+        "operationId": "Stop-System",
+        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4956,49 +4983,49 @@
         "operationId": "List-SystemUser",
         "parameters": [
           {
-            "required": false,
             "default": 10,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": 0,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
+            "required": false,
             "type": "integer"
           },
           {
-            "required": false,
             "default": "",
             "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "default": "",
             "description": "The comma separated fields included in the returned records.\nIf omitted the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
+            "required": false,
             "type": "string"
           }
         ],
@@ -5007,6 +5034,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserListResponse",
               "type": "object"
             }
           },
@@ -5038,6 +5066,7 @@
             "description": "User added successfully",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserCreateResponse",
               "type": "object"
             }
           },
@@ -5058,14 +5087,15 @@
     },
     "/systemusers/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-SystemUser",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserDeleteResponse",
               "type": "object"
             }
           },
@@ -5085,18 +5115,18 @@
         "operationId": "Get-SystemUser",
         "parameters": [
           {
-            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
+            "required": false,
             "type": "string"
           },
           {
-            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
+            "required": false,
             "type": "string"
           }
         ],
@@ -5105,6 +5135,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserGetResponse",
               "type": "object"
             }
           },
@@ -5129,7 +5160,7 @@
       ],
       "put": {
         "description": "This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
-        "operationId": "Put-SystemUser",
+        "operationId": "Set-SystemUser",
         "parameters": [
           {
             "in": "body",
@@ -5144,6 +5175,7 @@
             "description": "OK",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUserSetResponse",
               "type": "object"
             }
           },
@@ -5169,16 +5201,12 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to expire a user's password.",
         "operationId": "POST-ExpireSystemUserPassword",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
-            }
+            "description": ""
           },
           "400": {
             "$ref": "#/responses/trait:standardErrors:400"
@@ -5239,11 +5267,7 @@
         ],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
-            }
+            "description": ""
           },
           "400": {
             "$ref": "#/responses/trait:standardErrors:400"
@@ -5274,15 +5298,19 @@
     },
     "/systemusers/{id}/sshkeys": {
       "get": {
-        "parameters": [],
         "description": "This endpoint will return a specific System User's public SSH key.",
         "operationId": "List-SystemUsersSshKey",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "type": "object"
+              "items": {
+                "additionalProperties": true,
+                "title": "SystemUsersSshKeyListResponse",
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "400": {
@@ -5325,6 +5353,7 @@
             "description": "",
             "schema": {
               "additionalProperties": true,
+              "title": "SystemUsersSshKeyCreateResponse",
               "type": "object"
             }
           },
@@ -5354,16 +5383,12 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to unlock a user's account.",
         "operationId": "Unlock-SystemUser",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
-            }
+            "description": ""
           },
           "400": {
             "$ref": "#/responses/trait:standardErrors:400"
@@ -5394,16 +5419,12 @@
     },
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint will delete a specific System User's SSH Key.",
         "operationId": "Delete-SystemUsersSshKey",
+        "parameters": [],
         "responses": {
           "200": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
-            }
+            "description": ""
           },
           "400": {
             "description": "",

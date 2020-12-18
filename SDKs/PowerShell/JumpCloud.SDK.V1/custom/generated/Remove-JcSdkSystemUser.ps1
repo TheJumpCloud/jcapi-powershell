@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1A571W2SystemusersIdDeleteResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ISystemUserDeleteResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -31,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths1A571W2SystemusersIdDeleteResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserDeleteResponse])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -109,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Remove-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalSystemUser @PSBoundParameters
     }
     End
     {

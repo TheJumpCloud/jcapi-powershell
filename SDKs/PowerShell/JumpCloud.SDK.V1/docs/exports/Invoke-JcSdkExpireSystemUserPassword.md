@@ -14,12 +14,12 @@ This endpoint allows you to expire a user's password.
 
 ### Post (Default)
 ```
-Invoke-JcSdkExpireSystemUserPassword -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireSystemUserPassword -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PostViaIdentity
 ```
-Invoke-JcSdkExpireSystemUserPassword -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf]
+Invoke-JcSdkExpireSystemUserPassword -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -75,6 +75,21 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -114,8 +129,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
-
-### JumpCloud.SDK.V1.Models.IPathsM6Ti10SystemusersIdExpirePostResponses200ContentApplicationJsonSchema
 
 ### System.String
 

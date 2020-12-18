@@ -207,7 +207,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths17QaszlSearchSystemsPostResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.ISystemSearchResponse
 
 ## NOTES
 

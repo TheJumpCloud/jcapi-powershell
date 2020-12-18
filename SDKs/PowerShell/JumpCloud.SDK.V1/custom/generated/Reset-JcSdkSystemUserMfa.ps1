@@ -21,8 +21,6 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1B22QnrSystemusersIdResetmfaPostResponses200ContentApplicationJsonSchema
-.Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
@@ -43,7 +41,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Reset-JcSdkSystemUserMfa
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths1B22QnrSystemusersIdResetmfaPostResponses200ContentApplicationJsonSchema], [System.String])]
+    [OutputType([System.String])]
     [CmdletBinding(DefaultParameterSetName='ResetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Reset', Mandatory)]
@@ -103,6 +101,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
 
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
+
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
@@ -139,7 +143,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Reset-JcSdkInternalSystemUserMfa @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Reset-JcSdkInternalSystemUserMfa @PSBoundParameters
     }
     End
     {

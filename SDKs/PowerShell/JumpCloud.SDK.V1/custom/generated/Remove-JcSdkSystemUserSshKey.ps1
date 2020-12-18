@@ -16,8 +16,6 @@ PS C:\> {{ Add code here }}
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
-.Outputs
-JumpCloud.SDK.V1.Models.IPathsLylraySystemusersSystemuserIdSshkeysIdDeleteResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -33,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsLylraySystemusersSystemuserIdSshkeysIdDeleteResponses200ContentApplicationJsonSchema], [JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -74,6 +72,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

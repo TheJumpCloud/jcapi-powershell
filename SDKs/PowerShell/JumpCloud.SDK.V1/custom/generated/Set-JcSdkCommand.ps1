@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.ICommand
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1KdhxraCommandsIdPutResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ICommandSetResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -51,141 +51,141 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths1KdhxraCommandsIdPutResponses200ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandSetResponse])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Put', Mandatory)]
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Set', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Id},
 
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ICommand]
     # Command
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The command to execute on the server.
     ${Command},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
     ${CommandRunners},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The Command OS
     ${CommandType},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of file IDs to include with the command.
     ${Files},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # How the command will execute.
     ${LaunchType},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${ListensTo},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The ID of the organization.
     ${Organization},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ].
     # If you send this as an empty string, it will run immediately.
     ${Schedule},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # When the command will repeat.
     ${ScheduleRepeatType},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The shell used to run the command.
     ${Shell},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${Sudo},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of system IDs to run the command on.
     # Not available if you are using Groups.
     ${Systems},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The time in seconds to allow the command to run for.
     ${Timeout},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The name of the command trigger.
     ${Trigger},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The ID of the system user to run the command as.
@@ -254,7 +254,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalCommand @PSBoundParameters
     }
     End
     {

@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths3Q5S9QCommandTriggerTriggernamePostResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ICommandTriggerPostResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -31,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Invoke-JcSdkCommandTrigger
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPaths3Q5S9QCommandTriggerTriggernamePostResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandTriggerPostResponse])]
     [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Post', Mandatory)]
@@ -109,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalCommandTrigger @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalCommandTrigger @PSBoundParameters
     }
     End
     {

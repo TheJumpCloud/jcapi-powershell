@@ -14,12 +14,14 @@ This endpoint will delete a specific System User's SSH Key.
 
 ### Delete (Default)
 ```
-Remove-JcSdkSystemUserSshKey -Id <String> -SystemuserId <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkSystemUserSshKey -Id <String> -SystemuserId <String> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkSystemUserSshKey -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -71,6 +73,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -130,8 +147,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
-
-### JumpCloud.SDK.V1.Models.IPathsLylraySystemusersSystemuserIdSshkeysIdDeleteResponses200ContentApplicationJsonSchema
 
 ## NOTES
 

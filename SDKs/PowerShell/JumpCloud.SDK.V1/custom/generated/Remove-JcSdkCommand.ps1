@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsB7Pdj1CommandsIdDeleteResponses200ContentApplicationJsonSchema
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -31,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsB7Pdj1CommandsIdDeleteResponses200ContentApplicationJsonSchema])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -109,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Remove-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalCommand @PSBoundParameters
     }
     End
     {

@@ -23,7 +23,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsZ4Ogf7SearchSystemusersPostResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ISystemUserSearchResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -38,7 +38,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Search-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsZ4Ogf7SearchSystemusersPostResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserSearchResponse])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter()]
@@ -168,7 +168,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = (JumpCloud.SDK.V1.internal\Search-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalSystemUser @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -193,7 +193,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V1.internal\Search-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalSystemUser @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

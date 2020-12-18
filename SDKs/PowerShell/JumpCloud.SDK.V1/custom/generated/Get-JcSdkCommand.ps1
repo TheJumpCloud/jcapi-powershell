@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsIz6IswCommandsGetResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ICommandGetResponse
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsTigy9HCommandsIdGetResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V1.Models.ICommandListResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -33,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsTigy9HCommandsIdGetResponses200ContentApplicationJsonSchema], [JumpCloud.SDK.V1.Models.IPathsIz6IswCommandsGetResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandGetResponse], [JumpCloud.SDK.V1.Models.ICommandListResponse])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -159,7 +159,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommand @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -184,7 +184,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommand @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

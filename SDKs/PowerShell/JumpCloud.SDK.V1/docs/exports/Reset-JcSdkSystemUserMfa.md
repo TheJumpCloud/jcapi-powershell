@@ -16,28 +16,28 @@ Please be aware that if the user does not complete TOTP MFA setup before the `ex
 
 ### ResetExpanded (Default)
 ```
-Reset-JcSdkSystemUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Reset-JcSdkSystemUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Reset
 ```
 Reset-JcSdkSystemUserMfa -Id <String>
- -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentity
 ```
 Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity>
- -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
 ```
 Reset-JcSdkSystemUserMfa -InputObject <IJumpCloudApIsIdentity> [-Exclusion] [-ExclusionUntil <DateTime>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -140,6 +140,21 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -181,8 +196,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 
 ## OUTPUTS
-
-### JumpCloud.SDK.V1.Models.IPaths1B22QnrSystemusersIdResetmfaPostResponses200ContentApplicationJsonSchema
 
 ### System.String
 

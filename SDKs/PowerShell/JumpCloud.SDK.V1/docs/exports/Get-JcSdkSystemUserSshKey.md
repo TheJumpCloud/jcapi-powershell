@@ -59,7 +59,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths7B6272SystemusersIdSshkeysGetResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IGet200ApplicationJsonItemsItem
 
 ### JumpCloud.SDK.V1.Models.IPathsCh5U08SystemusersIdSshkeysGetResponses400ContentApplicationJsonSchema
 

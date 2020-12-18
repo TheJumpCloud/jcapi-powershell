@@ -159,9 +159,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths14Jnep3CommandresultsIdGetResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.ICommandResultGetResponse
 
-### JumpCloud.SDK.V1.Models.IPathsU946O9CommandresultsGetResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.ICommandResultListResponse
 
 ## NOTES
 

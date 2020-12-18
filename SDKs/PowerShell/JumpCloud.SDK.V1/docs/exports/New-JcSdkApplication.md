@@ -374,7 +374,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPathsDob2B2ApplicationsPostResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IApplicationCreateResponse
 
 ## NOTES
 

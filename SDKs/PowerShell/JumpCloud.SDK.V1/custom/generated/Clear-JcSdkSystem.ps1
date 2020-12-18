@@ -29,26 +29,20 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkSystemPostSystem.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Clear-JcSdkSystem.md
 #>
- Function Invoke-JcSdkSystemPostSystem
+ Function Clear-JcSdkSystem
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Systems', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Clear', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Systems', Mandatory)]
-    [Parameter(ParameterSetName='Systems1', Mandatory)]
-    [Parameter(ParameterSetName='Systems2', Mandatory)]
-    [Parameter(ParameterSetName='Systems3', Mandatory)]
+    [Parameter(ParameterSetName='Clear', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${SystemId},
 
-    [Parameter(ParameterSetName='SystemsViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SystemsViaIdentity1', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SystemsViaIdentity2', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SystemsViaIdentity3', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='ClearViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -117,7 +111,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalSystemPostSystem @PSBoundParameters
+        $Results = JumpCloud.SDK.V1.internal\Clear-JcSdkInternalSystem @PSBoundParameters
     }
     End
     {

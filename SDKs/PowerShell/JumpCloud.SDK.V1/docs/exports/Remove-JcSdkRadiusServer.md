@@ -114,7 +114,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths1C22T4CRadiusserversIdDeleteResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IRadiusServerDeleteResponse
 
 ## NOTES
 
