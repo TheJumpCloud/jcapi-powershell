@@ -406,7 +406,6 @@ Function Update-SwaggerObject
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
                     # Map operationIds
@@ -423,6 +422,16 @@ Function Update-SwaggerObject
                         {
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
+                    }
+                    # Generalize responses
+                    If ($AttributePath -like '*.responses.200')
+                    {
+                        $GeneralResponseObject = [PSCustomObject]@{
+                            additionalProperties = $true
+                            type                 = 'object'
+                        }
+                        $ThisObject.$AttributeName.PSObject.Properties.Remove('schema')
+                        Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralResponseObject)
                     }
                     # Append "x-ms-enum" to "enum" section
                     If ($AttributePath -like '*.enum')
@@ -511,10 +520,9 @@ Function Update-SwaggerObject
                     # }
                     If ($ThisObject.$AttributeName)
                     {
-                        # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
                         # If it was an array of objects before reapply the parent array.
-                        If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
                         }
@@ -534,7 +542,7 @@ Function Update-SwaggerObject
                 {
                     $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
                     # If it was an array of objects before reapply the parent array.
-                    If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                    If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                     {
                         $ModifiedObject = @($ModifiedObject)
                     }
