@@ -28,7 +28,7 @@ $TransformConfig = [Ordered]@{
         FindAndReplace     = [Ordered]@{
             # Path Issues
             '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"System"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
             '"basePath":"/api"'                                                        = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
@@ -46,49 +46,53 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'POST_applications'                           = 'Create-Application';
-            'DELETE_applications-id'                      = 'Delete-Application';
-            'GET_applications-id'                         = 'Get-Application';
-            'GET_applications'                            = 'List-Application';
-            'PUT_applications-id'                         = 'Put-Application';
-            'GET_application-templates-id'                = 'Get-ApplicationTemplate';
-            'GET_application-templates'                   = 'List-ApplicationTemplate';
-            'POST_commands'                               = 'Create-Command';
-            'DELETE_commands-id'                          = 'Delete-Command';
-            'GET_commands-id'                             = 'Get-Command';
-            'GET_commands'                                = 'List-Command';
-            'PUT_commands-id'                             = 'Put-Command';
-            'GET_files-command-id'                        = 'Get-CommandFile';
-            'DELETE_commandresults-id'                    = 'Delete-CommandResult';
-            'GET_commandresults-id'                       = 'Get-CommandResult';
-            'GET_commandresults'                          = 'List-CommandResult';
-            'POST_command-trigger-triggername'            = 'POST-CommandTrigger';
-            'POST_systemusers-id-expire'                  = 'POST-ExpireSystemUserPassword';
-            'GET_organizations-id'                        = 'Get-Organization';
-            'GET_organizations'                           = 'List-Organization';
-            'PUT_organizations-id'                        = 'Put-Organization';
-            'POST_search-organizations'                   = 'Search-Organization';
-            'POST_radiusservers'                          = 'Create-RadiusServer';
-            'DELETE_radiusservers-id'                     = 'Delete-RadiusServer';
-            'GET_radiusservers-id'                        = 'Get-RadiusServer';
-            'GET_radiusservers'                           = 'List-RadiusServer';
-            'PUT_radiusservers-id'                        = 'Put-RadiusServer';
-            'DELETE_systems-id'                           = 'Delete-System';
-            'GET_systems-id'                              = 'Get-System';
-            'GET_systems'                                 = 'List-System';
-            'PUT_systems-id'                              = 'Put-System';
-            'POST_search-systems'                         = 'Search-System';
-            'POST_systemusers'                            = 'Create-SystemUser';
-            'DELETE_systemusers-id'                       = 'Delete-SystemUser';
-            'GET_systemusers-id'                          = 'Get-SystemUser';
-            'GET_systemusers'                             = 'List-SystemUser';
-            'PUT_systemusers-id'                          = 'Put-SystemUser';
-            'POST_search-systemusers'                     = 'Search-SystemUser';
-            'POST_systemusers-id-unlock'                  = 'Unlock-SystemUser';
-            'POST_systemusers-id-resetmfa'                = 'Reset-SystemUserMfa';
-            'POST_systemusers-id-sshkeys'                 = 'Create-SystemUsersSshKey';
-            'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
-            'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
+            'POST_applications'                               = 'Create-Application';
+            'DELETE_applications-id'                          = 'Delete-Application';
+            'GET_applications-id'                             = 'Get-Application';
+            'GET_applications'                                = 'List-Application';
+            'PUT_applications-id'                             = 'Set-Application';
+            'GET_application-templates-id'                    = 'Get-ApplicationTemplate';
+            'GET_application-templates'                       = 'List-ApplicationTemplate';
+            'POST_commands'                                   = 'Create-Command';
+            'DELETE_commands-id'                              = 'Delete-Command';
+            'GET_commands-id'                                 = 'Get-Command';
+            'GET_commands'                                    = 'List-Command';
+            'PUT_commands-id'                                 = 'Set-Command';
+            'GET_files-command-id'                            = 'Get-CommandFile';
+            'DELETE_commandresults-id'                        = 'Delete-CommandResult';
+            'GET_commandresults-id'                           = 'Get-CommandResult';
+            'GET_commandresults'                              = 'List-CommandResult';
+            'POST_command-trigger-triggername'                = 'POST-CommandTrigger';
+            'POST_systemusers-id-expire'                      = 'POST-ExpireSystemUserPassword';
+            'GET_organizations-id'                            = 'Get-Organization';
+            'GET_organizations'                               = 'List-Organization';
+            'POST_search-organizations'                       = 'Search-Organization';
+            'PUT_organizations-id'                            = 'Set-Organization';
+            'POST_radiusservers'                              = 'Create-RadiusServer';
+            'DELETE_radiusservers-id'                         = 'Delete-RadiusServer';
+            'GET_radiusservers-id'                            = 'Get-RadiusServer';
+            'GET_radiusservers'                               = 'List-RadiusServer';
+            'PUT_radiusservers-id'                            = 'Set-RadiusServer';
+            'POST_systems-system_id-command-builtin-erase'    = 'Clear-System';
+            'DELETE_systems-id'                               = 'Delete-System';
+            'GET_systems-id'                                  = 'Get-System';
+            'GET_systems'                                     = 'List-System';
+            'POST_systems-system_id-command-builtin-lock'     = 'Lock-System';
+            'POST_systems-system_id-command-builtin-restart'  = 'Restart-System';
+            'POST_search-systems'                             = 'Search-System';
+            'PUT_systems-id'                                  = 'Set-System';
+            'POST_systems-system_id-command-builtin-shutdown' = 'Stop-System';
+            'POST_systemusers'                                = 'Create-SystemUser';
+            'DELETE_systemusers-id'                           = 'Delete-SystemUser';
+            'GET_systemusers-id'                              = 'Get-SystemUser';
+            'GET_systemusers'                                 = 'List-SystemUser';
+            'POST_search-systemusers'                         = 'Search-SystemUser';
+            'PUT_systemusers-id'                              = 'Set-SystemUser';
+            'POST_systemusers-id-unlock'                      = 'Unlock-SystemUser';
+            'POST_systemusers-id-resetmfa'                    = 'Reset-SystemUserMfa';
+            'POST_systemusers-id-sshkeys'                     = 'Create-SystemUsersSshKey';
+            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-SystemUsersSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'List-SystemUsersSshKey';
         };
         ExcludedList       = @();
     }
@@ -126,7 +130,7 @@ $TransformConfig = [Ordered]@{
             'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
             'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
             'GET_applemdms'                                              = 'List-AppleMDM';
-            'PUT_applemdms-id'                                           = 'Update-AppleMDM';
+            'PUT_applemdms-id'                                           = 'Set-AppleMDM';
             'GET_applemdms-apple_mdm_id-csr'                             = 'Get-AppleMDMCsr';
             'GET_applemdms-apple_mdm_id-depkey'                          = 'Get-AppleMDMDepKey';
             'POST_applemdms-apple_mdm_id-devices-device_id-erase'        = 'Clear-AppleMDMDevice';
@@ -141,8 +145,13 @@ $TransformConfig = [Ordered]@{
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
             'GET_applications-application_id-users'                      = 'Get-ApplicationTraverseUser';
             'GET_applications-application_id-usergroups'                 = 'Get-ApplicationTraverseUserGroup';
+            'POST_authn-policies'                                        = 'Create-AuthenticationPolicy';
+            'DELETE_authn-policies-id'                                   = 'Delete-AuthenticationPolicy';
+            'GET_authn-policies-id'                                      = 'Get-AuthenticationPolicy';
+            'GET_authn-policies'                                         = 'List-AuthenticationPolicy';
+            'PATCH_authn-policies-id'                                    = 'Update-AuthenticationPolicy';
             'POST_bulk-users'                                            = 'Create-BulkUsers';
-            'PATCH_bulk-users'                                           = 'Patch-BulkUsers';
+            'PATCH_bulk-users'                                           = 'Update-BulkUsers';
             'GET_bulk-users-job_id-results'                              = 'Get-BulkUsersResult';
             'GET_commands-command_id-associations'                       = 'Get-CommandAssociation';
             'POST_commands-command_id-associations'                      = 'Set-CommandAssociation';
@@ -157,10 +166,10 @@ $TransformConfig = [Ordered]@{
             'DELETE_duo-accounts-account_id-applications-application_id' = 'Delete-DuoApplication';
             'GET_duo-accounts-account_id-applications-application_id'    = 'Get-DuoApplication';
             'GET_duo-accounts-account_id-applications'                   = 'List-DuoApplication';
-            'PUT_duo-accounts-account_id-applications-application_id'    = 'Put-DuoApplication';
+            'PUT_duo-accounts-account_id-applications-application_id'    = 'Set-DuoApplication';
             'GET_groups'                                                 = 'List-Group';
             'GET_gsuites-id'                                             = 'Get-GSuite';
-            'PATCH_gsuites-id'                                           = 'Patch-GSuite';
+            'PATCH_gsuites-id'                                           = 'Update-GSuite';
             'GET_gsuites-gsuite_id-associations'                         = 'Get-GSuiteAssociation';
             'POST_gsuites-gsuite_id-associations'                        = 'Set-GSuiteAssociation';
             'POST_gsuites-gsuite_id-translationrules'                    = 'Create-GSuiteTranslationRule';
@@ -170,20 +179,26 @@ $TransformConfig = [Ordered]@{
             'GET_gsuites-gsuite_id-users'                                = 'Get-GSuiteTraverseUser';
             'GET_gsuites-gsuite_id-usergroups'                           = 'Get-GSuiteTraverseUserGroup';
             'GET_gsuites-gsuite_id-import-users'                         = 'List-GSuiteUsersToImport';
+            'POST_iplists'                                               = 'Create-IpList';
+            'DELETE_iplists-id'                                          = 'Delete-IpList';
+            'GET_iplists-id'                                             = 'Get-IpList';
+            'GET_iplists'                                                = 'List-IpList';
+            'PUT_iplists-id'                                             = 'Set-IpList';
+            'PATCH_iplists-id'                                           = 'Update-IpList';
             'GET_ldapservers-id'                                         = 'Get-LdapServer';
             'GET_ldapservers'                                            = 'List-LdapServer';
-            'PATCH_ldapservers-id'                                       = 'Patch-LdapServer';
+            'PATCH_ldapservers-id'                                       = 'Update-LdapServer';
             'GET_ldapservers-ldapserver_id-associations'                 = 'Get-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-associations'                = 'Set-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-sambadomains'                = 'Create-LdapServerSambaDomain';
             'DELETE_ldapservers-ldapserver_id-sambadomains-id'           = 'Delete-LdapServerSambaDomain';
             'GET_ldapservers-ldapserver_id-sambadomains-id'              = 'Get-LdapServerSambaDomain';
             'GET_ldapservers-ldapserver_id-sambadomains'                 = 'List-LdapServerSambaDomain';
-            'PUT_ldapservers-ldapserver_id-sambadomains-id'              = 'Put-LdapServerSambaDomain';
+            'PUT_ldapservers-ldapserver_id-sambadomains-id'              = 'Set-LdapServerSambaDomain';
             'GET_ldapservers-ldapserver_id-users'                        = 'Get-LdapServerTraverseUser';
             'GET_ldapservers-ldapserver_id-usergroups'                   = 'Get-LdapServerTraverseUserGroup';
             'GET_office365s-office365_id'                                = 'Get-Office365';
-            'PATCH_office365s-office365_id'                              = 'Patch-Office365';
+            'PATCH_office365s-office365_id'                              = 'Update-Office365';
             'GET_office365s-office365_id-associations'                   = 'Get-Office365Association';
             'POST_office365s-office365_id-associations'                  = 'Set-Office365Association';
             'POST_office365s-office365_id-translationrules'              = 'Create-Office365TranslationRule';
@@ -192,23 +207,22 @@ $TransformConfig = [Ordered]@{
             'GET_office365s-office365_id-translationrules'               = 'List-Office365TranslationRule';
             'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
             'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
+            'GET_policies-policy_id-policyresults'                       = 'List-PoliciesPolicyResult';
+            'GET_policies-policy_id-policystatuses'                      = 'List-PoliciesPolicyStatus';
             'POST_policies'                                              = 'Create-Policy';
             'DELETE_policies-id'                                         = 'Delete-Policy';
             'GET_policies-id'                                            = 'Get-Policy';
             'GET_policies'                                               = 'List-Policy';
-            'PUT_policies-id'                                            = 'Put-Policy';
+            'PUT_policies-id'                                            = 'Set-Policy';
             'GET_policies-policy_id-associations'                        = 'Get-PolicyAssociation';
             'POST_policies-policy_id-associations'                       = 'Set-PolicyAssociation';
             'GET_policyresults-id'                                       = 'Get-PolicyResult';
             'GET_policyresults'                                          = 'List-PolicyResult';
-            'GET_policies-policy_id-policyresults'                       = 'List-PolicyResult';
-            'GET_policies-policy_id-policystatuses'                      = 'List-PolicyStatus';
-            'GET_systems-system_id-policystatuses'                       = 'List-PolicyStatus';
             'GET_policytemplates-id'                                     = 'Get-PolicyTemplate';
             'GET_policytemplates'                                        = 'List-PolicyTemplate';
             'GET_policies-policy_id-systems'                             = 'Get-PolicyTraverseSystem';
             'GET_policies-policy_id-systemgroups'                        = 'Get-PolicyTraverseSystemGroup';
-            'POST_providers-provider_id-administrators'                  = 'Create-ProviderAdmin';
+            'POST_providers-provider_id-administrators'                  = 'Create-ProviderAdministrator';
             'GET_providers-provider_id-administrators'                   = 'List-ProviderAdministrator';
             'GET_radiusservers-radiusserver_id-associations'             = 'Get-RadiusServerAssociation';
             'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
@@ -218,7 +232,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
             'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
             'GET_softwareapps'                                           = 'List-SoftwareApp';
-            'PUT_softwareapps-id'                                        = 'Update-SoftwareApp';
+            'PUT_softwareapps-id'                                        = 'Set-SoftwareApp';
             'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
             'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
             'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
@@ -231,7 +245,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_systemgroups-id'                                     = 'Delete-SystemGroup';
             'GET_systemgroups-id'                                        = 'Get-SystemGroup';
             'GET_systemgroups'                                           = 'List-SystemGroup';
-            'PUT_systemgroups-id'                                        = 'Put-SystemGroup';
+            'PUT_systemgroups-id'                                        = 'Set-SystemGroup';
             'GET_systemgroups-group_id-associations'                     = 'Get-SystemGroupAssociation';
             'POST_systemgroups-group_id-associations'                    = 'Set-SystemGroupAssociation';
             'GET_systemgroups-group_id-members'                          = 'Get-SystemGroupMembers';
@@ -293,7 +307,8 @@ $TransformConfig = [Ordered]@{
             'GET_systeminsights-wifi_networks'                           = 'List-SystemInsightsWifiNetwork';
             'GET_systeminsights-wifi_status'                             = 'List-SystemInsightsWifiStatus';
             'GET_systeminsights-windows_security_products'               = 'List-SystemInsightsWindowsSecurityProduct';
-            'GET_systems-system_id-memberof'                             = 'Get-SystemMember';
+            'GET_systems-system_id-memberof'                             = 'Get-SystemMemberof';
+            'GET_systems-system_id-policystatuses'                       = 'List-SystemsPolicyStatus';
             'GET_systems-system_id-commands'                             = 'Get-SystemTraverseCommand';
             'GET_systems-system_id-policies'                             = 'Get-SystemTraversePolicy';
             'GET_systems-system_id-users'                                = 'Get-SystemTraverseUser';
@@ -304,7 +319,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_usergroups-id'                                       = 'Delete-UserGroup';
             'GET_usergroups-id'                                          = 'Get-UserGroup';
             'GET_usergroups'                                             = 'List-UserGroup';
-            'PUT_usergroups-id'                                          = 'Put-UserGroup';
+            'PUT_usergroups-id'                                          = 'Set-UserGroup';
             'GET_usergroups-group_id-associations'                       = 'Get-UserGroupAssociation';
             'POST_usergroups-group_id-associations'                      = 'Set-UserGroupAssociation';
             'GET_usergroups-group_id-members'                            = 'Get-UserGroupMembers';
@@ -318,7 +333,7 @@ $TransformConfig = [Ordered]@{
             'GET_usergroups-group_id-radiusservers'                      = 'Get-UserGroupTraverseRadiusServer';
             'GET_usergroups-group_id-systems'                            = 'Get-UserGroupTraverseSystem';
             'GET_usergroups-group_id-systemgroups'                       = 'Get-UserGroupTraverseSystemGroup';
-            'GET_users-user_id-memberof'                                 = 'Get-UserMember';
+            'GET_users-user_id-memberof'                                 = 'Get-UserMemberof';
             'GET_users-user_id-applications'                             = 'Get-UserTraverseApplication';
             'GET_users-user_id-directories'                              = 'Get-UserTraverseDirectory';
             'GET_users-user_id-gsuites'                                  = 'Get-UserTraverseGSuite';
@@ -332,7 +347,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id'                                            = 'Get-Workday';
             'POST_workdays-workday_id-import'                            = 'Import-Workday';
             'GET_workdays'                                               = 'List-Workday';
-            'PUT_workdays-id'                                            = 'Put-Workday';
+            'PUT_workdays-id'                                            = 'Set-Workday';
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
@@ -512,18 +527,22 @@ Function Update-SwaggerObject
                     # Generalize responses for when operation returns an object or an array of objects
                     If ($AttributePath -like '*.responses.200.schema.$ref' -or $AttributePath -like '*.responses.200.schema.items.$ref')
                     {
-                        $RefItem = Get-SwaggerItem -InputObject:($InputObjectOrg) -Path:($ThisObject.$AttributeName)
-                        If ( $RefItem.type -eq 'object')
-                        {
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:($RefItem.type)
-                            $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        }
-                        Else
-                        {
-                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' Unknown type of object'.")
-                        }
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('object')
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        # $RefItem = Get-SwaggerItem -InputObject:($InputObjectOrg) -Path:($ThisObject.$AttributeName)
+                        # If ( $RefItem.type -eq 'object')
+                        # {
+                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
+                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:($RefItem.type)
+                        #     $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        # }
+                        # Else
+                        # {
+                        #     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' Unknown type of object: $($AttributePath): $($RefItem | ConvertTo-Json -Compress)")
+                        # }
                     }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
