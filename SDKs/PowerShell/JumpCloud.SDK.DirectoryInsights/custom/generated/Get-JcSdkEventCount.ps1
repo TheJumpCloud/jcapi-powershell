@@ -23,7 +23,7 @@ Get only group_create event counts the last thirty days
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
 .Outputs
-System.Int64
+JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetResponse
 .Outputs
 System.String
 .Notes
@@ -47,7 +47,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventCount
 {
-    [OutputType([System.Int64], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetResponse], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]

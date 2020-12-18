@@ -236,7 +236,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Int64
+### JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetResponse
 
 ### System.String
 

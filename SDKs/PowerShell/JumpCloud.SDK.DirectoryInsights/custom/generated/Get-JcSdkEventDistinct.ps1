@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery
 .Outputs
-System.Int64
+JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetResponse
 .Outputs
 System.String
 .Notes
@@ -36,7 +36,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventDistinct
 {
-    [OutputType([System.Int64], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetResponse], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]

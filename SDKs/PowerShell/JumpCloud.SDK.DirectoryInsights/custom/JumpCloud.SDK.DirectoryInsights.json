@@ -247,6 +247,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
+                "title": "EventGetResponse",
                 "type": "object"
               },
               "type": "array"
@@ -305,7 +306,9 @@
           "200": {
             "description": "Count of matching event rows",
             "schema": {
-              "$ref": "#/definitions/EventCount"
+              "additionalProperties": true,
+              "title": "EventCountGetResponse",
+              "type": "object"
             }
           },
           "400": {
@@ -361,7 +364,9 @@
           "200": {
             "description": "List of distinct field values",
             "schema": {
-              "$ref": "#/definitions/EventCount"
+              "additionalProperties": true,
+              "title": "EventDistinctGetResponse",
+              "type": "object"
             }
           },
           "400": {
@@ -419,6 +424,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
+                "title": "EventIntervalGetResponse",
                 "type": "object"
               },
               "type": "array"

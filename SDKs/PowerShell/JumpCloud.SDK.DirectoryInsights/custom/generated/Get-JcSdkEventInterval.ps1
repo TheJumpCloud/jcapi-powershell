@@ -167,7 +167,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
+                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
                 {
                     If (-not [System.String]::IsNullOrEmpty($Result))
@@ -209,7 +209,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
+            $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
