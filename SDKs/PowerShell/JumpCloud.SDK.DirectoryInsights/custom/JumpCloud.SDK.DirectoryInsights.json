@@ -205,7 +205,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
-                "title": "EventGetResponse",
+                "title": "EventGetApplicationJsonResponse",
                 "type": "object"
               },
               "type": "array"
@@ -265,7 +265,7 @@
             "description": "Count of matching event rows",
             "schema": {
               "additionalProperties": true,
-              "title": "EventCountGetResponse",
+              "title": "EventCountGetApplicationJsonResponse",
               "type": "object"
             }
           },
@@ -323,7 +323,7 @@
             "description": "List of distinct field values",
             "schema": {
               "additionalProperties": true,
-              "title": "EventDistinctGetResponse",
+              "title": "EventDistinctGetApplicationJsonResponse",
               "type": "object"
             }
           },
@@ -382,7 +382,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
-                "title": "EventIntervalGetResponse",
+                "title": "EventIntervalGetApplicationJsonResponse",
                 "type": "object"
               },
               "type": "array"
