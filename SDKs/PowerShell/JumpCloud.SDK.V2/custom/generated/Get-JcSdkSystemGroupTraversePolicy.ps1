@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IPathsU06IgcSystemgroupsGroupIdPoliciesGetResponses200ContentApplicationJsonSchemaItems
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -30,7 +30,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -46,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSystemGroupTraversePolicy
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPathsU06IgcSystemgroupsGroupIdPoliciesGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -151,7 +151,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemGroupTraversePolicy @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemGroupTraversePolicy @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -176,7 +176,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemGroupTraversePolicy @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemGroupTraversePolicy @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

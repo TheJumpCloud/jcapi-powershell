@@ -13,13 +13,13 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V2.Models.IGSuiteUsersToImportListResponse
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGSuiteUserToImport.md
 #>
  Function Get-JcSdkGSuiteUserToImport
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGSuiteUsersToImportListResponse])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]

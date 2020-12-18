@@ -1,45 +1,42 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdmin.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkIPList.md
 schema: 2.0.0
 ---
 
-# New-JcSdkProviderAdmin
+# Update-JcSdkIPList
 
 ## SYNOPSIS
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```
 
 ## SYNTAX
 
-### CreateExpanded (Default)
+### UpdateExpanded (Default)
 ```
-New-JcSdkProviderAdmin -ProviderId <String> -Email <String> [-EnableMultiFactor] [-Firstname <String>]
- [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkIPList -Id <String> [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
-### Create
+### Update
 ```
-New-JcSdkProviderAdmin -ProviderId <String> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
+Update-JcSdkIPList -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### UpdateViaIdentity
+```
+Update-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### CreateViaIdentity
+### UpdateViaIdentityExpanded
 ```
-New-JcSdkProviderAdmin -InputObject <IJumpCloudApIsIdentity> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
- [<CommonParameters>]
-```
-
-### CreateViaIdentityExpanded
-```
-New-JcSdkProviderAdmin -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
- [-Firstname <String>] [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-Ips <String[]>]
+ [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```
 
 ## EXAMPLES
 
@@ -60,12 +57,12 @@ You must be associated with the provider to use this route.\n\n#### Sample Reque
 ## PARAMETERS
 
 ### -Body
-ProviderAdminReq
+IPListRequest
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IProviderAdminReq
-Parameter Sets: Create, CreateViaIdentity
+Type: JumpCloud.SDK.V2.Models.IIPListRequest
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -75,45 +72,30 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Email
+### -Description
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Id
+.
+
+```yaml
+Type: System.String
+Parameter Sets: Update, UpdateExpanded
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -EnableMultiFactor
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Firstname
-.
-
-```yaml
-Type: System.String
-Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -126,7 +108,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -136,12 +118,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Lastname
+### -Ips
 .
 
 ```yaml
-Type: System.String
-Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Type: System.String[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -151,15 +133,15 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ProviderId
+### -Name
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: Create, CreateExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -202,13 +184,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IIPListRequest
 
-### JumpCloud.SDK.V2.Models.IProviderAdminReq
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAdministrator
+### JumpCloud.SDK.V2.Models.IIPListUpdateResponse
 
 ### System.String
 
@@ -221,11 +203,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IProviderAdminReq>: ProviderAdminReq
-  - `Email <String>`: 
-  - `[EnableMultiFactor <Boolean?>]`: 
-  - `[Firstname <String>]`: 
-  - `[Lastname <String>]`: 
+BODY <IIPListRequest>: IPListRequest
+  - `[Description <String>]`: 
+  - `[Ips <String[]>]`: 
+  - `[Name <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -236,7 +217,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

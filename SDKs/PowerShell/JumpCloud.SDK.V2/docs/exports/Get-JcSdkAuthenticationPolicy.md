@@ -1,31 +1,35 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemMember.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAuthenticationPolicy.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkSystemMember
+# Get-JcSdkAuthenticationPolicy
 
 ## SYNOPSIS
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## SYNTAX
 
-### Get (Default)
+### List (Default)
 ```
-Get-JcSdkSystemMember -SystemId <String> [-Filter <String[]>] [-Sort <String[]>] [-Authorization <String>]
- [-Date <String>] [<CommonParameters>]
+Get-JcSdkAuthenticationPolicy [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
+ [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
+```
+
+### Get
+```
+Get-JcSdkAuthenticationPolicy -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
- [-Authorization <String>] [-Date <String>] [<CommonParameters>]
+Get-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## EXAMPLES
 
@@ -45,36 +49,6 @@ This endpoint returns all the System Groups a System is a member of.\n\n#### Sam
 
 ## PARAMETERS
 
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Filter
 A filter to apply to the query.
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
@@ -87,10 +61,25 @@ Supports wild cards.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Id
+Unique identifier of the authentication policy
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -119,7 +108,7 @@ Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -129,15 +118,30 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SystemId
-ObjectID of the System.
+### -XTotalCount
+.
 
 ```yaml
-Type: System.String
-Parameter Sets: Get
+Type: System.Int32
+Parameter Sets: List
 Aliases:
 
-Required: True
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XUnfilteredTotalCount
+If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+
+```yaml
+Type: System.Int32
+Parameter Sets: List
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -153,7 +157,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+### JumpCloud.SDK.V2.Models.IAuthenticationPolicyGetResponse
+
+### JumpCloud.SDK.V2.Models.IPaths17Qpg71AuthnPoliciesGetResponses200ContentApplicationJsonSchemaItems
+
+### System.String
 
 ## NOTES
 
@@ -173,7 +181,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

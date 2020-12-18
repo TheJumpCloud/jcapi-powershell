@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V2.Models.ILdapServerUpdateResponse
 .Outputs
 System.String
 .Notes
@@ -39,7 +39,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -55,49 +55,49 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkLdapServer
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
-    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.ILdapServerUpdateResponse], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Patch', Mandatory)]
-    [Parameter(ParameterSetName='PatchExpanded', Mandatory)]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [Parameter(ParameterSetName='Update', Mandatory)]
+    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # Unique identifier of the LDAP server.
     ${Id},
 
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Patch', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Id1},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Support.LdapServerAction]
     # LDAP Server Action
     ${UserLockoutAction},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Support.LdapServerAction]

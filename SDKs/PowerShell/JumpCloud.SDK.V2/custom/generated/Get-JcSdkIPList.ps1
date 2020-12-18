@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Description
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,7 +15,11 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.IIPListGetResponse
+.Outputs
+JumpCloud.SDK.V2.Models.IPathsAriiqoIplistsGetResponses200ContentApplicationJsonSchemaItems
+.Outputs
+System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -30,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -42,18 +46,18 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkUserMember.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkIPList.md
 #>
- Function Get-JcSdkUserMember
+ Function Get-JcSdkIPList
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
-    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V2.Models.IIPListGetResponse], [System.String], [JumpCloud.SDK.V2.Models.IPathsAriiqoIplistsGetResponses200ContentApplicationJsonSchemaItems])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the User.
-    ${UserId},
+    # .
+    ${Id},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -62,7 +66,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
@@ -75,12 +79,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **EX:** `GET /users?username=eq:testuser`
     ${Filter},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # .
+    ${XTotalCount},
+
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+    ${XUnfilteredTotalCount},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -143,7 +159,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
@@ -158,7 +174,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserMember @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalIPList @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -183,7 +199,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserMember @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalIPList @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

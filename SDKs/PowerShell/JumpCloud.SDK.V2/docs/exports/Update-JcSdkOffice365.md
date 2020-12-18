@@ -12,25 +12,25 @@ This endpoint allows updating some attributes of an Office 365 instance.\n\n####
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### UpdateExpanded (Default)
 ```
 Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
  [-UserPasswordExpirationAction <UserPasswordExpirationAction2>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Update
 ```
 Update-JcSdkOffice365 -Office365Id <String> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### UpdateViaIdentity
 ```
 Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### UpdateViaIdentityExpanded
 ```
 Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
  [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction2>]
@@ -64,7 +64,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IOffice365PatchInput
-Parameter Sets: Patch, PatchViaIdentity
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -80,7 +80,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -95,7 +95,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -110,7 +110,7 @@ ObjectID of the Office 365 instance.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded
+Parameter Sets: Update, UpdateExpanded
 Aliases:
 
 Required: True
@@ -125,7 +125,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserLockoutAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -140,7 +140,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -192,7 +192,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IOffice365Output
+### JumpCloud.SDK.V2.Models.IOffice365UpdateResponse
 
 ## NOTES
 
@@ -217,7 +217,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

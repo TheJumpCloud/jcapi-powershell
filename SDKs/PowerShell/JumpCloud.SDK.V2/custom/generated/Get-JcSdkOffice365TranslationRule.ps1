@@ -17,7 +17,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365TranslationRule
+JumpCloud.SDK.V2.Models.IOffice365TranslationRuleGetResponse
+.Outputs
+JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -48,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkOffice365TranslationRule
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365TranslationRule])]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365TranslationRuleGetResponse], [JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -174,7 +176,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalOffice365TranslationRule @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalOffice365TranslationRule @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -199,7 +201,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalOffice365TranslationRule @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalOffice365TranslationRule @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

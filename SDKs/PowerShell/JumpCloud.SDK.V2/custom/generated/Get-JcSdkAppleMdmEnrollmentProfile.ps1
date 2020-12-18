@@ -15,9 +15,9 @@ Get an enrollment profile by Id
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IAppleMdm
+JumpCloud.SDK.V2.Models.IAppleMdmEnrollmentProfileGetResponse
 .Outputs
-System.String
+JumpCloud.SDK.V2.Models.IPaths127NticApplemdmsAppleMdmIdEnrollmentprofilesGetResponses200ContentApplicationJsonSchemaItems
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -32,7 +32,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -48,7 +48,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkAppleMdmEnrollmentProfile
 {
-    [OutputType([System.String], [JumpCloud.SDK.V2.Models.IAppleMdm])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmEnrollmentProfileGetResponse], [JumpCloud.SDK.V2.Models.IPaths127NticApplemdmsAppleMdmIdEnrollmentprofilesGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -127,7 +127,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmEnrollmentProfile @PSBoundParameters
+        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmEnrollmentProfile @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

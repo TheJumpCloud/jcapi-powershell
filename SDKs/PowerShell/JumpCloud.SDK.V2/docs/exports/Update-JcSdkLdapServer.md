@@ -12,27 +12,27 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### UpdateExpanded (Default)
 ```
 Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <LdapServerAction>]
  [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Update
 ```
 Update-JcSdkLdapServer -Id <String>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### UpdateViaIdentity
 ```
 Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### UpdateViaIdentityExpanded
 ```
 Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
  [-UserLockoutAction <LdapServerAction>] [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm]
@@ -66,7 +66,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
-Parameter Sets: Patch, PatchViaIdentity
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -81,7 +81,7 @@ Unique identifier of the LDAP server.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -96,7 +96,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded
+Parameter Sets: UpdateExpanded
 Aliases:
 
 Required: False
@@ -112,7 +112,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -127,7 +127,7 @@ LDAP Server Action
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -142,7 +142,7 @@ LDAP Server Action
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -194,7 +194,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
+### JumpCloud.SDK.V2.Models.ILdapServerUpdateResponse
 
 ### System.String
 
@@ -221,7 +221,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

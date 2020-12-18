@@ -13,24 +13,24 @@ Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https
 
 ## SYNTAX
 
-### UpdateExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkSoftwareApp -Id <String> [-DisplayName <String>] [-Id1 <String>]
  [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Update
+### Set
 ```
 Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### UpdateViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### UpdateViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-DisplayName <String>]
  [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -64,7 +64,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISoftwareApp
-Parameter Sets: Update, UpdateViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -79,7 +79,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -94,7 +94,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: Set, SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -109,7 +109,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: UpdateExpanded
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -125,7 +125,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -141,7 +141,7 @@ To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -193,7 +193,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISoftwareApp
+### JumpCloud.SDK.V2.Models.ISoftwareAppSetResponse
 
 ### System.String
 
@@ -210,6 +210,7 @@ BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <IJcSoftwareAppSettings[]>]`: 
+    - `[AutoUpdate <Boolean?>]`: 
     - `[PackageId <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
@@ -221,7 +222,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
@@ -234,6 +235,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[WorkdayId <String>]`: 
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
+  - `[AutoUpdate <Boolean?>]`: 
   - `[PackageId <String>]`: 
 
 ## RELATED LINKS

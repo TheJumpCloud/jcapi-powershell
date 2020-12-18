@@ -1,10 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
 .Description
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -14,12 +12,12 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IAuthnPolicyInput
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-.Inputs
-JumpCloud.SDK.V2.Models.IProviderAdminReq
 .Outputs
-JumpCloud.SDK.V2.Models.IAdministrator
+JumpCloud.SDK.V2.Models.IAuthenticationPolicyUpdateResponse
 .Outputs
 System.String
 .Notes
@@ -27,11 +25,17 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IProviderAdminReq>:
-  Email <String>:
-  [EnableMultiFactor <Boolean?>]:
-  [Firstname <String>]:
-  [Lastname <String>]:
+BODY <IAuthnPolicyInput>:
+  EffectAction <Action>:
+  [Conditions <IAuthnPolicyInputConditions>]:
+  [Description <String>]:
+  [Disabled <Boolean?>]:
+  [MfaRequired <Boolean?>]:
+  [Name <String>]:
+  [TargetResources <IAuthnPolicyResourceTarget[]>]:
+    [Type <Type?>]:
+  [UserGroupInclusions <String[]>]:
+  [UserInclusions <String[]>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -42,7 +46,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -53,64 +57,104 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
+
+TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
+  [Type <Type?>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdmin.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
- Function New-JcSdkProviderAdmin
+ Function Update-JcSdkAuthenticationPolicy
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator], [System.String])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.IAuthenticationPolicyUpdateResponse], [System.String])]
+    [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Create', Mandatory)]
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Update', Mandatory)]
+    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # .
-    ${ProviderId},
+    # Unique identifier of the authentication policy
+    ${Id},
 
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IProviderAdminReq]
-    # ProviderAdminReq
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyInput]
+    # AuthnPolicyInput
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]
+    # .
+    ${Conditions},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
-    ${Email},
+    ${Description},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${EnableMultiFactor},
+    ${Disabled},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Action])]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Support.Action]
+    # .
+    ${EffectAction},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${MfaRequired},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
-    ${Firstname},
+    ${Name},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
     # .
-    ${Lastname},
+    # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
+    ${TargetResources},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserGroupInclusions},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserInclusions},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -168,7 +212,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalProviderAdmin @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalAuthenticationPolicy @PSBoundParameters
     }
     End
     {

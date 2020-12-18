@@ -13,13 +13,13 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsConnectivity
+JumpCloud.SDK.V2.Models.IPaths1Kv3Zi3SysteminsightsConnectivityGetResponses200ContentApplicationJsonSchemaItems
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightConnectivity.md
 #>
  Function Get-JcSdkSystemInsightConnectivity
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsConnectivity])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Kv3Zi3SysteminsightsConnectivityGetResponses200ContentApplicationJsonSchemaItems])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter()]
@@ -111,7 +111,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightConnectivity @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightConnectivity @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -136,7 +136,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightConnectivity @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemInsightConnectivity @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

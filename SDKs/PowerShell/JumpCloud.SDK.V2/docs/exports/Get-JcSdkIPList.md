@@ -1,30 +1,35 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkUserMember.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkIPList.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkUserMember
+# Get-JcSdkIPList
 
 ## SYNOPSIS
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## SYNTAX
 
-### Get (Default)
+### List (Default)
 ```
-Get-JcSdkUserMember -UserId <String> [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkIPList [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
+ [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
+```
+
+### Get
+```
+Get-JcSdkIPList -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
- [<CommonParameters>]
+Get-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
 ## EXAMPLES
 
@@ -56,10 +61,25 @@ Supports wild cards.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Id
+.
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -88,7 +108,7 @@ Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: (All)
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -98,15 +118,30 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserId
-ObjectID of the User.
+### -XTotalCount
+.
 
 ```yaml
-Type: System.String
-Parameter Sets: Get
+Type: System.Int32
+Parameter Sets: List
 Aliases:
 
-Required: True
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -XUnfilteredTotalCount
+If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+
+```yaml
+Type: System.Int32
+Parameter Sets: List
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -122,7 +157,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+### JumpCloud.SDK.V2.Models.IIPListGetResponse
+
+### JumpCloud.SDK.V2.Models.IPathsAriiqoIplistsGetResponses200ContentApplicationJsonSchemaItems
+
+### System.String
 
 ## NOTES
 
@@ -142,7 +181,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

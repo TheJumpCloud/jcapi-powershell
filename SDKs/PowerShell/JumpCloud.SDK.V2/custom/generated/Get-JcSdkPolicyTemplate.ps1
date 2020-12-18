@@ -17,9 +17,9 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IError
 .Outputs
-JumpCloud.SDK.V2.Models.IPolicyTemplate
+JumpCloud.SDK.V2.Models.IPaths1Pt2HgfPolicytemplatesGetResponses200ContentApplicationJsonSchemaItems
 .Outputs
-JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
+JumpCloud.SDK.V2.Models.IPolicyTemplateGetResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -34,7 +34,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]:
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -50,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkPolicyTemplate
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails], [JumpCloud.SDK.V2.Models.IPolicyTemplate], [JumpCloud.SDK.V2.Models.IError])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateGetResponse], [JumpCloud.SDK.V2.Models.IPaths1Pt2HgfPolicytemplatesGetResponses200ContentApplicationJsonSchemaItems], [JumpCloud.SDK.V2.Models.IError])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -169,7 +169,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTemplate @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTemplate @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -194,7 +194,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTemplate @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTemplate @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

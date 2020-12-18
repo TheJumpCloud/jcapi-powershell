@@ -12,24 +12,24 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### UpdateExpanded (Default)
 ```
 Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
  [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Update
 ```
 Update-JcSdkGSuite -Id <String> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### UpdateViaIdentity
 ```
 Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### UpdateViaIdentityExpanded
 ```
 Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
  [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
@@ -63,7 +63,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGsuitePatchInput
-Parameter Sets: Patch, PatchViaIdentity
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -93,7 +93,7 @@ Unique identifier of the GSuite.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded
+Parameter Sets: Update, UpdateExpanded
 Aliases:
 
 Required: True
@@ -109,7 +109,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -124,7 +124,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -139,7 +139,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserLockoutAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -154,7 +154,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -206,7 +206,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuiteOutput
+### JumpCloud.SDK.V2.Models.IGSuiteUpdateResponse
 
 ## NOTES
 
@@ -232,7 +232,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: 
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
