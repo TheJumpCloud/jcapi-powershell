@@ -3,7 +3,182 @@
   "consumes": [
     "application/json"
   ],
-  "definitions": {},
+  "definitions": {
+    "ErrorMessage": {
+      "properties": {
+        "message": {
+          "description": "Text detailed error message returned by the service",
+          "type": "string"
+        }
+      },
+      "title": "ErrorMessage",
+      "type": "object"
+    },
+    "EventDistinctQuery": {
+      "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "field": {
+          "description": "field is what they wish to query on",
+          "type": "string",
+          "x-go-name": "Field"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventDistinctQuery",
+      "type": "object"
+    },
+    "EventIntervalQuery": {
+      "description": "EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "interval_unit": {
+          "type": "string",
+          "x-go-name": "IntervalUnit"
+        },
+        "interval_value": {
+          "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
+          "type": "string",
+          "x-go-name": "IntervalValue"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "timezone": {
+          "description": "TimeZone. Specify the timezone in which the user is in\noptional",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time",
+        "interval_unit"
+      ],
+      "title": "EventIntervalQuery",
+      "type": "object"
+    },
+    "EventQuery": {
+      "description": "EventQuery is the users' command to search our auth logs",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        },
+        "fields": {
+          "description": "optional list of fields to return from query",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Projection"
+        },
+        "limit": {
+          "description": "Max number of rows to return",
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Limit"
+        },
+        "search_after": {
+          "description": "Specific query to search after, see x-* response headers for next values",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "SearchAfter"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "sort": {
+          "description": "ASC or DESC order for timestamp",
+          "type": "string",
+          "x-go-name": "Sort"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventQuery",
+      "type": "object"
+    },
+    "SearchTerm": {
+      "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
+      "properties": {
+        "and": {
+          "$ref": "#/definitions/TermConjunction"
+        },
+        "or": {
+          "$ref": "#/definitions/TermConjunction"
+        }
+      },
+      "title": "SearchTerm",
+      "type": "object"
+    },
+    "TermConjunction": {
+      "additionalProperties": true,
+      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
+      "title": "TermConjunction",
+      "type": "object"
+    }
+  },
   "host": "api.jumpcloud.com",
   "info": {
     "description": "The purpose of this API is to query Jumpcloud Directory Insights events",
@@ -20,80 +195,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "description": "EventQuery is the users' command to search our auth logs",
-              "properties": {
-                "end_time": {
-                  "description": "optional query end time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                },
-                "fields": {
-                  "description": "optional list of fields to return from query",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Projection"
-                },
-                "limit": {
-                  "description": "Max number of rows to return",
-                  "format": "int64",
-                  "type": "integer",
-                  "x-go-name": "Limit"
-                },
-                "search_after": {
-                  "description": "Specific query to search after, see x-* response headers for next values",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "SearchAfter"
-                },
-                "search_term": {
-                  "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
-                  "properties": {
-                    "and": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    },
-                    "or": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    }
-                  },
-                  "title": "SearchTerm",
-                  "type": "object"
-                },
-                "service": {
-                  "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-                  "example": "[systems,radius,sso,directory,ldap,mdm,all]",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Service"
-                },
-                "sort": {
-                  "description": "ASC or DESC order for timestamp",
-                  "type": "string",
-                  "x-go-name": "Sort"
-                },
-                "start_time": {
-                  "description": "query start time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "service",
-                "start_time"
-              ],
-              "title": "EventQuery",
-              "type": "object"
+              "$ref": "#/definitions/EventQuery"
             }
           }
         ],
@@ -103,6 +205,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
+                "title": "EventGetResponse",
                 "type": "object"
               },
               "type": "array"
@@ -111,53 +214,25 @@
           "400": {
             "description": "Invalid/unknown query JSON body",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "401": {
             "description": "Unauthorized (Invalid API Key)",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "402": {
             "description": "Directory Insights is not enabled for your organization",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "500": {
             "description": "Technical difficulties processing your request",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
@@ -181,80 +256,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "description": "EventQuery is the users' command to search our auth logs",
-              "properties": {
-                "end_time": {
-                  "description": "optional query end time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                },
-                "fields": {
-                  "description": "optional list of fields to return from query",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Projection"
-                },
-                "limit": {
-                  "description": "Max number of rows to return",
-                  "format": "int64",
-                  "type": "integer",
-                  "x-go-name": "Limit"
-                },
-                "search_after": {
-                  "description": "Specific query to search after, see x-* response headers for next values",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "SearchAfter"
-                },
-                "search_term": {
-                  "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
-                  "properties": {
-                    "and": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    },
-                    "or": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    }
-                  },
-                  "title": "SearchTerm",
-                  "type": "object"
-                },
-                "service": {
-                  "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-                  "example": "[systems,radius,sso,directory,ldap,mdm,all]",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Service"
-                },
-                "sort": {
-                  "description": "ASC or DESC order for timestamp",
-                  "type": "string",
-                  "x-go-name": "Sort"
-                },
-                "start_time": {
-                  "description": "query start time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "service",
-                "start_time"
-              ],
-              "title": "EventQuery",
-              "type": "object"
+              "$ref": "#/definitions/EventQuery"
             }
           }
         ],
@@ -262,68 +264,33 @@
           "200": {
             "description": "Count of matching event rows",
             "schema": {
-              "description": "EventCount JSON struct with count of matching events",
-              "properties": {
-                "count": {
-                  "format": "int64",
-                  "type": "integer",
-                  "x-go-name": "Count"
-                }
-              },
-              "title": "EventCount",
+              "additionalProperties": true,
+              "title": "EventCountGetResponse",
               "type": "object"
             }
           },
           "400": {
             "description": "Invalid/unknown query JSON body",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "401": {
             "description": "Unauthorized (Invalid API Key)",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "402": {
             "description": "Directory Insights is not enabled for your organization",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "500": {
             "description": "Technical difficulties processing your request",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
@@ -347,58 +314,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
-              "properties": {
-                "end_time": {
-                  "description": "optional query end time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                },
-                "field": {
-                  "description": "field is what they wish to query on",
-                  "type": "string",
-                  "x-go-name": "Field"
-                },
-                "search_term": {
-                  "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
-                  "properties": {
-                    "and": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    },
-                    "or": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    }
-                  },
-                  "title": "SearchTerm",
-                  "type": "object"
-                },
-                "service": {
-                  "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-                  "example": "[systems,radius,sso,directory,ldap,mdm,all]",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Service"
-                },
-                "start_time": {
-                  "description": "query start time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "service",
-                "start_time"
-              ],
-              "title": "EventDistinctQuery",
-              "type": "object"
+              "$ref": "#/definitions/EventDistinctQuery"
             }
           }
         ],
@@ -406,68 +322,33 @@
           "200": {
             "description": "List of distinct field values",
             "schema": {
-              "description": "EventCount JSON struct with count of matching events",
-              "properties": {
-                "count": {
-                  "format": "int64",
-                  "type": "integer",
-                  "x-go-name": "Count"
-                }
-              },
-              "title": "EventCount",
+              "additionalProperties": true,
+              "title": "EventDistinctGetResponse",
               "type": "object"
             }
           },
           "400": {
             "description": "Invalid/unknown query JSON body",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "401": {
             "description": "Unauthorized (Invalid API Key)",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "402": {
             "description": "Directory Insights is not enabled for your organization",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "500": {
             "description": "Technical difficulties processing your request",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
@@ -491,67 +372,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "description": "EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field",
-              "properties": {
-                "end_time": {
-                  "description": "optional query end time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                },
-                "interval_unit": {
-                  "type": "string",
-                  "x-go-name": "IntervalUnit"
-                },
-                "interval_value": {
-                  "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
-                  "type": "string",
-                  "x-go-name": "IntervalValue"
-                },
-                "search_term": {
-                  "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
-                  "properties": {
-                    "and": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    },
-                    "or": {
-                      "additionalProperties": true,
-                      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
-                      "title": "TermConjunction",
-                      "type": "object"
-                    }
-                  },
-                  "title": "SearchTerm",
-                  "type": "object"
-                },
-                "service": {
-                  "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-                  "example": "[systems,radius,sso,directory,ldap,mdm,all]",
-                  "items": {
-                    "type": "string"
-                  },
-                  "type": "array",
-                  "x-go-name": "Service"
-                },
-                "start_time": {
-                  "description": "query start time, UTC in RFC3339 format",
-                  "format": "date-time",
-                  "type": "string"
-                },
-                "timezone": {
-                  "description": "TimeZone. Specify the timezone in which the user is in\noptional",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "service",
-                "start_time",
-                "interval_unit"
-              ],
-              "title": "EventIntervalQuery",
-              "type": "object"
+              "$ref": "#/definitions/EventIntervalQuery"
             }
           }
         ],
@@ -561,6 +382,7 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
+                "title": "EventIntervalGetResponse",
                 "type": "object"
               },
               "type": "array"
@@ -569,53 +391,25 @@
           "400": {
             "description": "Invalid/unknown query JSON body",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "401": {
             "description": "Unauthorized (Invalid API Key)",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "402": {
             "description": "Directory Insights is not enabled for your organization",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           },
           "500": {
             "description": "Technical difficulties processing your request",
             "schema": {
-              "properties": {
-                "message": {
-                  "description": "Text detailed error message returned by the service",
-                  "type": "string"
-                }
-              },
-              "title": "ErrorMessage",
-              "type": "object"
+              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },

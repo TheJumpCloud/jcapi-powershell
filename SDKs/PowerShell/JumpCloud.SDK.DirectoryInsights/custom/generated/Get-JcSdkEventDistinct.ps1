@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery
 .Outputs
-System.Int64
+JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetResponse
 .Outputs
 System.String
 .Notes
@@ -28,16 +28,15 @@ BODY <IEventDistinctQuery>:
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [Field <String>]: field is what they wish to query on
-  [SearchTermAnd <IPaths1Xzx97NEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
-  [SearchTermOr <IPaths10CwkoaEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    [(Any) <Object>]: This indicates any property can be added to this object.
+  [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
 #>
  Function Get-JcSdkEventDistinct
 {
-    [OutputType([System.Int64], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetResponse], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
@@ -74,14 +73,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.IPaths1Xzx97NEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd]))]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
     ${SearchTermAnd},
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.IPaths10CwkoaEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr]))]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
     ${SearchTermOr},

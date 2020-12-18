@@ -191,7 +191,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Int64
+### JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetResponse
 
 ### System.String
 
@@ -209,10 +209,9 @@ BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search o
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Field <String>]`: field is what they wish to query on
-  - `[SearchTermAnd <IPaths1Xzx97NEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <IPaths10CwkoaEventsDistinctPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS
 

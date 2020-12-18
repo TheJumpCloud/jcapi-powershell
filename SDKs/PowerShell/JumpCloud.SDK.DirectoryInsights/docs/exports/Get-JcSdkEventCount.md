@@ -21,7 +21,7 @@ Get-JcSdkEventCount -Service <String[]> -StartTime <DateTime> [-EndTime <DateTim
 
 ### Get
 ```
-Get-JcSdkEventCount -Body <IEventQuery0> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventCount -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,7 +64,7 @@ EventQuery is the users' command to search our auth logs
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuery0
+Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
 Parameter Sets: Get
 Aliases:
 
@@ -232,11 +232,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IEventQuery0
+### JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
 
 ## OUTPUTS
 
-### System.Int64
+### JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetResponse
 
 ### System.String
 
@@ -249,17 +249,16 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventQuery0>: EventQuery is the users' command to search our auth logs
+BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
-  - `[SearchTermAnd <IPaths1L6I55XEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesAnd>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <IPaths7Rk3SjEventsCountPostRequestbodyContentApplicationJsonSchemaPropertiesSearchTermPropertiesOr>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[Sort <String>]`: ASC or DESC order for timestamp
 
 ## RELATED LINKS
