@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName = ('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$SortAttributes = $true
 )
@@ -725,20 +725,28 @@ $SDKName | ForEach-Object {
                 $AllDefinitions | ForEach-Object {
                     If ($UsedDefinitions -notcontains $_)
                     {
-                        Write-Warning ("Removing unused definition: $_")
+                        # Write-Warning ("Removing unused definition: $_")
                         $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
                     }
+                }
+                $DefinitionResults = If ($UsedDefinitions -and $AllDefinitions)
+                {
+                    Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions
                 }
                 # Remove unused parameters
                 $AllParameters = $UpdatedSwagger.parameters.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
                 $AllParameters | ForEach-Object {
                     If ($UsedParameters -notcontains $_)
                     {
-                        Write-Warning ("Removing unused parameter: $_")
+                        # Write-Warning ("Removing unused parameter: $_")
                         $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
                     }
                 }
-            } While ((Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions) -or (Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters))
+                $ParameterResults = If ($UsedParameters -and $AllParameters)
+                {
+                    Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters
+                }
+            } While ($DefinitionResults -or $ParameterResults)
             #endregion
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"

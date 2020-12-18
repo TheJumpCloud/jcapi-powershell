@@ -304,16 +304,15 @@ Try
                         $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
                         $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
-                        # $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $testModuleContent = Get-Content -Path:($testModulePath) -Raw
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
                         # ./test-module.ps1 -Live # Run to query against real API
-                        # $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                        $TestModuleCommand = "Import-Module -Name $($psd1Path); Invoke-Pester -Path '$($TestFolderPath)' -PassThru | Export-NUnitReport -Path '$($PesterTestResultPath)'"
+                        $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
                         $TestModuleJob = Start-Job -ScriptBlock:( {
