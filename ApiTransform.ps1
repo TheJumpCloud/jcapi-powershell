@@ -525,24 +525,43 @@ Function Update-SwaggerObject
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
                     }
                     # Generalize responses for when operation returns an object or an array of objects
-                    If ($AttributePath -like '*.responses.200.schema.$ref' -or $AttributePath -like '*.responses.200.schema.items.$ref')
+                    # If ($AttributePath -like '*.responses.200.*.$ref')
+                    # {
+                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
+                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('object')
+                    #     $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    #     # $RefItem = Get-SwaggerItem -InputObject:($InputObjectOrg) -Path:($ThisObject.$AttributeName)
+                    #     # If ( $RefItem.type -eq 'object')
+                    #     # {
+                    #     #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                    #     #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
+                    #     #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:($RefItem.type)
+                    #     #     $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    #     # }
+                    #     # Else
+                    #     # {
+                    #     #     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' Unknown type of object: $($AttributePath): $($RefItem | ConvertTo-Json -Compress)")
+                    #     # }
+                    # }
+                    # Generalize responses for when operation returns an object or an array of objects
+                    If ($AttributePath -like '*.responses.200.schema')
                     {
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('object')
-                        $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        # $RefItem = Get-SwaggerItem -InputObject:($InputObjectOrg) -Path:($ThisObject.$AttributeName)
-                        # If ( $RefItem.type -eq 'object')
-                        # {
-                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
-                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)Response")
-                        #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:($RefItem.type)
-                        #     $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        # }
-                        # Else
-                        # {
-                        #     Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' Unknown type of object: $($AttributePath): $($RefItem | ConvertTo-Json -Compress)")
-                        # }
+                        $GeneralObject = [PSCustomObject]@{
+                            additionalProperties = $true
+                            title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])Response"
+                            type                 = 'object'
+                        }
+                        If ($ThisObject.$AttributeName.type -eq 'array')
+                        {
+                            $ThisObject.$AttributeName.PSObject.Properties.Remove('items')
+                            Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('items') -Value:($GeneralObject)
+                        }
+                        Else
+                        {
+                            $ThisObject.PSObject.Properties.Remove($AttributeName)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
+                        }
                     }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
