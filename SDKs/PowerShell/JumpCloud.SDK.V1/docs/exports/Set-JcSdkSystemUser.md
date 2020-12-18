@@ -14,46 +14,45 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <IPutContentSchemaAddressesItem[]>]
- [-AllowPublicKey] [-Attributes <IPutContentSchemaAttributesItem[]>] [-Company <String>]
- [-CostCenter <String>] [-Department <String>] [-Description <String>] [-Displayname <String>]
- [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
- [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordNeverExpires] [-PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <IPutContentSchemaRelationshipsItem[]>] [-SambaServiceUser]
- [-SshKeys <IPutContentSchemaSshKeysItem[]>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
- [-Username <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Set
-```
-Set-JcSdkSystemUser -Id <String> -Body <ISystemUserPut> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### SetViaIdentity
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemUserPut> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
-```
-
-### SetViaIdentityExpanded
-```
-Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
- [-Addresses <IPutContentSchemaAddressesItem[]>] [-AllowPublicKey]
- [-Attributes <IPutContentSchemaAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>]
+ [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-Displayname <String>] [-Email <String>]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
  [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
  [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <IPutContentSchemaRelationshipsItem[]>] [-SambaServiceUser]
- [-SshKeys <IPutContentSchemaSshKeysItem[]>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
- [-Username <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
+ [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### Set
+```
+Set-JcSdkSystemUser -Id <String> -Body <ISystemuserput> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentity
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentityExpanded
+```
+Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
+ [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
+ [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
+ [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
+ [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
+ [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -97,7 +96,7 @@ type, poBox, extendedAddress, streetAddress, locality, region, postalCode, count
 To construct, see NOTES section for ADDRESSES properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaAddressesItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -127,7 +126,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -143,7 +142,7 @@ SystemUserPut
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemUserPut
+Type: JumpCloud.SDK.V1.Models.ISystemuserput
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -580,7 +579,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaPhoneNumbersItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -610,7 +609,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaRelationshipsItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -641,7 +640,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for SSHKEYS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaSshKeysItem[]
+Type: JumpCloud.SDK.V1.Models.ISshkeypost[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -765,11 +764,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V1.Models.ISystemUserPut
+### JumpCloud.SDK.V1.Models.ISystemuserput
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserReturn2
+### JumpCloud.SDK.V1.Models.ISystemUserSetApplicationJsonResponse
 
 ## NOTES
 
@@ -780,7 +779,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ADDRESSES <IPutContentSchemaAddressesItem[]>: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
   - `[Country <String>]`: 
   - `[ExtendedAddress <String>]`: 
   - `[Locality <String>]`: 
@@ -790,9 +789,9 @@ ADDRESSES <IPutContentSchemaAddressesItem[]>: type, poBox, extendedAddress, stre
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
-BODY <ISystemUserPut>: SystemUserPut
+BODY <ISystemuserput>: SystemUserPut
   - `[AccountLocked <Boolean?>]`: 
-  - `[Addresses <IPutContentSchemaAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  - `[Addresses <ISystemuserputAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -802,7 +801,7 @@ BODY <ISystemUserPut>: SystemUserPut
     - `[StreetAddress <String>]`: 
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
-  - `[Attributes <IPutContentSchemaAttributesItem[]>]`: 
+  - `[Attributes <ISystemuserputAttributesItem[]>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
   - `[Department <String>]`: 
@@ -828,13 +827,13 @@ BODY <ISystemUserPut>: SystemUserPut
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
-  - `[PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <IPutContentSchemaRelationshipsItem[]>]`: 
+  - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
-  - `[SshKeys <IPutContentSchemaSshKeysItem[]>]`: 
+  - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.
     - `PublicKey <String>`: The Public SSH key.
   - `[Sudo <Boolean?>]`: 
@@ -845,14 +844,15 @@ BODY <ISystemUserPut>: SystemUserPut
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
-PHONENUMBERS <IPutContentSchemaPhoneNumbersItem[]>: .
+PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
 
-SSHKEYS <IPutContentSchemaSshKeysItem[]>: .
+SSHKEYS <ISshkeypost[]>: .
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 

@@ -14,31 +14,31 @@ The endpoint updates a SSO / SAML Application.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IPutContentSchemaConfig>]
- [-Created <String>] [-DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
- [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>]
- [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
+ [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
+ [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
+ [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkApplication -Id <String> -Body <IApplication3> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication3> [-Confirm] [-WhatIf]
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <Color>]
- [-Config <IPutContentSchemaConfig>] [-Created <String>]
- [-DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
- [-DisplayLabel <String>] [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>]
- [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [-Config <IApplicationConfig>] [-Created <String>]
+ [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
+ [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>] [-Name <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -83,7 +83,7 @@ Application
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplication3
+Type: JumpCloud.SDK.V1.Models.IApplication
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -114,7 +114,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for CONFIG properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaConfig
+Type: JumpCloud.SDK.V1.Models.IApplicationConfig
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -144,7 +144,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaDatabaseAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -321,6 +321,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoBeta
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoJit
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoUrl
 .
 
@@ -372,13 +417,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication3
+### JumpCloud.SDK.V1.Models.IApplication
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication4
+### JumpCloud.SDK.V1.Models.IApplicationSetApplicationJsonResponse
 
 ## NOTES
 
@@ -389,10 +434,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IApplication3>: Application
+BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <Color?>]`: 
-  - `[Config <IPutContentSchemaConfig>]`: 
+  - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -413,7 +458,7 @@ BODY <IApplication3>: Application
     - `[ConstantAttributeRequired <Boolean?>]`: 
     - `[ConstantAttributeToggle <String>]`: 
     - `[ConstantAttributeType <String>]`: 
-    - `[ConstantAttributeValue <IPutContentSchemaConfigConstantAttributesValueItem[]>]`: 
+    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -473,7 +518,7 @@ BODY <IApplication3>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IPutContentSchemaDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
@@ -483,9 +528,12 @@ BODY <IApplication3>: Application
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 
+  - `[SsoBeta <Boolean?>]`: 
+  - `[SsoJit <Boolean?>]`: 
+  - `[SsoType <String>]`: 
   - `[SsoUrl <String>]`: 
 
-CONFIG <IPutContentSchemaConfig>: .
+CONFIG <IApplicationConfig>: .
   - `[AcUrlLabel <String>]`: 
   - `[AcUrlOptions <String>]`: 
   - `[AcUrlPosition <Int32?>]`: 
@@ -506,7 +554,7 @@ CONFIG <IPutContentSchemaConfig>: .
   - `[ConstantAttributeRequired <Boolean?>]`: 
   - `[ConstantAttributeToggle <String>]`: 
   - `[ConstantAttributeType <String>]`: 
-  - `[ConstantAttributeValue <IPutContentSchemaConfigConstantAttributesValueItem[]>]`: 
+  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 
@@ -568,6 +616,7 @@ CONFIG <IPutContentSchemaConfig>: .
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

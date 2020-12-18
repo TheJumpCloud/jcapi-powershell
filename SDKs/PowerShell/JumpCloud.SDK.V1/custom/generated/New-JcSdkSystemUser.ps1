@@ -13,15 +13,15 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.ISystemUserPost
+JumpCloud.SDK.V1.Models.ISystemuserputpost
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemUserReturn
+JumpCloud.SDK.V1.Models.ISystemUserCreateApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ADDRESSES <IPostContentSchemaAddressesItem[]>:
+ADDRESSES <ISystemuserputpostAddressesItem[]>:
   [Country <String>]:
   [ExtendedAddress <String>]:
   [Locality <String>]:
@@ -31,12 +31,12 @@ ADDRESSES <IPostContentSchemaAddressesItem[]>:
   [StreetAddress <String>]:
   [Type <String>]:
 
-BODY <ISystemUserPost>:
+BODY <ISystemuserputpost>:
   Email <String>:
   Username <String>:
   [AccountLocked <Boolean?>]:
   [Activated <Boolean?>]:
-  [Addresses <IPostContentSchemaAddressesItem[]>]:
+  [Addresses <ISystemuserputpostAddressesItem[]>]:
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -46,7 +46,7 @@ BODY <ISystemUserPost>:
     [StreetAddress <String>]:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
-  [Attributes <IPostContentSchemaAttributesItem[]>]:
+  [Attributes <ISystemuserputpostAttributesItem[]>]:
   [Company <String>]:
   [CostCenter <String>]:
   [Department <String>]:
@@ -72,18 +72,18 @@ BODY <ISystemUserPost>:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
   [PasswordlessSudo <Boolean?>]:
-  [PhoneNumbers <IPostContentSchemaPhoneNumbersItem[]>]:
+  [PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <IPostContentSchemaRelationshipsItem[]>]:
+  [Relationships <ISystemuserputpostRelationshipsItem[]>]:
   [SambaServiceUser <Boolean?>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
   [UnixGuid <Int32?>]:
   [UnixUid <Int32?>]:
 
-PHONENUMBERS <IPostContentSchemaPhoneNumbersItem[]>:
+PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
 .Link
@@ -91,12 +91,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserReturn])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserCreateApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISystemUserPost]
+    [JumpCloud.SDK.V1.Models.ISystemuserputpost]
     # SystemUserPost
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -127,7 +127,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPostContentSchemaAddressesItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputpostAddressesItem[]]
     # .
     # To construct, see NOTES section for ADDRESSES properties and create a hash table.
     ${Addresses},
@@ -140,7 +140,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPostContentSchemaAttributesItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]]
     # .
     ${Attributes},
 
@@ -296,7 +296,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPostContentSchemaPhoneNumbersItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputpostPhoneNumbersItem[]]
     # .
     # To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
     ${PhoneNumbers},
@@ -309,7 +309,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPostContentSchemaRelationshipsItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
     # .
     ${Relationships},
 
@@ -405,7 +405,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalSystemUser @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

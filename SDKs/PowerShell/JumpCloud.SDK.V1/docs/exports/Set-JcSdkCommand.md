@@ -23,12 +23,12 @@ Set-JcSdkCommand -Id <String> -Command <String> [-CommandRunners <String[]>] [-C
 
 ### Set
 ```
-Set-JcSdkCommand -Id <String> -Body <ICommand2> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -Id <String> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand2> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -67,7 +67,7 @@ Command
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ICommand2
+Type: JumpCloud.SDK.V1.Models.ICommand
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -403,13 +403,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.ICommand2
+### JumpCloud.SDK.V1.Models.ICommand
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommand3
+### JumpCloud.SDK.V1.Models.ICommandSetApplicationJsonResponse
 
 ## NOTES
 
@@ -420,8 +420,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ICommand2>: Command
-  - `Command <String>`: The command to execute on the server.
+BODY <ICommand>: Command
+  - `Command1 <String>`: The command to execute on the server.
   - `[CommandRunners <String[]>]`: An array of IDs of the Command Runner Users that can execute this command.
   - `[CommandType <String>]`: The Command OS
   - `[Files <String[]>]`: An array of file IDs to include with the command.
@@ -440,6 +440,7 @@ BODY <ICommand2>: Command
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ICommand
 .Outputs
-JumpCloud.SDK.V1.Models.ICommand0
+JumpCloud.SDK.V1.Models.ICommandCreateApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -43,7 +43,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommand0])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandCreateApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -214,7 +214,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalCommand @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

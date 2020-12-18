@@ -19,14 +19,14 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.IOrganization0
+JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
-  [Settings <IPutContentSchemaSettings>]: OrganizationSettingsPut
+  [Settings <IOrganizationsettingsput>]: OrganizationSettingsPut
     [ContactEmail <String>]:
     [ContactName <String>]:
     [DeviceIdentificationEnabled <Boolean?>]:
@@ -73,10 +73,11 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 
-SETTINGS <IPutContentSchemaSettings>:
+SETTINGS <IOrganizationsettingsput>:
   [ContactEmail <String>]:
   [ContactName <String>]:
   [DeviceIdentificationEnabled <Boolean?>]:
@@ -125,7 +126,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkOrganization
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IOrganization0])]
+    [OutputType([JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -154,7 +155,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaSettings]
+    [JumpCloud.SDK.V1.Models.IOrganizationsettingsput]
     # OrganizationSettingsPut
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings},
@@ -221,7 +222,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

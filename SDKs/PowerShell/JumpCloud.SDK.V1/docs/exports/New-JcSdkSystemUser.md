@@ -15,21 +15,21 @@ This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n
 ### CreateExpanded (Default)
 ```
 New-JcSdkSystemUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
- [-Addresses <IPostContentSchemaAddressesItem[]>] [-AllowPublicKey]
- [-Attributes <IPostContentSchemaAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+ [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey]
+ [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-Displayname <String>] [-EmployeeIdentifier <String>]
  [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
  [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>] [-ExternalSourceType <String>]
  [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
  [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <IPostContentSchemaPhoneNumbersItem[]>]
- [-PublicKey <String>] [-Relationships <IPostContentSchemaRelationshipsItem[]>] [-SambaServiceUser] [-Sudo]
+ [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo]
  [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkSystemUser -Body <ISystemUserPost> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemUser -Body <ISystemuserputpost> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -88,7 +88,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for ADDRESSES properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaAddressesItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputpostAddressesItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -118,7 +118,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -134,7 +134,7 @@ SystemUserPost
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemUserPost
+Type: JumpCloud.SDK.V1.Models.ISystemuserputpost
 Parameter Sets: Create
 Aliases:
 
@@ -555,7 +555,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaPhoneNumbersItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputpostPhoneNumbersItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -585,7 +585,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaRelationshipsItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -722,11 +722,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserPost
+### JumpCloud.SDK.V1.Models.ISystemuserputpost
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserReturn
+### JumpCloud.SDK.V1.Models.ISystemUserCreateApplicationJsonResponse
 
 ## NOTES
 
@@ -737,7 +737,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ADDRESSES <IPostContentSchemaAddressesItem[]>: .
+ADDRESSES <ISystemuserputpostAddressesItem[]>: .
   - `[Country <String>]`: 
   - `[ExtendedAddress <String>]`: 
   - `[Locality <String>]`: 
@@ -747,12 +747,12 @@ ADDRESSES <IPostContentSchemaAddressesItem[]>: .
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
-BODY <ISystemUserPost>: SystemUserPost
+BODY <ISystemuserputpost>: SystemUserPost
   - `Email <String>`: 
   - `Username <String>`: 
   - `[AccountLocked <Boolean?>]`: 
   - `[Activated <Boolean?>]`: 
-  - `[Addresses <IPostContentSchemaAddressesItem[]>]`: 
+  - `[Addresses <ISystemuserputpostAddressesItem[]>]`: 
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -762,7 +762,7 @@ BODY <ISystemUserPost>: SystemUserPost
     - `[StreetAddress <String>]`: 
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
-  - `[Attributes <IPostContentSchemaAttributesItem[]>]`: 
+  - `[Attributes <ISystemuserputpostAttributesItem[]>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
   - `[Department <String>]`: 
@@ -788,18 +788,18 @@ BODY <ISystemUserPost>: SystemUserPost
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
   - `[PasswordlessSudo <Boolean?>]`: 
-  - `[PhoneNumbers <IPostContentSchemaPhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <IPostContentSchemaRelationshipsItem[]>]`: 
+  - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[Sudo <Boolean?>]`: 
   - `[Suspended <Boolean?>]`: 
   - `[UnixGuid <Int32?>]`: 
   - `[UnixUid <Int32?>]`: 
 
-PHONENUMBERS <IPostContentSchemaPhoneNumbersItem[]>: .
+PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
 

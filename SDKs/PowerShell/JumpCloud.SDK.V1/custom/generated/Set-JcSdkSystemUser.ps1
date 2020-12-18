@@ -15,15 +15,15 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
-JumpCloud.SDK.V1.Models.ISystemUserPut
+JumpCloud.SDK.V1.Models.ISystemuserput
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemUserReturn2
+JumpCloud.SDK.V1.Models.ISystemUserSetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ADDRESSES <IPutContentSchemaAddressesItem[]>:
+ADDRESSES <ISystemuserputAddressesItem[]>:
   [Country <String>]:
   [ExtendedAddress <String>]:
   [Locality <String>]:
@@ -33,9 +33,9 @@ ADDRESSES <IPutContentSchemaAddressesItem[]>:
   [StreetAddress <String>]:
   [Type <String>]:
 
-BODY <ISystemUserPut>:
+BODY <ISystemuserput>:
   [AccountLocked <Boolean?>]:
-  [Addresses <IPutContentSchemaAddressesItem[]>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  [Addresses <ISystemuserputAddressesItem[]>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -45,7 +45,7 @@ BODY <ISystemUserPut>:
     [StreetAddress <String>]:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
-  [Attributes <IPutContentSchemaAttributesItem[]>]:
+  [Attributes <ISystemuserputAttributesItem[]>]:
   [Company <String>]:
   [CostCenter <String>]:
   [Department <String>]:
@@ -71,13 +71,13 @@ BODY <ISystemUserPut>:
   [Middlename <String>]:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
-  [PhoneNumbers <IPutContentSchemaPhoneNumbersItem[]>]:
+  [PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <IPutContentSchemaRelationshipsItem[]>]:
+  [Relationships <ISystemuserputRelationshipsItem[]>]:
   [SambaServiceUser <Boolean?>]:
-  [SshKeys <IPutContentSchemaSshKeysItem[]>]:
+  [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
   [Sudo <Boolean?>]:
@@ -88,14 +88,15 @@ BODY <ISystemUserPut>:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 
-PHONENUMBERS <IPutContentSchemaPhoneNumbersItem[]>:
+PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
 
-SSHKEYS <IPutContentSchemaSshKeysItem[]>:
+SSHKEYS <ISshkeypost[]>:
   Name <String>: The name of the SSH key.
   PublicKey <String>: The Public SSH key.
 .Link
@@ -103,7 +104,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserReturn2])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUserSetApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -124,7 +125,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISystemUserPut]
+    [JumpCloud.SDK.V1.Models.ISystemuserput]
     # SystemUserPut
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -139,7 +140,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaAddressesItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]]
     # type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     # To construct, see NOTES section for ADDRESSES properties and create a hash table.
     ${Addresses},
@@ -154,7 +155,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaAttributesItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]]
     # .
     ${Attributes},
 
@@ -336,7 +337,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaPhoneNumbersItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]]
     # .
     # To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
     ${PhoneNumbers},
@@ -351,7 +352,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaRelationshipsItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]
     # .
     ${Relationships},
 
@@ -365,7 +366,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaSshKeysItem[]]
+    [JumpCloud.SDK.V1.Models.ISshkeypost[]]
     # .
     # To construct, see NOTES section for SSHKEYS properties and create a hash table.
     ${SshKeys},
@@ -467,7 +468,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalSystemUser @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

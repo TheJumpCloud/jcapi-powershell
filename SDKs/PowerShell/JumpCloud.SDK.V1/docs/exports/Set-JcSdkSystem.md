@@ -15,27 +15,27 @@ This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl 
 ### SetExpanded (Default)
 ```
 Set-JcSdkSystem -Id <String> [-Authorization <String>] [-Date <String>]
- [-AgentBoundMessages <IPutContentSchemaAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
+ [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
  [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystem -Id <String> -Body <ISystemPut> [-Authorization <String>] [-Date <String>] [-Confirm]
+Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Authorization <String>] [-Date <String>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemPut> [-Authorization <String>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Authorization <String>]
  [-Date <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Authorization <String>] [-Date <String>]
- [-AgentBoundMessages <IPutContentSchemaAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
+ [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
  [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -66,7 +66,7 @@ This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl 
 To construct, see NOTES section for AGENTBOUNDMESSAGES properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaAgentBoundMessagesItem[]
+Type: JumpCloud.SDK.V1.Models.ISystemputAgentBoundMessagesItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -157,7 +157,7 @@ SystemPut
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemPut
+Type: JumpCloud.SDK.V1.Models.ISystemput
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -267,11 +267,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
-### JumpCloud.SDK.V1.Models.ISystemPut
+### JumpCloud.SDK.V1.Models.ISystemput
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IJcSystem1
+### JumpCloud.SDK.V1.Models.ISystemSetApplicationJsonResponse
 
 ## NOTES
 
@@ -282,11 +282,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-AGENTBOUNDMESSAGES <IPutContentSchemaAgentBoundMessagesItem[]>: .
+AGENTBOUNDMESSAGES <ISystemputAgentBoundMessagesItem[]>: .
   - `[Cmd <String>]`: 
 
-BODY <ISystemPut>: SystemPut
-  - `[AgentBoundMessages <IPutContentSchemaAgentBoundMessagesItem[]>]`: 
+BODY <ISystemput>: SystemPut
+  - `[AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]`: 
     - `[Cmd <String>]`: 
   - `[AllowMultiFactorAuthentication <Boolean?>]`: 
   - `[AllowPublicKeyAuthentication <Boolean?>]`: 
@@ -296,6 +296,7 @@ BODY <ISystemPut>: SystemPut
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

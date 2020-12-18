@@ -15,7 +15,7 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkOrganization -Id <String> [-Settings <IPutContentSchemaSettings>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -35,8 +35,8 @@ Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IPutContentSchemaSettings>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -128,7 +128,7 @@ OrganizationSettingsPut
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPutContentSchemaSettings
+Type: JumpCloud.SDK.V1.Models.IOrganizationsettingsput
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -181,7 +181,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganization0
+### JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse
 
 ## NOTES
 
@@ -193,7 +193,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
-  - `[Settings <IPutContentSchemaSettings>]`: OrganizationSettingsPut
+  - `[Settings <IOrganizationsettingsput>]`: OrganizationSettingsPut
     - `[ContactEmail <String>]`: 
     - `[ContactName <String>]`: 
     - `[DeviceIdentificationEnabled <Boolean?>]`: 
@@ -240,10 +240,11 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
-SETTINGS <IPutContentSchemaSettings>: OrganizationSettingsPut
+SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[ContactEmail <String>]`: 
   - `[ContactName <String>]`: 
   - `[DeviceIdentificationEnabled <Boolean?>]`: 

@@ -15,19 +15,19 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
-JumpCloud.SDK.V1.Models.ISystemPut
+JumpCloud.SDK.V1.Models.ISystemput
 .Outputs
-JumpCloud.SDK.V1.Models.IJcSystem1
+JumpCloud.SDK.V1.Models.ISystemSetApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-AGENTBOUNDMESSAGES <IPutContentSchemaAgentBoundMessagesItem[]>:
+AGENTBOUNDMESSAGES <ISystemputAgentBoundMessagesItem[]>:
   [Cmd <String>]:
 
-BODY <ISystemPut>:
-  [AgentBoundMessages <IPutContentSchemaAgentBoundMessagesItem[]>]:
+BODY <ISystemput>:
+  [AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]:
     [Cmd <String>]:
   [AllowMultiFactorAuthentication <Boolean?>]:
   [AllowPublicKeyAuthentication <Boolean?>]:
@@ -37,6 +37,7 @@ BODY <ISystemPut>:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -44,7 +45,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkSystem
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IJcSystem1])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemSetApplicationJsonResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -77,7 +78,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISystemPut]
+    [JumpCloud.SDK.V1.Models.ISystemput]
     # SystemPut
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -85,7 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IPutContentSchemaAgentBoundMessagesItem[]]
+    [JumpCloud.SDK.V1.Models.ISystemputAgentBoundMessagesItem[]]
     # .
     # To construct, see NOTES section for AGENTBOUNDMESSAGES properties and create a hash table.
     ${AgentBoundMessages},
@@ -181,7 +182,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalSystem @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalSystem @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

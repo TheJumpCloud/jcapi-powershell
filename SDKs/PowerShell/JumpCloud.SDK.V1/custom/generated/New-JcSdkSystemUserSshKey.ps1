@@ -15,22 +15,23 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
-JumpCloud.SDK.V1.Models.ISshKeyPost
+JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
 JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.ISshKeyList
+JumpCloud.SDK.V1.Models.ISystemUsersSshKeyCreateApplicationJsonResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISshKeyPost>:
+BODY <ISshkeypost>:
   Name <String>: The name of the SSH key.
   PublicKey <String>: The Public SSH key.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -38,7 +39,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshKeyList], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUsersSshKeyCreateApplicationJsonResponse], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
@@ -59,7 +60,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISshKeyPost]
+    [JumpCloud.SDK.V1.Models.ISshkeypost]
     # SSHKeyPost
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},

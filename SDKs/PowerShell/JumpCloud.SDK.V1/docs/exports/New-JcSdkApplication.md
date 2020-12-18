@@ -14,11 +14,11 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IPostContentSchemaConfig>] [-Created <String>]
- [-DatabaseAttributes <IPostContentSchemaDatabaseAttributesItem[]>] [-Description <String>]
- [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>]
- [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
+ [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
+ [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
+ [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for CONFIG properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaConfig
+Type: JumpCloud.SDK.V1.Models.IApplicationConfig
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -128,7 +128,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaDatabaseAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -274,6 +274,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoBeta
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoJit
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoType
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoUrl
 .
 
@@ -329,7 +374,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplication0
+### JumpCloud.SDK.V1.Models.IApplicationCreateApplicationJsonResponse
 
 ## NOTES
 
@@ -343,7 +388,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <Color?>]`: 
-  - `[Config <IPostContentSchemaConfig>]`: 
+  - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -364,7 +409,7 @@ BODY <IApplication>: Application
     - `[ConstantAttributeRequired <Boolean?>]`: 
     - `[ConstantAttributeToggle <String>]`: 
     - `[ConstantAttributeType <String>]`: 
-    - `[ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]`: 
+    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -424,7 +469,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IPostContentSchemaDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
@@ -434,9 +479,12 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 
+  - `[SsoBeta <Boolean?>]`: 
+  - `[SsoJit <Boolean?>]`: 
+  - `[SsoType <String>]`: 
   - `[SsoUrl <String>]`: 
 
-CONFIG <IPostContentSchemaConfig>: .
+CONFIG <IApplicationConfig>: .
   - `[AcUrlLabel <String>]`: 
   - `[AcUrlOptions <String>]`: 
   - `[AcUrlPosition <Int32?>]`: 
@@ -457,7 +505,7 @@ CONFIG <IPostContentSchemaConfig>: .
   - `[ConstantAttributeRequired <Boolean?>]`: 
   - `[ConstantAttributeToggle <String>]`: 
   - `[ConstantAttributeType <String>]`: 
-  - `[ConstantAttributeValue <IPostContentSchemaConfigConstantAttributesValueItem[]>]`: 
+  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 

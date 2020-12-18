@@ -9,16 +9,14 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint will return Organization data based on your search parameters.
-This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.
-\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
+This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
 
 ## SYNTAX
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>]
- [-Filter1 <IPostContentSchemaFilter>] [-SearchFilter <IPostContentSchemaSearchFilter>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
+ [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
@@ -29,8 +27,7 @@ Search-JcSdkOrganization -Body <ISearch> [-Fields <String>] [-Filter <String>] [
 
 ## DESCRIPTION
 This endpoint will return Organization data based on your search parameters.
-This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.
-\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
+This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
 
 ## EXAMPLES
 
@@ -123,7 +120,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaFilter
+Type: JumpCloud.SDK.V1.Models.ISearchFilter
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -153,7 +150,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IPostContentSchemaSearchFilter
+Type: JumpCloud.SDK.V1.Models.ISearchFilter1
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -204,7 +201,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganizationList0
+### JumpCloud.SDK.V1.Models.IOrganizationSearchApplicationJsonResponse
 
 ## NOTES
 
@@ -217,8 +214,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>: search
   - `[Fields <String>]`: 
-  - `[Filter <IPostContentSchemaFilter>]`: 
-  - `[SearchFilter <IPostContentSchemaSearchFilter>]`: 
+  - `[Filter <ISearchFilter>]`: 
+  - `[SearchFilter <ISearchFilter1>]`: 
 
 ## RELATED LINKS
 
