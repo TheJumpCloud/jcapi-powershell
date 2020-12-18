@@ -340,6 +340,26 @@ $TransformConfig = [Ordered]@{
         ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo')
     }
 }
+Function Get-SwaggerItem
+{
+    Param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
+        , $Path
+    )
+    # Brake up parts of path to iterate through
+    If ($Path -match '#')
+    {
+        $Path = $Path.Replace('#', '')
+    }
+    $PathDotSource = $Path.Split('/').Split('.') | Where-Object { $_ }
+    # Get contents of swagger file
+    $Object = $InputObject
+    # Iterate through parts of the path and return the requested model
+    $PathDotSource | ForEach-Object {
+        $Object = $Object.$_
+    }
+    Return $Object
+}
 Function Update-SwaggerObject
 {
     Param(
@@ -347,6 +367,7 @@ Function Update-SwaggerObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The original input object which will be used as a reference', DontShow)]$InputObjectOrg
     )
     $InputObject | ForEach-Object {
         $ThisObject = $_
@@ -423,16 +444,6 @@ Function Update-SwaggerObject
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
-                    # Generalize responses
-                    If ($AttributePath -like '*.responses.200')
-                    {
-                        $GeneralResponseObject = [PSCustomObject]@{
-                            additionalProperties = $true
-                            type                 = 'object'
-                        }
-                        $ThisObject.$AttributeName.PSObject.Properties.Remove('schema')
-                        Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralResponseObject)
-                    }
                     # Append "x-ms-enum" to "enum" section
                     If ($AttributePath -like '*.enum')
                     {
@@ -498,6 +509,22 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
                     }
+                    # Generalize responses for when operation returns an object or an array of objects
+                    If ($AttributePath -like '*.responses.200.schema.$ref' -or $AttributePath -like '*.responses.200.schema.items.$ref')
+                    {
+                        $RefItem = Get-SwaggerItem -InputObject:($InputObjectOrg) -Path:($ThisObject.$AttributeName)
+                        If ( $RefItem.type -eq 'object')
+                        {
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('title') -Value:(($ThisObject.$AttributeName).Split('/') | Select-Object -Last 1)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:($RefItem.type)
+                            $ThisObject.PSObject.Properties.Remove($AttributeName)
+                        }
+                        Else
+                        {
+                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' Unknown type of object'.")
+                        }
+                    }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
                     {
@@ -520,7 +547,7 @@ Function Update-SwaggerObject
                     # }
                     If ($ThisObject.$AttributeName)
                     {
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
                         If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
@@ -540,7 +567,7 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                     # If it was an array of objects before reapply the parent array.
                     If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                     {
@@ -641,7 +668,7 @@ $SDKName | ForEach-Object {
             }
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes)
+            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) -InputObjectOrg:($SwaggerObject)
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
             # Validate that all operationIds in mapping have been found in spec
@@ -685,11 +712,14 @@ $SDKName | ForEach-Object {
             {
                 $UpdatedSpec = $true
             }
+            # Format the results
+            $SwaggerString = Format-SwaggerObject -InputObject:($SwaggerString | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
-            # For comparing before and after
+            # # For comparing before and after
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
-            # $SwaggerObjectOrg | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
+            # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
+            # # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $UpdatedSwagger | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
             # Return variable to Azure Pipelines
             Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
