@@ -15,6 +15,8 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
+JumpCloud.SDK.V1.Models.IPathsM6Ti10SystemusersIdExpirePostResponses200ContentApplicationJsonSchema
+.Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
@@ -23,6 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -30,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Invoke-JcSdkExpireSystemUserPassword
 {
-    [OutputType([System.String])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPathsM6Ti10SystemusersIdExpirePostResponses200ContentApplicationJsonSchema], [System.String])]
     [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Post', Mandatory)]
@@ -65,12 +68,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Returns true when the command succeeds
-    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -108,7 +105,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalExpireSystemUserPassword @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalExpireSystemUserPassword @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

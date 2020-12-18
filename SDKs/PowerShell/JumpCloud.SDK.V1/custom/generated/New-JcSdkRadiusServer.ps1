@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IRadiusserverpost
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserver
+JumpCloud.SDK.V1.Models.IPaths11E1Ot4RadiusserversPostResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -33,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths11E1Ot4RadiusserversPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -136,7 +136,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalRadiusServer @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalRadiusServer @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

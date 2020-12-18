@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-JcSdkCommandResult
 
 ## SYNOPSIS
-This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````
+This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````
 
 ## SYNTAX
 
@@ -24,7 +24,7 @@ Remove-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Co
 ```
 
 ## DESCRIPTION
-This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ````
+This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````
 
 ## EXAMPLES
 
@@ -130,7 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommandresult
+### JumpCloud.SDK.V1.Models.IPaths2Ze930CommandresultsIdDeleteResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -143,6 +143,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

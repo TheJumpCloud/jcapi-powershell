@@ -1,8 +1,10 @@
 <#
 .Synopsis
-This endpoint will delete a specific System User's SSH Key.
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Description
-This endpoint will delete a specific System User's SSH Key.
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,9 +17,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema
-.Outputs
-JumpCloud.SDK.V1.Models.IPathsLylraySystemusersSystemuserIdSshkeysIdDeleteResponses200ContentApplicationJsonSchema
+System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -29,26 +29,26 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkSystemUserSshKey.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkSystemPostSystem.md
 #>
- Function Remove-JcSdkSystemUserSshKey
+ Function Invoke-JcSdkSystemPostSystem
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IPathsLylraySystemusersSystemuserIdSshkeysIdDeleteResponses200ContentApplicationJsonSchema], [JumpCloud.SDK.V1.Models.IPaths1Bg71WnSystemusersSystemuserIdSshkeysIdDeleteResponses400ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Systems', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Delete', Mandatory)]
+    [Parameter(ParameterSetName='Systems', Mandatory)]
+    [Parameter(ParameterSetName='Systems1', Mandatory)]
+    [Parameter(ParameterSetName='Systems2', Mandatory)]
+    [Parameter(ParameterSetName='Systems3', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${SystemId},
 
-    [Parameter(ParameterSetName='Delete', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Path')]
-    [System.String]
-    # .
-    ${SystemuserId},
-
-    [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity1', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity2', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SystemsViaIdentity3', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -74,6 +74,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -111,7 +117,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Remove-JcSdkInternalSystemUserSshKey @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalSystemPostSystem @PSBoundParameters
     }
     End
     {

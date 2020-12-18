@@ -130,7 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Boolean
+### JumpCloud.SDK.V1.Models.IPathsB7Pdj1CommandsIdDeleteResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -143,6 +143,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

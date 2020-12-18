@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 .Description
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.ICommandresult
+JumpCloud.SDK.V1.Models.IPaths14Jnep3CommandresultsIdGetResponses200ContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.ICommandresultslist
+JumpCloud.SDK.V1.Models.IPathsU946O9CommandresultsGetResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -25,6 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -32,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommandResult
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths14Jnep3CommandresultsIdGetResponses200ContentApplicationJsonSchema], [JumpCloud.SDK.V1.Models.IPathsU946O9CommandresultsGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -158,7 +159,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters
+                $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -183,7 +184,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters
+            $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

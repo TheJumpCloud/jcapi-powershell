@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
 .Description
-This endpoint allows you to get a RADIUS server in your organization.\n\n#### \n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,9 +15,9 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserver
+JumpCloud.SDK.V1.Models.IPaths1Eil0UaRadiusserversGetResponses200ContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserverslist
+JumpCloud.SDK.V1.Models.IPathsXbrw3SRadiusserversIdGetResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -25,6 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -32,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver], [JumpCloud.SDK.V1.Models.IRadiusserverslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPathsXbrw3SRadiusserversIdGetResponses200ContentApplicationJsonSchema], [JumpCloud.SDK.V1.Models.IPaths1Eil0UaRadiusserversGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -152,7 +153,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalRadiusServer @PSBoundParameters
+                $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalRadiusServer @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -177,7 +178,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalRadiusServer @PSBoundParameters
+            $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalRadiusServer @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

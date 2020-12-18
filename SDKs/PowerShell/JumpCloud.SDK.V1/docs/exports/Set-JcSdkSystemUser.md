@@ -768,7 +768,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemuserreturn
+### JumpCloud.SDK.V1.Models.IPaths1Fu8WdnSystemusersIdPutResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -844,6 +844,7 @@ BODY <ISystemuserput>: SystemUserPut
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

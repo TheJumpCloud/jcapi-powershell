@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IApplication
 .Outputs
-JumpCloud.SDK.V1.Models.IApplication
+JumpCloud.SDK.V1.Models.IPathsDob2B2ApplicationsPostResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -115,6 +115,9 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
+  [SsoBeta <Boolean?>]:
+  [SsoJit <Boolean?>]:
+  [SsoType <String>]:
   [SsoUrl <String>]:
 
 CONFIG <IApplicationConfig>:
@@ -202,7 +205,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPathsDob2B2ApplicationsPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -301,6 +304,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoBeta},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoJit},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoType},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${SsoUrl},
@@ -361,7 +382,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

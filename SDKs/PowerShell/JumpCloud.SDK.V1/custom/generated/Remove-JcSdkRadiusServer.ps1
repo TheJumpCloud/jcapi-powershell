@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusserverput
+JumpCloud.SDK.V1.Models.IPaths1C22T4CRadiusserversIdDeleteResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -23,6 +23,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -30,7 +31,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserverput])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths1C22T4CRadiusserversIdDeleteResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -102,7 +103,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalRadiusServer @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Remove-JcSdkInternalRadiusServer @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

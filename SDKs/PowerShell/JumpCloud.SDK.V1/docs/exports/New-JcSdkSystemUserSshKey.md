@@ -175,9 +175,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
+### JumpCloud.SDK.V1.Models.IPaths1XpiccaSystemusersIdSshkeysPostResponses200ContentApplicationJsonSchema
 
-### JumpCloud.SDK.V1.Models.ISshkeylist
+### JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -194,6 +194,7 @@ BODY <ISshkeypost>: SSHKeyPost
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
