@@ -1,30 +1,65 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkCommandTrigger.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkSystemPostSystem.md
 schema: 2.0.0
 ---
 
-# Invoke-JcSdkCommandTrigger
+# Invoke-JcSdkSystemPostSystem
 
 ## SYNOPSIS
-This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 
 ## SYNTAX
 
-### Post (Default)
+### Systems (Default)
 ```
-Invoke-JcSdkCommandTrigger -Triggername <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PostViaIdentity
+### Systems1
 ```
-Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### Systems2
+```
+Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### Systems3
+```
+Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SystemsViaIdentity
+```
+Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### SystemsViaIdentity1
+```
+Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### SystemsViaIdentity2
+```
+Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### SystemsViaIdentity3
+```
+Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 
 ## EXAMPLES
 
@@ -50,7 +85,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PostViaIdentity
+Parameter Sets: SystemsViaIdentity, SystemsViaIdentity1, SystemsViaIdentity2, SystemsViaIdentity3
 Aliases:
 
 Required: True
@@ -75,12 +110,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Triggername
+### -SystemId
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: Post
+Parameter Sets: Systems, Systems1, Systems2, Systems3
 Aliases:
 
 Required: True
@@ -130,7 +165,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IPaths3Q5S9QCommandTriggerTriggernamePostResponses200ContentApplicationJsonSchema
+### System.String
 
 ## NOTES
 

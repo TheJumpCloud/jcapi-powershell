@@ -175,9 +175,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganization
+### JumpCloud.SDK.V1.Models.IPaths1Ebv7Q2OrganizationsIdGetResponses200ContentApplicationJsonSchema
 
-### JumpCloud.SDK.V1.Models.IOrganizationslist
+### JumpCloud.SDK.V1.Models.IPathsBxzw0YOrganizationsGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -190,6 +190,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

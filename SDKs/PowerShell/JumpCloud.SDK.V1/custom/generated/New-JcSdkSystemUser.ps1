@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ISystemuserputpost
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemuserreturn
+JumpCloud.SDK.V1.Models.IPaths15CjnjjSystemusersPostResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -91,7 +91,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkSystemUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths15CjnjjSystemusersPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -405,7 +405,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalSystemUser @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalSystemUser @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

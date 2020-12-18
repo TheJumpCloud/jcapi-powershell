@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.ICommand
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.ICommand
+JumpCloud.SDK.V1.Models.IPaths1KdhxraCommandsIdPutResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -43,6 +43,7 @@ BODY <ICommand>:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
+  [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
@@ -50,7 +51,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkCommand
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommand])]
+    [OutputType([JumpCloud.SDK.V1.Models.IPaths1KdhxraCommandsIdPutResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Put', Mandatory)]
@@ -253,7 +254,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalCommand @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalCommand @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

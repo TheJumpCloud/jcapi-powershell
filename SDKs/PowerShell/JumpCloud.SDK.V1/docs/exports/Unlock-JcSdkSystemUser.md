@@ -14,13 +14,12 @@ This endpoint allows you to unlock a user's account.
 
 ### Unlock (Default)
 ```
-Unlock-JcSdkSystemUser -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Unlock-JcSdkSystemUser -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UnlockViaIdentity
 ```
-Unlock-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Unlock-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -75,21 +74,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -130,6 +114,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### JumpCloud.SDK.V1.Models.IPaths17T55AkSystemusersIdUnlockPostResponses200ContentApplicationJsonSchema
+
 ### System.String
 
 ## NOTES
@@ -143,6 +129,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

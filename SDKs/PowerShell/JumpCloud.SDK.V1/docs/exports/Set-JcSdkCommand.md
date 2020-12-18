@@ -409,7 +409,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommand
+### JumpCloud.SDK.V1.Models.IPaths1KdhxraCommandsIdPutResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -440,6 +440,7 @@ BODY <ICommand>: Command
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 

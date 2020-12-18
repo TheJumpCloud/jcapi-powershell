@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkCommandResult
 
 ## SYNOPSIS
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ## SYNTAX
 
@@ -29,7 +29,7 @@ Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] 
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \n  ```
+This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
 
 ## EXAMPLES
 
@@ -159,9 +159,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommandresult
+### JumpCloud.SDK.V1.Models.IPaths14Jnep3CommandresultsIdGetResponses200ContentApplicationJsonSchema
 
-### JumpCloud.SDK.V1.Models.ICommandresultslist
+### JumpCloud.SDK.V1.Models.IPathsU946O9CommandresultsGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
 
@@ -174,6 +174,7 @@ To create the parameters described below, construct a hash table containing the 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
