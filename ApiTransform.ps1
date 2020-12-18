@@ -539,7 +539,7 @@ Function Update-SwaggerObject
                     {
                         $GeneralObject = [PSCustomObject]@{
                             additionalProperties = $true
-                            title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])Response"
+                            title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse"
                             type                 = 'object'
                         }
                         If ($ThisObject.$AttributeName.type -eq 'array')
