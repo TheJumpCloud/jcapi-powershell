@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of an Office 365 instance.\n\n####
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
- [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -32,9 +32,8 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365Pat
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
- [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -124,7 +123,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserLockoutAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -139,7 +138,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -192,7 +191,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IOffice365UpdateApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IOffice365Output
 
 ## NOTES
 
@@ -205,8 +204,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
   - `[Name <String>]`: 
-  - `[UserLockoutAction <UserLockoutAction?>]`: 
-  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
+  - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordExpirationAction <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

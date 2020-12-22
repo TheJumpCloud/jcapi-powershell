@@ -13,7 +13,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsN2YzahApplemdmsAppleMdmIdDevicesGetResponses200ContentApplicationJsonSchemaItems
+JumpCloud.SDK.V2.Models.IAppleMdmDevice
 .Outputs
 System.String
 .Link
@@ -21,7 +21,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkAppleMdmDevice
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPathsN2YzahApplemdmsAppleMdmIdDevicesGetResponses200ContentApplicationJsonSchemaItems], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice], [System.String])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
@@ -138,7 +138,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -163,7 +163,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

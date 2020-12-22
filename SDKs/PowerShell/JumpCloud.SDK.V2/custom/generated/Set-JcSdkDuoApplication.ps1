@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IDuoApplicationSetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IDuoApplication
 .Outputs
 System.String
 .Notes
@@ -56,7 +56,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkDuoApplication
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplicationSetApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication], [System.String])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -173,7 +173,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalDuoApplication @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalDuoApplication @PSBoundParameters
     }
     End
     {

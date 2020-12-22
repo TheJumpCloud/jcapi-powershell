@@ -75,7 +75,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPathsX1W8N4WorkdaysWorkdayIdWorkersGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IWorkdayWorker
 
 ## NOTES
 

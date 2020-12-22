@@ -15,8 +15,6 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.ISystemFdeKeyGetApplicationJsonResponse
-.Outputs
 System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
@@ -48,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSystemFdeKey
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISystemFdeKeyGetApplicationJsonResponse], [System.String])]
+    [OutputType([System.String])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -120,7 +118,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemFdeKey @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSystemFdeKey @PSBoundParameters
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

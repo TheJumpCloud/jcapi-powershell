@@ -15,7 +15,7 @@ Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X 
 ### UpdateExpanded (Default)
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <IAuthnPolicyInputConditions>]
- [-Description <String>] [-Disabled] [-EffectAction <Action>] [-MfaRequired] [-Name <String>]
+ [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
  [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupInclusions <String[]>]
  [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -35,7 +35,7 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IA
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity>
- [-Conditions <IAuthnPolicyInputConditions>] [-Description <String>] [-Disabled] [-EffectAction <Action>]
+ [-Conditions <IAuthnPolicyInputConditions>] [-Description <String>] [-Disabled] [-EffectAction <String>]
  [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -126,7 +126,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Action
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -286,7 +286,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAuthenticationPolicyUpdateApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IAuthnPolicy
 
 ### System.String
 
@@ -300,14 +300,14 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IAuthnPolicyInput>: AuthnPolicyInput
-  - `EffectAction <Action>`: 
+  - `EffectAction <String>`: 
   - `[Conditions <IAuthnPolicyInputConditions>]`: 
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
-    - `[Type <Type?>]`: 
+    - `[Type <String>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
 
@@ -333,7 +333,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[WorkdayId <String>]`: 
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
-  - `[Type <Type?>]`: 
+  - `[Type <String>]`: 
 
 ## RELATED LINKS
 

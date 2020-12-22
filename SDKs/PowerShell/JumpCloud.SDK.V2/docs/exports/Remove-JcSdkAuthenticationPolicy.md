@@ -115,7 +115,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAuthenticationPolicyDeleteApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IAuthnPolicy
 
 ### System.String
 

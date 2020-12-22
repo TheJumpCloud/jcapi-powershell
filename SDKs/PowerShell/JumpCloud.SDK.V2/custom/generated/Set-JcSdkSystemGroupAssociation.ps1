@@ -25,8 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISystemGroupGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
-  Op <Op>: How to modify the graph connection.
-  Type <Type>:
+  Op <String>: How to modify the graph connection.
+  Type <String>:
   [Attributes <ISystemGroupGraphManagementReqAttributes>]: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -89,17 +89,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Op])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Op]
+    [System.String]
     # How to modify the graph connection.
     ${Op},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type]
+    [System.String]
     # .
     ${Type},
 

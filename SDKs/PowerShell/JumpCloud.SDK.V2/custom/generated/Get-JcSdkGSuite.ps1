@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGSuiteGetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IGsuiteOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -46,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkGSuite
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGSuiteGetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -118,7 +118,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuite @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuite @PSBoundParameters
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

@@ -75,7 +75,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPathsP2769DSysteminsightsServicesGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.ISystemInsightsServices
 
 ## NOTES
 

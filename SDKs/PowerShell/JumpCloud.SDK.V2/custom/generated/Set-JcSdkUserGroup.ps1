@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IUserGroupPut
 .Outputs
-JumpCloud.SDK.V2.Models.IUserGroupSetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IUserGroup
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -61,7 +61,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkUserGroup
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IUserGroupSetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -179,7 +179,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters
     }
     End
     {

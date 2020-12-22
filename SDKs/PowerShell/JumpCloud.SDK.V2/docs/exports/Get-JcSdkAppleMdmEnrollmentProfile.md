@@ -103,9 +103,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAppleMdmEnrollmentProfileGetApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IAppleMdm
 
-### JumpCloud.SDK.V2.Models.IPaths127NticApplemdmsAppleMdmIdEnrollmentprofilesGetResponses200ContentApplicationJsonSchemaItems
+### System.String
 
 ## NOTES
 

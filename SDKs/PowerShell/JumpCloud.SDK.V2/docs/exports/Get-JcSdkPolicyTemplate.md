@@ -144,9 +144,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IError
 
-### JumpCloud.SDK.V2.Models.IPaths1Pt2HgfPolicytemplatesGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IPolicyTemplate
 
-### JumpCloud.SDK.V2.Models.IPolicyTemplateGetApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
 
 ## NOTES
 

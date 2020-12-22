@@ -4,6 +4,151 @@
     "application/json"
   ],
   "definitions": {
+    "active-directory-input": {
+      "properties": {
+        "domain": {
+          "description": "Domain name for this Active Directory instance.",
+          "type": "string"
+        }
+      },
+      "title": "Active Directory Input",
+      "type": "object"
+    },
+    "active-directory-output": {
+      "allOf": [
+        {
+          "properties": {
+            "id": {
+              "description": "ObjectID of this Active Directory instance.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/active-directory-input"
+        }
+      ],
+      "title": "Active Directory Output"
+    },
+    "Administrator": {
+      "example": {
+        "email": "joe@example.com",
+        "enableMultiFactor": true,
+        "firstname": "Joe",
+        "id": "0123456789abcdef01234567",
+        "lastname": "Blough",
+        "registered": false
+      },
+      "properties": {
+        "email": {
+          "type": "string"
+        },
+        "enableMultiFactor": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "registered": {
+          "type": "boolean"
+        },
+        "role": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
+        "suspended": {
+          "type": "boolean"
+        }
+      },
+      "title": "Administrator",
+      "type": "object"
+    },
+    "AppleMDM": {
+      "properties": {
+        "apnsCertExpiry": {
+          "description": "The expiration date and time for the APNS Certificate.",
+          "type": "string"
+        },
+        "apnsPushTopic": {
+          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist.",
+          "type": "string"
+        },
+        "defaultSystemGroupID": {
+          "description": "ObjectId uniquely identifying the MDM default System Group.",
+          "type": "string"
+        },
+        "dep": {
+          "$ref": "#/definitions/DEP"
+        },
+        "depAccessTokenExpiry": {
+          "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State.",
+          "type": "string"
+        },
+        "depServerTokenState": {
+          "description": "The state of the dep server token, presence and expiry.",
+          "enum": [
+            "unknown",
+            "missing",
+            "valid",
+            "expired"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying an MDM Enrollment,",
+          "type": "string"
+        },
+        "name": {
+          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
+          "maxLength": 255,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "AppleMDM",
+      "type": "object"
+    },
+    "apple-mdm-device": {
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "depRegistered": {
+          "type": "boolean"
+        },
+        "enrolled": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "osVersion": {
+          "type": "string"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "udid": {
+          "type": "string"
+        }
+      },
+      "title": "Apple MDM Device",
+      "type": "object"
+    },
     "apple-mdm-patch-input": {
       "properties": {
         "appleSignedCert": {
@@ -29,6 +174,14 @@
       },
       "title": "Apple MDM Patch Input",
       "type": "object"
+    },
+    "apple-mdm-public-key-cert": {
+      "title": "Apple MDM Public Key Certificate",
+      "type": "string"
+    },
+    "apple-mdm-signed-csr-plist": {
+      "title": "Apple MDM Signed CSR PList",
+      "type": "string"
     },
     "auth-info": {
       "properties": {
@@ -126,10 +279,7 @@
             "deny",
             "unknown"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "action"
-          }
+          "type": "string"
         },
         "obligations": {
           "$ref": "#/definitions/AuthnPolicyObligations"
@@ -185,10 +335,7 @@
           "enum": [
             "user_portal"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "title": "AuthnPolicyResourceTarget",
@@ -337,6 +484,41 @@
       "title": "DEPWelcomeScreen",
       "type": "object"
     },
+    "Directory": {
+      "description": "",
+      "properties": {
+        "id": {
+          "description": "The ObjectID of the directory.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the directory.",
+          "type": "string"
+        },
+        "oAuthStatus": {
+          "description": "the expiry and error status of the bearer token",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of directory.",
+          "enum": [
+            "active_directory",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "workday"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "type"
+      ],
+      "title": "Directory",
+      "type": "object"
+    },
     "DuoAccount": {
       "properties": {
         "id": {
@@ -450,6 +632,26 @@
       "title": "ErrorResponse",
       "type": "object"
     },
+    "GraphConnection": {
+      "description": "Represents an edge between two graph objects. From can be omitted if it is clear from context.",
+      "properties": {
+        "attributes": {
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "from": {
+          "$ref": "#/definitions/GraphObject"
+        },
+        "to": {
+          "$ref": "#/definitions/GraphObject"
+        }
+      },
+      "required": [
+        "to"
+      ],
+      "title": "GraphConnection",
+      "type": "object"
+    },
     "GraphManagementReq": {
       "properties": {
         "attributes": {
@@ -467,10 +669,7 @@
             "remove",
             "update"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "$ref": "#/definitions/GraphType"
@@ -482,6 +681,60 @@
         "id"
       ],
       "title": "GraphManagementReq",
+      "type": "object"
+    },
+    "GraphObject": {
+      "properties": {
+        "attributes": {
+          "description": "The graph object's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of the graph object.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of graph object.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "id"
+      ],
+      "title": "GraphObject",
+      "type": "object"
+    },
+    "GraphObjectWithPaths": {
+      "properties": {
+        "compiledAttributes": {
+          "description": "The compiled graph attributes of the target object.",
+          "type": "object"
+        },
+        "id": {
+          "description": "Object ID of this graph object.",
+          "type": "string"
+        },
+        "paths": {
+          "description": "A path through the graph between two graph objects.",
+          "items": {
+            "items": {
+              "$ref": "#/definitions/GraphConnection"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "type": {
+          "$ref": "#/definitions/GraphType"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "paths"
+      ],
+      "title": "GraphObjectWithPaths",
       "type": "object"
     },
     "GraphType": {
@@ -501,60 +754,45 @@
         "user_group"
       ],
       "title": "GraphType",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "GraphType",
-        "values": [
-          {
-            "name": "active_directory",
-            "value": "active_directory"
-          },
-          {
-            "name": "application",
-            "value": "application"
-          },
-          {
-            "name": "command",
-            "value": "command"
-          },
-          {
-            "name": "g_suite",
-            "value": "g_suite"
-          },
-          {
-            "name": "ldap_server",
-            "value": "ldap_server"
-          },
-          {
-            "name": "office_365",
-            "value": "office_365"
-          },
-          {
-            "name": "policy",
-            "value": "policy"
-          },
-          {
-            "name": "radius_server",
-            "value": "radius_server"
-          },
-          {
-            "name": "systems",
-            "value": "system"
-          },
-          {
-            "name": "systems_group",
-            "value": "system_group"
-          },
-          {
-            "name": "user",
-            "value": "user"
-          },
-          {
-            "name": "user_group",
-            "value": "user_group"
-          }
-        ]
-      }
+      "type": "string"
+    },
+    "Group": {
+      "properties": {
+        "attributes": {
+          "description": "The group object's attributes.",
+          "type": "object"
+        },
+        "description": {
+          "description": "Description of a Group",
+          "type": "string"
+        },
+        "email": {
+          "description": "E-mail address associated with a Group",
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a Group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of a Group.",
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/GroupType"
+        }
+      },
+      "title": "Group",
+      "type": "object"
+    },
+    "GroupType": {
+      "description": "The group type.",
+      "enum": [
+        "system_group",
+        "user_group"
+      ],
+      "title": "GroupType",
+      "type": "string"
     },
     "GSuiteBuiltinTranslation": {
       "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
@@ -575,10 +813,41 @@
         "user_primary_organization_title"
       ],
       "title": "G Suite BuiltIn Translation",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "GSuiteBuiltinTranslation"
-      }
+      "type": "string"
+    },
+    "gsuite-output": {
+      "allOf": [
+        {
+          "properties": {
+            "groupsEnabled": {
+              "type": "boolean"
+            },
+            "id": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "userLockoutAction": {
+              "enum": [
+                "suspend",
+                "maintain"
+              ],
+              "type": "string"
+            },
+            "userPasswordExpirationAction": {
+              "enum": [
+                "suspend",
+                "maintain",
+                "remove_access"
+              ],
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "title": "GSuite Output",
+      "type": "object"
     },
     "gsuite-patch-input": {
       "properties": {
@@ -593,10 +862,7 @@
             "suspend",
             "maintain"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "userLockoutAction"
-          }
+          "type": "string"
         },
         "userPasswordExpirationAction": {
           "enum": [
@@ -604,10 +870,7 @@
             "maintain",
             "remove_access"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "userPasswordExpirationAction"
-          }
+          "type": "string"
         }
       },
       "title": "GSuite Patch Input",
@@ -698,16 +961,90 @@
       "title": "Job ID",
       "type": "object"
     },
+    "job-workresult": {
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "meta": {
+          "type": "object"
+        },
+        "persistedFields": {
+          "type": "object"
+        },
+        "status": {
+          "type": "string"
+        },
+        "statusMsg": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        }
+      },
+      "title": "Job WorkResult",
+      "type": "object"
+    },
     "LdapServerAction": {
       "enum": [
         "disable",
         "remove"
       ],
       "title": "LDAP Server Action",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "LdapServerAction"
-      }
+      "type": "string"
+    },
+    "ldap-server-input": {
+      "properties": {
+        "name": {
+          "description": "The name of this LDAP server",
+          "type": "string"
+        },
+        "userLockoutAction": {
+          "description": "action to take; one of 'remove' or 'disable'",
+          "enum": [
+            "disable",
+            "remove"
+          ],
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "description": "action to take; one of 'remove' or 'disable'",
+          "enum": [
+            "disable",
+            "remove"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "LDAP Server Input",
+      "type": "object"
+    },
+    "ldap-server-output": {
+      "allOf": [
+        {
+          "properties": {
+            "id": {
+              "description": "Unique identifier of this LDAP server",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": "object"
+        },
+        {
+          "$ref": "#/definitions/ldap-server-input"
+        }
+      ],
+      "title": "LDAP Server Output"
+    },
+    "mobileconfig": {
+      "title": "mobileconfig",
+      "type": "string"
     },
     "Office365BuiltinTranslation": {
       "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
@@ -724,10 +1061,38 @@
         "user_office_location"
       ],
       "title": "Office 365 BuiltIn Translation",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Office365BuiltinTranslation"
-      }
+      "type": "string"
+    },
+    "office365-output": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userLockoutAction": {
+          "enum": [
+            "suspend",
+            "maintain"
+          ],
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "enum": [
+            "suspend",
+            "maintain"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "userLockoutAction",
+        "userPasswordExpirationAction"
+      ],
+      "title": "Office 365 Output",
+      "type": "object"
     },
     "office365-patch-input": {
       "properties": {
@@ -739,20 +1104,14 @@
             "suspend",
             "maintain"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "userLockoutAction"
-          }
+          "type": "string"
         },
         "userPasswordExpirationAction": {
           "enum": [
             "suspend",
             "maintain"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "userPasswordExpirationAction"
-          }
+          "type": "string"
         }
       },
       "title": "Office 365 Patch Input",
@@ -781,6 +1140,24 @@
         }
       },
       "title": "Office 365 Translation Rule Request",
+      "type": "object"
+    },
+    "Policy": {
+      "description": "An instance of a policy template.",
+      "properties": {
+        "id": {
+          "description": "ObjectId uniquely identifying a Policy.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The description for this specific Policy.",
+          "type": "string"
+        },
+        "template": {
+          "$ref": "#/definitions/PolicyTemplate"
+        }
+      },
+      "title": "Policy",
       "type": "object"
     },
     "PolicyRequest": {
@@ -812,6 +1189,58 @@
       "title": "PolicyRequest",
       "type": "object"
     },
+    "PolicyResult": {
+      "properties": {
+        "detail": {
+          "description": "Details pertaining to the policy result.",
+          "type": "string"
+        },
+        "endedAt": {
+          "description": "The end of the policy application.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "exitStatus": {
+          "description": "The 32-bit unsigned exit status from the applying the policy.",
+          "type": "integer"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a Policy Result.",
+          "type": "string"
+        },
+        "policyID": {
+          "description": "ObjectId uniquely identifying the parent Policy.",
+          "type": "string"
+        },
+        "startedAt": {
+          "description": "The start of the policy application.",
+          "format": "date-time",
+          "type": "string"
+        },
+        "state": {
+          "description": "Enumeration describing the state of the policy. Success, failed, or pending.",
+          "type": "string"
+        },
+        "stdErr": {
+          "description": "The STDERR output from applying the policy.",
+          "type": "string"
+        },
+        "stdOut": {
+          "description": "The STDOUT output from applying the policy.",
+          "type": "string"
+        },
+        "success": {
+          "description": "True if the policy was successfully applied; false otherwise.",
+          "type": "boolean"
+        },
+        "systemID": {
+          "description": "ObjectId uniquely identifying the parent System.",
+          "type": "string"
+        }
+      },
+      "title": "PolicyResult",
+      "type": "object"
+    },
     "PolicyTemplate": {
       "description": "The shallow information about a Policy Template.",
       "properties": {
@@ -835,10 +1264,7 @@
               "agent",
               "mdm"
             ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "items"
-            }
+            "type": "string"
           },
           "type": "array"
         },
@@ -864,10 +1290,7 @@
             "darwin",
             "windows"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "osMetaFamily"
-          }
+          "type": "string"
         },
         "reference": {
           "description": "URL to visit for further information.",
@@ -907,10 +1330,7 @@
             "doublelistbox",
             "table"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "displayType"
-          }
+          "type": "string"
         },
         "id": {
           "description": "ObjectId uniquely identifying a Policy Template Configuration Field",
@@ -961,6 +1381,52 @@
         "name"
       ],
       "title": "PolicyTemplateConfigField",
+      "type": "object"
+    },
+    "PolicyTemplateWithDetails": {
+      "description": "The shallow information about a Policy Template.",
+      "properties": {
+        "activation": {
+          "description": "Requirements before the policy can be activated.",
+          "type": "string"
+        },
+        "behavior": {
+          "description": "Specifics about the behavior of the policy.",
+          "type": "string"
+        },
+        "configFields": {
+          "description": "An unordered list of all the fields that can be configured for this Policy Template.",
+          "items": {
+            "$ref": "#/definitions/PolicyTemplateConfigField"
+          },
+          "type": "array"
+        },
+        "description": {
+          "description": "The default description for the Policy.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The default display name for the Policy.",
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a Policy Template.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The unique name for the Policy Template.",
+          "type": "string"
+        },
+        "osMetaFamily": {
+          "enum": [
+            "linux",
+            "darwin",
+            "windows"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "PolicyTemplateWithDetails",
       "type": "object"
     },
     "PolicyValue": {
@@ -1087,10 +1553,7 @@
         "tos"
       ],
       "title": "Setup Assistant Option",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "SetupAssistantOption"
-      }
+      "type": "string"
     },
     "software-app": {
       "properties": {
@@ -1108,6 +1571,47 @@
         }
       },
       "title": "Software Application Package Object"
+    },
+    "software-app-status": {
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "details": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "softwareAppId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "systemId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "Software Application Status Object"
+    },
+    "systemfdekey": {
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "SystemFDEKey",
+      "type": "object"
     },
     "SystemGraphManagementReq": {
       "properties": {
@@ -1139,10 +1643,7 @@
             "remove",
             "update"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "enum": [
@@ -1157,10 +1658,7 @@
             "user",
             "user_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1198,10 +1696,7 @@
           "enum": [
             "system_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "title": "SystemGroup",
@@ -1237,10 +1732,7 @@
             "remove",
             "update"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "enum": [
@@ -1255,10 +1747,7 @@
             "user",
             "user_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1281,26 +1770,14 @@
             "add",
             "remove"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "description": "The member type.",
           "enum": [
             "system"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type1",
-            "values": [
-              {
-                "name": "systems",
-                "value": "system"
-              }
-            ]
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1309,6 +1786,2274 @@
         "id"
       ],
       "title": "SystemGroupMembersReq",
+      "type": "object"
+    },
+    "system-insights-alf": {
+      "properties": {
+        "allow_signed_enabled\t": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "firewall_unload": {
+          "type": "integer"
+        },
+        "global_state": {
+          "type": "integer"
+        },
+        "logging_enabled": {
+          "type": "integer"
+        },
+        "logging_option": {
+          "type": "integer"
+        },
+        "stealth_enabled": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights ALF",
+      "type": "object"
+    },
+    "system-insights-alf-exceptions": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "state": {
+          "type": "number"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights ALF Exceptions",
+      "type": "object"
+    },
+    "system-insights-alf-explicit-auths": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "process": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights ALF Explicit Authorizations",
+      "type": "object"
+    },
+    "system-insights-appcompat-shims": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "executable": {
+          "type": "string"
+        },
+        "install_time": {
+          "type": "number"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sdb_id": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Application Compatibility Shims",
+      "type": "object"
+    },
+    "system-insights-apps": {
+      "example": {
+        "applescript_enabled": "1",
+        "bundle_executable": "App Store",
+        "bundle_identifier": "com.apple.appstore",
+        "bundle_name": "App Store",
+        "bundle_package_type": "APPL",
+        "bundle_short_version": "2.4",
+        "bundle_version": "658.1",
+        "category": "public.app-category.utilities",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "compiler": "com.apple.compilers.llvm.clang.1_0",
+        "copyright": "",
+        "development_region": "English",
+        "display_name": "App Store",
+        "element": "",
+        "environment": "",
+        "info_string": "",
+        "last_opened_time": 1556688963,
+        "minimum_system_version": "10.13",
+        "name": "App Store.app",
+        "path": "/Applications/App Store.app",
+        "system_id": "5c9e51a13c5146f89bae12d9"
+      },
+      "properties": {
+        "applescript_enabled": {
+          "type": "string"
+        },
+        "bundle_executable": {
+          "type": "string"
+        },
+        "bundle_identifier": {
+          "type": "string"
+        },
+        "bundle_name": {
+          "type": "string"
+        },
+        "bundle_package_type": {
+          "type": "string"
+        },
+        "bundle_short_version": {
+          "type": "string"
+        },
+        "bundle_version": {
+          "type": "string"
+        },
+        "category": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "compiler": {
+          "type": "string"
+        },
+        "copyright": {
+          "type": "string"
+        },
+        "development_region": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "element": {
+          "type": "string"
+        },
+        "environment": {
+          "type": "string"
+        },
+        "info_string": {
+          "type": "string"
+        },
+        "last_opened_time": {
+          "type": "number"
+        },
+        "minimum_system_version": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Apps",
+      "type": "object"
+    },
+    "system-insights-authorized-keys": {
+      "properties": {
+        "algorithm": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "key": {
+          "type": "string"
+        },
+        "key_file": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Authorized Keys",
+      "type": "object"
+    },
+    "system-insights-battery": {
+      "example": {
+        "amperage": 93836453,
+        "charged": 63086136,
+        "charging": 6577424,
+        "collection_time": "anim in dolor",
+        "condition": "magna Ut dolor laborum",
+        "current_capacity": 95829126,
+        "cycle_count": -58203101,
+        "designed_capacity": 51607498,
+        "health": "ipsum Duis amet magna sint",
+        "manufacture_date": 66625366,
+        "manufacturer": "laboris",
+        "max_capacity": 407375,
+        "minutes_to_full_charge": -43087634,
+        "minutes_until_empty": 56660087,
+        "model": "cupidatat quis esse tempor nostr",
+        "percent_remaining": -77798506,
+        "serial_number": "est do nisi anim eu",
+        "state": "Duis qui eu labore",
+        "system_id": "elit nulla cillum et",
+        "voltage": -79728034
+      },
+      "properties": {
+        "amperage": {
+          "type": "integer"
+        },
+        "charged": {
+          "type": "integer"
+        },
+        "charging": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "condition": {
+          "type": "string"
+        },
+        "current_capacity": {
+          "type": "integer"
+        },
+        "cycle_count": {
+          "type": "integer"
+        },
+        "designed_capacity": {
+          "type": "integer"
+        },
+        "health": {
+          "type": "string"
+        },
+        "manufacture_date": {
+          "type": "integer"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "max_capacity": {
+          "type": "integer"
+        },
+        "minutes_to_full_charge": {
+          "type": "integer"
+        },
+        "minutes_until_empty": {
+          "type": "integer"
+        },
+        "model": {
+          "type": "string"
+        },
+        "percent_remaining": {
+          "type": "integer"
+        },
+        "serial_number": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "voltage": {
+          "type": "integer"
+        }
+      },
+      "title": "System Insights Battery",
+      "type": "object"
+    },
+    "system-insights-bitlocker-info": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "conversion_status": 0,
+        "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
+        "drive_letter": "C:",
+        "encryption_method": "None",
+        "persistent_volume_id": "",
+        "protection_status": 0,
+        "system_id": "5c9e51a13c5146f89bae12d9"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "conversion_status": {
+          "type": "integer"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "drive_letter": {
+          "type": "string"
+        },
+        "encryption_method": {
+          "type": "string"
+        },
+        "persistent_volume_id": {
+          "type": "string"
+        },
+        "protection_status": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Bitlocker Info",
+      "type": "object"
+    },
+    "system-insights-browser-plugins": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:30.858+00:00",
+        "description": "LastPass Plugin",
+        "development_region": "en-US",
+        "disabled": 0,
+        "identifier": "com.lastpass.nplastpass",
+        "name": "LastPass",
+        "native": 0,
+        "path": "/Library/Internet Plug-Ins/nplastpass.plugin/",
+        "sdk": "7D175",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "uid": "0",
+        "version": "4.1.7"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "development_region": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "integer"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "native": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sdk": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Browser Plugins",
+      "type": "object"
+    },
+    "system-insights-certificates": {
+      "properties": {
+        "authority_key_id": {
+          "type": "string"
+        },
+        "ca": {
+          "type": "integer"
+        },
+        "common_name": {
+          "type": "string"
+        },
+        "issuer": {
+          "type": "string"
+        },
+        "key_algorithm": {
+          "type": "string"
+        },
+        "key_strength": {
+          "type": "string"
+        },
+        "key_usage": {
+          "type": "string"
+        },
+        "not_valid_after": {
+          "type": "string"
+        },
+        "not_valid_before": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "self_signed": {
+          "type": "integer"
+        },
+        "serial": {
+          "type": "string"
+        },
+        "sha1": {
+          "type": "string"
+        },
+        "sid": {
+          "type": "string"
+        },
+        "signing_algorithm": {
+          "type": "string"
+        },
+        "store": {
+          "type": "string"
+        },
+        "store_id": {
+          "type": "string"
+        },
+        "store_location": {
+          "type": "string"
+        },
+        "subject": {
+          "type": "string"
+        },
+        "subject_key_id": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Certificates"
+    },
+    "system-insights-chrome-extensions": {
+      "example": {
+        "author": "",
+        "collection_time": "2019-06-03T19:41:31.125+00:00",
+        "description": "provider for discovery and services for mirroring of chrome media router",
+        "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
+        "locale": "en",
+        "name": "chrome media router",
+        "path": "/users/thomas/library/application support/google/chrome/default/extensions/pkedcjkdefgpdelpbcmbmeomcjbeemfm/7419.311.0.1_0/",
+        "permissions": "alarms, cast, cast.streaming, declarativewebrequest, desktopcapture, gcm, http://*/*, identity, identity.email, management, mdns, mediarouterprivate, metricsprivate, networkingprivate, processes, storage, system.cpu, settingsprivate, tabcapture, tabs, webview, https://hangouts.google.com/*, https://*.google.com/cast/chromecast/home/gsse",
+        "persistent": 0,
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "uid": "501",
+        "update_url": "https://clients2.google.com/service/update2/crx",
+        "version": "7419.311.0.1"
+      },
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "permissions": {
+          "type": "string"
+        },
+        "persistent": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "update_url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Chrome Extensions",
+      "type": "object"
+    },
+    "system-insights-connectivity": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "disconnected": {
+          "type": "integer"
+        },
+        "ipv4_internet": {
+          "type": "integer"
+        },
+        "ipv4_local_network": {
+          "type": "integer"
+        },
+        "ipv4_no_traffic": {
+          "type": "integer"
+        },
+        "ipv4_subnet": {
+          "type": "integer"
+        },
+        "ipv6_internet": {
+          "type": "integer"
+        },
+        "ipv6_local_network": {
+          "type": "integer"
+        },
+        "ipv6_no_traffic": {
+          "type": "integer"
+        },
+        "ipv6_subnet": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "system insights connectivity",
+      "type": "object"
+    },
+    "system-insights-crashes": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "crash_path": {
+          "type": "string"
+        },
+        "crashed_thread": {
+          "type": "string"
+        },
+        "datetime": {
+          "type": "string"
+        },
+        "exception_codes": {
+          "type": "string"
+        },
+        "exception_notes": {
+          "type": "string"
+        },
+        "exception_type": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "parent": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "string"
+        },
+        "registers": {
+          "type": "string"
+        },
+        "responsible": {
+          "type": "string"
+        },
+        "stack_trace": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "integer"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Crashes",
+      "type": "object"
+    },
+    "system-insights-cups-destinations": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "option_name": {
+          "type": "string"
+        },
+        "option_value": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights CUPS Destinations"
+    },
+    "system-insights-disk-encryption": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:31.557+00:00",
+        "encrypted": 0,
+        "encryption_status": "undefined",
+        "name": "/dev/disk8",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "",
+        "uid": "",
+        "user_uuid": "",
+        "uuid": ""
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "integer"
+        },
+        "encryption_status": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "user_uuid": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Disk Encryption",
+      "type": "object"
+    },
+    "system-insights-disk-info": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "description": "Disk drive",
+        "disk_index": 0,
+        "disk_size": "64420392960",
+        "hardware_model": "VMware, VMware Virtual S SCSI Disk Device",
+        "id": "\\\\.\\PHYSICALDRIVE0",
+        "manufacturer": "(Standard disk drives)",
+        "name": "\\\\.\\PHYSICALDRIVE0",
+        "partitions": 3,
+        "pnp_device_id": "SCSI\\DISK&VEN_VMWARE_&PROD_VMWARE_VIRTUAL_S\\5&1EC51BF7&0&000000",
+        "serial": "",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "SCSI"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disk_index": {
+          "type": "integer"
+        },
+        "disk_size": {
+          "type": "string"
+        },
+        "hardware_model": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "partitions": {
+          "type": "integer"
+        },
+        "pnp_device_id": {
+          "type": "string"
+        },
+        "serial": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Disk Info",
+      "type": "object"
+    },
+    "system-insights-dns-resolvers": {
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "id": {
+          "type": "number"
+        },
+        "netmask": {
+          "type": "string"
+        },
+        "options": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights DNS Resolvers",
+      "type": "object"
+    },
+    "system-insights-etc-hosts": {
+      "example": {
+        "address": "192.168.2.21",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "hostnames": "hosty hosty.local",
+        "system_id": "5c9e51a13c5146f89bae12d9"
+      },
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "hostnames": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Etc Hosts",
+      "type": "object"
+    },
+    "system-insights-firefox-addons": {
+      "example": {
+        "active": 1,
+        "autoupdate": 1,
+        "collection_time": "2019-06-03T19:41:31.204+00:00",
+        "creator": "null",
+        "description": "",
+        "disabled": 0,
+        "identifier": "fxmonitor@mozilla.org",
+        "location": "app-system-addons",
+        "name": "Firefox Monitor",
+        "path": "",
+        "source_url": "file:///var/folders/dn/zjm_0lzn4lv6bgnt5b3nkgxh0000gn/T/tmpaddon-9fb449",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "extension",
+        "uid": "501",
+        "version": "2.8",
+        "visible": 1
+      },
+      "properties": {
+        "active": {
+          "type": "integer"
+        },
+        "autoupdate": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "creator": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "integer"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "source_url": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "visible": {
+          "type": "integer"
+        }
+      },
+      "title": "System Insights Firefox Addons",
+      "type": "object"
+    },
+    "system-insights-groups": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "comment": "",
+        "gid": "701",
+        "gid_signed": "701",
+        "group_sid": "",
+        "groupname": "1",
+        "system_id": "5c9e51a13c5146f89bae12d9"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "comment": {
+          "type": "string"
+        },
+        "gid": {
+          "type": "string"
+        },
+        "gid_signed": {
+          "type": "string"
+        },
+        "group_sid": {
+          "type": "string"
+        },
+        "groupname": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Groups",
+      "type": "object"
+    },
+    "system-insights-ie-extensions": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "registry_path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights IE Extensions",
+      "type": "object"
+    },
+    "system-insights-interface-addresses": {
+      "example": {
+        "address": "::1",
+        "broadcast": "",
+        "collection_time": "2019-06-03T19:41:31.008+00:00",
+        "friendly_name": "",
+        "interface": "lo0",
+        "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+        "point_to_point": "::1",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "unknown"
+      },
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "broadcast": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "friendly_name": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "mask": {
+          "type": "string"
+        },
+        "point_to_point": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Interface Addresses",
+      "type": "object"
+    },
+    "system-insights-interface-details": {
+      "properties": {
+        "collisions": {
+          "type": "string"
+        },
+        "connection_id": {
+          "type": "string"
+        },
+        "connection_status": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "dhcp_enabled": {
+          "type": "integer"
+        },
+        "dhcp_lease_expires": {
+          "type": "string"
+        },
+        "dhcp_lease_obtained": {
+          "type": "string"
+        },
+        "dhcp_server": {
+          "type": "string"
+        },
+        "dns_domain": {
+          "type": "string"
+        },
+        "dns_domain_suffix_search_order": {
+          "type": "string"
+        },
+        "dns_host_name": {
+          "type": "string"
+        },
+        "dns_server_search_order": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "integer"
+        },
+        "flags": {
+          "type": "integer"
+        },
+        "friendly_name": {
+          "type": "string"
+        },
+        "ibytes": {
+          "type": "string"
+        },
+        "idrops": {
+          "type": "string"
+        },
+        "ierrors": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "ipackets": {
+          "type": "string"
+        },
+        "last_change": {
+          "type": "string"
+        },
+        "link_speed": {
+          "type": "string"
+        },
+        "mac": {
+          "type": "string"
+        },
+        "manufacturer": {
+          "type": "string"
+        },
+        "metric": {
+          "type": "integer"
+        },
+        "mtu": {
+          "type": "integer"
+        },
+        "obytes": {
+          "type": "string"
+        },
+        "odrops": {
+          "type": "string"
+        },
+        "oerrors": {
+          "type": "string"
+        },
+        "opackets": {
+          "type": "string"
+        },
+        "pci_slot": {
+          "type": "string"
+        },
+        "physical_adapter": {
+          "type": "integer"
+        },
+        "service": {
+          "type": "string"
+        },
+        "speed": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer"
+        }
+      },
+      "title": "System Insights Interface Details",
+      "type": "object"
+    },
+    "system-insights-kernel-info": {
+      "properties": {
+        "arguments": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Kernel Info",
+      "type": "object"
+    },
+    "system-insights-launchd": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "string"
+        },
+        "groupname": {
+          "type": "string"
+        },
+        "inetd_compatibility": {
+          "type": "string"
+        },
+        "keep_alive": {
+          "type": "string"
+        },
+        "label": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "on_demand": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "process_type": {
+          "type": "string"
+        },
+        "program": {
+          "type": "string"
+        },
+        "program_arguments": {
+          "type": "string"
+        },
+        "queue_directories": {
+          "type": "string"
+        },
+        "root_directory": {
+          "type": "string"
+        },
+        "run_at_load": {
+          "type": "string"
+        },
+        "start_interval": {
+          "type": "string"
+        },
+        "start_on_mount": {
+          "type": "string"
+        },
+        "stderr_path": {
+          "type": "string"
+        },
+        "stdout_path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "watch_paths": {
+          "type": "string"
+        },
+        "working_directory": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights LaunchD",
+      "type": "object"
+    },
+    "system-insights-logged-in-users": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "host": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "time": {
+          "type": "integer"
+        },
+        "tty": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "user": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Logged-In Users",
+      "type": "object"
+    },
+    "system-insights-logical-drives": {
+      "example": {
+        "boot_partition": 0,
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
+        "device_id": "C:",
+        "file_system": "NTFS",
+        "free_space": "43194331136",
+        "size": "63778582528",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "Unknown"
+      },
+      "properties": {
+        "boot_partition": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "device_id": {
+          "type": "string"
+        },
+        "file_system": {
+          "type": "string"
+        },
+        "free_space": {
+          "type": "string"
+        },
+        "size": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Logical Drives",
+      "type": "object"
+    },
+    "system-insights-managed-policies": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "domain": {
+          "type": "string"
+        },
+        "manual": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Managed Policies",
+      "type": "object"
+    },
+    "system-insights-mounts": {
+      "example": {
+        "blocks": "388086",
+        "blocks_available": "95135",
+        "blocks_free": "95135",
+        "blocks_size": "4096",
+        "collection_time": "2019-06-03T19:41:31.746+00:00",
+        "device": "/dev/disk5s1",
+        "device_alias": "/dev/disk5s1",
+        "flags": "70292505",
+        "inodes": "4294967279",
+        "inodes_free": "4294966853",
+        "path": "/private/var/folders/zz/zyxvpxvq6csfxvn_n0000000000000/T/.vbfolder_1dQavK",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "hfs"
+      },
+      "properties": {
+        "blocks": {
+          "type": "string"
+        },
+        "blocks_available": {
+          "type": "string"
+        },
+        "blocks_free": {
+          "type": "string"
+        },
+        "blocks_size": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "device": {
+          "type": "string"
+        },
+        "device_alias": {
+          "type": "string"
+        },
+        "flags": {
+          "type": "string"
+        },
+        "inodes": {
+          "type": "string"
+        },
+        "inodes_free": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Mounts",
+      "type": "object"
+    },
+    "system-insights-os-version": {
+      "example": {
+        "build": "17G65",
+        "codename": "",
+        "collection_time": "2019-06-03T19:41:30.933+00:00",
+        "install_date": "",
+        "major": 10,
+        "minor": 13,
+        "name": "Mac OS X",
+        "patch": 6,
+        "platform": "darwin",
+        "platform_like": "darwin",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "version": "10.13.6"
+      },
+      "properties": {
+        "build": {
+          "type": "string"
+        },
+        "codename": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "install_date": {
+          "type": "string"
+        },
+        "major": {
+          "type": "integer"
+        },
+        "minor": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "patch": {
+          "type": "integer"
+        },
+        "platform": {
+          "type": "string"
+        },
+        "platform_like": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights OS Version",
+      "type": "object"
+    },
+    "system-insights-patches": {
+      "example": {
+        "caption": "http://support.microsoft.com/?kbid=4503308",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "csname": "DESKTOP-B17DUKP",
+        "description": "Security Update",
+        "fix_comments": "",
+        "hotfix_id": "KB4503308",
+        "install_date": "",
+        "installed_by": "NT AUTHORITY\\SYSTEM",
+        "installed_on": "7/30/2019",
+        "system_id": "5c9e51a13c5146f89bae12d9"
+      },
+      "properties": {
+        "caption": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "csname": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "fix_comments": {
+          "type": "string"
+        },
+        "hotfix_id": {
+          "type": "string"
+        },
+        "install_date": {
+          "type": "string"
+        },
+        "installed_by": {
+          "type": "string"
+        },
+        "installed_on": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Patches",
+      "type": "object"
+    },
+    "system-insights-programs": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
+        "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
+        "install_date": "20190724",
+        "install_location": "",
+        "install_source": "C:\\Windows\\SoftwareDistribution\\Download\\b78f29c88063bd09e7afd48e257d0126\\img\\",
+        "language": "0",
+        "name": "Update for Windows 10 for x64-based Systems (KB4480730)",
+        "publisher": "Microsoft Corporation",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "uninstall_string": "MsiExec.exe /X{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
+        "version": "2.51.0.0"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "identifying_number": {
+          "type": "string"
+        },
+        "install_date": {
+          "type": "string"
+        },
+        "install_location": {
+          "type": "string"
+        },
+        "install_source": {
+          "type": "string"
+        },
+        "language": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "publisher": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uninstall_string": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Programs",
+      "type": "object"
+    },
+    "system-insights-python-packages": {
+      "properties": {
+        "auther": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "license": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Python packages"
+    },
+    "system-insights-safari-extensions": {
+      "example": {
+        "author": "Eyeo GmbH",
+        "collection_time": "2019-05-16T18:58:15.673+00:00",
+        "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
+        "developer_id": "GRYYZR985A",
+        "identifier": "org.adblockplus.adblockplussafari",
+        "name": "Adblock Plus",
+        "path": "/Users/samuelharvanek/Library/Safari/Extensions/Adblock Plus.safariextz",
+        "sdk": "6.0",
+        "system_id": "5cdb13e85a0e0719283583c0",
+        "uid": "501",
+        "update_url": "https://update.adblockplus.org/adblockplussafari/updates.plist",
+        "version": "1.12.5"
+      },
+      "properties": {
+        "author": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "developer_id": {
+          "type": "string"
+        },
+        "identifier": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "sdk": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "update_url": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Safari Extensions",
+      "type": "object"
+    },
+    "system-insights-scheduled-tasks": {
+      "properties": {
+        "action": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "integer"
+        },
+        "hidden": {
+          "type": "integer"
+        },
+        "last_run_code": {
+          "type": "string"
+        },
+        "last_run_message": {
+          "type": "string"
+        },
+        "last_run_time": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "next_run_time": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Scheduled tasks",
+      "type": "object"
+    },
+    "system-insights-services": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "display_name": {
+          "type": "string"
+        },
+        "module_path": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "pid": {
+          "type": "integer"
+        },
+        "service_exit_code": {
+          "type": "integer"
+        },
+        "service_type": {
+          "type": "string"
+        },
+        "start_type": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "user_account": {
+          "type": "string"
+        },
+        "win32_exit_code": {
+          "type": "integer"
+        }
+      },
+      "title": "System Insights Services",
+      "type": "object"
+    },
+    "system-insights-shadow": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "expire": {
+          "type": "string"
+        },
+        "flag": {
+          "type": "string"
+        },
+        "hash_alg": {
+          "type": "string"
+        },
+        "inactive": {
+          "type": "string"
+        },
+        "last_change": {
+          "type": "string"
+        },
+        "max": {
+          "type": "string"
+        },
+        "min": {
+          "type": "string"
+        },
+        "password_status": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "warning": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Shadow",
+      "type": "object"
+    },
+    "system-insights-shared-folders": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Shared Folders",
+      "type": "object"
+    },
+    "system-insights-shared-resources": {
+      "properties": {
+        "allow_maximum": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "install_date": {
+          "type": "string"
+        },
+        "maximum_allowed": {
+          "type": "integer"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer"
+        }
+      },
+      "title": "System Insights Shared Resources",
+      "type": "object"
+    },
+    "system-insights-sharing-preferences": {
+      "properties": {
+        "bluetooth_sharing": {
+          "type": "integer"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "content_caching": {
+          "type": "integer"
+        },
+        "disc_sharing": {
+          "type": "integer"
+        },
+        "file_sharing": {
+          "type": "integer"
+        },
+        "internet_sharing": {
+          "type": "integer"
+        },
+        "printer_sharing": {
+          "type": "integer"
+        },
+        "remote_apple_events": {
+          "type": "integer"
+        },
+        "remote_login": {
+          "type": "integer"
+        },
+        "remote_management": {
+          "type": "integer"
+        },
+        "screen_sharing": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Sharing Preferences",
+      "type": "object"
+    },
+    "system-insights-sip-config": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "config_flag": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "integer"
+        },
+        "enabled_nvram": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights SIP Config",
+      "type": "object"
+    },
+    "system-insights-startup-items": {
+      "properties": {
+        "args": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "source": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Startup items"
+    },
+    "system-insights-system-controls": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "config_value": {
+          "type": "string"
+        },
+        "current_value": {
+          "type": "string"
+        },
+        "field_name": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "oid": {
+          "type": "string"
+        },
+        "subsystem": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights System Controls",
+      "type": "object"
+    },
+    "system-insights-system-info": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:30.771+00:00",
+        "computer_name": "Johnny’s MacBook Pro (2)",
+        "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
+        "cpu_logical_cores": 8,
+        "cpu_microcode": "",
+        "cpu_physical_cores": 4,
+        "cpu_subtype": "Intel x86-64h Haswell",
+        "cpu_type": "x86_64h",
+        "hardware_model": "MacBookPro14,3 ",
+        "hardware_serial": "111111FFFFFF",
+        "hardware_vendor": "Apple Inc. ",
+        "hardware_version": "1.0 ",
+        "hostname": "johnnys-macbook-pro-2.local",
+        "local_hostname": "Jonnys-MacBook-Pro-2",
+        "physical_memory": "17179869184",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "uuid": "11111111-FFFF-1111-FFFF-111111111111"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "computer_name": {
+          "type": "string"
+        },
+        "cpu_brand": {
+          "type": "string"
+        },
+        "cpu_logical_cores": {
+          "type": "integer"
+        },
+        "cpu_microcode": {
+          "type": "string"
+        },
+        "cpu_physical_cores": {
+          "type": "integer"
+        },
+        "cpu_subtype": {
+          "type": "string"
+        },
+        "cpu_type": {
+          "type": "string"
+        },
+        "hardware_model": {
+          "type": "string"
+        },
+        "hardware_serial": {
+          "type": "string"
+        },
+        "hardware_vendor": {
+          "type": "string"
+        },
+        "hardware_version": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "local_hostname": {
+          "type": "string"
+        },
+        "physical_memory": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights System Info",
+      "type": "object"
+    },
+    "system-insights-uptime": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "days": {
+          "type": "integer"
+        },
+        "hours": {
+          "type": "integer"
+        },
+        "minutes": {
+          "type": "integer"
+        },
+        "seconds": {
+          "type": "integer"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "total_seconds": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Uptime",
+      "type": "object"
+    },
+    "system-insights-usb-devices": {
+      "properties": {
+        "class": {
+          "type": "string"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "model": {
+          "type": "string"
+        },
+        "model_id": {
+          "type": "string"
+        },
+        "protocol": {
+          "type": "string"
+        },
+        "removable": {
+          "type": "integer"
+        },
+        "serial": {
+          "type": "string"
+        },
+        "subclass": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "usb_address": {
+          "type": "integer"
+        },
+        "usb_port": {
+          "type": "integer"
+        },
+        "vendor": {
+          "type": "string"
+        },
+        "vendor_id": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights USB Devices",
+      "type": "object"
+    },
+    "system-insights-user-groups": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "gid": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights User Groups",
+      "type": "object"
+    },
+    "system-insights-users": {
+      "example": {
+        "collection_time": "2019-06-03T19:41:29.71+00:00",
+        "description": "AppleEvents Daemon",
+        "directory": "/var/empty",
+        "gid": "55",
+        "gid_signed": "55",
+        "shell": "/usr/bin/false",
+        "system_id": "5c9e51a13c5146f89bae12d9",
+        "type": "",
+        "uid": "55",
+        "uid_signed": "55",
+        "username": "_appleevents",
+        "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037"
+      },
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "gid": {
+          "type": "string"
+        },
+        "gid_signed": {
+          "type": "string"
+        },
+        "shell": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        },
+        "uid_signed": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "uuid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Users",
+      "type": "object"
+    },
+    "system-insights-user-ssh-keys": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights User SSH Keys",
+      "type": "object"
+    },
+    "system-insights-wifi-networks": {
+      "properties": {
+        "auto_login": {
+          "type": "number"
+        },
+        "captive_portal": {
+          "type": "number"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "disabled": {
+          "type": "number"
+        },
+        "last_connected": {
+          "type": "number"
+        },
+        "network_name": {
+          "type": "string"
+        },
+        "passpoint": {
+          "type": "number"
+        },
+        "possibly_hidden": {
+          "type": "number"
+        },
+        "roaming": {
+          "type": "number"
+        },
+        "roaming_profile": {
+          "type": "string"
+        },
+        "security_type": {
+          "type": "string"
+        },
+        "ssid": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "temporarily_disabled": {
+          "type": "number"
+        }
+      },
+      "title": "System Insights WiFi Networks",
+      "type": "object"
+    },
+    "system-insights-wifi-status": {
+      "properties": {
+        "bssid": {
+          "type": "string"
+        },
+        "channel": {
+          "type": "number"
+        },
+        "channel_band": {
+          "type": "number"
+        },
+        "channel_width": {
+          "type": "number"
+        },
+        "collection_time": {
+          "type": "string"
+        },
+        "country_code": {
+          "type": "string"
+        },
+        "interface": {
+          "type": "string"
+        },
+        "mode": {
+          "type": "string"
+        },
+        "network_name": {
+          "type": "string"
+        },
+        "noise": {
+          "type": "number"
+        },
+        "rssi": {
+          "type": "number"
+        },
+        "security_type": {
+          "type": "string"
+        },
+        "ssid": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "transmit_rate": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights WiFi Status",
+      "type": "object"
+    },
+    "system-insights-windows-security-products": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "remediation_path": {
+          "type": "string"
+        },
+        "signatures_up_to_date": {
+          "type": "number"
+        },
+        "state": {
+          "type": "string"
+        },
+        "state_timestamp": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights Windows Security Products",
       "type": "object"
     },
     "UserGraphManagementReq": {
@@ -1341,10 +4086,7 @@
             "remove",
             "update"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "enum": [
@@ -1359,52 +4101,7 @@
             "system",
             "system_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type2",
-            "values": [
-              {
-                "name": "active_directory",
-                "value": "active_directory"
-              },
-              {
-                "name": "application",
-                "value": "application"
-              },
-              {
-                "name": "command",
-                "value": "command"
-              },
-              {
-                "name": "g_suite",
-                "value": "g_suite"
-              },
-              {
-                "name": "ldap_server",
-                "value": "ldap_server"
-              },
-              {
-                "name": "office_365",
-                "value": "office_365"
-              },
-              {
-                "name": "policy",
-                "value": "policy"
-              },
-              {
-                "name": "radius_server",
-                "value": "radius_server"
-              },
-              {
-                "name": "systems",
-                "value": "system"
-              },
-              {
-                "name": "systems_group",
-                "value": "system_group"
-              }
-            ]
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1441,10 +4138,7 @@
           "enum": [
             "user_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "title": "UserGroup",
@@ -1490,10 +4184,7 @@
             "remove",
             "update"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "description": "The graph type",
@@ -1509,52 +4200,7 @@
             "system",
             "system_group"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type2",
-            "values": [
-              {
-                "name": "active_directory",
-                "value": "active_directory"
-              },
-              {
-                "name": "application",
-                "value": "application"
-              },
-              {
-                "name": "command",
-                "value": "command"
-              },
-              {
-                "name": "g_suite",
-                "value": "g_suite"
-              },
-              {
-                "name": "ldap_server",
-                "value": "ldap_server"
-              },
-              {
-                "name": "office_365",
-                "value": "office_365"
-              },
-              {
-                "name": "policy",
-                "value": "policy"
-              },
-              {
-                "name": "radius_server",
-                "value": "radius_server"
-              },
-              {
-                "name": "systems",
-                "value": "system"
-              },
-              {
-                "name": "systems_group",
-                "value": "system_group"
-              }
-            ]
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1577,20 +4223,14 @@
             "add",
             "remove"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "op"
-          }
+          "type": "string"
         },
         "type": {
           "description": "The member type.",
           "enum": [
             "user"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "type"
-          }
+          "type": "string"
         }
       },
       "required": [
@@ -1717,6 +4357,27 @@
       },
       "title": "Workday Output",
       "type": "object"
+    },
+    "workday-worker": {
+      "properties": {
+        "attributes": {
+          "type": "object"
+        },
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "Workday Worker",
+      "type": "object"
     }
   },
   "host": "console.jumpcloud.com",
@@ -1816,9 +4477,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ActiveDirectoryListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/active-directory-output"
               },
               "type": "array"
             }
@@ -1856,60 +4515,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -1934,9 +4540,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ActiveDirectoryAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -1997,9 +4601,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ActiveDirectoryTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -2031,9 +4633,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ActiveDirectoryGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/active-directory-output"
             }
           }
         },
@@ -2064,9 +4664,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "AppleMDMListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/AppleMDM"
               },
               "type": "array"
             }
@@ -2092,9 +4690,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "AppleMDMCsrGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/apple-mdm-signed-csr-plist"
             }
           },
           "400": {
@@ -2144,9 +4740,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "AppleMDMDepKeyGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/apple-mdm-public-key-cert"
             }
           },
           "400": {
@@ -2240,9 +4834,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "AppleMDMDeviceListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/apple-mdm-device"
               },
               "type": "array"
             }
@@ -2594,9 +5186,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "AppleMDMEnrollmentProfileListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/AppleMDM"
               },
               "type": "array"
             }
@@ -2630,9 +5220,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "AppleMDMEnrollmentProfileGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/mobileconfig"
             }
           }
         },
@@ -2727,9 +5315,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "AppleMDMDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/AppleMDM"
             }
           },
           "400": {
@@ -2782,9 +5368,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "AppleMDMSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/AppleMDM"
             }
           },
           "400": {
@@ -2838,60 +5422,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -2916,9 +5447,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ApplicationAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -3004,9 +5533,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ApplicationTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -3068,9 +5595,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "ApplicationTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -3149,9 +5674,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "AuthenticationPolicyListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/AuthnPolicy"
               },
               "type": "array"
             }
@@ -3237,9 +5760,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "AuthenticationPolicyDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/AuthnPolicy"
             }
           },
           "400": {
@@ -3276,9 +5797,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "AuthenticationPolicyGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/AuthnPolicy"
             }
           },
           "400": {
@@ -3332,9 +5851,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "AuthenticationPolicyUpdateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/AuthnPolicy"
             }
           },
           "400": {
@@ -3454,9 +5971,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "BulkUsersResultGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/job-workresult"
               },
               "type": "array"
             }
@@ -3502,60 +6017,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -3580,9 +6042,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "CommandAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -3668,9 +6128,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "CommandTraverseSystemGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -3732,9 +6190,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "CommandTraverseSystemGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -3807,9 +6263,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "DirectoryListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/Directory"
               },
               "type": "array"
             }
@@ -3839,9 +6293,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "DuoAccountListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/DuoAccount"
               },
               "type": "array"
             }
@@ -3902,9 +6354,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "DuoApplicationListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/DuoApplication"
               },
               "type": "array"
             }
@@ -3998,9 +6448,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "DuoApplicationDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/DuoApplication"
             }
           },
           "400": {
@@ -4037,9 +6485,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "DuoApplicationGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/DuoApplication"
             }
           },
           "400": {
@@ -4098,9 +6544,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "DuoApplicationSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/DuoApplication"
             }
           },
           "400": {
@@ -4139,9 +6583,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "DuoAccountDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/DuoAccount"
             }
           },
           "400": {
@@ -4178,9 +6620,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "DuoAccountGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/DuoAccount"
             }
           }
         },
@@ -4268,9 +6708,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "GroupListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/Group"
               },
               "type": "array"
             }
@@ -4314,60 +6752,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -4392,9 +6777,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "GSuiteAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -4480,8 +6863,34 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "GSuiteUsersToImportListApplicationJsonResponse",
+              "properties": {
+                "nextPageToken": {
+                  "type": "string"
+                },
+                "users": {
+                  "items": {
+                    "properties": {
+                      "familyName": {
+                        "type": "string"
+                      },
+                      "givenName": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "primaryEmail": {
+                        "type": "string"
+                      },
+                      "thumbnailPhotoUrl": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
               "type": "object"
             }
           }
@@ -4572,9 +6981,7 @@
             },
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "GSuiteTranslationRuleListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GSuiteTranslationRule"
               },
               "type": "array"
             }
@@ -4648,9 +7055,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "GSuiteTranslationRuleGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/GSuiteTranslationRule"
             }
           }
         },
@@ -4715,9 +7120,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "GSuiteTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -4779,9 +7182,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "GSuiteTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -4813,9 +7214,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "GSuiteGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/gsuite-output"
             }
           }
         },
@@ -4851,9 +7250,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "GSuiteUpdateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/gsuite-output"
             }
           }
         },
@@ -4916,9 +7313,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "IpListListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/IPList"
               },
               "type": "array"
             }
@@ -5004,9 +7399,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "IpListDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/IPList"
             }
           },
           "400": {
@@ -5043,9 +7436,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "IpListGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/IPList"
             }
           },
           "400": {
@@ -5098,9 +7489,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "IpListUpdateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/IPList"
             }
           },
           "400": {
@@ -5145,9 +7534,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "IpListSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/IPList"
             }
           },
           "400": {
@@ -5238,9 +7625,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "LdapServerListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/ldap-server-output"
               },
               "type": "array"
             }
@@ -5263,9 +7648,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "LdapServerGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/ldap-server-output"
             }
           }
         },
@@ -5312,8 +7695,20 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "LdapServerUpdateApplicationJsonResponse",
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "userLockoutAction": {
+                  "$ref": "#/definitions/LdapServerAction"
+                },
+                "userPasswordExpirationAction": {
+                  "$ref": "#/definitions/LdapServerAction"
+                }
+              },
               "type": "object"
             }
           },
@@ -5361,60 +7756,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -5439,9 +7781,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "LdapServerAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -5549,9 +7889,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "LdapServerSambaDomainListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/samba-domain-output"
               },
               "type": "array"
             }
@@ -5616,9 +7954,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "LdapServerSambaDomainDeleteApplicationJsonResponse",
-              "type": "object"
+              "type": "string"
             }
           },
           "204": {
@@ -5640,9 +7976,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "LdapServerSambaDomainGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/samba-domain-output"
             }
           }
         },
@@ -5685,9 +8019,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "LdapServerSambaDomainSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/samba-domain-output"
             }
           }
         },
@@ -5738,9 +8070,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "LdapServerTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -5802,9 +8132,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "LdapServerTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -5836,9 +8164,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "Office365GetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/office365-output"
             }
           }
         },
@@ -5874,9 +8200,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "Office365UpdateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/office365-output"
             }
           }
         },
@@ -5912,60 +8236,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -5990,9 +8261,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "Office365AssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -6109,9 +8378,7 @@
             },
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "Office365TranslationRuleListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/Office365TranslationRule"
               },
               "type": "array"
             }
@@ -6185,9 +8452,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "Office365TranslationRuleGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/Office365TranslationRule"
             }
           }
         },
@@ -6252,9 +8517,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "Office365TraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -6316,9 +8579,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "Office365TraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -6402,9 +8663,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/Policy"
               },
               "type": "array"
             }
@@ -6476,9 +8735,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "PolicyGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/PolicyWithDetails"
             }
           }
         },
@@ -6514,9 +8771,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "PolicySetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/Policy"
             }
           }
         },
@@ -6552,60 +8807,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -6630,9 +8832,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -6740,9 +8940,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PoliciesPolicyResultListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/PolicyResult"
               },
               "type": "array"
             }
@@ -6825,9 +9023,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PoliciesPolicyStatusListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/PolicyResult"
               },
               "type": "array"
             }
@@ -6888,9 +9084,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyTraverseSystemGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -6952,9 +9146,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyTraverseSystemGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -7038,9 +9230,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyResultListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/PolicyResult"
               },
               "type": "array"
             }
@@ -7063,9 +9253,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "PolicyResultGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/PolicyResult"
             }
           }
         },
@@ -7147,9 +9335,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "PolicyTemplateListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/PolicyTemplate"
               },
               "type": "array"
             }
@@ -7178,9 +9364,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "PolicyTemplateGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/PolicyTemplateWithDetails"
             }
           }
         },
@@ -7288,8 +9472,17 @@
               }
             },
             "schema": {
-              "additionalProperties": true,
-              "title": "ProviderAdministratorListApplicationJsonResponse",
+              "properties": {
+                "results": {
+                  "items": {
+                    "$ref": "#/definitions/Administrator"
+                  },
+                  "type": "array"
+                },
+                "totalCount": {
+                  "type": "integer"
+                }
+              },
               "type": "object"
             }
           },
@@ -7341,9 +9534,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ProviderAdministratorCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/Administrator"
             }
           },
           "401": {
@@ -7390,60 +9581,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -7468,9 +9606,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "RadiusServerAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -7556,9 +9692,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "RadiusServerTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -7620,9 +9754,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "RadiusServerTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -7695,9 +9827,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SoftwareAppListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/software-app"
               },
               "type": "array"
             }
@@ -7779,9 +9909,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SoftwareAppGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/software-app"
             }
           },
           "400": {
@@ -7834,9 +9962,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SoftwareAppSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/software-app"
             }
           },
           "400": {
@@ -7890,60 +10016,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                },
-                {
-                  "name": "user",
-                  "value": "user"
-                },
-                {
-                  "name": "user_group",
-                  "value": "user_group"
-                }
-              ]
-            }
+            "type": "string"
           },
           {
             "default": 10,
@@ -7968,9 +10041,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SoftwareAppAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -8067,9 +10138,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SoftwareAppStatusGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/software-app-status"
               },
               "type": "array"
             }
@@ -8130,9 +10199,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SoftwareAppTraverseSystemGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8194,9 +10261,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SoftwareAppTraverseSystemGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8294,9 +10359,7 @@
             },
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/SystemGroup"
               },
               "type": "array"
             }
@@ -8382,10 +10445,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets1"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -8393,9 +10453,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -8481,9 +10539,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupTraverseCommandGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8534,9 +10590,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupMembersGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -8639,9 +10693,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupMembershipGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8703,9 +10755,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupTraversePolicyGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8767,9 +10817,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8831,9 +10879,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemGroupTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -8888,9 +10934,7 @@
               }
             },
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemGroupGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/SystemGroup"
             }
           }
         },
@@ -8933,9 +10977,7 @@
               }
             },
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemGroupSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/SystemGroup"
             }
           }
         },
@@ -8998,9 +11040,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAlfListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-alf"
               },
               "type": "array"
             }
@@ -9065,9 +11105,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAlfExceptionListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-alf-exceptions"
               },
               "type": "array"
             }
@@ -9132,9 +11170,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAlfExplicitAuthListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-alf-explicit-auths"
               },
               "type": "array"
             }
@@ -9199,9 +11235,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAppCompatShimListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-appcompat-shims"
               },
               "type": "array"
             }
@@ -9266,9 +11300,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAppsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-apps"
               },
               "type": "array"
             }
@@ -9333,9 +11365,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsAuthorizedKeyListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-authorized-keys"
               },
               "type": "array"
             }
@@ -9400,9 +11430,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsBatteryListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-battery"
               },
               "type": "array"
             }
@@ -9467,9 +11495,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsBitlockerInfoListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-bitlocker-info"
               },
               "type": "array"
             }
@@ -9534,9 +11560,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsBrowserPluginsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-browser-plugins"
               },
               "type": "array"
             }
@@ -9601,9 +11625,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsCertificatesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-certificates"
               },
               "type": "array"
             }
@@ -9668,9 +11690,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsChromeExtensionsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-chrome-extensions"
               },
               "type": "array"
             }
@@ -9735,9 +11755,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsConnectivityListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-connectivity"
               },
               "type": "array"
             }
@@ -9802,9 +11820,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsCrashesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-crashes"
               },
               "type": "array"
             }
@@ -9869,9 +11885,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsCupsDestinationsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-cups-destinations"
               },
               "type": "array"
             }
@@ -9936,9 +11950,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsDiskEncryptionListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-disk-encryption"
               },
               "type": "array"
             }
@@ -10003,9 +12015,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsDiskInfoListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-disk-info"
               },
               "type": "array"
             }
@@ -10070,9 +12080,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsDnsResolverListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-dns-resolvers"
               },
               "type": "array"
             }
@@ -10137,9 +12145,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsEtcHostsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-etc-hosts"
               },
               "type": "array"
             }
@@ -10204,9 +12210,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsFirefoxAddonsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-firefox-addons"
               },
               "type": "array"
             }
@@ -10271,9 +12275,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsGroupsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-groups"
               },
               "type": "array"
             }
@@ -10338,9 +12340,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsIEExtensionsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-ie-extensions"
               },
               "type": "array"
             }
@@ -10405,9 +12405,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsInterfaceAddressesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-interface-addresses"
               },
               "type": "array"
             }
@@ -10472,9 +12470,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsInterfaceDetailsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-interface-details"
               },
               "type": "array"
             }
@@ -10539,9 +12535,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsKernelInfoListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-kernel-info"
               },
               "type": "array"
             }
@@ -10606,9 +12600,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsLaunchdListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-launchd"
               },
               "type": "array"
             }
@@ -10673,9 +12665,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsLoggedinUsersListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-logged-in-users"
               },
               "type": "array"
             }
@@ -10740,9 +12730,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsLogicalDrivesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-logical-drives"
               },
               "type": "array"
             }
@@ -10807,9 +12795,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsManagedPoliciesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-managed-policies"
               },
               "type": "array"
             }
@@ -10874,9 +12860,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsMountsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-mounts"
               },
               "type": "array"
             }
@@ -10941,9 +12925,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsOsVersionListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-os-version"
               },
               "type": "array"
             }
@@ -11008,9 +12990,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsPatchesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-patches"
               },
               "type": "array"
             }
@@ -11075,9 +13055,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsProgramsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-programs"
               },
               "type": "array"
             }
@@ -11142,9 +13120,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsPythonPackagesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-python-packages"
               },
               "type": "array"
             }
@@ -11209,9 +13185,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSafariExtensionsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-safari-extensions"
               },
               "type": "array"
             }
@@ -11276,9 +13250,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsScheduledTasksListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-scheduled-tasks"
               },
               "type": "array"
             }
@@ -11343,9 +13315,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsServicesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-services"
               },
               "type": "array"
             }
@@ -11410,9 +13380,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsShadowListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-shadow"
               },
               "type": "array"
             }
@@ -11477,9 +13445,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSharedFoldersListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-shared-folders"
               },
               "type": "array"
             }
@@ -11544,9 +13510,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSharedResourcesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-shared-resources"
               },
               "type": "array"
             }
@@ -11606,9 +13570,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSharingPreferencesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-sharing-preferences"
               },
               "type": "array"
             }
@@ -11673,9 +13635,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSipConfigListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-sip-config"
               },
               "type": "array"
             }
@@ -11740,9 +13700,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsStartupItemsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-startup-items"
               },
               "type": "array"
             }
@@ -11807,9 +13765,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSystemControlsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-system-controls"
               },
               "type": "array"
             }
@@ -11874,9 +13830,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsSystemInfoListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-system-info"
               },
               "type": "array"
             }
@@ -11941,9 +13895,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsUptimeListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-uptime"
               },
               "type": "array"
             }
@@ -12008,9 +13960,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsUSBDevicesListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-usb-devices"
               },
               "type": "array"
             }
@@ -12075,9 +14025,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsUserGroupsListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-user-groups"
               },
               "type": "array"
             }
@@ -12142,9 +14090,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsUserSSHKeysListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-user-ssh-keys"
               },
               "type": "array"
             }
@@ -12209,9 +14155,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsUsersListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-users"
               },
               "type": "array"
             }
@@ -12276,9 +14220,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsWifiNetworkListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-wifi-networks"
               },
               "type": "array"
             }
@@ -12343,9 +14285,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsWifiStatusListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-wifi-status"
               },
               "type": "array"
             }
@@ -12410,9 +14350,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemInsightsWindowsSecurityProductListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/system-insights-windows-security-products"
               },
               "type": "array"
             }
@@ -12465,10 +14403,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets1"
-            }
+            "type": "string"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -12482,9 +14417,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -12576,9 +14509,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemTraverseCommandGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -12615,9 +14546,7 @@
               }
             },
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemFDEKeyGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemfdekey"
             }
           },
           "400": {
@@ -12711,9 +14640,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemMemberofGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -12775,9 +14702,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemTraversePolicyGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -12861,9 +14786,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemsPolicyStatusListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/PolicyResult"
               },
               "type": "array"
             }
@@ -12931,9 +14854,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemTraverseUserGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13001,9 +14922,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemTraverseUserGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13087,9 +15006,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/UserGroup"
               },
               "type": "array"
             }
@@ -13175,9 +15092,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseApplicationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13239,52 +15154,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets2",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                }
-              ]
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -13292,9 +15162,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -13380,9 +15248,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseDirectoryGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13444,9 +15310,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseGSuiteGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13508,9 +15372,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseLdapServerGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13561,9 +15423,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupMembersGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -13660,9 +15520,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupMembershipGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13724,9 +15582,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseOffice365GetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13788,9 +15644,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseRadiusServerGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13852,9 +15706,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseSystemGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13916,9 +15768,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserGroupTraverseSystemGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -13966,9 +15816,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "UserGroupGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/UserGroup"
             }
           }
         },
@@ -14004,9 +15852,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "UserGroupSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/UserGroup"
             }
           }
         },
@@ -14057,9 +15903,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseApplicationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14121,52 +15965,7 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string",
-            "x-ms-enum": {
-              "name": "targets2",
-              "values": [
-                {
-                  "name": "active_directory",
-                  "value": "active_directory"
-                },
-                {
-                  "name": "application",
-                  "value": "application"
-                },
-                {
-                  "name": "command",
-                  "value": "command"
-                },
-                {
-                  "name": "g_suite",
-                  "value": "g_suite"
-                },
-                {
-                  "name": "ldap_server",
-                  "value": "ldap_server"
-                },
-                {
-                  "name": "office_365",
-                  "value": "office_365"
-                },
-                {
-                  "name": "policy",
-                  "value": "policy"
-                },
-                {
-                  "name": "radius_server",
-                  "value": "radius_server"
-                },
-                {
-                  "name": "systems",
-                  "value": "system"
-                },
-                {
-                  "name": "systems_group",
-                  "value": "system_group"
-                }
-              ]
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -14174,9 +15973,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserAssociationGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphConnection"
               },
               "type": "array"
             }
@@ -14262,9 +16059,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseDirectoryGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14326,9 +16121,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseGSuiteGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14390,9 +16183,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseLdapServerGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14465,9 +16256,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserMemberofGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14529,9 +16318,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseOffice365GetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14593,9 +16380,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseRadiusServerGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14657,9 +16442,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseSystemGroupGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14721,9 +16504,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "UserTraverseSystemGetApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/GraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -14807,9 +16588,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "WorkdayListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/workday-output"
               },
               "type": "array"
             }
@@ -14859,9 +16638,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "WorkdayGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/workday-output"
             }
           }
         },
@@ -14896,9 +16673,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "WorkdaySetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/workday-output"
             }
           }
         },
@@ -14938,9 +16713,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "WorkdayResultImportApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/job-workresult"
               },
               "type": "array"
             }
@@ -15118,9 +16891,7 @@
             },
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "WorkdayWorkerListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/workday-worker"
               },
               "type": "array"
             }

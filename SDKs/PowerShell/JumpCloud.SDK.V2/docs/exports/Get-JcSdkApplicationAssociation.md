@@ -15,12 +15,12 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### Get (Default)
 ```
-Get-JcSdkApplicationAssociation -ApplicationId <String> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkApplicationAssociation -ApplicationId <String> -Targets <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,7 +80,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -100,7 +100,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1U43DrmApplicationsApplicationIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
 

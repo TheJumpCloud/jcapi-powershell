@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IPaths3Laq5OWorkdaysIdImportJobIdResultsGetResponses200ContentApplicationJsonSchemaItems
+JumpCloud.SDK.V2.Models.IJobWorkresult
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -46,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Import-JcSdkWorkdayResult
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPaths3Laq5OWorkdaysIdImportJobIdResultsGetResponses200ContentApplicationJsonSchemaItems])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobWorkresult])]
     [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Import', Mandatory)]
@@ -124,7 +124,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Import-JcSdkInternalWorkdayResult @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Import-JcSdkInternalWorkdayResult @PSBoundParameters
     }
     End
     {

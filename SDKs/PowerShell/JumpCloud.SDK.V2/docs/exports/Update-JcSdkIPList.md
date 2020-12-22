@@ -190,7 +190,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IIPListUpdateApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IIPList
 
 ### System.String
 

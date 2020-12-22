@@ -19,7 +19,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPolicyRequest
 .Outputs
-JumpCloud.SDK.V2.Models.IPolicySetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IPolicy
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -61,7 +61,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkPolicy
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPolicySetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicy])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -165,7 +165,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalPolicy @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalPolicy @PSBoundParameters
     }
     End
     {

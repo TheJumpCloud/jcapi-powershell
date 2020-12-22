@@ -24,19 +24,19 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IAuthnPolicyInput>:
-  EffectAction <Action>:
+  EffectAction <String>:
   [Conditions <IAuthnPolicyInputConditions>]:
   [Description <String>]:
   [Disabled <Boolean?>]:
   [MfaRequired <Boolean?>]:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
-    [Type <Type?>]:
+    [Type <String>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
-  [Type <Type?>]:
+  [Type <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkAuthenticationPolicy.md
 #>
@@ -71,9 +71,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Disabled},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Action])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Action]
+    [System.String]
     # .
     ${EffectAction},
 

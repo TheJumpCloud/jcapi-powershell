@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IPaths1Ofje86RadiusserversRadiusserverIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
+JumpCloud.SDK.V2.Models.IGraphConnection
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -46,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkRadiusServerAssociation
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Ofje86RadiusserversRadiusserverIdAssociationsGetResponses200ContentApplicationJsonSchemaItems])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGraphConnection])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -63,9 +63,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets])]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.Targets]
+    [System.String]
     # .
     ${Targets},
 
@@ -145,7 +144,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalRadiusServerAssociation @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalRadiusServerAssociation @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -170,7 +169,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalRadiusServerAssociation @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalRadiusServerAssociation @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.ISambaDomainInput
 .Outputs
-JumpCloud.SDK.V2.Models.ILdapServerSambaDomainSetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.ISambaDomainOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -52,7 +52,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkLdapServerSambaDomain
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ILdapServerSambaDomainSetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomainOutput])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -155,7 +155,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalLdapServerSambaDomain @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalLdapServerSambaDomain @PSBoundParameters
     }
     End
     {

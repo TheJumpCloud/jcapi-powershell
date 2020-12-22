@@ -160,9 +160,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IOffice365TranslationRuleGetApplicationJsonResponse
-
-### JumpCloud.SDK.V2.Models.IPaths1T5IugnOffice365SOffice365IdTranslationrulesGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IOffice365TranslationRule
 
 ## NOTES
 

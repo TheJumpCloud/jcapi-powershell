@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of a Radius Server.\n\nA direct 
 
 ### Get (Default)
 ```
-Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -98,7 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1Ofje86RadiusserversRadiusserverIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
 

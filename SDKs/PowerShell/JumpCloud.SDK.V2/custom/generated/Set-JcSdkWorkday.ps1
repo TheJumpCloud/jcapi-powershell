@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IWorkdayFields
 .Outputs
-JumpCloud.SDK.V2.Models.IWorkdaySetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IWorkdayOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -52,7 +52,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkWorkday
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IWorkdaySetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -148,7 +148,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkday @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkday @PSBoundParameters
     }
     End
     {

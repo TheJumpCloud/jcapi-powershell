@@ -19,7 +19,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
-JumpCloud.SDK.V2.Models.ISoftwareAppSetApplicationJsonResponse
+JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
 System.String
 .Notes
@@ -63,7 +63,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppSetApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApp], [System.String])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -167,7 +167,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters
     }
     End
     {

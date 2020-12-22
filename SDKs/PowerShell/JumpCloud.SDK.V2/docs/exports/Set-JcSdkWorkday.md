@@ -174,7 +174,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IWorkdaySetApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IWorkdayOutput
 
 ## NOTES
 

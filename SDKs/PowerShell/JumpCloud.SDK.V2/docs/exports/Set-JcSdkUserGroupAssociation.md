@@ -14,7 +14,7 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <Op> -Type <Type2>
+Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <String>
  [-Attributes <IUserGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -32,7 +32,7 @@ Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IUser
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type2>
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
  [-Attributes <IUserGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -138,7 +138,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -168,7 +168,7 @@ Accept wildcard characters: False
 The graph type
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type2
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -234,8 +234,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IUserGroupGraphManagementReq>: UserGroupGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type2>`: The graph type
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: The graph type
   - `[Attributes <IUserGroupGraphManagementReqAttributes>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

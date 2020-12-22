@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Requ
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
- [-UserPasswordExpirationAction <UserPasswordExpirationAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -32,8 +32,8 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInpu
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
- [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -138,7 +138,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserLockoutAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -153,7 +153,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -206,7 +206,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGSuiteUpdateApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IGsuiteOutput
 
 ## NOTES
 
@@ -220,8 +220,8 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGsuitePatchInput>: GSuite Patch Input
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
-  - `[UserLockoutAction <UserLockoutAction?>]`: 
-  - `[UserPasswordExpirationAction <UserPasswordExpirationAction?>]`: 
+  - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordExpirationAction <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

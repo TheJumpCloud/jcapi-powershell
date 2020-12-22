@@ -83,7 +83,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IOffice365GetApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IOffice365Output
 
 ## NOTES
 

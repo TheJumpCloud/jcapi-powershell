@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IAuthnPolicyInput
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IAuthenticationPolicyUpdateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IAuthnPolicy
 .Outputs
 System.String
 .Notes
@@ -26,14 +26,14 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IAuthnPolicyInput>:
-  EffectAction <Action>:
+  EffectAction <String>:
   [Conditions <IAuthnPolicyInputConditions>]:
   [Description <String>]:
   [Disabled <Boolean?>]:
   [MfaRequired <Boolean?>]:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
-    [Type <Type?>]:
+    [Type <String>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
 
@@ -59,13 +59,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [WorkdayId <String>]:
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
-  [Type <Type?>]:
+  [Type <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
  Function Update-JcSdkAuthenticationPolicy
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAuthenticationPolicyUpdateApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy], [System.String])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -114,9 +114,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Action])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Action]
+    [System.String]
     # .
     ${EffectAction},
 
@@ -212,7 +211,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Update-JcSdkInternalAuthenticationPolicy @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalAuthenticationPolicy @PSBoundParameters
     }
     End
     {

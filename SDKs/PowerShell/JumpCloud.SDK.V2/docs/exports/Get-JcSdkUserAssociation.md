@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of a User.\n\nA direct associati
 
 ### Get (Default)
 ```
-Get-JcSdkUserAssociation -UserId <String> -Targets <Targets2> [<CommonParameters>]
+Get-JcSdkUserAssociation -UserId <String> -Targets <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets2> [<CommonParameters>]
+Get-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +63,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets2
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -98,7 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPaths1FrzoyhUsersUserIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
 

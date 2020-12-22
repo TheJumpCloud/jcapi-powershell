@@ -14,12 +14,12 @@ This endpoint returns the _direct_ associations of this User Group.\n\nA direct 
 
 ### Get (Default)
 ```
-Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <Targets2> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets2> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets2
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -98,7 +98,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPathsR7V5OkUsergroupsGroupIdAssociationsGetResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
 

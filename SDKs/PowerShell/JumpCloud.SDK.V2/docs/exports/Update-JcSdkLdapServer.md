@@ -14,8 +14,8 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <LdapServerAction>]
- [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -34,9 +34,8 @@ Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
- [-UserLockoutAction <LdapServerAction>] [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -126,7 +125,7 @@ Accept wildcard characters: False
 LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -141,7 +140,7 @@ Accept wildcard characters: False
 LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
+Type: System.String
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -194,7 +193,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ILdapServerUpdateApplicationJsonResponse
+### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
 
 ### System.String
 
@@ -209,8 +208,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
   - `[Id <String>]`: 
-  - `[UserLockoutAction <LdapServerAction?>]`: LDAP Server Action
-  - `[UserPasswordExpirationAction <LdapServerAction?>]`: LDAP Server Action
+  - `[UserLockoutAction <String>]`: LDAP Server Action
+  - `[UserPasswordExpirationAction <String>]`: LDAP Server Action
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

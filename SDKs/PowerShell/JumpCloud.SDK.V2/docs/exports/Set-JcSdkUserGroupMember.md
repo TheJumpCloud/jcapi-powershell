@@ -14,7 +14,7 @@ This endpoint allows you to manage the user members of a User Group.\n\n#### Sam
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <Op> -Type <Type> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -32,7 +32,7 @@ Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroup
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type> [-PassThru]
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -123,7 +123,7 @@ Accept wildcard characters: False
 How to modify the membership connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -143,21 +143,6 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Type
-The member type.
-
-```yaml
-Type: JumpCloud.SDK.V2.Support.Type
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -219,8 +204,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IUserGroupMembersReq>: UserGroupMembersReq
   - `Id <String>`: The ObjectID of member being added or removed.
-  - `Op <Op>`: How to modify the membership connection.
-  - `Type <Type>`: The member type.
+  - `Op <String>`: How to modify the membership connection.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

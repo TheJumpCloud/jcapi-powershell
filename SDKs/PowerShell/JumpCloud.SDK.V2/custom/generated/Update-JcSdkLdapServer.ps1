@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V2.Models.ILdapServerUpdateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
 .Outputs
 System.String
 .Notes
@@ -27,8 +27,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>:
   [Id <String>]:
-  [UserLockoutAction <LdapServerAction?>]: LDAP Server Action
-  [UserPasswordExpirationAction <LdapServerAction?>]: LDAP Server Action
+  [UserLockoutAction <String>]: LDAP Server Action
+  [UserPasswordExpirationAction <String>]: LDAP Server Action
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -55,7 +55,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkLdapServer
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ILdapServerUpdateApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema], [System.String])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -90,17 +90,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.LdapServerAction]
+    [System.String]
     # LDAP Server Action
     ${UserLockoutAction},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.LdapServerAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.LdapServerAction]
+    [System.String]
     # LDAP Server Action
     ${UserPasswordExpirationAction},
 

@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IGsuitePatchInput
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGSuiteUpdateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IGsuiteOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -26,8 +26,8 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGsuitePatchInput>:
   [GroupsEnabled <Boolean?>]:
   [Name <String>]:
-  [UserLockoutAction <UserLockoutAction?>]:
-  [UserPasswordExpirationAction <UserPasswordExpirationAction?>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -54,7 +54,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkGSuite
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGSuiteUpdateApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -96,17 +96,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserLockoutAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserLockoutAction]
+    [System.String]
     # .
     ${UserLockoutAction},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserPasswordExpirationAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserPasswordExpirationAction]
+    [System.String]
     # .
     ${UserPasswordExpirationAction},
 
@@ -166,7 +164,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Update-JcSdkInternalGSuite @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalGSuite @PSBoundParameters
     }
     End
     {

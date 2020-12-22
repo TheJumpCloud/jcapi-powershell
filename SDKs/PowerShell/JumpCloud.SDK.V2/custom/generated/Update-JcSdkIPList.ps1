@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IIPListRequest
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IIPListUpdateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IIPList
 .Outputs
 System.String
 .Notes
@@ -55,7 +55,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkIPList
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IIPListUpdateApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IIPList], [System.String])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -158,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Update-JcSdkInternalIPList @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalIPList @PSBoundParameters
     }
     End
     {

@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IOffice365PatchInput
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365UpdateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IOffice365Output
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -25,8 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>:
   [Name <String>]:
-  [UserLockoutAction <UserLockoutAction?>]:
-  [UserPasswordExpirationAction <UserPasswordExpirationAction?>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -53,7 +53,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkOffice365
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365UpdateApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -88,17 +88,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserLockoutAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserLockoutAction]
+    [System.String]
     # .
     ${UserLockoutAction},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserPasswordExpirationAction])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserPasswordExpirationAction]
+    [System.String]
     # .
     ${UserPasswordExpirationAction},
 
@@ -158,7 +156,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Update-JcSdkInternalOffice365 @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalOffice365 @PSBoundParameters
     }
     End
     {

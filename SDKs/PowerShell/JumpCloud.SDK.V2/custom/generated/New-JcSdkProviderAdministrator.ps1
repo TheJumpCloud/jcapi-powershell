@@ -19,7 +19,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IProviderAdminReq
 .Outputs
-JumpCloud.SDK.V2.Models.IProviderAdministratorCreateApplicationJsonResponse
+JumpCloud.SDK.V2.Models.IAdministrator
 .Outputs
 System.String
 .Notes
@@ -58,7 +58,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkProviderAdministrator
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IProviderAdministratorCreateApplicationJsonResponse], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator], [System.String])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
@@ -168,7 +168,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\New-JcSdkInternalProviderAdministrator @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalProviderAdministrator @PSBoundParameters
     }
     End
     {
