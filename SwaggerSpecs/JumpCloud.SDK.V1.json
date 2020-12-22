@@ -2548,6 +2548,15 @@
         },
         "attributes": {
           "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -2567,6 +2576,9 @@
         "description": {
           "maxLength": 1024,
           "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
         },
         "displayname": {
           "maxLength": 1024,
@@ -2736,6 +2748,15 @@
         },
         "attributes": {
           "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -2752,6 +2773,9 @@
         "description": {
           "maxLength": 1024,
           "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
         },
         "displayname": {
           "type": "string"
@@ -2927,6 +2951,15 @@
         },
         "attributes": {
           "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -2953,6 +2986,9 @@
         "description": {
           "maxLength": 1024,
           "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
         },
         "displayname": {
           "maxLength": 1024,

@@ -31,6 +31,10 @@ ADDRESSES <ISystemuserputpostAddressesItem[]>:
   [StreetAddress <String>]:
   [Type <String>]:
 
+ATTRIBUTES <ISystemuserputpostAttributesItem[]>:
+  [Name <String>]:
+  [Value <String>]:
+
 BODY <ISystemuserputpost>:
   Email <String>:
   Username <String>:
@@ -47,10 +51,13 @@ BODY <ISystemuserputpost>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [Attributes <ISystemuserputpostAttributesItem[]>]:
+    [Name <String>]:
+    [Value <String>]:
   [Company <String>]:
   [CostCenter <String>]:
   [Department <String>]:
   [Description <String>]:
+  [DisableDeviceMaxLoginAttempts <Boolean?>]:
   [Displayname <String>]:
   [EmployeeIdentifier <String>]: Must be unique per user.
   [EmployeeType <String>]:
@@ -142,6 +149,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]]
     # .
+    # To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
     ${Attributes},
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -167,6 +175,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Description},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${DisableDeviceMaxLoginAttempts},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
