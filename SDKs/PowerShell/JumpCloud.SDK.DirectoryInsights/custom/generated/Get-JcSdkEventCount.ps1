@@ -23,7 +23,7 @@ Get only group_create event counts the last thirty days
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetApplicationJsonResponse
+System.Int64
 .Outputs
 System.String
 .Notes
@@ -47,7 +47,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventCount
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IEventCountGetApplicationJsonResponse], [System.String])]
+    [OutputType([System.Int64], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
@@ -174,7 +174,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
                 If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
                 {
                     If (-not [System.String]::IsNullOrEmpty($Result))
@@ -216,7 +216,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

@@ -14,6 +14,18 @@
       "title": "ErrorMessage",
       "type": "object"
     },
+    "EventCount": {
+      "description": "EventCount JSON struct with count of matching events",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Count"
+        }
+      },
+      "title": "EventCount",
+      "type": "object"
+    },
     "EventDistinctQuery": {
       "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
       "properties": {
@@ -205,7 +217,6 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
-                "title": "EventGetApplicationJsonResponse",
                 "type": "object"
               },
               "type": "array"
@@ -264,9 +275,7 @@
           "200": {
             "description": "Count of matching event rows",
             "schema": {
-              "additionalProperties": true,
-              "title": "EventCountGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/EventCount"
             }
           },
           "400": {
@@ -322,9 +331,7 @@
           "200": {
             "description": "List of distinct field values",
             "schema": {
-              "additionalProperties": true,
-              "title": "EventDistinctGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/EventCount"
             }
           },
           "400": {
@@ -382,7 +389,6 @@
             "schema": {
               "items": {
                 "additionalProperties": true,
-                "title": "EventIntervalGetApplicationJsonResponse",
                 "type": "object"
               },
               "type": "array"

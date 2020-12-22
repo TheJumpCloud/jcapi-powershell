@@ -191,7 +191,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctGetApplicationJsonResponse
+### System.Int64
 
 ### System.String
 
