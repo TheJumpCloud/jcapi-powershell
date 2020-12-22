@@ -360,7 +360,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommandCreateApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ICommand
 
 ## NOTES
 

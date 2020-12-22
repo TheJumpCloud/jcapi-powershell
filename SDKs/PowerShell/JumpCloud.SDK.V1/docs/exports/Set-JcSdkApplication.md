@@ -14,9 +14,9 @@ The endpoint updates a SSO / SAML Application.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkApplication -Id <String> [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
+Set-JcSdkApplication -Id <String> [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
+ [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
  [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -34,10 +34,10 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> 
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <Color>]
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <String>]
  [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>] [-Name <String>]
+ [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
  [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Support.Color
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -265,7 +265,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Support.Color
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -423,7 +423,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IApplicationSetApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.IApplication
 
 ## NOTES
 
@@ -436,7 +436,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
-  - `[Color <Color?>]`: 
+  - `[Color <String>]`: 
   - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
@@ -524,7 +524,7 @@ BODY <IApplication>: Application
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[LearnMore <String>]`: 
-  - `[LogoColor <Color?>]`: 
+  - `[LogoColor <String>]`: 
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 

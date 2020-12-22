@@ -16,13 +16,13 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 ```
 Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>]
  [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-Displayname <String>] [-Email <String>]
- [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
- [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
- [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
- [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
+ [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
+ [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
  [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -44,11 +44,11 @@ Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput>
 Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
  [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
- [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
- [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>]
+ [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
+ [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>]
+ [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
+ [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
  [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
@@ -124,6 +124,7 @@ Accept wildcard characters: False
 
 ### -Attributes
 .
+To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]
@@ -203,6 +204,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableDeviceMaxLoginAttempts
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -768,7 +784,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserSetApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ISystemuserreturn
 
 ## NOTES
 
@@ -789,6 +805,10 @@ ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetA
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
+ATTRIBUTES <ISystemuserputAttributesItem[]>: .
+  - `[Name <String>]`: 
+  - `[Value <String>]`: 
+
 BODY <ISystemuserput>: SystemUserPut
   - `[AccountLocked <Boolean?>]`: 
   - `[Addresses <ISystemuserputAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
@@ -802,10 +822,13 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[Attributes <ISystemuserputAttributesItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
   - `[Department <String>]`: 
   - `[Description <String>]`: 
+  - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
   - `[Displayname <String>]`: 
   - `[Email <String>]`: 
   - `[EmployeeIdentifier <String>]`: Must be unique per user. 

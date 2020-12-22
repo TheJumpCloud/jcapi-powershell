@@ -19,7 +19,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse
+JumpCloud.SDK.V1.Models.IOrganization
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -40,7 +40,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [EnableManagedUid <Boolean?>]:
     [Logo <String>]:
     [Name <String>]:
-    [PasswordCompliance <PasswordCompliance?>]:
+    [PasswordCompliance <String>]:
     [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
     [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
     [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
@@ -91,7 +91,7 @@ SETTINGS <IOrganizationsettingsput>:
   [EnableManagedUid <Boolean?>]:
   [Logo <String>]:
   [Name <String>]:
-  [PasswordCompliance <PasswordCompliance?>]:
+  [PasswordCompliance <String>]:
   [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
   [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
   [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
@@ -126,7 +126,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkOrganization
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V1.Models.IOrganization])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -222,7 +222,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalOrganization @PSBoundParameters
     }
     End
     {

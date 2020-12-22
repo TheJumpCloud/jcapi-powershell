@@ -15,7 +15,7 @@ This endpoint allows you to update RADIUS servers in your organization.\n\n####\
 ### SetExpanded (Default)
 ```
 Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-Mfa <Mfa>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -36,7 +36,7 @@ Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity>
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-Mfa <Mfa>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
+ -SharedSecret <String> [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Support.Mfa
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -240,7 +240,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IRadiusServerSetApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.IRadiusserverput
 
 ## NOTES
 
@@ -255,7 +255,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: 
-  - `[Mfa <Mfa?>]`: 
+  - `[Mfa <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 

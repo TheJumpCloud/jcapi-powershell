@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IRadiusserverpost
 .Outputs
-JumpCloud.SDK.V1.Models.IRadiusServerCreateApplicationJsonResponse
+JumpCloud.SDK.V1.Models.IRadiusserver
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -25,7 +25,7 @@ BODY <IRadiusserverpost>:
   Name <String>:
   NetworkSourceIP <String>:
   SharedSecret <String>: RADIUS shared secret between the server and client.
-  [Mfa <Mfa?>]:
+  [Mfa <String>]:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
 .Link
@@ -33,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkRadiusServer
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IRadiusServerCreateApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -62,9 +62,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${SharedSecret},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Mfa])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Mfa]
+    [System.String]
     # .
     ${Mfa},
 
@@ -136,7 +135,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalRadiusServer @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalRadiusServer @PSBoundParameters
     }
     End
     {

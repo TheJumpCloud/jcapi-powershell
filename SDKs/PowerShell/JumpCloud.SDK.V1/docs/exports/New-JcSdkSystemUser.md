@@ -17,14 +17,15 @@ This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n
 New-JcSdkSystemUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey]
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-Displayname <String>] [-EmployeeIdentifier <String>]
- [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
- [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>] [-ExternalSourceType <String>]
- [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
- [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
- [-PublicKey <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo]
- [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
+ [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
+ [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
+ [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
+ [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
+ [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
+ [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -116,6 +117,7 @@ Accept wildcard characters: False
 
 ### -Attributes
 .
+To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]
@@ -195,6 +197,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DisableDeviceMaxLoginAttempts
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -726,7 +743,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserCreateApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ISystemuserreturn
 
 ## NOTES
 
@@ -747,6 +764,10 @@ ADDRESSES <ISystemuserputpostAddressesItem[]>: .
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
+ATTRIBUTES <ISystemuserputpostAttributesItem[]>: .
+  - `[Name <String>]`: 
+  - `[Value <String>]`: 
+
 BODY <ISystemuserputpost>: SystemUserPost
   - `Email <String>`: 
   - `Username <String>`: 
@@ -763,10 +784,13 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[Attributes <ISystemuserputpostAttributesItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
   - `[Department <String>]`: 
   - `[Description <String>]`: 
+  - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
   - `[Displayname <String>]`: 
   - `[EmployeeIdentifier <String>]`: Must be unique per user. 
   - `[EmployeeType <String>]`: 

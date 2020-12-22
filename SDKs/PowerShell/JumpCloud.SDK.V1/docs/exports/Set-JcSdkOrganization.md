@@ -181,7 +181,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IOrganizationSetApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.IOrganization
 
 ## NOTES
 
@@ -207,7 +207,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[EnableManagedUid <Boolean?>]`: 
     - `[Logo <String>]`: 
     - `[Name <String>]`: 
-    - `[PasswordCompliance <PasswordCompliance?>]`: 
+    - `[PasswordCompliance <String>]`: 
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
     - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
@@ -258,7 +258,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[EnableManagedUid <Boolean?>]`: 
   - `[Logo <String>]`: 
   - `[Name <String>]`: 
-  - `[PasswordCompliance <PasswordCompliance?>]`: 
+  - `[PasswordCompliance <String>]`: 
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
   - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 

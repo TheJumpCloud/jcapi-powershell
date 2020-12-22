@@ -177,7 +177,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 
-### JumpCloud.SDK.V1.Models.ISystemUsersSshKeyCreateApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ISshkeylist
 
 ## NOTES
 

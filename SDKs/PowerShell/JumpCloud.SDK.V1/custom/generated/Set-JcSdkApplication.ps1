@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IApplication
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IApplicationSetApplicationJsonResponse
+JumpCloud.SDK.V1.Models.IApplication
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -25,7 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>:
   [Beta <Boolean?>]:
-  [Color <Color?>]:
+  [Color <String>]:
   [Config <IApplicationConfig>]:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
@@ -113,7 +113,7 @@ BODY <IApplication>:
   [DisplayName <String>]:
   [Id <String>]:
   [LearnMore <String>]:
-  [LogoColor <Color?>]:
+  [LogoColor <String>]:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
@@ -213,7 +213,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IApplicationSetApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -249,9 +249,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${Color},
 
@@ -313,9 +312,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${LogoColor},
 
@@ -424,7 +422,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\Set-JcSdkInternalApplication @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Set-JcSdkInternalApplication @PSBoundParameters
     }
     End
     {

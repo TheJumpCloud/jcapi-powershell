@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IApplication
 .Outputs
-JumpCloud.SDK.V1.Models.IApplicationCreateApplicationJsonResponse
+JumpCloud.SDK.V1.Models.IApplication
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -23,7 +23,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>:
   [Beta <Boolean?>]:
-  [Color <Color?>]:
+  [Color <String>]:
   [Config <IApplicationConfig>]:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
@@ -111,7 +111,7 @@ BODY <IApplication>:
   [DisplayName <String>]:
   [Id <String>]:
   [LearnMore <String>]:
-  [LogoColor <Color?>]:
+  [LogoColor <String>]:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
@@ -205,7 +205,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkApplication
 {
-    [OutputType([JumpCloud.SDK.V1.Models.IApplicationCreateApplicationJsonResponse])]
+    [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
@@ -222,9 +222,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Beta},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${Color},
 
@@ -278,9 +277,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${LearnMore},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${LogoColor},
 
@@ -382,7 +380,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters
     }
     End
     {

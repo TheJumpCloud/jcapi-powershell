@@ -19,7 +19,7 @@ JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
 JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemUsersSshKeyCreateApplicationJsonResponse
+JumpCloud.SDK.V1.Models.ISshkeylist
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -39,7 +39,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkSystemUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemUsersSshKeyCreateApplicationJsonResponse], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]

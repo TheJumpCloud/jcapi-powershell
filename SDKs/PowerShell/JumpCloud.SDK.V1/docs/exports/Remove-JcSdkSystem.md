@@ -150,7 +150,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemDeleteApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.IJcSystem
 
 ## NOTES
 

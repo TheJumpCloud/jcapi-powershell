@@ -28,60 +28,7 @@
             "#57C49F",
             "#FF6C03"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "color",
-            "values": [
-              {
-                "name": "202D38",
-                "value": "'#202D38'"
-              },
-              {
-                "name": "005466",
-                "value": "'#005466'"
-              },
-              {
-                "name": "3E8696",
-                "value": "'#3E8696'"
-              },
-              {
-                "name": "006CAC",
-                "value": "'#006CAC'"
-              },
-              {
-                "name": "0617AC",
-                "value": "'#0617AC'"
-              },
-              {
-                "name": "7C6ADA",
-                "value": "'#7C6ADA'"
-              },
-              {
-                "name": "D5779D",
-                "value": "'#D5779D'"
-              },
-              {
-                "name": "9E2F00",
-                "value": "'#9E2F00'"
-              },
-              {
-                "name": "FFB000",
-                "value": "'#FFB000'"
-              },
-              {
-                "name": "58C469",
-                "value": "'#58C469'"
-              },
-              {
-                "name": "57C49F",
-                "value": "'#57C49F'"
-              },
-              {
-                "name": "FF6C03",
-                "value": "'#FF6C03'"
-              }
-            ]
-          }
+          "type": "string"
         },
         "config": {
           "properties": {
@@ -465,60 +412,7 @@
                 "#57C49F",
                 "#FF6C03"
               ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "color",
-                "values": [
-                  {
-                    "name": "202D38",
-                    "value": "'#202D38'"
-                  },
-                  {
-                    "name": "005466",
-                    "value": "'#005466'"
-                  },
-                  {
-                    "name": "3E8696",
-                    "value": "'#3E8696'"
-                  },
-                  {
-                    "name": "006CAC",
-                    "value": "'#006CAC'"
-                  },
-                  {
-                    "name": "0617AC",
-                    "value": "'#0617AC'"
-                  },
-                  {
-                    "name": "7C6ADA",
-                    "value": "'#7C6ADA'"
-                  },
-                  {
-                    "name": "D5779D",
-                    "value": "'#D5779D'"
-                  },
-                  {
-                    "name": "9E2F00",
-                    "value": "'#9E2F00'"
-                  },
-                  {
-                    "name": "FFB000",
-                    "value": "'#FFB000'"
-                  },
-                  {
-                    "name": "58C469",
-                    "value": "'#58C469'"
-                  },
-                  {
-                    "name": "57C49F",
-                    "value": "'#57C49F'"
-                  },
-                  {
-                    "name": "FF6C03",
-                    "value": "'#FF6C03'"
-                  }
-                ]
-              }
+              "type": "string"
             },
             "url": {
               "type": "string"
@@ -551,6 +445,484 @@
         }
       },
       "title": "Application",
+      "type": "object"
+    },
+    "applicationslist": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "results": {
+          "description": "The list of applications.",
+          "items": {
+            "$ref": "#/definitions/application"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of applications.",
+          "type": "integer"
+        }
+      },
+      "title": "ApplicationsList",
+      "type": "object"
+    },
+    "applicationtemplate": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "beta": {
+          "type": "boolean"
+        },
+        "color": {
+          "enum": [
+            "",
+            "#202D38",
+            "#005466",
+            "#3E8696",
+            "#006CAC",
+            "#0617AC",
+            "#7C6ADA",
+            "#D5779D",
+            "#9E2F00",
+            "#FFB000",
+            "#58C469",
+            "#57C49F",
+            "#FF6C03"
+          ],
+          "type": "string"
+        },
+        "config": {
+          "properties": {
+            "acsUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "constantAttributes": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "mutable": {
+                  "type": "boolean"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "databaseAttributes": {
+              "properties": {
+                "position": {
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "idpCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpPrivateKey": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "spEntityId": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "string"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "toggle": {
+                  "type": "string"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "displayLabel": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "isConfigured": {
+          "type": "boolean"
+        },
+        "jit": {
+          "properties": {
+            "attributes": {
+              "type": "object"
+            },
+            "createOnly": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "keywords": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "learnMore": {
+          "type": "string"
+        },
+        "logo": {
+          "properties": {
+            "url": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "name": {
+          "type": "string"
+        },
+        "sso": {
+          "properties": {
+            "beta": {
+              "type": "boolean"
+            },
+            "jit": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "ssoUrl": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "",
+            "end_of_life",
+            "end_of_support",
+            "beta"
+          ],
+          "type": "string"
+        },
+        "test": {
+          "type": "string"
+        }
+      },
+      "title": "ApplicationTemplate",
+      "type": "object"
+    },
+    "applicationtemplateslist": {
+      "properties": {
+        "results": {
+          "description": "The list of applications.",
+          "items": {
+            "$ref": "#/definitions/applicationtemplate"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of applications.",
+          "type": "integer"
+        }
+      },
+      "title": "ApplicationTemplatesList",
       "type": "object"
     },
     "command": {
@@ -634,6 +1006,240 @@
       "title": "Command",
       "type": "object"
     },
+    "commandfilereturn": {
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the file.",
+                "type": "string"
+              },
+              "destination": {
+                "description": "The location where the file will be stored.",
+                "type": "string"
+              },
+              "name": {
+                "description": "The file name.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of commands files",
+          "type": "integer"
+        }
+      },
+      "title": "CommandFileReturn",
+      "type": "object"
+    },
+    "commandresult": {
+      "properties": {
+        "_id": {
+          "description": "The ID of the command.",
+          "type": "string"
+        },
+        "command": {
+          "description": "The command that was executed on the system.",
+          "type": "string"
+        },
+        "files": {
+          "description": "An array of file ids that were included in the command",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "The name of the command.",
+          "type": "string"
+        },
+        "organization": {
+          "description": "The ID of the organization.",
+          "type": "string"
+        },
+        "requestTime": {
+          "description": "The time that the command was sent.",
+          "type": "string"
+        },
+        "response": {
+          "properties": {
+            "data": {
+              "properties": {
+                "exitCode": {
+                  "description": "The stderr output from the command that ran.",
+                  "type": "integer"
+                },
+                "output": {
+                  "description": "The output of the command that was executed.",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "error": {
+              "description": "The stderr output from the command that ran.",
+              "type": "string"
+            },
+            "id": {
+              "description": "ID of the response.",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "responseTime": {
+          "description": "The time that the command was completed.",
+          "type": "string"
+        },
+        "sudo": {
+          "description": "If the user had sudo rights",
+          "type": "boolean"
+        },
+        "system": {
+          "description": "The name of the system the command was executed on.",
+          "type": "string"
+        },
+        "systemId": {
+          "description": "The id of the system the command was executed on.",
+          "type": "string"
+        },
+        "user": {
+          "description": "The user the command ran as.",
+          "type": "string"
+        },
+        "workflowId": {
+          "type": "string"
+        },
+        "workflowInstanceId": {
+          "type": "string"
+        }
+      },
+      "title": "CommandResult",
+      "type": "object"
+    },
+    "commandresultslist": {
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the command result.",
+                "type": "string"
+              },
+              "command": {
+                "description": "The command that was executed on the system.",
+                "type": "string"
+              },
+              "exitCode": {
+                "description": "The stderr output from the command that ran.",
+                "type": "integer"
+              },
+              "name": {
+                "description": "The name of the command.",
+                "type": "string"
+              },
+              "requestTime": {
+                "description": "The time (UTC) that the command was sent.",
+                "type": "string"
+              },
+              "responseTime": {
+                "description": "The time (UTC) that the command was completed.",
+                "type": "string"
+              },
+              "sudo": {
+                "description": "If the user had sudo rights.",
+                "type": "boolean"
+              },
+              "system": {
+                "description": "The display name of the system the command was executed on.",
+                "type": "string"
+              },
+              "systemId": {
+                "description": "The id of the system the command was executed on.",
+                "type": "string"
+              },
+              "user": {
+                "description": "The user the command ran as.",
+                "type": "string"
+              },
+              "workflowId": {
+                "description": "The id for the command that ran on the system.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of command results.",
+          "type": "integer"
+        }
+      },
+      "title": "CommandResultsList",
+      "type": "object"
+    },
+    "commandslist": {
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the command.",
+                "type": "string"
+              },
+              "command": {
+                "description": "The Command to execute.",
+                "type": "string"
+              },
+              "commandType": {
+                "description": "The Command OS.",
+                "type": "string"
+              },
+              "launchType": {
+                "description": "How the Command is executed.",
+                "type": "string"
+              },
+              "listensTo": {
+                "type": "string"
+              },
+              "name": {
+                "description": "The name of the Command.",
+                "type": "string"
+              },
+              "organization": {
+                "description": "The ID of the Organization.",
+                "type": "string"
+              },
+              "schedule": {
+                "description": "A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.",
+                "type": "string"
+              },
+              "scheduleRepeatType": {
+                "description": "When the command will repeat.",
+                "type": "string"
+              },
+              "trigger": {
+                "description": "Trigger to execute command.",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of commands",
+          "type": "integer"
+        }
+      },
+      "title": "CommandsList",
+      "type": "object"
+    },
     "errorresponse": {
       "properties": {
         "message": {
@@ -641,6 +1247,196 @@
         }
       },
       "title": "ErrorResponse",
+      "type": "object"
+    },
+    "fde": {
+      "properties": {
+        "active": {
+          "type": "boolean"
+        },
+        "keyPresent": {
+          "type": "boolean"
+        }
+      },
+      "title": "FDE",
+      "type": "object"
+    },
+    "JcSystem": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "allowMultiFactorAuthentication": {
+          "type": "boolean"
+        },
+        "allowPublicKeyAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshPasswordAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshRootLogin": {
+          "type": "boolean"
+        },
+        "amazonInstanceID": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "builtInCommands": {
+          "items": {
+            "properties": {
+              "name": {
+                "enum": [
+                  "erase",
+                  "lock",
+                  "restart",
+                  "shutdown"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "security"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "connectionHistory": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "created": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "fde": {
+          "$ref": "#/definitions/fde"
+        },
+        "fileSystem": {
+          "type": "string"
+        },
+        "hasServiceAccount": {
+          "type": "boolean"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "lastContact": {
+          "type": "string"
+        },
+        "mdm": {
+          "properties": {
+            "dep": {
+              "type": "boolean"
+            },
+            "profileIdentifier": {
+              "type": "string"
+            },
+            "userApproved": {
+              "type": "boolean"
+            },
+            "vendor": {
+              "enum": [
+                "unknown",
+                "none",
+                "internal",
+                "external"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "modifySSHDConfig": {
+          "type": "boolean"
+        },
+        "networkInterfaces": {
+          "items": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "internal": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "remoteIP": {
+          "type": "string"
+        },
+        "sshdParams": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "sshRootEnabled": {
+          "type": "boolean"
+        },
+        "systemInsights": {
+          "properties": {
+            "state": {
+              "enum": [
+                "enabled",
+                "disabled",
+                "deferred"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "systemTimezone": {
+          "type": "integer"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "JcSystem",
       "type": "object"
     },
     "mfa": {
@@ -657,6 +1453,233 @@
         }
       },
       "title": "mfa",
+      "type": "object"
+    },
+    "organization": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "hasStripeCustomerId": {
+          "type": "boolean"
+        },
+        "logoUrl": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "settings": {
+          "$ref": "#/definitions/organizationsettings"
+        }
+      },
+      "title": "Organization",
+      "type": "object"
+    },
+    "organizationsettings": {
+      "description": "",
+      "properties": {
+        "betaFeatures": {
+          "type": "object"
+        },
+        "contactEmail": {
+          "type": "string"
+        },
+        "contactName": {
+          "type": "string"
+        },
+        "deviceIdentificationEnabled": {
+          "type": "boolean"
+        },
+        "disableCommandRunner": {
+          "type": "boolean"
+        },
+        "disableGoogleLogin": {
+          "type": "boolean"
+        },
+        "disableLdap": {
+          "type": "boolean"
+        },
+        "disableUM": {
+          "type": "boolean"
+        },
+        "duplicateLDAPGroups": {
+          "type": "boolean"
+        },
+        "emailDisclaimer": {
+          "type": "string"
+        },
+        "enableGoogleApps": {
+          "type": "boolean"
+        },
+        "enableManagedUID": {
+          "type": "boolean"
+        },
+        "enableO365": {
+          "type": "boolean"
+        },
+        "enableUserPortalAgentInstall": {
+          "type": "boolean"
+        },
+        "features": {
+          "properties": {
+            "directoryInsights": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "directoryInsightsPremium": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "systemInsights": {
+              "properties": {
+                "enabled": {
+                  "type": "boolean"
+                },
+                "enableNewDarwin": {
+                  "type": "boolean"
+                },
+                "enableNewLinux": {
+                  "type": "boolean"
+                },
+                "enableNewWindows": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "logo": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "passwordCompliance": {
+          "enum": [
+            "custom",
+            "pci3",
+            "windows"
+          ],
+          "type": "string"
+        },
+        "passwordPolicy": {
+          "properties": {
+            "allowUsernameSubstring": {
+              "type": "boolean"
+            },
+            "daysAfterExpirationToSelfRecover": {
+              "description": "Deprecated field used for the legacy grace period feature.",
+              "type": "integer"
+            },
+            "daysBeforeExpirationToForceReset": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "effectiveDate": {
+              "type": "string"
+            },
+            "enableDaysAfterExpirationToSelfRecover": {
+              "type": "boolean"
+            },
+            "enableDaysBeforeExpirationToForceReset": {
+              "type": "boolean"
+            },
+            "enableLockoutTimeInSeconds": {
+              "type": "boolean"
+            },
+            "enableMaxHistory": {
+              "type": "boolean"
+            },
+            "enableMaxLoginAttempts": {
+              "type": "boolean"
+            },
+            "enableMinChangePeriodInDays": {
+              "type": "boolean"
+            },
+            "enableMinLength": {
+              "type": "boolean"
+            },
+            "enablePasswordExpirationInDays": {
+              "type": "boolean"
+            },
+            "lockoutTimeInSeconds": {
+              "type": "integer"
+            },
+            "maxHistory": {
+              "maximum": 24,
+              "minimum": 1,
+              "type": "integer"
+            },
+            "maxLoginAttempts": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "minChangePeriodInDays": {
+              "type": "integer"
+            },
+            "minLength": {
+              "type": "integer"
+            },
+            "needsLowercase": {
+              "type": "boolean"
+            },
+            "needsNumeric": {
+              "type": "boolean"
+            },
+            "needsSymbolic": {
+              "type": "boolean"
+            },
+            "needsUppercase": {
+              "type": "boolean"
+            },
+            "passwordExpirationInDays": {
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "pendingDelete": {
+          "type": "boolean"
+        },
+        "showIntro": {
+          "type": "boolean"
+        },
+        "systemUserPasswordExpirationInDays": {
+          "type": "integer"
+        },
+        "systemUsersCanEdit": {
+          "type": "boolean"
+        },
+        "userPortal": {
+          "properties": {
+            "idleSessionDurationMinutes": {
+              "maximum": 129600,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "title": "OrganizationSettings",
       "type": "object"
     },
     "organizationsettingsput": {
@@ -738,10 +1761,7 @@
             "pci3",
             "windows"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "passwordCompliance"
-          }
+          "type": "string"
         },
         "passwordPolicy": {
           "properties": {
@@ -840,6 +1860,73 @@
       "title": "OrganizationSettingsPut",
       "type": "object"
     },
+    "organizationslist": {
+      "properties": {
+        "results": {
+          "description": "The list of organizations.",
+          "items": {
+            "properties": {
+              "_id": {
+                "description": "The ID of the organization.",
+                "type": "string"
+              },
+              "displayName": {
+                "description": "The name of the organization.",
+                "type": "string"
+              },
+              "logoUrl": {
+                "description": "The organization logo image URL. ",
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of organizations. ",
+          "type": "integer"
+        }
+      },
+      "title": "OrganizationList",
+      "type": "object"
+    },
+    "radiusserver": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkSourceIp": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "sharedSecret": {
+          "type": "string"
+        },
+        "userLockoutAction": {
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "type": "string"
+        }
+      },
+      "title": "RadiusServer",
+      "type": "object"
+    },
     "radiusserverpost": {
       "properties": {
         "mfa": {
@@ -849,10 +1936,7 @@
             "REQUIRED",
             "ALWAYS"
           ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "mfa"
-          }
+          "type": "string"
         },
         "name": {
           "type": "string"
@@ -879,6 +1963,51 @@
       "title": "RadiusServerPost",
       "type": "object"
     },
+    "radiusserverput": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "mfa": {
+          "enum": [
+            "DISABLED",
+            "ENABLED",
+            "REQUIRED",
+            "ALWAYS"
+          ],
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "networkSourceIp": {
+          "type": "string"
+        },
+        "userLockoutAction": {
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "type": "string"
+        }
+      },
+      "title": "RadiusServerPut",
+      "type": "object"
+    },
+    "radiusserverslist": {
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/definitions/radiusserver"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "type": "integer"
+        }
+      },
+      "title": "RadiusServersList",
+      "type": "object"
+    },
     "search": {
       "properties": {
         "fields": {
@@ -892,6 +2021,28 @@
         }
       },
       "title": "search",
+      "type": "object"
+    },
+    "sshkeylist": {
+      "properties": {
+        "_id": {
+          "description": "The ID of the SSH key.",
+          "type": "string"
+        },
+        "create_date": {
+          "description": "The date the SSH key was created.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the SSH key.",
+          "type": "string"
+        },
+        "public_key": {
+          "description": "The Public SSH key.",
+          "type": "string"
+        }
+      },
+      "title": "SSHKeyList",
       "type": "object"
     },
     "sshkeypost": {
@@ -942,6 +2093,23 @@
         }
       },
       "title": "SystemPut",
+      "type": "object"
+    },
+    "systemslist": {
+      "properties": {
+        "results": {
+          "description": "The list of systems.",
+          "items": {
+            "$ref": "#/definitions/JcSystem"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of systems.",
+          "type": "integer"
+        }
+      },
+      "title": "SystemsList",
       "type": "object"
     },
     "systemuserput": {
@@ -995,6 +2163,15 @@
         },
         "attributes": {
           "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -1014,6 +2191,9 @@
         "description": {
           "maxLength": 1024,
           "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
         },
         "displayname": {
           "maxLength": 1024,
@@ -1183,6 +2363,15 @@
         },
         "attributes": {
           "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
             "type": "object"
           },
           "type": "array"
@@ -1199,6 +2388,9 @@
         "description": {
           "maxLength": 1024,
           "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
         },
         "displayname": {
           "type": "string"
@@ -1314,6 +2506,271 @@
       ],
       "title": "SystemUserPost",
       "type": "object"
+    },
+    "systemuserreturn": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "attributes": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "badLoginAttempts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "created": {
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "password_expiration_date": {
+          "type": "string"
+        },
+        "password_expired": {
+          "type": "boolean"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "relationships": {
+          "items": {
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "ssh_keys": {
+          "items": {
+            "$ref": "#/definitions/sshkeylist"
+          },
+          "type": "array"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "totp_enabled": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "username": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "title": "SystemUserReturn",
+      "type": "object"
+    },
+    "systemuserslist": {
+      "properties": {
+        "results": {
+          "description": "The list of system users.",
+          "items": {
+            "$ref": "#/definitions/systemuserreturn"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of system users.",
+          "type": "integer"
+        }
+      },
+      "title": "SystemUsersList",
+      "type": "object"
+    },
+    "triggerreturn": {
+      "properties": {
+        "triggered": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "title": "TriggerReturn",
+      "type": "object"
     }
   },
   "host": "console.jumpcloud.com",
@@ -1384,9 +2841,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/applicationslist"
             }
           }
         },
@@ -1413,9 +2868,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/application"
             }
           }
         },
@@ -1436,9 +2889,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/application"
             }
           }
         },
@@ -1457,9 +2908,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/application"
             }
           }
         },
@@ -1494,9 +2943,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/application"
             }
           }
         },
@@ -1553,9 +3000,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationTemplateListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/applicationtemplateslist"
             }
           }
         },
@@ -1612,9 +3057,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "ApplicationTemplateGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/applicationtemplate"
             }
           }
         },
@@ -1651,9 +3094,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandTriggerPOSTApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/triggerreturn"
             }
           },
           "401": {
@@ -1718,9 +3159,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandResultListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/commandresultslist"
             }
           },
           "401": {
@@ -1744,9 +3183,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandResultDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/commandresult"
             }
           },
           "401": {
@@ -1784,9 +3221,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandResultGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/commandresult"
             }
           },
           "401": {
@@ -1859,9 +3294,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/commandslist"
             }
           },
           "401": {
@@ -1891,9 +3324,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/command"
             }
           },
           "401": {
@@ -1945,9 +3376,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/command"
             }
           },
           "401": {
@@ -1985,9 +3414,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/command"
             }
           },
           "401": {
@@ -2037,9 +3464,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "CommandFileGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/commandfilereturn"
             }
           },
           "400": {
@@ -2122,9 +3547,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "OrganizationListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/organizationslist"
             }
           }
         },
@@ -2161,9 +3584,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "OrganizationGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/organization"
             }
           },
           "401": {
@@ -2209,9 +3630,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "OrganizationSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/organization"
             }
           },
           "400": {
@@ -2279,9 +3698,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "RadiusServerListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/radiusserverslist"
             }
           }
         },
@@ -2308,9 +3725,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "RadiusServerCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/radiusserver"
             }
           }
         },
@@ -2331,9 +3746,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "RadiusServerDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/radiusserverput"
             }
           }
         },
@@ -2352,9 +3765,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "RadiusServerGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/radiusserver"
             }
           }
         },
@@ -2397,10 +3808,7 @@
                     "REQUIRED",
                     "ALWAYS"
                   ],
-                  "type": "string",
-                  "x-ms-enum": {
-                    "name": "mfa"
-                  }
+                  "type": "string"
                 },
                 "name": {
                   "type": "string"
@@ -2431,9 +3839,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "RadiusServerSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/radiusserverput"
             }
           }
         },
@@ -2494,9 +3900,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "OrganizationSearchApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/organizationslist"
             }
           },
           "401": {
@@ -2560,9 +3964,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemSearchApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemslist"
             }
           },
           "401": {
@@ -2626,9 +4028,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserSearchApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserslist"
             }
           },
           "401": {
@@ -2700,9 +4100,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemslist"
             }
           }
         },
@@ -2730,9 +4128,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/JcSystem"
             }
           }
         },
@@ -2773,9 +4169,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/JcSystem"
             }
           }
         },
@@ -2816,9 +4210,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/JcSystem"
             }
           }
         },
@@ -3062,9 +4454,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserListApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserslist"
             }
           },
           "401": {
@@ -3094,9 +4484,7 @@
           "200": {
             "description": "User added successfully",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserreturn"
             }
           },
           "400": {
@@ -3123,9 +4511,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserDeleteApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserreturn"
             }
           },
           "401": {
@@ -3163,9 +4549,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserGetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserreturn"
             }
           },
           "401": {
@@ -3203,9 +4587,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUserSetApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/systemuserreturn"
             }
           },
           "401": {
@@ -3335,9 +4717,7 @@
             "description": "",
             "schema": {
               "items": {
-                "additionalProperties": true,
-                "title": "SystemUsersSshKeyListApplicationJsonResponse",
-                "type": "object"
+                "$ref": "#/definitions/sshkeylist"
               },
               "type": "array"
             }
@@ -3381,9 +4761,7 @@
           "200": {
             "description": "",
             "schema": {
-              "additionalProperties": true,
-              "title": "SystemUsersSshKeyCreateApplicationJsonResponse",
-              "type": "object"
+              "$ref": "#/definitions/sshkeylist"
             }
           },
           "400": {

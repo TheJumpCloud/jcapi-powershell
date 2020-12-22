@@ -174,9 +174,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemUserGetApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ISystemuserreturn
 
-### JumpCloud.SDK.V1.Models.ISystemUserListApplicationJsonResponse
+### JumpCloud.SDK.V1.Models.ISystemuserslist
 
 ## NOTES
 
