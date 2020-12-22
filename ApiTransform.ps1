@@ -459,74 +459,74 @@ Function Update-SwaggerObject
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
-                    # Append "x-ms-enum" to "enum" section
-                    If ($AttributePath -like '*.enum' -and $AttributePath -notlike '*.responses*')
-                    {
-                        $xMsEnum = [PSCustomObject]@{
-                            name = $ThisObjectName
-                            # modelAsString = $true
-                        }
-                        # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                        If ($ThisObject.enum | ForEach-Object {
-                                If ($_ -eq 'system' -or $_ -like '*#*')
-                                {
-                                    $_
-                                }
-                            })
-                        {
-                            $xMsEnumValues = @(
-                                $ThisObject.enum | ForEach-Object {
-                                    $EnumItem = $_
-                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                                    If (-not [System.String]::IsNullOrEmpty($EnumItem))
-                                    {
-                                        [PSCustomObject]@{
-                                            name  = $EnumItemName;
-                                            value = $EnumItem | ForEach-Object {
-                                                If ($_ -match [regex]'(\#|\s)')
-                                                {
-                                                    "'$($_)'"
-                                                }
-                                                Else
-                                                {
-                                                    $_
-                                                };
-                                            };
-                                        }
-                                    }
-                                }
-                            )
-                            Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
-                        }
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
-                        # Make x-ms-enum names unique
-                        # See if x-ms-enum already exists by name
-                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
-                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                        {
-                            $xMsEnumObjectFilteredId = 0
-                            $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                        }
-                        Else
-                        {
-                            # See if x-ms-enum already exists by name and value
-                            $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
-                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                            {
-                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                                $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                            }
-                            Else
-                            {
-                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
-                            }
-                        }
-                        If ($xMsEnumObjectFilteredId -gt 0)
-                        {
-                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
-                        }
-                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
-                    }
+                    # # Append "x-ms-enum" to "enum" section
+                    # If ($AttributePath -like '*.enum' -and $AttributePath -notlike '*.responses*')
+                    # {
+                    #     $xMsEnum = [PSCustomObject]@{
+                    #         name = $ThisObjectName
+                    #         # modelAsString = $true
+                    #     }
+                    #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
+                    #     If ($ThisObject.enum | ForEach-Object {
+                    #             If ($_ -eq 'system' -or $_ -like '*#*')
+                    #             {
+                    #                 $_
+                    #             }
+                    #         })
+                    #     {
+                    #         $xMsEnumValues = @(
+                    #             $ThisObject.enum | ForEach-Object {
+                    #                 $EnumItem = $_
+                    #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                    #                 If (-not [System.String]::IsNullOrEmpty($EnumItem))
+                    #                 {
+                    #                     [PSCustomObject]@{
+                    #                         name  = $EnumItemName;
+                    #                         value = $EnumItem | ForEach-Object {
+                    #                             If ($_ -match [regex]'(\#|\s)')
+                    #                             {
+                    #                                 "'$($_)'"
+                    #                             }
+                    #                             Else
+                    #                             {
+                    #                                 $_
+                    #                             };
+                    #                         };
+                    #                     }
+                    #                 }
+                    #             }
+                    #         )
+                    #         Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                    #     }
+                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                    #     # Make x-ms-enum names unique
+                    #     # See if x-ms-enum already exists by name
+                    #     $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
+                    #     If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                    #     {
+                    #         $xMsEnumObjectFilteredId = 0
+                    #         $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                    #     }
+                    #     Else
+                    #     {
+                    #         # See if x-ms-enum already exists by name and value
+                    #         $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
+                    #         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                    #         {
+                    #             $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                    #             $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                    #         }
+                    #         Else
+                    #         {
+                    #             $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                    #         }
+                    #     }
+                    #     If ($xMsEnumObjectFilteredId -gt 0)
+                    #     {
+                    #         $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                    #     }
+                    #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
+                    # }
                     # Exclude $ref
                     If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
                     {
@@ -534,25 +534,31 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
                     }
-                    # Generalize responses for when operation returns an object or an array of objects
-                    If ($AttributePath -like '*.responses.200.schema')
-                    {
-                        $GeneralObject = [PSCustomObject]@{
-                            additionalProperties = $true
-                            title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse"
-                            type                 = 'object'
-                        }
-                        If ($ThisObject.$AttributeName.type -eq 'array')
-                        {
-                            $ThisObject.$AttributeName.PSObject.Properties.Remove('items')
-                            Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('items') -Value:($GeneralObject)
-                        }
-                        Else
-                        {
-                            $ThisObject.PSObject.Properties.Remove($AttributeName)
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
-                        }
-                    }
+                    # # Generalize responses for when operation returns an object or an array of objects
+                    # If ($AttributePath -like '*.responses.200.schema')
+                    # {
+
+                    #     If ($ThisObject.$AttributeName.type -eq 'array')
+                    #     {
+                    #         $GeneralObject = [PSCustomObject]@{
+                    #             additionalProperties = $true
+                    #             type                 = 'object'
+                    #         }
+                    #         $ThisObject.$AttributeName.PSObject.Properties.Remove('items')
+                    #         Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('items') -Value:($GeneralObject)
+                    #         Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse")
+                    #     }
+                    #     Else
+                    #     {
+                    #         $GeneralObject = [PSCustomObject]@{
+                    #             additionalProperties = $true
+                    #             title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse"
+                    #             type                 = 'object'
+                    #         }
+                    #         $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    #         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
+                    #     }
+                    # }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
                     {
