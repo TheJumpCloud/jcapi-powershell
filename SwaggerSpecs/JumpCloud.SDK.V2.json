@@ -14587,7 +14587,7 @@
     "/systems/{system_id}/memberof": {
       "get": {
         "description": "This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "Get-SystemMemberof",
+        "operationId": "Get-SystemMemberOf",
         "parameters": [
           {
             "default": [],
@@ -16209,7 +16209,7 @@
     "/users/{user_id}/memberof": {
       "get": {
         "description": "This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "Get-UserMemberof",
+        "operationId": "Get-UserMemberOf",
         "parameters": [
           {
             "default": [],

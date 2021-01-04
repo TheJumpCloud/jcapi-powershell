@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemMemberof.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemMember.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkSystemMemberof
+# Get-JcSdkSystemMember
 
 ## SYNOPSIS
 This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
@@ -14,13 +14,13 @@ This endpoint returns all the System Groups a System is a member of.\n\n#### Sam
 
 ### Get (Default)
 ```
-Get-JcSdkSystemMemberof -SystemId <String> [-Filter <String[]>] [-Sort <String[]>] [-Authorization <String>]
+Get-JcSdkSystemMember -SystemId <String> [-Filter <String[]>] [-Sort <String[]>] [-Authorization <String>]
  [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemMemberof -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
+Get-JcSdkSystemMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
  [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
