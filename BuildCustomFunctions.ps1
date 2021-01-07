@@ -251,7 +251,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate')
                         {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 500)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
                         }
                         If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
