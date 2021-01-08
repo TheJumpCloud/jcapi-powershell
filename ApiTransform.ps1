@@ -735,7 +735,7 @@ $SDKName | ForEach-Object {
                         $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
                     }
                 }
-                $DefinitionResults = If ($UsedDefinitions -and $AllDefinitions)
+                $DefinitionResults = If (-not [System.String]::IsNullOrEmpty($UsedDefinitions) -and -not [System.String]::IsNullOrEmpty($AllDefinitions))
                 {
                     Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions
                 }
@@ -748,7 +748,7 @@ $SDKName | ForEach-Object {
                         $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
                     }
                 }
-                $ParameterResults = If ($UsedParameters -and $AllParameters)
+                $ParameterResults = If (-not [System.String]::IsNullOrEmpty($UsedParameters) -and -not [System.String]::IsNullOrEmpty($AllParameters))
                 {
                     Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters
                 }
@@ -787,8 +787,15 @@ $SDKName | ForEach-Object {
             If (Test-Path -Path:($OutputFullPathJson))
             {
                 $OldSpec = Get-Content -Path:($OutputFullPathJson) -Raw | ConvertFrom-Json -Depth:(100) | ConvertTo-Json -Depth:(100)
-                $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
-                If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                If (-not [System.String]::IsNullOrEmpty($OldSpec))
+                {
+                    $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
+                    If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                    {
+                        $UpdatedSpec = $true
+                    }
+                }
+                Else
                 {
                     $UpdatedSpec = $true
                 }
