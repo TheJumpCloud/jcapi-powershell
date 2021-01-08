@@ -101,7 +101,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
             {
-                $PSBoundParameters.Add('Limit', 500)
+                $PSBoundParameters.Add('Limit', 100)
             }
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
             {
