@@ -460,39 +460,33 @@ Function Update-SwaggerObject
                         }
                     }
                     # # Append "x-ms-enum" to "enum" section
-                    # If ($AttributePath -like '*.enum' -and $AttributePath -notlike '*.responses*')
+                    # If ($AttributePath -like '*.enum')
                     # {
                     #     $xMsEnum = [PSCustomObject]@{
                     #         name = $ThisObjectName
                     #         # modelAsString = $true
                     #     }
+                    #     # Remove blank values from enum
+                    #     If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration
                     #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                    #     If ($ThisObject.enum | ForEach-Object {
-                    #             If ($_ -eq 'system' -or $_ -like '*#*')
-                    #             {
-                    #                 $_
-                    #             }
-                    #         })
+                    #     If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
                     #     {
                     #         $xMsEnumValues = @(
                     #             $ThisObject.enum | ForEach-Object {
                     #                 $EnumItem = $_
                     #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                    #                 If (-not [System.String]::IsNullOrEmpty($EnumItem))
-                    #                 {
-                    #                     [PSCustomObject]@{
-                    #                         name  = $EnumItemName;
-                    #                         value = $EnumItem | ForEach-Object {
-                    #                             If ($_ -match [regex]'(\#|\s)')
-                    #                             {
-                    #                                 "'$($_)'"
-                    #                             }
-                    #                             Else
-                    #                             {
-                    #                                 $_
-                    #                             };
+                    #                 [PSCustomObject]@{
+                    #                     name  = $EnumItemName;
+                    #                     value = $EnumItem | ForEach-Object {
+                    #                         If ($_ -match [regex]'(\#|\s)')
+                    #                         {
+                    #                             "'$($_)'"
+                    #                         }
+                    #                         Else
+                    #                         {
+                    #                             $_
                     #                         };
-                    #                     }
+                    #                     };
                     #                 }
                     #             }
                     #         )
