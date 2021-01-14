@@ -1658,6 +1658,46 @@
         "os": {
           "type": "string"
         },
+        "provisionMetadata": {
+          "properties": {
+            "provisioner": {
+              "properties": {
+                "provisionerId": {
+                  "type": "string"
+                },
+                "type": {
+                  "default": "administrator",
+                  "x-ms-enum": {
+                    "name": "type1",
+                    "modelAsString": true,
+                    "values": [
+                      {
+                        "name": "administrator",
+                        "value": "administrator"
+                      },
+                      {
+                        "name": "mdm",
+                        "value": "mdm"
+                      },
+                      {
+                        "name": "user",
+                        "value": "user"
+                      }
+                    ]
+                  },
+                  "enum": [
+                    "administrator",
+                    "mdm",
+                    "user"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
         "remoteIP": {
           "type": "string"
         },
