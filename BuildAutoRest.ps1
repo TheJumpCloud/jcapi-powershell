@@ -75,12 +75,12 @@ Try
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-                $ConfigProjectUri = $Config.metadata.projectUri
-                $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
+                # $ConfigProjectUri = $Config.metadata.projectUri
+                # $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
                 $ConfigInputFile = '{0}/{1}' -f $BaseFolder, $Config.'input-file'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
-                $nupkgName = '{0}*.nupkg' -f $ModuleName
+                # $nupkgName = '{0}*.nupkg' -f $ModuleName
                 $binFolder = '{0}/bin/' -f $OutputFullPath
                 $extractedModulePath = '{0}{1}' -f $binFolder, $ModuleName
                 $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
@@ -305,7 +305,7 @@ Try
                         $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path $testFolder -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
