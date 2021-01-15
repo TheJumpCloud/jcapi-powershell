@@ -24,8 +24,8 @@ namespace JumpCloud.SDK.DirectoryInsights
             // this._pipeline.Prepend(Debugging);
             // this._pipelineWithProxy.Prepend(Debugging);
             // Add CustomErrors
-            this._pipeline.Prepend(CustomError);
-            this._pipelineWithProxy.Prepend(CustomError);
+            // this._pipeline.Prepend(CustomError);
+            // this._pipelineWithProxy.Prepend(CustomError);
             // // Add Paginate
             // this._pipeline.Append(Paginate);
             // this._pipelineWithProxy.Append(Paginate);
