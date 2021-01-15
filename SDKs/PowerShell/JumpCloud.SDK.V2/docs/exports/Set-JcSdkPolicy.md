@@ -13,24 +13,24 @@ Given the amount of configurable parameters required to update a Policy, we sugg
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkPolicy -Id <String> -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkPolicy -Id <String> -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Name <String> [-TemplateId <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -64,7 +64,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyRequest
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -79,7 +79,7 @@ ObjectID of the Policy object.
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -95,7 +95,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -110,7 +110,7 @@ The description for this specific Policy.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -125,7 +125,7 @@ ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -141,7 +141,7 @@ To construct, see NOTES section for VALUES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyValue[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -217,10 +217,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the Policy Template.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

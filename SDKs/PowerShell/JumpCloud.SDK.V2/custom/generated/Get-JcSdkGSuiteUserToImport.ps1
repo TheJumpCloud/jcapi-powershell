@@ -31,13 +31,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Int32]
-    # Maximum number of results per page.
+    # Google Directory API maximum number of results per page.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
     ${MaxResults},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
-    # Token used to access next page of results.
+    # Google Directory API sort field parameter.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
+    ${OrderBy},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API token used to access the next page of results.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
     ${PageToken},
 
     [Parameter()]
@@ -46,6 +55,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Google Directory API search parameter.
     # See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
     ${Query},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API sort direction parameter.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
+    ${SortOrder},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -118,7 +134,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             Do
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUserToImport @PSBoundParameters
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUserToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -142,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUserToImport @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUserToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

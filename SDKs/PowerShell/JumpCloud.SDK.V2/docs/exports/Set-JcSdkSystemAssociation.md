@@ -14,8 +14,9 @@ This endpoint allows you to manage the _direct_ associations of a System.\n\nA d
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <Op> -Type <Type2> [-Authorization <String>]
- [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <String> -Type <String>
+ [-Authorization <String>] [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -32,7 +33,7 @@ Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISystemG
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type2>
+Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
  [-Authorization <String>] [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
@@ -139,7 +140,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -214,7 +215,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type2
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -280,8 +281,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISystemGraphManagementReq>: SystemGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type2>`: 
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: 
   - `[SudoEnabled <Boolean?>]`: 
   - `[SudoWithoutPassword <Boolean?>]`: 
 
@@ -291,10 +292,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the Policy Template.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

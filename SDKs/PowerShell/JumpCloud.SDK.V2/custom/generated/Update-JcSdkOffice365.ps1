@@ -25,8 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>:
   [Name <String>]:
-  [UserLockoutAction <UserLockoutAction?>]:
-  [UserPasswordExpirationAction <UserPasswordExpirationAction2?>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -34,10 +34,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]:
+  [Id <String>]: ObjectID of the Policy Template.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -54,51 +55,49 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Update-JcSdkOffice365
 {
     [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
-    [CmdletBinding(DefaultParameterSetName='PatchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Patch', Mandatory)]
-    [Parameter(ParameterSetName='PatchExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Update', Mandatory)]
+    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Office 365 instance.
     ${Office365Id},
 
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Patch', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PatchViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IOffice365PatchInput]
     # Office 365 Patch Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserLockoutAction])]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserLockoutAction]
+    [System.String]
     # .
     ${UserLockoutAction},
 
-    [Parameter(ParameterSetName='PatchExpanded')]
-    [Parameter(ParameterSetName='PatchViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2])]
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2]
+    [System.String]
     # .
     ${UserPasswordExpirationAction},
 

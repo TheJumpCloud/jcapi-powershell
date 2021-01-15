@@ -14,8 +14,8 @@ This endpoint allows you to manage the system members of a System Group.\n\n####
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemGroupMember -GroupId <String> -Id <String> -Op <Op1> [-Authorization <String>] [-Date <String>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroupMember -GroupId <String> -Id <String> -Op <String> [-Authorization <String>]
+ [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -32,7 +32,7 @@ Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <ISystemG
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op1>
+Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
  [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -153,7 +153,7 @@ Accept wildcard characters: False
 How to modify the membership connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op1
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -234,7 +234,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISystemGroupMembersReq>: SystemGroupMembersReq
   - `Id <String>`: The ObjectID of member being added or removed.
-  - `Op <Op1>`: How to modify the membership connection.
+  - `Op <String>`: How to modify the membership connection.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -242,10 +242,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the Policy Template.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

@@ -36,7 +36,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Update-JcSdkBulkUser
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Patch', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Update', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]

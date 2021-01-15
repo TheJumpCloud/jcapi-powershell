@@ -12,31 +12,30 @@ This endpoint allows updating some attributes of an LDAP server.\n\nSample Reque
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### UpdateExpanded (Default)
 ```
-Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <LdapServerAction>]
- [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Update
 ```
 Update-JcSdkLdapServer -Id <String>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### UpdateViaIdentity
 ```
 Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### UpdateViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>]
- [-UserLockoutAction <LdapServerAction>] [-UserPasswordExpirationAction <LdapServerAction>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,7 +65,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
-Parameter Sets: Patch, PatchViaIdentity
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -81,7 +80,7 @@ Unique identifier of the LDAP server.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: Update, UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -96,7 +95,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded
+Parameter Sets: UpdateExpanded
 Aliases:
 
 Required: False
@@ -112,7 +111,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -126,8 +125,8 @@ Accept wildcard characters: False
 LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -141,8 +140,8 @@ Accept wildcard characters: False
 LDAP Server Action
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.LdapServerAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -209,8 +208,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
   - `[Id <String>]`: 
-  - `[UserLockoutAction <LdapServerAction?>]`: LDAP Server Action
-  - `[UserPasswordExpirationAction <LdapServerAction?>]`: LDAP Server Action
+  - `[UserLockoutAction <String>]`: LDAP Server Action
+  - `[UserPasswordExpirationAction <String>]`: LDAP Server Action
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -218,10 +217,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of the Policy Template.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
