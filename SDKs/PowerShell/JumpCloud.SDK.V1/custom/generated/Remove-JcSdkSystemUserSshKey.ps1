@@ -115,7 +115,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalSystemUserSshKey @PSBoundParameters
+        $Results = (JumpCloud.SDK.V1.internal\Remove-JcSdkInternalSystemUserSshKey @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
     }
     End
     {

@@ -11,6 +11,10 @@ Locale: en-US
 The JumpCloud V1 PowerShell SDK
 
 ## JumpCloud.SDK.V1 Cmdlets
+### [Clear-JcSdkSystem](Clear-JcSdkSystem.md)
+This endpoint allows you to run the erase command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+
 ### [Get-JcSdkApplication](Get-JcSdkApplication.md)
 The endpoint retrieves an SSO / SAML Application.
 
@@ -47,9 +51,9 @@ This endpoint allows you to launch a command based on a defined trigger.\n\n####
 ### [Invoke-JcSdkExpireSystemUserPassword](Invoke-JcSdkExpireSystemUserPassword.md)
 This endpoint allows you to expire a user's password.
 
-### [Invoke-JcSdkSystemPostSystem](Invoke-JcSdkSystemPostSystem.md)
-This endpoint allows you to run the erase command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+### [Lock-JcSdkSystem](Lock-JcSdkSystem.md)
+This endpoint allows you to run the lock command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 
 ### [New-JcSdkApplication](New-JcSdkApplication.md)
 The endpoint adds a new SSO / SAML Applications.
@@ -94,6 +98,10 @@ This endpoint allows you to reset the TOTP key for a specified system user and p
 This will result in the user being prompted to setup TOTP MFA when logging into userportal.
 Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```
 
+### [Restart-JcSdkSystem](Restart-JcSdkSystem.md)
+This endpoint allows you to run the restart command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+
 ### [Search-JcSdkOrganization](Search-JcSdkOrganization.md)
 This endpoint will return Organization data based on your search parameters.
 This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the supported parameters and pass those in the body of request.\n\nThe parameters must be passed as Content-Type application/json.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/search/organizations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"search\":{\n    \"fields\" : [\"settings.name\"],\n    \"searchTerm\": \"Second\"\n    },\n  \"fields\": [\"_id\", \"displayName\", \"logoUrl\"],\n  \"limit\" : 0,\n  \"skip\" : 0\n}'\n```
@@ -130,6 +138,10 @@ This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl 
 
 ### [Set-JcSdkSystemUser](Set-JcSdkSystemUser.md)
 This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+
+### [Stop-JcSdkSystem](Stop-JcSdkSystem.md)
+This endpoint allows you to run the shutdown command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 
 ### [Unlock-JcSdkSystemUser](Unlock-JcSdkSystemUser.md)
 This endpoint allows you to unlock a user's account.

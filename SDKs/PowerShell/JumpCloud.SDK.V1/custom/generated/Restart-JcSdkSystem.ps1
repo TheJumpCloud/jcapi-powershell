@@ -1,8 +1,10 @@
 <#
 .Synopsis
-This endpoint will create a specific System User's Public SSH Key.
+This endpoint allows you to run the restart command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Description
-This endpoint will create a specific System User's Public SSH Key.
+This endpoint allows you to run the restart command on the specified device.
+If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -14,20 +16,12 @@ PS C:\> {{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-.Inputs
-JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
-JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema
-.Outputs
-JumpCloud.SDK.V1.Models.ISshkeylist
+System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <ISshkeypost>:
-  Name <String>: The name of the SSH key.
-  PublicKey <String>: The Public SSH key.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
@@ -35,49 +29,25 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkSystemUserSshKey.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Restart-JcSdkSystem.md
 #>
- Function New-JcSdkSystemUserSshKey
+ Function Restart-JcSdkSystem
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IPathsZx6QbkSystemusersIdSshkeysPostResponses400ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([System.String])]
+    [CmdletBinding(DefaultParameterSetName='Restart', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Create', Mandatory)]
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Restart', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${SystemId},
 
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='RestartViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISshkeypost]
-    # SSHKeyPost
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # The name of the SSH key.
-    ${Name},
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # The Public SSH key.
-    ${PublicKey},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -98,6 +68,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -135,7 +111,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V1.internal\New-JcSdkInternalSystemUserSshKey @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V1.internal\Restart-JcSdkInternalSystem @PSBoundParameters
     }
     End
     {

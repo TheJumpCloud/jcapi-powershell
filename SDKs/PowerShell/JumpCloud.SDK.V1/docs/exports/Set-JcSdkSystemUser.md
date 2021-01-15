@@ -12,7 +12,7 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>]
  [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
@@ -28,18 +28,18 @@ Set-JcSdkSystemUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAdd
  [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkSystemUser -Id <String> -Body <ISystemuserput> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
@@ -81,7 +81,7 @@ This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -97,7 +97,7 @@ To construct, see NOTES section for ADDRESSES properties and create a hash table
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -112,7 +112,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -128,7 +128,7 @@ To construct, see NOTES section for ATTRIBUTES properties and create a hash tabl
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -144,7 +144,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserput
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -159,7 +159,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -174,7 +174,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -189,7 +189,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -204,7 +204,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -219,7 +219,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -234,7 +234,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -249,7 +249,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -264,7 +264,7 @@ Must be unique per user.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -279,7 +279,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -294,7 +294,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -309,7 +309,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -324,7 +324,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -339,7 +339,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -354,7 +354,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -369,7 +369,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -384,7 +384,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -399,7 +399,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -415,7 +415,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -430,7 +430,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -445,7 +445,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -460,7 +460,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -475,7 +475,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -490,7 +490,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -505,7 +505,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -520,7 +520,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.DateTime
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -535,7 +535,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -565,7 +565,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -580,7 +580,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -596,7 +596,7 @@ To construct, see NOTES section for PHONENUMBERS properties and create a hash ta
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -611,7 +611,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -626,7 +626,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -641,7 +641,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -657,7 +657,7 @@ To construct, see NOTES section for SSHKEYS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISshkeypost[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -672,7 +672,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -687,7 +687,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -702,7 +702,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Int32
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -717,7 +717,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Int32
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -732,7 +732,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False

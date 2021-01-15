@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkSystemPostSystem.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Clear-JcSdkSystem.md
 schema: 2.0.0
 ---
 
-# Invoke-JcSdkSystemPostSystem
+# Clear-JcSdkSystem
 
 ## SYNOPSIS
 This endpoint allows you to run the erase command on the specified device.
@@ -13,48 +13,14 @@ If a device is offline, the command will be run when the device becomes availabl
 
 ## SYNTAX
 
-### Systems (Default)
+### Clear (Default)
 ```
-Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Systems1
-```
-Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Clear-JcSdkSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Systems2
+### ClearViaIdentity
 ```
-Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Systems3
-```
-Invoke-JcSdkSystemPostSystem -SystemId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### SystemsViaIdentity
-```
-Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
-```
-
-### SystemsViaIdentity1
-```
-Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
-```
-
-### SystemsViaIdentity2
-```
-Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
-```
-
-### SystemsViaIdentity3
-```
-Invoke-JcSdkSystemPostSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Clear-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,7 +51,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: SystemsViaIdentity, SystemsViaIdentity1, SystemsViaIdentity2, SystemsViaIdentity3
+Parameter Sets: ClearViaIdentity
 Aliases:
 
 Required: True
@@ -115,7 +81,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Systems, Systems1, Systems2, Systems3
+Parameter Sets: Clear
 Aliases:
 
 Required: True

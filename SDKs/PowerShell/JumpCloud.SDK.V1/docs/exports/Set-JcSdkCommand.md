@@ -12,7 +12,7 @@ This endpoint Updates a command based on the command ID and returns the modified
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkCommand -Id <String> -Command <String> [-CommandRunners <String[]>] [-CommandType <String>]
  [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>]
@@ -21,18 +21,18 @@ Set-JcSdkCommand -Id <String> -Command <String> [-CommandRunners <String[]>] [-C
  [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkCommand -Id <String> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Command <String> [-CommandRunners <String[]>]
  [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
@@ -68,7 +68,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ICommand
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -83,7 +83,7 @@ The command to execute on the server.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -98,7 +98,7 @@ An array of IDs of the Command Runner Users that can execute this command.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -113,7 +113,7 @@ The Command OS
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -128,7 +128,7 @@ An array of file IDs to include with the command.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -143,7 +143,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -159,7 +159,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -174,7 +174,7 @@ How the command will execute.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -189,7 +189,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -204,7 +204,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -219,7 +219,7 @@ The ID of the organization.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -250,7 +250,7 @@ If you send this as an empty string, it will run immediately.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -265,7 +265,7 @@ When the command will repeat.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -280,7 +280,7 @@ The shell used to run the command.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -295,7 +295,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -311,7 +311,7 @@ Not available if you are using Groups.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -326,7 +326,7 @@ The time in seconds to allow the command to run for.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -341,7 +341,7 @@ The name of the command trigger.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -357,7 +357,7 @@ This field is required when creating a command with a commandType of "mac" or "l
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False

@@ -27,7 +27,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>:
   Name <String>:
   NetworkSourceIP <String>:
   SharedSecret <String>:
-  [Mfa <Mfa?>]:
+  [Mfa <String>]:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
 
@@ -42,69 +42,68 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Set-JcSdkRadiusServer
 {
     [OutputType([JumpCloud.SDK.V1.Models.IRadiusserverput])]
-    [CmdletBinding(DefaultParameterSetName='PutExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Put', Mandatory)]
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Set', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Id},
 
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Put', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PutViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema]
     # .
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${NetworkSourceIP},
 
-    [Parameter(ParameterSetName='PutExpanded', Mandatory)]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${SharedSecret},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Mfa])]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Mfa]
+    [System.String]
     # .
     ${Mfa},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
     ${UserLockoutAction},
 
-    [Parameter(ParameterSetName='PutExpanded')]
-    [Parameter(ParameterSetName='PutViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .

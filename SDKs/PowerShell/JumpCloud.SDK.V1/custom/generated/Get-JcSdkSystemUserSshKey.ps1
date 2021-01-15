@@ -86,7 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters
+        $Result = (JumpCloud.SDK.V1.internal\Get-JcSdkInternalSystemUserSshKey @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
