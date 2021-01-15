@@ -111,6 +111,7 @@ $TransformConfig = [Ordered]@{
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
             'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"BodyObject"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
