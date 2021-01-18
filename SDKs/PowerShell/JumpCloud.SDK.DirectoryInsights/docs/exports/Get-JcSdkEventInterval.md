@@ -224,7 +224,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems
+### JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
 
 ### System.String
 
