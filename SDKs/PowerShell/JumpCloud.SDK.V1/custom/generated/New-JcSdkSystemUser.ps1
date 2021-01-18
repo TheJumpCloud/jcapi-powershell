@@ -83,7 +83,7 @@ BODY <ISystemuserputpost>:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+  [Relationships <IAny[]>]:
   [SambaServiceUser <Boolean?>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
@@ -323,7 +323,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
+    [JumpCloud.SDK.V1.Models.IAny[]]
     # .
     ${Relationships},
 

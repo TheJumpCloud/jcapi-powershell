@@ -23,9 +23,9 @@ New-JcSdkSystemUser -Email <String> -Username <String> [-AccountLocked] [-Activa
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
  [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
  [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>] [-Relationships <IAny[]>]
+ [-SambaServiceUser] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -602,7 +602,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]
+Type: JumpCloud.SDK.V1.Models.IAny[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -816,7 +816,7 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
+  - `[Relationships <IAny[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[Sudo <Boolean?>]`: 
   - `[Suspended <Boolean?>]`: 

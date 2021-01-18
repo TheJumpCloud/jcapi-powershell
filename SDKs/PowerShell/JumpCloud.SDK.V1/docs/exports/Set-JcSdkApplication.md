@@ -15,10 +15,10 @@ The endpoint updates a SSO / SAML Application.
 ### SetExpanded (Default)
 ```
 Set-JcSdkApplication -Id <String> [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DatabaseAttributes <IAny[]>] [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>]
+ [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -35,11 +35,10 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <String>]
- [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
- [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Config <IApplicationConfig>] [-Created <String>] [-DatabaseAttributes <IAny[]>] [-Description <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>]
+ [-LogoUrl <String>] [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>]
+ [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -144,7 +143,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.IAny[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -518,7 +517,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IAny[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 

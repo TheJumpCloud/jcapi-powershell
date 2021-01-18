@@ -82,7 +82,7 @@ BODY <ISystemuserput>:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <ISystemuserputRelationshipsItem[]>]:
+  [Relationships <IAny[]>]:
   [SambaServiceUser <Boolean?>]:
   [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
@@ -367,7 +367,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]
+    [JumpCloud.SDK.V1.Models.IAny[]]
     # .
     ${Relationships},
 
