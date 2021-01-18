@@ -15,8 +15,8 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String> -Type <String>
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,8 +33,8 @@ Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGr
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -140,7 +140,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -170,7 +170,7 @@ Accept wildcard characters: False
 The graph type.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphType
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -236,9 +236,9 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <GraphType>`: The graph type.
-  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: The graph type.
+  - `[Attributes <IAny>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -246,10 +246,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

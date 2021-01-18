@@ -45,7 +45,7 @@ The endpoint allows you to create a Workday Import request.\n\n#### Sample Reque
 ## PARAMETERS
 
 ### -Body
-.
+Array of bulk-user-create
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -144,8 +144,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkUserCreate[]>: .
-  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
+BODY <IBulkUserCreate[]>: Array of bulk-user-create
+  - `[Attributes <IAny[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
   - `[Lastname <String>]`: 
@@ -157,10 +157,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

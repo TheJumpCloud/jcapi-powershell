@@ -14,9 +14,8 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemGroupAssociation -GroupId <String> -Id <String> -Op <Op> -Type <Type2>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSystemGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <String>
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,9 +32,8 @@ Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISy
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type2>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +61,7 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -140,7 +138,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -170,7 +168,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type2
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -236,9 +234,9 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISystemGroupGraphManagementReq>: SystemGroupGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type2>`: 
-  - `[Attributes <ISystemGroupGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: 
+  - `[Attributes <IAny>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -246,10 +244,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

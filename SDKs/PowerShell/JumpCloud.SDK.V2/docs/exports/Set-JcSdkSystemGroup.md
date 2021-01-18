@@ -12,23 +12,23 @@ This endpoint allows you to do a full update of the System Group.\n\n#### Sample
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkSystemGroup -Id <String> -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -61,7 +61,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISystemGroupData
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -76,7 +76,7 @@ ObjectID of the System Group.
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -92,7 +92,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -107,7 +107,7 @@ Display name of a System Group.
 
 ```yaml
 Type: System.String
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -179,10 +179,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
