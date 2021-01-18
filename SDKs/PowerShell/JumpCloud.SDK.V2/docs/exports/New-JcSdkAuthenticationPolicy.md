@@ -14,7 +14,7 @@ Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkAuthenticationPolicy [-Conditions <IAuthnPolicyInputConditions>] [-Description <String>] [-Disabled]
+New-JcSdkAuthenticationPolicy [-Conditions <IAny>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -62,10 +62,10 @@ Accept wildcard characters: False
 ```
 
 ### -Conditions
-.
+Any object
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -251,10 +251,10 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IAuthnPolicyInput>: AuthnPolicyInput
-  - `EffectAction <String>`: 
-  - `[Conditions <IAuthnPolicyInputConditions>]`: 
+  - `[Conditions <IAny>]`: Any object
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
+  - `[EffectAction <String>]`: 
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 

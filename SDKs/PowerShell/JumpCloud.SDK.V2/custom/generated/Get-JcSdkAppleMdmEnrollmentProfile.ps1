@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdm
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -33,7 +33,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the Policy Template.
+  [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -49,7 +49,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkAppleMdmEnrollmentProfile
 {
-    [OutputType([System.String], [JumpCloud.SDK.V2.Models.IAppleMdm])]
+    [OutputType([System.Boolean], [JumpCloud.SDK.V2.Models.IAppleMdm])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -91,6 +91,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

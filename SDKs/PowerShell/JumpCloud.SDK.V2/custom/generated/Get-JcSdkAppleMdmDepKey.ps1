@@ -31,7 +31,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the Policy Template.
+  [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -82,6 +82,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

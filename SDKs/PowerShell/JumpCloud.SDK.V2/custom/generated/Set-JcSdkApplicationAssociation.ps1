@@ -29,7 +29,7 @@ BODY <IGraphManagementReq>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <String>: The graph type.
-  [Attributes <IGraphManagementReqAttributes>]: The graph connection's attributes.
+  [Attributes <IAny>]: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -41,7 +41,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the Policy Template.
+  [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -107,7 +107,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]
+    [JumpCloud.SDK.V2.Models.IAny]
     # The graph connection's attributes.
     ${Attributes},
 

@@ -26,10 +26,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IAuthnPolicyInput>:
-  EffectAction <String>:
-  [Conditions <IAuthnPolicyInputConditions>]:
+  [Conditions <IAny>]: Any object
   [Description <String>]:
   [Disabled <Boolean?>]:
+  [EffectAction <String>]:
   [MfaRequired <Boolean?>]:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
@@ -47,7 +47,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the Policy Template.
+  [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -95,8 +95,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]
-    # .
+    [JumpCloud.SDK.V2.Models.IAny]
+    # Any object
     ${Conditions},
 
     [Parameter(ParameterSetName='UpdateExpanded')]

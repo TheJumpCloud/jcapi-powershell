@@ -15,8 +15,7 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 ### SetExpanded (Default)
 ```
 Set-JcSdkSystemGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -34,8 +33,7 @@ Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISy
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <ISystemGroupGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,7 +61,7 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -238,7 +236,7 @@ BODY <ISystemGroupGraphManagementReq>: SystemGroupGraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: 
-  - `[Attributes <ISystemGroupGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IAny>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -250,7 +248,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the Policy Template.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

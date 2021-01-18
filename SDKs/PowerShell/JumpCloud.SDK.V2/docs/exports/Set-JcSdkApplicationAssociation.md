@@ -16,7 +16,7 @@ A direct association can be a non-homogeneous relationship between 2 different o
 ### SetExpanded (Default)
 ```
 Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -34,7 +34,7 @@ Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGr
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -238,7 +238,7 @@ BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: The graph type.
-  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IAny>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -250,7 +250,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the Policy Template.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

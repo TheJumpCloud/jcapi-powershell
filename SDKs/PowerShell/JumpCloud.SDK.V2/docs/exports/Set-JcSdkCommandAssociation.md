@@ -14,8 +14,8 @@ This endpoint will allow you to manage the _direct_ associations of this Command
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type <String> [-Attributes <IAny>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,7 +33,7 @@ Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphM
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,7 +61,7 @@ This endpoint will allow you to manage the _direct_ associations of this Command
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -236,7 +236,7 @@ BODY <IGraphManagementReq>: GraphManagementReq
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: The graph type.
-  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IAny>]`: The graph connection's attributes.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -248,7 +248,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the Policy Template.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

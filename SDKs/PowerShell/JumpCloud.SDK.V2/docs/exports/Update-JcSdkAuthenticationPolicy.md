@@ -14,10 +14,9 @@ Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X 
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <IAuthnPolicyInputConditions>]
- [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupInclusions <String[]>]
- [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <IAny>] [-Description <String>] [-Disabled]
+ [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
+ [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -34,10 +33,10 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IA
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity>
- [-Conditions <IAuthnPolicyInputConditions>] [-Description <String>] [-Disabled] [-EffectAction <String>]
- [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <IAny>]
+ [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupInclusions <String[]>]
+ [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,10 +77,10 @@ Accept wildcard characters: False
 ```
 
 ### -Conditions
-.
+Any object
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions
+Type: JumpCloud.SDK.V2.Models.IAny
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -300,10 +299,10 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IAuthnPolicyInput>: AuthnPolicyInput
-  - `EffectAction <String>`: 
-  - `[Conditions <IAuthnPolicyInputConditions>]`: 
+  - `[Conditions <IAny>]`: Any object
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
+  - `[EffectAction <String>]`: 
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
@@ -321,7 +320,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the Policy Template.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
