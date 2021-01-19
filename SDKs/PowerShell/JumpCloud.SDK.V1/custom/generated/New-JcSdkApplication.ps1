@@ -23,7 +23,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>:
   [Beta <Boolean?>]:
-  [Color <Color?>]:
+  [Color <String>]:
   [Config <IApplicationConfig>]:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
@@ -105,13 +105,13 @@ BODY <IApplication>:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
   [Created <String>]:
-  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
+  [DatabaseAttributes <IAny[]>]:
   [Description <String>]:
   [DisplayLabel <String>]:
   [DisplayName <String>]:
   [Id <String>]:
   [LearnMore <String>]:
-  [LogoColor <Color?>]:
+  [LogoColor <String>]:
   [LogoUrl <String>]:
   [Name <String>]:
   [Organization <String>]:
@@ -222,9 +222,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Beta},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${Color},
 
@@ -243,7 +242,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
+    [JumpCloud.SDK.V1.Models.IAny[]]
     # .
     ${DatabaseAttributes},
 
@@ -278,9 +277,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${LearnMore},
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [ArgumentCompleter([JumpCloud.SDK.V1.Support.Color])]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Support.Color]
+    [System.String]
     # .
     ${LogoColor},
 

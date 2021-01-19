@@ -14,11 +14,11 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkApplication [-Beta] [-Color <Color>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <Color>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkApplication [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
+ [-DatabaseAttributes <IAny[]>] [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>]
+ [-Id <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Support.Color
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -128,7 +128,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]
+Type: JumpCloud.SDK.V1.Models.IAny[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -218,7 +218,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Support.Color
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -387,7 +387,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
-  - `[Color <Color?>]`: 
+  - `[Color <String>]`: 
   - `[Config <IApplicationConfig>]`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
@@ -469,13 +469,13 @@ BODY <IApplication>: Application
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <IAny[]>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[LearnMore <String>]`: 
-  - `[LogoColor <Color?>]`: 
+  - `[LogoColor <String>]`: 
   - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 

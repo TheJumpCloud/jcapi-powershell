@@ -25,8 +25,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>:
   [Fields <String>]:
-  [Filter <ISearchFilter>]:
-  [SearchFilter <ISearchFilter1>]:
+  [Filter <IAny>]: Any object
+  [SearchFilter <IAny>]: Any object
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkOrganization.md
 #>
@@ -70,14 +70,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter]
-    # .
+    [JumpCloud.SDK.V1.Models.IAny]
+    # Any object
     ${Filter1},
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.ISearchFilter1]
-    # .
+    [JumpCloud.SDK.V1.Models.IAny]
+    # Any object
     ${SearchFilter},
 
     [Parameter(DontShow)]

@@ -15,8 +15,8 @@ This endpoint WILL NOT allow you to add a new Organization.\n\nYou can use the s
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <ISearchFilter>]
- [-SearchFilter <ISearchFilter1>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <IAny>]
+ [-SearchFilter <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
@@ -117,10 +117,10 @@ Accept wildcard characters: False
 ```
 
 ### -Filter1
-.
+Any object
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter
+Type: JumpCloud.SDK.V1.Models.IAny
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -147,10 +147,10 @@ Accept wildcard characters: False
 ```
 
 ### -SearchFilter
-.
+Any object
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.ISearchFilter1
+Type: JumpCloud.SDK.V1.Models.IAny
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -214,8 +214,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>: search
   - `[Fields <String>]`: 
-  - `[Filter <ISearchFilter>]`: 
-  - `[SearchFilter <ISearchFilter1>]`: 
+  - `[Filter <IAny>]`: Any object
+  - `[SearchFilter <IAny>]`: Any object
 
 ## RELATED LINKS
 
