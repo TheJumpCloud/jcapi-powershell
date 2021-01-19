@@ -90,9 +90,9 @@ $TransformConfig = [Ordered]@{
             'PUT_systemusers-id'                              = 'Set-User';
             'POST_systemusers-id-unlock'                      = 'Unlock-User';
             'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
-            'POST_systemusers-id-sshkeys'                     = 'Create-UsersSshKey';
-            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UsersSshKey';
-            'GET_systemusers-id-sshkeys'                      = 'List-UsersSshKey';
+            'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
+            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'List-UserSshKey';
         };
         ExcludedList       = @();
     }
