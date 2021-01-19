@@ -4728,7 +4728,7 @@
     "/systemusers/{id}/sshkeys": {
       "get": {
         "description": "This endpoint will return a specific System User's public SSH key.",
-        "operationId": "List-UsersSshKey",
+        "operationId": "List-UserSshKey",
         "parameters": [],
         "responses": {
           "200": {
@@ -4765,7 +4765,7 @@
       ],
       "post": {
         "description": "This endpoint will create a specific System User's Public SSH Key.",
-        "operationId": "Create-UsersSshKey",
+        "operationId": "Create-UserSshKey",
         "parameters": [
           {
             "in": "body",
@@ -4845,7 +4845,7 @@
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
       "delete": {
         "description": "This endpoint will delete a specific System User's SSH Key.",
-        "operationId": "Delete-UsersSshKey",
+        "operationId": "Delete-UserSshKey",
         "parameters": [],
         "responses": {
           "200": {
