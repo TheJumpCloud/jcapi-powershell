@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems
+JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
 .Outputs
 System.String
 .Notes
@@ -38,7 +38,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventInterval
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPaths8Vdch8EventsIntervalPostResponses200ContentApplicationJsonSchemaItems], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany], [System.String])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]

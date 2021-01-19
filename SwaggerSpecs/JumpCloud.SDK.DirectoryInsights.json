@@ -171,36 +171,6 @@
       "title": "EventQuery",
       "type": "object"
     },
-    "EventServiceTimeQuery": {
-      "description": "EventServiceTimeQuery is the base struct for most event queries\nit includes the minimum-required fields of service and start/end times",
-      "properties": {
-        "end_time": {
-          "description": "optional query end time, UTC in RFC3339 format",
-          "format": "date-time",
-          "type": "string"
-        },
-        "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "x-go-name": "Service"
-        },
-        "start_time": {
-          "description": "query start time, UTC in RFC3339 format",
-          "format": "date-time",
-          "type": "string"
-        }
-      },
-      "required": [
-        "service",
-        "start_time"
-      ],
-      "title": "EventServiceTimeQuery",
-      "type": "object"
-    },
     "SearchTerm": {
       "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
       "properties": {

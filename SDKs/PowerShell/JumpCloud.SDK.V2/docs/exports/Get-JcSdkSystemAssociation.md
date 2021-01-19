@@ -14,13 +14,13 @@ This endpoint returns the _direct_ associations of a System.\n\nA direct associa
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets1> [-Authorization <String>] [-Date <String>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <String> [-Authorization <String>] [-Date <String>]
  [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [-Authorization <String>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [-Authorization <String>]
  [-Date <String>] [<CommonParameters>]
 ```
 
@@ -110,7 +110,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets1
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -147,10 +147,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

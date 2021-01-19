@@ -12,29 +12,28 @@ This endpoint allows updating some attributes of an Office 365 instance.\n\n####
 
 ## SYNTAX
 
-### PatchExpanded (Default)
+### UpdateExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <UserLockoutAction>]
- [-UserPasswordExpirationAction <UserPasswordExpirationAction2>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Patch
+### Update
 ```
 Update-JcSdkOffice365 -Office365Id <String> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentity
+### UpdateViaIdentity
 ```
 Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> -Body <IOffice365PatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### PatchViaIdentityExpanded
+### UpdateViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>]
- [-UserLockoutAction <UserLockoutAction>] [-UserPasswordExpirationAction <UserPasswordExpirationAction2>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,7 +63,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IOffice365PatchInput
-Parameter Sets: Patch, PatchViaIdentity
+Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
 Required: True
@@ -80,7 +79,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: PatchViaIdentity, PatchViaIdentityExpanded
+Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -95,7 +94,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -110,7 +109,7 @@ ObjectID of the Office 365 instance.
 
 ```yaml
 Type: System.String
-Parameter Sets: Patch, PatchExpanded
+Parameter Sets: Update, UpdateExpanded
 Aliases:
 
 Required: True
@@ -124,8 +123,8 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserLockoutAction
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -139,8 +138,8 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.UserPasswordExpirationAction2
-Parameter Sets: PatchExpanded, PatchViaIdentityExpanded
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -205,8 +204,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
   - `[Name <String>]`: 
-  - `[UserLockoutAction <UserLockoutAction?>]`: 
-  - `[UserPasswordExpirationAction <UserPasswordExpirationAction2?>]`: 
+  - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordExpirationAction <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -214,10 +213,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: 
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
