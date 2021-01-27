@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkCustomemailGetTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkCustomEmailTemplate.md
 schema: 2.0.0
 ---
 
-# Invoke-JcSdkCustomemailGetTemplate
+# Get-JcSdkCustomEmailTemplate
 
 ## SYNOPSIS
 Get the list of custom email templates
@@ -13,7 +13,7 @@ Get the list of custom email templates
 ## SYNTAX
 
 ```
-Invoke-JcSdkCustomemailGetTemplate [<CommonParameters>]
+Get-JcSdkCustomEmailTemplate [<CommonParameters>]
 ```
 
 ## DESCRIPTION

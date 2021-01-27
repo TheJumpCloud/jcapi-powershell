@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Lists Office 365 users available for import.
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
 .Description
-Lists Office 365 users available for import.
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,13 +13,22 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
+JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectory
+.Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IPaths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IGraphConnectionActiveDirectory>:
+  Id <String>: The ObjectID of graph object being added or removed as an association.
+  Op <String>: How to modify the graph connection.
+  Type <String>: Targets which a "active_directory" can be associated to.
+  [Attributes <IGraphConnectionActiveDirectoryAttributes>]: The graph connection's attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -43,39 +52,64 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Import-JcSdkGet.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkActiveDirectoryAssociation.md
 #>
- Function Import-JcSdkGet
+ Function Set-JcSdkActiveDirectoryAssociation
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPaths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false)]
+    [OutputType([System.Boolean])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Import', Mandatory)]
+    [Parameter(ParameterSetName='Set', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${Office365Id},
+    ${ActivedirectoryId},
 
-    [Parameter(ParameterSetName='ImportViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String]
-    # Office 365 API token used to access the next page of results.
-    # See https://docs.microsoft.com/en-us/graph/paging.
-    ${SkipToken},
+    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectory]
+    # GraphConnection (ActiveDirectory)
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
 
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # Office 365 API maximum number of results per page.
-    # See https://docs.microsoft.com/en-us/graph/paging.
-    ${Top},
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The ObjectID of graph object being added or removed as an association.
+    ${Id},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # How to modify the graph connection.
+    ${Op},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Targets which a "active_directory" can be associated to.
+    ${Type},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectoryAttributes]))]
+    [System.Collections.Hashtable]
+    # The graph connection's attributes.
+    ${Attributes},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -96,6 +130,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -133,7 +173,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = (JumpCloud.SDK.V2.internal\Import-JcSdkInternalGet @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalActiveDirectoryAssociation @PSBoundParameters
     }
     End
     {

@@ -24,7 +24,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IAuthnPolicyInput>:
-  [Conditions <IAny>]: Any object
+  [Conditions <IAuthnPolicyInputConditions>]: Dictionary of <any>
+    [(Any) <Object>]: This indicates any property can be added to this object.
   [Description <String>]:
   [Disabled <Boolean?>]:
   [EffectAction <String>]:
@@ -55,8 +56,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAny]
-    # Any object
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]))]
+    [System.Collections.Hashtable]
+    # Dictionary of <any>
     ${Conditions},
 
     [Parameter(ParameterSetName='CreateExpanded')]

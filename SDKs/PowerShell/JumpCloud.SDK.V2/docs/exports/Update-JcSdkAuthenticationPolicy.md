@@ -14,7 +14,7 @@ Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X 
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <IAny>] [-Description <String>] [-Disabled]
+Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
  [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
@@ -34,7 +34,7 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IA
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <IAny>]
+Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <Hashtable>]
  [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
  [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupExclusions <String[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -78,10 +78,10 @@ Accept wildcard characters: False
 ```
 
 ### -Conditions
-Any object
+Dictionary of \<any\>
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAny
+Type: System.Collections.Hashtable
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -315,7 +315,8 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IAuthnPolicyInput>: AuthnPolicyInput
-  - `[Conditions <IAny>]`: Any object
+  - `[Conditions <IAuthnPolicyInputConditions>]`: Dictionary of <any>
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
   - `[EffectAction <String>]`: 

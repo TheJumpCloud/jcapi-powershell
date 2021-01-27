@@ -24,7 +24,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IBulkUserCreate[]>:
-  [Attributes <IAny[]>]: Map of additional attributes.
+  [Attributes <IBulkUserCreateAttributesItem[]>]: Map of additional attributes.
   [Email <String>]:
   [Firstname <String>]:
   [Lastname <String>]:

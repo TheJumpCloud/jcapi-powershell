@@ -1,39 +1,39 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkActiveDirectoryAssociation.md
 schema: 2.0.0
 ---
 
-# Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation
+# Set-JcSdkActiveDirectoryAssociation
 
 ## SYNOPSIS
 This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
 
 ## SYNTAX
 
-### ActivedirectoriesExpanded (Default)
+### SetExpanded (Default)
 ```
-Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation -ActivedirectoryId <String> -Id <String>
- -Op <String> -Type <String> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Id <String> -Op <String> -Type <String>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### Activedirectories
+### Set
 ```
-Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation -ActivedirectoryId <String>
+Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Body <IGraphConnectionActiveDirectory>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SetViaIdentity
+```
+Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity>
  -Body <IGraphConnectionActiveDirectory> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### ActivedirectoriesViaIdentity
+### SetViaIdentityExpanded
 ```
-Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation -InputObject <IJumpCloudApIsIdentity>
- -Body <IGraphConnectionActiveDirectory> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### ActivedirectoriesViaIdentityExpanded
-```
-Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String>
- -Op <String> -Type <String> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <String> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,7 +62,7 @@ This endpoint allows you to manage the _direct_ associations of an Active Direct
 
 ```yaml
 Type: System.String
-Parameter Sets: Activedirectories, ActivedirectoriesExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -77,7 +77,7 @@ The graph connection's attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
-Parameter Sets: ActivedirectoriesExpanded, ActivedirectoriesViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -93,7 +93,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectory
-Parameter Sets: Activedirectories, ActivedirectoriesViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -108,7 +108,7 @@ The ObjectID of graph object being added or removed as an association.
 
 ```yaml
 Type: System.String
-Parameter Sets: ActivedirectoriesExpanded, ActivedirectoriesViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -124,7 +124,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: ActivedirectoriesViaIdentity, ActivedirectoriesViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -139,7 +139,7 @@ How to modify the graph connection.
 
 ```yaml
 Type: System.String
-Parameter Sets: ActivedirectoriesExpanded, ActivedirectoriesViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -169,7 +169,7 @@ Targets which a "active_directory" can be associated to.
 
 ```yaml
 Type: System.String
-Parameter Sets: ActivedirectoriesExpanded, ActivedirectoriesViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: True

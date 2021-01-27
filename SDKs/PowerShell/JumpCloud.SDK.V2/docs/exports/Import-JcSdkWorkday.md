@@ -145,7 +145,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IBulkUserCreate[]>: Array of bulk-user-create
-  - `[Attributes <IAny[]>]`: Map of additional attributes.
+  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
   - `[Lastname <String>]`: 

@@ -107,7 +107,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IBulkUserUpdate[]>: Array of bulk-user-update
-  - `[Attributes <IAny[]>]`: Map of additional attributes.
+  - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
   - `[Id <String>]`: Object ID of the systemuser being updated

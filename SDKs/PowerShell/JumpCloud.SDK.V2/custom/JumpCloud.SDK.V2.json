@@ -247,6 +247,7 @@
       "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.\n\nConditions may be added to an authentication policy using the following conditional language:\n\n```\n<conditions> ::= <expression>\n<expression> ::= <ipAddressIn> | <deviceManaged> | <notExpression> | <allExpression> | <anyExpression>\n<ipAddressIn> ::= { \"ipAddressIn\": [ <objectId>, ... ] }\n<deviceManaged> ::= { \"deviceManaged\": <boolean> }\n<notExpression> ::= { \"not\": <expression> }\n<allExpression> ::= { \"all\": [ <expression>, ... ] }\n<anyExpression> ::= { \"any\": [ <expression>, ... ] }\n```\n\nFor example, to add a condition that applies to IP address in a given list the following condition can be added:\n\n`{\"ipAddressIn\": [ <ip_list_object_id> ]}`\n\nIf you would rather exclude IP addresses in the given lists, the following condition could be added:\n\n`{\n  \"not\": {\n    \"ipAddressIn\": [ <ip_list_object_id_1>, <ip_list_object_id_2> ]\n  }\n}`\n\nYou may also include more than one condition and choose whether \"all\" or \"any\" of them must be met for the policy to apply.\n\n`{\n  \"all\": [\n    {\n      \"ipAddressIn\": [ <ip_list_object_id>, ... ]\n    },\n    {\n      \"deviceManaged\": true\n    }\n  ]\n}`",
       "properties": {
         "conditions": {
+          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -294,6 +295,7 @@
     "AuthnPolicyInput": {
       "properties": {
         "conditions": {
+          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -395,6 +397,7 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -421,6 +424,7 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -598,6 +602,7 @@
           "type": "string"
         },
         "oAuthStatus": {
+          "additionalProperties": true,
           "description": "the expiry and error status of the bearer token",
           "type": "object"
         },
@@ -1429,6 +1434,7 @@
     "Group": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -1486,6 +1492,7 @@
       "type": "string"
     },
     "gsuite-output": {
+      "additionalProperties": true,
       "allOf": [
         {
           "properties": {
@@ -1644,9 +1651,11 @@
           "type": "string"
         },
         "meta": {
+          "additionalProperties": true,
           "type": "object"
         },
         "persistedFields": {
+          "additionalProperties": true,
           "type": "object"
         },
         "status": {
@@ -1986,6 +1995,7 @@
           "type": "string"
         },
         "displayOptions": {
+          "additionalProperties": true,
           "description": "The options that correspond to the display_type.",
           "type": "object"
         },
@@ -2290,6 +2300,7 @@
     "SystemGroup": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -4776,6 +4787,7 @@
     "workday-worker": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "type": "object"
         },
         "email": {
@@ -4968,7 +4980,7 @@
       ],
       "post": {
         "description": "This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```",
-        "operationId": "POST_activedirectories-activedirectory_id-associations",
+        "operationId": "Set-ActiveDirectoryAssociation",
         "parameters": [
           {
             "in": "body",
@@ -6625,7 +6637,7 @@
     "/customemail/templates": {
       "get": {
         "description": "Get the list of custom email templates",
-        "operationId": "GET_customemail-templates",
+        "operationId": "List-CustomEmailTemplates",
         "responses": {
           "200": {
             "description": "OK",
@@ -8918,7 +8930,7 @@
     "/office365s/{office365_id}/import/users": {
       "get": {
         "description": "Lists Office 365 users available for import.",
-        "operationId": "GET_office365s-office365_id-import-users",
+        "operationId": "List-Office365UsersToImport",
         "parameters": [
           {
             "description": "Office 365 API maximum number of results per page. See https://docs.microsoft.com/en-us/graph/paging.",
