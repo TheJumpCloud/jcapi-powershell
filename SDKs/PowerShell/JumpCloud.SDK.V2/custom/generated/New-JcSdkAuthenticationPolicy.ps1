@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
 .Description
-Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -32,6 +32,7 @@ BODY <IAuthnPolicyInput>:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
     [Type <String>]:
+  [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
 
@@ -94,6 +95,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
     ${TargetResources},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserGroupExclusions},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]

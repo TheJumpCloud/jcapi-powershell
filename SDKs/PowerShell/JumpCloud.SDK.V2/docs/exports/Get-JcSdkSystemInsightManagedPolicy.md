@@ -38,7 +38,7 @@ Valid filter fields are `system_id` and `domain`.
 ## PARAMETERS
 
 ### -Filter
-Supported operators are: eq
+Supported operators are: eq, gte, in
 
 ```yaml
 Type: System.String[]

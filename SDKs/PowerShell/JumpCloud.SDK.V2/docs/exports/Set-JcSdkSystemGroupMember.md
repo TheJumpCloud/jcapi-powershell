@@ -20,13 +20,13 @@ Set-JcSdkSystemGroupMember -GroupId <String> -Id <String> -Op <String> [-Authori
 
 ### Set
 ```
-Set-JcSdkSystemGroupMember -GroupId <String> -Body <ISystemGroupMembersReq> [-Authorization <String>]
- [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroupMember -GroupId <String> -Body <IGraphConnectionSystemGroupMember>
+ [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupMembersReq>
+Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionSystemGroupMember>
  [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -73,11 +73,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-SystemGroupMembersReq
+GraphConnection-SystemGroup-Member
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupMembersReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,9 +215,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember
 
-### JumpCloud.SDK.V2.Models.ISystemGroupMembersReq
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -232,7 +232,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGroupMembersReq>: SystemGroupMembersReq
+BODY <IGraphConnectionSystemGroupMember>: GraphConnection-SystemGroup-Member
   - `Id <String>`: The ObjectID of member being added or removed.
   - `Op <String>`: How to modify the membership connection.
 

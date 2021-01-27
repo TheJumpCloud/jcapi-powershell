@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "user" can be associated to.
 
 ```yaml
 Type: System.String

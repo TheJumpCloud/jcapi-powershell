@@ -31,6 +31,7 @@ BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
   [Settings <IJcSoftwareAppSettings[]>]:
+    [AllowUpdateDelay <Boolean?>]:
     [AutoUpdate <Boolean?>]:
     [PackageId <String>]:
 
@@ -57,6 +58,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [WorkdayId <String>]:
 
 SETTINGS <IJcSoftwareAppSettings[]>:
+  [AllowUpdateDelay <Boolean?>]:
   [AutoUpdate <Boolean?>]:
   [PackageId <String>]:
 .Link

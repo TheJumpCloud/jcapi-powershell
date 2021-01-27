@@ -872,6 +872,20 @@
         "name": {
           "type": "string"
         },
+        "provision": {
+          "properties": {
+            "beta": {
+              "type": "boolean"
+            },
+            "groups_supported": {
+              "type": "boolean"
+            },
+            "type": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "sso": {
           "properties": {
             "beta": {
@@ -2532,6 +2546,9 @@
         },
         "account_locked": {
           "type": "boolean"
+        },
+        "account_locked_date": {
+          "type": "string"
         },
         "activated": {
           "type": "boolean"

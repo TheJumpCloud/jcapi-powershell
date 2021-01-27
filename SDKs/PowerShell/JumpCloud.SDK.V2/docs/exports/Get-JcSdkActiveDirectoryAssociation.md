@@ -76,7 +76,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "active_directory" can be associated to.
 
 ```yaml
 Type: System.String

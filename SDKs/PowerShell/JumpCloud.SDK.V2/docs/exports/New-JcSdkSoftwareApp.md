@@ -161,10 +161,12 @@ BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <IJcSoftwareAppSettings[]>]`: 
+    - `[AllowUpdateDelay <Boolean?>]`: 
     - `[AutoUpdate <Boolean?>]`: 
     - `[PackageId <String>]`: 
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
+  - `[AllowUpdateDelay <Boolean?>]`: 
   - `[AutoUpdate <Boolean?>]`: 
   - `[PackageId <String>]`: 
 

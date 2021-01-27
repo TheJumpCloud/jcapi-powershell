@@ -25,7 +25,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
-    # Supported operators are: eq
+    # Supported operators are: eq, gte, in
     ${Filter},
 
     [Parameter()]

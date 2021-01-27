@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "command" can be associated to.
 
 ```yaml
 Type: System.String

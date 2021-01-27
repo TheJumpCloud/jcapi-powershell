@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphManagementReq
+JumpCloud.SDK.V2.Models.IGraphConnectionApplication
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -25,11 +25,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphManagementReq>:
+BODY <IGraphConnectionApplication>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <String>: The graph type.
-  [Attributes <IAny>]: The graph connection's attributes.
+  Type <String>: Targets which a "application" can be associated to.
+  [Attributes <IGraphConnectionApplicationAttributes>]: The graph connection's attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -78,8 +79,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphManagementReq]
-    # GraphManagementReq
+    [JumpCloud.SDK.V2.Models.IGraphConnectionApplication]
+    # GraphConnection (Application)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -101,13 +102,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # The graph type.
+    # Targets which a "application" can be associated to.
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAny]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionApplicationAttributes]))]
+    [System.Collections.Hashtable]
     # The graph connection's attributes.
     ${Attributes},
 

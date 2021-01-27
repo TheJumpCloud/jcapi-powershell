@@ -27,7 +27,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODYOBJECT <ICustomEmail>:
   Subject <String>:
-  Type <String>:
+  Type <String>: CustomEmailType
   [Body <String>]:
   [Button <String>]:
   [Header <String>]:
@@ -82,7 +82,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ICustomEmail]
-    # CustomEmail
+    # Custom email content created by the admin user to personalize emails sent to their system users.
     # To construct, see NOTES section for BODYOBJECT properties and create a hash table.
     ${BodyObject},
 
@@ -97,7 +97,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # .
+    # CustomEmailType
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]

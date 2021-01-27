@@ -16,25 +16,25 @@ A direct association can be a non-homogeneous relationship between 2 different o
 ### SetExpanded (Default)
 ```
 Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphManagementReq> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphConnectionApplication> [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionApplication>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +78,7 @@ Accept wildcard characters: False
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAny
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -90,11 +90,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphManagementReq
+GraphConnection (Application)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionApplication
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -167,7 +167,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-The graph type.
+Targets which a "application" can be associated to.
 
 ```yaml
 Type: System.String
@@ -217,7 +217,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphManagementReq
+### JumpCloud.SDK.V2.Models.IGraphConnectionApplication
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -234,11 +234,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphManagementReq>: GraphManagementReq
+BODY <IGraphConnectionApplication>: GraphConnection (Application)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: The graph type.
-  - `[Attributes <IAny>]`: The graph connection's attributes.
+  - `Type <String>`: Targets which a "application" can be associated to.
+  - `[Attributes <IGraphConnectionApplicationAttributes>]`: The graph connection's attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

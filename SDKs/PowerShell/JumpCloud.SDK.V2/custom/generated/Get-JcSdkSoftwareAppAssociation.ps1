@@ -68,7 +68,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
-    # .
+    # Targets which a "software_app" can be associated to.
     ${Targets},
 
     [Parameter(DontShow)]

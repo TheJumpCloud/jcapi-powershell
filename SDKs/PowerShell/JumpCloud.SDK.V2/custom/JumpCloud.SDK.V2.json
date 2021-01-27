@@ -247,7 +247,6 @@
       "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.\n\nConditions may be added to an authentication policy using the following conditional language:\n\n```\n<conditions> ::= <expression>\n<expression> ::= <ipAddressIn> | <deviceManaged> | <notExpression> | <allExpression> | <anyExpression>\n<ipAddressIn> ::= { \"ipAddressIn\": [ <objectId>, ... ] }\n<deviceManaged> ::= { \"deviceManaged\": <boolean> }\n<notExpression> ::= { \"not\": <expression> }\n<allExpression> ::= { \"all\": [ <expression>, ... ] }\n<anyExpression> ::= { \"any\": [ <expression>, ... ] }\n```\n\nFor example, to add a condition that applies to IP address in a given list the following condition can be added:\n\n`{\"ipAddressIn\": [ <ip_list_object_id> ]}`\n\nIf you would rather exclude IP addresses in the given lists, the following condition could be added:\n\n`{\n  \"not\": {\n    \"ipAddressIn\": [ <ip_list_object_id_1>, <ip_list_object_id_2> ]\n  }\n}`\n\nYou may also include more than one condition and choose whether \"all\" or \"any\" of them must be met for the policy to apply.\n\n`{\n  \"all\": [\n    {\n      \"ipAddressIn\": [ <ip_list_object_id>, ... ]\n    },\n    {\n      \"deviceManaged\": true\n    }\n  ]\n}`",
       "properties": {
         "conditions": {
-          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -295,7 +294,6 @@
     "AuthnPolicyInput": {
       "properties": {
         "conditions": {
-          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -363,6 +361,12 @@
     },
     "AuthnPolicyUserGroupTarget": {
       "properties": {
+        "exclusions": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "inclusions": {
           "items": {
             "type": "string"
@@ -391,7 +395,6 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
-            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -418,7 +421,6 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
-            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -444,7 +446,7 @@
       "type": "object"
     },
     "CustomEmail": {
-      "description": "",
+      "description": "Custom email content created by the admin user to personalize emails sent to their system users.",
       "properties": {
         "body": {
           "minLength": 0,
@@ -475,14 +477,7 @@
           "type": "string"
         },
         "type": {
-          "enum": [
-            "user_change_password",
-            "password_reset_confirmation",
-            "password_expiration_warning",
-            "password_expiration",
-            "lockout_notice"
-          ],
-          "type": "string"
+          "$ref": "#/definitions/CustomEmailType"
         }
       },
       "required": [
@@ -491,6 +486,56 @@
       ],
       "title": "CustomEmail",
       "type": "object"
+    },
+    "CustomEmailTemplate": {
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/definitions/CustomEmailTemplateField"
+          },
+          "type": "array"
+        },
+        "type": {
+          "$ref": "#/definitions/CustomEmailType"
+        }
+      },
+      "title": "CustomEmailTemplate",
+      "type": "object"
+    },
+    "CustomEmailTemplateField": {
+      "properties": {
+        "defaultValue": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "field": {
+          "type": "string"
+        },
+        "multiline": {
+          "type": "boolean"
+        }
+      },
+      "title": "CustomEmailTemplateField",
+      "type": "object"
+    },
+    "CustomEmailType": {
+      "enum": [
+        "lockout_notice_user",
+        "password_expiration",
+        "password_expiration_warning",
+        "password_reset_confirmation",
+        "user_change_password"
+      ],
+      "title": "CustomEmailType",
+      "type": "string"
     },
     "DEP": {
       "properties": {
@@ -553,7 +598,6 @@
           "type": "string"
         },
         "oAuthStatus": {
-          "additionalProperties": true,
           "description": "the expiry and error status of the bearer token",
           "type": "object"
         },
@@ -690,11 +734,33 @@
       "title": "ErrorResponse",
       "type": "object"
     },
+    "GraphAttribute-Sudo": {
+      "description": "The graph connection's attributes",
+      "properties": {
+        "sudo": {
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "withoutPassword": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "title": "GraphAttribute-Sudo"
+    },
     "GraphConnection": {
       "description": "Represents an edge between two graph objects. From can be omitted if it is clear from context.",
       "properties": {
         "attributes": {
           "additionalProperties": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphAttribute-Sudo"
+            }
+          ],
           "description": "The graph connection's attributes.",
           "type": "object"
         },
@@ -711,7 +777,7 @@
       "title": "GraphConnection",
       "type": "object"
     },
-    "GraphManagementReq": {
+    "GraphConnection-ActiveDirectory": {
       "properties": {
         "attributes": {
           "additionalProperties": true,
@@ -732,21 +798,561 @@
           "type": "string"
         },
         "type": {
-          "$ref": "#/definitions/GraphType"
+          "description": "Targets which a \"active_directory\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
         }
       },
       "required": [
+        "id",
         "op",
-        "type",
-        "id"
+        "type"
       ],
-      "title": "GraphManagementReq",
+      "title": "GraphConnection (ActiveDirectory)",
+      "type": "object"
+    },
+    "GraphConnection-Application": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"application\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (Application)",
+      "type": "object"
+    },
+    "GraphConnection-Command": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"command\" can be associated to.",
+          "enum": [
+            "system",
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (Command)",
+      "type": "object"
+    },
+    "GraphConnection-GSuite": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"g_suite\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (GSuite)",
+      "type": "object"
+    },
+    "GraphConnection-LdapServer": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"ldap_server\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (LdapServer)",
+      "type": "object"
+    },
+    "GraphConnection-Office365": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"office_365\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (Office365)",
+      "type": "object"
+    },
+    "GraphConnection-Policy": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"policy\" can be associated to.",
+          "enum": [
+            "system",
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (Policy)",
+      "type": "object"
+    },
+    "GraphConnection-RadiusServer": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"radius_server\" can be associated to.",
+          "enum": [
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (RadiusServer)",
+      "type": "object"
+    },
+    "GraphConnection-SoftwareApp": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"software_app\" can be associated to.",
+          "enum": [
+            "system",
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (SoftwareApp)",
+      "type": "object"
+    },
+    "GraphConnection-System": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphAttribute-Sudo"
+            }
+          ],
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"system\" can be associated to.",
+          "enum": [
+            "command",
+            "policy",
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (System)",
+      "type": "object"
+    },
+    "GraphConnection-SystemGroup": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"system_group\" can be associated to.",
+          "enum": [
+            "command",
+            "policy",
+            "user",
+            "user_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (SystemGroup)",
+      "type": "object"
+    },
+    "GraphConnection-SystemGroup-Member": {
+      "properties": {
+        "id": {
+          "description": "The ObjectID of member being added or removed.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the membership connection.",
+          "enum": [
+            "add",
+            "remove"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "The member type.",
+          "enum": [
+            "system"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection-SystemGroup-Member",
+      "type": "object"
+    },
+    "GraphConnection-User": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphAttribute-Sudo"
+            }
+          ],
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"user\" can be associated to.",
+          "enum": [
+            "active_directory",
+            "application",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "radius_server",
+            "system",
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (User)",
+      "type": "object"
+    },
+    "GraphConnection-UserGroup": {
+      "properties": {
+        "attributes": {
+          "additionalProperties": true,
+          "description": "The graph connection's attributes.",
+          "type": "object"
+        },
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "Targets which a \"user_group\" can be associated to.",
+          "enum": [
+            "active_directory",
+            "application",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "radius_server",
+            "system",
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection (UserGroup)",
+      "type": "object"
+    },
+    "GraphConnection-UserGroup-Member": {
+      "properties": {
+        "id": {
+          "description": "The ObjectID of member being added or removed.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the membership connection.",
+          "enum": [
+            "add",
+            "remove"
+          ],
+          "type": "string"
+        },
+        "type": {
+          "description": "The member type.",
+          "enum": [
+            "user"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op",
+        "type"
+      ],
+      "title": "GraphConnection-UserGroup-Member",
       "type": "object"
     },
     "GraphObject": {
       "properties": {
         "attributes": {
           "additionalProperties": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphAttribute-Sudo"
+            }
+          ],
           "description": "The graph object's attributes.",
           "type": "object"
         },
@@ -770,6 +1376,11 @@
       "properties": {
         "compiledAttributes": {
           "additionalProperties": true,
+          "allOf": [
+            {
+              "$ref": "#/definitions/GraphAttribute-Sudo"
+            }
+          ],
           "description": "The compiled graph attributes of the target object.",
           "type": "object"
         },
@@ -788,7 +1399,23 @@
           "type": "array"
         },
         "type": {
-          "$ref": "#/definitions/GraphType"
+          "description": "The type of graph object.",
+          "enum": [
+            "active_directory",
+            "application",
+            "command",
+            "g_suite",
+            "ldap_server",
+            "office_365",
+            "policy",
+            "radius_server",
+            "system",
+            "system_group",
+            "user",
+            "user_group"
+          ],
+          "title": "GraphType",
+          "type": "string"
         }
       },
       "required": [
@@ -799,29 +1426,9 @@
       "title": "GraphObjectWithPaths",
       "type": "object"
     },
-    "GraphType": {
-      "description": "The graph type.",
-      "enum": [
-        "active_directory",
-        "application",
-        "command",
-        "g_suite",
-        "ldap_server",
-        "office_365",
-        "policy",
-        "radius_server",
-        "system",
-        "system_group",
-        "user",
-        "user_group"
-      ],
-      "title": "GraphType",
-      "type": "string"
-    },
     "Group": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -879,7 +1486,6 @@
       "type": "string"
     },
     "gsuite-output": {
-      "additionalProperties": true,
       "allOf": [
         {
           "properties": {
@@ -1006,6 +1612,10 @@
     },
     "JcSoftware-app-settings": {
       "properties": {
+        "allowUpdateDelay": {
+          "default": false,
+          "type": "boolean"
+        },
         "autoUpdate": {
           "default": false,
           "type": "boolean"
@@ -1034,11 +1644,9 @@
           "type": "string"
         },
         "meta": {
-          "additionalProperties": true,
           "type": "object"
         },
         "persistedFields": {
-          "additionalProperties": true,
           "type": "object"
         },
         "status": {
@@ -1378,7 +1986,6 @@
           "type": "string"
         },
         "displayOptions": {
-          "additionalProperties": true,
           "description": "The options that correspond to the display_type.",
           "type": "object"
         },
@@ -1680,66 +2287,9 @@
       "title": "SystemFDEKey",
       "type": "object"
     },
-    "SystemGraphManagementReq": {
-      "properties": {
-        "attributes": {
-          "description": "The graph connection's attributes",
-          "properties": {
-            "sudo": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "withoutPassword": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "SystemGraphManagementReq",
-      "type": "object"
-    },
     "SystemGroup": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -1781,80 +2331,6 @@
         "name"
       ],
       "title": "SystemGroupData",
-      "type": "object"
-    },
-    "SystemGroupGraphManagementReq": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "SystemGroupGraphManagementReq",
-      "type": "object"
-    },
-    "SystemGroupMembersReq": {
-      "properties": {
-        "id": {
-          "description": "The ObjectID of member being added or removed.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the membership connection.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The member type.",
-          "enum": [
-            "system"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "SystemGroupMembersReq",
       "type": "object"
     },
     "system-insights-alf": {
@@ -4125,62 +4601,6 @@
       "title": "System Insights Windows Security Products",
       "type": "object"
     },
-    "UserGraphManagementReq": {
-      "properties": {
-        "attributes": {
-          "description": "The graph connection's attributes",
-          "properties": {
-            "sudo": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
-                "withoutPassword": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "UserGraphManagementReq",
-      "type": "object"
-    },
     "UserGroup": {
       "properties": {
         "attributes": {
@@ -4234,81 +4654,6 @@
         }
       },
       "title": "UserGroupAttributes",
-      "type": "object"
-    },
-    "UserGroupGraphManagementReq": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The graph type",
-          "enum": [
-            "active_directory",
-            "application",
-            "command",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "policy",
-            "radius_server",
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "UserGroupGraphManagementReq",
-      "type": "object"
-    },
-    "UserGroupMembersReq": {
-      "properties": {
-        "id": {
-          "description": "The ObjectID of member being added or removed.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the membership connection.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The member type.",
-          "enum": [
-            "user"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "op",
-        "type",
-        "id"
-      ],
-      "title": "UserGroupMembersReq",
       "type": "object"
     },
     "UserGroupPost": {
@@ -4431,7 +4776,6 @@
     "workday-worker": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
           "type": "object"
         },
         "email": {
@@ -4568,18 +4912,8 @@
         "operationId": "Get-ActiveDirectoryAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"active_directory\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -4631,7 +4965,31 @@
           "required": true,
           "type": "string"
         }
-      ]
+      ],
+      "post": {
+        "description": "This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```",
+        "operationId": "POST_activedirectories-activedirectory_id-associations",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GraphConnection-ActiveDirectory"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Manage the associations of an Active Directory instance"
+      }
     },
     "/activedirectories/{activedirectory_id}/usergroups": {
       "get": {
@@ -5475,18 +5833,8 @@
         "operationId": "Get-ApplicationAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"application\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -5548,7 +5896,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-Application"
             }
           }
         ],
@@ -5777,7 +6125,7 @@
         "summary": "List Authentication Policies"
       },
       "post": {
-        "description": "Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```",
+        "description": "Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```",
         "operationId": "Create-AuthenticationPolicy",
         "parameters": [
           {
@@ -6070,20 +6418,10 @@
         "operationId": "Get-CommandAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"command\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
               "system",
-              "system_group",
-              "user",
-              "user_group"
+              "system_group"
             ],
             "in": "query",
             "name": "targets",
@@ -6143,7 +6481,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-Command"
             }
           }
         ],
@@ -6283,6 +6621,47 @@
           "type": "string"
         }
       ]
+    },
+    "/customemail/templates": {
+      "get": {
+        "description": "Get the list of custom email templates",
+        "operationId": "GET_customemail-templates",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/CustomEmailTemplate"
+              },
+              "type": "array"
+            }
+          },
+          "400": {
+            "$ref": "#/responses/trait:standardErrors:400"
+          },
+          "401": {
+            "$ref": "#/responses/trait:standardErrors:401"
+          },
+          "403": {
+            "$ref": "#/responses/trait:standardErrors:403"
+          },
+          "404": {
+            "$ref": "#/responses/trait:standardErrors:404"
+          },
+          "409": {
+            "$ref": "#/responses/trait:standardErrors:409"
+          },
+          "500": {
+            "$ref": "#/responses/trait:standardErrors:500"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List custom email templates"
+      }
     },
     "/customemails": {
       "post": {
@@ -6978,18 +7357,8 @@
         "operationId": "Get-GSuiteAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"g_suite\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -7051,7 +7420,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-GSuite"
             }
           }
         ],
@@ -7158,7 +7527,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a list of users to import"
+        "summary": "Get a list of users to import from a G Suite instance"
       },
       "parameters": [
         {
@@ -7996,18 +8365,8 @@
         "operationId": "Get-LdapServerAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"ldap_server\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -8069,7 +8428,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-LdapServer"
             }
           }
         ],
@@ -8476,18 +8835,8 @@
         "operationId": "Get-Office365Association",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"office_365\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -8549,7 +8898,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-Office365"
             }
           }
         ],
@@ -8565,6 +8914,78 @@
         ],
         "summary": "Manage the associations of an Office 365 instance"
       }
+    },
+    "/office365s/{office365_id}/import/users": {
+      "get": {
+        "description": "Lists Office 365 users available for import.",
+        "operationId": "GET_office365s-office365_id-import-users",
+        "parameters": [
+          {
+            "description": "Office 365 API maximum number of results per page. See https://docs.microsoft.com/en-us/graph/paging.",
+            "in": "query",
+            "name": "top",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "Office 365 API token used to access the next page of results. See https://docs.microsoft.com/en-us/graph/paging.",
+            "in": "query",
+            "name": "skipToken",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "skipToken": {
+                  "type": "string"
+                },
+                "top": {
+                  "type": "integer"
+                },
+                "users": {
+                  "items": {
+                    "properties": {
+                      "givenName": {
+                        "type": "string"
+                      },
+                      "id": {
+                        "type": "string"
+                      },
+                      "surname": {
+                        "type": "string"
+                      },
+                      "userPrincipalName": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get a list of users to import from an Office 365 instance"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "office365_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
     },
     "/office365s/{office365_id}/translationrules": {
       "get": {
@@ -9047,20 +9468,10 @@
         "operationId": "Get-PolicyAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"policy\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
               "system",
-              "system_group",
-              "user",
-              "user_group"
+              "system_group"
             ],
             "in": "query",
             "name": "targets",
@@ -9120,7 +9531,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-Policy"
             }
           }
         ],
@@ -9821,18 +10232,8 @@
         "operationId": "Get-RadiusServerAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"radius_server\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group",
               "user",
               "user_group"
             ],
@@ -9894,7 +10295,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-RadiusServer"
             }
           }
         ],
@@ -10256,20 +10657,10 @@
         "operationId": "Get-SoftwareAppAssociation",
         "parameters": [
           {
-            "description": "",
+            "description": "Targets which a \"software_app\" can be associated to.",
             "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
               "system",
-              "system_group",
-              "user",
-              "user_group"
+              "system_group"
             ],
             "in": "query",
             "name": "targets",
@@ -10329,7 +10720,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-SoftwareApp"
             }
           }
         ],
@@ -10670,6 +11061,19 @@
         "operationId": "Get-SystemGroupAssociation",
         "parameters": [
           {
+            "description": "Targets which a \"system_group\" can be associated to.",
+            "enum": [
+              "command",
+              "policy",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
+            "name": "targets",
+            "required": true,
+            "type": "string"
+          },
+          {
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
@@ -10685,25 +11089,6 @@
             "name": "skip",
             "required": false,
             "type": "integer"
-          },
-          {
-            "description": "",
-            "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "user",
-              "user_group"
-            ],
-            "in": "query",
-            "name": "targets",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -10741,7 +11126,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SystemGroupGraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-SystemGroup"
             }
           }
         ],
@@ -10878,7 +11263,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SystemGroupMembersReq"
+              "$ref": "#/definitions/GraphConnection-SystemGroup-Member"
             }
           },
           {
@@ -11254,7 +11639,7 @@
         "parameters": [
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11319,7 +11704,7 @@
         "parameters": [
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11384,7 +11769,7 @@
         "parameters": [
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11469,7 +11854,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11534,7 +11919,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11599,7 +11984,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11664,7 +12049,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11729,7 +12114,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11794,7 +12179,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11859,7 +12244,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11924,7 +12309,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -11989,7 +12374,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12054,7 +12439,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12119,7 +12504,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12184,7 +12569,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12249,7 +12634,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12314,7 +12699,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12379,7 +12764,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12444,7 +12829,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12509,7 +12894,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12574,7 +12959,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12639,7 +13024,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12704,7 +13089,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12769,7 +13154,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12834,7 +13219,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12899,7 +13284,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -12964,7 +13349,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13029,7 +13414,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13094,7 +13479,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13159,7 +13544,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13224,7 +13609,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13289,7 +13674,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13354,7 +13739,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13419,7 +13804,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13484,7 +13869,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13549,7 +13934,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13614,7 +13999,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13679,7 +14064,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13744,7 +14129,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13804,7 +14189,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13869,7 +14254,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13934,7 +14319,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -13999,7 +14384,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14064,7 +14449,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14129,7 +14514,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14194,7 +14579,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14259,7 +14644,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14324,7 +14709,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14389,7 +14774,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14454,7 +14839,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14519,7 +14904,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14584,7 +14969,7 @@
           },
           {
             "default": [],
-            "description": "Supported operators are: eq",
+            "description": "Supported operators are: eq, gte, in",
             "in": "query",
             "items": {
               "type": "string"
@@ -14628,6 +15013,19 @@
         "operationId": "Get-SystemAssociation",
         "parameters": [
           {
+            "description": "Targets which a \"system\" can be associated to.",
+            "enum": [
+              "command",
+              "policy",
+              "user",
+              "user_group"
+            ],
+            "in": "query",
+            "name": "targets",
+            "required": true,
+            "type": "string"
+          },
+          {
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
@@ -14643,25 +15041,6 @@
             "name": "skip",
             "required": false,
             "type": "integer"
-          },
-          {
-            "description": "",
-            "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "user",
-              "user_group"
-            ],
-            "in": "query",
-            "name": "targets",
-            "required": true,
-            "type": "string"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -14705,7 +15084,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SystemGraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-System"
             }
           },
           {
@@ -15379,6 +15758,23 @@
         "operationId": "Get-UserGroupAssociation",
         "parameters": [
           {
+            "description": "Targets which a \"user_group\" can be associated to.",
+            "enum": [
+              "active_directory",
+              "application",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "radius_server",
+              "system",
+              "system_group"
+            ],
+            "in": "query",
+            "name": "targets",
+            "required": true,
+            "type": "string"
+          },
+          {
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
@@ -15394,25 +15790,6 @@
             "name": "skip",
             "required": false,
             "type": "integer"
-          },
-          {
-            "description": "",
-            "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group"
-            ],
-            "in": "query",
-            "name": "targets",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -15450,7 +15827,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/UserGroupGraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-UserGroup"
             }
           }
         ],
@@ -15711,7 +16088,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/UserGroupMembersReq"
+              "$ref": "#/definitions/GraphConnection-UserGroup-Member"
             }
           }
         ],
@@ -16190,6 +16567,23 @@
         "operationId": "Get-UserAssociation",
         "parameters": [
           {
+            "description": "Targets which a \"user\" can be associated to.",
+            "enum": [
+              "active_directory",
+              "application",
+              "g_suite",
+              "ldap_server",
+              "office_365",
+              "radius_server",
+              "system",
+              "system_group"
+            ],
+            "in": "query",
+            "name": "targets",
+            "required": true,
+            "type": "string"
+          },
+          {
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
@@ -16205,25 +16599,6 @@
             "name": "skip",
             "required": false,
             "type": "integer"
-          },
-          {
-            "description": "",
-            "enum": [
-              "active_directory",
-              "application",
-              "command",
-              "g_suite",
-              "ldap_server",
-              "office_365",
-              "policy",
-              "radius_server",
-              "system",
-              "system_group"
-            ],
-            "in": "query",
-            "name": "targets",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -16261,7 +16636,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/UserGraphManagementReq"
+              "$ref": "#/definitions/GraphConnection-User"
             }
           }
         ],
