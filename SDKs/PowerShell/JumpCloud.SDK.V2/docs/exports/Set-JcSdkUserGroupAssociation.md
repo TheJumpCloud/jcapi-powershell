@@ -14,26 +14,26 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <String> [-Attributes <IAny>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <String>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Body <IUserGroupGraphManagementReq> [-PassThru] [-Confirm]
+Set-JcSdkUserGroupAssociation -GroupId <String> -Body <IGraphConnectionUserGroup> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupGraphManagementReq>
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionUserGroup>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,7 +61,7 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAny
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -73,11 +73,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-UserGroupGraphManagementReq
+GraphConnection (UserGroup)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IUserGroupGraphManagementReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionUserGroup
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -165,7 +165,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-The graph type
+Targets which a "user_group" can be associated to.
 
 ```yaml
 Type: System.String
@@ -215,9 +215,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IGraphConnectionUserGroup
 
-### JumpCloud.SDK.V2.Models.IUserGroupGraphManagementReq
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -232,11 +232,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IUserGroupGraphManagementReq>: UserGroupGraphManagementReq
+BODY <IGraphConnectionUserGroup>: GraphConnection (UserGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: The graph type
-  - `[Attributes <IAny>]`: The graph connection's attributes.
+  - `Type <String>`: Targets which a "user_group" can be associated to.
+  - `[Attributes <IGraphConnectionUserGroupAttributes>]`: The graph connection's attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

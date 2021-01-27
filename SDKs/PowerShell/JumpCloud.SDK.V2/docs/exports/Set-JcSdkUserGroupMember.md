@@ -20,14 +20,14 @@ Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-PassThru]
 
 ### Set
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Body <IUserGroupMembersReq> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Body <IGraphConnectionUserGroupMember> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupMembersReq> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionUserGroupMember>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -58,11 +58,11 @@ This endpoint allows you to manage the user members of a User Group.\n\n#### Sam
 ## PARAMETERS
 
 ### -Body
-UserGroupMembersReq
+GraphConnection-UserGroup-Member
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IUserGroupMembersReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -185,9 +185,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember
 
-### JumpCloud.SDK.V2.Models.IUserGroupMembersReq
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -202,7 +202,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IUserGroupMembersReq>: UserGroupMembersReq
+BODY <IGraphConnectionUserGroupMember>: GraphConnection-UserGroup-Member
   - `Id <String>`: The ObjectID of member being added or removed.
   - `Op <String>`: How to modify the membership connection.
 

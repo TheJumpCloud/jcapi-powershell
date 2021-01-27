@@ -13,9 +13,9 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember
 .Inputs
-JumpCloud.SDK.V2.Models.ISystemGroupMembersReq
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 System.Boolean
 .Notes
@@ -23,7 +23,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISystemGroupMembersReq>:
+BODY <IGraphConnectionSystemGroupMember>:
   Id <String>: The ObjectID of member being added or removed.
   Op <String>: How to modify the membership connection.
 
@@ -86,8 +86,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISystemGroupMembersReq]
-    # SystemGroupMembersReq
+    [JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember]
+    # GraphConnection-SystemGroup-Member
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "policy" can be associated to.
 
 ```yaml
 Type: System.String

@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -BodyObject
-CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
 To construct, see NOTES section for BODYOBJECT properties and create a hash table.
 
 ```yaml
@@ -197,7 +197,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-.
+CustomEmailType
 
 ```yaml
 Type: System.String
@@ -266,9 +266,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODYOBJECT <ICustomEmail>: CustomEmail
+BODYOBJECT <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
-  - `Type <String>`: 
+  - `Type <String>`: CustomEmailType
   - `[Body <String>]`: 
   - `[Button <String>]`: 
   - `[Header <String>]`: 

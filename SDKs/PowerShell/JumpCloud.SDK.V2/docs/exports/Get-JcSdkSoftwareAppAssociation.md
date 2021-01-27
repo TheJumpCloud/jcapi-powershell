@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "software_app" can be associated to.
 
 ```yaml
 Type: System.String

@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-.
+Targets which a "office_365" can be associated to.
 
 ```yaml
 Type: System.String

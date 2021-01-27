@@ -34,6 +34,7 @@ BODY <IAuthnPolicyInput>:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
     [Type <String>]:
+  [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
 
@@ -141,6 +142,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
     ${TargetResources},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserGroupExclusions},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]

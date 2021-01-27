@@ -463,17 +463,26 @@ This endpoint will return all of the data in your WorkDay Custom Report that has
 This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
 Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"auth\":{\n\t  \"basic\": {\n\t\t\"username\": \"someDeveloper\",\t  \n\t\t\"password\": \"notTheRealPassword\"\n\n\t  }\n\t}\n}'\n\n```
 
+### [Import-JcSdkGet](Import-JcSdkGet.md)
+Lists Office 365 users available for import.
+
 ### [Import-JcSdkWorkday](Import-JcSdkWorkday.md)
 The endpoint allows you to create a Workday Import request.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"WorkdayID\",\"value\":\"name.name\"}\n\t\t\t]\n\t\t\n\t}\n]\n```
 
 ### [Import-JcSdkWorkdayResult](Import-JcSdkWorkdayResult.md)
 This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
 
+### [Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation](Invoke-JcSdkActivedirectoryPostActivedirectoryIdAssociation.md)
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
+
+### [Invoke-JcSdkCustomemailGetTemplate](Invoke-JcSdkCustomemailGetTemplate.md)
+Get the list of custom email templates
+
 ### [Lock-JcSdkAppleMdmDevice](Lock-JcSdkAppleMdmDevice.md)
 Locks a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
 
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
-Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
 
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.

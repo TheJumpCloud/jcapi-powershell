@@ -16,7 +16,8 @@ Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X 
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <IAny>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -35,8 +36,8 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IA
 ```
 Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <IAny>]
  [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupInclusions <String[]>]
- [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupExclusions <String[]>]
+ [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -213,6 +214,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserGroupExclusions
+.
+
+```yaml
+Type: System.String[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserGroupInclusions
 .
 
@@ -307,6 +323,7 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
     - `[Type <String>]`: 
+  - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
 
