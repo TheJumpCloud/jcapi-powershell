@@ -128,6 +128,7 @@ $TransformConfig = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
             'GET_activedirectories'                                      = 'List-ActiveDirectory';
             'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
+            'POST_activedirectories-activedirectory_id-associations'     = 'Set-ActiveDirectoryAssociation';
             'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
             'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
             'GET_applemdms'                                              = 'List-AppleMDM';
@@ -162,6 +163,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_customemails-custom_email_type'                      = 'Delete-CustomEmailConfiguration';
             'GET_customemails-custom_email_type'                         = 'Get-CustomEmailConfiguration';
             'PUT_customemails-custom_email_type'                         = 'Set-CustomEmailConfiguration';
+            'GET_customemail-templates'                                  = 'List-CustomEmailTemplates';
             'GET_directories'                                            = 'List-Directory';
             'POST_duo-accounts'                                          = 'Create-DuoAccount';
             'DELETE_duo-accounts-id'                                     = 'Delete-DuoAccount';
@@ -212,6 +214,7 @@ $TransformConfig = [Ordered]@{
             'GET_office365s-office365_id-translationrules'               = 'List-Office365TranslationRule';
             'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
             'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
+            'GET_office365s-office365_id-import-users'                   = 'List-Office365UsersToImport';
             'GET_policies-policy_id-policyresults'                       = 'List-PoliciesPolicyResult';
             'GET_policies-policy_id-policystatuses'                      = 'List-PoliciesPolicyStatus';
             'POST_policies'                                              = 'Create-Policy';
@@ -529,6 +532,14 @@ Function Update-SwaggerObject
                     #     }
                     #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
                     # }
+                    # Check for when type is object without defined properties
+                    If ($AttributePath -like '*.type')
+                    {
+                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin 'properties' -notin $ThisObject.PSObject.Properties.Name)
+                        {
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
+                        }
+                    }
                     # Exclude $ref
                     If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
                     {

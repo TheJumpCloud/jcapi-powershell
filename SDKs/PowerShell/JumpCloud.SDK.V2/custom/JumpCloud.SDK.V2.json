@@ -247,6 +247,7 @@
       "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.\n\nConditions may be added to an authentication policy using the following conditional language:\n\n```\n<conditions> ::= <expression>\n<expression> ::= <ipAddressIn> | <deviceManaged> | <notExpression> | <allExpression> | <anyExpression>\n<ipAddressIn> ::= { \"ipAddressIn\": [ <objectId>, ... ] }\n<deviceManaged> ::= { \"deviceManaged\": <boolean> }\n<notExpression> ::= { \"not\": <expression> }\n<allExpression> ::= { \"all\": [ <expression>, ... ] }\n<anyExpression> ::= { \"any\": [ <expression>, ... ] }\n```\n\nFor example, to add a condition that applies to IP address in a given list the following condition can be added:\n\n`{\"ipAddressIn\": [ <ip_list_object_id> ]}`\n\nIf you would rather exclude IP addresses in the given lists, the following condition could be added:\n\n`{\n  \"not\": {\n    \"ipAddressIn\": [ <ip_list_object_id_1>, <ip_list_object_id_2> ]\n  }\n}`\n\nYou may also include more than one condition and choose whether \"all\" or \"any\" of them must be met for the policy to apply.\n\n`{\n  \"all\": [\n    {\n      \"ipAddressIn\": [ <ip_list_object_id>, ... ]\n    },\n    {\n      \"deviceManaged\": true\n    }\n  ]\n}`",
       "properties": {
         "conditions": {
+          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -294,6 +295,7 @@
     "AuthnPolicyInput": {
       "properties": {
         "conditions": {
+          "additionalProperties": true,
           "type": "object"
         },
         "description": {
@@ -389,6 +391,7 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -415,6 +418,7 @@
         "attributes": {
           "description": "Map of additional attributes.",
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -549,6 +553,7 @@
           "type": "string"
         },
         "oAuthStatus": {
+          "additionalProperties": true,
           "description": "the expiry and error status of the bearer token",
           "type": "object"
         },
@@ -689,6 +694,7 @@
       "description": "Represents an edge between two graph objects. From can be omitted if it is clear from context.",
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The graph connection's attributes.",
           "type": "object"
         },
@@ -708,6 +714,7 @@
     "GraphManagementReq": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The graph connection's attributes.",
           "type": "object"
         },
@@ -739,6 +746,7 @@
     "GraphObject": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The graph object's attributes.",
           "type": "object"
         },
@@ -761,6 +769,7 @@
     "GraphObjectWithPaths": {
       "properties": {
         "compiledAttributes": {
+          "additionalProperties": true,
           "description": "The compiled graph attributes of the target object.",
           "type": "object"
         },
@@ -812,6 +821,7 @@
     "Group": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -869,6 +879,7 @@
       "type": "string"
     },
     "gsuite-output": {
+      "additionalProperties": true,
       "allOf": [
         {
           "properties": {
@@ -1023,9 +1034,11 @@
           "type": "string"
         },
         "meta": {
+          "additionalProperties": true,
           "type": "object"
         },
         "persistedFields": {
+          "additionalProperties": true,
           "type": "object"
         },
         "status": {
@@ -1365,6 +1378,7 @@
           "type": "string"
         },
         "displayOptions": {
+          "additionalProperties": true,
           "description": "The options that correspond to the display_type.",
           "type": "object"
         },
@@ -1725,6 +1739,7 @@
     "SystemGroup": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The group object's attributes.",
           "type": "object"
         },
@@ -1771,6 +1786,7 @@
     "SystemGroupGraphManagementReq": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The graph connection's attributes.",
           "type": "object"
         },
@@ -4223,6 +4239,7 @@
     "UserGroupGraphManagementReq": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "description": "The graph connection's attributes.",
           "type": "object"
         },
@@ -4414,6 +4431,7 @@
     "workday-worker": {
       "properties": {
         "attributes": {
+          "additionalProperties": true,
           "type": "object"
         },
         "email": {
