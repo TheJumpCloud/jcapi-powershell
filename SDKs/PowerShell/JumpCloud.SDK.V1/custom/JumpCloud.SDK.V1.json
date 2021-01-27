@@ -376,6 +376,7 @@
         },
         "databaseAttributes": {
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -844,6 +845,7 @@
         "jit": {
           "properties": {
             "attributes": {
+              "additionalProperties": true,
               "type": "object"
             },
             "createOnly": {
@@ -1326,6 +1328,7 @@
         },
         "connectionHistory": {
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -1518,6 +1521,7 @@
       "description": "",
       "properties": {
         "betaFeatures": {
+          "additionalProperties": true,
           "type": "object"
         },
         "contactEmail": {
@@ -2046,9 +2050,11 @@
           "type": "string"
         },
         "filter": {
+          "additionalProperties": true,
           "type": "object"
         },
         "searchFilter": {
+          "additionalProperties": true,
           "type": "object"
         }
       },
@@ -2315,6 +2321,7 @@
         },
         "relationships": {
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -2507,6 +2514,7 @@
         },
         "relationships": {
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -2740,6 +2748,7 @@
         },
         "relationships": {
           "items": {
+            "additionalProperties": true,
             "type": "object"
           },
           "type": "array"
@@ -3505,6 +3514,7 @@
           "400": {
             "description": "",
             "schema": {
+              "additionalProperties": true,
               "type": "object"
             }
           }
@@ -4760,6 +4770,7 @@
           "400": {
             "description": "",
             "schema": {
+              "additionalProperties": true,
               "description": "Bad Request",
               "type": "object"
             }
@@ -4802,6 +4813,7 @@
           "400": {
             "description": "",
             "schema": {
+              "additionalProperties": true,
               "description": "Bad Request",
               "type": "object"
             }
@@ -4871,6 +4883,7 @@
           "400": {
             "description": "",
             "schema": {
+              "additionalProperties": true,
               "description": "Bad Request",
               "type": "object"
             }

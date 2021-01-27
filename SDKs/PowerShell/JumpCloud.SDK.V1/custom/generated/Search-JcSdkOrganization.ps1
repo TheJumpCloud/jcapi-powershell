@@ -25,8 +25,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>:
   [Fields <String>]:
-  [Filter <IAny>]: Any object
-  [SearchFilter <IAny>]: Any object
+  [Filter <ISearchFilter>]: Dictionary of <any>
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [SearchFilter <ISearchFilter1>]: Dictionary of <any>
+    [(Any) <Object>]: This indicates any property can be added to this object.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkOrganization.md
 #>
@@ -70,14 +72,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IAny]
-    # Any object
+    [JumpCloud.SDK.V1.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V1.Models.ISearchFilter]))]
+    [System.Collections.Hashtable]
+    # Dictionary of <any>
     ${Filter1},
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IAny]
-    # Any object
+    [JumpCloud.SDK.V1.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V1.Models.ISearchFilter1]))]
+    [System.Collections.Hashtable]
+    # Dictionary of <any>
     ${SearchFilter},
 
     [Parameter(DontShow)]

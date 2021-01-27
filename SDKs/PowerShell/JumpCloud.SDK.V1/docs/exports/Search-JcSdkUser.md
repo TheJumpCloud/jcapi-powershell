@@ -18,8 +18,8 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkUser [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <IAny>]
- [-SearchFilter <IAny>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkUser [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <Hashtable>]
+ [-SearchFilter <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
@@ -123,10 +123,10 @@ Accept wildcard characters: False
 ```
 
 ### -Filter1
-Any object
+Dictionary of \<any\>
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IAny
+Type: System.Collections.Hashtable
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -153,10 +153,10 @@ Accept wildcard characters: False
 ```
 
 ### -SearchFilter
-Any object
+Dictionary of \<any\>
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IAny
+Type: System.Collections.Hashtable
 Parameter Sets: SearchExpanded
 Aliases:
 
@@ -220,8 +220,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ISearch>: search
   - `[Fields <String>]`: 
-  - `[Filter <IAny>]`: Any object
-  - `[SearchFilter <IAny>]`: Any object
+  - `[Filter <ISearchFilter>]`: Dictionary of <any>
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchFilter <ISearchFilter1>]`: Dictionary of <any>
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 ## RELATED LINKS
 

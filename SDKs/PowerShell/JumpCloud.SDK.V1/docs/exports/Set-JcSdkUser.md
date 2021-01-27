@@ -23,8 +23,8 @@ Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddresses
  [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
  [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <IAny[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
+ [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -50,8 +50,8 @@ Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
  [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <IAny[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
+ [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -625,7 +625,7 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IAny[]
+Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -854,7 +854,7 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <IAny[]>]`: 
+  - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.

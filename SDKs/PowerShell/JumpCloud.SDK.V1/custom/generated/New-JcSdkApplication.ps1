@@ -105,7 +105,7 @@ BODY <IApplication>:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
   [Created <String>]:
-  [DatabaseAttributes <IAny[]>]:
+  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
   [Description <String>]:
   [DisplayLabel <String>]:
   [DisplayName <String>]:
@@ -242,7 +242,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IAny[]]
+    [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
     # .
     ${DatabaseAttributes},
 

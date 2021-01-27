@@ -17,7 +17,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.ISshkeypost
 .Outputs
-JumpCloud.SDK.V1.Models.IAny
+JumpCloud.SDK.V1.Models.IDictionaryOfany2
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Notes
@@ -39,7 +39,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IAny])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IDictionaryOfany2])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
