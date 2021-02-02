@@ -8,7 +8,8 @@
       "properties": {
         "message": {
           "description": "Text detailed error message returned by the service",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "Message"
         }
       },
       "title": "ErrorMessage",
@@ -32,7 +33,8 @@
         "end_time": {
           "description": "optional query end time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "EndTime"
         },
         "field": {
           "description": "field is what they wish to query on",
@@ -54,7 +56,8 @@
         "start_time": {
           "description": "query start time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "StartTime"
         }
       },
       "required": [
@@ -70,7 +73,8 @@
         "end_time": {
           "description": "optional query end time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "EndTime"
         },
         "interval_unit": {
           "type": "string",
@@ -96,11 +100,13 @@
         "start_time": {
           "description": "query start time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "StartTime"
         },
         "timezone": {
           "description": "TimeZone. Specify the timezone in which the user is in\noptional",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "TimeZone"
         }
       },
       "required": [
@@ -117,7 +123,8 @@
         "end_time": {
           "description": "optional query end time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "EndTime"
         },
         "fields": {
           "description": "optional list of fields to return from query",
@@ -161,7 +168,8 @@
         "start_time": {
           "description": "query start time, UTC in RFC3339 format",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+          "x-go-name": "StartTime"
         }
       },
       "required": [
