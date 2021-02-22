@@ -13,7 +13,7 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkSystemUser' {
+Describe 'Get-JcSdkUser' {
     It 'List' {
         Get-JcSdkUser | Should -Not -BeNullOrEmpty
     }
