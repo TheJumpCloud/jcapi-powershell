@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkApplication' {
-    It 'PutExpanded' -skip {
+    It 'SetExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
+    It 'Set' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
+    It 'SetViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
+    It 'SetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
