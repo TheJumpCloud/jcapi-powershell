@@ -38,7 +38,7 @@ Only valid filed field is `system_id`.
 ## PARAMETERS
 
 ### -Filter
-Supported operators are: eq
+Supported operators are: eq, gte, in
 
 ```yaml
 Type: System.String[]

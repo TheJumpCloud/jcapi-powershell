@@ -13,27 +13,27 @@ We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCust
 
 ## SYNTAX
 
-### PutExpanded (Default)
+### SetExpanded (Default)
 ```
 Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
-### Put
+### Set
 ```
 Set-JcSdkOrganization -Id <String>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentity
+### SetViaIdentity
 ```
 Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
-### PutViaIdentityExpanded
+### SetViaIdentityExpanded
 ```
 Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -67,7 +67,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
-Parameter Sets: Put, PutViaIdentity
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
 Required: True
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Put, PutExpanded
+Parameter Sets: Set, SetExpanded
 Aliases:
 
 Required: True
@@ -98,7 +98,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PutViaIdentity, PutViaIdentityExpanded
+Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -129,7 +129,7 @@ To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IOrganizationsettingsput
-Parameter Sets: PutExpanded, PutViaIdentityExpanded
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
@@ -207,7 +207,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[EnableManagedUid <Boolean?>]`: 
     - `[Logo <String>]`: 
     - `[Name <String>]`: 
-    - `[PasswordCompliance <PasswordCompliance?>]`: 
+    - `[PasswordCompliance <String>]`: 
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
     - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
@@ -240,6 +240,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
+  - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
@@ -257,7 +258,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[EnableManagedUid <Boolean?>]`: 
   - `[Logo <String>]`: 
   - `[Name <String>]`: 
-  - `[PasswordCompliance <PasswordCompliance?>]`: 
+  - `[PasswordCompliance <String>]`: 
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
   - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 

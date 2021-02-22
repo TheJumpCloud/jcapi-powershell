@@ -36,12 +36,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Update-JcSdkBulkUser
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='Patch', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Update', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]
-    # .
+    # Array of bulk-user-update
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

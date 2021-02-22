@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphManagementReq
+JumpCloud.SDK.V2.Models.IGraphConnectionApplication
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -25,11 +25,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphManagementReq>:
+BODY <IGraphConnectionApplication>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
-  Op <Op>: How to modify the graph connection.
-  Type <GraphType>: The graph type.
-  [Attributes <IGraphManagementReqAttributes>]: The graph connection's attributes.
+  Op <String>: How to modify the graph connection.
+  Type <String>: Targets which a "application" can be associated to.
+  [Attributes <IGraphConnectionApplicationAttributes>]: The graph connection's attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -37,10 +38,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
   [DeviceId <String>]:
   [GroupId <String>]: ObjectID of the System Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of the System Group.
+  [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
@@ -77,8 +79,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphManagementReq]
-    # GraphManagementReq
+    [JumpCloud.SDK.V2.Models.IGraphConnectionApplication]
+    # GraphConnection (Application)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -91,24 +93,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Op])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Op]
+    [System.String]
     # How to modify the graph connection.
     ${Op},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphType])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.GraphType]
-    # The graph type.
+    [System.String]
+    # Targets which a "application" can be associated to.
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionApplicationAttributes]))]
+    [System.Collections.Hashtable]
     # The graph connection's attributes.
     ${Attributes},
 

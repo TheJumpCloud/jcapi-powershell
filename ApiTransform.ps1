@@ -46,49 +46,53 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'POST_applications'                           = 'Create-Application';
-            'DELETE_applications-id'                      = 'Delete-Application';
-            'GET_applications-id'                         = 'Get-Application';
-            'GET_applications'                            = 'List-Application';
-            'PUT_applications-id'                         = 'Set-Application';
-            'GET_application-templates-id'                = 'Get-ApplicationTemplate';
-            'GET_application-templates'                   = 'List-ApplicationTemplate';
-            'POST_commands'                               = 'Create-Command';
-            'DELETE_commands-id'                          = 'Delete-Command';
-            'GET_commands-id'                             = 'Get-Command';
-            'GET_commands'                                = 'List-Command';
-            'PUT_commands-id'                             = 'Set-Command';
-            'GET_files-command-id'                        = 'Get-CommandFile';
-            'DELETE_commandresults-id'                    = 'Delete-CommandResult';
-            'GET_commandresults-id'                       = 'Get-CommandResult';
-            'GET_commandresults'                          = 'List-CommandResult';
-            'POST_command-trigger-triggername'            = 'POST-CommandTrigger';
-            'POST_systemusers-id-expire'                  = 'POST-ExpireSystemUserPassword';
-            'GET_organizations-id'                        = 'Get-Organization';
-            'GET_organizations'                           = 'List-Organization';
-            'POST_search-organizations'                   = 'Search-Organization';
-            'PUT_organizations-id'                        = 'Set-Organization';
-            'POST_radiusservers'                          = 'Create-RadiusServer';
-            'DELETE_radiusservers-id'                     = 'Delete-RadiusServer';
-            'GET_radiusservers-id'                        = 'Get-RadiusServer';
-            'GET_radiusservers'                           = 'List-RadiusServer';
-            'PUT_radiusservers-id'                        = 'Set-RadiusServer';
-            'DELETE_systems-id'                           = 'Delete-System';
-            'GET_systems-id'                              = 'Get-System';
-            'GET_systems'                                 = 'List-System';
-            'POST_search-systems'                         = 'Search-System';
-            'PUT_systems-id'                              = 'Set-System';
-            'POST_systemusers'                            = 'Create-SystemUser';
-            'DELETE_systemusers-id'                       = 'Delete-SystemUser';
-            'GET_systemusers-id'                          = 'Get-SystemUser';
-            'GET_systemusers'                             = 'List-SystemUser';
-            'POST_search-systemusers'                     = 'Search-SystemUser';
-            'PUT_systemusers-id'                          = 'Set-SystemUser';
-            'POST_systemusers-id-unlock'                  = 'Unlock-SystemUser';
-            'POST_systemusers-id-resetmfa'                = 'Reset-SystemUserMfa';
-            'POST_systemusers-id-sshkeys'                 = 'Create-SystemUsersSshKey';
-            'DELETE_systemusers-systemuser_id-sshkeys-id' = 'Delete-SystemUsersSshKey';
-            'GET_systemusers-id-sshkeys'                  = 'List-SystemUsersSshKey';
+            'POST_applications'                               = 'Create-Application';
+            'DELETE_applications-id'                          = 'Delete-Application';
+            'GET_applications-id'                             = 'Get-Application';
+            'GET_applications'                                = 'List-Application';
+            'PUT_applications-id'                             = 'Set-Application';
+            'GET_application-templates-id'                    = 'Get-ApplicationTemplate';
+            'GET_application-templates'                       = 'List-ApplicationTemplate';
+            'POST_commands'                                   = 'Create-Command';
+            'DELETE_commands-id'                              = 'Delete-Command';
+            'GET_commands-id'                                 = 'Get-Command';
+            'GET_commands'                                    = 'List-Command';
+            'PUT_commands-id'                                 = 'Set-Command';
+            'GET_files-command-id'                            = 'Get-CommandFile';
+            'DELETE_commandresults-id'                        = 'Delete-CommandResult';
+            'GET_commandresults-id'                           = 'Get-CommandResult';
+            'GET_commandresults'                              = 'List-CommandResult';
+            'POST_command-trigger-triggername'                = 'POST-CommandTrigger';
+            'POST_systemusers-id-expire'                      = 'POST-ExpireUserPassword';
+            'GET_organizations-id'                            = 'Get-Organization';
+            'GET_organizations'                               = 'List-Organization';
+            'POST_search-organizations'                       = 'Search-Organization';
+            'PUT_organizations-id'                            = 'Set-Organization';
+            'POST_radiusservers'                              = 'Create-RadiusServer';
+            'DELETE_radiusservers-id'                         = 'Delete-RadiusServer';
+            'GET_radiusservers-id'                            = 'Get-RadiusServer';
+            'GET_radiusservers'                               = 'List-RadiusServer';
+            'PUT_radiusservers-id'                            = 'Set-RadiusServer';
+            'POST_systems-system_id-command-builtin-erase'    = 'Clear-System';
+            'DELETE_systems-id'                               = 'Delete-System';
+            'GET_systems-id'                                  = 'Get-System';
+            'GET_systems'                                     = 'List-System';
+            'POST_systems-system_id-command-builtin-lock'     = 'Lock-System';
+            'POST_systems-system_id-command-builtin-restart'  = 'Restart-System';
+            'POST_search-systems'                             = 'Search-System';
+            'PUT_systems-id'                                  = 'Set-System';
+            'POST_systems-system_id-command-builtin-shutdown' = 'Stop-System';
+            'POST_systemusers'                                = 'Create-User';
+            'DELETE_systemusers-id'                           = 'Delete-User';
+            'GET_systemusers-id'                              = 'Get-User';
+            'GET_systemusers'                                 = 'List-User';
+            'POST_search-systemusers'                         = 'Search-User';
+            'PUT_systemusers-id'                              = 'Set-User';
+            'POST_systemusers-id-unlock'                      = 'Unlock-User';
+            'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
+            'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
+            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'List-UserSshKey';
         };
         ExcludedList       = @();
     }
@@ -107,6 +111,7 @@ $TransformConfig = [Ordered]@{
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
             'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"BodyObject"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
@@ -123,6 +128,7 @@ $TransformConfig = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
             'GET_activedirectories'                                      = 'List-ActiveDirectory';
             'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
+            'POST_activedirectories-activedirectory_id-associations'     = 'Set-ActiveDirectoryAssociation';
             'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
             'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
             'GET_applemdms'                                              = 'List-AppleMDM';
@@ -141,13 +147,23 @@ $TransformConfig = [Ordered]@{
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
             'GET_applications-application_id-users'                      = 'Get-ApplicationTraverseUser';
             'GET_applications-application_id-usergroups'                 = 'Get-ApplicationTraverseUserGroup';
+            'POST_authn-policies'                                        = 'Create-AuthenticationPolicy';
+            'DELETE_authn-policies-id'                                   = 'Delete-AuthenticationPolicy';
+            'GET_authn-policies-id'                                      = 'Get-AuthenticationPolicy';
+            'GET_authn-policies'                                         = 'List-AuthenticationPolicy';
+            'PATCH_authn-policies-id'                                    = 'Update-AuthenticationPolicy';
             'POST_bulk-users'                                            = 'Create-BulkUsers';
-            'PATCH_bulk-users'                                           = 'Set-BulkUsers';
+            'PATCH_bulk-users'                                           = 'Update-BulkUsers';
             'GET_bulk-users-job_id-results'                              = 'Get-BulkUsersResult';
             'GET_commands-command_id-associations'                       = 'Get-CommandAssociation';
             'POST_commands-command_id-associations'                      = 'Set-CommandAssociation';
             'GET_commands-command_id-systems'                            = 'Get-CommandTraverseSystem';
             'GET_commands-command_id-systemgroups'                       = 'Get-CommandTraverseSystemGroup';
+            'POST_customemails'                                          = 'Create-CustomEmailConfiguration';
+            'DELETE_customemails-custom_email_type'                      = 'Delete-CustomEmailConfiguration';
+            'GET_customemails-custom_email_type'                         = 'Get-CustomEmailConfiguration';
+            'PUT_customemails-custom_email_type'                         = 'Set-CustomEmailConfiguration';
+            'GET_customemail-templates'                                  = 'List-CustomEmailTemplates';
             'GET_directories'                                            = 'List-Directory';
             'POST_duo-accounts'                                          = 'Create-DuoAccount';
             'DELETE_duo-accounts-id'                                     = 'Delete-DuoAccount';
@@ -160,7 +176,7 @@ $TransformConfig = [Ordered]@{
             'PUT_duo-accounts-account_id-applications-application_id'    = 'Set-DuoApplication';
             'GET_groups'                                                 = 'List-Group';
             'GET_gsuites-id'                                             = 'Get-GSuite';
-            'PATCH_gsuites-id'                                           = 'Set-GSuite';
+            'PATCH_gsuites-id'                                           = 'Update-GSuite';
             'GET_gsuites-gsuite_id-associations'                         = 'Get-GSuiteAssociation';
             'POST_gsuites-gsuite_id-associations'                        = 'Set-GSuiteAssociation';
             'POST_gsuites-gsuite_id-translationrules'                    = 'Create-GSuiteTranslationRule';
@@ -170,9 +186,15 @@ $TransformConfig = [Ordered]@{
             'GET_gsuites-gsuite_id-users'                                = 'Get-GSuiteTraverseUser';
             'GET_gsuites-gsuite_id-usergroups'                           = 'Get-GSuiteTraverseUserGroup';
             'GET_gsuites-gsuite_id-import-users'                         = 'List-GSuiteUsersToImport';
+            'POST_iplists'                                               = 'Create-IpList';
+            'DELETE_iplists-id'                                          = 'Delete-IpList';
+            'GET_iplists-id'                                             = 'Get-IpList';
+            'GET_iplists'                                                = 'List-IpList';
+            'PUT_iplists-id'                                             = 'Set-IpList';
+            'PATCH_iplists-id'                                           = 'Update-IpList';
             'GET_ldapservers-id'                                         = 'Get-LdapServer';
             'GET_ldapservers'                                            = 'List-LdapServer';
-            'PATCH_ldapservers-id'                                       = 'Set-LdapServer';
+            'PATCH_ldapservers-id'                                       = 'Update-LdapServer';
             'GET_ldapservers-ldapserver_id-associations'                 = 'Get-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-associations'                = 'Set-LdapServerAssociation';
             'POST_ldapservers-ldapserver_id-sambadomains'                = 'Create-LdapServerSambaDomain';
@@ -183,7 +205,7 @@ $TransformConfig = [Ordered]@{
             'GET_ldapservers-ldapserver_id-users'                        = 'Get-LdapServerTraverseUser';
             'GET_ldapservers-ldapserver_id-usergroups'                   = 'Get-LdapServerTraverseUserGroup';
             'GET_office365s-office365_id'                                = 'Get-Office365';
-            'PATCH_office365s-office365_id'                              = 'Set-Office365';
+            'PATCH_office365s-office365_id'                              = 'Update-Office365';
             'GET_office365s-office365_id-associations'                   = 'Get-Office365Association';
             'POST_office365s-office365_id-associations'                  = 'Set-Office365Association';
             'POST_office365s-office365_id-translationrules'              = 'Create-Office365TranslationRule';
@@ -192,6 +214,7 @@ $TransformConfig = [Ordered]@{
             'GET_office365s-office365_id-translationrules'               = 'List-Office365TranslationRule';
             'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
             'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
+            'GET_office365s-office365_id-import-users'                   = 'List-Office365UsersToImport';
             'GET_policies-policy_id-policyresults'                       = 'List-PoliciesPolicyResult';
             'GET_policies-policy_id-policystatuses'                      = 'List-PoliciesPolicyStatus';
             'POST_policies'                                              = 'Create-Policy';
@@ -292,7 +315,7 @@ $TransformConfig = [Ordered]@{
             'GET_systeminsights-wifi_networks'                           = 'List-SystemInsightsWifiNetwork';
             'GET_systeminsights-wifi_status'                             = 'List-SystemInsightsWifiStatus';
             'GET_systeminsights-windows_security_products'               = 'List-SystemInsightsWindowsSecurityProduct';
-            'GET_systems-system_id-memberof'                             = 'Get-SystemMemberof';
+            'GET_systems-system_id-memberof'                             = 'Get-SystemMember';
             'GET_systems-system_id-policystatuses'                       = 'List-SystemsPolicyStatus';
             'GET_systems-system_id-commands'                             = 'Get-SystemTraverseCommand';
             'GET_systems-system_id-policies'                             = 'Get-SystemTraversePolicy';
@@ -318,7 +341,7 @@ $TransformConfig = [Ordered]@{
             'GET_usergroups-group_id-radiusservers'                      = 'Get-UserGroupTraverseRadiusServer';
             'GET_usergroups-group_id-systems'                            = 'Get-UserGroupTraverseSystem';
             'GET_usergroups-group_id-systemgroups'                       = 'Get-UserGroupTraverseSystemGroup';
-            'GET_users-user_id-memberof'                                 = 'Get-UserMemberof';
+            'GET_users-user_id-memberof'                                 = 'Get-UserMember';
             'GET_users-user_id-applications'                             = 'Get-UserTraverseApplication';
             'GET_users-user_id-directories'                              = 'Get-UserTraverseDirectory';
             'GET_users-user_id-gsuites'                                  = 'Get-UserTraverseGSuite';
@@ -367,6 +390,7 @@ Function Update-SwaggerObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The original input object which will be used as a reference', DontShow)]$InputObjectOrg
     )
     $InputObject | ForEach-Object {
         $ThisObject = $_
@@ -426,7 +450,6 @@ Function Update-SwaggerObject
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                $ThisObjectAttributeNameType = ($ThisObject.$AttributeName.GetType()).FullName
                 If ($NoUpdate -eq $false)
                 {
                     # Map operationIds
@@ -444,73 +467,78 @@ Function Update-SwaggerObject
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
-                    # Append "x-ms-enum" to "enum" section
-                    If ($AttributePath -like '*.enum' -and $AttributePath -notlike '*.responses*')
+                    # Remove blank values from enum
+                    If ($AttributePath -like '*.enum')
                     {
-                        $xMsEnum = [PSCustomObject]@{
-                            name = "$($ThisObjectName)"
-                            # modelAsString = $true
-                        }
-                        # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                        If ($ThisObject.enum | ForEach-Object {
-                                If ($_ -eq 'system' -or $_ -like '*#*')
-                                {
-                                    $_
-                                }
-                            })
+                        If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
+                    }
+                    # # Append "x-ms-enum" to "enum" section
+                    # If ($AttributePath -like '*.enum')
+                    # {
+                    #     $xMsEnum = [PSCustomObject]@{
+                    #         name = $ThisObjectName
+                    #         # modelAsString = $true
+                    #     }
+                    #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
+                    #     If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
+                    #     {
+                    #         $xMsEnumValues = @(
+                    #             $ThisObject.enum | ForEach-Object {
+                    #                 $EnumItem = $_
+                    #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                    #                 [PSCustomObject]@{
+                    #                     name  = $EnumItemName;
+                    #                     value = $EnumItem | ForEach-Object {
+                    #                         If ($_ -match [regex]'(\#|\s)')
+                    #                         {
+                    #                             "'$($_)'"
+                    #                         }
+                    #                         Else
+                    #                         {
+                    #                             $_
+                    #                         };
+                    #                     };
+                    #                 }
+                    #             }
+                    #         )
+                    #         Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                    #     }
+                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                    #     # Make x-ms-enum names unique
+                    #     # See if x-ms-enum already exists by name
+                    #     $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
+                    #     If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                    #     {
+                    #         $xMsEnumObjectFilteredId = 0
+                    #         $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                    #     }
+                    #     Else
+                    #     {
+                    #         # See if x-ms-enum already exists by name and value
+                    #         $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
+                    #         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                    #         {
+                    #             $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                    #             $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                    #         }
+                    #         Else
+                    #         {
+                    #             $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                    #         }
+                    #     }
+                    #     If ($xMsEnumObjectFilteredId -gt 0)
+                    #     {
+                    #         $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                    #     }
+                    #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
+                    # }
+                    # Check for when type is object without defined properties
+                    If ($AttributePath -like '*.type')
+                    {
+                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin $ThisObject.PSObject.Properties.Name)
                         {
-                            $xMsEnumValues = @(
-                                $ThisObject.enum | ForEach-Object {
-                                    $EnumItem = $_
-                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                                    If (-not [System.String]::IsNullOrEmpty($EnumItem))
-                                    {
-                                        [PSCustomObject]@{
-                                            name  = $EnumItemName;
-                                            value = $EnumItem | ForEach-Object {
-                                                If ($_ -match [regex]'(\#|\s)')
-                                                {
-                                                    "'$($_)'"
-                                                }
-                                                Else
-                                                {
-                                                    $_
-                                                };
-                                            };
-                                        }
-                                    }
-                                }
-                            )
-                            Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
                         }
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
-                        # Make x-ms-enum names unique
-                        # See if x-ms-enum already exists by name
-                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
-                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                        {
-                            $xMsEnumObjectFilteredId = 0
-                            $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                        }
-                        Else
-                        {
-                            # See if x-ms-enum already exists by name and value
-                            $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
-                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                            {
-                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                                $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                            }
-                            Else
-                            {
-                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
-                            }
-                        }
-                        If ($xMsEnumObjectFilteredId -gt 0)
-                        {
-                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
-                        }
-                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
                     }
                     # Exclude $ref
                     If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
@@ -519,6 +547,31 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
                     }
+                    # # Generalize responses for when operation returns an object or an array of objects
+                    # If ($AttributePath -like '*.responses.200.schema')
+                    # {
+
+                    #     If ($ThisObject.$AttributeName.type -eq 'array')
+                    #     {
+                    #         $GeneralObject = [PSCustomObject]@{
+                    #             additionalProperties = $true
+                    #             type                 = 'object'
+                    #         }
+                    #         $ThisObject.$AttributeName.PSObject.Properties.Remove('items')
+                    #         Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('items') -Value:($GeneralObject)
+                    #         Add-Member -InputObject:($ThisObject.$AttributeName) -MemberType:('NoteProperty') -Name:('title') -Value:("$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse")
+                    #     }
+                    #     Else
+                    #     {
+                    #         $GeneralObject = [PSCustomObject]@{
+                    #             additionalProperties = $true
+                    #             title                = "$(($NewOperationId).Split('-')[1].Replace('JcSdk',''))$(($NewOperationId).Split('-')[0])ApplicationJsonResponse"
+                    #             type                 = 'object'
+                    #         }
+                    #         $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    #         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
+                    #     }
+                    # }
                     # Exclude paths
                     If ($AttributeName -in $global:ExcludedList)
                     {
@@ -541,10 +594,9 @@ Function Update-SwaggerObject
                     # }
                     If ($ThisObject.$AttributeName)
                     {
-                        # Write-Host ("AttributeName: $($AttributeName); Type: $($ThisObjectAttributeNameType);")
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
-                        If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
                         }
@@ -562,9 +614,9 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate)
+                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                     # If it was an array of objects before reapply the parent array.
-                    If ($ThisObjectAttributeNameType -eq 'System.Object[]')
+                    If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                     {
                         $ModifiedObject = @($ModifiedObject)
                     }
@@ -643,6 +695,8 @@ $SDKName | ForEach-Object {
             {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
+            # Format the spec
+            $SwaggerObjectContent = Format-SwaggerObject -InputObject:($SwaggerObjectContent) -Sort:($SortAttributes)
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -662,23 +716,60 @@ $SDKName | ForEach-Object {
                 }
             }
             #######################################################################
-            # Resolve the swagger references ($ref)/flatten
-            $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            Do
-            {
-                $RefMatches = $SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches
-                $RefMatches.Matches | ForEach-Object {
-                    $RefItem = Get-SwaggerItem -InputObject:($SwaggerObjectRefMatches) -Path:($_.Groups[2].Value)
-                    $SwaggerObject = $SwaggerObject.Replace($_.Groups[0].Value, ($RefItem | ConvertTo-Json -Depth:(100) -Compress))
-                }
-            } While ($SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches)
-            $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $SwaggerObject.PSObject.Properties.Remove('definitions')
-            $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
+            # # Resolve the swagger references ($ref)/flatten
+            # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # Do
+            # {
+            #     $RefMatches = $SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches
+            #     $RefMatches.Matches | ForEach-Object {
+            #         $RefItem = Get-SwaggerItem -InputObject:($SwaggerObjectRefMatches) -Path:($_.Groups[2].Value)
+            #         $SwaggerObject = $SwaggerObject.Replace($_.Groups[0].Value, ($RefItem | ConvertTo-Json -Depth:(100) -Compress))
+            #     }
+            # } While ($SwaggerObject | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches)
+            # $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # $SwaggerObject.definitions = @{}
+            # $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes)
+            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) -InputObjectOrg:($SwaggerObject)
+            #region Clean up unused definitions and parameters
+            Do
+            {
+                $UsedRefs = ($UpdatedSwagger | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches).Matches
+                If (-not [System.String]::IsNullOrEmpty($UsedRefs))
+                {
+                    $UsedDefinitions = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*definitions*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
+                    $UsedParameters = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*parameters*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
+                }
+                # Remove unused definitions
+                $AllDefinitions = $UpdatedSwagger.definitions.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
+                $AllDefinitions | ForEach-Object {
+                    If ($UsedDefinitions -notcontains $_)
+                    {
+                        # Write-Warning ("Removing unused definition: $_")
+                        $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
+                    }
+                }
+                $DefinitionResults = If (-not [System.String]::IsNullOrEmpty($UsedDefinitions) -and -not [System.String]::IsNullOrEmpty($AllDefinitions))
+                {
+                    Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions
+                }
+                # Remove unused parameters
+                $AllParameters = $UpdatedSwagger.parameters.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
+                $AllParameters | ForEach-Object {
+                    If ($UsedParameters -notcontains $_)
+                    {
+                        # Write-Warning ("Removing unused parameter: $_")
+                        $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
+                    }
+                }
+                $ParameterResults = If (-not [System.String]::IsNullOrEmpty($UsedParameters) -and -not [System.String]::IsNullOrEmpty($AllParameters))
+                {
+                    Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters
+                }
+            } While ($DefinitionResults -or $ParameterResults)
+            #endregion
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
             # Validate that all operationIds in mapping have been found in spec
@@ -712,8 +803,15 @@ $SDKName | ForEach-Object {
             If (Test-Path -Path:($OutputFullPathJson))
             {
                 $OldSpec = Get-Content -Path:($OutputFullPathJson) -Raw | ConvertFrom-Json -Depth:(100) | ConvertTo-Json -Depth:(100)
-                $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
-                If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                If (-not [System.String]::IsNullOrEmpty($OldSpec))
+                {
+                    $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
+                    If (-not [System.String]::IsNullOrEmpty($CompareResults))
+                    {
+                        $UpdatedSpec = $true
+                    }
+                }
+                Else
                 {
                     $UpdatedSpec = $true
                 }
@@ -727,6 +825,7 @@ $SDKName | ForEach-Object {
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # # For comparing before and after
+            # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.FindAndReplace")) -Force # For Debugging to compare before and after
             # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after

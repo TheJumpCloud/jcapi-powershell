@@ -14,26 +14,26 @@ This endpoint will allow you to manage the _direct_ associations of this Command
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type <String>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkCommandAssociation -CommandId <String> -Body <IGraphManagementReq> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkCommandAssociation -CommandId <String> -Body <IGraphConnectionCommand> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphManagementReq> [-PassThru]
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionCommand> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <GraphType>
- [-Attributes <IGraphManagementReqAttributes>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,7 +61,7 @@ This endpoint will allow you to manage the _direct_ associations of this Command
 The graph connection's attributes.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReqAttributes
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -73,11 +73,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphManagementReq
+GraphConnection (Command)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphManagementReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionCommand
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -138,7 +138,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -165,10 +165,10 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-The graph type.
+Targets which a "command" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphType
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -215,7 +215,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphManagementReq
+### JumpCloud.SDK.V2.Models.IGraphConnectionCommand
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +232,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphManagementReq>: GraphManagementReq
+BODY <IGraphConnectionCommand>: GraphConnection (Command)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <GraphType>`: The graph type.
-  - `[Attributes <IGraphManagementReqAttributes>]`: The graph connection's attributes.
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: Targets which a "command" can be associated to.
+  - `[Attributes <IGraphConnectionCommandAttributes>]`: The graph connection's attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -244,10 +245,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

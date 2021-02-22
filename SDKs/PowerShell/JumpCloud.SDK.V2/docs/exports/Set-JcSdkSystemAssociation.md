@@ -14,27 +14,28 @@ This endpoint allows you to manage the _direct_ associations of a System.\n\nA d
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <Op> -Type <Type1> [-Authorization <String>]
- [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <String> -Type <String>
+ [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Body <ISystemGraphManagementReq> [-Authorization <String>]
+Set-JcSdkSystemAssociation -SystemId <String> -Body <IGraphConnectionSystem> [-Authorization <String>]
  [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGraphManagementReq>
+Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionSystem>
  [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <Op> -Type <Type1>
- [-Authorization <String>] [-Date <String>] [-SudoEnabled] [-SudoWithoutPassword] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+ [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,6 +59,21 @@ This endpoint allows you to manage the _direct_ associations of a System.\n\nA d
 
 ## PARAMETERS
 
+### -Attributes
+The graph connection's attributes.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Authorization
 Authorization header for the System Context API
 
@@ -74,11 +90,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-SystemGraphManagementReq
+GraphConnection (System)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGraphManagementReq
+Type: JumpCloud.SDK.V2.Models.IGraphConnectionSystem
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -139,7 +155,7 @@ Accept wildcard characters: False
 How to modify the graph connection.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Op
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -165,36 +181,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SudoEnabled
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SudoWithoutPassword
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SystemId
 ObjectID of the System.
 
@@ -211,10 +197,10 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-.
+Targets which a "system" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type1
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -261,9 +247,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IGraphConnectionSystem
 
-### JumpCloud.SDK.V2.Models.ISystemGraphManagementReq
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -278,12 +264,14 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGraphManagementReq>: SystemGraphManagementReq
+BODY <IGraphConnectionSystem>: GraphConnection (System)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
-  - `Op <Op>`: How to modify the graph connection.
-  - `Type <Type1>`: 
-  - `[SudoEnabled <Boolean?>]`: 
-  - `[SudoWithoutPassword <Boolean?>]`: 
+  - `Op <String>`: How to modify the graph connection.
+  - `Type <String>`: Targets which a "system" can be associated to.
+  - `[Attributes <IGraphConnectionSystemAttributes1>]`: The graph connection's attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[SudoEnabled <Boolean?>]`: 
+    - `[SudoWithoutPassword <Boolean?>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -291,10 +279,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
+  - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
-  - `[Id <String>]`: ObjectID of the System Group.
+  - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.

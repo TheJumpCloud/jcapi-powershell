@@ -40,7 +40,7 @@ See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-s
 ## PARAMETERS
 
 ### -Body
-.
+Array of bulk-user-create
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -106,7 +106,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkUserCreate[]>: .
+BODY <IBulkUserCreate[]>: Array of bulk-user-create
   - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 

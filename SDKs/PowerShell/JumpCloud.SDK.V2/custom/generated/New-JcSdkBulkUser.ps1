@@ -40,7 +40,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]
-    # .
+    # Array of bulk-user-create
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

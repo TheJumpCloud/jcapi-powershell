@@ -13,8 +13,8 @@ Lists G Suite users available for import.
 ## SYNTAX
 
 ```
-Get-JcSdkGSuiteUserToImport -GsuiteId <String> [-MaxResults <Int32>] [-PageToken <String>] [-Query <String>]
- [<CommonParameters>]
+Get-JcSdkGSuiteUserToImport -GsuiteId <String> [-MaxResults <Int32>] [-OrderBy <String>] [-PageToken <String>]
+ [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -54,7 +54,8 @@ Accept wildcard characters: False
 ```
 
 ### -MaxResults
-Maximum number of results per page.
+Google Directory API maximum number of results per page.
+See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
 
 ```yaml
 Type: System.Int32
@@ -68,8 +69,25 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -OrderBy
+Google Directory API sort field parameter.
+See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -PageToken
-Token used to access next page of results.
+Google Directory API token used to access the next page of results.
+See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
 
 ```yaml
 Type: System.String
@@ -86,6 +104,22 @@ Accept wildcard characters: False
 ### -Query
 Google Directory API search parameter.
 See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SortOrder
+Google Directory API sort direction parameter.
+See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
 
 ```yaml
 Type: System.String
