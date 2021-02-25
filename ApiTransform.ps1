@@ -359,6 +359,7 @@ $TransformConfig = [Ordered]@{
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
+            'subscriptions_get'                                          = 'Get-Subscription'
         };
         ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
     }
