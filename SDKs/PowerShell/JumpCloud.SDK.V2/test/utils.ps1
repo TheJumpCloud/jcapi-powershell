@@ -70,6 +70,17 @@ function setupEnv() {
     } WHILE ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
     $Global:RadiusIPAddress = "$($octet1).$($octet2).$($octet3).$($octet4)"
 
+    # Create an Active Directory Object
+    $global:ActiveDirectoryName = "DC=ADTEST$(RandomString -len 6);DC=ORG"
+    $Headers = @{
+    'Accept'    = 'application/json';
+    'x-api-key' = $JCApiKey
+    }
+    $Form = @{
+        'domain'   = $global:ActiveDirectoryName;
+    } | ConvertTo-Json
+    Invoke-WebRequest -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers $Headers -Body $Form -ContentType 'application/json' -UseBasicParsing
+    $global:PesterTestActiveDirectory = Get-JcSdkActiveDirectory| ? { $_.Domain -eq $global:ActiveDirectoryName }
 }
 function cleanupEnv() {
     # Clean resources you create for testing
@@ -77,4 +88,12 @@ function cleanupEnv() {
     Remove-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id)
     Remove-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id)
     Remove-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id)
+
+    # Delete an Active Directory Object
+    $Headers = @{
+    'Accept'    = 'application/json';
+    'x-api-key' = $JCApiKey
+    }
+    Invoke-WebRequest -Method 'Delete' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
+
 }
