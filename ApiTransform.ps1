@@ -437,7 +437,7 @@ Function Update-SwaggerObject
             # Sort attribute names
             If (-not [System.String]::IsNullOrEmpty($AttributeNames) -and $Sort -eq $true)
             {
-                $AttributeNames = $AttributeNames | Sort-Object
+                $AttributeNames = $AttributeNames | Sort-Object -CaseSensitive
             }
         }
         Else
