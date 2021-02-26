@@ -20,8 +20,6 @@ Describe 'Get-JcSdkUserTraverseSystem' {
     AfterAll{
         # Remove Associations
         Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestSystem.Id) -Op:('remove') -Type:("system")
-
-        
     }
 
     It 'Get' {
