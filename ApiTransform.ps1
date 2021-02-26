@@ -359,8 +359,9 @@ $TransformConfig = [Ordered]@{
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
+            'GET_subscriptions'                                          = 'Get-Subscription'
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
