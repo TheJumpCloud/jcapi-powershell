@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkIPList
 
 ## SYNOPSIS
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
 
 ## SYNTAX
 
@@ -36,7 +36,7 @@ Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-
 ```
 
 ## DESCRIPTION
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
 
 ## EXAMPLES
 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-JcSdkIPList
 
 ## SYNOPSIS
-Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.12\",\n    \"192.168.10.20 - 192.168.10.30\",\n    \"123.225.10.0/32\"\n  ]\n}'\n```
+Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.12\",\n      \"192.168.10.20 - 192.168.10.30\",\n      \"123.225.10.0/32\"\n    ]\n  }'\n```
 
 ## SYNTAX
 
@@ -24,7 +24,7 @@ New-JcSdkIPList -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.12\",\n    \"192.168.10.20 - 192.168.10.30\",\n    \"123.225.10.0/32\"\n  ]\n}'\n```
+Create an IP list.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.12\",\n      \"192.168.10.20 - 192.168.10.30\",\n      \"123.225.10.0/32\"\n    ]\n  }'\n```
 
 ## EXAMPLES
 

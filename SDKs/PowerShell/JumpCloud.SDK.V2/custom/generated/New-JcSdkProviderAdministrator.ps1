@@ -1,10 +1,12 @@
 <#
 .Synopsis
 This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+You must be associated with the provider to use this route.
+You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
 .Description
 This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+You must be associated with the provider to use this route.
+You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -32,6 +34,8 @@ BODY <IProviderAdminReq>:
   [EnableMultiFactor <Boolean?>]:
   [Firstname <String>]:
   [Lastname <String>]:
+  [Role <String>]:
+  [RoleName <String>]:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -112,6 +116,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Lastname},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${Role},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${RoleName},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
