@@ -13,23 +13,13 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestUserSshKeyName = 'PesterTestUserSshKeyName'
-$global:PesterTestUserSshKeyPublicKey = 'PesterTestUserSshKeyPublicKey'
 Describe 'New-JcSdkUserSshKey' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Create' {
-        $User = (Get-JcSdkUser)[0]
-        $SshKey = Get-JcSdkUserSshKey -Id:($User.Id)
-        If (-not [System.String]::IsNullOrEmpty($SshKey))
-        {
-            $SshKey.Id | ForEach-Object {
-                Remove-JcSdkUserSshKey -Id:($_) -UserId:($User.Id)
-            }
-        }
-        New-JcSdkUserSshKey -Id:($User.Id) -Name:($global:PesterTestUserSshKeyName) -PublicKey:($global:PesterTestUserSshKeyPublicKey) | Should -Not -BeNullOrEmpty
+        New-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) -Name:($global:PesterTestUserSshKey.Name) -PublicKey:($global:PesterTestUserSshKey.PublicKey) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -Skip {

@@ -19,12 +19,10 @@ function setupEnv()
         $envFile = 'localEnv.json'
     }
     Set-Content -Path (Join-Path $PSScriptRoot $envFile) -Value (ConvertTo-Json $env)
-
-    # Generate random string
-    $RandStr = RandomString -len 5
     ########################################################################
     # TODO
     ########################################################################
+    # (Get-Command -Syntax -Name New-JcSdkCommand) | ForEach-Object { $_.Replace('[-Fields <string>]', '').Replace('[-Filter <string>]', '').Replace('[-Sort <string>]', '').Replace('[-Search <string>]', '').Replace('[-Paginate <bool>]', '').Replace('[-Break]', '').Replace('[-HttpPipelineAppend <SendAsyncStep[]>]', '').Replace('[-HttpPipelinePrepend <SendAsyncStep[]>]', '').Replace('[-PassThru]', '').Replace('[-Proxy <uri>]', '').Replace('[-ProxyCredential <pscredential>]', '').Replace('[-ProxyUseDefaultCredentials]', '').Replace('[<CommonParameters>]', '').Replace('[-WhatIf]', '').Replace('[-Confirm]', '') }
     # Get-JcSdkApplication
     # Get-JcSdkApplicationTemplate
     # Get-JcSdkCommandFile
@@ -38,14 +36,15 @@ function setupEnv()
         Command = 'echo "Hello World"'
         User    = '000000000000000000000000'
     }
-    $global:PesterTestCommand = New-JcSdkCommand @Command
-
+    # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
+    $NewCommand = New-JcSdkCommand @Command
+    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
     # Create a user
-    $User = @{Username = "pester.test.$($RandStr)"
+    $User = @{Username = "pester.test.$(RandomString -len 5)"
         FirstName      = "Pester"
         LastName       = "Test"
         Password       = "Testing123!"
-        Email          = "pester.test@example$($RandStr).com"
+        Email          = "pester.test@example$(RandomString -len 5).com"
     }
     $global:PesterTestUser = New-JcSdkUser @User
     # Create a user ssh key
@@ -70,44 +69,30 @@ function setupEnv()
     $global:PesterTestOrganization = Get-JcSdkOrganization
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
-    # ########################################################################
-    # # V2
-    # ########################################################################
-    # # Create a User Group
-    # $global:UserGroupName = "PesterTestUserGroup"
-    # New-JcSdkUserGroup -Name:($global:UserGroupName)
-    # $global:PesterTestUserGroup = Get-JcSdkUserGroup | Where-Object { $_.Name -eq $global:UserGroupName }
-
-    # # Create a System Group
-    # $global:SystemGroupName = "PesterTestSystemGroup"
-    # New-JcSdkSystemGroup -Name:($global:SystemGroupName)
-    # $global:PesterTestSystemGroup = Get-JcSdkSystemGroup | Where-Object { $_.Name -eq $global:SystemGroupName }
-
-    # # Create an Active Directory Object
-    # $global:ActiveDirectoryName = "DC=ADTEST$(RandomString -len 6);DC=ORG"
-    # $Headers = @{
-    #     'Accept'    = 'application/json';
-    #     'x-api-key' = $JCApiKey
-    # }
-    # $Form = @{
-    #     'domain' = $global:ActiveDirectoryName;
-    # } | ConvertTo-Json
-    # Invoke-WebRequest -Method 'POST' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers $Headers -Body $Form -ContentType 'application/json' -UseBasicParsing
-    # $global:PesterTestActiveDirectory = Get-JcSdkActiveDirectory | Where-Object { $_.Domain -eq $global:ActiveDirectoryName }
+    Start-Sleep -Seconds:(10)
 }
 function cleanupEnv()
 {
-    # Clean resources you create for testing
-    Remove-JcSdkUser -Id:($global:PesterTestUser.Id)
-    Remove-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id)
-    Remove-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id)
-    Remove-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id)
-
-    # Delete an Active Directory Object
-    $Headers = @{
-        'Accept'    = 'application/json';
-        'x-api-key' = $JCApiKey
+    ########################################################################
+    # V1
+    ########################################################################
+    # Remove Commands
+    $null = Get-JcSdkCommand | ForEach-Object { Remove-JcSdkCommand -Id:($_.Id) }
+    # Remove Users and SSH Keys
+    $null = Get-JcSdkUser | ForEach-Object {
+        $UserId = $_.Id
+        If ( $_.ExternallyManaged )
+        {
+            Set-JcSdkUser -Id:($UserId) -ExternallyManaged:($false)
+        }
+        If ($_.SshKeys)
+        {
+            $_.SshKeys | ForEach-Object {
+                Remove-JcSdkUserSshKey -Id:($_.Id) -SystemuserId:($UserId)
+            }
+        }
+        Remove-JcSdkUser -Id:($UserId)
     }
-    Invoke-WebRequest -Method 'DELETE' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
-
+    # Remove RADIUS Servers
+    $null = Get-JcSdkRadiusServer | ForEach-Object { Remove-JcSdkRadiusServer -Id:($_.Id) }
 }
