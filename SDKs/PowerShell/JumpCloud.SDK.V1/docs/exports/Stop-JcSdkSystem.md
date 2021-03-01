@@ -9,7 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to run the shutdown command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 
 ## SYNTAX
 
@@ -25,7 +35,17 @@ Stop-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-
 
 ## DESCRIPTION
 This endpoint allows you to run the shutdown command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 
 ## EXAMPLES
 
@@ -149,4 +169,5 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS
+
 

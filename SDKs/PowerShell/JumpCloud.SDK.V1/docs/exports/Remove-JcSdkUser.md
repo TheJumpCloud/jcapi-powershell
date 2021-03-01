@@ -8,7 +8,15 @@ schema: 2.0.0
 # Remove-JcSdkUser
 
 ## SYNOPSIS
-This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint allows you to delete a particular system user.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -23,7 +31,15 @@ Remove-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<Co
 ```
 
 ## DESCRIPTION
-This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint allows you to delete a particular system user.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -132,4 +148,5 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS
+
 

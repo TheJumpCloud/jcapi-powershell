@@ -8,7 +8,24 @@ schema: 2.0.0
 # New-JcSdkCommand
 
 ## SYNOPSIS
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 
 ## SYNTAX
 
@@ -26,7 +43,24 @@ New-JcSdkCommand -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 
 ## EXAMPLES
 
@@ -375,4 +409,5 @@ BODY <ICommand>: Command
   - `[User <String>]`: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 
 ## RELATED LINKS
+
 

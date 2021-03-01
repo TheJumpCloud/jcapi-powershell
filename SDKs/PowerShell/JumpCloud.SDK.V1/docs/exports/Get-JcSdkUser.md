@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkUser
 
 ## SYNOPSIS
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -28,7 +37,16 @@ Get-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter 
 ```
 
 ## DESCRIPTION
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -177,4 +195,5 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS
+
 

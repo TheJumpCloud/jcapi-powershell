@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkCommandResult
 
 ## SYNOPSIS
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific command result.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -29,7 +37,15 @@ Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] 
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific command result.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 
@@ -164,4 +180,5 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS
+
 

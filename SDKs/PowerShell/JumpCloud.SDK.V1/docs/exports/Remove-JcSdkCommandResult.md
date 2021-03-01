@@ -8,7 +8,15 @@ schema: 2.0.0
 # Remove-JcSdkCommandResult
 
 ## SYNOPSIS
-This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````
+This endpoint deletes a specific command result.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ````
 
 ## SYNTAX
 
@@ -23,7 +31,15 @@ Remove-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-Wha
 ```
 
 ## DESCRIPTION
-This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````
+This endpoint deletes a specific command result.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ````
 
 ## EXAMPLES
 
@@ -132,4 +148,5 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS
+
 

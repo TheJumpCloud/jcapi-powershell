@@ -8,7 +8,21 @@ schema: 2.0.0
 # Set-JcSdkUser
 
 ## SYNOPSIS
-This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to update a system user.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 
 ## SYNTAX
 
@@ -56,7 +70,21 @@ Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to update a system user.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 
 ## EXAMPLES
 
@@ -865,4 +893,5 @@ SSHKEYS <ISshkeypost[]>: .
   - `PublicKey <String>`: The Public SSH key.
 
 ## RELATED LINKS
+
 
