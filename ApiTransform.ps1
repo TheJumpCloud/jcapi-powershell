@@ -359,8 +359,9 @@ $TransformConfig = [Ordered]@{
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
+            'GET_subscriptions'                                          = 'Get-Subscription'
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
@@ -436,7 +437,7 @@ Function Update-SwaggerObject
             # Sort attribute names
             If (-not [System.String]::IsNullOrEmpty($AttributeNames) -and $Sort -eq $true)
             {
-                $AttributeNames = $AttributeNames | Sort-Object
+                $AttributeNames = $AttributeNames | Sort-Object -CaseSensitive
             }
         }
         Else
@@ -535,7 +536,7 @@ Function Update-SwaggerObject
                     # Check for when type is object without defined properties
                     If ($AttributePath -like '*.type')
                     {
-                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin $ThisObject.PSObject.Properties.Name)
+                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'allOf' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin $ThisObject.PSObject.Properties.Name)
                         {
                             Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
                         }
