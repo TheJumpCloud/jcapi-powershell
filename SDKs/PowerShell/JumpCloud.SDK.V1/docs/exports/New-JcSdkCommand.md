@@ -17,12 +17,12 @@ This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\
 New-JcSdkCommand -Command <String> [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
  [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
  [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
- [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkCommand -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -173,21 +173,6 @@ The ID of the organization.
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

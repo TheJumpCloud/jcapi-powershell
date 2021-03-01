@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -52,7 +52,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Lock-JcSdkAppleMdmDevice
 {
-    [OutputType([System.String])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='LockExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Lock', Mandatory)]

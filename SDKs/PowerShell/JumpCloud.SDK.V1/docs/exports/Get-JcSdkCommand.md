@@ -14,17 +14,17 @@ This endpoint returns a specific command based on the command ID.\n\n#### Sample
 
 ### List (Default)
 ```
-Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkCommand -Id <String> [-Fields <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand -Id <String> [-Fields <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -114,21 +114,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

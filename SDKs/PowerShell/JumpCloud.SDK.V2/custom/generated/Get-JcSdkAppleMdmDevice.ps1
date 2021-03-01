@@ -14,14 +14,12 @@ PS C:\> {{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdmDevice
-.Outputs
-System.String
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDevice.md
 #>
  Function Get-JcSdkAppleMdmDevice
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
@@ -40,7 +38,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
-    # **EX:** `GET /users?username=eq:testuser`
+    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
     [Parameter()]

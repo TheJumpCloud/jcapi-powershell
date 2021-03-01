@@ -1,11 +1,13 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath)) {
+if (-Not (Test-Path -Path $loadEnvPath))
+{
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkCommandResult.Recording.json'
 $currentPath = $PSScriptRoot
-while(-not $mockingPath) {
+while (-not $mockingPath)
+{
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
@@ -16,8 +18,8 @@ Describe 'Get-JcSdkCommandResult' {
         Get-JcSdkCommandResult | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' {
-        $ListResults = Get-JcSdkCommandResult
+    It 'Get' -Skip {
+        $ListResults = Get-JcSdkCommandResult # Need to pull from global
         Get-JcSdkCommandResult -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
     }
 

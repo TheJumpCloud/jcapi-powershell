@@ -16,8 +16,6 @@ PS C:\> {{ Add code here }}
 JumpCloud.SDK.V2.Models.ICustomEmail
 .Outputs
 JumpCloud.SDK.V2.Models.ICustomEmail
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -36,7 +34,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkCustomEmailConfiguration
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]

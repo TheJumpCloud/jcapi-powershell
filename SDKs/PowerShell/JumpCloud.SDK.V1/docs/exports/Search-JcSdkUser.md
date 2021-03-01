@@ -19,12 +19,12 @@ If any `field` has a partial text match on the`searchTerm` the record will be re
 ### SearchExpanded (Default)
 ```
 Search-JcSdkUser [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <Hashtable>]
- [-SearchFilter <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkUser -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
+Search-JcSdkUser -Body <ISearch> [-Fields <String>] [-Filter <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -128,21 +128,6 @@ Dictionary of \<any\>
 ```yaml
 Type: System.Collections.Hashtable
 Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

@@ -2,10 +2,8 @@ bin
 obj
 .vs
 generated
-!custom/generated
 internal
 exports
-!docs/exports
 tools
 custom/*.psm1
 test/*-TestResults.xml

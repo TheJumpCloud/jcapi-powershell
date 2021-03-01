@@ -14,19 +14,17 @@ This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\nc
 
 ### List (Default)
 ```
-Get-JcSdkUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -116,21 +114,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

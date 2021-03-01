@@ -1545,6 +1545,103 @@
         "disableUM": {
           "type": "boolean"
         },
+        "displayPreferences": {
+          "properties": {
+            "orgInsights": {
+              "properties": {
+                "deviceNotifications": {
+                  "properties": {
+                    "agentOutOfDateMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "inactiveMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "uptimeMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "visible": {
+                      "type": "boolean"
+                    },
+                    "withoutPoliciesMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "withoutUsersMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  }
+                },
+                "diskEncryption": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "expiredPasswords": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "fundamentals": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "upcomingPasswordExpiration": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "userLockouts": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
         "duplicateLDAPGroups": {
           "type": "boolean"
         },
@@ -2840,6 +2937,128 @@
     }
   },
   "paths": {
+    "/application-templates": {
+      "get": {
+        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "List-ApplicationTemplate",
+        "parameters": [
+          {
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The number of records to return at once.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "The offset into the records to return.",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplateslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List Application Templates"
+      }
+    },
+    "/application-templates/{id}": {
+      "get": {
+        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "Get-ApplicationTemplate",
+        "parameters": [
+          {
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "in": "query",
+            "name": "fields",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "The number of records to return at once.",
+            "in": "query",
+            "name": "limit",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "description": "The offset into the records to return.",
+            "in": "query",
+            "name": "skip",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
+            "in": "query",
+            "name": "sort",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
+            "in": "query",
+            "name": "filter",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationtemplate"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get an Application Template"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/applications": {
       "get": {
         "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
@@ -2867,7 +3086,8 @@
             "type": "integer"
           },
           {
-            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
+            "default": "name",
+            "description": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
             "required": false,
@@ -2999,128 +3219,6 @@
         "summary": "Update an Application"
       }
     },
-    "/application-templates": {
-      "get": {
-        "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "List-ApplicationTemplate",
-        "parameters": [
-          {
-            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
-            "in": "query",
-            "name": "fields",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The number of records to return at once.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The offset into the records to return.",
-            "in": "query",
-            "name": "skip",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
-            "in": "query",
-            "name": "filter",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/applicationtemplateslist"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "List Application Templates"
-      }
-    },
-    "/application-templates/{id}": {
-      "get": {
-        "description": "The endpoint returns a specific SSO / SAML Application Template.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "Get-ApplicationTemplate",
-        "parameters": [
-          {
-            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
-            "in": "query",
-            "name": "fields",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "The number of records to return at once.",
-            "in": "query",
-            "name": "limit",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "description": "The offset into the records to return.",
-            "in": "query",
-            "name": "skip",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
-            "in": "query",
-            "name": "sort",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
-            "in": "query",
-            "name": "filter",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/applicationtemplate"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get an Application Template"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
     "/command/trigger/{triggername}": {
       "parameters": [
         {
@@ -3140,9 +3238,6 @@
             "schema": {
               "$ref": "#/definitions/triggerreturn"
             }
-          },
-          "401": {
-            "description": ""
           }
         },
         "security": [
@@ -3205,9 +3300,6 @@
             "schema": {
               "$ref": "#/definitions/commandresultslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3229,9 +3321,6 @@
             "schema": {
               "$ref": "#/definitions/commandresult"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3267,9 +3356,6 @@
             "schema": {
               "$ref": "#/definitions/commandresult"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3340,9 +3426,6 @@
             "schema": {
               "$ref": "#/definitions/commandslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3370,9 +3453,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3391,9 +3471,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3422,9 +3499,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3460,9 +3534,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3509,13 +3580,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/commandfilereturn"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
             }
           }
         },
@@ -3631,12 +3695,6 @@
             "schema": {
               "$ref": "#/definitions/organization"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": ""
           }
         },
         "security": [
@@ -3677,12 +3735,6 @@
             "schema": {
               "$ref": "#/definitions/organization"
             }
-          },
-          "400": {
-            "description": ""
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3947,9 +3999,6 @@
             "schema": {
               "$ref": "#/definitions/organizationslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4011,9 +4060,6 @@
             "schema": {
               "$ref": "#/definitions/systemslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4075,9 +4121,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4283,24 +4326,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4327,24 +4352,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4371,24 +4378,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4415,24 +4404,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4501,9 +4472,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserslist"
             }
-          },
-          "401": {
-            "description": ""
           }
         },
         "security": [
@@ -4531,12 +4499,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "400": {
-            "description": "User already exists"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4558,9 +4520,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4596,9 +4555,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4634,9 +4590,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4663,24 +4616,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4724,24 +4659,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4765,14 +4682,6 @@
                 "$ref": "#/definitions/sshkeylist"
               },
               "type": "array"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
             }
           }
         },
@@ -4809,14 +4718,6 @@
             "schema": {
               "$ref": "#/definitions/sshkeylist"
             }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -4843,24 +4744,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4879,14 +4762,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
-            }
           }
         },
         "security": [

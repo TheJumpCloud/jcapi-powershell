@@ -20,12 +20,12 @@ Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [
 
 ### Get
 ```
-Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
+Get-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
  [<CommonParameters>]
 ```
 
@@ -116,21 +116,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: Get, GetViaIdentity
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

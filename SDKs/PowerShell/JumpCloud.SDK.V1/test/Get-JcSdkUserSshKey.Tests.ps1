@@ -13,16 +13,8 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestUserSshKeyName = 'PesterTestUserSshKeyName'
-$global:PesterTestUserSshKeyPublicKey = 'PesterTestUserSshKeyPublicKey'
 Describe 'Get-JcSdkUserSshKey' {
     It 'List' {
-        $User = (Get-JcSdkUser)[0]
-        If ([System.String]::IsNullOrEmpty($User.SshKeys))
-        {
-            New-JcSdkUserSshKey -Id:($User.Id) -Name:($global:PesterTestUserSshKeyName) -PublicKey:($global:PesterTestUserSshKeyPublicKey)
-            Start-Sleep 10
-        }
-        Get-JcSdkUserSshKey -Id:($User.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
 }

@@ -18,8 +18,6 @@ JumpCloud.SDK.V2.Models.IIPListRequest
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IIPList
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -56,7 +54,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkIPList
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IIPList], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IIPList])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]

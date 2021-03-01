@@ -16,8 +16,6 @@ PS C:\> {{ Add code here }}
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IIPList
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -49,7 +47,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkIPList
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IIPList], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IIPList])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]

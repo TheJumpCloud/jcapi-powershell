@@ -25,12 +25,12 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkUser -Body <ISystemuserputpost> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUser -Body <ISystemuserputpost> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -498,21 +498,6 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

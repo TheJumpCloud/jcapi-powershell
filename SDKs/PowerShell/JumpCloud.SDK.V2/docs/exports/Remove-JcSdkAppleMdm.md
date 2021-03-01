@@ -118,8 +118,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAppleMdm
 
-### System.String
-
 ## NOTES
 
 ALIASES

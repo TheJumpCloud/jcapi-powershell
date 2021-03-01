@@ -18,7 +18,7 @@ Describe 'Get-JcSdkApplication' {
         Get-JcSdkApplication | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' {
+    It 'Get' -Skip {
         $ListResults = Get-JcSdkApplication
         Get-JcSdkApplication -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
     }

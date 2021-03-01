@@ -1,28 +1,18 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
-$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkCommand.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkSubscription.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkCommand' {
-    It 'List' {
-        Get-JcSdkCommand | Should -Not -BeNullOrEmpty
-    }
-
-    It 'Get' {
-        Get-JcSdkCommand -Id:($global:PesterTestCommand.Id) | Should -Not -BeNullOrEmpty
-    }
-
-    It 'GetViaIdentity' -Skip {
+Describe 'Get-JcSdkSubscription' {
+    It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

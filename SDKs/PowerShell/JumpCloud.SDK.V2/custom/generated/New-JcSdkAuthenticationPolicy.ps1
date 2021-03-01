@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample Policy\",\n    \"disabled\": false,\n    \"effect\": {\n      \"action\": \"allow\"\n    },\n    \"targets\": {\n      \"users\": {\n        \"inclusions\": [\"ALL\"]\n      },\n      \"userGroups\": {\n        \"exclusions\": [{USER_GROUP_ID}]\n      },\n      \"resources\": [ {\"type\": \"user_portal\" } ]\n    },\n    \"conditions\":{\n      \"ipAddressIn\": [{IP_LIST_ID}]\n    }\n  }'\n```
 .Description
-Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample Policy\",\n  \"disabled\": false,\n  \"effect\": {\n    \"action\": \"allow\"\n  },\n  \"targets\": {\n    \"users\": {\n      \"inclusions\": [\"ALL\"]\n    },\n    \"userGroups\": {\n      \"exclusions\": [{USER_GROUP_ID}]\n    },\n    \"resources\": [ {\"type\": \"user_portal\" } ]\n  },\n  \"conditions\":{\n    \"ipAddressIn\": [{IP_LIST_ID}]\n  }\n}'\n```
+Create an authentication policy.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample Policy\",\n    \"disabled\": false,\n    \"effect\": {\n      \"action\": \"allow\"\n    },\n    \"targets\": {\n      \"users\": {\n        \"inclusions\": [\"ALL\"]\n      },\n      \"userGroups\": {\n        \"exclusions\": [{USER_GROUP_ID}]\n      },\n      \"resources\": [ {\"type\": \"user_portal\" } ]\n    },\n    \"conditions\":{\n      \"ipAddressIn\": [{IP_LIST_ID}]\n    }\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -16,8 +16,6 @@ PS C:\> {{ Add code here }}
 JumpCloud.SDK.V2.Models.IAuthnPolicyInput
 .Outputs
 JumpCloud.SDK.V2.Models.IAuthnPolicy
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -44,7 +42,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkAuthenticationPolicy
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]

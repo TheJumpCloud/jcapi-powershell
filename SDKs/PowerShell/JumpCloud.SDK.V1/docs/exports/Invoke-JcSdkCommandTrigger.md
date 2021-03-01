@@ -14,13 +14,12 @@ This endpoint allows you to launch a command based on a defined trigger.\n\n####
 
 ### Post (Default)
 ```
-Invoke-JcSdkCommandTrigger -Triggername <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -Triggername <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PostViaIdentity
 ```
-Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,21 +56,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

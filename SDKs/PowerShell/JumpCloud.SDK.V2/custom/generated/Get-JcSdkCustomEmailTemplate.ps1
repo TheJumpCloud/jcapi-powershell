@@ -14,14 +14,12 @@ PS C:\> {{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.ICustomEmailTemplate
-.Outputs
-System.String
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkCustomEmailTemplate.md
 #>
  Function Get-JcSdkCustomEmailTemplate
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmailTemplate], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmailTemplate])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(DontShow)]

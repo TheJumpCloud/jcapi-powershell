@@ -17,18 +17,17 @@ This endpoint Updates a command based on the command ID and returns the modified
 Set-JcSdkCommand -Id <String> -Command <String> [-CommandRunners <String[]>] [-CommandType <String>]
  [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>]
  [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>]
- [-Timeout <String>] [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Timeout <String>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkCommand -Id <String> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommand -Id <String> -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -37,8 +36,8 @@ Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-PassTh
 Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Command <String> [-CommandRunners <String[]>]
  [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
  [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo]
- [-Systems <String[]>] [-Timeout <String>] [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Systems <String[]>] [-Timeout <String>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -220,21 +219,6 @@ The ID of the organization.
 ```yaml
 Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

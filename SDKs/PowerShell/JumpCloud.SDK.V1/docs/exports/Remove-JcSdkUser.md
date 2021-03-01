@@ -14,12 +14,12 @@ This endpoint allows you to delete a particular system user.\n\n#### Sample Requ
 
 ### Delete (Default)
 ```
-Remove-JcSdkUser -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkUser -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -71,21 +71,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

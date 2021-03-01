@@ -9,14 +9,15 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+You must be associated with the provider to use this route.
+You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
 
 ## SYNTAX
 
 ### CreateExpanded (Default)
 ```
 New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-EnableMultiFactor] [-Firstname <String>]
- [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -34,12 +35,14 @@ New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Body <IPro
 ### CreateViaIdentityExpanded
 ```
 New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
- [-Firstname <String>] [-Lastname <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\":\"{ADMIN_EMAIL}\"\n  }'\n```
+You must be associated with the provider to use this route.
+You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
 
 ## EXAMPLES
 
@@ -166,6 +169,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Role
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RoleName
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -210,8 +243,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAdministrator
 
-### System.String
-
 ## NOTES
 
 ALIASES
@@ -226,6 +257,8 @@ BODY <IProviderAdminReq>: ProviderAdminReq
   - `[EnableMultiFactor <Boolean?>]`: 
   - `[Firstname <String>]`: 
   - `[Lastname <String>]`: 
+  - `[Role <String>]`: 
+  - `[RoleName <String>]`: 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

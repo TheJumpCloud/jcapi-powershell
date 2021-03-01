@@ -19,8 +19,7 @@ Describe 'Get-JcSdkSystem' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkSystem
-        Get-JcSdkSystem -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkSystem -Id:($global:PesterTestSystem.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {

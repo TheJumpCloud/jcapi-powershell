@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n \"name\": \"group_update\"\n}'\n\n```
+This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```
 .Description
-This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n \"name\": \"group_update\"\n}'\n\n```
+This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -35,6 +35,10 @@ BODY <IUserGroupPut>:
   [AttributeSambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
+  [MemberQueryFilters <IFilter[]>]:
+    Field <String>: Name of field in filter target object.
+    Operator <String>: Filter comparison operator.
+    Value <String>: Filter comparison value.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -57,6 +61,11 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
+
+MEMBERQUERYFILTERS <IFilter[]>:
+  Field <String>: Name of field in filter target object.
+  Operator <String>: Filter comparison operator.
+  Value <String>: Filter comparison value.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserGroup.md
 #>
@@ -123,6 +132,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Email address of a User Group
     ${Email},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IFilter[]]
+    # .
+    # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
+    ${MemberQueryFilters},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

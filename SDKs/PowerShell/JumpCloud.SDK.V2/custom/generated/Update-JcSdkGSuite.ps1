@@ -17,7 +17,7 @@ JumpCloud.SDK.V2.Models.IGsuitePatchInput
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGsuiteOutput1
+JumpCloud.SDK.V2.Models.IGsuiteOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -55,7 +55,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkGSuite
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput1])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]

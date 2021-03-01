@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n \"name\": \"{Group_Name}\"\n}'\n\n```
+This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
 .Description
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n \"name\": \"{Group_Name}\"\n}'\n\n```
+This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -33,6 +33,15 @@ BODY <IUserGroupPost>:
   [AttributeSambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
+  [MemberQueryFilters <IFilter[]>]:
+    Field <String>: Name of field in filter target object.
+    Operator <String>: Filter comparison operator.
+    Value <String>: Filter comparison value.
+
+MEMBERQUERYFILTERS <IFilter[]>:
+  Field <String>: Name of field in filter target object.
+  Operator <String>: Filter comparison operator.
+  Value <String>: Filter comparison value.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkUserGroup.md
 #>
@@ -78,6 +87,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Email address of a User Group
     ${Email},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IFilter[]]
+    # .
+    # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
+    ${MemberQueryFilters},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

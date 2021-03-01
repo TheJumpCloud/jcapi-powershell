@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
 .Description
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"name\": \"Sample IP List\",\n  \"ips\": [\n    \"192.168.10.10\"\n  ]\n}'\n```
+Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -18,8 +18,6 @@ JumpCloud.SDK.V2.Models.IIPListRequest
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IIPList
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -56,7 +54,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkIPList
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IIPList], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IIPList])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]

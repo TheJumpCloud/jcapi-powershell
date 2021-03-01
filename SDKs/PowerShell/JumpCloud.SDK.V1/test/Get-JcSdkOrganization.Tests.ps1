@@ -19,8 +19,7 @@ Describe 'Get-JcSdkOrganization' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkOrganization
-        Get-JcSdkOrganization -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {

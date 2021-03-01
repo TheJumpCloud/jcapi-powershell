@@ -19,8 +19,7 @@ Describe 'Get-JcSdkUser' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkUser
-        Get-JcSdkUser -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkUser -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {

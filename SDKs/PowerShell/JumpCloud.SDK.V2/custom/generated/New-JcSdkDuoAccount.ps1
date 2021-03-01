@@ -16,14 +16,12 @@ PS C:\> {{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.IDuoAccount
-.Outputs
-System.String
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkDuoAccount.md
 #>
  Function New-JcSdkDuoAccount
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(DontShow)]

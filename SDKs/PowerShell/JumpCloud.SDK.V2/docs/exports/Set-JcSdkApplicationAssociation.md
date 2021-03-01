@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to manage the _direct_ associations of an Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
 
 ## SYNTAX
 
@@ -39,7 +39,7 @@ Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Strin
 
 ## DESCRIPTION
 This endpoint allows you to manage the _direct_ associations of an Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n}'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
 
 ## EXAMPLES
 

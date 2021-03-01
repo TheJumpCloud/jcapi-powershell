@@ -72,7 +72,7 @@ A filter to apply to the query.
 **value** = Populate with the value you want to search for.
 Is case sensitive.
 Supports wild cards.
-**EX:** `GET /users?username=eq:testuser`
+**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
 Type: System.String[]
@@ -141,8 +141,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
-
-### JumpCloud.SDK.V2.Models.IError
 
 ### JumpCloud.SDK.V2.Models.IPolicyTemplate
 

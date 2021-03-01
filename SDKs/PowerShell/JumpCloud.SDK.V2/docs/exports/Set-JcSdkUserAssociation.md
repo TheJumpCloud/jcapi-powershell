@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkUserAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n   \"op\": \"add\",\n   \"type\": \"system_group\",\n   \"id\": \"{GroupID}\"\n}'
+This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
 
 ## SYNTAX
 
@@ -37,7 +37,7 @@ Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op 
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n   \"attributes\": {\n      \"sudo\": {\n         \"enabled\": true,\n         \"withoutPassword\": false\n      }\n   },\n   \"op\": \"add\",\n   \"type\": \"system_group\",\n   \"id\": \"{GroupID}\"\n}'
+This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
 
 ## EXAMPLES
 

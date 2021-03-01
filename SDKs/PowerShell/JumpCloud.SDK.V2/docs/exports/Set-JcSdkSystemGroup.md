@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkSystemGroup
 
 ## SYNOPSIS
-This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n \"name\": \"Name_Update\"\n}'\n```
+This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Name_Update\"\n  }'\n```
 
 ## SYNTAX
 
@@ -35,7 +35,7 @@ Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Conf
 ```
 
 ## DESCRIPTION
-This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n \"name\": \"Name_Update\"\n}'\n```
+This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Name_Update\"\n  }'\n```
 
 ## EXAMPLES
 

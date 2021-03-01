@@ -15,8 +15,6 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IError
-.Outputs
 JumpCloud.SDK.V2.Models.IPolicyTemplate
 .Outputs
 JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
@@ -51,7 +49,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkPolicyTemplate
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails], [JumpCloud.SDK.V2.Models.IPolicyTemplate], [JumpCloud.SDK.V2.Models.IError])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails], [JumpCloud.SDK.V2.Models.IPolicyTemplate])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -84,7 +82,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
-    # **EX:** `GET /users?username=eq:testuser`
+    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
     [Parameter(ParameterSetName='List')]
