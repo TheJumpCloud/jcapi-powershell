@@ -30,6 +30,34 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # Office 365 API count parameter.
+    # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
+    ${Count},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Office 365 API filter parameter.
+    # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
+    ${Filter},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Office 365 API orderby parameter.
+    # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
+    ${Orderby},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Office 365 API search parameter.
+    # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
+    ${Search},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Office 365 API token used to access the next page of results.
     # See https://docs.microsoft.com/en-us/graph/paging.
@@ -41,6 +69,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Office 365 API maximum number of results per page.
     # See https://docs.microsoft.com/en-us/graph/paging.
     ${Top},
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.String]
+    # Defines the consistency header for O365 requests.
+    # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#request-headers
+    ${ConsistencyLevel},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

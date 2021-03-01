@@ -118,7 +118,8 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-.
+The comma separated fields used to sort the collection.
+Default sort is ascending, prefix with - to sort descending.
 
 ```yaml
 Type: System.String

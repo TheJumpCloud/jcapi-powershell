@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkActiveDirectoryAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
 
 ## SYNTAX
 
@@ -37,7 +37,7 @@ Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Id <S
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n        \"op\": \"add\",\n        \"type\": \"user\",\n        \"id\": \"{User_ID}\"\n}\n'\n```
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
 
 ## EXAMPLES
 

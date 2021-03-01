@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkCommandAssociation
 
 ## SYNOPSIS
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n}'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
 
 ## SYNTAX
 
@@ -37,7 +37,7 @@ Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -
 ```
 
 ## DESCRIPTION
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n}'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
 
 ## EXAMPLES
 

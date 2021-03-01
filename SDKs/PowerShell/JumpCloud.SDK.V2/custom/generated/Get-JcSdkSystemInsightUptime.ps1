@@ -25,7 +25,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
-    # Supported operators are: eq, gte, in
+    # Supported operators are: eq, gte, in.
+    # e.g:
+    # Filter for single value:
+    # `filter=field:gte:value`
+    # Filter for any value in a list: (note “pipe” character: `|` separating values)
+    # `filter=field:in:value1|value2|value3`
     ${Filter},
 
     [Parameter()]
@@ -33,6 +38,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
+    # e.g:
+    # Sort by single field:
+    # `sort=field`
+    # Sort descending by single field:
+    # `sort=-field`
+    # Sort by multiple fields:
+    # `sort=field1,-field2,field3`
     ${Sort},
 
     [Parameter(DontShow)]

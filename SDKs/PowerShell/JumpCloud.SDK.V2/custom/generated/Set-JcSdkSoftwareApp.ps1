@@ -1,10 +1,10 @@
 <#
 .Synopsis
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\"displayName\": \"Adobe Reader\"\n}'\n```
+Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
 .Description
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\"displayName\": \"Adobe Reader\"\n}'\n```
+Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -32,8 +32,16 @@ BODY <ISoftwareApp>:
   [Id <String>]:
   [Settings <IJcSoftwareAppSettings[]>]:
     [AllowUpdateDelay <Boolean?>]:
+    [AppleVppAssignedLicenses <Int32?>]:
+    [AppleVppAvailableLicenses <Int32?>]:
+    [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [AppleVppTotalLicenses <Int32?>]:
     [AutoUpdate <Boolean?>]:
+    [Location <String>]: Repository where the app is located within the package manager
+    [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [PackageId <String>]:
+    [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -59,8 +67,16 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 
 SETTINGS <IJcSoftwareAppSettings[]>:
   [AllowUpdateDelay <Boolean?>]:
+  [AppleVppAssignedLicenses <Int32?>]:
+  [AppleVppAvailableLicenses <Int32?>]:
+  [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [AppleVppTotalLicenses <Int32?>]:
   [AutoUpdate <Boolean?>]:
+  [Location <String>]: Repository where the app is located within the package manager
+  [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [PackageId <String>]:
+  [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 #>
