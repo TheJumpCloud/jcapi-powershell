@@ -273,6 +273,11 @@ Try
                     }
                 }
                 ###########################################################################
+                # Format help files
+                Get-ChildItem -Path:($DocsFolderPath) | ForEach-Object {
+                    (Get-Content -Path:($_.FullName) -Raw).Replace('\n', "`n") | Set-Content -Path:($_.FullName)
+                }
+                ###########################################################################
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
