@@ -17,7 +17,7 @@ Describe 'Get-JcSdkActiveDirectory' {
     }
 
     It 'Get' {
-        $Id = (Get-JcSdkActiveDirectory | select -first 1).Id
+        $Id = $global:PesterTestActiveDirectory.Id
         Get-JcSdkActiveDirectory -Id $Id | should -not -BeNullOrEmpty
     }
 

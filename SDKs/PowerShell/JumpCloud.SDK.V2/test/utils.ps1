@@ -23,7 +23,7 @@ function setupEnv() {
     $global:FirstName = "Pester"
     $global:LastName = "Test"
     $global:Password = "Testing123!"
-    $global:Email = "pester.test@example.com"
+    $global:Email = "pester.testworkman@example.com"
     New-JcSdkUser -Username:($global:Username) -FirstName:($global:FirstName) -LastName:($global:LastName) -Password:($global:Password) -Email:($global:Email)
     $global:PesterTestUser = Get-JcSdkUser | ? { $_.username -eq $global:Username }
 
@@ -73,14 +73,17 @@ function setupEnv() {
     # Create an Active Directory Object
     $global:ActiveDirectoryName = "DC=ADTEST$(RandomString -len 6);DC=ORG"
     $Headers = @{
-    'Accept'    = 'application/json';
-    'x-api-key' = $JCApiKey
+        'Accept'    = 'application/json';
+        'x-api-key' = $env:JCApiKey
     }
     $Form = @{
         'domain'   = $global:ActiveDirectoryName;
     } | ConvertTo-Json
     Invoke-WebRequest -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers $Headers -Body $Form -ContentType 'application/json' -UseBasicParsing
     $global:PesterTestActiveDirectory = Get-JcSdkActiveDirectory| ? { $_.Domain -eq $global:ActiveDirectoryName }
+
+    # Get the Apple MDM
+    $global:PesterAppleMDM = Get-JcSdkAppleMdm
 }
 function cleanupEnv() {
     # Clean resources you create for testing
@@ -91,8 +94,8 @@ function cleanupEnv() {
 
     # Delete an Active Directory Object
     $Headers = @{
-    'Accept'    = 'application/json';
-    'x-api-key' = $JCApiKey
+        'Accept'    = 'application/json';
+        'x-api-key' = $env:JCApiKey
     }
     Invoke-WebRequest -Method 'Delete' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
 
