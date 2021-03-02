@@ -15,6 +15,7 @@ while (-not $mockingPath)
 
 Describe 'Get-JcSdkUserSshKey' {
     It 'List' {
+        Start-Sleep -Seconds:(10)
         Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
 }

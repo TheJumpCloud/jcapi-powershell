@@ -22,7 +22,7 @@ function setupEnv()
     ########################################################################
     # TODO
     ########################################################################
-    # (Get-Command -Syntax -Name New-JcSdkCommand) | ForEach-Object { $_.Replace('[-Fields <string>]', '').Replace('[-Filter <string>]', '').Replace('[-Sort <string>]', '').Replace('[-Search <string>]', '').Replace('[-Paginate <bool>]', '').Replace('[-Break]', '').Replace('[-HttpPipelineAppend <SendAsyncStep[]>]', '').Replace('[-HttpPipelinePrepend <SendAsyncStep[]>]', '').Replace('[-PassThru]', '').Replace('[-Proxy <uri>]', '').Replace('[-ProxyCredential <pscredential>]', '').Replace('[-ProxyUseDefaultCredentials]', '').Replace('[<CommonParameters>]', '').Replace('[-WhatIf]', '').Replace('[-Confirm]', '') }
+    # (Get-Command -Syntax -Name Invoke-JcSdkCommandTrigger) | ForEach-Object { $_.Replace('[-Fields <string>]', '').Replace('[-Filter <string>]', '').Replace('[-Sort <string>]', '').Replace('[-Search <string>]', '').Replace('[-Paginate <bool>]', '').Replace('[-Break]', '').Replace('[-HttpPipelineAppend <SendAsyncStep[]>]', '').Replace('[-HttpPipelinePrepend <SendAsyncStep[]>]', '').Replace('[-PassThru]', '').Replace('[-Proxy <uri>]', '').Replace('[-ProxyCredential <pscredential>]', '').Replace('[-ProxyUseDefaultCredentials]', '').Replace('[<CommonParameters>]', '').Replace('[-WhatIf]', '').Replace('[-Confirm]', '') }
     # Get-JcSdkApplication
     # Get-JcSdkApplicationTemplate
     # Get-JcSdkCommandFile
@@ -31,45 +31,35 @@ function setupEnv()
     # V1
     ########################################################################
     # Create a command
-    $Command = @{
+    $global:PesterDefCommand = @{
         Name    = 'PesterTestCommand'
         Command = 'echo "Hello World"'
         User    = '000000000000000000000000'
     }
-    # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
-    $NewCommand = New-JcSdkCommand @Command
-    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
     # Create a user
-    $User = @{Username = "pester.test.$(RandomString -len 5)"
-        FirstName      = "Pester"
-        LastName       = "Test"
-        Password       = "Testing123!"
-        Email          = "pester.test@example$(RandomString -len 5).com"
+    $global:PesterDefUser = @{
+        Username  = "pester.test.$(RandomString -len 5)"
+        FirstName = "Pester"
+        LastName  = "Test"
+        Password  = "Testing123!"
+        Email     = "pester.test@example$(RandomString -len 5).com"
     }
-    $global:PesterTestUser = New-JcSdkUser @User
     # Create a user ssh key
-    $UserSshKey = @{
-        Id        = $global:PesterTestUser.Id
+    $global:PesterDefUserSshKey = @{
+        Id        = $null # Defined later in New-JcSdkUserSshKey.Tests.ps1
         Name      = 'PesterTestUserSshKeyName'
         PublicKey = 'PesterTestUserSshKeyPublicKey'
     }
-    $global:PesterTestUserSshKey = New-JcSdkUserSshKey @UserSshKey
     # Create a RADIUS Server
-    $RadiusServer = @{
+    $global:PesterDefRadiusServer = @{
         Name            = "PesterTestRadiusServer"
         SharedSecret    = "Testing123!"
         NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
     }
-    Do
-    {
-        $global:PesterTestRadiusServer = New-JcSdkRadiusServer @RadiusServer
-    } While ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
-
     # Get organization
     $global:PesterTestOrganization = Get-JcSdkOrganization
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
-    Start-Sleep -Seconds:(10)
 }
 function cleanupEnv()
 {

@@ -13,19 +13,13 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestUserName = 'PesterTestUser'
-$global:PesterTestUserEmail = 'PesterTest@PesterTest.com'
 Describe 'New-JcSdkUser' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Create' {
-        $User = Get-JcSdkUser | Where-Object { $_.Username -eq $global:PesterTestUserName }
-        If ($User)
-        {
-            Remove-JcSdkUser -Id:($User.Id)
-        }
-        New-JcSdkUser -Email:($global:PesterTestUserEmail) -Username:($global:PesterTestUserName)  | Should -Not -BeNullOrEmpty
+        $global:PesterTestUser = New-JcSdkUser @global:PesterDefUser
+        $global:PesterTestUser | Should -Not -BeNullOrEmpty
     }
 }

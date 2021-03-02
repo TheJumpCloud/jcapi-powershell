@@ -19,7 +19,9 @@ Describe 'New-JcSdkUserSshKey' {
     }
 
     It 'Create' {
-        New-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) -Name:($global:PesterTestUserSshKey.Name) -PublicKey:($global:PesterTestUserSshKey.PublicKey) | Should -Not -BeNullOrEmpty
+        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
+        $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
+        $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -Skip {
