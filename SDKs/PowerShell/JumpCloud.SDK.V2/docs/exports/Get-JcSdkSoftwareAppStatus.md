@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkSoftwareAppStatus
 
 ## SYNOPSIS
-This endpoint allows you to get the status of the provided Software Application on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/statuses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get the status of the provided Software Application on associated JumpCloud systems.
+
+#### Sample Request
+```
+$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/statuses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+```
 
 ## SYNTAX
 
@@ -25,7 +33,15 @@ Get-JcSdkSoftwareAppStatus -InputObject <IJumpCloudApIsIdentity> [-Filter <Strin
 ```
 
 ## DESCRIPTION
-This endpoint allows you to get the status of the provided Software Application on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/statuses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get the status of the provided Software Application on associated JumpCloud systems.
+
+#### Sample Request
+```
+$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/statuses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+```
 
 ## EXAMPLES
 

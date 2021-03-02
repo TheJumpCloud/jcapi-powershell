@@ -1,10 +1,56 @@
 <#
 .Synopsis
-This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"auth\":{\n\t  \"basic\": {\n\t\t\"username\": \"someDeveloper\",\t  \n\t\t\"password\": \"notTheRealPassword\"\n\n\t  }\n\t}\n}'\n\n```
+This endpoint adds an authorization method to a workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"auth\":{
+\t  \"basic\": {
+\t\t\"username\": \"someDeveloper\",\t  
+\t\t\"password\": \"notTheRealPassword\"
+
+\t  }
+\t}
+}'
+
+```
 .Description
-This endpoint adds an authorization method to a workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"auth\":{\n\t  \"basic\": {\n\t\t\"username\": \"someDeveloper\",\t  \n\t\t\"password\": \"notTheRealPassword\"\n\n\t  }\n\t}\n}'\n\n```
+This endpoint adds an authorization method to a workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"auth\":{
+\t  \"basic\": {
+\t\t\"username\": \"someDeveloper\",\t  
+\t\t\"password\": \"notTheRealPassword\"
+
+\t  }
+\t}
+}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -181,4 +227,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

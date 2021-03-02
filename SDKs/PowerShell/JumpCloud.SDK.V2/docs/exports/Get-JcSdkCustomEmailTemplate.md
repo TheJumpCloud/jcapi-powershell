@@ -46,8 +46,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.ICustomEmailTemplate
 
-### System.String
-
 ## NOTES
 
 ALIASES

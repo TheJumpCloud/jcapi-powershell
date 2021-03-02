@@ -8,7 +8,17 @@ schema: 2.0.0
 # Get-JcSdkRadiusServerAssociation
 
 ## SYNOPSIS
-This endpoint returns the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the _direct_ associations of a Radius Server.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -23,7 +33,17 @@ Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets 
 ```
 
 ## DESCRIPTION
-This endpoint returns the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the _direct_ associations of a Radius Server.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

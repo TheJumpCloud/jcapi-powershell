@@ -1,10 +1,32 @@
 <#
 .Synopsis
 This endpoint allows you to create a translation rule for a specific Office 365 instance.
-These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Translation Rule Parameters}\n  }'\n```
+These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Translation Rule Parameters}
+  }'
+```
 .Description
 This endpoint allows you to create a translation rule for a specific Office 365 instance.
-These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Translation Rule Parameters}\n  }'\n```
+These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Translation Rule Parameters}
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -159,4 +181,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,7 +8,22 @@ schema: 2.0.0
 # Set-JcSdkActiveDirectoryAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -20,14 +35,14 @@ Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Id <String> -Op
 
 ### Set
 ```
-Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Body <IGraphConnectionActiveDirectory>
+Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Body <IGraphOperationActiveDirectory>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity>
- -Body <IGraphConnectionActiveDirectory> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IGraphOperationActiveDirectory> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -37,7 +52,22 @@ Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Id <S
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of an Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of an Active Directory instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -73,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -88,11 +118,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (ActiveDirectory)
+GraphOperation (ActiveDirectory)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectory
+Type: JumpCloud.SDK.V2.Models.IGraphOperationActiveDirectory
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +245,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionActiveDirectory
+### JumpCloud.SDK.V2.Models.IGraphOperationActiveDirectory
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +262,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionActiveDirectory>: GraphConnection (ActiveDirectory)
+BODY <IGraphOperationActiveDirectory>: GraphOperation (ActiveDirectory)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "active_directory" can be associated to.
-  - `[Attributes <IGraphConnectionActiveDirectoryAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

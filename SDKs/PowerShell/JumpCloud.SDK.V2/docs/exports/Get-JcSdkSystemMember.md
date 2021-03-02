@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkSystemMember
 
 ## SYNOPSIS
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns all the System Groups a System is a member of.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -25,7 +34,16 @@ Get-JcSdkSystemMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all the System Groups a System is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns all the System Groups a System is a member of.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

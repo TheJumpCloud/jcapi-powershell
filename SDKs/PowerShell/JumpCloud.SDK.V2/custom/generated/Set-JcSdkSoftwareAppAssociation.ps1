@@ -1,8 +1,34 @@
 <#
 .Synopsis
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"id\": \"<object_id>\",
+  \"op\": \"add\",
+  \"type\": \"system\"
+ }'
+```
 .Description
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"id\": \"<object_id>\",
+  \"op\": \"add\",
+  \"type\": \"system\"
+ }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionSoftwareApp
+JumpCloud.SDK.V2.Models.IGraphOperationSoftwareApp
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,11 +49,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionSoftwareApp>:
+BODY <IGraphOperationSoftwareApp>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <String>: Targets which a "software_app" can be associated to.
-  [Attributes <IGraphConnectionSoftwareAppAttributes>]: The graph connection's attributes.
+  [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -77,8 +103,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionSoftwareApp]
-    # GraphConnection (SoftwareApp)
+    [JumpCloud.SDK.V2.Models.IGraphOperationSoftwareApp]
+    # GraphOperation (SoftwareApp)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -106,9 +132,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionSoftwareAppAttributes]))]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
     [System.Collections.Hashtable]
-    # The graph connection's attributes.
+    # The graph attributes.
     ${Attributes},
 
     [Parameter(DontShow)]
@@ -189,4 +215,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

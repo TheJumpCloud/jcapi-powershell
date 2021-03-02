@@ -9,7 +9,17 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Registers a Duo account for an organization.
-Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 
 ## SYNTAX
 
@@ -19,7 +29,17 @@ New-JcSdkDuoAccount [-Confirm] [-WhatIf] [<CommonParameters>]
 
 ## DESCRIPTION
 Registers a Duo account for an organization.
-Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 
 ## EXAMPLES
 
@@ -78,8 +98,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IDuoAccount
-
-### System.String
 
 ## NOTES
 

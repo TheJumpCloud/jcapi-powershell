@@ -8,7 +8,15 @@ schema: 2.0.0
 # Remove-JcSdkLdapServerSambaDomain
 
 ## SYNOPSIS
-This endpoint allows you to delete a samba domain from an LDAP server.\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint allows you to delete a samba domain from an LDAP server.
+
+##### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -25,7 +33,15 @@ Remove-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> [-PassTh
 ```
 
 ## DESCRIPTION
-This endpoint allows you to delete a samba domain from an LDAP server.\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint allows you to delete a samba domain from an LDAP server.
+
+##### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

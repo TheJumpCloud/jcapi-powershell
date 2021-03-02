@@ -8,7 +8,18 @@ schema: 2.0.0
 # Get-JcSdkAppleMdmEnrollmentProfile
 
 ## SYNOPSIS
-Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Get an enrollment profile
+
+Currently only requesting the mobileconfig is supported.
+
+#### Sample Request
+
+```
+curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\
+  -H 'accept: application/x-apple-aspen-config' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -28,7 +39,18 @@ Get-JcSdkAppleMdmEnrollmentProfile -InputObject <IJumpCloudApIsIdentity> [-PassT
 ```
 
 ## DESCRIPTION
-Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Get an enrollment profile
+
+Currently only requesting the mobileconfig is supported.
+
+#### Sample Request
+
+```
+curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\
+  -H 'accept: application/x-apple-aspen-config' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

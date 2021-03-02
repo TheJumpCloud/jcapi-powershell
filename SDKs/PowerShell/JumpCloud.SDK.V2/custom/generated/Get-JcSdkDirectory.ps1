@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -166,4 +182,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -18,8 +18,6 @@ JumpCloud.SDK.V2.Models.ICustomEmail
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.ICustomEmail
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -60,7 +58,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkCustomEmailConfiguration
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -207,4 +205,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -1,8 +1,30 @@
 <#
 .Synopsis
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Description
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -21,15 +43,27 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>:
-  [Id <Int32?>]:
-  [Name <String>]:
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>:
+  Name <String>:
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>:
+  Id <Single>:
+  Name <String>:
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>:
+  Name <String>:
+  Value <String>:
 
 BODY <IUserGroupPost>:
   Name <String>: Display name of a User Group.
-  [AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]:
-    [Id <Int32?>]:
-    [Name <String>]:
+  [AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]:
+    Name <String>:
+  [AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]:
+    Id <Single>:
+    Name <String>:
+  [AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]:
+    Name <String>:
+    Value <String>:
   [AttributeSambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
@@ -65,10 +99,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]]
+    [JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]]
+    # .
+    # To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
+    ${AttributeLdapGroups},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
     ${AttributePosixGroups},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]]
+    # .
+    # To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
+    ${AttributeRadiusReply},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -167,4 +215,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

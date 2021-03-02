@@ -1,8 +1,34 @@
 <#
 .Synopsis
-This endpoint allows you to manage the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{System_ID}\"\n  }'\n```
+This endpoint allows you to manage the system members of a System Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system\",
+    \"id\": \"{System_ID}\"
+  }'
+```
 .Description
-This endpoint allows you to manage the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{System_ID}\"\n  }'\n```
+This endpoint allows you to manage the system members of a System Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system\",
+    \"id\": \"{System_ID}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember
+JumpCloud.SDK.V2.Models.IGraphOperationSystemGroupMember
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,9 +49,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionSystemGroupMember>:
-  Id <String>: The ObjectID of member being added or removed.
-  Op <String>: How to modify the membership connection.
+BODY <IGraphOperationSystemGroupMember>:
+  Id <String>: The ObjectID of graph object being added or removed as an association.
+  Op <String>: How to modify the graph connection.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -86,8 +114,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupMember]
-    # GraphConnection-SystemGroup-Member
+    [JumpCloud.SDK.V2.Models.IGraphOperationSystemGroupMember]
+    # GraphOperation (SystemGroup-Member)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -95,15 +123,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # The ObjectID of member being added or removed.
+    # The ObjectID of graph object being added or removed as an association.
     ${Id},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # How to modify the membership connection.
+    # How to modify the graph connection.
     ${Op},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
+    [System.Collections.Hashtable]
+    # The graph attributes.
+    ${Attributes},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -183,4 +219,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

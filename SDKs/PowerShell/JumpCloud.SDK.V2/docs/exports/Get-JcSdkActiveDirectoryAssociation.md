@@ -8,7 +8,18 @@ schema: 2.0.0
 # Get-JcSdkActiveDirectoryAssociation
 
 ## SYNOPSIS
-This endpoint returns the direct associations of this Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the direct associations of this Active Directory instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.
+
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -24,7 +35,18 @@ Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targe
 ```
 
 ## DESCRIPTION
-This endpoint returns the direct associations of this Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the direct associations of this Active Directory instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.
+
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

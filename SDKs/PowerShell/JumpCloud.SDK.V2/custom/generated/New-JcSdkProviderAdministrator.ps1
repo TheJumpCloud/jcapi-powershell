@@ -2,11 +2,35 @@
 .Synopsis
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
+You must provide either `role` or `roleName`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"email\": \"{ADMIN_EMAIL}\",
+    \"roleName\": \"{ROLE_NAME}\"
+  }'
+```
 .Description
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
+You must provide either `role` or `roleName`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"email\": \"{ADMIN_EMAIL}\",
+    \"roleName\": \"{ROLE_NAME}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -22,8 +46,6 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 JumpCloud.SDK.V2.Models.IProviderAdminReq
 .Outputs
 JumpCloud.SDK.V2.Models.IAdministrator
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -63,7 +85,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkProviderAdministrator
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
@@ -203,4 +225,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 
