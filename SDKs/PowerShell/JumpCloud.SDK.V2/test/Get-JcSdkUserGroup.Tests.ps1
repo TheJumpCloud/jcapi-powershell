@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 Describe 'Get-JcSdkUserGroup' {
     It 'List' {
         $GroupListTest = JumpCloud.SDK.V2\Get-JcSdkUserGroup
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
+        If ([System.String]::IsNullOrEmpty($GroupListTest))
         {
             $GroupListTest | Should -Not -BeNullOrEmpty
         }
@@ -27,7 +27,7 @@ Describe 'Get-JcSdkUserGroup' {
 
     It 'Get' {
         $GroupGetTest = JumpCloud.SDK.V2\Get-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
+        If ([System.String]::IsNullOrEmpty($GroupGetTest))
         {
             $GroupGetTest | Should -Not -BeNullOrEmpty
         }
