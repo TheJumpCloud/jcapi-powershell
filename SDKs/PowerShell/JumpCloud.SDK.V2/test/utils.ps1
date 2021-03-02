@@ -94,7 +94,7 @@ function setupEnv() {
 
     # Get LDAP Server
     $global:PesterLdapServer = Get-JcSdkLdapServer
-}
+
     # Get all Directories
     $global:PesterTestDirectories = Get-JcSdkDirectory
     $global:PesterTestGSuite = $global:PesterTestDirectories | ? { $_.type -eq "g_suite" } | Select -First 1
@@ -104,12 +104,15 @@ function setupEnv() {
     # Get an Application
     $global:PesterTestApplication = Get-JcSdkApplication | Select -First 1
     }
+
+    
 function cleanupEnv() {
     # Clean resources you create for testing
     Remove-JcSdkUser -Id:($global:PesterTestUser.Id)
     Remove-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id)
     Remove-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id)
     Remove-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id)
+    Remove-JcSdkCommand -Id:($global:PesterTestCommand.Id)
 
     # Delete an Active Directory Object
     $Headers = @{
