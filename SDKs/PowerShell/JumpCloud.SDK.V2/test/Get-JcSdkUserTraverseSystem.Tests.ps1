@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkUserTraverseSystem' {
     BeforeAll{
-        # Associate User System
+        # Associate User > System
         Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:("system")
     }
 

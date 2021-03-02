@@ -23,7 +23,7 @@ function setupEnv() {
     $global:FirstName = "Pester"
     $global:LastName = "Test"
     $global:Password = "Testing123!"
-    $global:Email = "pester.testworkman@example.com"
+    $global:Email = "pester.testmoorehead@example.com"
     New-JcSdkUser -Username:($global:Username) -FirstName:($global:FirstName) -LastName:($global:LastName) -Password:($global:Password) -Email:($global:Email)
     $global:PesterTestUser = Get-JcSdkUser | ? { $_.username -eq $global:Username }
 
@@ -41,34 +41,16 @@ function setupEnv() {
     $global:PesterTestSystem = Get-JCSdkSystem | Select -First 1
 
     # Create a RADIUS Server
-    $global:RadiusServerName = "PesterTest"
-    $global:SharedSecret = "Testing123!"
-    $octet1 = 0
-    $octet2 = 0
-    $octet3 = 0
-    $octet4 = 0
-    DO
+     # Create a RADIUS Server
+    $RadiusServer = @{
+        Name            = "PesterTestRadiusServer"
+        SharedSecret    = "Testing123!"
+        NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
+    }
+    Do
     {
-        $global:PesterTestRadiusServer = New-JcSdkRadiusServer -Name:("$global:RadiusServerName") -SharedSecret:($global:SharedSecret) -NetworkSourceIP:("$($octet1).$($octet2).$($octet3).$($octet4)")
-        if ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
-        {
-            if ($octet4 -lt 255) {
-                $octet4++
-            } elseif ($octet3 -lt 244) {
-                $octet4 = 0
-                $octet3++
-            } elseif ($octet2 -lt 244) {
-                $octet3 = 0
-                $octet2++
-            } elseif ($octet1 -lt 244) {
-                $octet2 = 0
-                $octet1++
-            } elseif ($octet1 -eq 255) {
-                Write-Error "Unable to configure RADIUS server - no valid IP Addresses."
-            }
-        }
-    } WHILE ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
-    $Global:RadiusIPAddress = "$($octet1).$($octet2).$($octet3).$($octet4)"
+        $global:PesterTestRadiusServer = New-JcSdkRadiusServer @RadiusServer
+    } While ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
 
     # Create an Active Directory Object
     $global:ActiveDirectoryName = "DC=ADTEST$(RandomString -len 6);DC=ORG"
@@ -102,9 +84,6 @@ function setupEnv() {
     $NewCommand = New-JcSdkCommand @Command
     $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
 
-    # Get Gsuite
-    $global:PesterTestGsuite = Get-JcSdkDirectory | ? { $_.Type -eq "g_suite" }
-
     # Create New IP List
     $IpList = @{
         Description    = 'PesterIpList'
@@ -116,6 +95,15 @@ function setupEnv() {
     # Get LDAP Server
     $global:PesterLdapServer = Get-JcSdkLdapServer
 }
+    # Get all Directories
+    $global:PesterTestDirectories = Get-JcSdkDirectory
+    $global:PesterTestGSuite = $global:PesterTestDirectories | ? { $_.type -eq "g_suite" } | Select -First 1
+    $global:PesterTestOffice365 = $global:PesterTestDirectories | ? { $_.type -eq "office_365" } | Select -First 1
+    $global:PesterTestLdap = $global:PesterTestDirectories | ? { $_.type -eq "ldap_server" } | Select -First 1
+
+    # Get an Application
+    $global:PesterTestApplication = Get-JcSdkApplication | Select -First 1
+    }
 function cleanupEnv() {
     # Clean resources you create for testing
     Remove-JcSdkUser -Id:($global:PesterTestUser.Id)

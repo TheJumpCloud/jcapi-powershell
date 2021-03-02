@@ -12,12 +12,30 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserGroup' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        $GroupListTest = JumpCloud.SDK.V2\Get-JcSdkUserGroup
+        If ([System.String]::IsNullOrEmpty($AssociationTest))
+        {
+            $GroupListTest | Should -Not -BeNullOrEmpty
+        }
+        else
+        {
+            # Test that a group exists
+            $GroupListTest.Count | Should -BeGreaterOrEqual 1
+        }
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        $GroupGetTest = JumpCloud.SDK.V2\Get-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id)
+        If ([System.String]::IsNullOrEmpty($AssociationTest))
+        {
+            $GroupGetTest | Should -Not -BeNullOrEmpty
+        }
+        else
+        {
+            # Test that a group exists and you can query it by ID
+            $GroupGetTest.Count | Should -BeGreaterOrEqual 1
+        }
     }
 
     It 'GetViaIdentity' -skip {
