@@ -468,6 +468,11 @@ Function Update-SwaggerObject
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
+                    # Remove non 2XX response so that autorest returns correct errors to PowerShell
+                    If ($AttributePath -like '.paths.*.responses.*' -and $AttributePath -notlike '.paths.*.responses.2*')
+                    {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove blank values from enum
                     If ($AttributePath -like '*.enum')
                     {
