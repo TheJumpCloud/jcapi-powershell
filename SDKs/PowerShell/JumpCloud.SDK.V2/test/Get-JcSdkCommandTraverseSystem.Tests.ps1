@@ -12,7 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCommandTraverseSystem' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    BeforeAll {
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id $($global:PesterTestSystem.Id) -Op 'add' -Type 'system'
+    }
+    AfterAll {
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id $($global:PesterTestSystem.Id) -Op 'remove' -Type 'system'
+    }
+    It 'List' {
+        Get-JcSdkCommandTraverseSystem -CommandId $($global:PesterTestCommand.id) | Should -Not -BeNullOrEmpty
     }
 }

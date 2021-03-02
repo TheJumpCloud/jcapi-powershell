@@ -13,6 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkBulkUserResult' {
     It 'Get' -skip {
+        #TODO: manual setup work to first add a bulk set of users
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

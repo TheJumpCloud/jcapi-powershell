@@ -84,6 +84,23 @@ function setupEnv() {
 
     # Get the Apple MDM
     $global:PesterAppleMDM = Get-JcSdkAppleMdm
+
+    # Create Application
+    # TODO: Switch from select to new
+    $global:PesterTestApplication = Get-JcSdkApplication | Select -First 1
+
+    # Create Authentication Policy
+    $global:PesterTestAuthenticationPolicy = New-JcSdkAuthenticationPolicy -Name "AuthenticationPolicy-$(RandomString -len 7)" -EffectAction allow -TargetResources @{"type" = "user_portal" } -UserGroupInclusions $($global:PesterTestUserGroup.id)
+
+    # Create a command
+    $Command = @{
+        Name    = 'PesterTestCommand'
+        Command = 'echo "Hello World"'
+        User    = '000000000000000000000000'
+    }
+    # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
+    $NewCommand = New-JcSdkCommand @Command
+    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
 }
 function cleanupEnv() {
     # Clean resources you create for testing
@@ -99,4 +116,6 @@ function cleanupEnv() {
     }
     Invoke-WebRequest -Method 'Delete' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
 
+    # Delete Authentication Policy
+    Remove-JcSdkAuthenticationPolicy -id $($global:PesterTestAuthenticationPolicy.id)
 }
