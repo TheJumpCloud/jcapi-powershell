@@ -101,6 +101,20 @@ function setupEnv() {
     # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
     $NewCommand = New-JcSdkCommand @Command
     $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
+
+    # Get Gsuite
+    $global:PesterTestGsuite = Get-JcSdkDirectory | ? { $_.Type -eq "g_suite" }
+
+    # Create New IP List
+    $IpList = @{
+        Description    = 'PesterIpList'
+        Ips = '0.1.2.3'
+        Name    = 'Pester IP Test List'
+    }
+    $global:PesterIPList = new-jcsdkIpList @IpList
+
+    # Get LDAP Server
+    $global:PesterLdapServer = Get-JcSdkLdapServer
 }
 function cleanupEnv() {
     # Clean resources you create for testing

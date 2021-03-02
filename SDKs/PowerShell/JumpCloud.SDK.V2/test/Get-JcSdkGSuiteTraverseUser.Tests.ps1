@@ -12,7 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkGSuiteTraverseUser' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    BeforeAll {
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
+    }
+    AfterAll {
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
+    }
+    It 'List' {
+        Get-JcSdkGSuiteTraverseUser -GsuiteId $($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
     }
 }
