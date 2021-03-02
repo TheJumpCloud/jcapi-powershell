@@ -13,12 +13,12 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGSuiteTraverseUser' {
     BeforeAll {
-        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
     }
     AfterAll {
-        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
     }
     It 'List' {
-        Get-JcSdkGSuiteTraverseUser -GsuiteId $($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkGSuiteTraverseUser -GsuiteId $($global:PesterTestGSuite.Id) | Should -Not -BeNullOrEmpty
     }
 }

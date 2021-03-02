@@ -13,19 +13,19 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGSuiteTranslationRule' {
     BeforeAll {
-        New-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id) -BuiltIn user_work_addresses
+        New-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -BuiltIn user_work_addresses
     }
     AfterAll {
-        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id) | Select-Object -First 1
-        Remove-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id) -Id $rule.id
+        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) | Select-Object -First 1
+        Remove-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -Id $rule.id
     }
     It 'List' {
-        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id)
+        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id)
     }
 
     It 'Get' {
-        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id) | Select-Object -First 1
-        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGsuite.Id) -id $rule.id
+        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) | Select-Object -First 1
+        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -id $rule.id
     }
 
     It 'GetViaIdentity' -skip {

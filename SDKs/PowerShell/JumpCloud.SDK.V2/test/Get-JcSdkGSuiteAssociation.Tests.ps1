@@ -13,12 +13,12 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGSuiteAssociation' {
     BeforeAll{
-        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.id) -op add -type user
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id $($global:PesterTestUser.id) -op add -type user
     }
     AfterAll{
-        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Id $($global:PesterTestUser.id) -op remove -type user
+        Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id $($global:PesterTestUser.id) -op remove -type user
     }
     It 'List' {
-        Get-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGsuite.Id) -Targets user
+        Get-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Targets user
     }
 }
