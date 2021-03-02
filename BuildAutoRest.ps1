@@ -257,6 +257,8 @@ Try
                                     $PSScriptInfo = $PSScriptInfo.Replace($PSScriptInfoDescription, $InternalDescription)
                                     "$PSScriptInfo`n $CustomFileContent" | Set-Content -Path:($CustomFileFullName)
                                 }
+                                # Format help files
+                                (Get-Content -Path:($CustomFile.FullName) -Raw).Replace('\n', "`n") | Set-Content -Path:($CustomFile.FullName)
                             }
                             # Clean tests folder
                             $UnusedTestFiles = Get-ChildItem -Path:($TestFolderPath) -Recurse -File | Where-Object { `
