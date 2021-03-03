@@ -16,8 +16,11 @@ Describe 'Set-JcSdkApplicationAssociation' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user' } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'add' -Type 'user_group' } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user' } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'remove' -Type 'user_group' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

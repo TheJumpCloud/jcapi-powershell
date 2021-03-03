@@ -16,8 +16,11 @@ Describe 'Set-JcSdkActiveDirectoryAssociation' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user' } | Should -Not -Throw
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'add' -Type 'user_group' } | Should -Not -Throw
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user' } | Should -Not -Throw
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'remove' -Type 'user_group' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
