@@ -27,14 +27,13 @@ Get-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort 
 
 ### Get
 ```
-Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [-Authorization <String>] [-Date <String>]
- [<CommonParameters>]
+Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
 Get-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
- [-Authorization <String>] [-Date <String>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,36 +64,6 @@ curl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: Get, GetViaIdentity
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: Get, GetViaIdentity
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.

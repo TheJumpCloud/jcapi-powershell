@@ -24,14 +24,12 @@ curl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\
 
 ### Delete (Default)
 ```
-Remove-JcSdkSystem -Id <String> [-Authorization <String>] [-Date <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkSystem -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Authorization <String>] [-Date <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Remove-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,36 +62,6 @@ curl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Id
 .

@@ -29,27 +29,25 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystem -Id <String> [-Authorization <String>] [-Date <String>]
- [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
- [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
- [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]
+ [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication]
+ [-AllowSshRootLogin] [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Authorization <String>] [-Date <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Authorization <String>]
- [-Date <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Authorization <String>] [-Date <String>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity>
  [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
  [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -167,21 +165,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 SystemPut
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -195,21 +178,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
