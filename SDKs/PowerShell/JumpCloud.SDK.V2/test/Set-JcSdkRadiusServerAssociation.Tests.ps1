@@ -12,12 +12,17 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkRadiusServerAssociation' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusServer.id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        $PesterDefAssociation = @{
+            Id   = $global:PesterTestUser.Id
+            Op   = 'remove'
+            Type = 'user'
+        }
+        { Set-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusServer.id) -Body:($PesterDefAssociation) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

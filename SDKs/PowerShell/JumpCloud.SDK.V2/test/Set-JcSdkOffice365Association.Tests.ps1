@@ -12,12 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkOffice365Association' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Id:($global:PesterTestUser.id) -op:('add') -type:('user') } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Id:($global:PesterTestUser.id) -op:('remove') -type:('user') } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        $PesterDefAssociation = @{
+            Id = $global:PesterTestUser.Id
+            Op = 'add'
+            Type = 'user'
+        } 
+        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+        $PesterDefAssociation.Op = 'remove'
+        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
