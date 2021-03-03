@@ -19,7 +19,7 @@ To pack `JumpCloud.SDK.V1` for distribution, run the `pack-module.ps1` script. T
 ## Module Script Details
 There are multiple scripts created for performing different actions for developing `JumpCloud.SDK.V1`.
 - `build-module.ps1`
-  - Builds the module DLL (`./bin/JumpCloudApIs.private.dll`), creates the exported cmdlets and documentation, generates custom cmdlet test stubs and exported cmdlet example stubs, and updates `./JumpCloud.SDK.V1.psd1` with Azure profile information.
+  - Builds the module DLL (`./bin/JumpCloud.SDK.V1.private.dll`), creates the exported cmdlets and documentation, generates custom cmdlet test stubs and exported cmdlet example stubs, and updates `./JumpCloud.SDK.V1.psd1` with Azure profile information.
   - **Parameters**: [`Switch` parameters]
     - `-Run`: After building, creates an isolated PowerShell session and loads `JumpCloud.SDK.V1`.
     - `-Test`: After building, runs the `Pester` tests defined in the `test` folder.
