@@ -8,27 +8,43 @@ schema: 2.0.0
 # Get-JcSdkCommand
 
 ## SYNOPSIS
-This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific command based on the command ID.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkCommand -Id <String> [-Fields <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand -Id <String> [-Fields <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific command based on the command ID.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -114,21 +130,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

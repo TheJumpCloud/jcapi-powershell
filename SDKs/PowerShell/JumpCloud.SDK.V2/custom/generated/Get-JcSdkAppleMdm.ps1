@@ -1,10 +1,30 @@
 <#
 .Synopsis
 Get a list of all Apple MDM configurations.
-An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+
+Note: currently only one MDM configuration per organization is supported.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/applemdms \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
 Get a list of all Apple MDM configurations.
-An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+
+Note: currently only one MDM configuration per organization is supported.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/applemdms \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> Get-JcSdkAppleMdm
 
@@ -104,4 +124,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

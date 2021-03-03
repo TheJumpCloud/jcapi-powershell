@@ -9,7 +9,18 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 
 ## SYNTAX
 
@@ -38,7 +49,18 @@ Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Disp
 
 ## DESCRIPTION
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -194,8 +216,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.ISoftwareApp
-
-### System.String
 
 ## NOTES
 

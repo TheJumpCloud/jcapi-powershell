@@ -1,8 +1,32 @@
 <#
 .Synopsis
-This endpoint allows you to create a samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to create a samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 .Description
-This endpoint allows you to create a samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to create a samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -165,4 +189,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

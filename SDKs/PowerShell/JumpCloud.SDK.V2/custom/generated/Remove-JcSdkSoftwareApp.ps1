@@ -1,8 +1,28 @@
 <#
 .Synopsis
-Removes a Software Application configuration.\n\nWarning: This is a destructive operation and will unmanage the application on all affected systems.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Removes a Software Application configuration.
+
+Warning: This is a destructive operation and will unmanage the application on all affected systems.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-Removes a Software Application configuration.\n\nWarning: This is a destructive operation and will unmanage the application on all affected systems.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Removes a Software Application configuration.
+
+Warning: This is a destructive operation and will unmanage the application on all affected systems.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,7 +35,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -47,7 +67,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkSoftwareApp
 {
-    [OutputType([System.String])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]
@@ -141,4 +161,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,40 +8,68 @@ schema: 2.0.0
 # Set-JcSdkSystem
 
 ## SYNOPSIS
-This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```
+This endpoint allows you to update a system.
+
+#### Sample Request 
+```
+curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"displayName\":\"Name_Update\",
+\t\"allowSshPasswordAuthentication\":\"true\",
+\t\"allowSshRootLogin\":\"true\",
+\t\"allowMultiFactorAuthentication\":\"true\",
+\t\"allowPublicKeyAuthentication\":\"false\"
+}'
+```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystem -Id <String> [-Authorization <String>] [-Date <String>]
- [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
- [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
- [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]
+ [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication]
+ [-AllowSshRootLogin] [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Authorization <String>] [-Date <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Authorization <String>]
- [-Date <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Authorization <String>] [-Date <String>]
+Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity>
  [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
  [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```
+This endpoint allows you to update a system.
+
+#### Sample Request 
+```
+curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"displayName\":\"Name_Update\",
+\t\"allowSshPasswordAuthentication\":\"true\",
+\t\"allowSshRootLogin\":\"true\",
+\t\"allowMultiFactorAuthentication\":\"true\",
+\t\"allowPublicKeyAuthentication\":\"false\"
+}'
+```
 
 ## EXAMPLES
 
@@ -137,21 +165,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Body
 SystemPut
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -165,21 +178,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

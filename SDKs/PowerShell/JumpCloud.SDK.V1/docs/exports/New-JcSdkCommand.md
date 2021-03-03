@@ -8,7 +8,24 @@ schema: 2.0.0
 # New-JcSdkCommand
 
 ## SYNOPSIS
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 
 ## SYNTAX
 
@@ -17,16 +34,33 @@ This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\
 New-JcSdkCommand -Command <String> [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
  [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
  [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
- [-Trigger <String>] [-User <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkCommand -Body <ICommand> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 
 ## EXAMPLES
 
@@ -173,21 +207,6 @@ The ID of the organization.
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific policy template.
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific policy template.
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -14,8 +30,6 @@ PS C:\> {{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-.Outputs
-JumpCloud.SDK.V2.Models.IError
 .Outputs
 JumpCloud.SDK.V2.Models.IPolicyTemplate
 .Outputs
@@ -51,7 +65,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkPolicyTemplate
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails], [JumpCloud.SDK.V2.Models.IPolicyTemplate], [JumpCloud.SDK.V2.Models.IError])]
+    [OutputType([JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails], [JumpCloud.SDK.V2.Models.IPolicyTemplate])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -224,4 +238,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

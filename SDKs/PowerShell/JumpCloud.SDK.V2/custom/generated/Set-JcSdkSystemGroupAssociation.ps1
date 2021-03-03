@@ -1,8 +1,40 @@
 <#
 .Synopsis
-This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a System Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{UserID}\"
+  }'
+```
 .Description
-This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a System Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{UserID}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +45,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroup
+JumpCloud.SDK.V2.Models.IGraphOperationSystemGroup
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,11 +55,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionSystemGroup>:
+BODY <IGraphOperationSystemGroup>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <String>: Targets which a "system_group" can be associated to.
-  [Attributes <IGraphConnectionSystemGroupAttributes>]: The graph connection's attributes.
+  [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -77,8 +109,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroup]
-    # GraphConnection (SystemGroup)
+    [JumpCloud.SDK.V2.Models.IGraphOperationSystemGroup]
+    # GraphOperation (SystemGroup)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -106,9 +138,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroupAttributes]))]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
     [System.Collections.Hashtable]
-    # The graph connection's attributes.
+    # The graph attributes.
     ${Attributes},
 
     [Parameter(DontShow)]
@@ -189,4 +221,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

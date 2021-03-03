@@ -8,8 +8,18 @@ schema: 2.0.0
 # Remove-JcSdkAppleMdm
 
 ## SYNOPSIS
-Removes an Apple MDM configuration.\n\nWarning: This is a destructive operation and will remove your Apple Push Certificates.
-We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Removes an Apple MDM configuration.
+
+Warning: This is a destructive operation and will remove your Apple Push Certificates.
+We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -24,8 +34,18 @@ Remove-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] 
 ```
 
 ## DESCRIPTION
-Removes an Apple MDM configuration.\n\nWarning: This is a destructive operation and will remove your Apple Push Certificates.
-We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Removes an Apple MDM configuration.
+
+Warning: This is a destructive operation and will remove your Apple Push Certificates.
+We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -117,8 +137,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IAppleMdm
-
-### System.String
 
 ## NOTES
 

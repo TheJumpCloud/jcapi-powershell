@@ -8,7 +8,20 @@ schema: 2.0.0
 # Update-JcSdkLdapServer
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+This endpoint allows updating some attributes of an LDAP server.
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"remove\",
+    \"userPasswordExpirationAction\": \"disable\"
+  }'
+```
 
 ## SYNTAX
 
@@ -39,7 +52,20 @@ Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Us
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of an LDAP server.\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"remove\",\n    \"userPasswordExpirationAction\": \"disable\"\n  }'\n```
+This endpoint allows updating some attributes of an LDAP server.
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"remove\",
+    \"userPasswordExpirationAction\": \"disable\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -194,8 +220,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IPaths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema
-
-### System.String
 
 ## NOTES
 

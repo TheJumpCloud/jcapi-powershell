@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkCommandFile
 
 ## SYNOPSIS
-This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the uploaded file(s) associated with a specific command.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -23,7 +32,16 @@ Get-JcSdkCommandFile -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [<
 ```
 
 ## DESCRIPTION
-This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the uploaded file(s) associated with a specific command.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 
@@ -100,8 +118,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V1.Models.ICommandfilereturn
-
-### JumpCloud.SDK.V1.Models.IDictionaryOfany
 
 ## NOTES
 

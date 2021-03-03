@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns an individual system.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Description
-This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns an individual system.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -82,20 +98,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Default sort is ascending.
     # Prefix with `-` to sort descending.
     ${Sort},
-
-    [Parameter(ParameterSetName='Get')]
-    [Parameter(ParameterSetName='GetViaIdentity')]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # Authorization header for the System Context API
-    ${Authorization},
-
-    [Parameter(ParameterSetName='Get')]
-    [Parameter(ParameterSetName='GetViaIdentity')]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # Current date header for the System Context API
-    ${Date},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -227,4 +229,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

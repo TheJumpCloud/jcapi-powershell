@@ -8,29 +8,45 @@ schema: 2.0.0
 # Get-JcSdkUser
 
 ## SYNOPSIS
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
 ### List (Default)
 ```
-Get-JcSdkUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String>] [-PassThru] [<CommonParameters>]
+Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [-PassThru]
- [<CommonParameters>]
+Get-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -116,21 +132,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

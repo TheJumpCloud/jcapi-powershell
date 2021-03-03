@@ -16,8 +16,6 @@ PS C:\> {{ Add code here }}
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
 JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -38,7 +36,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventInterval
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany], [System.String])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
@@ -230,4 +228,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,7 +8,15 @@ schema: 2.0.0
 # Remove-JcSdkIPList
 
 ## SYNOPSIS
-Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Delete a specific IP list.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -23,7 +31,15 @@ Remove-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<
 ```
 
 ## DESCRIPTION
-Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Delete a specific IP list.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -115,8 +131,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IIPList
-
-### System.String
 
 ## NOTES
 

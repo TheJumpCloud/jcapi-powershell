@@ -2,11 +2,27 @@
 .Synopsis
 This endpoint allows you to delete a system.
 This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute.
-If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+If the system is not connected to JumpCloud the system record will simply be removed.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Description
 This endpoint allows you to delete a system.
 This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute.
-If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+If the system is not connected to JumpCloud the system record will simply be removed.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -50,18 +66,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # Authorization header for the System Context API
-    ${Authorization},
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.String]
-    # Current date header for the System Context API
-    ${Date},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -135,4 +139,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

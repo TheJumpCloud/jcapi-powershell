@@ -13,15 +13,13 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V1.Models.IDictionaryOfany1
-.Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUserSshKey.md
 #>
  Function Get-JcSdkUserSshKey
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist], [JumpCloud.SDK.V1.Models.IDictionaryOfany1])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISshkeylist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
@@ -114,4 +112,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

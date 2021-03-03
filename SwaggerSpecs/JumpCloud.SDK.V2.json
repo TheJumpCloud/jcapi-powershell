@@ -714,22 +714,6 @@
       "title": "DuoApplicationUpdateReq",
       "type": "object"
     },
-    "Error": {
-      "properties": {
-        "code": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "fields": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        }
-      },
-      "title": "Error",
-      "type": "object"
-    },
     "errorresponse": {
       "properties": {
         "message": {
@@ -824,35 +808,127 @@
       "description": "Query using a sequence of field filters.",
       "title": "FilterQuery"
     },
-    "GraphAttribute-Sudo": {
-      "description": "The graph connection's attributes",
+    "GraphAttribute-LdapGroups": {
+      "description": "List of LDAP groups to provision when this JumpCloud group is bound to an LDAP instance.",
       "properties": {
-        "sudo": {
-          "properties": {
-            "enabled": {
-              "type": "boolean"
+        "ldapGroups": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              }
             },
-            "withoutPassword": {
-              "type": "boolean"
+            "required": [
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "title": "GraphAttribute (LdapGroups)",
+      "type": "object"
+    },
+    "GraphAttribute-PosixGroups": {
+      "description": "List of POSIX groups to provision when this JumpCloud group is bound to a supported resource.",
+      "properties": {
+        "posixGroups": {
+          "items": {
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "title": "GraphAttribute (PosixGroups)",
+      "type": "object"
+    },
+    "GraphAttribute-Radius": {
+      "description": "RADIUS reply attributes are returned in the Access-Accept messages sent to endpoints that authenticate with JumpCloud RADIUS.",
+      "properties": {
+        "radius": {
+          "properties": {
+            "reply": {
+              "items": {
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "value": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name",
+                  "value"
+                ],
+                "type": "object"
+              },
+              "type": "array"
             }
           },
           "type": "object"
         }
       },
-      "title": "GraphAttribute-Sudo"
+      "title": "GraphAttribute (Radius)",
+      "type": "object"
+    },
+    "GraphAttributes": {
+      "additionalProperties": true,
+      "description": "The graph attributes.",
+      "title": "GraphAttributes",
+      "type": "object"
+    },
+    "GraphAttribute-SambaEnabled": {
+      "description": "Enabling Samba support allows for LDAP users to authenticate to endpoints that require Samba attributes within the LDAP directory",
+      "properties": {
+        "sambaEnabled": {
+          "type": "boolean"
+        }
+      },
+      "title": "GraphAttribute (SambaEnabled)",
+      "type": "object"
+    },
+    "GraphAttribute-Sudo": {
+      "description": "Setting user access controls in order to grant administrator permissions",
+      "properties": {
+        "sudo": {
+          "properties": {
+            "enabled": {
+              "description": "Enables sudo",
+              "type": "boolean"
+            },
+            "withoutPassword": {
+              "description": "Enable sudo without password (requires 'enabled' to be true)",
+              "type": "boolean"
+            }
+          },
+          "required": [
+            "enabled",
+            "withoutPassword"
+          ],
+          "type": "object"
+        }
+      },
+      "title": "GraphAttribute (Sudo)",
+      "type": "object"
     },
     "GraphConnection": {
       "description": "Represents an edge between two graph objects. From can be omitted if it is clear from context.",
       "properties": {
         "attributes": {
-          "additionalProperties": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/GraphAttribute-Sudo"
-            }
-          ],
-          "description": "The graph connection's attributes.",
-          "type": "object"
+          "$ref": "#/definitions/GraphAttributes"
         },
         "from": {
           "$ref": "#/definitions/GraphObject"
@@ -867,584 +943,10 @@
       "title": "GraphConnection",
       "type": "object"
     },
-    "GraphConnection-ActiveDirectory": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"active_directory\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (ActiveDirectory)",
-      "type": "object"
-    },
-    "GraphConnection-Application": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"application\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (Application)",
-      "type": "object"
-    },
-    "GraphConnection-Command": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"command\" can be associated to.",
-          "enum": [
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (Command)",
-      "type": "object"
-    },
-    "GraphConnection-GSuite": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"g_suite\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (GSuite)",
-      "type": "object"
-    },
-    "GraphConnection-LdapServer": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"ldap_server\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (LdapServer)",
-      "type": "object"
-    },
-    "GraphConnection-Office365": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"office_365\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (Office365)",
-      "type": "object"
-    },
-    "GraphConnection-Policy": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"policy\" can be associated to.",
-          "enum": [
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (Policy)",
-      "type": "object"
-    },
-    "GraphConnection-RadiusServer": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"radius_server\" can be associated to.",
-          "enum": [
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (RadiusServer)",
-      "type": "object"
-    },
-    "GraphConnection-SoftwareApp": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"software_app\" can be associated to.",
-          "enum": [
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (SoftwareApp)",
-      "type": "object"
-    },
-    "GraphConnection-System": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/GraphAttribute-Sudo"
-            }
-          ],
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"system\" can be associated to.",
-          "enum": [
-            "command",
-            "policy",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (System)",
-      "type": "object"
-    },
-    "GraphConnection-SystemGroup": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"system_group\" can be associated to.",
-          "enum": [
-            "command",
-            "policy",
-            "user",
-            "user_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (SystemGroup)",
-      "type": "object"
-    },
-    "GraphConnection-SystemGroup-Member": {
-      "properties": {
-        "id": {
-          "description": "The ObjectID of member being added or removed.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the membership connection.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The member type.",
-          "enum": [
-            "system"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection-SystemGroup-Member",
-      "type": "object"
-    },
-    "GraphConnection-User": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/GraphAttribute-Sudo"
-            }
-          ],
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"user\" can be associated to.",
-          "enum": [
-            "active_directory",
-            "application",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "radius_server",
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (User)",
-      "type": "object"
-    },
-    "GraphConnection-UserGroup": {
-      "properties": {
-        "attributes": {
-          "additionalProperties": true,
-          "description": "The graph connection's attributes.",
-          "type": "object"
-        },
-        "id": {
-          "description": "The ObjectID of graph object being added or removed as an association.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the graph connection.",
-          "enum": [
-            "add",
-            "remove",
-            "update"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "Targets which a \"user_group\" can be associated to.",
-          "enum": [
-            "active_directory",
-            "application",
-            "g_suite",
-            "ldap_server",
-            "office_365",
-            "radius_server",
-            "system",
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection (UserGroup)",
-      "type": "object"
-    },
-    "GraphConnection-UserGroup-Member": {
-      "properties": {
-        "id": {
-          "description": "The ObjectID of member being added or removed.",
-          "type": "string"
-        },
-        "op": {
-          "description": "How to modify the membership connection.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        },
-        "type": {
-          "description": "The member type.",
-          "enum": [
-            "user"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "op",
-        "type"
-      ],
-      "title": "GraphConnection-UserGroup-Member",
-      "type": "object"
-    },
     "GraphObject": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/GraphAttribute-Sudo"
-            }
-          ],
-          "description": "The graph object's attributes.",
-          "type": "object"
+          "$ref": "#/definitions/GraphAttributes"
         },
         "id": {
           "description": "The ObjectID of the graph object.",
@@ -1465,14 +967,7 @@
     "GraphObjectWithPaths": {
       "properties": {
         "compiledAttributes": {
-          "additionalProperties": true,
-          "allOf": [
-            {
-              "$ref": "#/definitions/GraphAttribute-Sudo"
-            }
-          ],
-          "description": "The compiled graph attributes of the target object.",
-          "type": "object"
+          "$ref": "#/definitions/GraphAttributes"
         },
         "id": {
           "description": "Object ID of this graph object.",
@@ -1500,6 +995,462 @@
       "title": "GraphObjectWithPaths",
       "type": "object"
     },
+    "GraphOperation": {
+      "properties": {
+        "id": {
+          "description": "The ObjectID of graph object being added or removed as an association.",
+          "type": "string"
+        },
+        "op": {
+          "description": "How to modify the graph connection.",
+          "enum": [
+            "add",
+            "remove",
+            "update"
+          ],
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "op"
+      ],
+      "title": "GraphOperation",
+      "type": "object"
+    },
+    "GraphOperation-ActiveDirectory": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"active_directory\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (ActiveDirectory)",
+      "type": "object"
+    },
+    "GraphOperation-Application": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"application\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (Application)",
+      "type": "object"
+    },
+    "GraphOperation-Command": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"command\" can be associated to.",
+              "enum": [
+                "system",
+                "system_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (Command)",
+      "type": "object"
+    },
+    "GraphOperation-GSuite": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"g_suite\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (GSuite)",
+      "type": "object"
+    },
+    "GraphOperation-LdapServer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"ldap_server\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (LdapServer)",
+      "type": "object"
+    },
+    "GraphOperation-Office365": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"office_365\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (Office365)",
+      "type": "object"
+    },
+    "GraphOperation-Policy": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"policy\" can be associated to.",
+              "enum": [
+                "system",
+                "system_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (Policy)",
+      "type": "object"
+    },
+    "GraphOperation-RadiusServer": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"radius_server\" can be associated to.",
+              "enum": [
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (RadiusServer)",
+      "type": "object"
+    },
+    "GraphOperation-SoftwareApp": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"software_app\" can be associated to.",
+              "enum": [
+                "system",
+                "system_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (SoftwareApp)",
+      "type": "object"
+    },
+    "GraphOperation-System": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/GraphAttributes"
+                },
+                {
+                  "$ref": "#/definitions/GraphAttribute-Sudo"
+                }
+              ]
+            },
+            "type": {
+              "description": "Targets which a \"system\" can be associated to.",
+              "enum": [
+                "command",
+                "policy",
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (System)",
+      "type": "object"
+    },
+    "GraphOperation-SystemGroup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"system_group\" can be associated to.",
+              "enum": [
+                "command",
+                "policy",
+                "user",
+                "user_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (SystemGroup)",
+      "type": "object"
+    },
+    "GraphOperation-SystemGroup-Member": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "The member type.",
+              "enum": [
+                "system"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (SystemGroup-Member)",
+      "type": "object"
+    },
+    "GraphOperation-User": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "allOf": [
+                {
+                  "$ref": "#/definitions/GraphAttributes"
+                },
+                {
+                  "$ref": "#/definitions/GraphAttribute-Sudo"
+                }
+              ]
+            },
+            "type": {
+              "description": "Targets which a \"user\" can be associated to.",
+              "enum": [
+                "active_directory",
+                "application",
+                "g_suite",
+                "ldap_server",
+                "office_365",
+                "radius_server",
+                "system",
+                "system_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (User)",
+      "type": "object"
+    },
+    "GraphOperation-UserGroup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"user_group\" can be associated to.",
+              "enum": [
+                "active_directory",
+                "application",
+                "g_suite",
+                "ldap_server",
+                "office_365",
+                "radius_server",
+                "system",
+                "system_group"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (UserGroup)",
+      "type": "object"
+    },
+    "GraphOperation-UserGroup-Member": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "The member type.",
+              "enum": [
+                "user"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (UserGroup-Member)",
+      "type": "object"
+    },
     "GraphType": {
       "description": "A graph object type.",
       "enum": [
@@ -1522,9 +1473,7 @@
     "Group": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
-          "description": "The group object's attributes.",
-          "type": "object"
+          "$ref": "#/definitions/GraphAttributes"
         },
         "description": {
           "description": "Description of a Group",
@@ -1547,6 +1496,28 @@
         }
       },
       "title": "Group",
+      "type": "object"
+    },
+    "GroupAttributes-UserGroup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        {
+          "$ref": "#/definitions/GraphAttribute-LdapGroups"
+        },
+        {
+          "$ref": "#/definitions/GraphAttribute-PosixGroups"
+        },
+        {
+          "$ref": "#/definitions/GraphAttribute-Radius"
+        },
+        {
+          "$ref": "#/definitions/GraphAttribute-SambaEnabled"
+        }
+      ],
+      "description": "The graph attributes for a UserGroup.",
+      "title": "GroupAttributes (UserGroup)",
       "type": "object"
     },
     "GroupType": {
@@ -2486,9 +2457,7 @@
     "SystemGroup": {
       "properties": {
         "attributes": {
-          "additionalProperties": true,
-          "description": "The group object's attributes.",
-          "type": "object"
+          "$ref": "#/definitions/GraphAttributes"
         },
         "description": {
           "description": "Description of a System Group",
@@ -4801,7 +4770,7 @@
     "UserGroup": {
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/UserGroupAttributes"
+          "$ref": "#/definitions/GroupAttributes-UserGroup"
         },
         "description": {
           "description": "Description of a User Group",
@@ -4833,33 +4802,10 @@
       "title": "UserGroup",
       "type": "object"
     },
-    "UserGroupAttributes": {
-      "properties": {
-        "posixGroups": {
-          "items": {
-            "properties": {
-              "id": {
-                "type": "integer"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "sambaEnabled": {
-          "type": "boolean"
-        }
-      },
-      "title": "UserGroupAttributes",
-      "type": "object"
-    },
     "UserGroupPost": {
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/UserGroupAttributes"
+          "$ref": "#/definitions/GroupAttributes-UserGroup"
         },
         "description": {
           "description": "Description of a User Group",
@@ -4886,7 +4832,7 @@
     "UserGroupPut": {
       "properties": {
         "attributes": {
-          "$ref": "#/definitions/UserGroupAttributes"
+          "$ref": "#/definitions/GroupAttributes-UserGroup"
         },
         "description": {
           "description": "Description of a User Group",
@@ -5188,7 +5134,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-ActiveDirectory"
+              "$ref": "#/definitions/GraphOperation-ActiveDirectory"
             }
           }
         ],
@@ -5335,24 +5281,6 @@
             "schema": {
               "$ref": "#/definitions/apple-mdm-signed-csr-plist"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -5385,24 +5313,6 @@
             "schema": {
               "$ref": "#/definitions/apple-mdm-public-key-cert"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -5481,24 +5391,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -5558,40 +5450,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -5643,40 +5501,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -5709,40 +5533,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -5775,40 +5565,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -5905,40 +5661,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -5960,24 +5682,6 @@
             "schema": {
               "$ref": "#/definitions/AppleMDM"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6013,24 +5717,6 @@
             "schema": {
               "$ref": "#/definitions/AppleMDM"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6110,7 +5796,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-Application"
+              "$ref": "#/definitions/GraphOperation-Application"
             }
           }
         ],
@@ -6311,24 +5997,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6356,24 +6024,6 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicy"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6395,24 +6045,6 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicy"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6432,24 +6064,6 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicy"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6486,24 +6100,6 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicy"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6695,7 +6291,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-Command"
+              "$ref": "#/definitions/GraphOperation-Command"
             }
           }
         ],
@@ -6849,24 +6445,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6896,24 +6474,6 @@
             "schema": {
               "$ref": "#/definitions/CustomEmail"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6932,24 +6492,6 @@
         "responses": {
           "204": {
             "description": "No Content"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -6969,24 +6511,6 @@
             "schema": {
               "$ref": "#/definitions/CustomEmail"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7022,24 +6546,6 @@
             "schema": {
               "$ref": "#/definitions/CustomEmail"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7104,12 +6610,6 @@
               },
               "type": "array"
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -7153,24 +6653,6 @@
             "schema": {
               "$ref": "#/definitions/DuoAccount"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7195,24 +6677,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7248,24 +6712,6 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7287,24 +6733,6 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7324,24 +6752,6 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7383,24 +6793,6 @@
             "schema": {
               "$ref": "#/definitions/DuoApplication"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7422,24 +6814,6 @@
             "schema": {
               "$ref": "#/definitions/DuoAccount"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -7549,12 +6923,6 @@
               },
               "type": "array"
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -7634,7 +7002,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-GSuite"
+              "$ref": "#/definitions/GraphOperation-GSuite"
             }
           }
         ],
@@ -8158,24 +7526,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8203,24 +7553,6 @@
             "schema": {
               "$ref": "#/definitions/IPList"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8242,24 +7574,6 @@
             "schema": {
               "$ref": "#/definitions/IPList"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8279,24 +7593,6 @@
             "schema": {
               "$ref": "#/definitions/IPList"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8332,24 +7628,6 @@
             "schema": {
               "$ref": "#/definitions/IPList"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8377,24 +7655,6 @@
             "schema": {
               "$ref": "#/definitions/IPList"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -8552,17 +7812,6 @@
               },
               "type": "object"
             }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -8642,7 +7891,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-LdapServer"
+              "$ref": "#/definitions/GraphOperation-LdapServer"
             }
           }
         ],
@@ -8723,12 +7972,6 @@
                 "$ref": "#/definitions/samba-domain-output"
               },
               "type": "array"
-            }
-          },
-          "default": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/Error"
             }
           }
         },
@@ -9112,7 +8355,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-Office365"
+              "$ref": "#/definitions/GraphOperation-Office365"
             }
           }
         ],
@@ -9591,12 +8834,6 @@
               },
               "type": "array"
             }
-          },
-          "500": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -9776,7 +9013,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-Policy"
+              "$ref": "#/definitions/GraphOperation-Policy"
             }
           }
         ],
@@ -10253,12 +9490,6 @@
               },
               "type": "array"
             }
-          },
-          "500": {
-            "description": "Unexpected error.",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -10399,22 +9630,6 @@
               },
               "type": "object"
             }
-          },
-          "401": {
-            "description": "",
-            "examples": {
-              "application/json": {
-                "message": "Unauthorized"
-              }
-            },
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -10449,17 +9664,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/Administrator"
-            }
-          },
-          "401": {
-            "description": "",
-            "schema": {
-              "properties": {
-                "message": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
             }
           }
         },
@@ -10540,7 +9744,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-RadiusServer"
+              "$ref": "#/definitions/GraphOperation-RadiusServer"
             }
           }
         ],
@@ -10778,24 +9982,6 @@
         "responses": {
           "204": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -10815,24 +10001,6 @@
             "schema": {
               "$ref": "#/definitions/software-app"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -10868,24 +10036,6 @@
             "schema": {
               "$ref": "#/definitions/software-app"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -10965,7 +10115,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-SoftwareApp"
+              "$ref": "#/definitions/GraphOperation-SoftwareApp"
             }
           }
         ],
@@ -11276,12 +10426,6 @@
               },
               "type": "array"
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -11390,7 +10534,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-SystemGroup"
+              "$ref": "#/definitions/GraphOperation-SystemGroup"
             }
           }
         ],
@@ -11527,7 +10671,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-SystemGroup-Member"
+              "$ref": "#/definitions/GraphOperation-SystemGroup-Member"
             }
           },
           {
@@ -15348,7 +14492,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-System"
+              "$ref": "#/definitions/GraphOperation-System"
             }
           },
           {
@@ -15449,24 +14593,6 @@
             "schema": {
               "$ref": "#/definitions/systemfdekey"
             }
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -15911,12 +15037,6 @@
               },
               "type": "array"
             }
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
           }
         },
         "security": [
@@ -16091,7 +15211,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-UserGroup"
+              "$ref": "#/definitions/GraphOperation-UserGroup"
             }
           }
         ],
@@ -16352,7 +15472,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-UserGroup-Member"
+              "$ref": "#/definitions/GraphOperation-UserGroup-Member"
             }
           }
         ],
@@ -16900,7 +16020,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/GraphConnection-User"
+              "$ref": "#/definitions/GraphOperation-User"
             }
           }
         ],

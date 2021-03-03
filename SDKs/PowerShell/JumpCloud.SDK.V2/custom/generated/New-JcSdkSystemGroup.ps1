@@ -1,8 +1,32 @@
 <#
 .Synopsis
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Description
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -116,4 +140,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

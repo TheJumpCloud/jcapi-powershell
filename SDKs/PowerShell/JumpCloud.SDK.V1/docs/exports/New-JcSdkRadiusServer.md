@@ -8,7 +8,22 @@ schema: 2.0.0
 # New-JcSdkRadiusServer
 
 ## SYNOPSIS
-This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to create RADIUS servers in your organization.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{test_radius}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\":\"{secretpassword}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 
 ## SYNTAX
 
@@ -25,7 +40,22 @@ New-JcSdkRadiusServer -Body <IRadiusserverpost> [-Confirm] [-WhatIf] [<CommonPar
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to create RADIUS servers in your organization.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{test_radius}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\":\"{secretpassword}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 
 ## EXAMPLES
 

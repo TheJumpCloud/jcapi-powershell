@@ -1,8 +1,30 @@
 <#
 .Synopsis
-This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n\n```
+This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.
+
+##### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+
+```
 .Description
-This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n\n```
+This endpoint will return all of the data in your WorkDay Custom Report that has been associated with your WorkDay Instance in JumpCloud.
+
+##### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -165,4 +187,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

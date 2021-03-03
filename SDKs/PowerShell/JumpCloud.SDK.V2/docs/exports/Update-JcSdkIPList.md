@@ -8,7 +8,16 @@ schema: 2.0.0
 # Update-JcSdkIPList
 
 ## SYNOPSIS
-Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```
+Update a specific IP list.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{\"name\": \"New IP List Name\"}'
+```
 
 ## SYNTAX
 
@@ -36,7 +45,16 @@ Update-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>]
 ```
 
 ## DESCRIPTION
-Update a specific IP list.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"name\": \"New IP List Name\"}'\n```
+Update a specific IP list.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{\"name\": \"New IP List Name\"}'
+```
 
 ## EXAMPLES
 
@@ -191,8 +209,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IIPList
-
-### System.String
 
 ## NOTES
 

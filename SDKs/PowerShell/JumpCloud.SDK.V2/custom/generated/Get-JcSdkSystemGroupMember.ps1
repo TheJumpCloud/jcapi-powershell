@@ -1,8 +1,26 @@
 <#
 .Synopsis
-This endpoint returns the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the system members of a System Group.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Description
-This endpoint returns the system members of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the system members of a System Group.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -193,4 +211,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

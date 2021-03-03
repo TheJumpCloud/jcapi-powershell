@@ -1,10 +1,32 @@
 <#
 .Synopsis
 This endpoint allows you to create a translation rule for a specific G Suite instance.
-These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Translation Rule Parameters}\n  }'\n```
+These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Translation Rule Parameters}
+  }'
+```
 .Description
 This endpoint allows you to create a translation rule for a specific G Suite instance.
-These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Translation Rule Parameters}\n  }'\n```
+These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Translation Rule Parameters}
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -159,4 +181,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

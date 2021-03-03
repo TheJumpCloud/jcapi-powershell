@@ -8,7 +8,22 @@ schema: 2.0.0
 # Set-JcSdkPolicyAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a Policy.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{Group_ID}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -20,13 +35,13 @@ Set-JcSdkPolicyAssociation -PolicyId <String> -Id <String> -Op <String> -Type <S
 
 ### Set
 ```
-Set-JcSdkPolicyAssociation -PolicyId <String> -Body <IGraphConnectionPolicy> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkPolicyAssociation -PolicyId <String> -Body <IGraphOperationPolicy> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionPolicy> [-PassThru]
+Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationPolicy> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +52,22 @@ Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -O
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a Policy.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{Group_ID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -58,7 +88,7 @@ This endpoint allows you to manage the _direct_ associations of a Policy.\n\nA d
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +103,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (Policy)
+GraphOperation (Policy)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionPolicy
+Type: JumpCloud.SDK.V2.Models.IGraphOperationPolicy
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +245,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionPolicy
+### JumpCloud.SDK.V2.Models.IGraphOperationPolicy
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +262,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionPolicy>: GraphConnection (Policy)
+BODY <IGraphOperationPolicy>: GraphOperation (Policy)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "policy" can be associated to.
-  - `[Attributes <IGraphConnectionPolicyAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

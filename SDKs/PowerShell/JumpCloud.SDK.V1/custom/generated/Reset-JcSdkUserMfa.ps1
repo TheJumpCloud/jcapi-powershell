@@ -2,11 +2,37 @@
 .Synopsis
 This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
 This will result in the user being prompted to setup TOTP MFA when logging into userportal.
-Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```
+Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+
+Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'
+
+```
 .Description
 This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
 This will result in the user being prompted to setup TOTP MFA when logging into userportal.
-Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```
+Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+
+Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -21,7 +47,7 @@ JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -41,7 +67,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Reset-JcSdkUserMfa
 {
-    [OutputType([System.String])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='ResetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Reset', Mandatory)]
@@ -159,4 +185,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

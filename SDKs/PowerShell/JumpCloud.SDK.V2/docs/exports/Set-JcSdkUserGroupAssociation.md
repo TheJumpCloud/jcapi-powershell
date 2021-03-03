@@ -8,7 +8,23 @@ schema: 2.0.0
 # Set-JcSdkUserGroupAssociation
 
 ## SYNOPSIS
-This endpoint manages the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n  }'\n```
+This endpoint manages the _direct_ associations of this User Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system\",
+    \"id\": \"{SystemID}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -20,13 +36,13 @@ Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type 
 
 ### Set
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Body <IGraphConnectionUserGroup> [-PassThru] [-Confirm]
+Set-JcSdkUserGroupAssociation -GroupId <String> -Body <IGraphOperationUserGroup> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionUserGroup>
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUserGroup>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +53,23 @@ Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String>
 ```
 
 ## DESCRIPTION
-This endpoint manages the _direct_ associations of this User Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n  }'\n```
+This endpoint manages the _direct_ associations of this User Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example User Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system\",
+    \"id\": \"{SystemID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -58,7 +90,7 @@ This endpoint manages the _direct_ associations of this User Group.\n\nA direct 
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +105,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (UserGroup)
+GraphOperation (UserGroup)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionUserGroup
+Type: JumpCloud.SDK.V2.Models.IGraphOperationUserGroup
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +247,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionUserGroup
+### JumpCloud.SDK.V2.Models.IGraphOperationUserGroup
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +264,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionUserGroup>: GraphConnection (UserGroup)
+BODY <IGraphOperationUserGroup>: GraphOperation (UserGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "user_group" can be associated to.
-  - `[Attributes <IGraphConnectionUserGroupAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

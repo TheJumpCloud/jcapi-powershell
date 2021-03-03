@@ -9,7 +9,18 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to create a policy.
-Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```
+Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
 
 ## SYNTAX
 
@@ -26,7 +37,18 @@ New-JcSdkPolicy -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 
 ## DESCRIPTION
 This endpoint allows you to create a policy.
-Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```
+Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
 
 ## EXAMPLES
 

@@ -1,10 +1,32 @@
 <#
 .Synopsis
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 .Description
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -20,8 +42,6 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
 JumpCloud.SDK.V2.Models.ISoftwareApp
-.Outputs
-System.String
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -82,7 +102,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkSoftwareApp
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApp], [System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareApp])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -202,4 +222,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,7 +8,16 @@ schema: 2.0.0
 # Remove-JcSdkSystemGroup
 
 ## SYNOPSIS
-This endpoint allows you to delete a System Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint allows you to delete a System Group.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -24,7 +33,16 @@ Remove-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Conf
 ```
 
 ## DESCRIPTION
-This endpoint allows you to delete a System Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint allows you to delete a System Group.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

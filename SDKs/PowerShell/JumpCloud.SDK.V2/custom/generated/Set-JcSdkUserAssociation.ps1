@@ -1,8 +1,52 @@
 <#
 .Synopsis
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a User.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"attributes\": {
+      \"sudo\": {
+      \"enabled\": true,
+        \"withoutPassword\": false
+      }
+    },
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{GroupID}\"
+  }'
+```
 .Description
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a User.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"attributes\": {
+      \"sudo\": {
+      \"enabled\": true,
+        \"withoutPassword\": false
+      }
+    },
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{GroupID}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +57,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionUser
+JumpCloud.SDK.V2.Models.IGraphOperationUser
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,14 +67,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionUser>:
+BODY <IGraphOperationUser>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <String>: Targets which a "user" can be associated to.
-  [Attributes <IGraphConnectionUserAttributes1>]: The graph connection's attributes.
-    [(Any) <Object>]: This indicates any property can be added to this object.
-    [SudoEnabled <Boolean?>]:
-    [SudoWithoutPassword <Boolean?>]:
+  [AttributeSudoEnabled <Boolean?>]: Enables sudo
+  [AttributeSudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -79,8 +121,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionUser]
-    # GraphConnection (User)
+    [JumpCloud.SDK.V2.Models.IGraphOperationUser]
+    # GraphOperation (User)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -108,10 +150,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionUserAttributes1]))]
-    [System.Collections.Hashtable]
-    # The graph connection's attributes.
-    ${Attributes},
+    [System.Management.Automation.SwitchParameter]
+    # Enables sudo
+    ${AttributeSudoEnabled},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # Enable sudo without password (requires 'enabled' to be true)
+    ${AttributeSudoWithoutPassword},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -191,4 +239,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

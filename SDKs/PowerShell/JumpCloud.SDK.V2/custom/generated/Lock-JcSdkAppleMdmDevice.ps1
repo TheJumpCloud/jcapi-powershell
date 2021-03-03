@@ -1,8 +1,26 @@
 <#
 .Synopsis
-Locks a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Locks a DEP-enrolled device.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Description
-Locks a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Locks a DEP-enrolled device.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -17,7 +35,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -52,7 +70,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Lock-JcSdkAppleMdmDevice
 {
-    [OutputType([System.String])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='LockExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Lock', Mandatory)]
@@ -170,4 +188,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 
