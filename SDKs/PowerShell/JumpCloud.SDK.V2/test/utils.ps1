@@ -116,9 +116,6 @@ function setupEnv() {
     # Get the Apple MDM
     $global:PesterAppleMDM = Get-JcSdkAppleMdm
 
-    # Create Authentication Policy
-    $global:PesterTestAuthenticationPolicy = New-JcSdkAuthenticationPolicy -Name "AuthenticationPolicy-$(RandomString -len 7)" -EffectAction allow -TargetResources @{"type" = "user_portal" } -UserGroupInclusions $($global:PesterTestUserGroup.id)
-
     # Create New IP List
     $IpList = @{
         Description    = 'PesterIpList'
@@ -137,7 +134,6 @@ function setupEnv() {
     $global:PesterTestLdap = $global:PesterTestDirectories | ? { $_.type -eq "ldap_server" } | Select -First 1
 }
 
-    
 function cleanupEnv() {
     # Clean resources you create for testing
     Remove-JcSdkUser -Id:($global:PesterTestUser.Id)
@@ -152,7 +148,4 @@ function cleanupEnv() {
         'x-api-key' = $env:JCApiKey
     }
     Invoke-WebRequest -Method 'Delete' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
-
-    # Delete Authentication Policy
-    Remove-JcSdkAuthenticationPolicy -id $($global:PesterTestAuthenticationPolicy.id)
 }
