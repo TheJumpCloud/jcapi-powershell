@@ -13,6 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkCustomEmailConfiguration' {
     It 'SetExpanded' {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation -Type password_reset_confirmation -subject "CUSTOMMODIFY" } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning -Type password_expiration_warning -subject "CUSTOMMODIFY" } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user -Type lockout_notice_user -subject "CUSTOMMODIFY" } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration -Type password_expiration -subject "CUSTOMMODIFY" } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password -Type user_change_password -subject "CUSTOMMODIFY" } | Should -Not -Throw
+    }
+
+    It 'Set' {
         $types = ('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
         foreach ($type in $types) {
             $body = @{
@@ -25,14 +33,6 @@ Describe 'Set-JcSdkCustomEmailConfiguration' {
             }
             { Set-JcSdkCustomEmailConfiguration -CustomEmailType $type -BodyObject $body } | Should -Not -Throw
         }
-    }
-
-    It 'Set' {
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation -Type password_reset_confirmation -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning -Type password_expiration_warning -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user -Type lockout_notice_user -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration -Type password_expiration -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password -Type user_change_password -subject "CUSTOMMODIFY" } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
