@@ -116,14 +116,6 @@ function setupEnv() {
     # Get the Apple MDM
     $global:PesterAppleMDM = Get-JcSdkAppleMdm
 
-    # Create New IP List
-    $IpList = @{
-        Description    = 'PesterIpList'
-        Ips = '0.1.2.3'
-        Name    = 'Pester IP Test List'
-    }
-    $global:PesterIPList = New-JcSdkIpList @IpList
-
     # Get LDAP Server
     $global:PesterLdapServer = Get-JcSdkLdapServer
 

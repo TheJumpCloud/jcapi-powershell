@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkIPList' {
-    It 'List' -skip {
+    It 'List' {
         Get-JcSdkIPList | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
+    It 'Get' {
         Get-JcSdkIPList -Id $($global:PesterIPList.Id) | Should -Not -BeNullOrEmpty
     }
 
