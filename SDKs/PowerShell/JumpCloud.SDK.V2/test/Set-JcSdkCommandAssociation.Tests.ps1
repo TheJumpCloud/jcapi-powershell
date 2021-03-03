@@ -12,15 +12,27 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCommandAssociation' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system')
+        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -Not -BeNullOrEmpty
+
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id:($global:PesterTestSystem.Id) -Op:('remove') -Type:('system')
+        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -BeNullOrEmpty
     }
 
     It 'Set' {
-        { Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.Id) -Id $($global:PesterTestSystem.Id) -Op 'add' -Type 'system' } | Should -Not -Throw
-        { Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.Id) -Id $($global:PesterTestSystemGroup.Id) -Op 'add' -Type 'system_group' } | Should -Not -Throw
-        { Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.Id) -Id $($global:PesterTestSystem.Id) -Op 'remove' -Type 'system' } | Should -Not -Throw
-        { Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.Id) -Id $($global:PesterTestSystemGroup.Id) -Op 'remove' -Type 'system_group' } | Should -Not -Throw
+        $PesterDefAssociation = @{
+            Id   = $global:PesterTestSystem.Id;
+            Op   = 'add';
+            Type = 'system';
+            Attributes = @{};
+        }
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Body $PesterDefAssociation
+        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -Not -BeNullOrEmpty
+
+        $PesterDefAssociation.Op = 'remove'
+        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Body $PesterDefAssociation
+        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -BeNullOrEmpty
     }
 
     It 'SetViaIdentity' -skip {
