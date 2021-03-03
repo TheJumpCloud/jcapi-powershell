@@ -54,7 +54,7 @@ DotNetFrameworkVersion = '4.7.2'
 # RequiredModules = @()
 
 # Assemblies that must be loaded prior to importing this module
-RequiredAssemblies = './bin/JumpCloudApIs.private.dll'
+RequiredAssemblies = './bin/JumpCloud.SDK.V2.private.dll'
 
 # Script files (.ps1) that are run in the caller's environment prior to importing this module.
 # ScriptsToProcess = @()
