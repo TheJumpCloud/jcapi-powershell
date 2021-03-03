@@ -12,20 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkGSuiteTranslationRule' {
-    BeforeAll {
-        New-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -BuiltIn user_work_addresses
-    }
-    AfterAll {
-        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) | Select-Object -First 1
-        Remove-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -Id $rule.id
-    }
     It 'List' {
         Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id)
     }
 
     It 'Get' {
-        $rule = Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) | Select-Object -First 1
-        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -id $rule.id
+        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -id $($global:PesterTestGsuiteTranslationRule.id)
     }
 
     It 'GetViaIdentity' -skip {
