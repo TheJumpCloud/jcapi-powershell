@@ -1520,6 +1520,9 @@
     "organizationsettings": {
       "description": "",
       "properties": {
+        "agentVersion": {
+          "type": "string"
+        },
         "betaFeatures": {
           "additionalProperties": true,
           "type": "object"
@@ -3238,9 +3241,6 @@
             "schema": {
               "$ref": "#/definitions/triggerreturn"
             }
-          },
-          "401": {
-            "description": ""
           }
         },
         "security": [
@@ -3303,9 +3303,6 @@
             "schema": {
               "$ref": "#/definitions/commandresultslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3327,9 +3324,6 @@
             "schema": {
               "$ref": "#/definitions/commandresult"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3365,9 +3359,6 @@
             "schema": {
               "$ref": "#/definitions/commandresult"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3438,9 +3429,6 @@
             "schema": {
               "$ref": "#/definitions/commandslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3468,9 +3456,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3489,9 +3474,6 @@
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3520,9 +3502,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3558,9 +3537,6 @@
             "schema": {
               "$ref": "#/definitions/command"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -3607,13 +3583,6 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/commandfilereturn"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "type": "object"
             }
           }
         },
@@ -3729,12 +3698,6 @@
             "schema": {
               "$ref": "#/definitions/organization"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": ""
           }
         },
         "security": [
@@ -3775,12 +3738,6 @@
             "schema": {
               "$ref": "#/definitions/organization"
             }
-          },
-          "400": {
-            "description": ""
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4045,9 +4002,6 @@
             "schema": {
               "$ref": "#/definitions/organizationslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4109,9 +4063,6 @@
             "schema": {
               "$ref": "#/definitions/systemslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4173,9 +4124,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserslist"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4381,24 +4329,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4425,24 +4355,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4469,24 +4381,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4513,24 +4407,6 @@
         "responses": {
           "201": {
             "description": "Command created"
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4599,9 +4475,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserslist"
             }
-          },
-          "401": {
-            "description": ""
           }
         },
         "security": [
@@ -4629,12 +4502,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "400": {
-            "description": "User already exists"
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4656,9 +4523,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4694,9 +4558,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4732,9 +4593,6 @@
             "schema": {
               "$ref": "#/definitions/systemuserreturn"
             }
-          },
-          "401": {
-            "description": "Unauthorized"
           }
         },
         "security": [
@@ -4761,24 +4619,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4822,24 +4662,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4863,14 +4685,6 @@
                 "$ref": "#/definitions/sshkeylist"
               },
               "type": "array"
-            }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
             }
           }
         },
@@ -4907,14 +4721,6 @@
             "schema": {
               "$ref": "#/definitions/sshkeylist"
             }
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
-            }
           }
         },
         "security": [
@@ -4941,24 +4747,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "$ref": "#/responses/trait:standardErrors:400"
-          },
-          "401": {
-            "$ref": "#/responses/trait:standardErrors:401"
-          },
-          "403": {
-            "$ref": "#/responses/trait:standardErrors:403"
-          },
-          "404": {
-            "$ref": "#/responses/trait:standardErrors:404"
-          },
-          "409": {
-            "$ref": "#/responses/trait:standardErrors:409"
-          },
-          "500": {
-            "$ref": "#/responses/trait:standardErrors:500"
           }
         },
         "security": [
@@ -4977,14 +4765,6 @@
         "responses": {
           "200": {
             "description": ""
-          },
-          "400": {
-            "description": "",
-            "schema": {
-              "additionalProperties": true,
-              "description": "Bad Request",
-              "type": "object"
-            }
           }
         },
         "security": [

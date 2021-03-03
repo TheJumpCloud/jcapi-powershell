@@ -1,8 +1,38 @@
 <#
 .Synopsis
-This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```
+This endpoint allows you to update a system.
+
+#### Sample Request 
+```
+curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"displayName\":\"Name_Update\",
+\t\"allowSshPasswordAuthentication\":\"true\",
+\t\"allowSshRootLogin\":\"true\",
+\t\"allowMultiFactorAuthentication\":\"true\",
+\t\"allowPublicKeyAuthentication\":\"false\"
+}'
+```
 .Description
-This endpoint allows you to update a system.\n\n#### Sample Request \n```\ncurl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"displayName\":\"Name_Update\",\n\t\"allowSshPasswordAuthentication\":\"true\",\n\t\"allowSshRootLogin\":\"true\",\n\t\"allowMultiFactorAuthentication\":\"true\",\n\t\"allowPublicKeyAuthentication\":\"false\"\n}'\n```
+This endpoint allows you to update a system.
+
+#### Sample Request 
+```
+curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"displayName\":\"Name_Update\",
+\t\"allowSshPasswordAuthentication\":\"true\",
+\t\"allowSshRootLogin\":\"true\",
+\t\"allowMultiFactorAuthentication\":\"true\",
+\t\"allowPublicKeyAuthentication\":\"false\"
+}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -198,4 +228,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

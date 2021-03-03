@@ -1,8 +1,38 @@
 <#
 .Synopsis
-This endpoint allows you to update RADIUS servers in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to update RADIUS servers in your organization.
+
+####
+```
+curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{name_update}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\": \"{secret_password}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 .Description
-This endpoint allows you to update RADIUS servers in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{name_update}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\": \"{secret_password}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to update RADIUS servers in your organization.
+
+####
+```
+curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{name_update}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\": \"{secret_password}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -181,4 +211,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,40 +8,88 @@ schema: 2.0.0
 # Set-JcSdkOrganization
 
 ## SYNOPSIS
-This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
-We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```
+This endpoint allows you to update an Organization.
+
+Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
+We discourage the use of non-custom passwordCompliance values.
+
+`hasStripeCustomerId` is deprecated and will be removed.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"settings\": {
+    \"contactName\": \"Admin Name\",
+    \"contactEmail\": \"admin@company.com\",
+    \"systemUsersCanEdit\":true,
+    \"passwordPolicy\": {
+      \"enableMaxHistory\": true,
+      \"maxHistory\": 3
+    }
+  }
+}'
+```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkOrganization -Id <String> [-Settings <IOrganizationsettingsput>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### Set
 ```
 Set-JcSdkOrganization -Id <String>
- -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
- -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
-We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```
+This endpoint allows you to update an Organization.
+
+Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
+We discourage the use of non-custom passwordCompliance values.
+
+`hasStripeCustomerId` is deprecated and will be removed.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"settings\": {
+    \"contactName\": \"Admin Name\",
+    \"contactEmail\": \"admin@company.com\",
+    \"systemUsersCanEdit\":true,
+    \"passwordPolicy\": {
+      \"enableMaxHistory\": true,
+      \"maxHistory\": 3
+    }
+  }
+}'
+```
 
 ## EXAMPLES
 
@@ -105,21 +153,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
