@@ -266,8 +266,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonItemsItem
 
-### System.String
-
 ## NOTES
 
 ALIASES
