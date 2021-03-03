@@ -71,6 +71,8 @@ Try
                 $Config = $ConfigContent | ConvertFrom-Yaml
                 # $InputFile = $BaseFolder + $Config.'input-file'
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
+                $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
+                $PesterTestsFilePath = '{0}/PesterTests.ps1' -f $ToolsFolderPath
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
@@ -86,7 +88,6 @@ Try
                 $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
                 $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
-                $PesterTestsFilePath = '{0}/PesterTests.ps1' -f $CustomFolderPath
                 $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
@@ -362,7 +363,6 @@ Try
                         $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                         $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
                         $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
-                        $GitIgnoreContent = $GitIgnoreContent += "`n$($PesterTestsFilePath)"
                         $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
                 }
