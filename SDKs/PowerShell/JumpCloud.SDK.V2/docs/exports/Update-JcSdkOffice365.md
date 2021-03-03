@@ -8,7 +8,22 @@ schema: 2.0.0
 # Update-JcSdkOffice365
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\"
+  }'
+```
 
 ## SYNTAX
 
@@ -37,7 +52,22 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-U
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -203,31 +233,30 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
-  - `[Name <String>]`: 
-  - `[UserLockoutAction <String>]`: 
-  - `[UserPasswordExpirationAction <String>]`: 
+  - `[Name <String>]`:
+  - `[UserLockoutAction <String>]`:
+  - `[UserPasswordExpirationAction <String>]`:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

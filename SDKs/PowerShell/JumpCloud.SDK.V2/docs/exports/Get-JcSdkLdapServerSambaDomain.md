@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkLdapServerSambaDomain
 
 ## SYNOPSIS
-This endpoint returns a specific samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X GET \\
+  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -29,7 +38,16 @@ Get-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> [<CommonPar
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X GET \\
+  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 

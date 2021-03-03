@@ -8,7 +8,16 @@ schema: 2.0.0
 # Sync-JcSdkAppleMdmDevice
 
 ## SYNOPSIS
-Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 
 ## SYNTAX
 
@@ -24,7 +33,16 @@ Sync-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Con
 ```
 
 ## DESCRIPTION
-Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 
 ## EXAMPLES
 

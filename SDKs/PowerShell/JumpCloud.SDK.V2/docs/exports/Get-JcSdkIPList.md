@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkIPList
 
 ## SYNOPSIS
-Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -29,7 +37,15 @@ Get-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific IP list.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

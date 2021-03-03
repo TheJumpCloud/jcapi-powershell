@@ -8,7 +8,21 @@ schema: 2.0.0
 # Set-JcSdkIPList
 
 ## SYNOPSIS
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
+Replace a specific IP list.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Sample IP List\",
+    \"ips\": [
+      \"192.168.10.10\"
+    ]
+  }'
+```
 
 ## SYNTAX
 
@@ -36,7 +50,21 @@ Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-
 ```
 
 ## DESCRIPTION
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
+Replace a specific IP list.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Sample IP List\",
+    \"ips\": [
+      \"192.168.10.10\"
+    ]
+  }'
+```
 
 ## EXAMPLES
 
@@ -202,31 +230,30 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IIPListRequest>: IPListRequest
-  - `[Description <String>]`: 
-  - `[Ips <String[]>]`: 
-  - `[Name <String>]`: 
+  - `[Description <String>]`:
+  - `[Ips <String[]>]`:
+  - `[Name <String>]`:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

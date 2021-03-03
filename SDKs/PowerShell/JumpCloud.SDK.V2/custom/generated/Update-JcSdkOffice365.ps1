@@ -1,8 +1,38 @@
 <#
 .Synopsis
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\"
+  }'
+```
 .Description
-This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n```
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -52,50 +82,50 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkOffice365.md
 #>
- Function Update-JcSdkOffice365
+Function Update-JcSdkOffice365
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
-    [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Update', Mandatory)]
-    [Parameter(ParameterSetName='UpdateExpanded', Mandatory)]
+  [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
+  [CmdletBinding(DefaultParameterSetName = 'UpdateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Update', Mandatory)]
+    [Parameter(ParameterSetName = 'UpdateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Office 365 instance.
     ${Office365Id},
 
-    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'Update', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IOffice365PatchInput]
     # Office 365 Patch Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName = 'UpdateExpanded')]
+    [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName = 'UpdateExpanded')]
+    [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${UserLockoutAction},
 
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [Parameter(ParameterSetName = 'UpdateExpanded')]
+    [Parameter(ParameterSetName = 'UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
@@ -139,38 +169,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalOffice365 @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\Update-JcSdkInternalOffice365 @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

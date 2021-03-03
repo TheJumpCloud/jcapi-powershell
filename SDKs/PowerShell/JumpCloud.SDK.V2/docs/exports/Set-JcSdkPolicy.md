@@ -9,7 +9,19 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```
+Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
 
 ## SYNTAX
 
@@ -38,7 +50,19 @@ Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Name <String> [-TemplateI
 
 ## DESCRIPTION
 This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```
+Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
 
 ## EXAMPLES
 
@@ -207,35 +231,34 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
-  - `[Values <IPolicyValue[]>]`: 
+  - `[Values <IPolicyValue[]>]`:
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
   - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 ## RELATED LINKS
-

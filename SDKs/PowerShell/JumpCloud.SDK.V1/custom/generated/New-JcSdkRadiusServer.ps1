@@ -1,8 +1,38 @@
 <#
 .Synopsis
-This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to create RADIUS servers in your organization.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{test_radius}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\":\"{secretpassword}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 .Description
-This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```
+This endpoint allows you to create RADIUS servers in your organization.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{test_radius}\",
+    \"networkSourceIp\": \"{0.0.0.0}\",
+    \"sharedSecret\":\"{secretpassword}\",
+    \"userLockoutAction\": \"REMOVE\",
+    \"userPasswordExpirationAction\": \"MAINTAIN\"
+}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -151,4 +181,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

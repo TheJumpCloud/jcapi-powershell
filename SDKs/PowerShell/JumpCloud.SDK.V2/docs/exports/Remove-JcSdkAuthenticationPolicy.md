@@ -8,7 +8,15 @@ schema: 2.0.0
 # Remove-JcSdkAuthenticationPolicy
 
 ## SYNOPSIS
-Delete the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Delete the specified authentication policy.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -24,7 +32,15 @@ Remove-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Confirm
 ```
 
 ## DESCRIPTION
-Delete the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Delete the specified authentication policy.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

@@ -8,7 +8,17 @@ schema: 2.0.0
 # Get-JcSdkSystemPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the policy results for a particular system.
+
+##### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -18,7 +28,17 @@ Get-JcSdkSystemPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <St
 ```
 
 ## DESCRIPTION
-This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the policy results for a particular system.
+
+##### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

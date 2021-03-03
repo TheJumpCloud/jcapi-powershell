@@ -1,8 +1,34 @@
 <#
 .Synopsis
-This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the user members of a User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 .Description
-This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the user members of a User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember
+JumpCloud.SDK.V2.Models.IGraphOperationUserGroupMember
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,9 +49,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionUserGroupMember>:
-  Id <String>: The ObjectID of member being added or removed.
-  Op <String>: How to modify the membership connection.
+BODY <IGraphOperationUserGroupMember>:
+  Id <String>: The ObjectID of graph object being added or removed as an association.
+  Op <String>: How to modify the graph connection.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -51,47 +79,55 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserGroupMember.md
 #>
- Function Set-JcSdkUserGroupMember
+Function Set-JcSdkUserGroupMember
 {
-    [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Set', Mandatory)]
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+  [OutputType([System.Boolean])]
+  [CmdletBinding(DefaultParameterSetName = 'SetExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Set', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the User Group.
     ${GroupId},
 
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember]
-    # GraphConnection-UserGroup-Member
+    [JumpCloud.SDK.V2.Models.IGraphOperationUserGroupMember]
+    # GraphOperation (UserGroup-Member)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # The ObjectID of member being added or removed.
+    # The ObjectID of graph object being added or removed as an association.
     ${Id},
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # How to modify the membership connection.
+    # How to modify the graph connection.
     ${Op},
+
+    [Parameter(ParameterSetName = 'SetExpanded')]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes = ([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
+    [System.Collections.Hashtable]
+    # The graph attributes.
+    ${Attributes},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -137,38 +173,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroupMember @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroupMember @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

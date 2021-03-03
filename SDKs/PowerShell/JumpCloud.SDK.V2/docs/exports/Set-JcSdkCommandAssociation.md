@@ -8,7 +8,23 @@ schema: 2.0.0
 # Set-JcSdkCommandAssociation
 
 ## SYNOPSIS
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+ curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"Group_ID\"
+  }'
+```
 
 ## SYNTAX
 
@@ -20,13 +36,13 @@ Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type 
 
 ### Set
 ```
-Set-JcSdkCommandAssociation -CommandId <String> -Body <IGraphConnectionCommand> [-PassThru] [-Confirm]
+Set-JcSdkCommandAssociation -CommandId <String> -Body <IGraphOperationCommand> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionCommand> [-PassThru]
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationCommand> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +53,23 @@ Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -
 ```
 
 ## DESCRIPTION
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+ curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"Group_ID\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -58,7 +90,7 @@ This endpoint will allow you to manage the _direct_ associations of this Command
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +105,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (Command)
+GraphOperation (Command)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionCommand
+Type: JumpCloud.SDK.V2.Models.IGraphOperationCommand
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +247,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionCommand
+### JumpCloud.SDK.V2.Models.IGraphOperationCommand
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,34 +264,33 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionCommand>: GraphConnection (Command)
+BODY <IGraphOperationCommand>: GraphOperation (Command)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "command" can be associated to.
-  - `[Attributes <IGraphConnectionCommandAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

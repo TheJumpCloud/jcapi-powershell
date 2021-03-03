@@ -1520,6 +1520,9 @@
     "organizationsettings": {
       "description": "",
       "properties": {
+        "agentVersion": {
+          "type": "string"
+        },
         "betaFeatures": {
           "additionalProperties": true,
           "type": "object"
@@ -2964,7 +2967,8 @@
             "type": "integer"
           },
           {
-            "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
+            "default": "name",
+            "description": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
             "required": false,

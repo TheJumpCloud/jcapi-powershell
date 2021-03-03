@@ -1,8 +1,34 @@
 <#
 .Synopsis
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of a G Suite.
+
+##### Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"suspend\",
+    \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
 .Description
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of a G Suite.
+
+##### Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"suspend\",
+    \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -181,4 +207,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

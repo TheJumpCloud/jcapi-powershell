@@ -9,7 +9,16 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint will return the _direct_ associations of a Software Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -25,7 +34,16 @@ Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <
 
 ## DESCRIPTION
 This endpoint will return the _direct_ associations of a Software Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

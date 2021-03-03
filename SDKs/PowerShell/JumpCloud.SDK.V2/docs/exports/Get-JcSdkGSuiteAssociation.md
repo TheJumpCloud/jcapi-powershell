@@ -8,7 +8,18 @@ schema: 2.0.0
 # Get-JcSdkGSuiteAssociation
 
 ## SYNOPSIS
-This endpoint returns the _direct_ associations of this G Suite instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the _direct_ associations of this G Suite instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.
+
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations?targets=user_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -23,7 +34,18 @@ Get-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Strin
 ```
 
 ## DESCRIPTION
-This endpoint returns the _direct_ associations of this G Suite instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns the _direct_ associations of this G Suite instance.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example G Suite and Users.
+
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associations?targets=user_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

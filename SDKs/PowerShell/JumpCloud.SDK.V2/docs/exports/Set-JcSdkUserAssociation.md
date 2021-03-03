@@ -8,36 +8,80 @@ schema: 2.0.0
 # Set-JcSdkUserAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a User.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"attributes\": {
+      \"sudo\": {
+      \"enabled\": true,
+        \"withoutPassword\": false
+      }
+    },
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{GroupID}\"
+  }'
+```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <String> [-Attributes <Hashtable>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <String> [-AttributeSudoEnabled]
+ [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkUserAssociation -UserId <String> -Body <IGraphConnectionUser> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkUserAssociation -UserId <String> -Body <IGraphOperationUser> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionUser> [-PassThru]
+Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUser> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a User.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"attributes\": {\n      \"sudo\": {\n      \"enabled\": true,\n        \"withoutPassword\": false\n      }\n    },\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{GroupID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a User.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"attributes\": {
+      \"sudo\": {
+      \"enabled\": true,
+        \"withoutPassword\": false
+      }
+    },
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"{GroupID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -57,11 +101,26 @@ This endpoint allows you to manage the _direct_ associations of a User.\n\nA dir
 
 ## PARAMETERS
 
-### -Attributes
-The graph connection's attributes.
+### -AttributeSudoEnabled
+Enables sudo
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributeSudoWithoutPassword
+Enable sudo without password (requires 'enabled' to be true)
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -73,11 +132,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (User)
+GraphOperation (User)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionUser
+Type: JumpCloud.SDK.V2.Models.IGraphOperationUser
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +274,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionUser
+### JumpCloud.SDK.V2.Models.IGraphOperationUser
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,36 +291,33 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionUser>: GraphConnection (User)
+BODY <IGraphOperationUser>: GraphOperation (User)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "user" can be associated to.
-  - `[Attributes <IGraphConnectionUserAttributes1>]`: The graph connection's attributes.
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[SudoEnabled <Boolean?>]`: 
-    - `[SudoWithoutPassword <Boolean?>]`: 
+  - `[AttributeSudoEnabled <Boolean?>]`: Enables sudo
+  - `[AttributeSudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

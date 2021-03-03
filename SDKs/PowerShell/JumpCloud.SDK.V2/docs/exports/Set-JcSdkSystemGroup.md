@@ -8,7 +8,18 @@ schema: 2.0.0
 # Set-JcSdkSystemGroup
 
 ## SYNOPSIS
-This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Name_Update\"\n  }'\n```
+This endpoint allows you to do a full update of the System Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Name_Update\"
+  }'
+```
 
 ## SYNTAX
 
@@ -35,7 +46,18 @@ Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Conf
 ```
 
 ## DESCRIPTION
-This endpoint allows you to do a full update of the System Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Name_Update\"\n  }'\n```
+This endpoint allows you to do a full update of the System Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Name_Update\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -174,26 +196,25 @@ BODY <ISystemGroupData>: SystemGroupData
   - `Name <String>`: Display name of a System Group.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

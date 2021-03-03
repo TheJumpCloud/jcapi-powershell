@@ -1,8 +1,26 @@
 <#
 .Synopsis
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular System User.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -212,4 +230,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

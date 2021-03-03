@@ -1,10 +1,30 @@
 <#
 .Synopsis
 This endpoint allows you to run the lock command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 .Description
 This endpoint allows you to run the lock command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -127,4 +147,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

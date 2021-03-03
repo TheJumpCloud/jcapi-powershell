@@ -8,7 +8,21 @@ schema: 2.0.0
 # Set-JcSdkWorkday
 
 ## SYNOPSIS
-This endpoint allows you to update the name and Custom Report URL for a Workday Instance.\n\nCurrently, the name can not be changed from the default of `Workday Import`.\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"reportUrl\":\"{Report_URL}\",\n\t\"name\":\"{Name}\"\n}\t'\n```
+This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
+
+Currently, the name can not be changed from the default of `Workday Import`.
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"reportUrl\":\"{Report_URL}\",
+\t\"name\":\"{Name}\"
+}\t'
+```
 
 ## SYNTAX
 
@@ -35,7 +49,21 @@ Set-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-Report
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update the name and Custom Report URL for a Workday Instance.\n\nCurrently, the name can not be changed from the default of `Workday Import`.\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"reportUrl\":\"{Report_URL}\",\n\t\"name\":\"{Name}\"\n}\t'\n```
+This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
+
+Currently, the name can not be changed from the default of `Workday Import`.
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"reportUrl\":\"{Report_URL}\",
+\t\"name\":\"{Name}\"
+}\t'
+```
 
 ## EXAMPLES
 

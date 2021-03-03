@@ -1,44 +1,44 @@
 <#
 .Synopsis
-Get a list of all Apple MDM configurations.
-An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+This endpoint returns all pricing & packaging subscriptions.
 
-Note: currently only one MDM configuration per organization is supported.
+##### Sample Request
 
-#### Sample Request
 ```
-curl https://console.jumpcloud.com/api/v2/applemdms \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+ curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-```
+  ```
 .Description
-Get a list of all Apple MDM configurations.
-An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+This endpoint returns all pricing & packaging subscriptions.
 
-Note: currently only one MDM configuration per organization is supported.
+##### Sample Request
 
-#### Sample Request
 ```
-curl https://console.jumpcloud.com/api/v2/applemdms \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+ curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-```
+  ```
 .Example
-PS C:\> Get-JcSdkAppleMdm
+PS C:\> {{ Add code here }}
 
-Get Apple MDM Server information within a JumpCloud Tenant
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.IAppleMdm
+JumpCloud.SDK.V2.Models.ISubscription
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdm.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSubscription.md
 #>
- Function Get-JcSdkAppleMdm
+ Function Get-JcSdkSubscription
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V2.Models.ISubscription])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -96,7 +96,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalSubscription @PSBoundParameters
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

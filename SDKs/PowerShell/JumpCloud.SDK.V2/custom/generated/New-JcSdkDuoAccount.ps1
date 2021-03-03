@@ -1,10 +1,30 @@
 <#
 .Synopsis
 Registers a Duo account for an organization.
-Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Description
 Registers a Duo account for an organization.
-Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -96,4 +116,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

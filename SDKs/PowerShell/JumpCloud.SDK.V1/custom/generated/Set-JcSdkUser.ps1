@@ -1,8 +1,36 @@
 <#
 .Synopsis
-This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to update a system user.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 .Description
-This endpoint allows you to update a system user.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to update a system user.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -493,4 +521,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkDirectory
 
 ## SYNOPSIS
-This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -17,7 +25,15 @@ Get-JcSdkDirectory [-Fields <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

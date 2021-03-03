@@ -1,8 +1,26 @@
 <#
 .Synopsis
-This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific Active Directory.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Description
-This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns a specific Active Directory.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -220,4 +238,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

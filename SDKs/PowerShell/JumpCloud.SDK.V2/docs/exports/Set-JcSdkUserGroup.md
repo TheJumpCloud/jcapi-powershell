@@ -8,15 +8,27 @@ schema: 2.0.0
 # Set-JcSdkUserGroup
 
 ## SYNOPSIS
-This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```
+This endpoint allows you to do a full update of the User Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    \"name\": \"group_update\"
+  }'
+```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
- [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
+ [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
+ [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -33,13 +45,25 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
- [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>] [-AttributeSambaEnabled]
- [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
+ [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
+ [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```
+This endpoint allows you to do a full update of the User Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    \"name\": \"group_update\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -59,12 +83,44 @@ This endpoint allows you to do a full update of the User Group.\n\n#### Sample R
 
 ## PARAMETERS
 
+### -AttributeLdapGroups
+.
+To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -AttributePosixGroups
 .
 To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]
+Type: JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributeRadiusReply
+.
+To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -251,44 +307,56 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>: .
-  - `[Id <Int32?>]`: 
-  - `[Name <String>]`: 
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>: .
+  - `Name <String>`:
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>: .
+  - `Id <Single>`:
+  - `Name <String>`:
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>: .
+  - `Name <String>`:
+  - `Value <String>`:
 
 BODY <IUserGroupPut>: UserGroupPut
   - `Name <String>`: Display name of a User Group.
-  - `[AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]`: 
-    - `[Id <Int32?>]`: 
-    - `[Name <String>]`: 
-  - `[AttributeSambaEnabled <Boolean?>]`: 
+  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`:
+    - `Name <String>`:
+  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`:
+    - `Id <Single>`:
+    - `Name <String>`:
+  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`:
+    - `Name <String>`:
+    - `Value <String>`:
+  - `[AttributeSambaEnabled <Boolean?>]`:
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
-  - `[MemberQueryFilters <IFilter[]>]`: 
+  - `[MemberQueryFilters <IFilter[]>]`:
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 MEMBERQUERYFILTERS <IFilter[]>: .
   - `Field <String>`: Name of field in filter target object.
@@ -296,4 +364,3 @@ MEMBERQUERYFILTERS <IFilter[]>: .
   - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
-

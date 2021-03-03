@@ -1,8 +1,32 @@
 <#
 .Synopsis
-This endpoint allows you to create a samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to create a samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 .Description
-This endpoint allows you to create a samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to create a samba domain for an LDAP server.
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -51,43 +75,43 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkLdapServerSambaDomain.md
 #>
- Function New-JcSdkLdapServerSambaDomain
+Function New-JcSdkLdapServerSambaDomain
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomainOutput])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Create', Mandatory)]
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+  [OutputType([JumpCloud.SDK.V2.Models.ISambaDomainOutput])]
+  [CmdletBinding(DefaultParameterSetName = 'CreateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Create', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # Unique identifier of the LDAP server.
     ${LdapserverId},
 
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'Create', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'CreateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ISambaDomainInput]
     # Samba Domain Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Name of this domain's WorkGroup
     ${Name},
 
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Security identifier of this domain
@@ -131,38 +155,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalLdapServerSambaDomain @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalLdapServerSambaDomain @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

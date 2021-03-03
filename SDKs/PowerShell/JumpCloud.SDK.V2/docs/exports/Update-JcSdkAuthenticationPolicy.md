@@ -8,7 +8,16 @@ schema: 2.0.0
 # Update-JcSdkAuthenticationPolicy
 
 ## SYNOPSIS
-Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
 
 ## SYNTAX
 
@@ -41,7 +50,16 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditi
 ```
 
 ## DESCRIPTION
-Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
 
 ## EXAMPLES
 

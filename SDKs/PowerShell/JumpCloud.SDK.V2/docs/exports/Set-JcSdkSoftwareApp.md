@@ -9,7 +9,18 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 
 ## SYNTAX
 
@@ -38,7 +49,18 @@ Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Disp
 
 ## DESCRIPTION
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```
+Only displayName can be changed.
+
+#### Sample Request
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"Adobe Reader\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -205,55 +227,54 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <ISoftwareApp>: Software Application Package Object
-  - `[DisplayName <String>]`: 
-  - `[Id <String>]`: 
-  - `[Settings <IJcSoftwareAppSettings[]>]`: 
-    - `[AllowUpdateDelay <Boolean?>]`: 
-    - `[AppleVppAssignedLicenses <Int32?>]`: 
-    - `[AppleVppAvailableLicenses <Int32?>]`: 
+  - `[DisplayName <String>]`:
+  - `[Id <String>]`:
+  - `[Settings <IJcSoftwareAppSettings[]>]`:
+    - `[AllowUpdateDelay <Boolean?>]`:
+    - `[AppleVppAssignedLicenses <Int32?>]`:
+    - `[AppleVppAvailableLicenses <Int32?>]`:
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[AppleVppTotalLicenses <Int32?>]`: 
-    - `[AutoUpdate <Boolean?>]`: 
+    - `[AppleVppTotalLicenses <Int32?>]`:
+    - `[AutoUpdate <Boolean?>]`:
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-    - `[PackageId <String>]`: 
+    - `[PackageId <String>]`:
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
-  - `[AllowUpdateDelay <Boolean?>]`: 
-  - `[AppleVppAssignedLicenses <Int32?>]`: 
-  - `[AppleVppAvailableLicenses <Int32?>]`: 
+  - `[AllowUpdateDelay <Boolean?>]`:
+  - `[AppleVppAssignedLicenses <Int32?>]`:
+  - `[AppleVppAvailableLicenses <Int32?>]`:
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[AppleVppTotalLicenses <Int32?>]`: 
-  - `[AutoUpdate <Boolean?>]`: 
+  - `[AppleVppTotalLicenses <Int32?>]`:
+  - `[AutoUpdate <Boolean?>]`:
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-  - `[PackageId <String>]`: 
+  - `[PackageId <String>]`:
   - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 ## RELATED LINKS
-

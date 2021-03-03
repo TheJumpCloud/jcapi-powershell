@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkWorkday
 
 ## SYNOPSIS
-This endpoint will return  all the available information about an instance of Workday.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return  all the available information about an instance of Workday.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -28,7 +37,16 @@ Get-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint will return  all the available information about an instance of Workday.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return  all the available information about an instance of Workday.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 

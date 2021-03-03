@@ -8,7 +8,19 @@ schema: 2.0.0
 # Get-JcSdkOffice365Association
 
 ## SYNOPSIS
-This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns _direct_ associations of an Office 365 instance.
+
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -23,7 +35,19 @@ Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <St
 ```
 
 ## DESCRIPTION
-This endpoint returns _direct_ associations of an Office 365 instance.\n\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns _direct_ associations of an Office 365 instance.
+
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Office 365 and Users.
+
+#### Sample Request
+```
+curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/associations?targets=user_group' \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

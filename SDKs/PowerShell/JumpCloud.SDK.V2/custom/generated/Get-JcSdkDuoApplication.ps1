@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific Duo application that is associated with the specified Duo account.
+
+#### Sample Request
+```
+  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific Duo application that is associated with the specified Duo account.
+
+#### Sample Request
+```
+  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -154,4 +170,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

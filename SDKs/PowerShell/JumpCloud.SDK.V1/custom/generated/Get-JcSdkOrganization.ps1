@@ -1,8 +1,26 @@
 <#
 .Synopsis
-This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular Organization.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
-This endpoint returns a particular Organization.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a particular Organization.
+
+#### Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -213,4 +231,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

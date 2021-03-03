@@ -1,10 +1,26 @@
 <#
 .Synopsis
 Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+
+#### Sample Request
+```
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Description
 Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+
+#### Sample Request
+```
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -155,4 +171,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -1,8 +1,32 @@
 <#
 .Synopsis
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Description
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -26,19 +50,19 @@ BODY <ISystemGroupData>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSystemGroup.md
 #>
- Function New-JcSdkSystemGroup
+Function New-JcSdkSystemGroup
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISystemGroup])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
+  [OutputType([JumpCloud.SDK.V2.Models.ISystemGroup])]
+  [CmdletBinding(DefaultParameterSetName = 'CreateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ISystemGroupData]
     # SystemGroupData
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Display name of a System Group.
@@ -82,38 +106,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalSystemGroup @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalSystemGroup @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

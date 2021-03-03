@@ -1,8 +1,42 @@
 <#
 .Synopsis
-Lists all Apple MDM devices.\n\nThe filter and sort queries will allow the following fields:\n`createdAt`\n`depRegistered`\n`enrolled`\n`id`\n`osVersion`\n`serialNumber`\n`udid`\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\\n  -H 'accept: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Lists all Apple MDM devices.
+
+The filter and sort queries will allow the following fields:
+`createdAt`
+`depRegistered`
+`enrolled`
+`id`
+`osVersion`
+`serialNumber`
+`udid`
+
+#### Sample Request
+```
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\
+  -H 'accept: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Description
-Lists all Apple MDM devices.\n\nThe filter and sort queries will allow the following fields:\n`createdAt`\n`depRegistered`\n`enrolled`\n`id`\n`osVersion`\n`serialNumber`\n`udid`\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\\n  -H 'accept: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```
+Lists all Apple MDM devices.
+
+The filter and sort queries will allow the following fields:
+`createdAt`
+`depRegistered`
+`enrolled`
+`id`
+`osVersion`
+`serialNumber`
+`udid`
+
+#### Sample Request
+```
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\
+  -H 'accept: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -190,4 +224,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

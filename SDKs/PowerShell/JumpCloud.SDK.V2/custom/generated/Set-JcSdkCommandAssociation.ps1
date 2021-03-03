@@ -1,8 +1,40 @@
 <#
 .Synopsis
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+ curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"Group_ID\"
+  }'
+```
 .Description
-This endpoint will allow you to manage the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\n curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"Group_ID\"\n  }'\n```
+This endpoint will allow you to manage the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+ curl -X POST https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system_group\",
+    \"id\": \"Group_ID\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,7 +45,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphConnectionCommand
+JumpCloud.SDK.V2.Models.IGraphOperationCommand
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -23,11 +55,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphConnectionCommand>:
+BODY <IGraphOperationCommand>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <String>: Targets which a "command" can be associated to.
-  [Attributes <IGraphConnectionCommandAttributes>]: The graph connection's attributes.
+  [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
@@ -54,61 +86,61 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkCommandAssociation.md
 #>
- Function Set-JcSdkCommandAssociation
+Function Set-JcSdkCommandAssociation
 {
-    [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Set', Mandatory)]
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+  [OutputType([System.Boolean])]
+  [CmdletBinding(DefaultParameterSetName = 'SetExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Set', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Command.
     ${CommandId},
 
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphConnectionCommand]
-    # GraphConnection (Command)
+    [JumpCloud.SDK.V2.Models.IGraphOperationCommand]
+    # GraphOperation (Command)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The ObjectID of graph object being added or removed as an association.
     ${Id},
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # How to modify the graph connection.
     ${Op},
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Targets which a "command" can be associated to.
     ${Type},
 
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName = 'SetExpanded')]
+    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphConnectionCommandAttributes]))]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes = ([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
     [System.Collections.Hashtable]
-    # The graph connection's attributes.
+    # The graph attributes.
     ${Attributes},
 
     [Parameter(DontShow)]
@@ -155,38 +187,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalCommandAssociation @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalCommandAssociation @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

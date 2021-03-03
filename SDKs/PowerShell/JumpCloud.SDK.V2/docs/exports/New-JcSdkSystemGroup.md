@@ -8,7 +8,19 @@ schema: 2.0.0
 # New-JcSdkSystemGroup
 
 ## SYNOPSIS
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -23,7 +35,19 @@ New-JcSdkSystemGroup -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParam
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -129,4 +153,3 @@ BODY <ISystemGroupData>: SystemGroupData
   - `Name <String>`: Display name of a System Group.
 
 ## RELATED LINKS
-

@@ -8,7 +8,18 @@ schema: 2.0.0
 # Get-JcSdkCommandAssociation
 
 ## SYNOPSIS
-This endpoint will return the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint will return the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -23,7 +34,18 @@ Get-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Stri
 ```
 
 ## DESCRIPTION
-This endpoint will return the _direct_ associations of this Command.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint will return the _direct_ associations of this Command.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Commands and User Groups.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associations?targets=system_group \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

@@ -8,7 +8,19 @@ schema: 2.0.0
 # Get-JcSdkSystemAssociation
 
 ## SYNOPSIS
-This endpoint returns the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the _direct_ associations of a System.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -25,7 +37,19 @@ Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Strin
 ```
 
 ## DESCRIPTION
-This endpoint returns the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns the _direct_ associations of a System.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

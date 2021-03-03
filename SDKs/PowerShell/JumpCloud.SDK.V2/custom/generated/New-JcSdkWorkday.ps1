@@ -1,10 +1,58 @@
 <#
 .Synopsis
-This endpoint allows you to create a new workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\nCurrently, only one instance is allowed and it must be `Workday Import`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Workday2\",\n    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",\n    \"auth\": {\n      \"basic\": {\n        \"username\": \"someDeveloper\",\n        \"password\": \"notTheRealPassword\"\n      }\n    }\n  }'\n```
+This endpoint allows you to create a new workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+Currently, only one instance is allowed and it must be `Workday Import`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Workday2\",
+    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",
+    \"auth\": {
+      \"basic\": {
+        \"username\": \"someDeveloper\",
+        \"password\": \"notTheRealPassword\"
+      }
+    }
+  }'
+```
 .Description
-This endpoint allows you to create a new workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\nCurrently, only one instance is allowed and it must be `Workday Import`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Workday2\",\n    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",\n    \"auth\": {\n      \"basic\": {\n        \"username\": \"someDeveloper\",\n        \"password\": \"notTheRealPassword\"\n      }\n    }\n  }'\n```
+This endpoint allows you to create a new workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+Currently, only one instance is allowed and it must be `Workday Import`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Workday2\",
+    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",
+    \"auth\": {
+      \"basic\": {
+        \"username\": \"someDeveloper\",
+        \"password\": \"notTheRealPassword\"
+      }
+    }
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -32,43 +80,43 @@ BODY <IWorkdayInput>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkWorkday.md
 #>
- Function New-JcSdkWorkday
+Function New-JcSdkWorkday
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
+  [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
+  [CmdletBinding(DefaultParameterSetName = 'CreateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+  Param(
+    [Parameter(ParameterSetName = 'Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IWorkdayInput]
     # Workday Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName = 'CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${BasicPassword},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName = 'CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${BasicUsername},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName = 'CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName = 'CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${OauthCode},
 
-    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName = 'CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
@@ -112,38 +160,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
+  )
+  Begin
+  {
+    $Results = @()
+    $PSBoundParameters.Add('HttpPipelineAppend', {
+        param($req, $callback, $next)
+        # call the next step in the Pipeline
+        $ResponseTask = $next.SendAsync($req, $callback)
+        $global:JCHttpRequest = $req
+        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+        $global:JCHttpResponse = $ResponseTask
+        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+        Return $ResponseTask
+      }
     )
-    Begin
-    {
-        $Results = @()
-        $PSBoundParameters.Add('HttpPipelineAppend', {
-                param($req, $callback, $next)
-                # call the next step in the Pipeline
-                $ResponseTask = $next.SendAsync($req, $callback)
-                $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-                $global:JCHttpResponse = $ResponseTask
-                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-                Return $ResponseTask
-            }
-        )
+  }
+  Process
+  {
+    $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalWorkday @PSBoundParameters
+  }
+  End
+  {
+    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+    # Clean up global variables
+    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+    $GlobalVars | ForEach-Object {
+      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
     }
-    Process
-    {
-        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalWorkday @PSBoundParameters
-    }
-    End
-    {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-        $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
-        Return $Results
-    }
+    Return $Results
+  }
 }
-

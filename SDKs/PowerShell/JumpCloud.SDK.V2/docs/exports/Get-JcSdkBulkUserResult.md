@@ -8,7 +8,16 @@ schema: 2.0.0
 # Get-JcSdkBulkUserResult
 
 ## SYNOPSIS
-This endpoint will return the results of particular user import or update job request.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return the results of particular user import or update job request.
+
+#### Sample Request
+```
+curl -X GET \\
+  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -23,7 +32,16 @@ Get-JcSdkBulkUserResult -InputObject <IJumpCloudApIsIdentity> [<CommonParameters
 ```
 
 ## DESCRIPTION
-This endpoint will return the results of particular user import or update job request.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return the results of particular user import or update job request.
+
+#### Sample Request
+```
+curl -X GET \\
+  https://console.jumpcloud.com/api/v2/bulk/users/{ImportJobID}/results \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 

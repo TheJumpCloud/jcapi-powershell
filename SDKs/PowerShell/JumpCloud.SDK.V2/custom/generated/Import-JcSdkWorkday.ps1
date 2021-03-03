@@ -1,8 +1,50 @@
 <#
 .Synopsis
-The endpoint allows you to create a Workday Import request.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"WorkdayID\",\"value\":\"name.name\"}\n\t\t\t]\n\t\t\n\t}\n]\n```
+The endpoint allows you to create a Workday Import request.
+
+#### Sample Request 
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t\t\"email\":\"{email}\",
+\t\t\"firstname\":\"{firstname}\",
+\t\t\"lastname\":\"{firstname}\",
+\t\t\"username\":\"{username}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
+\t\t\t{\"name\":\"WorkdayID\",\"value\":\"name.name\"}
+\t\t\t]
+\t\t
+\t}
+]
+```
 .Description
-The endpoint allows you to create a Workday Import request.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"WorkdayID\",\"value\":\"name.name\"}\n\t\t\t]\n\t\t\n\t}\n]\n```
+The endpoint allows you to create a Workday Import request.
+
+#### Sample Request 
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t\t\"email\":\"{email}\",
+\t\t\"firstname\":\"{firstname}\",
+\t\t\"lastname\":\"{firstname}\",
+\t\t\"username\":\"{username}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
+\t\t\t{\"name\":\"WorkdayID\",\"value\":\"name.name\"}
+\t\t\t]
+\t\t
+\t}
+]
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -151,4 +193,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

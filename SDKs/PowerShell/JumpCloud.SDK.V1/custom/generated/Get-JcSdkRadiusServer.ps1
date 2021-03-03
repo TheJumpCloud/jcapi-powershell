@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get a RADIUS server in your organization.
+
+####
+```
+curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+```
 .Description
-This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```
+This endpoint allows you to get a RADIUS server in your organization.
+
+####
+```
+curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -207,4 +223,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

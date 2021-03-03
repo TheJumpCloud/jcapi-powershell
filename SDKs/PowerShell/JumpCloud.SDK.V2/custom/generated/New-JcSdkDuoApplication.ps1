@@ -1,8 +1,36 @@
 <#
 .Synopsis
-Creates a Duo application for your organization and the specified account.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Application Name\",\n    \"apiHost\": \"api-1234.duosecurity.com\",\n    \"integrationKey\": \"1234\",\n    \"secretKey\": \"5678\"\n  }'\n```
+Creates a Duo application for your organization and the specified account.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Application Name\",
+    \"apiHost\": \"api-1234.duosecurity.com\",
+    \"integrationKey\": \"1234\",
+    \"secretKey\": \"5678\"
+  }'
+```
 .Description
-Creates a Duo application for your organization and the specified account.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Application Name\",\n    \"apiHost\": \"api-1234.duosecurity.com\",\n    \"integrationKey\": \"1234\",\n    \"secretKey\": \"5678\"\n  }'\n```
+Creates a Duo application for your organization and the specified account.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Application Name\",
+    \"apiHost\": \"api-1234.duosecurity.com\",
+    \"integrationKey\": \"1234\",
+    \"secretKey\": \"5678\"
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -181,4 +209,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

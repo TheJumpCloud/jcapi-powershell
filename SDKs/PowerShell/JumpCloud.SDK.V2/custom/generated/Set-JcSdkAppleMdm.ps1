@@ -2,11 +2,51 @@
 .Synopsis
 Updates an Apple MDM configuration.
 This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
-It may also be used to update the DEP Settings.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"MDM name\",\n    \"appleSignedCert\": \"{CERTIFICATE}\",\n    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\",\n    \"dep\": {\n      \"welcomeScreen\": {\n        \"title\": \"Welcome\",\n        \"paragraph\": \"In just a few steps, you will be working securely from your Mac.\",\n        \"button\": \"continue\",\n      },\n    },\n  }'\n```
+It may also be used to update the DEP Settings.
+
+#### Sample Request
+```
+  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"MDM name\",
+    \"appleSignedCert\": \"{CERTIFICATE}\",
+    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\",
+    \"dep\": {
+      \"welcomeScreen\": {
+        \"title\": \"Welcome\",
+        \"paragraph\": \"In just a few steps, you will be working securely from your Mac.\",
+        \"button\": \"continue\",
+      },
+    },
+  }'
+```
 .Description
 Updates an Apple MDM configuration.
 This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
-It may also be used to update the DEP Settings.\n\n#### Sample Request\n```\n  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"MDM name\",\n    \"appleSignedCert\": \"{CERTIFICATE}\",\n    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\",\n    \"dep\": {\n      \"welcomeScreen\": {\n        \"title\": \"Welcome\",\n        \"paragraph\": \"In just a few steps, you will be working securely from your Mac.\",\n        \"button\": \"continue\",\n      },\n    },\n  }'\n```
+It may also be used to update the DEP Settings.
+
+#### Sample Request
+```
+  curl -X PUT https://console.jumpcloud.com/api/v2/applemdms/{ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"MDM name\",
+    \"appleSignedCert\": \"{CERTIFICATE}\",
+    \"encryptedDepServerToken\": \"{SERVER_TOKEN}\",
+    \"dep\": {
+      \"welcomeScreen\": {
+        \"title\": \"Welcome\",
+        \"paragraph\": \"In just a few steps, you will be working securely from your Mac.\",
+        \"button\": \"continue\",
+      },
+    },
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -230,4 +270,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -1,8 +1,26 @@
 <#
 .Synopsis
-Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
 .Description
-Patch the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"disabled\": false }'\n```
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -236,4 +254,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

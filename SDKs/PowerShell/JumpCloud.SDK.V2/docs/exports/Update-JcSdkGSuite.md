@@ -8,7 +8,20 @@ schema: 2.0.0
 # Update-JcSdkGSuite
 
 ## SYNOPSIS
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of a G Suite.
+
+##### Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"suspend\",
+    \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
 
 ## SYNTAX
 
@@ -37,7 +50,20 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name
 ```
 
 ## DESCRIPTION
-This endpoint allows updating some attributes of a G Suite.\n\n##### Sample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"maintain\"\n  }'\n```
+This endpoint allows updating some attributes of a G Suite.
+
+##### Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"suspend\",
+    \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
 
 ## EXAMPLES
 

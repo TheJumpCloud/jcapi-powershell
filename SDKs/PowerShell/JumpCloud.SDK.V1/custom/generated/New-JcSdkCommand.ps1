@@ -1,8 +1,42 @@
 <#
 .Synopsis
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 .Description
-This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```
+This endpoint allows you to create a new command.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/commands/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"name\":\"Test API Command\",
+\t\"command\":\"String\",
+\t\"user\":\"{UserID}\",
+\t\"schedule\":\"\",
+\t\"timeout\":\"100\"
+}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -224,4 +258,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

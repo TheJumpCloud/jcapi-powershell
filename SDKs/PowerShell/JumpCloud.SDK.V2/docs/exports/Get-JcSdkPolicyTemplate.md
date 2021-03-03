@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkPolicyTemplate
 
 ## SYNOPSIS
-This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific policy template.
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -28,7 +36,15 @@ Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns a specific policy template.
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 

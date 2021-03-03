@@ -4,17 +4,6 @@
     "application/json"
   ],
   "definitions": {
-    "ErrorMessage": {
-      "properties": {
-        "message": {
-          "description": "Text detailed error message returned by the service",
-          "type": "string",
-          "x-go-name": "Message"
-        }
-      },
-      "title": "ErrorMessage",
-      "type": "object"
-    },
     "EventCount": {
       "description": "EventCount JSON struct with count of matching events",
       "properties": {
@@ -229,30 +218,6 @@
               },
               "type": "array"
             }
-          },
-          "400": {
-            "description": "Invalid/unknown query JSON body",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "401": {
-            "description": "Unauthorized (Invalid API Key)",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "402": {
-            "description": "Directory Insights is not enabled for your organization",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "500": {
-            "description": "Technical difficulties processing your request",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
           }
         },
         "security": [
@@ -285,30 +250,6 @@
             "schema": {
               "$ref": "#/definitions/EventCount"
             }
-          },
-          "400": {
-            "description": "Invalid/unknown query JSON body",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "401": {
-            "description": "Unauthorized (Invalid API Key)",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "402": {
-            "description": "Directory Insights is not enabled for your organization",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "500": {
-            "description": "Technical difficulties processing your request",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
           }
         },
         "security": [
@@ -340,30 +281,6 @@
             "description": "List of distinct field values",
             "schema": {
               "$ref": "#/definitions/EventCount"
-            }
-          },
-          "400": {
-            "description": "Invalid/unknown query JSON body",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "401": {
-            "description": "Unauthorized (Invalid API Key)",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "402": {
-            "description": "Directory Insights is not enabled for your organization",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "500": {
-            "description": "Technical difficulties processing your request",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
@@ -400,30 +317,6 @@
                 "type": "object"
               },
               "type": "array"
-            }
-          },
-          "400": {
-            "description": "Invalid/unknown query JSON body",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "401": {
-            "description": "Unauthorized (Invalid API Key)",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "402": {
-            "description": "Directory Insights is not enabled for your organization",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
-            }
-          },
-          "500": {
-            "description": "Technical difficulties processing your request",
-            "schema": {
-              "$ref": "#/definitions/ErrorMessage"
             }
           }
         },
