@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkAuthenticationPolicy
 
 ## SYNOPSIS
-Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific authentication policy.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -29,7 +37,15 @@ Get-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [<CommonPara
 ```
 
 ## DESCRIPTION
-Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+Return a specific authentication policy.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -158,8 +174,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IAuthnPolicy
-
-### System.String
 
 ## NOTES
 

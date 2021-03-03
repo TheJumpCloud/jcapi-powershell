@@ -59,8 +59,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.IDictionaryOfany1
-
 ### JumpCloud.SDK.V1.Models.ISshkeylist
 
 ## NOTES

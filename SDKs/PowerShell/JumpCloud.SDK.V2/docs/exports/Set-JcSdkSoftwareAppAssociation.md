@@ -8,7 +8,20 @@ schema: 2.0.0
 # Set-JcSdkSoftwareAppAssociation
 
 ## SYNOPSIS
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"\<object_id\>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"id\": \"\<object_id\>\",
+  \"op\": \"add\",
+  \"type\": \"system\"
+ }'
+```
 
 ## SYNTAX
 
@@ -20,13 +33,13 @@ Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Id <String> -Op <String
 
 ### Set
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphConnectionSoftwareApp> [-PassThru]
+Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphOperationSoftwareApp> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionSoftwareApp>
+Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationSoftwareApp>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +50,20 @@ Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Strin
 ```
 
 ## DESCRIPTION
-This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"\<object_id\>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```
+This endpoint allows you to associate or disassociate a software application to a system or system group.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"id\": \"\<object_id\>\",
+  \"op\": \"add\",
+  \"type\": \"system\"
+ }'
+```
 
 ## EXAMPLES
 
@@ -58,7 +84,7 @@ This endpoint allows you to associate or disassociate a software application to 
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +99,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (SoftwareApp)
+GraphOperation (SoftwareApp)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionSoftwareApp
+Type: JumpCloud.SDK.V2.Models.IGraphOperationSoftwareApp
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +241,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionSoftwareApp
+### JumpCloud.SDK.V2.Models.IGraphOperationSoftwareApp
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +258,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionSoftwareApp>: GraphConnection (SoftwareApp)
+BODY <IGraphOperationSoftwareApp>: GraphOperation (SoftwareApp)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "software_app" can be associated to.
-  - `[Attributes <IGraphConnectionSoftwareAppAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

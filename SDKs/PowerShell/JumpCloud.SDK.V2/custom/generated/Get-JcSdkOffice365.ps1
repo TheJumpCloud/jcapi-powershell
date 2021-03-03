@@ -1,8 +1,32 @@
 <#
 .Synopsis
-This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns a specific Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Description
-This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint returns a specific Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -147,4 +171,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

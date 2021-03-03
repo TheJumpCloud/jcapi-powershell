@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkPolicyResult
 
 ## SYNOPSIS
-This endpoint will return the policy results for a specific policy.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return the policy results for a specific policy.
+
+##### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -34,7 +42,15 @@ Get-JcSdkPolicyResult -PolicyId <String> [-Fields <String[]>] [-Filter <String[]
 ```
 
 ## DESCRIPTION
-This endpoint will return the policy results for a specific policy.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint will return the policy results for a specific policy.
+
+##### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 

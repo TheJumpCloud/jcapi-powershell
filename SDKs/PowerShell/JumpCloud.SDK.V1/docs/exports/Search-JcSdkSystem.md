@@ -9,31 +9,159 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters.
-This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes.
-The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
-If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```
+This WILL NOT allow you to add a new system.
+
+To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes.
+The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
+
+The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.
+
+This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
+If the `and` or `or` are not included the default behavior is to match ALL query expressions.
+
+The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
+If any `field` has a partial text match on the`searchTerm` the record will be returned.
+
+
+#### Sample Request
+
+Exact search for a list of hostnames
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"filter\": {
+    \"or\": [
+      {\"hostname\" : \"my-hostname\"},
+      {\"hostname\" : \"other-hostname\"}
+    ]
+  },
+  \"fields\" : \"os hostname displayName\"
+}'
+```
+
+Text search for a hostname or display name
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": \"my-host\",
+    \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
+
+Combining `filter` and `searchFilter` to search for names that match a given OS
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": \"my-host\",
+    \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"filter\": {
+    \"or\": [
+      {\"os\" : \"Ubuntu\"},
+      {\"os\" : \"Mac OS X\"}
+    ]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
 
 ## SYNTAX
 
 ### SearchExpanded (Default)
 ```
 Search-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <Hashtable>]
- [-SearchFilter <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystem -Body <ISearch> [-Fields <String>] [-Filter <String>] [-PassThru] [-Confirm] [-WhatIf]
+Search-JcSdkSystem -Body <ISearch> [-Fields <String>] [-Filter <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Return Systems in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters.
-This WILL NOT allow you to add a new system.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes.
-The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
-If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.\n\n\n#### Sample Request\n\nExact search for a list of hostnames\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\": {\n    \"or\": [\n      {\"hostname\" : \"my-hostname\"},\n      {\"hostname\" : \"other-hostname\"}\n    ]\n  },\n  \"fields\" : \"os hostname displayName\"\n}'\n```\n\nText search for a hostname or display name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```\n\nCombining `filter` and `searchFilter` to search for names that match a given OS\n```\ncurl -X POST https://console.jumpcloud.com/api/search/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"my-host\",\n    \"fields\": [\"hostname\", \"displayName\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"os\" : \"Ubuntu\"},\n      {\"os\" : \"Mac OS X\"}\n    ]\n  },\n  \"fields\": \"os hostname displayName\"\n}'\n```
+This WILL NOT allow you to add a new system.
+
+To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes.
+The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
+
+The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.
+
+This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
+If the `and` or `or` are not included the default behavior is to match ALL query expressions.
+
+The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
+If any `field` has a partial text match on the`searchTerm` the record will be returned.
+
+
+#### Sample Request
+
+Exact search for a list of hostnames
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"filter\": {
+    \"or\": [
+      {\"hostname\" : \"my-hostname\"},
+      {\"hostname\" : \"other-hostname\"}
+    ]
+  },
+  \"fields\" : \"os hostname displayName\"
+}'
+```
+
+Text search for a hostname or display name
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": \"my-host\",
+    \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
+
+Combining `filter` and `searchFilter` to search for names that match a given OS
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": \"my-host\",
+    \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"filter\": {
+    \"or\": [
+      {\"os\" : \"Ubuntu\"},
+      {\"os\" : \"Mac OS X\"}
+    ]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
 
 ## EXAMPLES
 
@@ -128,21 +256,6 @@ Dictionary of \<any\>
 ```yaml
 Type: System.Collections.Hashtable
 Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

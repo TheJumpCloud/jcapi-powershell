@@ -9,7 +9,27 @@ schema: 2.0.0
 
 ## SYNOPSIS
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}\n\t\t]\n\t}\n]\n```
+See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t\t\"email\":\"{email}\",
+\t\t\"firstname\":\"{firstname}\",
+\t\t\"lastname\":\"{firstname}\",
+\t\t\"username\":\"{username}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
+\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
+\t\t]
+\t}
+]
+```
 
 ## SYNTAX
 
@@ -19,7 +39,27 @@ New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-Confirm] [-WhatIf] [<CommonParamet
 
 ## DESCRIPTION
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}\n\t\t]\n\t}\n]\n```
+See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t\t\"email\":\"{email}\",
+\t\t\"firstname\":\"{firstname}\",
+\t\t\"lastname\":\"{firstname}\",
+\t\t\"username\":\"{username}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
+\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
+\t\t]
+\t}
+]
+```
 
 ## EXAMPLES
 

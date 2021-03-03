@@ -8,15 +8,27 @@ schema: 2.0.0
 # New-JcSdkUserGroup
 
 ## SYNOPSIS
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 
 ## SYNTAX
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUserGroup -Name <String> [-AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]
- [-AttributeSambaEnabled] [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUserGroup -Name <String> [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
+ [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
+ [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -25,7 +37,18 @@ New-JcSdkUserGroup -Body <IUserGroupPost> [-Confirm] [-WhatIf] [<CommonParameter
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -45,12 +68,44 @@ This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```
 
 ## PARAMETERS
 
+### -AttributeLdapGroups
+.
+To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -AttributePosixGroups
 .
 To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IUserGroupAttributesPosixGroupsItem[]
+Type: JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributeRadiusReply
+.
+To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -204,15 +259,27 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTEPOSIXGROUPS <IUserGroupAttributesPosixGroupsItem[]>: .
-  - `[Id <Int32?>]`: 
-  - `[Name <String>]`: 
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>: .
+  - `Name <String>`: 
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>: .
+  - `Id <Single>`: 
+  - `Name <String>`: 
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>: .
+  - `Name <String>`: 
+  - `Value <String>`: 
 
 BODY <IUserGroupPost>: UserGroupPost
   - `Name <String>`: Display name of a User Group.
-  - `[AttributePosixGroups <IUserGroupAttributesPosixGroupsItem[]>]`: 
-    - `[Id <Int32?>]`: 
-    - `[Name <String>]`: 
+  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
+    - `Name <String>`: 
+  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
+    - `Id <Single>`: 
+    - `Name <String>`: 
+  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
+    - `Name <String>`: 
+    - `Value <String>`: 
   - `[AttributeSambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group

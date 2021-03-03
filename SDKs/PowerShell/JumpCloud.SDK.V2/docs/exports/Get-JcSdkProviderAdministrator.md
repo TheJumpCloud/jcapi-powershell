@@ -9,7 +9,15 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint returns a list of the Administrators associated with the Provider.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+You must be associated with the provider to use this route.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -20,7 +28,15 @@ Get-JcSdkProviderAdministrator -ProviderId <String> [-Fields <String[]>] [-Filte
 
 ## DESCRIPTION
 This endpoint returns a list of the Administrators associated with the Provider.
-You must be associated with the provider to use this route.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+You must be associated with the provider to use this route.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
@@ -117,8 +133,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
-
-### System.String
 
 ## NOTES
 

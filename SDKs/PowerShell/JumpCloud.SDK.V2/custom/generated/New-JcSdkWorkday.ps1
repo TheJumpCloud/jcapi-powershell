@@ -1,10 +1,58 @@
 <#
 .Synopsis
-This endpoint allows you to create a new workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\nCurrently, only one instance is allowed and it must be `Workday Import`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Workday2\",\n    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",\n    \"auth\": {\n      \"basic\": {\n        \"username\": \"someDeveloper\",\n        \"password\": \"notTheRealPassword\"\n      }\n    }\n  }'\n```
+This endpoint allows you to create a new workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+Currently, only one instance is allowed and it must be `Workday Import`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Workday2\",
+    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",
+    \"auth\": {
+      \"basic\": {
+        \"username\": \"someDeveloper\",
+        \"password\": \"notTheRealPassword\"
+      }
+    }
+  }'
+```
 .Description
-This endpoint allows you to create a new workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
-Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\nCurrently, only one instance is allowed and it must be `Workday Import`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Workday2\",\n    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",\n    \"auth\": {\n      \"basic\": {\n        \"username\": \"someDeveloper\",\n        \"password\": \"notTheRealPassword\"\n      }\n    }\n  }'\n```
+This endpoint allows you to create a new workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+Currently, only one instance is allowed and it must be `Workday Import`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Workday2\",
+    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",
+    \"auth\": {
+      \"basic\": {
+        \"username\": \"someDeveloper\",
+        \"password\": \"notTheRealPassword\"
+      }
+    }
+  }'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -146,4 +194,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

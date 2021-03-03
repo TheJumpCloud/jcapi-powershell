@@ -1,10 +1,58 @@
 <#
 .Synopsis
-This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
-We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```
+This endpoint allows you to update an Organization.
+
+Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
+We discourage the use of non-custom passwordCompliance values.
+
+`hasStripeCustomerId` is deprecated and will be removed.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"settings\": {
+    \"contactName\": \"Admin Name\",
+    \"contactEmail\": \"admin@company.com\",
+    \"systemUsersCanEdit\":true,
+    \"passwordPolicy\": {
+      \"enableMaxHistory\": true,
+      \"maxHistory\": 3
+    }
+  }
+}'
+```
 .Description
-This endpoint allows you to update an Organization.\n\nNote: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
-We discourage the use of non-custom passwordCompliance values.\n\n`hasStripeCustomerId` is deprecated and will be removed.\n\n#### Sample Request\n\n```\ncurl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"settings\": {\n    \"contactName\": \"Admin Name\",\n    \"contactEmail\": \"admin@company.com\",\n    \"systemUsersCanEdit\":true,\n    \"passwordPolicy\": {\n      \"enableMaxHistory\": true,\n      \"maxHistory\": 3\n    }\n  }\n}'\n```
+This endpoint allows you to update an Organization.
+
+Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
+We discourage the use of non-custom passwordCompliance values.
+
+`hasStripeCustomerId` is deprecated and will be removed.
+
+#### Sample Request
+
+```
+curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"settings\": {
+    \"contactName\": \"Admin Name\",
+    \"contactEmail\": \"admin@company.com\",
+    \"systemUsersCanEdit\":true,
+    \"passwordPolicy\": {
+      \"enableMaxHistory\": true,
+      \"maxHistory\": 3
+    }
+  }
+}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -180,12 +228,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
 
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Returns true when the command succeeds
-    ${PassThru},
-
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
@@ -238,4 +280,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

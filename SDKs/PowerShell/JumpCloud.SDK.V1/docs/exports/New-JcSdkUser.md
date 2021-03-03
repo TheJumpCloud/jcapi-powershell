@@ -8,7 +8,22 @@ schema: 2.0.0
 # New-JcSdkUser
 
 ## SYNOPSIS
-This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"username\":\"{username}\",\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to create a new system user.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"username\":\"{username}\",
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 
 ## SYNTAX
 
@@ -25,16 +40,31 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkUser -Body <ISystemuserputpost> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUser -Body <ISystemuserputpost> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"username\":\"{username}\",\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```
+This endpoint allows you to create a new system user.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"username\":\"{username}\",
+\t\"email\":\"{email_address}\",
+\t\"firstname\":\"{Name}\",
+\t\"lastname\":\"{Name}\"
+}'
+```
 
 ## EXAMPLES
 
@@ -498,21 +528,6 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False

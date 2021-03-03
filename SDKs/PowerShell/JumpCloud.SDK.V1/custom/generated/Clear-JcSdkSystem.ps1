@@ -1,10 +1,30 @@
 <#
 .Synopsis
 This endpoint allows you to run the erase command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 .Description
 This endpoint allows you to run the erase command on the specified device.
-If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```
+If a device is offline, the command will be run when the device becomes available.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d {}
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -17,7 +37,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-System.String
+System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -33,7 +53,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Clear-JcSdkSystem
 {
-    [OutputType([System.String])]
+    [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='Clear', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Clear', Mandatory)]
@@ -127,4 +147,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkSystem
 
 ## SYNOPSIS
-This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns an individual system.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## SYNTAX
 
@@ -19,18 +27,25 @@ Get-JcSdkSystem [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort 
 
 ### Get
 ```
-Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [-Authorization <String>] [-Date <String>]
- [<CommonParameters>]
+Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
 Get-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
- [-Authorization <String>] [-Date <String>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns an individual system.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 
 ## EXAMPLES
 
@@ -49,36 +64,6 @@ This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -Authorization
-Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: Get, GetViaIdentity
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Date
-Current date header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: Get, GetViaIdentity
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.

@@ -226,8 +226,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
 
-### System.String
-
 ## NOTES
 
 ALIASES

@@ -1,10 +1,64 @@
 <#
 .Synopsis
 The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```
+See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"department\":\"{UPDATED_DEPARTMENT}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}
+\t\t]
+\t},
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",
+\t\t\"phoneNumbers\":[
+\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},
+\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}
+\t\t]
+\t}
+]
+```
 .Description
 The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```
+See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"department\":\"{UPDATED_DEPARTMENT}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}
+\t\t]
+\t},
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",
+\t\t\"phoneNumbers\":[
+\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},
+\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}
+\t\t]
+\t}
+]
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -117,4 +171,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

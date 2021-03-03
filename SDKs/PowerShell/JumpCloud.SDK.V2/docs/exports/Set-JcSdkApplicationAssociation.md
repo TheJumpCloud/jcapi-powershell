@@ -9,7 +9,20 @@ schema: 2.0.0
 
 ## SYNOPSIS
 This endpoint allows you to manage the _direct_ associations of an Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.
+
+#### Sample Request
+```
+curl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user_group\",
+    \"id\": \"{Group_ID}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -21,13 +34,13 @@ Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String
 
 ### Set
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphConnectionApplication> [-PassThru]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphOperationApplication> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionApplication>
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationApplication>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -39,7 +52,20 @@ Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Strin
 
 ## DESCRIPTION
 This endpoint allows you to manage the _direct_ associations of an Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.\n\n#### Sample Request\n```\ncurl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Application and User Groups.
+
+#### Sample Request
+```
+curl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations' \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user_group\",
+    \"id\": \"{Group_ID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -75,7 +101,7 @@ Accept wildcard characters: False
 ```
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -90,11 +116,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (Application)
+GraphOperation (Application)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionApplication
+Type: JumpCloud.SDK.V2.Models.IGraphOperationApplication
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -217,7 +243,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionApplication
+### JumpCloud.SDK.V2.Models.IGraphOperationApplication
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -234,11 +260,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionApplication>: GraphConnection (Application)
+BODY <IGraphOperationApplication>: GraphOperation (Application)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "application" can be associated to.
-  - `[Attributes <IGraphConnectionApplicationAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

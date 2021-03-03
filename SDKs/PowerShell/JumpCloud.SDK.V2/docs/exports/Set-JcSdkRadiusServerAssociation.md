@@ -8,7 +8,24 @@ schema: 2.0.0
 # Set-JcSdkRadiusServerAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\n\"type\":\"user\", \n\"id\":\"{USER_ID}\", \n\"op\":\"add\"\n\t\n}'\n```
+This endpoint allows you to manage the _direct_ associations of a Radius Server.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t
+\"type\":\"user\", 
+\"id\":\"{USER_ID}\", 
+\"op\":\"add\"
+\t
+}'
+```
 
 ## SYNTAX
 
@@ -20,13 +37,13 @@ Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <Stri
 
 ### Set
 ```
-Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphConnectionRadiusServer> [-PassThru]
+Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphOperationRadiusServer> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionRadiusServer>
+Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationRadiusServer>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +54,24 @@ Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Stri
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a Radius Server.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\n\"type\":\"user\", \n\"id\":\"{USER_ID}\", \n\"op\":\"add\"\n\t\n}'\n```
+This endpoint allows you to manage the _direct_ associations of a Radius Server.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t
+\"type\":\"user\", 
+\"id\":\"{USER_ID}\", 
+\"op\":\"add\"
+\t
+}'
+```
 
 ## EXAMPLES
 
@@ -58,7 +92,7 @@ This endpoint allows you to manage the _direct_ associations of a Radius Server.
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +107,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (RadiusServer)
+GraphOperation (RadiusServer)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionRadiusServer
+Type: JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +249,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionRadiusServer
+### JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +266,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionRadiusServer>: GraphConnection (RadiusServer)
+BODY <IGraphOperationRadiusServer>: GraphOperation (RadiusServer)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "radius_server" can be associated to.
-  - `[Attributes <IGraphConnectionRadiusServerAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

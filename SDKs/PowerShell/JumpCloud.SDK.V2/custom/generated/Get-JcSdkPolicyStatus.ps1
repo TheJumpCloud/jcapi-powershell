@@ -1,8 +1,26 @@
 <#
 .Synopsis
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the latest policies results for a specific policy.
+
+##### Sample Request
+
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Description
-This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
+This endpoint returns the latest policies results for a specific policy.
+
+##### Sample Request
+
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -185,4 +203,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
 

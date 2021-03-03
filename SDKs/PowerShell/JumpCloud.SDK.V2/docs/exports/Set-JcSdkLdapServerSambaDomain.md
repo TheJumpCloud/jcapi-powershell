@@ -8,7 +8,19 @@ schema: 2.0.0
 # Set-JcSdkLdapServerSambaDomain
 
 ## SYNOPSIS
-This endpoint allows you to update the samba domain information for an LDAP server.\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to update the samba domain information for an LDAP server.
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -37,7 +49,19 @@ Set-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Name <Stri
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update the samba domain information for an LDAP server.\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"sid\":\"{SID_ID}\",\n    \"name\":\"{WORKGROUP_NAME}\"\n  }'\n```
+This endpoint allows you to update the samba domain information for an LDAP server.
+
+##### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"sid\":\"{SID_ID}\",
+    \"name\":\"{WORKGROUP_NAME}\"
+  }'
+```
 
 ## EXAMPLES
 

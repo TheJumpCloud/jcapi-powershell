@@ -10,7 +10,19 @@ schema: 2.0.0
 ## SYNOPSIS
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
+You must provide either `role` or `roleName`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"email\": \"{ADMIN_EMAIL}\",
+    \"roleName\": \"{ROLE_NAME}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -42,7 +54,19 @@ New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Email <Str
 ## DESCRIPTION
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"email\": \"{ADMIN_EMAIL}\",\n    \"roleName\": \"{ROLE_NAME}\"\n  }'\n```
+You must provide either `role` or `roleName`.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"email\": \"{ADMIN_EMAIL}\",
+    \"roleName\": \"{ROLE_NAME}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -242,8 +266,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IAdministrator
-
-### System.String
 
 ## NOTES
 

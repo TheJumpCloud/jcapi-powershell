@@ -8,36 +8,62 @@ schema: 2.0.0
 # Set-JcSdkUserGroupMember
 
 ## SYNOPSIS
-This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the user members of a User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 
 ## SYNTAX
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-Attributes <Hashtable>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Body <IGraphConnectionUserGroupMember> [-PassThru] [-Confirm]
+Set-JcSdkUserGroupMember -GroupId <String> -Body <IGraphOperationUserGroupMember> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionUserGroupMember>
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUserGroupMember>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the user members of a User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{User_ID}\"\n  }'\n```
+This endpoint allows you to manage the user members of a User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{User_ID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -57,12 +83,27 @@ This endpoint allows you to manage the user members of a User Group.\n\n#### Sam
 
 ## PARAMETERS
 
+### -Attributes
+The graph attributes.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
-GraphConnection-UserGroup-Member
+GraphOperation (UserGroup-Member)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember
+Type: JumpCloud.SDK.V2.Models.IGraphOperationUserGroupMember
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -89,7 +130,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-The ObjectID of member being added or removed.
+The ObjectID of graph object being added or removed as an association.
 
 ```yaml
 Type: System.String
@@ -120,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -Op
-How to modify the membership connection.
+How to modify the graph connection.
 
 ```yaml
 Type: System.String
@@ -185,7 +226,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionUserGroupMember
+### JumpCloud.SDK.V2.Models.IGraphOperationUserGroupMember
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -202,9 +243,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionUserGroupMember>: GraphConnection-UserGroup-Member
-  - `Id <String>`: The ObjectID of member being added or removed.
-  - `Op <String>`: How to modify the membership connection.
+BODY <IGraphOperationUserGroupMember>: GraphOperation (UserGroup-Member)
+  - `Id <String>`: The ObjectID of graph object being added or removed as an association.
+  - `Op <String>`: How to modify the graph connection.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

@@ -8,7 +8,23 @@ schema: 2.0.0
 # Set-JcSdkSystemGroupAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a System Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{UserID}\"
+  }'
+```
 
 ## SYNTAX
 
@@ -20,13 +36,13 @@ Set-JcSdkSystemGroupAssociation -GroupId <String> -Id <String> -Op <String> -Typ
 
 ### Set
 ```
-Set-JcSdkSystemGroupAssociation -GroupId <String> -Body <IGraphConnectionSystemGroup> [-PassThru] [-Confirm]
+Set-JcSdkSystemGroupAssociation -GroupId <String> -Body <IGraphOperationSystemGroup> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphConnectionSystemGroup>
+Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationSystemGroup>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -37,7 +53,23 @@ Set-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Strin
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a System Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"user\",\n    \"id\": \"{UserID}\"\n  }'\n```
+This endpoint allows you to manage the _direct_ associations of a System Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example System Groups and Users.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"user\",
+    \"id\": \"{UserID}\"
+  }'
+```
 
 ## EXAMPLES
 
@@ -58,7 +90,7 @@ This endpoint allows you to manage the _direct_ associations of a System Group.\
 ## PARAMETERS
 
 ### -Attributes
-The graph connection's attributes.
+The graph attributes.
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -73,11 +105,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-GraphConnection (SystemGroup)
+GraphOperation (SystemGroup)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroup
+Type: JumpCloud.SDK.V2.Models.IGraphOperationSystemGroup
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -215,7 +247,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphConnectionSystemGroup
+### JumpCloud.SDK.V2.Models.IGraphOperationSystemGroup
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -232,11 +264,11 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphConnectionSystemGroup>: GraphConnection (SystemGroup)
+BODY <IGraphOperationSystemGroup>: GraphOperation (SystemGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <String>`: Targets which a "system_group" can be associated to.
-  - `[Attributes <IGraphConnectionSystemGroupAttributes>]`: The graph connection's attributes.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter

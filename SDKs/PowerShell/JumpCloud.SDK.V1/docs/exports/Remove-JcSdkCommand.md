@@ -8,7 +8,16 @@ schema: 2.0.0
 # Remove-JcSdkCommand
 
 ## SYNOPSIS
-This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint deletes a specific command based on the Command ID.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -24,7 +33,16 @@ Remove-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm]
 ```
 
 ## DESCRIPTION
-This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```
+This endpoint deletes a specific command based on the Command ID.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 

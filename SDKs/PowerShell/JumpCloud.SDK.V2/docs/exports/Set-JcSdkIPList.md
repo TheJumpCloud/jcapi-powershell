@@ -8,7 +8,21 @@ schema: 2.0.0
 # Set-JcSdkIPList
 
 ## SYNOPSIS
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
+Replace a specific IP list.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Sample IP List\",
+    \"ips\": [
+      \"192.168.10.10\"
+    ]
+  }'
+```
 
 ## SYNTAX
 
@@ -36,7 +50,21 @@ Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-
 ```
 
 ## DESCRIPTION
-Replace a specific IP list.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Sample IP List\",\n    \"ips\": [\n      \"192.168.10.10\"\n    ]\n  }'\n```
+Replace a specific IP list.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Sample IP List\",
+    \"ips\": [
+      \"192.168.10.10\"
+    ]
+  }'
+```
 
 ## EXAMPLES
 
@@ -191,8 +219,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### JumpCloud.SDK.V2.Models.IIPList
-
-### System.String
 
 ## NOTES
 

@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkUserMember
 
 ## SYNOPSIS
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all the User Groups a User is a member of.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## SYNTAX
 
@@ -24,7 +32,15 @@ Get-JcSdkUserMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [
 ```
 
 ## DESCRIPTION
-This endpoint returns all the User Groups a User is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```
+This endpoint returns all the User Groups a User is a member of.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
 
 ## EXAMPLES
 
