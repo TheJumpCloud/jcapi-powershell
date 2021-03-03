@@ -12,7 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkPolicyTraverseSystem' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    BeforeAll {
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
+    }
+    AfterAll {
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
+        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
+    }
+    It 'List' {
+        Get-JcSdkPolicyTraverseSystem -PolicyId $($global:PesterTestWindowsPolicy.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkPolicyTraverseSystem -PolicyId $($global:PesterTestLinuxPolicy.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkPolicyTraverseSystem -PolicyId $($global:PesterTestDarwinPolicy.Id) | Should -Not -BeNullOrEmpty
     }
 }

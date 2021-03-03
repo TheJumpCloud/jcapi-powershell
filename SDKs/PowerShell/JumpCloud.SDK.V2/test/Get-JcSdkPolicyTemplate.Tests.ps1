@@ -12,12 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkPolicyTemplate' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkPolicyTemplate | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        $policyId = Get-JcSdkPolicyTemplate | Select -First 1
+        Get-JcSdkPolicyTemplate -Id $policyId.id | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

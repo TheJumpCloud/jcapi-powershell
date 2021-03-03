@@ -12,8 +12,10 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkPolicy' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Delete' {
+        Remove-JcSdkPolicy -id $($global:PesterTestWindowsPolicy.id)
+        Remove-JcSdkPolicy -id $($global:PesterTestLinuxPolicy.id)
+        Remove-JcSdkPolicy -id $($global:PesterTestDarwinPolicy.id)
     }
 
     It 'DeleteViaIdentity' -skip {
