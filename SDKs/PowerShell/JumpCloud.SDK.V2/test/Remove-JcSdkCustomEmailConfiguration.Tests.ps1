@@ -12,8 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkCustomEmailConfiguration' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Delete' {
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {

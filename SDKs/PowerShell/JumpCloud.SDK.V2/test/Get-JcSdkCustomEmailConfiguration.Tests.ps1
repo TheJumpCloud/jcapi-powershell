@@ -12,20 +12,6 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCustomEmailConfiguration' {
-    BeforeAll{
-        New-JcSdkCustomEmailConfiguration -type password_reset_confirmation -subject "CUSTOM"
-        New-JcSdkCustomEmailConfiguration -type password_expiration_warning -subject "CUSTOM"
-        New-JcSdkCustomEmailConfiguration -type lockout_notice_user -subject "CUSTOM"
-        New-JcSdkCustomEmailConfiguration -type password_expiration -subject "CUSTOM"
-        New-JcSdkCustomEmailConfiguration -type user_change_password -subject "CUSTOM"
-    }
-    AfterAll{
-        Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation
-        Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning
-        Remove-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user
-        Remove-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration
-        Remove-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password
-    }
     It 'Get' {
         Get-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation | Should -Not -BeNullOrEmpty
         Get-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning| Should -Not -BeNullOrEmpty
