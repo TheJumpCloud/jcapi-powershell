@@ -35,6 +35,8 @@ $TransformConfig = [Ordered]@{
             '"format":"email",'                                                        = ''; # WARNING (LLCS1001/DoesNotSupportEnum):Schema with type:'string and 'format:'email' is not recognized.
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''
             # Custom Tweaks
+            '{"$ref":"#/parameters/trait:systemContextAuth:Authorization"}'            = ''; # We dont want to support authentication through system context via the SDK
+            '{"$ref":"#/parameters/trait:systemContextAuth:Date"}'                     = ''; # We dont want to support authentication through system context via the SDK
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                      = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
