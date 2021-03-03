@@ -15,7 +15,7 @@ while (-not $mockingPath)
 
 Describe 'Remove-JcSdkSystem' {
     It 'Delete' {
-        { Remove-JcSdkRadJcSdkSystem -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
+        { Remove-JcSdkSystem -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -Skip {
