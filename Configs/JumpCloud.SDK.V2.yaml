@@ -28,7 +28,7 @@ prefix: JcSdkInternal
 customFunctionPrefix: JcSdk
 ## subject-prefix: JcSdk
 module-name: JumpCloud.SDK.V2 # $(service-name)
-# dll-name: $(module-name).private
+dll-name: JumpCloud.SDK.V2.private
 # # Folders
 # use-namespace-folders: false
 # current-folder: .
