@@ -1,4 +1,4 @@
-ss<#
+<#
 .Synopsis
 This endpoint allows you to update the samba domain information for an LDAP server.
 
@@ -196,3 +196,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
+

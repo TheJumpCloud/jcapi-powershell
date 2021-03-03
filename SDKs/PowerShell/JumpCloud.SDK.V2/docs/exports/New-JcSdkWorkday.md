@@ -237,10 +237,11 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IWorkdayInput>: Workday Input
-  - `[BasicPassword <String>]`:
-  - `[BasicUsername <String>]`:
-  - `[Name <String>]`:
-  - `[OauthCode <String>]`:
-  - `[ReportUrl <String>]`:
+  - `[BasicPassword <String>]`: 
+  - `[BasicUsername <String>]`: 
+  - `[Name <String>]`: 
+  - `[OauthCode <String>]`: 
+  - `[ReportUrl <String>]`: 
 
 ## RELATED LINKS
+

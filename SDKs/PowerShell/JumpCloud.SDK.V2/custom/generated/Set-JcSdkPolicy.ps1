@@ -1,4 +1,4 @@
-sss<#
+<#
 .Synopsis
 This endpoint allows you to update a policy.
 Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
@@ -206,3 +206,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
+

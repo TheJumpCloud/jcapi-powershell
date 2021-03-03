@@ -260,30 +260,30 @@ To create the parameters described below, construct a hash table containing the 
 
 
 ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>: .
-  - `Name <String>`:
+  - `Name <String>`: 
 
 ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>: .
-  - `Id <Single>`:
-  - `Name <String>`:
+  - `Id <Single>`: 
+  - `Name <String>`: 
 
 ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>: .
-  - `Name <String>`:
-  - `Value <String>`:
+  - `Name <String>`: 
+  - `Value <String>`: 
 
 BODY <IUserGroupPost>: UserGroupPost
   - `Name <String>`: Display name of a User Group.
-  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`:
-    - `Name <String>`:
-  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`:
-    - `Id <Single>`:
-    - `Name <String>`:
-  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`:
-    - `Name <String>`:
-    - `Value <String>`:
-  - `[AttributeSambaEnabled <Boolean?>]`:
+  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
+    - `Name <String>`: 
+  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
+    - `Id <Single>`: 
+    - `Name <String>`: 
+  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
+    - `Name <String>`: 
+    - `Value <String>`: 
+  - `[AttributeSambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
-  - `[MemberQueryFilters <IFilter[]>]`:
+  - `[MemberQueryFilters <IFilter[]>]`: 
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
@@ -294,3 +294,4 @@ MEMBERQUERYFILTERS <IFilter[]>: .
   - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
+

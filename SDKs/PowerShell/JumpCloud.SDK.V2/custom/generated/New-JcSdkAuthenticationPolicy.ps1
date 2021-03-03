@@ -94,75 +94,75 @@ TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkAuthenticationPolicy.md
 #>
-Function New-JcSdkAuthenticationPolicy
+ Function New-JcSdkAuthenticationPolicy
 {
-  [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy])]
-  [CmdletBinding(DefaultParameterSetName = 'CreateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
-  Param(
-    [Parameter(ParameterSetName = 'Create', Mandatory, ValueFromPipeline)]
+    [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy])]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    Param(
+    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicyInput]
     # AuthnPolicyInput
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes = ([JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]))]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]))]
     [System.Collections.Hashtable]
     # Dictionary of <any>
     ${Conditions},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Description},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${Disabled},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${EffectAction},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${MfaRequired},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Name},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
     # .
     # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
     ${TargetResources},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
     ${UserGroupExclusions},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
     ${UserGroupInclusions},
 
-    [Parameter(ParameterSetName = 'CreateExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
@@ -206,37 +206,39 @@ Function New-JcSdkAuthenticationPolicy
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
-  )
-  Begin
-  {
-    $Results = @()
-    $PSBoundParameters.Add('HttpPipelineAppend', {
-        param($req, $callback, $next)
-        # call the next step in the Pipeline
-        $ResponseTask = $next.SendAsync($req, $callback)
-        $global:JCHttpRequest = $req
-        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-        $global:JCHttpResponse = $ResponseTask
-        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-        Return $ResponseTask
-      }
     )
-  }
-  Process
-  {
-    $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalAuthenticationPolicy @PSBoundParameters
-  }
-  End
-  {
-    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-    # Clean up global variables
-    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-    $GlobalVars | ForEach-Object {
-      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+    Begin
+    {
+        $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+                $global:JCHttpResponse = $ResponseTask
+                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+                Return $ResponseTask
+            }
+        )
     }
-    Return $Results
-  }
+    Process
+    {
+        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalAuthenticationPolicy @PSBoundParameters
+    }
+    End
+    {
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
+        Return $Results
+    }
 }
+
+

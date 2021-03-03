@@ -184,7 +184,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
-  - `[Values <IPolicyValue[]>]`:
+  - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
@@ -193,3 +193,4 @@ VALUES <IPolicyValue[]>: .
   - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 ## RELATED LINKS
+

@@ -1,4 +1,4 @@
-ss<#
+<#
 .Synopsis
 This endpoint allows you to manage the _direct_ associations of a Office 365 instance.
 
@@ -219,3 +219,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
+

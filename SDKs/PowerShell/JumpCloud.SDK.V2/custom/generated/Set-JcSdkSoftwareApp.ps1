@@ -1,4 +1,4 @@
-s<#
+<#
 .Synopsis
 This endpoint updates a specific Software Application configuration for the organization.
 Only displayName can be changed.
@@ -222,3 +222,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
+

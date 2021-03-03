@@ -1,4 +1,4 @@
-sss<#
+<#
 .Synopsis
 This endpoint allows you to manage the _direct_ associations of a Policy.
 
@@ -219,3 +219,5 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
+
+

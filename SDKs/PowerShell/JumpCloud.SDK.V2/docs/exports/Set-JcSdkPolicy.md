@@ -231,34 +231,35 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
-  - `[Values <IPolicyValue[]>]`:
+  - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`:
-  - `[ActivedirectoryId <String>]`:
-  - `[AppleMdmId <String>]`:
+  - `[AccountId <String>]`: 
+  - `[ActivedirectoryId <String>]`: 
+  - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`:
-  - `[DeviceId <String>]`:
+  - `[CustomEmailType <String>]`: 
+  - `[DeviceId <String>]`: 
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`:
+  - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`:
+  - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`:
+  - `[WorkdayId <String>]`: 
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
   - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 ## RELATED LINKS
+

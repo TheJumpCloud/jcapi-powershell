@@ -811,9 +811,6 @@ This endpoint returns all pricing & packaging subscriptions.
   -H 'x-api-key: {API_KEY}'
   ```
 
-### [Get-JcSdkSubscription](Get-JcSdkSubscription.md)
-This endpoint returns all pricing & packaging subscriptions.\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```
-
 ### [Get-JcSdkSystemAssociation](Get-JcSdkSystemAssociation.md)
 This endpoint returns the _direct_ associations of a System.
 
@@ -1648,7 +1645,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
   -d '{
 \t\"auth\":{
 \t  \"basic\": {
-\t\t\"username\": \"someDeveloper\",\t
+\t\t\"username\": \"someDeveloper\",\t  
 \t\t\"password\": \"notTheRealPassword\"
 
 \t  }
@@ -1660,7 +1657,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 ### [Import-JcSdkWorkday](Import-JcSdkWorkday.md)
 The endpoint allows you to create a Workday Import request.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
   -H 'Accept: application/json' \\
@@ -1738,7 +1735,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -2363,8 +2360,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
   -H 'x-api-key: {API_KEY}' \\
   -d '{
 \t
-\"type\":\"user\",
-\"id\":\"{USER_ID}\",
+\"type\":\"user\", 
+\"id\":\"{USER_ID}\", 
 \"op\":\"add\"
 \t
 }'
@@ -2606,7 +2603,7 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 The endpoint allows you to create a bulk job to asynchronously update users.
 See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -2694,3 +2691,5 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
     \"userPasswordExpirationAction\": \"suspend\"
   }'
 ```
+
+

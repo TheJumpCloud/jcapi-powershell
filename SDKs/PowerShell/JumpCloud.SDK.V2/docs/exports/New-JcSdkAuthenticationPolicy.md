@@ -321,18 +321,19 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IAuthnPolicyInput>: AuthnPolicyInput
   - `[Conditions <IAuthnPolicyInputConditions>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[Description <String>]`:
-  - `[Disabled <Boolean?>]`:
-  - `[EffectAction <String>]`:
-  - `[MfaRequired <Boolean?>]`:
-  - `[Name <String>]`:
-  - `[TargetResources <IAuthnPolicyResourceTarget[]>]`:
-    - `[Type <String>]`:
-  - `[UserGroupExclusions <String[]>]`:
-  - `[UserGroupInclusions <String[]>]`:
-  - `[UserInclusions <String[]>]`:
+  - `[Description <String>]`: 
+  - `[Disabled <Boolean?>]`: 
+  - `[EffectAction <String>]`: 
+  - `[MfaRequired <Boolean?>]`: 
+  - `[Name <String>]`: 
+  - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
+    - `[Type <String>]`: 
+  - `[UserGroupExclusions <String[]>]`: 
+  - `[UserGroupInclusions <String[]>]`: 
+  - `[UserInclusions <String[]>]`: 
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
-  - `[Type <String>]`:
+  - `[Type <String>]`: 
 
 ## RELATED LINKS
+

@@ -189,8 +189,9 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IIPListRequest>: IPListRequest
-  - `[Description <String>]`:
-  - `[Ips <String[]>]`:
-  - `[Name <String>]`:
+  - `[Description <String>]`: 
+  - `[Ips <String[]>]`: 
+  - `[Name <String>]`: 
 
 ## RELATED LINKS
+

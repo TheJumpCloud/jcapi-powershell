@@ -103,88 +103,88 @@ MEMBERQUERYFILTERS <IFilter[]>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserGroup.md
 #>
-Function Set-JcSdkUserGroup
+ Function Set-JcSdkUserGroup
 {
-  [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
-  [CmdletBinding(DefaultParameterSetName = 'SetExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
-  Param(
-    [Parameter(ParameterSetName = 'Set', Mandatory)]
-    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    Param(
+    [Parameter(ParameterSetName='Set', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the User Group.
     ${Id},
 
-    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName = 'Set', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName = 'SetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IUserGroupPut]
     # UserGroupPut
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName = 'SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Display name of a User Group.
     ${Name},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
     ${AttributeLdapGroups},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
     ${AttributePosixGroups},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
     ${AttributeRadiusReply},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${AttributeSambaEnabled},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Description of a User Group
     ${Description},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Email address of a User Group
     ${Email},
 
-    [Parameter(ParameterSetName = 'SetExpanded')]
-    [Parameter(ParameterSetName = 'SetViaIdentityExpanded')]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IFilter[]]
     # .
@@ -229,37 +229,39 @@ Function Set-JcSdkUserGroup
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
     ${ProxyUseDefaultCredentials}
-  )
-  Begin
-  {
-    $Results = @()
-    $PSBoundParameters.Add('HttpPipelineAppend', {
-        param($req, $callback, $next)
-        # call the next step in the Pipeline
-        $ResponseTask = $next.SendAsync($req, $callback)
-        $global:JCHttpRequest = $req
-        # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
-        $global:JCHttpResponse = $ResponseTask
-        # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
-        Return $ResponseTask
-      }
     )
-  }
-  Process
-  {
-    $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters
-  }
-  End
-  {
-    Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-    # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-    Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-    # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-    # Clean up global variables
-    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-    $GlobalVars | ForEach-Object {
-      If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+    Begin
+    {
+        $Results = @()
+        $PSBoundParameters.Add('HttpPipelineAppend', {
+                param($req, $callback, $next)
+                # call the next step in the Pipeline
+                $ResponseTask = $next.SendAsync($req, $callback)
+                $global:JCHttpRequest = $req
+                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+                $global:JCHttpResponse = $ResponseTask
+                # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
+                Return $ResponseTask
+            }
+        )
     }
-    Return $Results
-  }
+    Process
+    {
+        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserGroup @PSBoundParameters
+    }
+    End
+    {
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
+        Return $Results
+    }
 }
+
+

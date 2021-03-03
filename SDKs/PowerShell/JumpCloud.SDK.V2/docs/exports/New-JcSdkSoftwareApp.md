@@ -182,32 +182,33 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <ISoftwareApp>: Software Application Package Object
-  - `[DisplayName <String>]`:
-  - `[Id <String>]`:
-  - `[Settings <IJcSoftwareAppSettings[]>]`:
-    - `[AllowUpdateDelay <Boolean?>]`:
-    - `[AppleVppAssignedLicenses <Int32?>]`:
-    - `[AppleVppAvailableLicenses <Int32?>]`:
+  - `[DisplayName <String>]`: 
+  - `[Id <String>]`: 
+  - `[Settings <IJcSoftwareAppSettings[]>]`: 
+    - `[AllowUpdateDelay <Boolean?>]`: 
+    - `[AppleVppAssignedLicenses <Int32?>]`: 
+    - `[AppleVppAvailableLicenses <Int32?>]`: 
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[AppleVppTotalLicenses <Int32?>]`:
-    - `[AutoUpdate <Boolean?>]`:
+    - `[AppleVppTotalLicenses <Int32?>]`: 
+    - `[AutoUpdate <Boolean?>]`: 
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-    - `[PackageId <String>]`:
+    - `[PackageId <String>]`: 
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 SETTINGS <IJcSoftwareAppSettings[]>: .
-  - `[AllowUpdateDelay <Boolean?>]`:
-  - `[AppleVppAssignedLicenses <Int32?>]`:
-  - `[AppleVppAvailableLicenses <Int32?>]`:
+  - `[AllowUpdateDelay <Boolean?>]`: 
+  - `[AppleVppAssignedLicenses <Int32?>]`: 
+  - `[AppleVppAvailableLicenses <Int32?>]`: 
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[AppleVppTotalLicenses <Int32?>]`:
-  - `[AutoUpdate <Boolean?>]`:
+  - `[AppleVppTotalLicenses <Int32?>]`: 
+  - `[AutoUpdate <Boolean?>]`: 
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-  - `[PackageId <String>]`:
+  - `[PackageId <String>]`: 
   - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 ## RELATED LINKS
+
