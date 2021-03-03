@@ -86,6 +86,7 @@ Try
                 $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
                 $CustomFolderPath = '{0}/custom' -f $OutputFullPath
                 $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
+                $PesterTestsFilePath = '{0}/PesterTests.ps1' -f $CustomFolderPath
                 $exportsFolderPath = '{0}/exports' -f $OutputFullPath
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
@@ -275,11 +276,6 @@ Try
                     }
                 }
                 ###########################################################################
-                # Format help files
-                Get-ChildItem -Path:($DocsFolderPath) | ForEach-Object {
-                    (Get-Content -Path:($_.FullName) -Raw).Replace('\n', "`n") | Set-Content -Path:($_.FullName)
-                }
-                ###########################################################################
                 # Add prerelease tag
                 If (-not [System.String]::IsNullOrEmpty($PrereleaseName))
                 {
@@ -312,7 +308,9 @@ Try
                         $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $PesterTestsContent = Get-Content -Path:($PesterTestsFilePath) -Raw
+                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
@@ -364,7 +362,7 @@ Try
                         $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                         $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
                         $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
-                        $GitIgnoreContent = $GitIgnoreContent += "!test-module.ps1"
+                        $GitIgnoreContent = $GitIgnoreContent += "`n$($PesterTestsFilePath)"
                         $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
                 }
