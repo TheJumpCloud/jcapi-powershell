@@ -19,7 +19,7 @@ To pack `JumpCloud.SDK.DirectoryInsights` for distribution, run the `pack-module
 ## Module Script Details
 There are multiple scripts created for performing different actions for developing `JumpCloud.SDK.DirectoryInsights`.
 - `build-module.ps1`
-  - Builds the module DLL (`./bin/DirectoryInsightsApi.private.dll`), creates the exported cmdlets and documentation, generates custom cmdlet test stubs and exported cmdlet example stubs, and updates `./JumpCloud.SDK.DirectoryInsights.psd1` with Azure profile information.
+  - Builds the module DLL (`./bin/JumpCloud.SDK.DirectoryInsights.private.dll`), creates the exported cmdlets and documentation, generates custom cmdlet test stubs and exported cmdlet example stubs, and updates `./JumpCloud.SDK.DirectoryInsights.psd1` with Azure profile information.
   - **Parameters**: [`Switch` parameters]
     - `-Run`: After building, creates an isolated PowerShell session and loads `JumpCloud.SDK.DirectoryInsights`.
     - `-Test`: After building, runs the `Pester` tests defined in the `test` folder.
