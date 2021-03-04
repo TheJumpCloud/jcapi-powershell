@@ -13,6 +13,8 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+$global:PesterTestUserSshKeyName = 'PesterTestUserSshKeyName'
+$global:PesterTestUserSshKeyPublicKey = 'PesterTestUserSshKeyPublicKey'
 Describe 'Get-JcSdkUserSshKey' {
     It 'List' {
         Start-Sleep -Seconds:(10)

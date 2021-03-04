@@ -12,12 +12,15 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystemGroup' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'PutExpanded' {
+        { Set-JcSdkSystemGroup -id:$($global:PesterTestSystemGroup.id) -Name:("PesterTestSystemGroup") } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Put' {
+        $body = @{
+            Name        = 'PesterTestSystemGroup'
+        }
+        { Set-JcSdkSystemGroup -Id $($global:PesterTestSystemGroup.Id) -Body $body } | Should -Not -Throw
     }
 
     It 'PutViaIdentityExpanded' -skip {

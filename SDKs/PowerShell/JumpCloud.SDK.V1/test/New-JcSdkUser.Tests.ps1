@@ -13,6 +13,8 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+$global:PesterTestUserName = 'PesterTestUser'
+$global:PesterTestUserEmail = 'PesterTest@PesterTest.com'
 Describe 'New-JcSdkUser' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw

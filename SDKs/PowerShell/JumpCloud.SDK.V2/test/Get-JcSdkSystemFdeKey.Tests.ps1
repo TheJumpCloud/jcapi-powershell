@@ -13,7 +13,8 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemFdeKey' {
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        # Need to configure system in test env for test to pass
+        Get-JcSdkSystemFdeKey -SystemId:($global:PesterTestSystem.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

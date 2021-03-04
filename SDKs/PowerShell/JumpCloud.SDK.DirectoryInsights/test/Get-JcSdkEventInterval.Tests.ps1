@@ -13,10 +13,12 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkEventInterval' {
     It 'GetExpanded' -skip {
+        # TODO: documentation needs updating
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Get' -skip {
+        # TODO: documentation needs updating
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

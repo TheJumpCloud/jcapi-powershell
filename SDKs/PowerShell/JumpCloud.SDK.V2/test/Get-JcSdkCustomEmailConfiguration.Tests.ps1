@@ -12,8 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCustomEmailConfiguration' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation | Should -Not -BeNullOrEmpty
+        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning| Should -Not -BeNullOrEmpty
+        Get-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user | Should -Not -BeNullOrEmpty
+        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration | Should -Not -BeNullOrEmpty
+        Get-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
