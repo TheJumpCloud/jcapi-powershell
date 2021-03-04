@@ -1,3 +1,5 @@
+# TODO: Configure a simple text file to upload with this command.
+
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath))
 {
