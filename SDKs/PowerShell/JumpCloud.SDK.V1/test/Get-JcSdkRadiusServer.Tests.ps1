@@ -19,8 +19,7 @@ Describe 'Get-JcSdkRadiusServer' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkRadiusServer
-        Get-JcSdkRadiusServer -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {

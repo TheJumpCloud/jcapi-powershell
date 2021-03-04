@@ -22,11 +22,7 @@ Describe 'New-JcSdkRadiusServer' {
     }
 
     It 'Create' {
-        $RadiusServer = Get-JcSdkRadiusServer | Where-Object { $_.Name -eq $global:PesterTestRadiusServerName -or $_.NetworkSourceIP -eq $global:PesterTestRadiusServerIp }
-        If ($RadiusServer)
-        {
-            Remove-JcSdkRadiusServer -Id:($RadiusServer.Id)
-        }
-        New-JcSdkRadiusServer -Name:($global:PesterTestRadiusServerName) -NetworkSourceIP:($global:PesterTestRadiusServerIp) -SharedSecret:($global:PesterTestSharedSecret) | Should -Not -BeNullOrEmpty
+        Do { $global:PesterTestRadiusServer = New-JcSdkRadiusServer @global:PesterDefRadiusServer } While ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
+        $global:PesterTestRadiusServer | Should -Not -BeNullOrEmpty
     }
 }

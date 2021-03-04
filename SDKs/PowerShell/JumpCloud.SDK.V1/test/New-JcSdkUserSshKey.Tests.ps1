@@ -21,15 +21,9 @@ Describe 'New-JcSdkUserSshKey' {
     }
 
     It 'Create' {
-        $User = (Get-JcSdkUser)[0]
-        $SshKey = Get-JcSdkUserSshKey -Id:($User.Id)
-        If (-not [System.String]::IsNullOrEmpty($SshKey))
-        {
-            $SshKey.Id | ForEach-Object {
-                Remove-JcSdkUserSshKey -Id:($_) -UserId:($User.Id)
-            }
-        }
-        New-JcSdkUserSshKey -Id:($User.Id) -Name:($global:PesterTestUserSshKeyName) -PublicKey:($global:PesterTestUserSshKeyPublicKey) | Should -Not -BeNullOrEmpty
+        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
+        $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
+        $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -Skip {

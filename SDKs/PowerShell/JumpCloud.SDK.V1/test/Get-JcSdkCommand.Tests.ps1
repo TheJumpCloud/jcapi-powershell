@@ -19,8 +19,7 @@ Describe 'Get-JcSdkCommand' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkCommand
-        Get-JcSdkCommand -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkCommand -Id:($global:PesterTestCommand.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {

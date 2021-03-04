@@ -25,11 +25,9 @@ Describe 'New-JcSdkCommand' {
     }
 
     It 'Create' {
-        $Command = Get-JcSdkCommand | Where-Object { $_.Name -eq $global:PesterTestCommandName }
-        If ($Command)
-        {
-            Remove-JcSdkCommand -Id:($Command.Id)
-        }
-        New-JcSdkCommand -Name:($global:PesterTestCommandName) -Command:($global:PesterTestCommand) -CommandType:($global:PesterTestCommandType) -Shell:($global:PesterTestCommandShell) | Should -Not -BeNullOrEmpty
+        # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
+        $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+        $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
+        $global:PesterTestCommand | Should -Not -BeNullOrEmpty
     }
 }

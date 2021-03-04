@@ -21,11 +21,7 @@ Describe 'New-JcSdkUser' {
     }
 
     It 'Create' {
-        $User = Get-JcSdkUser | Where-Object { $_.Username -eq $global:PesterTestUserName }
-        If ($User)
-        {
-            Remove-JcSdkUser -Id:($User.Id)
-        }
-        New-JcSdkUser -Email:($global:PesterTestUserEmail) -Username:($global:PesterTestUserName)  | Should -Not -BeNullOrEmpty
+        $global:PesterTestUser = New-JcSdkUser @global:PesterDefUser
+        $global:PesterTestUser | Should -Not -BeNullOrEmpty
     }
 }

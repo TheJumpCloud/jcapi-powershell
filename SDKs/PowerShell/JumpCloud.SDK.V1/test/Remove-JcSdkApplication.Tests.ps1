@@ -1,4 +1,4 @@
-# TODO: Configure New-JcSdkApplication test
+# TODO: Configure New-JcSdkApplication tests
 
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {

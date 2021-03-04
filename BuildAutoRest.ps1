@@ -71,6 +71,8 @@ Try
                 $Config = $ConfigContent | ConvertFrom-Yaml
                 # $InputFile = $BaseFolder + $Config.'input-file'
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
+                $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
+                $PesterTestsFilePath = '{0}/PesterTests.ps1' -f $ToolsFolderPath
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
@@ -307,7 +309,9 @@ Try
                         $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $PesterTestsContent = Get-Content -Path:($PesterTestsFilePath) -Raw
+                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
