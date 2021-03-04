@@ -12,7 +12,14 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkActiveDirectoryAssociation' {
+    BeforeAll{
+        Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
+    }
+    AfterAll{
+        Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
+    }
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        #TODO: Test fails
+        Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Targets 'User' | Should -not -BeNullOrEmpty
     }
 }

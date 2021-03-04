@@ -13,6 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        # Need to configure system in test env for test to pass
+        Get-JcSdkSystemInsightAlfExplicitAuth | Should -Not -Throw
     }
 }

@@ -13,7 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        # TODO: this should return a file
+        # TODO: ID of MDM enrollment profile is same id of $($global:PesterAppleMDM.id) and last number is one value greater
+        # ex. if AppleMDMID == 5f93256663336c45c3c1e892; AppleMdmEnrollmentProfileID == 5f93256663336c45c3c1e893
+        Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId $($global:PesterAppleMDM.id) -id 5f93256663336c45c3c1e893
     }
 
     It 'Get' -skip {

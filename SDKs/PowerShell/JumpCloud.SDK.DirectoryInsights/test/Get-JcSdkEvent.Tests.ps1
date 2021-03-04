@@ -40,7 +40,7 @@ Describe 'Get-JcSdkEvent' {
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Sort - Test that results come back in decending DateTime
-            $MostRecentRecord | Should -BeGreaterThan $OldestRecord
+            $MostRecentRecord | Should -BeGreaterOrEqual $OldestRecord
             # EndTime - Test that results are not newer than EndTime parameter value
             $MostRecentRecord | Should -BeLessOrEqual $ParamHash.EndTime
             # StartTime - Test that results are not older than StartTime parameter value
@@ -61,7 +61,7 @@ Describe 'Get-JcSdkEvent' {
             $MostRecentRecord = ([System.DateTime]($eventTest | Select-Object -First 1).timestamp).ToUniversalTime()
             $OldestRecord = ([System.DateTime]($eventTest | Select-Object -Last 1).timestamp).ToUniversalTime()
             # Sort - Test that results come back in decending DateTime
-            $MostRecentRecord | Should -BeGreaterThan $OldestRecord
+            $MostRecentRecord | Should -BeGreaterOrEqual $OldestRecord
             # EndTime - Test that results are not newer than EndTime parameter value
             $MostRecentRecord | Should -BeLessOrEqual $ParamHash.EndTime
             # StartTime - Test that results are not older than StartTime parameter value

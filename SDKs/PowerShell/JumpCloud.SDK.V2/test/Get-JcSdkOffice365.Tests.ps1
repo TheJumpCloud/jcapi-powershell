@@ -12,8 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkOffice365' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkOffice365 -Office365Id $($global:PesterTestOffice365.id)| Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

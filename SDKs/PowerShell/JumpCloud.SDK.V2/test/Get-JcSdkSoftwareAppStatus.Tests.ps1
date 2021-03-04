@@ -13,6 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSoftwareAppStatus' {
     It 'Get' -skip {
+        #TODO: Apply to a online system and wait for it to report complete
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

@@ -12,12 +12,21 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkAppleMdm' {
-    It 'UpdateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    BeforeAll {
+        $body = @{
+            Name                         = "Joe's MDM"
+            WelcomeScreenButton          = "Let's Grow!"
+            WelcomeScreenParagraph       = "This laptop should help you, a farmer, plant and grow many vegetables."
+            WelcomeScreenTitle           = "Hello There"
+        }
     }
 
-    It 'Update' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateExpanded' {
+        Set-JcSdkAppleMdm -id $global:PesterAppleMDM.id -body $body
+    }
+
+    It 'Update' {
+        Set-JcSdkAppleMdm -id $global:PesterAppleMDM.id -name $($body.name) -WelcomeScreenButton $($body.WelcomeScreenTitle) -WelcomeScreenParagraph $($body.WelcomeScreenTitle) -WelcomeScreenTitle $($body.WelcomeScreenTitle)
     }
 
     It 'UpdateViaIdentityExpanded' -skip {

@@ -12,8 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Invoke-JcSdkExpireUserPassword' {
-    It 'Post' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    AfterAll {
+        Set-JcSdkUser -Id:($global:PesterTestUser.Id) -Password:($global:PesterDefUser.Password)
+    }
+    
+    It 'Post' {
+        { Invoke-JcSdkExpireUserPassword -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
+        (Get-JcSdkUser -Id:($global:PesterTestUser.Id)).PasswordExpired | Should -Be $true
     }
 
     It 'PostViaIdentity' -skip {
