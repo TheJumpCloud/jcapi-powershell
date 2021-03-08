@@ -13,12 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkDuoAccount' {
     It 'List' -skip {
-        # TODO: Setup DUO in pester Orgs
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        # TODO: Setup DUO in pester Orgs
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 

@@ -13,7 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightLoggedinUser' {
     It 'List' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemInsightLoggedinUser | Should -Not -Throw
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

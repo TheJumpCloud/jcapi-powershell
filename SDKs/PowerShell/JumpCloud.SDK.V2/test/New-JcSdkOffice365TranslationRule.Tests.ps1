@@ -15,9 +15,9 @@ Describe 'New-JcSdkOffice365TranslationRule' {
     It 'CreateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
-    It 'Create' {
-        $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule -Office365Id $($global:PesterTestOffice365.Id) -BuiltIn user_street_address
-        $global:PesterTestOffice365TranslationRule | Should -Not -BeNullOrEmpty
+
+    It 'Create' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {

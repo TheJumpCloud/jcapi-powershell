@@ -13,9 +13,6 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestRadiusServerName = 'PesterTestRadiusServerName'
-$global:PesterTestRadiusServerIp = '211.211.211.211'
-$global:PesterTestSharedSecret = 'PesterTestSharedSecret'
 Describe 'New-JcSdkRadiusServer' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw

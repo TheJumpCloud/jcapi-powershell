@@ -12,30 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkPolicyResult' {
-    # BeforeAll {
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
-    # }
-    # AfterAll {
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-    #     Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-    # }
     It 'List1' -skip {
-        # This endpoint returns all policies results for an organization.
-        # TODO: Value was either too large or too small for an Int32.
-        Get-JcSdkPolicyResult | Should -Not -BeNullOrEmpty
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        # TODO: depending on the pester system apply a policy, wait for policy to be applied, then test
-        $policyResultWindow = Get-JcSdkPolicyResult -policyId $($global:PesterTestWindowsPolicy.Id) | Select-Object -First 1
-        Get-JcSdkPolicyResult -id $policyResultWindow.id | Should -Not -BeNullOrEmpty
-        $policyResultLinux = Get-JcSdkPolicyResult -policyId $($global:PesterTestLinuxPolicy.Id) | Select-Object -First 1
-        Get-JcSdkPolicyResult -id $policyResultLinux.id | Should -Not -BeNullOrEmpty
-        $policyResultMac = Get-JcSdkPolicyResult -policyId $($global:PesterTestDarwinPolicy.Id) | Select-Object -First 1
-        Get-JcSdkPolicyResult -id $policyResultMac.id | Should -Not -BeNullOrEmpty
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
@@ -43,9 +25,6 @@ Describe 'Get-JcSdkPolicyResult' {
     }
 
     It 'List' -skip {
-        # TODO: depending on the pester system apply a policy, wait for policy to be applied, then test
-        Get-JcSdkPolicyResult -policyId $($global:PesterTestWindowsPolicy.Id) | Should -Not -BeNullOrEmpty
-        Get-JcSdkPolicyResult -policyId $($global:PesterTestLinuxPolicy.Id) | Should -Not -BeNullOrEmpty
-        Get-JcSdkPolicyResult -policyId $($global:PesterTestDarwinPolicy.Id) | Should -Not -BeNullOrEmpty
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

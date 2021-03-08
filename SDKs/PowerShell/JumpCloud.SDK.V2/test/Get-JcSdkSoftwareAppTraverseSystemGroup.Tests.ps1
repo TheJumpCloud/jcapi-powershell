@@ -12,14 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSoftwareAppTraverseSystemGroup' {
-    BeforeAll {
-        Set-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Id $($global:PesterTestSystemGroup.Id) -Op 'add' -Type 'system_group'
-    }
-    AfterAll {
-        Set-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Id $($global:PesterTestSystemGroup.Id) -Op 'remove' -Type 'system_group'
-    }
-    It 'Get' {
-        Get-JcSdkSoftwareAppTraverseSystemGroup -SoftwareAppId $($global:PesterTestSoftwareApp.Id) | Should -Not -BeNullOrEmpty
+    It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

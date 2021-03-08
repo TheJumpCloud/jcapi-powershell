@@ -12,24 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkPolicyAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkPolicyAssociation -PolicyId:($global:PesterTestWindowsPolicy.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system') } | Should -Not -Throw
-    }
-
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestSystem.Id
-            Op   = 'remove'
-            Type = 'system'
-        }
-        { Set-JcSdkPolicyAssociation -PolicyId:($global:PesterTestWindowsPolicy.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
-    }
-
-    It 'SetViaIdentity' -Skip {
+    It 'SetExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'Set' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'SetViaIdentity' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'SetViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

@@ -1,5 +1,3 @@
-# TODO: Configure New-JcSdkCommand test to upload a simple text file
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'

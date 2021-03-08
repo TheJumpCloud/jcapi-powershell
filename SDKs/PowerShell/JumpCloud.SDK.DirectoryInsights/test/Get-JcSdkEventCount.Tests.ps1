@@ -3,7 +3,7 @@ if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
-$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkEventCountCount.Recording.json'
+$TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkEventCount.Recording.json'
 $currentPath = $PSScriptRoot
 while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -11,34 +11,12 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkEventCountCount' {
-    BeforeAll {
-        # Define parameters for functions
-        $ParamHash = @{
-            "StartTime"     = (Get-Date).AddHours(-24).ToUniversalTime();
-            "EndTime"       = (Get-Date).ToUniversalTime();
-            "Service"       = "all";
-            "Sort"          = "DESC"
-            "SearchTermAnd" = @{
-                "event_type" = "user_delete"
-            }
-        }
+Describe 'Get-JcSdkEventCount' {
+    It 'GetExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
-    <# ToDo
-    Service - Not sure how to validate yet (Test that results service value matches parameter value)
-    #>
-    It 'GetExpanded' {
-        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEventCount -Service:($ParamHash.Service) -StartTime:($ParamHash.StartTime) -EndTime:($ParamHash.EndTime) -Sort:($ParamHash.Sort) -SearchTermAnd:($ParamHash.SearchTermAnd)
-        If ([System.String]::IsNullOrEmpty($eventTest))
-        {
-            $eventTest | Should -Not -BeNullOrEmpty
-        }
-    }
-    It 'Get' {
-        $eventTest = JumpCloud.SDK.DirectoryInsights\Get-JcSdkEventCount -Body:($ParamHash)
-        If ([System.String]::IsNullOrEmpty($eventTest))
-        {
-            $eventTest | Should -Not -BeNullOrEmpty
-        }
+
+    It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

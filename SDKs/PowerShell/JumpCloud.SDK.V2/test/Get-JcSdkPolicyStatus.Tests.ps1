@@ -13,7 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkPolicyStatus' {
     It 'List' -skip {
-        #TODO: apply to systems before testing
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

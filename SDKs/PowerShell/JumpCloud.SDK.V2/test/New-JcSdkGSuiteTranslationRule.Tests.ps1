@@ -16,9 +16,8 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' {
-        $global:PesterTestGsuiteTranslationRule = New-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -BuiltIn user_work_addresses
-        $global:PesterTestGsuiteTranslationRule | Should -Not -BeNullOrEmpty
+    It 'Create' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
