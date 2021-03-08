@@ -30,25 +30,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance
 ### SetExpanded (Default)
 ```
 Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
 Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Body <IGraphOperationActiveDirectory>
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity>
- -Body <IGraphOperationActiveDirectory> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IGraphOperationActiveDirectory> [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
- -Type <String> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Type <String> [-CreationSource <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -130,6 +132,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

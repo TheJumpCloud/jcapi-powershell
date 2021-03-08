@@ -836,7 +836,7 @@
           "items": {
             "properties": {
               "id": {
-                "type": "number"
+                "type": "integer"
               },
               "name": {
                 "type": "string"
@@ -1675,38 +1675,6 @@
       "title": "IPListRequest",
       "type": "object"
     },
-    "JcSoftware-app-settings": {
-      "properties": {
-        "allowUpdateDelay": {
-          "default": false,
-          "type": "boolean"
-        },
-        "appleVpp": {
-          "$ref": "#/definitions/software-app-apple-vpp"
-        },
-        "autoUpdate": {
-          "default": false,
-          "type": "boolean"
-        },
-        "location": {
-          "description": "Repository where the app is located within the package manager",
-          "type": "string"
-        },
-        "locationObjectId": {
-          "description": "ID of the repository where the app is located within the package manager",
-          "type": "string"
-        },
-        "packageId": {
-          "type": "string"
-        },
-        "packageManager": {
-          "description": "App store serving the app: APPLE_VPP, CHOCOLATEY, etc.",
-          "type": "string"
-        }
-      },
-      "title": "Software Application Package Setting Object",
-      "type": "object"
-    },
     "job-id": {
       "properties": {
         "id": {
@@ -1959,6 +1927,7 @@
         },
         "exitStatus": {
           "description": "The 32-bit unsigned exit status from the applying the policy.",
+          "format": "int64",
           "type": "integer"
         },
         "id": {
@@ -2346,7 +2315,7 @@
         },
         "settings": {
           "items": {
-            "$ref": "#/definitions/JcSoftware-app-settings"
+            "$ref": "#/definitions/SoftwareAppSettings"
           },
           "type": "array"
         }
@@ -2375,6 +2344,38 @@
         }
       },
       "title": "software-app-apple-vpp",
+      "type": "object"
+    },
+    "SoftwareAppSettings": {
+      "properties": {
+        "allowUpdateDelay": {
+          "default": false,
+          "type": "boolean"
+        },
+        "appleVpp": {
+          "$ref": "#/definitions/software-app-apple-vpp"
+        },
+        "autoUpdate": {
+          "default": false,
+          "type": "boolean"
+        },
+        "location": {
+          "description": "Repository where the app is located within the package manager",
+          "type": "string"
+        },
+        "locationObjectId": {
+          "description": "ID of the repository where the app is located within the package manager",
+          "type": "string"
+        },
+        "packageId": {
+          "type": "string"
+        },
+        "packageManager": {
+          "description": "App store serving the app: APPLE_VPP, CHOCOLATEY, etc.",
+          "type": "string"
+        }
+      },
+      "title": "Software Application Package Setting Object",
       "type": "object"
     },
     "software-app-status": {
@@ -4975,6 +4976,14 @@
       "required": false,
       "type": "string"
     },
+    "trait:requestHeaders:creation-source": {
+      "default": "jumpcloud:bulk",
+      "description": "Defines the creation-source header for gapps, o365 and workdays requests.\nIf the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.\nAllowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.\n",
+      "in": "header",
+      "name": "creation-source",
+      "required": false,
+      "type": "string"
+    },
     "trait:systemContextAuth:Authorization": {
       "description": "Authorization header for the System Context API",
       "in": "header",
@@ -5045,6 +5054,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5098,6 +5110,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5136,6 +5151,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-ActiveDirectory"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5183,6 +5201,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5217,7 +5238,11 @@
       "get": {
         "description": "This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-ActiveDirectory",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5247,7 +5272,11 @@
       "get": {
         "description": "Get a list of all Apple MDM configurations.  An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "List-AppleMDM",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5271,7 +5300,11 @@
       "get": {
         "description": "Retrieves an Apple MDM signed CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-AppleMDMCsr",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "produces": [
           "application/octet-stream"
         ],
@@ -5303,7 +5336,11 @@
       "get": {
         "description": "Retrieves an Apple MDM DEP Public Key.",
         "operationId": "Get-AppleMDMDepKey",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "produces": [
           "application/x-pem-file"
         ],
@@ -5445,6 +5482,9 @@
               ],
               "type": "object"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5496,6 +5536,9 @@
               ],
               "type": "object"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5529,7 +5572,11 @@
       "post": {
         "description": "Restarts a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/restart \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
         "operationId": "Restart-AppleMDMDevice",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -5561,7 +5608,11 @@
       "post": {
         "description": "Shuts down a DEP-enrolled device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/shutdown \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
         "operationId": "Stop-AppleMDMDevice",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -5579,7 +5630,11 @@
       "get": {
         "description": "Get a list of enrollment profiles for an apple mdm.\n\nNote: currently only one enrollment profile is supported.\n\n#### Sample Request\n```\n curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "List-AppleMDMEnrollmentProfile",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5611,7 +5666,11 @@
       "get": {
         "description": "Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-AppleMDMEnrollmentProfile",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "produces": [
           "application/x-apple-aspen-config"
         ],
@@ -5657,7 +5716,11 @@
       "post": {
         "description": "Refreshes the list of devices that a JumpCloud admin has added to their virtual MDM in Apple Business Manager - ABM so that they can be DEP enrolled with JumpCloud.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
         "operationId": "Sync-AppleMDMDevice",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -5675,7 +5738,11 @@
       "delete": {
         "description": "Removes an Apple MDM configuration.\n\nWarning: This is a destructive operation and will remove your Apple Push Certificates.  We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-AppleMDM",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -5709,6 +5776,9 @@
             "schema": {
               "$ref": "#/definitions/apple-mdm-patch-input"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5759,6 +5829,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5798,6 +5871,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-Application"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5845,6 +5921,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5907,6 +5986,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -5986,6 +6068,9 @@
           },
           {
             "$ref": "#/parameters/trait:listCount:x-unfiltered-total-count"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6016,6 +6101,9 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicyInput"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6038,7 +6126,11 @@
       "delete": {
         "description": "Delete the specified authentication policy.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-AuthenticationPolicy",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6057,7 +6149,11 @@
       "get": {
         "description": "Return a specific authentication policy.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-AuthenticationPolicy",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6092,6 +6188,9 @@
             "schema": {
               "$ref": "#/definitions/AuthnPolicyInput"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6124,6 +6223,9 @@
               },
               "type": "array"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6154,6 +6256,9 @@
               },
               "type": "array"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6193,6 +6298,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6254,6 +6362,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6293,6 +6404,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-Command"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6340,6 +6454,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6402,6 +6519,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6462,10 +6582,13 @@
         "parameters": [
           {
             "in": "body",
-            "name": "BodyObject",
+            "name": "CustomEmail",
             "schema": {
               "$ref": "#/definitions/CustomEmail"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6488,7 +6611,11 @@
       "delete": {
         "description": "Delete the custom email configuration for the specified custom email type",
         "operationId": "Delete-CustomEmailConfiguration",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -6504,7 +6631,11 @@
       "get": {
         "description": "Get the custom email configuration for the specified custom email type",
         "operationId": "Get-CustomEmailConfiguration",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6534,10 +6665,13 @@
         "parameters": [
           {
             "in": "body",
-            "name": "BodyObject",
+            "name": "CustomEmail",
             "schema": {
               "$ref": "#/definitions/CustomEmail"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6599,6 +6733,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6624,7 +6761,11 @@
       "get": {
         "description": "This endpoint returns all the Duo accounts for your organization. Note: There can currently only be one Duo account for your organization.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "List-DuoAccount",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6646,7 +6787,11 @@
       "post": {
         "description": "Registers a Duo account for an organization. Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
         "operationId": "Create-DuoAccount",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "201": {
             "description": "",
@@ -6667,7 +6812,11 @@
       "get": {
         "description": "This endpoint returns all the Duo applications for the specified Duo account. Note: There can currently only be one Duo application for your organization.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "List-DuoApplication",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6704,6 +6853,9 @@
             "schema": {
               "$ref": "#/definitions/DuoApplicationReq"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6726,7 +6878,11 @@
       "delete": {
         "description": "Deletes the specified Duo application, an error will be returned if the application is used in a protected resource.\n\n#### Sample Request\n```\n  curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}''\n```",
         "operationId": "Delete-DuoApplication",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6745,7 +6901,11 @@
       "get": {
         "description": "This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-DuoApplication",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6785,6 +6945,9 @@
             "schema": {
               "$ref": "#/definitions/DuoApplicationUpdateReq"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -6807,7 +6970,11 @@
       "delete": {
         "description": "Removes the specified Duo account, an error will be returned if the account has some Duo application used in a protected resource.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-DuoAccount",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6826,7 +6993,11 @@
       "get": {
         "description": "This endpoint returns a specific Duo account.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-DuoAccount",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -6908,6 +7079,9 @@
             "type": "array"
           },
           {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          },
+          {
             "$ref": "#/parameters/trait:listCount:x-total-count"
           },
           {
@@ -6965,6 +7139,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7004,6 +7181,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-GSuite"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7066,6 +7246,9 @@
             "name": "sortOrder",
             "required": false,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7174,6 +7357,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7221,6 +7407,9 @@
             "schema": {
               "$ref": "#/definitions/GSuiteTranslationRuleRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7243,7 +7432,11 @@
       "delete": {
         "description": "This endpoint allows you to delete a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Delete-GSuiteTranslationRule",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -7259,7 +7452,11 @@
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-GSuiteTranslationRule",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -7322,6 +7519,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7384,6 +7584,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7418,7 +7621,11 @@
       "get": {
         "description": "This endpoint returns a specific G Suite.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-GSuite",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -7453,6 +7660,9 @@
             "schema": {
               "$ref": "#/definitions/gsuite-patch-input"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7515,6 +7725,9 @@
           },
           {
             "$ref": "#/parameters/trait:listCount:x-unfiltered-total-count"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7545,6 +7758,9 @@
             "schema": {
               "$ref": "#/definitions/IPListRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7567,7 +7783,11 @@
       "delete": {
         "description": "Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-IpList",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7586,7 +7806,11 @@
       "get": {
         "description": "Return a specific IP list.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-IpList",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -7620,6 +7844,9 @@
             "schema": {
               "$ref": "#/definitions/IPListRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7647,6 +7874,9 @@
             "schema": {
               "$ref": "#/definitions/IPListRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7719,6 +7949,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7744,7 +7977,11 @@
       "get": {
         "description": "This endpoint returns a specific LDAP server.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-LdapServer",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -7790,6 +8027,9 @@
               },
               "type": "object"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7854,6 +8094,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -7893,6 +8136,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-LdapServer"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8137,6 +8383,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8199,6 +8448,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8233,7 +8485,11 @@
       "get": {
         "description": "This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Get-Office365",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -8268,6 +8524,9 @@
             "schema": {
               "$ref": "#/definitions/office365-patch-input"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8318,6 +8577,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8357,6 +8619,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-Office365"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8421,6 +8686,9 @@
           },
           {
             "$ref": "#/parameters/trait:o365:ConsistencyLevel"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8529,6 +8797,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8576,6 +8847,9 @@
             "schema": {
               "$ref": "#/definitions/Office365TranslationRuleRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8598,7 +8872,11 @@
       "delete": {
         "description": "This endpoint allows you to delete a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Delete-Office365TranslationRule",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -8614,7 +8892,11 @@
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-Office365TranslationRule",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -8677,6 +8959,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8739,6 +9024,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8823,6 +9111,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8853,6 +9144,9 @@
             "schema": {
               "$ref": "#/definitions/PolicyRequest"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -8875,7 +9169,11 @@
       "delete": {
         "description": "This endpoint allows you to delete a policy.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d4291e6b9 \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Delete-Policy",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -8891,7 +9189,11 @@
       "get": {
         "description": "This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-Policy",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -8976,6 +9278,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9015,6 +9320,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-Policy"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9084,6 +9392,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9167,6 +9478,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9228,6 +9542,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9290,6 +9607,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9374,6 +9694,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9399,7 +9722,11 @@
       "get": {
         "description": "This endpoint will return the policy results for a specific policy.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-PolicyResult",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9479,6 +9806,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9504,7 +9834,11 @@
       "get": {
         "description": "This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-PolicyTemplate",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -9584,6 +9918,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9657,6 +9994,9 @@
             "schema": {
               "$ref": "#/definitions/ProviderAdminReq"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9707,6 +10047,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9746,6 +10089,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-RadiusServer"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9793,6 +10139,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9855,6 +10204,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9928,6 +10280,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9957,6 +10312,9 @@
             "schema": {
               "$ref": "#/definitions/software-app"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -9978,7 +10336,11 @@
       "delete": {
         "description": "Removes a Software Application configuration.\n\nWarning: This is a destructive operation and will unmanage the application on all affected systems.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-SoftwareApp",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -9994,7 +10356,11 @@
       "get": {
         "description": "Retrieves a Software Application.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SoftwareApp",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -10028,6 +10394,9 @@
             "schema": {
               "$ref": "#/definitions/software-app"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10078,6 +10447,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10117,6 +10489,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-SoftwareApp"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10175,6 +10550,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10236,6 +10614,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10298,6 +10679,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10332,7 +10716,11 @@
       "get": {
         "description": "This endpoint returns all pricing & packaging subscriptions.\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-Subscription",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -10401,6 +10789,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10445,6 +10836,9 @@
             "schema": {
               "$ref": "#/definitions/SystemGroupData"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10497,6 +10891,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10536,6 +10933,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-SystemGroup"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10583,6 +10983,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10634,6 +11037,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10673,6 +11079,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-SystemGroup-Member"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -10737,6 +11146,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10799,6 +11211,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10861,6 +11276,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10923,6 +11341,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -10957,7 +11378,11 @@
       "delete": {
         "description": "This endpoint allows you to delete a System Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Delete-SystemGroup",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -10973,7 +11398,11 @@
       "get": {
         "description": "This endpoint returns the details of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SystemGroup",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -11015,6 +11444,9 @@
             "schema": {
               "$ref": "#/definitions/SystemGroupData"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11084,6 +11516,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11149,6 +11584,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11214,6 +11652,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11279,6 +11720,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11344,6 +11788,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11409,6 +11856,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11474,6 +11924,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11539,6 +11992,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11604,6 +12060,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11669,6 +12128,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11734,6 +12196,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11799,6 +12264,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11864,6 +12332,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11929,6 +12400,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -11994,6 +12468,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12059,6 +12536,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12124,6 +12604,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12189,6 +12672,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12254,6 +12740,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12319,6 +12808,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12384,6 +12876,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12449,6 +12944,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12514,6 +13012,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12579,6 +13080,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12644,6 +13148,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12709,6 +13216,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12774,6 +13284,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12839,6 +13352,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12904,6 +13420,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -12969,6 +13488,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13034,6 +13556,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13099,6 +13624,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13164,6 +13692,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13229,6 +13760,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13294,6 +13828,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13359,6 +13896,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13424,6 +13964,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13489,6 +14032,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13554,6 +14100,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13614,6 +14163,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13679,6 +14231,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13744,6 +14299,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13809,6 +14367,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13874,6 +14435,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -13939,6 +14503,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14004,6 +14571,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14069,6 +14639,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14134,6 +14707,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14199,6 +14775,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14264,6 +14843,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14329,6 +14911,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14394,6 +14979,9 @@
             "name": "limit",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14451,6 +15039,9 @@
             "type": "integer"
           },
           {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          },
+          {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
           },
           {
@@ -14494,6 +15085,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-System"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -14547,6 +15141,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14656,6 +15253,9 @@
             "type": "array"
           },
           {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          },
+          {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
           },
           {
@@ -14722,6 +15322,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14806,6 +15409,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -14868,6 +15474,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -14936,6 +15545,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           },
           {
             "$ref": "#/parameters/trait:systemContextAuth:Authorization"
@@ -15026,6 +15638,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15056,6 +15671,9 @@
             "schema": {
               "$ref": "#/definitions/UserGroupPost"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15106,6 +15724,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15174,6 +15795,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15213,6 +15837,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-UserGroup"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15260,6 +15887,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15322,6 +15952,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15384,6 +16017,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15435,6 +16071,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15474,6 +16113,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-UserGroup-Member"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15532,6 +16174,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15594,6 +16239,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15656,6 +16304,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15718,6 +16369,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15780,6 +16434,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15814,7 +16471,11 @@
       "delete": {
         "description": "This endpoint allows you to delete a User Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Delete-UserGroup",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": "No Content"
@@ -15830,7 +16491,11 @@
       "get": {
         "description": "This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-UserGroup",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -15865,6 +16530,9 @@
             "schema": {
               "$ref": "#/definitions/UserGroupPut"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15915,6 +16583,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -15983,6 +16654,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16022,6 +16696,9 @@
             "schema": {
               "$ref": "#/definitions/GraphOperation-User"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16069,6 +16746,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16131,6 +16811,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16193,6 +16876,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16266,6 +16952,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16328,6 +17017,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16390,6 +17082,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16452,6 +17147,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16514,6 +17212,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16598,6 +17299,9 @@
             "name": "filter",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16628,6 +17332,9 @@
             "schema": {
               "$ref": "#/definitions/workday-input"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16650,7 +17357,11 @@
       "get": {
         "description": "This endpoint will return  all the available information about an instance of Workday.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-Workday",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -16684,6 +17395,9 @@
             "schema": {
               "$ref": "#/definitions/workday-fields"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16723,6 +17437,9 @@
             "name": "skip",
             "required": false,
             "type": "integer"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16762,7 +17479,11 @@
       "delete": {
         "description": "Removes any and all authorization methods from the workday instance\n\n##### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-WorkdayAuthorization",
-        "parameters": [],
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
         "responses": {
           "204": {
             "description": ""
@@ -16793,6 +17514,9 @@
             "schema": {
               "$ref": "#/definitions/auth-input-object"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16830,6 +17554,9 @@
               },
               "type": "array"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {
@@ -16880,6 +17607,9 @@
             "name": "sort",
             "required": false,
             "type": "array"
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
           }
         ],
         "responses": {

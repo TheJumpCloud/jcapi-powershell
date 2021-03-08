@@ -28,25 +28,25 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_i
 ### SetExpanded (Default)
 ```
 Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Id <String> -Op <String> -Type <String>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphOperationSoftwareApp> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphOperationSoftwareApp>
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationSoftwareApp>
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,6 +111,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

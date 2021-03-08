@@ -25,17 +25,18 @@ These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](ht
 ### List (Default)
 ```
 Get-JcSdkGSuiteTranslationRule -GsuiteId <String> [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>]
- [<CommonParameters>]
+ [-CreationSource <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkGSuiteTranslationRule -GsuiteId <String> -Id <String> [<CommonParameters>]
+Get-JcSdkGSuiteTranslationRule -GsuiteId <String> -Id <String> [-CreationSource <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Get-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,6 +69,23 @@ These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](ht
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Fields
 The comma separated fields included in the returned records.

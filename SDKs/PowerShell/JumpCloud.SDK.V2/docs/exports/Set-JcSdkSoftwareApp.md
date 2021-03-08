@@ -26,25 +26,26 @@ Only displayName can be changed.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSoftwareApp -Id <String> [-DisplayName <String>] [-Id1 <String>]
- [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -Id <String> [-CreationSource <String>] [-DisplayName <String>] [-Id1 <String>]
+ [-Settings <ISoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-CreationSource <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-DisplayName <String>]
- [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-CreationSource <String>]
+ [-DisplayName <String>] [-Settings <ISoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -93,6 +94,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -162,7 +180,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]
+Type: JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -229,7 +247,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
-  - `[Settings <IJcSoftwareAppSettings[]>]`: 
+  - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
@@ -264,7 +282,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-SETTINGS <IJcSoftwareAppSettings[]>: .
+SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 

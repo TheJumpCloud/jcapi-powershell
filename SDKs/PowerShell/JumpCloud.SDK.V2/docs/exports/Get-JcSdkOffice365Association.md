@@ -26,12 +26,14 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### Get (Default)
 ```
-Get-JcSdkOffice365Association -Office365Id <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkOffice365Association -Office365Id <String> -Targets <String> [-CreationSource <String>]
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <String>
+ [-CreationSource <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -66,6 +68,23 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -InputObject
 Identity Parameter

@@ -14,14 +14,14 @@ Delete the custom email configuration for the specified custom email type
 
 ### Delete (Default)
 ```
-Remove-JcSdkCustomEmailConfiguration -CustomEmailType <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkCustomEmailConfiguration -CustomEmailType <String> [-CreationSource <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,6 +44,23 @@ Delete the custom email configuration for the specified custom email type
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -CustomEmailType
 .

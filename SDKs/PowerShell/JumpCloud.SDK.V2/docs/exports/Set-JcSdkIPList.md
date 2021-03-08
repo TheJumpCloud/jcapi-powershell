@@ -28,25 +28,26 @@ curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkIPList -Id <String> [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkIPList -Id <String> [-CreationSource <String>] [-Description <String>] [-Ips <String[]>]
+ [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkIPList -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -Id <String> -Body <IIPListRequest> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> -Body <IIPListRequest> [-CreationSource <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-Ips <String[]>]
- [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-Description <String>]
+ [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -97,6 +98,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

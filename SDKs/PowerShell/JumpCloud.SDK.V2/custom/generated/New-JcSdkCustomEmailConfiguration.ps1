@@ -21,7 +21,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODYOBJECT <ICustomEmail>:
+CUSTOMEMAIL <ICustomEmail>:
   Subject <String>:
   Type <String>: CustomEmailType
   [Body <String>]:
@@ -37,12 +37,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.String]
+    # Defines the creation-source header for gapps, o365 and workdays requests.
+    # If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+    # Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+    ${CreationSource},
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ICustomEmail]
     # Custom email content created by the admin user to personalize emails sent to their system users.
-    # To construct, see NOTES section for BODYOBJECT properties and create a hash table.
-    ${BodyObject},
+    # To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
+    ${CustomEmail},
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]

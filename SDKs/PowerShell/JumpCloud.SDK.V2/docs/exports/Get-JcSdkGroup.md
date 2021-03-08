@@ -28,8 +28,8 @@ This endpoint returns all Groups that exist in your organization.
 ## SYNTAX
 
 ```
-Get-JcSdkGroup [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
- [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
+Get-JcSdkGroup [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [-CreationSource <String>]
+ [-XTotalCount <Int32>] [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,6 +67,23 @@ This endpoint returns all Groups that exist in your organization.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Fields
 The comma separated fields included in the returned records.

@@ -25,12 +25,14 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### Get (Default)
 ```
-Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <String> [-CreationSource <String>]
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String>
+ [-CreationSource <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,6 +66,23 @@ A direct association can be a non-homogeneous relationship between 2 different o
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -InputObject
 Identity Parameter

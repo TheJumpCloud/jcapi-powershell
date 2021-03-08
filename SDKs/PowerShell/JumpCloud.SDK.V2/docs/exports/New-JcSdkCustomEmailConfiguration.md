@@ -14,14 +14,15 @@ Create the custom email configuration for the specified custom email type
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-Body <String>] [-Button <String>]
- [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>] [-Confirm] [-WhatIf]
+New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-CreationSource <String>] [-Body <String>]
+ [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkCustomEmailConfiguration -BodyObject <ICustomEmail> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCustomEmailConfiguration -CustomEmail <ICustomEmail> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,22 +61,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BodyObject
-Custom email content created by the admin user to personalize emails sent to their system users.
-To construct, see NOTES section for BODYOBJECT properties and create a hash table.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.ICustomEmail
-Parameter Sets: Create
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -Button
 .
 
@@ -88,6 +73,39 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
+To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.ICustomEmail
+Parameter Sets: Create
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -217,7 +235,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODYOBJECT <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
+CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
   - `Type <String>`: CustomEmailType
   - `[Body <String>]`: 

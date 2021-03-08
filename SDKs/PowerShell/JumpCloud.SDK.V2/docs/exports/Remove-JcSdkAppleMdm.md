@@ -25,12 +25,13 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
 
 ### Delete (Default)
 ```
-Remove-JcSdkAppleMdm -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkAppleMdm -Id <String> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,6 +65,23 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 .

@@ -36,26 +36,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <String> [-AttributeSudoEnabled]
- [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <String> [-CreationSource <String>]
+ [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkUserAssociation -UserId <String> -Body <IGraphOperationUser> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUserAssociation -UserId <String> -Body <IGraphOperationUser> [-CreationSource <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUser> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUser>
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
- [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -144,6 +145,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
