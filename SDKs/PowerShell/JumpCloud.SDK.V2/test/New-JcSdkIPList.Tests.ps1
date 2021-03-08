@@ -16,7 +16,13 @@ Describe 'New-JcSdkIPList' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Create' {
+        $IpList = @{
+            Description = 'PesterIpList'
+            Ips         = '0.1.2.3'
+            Name        = 'Pester IP Test List'
+        }
+        $global:PesterIPList = New-JcSdkIpList @IpList
+        $global:PesterIPList | Should -Not -BeNullOrEmpty
     }
 }

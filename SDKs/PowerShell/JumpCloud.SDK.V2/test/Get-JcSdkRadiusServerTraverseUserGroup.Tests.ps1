@@ -12,7 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkRadiusServerTraverseUserGroup' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    BeforeAll {
+        Set-JcSdkRadiusServerAssociation -RadiusserverId $($global:PesterTestRadiusServer.id) -Id $($global:PesterTestUserGroup.Id) -Op 'add' -Type 'user_group'
+    }
+    AfterAll {
+        Set-JcSdkRadiusServerAssociation -RadiusserverId $($global:PesterTestRadiusServer.id) -Id $($global:PesterTestUserGroup.Id) -Op 'remove' -Type 'user_group'
+    }
+    It 'List' {
+        Get-JcSdkRadiusServerTraverseUserGroup -RadiusserverId $($global:PesterTestRadiusServer.id) | Should -Not -BeNullOrEmpty
     }
 }

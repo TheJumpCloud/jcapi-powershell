@@ -12,12 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkGSuiteTranslationRule' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id)
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -id $($global:PesterTestGsuiteTranslationRule.id)
     }
 
     It 'GetViaIdentity' -skip {

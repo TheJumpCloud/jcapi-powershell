@@ -1,3 +1,13 @@
+<#
+TODO:
+    Clear-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be cleared each time
+    Get-JcSdkCommandFile.Tests.ps1: Configure New-JcSdkCommand test to upload a simple text file
+    Invoke-JcSdkCommandTrigger.Tests.ps1: Configure a command with a 'trigger' launchType
+    Lock-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be locked each time
+    New-JcApplication.Tests.ps1: Figure out how to configure an Application from the SDK
+    New-JcSdkCommand.Tests.ps1: Configure a simple text file to upload with this command.
+    Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
+#>
 #################################################################
 $Filter = "*"
 $PesterTestFiles = @()

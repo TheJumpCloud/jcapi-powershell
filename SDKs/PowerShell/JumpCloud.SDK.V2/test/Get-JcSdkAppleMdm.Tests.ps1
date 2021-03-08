@@ -15,6 +15,7 @@ while (-not $mockingPath)
 
 Describe 'Get-JcSdkAppleMdm' {
     It 'List' {
-        (Get-JcSdkAppleMdm).Count | Should -BeGreaterThan 0
+        #TODO: need setup step
+        Get-JcSdkAppleMdm | Should -not -BeNullOrEmpty
     }
 }
