@@ -14,8 +14,7 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightDiskEncryption' {
-    It 'List' -skip {
-        # Need to configure system in test env for test to pass
+    It 'List' {
         Get-JcSdkSystemInsightDiskEncryption | Should -Not -BeNullOrEmpty
     }
 }

@@ -12,13 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkOffice365TraverseUser' {
-    BeforeAll {
-        Set-JcSdkOffice365Association -Office365Id $($global:PesterTestOffice365.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
-    }
-    AfterAll {
-        Set-JcSdkOffice365Association -Office365Id $($global:PesterTestOffice365.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
-    }
-    It 'List' {
-        Get-JcSdkOffice365TraverseUser -Office365Id $($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
+    It 'List' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

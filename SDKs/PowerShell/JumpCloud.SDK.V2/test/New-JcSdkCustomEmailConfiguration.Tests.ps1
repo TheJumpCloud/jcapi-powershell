@@ -16,11 +16,7 @@ Describe 'New-JcSdkCustomEmailConfiguration' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' {
-        { New-JcSdkCustomEmailConfiguration -type password_reset_confirmation -subject "CUSTOM" | Should -Not -BeNullOrEmpty } | Should -Not -Throw
-        { New-JcSdkCustomEmailConfiguration -type password_expiration_warning -subject "CUSTOM" | Should -Not -BeNullOrEmpty } | Should -Not -Throw
-        { New-JcSdkCustomEmailConfiguration -type lockout_notice_user -subject "CUSTOM" | Should -Not -BeNullOrEmpty } | Should -Not -Throw
-        { New-JcSdkCustomEmailConfiguration -type password_expiration -subject "CUSTOM" | Should -Not -BeNullOrEmpty } | Should -Not -Throw
-        { New-JcSdkCustomEmailConfiguration -type user_change_password -subject "CUSTOM" | Should -Not -BeNullOrEmpty } | Should -Not -Throw
+    It 'Create' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

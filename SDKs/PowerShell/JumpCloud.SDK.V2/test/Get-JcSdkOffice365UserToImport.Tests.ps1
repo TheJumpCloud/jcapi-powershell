@@ -13,7 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkOffice365UserToImport' {
     It 'List' -skip {
-        # TODO: additional params necessary
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

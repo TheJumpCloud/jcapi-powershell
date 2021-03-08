@@ -16,8 +16,7 @@ Describe 'New-JcSdkAuthenticationPolicy' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' {
-        $global:PesterTestAuthenticationPolicy = New-JcSdkAuthenticationPolicy -Name "AuthenticationPolicy-$(RandomString -len 7)" -EffectAction allow -TargetResources @{"type" = "user_portal" } -UserGroupInclusions $($global:PesterTestUserGroup.id)
-        $global:PesterTestAuthenticationPolicy | Should -Not -BeNullOrEmpty
+    It 'Create' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

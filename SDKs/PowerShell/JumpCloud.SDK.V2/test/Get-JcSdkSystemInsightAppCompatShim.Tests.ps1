@@ -13,7 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAppCompatShim' {
     It 'List' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemInsightAppCompatShim | Should -Not -Throw
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

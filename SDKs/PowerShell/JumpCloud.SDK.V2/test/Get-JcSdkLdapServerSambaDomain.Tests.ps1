@@ -12,13 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkLdapServerSambaDomain' {
-    It 'List' {
-        Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id) | Should -Not -BeNullOrEmpty
+    It 'List' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Get' {
-        $SambaId = Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id)
-        Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id) -Id $SambaId.id | Should -Not -BeNullOrEmpty
+    It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

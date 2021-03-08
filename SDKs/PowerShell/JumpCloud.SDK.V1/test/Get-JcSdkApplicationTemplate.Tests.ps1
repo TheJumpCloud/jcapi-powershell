@@ -20,7 +20,6 @@ Describe 'Get-JcSdkApplicationTemplate' {
 
     It 'Get' -Skip {
         $ListResults = Get-JcSdkApplicationTemplate # Need to pull from global
-
         Get-JcSdkApplicationTemplate -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
     }
 

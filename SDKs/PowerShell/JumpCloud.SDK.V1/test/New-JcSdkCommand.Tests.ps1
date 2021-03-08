@@ -1,5 +1,3 @@
-# TODO: Configure a simple text file to upload with this command.
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath))
 {
@@ -15,10 +13,6 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestCommandName = 'PesterTestCommand'
-$global:PesterTestCommand = 'Write-Host ("Hello World!")'
-$global:PesterTestCommandType = 'windows'
-$global:PesterTestCommandShell = 'PowerShell'
 Describe 'New-JcSdkCommand' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw

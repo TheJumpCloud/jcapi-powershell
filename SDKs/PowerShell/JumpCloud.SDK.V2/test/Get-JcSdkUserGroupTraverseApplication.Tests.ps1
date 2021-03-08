@@ -12,29 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserGroupTraverseApplication' {
-    BeforeAll{
-        # Associate User Group > System Group
-        Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestApplication.Id) -Op:('add') -Type:('application')
-    }
-
-    AfterAll{
-        # Remove Associations
-        Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestApplication.Id) -Op:('remove') -Type:('application')
-    }
-
-    It 'Get' {
-        $AssociationTest = JumpCloud.SDK.V2\Get-JcSdkUserGroupTraverseApplication -GroupId:($global:PesterTestUserGroup.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
-        {
-            $AssociationTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that an association exists
-            $AssociationTest.Count | Should -BeGreaterOrEqual 1
-        }
-    }
-    It 'GetViaIdentity' -skip {
+    It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

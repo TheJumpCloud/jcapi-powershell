@@ -12,13 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkActiveDirectory' {
-    It 'List' {
-        Get-JcSdkActiveDirectory | should -not -BeNullOrEmpty
+    It 'List' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Get' {
-        $Id = $global:PesterTestActiveDirectory.Id
-        Get-JcSdkActiveDirectory -Id $Id | should -not -BeNullOrEmpty
+    It 'Get' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

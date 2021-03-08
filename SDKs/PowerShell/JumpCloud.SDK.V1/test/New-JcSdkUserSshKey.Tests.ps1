@@ -13,8 +13,6 @@ while (-not $mockingPath)
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestUserSshKeyName = 'PesterTestUserSshKeyName'
-$global:PesterTestUserSshKeyPublicKey = 'PesterTestUserSshKeyPublicKey'
 Describe 'New-JcSdkUserSshKey' {
     It 'CreateExpanded' -Skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
