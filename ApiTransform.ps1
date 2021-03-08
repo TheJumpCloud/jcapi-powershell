@@ -112,8 +112,8 @@ $TransformConfig = [Ordered]@{
             '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"BodyObject"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            'software-app-settings'                                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
@@ -715,8 +715,11 @@ $SDKName | ForEach-Object {
                     $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
                     If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                     {
-                        $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
-                        $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        While ($SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name)))
+                        {
+                            $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
+                            $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        }
                     }
                     Else
                     {
