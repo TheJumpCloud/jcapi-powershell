@@ -9,6 +9,11 @@ TODO:
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
 #>
 #################################################################
+# If V2 is being run then run the V1 tests also because of dependencies
+If ($moduleName = 'JumpCloud.SDK.V2')
+{
+    $testFolder = @($testFolder.Replace('V2', 'V1'), $testFolder)
+}
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
