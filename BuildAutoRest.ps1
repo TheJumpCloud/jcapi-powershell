@@ -313,7 +313,7 @@ Try
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         # Test module
-                        Install-Module -Name Pester -Force
+                        Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
