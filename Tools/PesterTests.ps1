@@ -31,5 +31,5 @@ $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -an
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $OrderedTestsTakeDown }
 # Run tests
-Invoke-Pester -Script $PesterTestFiles.FullName -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")
+Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")
 #################################################################
