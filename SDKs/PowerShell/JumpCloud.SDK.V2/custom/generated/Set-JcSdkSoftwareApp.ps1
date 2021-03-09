@@ -50,7 +50,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISoftwareApp>:
   [DisplayName <String>]:
   [Id <String>]:
-  [Settings <IJcSoftwareAppSettings[]>]:
+  [Settings <ISoftwareAppSettings[]>]:
     [AllowUpdateDelay <Boolean?>]:
     [AppleVppAssignedLicenses <Int32?>]:
     [AppleVppAvailableLicenses <Int32?>]:
@@ -85,7 +85,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 
-SETTINGS <IJcSoftwareAppSettings[]>:
+SETTINGS <ISoftwareAppSettings[]>:
   [AllowUpdateDelay <Boolean?>]:
   [AppleVppAssignedLicenses <Int32?>]:
   [AppleVppAvailableLicenses <Int32?>]:
@@ -145,7 +145,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]]
+    [JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]]
     # .
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings},

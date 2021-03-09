@@ -49,7 +49,7 @@ ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>:
   Name <String>:
 
 ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>:
-  Id <Single>:
+  Id <Int32>:
   Name <String>:
 
 ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>:
@@ -61,7 +61,7 @@ BODY <IUserGroupPut>:
   [AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]:
     Name <String>:
   [AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]:
-    Id <Single>:
+    Id <Int32>:
     Name <String>:
   [AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]:
     Name <String>:

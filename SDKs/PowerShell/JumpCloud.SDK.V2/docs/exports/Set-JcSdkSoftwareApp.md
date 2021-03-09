@@ -26,8 +26,8 @@ Only displayName can be changed.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSoftwareApp -Id <String> [-DisplayName <String>] [-Id1 <String>]
- [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -Id <String> [-DisplayName <String>] [-Id1 <String>] [-Settings <ISoftwareAppSettings[]>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -44,7 +44,7 @@ Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-DisplayName <String>]
- [-Settings <IJcSoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Settings <ISoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -162,7 +162,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]
+Type: JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -229,7 +229,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
-  - `[Settings <IJcSoftwareAppSettings[]>]`: 
+  - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
@@ -264,7 +264,7 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-SETTINGS <IJcSoftwareAppSettings[]>: .
+SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 

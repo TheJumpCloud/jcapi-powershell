@@ -23,7 +23,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODYOBJECT <ICustomEmail>:
+CUSTOMEMAIL <ICustomEmail>:
   Subject <String>:
   Type <String>: CustomEmailType
   [Body <String>]:
@@ -81,8 +81,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ICustomEmail]
     # Custom email content created by the admin user to personalize emails sent to their system users.
-    # To construct, see NOTES section for BODYOBJECT properties and create a hash table.
-    ${BodyObject},
+    # To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
+    ${CustomEmail},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]

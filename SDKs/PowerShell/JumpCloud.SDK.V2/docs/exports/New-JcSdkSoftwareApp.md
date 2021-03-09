@@ -26,7 +26,7 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSoftwareApp [-DisplayName <String>] [-Id <String>] [-Settings <IJcSoftwareAppSettings[]>] [-Confirm]
+New-JcSdkSoftwareApp [-DisplayName <String>] [-Id <String>] [-Settings <ISoftwareAppSettings[]>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -119,7 +119,7 @@ Accept wildcard characters: False
 To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJcSoftwareAppSettings[]
+Type: JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -184,7 +184,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISoftwareApp>: Software Application Package Object
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
-  - `[Settings <IJcSoftwareAppSettings[]>]`: 
+  - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
@@ -197,7 +197,7 @@ BODY <ISoftwareApp>: Software Application Package Object
     - `[PackageId <String>]`: 
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
-SETTINGS <IJcSoftwareAppSettings[]>: .
+SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 
