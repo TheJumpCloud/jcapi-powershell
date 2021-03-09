@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Lock-JcSdkSystem' {
-    It 'Lock' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Lock' -Skip {
+        { Lock-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
     }
 
-    It 'LockViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'LockViaIdentity' -Skip {
+        { Lock-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

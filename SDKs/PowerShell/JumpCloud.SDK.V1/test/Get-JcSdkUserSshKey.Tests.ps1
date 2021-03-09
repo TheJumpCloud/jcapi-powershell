@@ -14,8 +14,11 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserSshKey' {
-    It 'List' {
-        Start-Sleep -Seconds:(10)
-        Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
+    It 'Get' {
+        Get-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) | Should -Not -BeNullOrEmpty
+    }
+
+    It 'GetViaIdentity' -Skip {
+        Get-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

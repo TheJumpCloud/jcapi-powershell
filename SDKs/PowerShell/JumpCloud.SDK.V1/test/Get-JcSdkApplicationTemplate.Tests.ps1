@@ -18,12 +18,11 @@ Describe 'Get-JcSdkApplicationTemplate' {
         Get-JcSdkApplicationTemplate | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -Skip {
-        $ListResults = Get-JcSdkApplicationTemplate # Need to pull from global
-        Get-JcSdkApplicationTemplate -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+    It 'Get' {
+        Get-JcSdkApplicationTemplate -Id:($global:PesterTestApplicationTemplate.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkApplicationTemplate -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

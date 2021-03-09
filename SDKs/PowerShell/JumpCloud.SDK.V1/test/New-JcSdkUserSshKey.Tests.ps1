@@ -1,34 +1,32 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'New-JcSdkUserSshKey.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkUserSshKey' {
-    It 'CreateExpanded' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'Create' {
+    It 'CreateExpanded' {
         $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
         $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
         $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 
+    It 'Create' -Skip {
+        New-JcSdkUserSshKey -Body '<ISshkeypost>' -Id '<String>' | Should -Not -BeNullOrEmpty
+    }
+
     It 'CreateViaIdentity' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkUserSshKey -Body '<ISshkeypost>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentityExpanded' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -PublicKey '<String>' | Should -Not -BeNullOrEmpty
     }
 }

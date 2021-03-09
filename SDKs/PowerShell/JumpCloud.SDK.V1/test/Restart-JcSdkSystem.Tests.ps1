@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Restart-JcSdkSystem' {
-    It 'Restart' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Restart' -Skip {
+        { Restart-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
     }
 
-    It 'RestartViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'RestartViaIdentity' -Skip {
+        { Restart-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

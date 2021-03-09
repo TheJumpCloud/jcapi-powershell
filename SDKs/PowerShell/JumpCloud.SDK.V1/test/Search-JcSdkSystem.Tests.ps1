@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Search-JcSdkSystem' {
-    It 'SearchExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SearchExpanded' -Skip {
+        { Search-JcSdkSystem [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Search' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Search' -Skip {
+        { Search-JcSdkSystem -Body '<ISearch>' } | Should -Not -Throw
     }
 }

@@ -29,6 +29,7 @@ TODO:
     New-JcSdkCommand.Tests.ps1: Configure a simple text file to upload with this command.
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
     Remove-JcSdkSystem.Tests.ps1: Disabled untill we can also create systems
+    Reset-JcSdkUserMfa.Tests.ps1: Configure MFA for $global:PesterTestUser
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1

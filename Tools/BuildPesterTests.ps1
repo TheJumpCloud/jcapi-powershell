@@ -1,6 +1,8 @@
 $ModuleFolder = Join-Path "$PSScriptRoot\.." "\SDKs\PowerShell\" -Resolve
 $SDKs = Get-ChildItem -Path $ModuleFolder
 $SDKs | ForEach-Object {
+    $PesterTestVariableList = @()
+    $PesterTestDefVariableList = @()
     $Prefix = 'JcSdk'
     $Module = $_.BaseName
     $TestFolderPath = "$ModuleFolder\$Module\test\"
@@ -9,6 +11,10 @@ $SDKs | ForEach-Object {
     $Commands | ForEach-Object {
         $CommandName = $_.Name
         $Type = $_.Noun.Replace($Prefix, '')
+        $PesterTestVariable = "`$global:PesterTest$($Type)"
+        $PesterTestDefVariable = "@global:PesterDef$($Type)"
+        $PesterTestVariableList += $PesterTestVariable
+        $PesterTestDefVariableList += $PesterTestDefVariable
         $CommandVerb = $_.Verb
         $TestFilePath = Join-Path $TestFolderPath "$($_.Name).Tests.ps1"
         $Content = Get-Content -Path $TestFilePath -Raw
@@ -35,8 +41,8 @@ $SDKs | ForEach-Object {
                 $Find = "    It '$($ParameterSetName)' -skip {`n        { throw [System.NotImplementedException] } | Should -Not -Throw`n    }"
                 $Replace = If ($CommandVerb -eq 'Get')
                 {
-                    If ($ParameterSetName -eq 'List') { "    It '$ParameterSetName' {`n        $($CommandName)  | Should -Not -BeNullOrEmpty`n    }" }
-                    ElseIf ($ParameterSetName -eq 'Get') { "    It '$ParameterSetName' {`n        $($CommandName) -Id:(`($($CommandName))[0].Id) | Should -Not -BeNullOrEmpty`n    }" }
+                    If ($ParameterSetName -eq 'List') { "    It '$ParameterSetName' {`n        $($CommandName) | Should -Not -BeNullOrEmpty`n    }" }
+                    ElseIf ($ParameterSetName -eq 'Get') { "    It '$ParameterSetName' {`n        $($CommandName) -Id:($PesterTestVariable.Id) | Should -Not -BeNullOrEmpty`n    }" }
                     Else
                     {
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))"); ;
@@ -45,7 +51,7 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'New')
                 {
-                    If ($ParameterSetName -eq 'CreateExpanded') { "    It '$ParameterSetName' {`n        `$global:PesterTest$($Type) = $($CommandName) @global:PesterDef$($Type)`n        `$global:PesterTest$($Type) | Should -Not -BeNullOrEmpty" }
+                    If ($ParameterSetName -eq 'CreateExpanded') { "    It '$ParameterSetName' {`n        $PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty`n    }" }
                     Else
                     {
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
@@ -54,14 +60,18 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'Remove')
                 {
-                    If ($ParameterSetName -eq 'Delete') { "    It '$ParameterSetName' {`n        { $($CommandName) -Id:(`$global:PesterTest$($Type).Id) } | Should -Not -Throw" }
+                    If ($ParameterSetName -eq 'Delete') { "    It '$ParameterSetName' {`n        { $($CommandName) -Id:($PesterTestVariable.Id) } | Should -Not -Throw`n    }" }
                     Else
                     {
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
                         "    It '$ParameterSetName' -Skip {`n        { $($CommandName) $($Parameters) } | Should -Not -Throw`n    }"
                     }
                 }
-                # ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Search', 'Set', 'Stop', 'Unlock')){}
+                ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Search', 'Set', 'Stop', 'Unlock'))
+                {
+                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
+                    "    It '$ParameterSetName' -Skip {`n        { $($CommandName) $($Parameters) } | Should -Not -Throw`n    }"
+                }
                 Else
                 {
                     Write-Warning ("Unmapped Verb: $CommandVerb")
@@ -75,4 +85,7 @@ $SDKs | ForEach-Object {
         }
         $Content.Trim() | Set-Content -Path $TestFilePath
     }
+    Invoke-ScriptAnalyzer -Path:("$TestFolderPath/*.Tests.ps1") -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+    Write-Warning ("Make sure these are defined in the RunPesterTests.ps1 script! $($PesterTestVariableList -join ', ')")
+    Write-Warning ("Make sure these are defined in the RunPesterTests.ps1 script! $($PesterTestDefVariableList -join ', ')")
 }
