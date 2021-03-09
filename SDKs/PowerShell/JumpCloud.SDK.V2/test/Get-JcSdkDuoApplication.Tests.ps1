@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkDuoApplication' {
-    It 'List' {
+    It 'List' -skip {
         Get-JcSdkDuoApplication | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' {
+    It 'Get' -skip {
         Get-JcSdkDuoApplication -Id:($global:PesterTestDuoApplication.Id) | Should -Not -BeNullOrEmpty
     }
 
