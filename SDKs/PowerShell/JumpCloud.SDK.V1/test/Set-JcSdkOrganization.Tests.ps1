@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkOrganization' {
-    It 'SetExpanded' -Skip {
+    It 'SetExpanded' -skip {
         { Set-JcSdkOrganization -Id '<String>' [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
     }
 
-    It 'Set' -Skip {
+    It 'Set' -skip {
         { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentity' -Skip {
+    It 'SetViaIdentity' -skip {
         { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'SetViaIdentityExpanded' -skip {
         { Set-JcSdkOrganization -InputObject '<IJumpCloudApIsIdentity>' [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
     }
 }

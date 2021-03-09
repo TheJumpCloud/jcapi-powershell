@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Restart-JcSdkSystem' {
-    It 'Restart' -Skip {
+    It 'Restart' -skip {
         { Restart-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
     }
 
-    It 'RestartViaIdentity' -Skip {
+    It 'RestartViaIdentity' -skip {
         { Restart-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

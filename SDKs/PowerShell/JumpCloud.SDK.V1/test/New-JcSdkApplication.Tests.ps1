@@ -17,7 +17,7 @@ Describe 'New-JcSdkApplication' {
         $global:PesterTestApplication | Should -Not -BeNullOrEmpty
     }
 
-    It 'Create' -Skip {
+    It 'Create' -skip {
         New-JcSdkApplication -Body '<IApplication>' | Should -Not -BeNullOrEmpty
     }
 }

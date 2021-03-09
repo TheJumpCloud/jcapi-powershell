@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Invoke-JcSdkExpireUserPassword' {
-    It 'Post' -Skip {
+    It 'Post' -skip {
         { Invoke-JcSdkExpireUserPassword -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'PostViaIdentity' -Skip {
+    It 'PostViaIdentity' -skip {
         { Invoke-JcSdkExpireUserPassword -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

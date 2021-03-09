@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCommand' {
-    It 'SetExpanded' -Skip {
+    It 'SetExpanded' -skip {
         { Set-JcSdkCommand -Command '<String>' -Id '<String>' [-CommandRunners '<String[]>'] [-CommandType '<String>'] [-Files '<String[]>'] [-LaunchType '<String>'] [-ListensTo '<String>'] [-Name '<String>'] [-Organization '<String>'] [-Schedule '<String>'] [-ScheduleRepeatType '<String>'] [-Shell '<String>'] [-Sudo] [-Systems '<String[]>'] [-Timeout '<String>'] [-Trigger '<String>'] [-User '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -Skip {
+    It 'Set' -skip {
         { Set-JcSdkCommand -Body '<ICommand>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentity' -Skip {
+    It 'SetViaIdentity' -skip {
         { Set-JcSdkCommand -Body '<ICommand>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'SetViaIdentityExpanded' -skip {
         { Set-JcSdkCommand -Command '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-CommandRunners '<String[]>'] [-CommandType '<String>'] [-Files '<String[]>'] [-LaunchType '<String>'] [-ListensTo '<String>'] [-Name '<String>'] [-Organization '<String>'] [-Schedule '<String>'] [-ScheduleRepeatType '<String>'] [-Shell '<String>'] [-Sudo] [-Systems '<String[]>'] [-Timeout '<String>'] [-Trigger '<String>'] [-User '<String>'] } | Should -Not -Throw
     }
 }

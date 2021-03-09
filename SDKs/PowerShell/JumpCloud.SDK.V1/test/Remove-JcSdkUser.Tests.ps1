@@ -16,7 +16,7 @@ Describe 'Remove-JcSdkUser' {
         { Remove-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -Skip {
+    It 'DeleteViaIdentity' -skip {
         { Remove-JcSdkUser -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

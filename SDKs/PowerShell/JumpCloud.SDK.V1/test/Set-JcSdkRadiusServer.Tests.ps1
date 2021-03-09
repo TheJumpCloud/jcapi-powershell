@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkRadiusServer' {
-    It 'SetExpanded' -Skip {
+    It 'SetExpanded' -skip {
         { Set-JcSdkRadiusServer -Id '<String>' -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -Skip {
+    It 'Set' -skip {
         { Set-JcSdkRadiusServer -Body '<IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentity' -Skip {
+    It 'SetViaIdentity' -skip {
         { Set-JcSdkRadiusServer -Body '<IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'SetViaIdentityExpanded' -skip {
         { Set-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 }

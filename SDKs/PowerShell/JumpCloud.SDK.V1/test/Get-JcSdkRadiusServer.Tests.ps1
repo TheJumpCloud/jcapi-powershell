@@ -20,7 +20,7 @@ Describe 'Get-JcSdkRadiusServer' {
         Get-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

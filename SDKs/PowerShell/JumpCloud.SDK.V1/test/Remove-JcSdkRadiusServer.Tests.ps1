@@ -16,7 +16,7 @@ Describe 'Remove-JcSdkRadiusServer' {
         { Remove-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -Skip {
+    It 'DeleteViaIdentity' -skip {
         { Remove-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

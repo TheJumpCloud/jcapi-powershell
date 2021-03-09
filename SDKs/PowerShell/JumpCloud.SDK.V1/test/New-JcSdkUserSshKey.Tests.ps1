@@ -13,20 +13,19 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkUserSshKey' {
     It 'CreateExpanded' {
-        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
         $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
         $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 
-    It 'Create' -Skip {
+    It 'Create' -skip {
         New-JcSdkUserSshKey -Body '<ISshkeypost>' -Id '<String>' | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentity' -Skip {
+    It 'CreateViaIdentity' -skip {
         New-JcSdkUserSshKey -Body '<ISshkeypost>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentityExpanded' -Skip {
+    It 'CreateViaIdentityExpanded' -skip {
         New-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -PublicKey '<String>' | Should -Not -BeNullOrEmpty
     }
 }

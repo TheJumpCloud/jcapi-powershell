@@ -1,13 +1,11 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkUserSshKey.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
@@ -18,7 +16,7 @@ Describe 'Get-JcSdkUserSshKey' {
         Get-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

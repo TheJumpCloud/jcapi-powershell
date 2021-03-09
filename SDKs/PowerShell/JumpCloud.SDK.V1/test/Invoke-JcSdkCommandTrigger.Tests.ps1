@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Invoke-JcSdkCommandTrigger' {
-    It 'Post' -Skip {
+    It 'Post' -skip {
         { Invoke-JcSdkCommandTrigger -Triggername '<String>' } | Should -Not -Throw
     }
 
-    It 'PostViaIdentity' -Skip {
+    It 'PostViaIdentity' -skip {
         { Invoke-JcSdkCommandTrigger -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

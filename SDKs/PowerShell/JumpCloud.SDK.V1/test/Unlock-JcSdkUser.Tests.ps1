@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Unlock-JcSdkUser' {
-    It 'Unlock' -Skip {
+    It 'Unlock' -skip {
         { Unlock-JcSdkUser -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'UnlockViaIdentity' -Skip {
+    It 'UnlockViaIdentity' -skip {
         { Unlock-JcSdkUser -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -20,7 +20,7 @@ Describe 'Get-JcSdkCommand' {
         Get-JcSdkCommand -Id:($global:PesterTestCommand.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkCommand -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

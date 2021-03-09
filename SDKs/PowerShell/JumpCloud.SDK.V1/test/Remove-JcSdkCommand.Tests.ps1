@@ -16,7 +16,7 @@ Describe 'Remove-JcSdkCommand' {
         { Remove-JcSdkCommand -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -Skip {
+    It 'DeleteViaIdentity' -skip {
         { Remove-JcSdkCommand -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

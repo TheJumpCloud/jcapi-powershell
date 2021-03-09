@@ -16,7 +16,7 @@ Describe 'Remove-JcSdkUserSshKey' {
         { Remove-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -Skip {
+    It 'DeleteViaIdentity' -skip {
         { Remove-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

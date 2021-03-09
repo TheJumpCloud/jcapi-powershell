@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Clear-JcSdkSystem' {
-    It 'Clear' -Skip {
+    It 'Clear' -skip {
         { Clear-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
     }
 
-    It 'ClearViaIdentity' -Skip {
+    It 'ClearViaIdentity' -skip {
         { Clear-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

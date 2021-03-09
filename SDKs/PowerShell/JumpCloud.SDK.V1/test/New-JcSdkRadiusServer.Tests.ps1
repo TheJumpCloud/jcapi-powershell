@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkRadiusServer' {
     It 'CreateExpanded' {
-        Do { $global:PesterTestRadiusServer = New-JcSdkRadiusServer @global:PesterDefRadiusServer } While ([System.String]::IsNullOrEmpty($global:PesterTestRadiusServer))
+        $global:PesterTestRadiusServer = New-JcSdkRadiusServer @global:PesterDefRadiusServer
         $global:PesterTestRadiusServer | Should -Not -BeNullOrEmpty
     }
 
-    It 'Create' -Skip {
+    It 'Create' -skip {
         New-JcSdkRadiusServer -Body '<IRadiusserverpost>' | Should -Not -BeNullOrEmpty
     }
 }

@@ -20,7 +20,7 @@ Describe 'Get-JcSdkUser' {
         Get-JcSdkUser -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkUser -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

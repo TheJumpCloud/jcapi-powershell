@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Stop-JcSdkSystem' {
-    It 'Stop' -Skip {
+    It 'Stop' -skip {
         { Stop-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
     }
 
-    It 'StopViaIdentity' -Skip {
+    It 'StopViaIdentity' -skip {
         { Stop-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

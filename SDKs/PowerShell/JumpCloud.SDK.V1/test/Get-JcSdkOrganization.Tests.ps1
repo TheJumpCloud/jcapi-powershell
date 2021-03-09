@@ -20,7 +20,7 @@ Describe 'Get-JcSdkOrganization' {
         Get-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkOrganization -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

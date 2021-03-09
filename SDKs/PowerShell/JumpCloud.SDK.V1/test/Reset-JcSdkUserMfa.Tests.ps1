@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Reset-JcSdkUserMfa' {
-    It 'ResetExpanded' -Skip {
+    It 'ResetExpanded' -skip {
         { Reset-JcSdkUserMfa -Id '<String>' [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
     }
 
-    It 'Reset' -Skip {
+    It 'Reset' -skip {
         { Reset-JcSdkUserMfa -Body '<IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'ResetViaIdentity' -Skip {
+    It 'ResetViaIdentity' -skip {
         { Reset-JcSdkUserMfa -Body '<IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'ResetViaIdentityExpanded' -Skip {
+    It 'ResetViaIdentityExpanded' -skip {
         { Reset-JcSdkUserMfa -InputObject '<IJumpCloudApIsIdentity>' [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
     }
 }

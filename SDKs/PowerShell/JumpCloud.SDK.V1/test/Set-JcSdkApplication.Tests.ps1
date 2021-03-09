@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkApplication' {
-    It 'SetExpanded' -Skip {
+    It 'SetExpanded' -skip {
         { Set-JcSdkApplication -Id '<String>' [-Beta] [-Color '<String>'] [-Config '<IApplicationConfig>'] [-Created '<String>'] [-DatabaseAttributes '<IApplicationDatabaseAttributesItem[]>'] [-Description '<String>'] [-DisplayLabel '<String>'] [-DisplayName '<String>'] [-Id1 '<String>'] [-LearnMore '<String>'] [-LogoColor '<String>'] [-LogoUrl '<String>'] [-Name '<String>'] [-Organization '<String>'] [-SsoBeta] [-SsoJit] [-SsoType '<String>'] [-SsoUrl '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -Skip {
+    It 'Set' -skip {
         { Set-JcSdkApplication -Body '<IApplication>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'SetViaIdentityExpanded' -skip {
         { Set-JcSdkApplication -InputObject '<IJumpCloudApIsIdentity>' [-Beta] [-Color '<String>'] [-Config '<IApplicationConfig>'] [-Created '<String>'] [-DatabaseAttributes '<IApplicationDatabaseAttributesItem[]>'] [-Description '<String>'] [-DisplayLabel '<String>'] [-DisplayName '<String>'] [-Id '<String>'] [-LearnMore '<String>'] [-LogoColor '<String>'] [-LogoUrl '<String>'] [-Name '<String>'] [-Organization '<String>'] [-SsoBeta] [-SsoJit] [-SsoType '<String>'] [-SsoUrl '<String>'] } | Should -Not -Throw
     }
 
-    It 'SetViaIdentity' -Skip {
+    It 'SetViaIdentity' -skip {
         { Set-JcSdkApplication -Body '<IApplication>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

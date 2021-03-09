@@ -38,47 +38,59 @@ $SDKs | ForEach-Object {
                         }
                     }
                 ) -join ' '
-                $Find = "    It '$($ParameterSetName)' -skip {`n        { throw [System.NotImplementedException] } | Should -Not -Throw`n    }"
-                $Replace = If ($CommandVerb -eq 'Get')
+                $Skip = $false
+                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\s+}\s+$)")
+                $CurrentTest = $Find.Matches.Groups[2].Value
+                $NewTest = If ($CommandVerb -eq 'Get')
                 {
-                    If ($ParameterSetName -eq 'List') { "    It '$ParameterSetName' {`n        $($CommandName) | Should -Not -BeNullOrEmpty`n    }" }
-                    ElseIf ($ParameterSetName -eq 'Get') { "    It '$ParameterSetName' {`n        $($CommandName) -Id:($PesterTestVariable.Id) | Should -Not -BeNullOrEmpty`n    }" }
+                    If ($ParameterSetName -eq 'List') { "$($CommandName) | Should -Not -BeNullOrEmpty" }
+                    ElseIf ($ParameterSetName -eq 'Get') { "$($CommandName) -Id:($PesterTestVariable.Id) | Should -Not -BeNullOrEmpty" }
                     Else
                     {
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))"); ;
-                        "    It '$ParameterSetName' -Skip {`n        $($CommandName) $($Parameters) | Should -Not -BeNullOrEmpty`n    }"
+                        $Skip = $true
+                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                        "$($CommandName) $($Parameters) | Should -Not -BeNullOrEmpty"
                     }
                 }
                 ElseIf ($CommandVerb -eq 'New')
                 {
-                    If ($ParameterSetName -eq 'CreateExpanded') { "    It '$ParameterSetName' {`n        $PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty`n    }" }
+                    If ($ParameterSetName -eq 'CreateExpanded') { "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty" }
                     Else
                     {
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
-                        "    It '$ParameterSetName' -Skip {`n        $($CommandName) $($Parameters) | Should -Not -BeNullOrEmpty`n    }"
+                        $Skip = $true
+                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                        "$($CommandName) $($Parameters) | Should -Not -BeNullOrEmpty"
                     }
                 }
                 ElseIf ($CommandVerb -eq 'Remove')
                 {
-                    If ($ParameterSetName -eq 'Delete') { "    It '$ParameterSetName' {`n        { $($CommandName) -Id:($PesterTestVariable.Id) } | Should -Not -Throw`n    }" }
+                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) -Id:($PesterTestVariable.Id) } | Should -Not -Throw" }
                     Else
                     {
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
-                        "    It '$ParameterSetName' -Skip {`n        { $($CommandName) $($Parameters) } | Should -Not -Throw`n    }"
+                        $Skip = $true
+                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                        "{ $($CommandName) $($Parameters) } | Should -Not -Throw"
                     }
                 }
                 ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Search', 'Set', 'Stop', 'Unlock'))
                 {
-                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))");
-                    "    It '$ParameterSetName' -Skip {`n        { $($CommandName) $($Parameters) } | Should -Not -Throw`n    }"
+                    $Skip = $true
+                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                    "{ $($CommandName) $($Parameters) } | Should -Not -Throw"
                 }
                 Else
                 {
+                    $Skip = $true
                     Write-Warning ("Unmapped Verb: $CommandVerb")
                 }
-                If (-not [System.String]::IsNullOrEmpty($Replace))
+                If (-not [System.String]::IsNullOrEmpty($CurrentTest) -and -not [System.String]::IsNullOrEmpty($NewTest))
                 {
-                    $Content = $Content.Replace("`r", "").Replace($Find, $Replace)
+                    $NewIt = $Find.Matches.Value.Replace($CurrentTest, $NewTest)
+                    If (-not $Skip)
+                    {
+                        $NewIt = $NewIt.Replace('-skip ', '')
+                    }
+                    $Content = $Content.Replace($Find.Matches.Value, $NewIt)
                 }
                 # Write-Host ("$($ParameterSetName): $($ParameterName) $($Parameters)")
             }
