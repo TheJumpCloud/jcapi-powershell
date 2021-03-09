@@ -7,6 +7,7 @@ TODO:
     New-JcApplication.Tests.ps1: Figure out how to configure an Application from the SDK
     New-JcSdkCommand.Tests.ps1: Configure a simple text file to upload with this command.
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
+    Remove-JcSdkSystem.Tests.ps1: Disabled untill we can create systems as well
 #>
 #################################################################
 # If V2 is being run then run the V1 tests also because of dependencies
