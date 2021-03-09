@@ -1,15 +1,23 @@
 <#
-(Get-Command -Name Remove-JcSdkSystemGroup) | ForEach-Object {
+(Get-Command -Name New-JcSdkApplication) | ForEach-Object {
     $ParameterName = $_.Name
     $_.ParameterSets | ForEach-Object {
-        $Parameters = ($_.Parameters | ForEach-Object {
+        $Parameters = ($_.Parameters | Sort-Object @{e = 'IsMandatory'; desc = $true }, @{e = 'Name'; desc = $false } | ForEach-Object {
                 if ($_.Name -notin ('Fields', 'Filter', 'Sort', 'Search', 'Paginate', 'Break', 'HttpPipelineAppend', 'HttpPipelinePrepend', 'PassThru', 'Proxy', 'ProxyCredential', 'ProxyUseDefaultCredentials', 'CommonParameters', 'WhatIf', 'Confirm', 'Verbose', 'Debug', 'ErrorAction', 'WarningAction', 'InformationAction', 'ErrorVariable', 'WarningVariable', 'InformationVariable', 'OutVariable', 'OutBuffer', 'PipelineVariable'))
                 {
-                    "-$($_.Name) <$($_.ParameterType.Name)>"
+                    $ParameterType = If ($_.ParameterType.Name -eq 'switchparameter') { '' }Else { " <$($_.ParameterType.Name.ToLower())>" }
+                    If ($_.IsMandatory)
+                    {
+                        "-$($_.Name)$($ParameterType)"
+                    }
+                    else
+                    {
+                        "[-$($_.Name)$($ParameterType)]"
+                    }
                 }
             }
         ) -join ' '
-        Write-Host ("$($_.Name): $($ParameterName) $($Parameters)")
+        Write-Host ("`n$($_.Name): $($ParameterName) $($Parameters)")
     }
 }
 TODO:
