@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkGSuiteTranslationRule' {
     It 'Delete' {
-        { Remove-JcSdkGSuiteTranslationRule -GsuiteId '<String>' -Id:($global:PesterTestGSuiteTranslationRule.Id) } | Should -Not -Throw
+        { Remove-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
