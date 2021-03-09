@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkLdapServerSambaDomain' {
-    It 'List' {
+    It 'List' -skip {
         Get-JcSdkLdapServerSambaDomain | Should -Not -BeNullOrEmpty
     }
 
