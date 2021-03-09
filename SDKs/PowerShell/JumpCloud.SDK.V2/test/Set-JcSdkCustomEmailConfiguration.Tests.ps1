@@ -12,34 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCustomEmailConfiguration' {
-    It 'SetExpanded' {
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation -Type password_reset_confirmation -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning -Type password_expiration_warning -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user -Type lockout_notice_user -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration -Type password_expiration -subject "CUSTOMMODIFY" } | Should -Not -Throw
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password -Type user_change_password -subject "CUSTOMMODIFY" } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType '<String>' -Subject '<String>' -Type '<String>' [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $types = ('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
-        foreach ($type in $types) {
-            $body = @{
-                Subject = 'CustomModify'
-                Header = 'CustomModify'
-                Title = 'CustomModify'
-                Button = 'CustomModify'
-                NextStepContactInfo = 'pester_person@alderaan.org'
-                Type                = $type
-            }
-            { Set-JcSdkCustomEmailConfiguration -CustomEmailType $type -BodyObject $body } | Should -Not -Throw
-        }
+    It 'Set' -skip {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' -CustomEmailType '<String>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' -Subject '<String>' -Type '<String>' [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
     }
 }

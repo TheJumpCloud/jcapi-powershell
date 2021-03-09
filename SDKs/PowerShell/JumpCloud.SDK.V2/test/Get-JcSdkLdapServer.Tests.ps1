@@ -15,11 +15,12 @@ Describe 'Get-JcSdkLdapServer' {
     It 'List' {
         Get-JcSdkLdapServer | Should -Not -BeNullOrEmpty
     }
+
     It 'Get' {
-        Get-JcSdkLdapServer -Id $($global:PesterLdapServer.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkLdapServer -Id:($global:PesterTestLdapServer.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkLdapServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

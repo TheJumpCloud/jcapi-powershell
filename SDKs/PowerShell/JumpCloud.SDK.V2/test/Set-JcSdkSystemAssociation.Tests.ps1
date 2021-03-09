@@ -12,62 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystemAssociation' {
-    BeforeAll {
-        $types = @{
-            'command'    = $($global:PesterTestCommand.id);
-            'policy'     = $($global:PesterTestWindowsPolicy.id);
-            'user'       = $($global:PesterTestUser.id);
-            'user_group' = $($global:PesterTestUserGroup.id);
-        }
-    }
-    It 'SetExpanded' {
-        # Adds
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Id:$($types[$type]) -Op:('add') -Type:($type) } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        # Removes
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Id:$($types[$type]) -Op:('remove') -Type:($type) } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkSystemAssociation -SystemId $($global:PesterTestSystem.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
+    It 'SetExpanded' -skip {
+        { Set-JcSdkSystemAssociation -Id '<String>' -Op '<String>' -SystemId '<String>' -Type '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        foreach ($type in $types.keys)
-        {
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'add'
-                Type = $type
-            }
-            { Set-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Body $body } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        foreach ($type in $types.keys)
-        {
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'remove'
-                Type = $type
-            }
-            { Set-JcSdkSystemAssociation -SystemId:$($global:PesterTestSystem.id) -Body $body } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkSystemAssociation -SystemId $($global:PesterTestSystem.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
+    It 'Set' -skip {
+        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -SystemId '<String>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
+
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }

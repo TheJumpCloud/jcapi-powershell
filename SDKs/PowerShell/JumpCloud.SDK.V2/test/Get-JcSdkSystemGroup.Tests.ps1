@@ -13,32 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemGroup' {
     It 'List' {
-        $GroupListTest = JumpCloud.SDK.V2\Get-JcSdkSystemGroup
-        If ([System.String]::IsNullOrEmpty($GroupListTest))
-        {
-            $GroupListTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that a group exists
-            $GroupListTest.Count | Should -BeGreaterOrEqual 1
-        }
+        Get-JcSdkSystemGroup | Should -Not -BeNullOrEmpty
     }
 
     It 'Get' {
-        $GroupGetTest = JumpCloud.SDK.V2\Get-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id)
-        If ([System.String]::IsNullOrEmpty($GroupGetTest))
-        {
-            $GroupGetTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that a group exists and you can query it by ID
-            $GroupGetTest.Count | Should -BeGreaterOrEqual 1
-        }
+        Get-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkSystemGroup -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

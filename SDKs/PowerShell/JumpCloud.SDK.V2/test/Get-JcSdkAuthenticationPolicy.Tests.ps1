@@ -17,10 +17,10 @@ Describe 'Get-JcSdkAuthenticationPolicy' {
     }
 
     It 'Get' {
-        Get-JcSdkAuthenticationPolicy -id $($global:PesterTestAuthenticationPolicy.id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

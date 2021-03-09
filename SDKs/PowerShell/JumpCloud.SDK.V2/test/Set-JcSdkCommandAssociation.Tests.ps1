@@ -12,34 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCommandAssociation' {
-    It 'SetExpanded' {
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system')
-        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -Not -BeNullOrEmpty
-
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id:($global:PesterTestSystem.Id) -Op:('remove') -Type:('system')
-        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -BeNullOrEmpty
+    It 'SetExpanded' -skip {
+        { Set-JcSdkCommandAssociation -CommandId '<String>' -Id '<String>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestSystem.Id;
-            Op   = 'add';
-            Type = 'system';
-            Attributes = @{};
-        }
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Body $PesterDefAssociation
-        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -Not -BeNullOrEmpty
-
-        $PesterDefAssociation.Op = 'remove'
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Body $PesterDefAssociation
-        Get-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -targets:('system') | Should -BeNullOrEmpty
+    It 'Set' -skip {
+        { Set-JcSdkCommandAssociation -Body '<IGraphOperationCommand>' -CommandId '<String>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCommandAssociation -Body '<IGraphOperationCommand>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCommandAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

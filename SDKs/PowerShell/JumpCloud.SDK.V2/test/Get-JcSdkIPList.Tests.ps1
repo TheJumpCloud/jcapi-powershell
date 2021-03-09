@@ -17,10 +17,10 @@ Describe 'Get-JcSdkIPList' {
     }
 
     It 'Get' {
-        Get-JcSdkIPList -Id $($global:PesterIPList.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkIPList -Id:($global:PesterTestIPList.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

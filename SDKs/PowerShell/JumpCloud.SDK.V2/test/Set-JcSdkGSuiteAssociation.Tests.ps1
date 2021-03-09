@@ -12,28 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkGSuiteAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
-        { Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id:($global:PesterTestUser.Id) -Op:('remove') -Type:('user') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkGSuiteAssociation -GsuiteId '<String>' -Id '<String>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id         = $global:PesterTestUser.Id
-            Op         = 'add'
-            Type       = 'user'
-            Attributes = @{}
-        }
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGSuite.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
-        $PesterDefAssociation.Op = 'remove'
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGSuite.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkGSuiteAssociation -Body '<IGraphOperationGSuite>' -GsuiteId '<String>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkGSuiteAssociation -Body '<IGraphOperationGSuite>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkGSuiteAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

@@ -12,30 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserTraverseOffice365' {
-    BeforeAll{
-        # Associate User > Office 365
-        Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestOffice365.Id) -Op:('add') -Type:("office_365")
-    }
-
-    AfterAll{
-        # Remove Associations
-        Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestOffice365.Id) -Op:('remove') -Type:("office_365")
-   }
-
     It 'Get' {
-        $AssociationTest = JumpCloud.SDK.V2\Get-JcSdkUserTraverseOffice365 -UserId:($global:PesterTestUser.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
-        {
-            $AssociationTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that an association exists
-            $AssociationTest.Count | Should -BeGreaterOrEqual 1
-        }
+        Get-JcSdkUserTraverseOffice365 -Id:($global:PesterTestUserTraverseOffice365.Id) | Should -Not -BeNullOrEmpty
     }
+
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkUserTraverseOffice365 -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }
-            

@@ -1,5 +1,3 @@
-# TODO: Set up DUO in Pester Orgs
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -14,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkDuoApplication' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId '<String>' -IntegrationKey '<String>' -Name '<String>' [-SecretKey '<String>'] } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkDuoApplication -AccountId '<String>' -ApplicationId '<String>' -Body '<IDuoApplicationUpdateReq>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkDuoApplication -Body '<IDuoApplicationUpdateReq>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' [-SecretKey '<String>'] } | Should -Not -Throw
     }
 }

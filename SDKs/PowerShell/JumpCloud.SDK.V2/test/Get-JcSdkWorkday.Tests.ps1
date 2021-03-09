@@ -1,5 +1,3 @@
-## TODO: Get Workday access
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -14,15 +12,15 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkWorkday' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkWorkday | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkWorkday -Id:($global:PesterTestWorkday.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

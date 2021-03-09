@@ -12,28 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserGroupTraverseSystem' {
-    BeforeAll{
-        # Associate User Group > System Group > System
-        Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestSystemGroup.Id) -Op:('add') -Type:('system_group')
-        Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add')
-    }
-
-    AfterAll{
-        # Remove Associations
-        Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestSystemGroup.Id) -Op:('remove') -Type:('system_group')
-        Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('remove')
-    }
-
     It 'Get' {
-        $AssociationTest = JumpCloud.SDK.V2\Get-JcSdkUserGroupTraverseSystem -GroupId:($global:PesterTestUserGroup.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
-        {
-            $AssociationTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that an association exists
-            $AssociationTest.Count | Should -BeGreaterOrEqual 1
-        }
+        Get-JcSdkUserGroupTraverseSystem -Id:($global:PesterTestUserGroupTraverseSystem.Id) | Should -Not -BeNullOrEmpty
+    }
+
+    It 'GetViaIdentity' -skip {
+        Get-JcSdkUserGroupTraverseSystem -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

@@ -12,18 +12,15 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
-    It 'List' -skip {
-        # TODO: this should return a file
-        # TODO: ID of MDM enrollment profile is same id of $($global:PesterAppleMDM.id) and last number is one value greater
-        # ex. if AppleMDMID == 5f93256663336c45c3c1e892; AppleMdmEnrollmentProfileID == 5f93256663336c45c3c1e893
-        Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId $($global:PesterAppleMDM.id) -id 5f93256663336c45c3c1e893
+    It 'List' {
+        Get-JcSdkAppleMdmEnrollmentProfile | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkAppleMdmEnrollmentProfile -Id:($global:PesterTestAppleMdmEnrollmentProfile.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkAppleMdmEnrollmentProfile -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

@@ -1,5 +1,3 @@
-# TODO: Configure Pester Orgs
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -14,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkLdapServerSambaDomain' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Id '<String>' -LdapserverId '<String>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -Id '<String>' -LdapserverId '<String>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
     }
 }

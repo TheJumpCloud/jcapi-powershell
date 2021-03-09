@@ -12,23 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSoftwareApp' {
-    It 'UpdateExpanded' {
-        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) -DisplayName:("Adobe Reader MODIFIED") } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkSoftwareApp -Id '<String>' [-DisplayName '<String>'] [-Id1 '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
     }
 
-    It 'Update' {
-        $PesterDefSofware = @{
-            DisplayName = "Adobe Reader"
-        }
-
-        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) -Body:($PesterDefSofware) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkSoftwareApp -Body '<ISoftwareApp>' -Id '<String>' } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkSoftwareApp -InputObject '<IJumpCloudApIsIdentity>' [-DisplayName '<String>'] [-Id '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkSoftwareApp -Body '<ISoftwareApp>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

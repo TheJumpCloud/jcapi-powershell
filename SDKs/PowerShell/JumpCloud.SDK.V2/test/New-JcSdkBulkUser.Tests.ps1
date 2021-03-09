@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkBulkUser' {
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkBulkUser -Body '<IBulkUserCreate[]>' | Should -Not -BeNullOrEmpty
     }
 }

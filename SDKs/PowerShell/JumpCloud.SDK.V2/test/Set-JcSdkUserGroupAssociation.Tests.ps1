@@ -12,67 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroupAssociation' {
-    BeforeAll{
-        $types = @{
-            'active_directory' = $($global:PesterTestActiveDirectory.id);
-            'application'      = $($global:PesterTestApplication.id);
-            'g_suite'          = $($global:PesterTestGSuite.id);
-            'ldap_server'      = $($global:PesterTestLdap.id);
-            'office_365'       = $($global:PesterTestOffice365.id);
-            'radius_server'    = $($global:PesterTestRadiusServer.id);
-            'system'           = $($global:PesterTestSystem.id);
-            'system_group'     = $($global:PesterTestSystemGroup.id);
-        }
-    }
-    It 'SetExpanded' {
-        # Adds
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Id:$($types[$type]) -Op:('add') -Type:($type) } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        # Removes
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Id:$($types[$type]) -Op:('remove') -Type:($type) } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkUserGroupAssociation -GroupId $($global:PesterTestUserGroup.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
+    It 'SetExpanded' -skip {
+        { Set-JcSdkUserGroupAssociation -GroupId '<String>' -Id '<String>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        foreach ($type in $types.keys){
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'add'
-                Type = $type
-            }
-            { Set-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Body $body } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        foreach ($type in $types.keys)
-        {
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'remove'
-                Type = $type
-            }
-            { Set-JcSdkUserGroupAssociation -GroupId:$($global:PesterTestUserGroup.id) -Body $body } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkUserGroupAssociation -GroupId $($global:PesterTestUserGroup.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
-
+    It 'Set' -skip {
+        { Set-JcSdkUserGroupAssociation -Body '<IGraphOperationUserGroup>' -GroupId '<String>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupAssociation -Body '<IGraphOperationUserGroup>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

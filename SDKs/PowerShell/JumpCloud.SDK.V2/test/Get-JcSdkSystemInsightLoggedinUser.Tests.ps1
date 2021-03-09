@@ -12,8 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightLoggedinUser' {
-    It 'List' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemInsightLoggedinUser | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkSystemInsightLoggedinUser | Should -Not -BeNullOrEmpty
     }
 }

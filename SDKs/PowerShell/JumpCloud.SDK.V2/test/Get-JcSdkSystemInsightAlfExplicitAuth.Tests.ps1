@@ -12,8 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' {
-    It 'List' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemInsightAlfExplicitAuth | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkSystemInsightAlfExplicitAuth | Should -Not -BeNullOrEmpty
     }
 }

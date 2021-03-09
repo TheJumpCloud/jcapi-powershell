@@ -12,8 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkGSuiteUserToImport' {
-    It 'List' -skip {
-        # TODO: additional params necessary
-        Get-JcSdkGSuiteUserToImport -GsuiteId $($global:PesterTestGSuite.Id)
+    It 'List' {
+        Get-JcSdkGSuiteUserToImport | Should -Not -BeNullOrEmpty
     }
 }

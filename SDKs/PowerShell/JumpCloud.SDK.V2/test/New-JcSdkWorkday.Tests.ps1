@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkWorkday' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestWorkday = New-JcSdkWorkday @global:PesterDefWorkday
+        $global:PesterTestWorkday | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkWorkday -Body '<IWorkdayInput>' | Should -Not -BeNullOrEmpty
     }
 }

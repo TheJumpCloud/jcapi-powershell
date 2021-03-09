@@ -12,17 +12,15 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkDuoApplication' {
-    It 'List' -skip {
-        # TODO: Setup DUO in pester Orgs
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        Get-JcSdkDuoApplication | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
-        # TODO: Setup DUO in pester Orgs
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        Get-JcSdkDuoApplication -Id:($global:PesterTestDuoApplication.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkDuoApplication -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

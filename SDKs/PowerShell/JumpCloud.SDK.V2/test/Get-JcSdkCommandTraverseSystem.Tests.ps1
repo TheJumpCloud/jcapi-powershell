@@ -12,13 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCommandTraverseSystem' {
-    BeforeAll {
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id $($global:PesterTestSystem.Id) -Op 'add' -Type 'system'
+    It 'Get' {
+        Get-JcSdkCommandTraverseSystem -Id:($global:PesterTestCommandTraverseSystem.Id) | Should -Not -BeNullOrEmpty
     }
-    AfterAll {
-        Set-JcSdkCommandAssociation -CommandId $($global:PesterTestCommand.id) -Id $($global:PesterTestSystem.Id) -Op 'remove' -Type 'system'
-    }
-    It 'List' {
-        Get-JcSdkCommandTraverseSystem -CommandId $($global:PesterTestCommand.id) | Should -Not -BeNullOrEmpty
+
+    It 'GetViaIdentity' -skip {
+        Get-JcSdkCommandTraverseSystem -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }
