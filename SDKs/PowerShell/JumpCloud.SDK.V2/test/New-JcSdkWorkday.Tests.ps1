@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkWorkday' {
-    It 'CreateExpanded' {
+    It 'CreateExpanded' -skip {
         $global:PesterTestWorkday = New-JcSdkWorkday @global:PesterDefWorkday
         $global:PesterTestWorkday | Should -Not -BeNullOrEmpty
     }
