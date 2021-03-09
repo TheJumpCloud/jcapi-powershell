@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkUserSshKey' {
     It 'Delete' {
-        { Remove-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) } | Should -Not -Throw
+        { Remove-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) -SystemuserId:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {

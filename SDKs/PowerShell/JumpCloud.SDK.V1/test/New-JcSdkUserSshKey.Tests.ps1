@@ -13,6 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkUserSshKey' {
     It 'CreateExpanded' {
+        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
         $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
         $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }

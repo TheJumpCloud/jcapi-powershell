@@ -66,7 +66,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Create Application
     # TODO: Switch from get to new
     $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
-    # Get organization
+    # Get a ApplicationTemplate
+    $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
+    # Get a CommandResult
+    $global:PesterTestCommandResult = Get-JcSdkCommandResult | Select-Object -First 1
+    # Get Organization
     $global:PesterTestOrganization = Get-JcSdkOrganization
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1

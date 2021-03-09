@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCommandFile' {
-    It 'Get' {
+    It 'Get' -skip {
         Get-JcSdkCommandFile -Id:($global:PesterTestCommandFile.Id) | Should -Not -BeNullOrEmpty
     }
 
