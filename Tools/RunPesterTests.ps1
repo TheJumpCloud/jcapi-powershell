@@ -77,9 +77,16 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 }
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
+    # Create a Authentication Policy
+    $global:PesterDefAuthenticationPolicy = @{
+        Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        EffectAction        = 'allow'
+        TargetResources     = @{"type" = "user_portal" }
+        UserGroupInclusions = $null # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
+    }
     # Create a User Group
     $global:PesterDefUserGroup = @{
-        Name = 'PesterTestUserGroup'
+        Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
     # Create a System Group
     $global:PesterDefSystemGroup = @{
@@ -121,7 +128,7 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @()
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests')
 $OrderedTestsMain = @()
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }

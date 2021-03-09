@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAuthenticationPolicy' {
-    It 'List' -skip {
+    It 'List' {
         Get-JcSdkAuthenticationPolicy | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' -skip {
+    It 'Get' {
         Get-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) | Should -Not -BeNullOrEmpty
     }
 
