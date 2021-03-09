@@ -8,12 +8,12 @@ TODO:
     New-JcApplication.Tests.ps1: Figure out how to configure an Application from the SDK
     New-JcSdkCommand.Tests.ps1: Configure a simple text file to upload with this command.
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
-    Remove-JcSdkSystem.Tests.ps1: Disabled untill we can create systems as well
+    Remove-JcSdkSystem.Tests.ps1: Disabled untill we can also create systems
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Define Objects
-If ($moduleName -eq 'JumpCloud.SDK.V1')
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 {
     # Create a command
     $global:PesterDefCommand = @{
@@ -54,9 +54,13 @@ ElseIf ($moduleName -eq 'JumpCloud.SDK.V2')
 
 #region Run Pester Tests
 # If V2 is being run then run the V1 tests also because of dependencies
-If ($moduleName -eq 'JumpCloud.SDK.V2')
+$moduleTestFolder = If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
-    $testFolder = @($testFolder.Replace('V2', 'V1'), $testFolder)
+    @($testFolder.Replace('V2', 'V1'), $testFolder)
+}
+else
+{
+    $testFolder
 }
 $Filter = "*"
 $PesterTestFiles = @()
@@ -64,7 +68,7 @@ $PesterTestFiles = @()
 $OrderedTestsSetup = @()
 $OrderedTestsMain = @()
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
-$TestFiles = Get-ChildItem -Path:($testFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
+$TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
 # Add "new" tests (Setup Org)
 $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $OrderedTestsSetup }
