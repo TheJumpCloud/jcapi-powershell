@@ -142,7 +142,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     }
     # Create a System Group
     $global:PesterDefSystemGroup = @{
-        Name = 'PesterTestSystemGroup'
+        Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
     # Create an Active Directory Object
     # TODO: Make this endpoint public

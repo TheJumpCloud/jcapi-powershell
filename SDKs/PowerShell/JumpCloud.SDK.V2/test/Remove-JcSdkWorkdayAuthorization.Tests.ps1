@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkWorkdayAuthorization' {
-    It 'Delete' {
+    It 'Delete' -skip {
         { Remove-JcSdkWorkdayAuthorization -WorkdayId '<String>' } | Should -Not -Throw
     }
 

@@ -64,7 +64,11 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'Remove')
                 {
-                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) $($Parameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)").Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")) } | Should -Not -Throw" }
+                    $Parameters = $Parameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
+                    $Parameters = $Parameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
+                    $Parameters = $Parameters.Replace("-GsuiteId '<String>", "-GsuiteId:(`$global:PesterTestGsuite.Id)")
+                    $Parameters = $Parameters.Replace("-Office365Id '<String>", "-Office365Id:(`$global:PesterTestOffice365.Id)")
+                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) $($Parameters) } | Should -Not -Throw" }
                     Else
                     {
                         $Skip = $true
