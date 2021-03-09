@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkCustomEmailConfiguration' {
     It 'Delete' {
-        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType '<String>' } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterDefCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
