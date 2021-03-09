@@ -116,6 +116,7 @@ $TransformConfig = [Ordered]@{
             'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
+            '{"$ref":"#/parameters/trait:requestHeaders:creation-source"}'                                        = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
