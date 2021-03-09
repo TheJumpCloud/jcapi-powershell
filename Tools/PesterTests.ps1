@@ -10,7 +10,7 @@ TODO:
 #>
 #################################################################
 # If V2 is being run then run the V1 tests also because of dependencies
-If ($moduleName = 'JumpCloud.SDK.V2')
+If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
     $testFolder = @($testFolder.Replace('V2', 'V1'), $testFolder)
 }
