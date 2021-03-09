@@ -7,7 +7,7 @@ $SDKs | ForEach-Object {
     $Module = $_.BaseName
     $TestFolderPath = "$ModuleFolder\$Module\test\"
     Import-Module "$ModuleFolder\$Module\$Module.psd1"
-    $Commands = Get-Command -Module $Module
+    $Commands = Get-Command -Module $Module #-Verb Remove # For testing specific commands
     $Commands | ForEach-Object {
         $CommandName = $_.Name
         $Type = $_.Noun.Replace($Prefix, '')
@@ -64,7 +64,7 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'Remove')
                 {
-                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) -Id:($PesterTestVariable.Id) } | Should -Not -Throw" }
+                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) $($Parameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)").Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")) } | Should -Not -Throw" }
                     Else
                     {
                         $Skip = $true

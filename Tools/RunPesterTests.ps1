@@ -1,5 +1,5 @@
 <#
-(Get-Command -Name Remove-JcSdkApplication) | ForEach-Object {
+(Get-Command -Name Remove-JcSdkUserSshKey) | ForEach-Object {
     $ParameterName = $_.Name
     $_.ParameterSets | ForEach-Object {
         $Parameters = ($_.Parameters | Sort-Object @{e = 'IsMandatory'; desc = $true }, @{e = 'Name'; desc = $false } | ForEach-Object {
