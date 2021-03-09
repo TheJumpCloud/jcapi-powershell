@@ -94,7 +94,7 @@ $TransformConfig = [Ordered]@{
             'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
             'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
             'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
-            'GET_systemusers-id-sshkeys'                      = 'List-UserSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'Get-UserSshKey';
         };
         ExcludedList       = @();
     }
