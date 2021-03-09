@@ -1,5 +1,5 @@
 <#
-(Get-Command -Name Remove-JcSdkUserSshKey) | ForEach-Object {
+(Get-Command -Name New-JcSdkPolicy) | ForEach-Object {
     $ParameterName = $_.Name
     $_.ParameterSets | ForEach-Object {
         $Parameters = ($_.Parameters | Sort-Object @{e = 'IsMandatory'; desc = $true }, @{e = 'Name'; desc = $false } | ForEach-Object {
@@ -108,15 +108,34 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Create a IP List
     $global:PesterDefIPList = @{
         Description = 'PesterIpList'
-        Ips         = '0.1.2.3'
+        Ips         = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
         Name        = 'Pester IP Test List'
     }
     # Create a Office365 Translation Rule
     $global:PesterDefOffice365TranslationRule = @{
         Office365Id = $global:PesterTestOffice365.Id
-        BuiltIn = 'user_street_address'
+        BuiltIn     = 'user_street_address'
     }
-
+    # Create a Policy
+    $global:PesterDefPolicy = Get-Random @(
+        @{
+            Name       = 'Pester_Windows'
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -Last 1).Id
+        },
+        @{
+            Name       = 'Pester_Linux'
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -Last 1).Id
+        },
+        @{
+            Name       = 'Pester_Darwin'
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -Last 1).Id
+        }
+    )
+    # Create a Software App
+    $global:PesterDefSoftwareApp = @{
+        DisplayName = "Adobe Reader"
+        Settings    = @{PackageId = 'adobereader' }
+    }
     # Create a User Group
     $global:PesterDefUserGroup = @{
         Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
