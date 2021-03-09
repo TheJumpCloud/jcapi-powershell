@@ -23,11 +23,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V1')
     }
     # Create a user
     $global:PesterDefUser = @{
-        Username  = "pester.test.$(RandomString -len 5)"
+        Username  = "pester.test.$(-join ((33..126) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         FirstName = "Pester"
         LastName  = "Test"
         Password  = "Testing123!"
-        Email     = "pester.test@example$(RandomString -len 5).com"
+        Email     = "pester.test@example$(-join ((33..126) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
     }
     # Create a user ssh key
     $global:PesterDefUserSshKey = @{
