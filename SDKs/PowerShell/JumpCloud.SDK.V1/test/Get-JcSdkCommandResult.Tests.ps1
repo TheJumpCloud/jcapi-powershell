@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCommandResult' {
-    It 'List' {
+    It 'List' -skip {
         Get-JcSdkCommandResult | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' {
+    It 'Get' -skip {
         Get-JcSdkCommandResult -Id:($global:PesterTestCommandResult.Id) | Should -Not -BeNullOrEmpty
     }
 
