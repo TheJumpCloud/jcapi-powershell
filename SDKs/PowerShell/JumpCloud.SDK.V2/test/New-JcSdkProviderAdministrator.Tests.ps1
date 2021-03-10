@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkProviderAdministrator' {
-    It 'CreateExpanded' {
+    It 'CreateExpanded' -skip {
         $global:PesterTestProviderAdministrator = New-JcSdkProviderAdministrator @global:PesterDefProviderAdministrator
         $global:PesterTestProviderAdministrator | Should -Not -BeNullOrEmpty
     }
