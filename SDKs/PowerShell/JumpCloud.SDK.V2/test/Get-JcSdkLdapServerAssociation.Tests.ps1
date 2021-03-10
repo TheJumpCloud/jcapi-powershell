@@ -12,13 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkLdapServerAssociation' {
-    BeforeAll {
-        Set-JcSdkLdapServerAssociation -LdapserverId $($global:PesterLdapServer.Id) -Id $($global:PesterTestUser.id) -op add -type user
+    It 'Get' {
+        Get-JcSdkLdapServerAssociation -LdapserverId:($global:PesterTestLdapserver.Id) -Targets '<String>' | Should -Not -BeNullOrEmpty
     }
-    AfterAll {
-        Set-JcSdkLdapServerAssociation -LdapserverId $($global:PesterLdapServer.Id) -Id $($global:PesterTestUser.id) -op remove -type user
-    }
-    It 'List' {
-        Get-JcSdkLdapServerAssociation -LdapserverId $($global:PesterLdapServer.Id) -Targets user | Should -Not -BeNullOrEmpty
+
+    It 'GetViaIdentity' -skip {
+        Get-JcSdkLdapServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets '<String>' | Should -Not -BeNullOrEmpty
     }
 }

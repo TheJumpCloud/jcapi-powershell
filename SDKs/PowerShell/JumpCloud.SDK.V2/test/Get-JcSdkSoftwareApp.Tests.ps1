@@ -17,10 +17,10 @@ Describe 'Get-JcSdkSoftwareApp' {
     }
 
     It 'Get' {
-        Get-JcSdkSoftwareApp -id $($global:PesterTestSoftwareApp.id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkSoftwareApp -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

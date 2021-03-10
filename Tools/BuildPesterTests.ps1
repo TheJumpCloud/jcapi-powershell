@@ -65,6 +65,10 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
+                $RequiredParameters = $RequiredParameters.Replace("-LdapserverId '<String>'", "-LdapserverId:(`$global:PesterTestLdapserver.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SoftwareAppId '<String>'", "-SoftwareAppId:(`$global:PesterTestSoftwareApp.Id)")
+                $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
                 If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User').Replace('UserMfa', 'User') }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
@@ -111,7 +115,26 @@ $SDKs | ForEach-Object {
                         "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
                     }
                 }
-                ElseIf ($CommandVerb -in ('Search', 'Set'))
+                ElseIf ($CommandVerb -eq 'Set')
+                {
+                    If ($ParameterSetName -eq 'SetExpanded')
+                    {
+                        $Skip = $true
+                        Write-Warning ("Figure out how to splat: $ParameterSetName ($($CommandVerb))")
+                        "{ $($CommandName) $($PesterTestDefVariable) } | Should -Not -Throw"
+                    }
+                    ElseIf ($ParameterSetName -eq 'Set')
+                    {
+                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    }
+                    Else
+                    {
+                        $Skip = $true
+                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    }
+                }
+                ElseIf ($CommandVerb -in ('Search'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")

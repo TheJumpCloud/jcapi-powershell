@@ -13,15 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkLdapServerSambaDomain' {
     It 'List' {
-        Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkLdapServerSambaDomain | Should -Not -BeNullOrEmpty
     }
 
     It 'Get' {
-        $SambaId = Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id)
-        Get-JcSdkLdapServerSambaDomain -LdapserverId $($global:PesterLdapServer.Id) -Id $SambaId.id | Should -Not -BeNullOrEmpty
+        Get-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

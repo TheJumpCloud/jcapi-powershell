@@ -19,11 +19,10 @@ Describe 'Get-JcSdkPolicy' {
     }
 
     It 'Get' {
-        $ListResults = Get-JcSdkPolicy
-        Get-JcSdkPolicy -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkPolicy -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }
