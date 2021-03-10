@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkAppleMdmCsr' {
     It 'Get' -skip {
-        Get-JcSdkAppleMdmCsr -Id:($global:PesterTestAppleMdmCsr.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkAppleMdmCsr -AppleMdmId '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

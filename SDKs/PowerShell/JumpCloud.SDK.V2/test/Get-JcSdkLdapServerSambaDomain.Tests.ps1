@@ -12,12 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkLdapServerSambaDomain' {
-    It 'List' -skip {
+    It 'List' {
         Get-JcSdkLdapServerSambaDomain | Should -Not -BeNullOrEmpty
     }
 
     It 'Get' {
-        Get-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

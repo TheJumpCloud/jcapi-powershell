@@ -17,7 +17,7 @@ Describe 'Get-JcSdkGSuiteTranslationRule' {
     }
 
     It 'Get' {
-        Get-JcSdkGSuiteTranslationRule -Id:($global:PesterTestGSuiteTranslationRule.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

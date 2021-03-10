@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemTraverseUserGroup' {
     It 'Get' {
-        Get-JcSdkSystemTraverseUserGroup -Id:($global:PesterTestSystemTraverseUserGroup.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkSystemTraverseUserGroup -SystemId '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSystemTraverseUserGroup -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] | Should -Not -BeNullOrEmpty
+        Get-JcSdkSystemTraverseUserGroup -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

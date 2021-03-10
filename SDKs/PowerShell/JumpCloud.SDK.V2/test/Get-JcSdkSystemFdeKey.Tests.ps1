@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemFdeKey' {
     It 'Get' {
-        Get-JcSdkSystemFdeKey -Id:($global:PesterTestSystemFdeKey.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkSystemFdeKey -SystemId '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

@@ -97,7 +97,9 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{
-        Type    = Get-Random @('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
+        Type    = 'password_reset_confirmation'
+        # Having multiple breaks remove tests
+        # Type    = Get-Random @('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
         Subject = "CUSTOM"
     }
     # Create a GSuite Translation Rule
@@ -109,7 +111,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterDefIPList = @{
         Description = 'PesterIpList'
         Ips         = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
-        Name        = 'Pester IP Test List'
+        Name        = "Pester IP Test List $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
     # Create a Office365 Translation Rule
     $global:PesterDefOffice365TranslationRule = @{
@@ -119,15 +121,15 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Create a Policy
     $global:PesterDefPolicy = Get-Random @(
         @{
-            Name       = 'Pester_Windows'
+            Name       = "Pester_Windows - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -Last 1).Id
         },
         @{
-            Name       = 'Pester_Linux'
+            Name       = "Pester_Linux - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -Last 1).Id
         },
         @{
-            Name       = 'Pester_Darwin'
+            Name       = "Pester_Darwin - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -Last 1).Id
         }
     )

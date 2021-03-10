@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkOffice365Association' {
     It 'Get' {
-        Get-JcSdkOffice365Association -Id:($global:PesterTestOffice365Association.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Targets '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

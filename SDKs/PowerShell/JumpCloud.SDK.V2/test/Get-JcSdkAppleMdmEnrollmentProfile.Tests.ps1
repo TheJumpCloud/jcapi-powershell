@@ -16,8 +16,8 @@ Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
         Get-JcSdkAppleMdmEnrollmentProfile | Should -Not -BeNullOrEmpty
     }
 
-    It 'Get' {
-        Get-JcSdkAppleMdmEnrollmentProfile -Id:($global:PesterTestAppleMdmEnrollmentProfile.Id) | Should -Not -BeNullOrEmpty
+    It 'Get' -skip {
+        Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId '<String>' -Id:($global:PesterTestAppleMdmEnrollmentProfile.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {

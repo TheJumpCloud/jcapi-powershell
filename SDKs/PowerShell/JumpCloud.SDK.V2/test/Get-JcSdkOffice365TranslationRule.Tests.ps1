@@ -17,7 +17,7 @@ Describe 'Get-JcSdkOffice365TranslationRule' {
     }
 
     It 'Get' {
-        Get-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
