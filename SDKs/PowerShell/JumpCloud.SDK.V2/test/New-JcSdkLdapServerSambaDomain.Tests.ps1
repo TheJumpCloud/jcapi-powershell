@@ -13,18 +13,19 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkLdapServerSambaDomain' {
     It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $global:PesterTestLdapServerSambaDomain = New-JcSdkLdapServerSambaDomain @global:PesterDefLdapServerSambaDomain
+        $global:PesterTestLdapServerSambaDomain | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -LdapserverId '<String>' | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -Sid '<String>' | Should -Not -BeNullOrEmpty
     }
 }
