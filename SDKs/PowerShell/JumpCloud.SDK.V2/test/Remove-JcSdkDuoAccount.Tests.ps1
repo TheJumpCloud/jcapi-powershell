@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkDuoAccount' {
     It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkDuoAccount -Id:($global:PesterTestDuoAccount.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkDuoAccount -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

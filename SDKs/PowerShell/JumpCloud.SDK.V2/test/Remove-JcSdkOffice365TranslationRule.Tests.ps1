@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkOffice365TranslationRule' {
     It 'Delete' {
-        { Remove-JcSdkOffice365TranslationRule -Office365Id $($global:PesterTestOffice365.Id) -Id $($global:PesterTestOffice365TranslationRule.id) } | Should -Not -Throw
+        { Remove-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkGSuiteTranslationRule' {
     It 'Delete' {
-        { Remove-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -Id $($global:PesterTestGsuiteTranslationRule.id) } | Should -Not -Throw
+        { Remove-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
