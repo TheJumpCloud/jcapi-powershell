@@ -37,9 +37,6 @@ $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Define Objects
 If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 {
-    # Create Application
-    # TODO: Switch from get to new
-    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
     # Get a ApplicationTemplate
     $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
     # Get a CommandResult
@@ -49,13 +46,28 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
 
-    # Create a command
-    $global:PesterDefCommand = @{
-        Name    = 'PesterTestCommand'
-        Command = 'echo "Hello World"'
-        User    = '000000000000000000000000'
+    # # Create a Application
+    # $global:PesterDefApplication = @{
+    #     Name   = 'dropbox'
+    #     ssoUrl = 'https://sso.jumpcloud.com/saml2/dropbox'
+    #     config = @{}
+    # }
+    # TODO: Switch from get to new
+    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    #  Create a CommandTrigger
+    $global:PesterDefCommandTrigger = @{
+        TriggerName = 'PesterTestTrigger'
     }
-    # Create a user
+    # Create a Command
+    $global:PesterDefCommand = @{
+        Name       = 'PesterTestCommand'
+        Command    = 'echo "Hello World"'
+        User       = '000000000000000000000000'
+        launchType = 'trigger'
+        trigger    = $global:PesterDefCommandTrigger.TriggerName
+    }
+    $global:PesterTestCommandTrigger = Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
+    # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         FirstName = "Pester"
@@ -63,7 +75,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         Password  = "Testing123!"
         Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
     }
-    # Create a user ssh key
+    # Create a User SSH Key
     $global:PesterDefUserSshKey = @{
         Id        = $null # Defined later in New-JcSdkUserSshKey.Tests.ps1
         Name      = 'PesterTestUserSshKeyName'
@@ -172,7 +184,7 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests')
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger')
 $OrderedTestsMain = @()
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
@@ -181,8 +193,7 @@ $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $T
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $OrderedTestsSetup }
 # Add all tests that are not "new" and not "remove"
 $OrderedTestsMain | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Get-*" }
-# $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsMain }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsMain }
 # Add "remove" tests (Cleanup Org)
 $OrderedTestsTakeDown | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $OrderedTestsTakeDown }
