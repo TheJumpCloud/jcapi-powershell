@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkCommand' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkCommand -Command '<String>' -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
+        { Set-JcSdkCommand -Command '<String>' -Id:($global:PesterTestCommand.Id) [-CommandRunners '<String[]>'] [-CommandType '<String>'] [-Files '<String[]>'] [-LaunchType '<String>'] [-ListensTo '<String>'] [-Name '<String>'] [-Organization '<String>'] [-Schedule '<String>'] [-ScheduleRepeatType '<String>'] [-Shell '<String>'] [-Sudo] [-Systems '<String[]>'] [-Timeout '<String>'] [-Trigger '<String>'] [-User '<String>'] } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkCommand -Body '<ICommand>' -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
+        { Set-JcSdkCommand -Body '<ICommand>' -Id:($global:PesterTestCommand.Id)  } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkCommand -Body '<ICommand>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkCommand -Body '<ICommand>' -InputObject '<IJumpCloudApIsIdentity>'  } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkCommand -Command '<String>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkCommand -Command '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-CommandRunners '<String[]>'] [-CommandType '<String>'] [-Files '<String[]>'] [-LaunchType '<String>'] [-ListensTo '<String>'] [-Name '<String>'] [-Organization '<String>'] [-Schedule '<String>'] [-ScheduleRepeatType '<String>'] [-Shell '<String>'] [-Sudo] [-Systems '<String[]>'] [-Timeout '<String>'] [-Trigger '<String>'] [-User '<String>'] } | Should -Not -Throw
     }
 }
