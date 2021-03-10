@@ -21,11 +21,11 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
         New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -GsuiteId:($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
-    }
-
     It 'CreateViaIdentity' -skip {
         New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
+        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

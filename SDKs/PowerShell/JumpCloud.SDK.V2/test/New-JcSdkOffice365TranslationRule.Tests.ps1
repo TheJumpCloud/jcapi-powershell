@@ -16,15 +16,16 @@ Describe 'New-JcSdkOffice365TranslationRule' {
         $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule @global:PesterDefOffice365TranslationRule
         $global:PesterTestOffice365TranslationRule | Should -Not -BeNullOrEmpty
     }
+
     It 'Create' -skip {
         New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
-    }
-
     It 'CreateViaIdentity' -skip {
         New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
+        New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

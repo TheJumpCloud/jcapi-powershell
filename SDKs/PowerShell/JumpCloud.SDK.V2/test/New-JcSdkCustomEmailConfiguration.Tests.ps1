@@ -17,7 +17,7 @@ Describe 'New-JcSdkCustomEmailConfiguration' {
         $global:PesterTestCustomEmailConfiguration | Should -Not -BeNullOrEmpty
     }
 
-    It 'Create' {
+    It 'Create' -skip {
         New-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' | Should -Not -BeNullOrEmpty
     }
 }

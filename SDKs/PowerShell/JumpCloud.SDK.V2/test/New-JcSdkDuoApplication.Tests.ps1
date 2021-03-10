@@ -12,8 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkDuoApplication' {
-    # TODO: Set up DUO in Pester Orgs
-    It 'CreateExpanded' {
+    It 'CreateExpanded' -skip {
         $global:PesterTestDuoApplication = New-JcSdkDuoApplication @global:PesterDefDuoApplication
         $global:PesterTestDuoApplication | Should -Not -BeNullOrEmpty
     }
@@ -22,11 +21,11 @@ Describe 'New-JcSdkDuoApplication' {
         New-JcSdkDuoApplication -AccountId '<String>' -Body '<IDuoApplicationReq>' | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' -SecretKey '<String>' | Should -Not -BeNullOrEmpty
-    }
-
     It 'CreateViaIdentity' -skip {
         New-JcSdkDuoApplication -Body '<IDuoApplicationReq>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
+        New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' -SecretKey '<String>' | Should -Not -BeNullOrEmpty
     }
 }

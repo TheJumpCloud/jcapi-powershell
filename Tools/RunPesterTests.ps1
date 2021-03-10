@@ -34,6 +34,12 @@ TODO:
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1
+#region Import Modules
+If ($moduleName -eq 'JumpCloud.SDK.V2')
+{
+    Import-Module -Name $modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
+}
+#endregion Import Modules
 #region Define Objects
 If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 {
