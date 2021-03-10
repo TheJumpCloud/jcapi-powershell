@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkDuoApplication' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId '<String>' -IntegrationKey '<String>' -Name '<String>' [-SecretKey '<String>'] } | Should -Not -Throw
+        { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId:($global:PesterTestApplication.Id) -IntegrationKey '<String>' -Name '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkDuoApplication -AccountId '<String>' -ApplicationId '<String>' -Body '<IDuoApplicationUpdateReq>' } | Should -Not -Throw
+        { Set-JcSdkDuoApplication -AccountId '<String>' -ApplicationId:($global:PesterTestApplication.Id) -Body '<IDuoApplicationUpdateReq>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkDuoApplication' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' [-SecretKey '<String>'] } | Should -Not -Throw
+        { Set-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' } | Should -Not -Throw
     }
 }

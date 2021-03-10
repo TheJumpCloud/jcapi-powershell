@@ -18,7 +18,7 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
     }
 
     It 'Create' -skip {
-        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -GsuiteId '<String>' | Should -Not -BeNullOrEmpty
+        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -GsuiteId:($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -skip {
@@ -26,6 +26,6 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] | Should -Not -BeNullOrEmpty
+        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkRadiusServerAssociation' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkRadiusServerAssociation -Id '<String>' -Op '<String>' -RadiusserverId '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkRadiusServerAssociation -Id:($global:PesterTestRadiusServerAssociation.Id) -Op '<String>' -RadiusserverId '<String>' -Type '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkRadiusServerAssociation' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkRadiusServerAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkRadiusServerAssociation -Id:($global:PesterTestRadiusServerAssociation.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }

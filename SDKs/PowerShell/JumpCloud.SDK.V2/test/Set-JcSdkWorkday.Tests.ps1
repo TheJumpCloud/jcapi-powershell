@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkWorkday' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkWorkday -Id '<String>' [-Name '<String>'] [-ReportUrl '<String>'] } | Should -Not -Throw
+        { Set-JcSdkWorkday -Id:($global:PesterTestWorkday.Id) } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkWorkday -Body '<IWorkdayFields>' -Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkWorkday -Body '<IWorkdayFields>' -Id:($global:PesterTestWorkday.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkWorkday' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' [-Name '<String>'] [-ReportUrl '<String>'] } | Should -Not -Throw
+        { Set-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

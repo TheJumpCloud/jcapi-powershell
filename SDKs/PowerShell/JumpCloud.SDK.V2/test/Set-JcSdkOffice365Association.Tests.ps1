@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkOffice365Association' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkOffice365Association -Id '<String>' -Office365Id '<String>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Id:($global:PesterTestOffice365Association.Id) -Office365Id:($global:PesterTestOffice365.Id) -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkOffice365Association -Body '<IGraphOperationOffice365>' -Office365Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Body '<IGraphOperationOffice365>' -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkOffice365Association' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkOffice365Association -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Id:($global:PesterTestOffice365Association.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }

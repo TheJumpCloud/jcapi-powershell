@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkApplicationAssociation' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkApplicationAssociation -ApplicationId '<String>' -Id '<String>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -ApplicationId:($global:PesterTestApplication.Id) -Id:($global:PesterTestApplicationAssociation.Id) -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkApplicationAssociation -ApplicationId '<String>' -Body '<IGraphOperationApplication>' } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -ApplicationId:($global:PesterTestApplication.Id) -Body '<IGraphOperationApplication>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkApplicationAssociation' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkApplicationAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-Attributes '<Hashtable>'] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -Id:($global:PesterTestApplicationAssociation.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }

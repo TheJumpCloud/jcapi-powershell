@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkLdapServerSambaDomain' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkLdapServerSambaDomain -Id '<String>' -LdapserverId '<String>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
+        { Set-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId '<String>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -Id '<String>' -LdapserverId '<String>' } | Should -Not -Throw
+        { Set-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId '<String>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkSystemGroupMember' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkSystemGroupMember -GroupId '<String>' -Id '<String>' -Op '<String>' [-Attributes '<Hashtable>'] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkSystemGroupMember -Body '<IGraphOperationSystemGroupMember>' -GroupId '<String>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Body '<IGraphOperationSystemGroupMember>' -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkSystemGroupMember -Body '<IGraphOperationSystemGroupMember>' -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Body '<IGraphOperationSystemGroupMember>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkSystemGroupMember -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' [-Attributes '<Hashtable>'] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Id:($global:PesterTestSystem.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' } | Should -Not -Throw
     }
 }

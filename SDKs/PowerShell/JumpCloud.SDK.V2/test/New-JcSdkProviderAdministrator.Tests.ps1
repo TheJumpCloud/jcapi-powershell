@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkProviderAdministrator' {
-    It 'CreateExpanded' -skip {
+    It 'CreateExpanded' {
         $global:PesterTestProviderAdministrator = New-JcSdkProviderAdministrator @global:PesterDefProviderAdministrator
         $global:PesterTestProviderAdministrator | Should -Not -BeNullOrEmpty
     }
@@ -26,6 +26,6 @@ Describe 'New-JcSdkProviderAdministrator' {
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkProviderAdministrator -Email '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-EnableMultiFactor] [-Firstname '<String>'] [-Lastname '<String>'] [-Role '<String>'] [-RoleName '<String>'] | Should -Not -BeNullOrEmpty
+        New-JcSdkProviderAdministrator -Email '<String>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

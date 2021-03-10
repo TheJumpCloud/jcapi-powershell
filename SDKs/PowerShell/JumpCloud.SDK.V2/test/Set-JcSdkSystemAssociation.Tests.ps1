@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkSystemAssociation' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkSystemAssociation -Id '<String>' -Op '<String>' -SystemId '<String>' -Type '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Id:($global:PesterTestSystemAssociation.Id) -Op '<String>' -SystemId:($global:PesterTestSystem.Id) -Type '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -SystemId '<String>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Body '<IGraphOperationSystem>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkSystemAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Id:($global:PesterTestSystemAssociation.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }

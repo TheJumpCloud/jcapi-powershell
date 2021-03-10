@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkCustomEmailConfiguration' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType '<String>' -Subject '<String>' -Type '<String>' [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterDefCustomEmailConfiguration.Type) -Subject '<String>' -Type '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' -CustomEmailType '<String>' } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' -CustomEmailType:($global:PesterDefCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkCustomEmailConfiguration' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' -Subject '<String>' -Type '<String>' [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' -Subject '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }

@@ -18,7 +18,7 @@ Describe 'New-JcSdkOffice365TranslationRule' {
     }
 
     It 'Create' -skip {
-        New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -Office365Id '<String>' | Should -Not -BeNullOrEmpty
+        New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -skip {
@@ -26,6 +26,6 @@ Describe 'New-JcSdkOffice365TranslationRule' {
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] | Should -Not -BeNullOrEmpty
+        New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

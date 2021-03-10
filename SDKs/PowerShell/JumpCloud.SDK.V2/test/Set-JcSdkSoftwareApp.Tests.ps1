@@ -13,15 +13,15 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkSoftwareApp' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkSoftwareApp -Id '<String>' [-DisplayName '<String>'] [-Id1 '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
+        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkSoftwareApp -Body '<ISoftwareApp>' -Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkSoftwareApp -Body '<ISoftwareApp>' -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkSoftwareApp -InputObject '<IJumpCloudApIsIdentity>' [-DisplayName '<String>'] [-Id '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
+        { Set-JcSdkSoftwareApp -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

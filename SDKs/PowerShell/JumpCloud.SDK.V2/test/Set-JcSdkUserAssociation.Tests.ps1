@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkUserAssociation' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkUserAssociation -Id '<String>' -Op '<String>' -Type '<String>' -UserId '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] } | Should -Not -Throw
+        { Set-JcSdkUserAssociation -Id:($global:PesterTestUserAssociation.Id) -Op '<String>' -Type '<String>' -UserId '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkUserAssociation' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkUserAssociation -Id '<String>' -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] } | Should -Not -Throw
+        { Set-JcSdkUserAssociation -Id:($global:PesterTestUserAssociation.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op '<String>' -Type '<String>' } | Should -Not -Throw
     }
 }
