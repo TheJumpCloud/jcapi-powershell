@@ -37,9 +37,6 @@ $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Define Objects
 If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 {
-    # Create Application
-    # TODO: Switch from get to new
-    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
     # Get a ApplicationTemplate
     $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
     # Get a CommandResult
@@ -49,13 +46,21 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
 
-    # Create a command
+    # # Create a Application
+    # $global:PesterDefApplication = @{
+    #     Name   = 'dropbox'
+    #     ssoUrl = 'https://sso.jumpcloud.com/saml2/dropbox'
+    #     config = @{}
+    # }
+    # TODO: Switch from get to new
+    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    # Create a Command
     $global:PesterDefCommand = @{
         Name    = 'PesterTestCommand'
         Command = 'echo "Hello World"'
         User    = '000000000000000000000000'
     }
-    # Create a user
+    # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         FirstName = "Pester"
@@ -63,7 +68,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         Password  = "Testing123!"
         Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
     }
-    # Create a user ssh key
+    # Create a User SSH Key
     $global:PesterDefUserSshKey = @{
         Id        = $null # Defined later in New-JcSdkUserSshKey.Tests.ps1
         Name      = 'PesterTestUserSshKeyName'

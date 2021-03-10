@@ -45,6 +45,16 @@ $SDKs | ForEach-Object {
                 $Skip = $false
                 $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\s+}\s+$)")
                 $CurrentTest = $Find.Matches.Groups[2].Value
+                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
+                    $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestSystem.Id)")
+                }
+                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
+                    $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestUser.Id)")
+                }
                 $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
@@ -53,11 +63,20 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
+
+                # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
                 $NewTest = If ($CommandVerb -eq 'Get')
                 {
-                    If ($ParameterSetName -eq 'List') { "$($CommandName) | Should -Not -BeNullOrEmpty" }
-                    ElseIf ($ParameterSetName -eq 'Get') { "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty" }
+                    If ($ParameterSetName -eq 'List')
+                    {
+                        "$($CommandName) | Should -Not -BeNullOrEmpty"
+                    }
+                    ElseIf ($ParameterSetName -eq 'Get')
+                    {
+                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
+                    }
                     Else
                     {
                         $Skip = $true
@@ -67,7 +86,10 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'New')
                 {
-                    If ($ParameterSetName -eq 'CreateExpanded') { "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty" }
+                    If ($ParameterSetName -eq 'CreateExpanded')
+                    {
+                        "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
+                    }
                     Else
                     {
                         $Skip = $true
@@ -77,7 +99,10 @@ $SDKs | ForEach-Object {
                 }
                 ElseIf ($CommandVerb -eq 'Remove')
                 {
-                    If ($ParameterSetName -eq 'Delete') { "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw" }
+                    If ($ParameterSetName -eq 'Delete')
+                    {
+                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    }
                     Else
                     {
                         $Skip = $true
@@ -85,7 +110,13 @@ $SDKs | ForEach-Object {
                         "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
                     }
                 }
-                ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Search', 'Set', 'Stop', 'Unlock'))
+                ElseIf ($CommandVerb -in ('Search', 'Set'))
+                {
+                    $Skip = $true
+                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                    "{ $($CommandName) $($RequiredParameters) $($OptionalParameters) } | Should -Not -Throw"
+                }
+                ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Stop', 'Unlock'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
@@ -110,7 +141,7 @@ $SDKs | ForEach-Object {
         }
         $Content.Trim() | Set-Content -Path $TestFilePath
     }
-    Invoke-ScriptAnalyzer -Path:("$TestFolderPath/*.Tests.ps1") -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
     Write-Warning ("Make sure these are defined in the RunPesterTests.ps1 script! $($PesterTestVariableList -join ', ')")
     Write-Warning ("Make sure these are defined in the RunPesterTests.ps1 script! $($PesterTestDefVariableList -join ', ')")
+    Invoke-ScriptAnalyzer -Path:("$TestFolderPath/*.Tests.ps1") -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
 }
