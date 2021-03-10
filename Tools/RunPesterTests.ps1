@@ -54,19 +54,22 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # }
     # TODO: Switch from get to new
     $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
-    #  Create a CommandTrigger
-    $global:PesterDefCommandTrigger = @{
-        TriggerName = 'PesterTestTrigger'
-    }
     # Create a Command
     $global:PesterDefCommand = @{
-        Name       = 'PesterTestCommand'
-        Command    = 'echo "Hello World"'
-        User       = '000000000000000000000000'
-        launchType = 'trigger'
-        trigger    = $global:PesterDefCommandTrigger.TriggerName
+        Name        = "PesterTestCommand-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        Command     = 'echo "Hello World"'
+        User        = "000000000000000000000000"
+        launchType  = "trigger"
+        trigger     = "PesterTestTrigger"
+        commandType = "windows"
     }
-    $global:PesterTestCommandTrigger = Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
+    # Trying to create a command, assign it to systems, and run it
+    # $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+    # $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
+    # $global:PesterDefCommand.Id = $global:PesterTestCommand.Id
+    # $global:PesterDefCommand.Systems = Get-JcSdkSystem | Where-Object { $_.os -eq $global:PesterDefCommand.commandType } | Select-Object -ExpandProperty Id
+    # Set-JcSdkCommand @global:PesterDefCommand
+    # Invoke-JcSdkCommandTrigger @global:PesterDefCommand.trigger
     # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
@@ -78,12 +81,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Create a User SSH Key
     $global:PesterDefUserSshKey = @{
         Id        = $null # Defined later in New-JcSdkUserSshKey.Tests.ps1
-        Name      = 'PesterTestUserSshKeyName'
-        PublicKey = 'PesterTestUserSshKeyPublicKey'
+        Name      = "PesterTestUserSshKeyName"
+        PublicKey = "PesterTestUserSshKeyPublicKey"
     }
     # Create a RADIUS Server
     $global:PesterDefRadiusServer = @{
-        Name            = "PesterTestRadiusServer"
+        Name            = "PesterTestRadiusServer-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         SharedSecret    = "Testing123!"
         NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
     }
@@ -184,16 +187,16 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger')
-$OrderedTestsMain = @()
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger.Tests')
+$OrderedTestsMain = @('Lock-JcSdkUser.Tests', 'Unlock-JcSdkUser.Tests')
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
 # Add "new" tests (Setup Org)
 $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $OrderedTestsSetup }
-# Add all tests that are not "new" and not "remove"
+# Add all tests that are not "new" and not "remove" and not in OrderedTestsSetup and not in OrderedTestsMain and not in OrderedTestsTakeDown
 $OrderedTestsMain | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsMain }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsSetup -and $_.BaseName -notin $OrderedTestsMain -and $_.BaseName -notin $OrderedTestsTakeDown }
 # Add "remove" tests (Cleanup Org)
 $OrderedTestsTakeDown | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $OrderedTestsTakeDown }

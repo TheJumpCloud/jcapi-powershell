@@ -17,7 +17,7 @@ Describe 'New-JcSdkCommand' {
     It 'CreateExpanded' {
         # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
         $NewCommand = New-JcSdkCommand @global:PesterDefCommand
-        $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
+        $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
         $global:PesterTestCommand | Should -Not -BeNullOrEmpty
     }
 
