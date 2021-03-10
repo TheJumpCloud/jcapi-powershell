@@ -64,6 +64,8 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User') }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
                 $NewTest = If ($CommandVerb -eq 'Get')
@@ -83,9 +85,9 @@ $SDKs | ForEach-Object {
                         "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
                     }
                 }
-                ElseIf ($CommandVerb -in ('New', 'Invoke'))
+                ElseIf ($CommandVerb -eq 'New')
                 {
-                    If (($CommandVerb -eq 'New' -and $ParameterSetName -eq 'CreateExpanded') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
+                    If ($ParameterSetName -eq 'CreateExpanded')
                     {
                         "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
                     }
@@ -96,9 +98,9 @@ $SDKs | ForEach-Object {
                         "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
                     }
                 }
-                ElseIf ($CommandVerb -eq 'Remove')
+                ElseIf ($CommandVerb -eq 'Remove' -or $CommandVerb -eq 'Invoke')
                 {
-                    If ($ParameterSetName -eq 'Delete')
+                    If (($CommandVerb -eq 'Remove' -and $ParameterSetName -eq 'Delete') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
                     {
                         "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
                     }

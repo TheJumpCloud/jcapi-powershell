@@ -13,11 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Invoke-JcSdkExpireUserPassword' {
     It 'Post' {
-        $global:PesterTestExpireUserPassword = Invoke-JcSdkExpireUserPassword @global:PesterDefExpireUserPassword
-        $global:PesterTestExpireUserPassword | Should -Not -BeNullOrEmpty
+        { Invoke-JcSdkExpireUserPassword -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'PostViaIdentity' -skip {
-        Invoke-JcSdkExpireUserPassword -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Invoke-JcSdkExpireUserPassword -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

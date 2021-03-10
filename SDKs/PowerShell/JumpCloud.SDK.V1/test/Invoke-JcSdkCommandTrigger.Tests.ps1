@@ -15,11 +15,10 @@ while (-not $mockingPath)
 
 Describe 'Invoke-JcSdkCommandTrigger' {
     It 'Post' {
-        $global:PesterTestCommandTrigger = Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
-        $global:PesterTestCommandTrigger | Should -Not -BeNullOrEmpty
+        { Invoke-JcSdkCommandTrigger -Triggername:($global:PesterTestCommand.trigger) } | Should -Not -Throw
     }
 
     It 'PostViaIdentity' -Skip {
-        Invoke-JcSdkCommandTrigger -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Invoke-JcSdkCommandTrigger -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
