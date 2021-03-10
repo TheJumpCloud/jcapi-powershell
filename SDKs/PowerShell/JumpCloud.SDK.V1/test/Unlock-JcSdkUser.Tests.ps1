@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Unlock-JcSdkUser' {
     It 'Unlock' -skip {
-        { Unlock-JcSdkUser -Id '<String>' } | Should -Not -Throw
+        { Unlock-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'UnlockViaIdentity' -skip {

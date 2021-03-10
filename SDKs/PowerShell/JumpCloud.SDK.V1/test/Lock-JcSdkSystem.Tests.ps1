@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Lock-JcSdkSystem' {
     It 'Lock' -skip {
-        { Lock-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
+        { Lock-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'LockViaIdentity' -skip {

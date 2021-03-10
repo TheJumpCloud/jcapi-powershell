@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Clear-JcSdkSystem' {
     It 'Clear' -skip {
-        { Clear-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
+        { Clear-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'ClearViaIdentity' -skip {

@@ -13,15 +13,15 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkSystem' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkSystem -Id '<String>' [-AgentBoundMessages '<ISystemputAgentBoundMessagesItem[]>'] [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin] [-DisplayName '<String>'] } | Should -Not -Throw
+        { Set-JcSdkSystem -Id:($global:PesterTestSystem.Id) [-AgentBoundMessages '<ISystemputAgentBoundMessagesItem[]>'] [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin] [-DisplayName '<String>'] } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkSystem -Body '<ISystemput>' -Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkSystem -Body '<ISystemput>' -Id:($global:PesterTestSystem.Id)  } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkSystem -Body '<ISystemput>' -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkSystem -Body '<ISystemput>' -InputObject '<IJumpCloudApIsIdentity>'  } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

@@ -1,5 +1,5 @@
 <#
-(Get-Command -Name Remove-JcSdkUserSshKey) | ForEach-Object {
+(Get-Command -Name New-JcSdkPolicy) | ForEach-Object {
     $ParameterName = $_.Name
     $_.ParameterSets | ForEach-Object {
         $Parameters = ($_.Parameters | Sort-Object @{e = 'IsMandatory'; desc = $true }, @{e = 'Name'; desc = $false } | ForEach-Object {
@@ -30,12 +30,25 @@ TODO:
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
     Remove-JcSdkSystem.Tests.ps1: Disabled untill we can also create systems
     Reset-JcSdkUserMfa.Tests.ps1: Configure MFA for $global:PesterTestUser
+    New-JcSdkDuoApplication.Tests.ps1: Set up DUO in Pester Orgs
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Define Objects
 If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
 {
+    # Create Application
+    # TODO: Switch from get to new
+    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    # Get a ApplicationTemplate
+    $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
+    # Get a CommandResult
+    $global:PesterTestCommandResult = Get-JcSdkCommandResult | Select-Object -First 1
+    # Get Organization
+    $global:PesterTestOrganization = Get-JcSdkOrganization
+    # Get a System
+    $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
+
     # Create a command
     $global:PesterDefCommand = @{
         Name    = 'PesterTestCommand'
@@ -62,28 +75,76 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         SharedSecret    = "Testing123!"
         NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
     }
-
-    # Create Application
-    # TODO: Switch from get to new
-    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
-    # Get a ApplicationTemplate
-    $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
-    # Get a CommandResult
-    $global:PesterTestCommandResult = Get-JcSdkCommandResult | Select-Object -First 1
-    # Get Organization
-    $global:PesterTestOrganization = Get-JcSdkOrganization
-    # Get a System
-    $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
 }
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
+    # Get the Apple MDM
+    $global:PesterAppleMDM = Get-JcSdkAppleMdm
+    # Get LDAP Server
+    $global:PesterLdapServer = Get-JcSdkLdapServer
+    # Get all Directories
+    $global:PesterTestDirectories = Get-JcSdkDirectory
+    $global:PesterTestGSuite = $global:PesterTestDirectories | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1
+    $global:PesterTestOffice365 = $global:PesterTestDirectories | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1
+    $global:PesterTestLdap = $global:PesterTestDirectories | Where-Object { $_.type -eq "ldap_server" } | Select-Object -First 1
+
+    # Create a Authentication Policy
+    $global:PesterDefAuthenticationPolicy = @{
+        Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        EffectAction        = 'allow'
+        TargetResources     = @{"type" = "user_portal" }
+        UserGroupInclusions = $null # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
+    }
+    # Create a Custom Email Configuration
+    $global:PesterDefCustomEmailConfiguration = @{
+        Type    = 'password_reset_confirmation'
+        # Having multiple breaks remove tests
+        # Type    = Get-Random @('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
+        Subject = "CUSTOM"
+    }
+    # Create a GSuite Translation Rule
+    $global:PesterDefGSuiteTranslationRule = @{
+        GsuiteId = $global:PesterTestGSuite.Id
+        BuiltIn  = 'user_work_addresses'
+    }
+    # Create a IP List
+    $global:PesterDefIPList = @{
+        Description = 'PesterIpList'
+        Ips         = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
+        Name        = "Pester IP Test List $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
+    # Create a Office365 Translation Rule
+    $global:PesterDefOffice365TranslationRule = @{
+        Office365Id = $global:PesterTestOffice365.Id
+        BuiltIn     = 'user_street_address'
+    }
+    # Create a Policy
+    $global:PesterDefPolicy = Get-Random @(
+        @{
+            Name       = "Pester_Windows - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -Last 1).Id
+        },
+        @{
+            Name       = "Pester_Linux - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -Last 1).Id
+        },
+        @{
+            Name       = "Pester_Darwin - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -Last 1).Id
+        }
+    )
+    # Create a Software App
+    $global:PesterDefSoftwareApp = @{
+        DisplayName = "Adobe Reader"
+        Settings    = @{PackageId = 'adobereader' }
+    }
     # Create a User Group
     $global:PesterDefUserGroup = @{
-        Name = 'PesterTestUserGroup'
+        Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
     # Create a System Group
     $global:PesterDefSystemGroup = @{
-        Name = 'PesterTestSystemGroup'
+        Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
     # Create an Active Directory Object
     # TODO: Make this endpoint public
@@ -95,16 +156,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
         'domain' = "DC=ADTEST{0};DC=ORG" -f [string]( -join ((65..90) + (97..122) | Get-Random -Count 6 | ForEach-Object { [char]$_ }));
     } | ConvertTo-Json
     $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers $Headers -Body $Form -ContentType 'application/json' -UseBasicParsing
-
-    # Get the Apple MDM
-    $global:PesterAppleMDM = Get-JcSdkAppleMdm
-    # Get LDAP Server
-    $global:PesterLdapServer = Get-JcSdkLdapServer
-    # Get all Directories
-    $global:PesterTestDirectories = Get-JcSdkDirectory
-    $global:PesterTestGSuite = $global:PesterTestDirectories | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1
-    $global:PesterTestOffice365 = $global:PesterTestDirectories | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1
-    $global:PesterTestLdap = $global:PesterTestDirectories | Where-Object { $_.type -eq "ldap_server" } | Select-Object -First 1
 }
 #endregion Define Objects
 
@@ -121,7 +172,7 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @()
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests')
 $OrderedTestsMain = @()
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
@@ -130,7 +181,8 @@ $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $T
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $OrderedTestsSetup }
 # Add all tests that are not "new" and not "remove"
 $OrderedTestsMain | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsMain }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Get-*" }
+# $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsMain }
 # Add "remove" tests (Cleanup Org)
 $OrderedTestsTakeDown | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $OrderedTestsTakeDown }
