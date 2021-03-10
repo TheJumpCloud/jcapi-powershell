@@ -12,20 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkGSuiteTranslationRule' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestGSuiteTranslationRule = New-JcSdkGSuiteTranslationRule @global:PesterDefGSuiteTranslationRule
+        $global:PesterTestGSuiteTranslationRule | Should -Not -BeNullOrEmpty
     }
 
-    It 'Create' {
-        $global:PesterTestGsuiteTranslationRule = New-JcSdkGSuiteTranslationRule -GsuiteId $($global:PesterTestGSuite.Id) -BuiltIn user_work_addresses
-        $global:PesterTestGsuiteTranslationRule | Should -Not -BeNullOrEmpty
+    It 'Create' -skip {
+        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -GsuiteId:($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

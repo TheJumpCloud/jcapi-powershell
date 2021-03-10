@@ -20,6 +20,6 @@ Describe 'New-JcSdkSystemGroup' {
     }
 
     It 'Create' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        New-JcSdkSystemGroup -Body '<ISystemGroupData>' | Should -Not -BeNullOrEmpty
     }
 }
