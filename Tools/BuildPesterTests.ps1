@@ -64,7 +64,6 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
-
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
                 $NewTest = If ($CommandVerb -eq 'Get')
@@ -84,9 +83,9 @@ $SDKs | ForEach-Object {
                         "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
                     }
                 }
-                ElseIf ($CommandVerb -eq 'New')
+                ElseIf ($CommandVerb -in ('New', 'Invoke'))
                 {
-                    If ($ParameterSetName -eq 'CreateExpanded')
+                    If (($CommandVerb -eq 'New' -and $ParameterSetName -eq 'CreateExpanded') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
                     {
                         "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
                     }
@@ -116,7 +115,7 @@ $SDKs | ForEach-Object {
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
                     "{ $($CommandName) $($RequiredParameters) $($OptionalParameters) } | Should -Not -Throw"
                 }
-                ElseIf ($CommandVerb -in ('Clear', 'Invoke', 'Lock', 'Reset', 'Restart', 'Stop', 'Unlock'))
+                ElseIf ($CommandVerb -in ('Clear', 'Lock', 'Reset', 'Restart', 'Stop', 'Unlock'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")

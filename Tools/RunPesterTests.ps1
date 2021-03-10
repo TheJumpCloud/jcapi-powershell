@@ -54,12 +54,23 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # }
     # TODO: Switch from get to new
     $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    #  Create a CommandTrigger
+    $global:PesterDefCommandTrigger = @{
+        TriggerName = 'PesterTestTrigger'
+    }
     # Create a Command
     $global:PesterDefCommand = @{
-        Name    = 'PesterTestCommand'
-        Command = 'echo "Hello World"'
-        User    = '000000000000000000000000'
+        Name       = 'PesterTestCommand'
+        Command    = 'echo "Hello World"'
+        User       = '000000000000000000000000'
+        launchType = 'trigger'
+        trigger    = $global:PesterDefCommandTrigger.TriggerName
     }
+    $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name }
+    Get-JcSdkCommand -Id:($global:PesterTestCommand.Id)
+
+    $global:PesterTestCommandTrigger = Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
     # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
@@ -177,7 +188,7 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests')
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger')
 $OrderedTestsMain = @()
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
