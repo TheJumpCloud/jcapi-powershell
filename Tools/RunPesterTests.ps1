@@ -108,7 +108,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestGSuite = $global:PesterTestDirectories | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1
     $global:PesterTestOffice365 = $global:PesterTestDirectories | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1
     $global:PesterTestLdap = $global:PesterTestDirectories | Where-Object { $_.type -eq "ldap_server" } | Select-Object -First 1
-
     # Create a Authentication Policy
     $global:PesterDefAuthenticationPolicy = @{
         Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
