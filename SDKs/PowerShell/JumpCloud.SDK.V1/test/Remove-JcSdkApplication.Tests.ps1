@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkApplication' {
-    It 'Delete' -skip {
+    It 'Delete' {
         { Remove-JcSdkApplication -Id:($global:PesterTestApplication.Id) } | Should -Not -Throw
     }
 
