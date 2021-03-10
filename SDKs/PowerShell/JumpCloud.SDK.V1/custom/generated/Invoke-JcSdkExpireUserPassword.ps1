@@ -27,20 +27,20 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Lock-JcSdkUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireUserPassword.md
 #>
- Function Lock-JcSdkUser
+ Function Invoke-JcSdkExpireUserPassword
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='Lock', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Lock', Mandatory)]
+    [Parameter(ParameterSetName='Post', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Id},
 
-    [Parameter(ParameterSetName='LockViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='PostViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -109,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Lock-JcSdkInternalUser @PSBoundParameters
+        $Results = JumpCloud.SDK.V1.internal\Invoke-JcSdkInternalExpireUserPassword @PSBoundParameters
     }
     End
     {

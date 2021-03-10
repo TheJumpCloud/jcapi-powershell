@@ -65,7 +65,7 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
-                If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User') }
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User').Replace('UserMfa', 'User') }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
                 $NewTest = If ($CommandVerb -eq 'Get')
@@ -117,7 +117,20 @@ $SDKs | ForEach-Object {
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
                     "{ $($CommandName) $($RequiredParameters) $($OptionalParameters) } | Should -Not -Throw"
                 }
-                ElseIf ($CommandVerb -in ('Clear', 'Lock', 'Reset', 'Restart', 'Stop', 'Unlock'))
+                ElseIf ($CommandVerb -in ('Lock', 'Reset', 'Unlock'))
+                {
+                    If ($ParameterSetName -in ('Lock', 'ResetExpanded', 'Unlock'))
+                    {
+                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    }
+                    Else
+                    {
+                        $Skip = $true
+                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
+                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    }
+                }
+                ElseIf ($CommandVerb -in ('Clear', 'Reset', 'Restart', 'Stop'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")

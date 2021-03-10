@@ -12,12 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Reset-JcSdkUserMfa' {
-    It 'ResetExpanded' -skip {
-        { Reset-JcSdkUserMfa -Id:($global:PesterTestUserMfa.Id) } | Should -Not -Throw
+    It 'ResetExpanded' {
+        { Reset-JcSdkUserMfa -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'Reset' -skip {
-        { Reset-JcSdkUserMfa -Body '<IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>' -Id:($global:PesterTestUserMfa.Id) } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Body '<IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>' -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'ResetViaIdentity' -skip {

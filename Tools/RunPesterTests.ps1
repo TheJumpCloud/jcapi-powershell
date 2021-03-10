@@ -187,8 +187,8 @@ else
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
-$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger')
-$OrderedTestsMain = @()
+$OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger.Tests')
+$OrderedTestsMain = @('Lock-JcSdkUser.Tests', 'Unlock-JcSdkUser.Tests')
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
 # Add "new" tests (Setup Org)

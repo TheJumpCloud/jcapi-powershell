@@ -147,6 +147,9 @@ curl --silent \\
      \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"
 ```
 
+### [Invoke-JcSdkExpireUserPassword](Invoke-JcSdkExpireUserPassword.md)
+This endpoint allows you to expire a user's password.
+
 ### [Lock-JcSdkSystem](Lock-JcSdkSystem.md)
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
@@ -160,9 +163,6 @@ curl -X POST \\
   -H 'x-api-key: {API_KEY}' \\
   -d {}
 ```
-
-### [Lock-JcSdkUser](Lock-JcSdkUser.md)
-This endpoint allows you to expire a user's password.
 
 ### [New-JcSdkApplication](New-JcSdkApplication.md)
 The endpoint adds a new SSO / SAML Applications.

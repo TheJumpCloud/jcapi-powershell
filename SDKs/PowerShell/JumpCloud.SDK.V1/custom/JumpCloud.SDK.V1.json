@@ -4580,7 +4580,7 @@
       ],
       "post": {
         "description": "This endpoint allows you to expire a user's password.",
-        "operationId": "Lock-User",
+        "operationId": "POST-ExpireUserPassword",
         "parameters": [],
         "responses": {
           "200": {

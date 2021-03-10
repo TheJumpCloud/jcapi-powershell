@@ -1,25 +1,26 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Lock-JcSdkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireUserPassword.md
 schema: 2.0.0
 ---
 
-# Lock-JcSdkUser
+# Invoke-JcSdkExpireUserPassword
 
 ## SYNOPSIS
 This endpoint allows you to expire a user's password.
 
 ## SYNTAX
 
-### Lock (Default)
+### Post (Default)
 ```
-Lock-JcSdkUser -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### LockViaIdentity
+### PostViaIdentity
 ```
-Lock-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -48,7 +49,7 @@ This endpoint allows you to expire a user's password.
 
 ```yaml
 Type: System.String
-Parameter Sets: Lock
+Parameter Sets: Post
 Aliases:
 
 Required: True
@@ -64,7 +65,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: LockViaIdentity
+Parameter Sets: PostViaIdentity
 Aliases:
 
 Required: True
