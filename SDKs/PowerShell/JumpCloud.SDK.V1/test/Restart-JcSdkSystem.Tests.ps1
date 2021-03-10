@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Restart-JcSdkSystem' {
     It 'Restart' -skip {
-        { Restart-JcSdkSystem -SystemId '<String>' } | Should -Not -Throw
+        { Restart-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'RestartViaIdentity' -skip {

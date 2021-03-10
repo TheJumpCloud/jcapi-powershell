@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkOrganization' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkOrganization -Id '<String>' [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
+        { Set-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -Id:($global:PesterTestOrganization.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkOrganization' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkOrganization -InputObject '<IJumpCloudApIsIdentity>' [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
+        { Set-JcSdkOrganization -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

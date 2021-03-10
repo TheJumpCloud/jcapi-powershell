@@ -19,7 +19,7 @@ Describe 'New-JcSdkUserSshKey' {
     }
 
     It 'Create' -skip {
-        New-JcSdkUserSshKey -Body '<ISshkeypost>' -Id '<String>' | Should -Not -BeNullOrEmpty
+        New-JcSdkUserSshKey -Body '<ISshkeypost>' -Id:($global:PesterTestUserSshKey.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'CreateViaIdentity' -skip {

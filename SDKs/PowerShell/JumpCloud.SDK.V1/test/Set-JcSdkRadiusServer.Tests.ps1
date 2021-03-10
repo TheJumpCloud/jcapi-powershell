@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkRadiusServer' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkRadiusServer -Id '<String>' -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
+        { Set-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkRadiusServer -Body '<IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>' -Id '<String>' } | Should -Not -Throw
+        { Set-JcSdkRadiusServer -Body '<IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>' -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkRadiusServer' {
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { Set-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
+        { Set-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -NetworkSourceIP '<String>' -SharedSecret '<String>' } | Should -Not -Throw
     }
 }

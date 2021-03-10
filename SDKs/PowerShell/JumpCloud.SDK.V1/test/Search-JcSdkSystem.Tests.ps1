@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Search-JcSdkSystem' {
     It 'SearchExpanded' -skip {
-        { Search-JcSdkSystem [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw
+        { Search-JcSdkSystem  } | Should -Not -Throw
     }
 
     It 'Search' -skip {
