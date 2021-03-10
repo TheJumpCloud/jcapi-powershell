@@ -68,13 +68,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         commandType = "windows"
     }
     # Trying to create a command, assign it to systems, and run it
-    $NewCommand = New-JcSdkCommand @global:PesterDefCommand
-    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
-    $global:PesterDefCommand.Id = $global:PesterTestCommand.Id
-    $global:PesterDefCommand.Systems = Get-JcSdkSystem | Where-Object { $_.os -eq $global:PesterDefCommand.commandType } | Select-Object -ExpandProperty Id
-    Set-JcSdkCommand @global:PesterDefCommand
-    Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
-
+    # $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+    # $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
+    # $global:PesterDefCommand.Id = $global:PesterTestCommand.Id
+    # $global:PesterDefCommand.Systems = Get-JcSdkSystem | Where-Object { $_.os -eq $global:PesterDefCommand.commandType } | Select-Object -ExpandProperty Id
+    # Set-JcSdkCommand @global:PesterDefCommand
+    # Invoke-JcSdkCommandTrigger @global:PesterDefCommandTrigger
     # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
