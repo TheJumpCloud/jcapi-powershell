@@ -20,7 +20,8 @@ $SDKs | ForEach-Object {
         $Content = Get-Content -Path $TestFilePath -Raw
         (Get-Command -Name $CommandName) | ForEach-Object {
             $ParameterName = $_.Name
-            $_.ParameterSets | ForEach-Object {
+            $ParameterSets = $_.ParameterSets
+            $ParameterSets | ForEach-Object {
                 $ParameterSetName = $_.Name
                 $RequiredParameters = @()
                 $OptionalParameters = @()
@@ -43,7 +44,7 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters -join ' '
                 $OptionalParameters = $OptionalParameters -join ' '
                 $Skip = $false
-                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\s+}\s+$)")
+                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s+})")
                 $CurrentTest = $Find.Matches.Groups[2].Value
                 If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*' -or $CommandName -like '*SystemGroupTraverse*')
                 {
@@ -97,108 +98,106 @@ $SDKs | ForEach-Object {
                 {
                     $RequiredFunction
                 }
-                $NewTest = If ($CommandVerb -eq 'Get')
-                {
-                    If ($ParameterSetName -eq 'List')
-                    {
-                        If ($CommandName -like 'Get-JcSdkSystemInsight*')
-                        {
-                            "{ $($RequiredFunction) } | Should -Not -Throw"
-                        }
-                        Else
-                        {
-                            # "$($CommandName) | Should -Not -BeNullOrEmpty"
-                            # Lazy validation
-                            "{ $($RequiredFunction) } | Should -Not -Throw"
-                        }
+                $PesterTestTypes = [Ordered]@{
+                    ShouldNotThrow                  = "{ $($RequiredFunction) } | Should -Not -Throw"
+                    NewObjectShouldNotBeNullOrEmpty = "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
+                    ShouldNotBeNullOrEmpty          = "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
+                }
+                $PesterTestFormatTable = [Ordered]@{
+                    Clear   = [Ordered]@{
+                        Clear                    = $null
+                        ClearExpanded            = $null
+                        ClearViaIdentity         = $null
+                        ClearViaIdentityExpanded = $null
                     }
-                    ElseIf ($ParameterSetName -eq 'Get')
-                    {
-                        # "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
-                        # Lazy validation
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
+                    Get     = [Ordered]@{
+                        Get            = $PesterTestTypes.ShouldNotThrow
+                        GetViaIdentity = $null
+                        List           = $PesterTestTypes.ShouldNotThrow
                     }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
+                    Grant   = [Ordered]@{
+                        Authorize                    = $null
+                        AuthorizeExpanded            = $null
+                        AuthorizeViaIdentity         = $null
+                        AuthorizeViaIdentityExpanded = $null
+                    }
+                    Import  = [Ordered]@{
+                        Import            = $null
+                        ImportViaIdentity = $null
+                    }
+                    Invoke  = [Ordered]@{
+                        Post            = $PesterTestTypes.ShouldNotThrow
+                        PostViaIdentity = $null
+                    }
+                    Lock    = [Ordered]@{
+                        Lock                    = $PesterTestTypes.ShouldNotThrow
+                        LockExpanded            = $null
+                        LockViaIdentity         = $null
+                        LockViaIdentityExpanded = $null
+                    }
+                    New     = [Ordered]@{
+                        Create                    = $null
+                        CreateExpanded            = $PesterTestTypes.NewObjectShouldNotBeNullOrEmpty
+                        CreateViaIdentity         = $null
+                        CreateViaIdentityExpanded = $null
+                    }
+                    Remove  = [Ordered]@{
+                        Delete            = $PesterTestTypes.ShouldNotThrow
+                        DeleteViaIdentity = $null
+                    }
+                    Reset   = [Ordered]@{
+                        Reset                    = $PesterTestTypes.ShouldNotThrow
+                        ResetExpanded            = $null
+                        ResetViaIdentity         = $null
+                        ResetViaIdentityExpanded = $null
+                    }
+                    Restart = [Ordered]@{
+                        Restart            = $null
+                        RestartViaIdentity = $null
+                    }
+                    Search  = [Ordered]@{
+                        Search         = $null
+                        SearchExpanded = $null
+                    }
+                    Set     = [Ordered]@{
+                        Set                    = $PesterTestTypes.ShouldNotThrow
+                        SetExpanded            = $null
+                        SetViaIdentity         = $null
+                        SetViaIdentityExpanded = $null
+                    }
+                    Stop    = [Ordered]@{
+                        Stop            = $null
+                        StopViaIdentity = $null
+                    }
+                    Sync    = [Ordered]@{
+                        Sync            = $null
+                        SyncViaIdentity = $null
+                    }
+                    Unlock  = [Ordered]@{
+                        Unlock            = $PesterTestTypes.ShouldNotThrow
+                        UnlockViaIdentity = $null
+                    }
+                    Update  = [Ordered]@{
+                        Update                    = $null
+                        UpdateExpanded            = $null
+                        UpdateViaIdentity         = $null
+                        UpdateViaIdentityExpanded = $null
                     }
                 }
-                ElseIf ($CommandVerb -eq 'New')
+                If (-not $PesterTestFormatTable.Contains($CommandVerb))
                 {
-                    If ($ParameterSetName -eq 'CreateExpanded')
-                    {
-                        "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
-                    }
+                    Write-Error ("Unmapped Verb in PesterTestFormatTable: $CommandVerb")
                 }
-                ElseIf ($CommandVerb -eq 'Remove' -or $CommandVerb -eq 'Invoke')
+                If (-not $PesterTestFormatTable.$CommandVerb.Contains($ParameterSetName))
                 {
-                    If (($CommandVerb -eq 'Remove' -and $ParameterSetName -eq 'Delete') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
-                    {
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
+                    Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $ParameterSetName")
                 }
-                ElseIf ($CommandVerb -eq 'Set')
-                {
-                    If ($ParameterSetName -eq 'SetExpanded')
-                    {
-                        $Skip = $true
-                        Write-Warning ("Figure out how to splat: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($PesterTestDefVariable) } | Should -Not -Throw"
-                    }
-                    ElseIf ($ParameterSetName -eq 'Set')
-                    {
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
-                }
-                ElseIf ($CommandVerb -in ('Search'))
+                $NewTest = $PesterTestFormatTable.$CommandVerb.$ParameterSetName
+                If ([System.String]::IsNullOrEmpty($NewTest))
                 {
                     $Skip = $true
-                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($OptionalFunction) } | Should -Not -Throw"
-                }
-                ElseIf ($CommandVerb -in ('Lock', 'Reset', 'Unlock'))
-                {
-                    If ($ParameterSetName -in ('Lock', 'ResetExpanded', 'Unlock'))
-                    {
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($RequiredFunction) } | Should -Not -Throw"
-                    }
-                }
-                ElseIf ($CommandVerb -in ('Clear', 'Reset', 'Restart', 'Stop'))
-                {
-                    $Skip = $true
-                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($RequiredFunction) } | Should -Not -Throw"
-                }
-                Else
-                {
-                    $Skip = $true
-                    Write-Warning ("Unmapped Verb: $CommandVerb")
+                    # Write-Warning ("Unmapped Test Format for Verb: $CommandVerb; ParameterSetName: $ParameterSetName;")
+                    $NewTest = "{ $($OptionalFunction) } | Should -Not -Throw"
                 }
                 If (-not [System.String]::IsNullOrEmpty($CurrentTest) -and -not [System.String]::IsNullOrEmpty($NewTest))
                 {
