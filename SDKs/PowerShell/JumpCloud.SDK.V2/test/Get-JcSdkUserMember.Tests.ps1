@@ -20,7 +20,7 @@ Describe 'Get-JcSdkUserMember' {
     AfterAll{
         # Remove Associations
         Set-JCSdkUserGroupMember -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestUser.Id) -Op:('remove')
-        
+
     }
 
     It 'Get' {

@@ -22,7 +22,7 @@ Describe 'Set-JcSdkLdapServerAssociation' {
             Id = $global:PesterTestUser.Id
             Op = 'add'
             Type = 'user'
-        } 
+        }
         { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
         $PesterDefAssociation.Op = 'remove'
         { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw

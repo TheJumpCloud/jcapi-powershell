@@ -38,4 +38,3 @@ Describe 'Get-JcSdkUserTraverseOffice365' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
-            

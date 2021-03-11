@@ -14,7 +14,7 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightChromeExtension' {
-    It 'List' -Skip {
+    It 'List' -skip {
         # Need to configure system in test env for test to pass
         Get-JcSdkSystemInsightChromeExtension | Should -Not -BeNullOrEmpty
     }

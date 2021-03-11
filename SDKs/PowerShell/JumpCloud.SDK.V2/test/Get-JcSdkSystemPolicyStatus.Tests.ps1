@@ -17,14 +17,14 @@ Describe 'Get-JcSdkSystemPolicyStatus' {
     BeforeAll{
         # Associate User Group > System Group > System
         # Note: $global:PesterTestAuthenticationPolicy is attached to $global:PesterTestUserGroup, which is why this works
-        
+
         #Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestSystemGroup.Id) -Op:('add') -Type:('system_group')
         #Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add')
     }
 
     AfterAll{
         # Remove Associations
-        
+
         #Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestSystemGroup.Id) -Op:('remove') -Type:('system_group')
         #Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('remove')
     }

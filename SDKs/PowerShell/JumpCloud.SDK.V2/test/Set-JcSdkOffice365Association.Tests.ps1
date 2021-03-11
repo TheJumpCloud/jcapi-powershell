@@ -22,7 +22,7 @@ Describe 'Set-JcSdkOffice365Association' {
             Id = $global:PesterTestUser.Id
             Op = 'add'
             Type = 'user'
-        } 
+        }
         { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
         $PesterDefAssociation.Op = 'remove'
         { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw

@@ -23,7 +23,7 @@ Describe 'Get-JcSdkPolicy' {
         Get-JcSdkPolicy -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

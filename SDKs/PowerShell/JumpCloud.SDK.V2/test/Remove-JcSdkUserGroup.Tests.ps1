@@ -14,11 +14,11 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkUserGroup' {
-    It 'Delete' -Skip {
+    It 'Delete' -skip {
         { Remove-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -Skip {
+    It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
