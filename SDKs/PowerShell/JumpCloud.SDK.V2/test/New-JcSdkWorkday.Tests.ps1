@@ -18,6 +18,6 @@ Describe 'New-JcSdkWorkday' {
     }
 
     It 'Create' -skip {
-        New-JcSdkWorkday -Body '<IWorkdayInput>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkWorkday -Body:($global:PesterTestWorkday) } | Should -Not -Throw
     }
 }

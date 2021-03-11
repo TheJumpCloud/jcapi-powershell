@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkDuoAccount' {
     It 'Create' -skip {
-        New-JcSdkDuoAccount  | Should -Not -BeNullOrEmpty
+        { New-JcSdkDuoAccount } | Should -Not -Throw
     }
 }

@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkOffice365' {
-    It 'PatchExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateExpanded' -skip {
+        { Update-JcSdkOffice365 -Office365Id:($global:PesterTestOffice365.Id) [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'Patch' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Update' -skip {
+        { Update-JcSdkOffice365 -Body:($global:PesterTestOffice365) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentity' -skip {
+        { Update-JcSdkOffice365 -Body:($global:PesterTestOffice365) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentityExpanded' -skip {
+        { Update-JcSdkOffice365 -InputObject '<IJumpCloudApIsIdentity>' [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 }

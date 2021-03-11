@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Restart-JcSdkAppleMdmDevice' {
     It 'Restart' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Restart-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' } | Should -Not -Throw
     }
 
     It 'RestartViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Restart-JcSdkAppleMdmDevice -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

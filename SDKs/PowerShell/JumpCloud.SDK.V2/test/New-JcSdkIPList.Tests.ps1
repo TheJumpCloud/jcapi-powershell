@@ -18,6 +18,6 @@ Describe 'New-JcSdkIPList' {
     }
 
     It 'Create' -skip {
-        New-JcSdkIPList -Body '<IIPListRequest>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkIPList -Body:($global:PesterTestIPList) } | Should -Not -Throw
     }
 }

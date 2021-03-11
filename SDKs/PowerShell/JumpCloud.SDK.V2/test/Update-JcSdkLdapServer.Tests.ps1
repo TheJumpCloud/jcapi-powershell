@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkLdapServer' {
-    It 'PatchExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateExpanded' -skip {
+        { Update-JcSdkLdapServer -Id:($global:PesterTestLdapServer.Id) [-Id1 '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Update' -skip {
+        { Update-JcSdkLdapServer -Body:($global:PesterTestLdapServer) -Id:($global:PesterTestLdapServer.Id) } | Should -Not -Throw
     }
 
-    It 'Patch' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentityExpanded' -skip {
+        { Update-JcSdkLdapServer -InputObject '<IJumpCloudApIsIdentity>' [-Id '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentity' -skip {
+        { Update-JcSdkLdapServer -Body:($global:PesterTestLdapServer) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

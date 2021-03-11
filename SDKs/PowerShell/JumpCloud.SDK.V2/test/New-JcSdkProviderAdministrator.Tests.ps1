@@ -18,14 +18,14 @@ Describe 'New-JcSdkProviderAdministrator' {
     }
 
     It 'Create' -skip {
-        New-JcSdkProviderAdministrator -Body '<IProviderAdminReq>' -ProviderId '<String>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkProviderAdministrator -Body:($global:PesterTestProviderAdministrator) -ProviderId '<String>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkProviderAdministrator -Body '<IProviderAdminReq>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkProviderAdministrator -Body:($global:PesterTestProviderAdministrator) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkProviderAdministrator -Email '<String>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkProviderAdministrator -Email '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-EnableMultiFactor] [-Firstname '<String>'] [-Lastname '<String>'] [-Role '<String>'] [-RoleName '<String>'] } | Should -Not -Throw
     }
 }

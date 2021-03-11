@@ -18,6 +18,6 @@ Describe 'New-JcSdkUserGroup' {
     }
 
     It 'Create' -skip {
-        New-JcSdkUserGroup -Body '<IUserGroupPost>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkUserGroup -Body:($global:PesterTestUserGroup) } | Should -Not -Throw
     }
 }
