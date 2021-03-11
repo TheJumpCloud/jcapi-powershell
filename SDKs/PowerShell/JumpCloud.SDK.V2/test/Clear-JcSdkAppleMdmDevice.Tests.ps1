@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Clear-JcSdkAppleMdmDevice' {
-    It 'EraseExpanded' -skip {
+    It 'ClearExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Erase' -skip {
+    It 'Clear' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentityExpanded' -skip {
+    It 'ClearViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentity' -skip {
+    It 'ClearViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
