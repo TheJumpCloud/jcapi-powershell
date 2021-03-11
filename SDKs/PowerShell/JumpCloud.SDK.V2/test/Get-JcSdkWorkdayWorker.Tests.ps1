@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkWorkdayWorker' {
     It 'List' -skip {
-        Get-JcSdkWorkdayWorker | Should -Not -BeNullOrEmpty
+        { Get-JcSdkWorkdayWorker -WorkdayId '<String>' } | Should -Not -Throw
     }
 }

@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkUserTraverseRadiusServer' {
     It 'Get' {
-        Get-JcSdkUserTraverseRadiusServer -UserId:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserTraverseRadiusServer -UserId:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

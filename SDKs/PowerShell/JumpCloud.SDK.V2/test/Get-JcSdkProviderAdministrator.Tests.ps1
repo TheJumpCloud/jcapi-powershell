@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkProviderAdministrator' {
-    It 'List' {
-        Get-JcSdkProviderAdministrator | Should -Not -BeNullOrEmpty
+    It 'List' -skip {
+        { Get-JcSdkProviderAdministrator -ProviderId '<String>' } | Should -Not -Throw
     }
 }

@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGSuiteAssociation' {
     It 'Get' {
-        Get-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGsuite.Id) -Targets:('user') | Should -Not -BeNullOrEmpty
+        { Get-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGsuite.Id) -Targets:('user') } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

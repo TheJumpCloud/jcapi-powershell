@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGSuiteTranslationRule' {
     It 'List' {
-        Get-JcSdkGSuiteTranslationRule | Should -Not -BeNullOrEmpty
+        { Get-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

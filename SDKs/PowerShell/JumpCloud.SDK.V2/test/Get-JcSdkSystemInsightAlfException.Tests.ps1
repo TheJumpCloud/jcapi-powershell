@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAlfException' {
     It 'List' {
-        { Get-JcSdkSystemInsightAlfException  } | Should -Not -Throw
+        { Get-JcSdkSystemInsightAlfException } | Should -Not -Throw
     }
 }

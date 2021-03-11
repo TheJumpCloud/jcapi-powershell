@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkIPList' {
     It 'List' {
-        Get-JcSdkIPList | Should -Not -BeNullOrEmpty
+        { Get-JcSdkIPList } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkIPList -Id:($global:PesterTestIPList.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkIPList -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

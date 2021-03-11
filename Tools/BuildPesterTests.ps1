@@ -81,28 +81,48 @@ $SDKs | ForEach-Object {
                 }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
+                $RequiredFunction = If ($RequiredParameters)
+                {
+                    "$($CommandName) $($RequiredParameters)"
+                }
+                Else
+                {
+                    $CommandName
+                }
+                $OptionalFunction = If ($OptionalParameters)
+                {
+                    "$($RequiredFunction) $($OptionalParameters)"
+                }
+                Else
+                {
+                    $RequiredFunction
+                }
                 $NewTest = If ($CommandVerb -eq 'Get')
                 {
                     If ($ParameterSetName -eq 'List')
                     {
                         If ($CommandName -like 'Get-JcSdkSystemInsight*')
                         {
-                            "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                            "{ $($RequiredFunction) } | Should -Not -Throw"
                         }
                         Else
                         {
-                            "$($CommandName) | Should -Not -BeNullOrEmpty"
+                            # "$($CommandName) | Should -Not -BeNullOrEmpty"
+                            # Lazy validation
+                            "{ $($RequiredFunction) } | Should -Not -Throw"
                         }
                     }
                     ElseIf ($ParameterSetName -eq 'Get')
                     {
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
+                        # "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
+                        # Lazy validation
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                     Else
                     {
                         $Skip = $true
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
+                        "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
                     }
                 }
                 ElseIf ($CommandVerb -eq 'New')
@@ -115,20 +135,20 @@ $SDKs | ForEach-Object {
                     {
                         $Skip = $true
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
+                        "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
                     }
                 }
                 ElseIf ($CommandVerb -eq 'Remove' -or $CommandVerb -eq 'Invoke')
                 {
                     If (($CommandVerb -eq 'Remove' -and $ParameterSetName -eq 'Delete') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
                     {
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                     Else
                     {
                         $Skip = $true
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                 }
                 ElseIf ($CommandVerb -eq 'Set')
@@ -141,39 +161,39 @@ $SDKs | ForEach-Object {
                     }
                     ElseIf ($ParameterSetName -eq 'Set')
                     {
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                     Else
                     {
                         $Skip = $true
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                 }
                 ElseIf ($CommandVerb -in ('Search'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($CommandName) $($RequiredParameters) $($OptionalParameters) } | Should -Not -Throw"
+                    "{ $($OptionalFunction) } | Should -Not -Throw"
                 }
                 ElseIf ($CommandVerb -in ('Lock', 'Reset', 'Unlock'))
                 {
                     If ($ParameterSetName -in ('Lock', 'ResetExpanded', 'Unlock'))
                     {
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                     Else
                     {
                         $Skip = $true
                         Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        "{ $($RequiredFunction) } | Should -Not -Throw"
                     }
                 }
                 ElseIf ($CommandVerb -in ('Clear', 'Reset', 'Restart', 'Stop'))
                 {
                     $Skip = $true
                     Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    "{ $($RequiredFunction) } | Should -Not -Throw"
                 }
                 Else
                 {
@@ -189,7 +209,7 @@ $SDKs | ForEach-Object {
                     }
                     $Content = $Content.Replace($Find.Matches.Value, $NewIt)
                 }
-                # Write-Host ("$($ParameterSetName): $($ParameterName) $($RequiredParameters)")
+                # Write-Host ("$($ParameterSetName): $($ParameterName)$($RequiredFunction)")
             }
         }
         $Content.Trim() | Set-Content -Path $TestFilePath

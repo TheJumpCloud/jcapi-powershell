@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemPolicyStatus' {
     It 'List' {
-        Get-JcSdkSystemPolicyStatus | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemPolicyStatus -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 }

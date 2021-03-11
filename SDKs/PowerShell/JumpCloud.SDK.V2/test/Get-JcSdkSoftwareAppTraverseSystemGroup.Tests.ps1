@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSoftwareAppTraverseSystemGroup' {
     It 'Get' {
-        Get-JcSdkSoftwareAppTraverseSystemGroup -SoftwareAppId:($global:PesterTestSoftwareApp.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSoftwareAppTraverseSystemGroup -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

@@ -12,8 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemFdeKey' {
-    It 'Get' {
-        Get-JcSdkSystemFdeKey -SystemId:($global:PesterTestSystem.Id) | Should -Not -BeNullOrEmpty
+    It 'Get' -skip {
+        { Get-JcSdkSystemFdeKey -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

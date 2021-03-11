@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkOffice365UserToImport' {
-    It 'List' {
-        Get-JcSdkOffice365UserToImport | Should -Not -BeNullOrEmpty
+    It 'List' -skip {
+        { Get-JcSdkOffice365UserToImport -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 }

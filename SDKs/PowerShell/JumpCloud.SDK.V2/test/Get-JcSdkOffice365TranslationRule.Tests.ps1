@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkOffice365TranslationRule' {
     It 'List' {
-        Get-JcSdkOffice365TranslationRule | Should -Not -BeNullOrEmpty
+        { Get-JcSdkOffice365TranslationRule -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

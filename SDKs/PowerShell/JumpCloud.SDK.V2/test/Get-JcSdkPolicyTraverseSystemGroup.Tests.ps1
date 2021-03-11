@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkPolicyTraverseSystemGroup' {
     It 'Get' {
-        Get-JcSdkPolicyTraverseSystemGroup -PolicyId:($global:PesterTestPolicy.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkPolicyTraverseSystemGroup -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

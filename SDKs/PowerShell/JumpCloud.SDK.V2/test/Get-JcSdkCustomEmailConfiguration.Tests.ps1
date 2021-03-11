@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkCustomEmailConfiguration' {
     It 'Get' {
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterDefCustomEmailConfiguration.Type) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterDefCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
