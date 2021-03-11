@@ -17,6 +17,6 @@ Describe 'Get-JcSdkLdapServerAssociation' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkLdapServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') | Should -Not -BeNullOrEmpty
+        { Get-JcSdkLdapServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
     }
 }

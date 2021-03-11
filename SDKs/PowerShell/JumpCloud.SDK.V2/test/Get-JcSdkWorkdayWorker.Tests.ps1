@@ -15,4 +15,8 @@ Describe 'Get-JcSdkWorkdayWorker' {
     It 'List' -skip {
         { Get-JcSdkWorkdayWorker -WorkdayId '<String>' } | Should -Not -Throw
     }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkWorkdayWorker -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+    }
 }

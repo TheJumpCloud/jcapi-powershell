@@ -17,6 +17,6 @@ Describe 'Get-JcSdkAppleMdmDepKey' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkAppleMdmDepKey -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAppleMdmDepKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

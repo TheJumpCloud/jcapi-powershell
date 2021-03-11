@@ -17,6 +17,6 @@ Describe 'Get-JcSdkRadiusServerAssociation' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkRadiusServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') | Should -Not -BeNullOrEmpty
+        { Get-JcSdkRadiusServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
     }
 }

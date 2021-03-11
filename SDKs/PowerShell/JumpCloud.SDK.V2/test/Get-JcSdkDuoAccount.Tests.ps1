@@ -21,6 +21,6 @@ Describe 'Get-JcSdkDuoAccount' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkDuoAccount -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkDuoAccount -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

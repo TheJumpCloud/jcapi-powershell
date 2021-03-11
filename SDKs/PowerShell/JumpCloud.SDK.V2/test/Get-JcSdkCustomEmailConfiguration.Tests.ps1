@@ -17,6 +17,6 @@ Describe 'Get-JcSdkCustomEmailConfiguration' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

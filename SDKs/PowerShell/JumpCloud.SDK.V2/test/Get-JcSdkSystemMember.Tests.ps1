@@ -17,6 +17,6 @@ Describe 'Get-JcSdkSystemMember' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSystemMember -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemMember -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }

@@ -21,6 +21,6 @@ Describe 'Get-JcSdkIPList' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

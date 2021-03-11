@@ -17,6 +17,6 @@ Describe 'Get-JcSdkSoftwareAppAssociation' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSoftwareAppAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('system_group') | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSoftwareAppAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('system_group') } | Should -Not -Throw
     }
 }

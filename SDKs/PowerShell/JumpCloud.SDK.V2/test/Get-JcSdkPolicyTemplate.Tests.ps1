@@ -21,6 +21,6 @@ Describe 'Get-JcSdkPolicyTemplate' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkPolicyTemplate -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkPolicyTemplate -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

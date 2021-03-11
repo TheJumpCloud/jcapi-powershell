@@ -12,16 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkPolicyResult' {
-    It 'List1' -skip {
-        Get-JcSdkPolicyResult | Should -Not -BeNullOrEmpty
-    }
-
     It 'Get' -skip {
         { Get-JcSdkPolicyResult -Id:($global:PesterTestPolicyResult.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkPolicyResult -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkPolicyResult -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'List' {

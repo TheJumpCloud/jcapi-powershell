@@ -21,6 +21,6 @@ Describe 'Get-JcSdkWorkday' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

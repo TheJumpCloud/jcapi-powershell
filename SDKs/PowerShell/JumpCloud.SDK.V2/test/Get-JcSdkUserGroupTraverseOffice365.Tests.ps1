@@ -17,6 +17,6 @@ Describe 'Get-JcSdkUserGroupTraverseOffice365' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserGroupTraverseOffice365 -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserGroupTraverseOffice365 -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

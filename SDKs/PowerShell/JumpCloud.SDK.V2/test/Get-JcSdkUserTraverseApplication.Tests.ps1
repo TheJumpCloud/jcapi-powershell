@@ -17,6 +17,6 @@ Describe 'Get-JcSdkUserTraverseApplication' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserTraverseApplication -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserTraverseApplication -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

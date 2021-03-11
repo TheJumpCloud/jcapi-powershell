@@ -21,6 +21,6 @@ Describe 'Get-JcSdkLdapServer' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkLdapServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkLdapServer -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

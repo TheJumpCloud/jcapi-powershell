@@ -21,6 +21,6 @@ Describe 'Get-JcSdkAuthenticationPolicy' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

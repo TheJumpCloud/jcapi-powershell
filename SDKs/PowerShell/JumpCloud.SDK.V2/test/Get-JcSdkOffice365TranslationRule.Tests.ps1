@@ -21,6 +21,6 @@ Describe 'Get-JcSdkOffice365TranslationRule' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

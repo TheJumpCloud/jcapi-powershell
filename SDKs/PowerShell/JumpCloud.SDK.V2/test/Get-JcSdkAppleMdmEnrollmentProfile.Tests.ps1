@@ -21,6 +21,6 @@ Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkAppleMdmEnrollmentProfile -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAppleMdmEnrollmentProfile -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

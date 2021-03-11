@@ -17,6 +17,6 @@ Describe 'Get-JcSdkOffice365' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkOffice365 -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkOffice365 -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

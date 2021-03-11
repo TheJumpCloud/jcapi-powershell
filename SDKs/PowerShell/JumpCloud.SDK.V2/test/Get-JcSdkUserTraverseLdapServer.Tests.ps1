@@ -17,6 +17,6 @@ Describe 'Get-JcSdkUserTraverseLdapServer' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserTraverseLdapServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserTraverseLdapServer -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

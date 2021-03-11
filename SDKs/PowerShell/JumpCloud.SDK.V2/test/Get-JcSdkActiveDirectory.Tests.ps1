@@ -21,6 +21,6 @@ Describe 'Get-JcSdkActiveDirectory' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkActiveDirectory -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkActiveDirectory -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

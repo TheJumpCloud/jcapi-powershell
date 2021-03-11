@@ -17,6 +17,6 @@ Describe 'Get-JcSdkUserGroupMember' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserGroupMember -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserGroupMember -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

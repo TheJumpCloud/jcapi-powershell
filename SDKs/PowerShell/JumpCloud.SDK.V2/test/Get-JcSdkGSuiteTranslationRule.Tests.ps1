@@ -21,6 +21,6 @@ Describe 'Get-JcSdkGSuiteTranslationRule' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

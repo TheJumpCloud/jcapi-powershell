@@ -17,6 +17,6 @@ Describe 'Get-JcSdkSoftwareAppStatus' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSoftwareAppStatus -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSoftwareAppStatus -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

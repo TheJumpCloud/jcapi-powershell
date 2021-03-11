@@ -17,6 +17,6 @@ Describe 'Get-JcSdkSystemFdeKey' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSystemFdeKey -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemFdeKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

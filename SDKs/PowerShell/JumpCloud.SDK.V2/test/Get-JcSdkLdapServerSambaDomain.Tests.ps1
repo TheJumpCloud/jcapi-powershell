@@ -21,6 +21,6 @@ Describe 'Get-JcSdkLdapServerSambaDomain' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

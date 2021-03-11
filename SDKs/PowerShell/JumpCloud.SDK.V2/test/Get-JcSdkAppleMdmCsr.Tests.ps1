@@ -17,6 +17,6 @@ Describe 'Get-JcSdkAppleMdmCsr' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkAppleMdmCsr -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAppleMdmCsr -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

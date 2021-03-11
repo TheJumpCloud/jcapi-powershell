@@ -17,6 +17,6 @@ Describe 'Get-JcSdkUserGroupTraverseRadiusServer' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserGroupTraverseRadiusServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUserGroupTraverseRadiusServer -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

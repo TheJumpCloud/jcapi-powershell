@@ -17,6 +17,6 @@ Describe 'Get-JcSdkActiveDirectoryAssociation' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkActiveDirectoryAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') | Should -Not -BeNullOrEmpty
+        { Get-JcSdkActiveDirectoryAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
     }
 }

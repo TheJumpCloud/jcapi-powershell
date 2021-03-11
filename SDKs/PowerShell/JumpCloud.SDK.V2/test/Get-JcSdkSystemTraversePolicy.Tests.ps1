@@ -17,6 +17,6 @@ Describe 'Get-JcSdkSystemTraversePolicy' {
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkSystemTraversePolicy -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemTraversePolicy -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
