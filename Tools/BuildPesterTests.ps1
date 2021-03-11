@@ -45,38 +45,54 @@ $SDKs | ForEach-Object {
                 $Skip = $false
                 $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\s+}\s+$)")
                 $CurrentTest = $Find.Matches.Groups[2].Value
-                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*')
+                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*' -or $CommandName -like '*SystemGroupTraverse*')
                 {
                     $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
                     $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestSystem.Id)")
                 }
-                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*')
+                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*' -or $CommandName -like '*UserGroupTraverse*')
                 {
                     $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
                     $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestUser.Id)")
                 }
                 $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
-                $RequiredParameters = $RequiredParameters.Replace("-GsuiteId '<String>'", "-GsuiteId:(`$global:PesterTestGsuite.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-Office365Id '<String>'", "-Office365Id:(`$global:PesterTestOffice365.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
-                $RequiredParameters = $RequiredParameters.Replace("-LdapserverId '<String>'", "-LdapserverId:(`$global:PesterTestLdapserver.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-SoftwareAppId '<String>'", "-SoftwareAppId:(`$global:PesterTestSoftwareApp.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-AppleMdmId '<String>'", "-AppleMdmId:(`$global:PesterTestAppleMdm.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-GsuiteId '<String>'", "-GsuiteId:(`$global:PesterTestGsuite.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-LdapserverId '<String>'", "-LdapserverId:(`$global:PesterTestLdapserver.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-Office365Id '<String>'", "-Office365Id:(`$global:PesterTestOffice365.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-PolicyId '<String>'", "-PolicyId:(`$global:PesterTestPolicy.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-RadiusserverId '<String>'", "-RadiusserverId:(`$global:PesterTestRadiusserver.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SoftwareAppId '<String>'", "-SoftwareAppId:(`$global:PesterTestSoftwareApp.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
+                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
+                $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
                 $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
-                If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User').Replace('UserMfa', 'User') }
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
+                }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
                 $NewTest = If ($CommandVerb -eq 'Get')
                 {
                     If ($ParameterSetName -eq 'List')
                     {
-                        "$($CommandName) | Should -Not -BeNullOrEmpty"
+                        If ($CommandName -like 'Get-JcSdkSystemInsight*')
+                        {
+                            "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                        }
+                        Else
+                        {
+                            "$($CommandName) | Should -Not -BeNullOrEmpty"
+                        }
                     }
                     ElseIf ($ParameterSetName -eq 'Get')
                     {
