@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkWorkdayWorker' {
-    It 'List' -skip {
+    It 'Get' -Skip {
         { Get-JcSdkWorkdayWorker -WorkdayId '<String>' } | Should -Not -Throw
     }
 
