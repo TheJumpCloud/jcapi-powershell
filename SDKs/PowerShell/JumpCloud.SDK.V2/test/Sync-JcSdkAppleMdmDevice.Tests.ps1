@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Sync-JcSdkAppleMdmDevice' {
     It 'Sync' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Sync-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
 
     It 'SyncViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Sync-JcSdkAppleMdmDevice -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

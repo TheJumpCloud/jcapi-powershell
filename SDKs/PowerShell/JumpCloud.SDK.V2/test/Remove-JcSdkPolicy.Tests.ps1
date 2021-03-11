@@ -13,12 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkPolicy' {
     It 'Delete' {
-        Remove-JcSdkPolicy -id $($global:PesterTestWindowsPolicy.id)
-        Remove-JcSdkPolicy -id $($global:PesterTestLinuxPolicy.id)
-        Remove-JcSdkPolicy -id $($global:PesterTestDarwinPolicy.id)
+        { Remove-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkPolicy -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

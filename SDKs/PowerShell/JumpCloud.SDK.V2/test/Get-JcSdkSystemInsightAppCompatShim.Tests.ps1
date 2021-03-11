@@ -12,8 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightAppCompatShim' {
-    It 'List' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemInsightAppCompatShim | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkSystemInsightAppCompatShim } | Should -Not -Throw
     }
 }

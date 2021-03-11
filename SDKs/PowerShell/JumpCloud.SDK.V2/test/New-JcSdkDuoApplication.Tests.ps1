@@ -18,14 +18,14 @@ Describe 'New-JcSdkDuoApplication' {
     }
 
     It 'Create' -skip {
-        New-JcSdkDuoApplication -AccountId '<String>' -Body '<IDuoApplicationReq>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkDuoApplication -AccountId '<String>' -Body:($global:PesterTestDuoApplication) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkDuoApplication -Body '<IDuoApplicationReq>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkDuoApplication -Body:($global:PesterTestDuoApplication) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' -SecretKey '<String>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' -SecretKey '<String>' } | Should -Not -Throw
     }
 }

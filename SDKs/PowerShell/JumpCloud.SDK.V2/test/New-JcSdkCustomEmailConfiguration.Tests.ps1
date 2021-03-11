@@ -18,6 +18,6 @@ Describe 'New-JcSdkCustomEmailConfiguration' {
     }
 
     It 'Create' -skip {
-        New-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' } | Should -Not -Throw
     }
 }

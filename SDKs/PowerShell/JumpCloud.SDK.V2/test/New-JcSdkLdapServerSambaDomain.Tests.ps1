@@ -18,14 +18,14 @@ Describe 'New-JcSdkLdapServerSambaDomain' {
     }
 
     It 'Create' -skip {
-        New-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -LdapserverId '<String>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkLdapServerSambaDomain -Body:($global:PesterTestLdapServerSambaDomain) -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkLdapServerSambaDomain -Body '<ISambaDomainInput>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkLdapServerSambaDomain -Body:($global:PesterTestLdapServerSambaDomain) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -Sid '<String>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
     }
 }

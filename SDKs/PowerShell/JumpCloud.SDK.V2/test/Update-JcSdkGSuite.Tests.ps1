@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkGSuite' {
-    It 'PatchExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateExpanded' -skip {
+        { Update-JcSdkGSuite -Id:($global:PesterTestGSuite.Id) [-GroupsEnabled] [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'Patch' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Update' -skip {
+        { Update-JcSdkGSuite -Body:($global:PesterTestGSuite) -Id:($global:PesterTestGSuite.Id) } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentity' -skip {
+        { Update-JcSdkGSuite -Body:($global:PesterTestGSuite) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PatchViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'UpdateViaIdentityExpanded' -skip {
+        { Update-JcSdkGSuite -InputObject '<IJumpCloudApIsIdentity>' [-GroupsEnabled] [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 }

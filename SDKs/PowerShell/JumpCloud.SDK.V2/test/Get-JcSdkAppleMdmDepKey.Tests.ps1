@@ -13,11 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkAppleMdmDepKey' {
     It 'Get' -skip {
-        # TODO: Test fails
-        Get-JcSdkAppleMdmDepKey -AppleMdmId $($global:PesterAppleMDM.id) | Should -not -BeNullOrEmpty
+        { Get-JcSdkAppleMdmDepKey -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkAppleMdmDepKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

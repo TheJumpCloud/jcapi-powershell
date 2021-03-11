@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkBulkUser' {
     It 'Create' -skip {
-        New-JcSdkBulkUser -Body '<IBulkUserCreate[]>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkBulkUser -Body:($global:PesterTestBulkUser) } | Should -Not -Throw
     }
 }

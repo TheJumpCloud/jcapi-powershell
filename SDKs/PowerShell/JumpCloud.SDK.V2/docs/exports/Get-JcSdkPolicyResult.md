@@ -20,12 +20,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
 
 ## SYNTAX
 
-### List1 (Default)
-```
-Get-JcSdkPolicyResult [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
-```
-
-### Get
+### Get (Default)
 ```
 Get-JcSdkPolicyResult -Id <String> [<CommonParameters>]
 ```
@@ -76,7 +71,7 @@ If omitted, the default list of fields will be returned.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List, List1
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -98,7 +93,7 @@ Supports wild cards.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List, List1
+Parameter Sets: List
 Aliases:
 
 Required: False
@@ -160,7 +155,7 @@ Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List, List1
+Parameter Sets: List
 Aliases:
 
 Required: False

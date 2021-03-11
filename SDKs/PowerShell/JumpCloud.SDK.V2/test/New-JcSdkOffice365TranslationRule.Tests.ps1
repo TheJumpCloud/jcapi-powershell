@@ -18,14 +18,14 @@ Describe 'New-JcSdkOffice365TranslationRule' {
     }
 
     It 'Create' -skip {
-        New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
+        { New-JcSdkOffice365TranslationRule -Body:($global:PesterTestOffice365TranslationRule) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkOffice365TranslationRule -Body '<IOffice365TranslationRuleRequest>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkOffice365TranslationRule -Body:($global:PesterTestOffice365TranslationRule) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] } | Should -Not -Throw
     }
 }

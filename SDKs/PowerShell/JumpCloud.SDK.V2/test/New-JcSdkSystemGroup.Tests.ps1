@@ -18,6 +18,6 @@ Describe 'New-JcSdkSystemGroup' {
     }
 
     It 'Create' -skip {
-        New-JcSdkSystemGroup -Body '<ISystemGroupData>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkSystemGroup -Body:($global:PesterTestSystemGroup) } | Should -Not -Throw
     }
 }

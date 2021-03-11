@@ -18,6 +18,6 @@ Describe 'New-JcSdkPolicy' {
     }
 
     It 'Create' -skip {
-        New-JcSdkPolicy -Body '<IPolicyRequest>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkPolicy -Body:($global:PesterTestPolicy) } | Should -Not -Throw
     }
 }

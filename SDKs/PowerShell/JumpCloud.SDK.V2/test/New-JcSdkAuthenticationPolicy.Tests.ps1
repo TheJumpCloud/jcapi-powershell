@@ -19,6 +19,6 @@ Describe 'New-JcSdkAuthenticationPolicy' {
     }
 
     It 'Create' -skip {
-        New-JcSdkAuthenticationPolicy -Body '<IAuthnPolicyInput>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkAuthenticationPolicy -Body:($global:PesterTestAuthenticationPolicy) } | Should -Not -Throw
     }
 }

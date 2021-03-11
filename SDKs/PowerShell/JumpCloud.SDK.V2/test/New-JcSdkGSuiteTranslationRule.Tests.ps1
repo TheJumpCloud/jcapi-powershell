@@ -18,14 +18,14 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
     }
 
     It 'Create' -skip {
-        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -GsuiteId:($global:PesterTestGsuite.Id) | Should -Not -BeNullOrEmpty
+        { New-JcSdkGSuiteTranslationRule -Body:($global:PesterTestGSuiteTranslationRule) -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkGSuiteTranslationRule -Body '<IGSuiteTranslationRuleRequest>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkGSuiteTranslationRule -Body:($global:PesterTestGSuiteTranslationRule) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] } | Should -Not -Throw
     }
 }

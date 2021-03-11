@@ -20,7 +20,8 @@ $SDKs | ForEach-Object {
         $Content = Get-Content -Path $TestFilePath -Raw
         (Get-Command -Name $CommandName) | ForEach-Object {
             $ParameterName = $_.Name
-            $_.ParameterSets | ForEach-Object {
+            $ParameterSets = $_.ParameterSets
+            $ParameterSets | ForEach-Object {
                 $ParameterSetName = $_.Name
                 $RequiredParameters = @()
                 $OptionalParameters = @()
@@ -43,103 +44,160 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters -join ' '
                 $OptionalParameters = $OptionalParameters -join ' '
                 $Skip = $false
-                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\s+}\s+$)")
+                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s+})")
                 $CurrentTest = $Find.Matches.Groups[2].Value
-                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*')
+                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*' -or $CommandName -like '*SystemGroupTraverse*')
                 {
                     $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
                     $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestSystem.Id)")
                 }
-                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*')
+                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*' -or $CommandName -like '*UserGroupTraverse*')
                 {
                     $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
                     $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestUser.Id)")
                 }
                 $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
-                $RequiredParameters = $RequiredParameters.Replace("-GsuiteId '<String>'", "-GsuiteId:(`$global:PesterTestGsuite.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-Office365Id '<String>'", "-Office365Id:(`$global:PesterTestOffice365.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
-                If ($CommandName -ne 'Remove-JcSdkUserSshKey') { $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User').Replace('UserSshKey', 'User').Replace('UserMfa', 'User') }
+                $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-AppleMdmId '<String>'", "-AppleMdmId:(`$global:PesterTestAppleMdm.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-ApplicationId '<String>'", "-ApplicationId:(`$global:PesterTestApplication.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-CommandId '<String>'", "-CommandId:(`$global:PesterTestCommand.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-GsuiteId '<String>'", "-GsuiteId:(`$global:PesterTestGsuite.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-LdapserverId '<String>'", "-LdapserverId:(`$global:PesterTestLdapserver.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-Office365Id '<String>'", "-Office365Id:(`$global:PesterTestOffice365.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-PolicyId '<String>'", "-PolicyId:(`$global:PesterTestPolicy.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-RadiusserverId '<String>'", "-RadiusserverId:(`$global:PesterTestRadiusserver.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SoftwareAppId '<String>'", "-SoftwareAppId:(`$global:PesterTestSoftwareApp.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
+                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
+                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
+                $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
+                $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
+                }
                 # -Op '<String>' -Type '<String>'
                 # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
-                $NewTest = If ($CommandVerb -eq 'Get')
+                $RequiredFunction = If ($RequiredParameters)
                 {
-                    If ($ParameterSetName -eq 'List')
-                    {
-                        "$($CommandName) | Should -Not -BeNullOrEmpty"
-                    }
-                    ElseIf ($ParameterSetName -eq 'Get')
-                    {
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
-                    }
-                }
-                ElseIf ($CommandVerb -eq 'New')
-                {
-                    If ($ParameterSetName -eq 'CreateExpanded')
-                    {
-                        "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "$($CommandName) $($RequiredParameters) | Should -Not -BeNullOrEmpty"
-                    }
-                }
-                ElseIf ($CommandVerb -eq 'Remove' -or $CommandVerb -eq 'Invoke')
-                {
-                    If (($CommandVerb -eq 'Remove' -and $ParameterSetName -eq 'Delete') -or ($CommandVerb -eq 'Invoke' -and $ParameterSetName -eq 'Post'))
-                    {
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
-                    }
-                }
-                ElseIf ($CommandVerb -in ('Search', 'Set'))
-                {
-                    $Skip = $true
-                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($CommandName) $($RequiredParameters) $($OptionalParameters) } | Should -Not -Throw"
-                }
-                ElseIf ($CommandVerb -in ('Lock', 'Reset', 'Unlock'))
-                {
-                    If ($ParameterSetName -in ('Lock', 'ResetExpanded', 'Unlock'))
-                    {
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
-                    }
-                    Else
-                    {
-                        $Skip = $true
-                        Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                        "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
-                    }
-                }
-                ElseIf ($CommandVerb -in ('Clear', 'Reset', 'Restart', 'Stop'))
-                {
-                    $Skip = $true
-                    Write-Warning ("Unmapped ParameterSetName: $ParameterSetName ($($CommandVerb))")
-                    "{ $($CommandName) $($RequiredParameters) } | Should -Not -Throw"
+                    "$($CommandName) $($RequiredParameters)"
                 }
                 Else
                 {
+                    $CommandName
+                }
+                $OptionalFunction = If ($OptionalParameters)
+                {
+                    "$($RequiredFunction) $($OptionalParameters)"
+                }
+                Else
+                {
+                    $RequiredFunction
+                }
+                $PesterTestTypes = [Ordered]@{
+                    ShouldNotThrow                  = "{ $($RequiredFunction) } | Should -Not -Throw"
+                    NewObjectShouldNotBeNullOrEmpty = "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
+                    ShouldNotBeNullOrEmpty          = "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
+                }
+                $PesterTestFormatTable = [Ordered]@{
+                    Clear   = [Ordered]@{
+                        Clear                    = $null
+                        ClearExpanded            = $null
+                        ClearViaIdentity         = $null
+                        ClearViaIdentityExpanded = $null
+                    }
+                    Get     = [Ordered]@{
+                        Get            = $PesterTestTypes.ShouldNotThrow
+                        GetViaIdentity = $null
+                        List           = $PesterTestTypes.ShouldNotThrow
+                    }
+                    Grant   = [Ordered]@{
+                        Authorize                    = $null
+                        AuthorizeExpanded            = $null
+                        AuthorizeViaIdentity         = $null
+                        AuthorizeViaIdentityExpanded = $null
+                    }
+                    Import  = [Ordered]@{
+                        Import            = $null
+                        ImportViaIdentity = $null
+                    }
+                    Invoke  = [Ordered]@{
+                        Post            = $PesterTestTypes.ShouldNotThrow
+                        PostViaIdentity = $null
+                    }
+                    Lock    = [Ordered]@{
+                        Lock                    = $PesterTestTypes.ShouldNotThrow
+                        LockExpanded            = $null
+                        LockViaIdentity         = $null
+                        LockViaIdentityExpanded = $null
+                    }
+                    New     = [Ordered]@{
+                        Create                    = $null
+                        CreateExpanded            = $PesterTestTypes.NewObjectShouldNotBeNullOrEmpty
+                        CreateViaIdentity         = $null
+                        CreateViaIdentityExpanded = $null
+                    }
+                    Remove  = [Ordered]@{
+                        Delete            = $PesterTestTypes.ShouldNotThrow
+                        DeleteViaIdentity = $null
+                    }
+                    Reset   = [Ordered]@{
+                        Reset                    = $PesterTestTypes.ShouldNotThrow
+                        ResetExpanded            = $null
+                        ResetViaIdentity         = $null
+                        ResetViaIdentityExpanded = $null
+                    }
+                    Restart = [Ordered]@{
+                        Restart            = $null
+                        RestartViaIdentity = $null
+                    }
+                    Search  = [Ordered]@{
+                        Search         = $null
+                        SearchExpanded = $null
+                    }
+                    Set     = [Ordered]@{
+                        Set                    = $PesterTestTypes.ShouldNotThrow
+                        SetExpanded            = $null
+                        SetViaIdentity         = $null
+                        SetViaIdentityExpanded = $null
+                    }
+                    Stop    = [Ordered]@{
+                        Stop            = $null
+                        StopViaIdentity = $null
+                    }
+                    Sync    = [Ordered]@{
+                        Sync            = $null
+                        SyncViaIdentity = $null
+                    }
+                    Unlock  = [Ordered]@{
+                        Unlock            = $PesterTestTypes.ShouldNotThrow
+                        UnlockViaIdentity = $null
+                    }
+                    Update  = [Ordered]@{
+                        Update                    = $null
+                        UpdateExpanded            = $null
+                        UpdateViaIdentity         = $null
+                        UpdateViaIdentityExpanded = $null
+                    }
+                }
+                If (-not $PesterTestFormatTable.Contains($CommandVerb))
+                {
+                    Write-Error ("Unmapped Verb in PesterTestFormatTable: $CommandVerb")
+                }
+                If (-not $PesterTestFormatTable.$CommandVerb.Contains($ParameterSetName))
+                {
+                    Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $ParameterSetName")
+                }
+                $NewTest = $PesterTestFormatTable.$CommandVerb.$ParameterSetName
+                If ([System.String]::IsNullOrEmpty($NewTest))
+                {
                     $Skip = $true
-                    Write-Warning ("Unmapped Verb: $CommandVerb")
+                    # Write-Warning ("Unmapped Test Format for Verb: $CommandVerb; ParameterSetName: $ParameterSetName;")
+                    $NewTest = "{ $($OptionalFunction) } | Should -Not -Throw"
                 }
                 If (-not [System.String]::IsNullOrEmpty($CurrentTest) -and -not [System.String]::IsNullOrEmpty($NewTest))
                 {
@@ -150,7 +208,7 @@ $SDKs | ForEach-Object {
                     }
                     $Content = $Content.Replace($Find.Matches.Value, $NewIt)
                 }
-                # Write-Host ("$($ParameterSetName): $($ParameterName) $($RequiredParameters)")
+                # Write-Host ("$($ParameterSetName): $($ParameterName)$($RequiredFunction)")
             }
         }
         $Content.Trim() | Set-Content -Path $TestFilePath
