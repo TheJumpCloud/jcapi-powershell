@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightDiskEncryption' {
     It 'List' {
-        Get-JcSdkSystemInsightDiskEncryption | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightDiskEncryption  } | Should -Not -Throw
     }
 }

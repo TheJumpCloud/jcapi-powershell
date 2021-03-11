@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAppCompatShim' {
     It 'List' {
-        Get-JcSdkSystemInsightAppCompatShim | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightAppCompatShim  } | Should -Not -Throw
     }
 }

@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAuthorizedKey' {
     It 'List' {
-        Get-JcSdkSystemInsightAuthorizedKey | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightAuthorizedKey  } | Should -Not -Throw
     }
 }

@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightScheduledTask' {
     It 'List' {
-        Get-JcSdkSystemInsightScheduledTask | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightScheduledTask  } | Should -Not -Throw
     }
 }

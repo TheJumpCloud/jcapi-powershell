@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' {
     It 'List' {
-        Get-JcSdkSystemInsightAlfExplicitAuth | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightAlfExplicitAuth  } | Should -Not -Throw
     }
 }

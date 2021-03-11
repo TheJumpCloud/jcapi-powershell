@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightSipConfig' {
     It 'List' {
-        Get-JcSdkSystemInsightSipConfig | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightSipConfig  } | Should -Not -Throw
     }
 }

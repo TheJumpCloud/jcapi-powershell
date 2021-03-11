@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemInsightFirefoxAddon' {
     It 'List' {
-        Get-JcSdkSystemInsightFirefoxAddon | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemInsightFirefoxAddon  } | Should -Not -Throw
     }
 }
