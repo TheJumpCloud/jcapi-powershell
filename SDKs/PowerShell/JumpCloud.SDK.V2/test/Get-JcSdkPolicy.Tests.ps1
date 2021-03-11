@@ -22,7 +22,7 @@ Describe 'Get-JcSdkPolicy' {
         Get-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) | Should -Not -BeNullOrEmpty
     }
 
-    It 'GetViaIdentity' -Skip {
+    It 'GetViaIdentity' -skip {
         Get-JcSdkPolicy -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

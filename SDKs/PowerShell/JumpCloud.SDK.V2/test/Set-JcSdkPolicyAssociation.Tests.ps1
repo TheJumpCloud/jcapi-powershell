@@ -25,11 +25,11 @@ Describe 'Set-JcSdkPolicyAssociation' {
         { Set-JcSdkPolicyAssociation -PolicyId:($global:PesterTestWindowsPolicy.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
     }
 
-    It 'SetViaIdentity' -Skip {
+    It 'SetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'SetViaIdentityExpanded' -Skip {
+    It 'SetViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

@@ -14,7 +14,7 @@ while (-not $mockingPath)
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkAppleMdmDevice' {
-    It 'List' -Skip {
+    It 'List' -skip {
         #TODO: Automate device enrollment - this test works in a real org
         Get-JcSdkAppleMdmDevice -AppleMdmId $($global:PesterAppleMDM.id) | Should -not -BeNullOrEmpty
     }

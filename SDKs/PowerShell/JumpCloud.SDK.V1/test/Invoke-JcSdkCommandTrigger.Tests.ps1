@@ -18,7 +18,7 @@ Describe 'Invoke-JcSdkCommandTrigger' {
         { Invoke-JcSdkCommandTrigger -Triggername:($global:PesterTestCommand.trigger) } | Should -Not -Throw
     }
 
-    It 'PostViaIdentity' -Skip {
+    It 'PostViaIdentity' -skip {
         { Invoke-JcSdkCommandTrigger -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
