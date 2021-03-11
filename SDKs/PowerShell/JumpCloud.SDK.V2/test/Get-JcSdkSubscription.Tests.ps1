@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSubscription' {
     It 'Get' {
-        Get-JcSdkSubscription | Should -Not -BeNullOrEmpty
+        Get-JcSdkSubscription  | Should -Not -BeNullOrEmpty
     }
 }

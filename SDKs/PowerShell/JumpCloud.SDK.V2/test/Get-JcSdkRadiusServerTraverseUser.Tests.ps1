@@ -12,13 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkRadiusServerTraverseUser' {
-    BeforeAll {
-        Set-JcSdkRadiusServerAssociation -RadiusserverId $($global:PesterTestRadiusServer.id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user'
+    It 'Get' {
+        Get-JcSdkRadiusServerTraverseUser -RadiusserverId '<String>' | Should -Not -BeNullOrEmpty
     }
-    AfterAll {
-        Set-JcSdkRadiusServerAssociation -RadiusserverId $($global:PesterTestRadiusServer.id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user'
-    }
-    It 'List' {
-        Get-JcSdkRadiusServerTraverseUser -RadiusserverId $($global:PesterTestRadiusServer.id) | Should -Not -BeNullOrEmpty
+
+    It 'GetViaIdentity' -skip {
+        Get-JcSdkRadiusServerTraverseUser -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

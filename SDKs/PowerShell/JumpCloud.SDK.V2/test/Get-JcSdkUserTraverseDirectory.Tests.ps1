@@ -12,29 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserTraverseDirectory' {
-   BeforeAll{
-        # Associate User > Any Directory
-        Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestLdap.Id) -Op:('add') -Type:("ldap_server")
-    }
-
-    AfterAll{
-        # Remove Associations
-        Set-JCSdkUserAssociation -UserId:($global:PesterTestUser.Id) -Id:($global:PesterTestLdap.Id) -Op:('remove') -Type:("ldap_server")
-   }
-
     It 'Get' {
-        $AssociationTest = JumpCloud.SDK.V2\Get-JcSdkUserTraverseDirectory -UserId:($global:PesterTestUser.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
-        {
-            $AssociationTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that an association exists
-            $AssociationTest.Count | Should -BeGreaterOrEqual 1
-        }
+        Get-JcSdkUserTraverseDirectory -UserId:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
+
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        Get-JcSdkUserTraverseDirectory -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }

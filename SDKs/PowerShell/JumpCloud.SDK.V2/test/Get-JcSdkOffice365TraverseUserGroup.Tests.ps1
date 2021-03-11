@@ -12,13 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkOffice365TraverseUserGroup' {
-    BeforeAll {
-        Set-JcSdkOffice365Association -Office365Id $($global:PesterTestOffice365.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'add' -Type 'user_group'
+    It 'Get' {
+        Get-JcSdkOffice365TraverseUserGroup -Office365Id:($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
     }
-    AfterAll {
-        Set-JcSdkOffice365Association -Office365Id $($global:PesterTestOffice365.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'remove' -Type 'user_group'
-    }
-    It 'List' {
-        Get-JcSdkOffice365TraverseUserGroup -Office365Id $($global:PesterTestOffice365.Id) | Should -Not -BeNullOrEmpty
+
+    It 'GetViaIdentity' -skip {
+        Get-JcSdkOffice365TraverseUserGroup -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
     }
 }
