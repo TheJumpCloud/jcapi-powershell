@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkUserAssociation' {
     It 'Get' {
-        Get-JcSdkUserAssociation -Targets '<String>' -UserId:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
+        Get-JcSdkUserAssociation -Targets:('user') -UserId:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkUserAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets '<String>' | Should -Not -BeNullOrEmpty
+        Get-JcSdkUserAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') | Should -Not -BeNullOrEmpty
     }
 }

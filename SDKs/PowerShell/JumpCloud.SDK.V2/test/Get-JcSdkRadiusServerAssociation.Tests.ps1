@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkRadiusServerAssociation' {
     It 'Get' {
-        Get-JcSdkRadiusServerAssociation -RadiusserverId '<String>' -Targets '<String>' | Should -Not -BeNullOrEmpty
+        Get-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusserver.Id) -Targets:('user') | Should -Not -BeNullOrEmpty
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkRadiusServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets '<String>' | Should -Not -BeNullOrEmpty
+        Get-JcSdkRadiusServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') | Should -Not -BeNullOrEmpty
     }
 }
