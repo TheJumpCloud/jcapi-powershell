@@ -17,11 +17,11 @@ Describe 'Set-JcSdkUser' {
     }
 
     It 'Set' -skip {
-        { Set-JcSdkUser -Body '<ISystemuserput>' -Id:($global:PesterTestUser.Id)  } | Should -Not -Throw
+        { Set-JcSdkUser -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkUser -Body '<ISystemuserput>' -InputObject '<IJumpCloudApIsIdentity>'  } | Should -Not -Throw
+        { Set-JcSdkUser -Body:($global:PesterTestUser) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

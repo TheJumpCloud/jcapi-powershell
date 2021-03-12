@@ -13,14 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkRadiusServer' {
     It 'List' {
-        Get-JcSdkRadiusServer | Should -Not -BeNullOrEmpty
+        { Get-JcSdkRadiusServer } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -19,14 +19,14 @@ Describe 'New-JcSdkUserSshKey' {
     }
 
     It 'Create' -skip {
-        New-JcSdkUserSshKey -Body '<ISshkeypost>' -Id:($global:PesterTestUser.Id) | Should -Not -BeNullOrEmpty
+        { New-JcSdkUserSshKey -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        New-JcSdkUserSshKey -Body '<ISshkeypost>' -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkUserSshKey -Body:($global:PesterTestUser) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        New-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -PublicKey '<String>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestUser.Name) -PublicKey '<String>' } | Should -Not -Throw
     }
 }

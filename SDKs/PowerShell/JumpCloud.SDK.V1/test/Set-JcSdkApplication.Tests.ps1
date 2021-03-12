@@ -17,7 +17,7 @@ Describe 'Set-JcSdkApplication' {
     }
 
     It 'Set' -skip {
-        { Set-JcSdkApplication -Body '<IApplication>' -Id:($global:PesterTestApplication.Id)  } | Should -Not -Throw
+        { Set-JcSdkApplication -Body:($global:PesterTestApplication) -Id:($global:PesterTestApplication.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
@@ -25,6 +25,6 @@ Describe 'Set-JcSdkApplication' {
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkApplication -Body '<IApplication>' -InputObject '<IJumpCloudApIsIdentity>'  } | Should -Not -Throw
+        { Set-JcSdkApplication -Body:($global:PesterTestApplication) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

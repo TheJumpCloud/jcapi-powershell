@@ -17,11 +17,11 @@ Describe 'Set-JcSdkOrganization' {
     }
 
     It 'Set' -skip {
-        { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -Id:($global:PesterTestOrganization.Id)  } | Should -Not -Throw
+        { Set-JcSdkOrganization -Body:($global:PesterTestOrganization) -Id:($global:PesterTestOrganization.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkOrganization -Body '<IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>' -InputObject '<IJumpCloudApIsIdentity>'  } | Should -Not -Throw
+        { Set-JcSdkOrganization -Body:($global:PesterTestOrganization) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

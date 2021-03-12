@@ -105,12 +105,6 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterTestCustomEmailConfiguration.Type)")
                 $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
                 $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
-                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
-                {
-                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
-                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
-                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
-                }
                 # Id replaces
                 $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
@@ -126,6 +120,13 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
+                # Things that should just be user
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
+                }
                 # Build function with parameters
                 $RequiredFunction = If ($RequiredParameters)
                 {

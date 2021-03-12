@@ -22,6 +22,6 @@ Describe 'New-JcSdkCommand' {
     }
 
     It 'Create' -skip {
-        New-JcSdkCommand -Body '<ICommand>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkCommand -Body:($global:PesterTestCommand) } | Should -Not -Throw
     }
 }
