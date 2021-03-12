@@ -198,7 +198,7 @@ $OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolic
 $OrderedTestsUpdate = @()
 $OrderedTestsMain = @('Lock-JcSdkUser.Tests', 'Unlock-JcSdkUser.Tests')
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
-$TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
+$TestFiles = Get-ChildItem -Path:($moduleTestFolder) -Recurse | Where-Object { $_.BaseName -like "*$($Filter).Tests*" }
 # Add "New" tests (Setup Org)
 $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
