@@ -1,13 +1,11 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkEventDistinct.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
@@ -15,12 +13,10 @@ while (-not $mockingPath)
 
 Describe 'Get-JcSdkEventDistinct' {
     It 'GetExpanded' -skip {
-        # TODO: documentation needs updating
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkEventDistinct -Service '<String[]>' -StartTime '<DateTime>' [-EndTime '<DateTime>'] [-Field '<String>'] [-SearchTermAnd '<Hashtable>'] [-SearchTermOr '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        # TODO: documentation needs updating
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkEventDistinct -Body:($global:PesterTestEventDistinct) } | Should -Not -Throw
     }
 }

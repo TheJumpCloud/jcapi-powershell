@@ -1,6 +1,6 @@
 $ModuleFolder = Join-Path "$PSScriptRoot\.." "\SDKs\PowerShell\" -Resolve
 $SDKs = Get-ChildItem -Path $ModuleFolder
-$SDKs | ForEach-Object {
+    $ModuleName = $_.BaseName
     $PesterTestVariableList = @()
     $PesterTestDefVariableList = @()
     $Prefix = 'JcSdk'
@@ -98,6 +98,11 @@ $SDKs | ForEach-Object {
                         $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
                     }
                 }
+                ElseIf ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights' -and $CommandName -like '*Event*')
+                {
+                    $RequiredParameters = $RequiredParameters.Replace("-Service '<String[]>' -StartTime '<DateTime>'", "-Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime())")
+                    $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime();})")
+                }
                 # Misc.
                 $RequiredParameters = $RequiredParameters.Replace("-Subject '<String>' -Type '<String>'", "-Subject:(`$global:PesterTestCustomEmailConfiguration.Subject) -Type:(`$global:PesterTestCustomEmailConfiguration.Type)")
                 $RequiredParameters = $RequiredParameters.Replace("-Name '<String>'", "-Name:($($PesterTestVariable).Name)")
@@ -160,6 +165,7 @@ $SDKs | ForEach-Object {
                     Get     = [Ordered]@{
                         Get            = $PesterTestTypes.ShouldNotThrow
                         GetViaIdentity = $null
+                        GetExpanded    = $PesterTestTypes.ShouldNotThrow
                         List           = $PesterTestTypes.ShouldNotThrow
                     }
                     Grant   = [Ordered]@{
@@ -237,7 +243,7 @@ $SDKs | ForEach-Object {
                 }
                 If (-not $PesterTestFormatTable.$CommandVerb.Contains($ParameterSetName))
                 {
-                    Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $ParameterSetName")
+                    Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $($CommandVerb).$($ParameterSetName)")
                 }
                 $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s+})")
                 $CurrentTest = $Find.Matches.Groups[2].Value
