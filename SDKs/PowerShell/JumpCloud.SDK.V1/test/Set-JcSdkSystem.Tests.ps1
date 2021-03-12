@@ -16,7 +16,7 @@ Describe 'Set-JcSdkSystem' {
         { Set-JcSdkSystem -Id:($global:PesterTestSystem.Id) [-AgentBoundMessages '<ISystemputAgentBoundMessagesItem[]>'] [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin] [-DisplayName '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkSystem -Body:($global:PesterTestSystem) -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 

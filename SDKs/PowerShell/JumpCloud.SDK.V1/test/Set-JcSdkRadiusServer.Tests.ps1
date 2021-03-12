@@ -16,7 +16,7 @@ Describe 'Set-JcSdkRadiusServer' {
         { Set-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) -Name:($global:PesterTestRadiusServer.Name) -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkRadiusServer -Body:($global:PesterTestRadiusServer) -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }
 

@@ -16,7 +16,7 @@ Describe 'Set-JcSdkOrganization' {
         { Set-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkOrganization -Body:($global:PesterTestOrganization) -Id:($global:PesterTestOrganization.Id) } | Should -Not -Throw
     }
 
