@@ -13,23 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkPolicyAssociation' {
     It 'SetExpanded' {
-        { Set-JcSdkPolicyAssociation -PolicyId:($global:PesterTestWindowsPolicy.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system') } | Should -Not -Throw
+        { Set-JcSdkPolicyAssociation -Id:($global:PesterTestUser.Id) -Op:('add') -PolicyId:($global:PesterTestPolicy.Id) -Type:('user') } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestSystem.Id
-            Op   = 'remove'
-            Type = 'system'
-        }
-        { Set-JcSdkPolicyAssociation -PolicyId:($global:PesterTestWindowsPolicy.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkPolicyAssociation -Body:($global:PesterTestPolicyAssociation) -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkPolicyAssociation -Body:($global:PesterTestPolicyAssociation) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkPolicyAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

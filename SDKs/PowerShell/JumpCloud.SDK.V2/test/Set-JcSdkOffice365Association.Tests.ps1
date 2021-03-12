@@ -13,26 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkOffice365Association' {
     It 'SetExpanded' {
-        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Id:($global:PesterTestUser.id) -op:('add') -type:('user') } | Should -Not -Throw
-        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Id:($global:PesterTestUser.id) -op:('remove') -type:('user') } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Id:($global:PesterTestUser.Id) -Office365Id:($global:PesterTestOffice365.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id = $global:PesterTestUser.Id
-            Op = 'add'
-            Type = 'user'
-        } 
-        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
-        $PesterDefAssociation.Op = 'remove'
-        { Set-JcSdkOffice365Association -Office365Id:($global:PesterTestOffice365.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkOffice365Association -Body:($global:PesterTestOffice365Association) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Body:($global:PesterTestOffice365Association) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkOffice365Association -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

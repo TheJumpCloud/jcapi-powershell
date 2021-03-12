@@ -13,33 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkApplicationAssociation' {
     It 'SetExpanded' {
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user')
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -Not -BeNullOrEmpty
-
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Id:($global:PesterTestUser.Id) -Op:('remove') -Type:('user')
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -BeNullOrEmpty
+        { Set-JcSdkApplicationAssociation -ApplicationId:($global:PesterTestApplication.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestUser.Id;
-            Op   = 'add';
-            Type = 'user';
-            Attributes = @{};
-        }
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Body $PesterDefAssociation
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -Not -BeNullOrEmpty
-
-        $PesterDefAssociation.Op = 'remove'
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Body $PesterDefAssociation
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -BeNullOrEmpty
+    It 'Set' -skip {
+        { Set-JcSdkApplicationAssociation -ApplicationId:($global:PesterTestApplication.Id) -Body:($global:PesterTestApplicationAssociation) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -Body:($global:PesterTestApplicationAssociation) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }
