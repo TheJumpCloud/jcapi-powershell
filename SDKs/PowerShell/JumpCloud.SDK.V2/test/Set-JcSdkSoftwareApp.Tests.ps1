@@ -18,7 +18,7 @@ Describe 'Set-JcSdkSoftwareApp' {
         { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) [-DisplayName '<String>'] [-Id1 '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
     }
 
-    It 'Set' -Skip {
+    It 'Set' {
         { Set-JcSdkSoftwareApp -Body:($global:PesterTestSoftwareApp) -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
