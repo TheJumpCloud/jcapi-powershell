@@ -26,13 +26,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/association
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <String> [-Authorization <String>] [-Date <String>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets> [-Authorization <String>] [-Date <String>]
  [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [-Authorization <String>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [-Authorization <String>]
  [-Date <String>] [<CommonParameters>]
 ```
 
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 Targets which a "system" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

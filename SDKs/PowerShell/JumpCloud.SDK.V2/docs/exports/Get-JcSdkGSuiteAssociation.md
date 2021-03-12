@@ -25,12 +25,12 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associatio
 
 ### Get (Default)
 ```
-Get-JcSdkGSuiteAssociation -GsuiteId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkGSuiteAssociation -GsuiteId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "g_suite" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

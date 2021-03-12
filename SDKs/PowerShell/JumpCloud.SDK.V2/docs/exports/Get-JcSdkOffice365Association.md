@@ -26,12 +26,12 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### Get (Default)
 ```
-Get-JcSdkOffice365Association -Office365Id <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkOffice365Association -Office365Id <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,7 +102,7 @@ Accept wildcard characters: False
 Targets which a "office_365" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

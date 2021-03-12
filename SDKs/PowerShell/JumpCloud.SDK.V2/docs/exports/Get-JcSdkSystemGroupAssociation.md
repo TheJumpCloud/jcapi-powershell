@@ -25,12 +25,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associat
 
 ### Get (Default)
 ```
-Get-JcSdkSystemGroupAssociation -GroupId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkSystemGroupAssociation -GroupId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkSystemGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "system_group" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

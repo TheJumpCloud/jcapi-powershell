@@ -27,8 +27,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-Attributes <Hashtable>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> -Type <Type> [-Attributes <Hashtable>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -45,7 +45,7 @@ Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOper
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -190,6 +190,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Type
+The member type.
+
+```yaml
+Type: JumpCloud.SDK.V2.Support.Type
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -246,6 +261,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUserGroupMember>: GraphOperation (UserGroup-Member)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
+  - `Type <Type>`: The member type.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

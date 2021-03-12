@@ -36,7 +36,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <String> [-AttributeSudoEnabled]
+Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <Type3> [-AttributeSudoEnabled]
  [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -54,7 +54,7 @@ Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOper
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type3>
  [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -212,7 +212,7 @@ Accept wildcard characters: False
 Targets which a "user" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Type3
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -294,7 +294,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUser>: GraphOperation (User)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: Targets which a "user" can be associated to.
+  - `Type <Type3>`: Targets which a "user" can be associated to.
   - `[AttributeSudoEnabled <Boolean?>]`: Enables sudo
   - `[AttributeSudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
