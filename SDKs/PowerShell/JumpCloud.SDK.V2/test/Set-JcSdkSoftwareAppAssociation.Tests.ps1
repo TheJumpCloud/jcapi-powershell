@@ -12,61 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSoftwareAppAssociation' {
-    BeforeAll {
-        $types = @{
-            'system'           = $($global:PesterTestSystem.id);
-            'system_group'     = $($global:PesterTestSystemGroup.id);
-        }
-    }
-    It 'SetExpanded' {
-        # Adds
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Id:$($types[$type]) -Op:('add') -Type:($type) } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        # Removes
-        foreach ($type in $types.keys)
-        {
-            { Set-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Id:$($types[$type]) -Op:('remove') -Type:($type) } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
+    It 'SetExpanded' -skip {
+        { Set-JcSdkSoftwareAppAssociation -Id:($global:PesterTestSystem.Id) -Op:('add') -SoftwareAppId:($global:PesterTestSoftwareApp.Id) -Type:('system') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Set' {
-        foreach ($type in $types.keys)
-        {
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'add'
-                Type = $type
-            }
-            { Set-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Body $body } | Should -Not -Throw
-            # check that the association was added to the group
-            Get-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Targets:($type) | Should -Not -BeNullOrEmpty
-        }
-        foreach ($type in $types.keys)
-        {
-            $body = @{
-                Id   = $($types[$type])
-                Op   = 'remove'
-                Type = $type
-            }
-            { Set-JcSdkSoftwareAppAssociation -SoftwareAppId:$($global:PesterTestSoftwareApp.id) -Body $body } | Should -Not -Throw
-            # check that the association was removed from the group
-            $toId = Get-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Targets:($type)
-            $toId.ToId | Should -Not -Contain $($types[$type])
-        }
+        { Set-JcSdkSoftwareAppAssociation -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; Type = 'system';}) -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSoftwareAppAssociation -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; Type = 'system';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSoftwareAppAssociation -Id:($global:PesterTestSystem.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('system') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

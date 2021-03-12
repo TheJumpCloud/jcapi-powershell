@@ -12,38 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroupMember' {
-    It 'SetExpanded' {
-        { Set-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.id) -Id $($global:PesterTestUser.id) -Op 'add' } | Should -Not -Throw
-        # check that the user group member is in the group
-        Get-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.Id) | Should -Not -BeNullOrEmpty
-        { Set-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.id) -Id $($global:PesterTestUser.id) -Op 'remove' } | Should -Not -Throw
-        # check that the user was removed from the group
-        $toId = Get-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.Id)
-        $toId.ToId | Should -Not -Contain $($global:PesterTestUser.Id)
+    It 'SetExpanded' -skip {
+        { Set-JcSdkUserGroupMember -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestUser.Id) -Op:('add') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Set' {
-        $body = @{
-            Id         = $global:PesterTestUser.Id;
-            Op         = 'add';
-            Type       = 'user';
-            Attributes = @{};
-        }
-        {Set-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.id) -Body $body} | Should -Not -Throw
-        # check that the user group member is in the group
-        Get-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.Id) | Should -Not -BeNullOrEmpty
-        $body.Op = 'remove'
-        {Set-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.id) -Body $body} | Should -Not -Throw
-        # check that the user was removed from the group
-        $toId = Get-JcSdkUserGroupMember -GroupId $($global:PesterTestUserGroup.Id)
-        $toId.ToId | Should -Not -Contain $($global:PesterTestUser.Id)
+        { Set-JcSdkUserGroupMember -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add';}) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupMember -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupMember -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

@@ -12,27 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkIPList' {
-    BeforeAll {
-        $IpList = @{
-            Description = 'PesterIpList'
-            Ips         = '0.1.2.4'
-            Name        = 'Pester IP Test List'
-        }
-    }
-    It 'SetExpanded' {
-        { Set-JcSdkIPList -Id:($global:PesterIPList.Id) -Ips:($IpList.Ips) -Name:($IpList.Name) -Description:($IpList.Description) } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkIPList -Id:($global:PesterTestIPList.Id) [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $IpList.Ips = '0.1.2.5'
-        { Set-JcSdkIPList -Id:($global:PesterIPList.Id) -Body:($IpList) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkIPList -Body:($global:PesterTestIPList) -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -Body:($global:PesterTestIPList) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
 }

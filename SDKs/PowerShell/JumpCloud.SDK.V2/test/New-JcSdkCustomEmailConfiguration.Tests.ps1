@@ -18,6 +18,6 @@ Describe 'New-JcSdkCustomEmailConfiguration' {
     }
 
     It 'Create' -skip {
-        { New-JcSdkCustomEmailConfiguration -CustomEmail '<ICustomEmail>' } | Should -Not -Throw
+        { New-JcSdkCustomEmailConfiguration -CustomEmail:($global:PesterTestCustomEmailConfiguration) } | Should -Not -Throw
     }
 }

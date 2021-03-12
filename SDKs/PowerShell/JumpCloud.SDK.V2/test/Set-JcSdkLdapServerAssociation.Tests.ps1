@@ -12,27 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkLdapServerAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Id:($global:PesterTestUser.id) -op:('add') -type:('user') } | Should -Not -Throw
-        { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Id:($global:PesterTestUser.id) -op:('remove') -type:('user') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkLdapServerAssociation -Id:($global:PesterTestUser.Id) -LdapserverId:($global:PesterTestLdapserver.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Set' {
-        $PesterDefAssociation = @{
-            Id = $global:PesterTestUser.Id
-            Op = 'add'
-            Type = 'user'
-        } 
-        { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
-        $PesterDefAssociation.Op = 'remove'
-        { Set-JcSdkLdapServerAssociation -LdapserverId:($global:PesterLdapServer.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+        { Set-JcSdkLdapServerAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkLdapServerAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkLdapServerAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

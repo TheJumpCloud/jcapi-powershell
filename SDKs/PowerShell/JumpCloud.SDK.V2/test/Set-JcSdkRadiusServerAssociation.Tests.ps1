@@ -12,24 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkRadiusServerAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusServer.id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkRadiusServerAssociation -Id:($global:PesterTestUser.Id) -Op:('add') -RadiusserverId:($global:PesterTestRadiusserver.Id) -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestUser.Id
-            Op   = 'remove'
-            Type = 'user'
-        }
-        { Set-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusServer.id) -Body:($PesterDefAssociation) } | Should -Not -Throw
+        { Set-JcSdkRadiusServerAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -RadiusserverId:($global:PesterTestRadiusserver.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkRadiusServerAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkRadiusServerAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

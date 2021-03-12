@@ -195,18 +195,25 @@ $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
 $OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolicy.Tests', 'New-JcSdkCommand.Tests', 'Invoke-JcSdkCommandTrigger.Tests')
+$OrderedTestsUpdate = @()
 $OrderedTestsMain = @('Lock-JcSdkUser.Tests', 'Unlock-JcSdkUser.Tests')
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
 $TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
-# Add "new" tests (Setup Org)
+# Add "New" tests (Setup Org)
 $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $OrderedTestsSetup }
-# Add all tests that are not "new" and not "remove" and not in OrderedTestsSetup and not in OrderedTestsMain and not in OrderedTestsTakeDown
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
+# Add "Set" tests (Setup Org)
+$OrderedTestsUpdate | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Set-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
+# Add tests that are not "Get" or "Remove" (Setup Org)
+$OrderedTestsUpdate | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "Get-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
+# # Add "Get" tests (Setup Org)
 $OrderedTestsMain | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -notlike "New-*" -and $_.BaseName -notlike "Remove-*" -and $_.BaseName -notin $OrderedTestsSetup -and $_.BaseName -notin $OrderedTestsMain -and $_.BaseName -notin $OrderedTestsTakeDown }
-# Add "remove" tests (Cleanup Org)
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Get-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
+# Add "Remove" tests (Cleanup Org)
 $OrderedTestsTakeDown | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
-$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $OrderedTestsTakeDown }
+$PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
 # Run tests
 Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")
 #endregion Run Pester Tests
@@ -236,6 +243,10 @@ If ($moduleName -eq 'JumpCloud.SDK.V1')
 }
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
+    # Remove-JcSdkCustomEmailConfiguration -CustomEmailType:('password_reset_confirmation')
+    # Remove-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id) -Id:((Get-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id)).id)
+    # Remove-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id) -Id:((Get-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id)).id)
+
     # Delete an Active Directory Object
     $Headers = @{
         'Accept'    = 'application/json';
