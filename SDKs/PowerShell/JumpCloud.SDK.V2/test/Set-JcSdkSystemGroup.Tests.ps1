@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystemGroup' {
-    It 'SetExpanded' {
+    It 'SetExpanded' -skip {
         { Set-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id) -Name:($global:PesterTestSystemGroup.Name) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkSystemGroup -Body:($global:PesterTestSystemGroup) -Id:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 

@@ -12,16 +12,16 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkActiveDirectoryAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Body:($global:PesterTestActiveDirectoryAssociation) } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkActiveDirectoryAssociation -Body:($global:PesterTestActiveDirectoryAssociation) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

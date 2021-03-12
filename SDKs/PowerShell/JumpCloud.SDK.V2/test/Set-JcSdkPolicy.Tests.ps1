@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkPolicy' {
-    It 'SetExpanded' {
-        { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) [-TemplateId '<String>'] [-Values '<IPolicyValue[]>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkPolicy -Body:($global:PesterTestPolicy) -Id:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }
 

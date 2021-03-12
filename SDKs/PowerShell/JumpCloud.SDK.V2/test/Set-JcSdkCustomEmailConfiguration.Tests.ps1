@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCustomEmailConfiguration' {
-    It 'SetExpanded' {
-        { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkCustomEmailConfiguration -CustomEmail:($global:PesterTestCustomEmailConfiguration) -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 

@@ -12,16 +12,16 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroupMember' {
-    It 'SetExpanded' {
-        { Set-JcSdkUserGroupMember -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestUser.Id) -Op:('add') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkUserGroupMember -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestUser.Id) -Op:('add') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { Set-JcSdkUserGroupMember -Body:($global:PesterTestUserGroupMember) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkUserGroupMember -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add';}) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkUserGroupMember -Body:($global:PesterTestUserGroupMember) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkUserGroupMember -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

@@ -10,6 +10,7 @@ $SDKs | ForEach-Object {
     $Commands = Get-Command -Module $Module #-Verb Remove # For testing specific commands
     $Commands | ForEach-Object {
         $CommandName = $_.Name
+        Write-Host ("Starting: $CommandName")
         $Type = $_.Noun.Replace($Prefix, '')
         $PesterTestVariable = "`$global:PesterTest$($Type)"
         $PesterTestDefVariable = "@global:PesterDef$($Type)"
@@ -23,6 +24,7 @@ $SDKs | ForEach-Object {
             $ParameterSets = $_.ParameterSets
             $ParameterSets | ForEach-Object {
                 $ParameterSetName = $_.Name
+                Write-Host ("Starting: $CommandName $ParameterSetName")
                 $RequiredParameters = @()
                 $OptionalParameters = @()
                 ($_.Parameters | Sort-Object @{e = 'IsMandatory'; desc = $true }, @{e = 'Name'; desc = $false } | ForEach-Object {
@@ -44,18 +46,69 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters -join ' '
                 $OptionalParameters = $OptionalParameters -join ' '
                 $Skip = $false
-                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s+})")
-                $CurrentTest = $Find.Matches.Groups[2].Value
-                If ($CommandName -like '*SystemGroupMember*' -or $CommandName -like '*SystemGroupAssociation*' -or $CommandName -like '*SystemGroupTraverse*')
+                # Associations
+                If ($CommandName -like '*GroupMember*' -or $CommandName -like '*Association*' -or $CommandName -like '*GroupTraverse*')
                 {
-                    $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
-                    $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestSystem.Id)")
+                    If ($CommandName -like '*SystemGroupMember*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'", "-Id:(`$global:PesterTestSystem.Id)`${1}-Op:('add')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystem.Id; Op = 'add';})")
+
+                    }
+                    ElseIf ($CommandName -like '*SystemGroupAssociation*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<String>'", "-Id:(`$global:PesterTestUserGroup.Id)`${1}-Op:('add') -Type:('user_group')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUserGroup.Id; Op = 'add'; Type = 'user_group';})")
+                    }
+                    ElseIf ($CommandName -like '*SystemGroupTraverse*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
+                    }
+                    ElseIf ($CommandName -like '*UserGroupMember*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'", "-Id:(`$global:PesterTestUser.Id)`${1}-Op:('add')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUser.Id; Op = 'add';})")
+
+                    }
+                    ElseIf ($CommandName -like '*UserGroupAssociation*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<String>'", "-Id:(`$global:PesterTestSystemGroup.Id)`${1}-Op:('add') -Type:('system_group')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystemGroup.Id; Op = 'add'; Type = 'system_group';})")
+                    }
+                    ElseIf ($CommandName -like '*UserGroupTraverse*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
+                    }
+                    ElseIf ($CommandName -in ('Set-JcSdkCommandAssociation', 'Set-JcSdkSoftwareAppAssociation', 'Set-JcSdkPolicyAssociation', 'Set-JcSdkUserAssociation' ))
+                    {
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<String>'", "-Id:(`$global:PesterTestSystem.Id)`${1}-Op:('add')`${2}-Type:('system')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystem.Id; Op = 'add'; Type = 'system';})")
+                    }
+                    Else
+                    {
+                        $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<String>'", "-Id:(`$global:PesterTestUser.Id)`${1}-Op:('add')`${2}-Type:('user')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUser.Id; Op = 'add'; Type = 'user';})")
+                    }
                 }
-                ElseIf ($CommandName -like '*UserGroupMember*' -or $CommandName -like '*UserGroupAssociation*' -or $CommandName -like '*UserGroupTraverse*')
+                # Misc.
+                $RequiredParameters = $RequiredParameters.Replace("-Subject '<String>' -Type '<String>'", "-Subject:(`$global:PesterTestCustomEmailConfiguration.Subject) -Type:(`$global:PesterTestCustomEmailConfiguration.Type)")
+                $RequiredParameters = $RequiredParameters.Replace("-Name '<String>'", "-Name:($($PesterTestVariable).Name)")
+                $RequiredParameters = $RequiredParameters.Replace("-CustomEmail '<ICustomEmail>'", "-CustomEmail:(`$global:PesterTestCustomEmailConfiguration)")
+                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterTestCustomEmailConfiguration.Type)")
+                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
+                $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
+                $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
+                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
                 {
-                    $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
-                    $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:(`$global:PesterTestUser.Id)")
+                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
+                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
                 }
+                # Id replaces
                 $RequiredParameters = $RequiredParameters.Replace("-Id '<String>'", "-Id:($($PesterTestVariable).Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-ActivedirectoryId '<String>'", "-ActivedirectoryId:(`$global:PesterTestActiveDirectory.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-AppleMdmId '<String>'", "-AppleMdmId:(`$global:PesterTestAppleMdm.Id)")
@@ -70,18 +123,7 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-SystemId '<String>'", "-SystemId:(`$global:PesterTestSystem.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-SystemuserId '<String>'", "-SystemuserId:(`$global:PesterTestUser.Id)")
                 $RequiredParameters = $RequiredParameters.Replace("-UserId '<String>'", "-UserId:(`$global:PesterTestUser.Id)")
-                $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterDefCustomEmailConfiguration.Type)")
-                $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
-                $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
-                $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
-                If ($CommandName -ne 'Remove-JcSdkUserSshKey')
-                {
-                    $RequiredParameters = $RequiredParameters.Replace('ExpireUserPassword', 'User')
-                    $RequiredParameters = $RequiredParameters.Replace('UserSshKey', 'User')
-                    $RequiredParameters = $RequiredParameters.Replace('UserMfa', 'User')
-                }
-                # -Op '<String>' -Type '<String>'
-                # $RequiredParameters = $RequiredParameters.Replace("-$($Type)Id '<String>'", "-$($Type)Id:(`$global:PesterTest$($Type).Id)")
+                # Build function with parameters
                 $RequiredFunction = If ($RequiredParameters)
                 {
                     "$($CommandName) $($RequiredParameters)"
@@ -99,6 +141,7 @@ $SDKs | ForEach-Object {
                     $RequiredFunction
                 }
                 $PesterTestTypes = [Ordered]@{
+                    SetAddRemoveShouldNotThrow      = "{ $($RequiredFunction.Replace("add","remove")) } | Should -Not -Throw`n        { $($RequiredFunction) } | Should -Not -Throw"
                     ShouldNotThrow                  = "{ $($RequiredFunction) } | Should -Not -Throw"
                     NewObjectShouldNotBeNullOrEmpty = "$PesterTestVariable = $($CommandName) $PesterTestDefVariable`n        $PesterTestVariable | Should -Not -BeNullOrEmpty"
                     ShouldNotBeNullOrEmpty          = "$($RequiredFunction) | Should -Not -BeNullOrEmpty"
@@ -160,7 +203,7 @@ $SDKs | ForEach-Object {
                         SearchExpanded = $null
                     }
                     Set     = [Ordered]@{
-                        Set                    = $PesterTestTypes.ShouldNotThrow
+                        Set                    = If ($CommandName -in ('Set-JcSdkUserAssociation', 'Set-JcSdkUserGroupAssociation')) { $PesterTestTypes.SetAddRemoveShouldNotThrow }Else { $PesterTestTypes.ShouldNotThrow }
                         SetExpanded            = $null
                         SetViaIdentity         = $null
                         SetViaIdentityExpanded = $null
@@ -192,6 +235,8 @@ $SDKs | ForEach-Object {
                 {
                     Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $ParameterSetName")
                 }
+                $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s+})")
+                $CurrentTest = $Find.Matches.Groups[2].Value
                 $NewTest = $PesterTestFormatTable.$CommandVerb.$ParameterSetName
                 If ([System.String]::IsNullOrEmpty($NewTest))
                 {
@@ -205,6 +250,13 @@ $SDKs | ForEach-Object {
                     If (-not $Skip)
                     {
                         $NewIt = $NewIt.Replace('-skip ', '')
+                    }
+                    Else
+                    {
+                        If ($Find.Matches.Groups[1].Value -notlike '*-skip*')
+                        {
+                            $NewIt = $NewIt.Replace($Find.Matches.Groups[1].Value, $Find.Matches.Groups[1].Value.Replace("'$($ParameterSetName)'", "'$($ParameterSetName)' -skip"))
+                        }
                     }
                     $Content = $Content.Replace($Find.Matches.Value, $NewIt)
                 }

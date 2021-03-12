@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkDuoApplication' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId:($global:PesterTestApplication.Id) -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) } | Should -Not -Throw
+        { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId:($global:PesterTestApplication.Id) -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) [-SecretKey '<String>'] } | Should -Not -Throw
     }
 
     It 'Set' -skip {

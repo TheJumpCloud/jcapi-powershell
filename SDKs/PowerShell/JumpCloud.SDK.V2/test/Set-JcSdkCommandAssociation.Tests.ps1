@@ -12,16 +12,16 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCommandAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkCommandAssociation -CommandId:($global:PesterTestCommand.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkCommandAssociation -CommandId:($global:PesterTestCommand.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') -Type:('system') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { Set-JcSdkCommandAssociation -Body:($global:PesterTestCommandAssociation) -CommandId:($global:PesterTestCommand.Id) } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkCommandAssociation -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; Type = 'system';}) -CommandId:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkCommandAssociation -Body:($global:PesterTestCommandAssociation) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkCommandAssociation -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; Type = 'system';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

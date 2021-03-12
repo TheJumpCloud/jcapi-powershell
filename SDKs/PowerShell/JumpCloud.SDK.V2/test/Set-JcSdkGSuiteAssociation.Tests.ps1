@@ -12,16 +12,16 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkGSuiteAssociation' {
-    It 'SetExpanded' {
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { Set-JcSdkGSuiteAssociation -Body:($global:PesterTestGSuiteAssociation) -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkGSuiteAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { Set-JcSdkGSuiteAssociation -Body:($global:PesterTestGSuiteAssociation) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+        { Set-JcSdkGSuiteAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

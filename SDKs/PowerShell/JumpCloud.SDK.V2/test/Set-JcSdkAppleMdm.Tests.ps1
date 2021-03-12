@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkAppleMdm' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkAppleMdm -Id:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
+        { Set-JcSdkAppleMdm -Id:($global:PesterTestAppleMdm.Id) [-AppleSignedCert '<String>'] [-DefaultSystemGroupId '<String>'] [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions '<IDepSetupAssistantOption[]>'] [-EncryptedDepServerToken '<String>'] [-Name '<String>'] [-WelcomeScreenButton '<String>'] [-WelcomeScreenParagraph '<String>'] [-WelcomeScreenTitle '<String>'] } | Should -Not -Throw
     }
 
     It 'Set' -skip {
