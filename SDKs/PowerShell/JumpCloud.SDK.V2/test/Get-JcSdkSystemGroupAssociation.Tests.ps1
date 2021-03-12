@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemGroupAssociation' {
     It 'Get' {
-        { Get-JcSdkSystemGroupAssociation -GroupId:($global:PesterTestSystemGroup.Id) -Targets:('user') } | Should -Not -Throw
+        { Get-JcSdkSystemGroupAssociation -GroupId:($global:PesterTestSystemGroup.Id) -Targets:('user_group') } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { Get-JcSdkSystemGroupAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
+        { Get-JcSdkSystemGroupAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user_group') } | Should -Not -Throw
     }
 }

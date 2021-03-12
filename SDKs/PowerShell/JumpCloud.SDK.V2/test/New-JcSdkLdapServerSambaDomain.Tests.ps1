@@ -26,6 +26,6 @@ Describe 'New-JcSdkLdapServerSambaDomain' {
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { New-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name '<String>' -Sid '<String>' } | Should -Not -Throw
+        { New-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
     }
 }

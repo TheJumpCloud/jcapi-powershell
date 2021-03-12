@@ -61,6 +61,7 @@ $SDKs | ForEach-Object {
                         $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<String>'", "-Id:(`$global:PesterTestUserGroup.Id)`${1}-Op:('add') -Type:('user_group')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUserGroup.Id; Op = 'add'; Type = 'user_group';})")
+                        $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user_group')")
                     }
                     ElseIf ($CommandName -like '*SystemGroupTraverse*')
                     {
@@ -73,25 +74,28 @@ $SDKs | ForEach-Object {
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUser.Id; Op = 'add';})")
 
                     }
+                    ElseIf ($CommandName -like '*UserGroupTraverse*')
+                    {
+                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
+                    }
                     ElseIf ($CommandName -like '*UserGroupAssociation*')
                     {
                         $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<String>'", "-Id:(`$global:PesterTestSystemGroup.Id)`${1}-Op:('add') -Type:('system_group')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystemGroup.Id; Op = 'add'; Type = 'system_group';})")
+                        $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('system_group')")
                     }
-                    ElseIf ($CommandName -like '*UserGroupTraverse*')
-                    {
-                        $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
-                    }
-                    ElseIf ($CommandName -in ('Set-JcSdkCommandAssociation', 'Set-JcSdkSoftwareAppAssociation', 'Set-JcSdkPolicyAssociation', 'Set-JcSdkUserAssociation' ))
+                    ElseIf ($CommandName -like '*JcSdkCommandAssociation' -or $CommandName -like '*JcSdkSoftwareAppAssociation' -or $CommandName -like '*JcSdkPolicyAssociation' -or $CommandName -like '*JcSdkUserAssociation' )
                     {
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<String>'", "-Id:(`$global:PesterTestSystem.Id)`${1}-Op:('add')`${2}-Type:('system')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystem.Id; Op = 'add'; Type = 'system';})")
+                        $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('system')")
                     }
                     Else
                     {
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<String>'", "-Id:(`$global:PesterTestUser.Id)`${1}-Op:('add')`${2}-Type:('user')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUser.Id; Op = 'add'; Type = 'user';})")
+                        $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
                     }
                 }
                 # Misc.
@@ -100,7 +104,6 @@ $SDKs | ForEach-Object {
                 $RequiredParameters = $RequiredParameters.Replace("-CustomEmail '<ICustomEmail>'", "-CustomEmail:(`$global:PesterTestCustomEmailConfiguration)")
                 $RequiredParameters = $RequiredParameters.Replace("-CustomEmailType '<String>'", "-CustomEmailType:(`$global:PesterTestCustomEmailConfiguration.Type)")
                 $RequiredParameters = $RequiredParameters.Replace("-Triggername '<String>'", "-Triggername:(`$global:PesterTestCommand.trigger)")
-                $RequiredParameters = $RequiredParameters.Replace("-Targets '<String>'", "-Targets:('user')")
                 $RequiredParameters = $RequiredParameters -Replace ("(-Body '<)(.*?)(>')", "-Body:($($PesterTestVariable))")
                 If ($CommandName -ne 'Remove-JcSdkUserSshKey')
                 {

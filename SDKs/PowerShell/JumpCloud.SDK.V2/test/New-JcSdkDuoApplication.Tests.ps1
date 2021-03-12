@@ -26,6 +26,6 @@ Describe 'New-JcSdkDuoApplication' {
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name '<String>' -SecretKey '<String>' } | Should -Not -Throw
+        { New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) -SecretKey '<String>' } | Should -Not -Throw
     }
 }
