@@ -4578,6 +4578,10 @@
         "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037"
       },
       "properties": {
+        "admin": {
+          "description": "Indicates this account has local administrator privileges",
+          "type": "boolean"
+        },
         "collection_time": {
           "type": "string"
         },
@@ -4593,8 +4597,20 @@
         "gid_signed": {
           "type": "string"
         },
+        "managed": {
+          "description": "Indicates this account belongs to a JumpCloud-managed user",
+          "type": "boolean"
+        },
+        "real_user": {
+          "description": "Indicates this account represents an interactive user account vs. a system or daemon account\n",
+          "type": "boolean"
+        },
         "shell": {
           "type": "string"
+        },
+        "suspended": {
+          "description": "Indicates this account is suspended or locked out",
+          "type": "boolean"
         },
         "system_id": {
           "type": "string"
@@ -5445,6 +5461,58 @@
           "type": "string"
         }
       ]
+    },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/enqueueActivationLockDebugCommands": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint triggers collecting information about the device in question. It is not intended for public use.",
+        "operationId": "POST_applemdms-apple_mdm_id-devices-device_id-enqueueActivationLockDebugCommands",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "activationLockAllowedWhileSupervised": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            }
+          },
+          {
+            "$ref": "#/parameters/trait:requestHeaders:creation-source"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content",
+            "schema": {
+              "properties": {},
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Enqueue Activation Lock Debug Commands"
+      }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
       "parameters": [
@@ -10300,7 +10368,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Get all configured Software Applications"
       },
       "post": {
         "description": "This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"displayName\": \"Adobe Reader\",\n  \"settings\": [{\"packageId\": \"adobereader\"}]\n}'\n```",
@@ -10329,7 +10398,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Create a Software Application that will be managed by JumpCloud"
       }
     },
     "/softwareapps/{id}": {
@@ -10570,7 +10640,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Get the status of the provided Software Application"
       },
       "parameters": [
         {
