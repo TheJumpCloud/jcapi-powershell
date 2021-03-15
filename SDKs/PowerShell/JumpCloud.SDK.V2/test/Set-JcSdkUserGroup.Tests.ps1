@@ -16,7 +16,7 @@ Describe 'Set-JcSdkUserGroup' {
         { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) } | Should -Not -Throw
     }
 
-    It 'Set' {
+    It 'Set' -skip {
         { Set-JcSdkUserGroup -Body:($global:PesterTestUserGroup) -Id:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 
