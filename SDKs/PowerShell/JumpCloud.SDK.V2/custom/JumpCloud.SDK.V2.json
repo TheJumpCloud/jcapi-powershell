@@ -5462,58 +5462,6 @@
         }
       ]
     },
-    "/applemdms/{apple_mdm_id}/devices/{device_id}/enqueueActivationLockDebugCommands": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "apple_mdm_id",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "in": "path",
-          "name": "device_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "description": "This endpoint triggers collecting information about the device in question. It is not intended for public use.",
-        "operationId": "POST_applemdms-apple_mdm_id-devices-device_id-enqueueActivationLockDebugCommands",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "properties": {
-                "activationLockAllowedWhileSupervised": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            }
-          },
-          {
-            "$ref": "#/parameters/trait:requestHeaders:creation-source"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "No Content",
-            "schema": {
-              "properties": {},
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Enqueue Activation Lock Debug Commands"
-      }
-    },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
       "parameters": [
         {

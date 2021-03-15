@@ -1701,10 +1701,6 @@ Locks a DEP-enrolled device.
   -d '{}'
 ```
 
-### [Lock-JcSdkPost](Lock-JcSdkPost.md)
-This endpoint triggers collecting information about the device in question.
-It is not intended for public use.
-
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
 
