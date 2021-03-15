@@ -12,12 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkGSuiteAssociation' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        { Set-JcSdkGSuiteAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {
