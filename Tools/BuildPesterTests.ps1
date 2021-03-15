@@ -257,7 +257,6 @@ $SDKs = Get-ChildItem -Path $ModuleFolder
                 {
                     Write-Error ("Unmapped ParameterSetName in PesterTestFormatTable: $($CommandVerb).$($ParameterSetName)")
                 }
-                If ($CommandName -like '*Association*') { $NewTest.Trim() | Out-File -Path 'C:\Users\epanipinto\Documents\GitHub\jcapi-powershell\Tools\temp.ps1' -Append }
                 $Find = $Content | Select-String -Pattern:([regex]"(?smi)(It '$($ParameterSetName)' .*?{\s+)(.*?)(\n\s{4}})")
                 $CurrentTest = $Find.Matches.Groups[2].Value
                 $NewTest = $PesterTestFormatTable.$CommandVerb.$ParameterSetName
