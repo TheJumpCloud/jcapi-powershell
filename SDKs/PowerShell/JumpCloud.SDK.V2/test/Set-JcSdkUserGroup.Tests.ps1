@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroup' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) [-AttributeLdapGroups '<IGraphAttributeLdapGroupsItem[]>'] [-AttributePosixGroups '<IGraphAttributePosixGroupsItem[]>'] [-AttributeRadiusReply '<IGraphAttributeRadiusReplyItem[]>'] [-AttributeSambaEnabled] [-Description '<String>'] [-Email '<String>'] [-MemberQueryFilters '<IFilter[]>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkUserGroup -Body:($global:PesterTestUserGroup) -Id:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 

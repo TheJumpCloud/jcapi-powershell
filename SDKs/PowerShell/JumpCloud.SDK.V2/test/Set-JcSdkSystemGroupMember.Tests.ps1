@@ -12,12 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystemGroupMember' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') [-Attributes '<Hashtable>'] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') } | Should -Not -Throw
     }
 
-    It 'Set' {
-        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add';}) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; }) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

@@ -15,7 +15,7 @@ while (-not $mockingPath)
 
 Describe 'Set-JcSdkSoftwareApp' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) [-DisplayName '<String>'] [-Id1 '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
+        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'Set' {
