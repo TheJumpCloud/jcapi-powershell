@@ -516,20 +516,30 @@ Function Update-SwaggerObject
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
                         # Make x-ms-enum names unique
                         # See if x-ms-enum already exists by name
-                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
+                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName }
                         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
                         {
                             $xMsEnumObjectFilteredId = 0
-                            $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                            $xMsEnumItem = @{
+                                Id   = $xMsEnumObjectFilteredId
+                                Name = $ThisObjectName
+                                Enum = $ThisObject.enum
+                            }
+                            $global:xMsEnumObject += $xMsEnumItem
                         }
                         Else
                         {
                             # See if x-ms-enum already exists by name and value
-                            $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
+                            $xMsEnumObjectByNameValue = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName -and [String]$_.Enum -eq [String]$ThisObject.enum }
                             If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
                             {
                                 $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                                $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
+                                $xMsEnumItem = @{
+                                    Id   = $xMsEnumObjectFilteredId
+                                    Name = $ThisObjectName
+                                    Enum = $ThisObject.enum
+                                }
+                                $global:xMsEnumObject += $xMsEnumItem
                             }
                             Else
                             {
@@ -540,7 +550,7 @@ Function Update-SwaggerObject
                         {
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
-                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
+                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.enum -join ',')")
                     }
                     # Check for when type is object without defined properties
                     If ($AttributePath -like '*.type')
