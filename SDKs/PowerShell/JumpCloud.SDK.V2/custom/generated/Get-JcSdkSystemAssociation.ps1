@@ -88,9 +88,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets2])]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.Targets]
+    [JumpCloud.SDK.V2.Support.Targets2]
     # Targets which a "system" can be associated to.
     ${Targets},
 

@@ -1345,7 +1345,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "type2"
               }
             }
           },
@@ -1377,7 +1377,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "type2"
               }
             }
           },
@@ -1406,7 +1406,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type2",
+                "name": "type3",
                 "values": [
                   {
                     "name": "systems",
@@ -1455,7 +1455,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type3",
+                "name": "type4",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1525,7 +1525,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type3",
+                "name": "type4",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1588,7 +1588,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "type5"
               }
             }
           },
@@ -10707,7 +10707,7 @@
             "required": true,
             "type": "string",
             "x-ms-enum": {
-              "name": "targets"
+              "name": "targets2"
             }
           },
           {
@@ -14662,7 +14662,7 @@
             "required": true,
             "type": "string",
             "x-ms-enum": {
-              "name": "targets"
+              "name": "targets2"
             }
           },
           {
@@ -15390,7 +15390,7 @@
             "required": true,
             "type": "string",
             "x-ms-enum": {
-              "name": "targets2",
+              "name": "targets3",
               "values": [
                 {
                   "name": "active_directory",
@@ -16236,7 +16236,7 @@
             "required": true,
             "type": "string",
             "x-ms-enum": {
-              "name": "targets2",
+              "name": "targets3",
               "values": [
                 {
                   "name": "active_directory",
