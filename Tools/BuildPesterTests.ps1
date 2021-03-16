@@ -3,6 +3,7 @@ $RunPesterTestsFilePath = Join-Path "$PSScriptRoot" "RunPesterTests.ps1" -Resolv
 $RunPesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
 $TestFolderPathAll = "$ModuleFolder/**/test/*.Tests.ps1"
 $SDKs = Get-ChildItem -Path $ModuleFolder
+$SDKs | ForEach-Object {
     $ModuleName = $_.BaseName
     $PesterTestVariableList = @()
     $PesterTestDefVariableList = @()
