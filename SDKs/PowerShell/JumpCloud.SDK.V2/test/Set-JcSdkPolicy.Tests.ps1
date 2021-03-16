@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkPolicy' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) [-TemplateId '<String>'] [-Values '<IPolicyValue[]>'] } | Should -Not -Throw
+        { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) } | Should -Not -Throw
     }
 
     It 'Set' {

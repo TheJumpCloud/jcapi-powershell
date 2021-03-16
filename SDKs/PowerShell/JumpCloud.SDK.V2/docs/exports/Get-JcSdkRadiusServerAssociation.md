@@ -24,12 +24,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/assoc
 
 ### Get (Default)
 ```
-Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 Targets which a "radius_server" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

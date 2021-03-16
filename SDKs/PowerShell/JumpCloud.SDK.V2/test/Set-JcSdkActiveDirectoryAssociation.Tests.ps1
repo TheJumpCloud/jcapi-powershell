@@ -12,12 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkActiveDirectoryAssociation' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {

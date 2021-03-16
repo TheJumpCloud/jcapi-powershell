@@ -18,6 +18,6 @@ Describe 'New-JcSdkRadiusServer' {
     }
 
     It 'Create' -skip {
-        New-JcSdkRadiusServer -Body '<IRadiusserverpost>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkRadiusServer -Body:($global:PesterTestRadiusServer) } | Should -Not -Throw
     }
 }

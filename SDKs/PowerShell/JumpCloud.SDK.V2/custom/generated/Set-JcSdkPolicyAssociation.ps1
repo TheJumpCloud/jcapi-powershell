@@ -56,7 +56,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationPolicy>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <String>: Targets which a "policy" can be associated to.
+  Type <Type1>: Targets which a "policy" can be associated to.
   [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
@@ -128,8 +128,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type1])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.Type1]
     # Targets which a "policy" can be associated to.
     ${Type},
 

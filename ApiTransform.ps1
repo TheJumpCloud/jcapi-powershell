@@ -482,66 +482,76 @@ Function Update-SwaggerObject
                     {
                         If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
                     }
-                    # # Append "x-ms-enum" to "enum" section
-                    # If ($AttributePath -like '*.enum')
-                    # {
-                    #     $xMsEnum = [PSCustomObject]@{
-                    #         name = $ThisObjectName
-                    #         # modelAsString = $true
-                    #     }
-                    #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                    #     If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
-                    #     {
-                    #         $xMsEnumValues = @(
-                    #             $ThisObject.enum | ForEach-Object {
-                    #                 $EnumItem = $_
-                    #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                    #                 [PSCustomObject]@{
-                    #                     name  = $EnumItemName;
-                    #                     value = $EnumItem | ForEach-Object {
-                    #                         If ($_ -match [regex]'(\#|\s)')
-                    #                         {
-                    #                             "'$($_)'"
-                    #                         }
-                    #                         Else
-                    #                         {
-                    #                             $_
-                    #                         };
-                    #                     };
-                    #                 }
-                    #             }
-                    #         )
-                    #         Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
-                    #     }
-                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
-                    #     # Make x-ms-enum names unique
-                    #     # See if x-ms-enum already exists by name
-                    #     $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
-                    #     If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                    #     {
-                    #         $xMsEnumObjectFilteredId = 0
-                    #         $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #     }
-                    #     Else
-                    #     {
-                    #         # See if x-ms-enum already exists by name and value
-                    #         $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
-                    #         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                    #         {
-                    #             $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                    #             $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #         }
-                    #         Else
-                    #         {
-                    #             $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
-                    #         }
-                    #     }
-                    #     If ($xMsEnumObjectFilteredId -gt 0)
-                    #     {
-                    #         $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
-                    #     }
-                    #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
-                    # }
+                    # Append "x-ms-enum" to "enum" section
+                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum')
+                    {
+                        $xMsEnum = [PSCustomObject]@{
+                            name = $ThisObjectName
+                            # modelAsString = $true
+                        }
+                        # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
+                        If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
+                        {
+                            $xMsEnumValues = @(
+                                $ThisObject.enum | ForEach-Object {
+                                    $EnumItem = $_
+                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                                    [PSCustomObject]@{
+                                        name  = $EnumItemName;
+                                        value = $EnumItem | ForEach-Object {
+                                            If ($_ -match [regex]'(\#|\s)')
+                                            {
+                                                "'$($_)'"
+                                            }
+                                            Else
+                                            {
+                                                $_
+                                            };
+                                        };
+                                    }
+                                }
+                            )
+                            Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                        }
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                        # Make x-ms-enum names unique
+                        # See if x-ms-enum already exists by name
+                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName }
+                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                        {
+                            $xMsEnumObjectFilteredId = 0
+                            $xMsEnumItem = @{
+                                Id   = $xMsEnumObjectFilteredId
+                                Name = $ThisObjectName
+                                Enum = $ThisObject.enum
+                            }
+                            $global:xMsEnumObject += $xMsEnumItem
+                        }
+                        Else
+                        {
+                            # See if x-ms-enum already exists by name and value
+                            $xMsEnumObjectByNameValue = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName -and [String]$_.Enum -eq [String]$ThisObject.enum }
+                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                            {
+                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                                $xMsEnumItem = @{
+                                    Id   = $xMsEnumObjectFilteredId
+                                    Name = $ThisObjectName
+                                    Enum = $ThisObject.enum
+                                }
+                                $global:xMsEnumObject += $xMsEnumItem
+                            }
+                            Else
+                            {
+                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                            }
+                        }
+                        If ($xMsEnumObjectFilteredId -gt 0)
+                        {
+                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                        }
+                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.enum -join ',')")
+                    }
                     # Check for when type is object without defined properties
                     If ($AttributePath -like '*.type')
                     {

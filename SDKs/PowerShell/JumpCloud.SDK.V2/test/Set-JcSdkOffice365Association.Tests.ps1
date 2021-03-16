@@ -12,12 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkOffice365Association' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkOffice365Association -Id:($global:PesterTestUser.Id) -Office365Id:($global:PesterTestOffice365.Id) -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkOffice365Association -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
+            { Set-JcSdkOffice365Association -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        { Set-JcSdkOffice365Association -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkOffice365Association -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
+            { Set-JcSdkOffice365Association -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {

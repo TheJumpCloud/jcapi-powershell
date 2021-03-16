@@ -1034,7 +1034,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1061,7 +1064,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1088,7 +1094,20 @@
                 "system",
                 "system_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type1",
+                "values": [
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1115,7 +1134,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1142,7 +1164,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1169,7 +1194,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1196,7 +1224,20 @@
                 "system",
                 "system_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type1",
+                "values": [
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1223,7 +1264,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type"
+              }
             }
           },
           "required": [
@@ -1250,7 +1294,20 @@
                 "system",
                 "system_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type1",
+                "values": [
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1286,7 +1343,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type2"
+              }
             }
           },
           "required": [
@@ -1315,7 +1375,10 @@
                 "user",
                 "user_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type2"
+              }
             }
           },
           "required": [
@@ -1341,7 +1404,16 @@
               "enum": [
                 "system"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type3",
+                "values": [
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1381,7 +1453,44 @@
                 "system",
                 "system_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type4",
+                "values": [
+                  {
+                    "name": "active_directory",
+                    "value": "active_directory"
+                  },
+                  {
+                    "name": "application",
+                    "value": "application"
+                  },
+                  {
+                    "name": "g_suite",
+                    "value": "g_suite"
+                  },
+                  {
+                    "name": "ldap_server",
+                    "value": "ldap_server"
+                  },
+                  {
+                    "name": "office_365",
+                    "value": "office_365"
+                  },
+                  {
+                    "name": "radius_server",
+                    "value": "radius_server"
+                  },
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1414,7 +1523,44 @@
                 "system",
                 "system_group"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type4",
+                "values": [
+                  {
+                    "name": "active_directory",
+                    "value": "active_directory"
+                  },
+                  {
+                    "name": "application",
+                    "value": "application"
+                  },
+                  {
+                    "name": "g_suite",
+                    "value": "g_suite"
+                  },
+                  {
+                    "name": "ldap_server",
+                    "value": "ldap_server"
+                  },
+                  {
+                    "name": "office_365",
+                    "value": "office_365"
+                  },
+                  {
+                    "name": "radius_server",
+                    "value": "radius_server"
+                  },
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
             }
           },
           "required": [
@@ -1440,7 +1586,10 @@
               "enum": [
                 "user"
               ],
-              "type": "string"
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type5"
+              }
             }
           },
           "required": [
@@ -4542,6 +4691,10 @@
         "uuid": "FFFFEEEE-DDDD-CCCC-BBBB-AAAA00000037"
       },
       "properties": {
+        "admin": {
+          "description": "Indicates this account has local administrator privileges",
+          "type": "boolean"
+        },
         "collection_time": {
           "type": "string"
         },
@@ -4557,8 +4710,20 @@
         "gid_signed": {
           "type": "string"
         },
+        "managed": {
+          "description": "Indicates this account belongs to a JumpCloud-managed user",
+          "type": "boolean"
+        },
+        "real_user": {
+          "description": "Indicates this account represents an interactive user account vs. a system or daemon account\n",
+          "type": "boolean"
+        },
         "shell": {
           "type": "string"
+        },
+        "suspended": {
+          "description": "Indicates this account is suspended or locked out",
+          "type": "boolean"
         },
         "system_id": {
           "type": "string"
@@ -5081,7 +5246,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -5742,7 +5910,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -6237,7 +6408,20 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets1",
+              "values": [
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
+            }
           },
           {
             "default": 10,
@@ -6948,7 +7132,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -7837,7 +8024,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -8301,7 +8491,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -8959,7 +9152,20 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets1",
+              "values": [
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
+            }
           },
           {
             "default": 10,
@@ -9690,7 +9896,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets"
+            }
           },
           {
             "default": 10,
@@ -9946,7 +10155,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Get all configured Software Applications"
       },
       "post": {
         "description": "This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"displayName\": \"Adobe Reader\",\n  \"settings\": [{\"packageId\": \"adobereader\"}]\n}'\n```",
@@ -9972,7 +10182,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Create a Software Application that will be managed by JumpCloud"
       }
     },
     "/softwareapps/{id}": {
@@ -10061,7 +10272,20 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets1",
+              "values": [
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
+            }
           },
           {
             "default": 10,
@@ -10193,7 +10417,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "summary": "Get the status of the provided Software Application"
       },
       "parameters": [
         {
@@ -10480,7 +10705,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets2"
+            }
           },
           {
             "default": 10,
@@ -14432,7 +14660,10 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets2"
+            }
           },
           {
             "default": 10,
@@ -15157,7 +15388,44 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets3",
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
+            }
           },
           {
             "default": 10,
@@ -15966,7 +16234,44 @@
             "in": "query",
             "name": "targets",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "targets3",
+              "values": [
+                {
+                  "name": "active_directory",
+                  "value": "active_directory"
+                },
+                {
+                  "name": "application",
+                  "value": "application"
+                },
+                {
+                  "name": "g_suite",
+                  "value": "g_suite"
+                },
+                {
+                  "name": "ldap_server",
+                  "value": "ldap_server"
+                },
+                {
+                  "name": "office_365",
+                  "value": "office_365"
+                },
+                {
+                  "name": "radius_server",
+                  "value": "radius_server"
+                },
+                {
+                  "name": "systems",
+                  "value": "system"
+                },
+                {
+                  "name": "systems_group",
+                  "value": "system_group"
+                }
+              ]
+            }
           },
           {
             "default": 10,

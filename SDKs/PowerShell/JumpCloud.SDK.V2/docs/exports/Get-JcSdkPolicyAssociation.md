@@ -24,12 +24,12 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
 
 ### Get (Default)
 ```
-Get-JcSdkPolicyAssociation -PolicyId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkPolicyAssociation -PolicyId <String> -Targets <Targets1> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,7 +98,7 @@ Accept wildcard characters: False
 Targets which a "policy" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets1
 Parameter Sets: (All)
 Aliases:
 

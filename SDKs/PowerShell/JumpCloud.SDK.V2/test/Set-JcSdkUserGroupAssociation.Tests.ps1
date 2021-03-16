@@ -12,13 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroupAssociation' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkUserGroupAssociation -GroupId:($global:PesterTestUserGroup.Id) -Id:($global:PesterTestSystemGroup.Id) -Op:('add') -Type:('system_group') [-Attributes '<Hashtable>'] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        { Set-JcSdkUserGroupAssociation -Body:(@{Id = $global:PesterTestSystemGroup.Id; Op = 'remove'; Type = 'system_group';}) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
-        { Set-JcSdkUserGroupAssociation -Body:(@{Id = $global:PesterTestSystemGroup.Id; Op = 'add'; Type = 'system_group';}) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {

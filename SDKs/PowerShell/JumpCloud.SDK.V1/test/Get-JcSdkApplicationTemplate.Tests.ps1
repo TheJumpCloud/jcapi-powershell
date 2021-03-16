@@ -13,14 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkApplicationTemplate' {
     It 'List' {
-        Get-JcSdkApplicationTemplate | Should -Not -BeNullOrEmpty
+        { Get-JcSdkApplicationTemplate } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkApplicationTemplate -Id:($global:PesterTestApplicationTemplate.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkApplicationTemplate -Id:($global:PesterTestApplicationTemplate.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        Get-JcSdkApplicationTemplate -InputObject '<IJumpCloudApIsIdentity>' | Should -Not -BeNullOrEmpty
+        { Get-JcSdkApplicationTemplate -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

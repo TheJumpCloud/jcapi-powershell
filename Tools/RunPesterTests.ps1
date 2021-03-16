@@ -37,7 +37,7 @@ $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Import Modules
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
-    Import-Module -Name $modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
+    Import-Module -Name $modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1') -Force
 }
 #endregion Import Modules
 #region Define Objects
@@ -110,6 +110,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestLdap = $global:PesterTestDirectories | Where-Object { $_.type -eq "ldap_server" } | Select-Object -First 1
     # Get a Policy Template
     $global:PesterTestPolicyTemplate = Get-JcSdkPolicyTemplate | Select-Object -First 1
+    # Create an ActiveDirectory
+    $global:PesterDefActiveDirectory = @{
+        'domain' = "DC=ADTEST{0};DC=ORG" -f [string]( -join ((65..90) + (97..122) | Get-Random -Count 6 | ForEach-Object { [char]$_ }));
+    }
+    # TODO: Make this endpoint public
+    $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey; }) -Body:($global:PesterDefActiveDirectory | ConvertTo-Json) -ContentType:('application/json') -UseBasicParsing
     # Create a Authentication Policy
     $global:PesterDefAuthenticationPolicy = @{
         Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
@@ -134,6 +140,13 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
         Description = 'PesterIpList'
         Ips         = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
         Name        = "Pester IP Test List $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
+    # Create a LdapServer
+    $global:PesterDefLdapServer = @{
+        Id                           = $PesterTestLdapServer.Id
+        Name                         = "jumpcloud"
+        UserLockoutAction            = "remove"
+        UserPasswordExpirationAction = "remove"
     }
     # Create a Office365 Translation Rule
     $global:PesterDefOffice365TranslationRule = @{
@@ -168,16 +181,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterDefSystemGroup = @{
         Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
-    # Create an Active Directory Object
-    # TODO: Make this endpoint public
-    $Headers = @{
-        'Accept'    = 'application/json';
-        'x-api-key' = $env:JCApiKey;
-    }
-    $Form = @{
-        'domain' = "DC=ADTEST{0};DC=ORG" -f [string]( -join ((65..90) + (97..122) | Get-Random -Count 6 | ForEach-Object { [char]$_ }));
-    } | ConvertTo-Json
-    $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers $Headers -Body $Form -ContentType 'application/json' -UseBasicParsing
 }
 #endregion Define Objects
 
@@ -198,7 +201,7 @@ $OrderedTestsSetup = @('New-JcSdkUserGroup.Tests', 'New-JcSdkAuthenticationPolic
 $OrderedTestsUpdate = @()
 $OrderedTestsMain = @('Lock-JcSdkUser.Tests', 'Unlock-JcSdkUser.Tests')
 $OrderedTestsTakeDown = @('Remove-JcSdkUserSshKey.Tests', 'Remove-JcSdkUser.Tests')
-$TestFiles = Get-ChildItem -Path:($moduleTestFolder) | Where-Object { $_.BaseName -like "*-JcSdk$($Filter).Tests*" }
+$TestFiles = Get-ChildItem -Path:($moduleTestFolder) -Recurse | Where-Object { $_.BaseName -like "*$($Filter).Tests*" }
 # Add "New" tests (Setup Org)
 $OrderedTestsSetup | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "New-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
@@ -243,15 +246,10 @@ If ($moduleName -eq 'JumpCloud.SDK.V1')
 }
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
+    # Delete a ActiveDirectory
+    Invoke-WebRequest -Method 'DELETE' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey }) -ContentType 'application/json' -UseBasicParsing
     # Remove-JcSdkCustomEmailConfiguration -CustomEmailType:('password_reset_confirmation')
     # Remove-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id) -Id:((Get-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id)).id)
     # Remove-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id) -Id:((Get-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id)).id)
-
-    # Delete an Active Directory Object
-    $Headers = @{
-        'Accept'    = 'application/json';
-        'x-api-key' = $env:JCApiKey
-    }
-    Invoke-WebRequest -Method 'DELETE' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers $Headers -ContentType 'application/json' -UseBasicParsing
 }
 #endregion Clean Up

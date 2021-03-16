@@ -18,6 +18,6 @@ Describe 'New-JcSdkUser' {
     }
 
     It 'Create' -skip {
-        New-JcSdkUser -Body '<ISystemuserputpost>' | Should -Not -BeNullOrEmpty
+        { New-JcSdkUser -Body:($global:PesterTestUser) } | Should -Not -Throw
     }
 }

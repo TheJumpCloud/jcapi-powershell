@@ -29,7 +29,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkOffice365Association -Office365Id <String> -Id <String> -Op <String> -Type <String>
+Set-JcSdkOffice365Association -Office365Id <String> -Id <String> -Op <String> -Type <Type>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -47,7 +47,7 @@ Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Body <IGrap
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -198,7 +198,7 @@ Accept wildcard characters: False
 Targets which a "office_365" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Type
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -265,7 +265,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationOffice365>: GraphOperation (Office365)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: Targets which a "office_365" can be associated to.
+  - `Type <Type>`: Targets which a "office_365" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
