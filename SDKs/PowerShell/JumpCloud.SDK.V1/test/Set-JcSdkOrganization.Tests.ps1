@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkOrganization' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) [-Settings '<IOrganizationsettingsput>'] } | Should -Not -Throw
+        { Set-JcSdkOrganization -Id:($global:PesterTestOrganization.Id) } | Should -Not -Throw
     }
 
     It 'Set' {

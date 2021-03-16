@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Reset-JcSdkUserMfa' {
     It 'ResetExpanded' -skip {
-        { Reset-JcSdkUserMfa -Id:($global:PesterTestUserMfa.Id) [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Id:($global:PesterTestUser.Id) [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
     }
 
     It 'Reset' -skip {
-        { Reset-JcSdkUserMfa -Body:($global:PesterTestUser) -Id:($global:PesterTestUserMfa.Id) } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'ResetViaIdentity' -skip {

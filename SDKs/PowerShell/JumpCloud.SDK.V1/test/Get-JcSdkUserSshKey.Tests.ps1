@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkUserSshKey' {
     It 'Get' {
-    	{ Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
+        { Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

@@ -17,7 +17,7 @@ Describe 'Set-JcSdkSystemGroupMember' {
     }
 
     It 'Set' -skip {
-        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; }) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add';}) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

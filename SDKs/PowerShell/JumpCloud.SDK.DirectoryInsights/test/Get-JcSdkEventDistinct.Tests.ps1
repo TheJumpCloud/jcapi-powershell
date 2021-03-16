@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkEventDistinct' {
-    It 'GetExpanded' -skip {
-        { Get-JcSdkEventDistinct -Service '<String[]>' -StartTime '<DateTime>' [-EndTime '<DateTime>'] [-Field '<String>'] [-SearchTermAnd '<Hashtable>'] [-SearchTermOr '<Hashtable>'] } | Should -Not -Throw
+    It 'GetExpanded' {
+        { Get-JcSdkEventDistinct -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw
     }
 
-    It 'Get' -skip {
-        { Get-JcSdkEventDistinct -Body:($global:PesterTestEventDistinct) } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkEventDistinct -Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime();}) } | Should -Not -Throw
     }
 }
