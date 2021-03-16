@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Import-JcSdkWorkday' {
     It 'Import' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Import-JcSdkWorkday -Body:($global:PesterTestWorkday) -WorkdayId '<String>' } | Should -Not -Throw
     }
 
     It 'ImportViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Import-JcSdkWorkday -Body:($global:PesterTestWorkday) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

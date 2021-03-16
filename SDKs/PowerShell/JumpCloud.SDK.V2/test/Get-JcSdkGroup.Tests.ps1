@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkGroup' {
     It 'List' {
-        Get-JcSdkGroup | Should -Not -BeNullOrEmpty
+        { Get-JcSdkGroup } | Should -Not -Throw
     }
 }

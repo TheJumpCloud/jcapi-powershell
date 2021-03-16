@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Stop-JcSdkSystem' {
     It 'Stop' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Stop-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'StopViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Stop-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

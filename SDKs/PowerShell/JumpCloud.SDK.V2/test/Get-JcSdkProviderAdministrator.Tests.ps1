@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkProviderAdministrator' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkProviderAdministrator -ProviderId '<String>' } | Should -Not -Throw
     }
 }

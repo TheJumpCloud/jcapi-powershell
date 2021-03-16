@@ -13,37 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkSystemGroupMember' {
     It 'SetExpanded' {
-        { Set-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.id) -Id $($global:pesterTestSystem.id) -Op 'add' } | Should -Not -Throw
-        # check that the user group member is in the group
-        Get-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.Id) | Should -Not -BeNullOrEmpty
-        { Set-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.id) -Id $($global:pesterTestSystem.id) -Op 'remove' } | Should -Not -Throw
-        # check that the user was removed from the group
-        $toId = Get-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.Id)
-        $toId.ToId | Should -Not -Contain $($global:pesterTestSystem.Id)
+        { Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') } | Should -Not -Throw
     }
 
-    It 'Set' {
-        $body = @{
-            Id         = $global:pesterTestSystem.Id;
-            Op         = 'add';
-            Type       = 'system';
-            Attributes = @{};
-        }
-        { Set-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.id) -Body $body } | Should -Not -Throw
-        # check that the user group member is in the group
-        Get-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.Id) | Should -Not -BeNullOrEmpty
-        $body.Op = 'remove'
-        { Set-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.id) -Body $body } | Should -Not -Throw
-        # check that the user was removed from the group
-        $toId = Get-JcSdkSystemGroupMember -GroupId $($global:PesterTestSystemGroup.Id)
-        $toId.ToId | Should -Not -Contain $($global:pesterTestSystem.Id)
+    It 'Set' -skip {
+        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add';}) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add';}) -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemGroupMember -Id:($global:PesterTestSystem.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') [-Attributes '<Hashtable>'] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }

@@ -25,12 +25,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/associati
 
 ### Get (Default)
 ```
-Get-JcSdkCommandAssociation -CommandId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkCommandAssociation -CommandId <String> -Targets <Targets1> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "command" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets1
 Parameter Sets: (All)
 Aliases:
 

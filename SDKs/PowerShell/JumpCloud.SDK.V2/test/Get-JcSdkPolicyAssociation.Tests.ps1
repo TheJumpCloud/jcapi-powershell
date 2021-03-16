@@ -12,19 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkPolicyAssociation' {
-    BeforeAll {
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op add -type system
+    It 'Get' {
+        { Get-JcSdkPolicyAssociation -PolicyId:($global:PesterTestPolicy.Id) -Targets:('system') } | Should -Not -Throw
     }
-    AfterAll {
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-        Set-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -Id $($global:PesterTestSystem.id) -op remove -type system
-    }
-    It 'List' {
-        Get-JcSdkPolicyAssociation -PolicyId $($global:PesterTestWindowsPolicy.Id) -targets system | Should -Not -BeNullOrEmpty
-        Get-JcSdkPolicyAssociation -PolicyId $($global:PesterTestLinuxPolicy.Id) -targets system | Should -Not -BeNullOrEmpty
-        Get-JcSdkPolicyAssociation -PolicyId $($global:PesterTestDarwinPolicy.Id) -targets system | Should -Not -BeNullOrEmpty
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkPolicyAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('system') } | Should -Not -Throw
     }
 }

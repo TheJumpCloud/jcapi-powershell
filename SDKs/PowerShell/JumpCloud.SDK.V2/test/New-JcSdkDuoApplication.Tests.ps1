@@ -12,20 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkDuoApplication' {
-    # TODO: Set up DUO in Pester Orgs
     It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $global:PesterTestDuoApplication = New-JcSdkDuoApplication @global:PesterDefDuoApplication
+        $global:PesterTestDuoApplication | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkDuoApplication -AccountId '<String>' -Body:($global:PesterTestDuoApplication) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkDuoApplication -Body:($global:PesterTestDuoApplication) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
+        { New-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) -SecretKey '<String>' } | Should -Not -Throw
     }
 }

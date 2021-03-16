@@ -13,12 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkEventInterval' {
     It 'GetExpanded' -skip {
-        # TODO: documentation needs updating
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkEventInterval -IntervalUnit '<String>' -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        # TODO: documentation needs updating
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkEventInterval -Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime();}) } | Should -Not -Throw
     }
 }

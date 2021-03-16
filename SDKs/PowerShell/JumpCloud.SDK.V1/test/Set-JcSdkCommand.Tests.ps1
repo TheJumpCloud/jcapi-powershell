@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkCommand' {
     It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCommand -Command '<String>' -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkCommand -Body:($global:PesterTestCommand) -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCommand -Body:($global:PesterTestCommand) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCommand -Command '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-CommandRunners '<String[]>'] [-CommandType '<String>'] [-Files '<String[]>'] [-LaunchType '<String>'] [-ListensTo '<String>'] [-Name '<String>'] [-Organization '<String>'] [-Schedule '<String>'] [-ScheduleRepeatType '<String>'] [-Shell '<String>'] [-Sudo] [-Systems '<String[]>'] [-Timeout '<String>'] [-Trigger '<String>'] [-User '<String>'] } | Should -Not -Throw
     }
 }

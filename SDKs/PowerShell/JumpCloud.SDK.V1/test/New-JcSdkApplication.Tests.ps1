@@ -1,5 +1,3 @@
-# TODO: Figure out how to configure an Application from the SDK
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -15,10 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkApplication' {
     It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $global:PesterTestApplication = New-JcSdkApplication @global:PesterDefApplication
+        $global:PesterTestApplication | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkApplication -Body:($global:PesterTestApplication) } | Should -Not -Throw
     }
 }

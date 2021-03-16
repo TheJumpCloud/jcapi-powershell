@@ -1,13 +1,11 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkApplicationTemplate.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
@@ -15,16 +13,14 @@ while (-not $mockingPath)
 
 Describe 'Get-JcSdkApplicationTemplate' {
     It 'List' {
-        Get-JcSdkApplicationTemplate | Should -Not -BeNullOrEmpty
+        { Get-JcSdkApplicationTemplate } | Should -Not -Throw
     }
 
-    It 'Get' -Skip {
-        $ListResults = Get-JcSdkApplicationTemplate # Need to pull from global
-
-        Get-JcSdkApplicationTemplate -Id:($ListResults[0].Id) | Should -Not -BeNullOrEmpty
+    It 'Get' {
+        { Get-JcSdkApplicationTemplate -Id:($global:PesterTestApplicationTemplate.Id) } | Should -Not -Throw
     }
 
-    It 'GetViaIdentity' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkApplicationTemplate -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

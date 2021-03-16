@@ -25,12 +25,12 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirec
 
 ### Get (Default)
 ```
-Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String>
+Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets>
  [<CommonParameters>]
 ```
 
@@ -101,7 +101,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

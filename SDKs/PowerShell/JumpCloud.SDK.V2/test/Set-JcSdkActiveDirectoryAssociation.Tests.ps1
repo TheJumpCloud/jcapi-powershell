@@ -13,31 +13,26 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkActiveDirectoryAssociation' {
     It 'SetExpanded' {
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'add' -Type 'user' } | Should -Not -Throw
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'add' -Type 'user_group' } | Should -Not -Throw
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUser.Id) -Op 'remove' -Type 'user' } | Should -Not -Throw
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Id $($global:PesterTestUserGroup.Id) -Op 'remove' -Type 'user_group' } | Should -Not -Throw
-    }
-    It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestUser.Id
-            Op   = 'add'
-            Type = 'user'
+        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
         }
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Body $PesterDefAssociation } | Should -Not -Throw
-        $PesterDefAssociation.Type = "user_group"
-        $PesterDefAssociation.Id = $global:PesterTestUserGroup.Id
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Body $PesterDefAssociation } | Should -Not -Throw
-        $PesterDefAssociation.Op = "remove"
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Body $PesterDefAssociation } | Should -Not -Throw
-        $PesterDefAssociation.Type = "user"
-        $PesterDefAssociation.Id = $global:PesterTestUser.Id
-        { Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $($global:PesterTestActiveDirectory.Id) -Body $PesterDefAssociation } | Should -Not -Throw
     }
+
+    It 'Set' {
+        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
+        }
+    }
+
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
+
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkActiveDirectoryAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

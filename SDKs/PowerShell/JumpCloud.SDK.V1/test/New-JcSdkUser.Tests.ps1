@@ -1,27 +1,23 @@
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
-if (-Not (Test-Path -Path $loadEnvPath))
-{
+if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
 }
 . ($loadEnvPath)
 $TestRecordingFile = Join-Path $PSScriptRoot 'New-JcSdkUser.Recording.json'
 $currentPath = $PSScriptRoot
-while (-not $mockingPath)
-{
+while(-not $mockingPath) {
     $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
     $currentPath = Split-Path -Path $currentPath -Parent
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-$global:PesterTestUserName = 'PesterTestUser'
-$global:PesterTestUserEmail = 'PesterTest@PesterTest.com'
 Describe 'New-JcSdkUser' {
-    It 'CreateExpanded' -Skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'Create' {
+    It 'CreateExpanded' {
         $global:PesterTestUser = New-JcSdkUser @global:PesterDefUser
         $global:PesterTestUser | Should -Not -BeNullOrEmpty
+    }
+
+    It 'Create' -skip {
+        { New-JcSdkUser -Body:($global:PesterTestUser) } | Should -Not -Throw
     }
 }

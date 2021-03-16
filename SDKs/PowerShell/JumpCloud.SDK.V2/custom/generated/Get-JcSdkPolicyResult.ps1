@@ -64,7 +64,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Get-JcSdkPolicyResult
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult])]
-    [CmdletBinding(DefaultParameterSetName='List1', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -86,7 +86,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${PolicyId},
 
     [Parameter(ParameterSetName='List')]
-    [Parameter(ParameterSetName='List1')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields included in the returned records.
@@ -94,7 +93,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Fields},
 
     [Parameter(ParameterSetName='List')]
-    [Parameter(ParameterSetName='List1')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
@@ -108,7 +106,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Filter},
 
     [Parameter(ParameterSetName='List')]
-    [Parameter(ParameterSetName='List1')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.

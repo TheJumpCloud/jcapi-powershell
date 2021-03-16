@@ -13,27 +13,26 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkGSuiteAssociation' {
     It 'SetExpanded' {
-        { Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user') } | Should -Not -Throw
-        { Set-JcSdkGSuiteAssociation -GsuiteId $($global:PesterTestGSuite.Id) -Id:($global:PesterTestUser.Id) -Op:('remove') -Type:('user') } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        $PesterDefAssociation = @{
-            Id         = $global:PesterTestUser.Id
-            Op         = 'add'
-            Type       = 'user'
-            Attributes = @{}
+        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
+            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
         }
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGSuite.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
-        $PesterDefAssociation.Op = 'remove'
-        { Set-JcSdkGSuiteAssociation -GsuiteId:($global:PesterTestGSuite.Id) -Body:($PesterDefAssociation) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkGSuiteAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkGSuiteAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

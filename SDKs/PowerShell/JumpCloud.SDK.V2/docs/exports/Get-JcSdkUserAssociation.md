@@ -26,12 +26,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/associations?tar
 
 ### Get (Default)
 ```
-Get-JcSdkUserAssociation -UserId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkUserAssociation -UserId <String> -Targets <Targets3> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets3> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -87,7 +87,7 @@ Accept wildcard characters: False
 Targets which a "user" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets3
 Parameter Sets: (All)
 Aliases:
 

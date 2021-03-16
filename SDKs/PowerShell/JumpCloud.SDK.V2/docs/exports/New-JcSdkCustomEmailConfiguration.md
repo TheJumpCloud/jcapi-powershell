@@ -21,7 +21,7 @@ New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-Body <Strin
 
 ### Create
 ```
-New-JcSdkCustomEmailConfiguration -BodyObject <ICustomEmail> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCustomEmailConfiguration -CustomEmail <ICustomEmail> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,22 +60,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -BodyObject
-Custom email content created by the admin user to personalize emails sent to their system users.
-To construct, see NOTES section for BODYOBJECT properties and create a hash table.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.ICustomEmail
-Parameter Sets: Create
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
 ### -Button
 .
 
@@ -88,6 +72,22 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
+To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.ICustomEmail
+Parameter Sets: Create
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -217,7 +217,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODYOBJECT <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
+CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
   - `Type <String>`: CustomEmailType
   - `[Body <String>]`: 

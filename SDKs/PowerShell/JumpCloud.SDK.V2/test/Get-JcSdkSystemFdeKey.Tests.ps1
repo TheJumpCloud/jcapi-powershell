@@ -13,11 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkSystemFdeKey' {
     It 'Get' -skip {
-        # Need to configure system in test env for test to pass
-        Get-JcSdkSystemFdeKey -SystemId:($global:PesterTestSystem.Id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkSystemFdeKey -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkSystemFdeKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

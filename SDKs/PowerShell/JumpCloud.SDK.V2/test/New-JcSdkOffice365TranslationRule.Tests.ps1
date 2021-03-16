@@ -12,19 +12,20 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkOffice365TranslationRule' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-    It 'Create' {
-        $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule -Office365Id $($global:PesterTestOffice365.Id) -BuiltIn user_street_address
+    It 'CreateExpanded' {
+        $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule @global:PesterDefOffice365TranslationRule
         $global:PesterTestOffice365TranslationRule | Should -Not -BeNullOrEmpty
     }
 
-    It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Create' -skip {
+        { New-JcSdkOffice365TranslationRule -Body:($global:PesterTestOffice365TranslationRule) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkOffice365TranslationRule -Body:($global:PesterTestOffice365TranslationRule) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
+        { New-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] } | Should -Not -Throw
     }
 }

@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkUserSshKey' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Delete' {
+        { Remove-JcSdkUserSshKey -Id:($global:PesterTestUserSshKey.Id) -SystemuserId:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

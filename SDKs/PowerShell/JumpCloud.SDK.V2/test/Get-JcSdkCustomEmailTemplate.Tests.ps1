@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkCustomEmailTemplate' {
     It 'List' {
-        Get-JcSdkCustomEmailTemplate | Should -Not -BeNullOrEmpty
+        { Get-JcSdkCustomEmailTemplate } | Should -Not -Throw
     }
 }

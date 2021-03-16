@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Grant-JcSdkWorkday' {
     It 'AuthorizeExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Grant-JcSdkWorkday -WorkdayId '<String>' [-BasicPassword '<String>'] [-BasicUsername '<String>'] [-OauthCode '<String>'] } | Should -Not -Throw
     }
 
     It 'Authorize' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Grant-JcSdkWorkday -Body:($global:PesterTestWorkday) -WorkdayId '<String>' } | Should -Not -Throw
     }
 
     It 'AuthorizeViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Grant-JcSdkWorkday -Body:($global:PesterTestWorkday) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'AuthorizeViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Grant-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' [-BasicPassword '<String>'] [-BasicUsername '<String>'] [-OauthCode '<String>'] } | Should -Not -Throw
     }
 }

@@ -13,14 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkAuthenticationPolicy' {
     It 'List' {
-        Get-JcSdkAuthenticationPolicy | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAuthenticationPolicy } | Should -Not -Throw
     }
 
     It 'Get' {
-        Get-JcSdkAuthenticationPolicy -id $($global:PesterTestAuthenticationPolicy.id) | Should -Not -BeNullOrEmpty
+        { Get-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

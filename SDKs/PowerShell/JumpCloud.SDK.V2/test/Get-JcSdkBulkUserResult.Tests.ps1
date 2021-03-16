@@ -13,11 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkBulkUserResult' {
     It 'Get' -skip {
-        #TODO: manual setup work to first add a bulk set of users
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkBulkUserResult -JobId '<String>' } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkBulkUserResult -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

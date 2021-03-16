@@ -84,8 +84,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(Mandatory)]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets1])]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String]
+    [JumpCloud.SDK.V2.Support.Targets1]
     # Targets which a "policy" can be associated to.
     ${Targets},
 

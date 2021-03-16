@@ -1,5 +1,3 @@
-# TODO: Configure New-JcSdkCommand test to upload a simple text file
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -15,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkCommandFile' {
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCommandFile -Id:($global:PesterTestCommandFile.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCommandFile -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

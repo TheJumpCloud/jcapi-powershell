@@ -12,29 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemTraverseCommand' {
-    BeforeAll{
-        # Associate User > System
-        Set-JCSdkSystemAssociation -SystemId:($global:PesterTestSystem.Id) -Id:($global:PesterTestCommand.Id) -Op:('add') -Type:("command")
-    }
-
-    AfterAll{
-        # Remove Associations
-        Set-JCSdkSystemAssociation -SystemId:($global:PesterTestSystem.Id) -Id:($global:PesterTestCommand.Id) -Op:('remove') -Type:("command")
-    }
-
     It 'Get' {
-        $AssociationTest = JumpCloud.SDK.V2\Get-JcSdkSystemTraverseCommand -SystemId:($global:PesterTestSystem.Id)
-        If ([System.String]::IsNullOrEmpty($AssociationTest))
-        {
-            $AssociationTest | Should -Not -BeNullOrEmpty
-        }
-        else
-        {
-            # Test that an association exists
-            $AssociationTest.Count | Should -BeGreaterOrEqual 1
-        }
+        { Get-JcSdkSystemTraverseCommand -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
+
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkSystemTraverseCommand -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

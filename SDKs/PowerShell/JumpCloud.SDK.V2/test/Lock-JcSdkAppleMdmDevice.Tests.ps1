@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Lock-JcSdkAppleMdmDevice' {
     It 'LockExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Lock-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' -Pin '<String>' } | Should -Not -Throw
     }
 
     It 'Lock' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'LockViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Lock-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -Body:($global:PesterTestAppleMdmDevice) -DeviceId '<String>' } | Should -Not -Throw
     }
 
     It 'LockViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Lock-JcSdkAppleMdmDevice -Body:($global:PesterTestAppleMdmDevice) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
+    }
+
+    It 'LockViaIdentityExpanded' -skip {
+        { Lock-JcSdkAppleMdmDevice -InputObject '<IJumpCloudApIsIdentity>' -Pin '<String>' } | Should -Not -Throw
     }
 }

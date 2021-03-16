@@ -12,17 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSoftwareAppAssociation' {
-    BeforeAll {
-        Set-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Id $($global:PesterTestSystem.Id) -Op 'add' -Type 'system'
-    }
-    AfterAll {
-        Set-JcSdkSoftwareAppAssociation -SoftwareAppId $($global:PesterTestSoftwareApp.Id) -Id $($global:PesterTestSystem.Id) -Op 'remove' -Type 'system'
-    }
-    It 'Get' -skip {
-        Get-JcSdkSoftwareAppAssociation -SoftwareAppId ($global:PesterTestSoftwareApp.id) -Targets system | Should -Not -BeNullOrEmpty
+    It 'Get' {
+        { Get-JcSdkSoftwareAppAssociation -SoftwareAppId:($global:PesterTestSoftwareApp.Id) -Targets:('system') } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkSoftwareAppAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('system') } | Should -Not -Throw
     }
 }

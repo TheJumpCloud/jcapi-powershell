@@ -13,14 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkCustomEmailConfiguration' {
     It 'Get' {
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_reset_confirmation | Should -Not -BeNullOrEmpty
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration_warning| Should -Not -BeNullOrEmpty
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType lockout_notice_user | Should -Not -BeNullOrEmpty
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType password_expiration | Should -Not -BeNullOrEmpty
-        Get-JcSdkCustomEmailConfiguration -CustomEmailType user_change_password | Should -Not -BeNullOrEmpty
+        { Get-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

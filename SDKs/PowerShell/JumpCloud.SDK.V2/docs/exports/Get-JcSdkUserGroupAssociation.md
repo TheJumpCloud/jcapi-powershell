@@ -25,12 +25,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associatio
 
 ### Get (Default)
 ```
-Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <Targets3> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets3> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "user_group" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets3
 Parameter Sets: (All)
 Aliases:
 

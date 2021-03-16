@@ -94,7 +94,7 @@ $TransformConfig = [Ordered]@{
             'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
             'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
             'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
-            'GET_systemusers-id-sshkeys'                      = 'List-UserSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'Get-UserSshKey';
         };
         ExcludedList       = @();
     }
@@ -112,9 +112,11 @@ $TransformConfig = [Ordered]@{
             '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
             '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
             '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                                                               = 'JcSoftware-app-settings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"BodyObject"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            'software-app-settings'                                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
+            '{"$ref":"#/parameters/trait:requestHeaders:creation-source"}'                                        = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
             '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
             '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -217,8 +219,8 @@ $TransformConfig = [Ordered]@{
             'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
             'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
             'GET_office365s-office365_id-import-users'                   = 'List-Office365UsersToImport';
-            'GET_policies-policy_id-policyresults'                       = 'List-PoliciesPolicyResult';
-            'GET_policies-policy_id-policystatuses'                      = 'List-PoliciesPolicyStatus';
+            'GET_policies-policy_id-policyresults'                       = 'List-PolicyResult';
+            'GET_policies-policy_id-policystatuses'                      = 'List-PolicyStatus';
             'POST_policies'                                              = 'Create-Policy';
             'DELETE_policies-id'                                         = 'Delete-Policy';
             'GET_policies-id'                                            = 'Get-Policy';
@@ -227,7 +229,7 @@ $TransformConfig = [Ordered]@{
             'GET_policies-policy_id-associations'                        = 'Get-PolicyAssociation';
             'POST_policies-policy_id-associations'                       = 'Set-PolicyAssociation';
             'GET_policyresults-id'                                       = 'Get-PolicyResult';
-            'GET_policyresults'                                          = 'List-PolicyResult';
+            'GET_policyresults'                                          = 'List-OrganizationPolicyResult';
             'GET_policytemplates-id'                                     = 'Get-PolicyTemplate';
             'GET_policytemplates'                                        = 'List-PolicyTemplate';
             'GET_policies-policy_id-systems'                             = 'Get-PolicyTraverseSystem';
@@ -360,7 +362,7 @@ $TransformConfig = [Ordered]@{
             'PUT_workdays-id'                                            = 'Set-Workday';
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
-            'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
+            'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
             'GET_subscriptions'                                          = 'Get-Subscription'
         };
         ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
@@ -480,66 +482,76 @@ Function Update-SwaggerObject
                     {
                         If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
                     }
-                    # # Append "x-ms-enum" to "enum" section
-                    # If ($AttributePath -like '*.enum')
-                    # {
-                    #     $xMsEnum = [PSCustomObject]@{
-                    #         name = $ThisObjectName
-                    #         # modelAsString = $true
-                    #     }
-                    #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                    #     If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
-                    #     {
-                    #         $xMsEnumValues = @(
-                    #             $ThisObject.enum | ForEach-Object {
-                    #                 $EnumItem = $_
-                    #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                    #                 [PSCustomObject]@{
-                    #                     name  = $EnumItemName;
-                    #                     value = $EnumItem | ForEach-Object {
-                    #                         If ($_ -match [regex]'(\#|\s)')
-                    #                         {
-                    #                             "'$($_)'"
-                    #                         }
-                    #                         Else
-                    #                         {
-                    #                             $_
-                    #                         };
-                    #                     };
-                    #                 }
-                    #             }
-                    #         )
-                    #         Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
-                    #     }
-                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
-                    #     # Make x-ms-enum names unique
-                    #     # See if x-ms-enum already exists by name
-                    #     $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
-                    #     If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                    #     {
-                    #         $xMsEnumObjectFilteredId = 0
-                    #         $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #     }
-                    #     Else
-                    #     {
-                    #         # See if x-ms-enum already exists by name and value
-                    #         $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
-                    #         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                    #         {
-                    #             $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                    #             $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #         }
-                    #         Else
-                    #         {
-                    #             $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
-                    #         }
-                    #     }
-                    #     If ($xMsEnumObjectFilteredId -gt 0)
-                    #     {
-                    #         $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
-                    #     }
-                    #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
-                    # }
+                    # Append "x-ms-enum" to "enum" section
+                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum')
+                    {
+                        $xMsEnum = [PSCustomObject]@{
+                            name = $ThisObjectName
+                            # modelAsString = $true
+                        }
+                        # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
+                        If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
+                        {
+                            $xMsEnumValues = @(
+                                $ThisObject.enum | ForEach-Object {
+                                    $EnumItem = $_
+                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                                    [PSCustomObject]@{
+                                        name  = $EnumItemName;
+                                        value = $EnumItem | ForEach-Object {
+                                            If ($_ -match [regex]'(\#|\s)')
+                                            {
+                                                "'$($_)'"
+                                            }
+                                            Else
+                                            {
+                                                $_
+                                            };
+                                        };
+                                    }
+                                }
+                            )
+                            Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                        }
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                        # Make x-ms-enum names unique
+                        # See if x-ms-enum already exists by name
+                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName }
+                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                        {
+                            $xMsEnumObjectFilteredId = 0
+                            $xMsEnumItem = @{
+                                Id   = $xMsEnumObjectFilteredId
+                                Name = $ThisObjectName
+                                Enum = $ThisObject.enum
+                            }
+                            $global:xMsEnumObject += $xMsEnumItem
+                        }
+                        Else
+                        {
+                            # See if x-ms-enum already exists by name and value
+                            $xMsEnumObjectByNameValue = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName -and [String]$_.Enum -eq [String]$ThisObject.enum }
+                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                            {
+                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                                $xMsEnumItem = @{
+                                    Id   = $xMsEnumObjectFilteredId
+                                    Name = $ThisObjectName
+                                    Enum = $ThisObject.enum
+                                }
+                                $global:xMsEnumObject += $xMsEnumItem
+                            }
+                            Else
+                            {
+                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                            }
+                        }
+                        If ($xMsEnumObjectFilteredId -gt 0)
+                        {
+                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                        }
+                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.enum -join ',')")
+                    }
                     # Check for when type is object without defined properties
                     If ($AttributePath -like '*.type')
                     {
@@ -714,8 +726,11 @@ $SDKName | ForEach-Object {
                     $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
                     If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                     {
-                        $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
-                        $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        While ($SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name)))
+                        {
+                            $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
+                            $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
+                        }
                     }
                     Else
                     {

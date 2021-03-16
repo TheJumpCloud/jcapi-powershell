@@ -1,5 +1,3 @@
-# TODO: Setup Orgs with a device that can be cleared each time
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -15,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Clear-JcSdkSystem' {
     It 'Clear' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Clear-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'ClearViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Clear-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

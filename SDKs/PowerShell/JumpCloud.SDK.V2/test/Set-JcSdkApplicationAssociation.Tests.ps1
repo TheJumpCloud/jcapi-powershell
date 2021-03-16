@@ -13,33 +13,26 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkApplicationAssociation' {
     It 'SetExpanded' {
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Id:($global:PesterTestUser.Id) -Op:('add') -Type:('user')
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -Not -BeNullOrEmpty
-
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Id:($global:PesterTestUser.Id) -Op:('remove') -Type:('user')
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -BeNullOrEmpty
+        $ParameterType = (Get-Command Set-JcSdkApplicationAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkApplicationAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkApplicationAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
+            { Set-JcSdkApplicationAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
+        }
     }
 
     It 'Set' {
-        $PesterDefAssociation = @{
-            Id   = $global:PesterTestUser.Id;
-            Op   = 'add';
-            Type = 'user';
-            Attributes = @{};
+        $ParameterType = (Get-Command Set-JcSdkApplicationAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkApplicationAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkApplicationAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
+            { Set-JcSdkApplicationAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
         }
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Body $PesterDefAssociation
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -Not -BeNullOrEmpty
-
-        $PesterDefAssociation.Op = 'remove'
-        Set-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -Body $PesterDefAssociation
-        Get-JcSdkApplicationAssociation -ApplicationId $($global:PesterTestApplication.id) -targets:('user') | Should -BeNullOrEmpty
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkApplicationAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

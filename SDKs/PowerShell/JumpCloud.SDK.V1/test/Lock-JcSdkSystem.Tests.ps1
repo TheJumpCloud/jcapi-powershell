@@ -1,5 +1,3 @@
-# TODO: Setup Orgs with a device that can be locked each time
-
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -15,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Lock-JcSdkSystem' {
     It 'Lock' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Lock-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
     It 'LockViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Lock-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

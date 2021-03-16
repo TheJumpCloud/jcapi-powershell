@@ -29,7 +29,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/associat
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkLdapServerAssociation -LdapserverId <String> -Id <String> -Op <String> -Type <String>
+Set-JcSdkLdapServerAssociation -LdapserverId <String> -Id <String> -Op <String> -Type <Type>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -47,7 +47,7 @@ Set-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGra
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <String>
+Set-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -198,7 +198,7 @@ Accept wildcard characters: False
 Targets which a "ldap_server" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Type
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -265,7 +265,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationLdapServer>: GraphOperation (LdapServer)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <String>`: Targets which a "ldap_server" can be associated to.
+  - `Type <Type>`: Targets which a "ldap_server" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

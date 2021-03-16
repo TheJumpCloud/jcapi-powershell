@@ -25,12 +25,12 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### Get (Default)
 ```
-Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <String> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -LdapserverId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String> [<CommonParameters>]
+Get-JcSdkLdapServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "ldap_server" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 
