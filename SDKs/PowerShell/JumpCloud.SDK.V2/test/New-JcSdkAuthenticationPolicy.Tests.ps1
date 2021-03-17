@@ -12,11 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkAuthenticationPolicy' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterDefAuthenticationPolicy.UserGroupInclusions = $global:PesterTestUserGroup.Id
+        $global:PesterTestAuthenticationPolicy = New-JcSdkAuthenticationPolicy @global:PesterDefAuthenticationPolicy
+        $global:PesterTestAuthenticationPolicy | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkAuthenticationPolicy -Body:($global:PesterTestAuthenticationPolicy) } | Should -Not -Throw
     }
 }

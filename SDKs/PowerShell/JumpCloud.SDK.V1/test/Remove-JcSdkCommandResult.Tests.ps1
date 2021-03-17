@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkCommandResult' {
     It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkCommandResult -Id:($global:PesterTestCommandResult.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkCommandResult -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

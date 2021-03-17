@@ -21,8 +21,7 @@ New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-CreationSou
 
 ### Create
 ```
-New-JcSdkCustomEmailConfiguration -CustomEmail <ICustomEmail> [-CreationSource <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkCustomEmailConfiguration -CustomEmail <ICustomEmail> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,20 +75,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+### -CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
+To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: JumpCloud.SDK.V2.Models.ICustomEmail
+Parameter Sets: Create
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -236,13 +234,12 @@ To create the parameters described below, construct a hash table containing the 
 
 
 CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
-  - `Subject <String>`: 
+  - `Subject <String>`:
   - `Type <String>`: CustomEmailType
-  - `[Body <String>]`: 
-  - `[Button <String>]`: 
-  - `[Header <String>]`: 
-  - `[NextStepContactInfo <String>]`: 
-  - `[Title <String>]`: 
+  - `[Body <String>]`:
+  - `[Button <String>]`:
+  - `[Header <String>]`:
+  - `[NextStepContactInfo <String>]`:
+  - `[Title <String>]`:
 
 ## RELATED LINKS
-

@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Unlock-JcSdkUser' {
     It 'Unlock' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Unlock-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'UnlockViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Unlock-JcSdkUser -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

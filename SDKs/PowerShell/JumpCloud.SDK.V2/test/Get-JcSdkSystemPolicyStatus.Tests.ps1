@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemPolicyStatus' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkSystemPolicyStatus -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 }

@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkUser' {
     It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkUser -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUser -Body:($global:PesterTestUser) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUser -InputObject '<IJumpCloudApIsIdentity>' [-AccountLocked] [-Addresses '<ISystemuserputAddressesItem[]>'] [-AllowPublicKey] [-Attributes '<ISystemuserputAttributesItem[]>'] [-Company '<String>'] [-CostCenter '<String>'] [-Department '<String>'] [-Description '<String>'] [-DisableDeviceMaxLoginAttempts] [-Displayname '<String>'] [-Email '<String>'] [-EmployeeIdentifier '<String>'] [-EmployeeType '<String>'] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn '<String>'] [-ExternallyManaged] [-ExternalPasswordExpirationDate '<String>'] [-ExternalSourceType '<String>'] [-Firstname '<String>'] [-JobTitle '<String>'] [-Lastname '<String>'] [-LdapBindingUser] [-Location '<String>'] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil '<DateTime>'] [-Middlename '<String>'] [-Password '<String>'] [-PasswordNeverExpires] [-PhoneNumbers '<ISystemuserputPhoneNumbersItem[]>'] [-PublicKey '<String>'] [-Relationships '<ISystemuserputRelationshipsItem[]>'] [-SambaServiceUser] [-SshKeys '<ISshkeypost[]>'] [-Sudo] [-Suspended] [-UnixGuid '<Int32>'] [-UnixUid '<Int32>'] [-Username '<String>'] } | Should -Not -Throw
     }
 }

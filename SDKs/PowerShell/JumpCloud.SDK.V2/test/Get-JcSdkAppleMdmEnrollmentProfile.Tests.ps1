@@ -13,14 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId:($global:PesterTestAppleMdm.Id) -Id:($global:PesterTestAppleMdmEnrollmentProfile.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkAppleMdmEnrollmentProfile -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSoftwareApp' {
-    It 'UpdateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
-    It 'Update' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkSoftwareApp -Body:($global:PesterTestSoftwareApp) -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkSoftwareApp -InputObject '<IJumpCloudApIsIdentity>' [-DisplayName '<String>'] [-Id '<String>'] [-Settings '<ISoftwareAppSettings[]>'] } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkSoftwareApp -Body:($global:PesterTestSoftwareApp) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkGSuiteTranslationRule' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Delete' {
+        { Remove-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) -Id:($global:PesterTestGSuiteTranslationRule.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

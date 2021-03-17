@@ -12,19 +12,27 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkPolicyAssociation' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkPolicyAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkPolicyAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkPolicyAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
+            { Set-JcSdkPolicyAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
+        }
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        $ParameterType = (Get-Command Set-JcSdkPolicyAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkPolicyAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkPolicyAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
+            { Set-JcSdkPolicyAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -PolicyId:($global:PesterTestPolicy.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkPolicyAssociation -Body:(@{Id = $global:PesterTestSystem.Id; Op = 'add'; Type = 'system';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkPolicyAssociation -Id:($global:PesterTestSystem.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('system') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

@@ -12,11 +12,14 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkCommand' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
+        $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+        $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
+        $global:PesterTestCommand | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkCommand -Body:($global:PesterTestCommand) } | Should -Not -Throw
     }
 }

@@ -12,7 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkActiveDirectoryAssociation' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId:($global:PesterTestActiveDirectory.Id) -Targets:('user') } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkActiveDirectoryAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
     }
 }

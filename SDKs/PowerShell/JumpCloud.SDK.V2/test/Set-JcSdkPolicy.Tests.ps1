@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkPolicy' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkPolicy -Body:($global:PesterTestPolicy) -Id:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkPolicy -Body:($global:PesterTestPolicy) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkPolicy -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestPolicy.Name) [-TemplateId '<String>'] [-Values '<IPolicyValue[]>'] } | Should -Not -Throw
     }
 }

@@ -12,7 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkUserTraverseOffice365' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkUserTraverseOffice365 -UserId:($global:PesterTestUser.Id) } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkUserTraverseOffice365 -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

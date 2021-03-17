@@ -21,14 +21,14 @@ Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -Subject <String> -T
 
 ### Set
 ```
-Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -CustomEmail <ICustomEmail>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -CustomEmail <ICustomEmail> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -CustomEmail <ICustomEmail>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -CustomEmail <ICustomEmail> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -89,20 +89,19 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+### -CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
+To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: JumpCloud.SDK.V2.Models.ICustomEmail
+Parameter Sets: Set, SetViaIdentity
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -282,35 +281,34 @@ To create the parameters described below, construct a hash table containing the 
 
 
 CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
-  - `Subject <String>`: 
+  - `Subject <String>`:
   - `Type <String>`: CustomEmailType
-  - `[Body <String>]`: 
-  - `[Button <String>]`: 
-  - `[Header <String>]`: 
-  - `[NextStepContactInfo <String>]`: 
-  - `[Title <String>]`: 
+  - `[Body <String>]`:
+  - `[Button <String>]`:
+  - `[Header <String>]`:
+  - `[NextStepContactInfo <String>]`:
+  - `[Title <String>]`:
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

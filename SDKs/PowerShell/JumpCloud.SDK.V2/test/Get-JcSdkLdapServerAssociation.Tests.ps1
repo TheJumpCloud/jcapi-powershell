@@ -12,7 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkLdapServerAssociation' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkLdapServerAssociation -LdapserverId:($global:PesterTestLdapserver.Id) -Targets:('user') } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkLdapServerAssociation -InputObject '<IJumpCloudApIsIdentity>' -Targets:('user') } | Should -Not -Throw
     }
 }

@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystem' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkSystem -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkSystem -Body:($global:PesterTestSystem) -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkSystem -Body:($global:PesterTestSystem) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkSystem -InputObject '<IJumpCloudApIsIdentity>' [-AgentBoundMessages '<ISystemputAgentBoundMessagesItem[]>'] [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin] [-DisplayName '<String>'] } | Should -Not -Throw
     }
 }

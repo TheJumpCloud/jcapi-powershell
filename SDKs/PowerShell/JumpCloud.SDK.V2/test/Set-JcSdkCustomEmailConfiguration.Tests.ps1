@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkCustomEmailConfiguration' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkCustomEmailConfiguration -CustomEmail:($global:PesterTestCustomEmailConfiguration) -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -CustomEmail:($global:PesterTestCustomEmailConfiguration) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
     }
 }

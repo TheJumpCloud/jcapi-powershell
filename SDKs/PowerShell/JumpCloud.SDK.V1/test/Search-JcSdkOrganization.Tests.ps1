@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Search-JcSdkOrganization' {
     It 'SearchExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Search-JcSdkOrganization [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw
     }
 
     It 'Search' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Search-JcSdkOrganization -Body:($global:PesterTestOrganization) } | Should -Not -Throw
     }
 }

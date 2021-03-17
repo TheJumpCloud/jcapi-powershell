@@ -565,6 +565,18 @@ See `/members` and `/associations` endpoints to manage those collections.
 ### [Get-JcSdkOffice365UserToImport](Get-JcSdkOffice365UserToImport.md)
 Lists Office 365 users available for import.
 
+### [Get-JcSdkOrganizationPolicyResult](Get-JcSdkOrganizationPolicyResult.md)
+This endpoint returns all policies results for an organization.
+
+##### Sample Request
+
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
+
 ### [Get-JcSdkPolicy](Get-JcSdkPolicy.md)
 This endpoint returns a specific policy.
 

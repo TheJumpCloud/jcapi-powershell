@@ -13,14 +13,14 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkCommandResult' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCommandResult } | Should -Not -Throw
     }
 
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCommandResult -Id:($global:PesterTestCommandResult.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkCommandResult -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

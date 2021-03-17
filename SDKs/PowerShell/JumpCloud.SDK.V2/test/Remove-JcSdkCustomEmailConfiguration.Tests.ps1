@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkCustomEmailConfiguration' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Delete' {
+        { Remove-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

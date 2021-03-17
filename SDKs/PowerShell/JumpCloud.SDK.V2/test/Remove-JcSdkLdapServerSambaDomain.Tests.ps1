@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkLdapServerSambaDomain' {
     It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

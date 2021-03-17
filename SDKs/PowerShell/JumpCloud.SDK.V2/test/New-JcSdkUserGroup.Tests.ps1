@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkUserGroup' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestUserGroup = New-JcSdkUserGroup @global:PesterDefUserGroup
+        $global:PesterTestUserGroup | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkUserGroup -Body:($global:PesterTestUserGroup) } | Should -Not -Throw
     }
 }

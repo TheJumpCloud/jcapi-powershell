@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Clear-JcSdkAppleMdmDevice' {
-    It 'EraseExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'ClearExpanded' -skip {
+        { Clear-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' -Pin '<String>' } | Should -Not -Throw
     }
 
-    It 'Erase' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Clear' -skip {
+        { Clear-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -Body:($global:PesterTestAppleMdmDevice) -DeviceId '<String>' } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'ClearViaIdentity' -skip {
+        { Clear-JcSdkAppleMdmDevice -Body:($global:PesterTestAppleMdmDevice) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'EraseViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'ClearViaIdentityExpanded' -skip {
+        { Clear-JcSdkAppleMdmDevice -InputObject '<IJumpCloudApIsIdentity>' -Pin '<String>' } | Should -Not -Throw
     }
 }

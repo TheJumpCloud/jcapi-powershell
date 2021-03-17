@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkBulkUserResult' {
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkBulkUserResult -JobId '<String>' } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkBulkUserResult -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

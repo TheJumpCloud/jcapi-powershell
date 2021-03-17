@@ -12,19 +12,27 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkSystemAssociation' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkSystemAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
+            { Set-JcSdkSystemAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
+        }
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        $ParameterType = (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkSystemAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
+            { Set-JcSdkSystemAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkSystemAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }

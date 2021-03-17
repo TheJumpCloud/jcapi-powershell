@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Reset-JcSdkUserMfa' {
     It 'ResetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Id:($global:PesterTestUser.Id) [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
     }
 
     It 'Reset' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'ResetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -Body:($global:PesterTestUser) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'ResetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Reset-JcSdkUserMfa -InputObject '<IJumpCloudApIsIdentity>' [-Exclusion] [-ExclusionUntil '<DateTime>'] } | Should -Not -Throw
     }
 }

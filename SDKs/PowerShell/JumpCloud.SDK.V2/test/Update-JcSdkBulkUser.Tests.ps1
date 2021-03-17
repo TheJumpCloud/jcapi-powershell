@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkBulkUser' {
-    It 'Patch' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Update' -skip {
+        { Update-JcSdkBulkUser -Body:($global:PesterTestBulkUser) } | Should -Not -Throw
     }
 }

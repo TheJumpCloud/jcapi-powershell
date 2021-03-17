@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkSystemInsightAlfExplicitAuth } | Should -Not -Throw
     }
 }

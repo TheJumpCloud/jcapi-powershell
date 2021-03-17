@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkIPList' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestIPList = New-JcSdkIPList @global:PesterDefIPList
+        $global:PesterTestIPList | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkIPList -Body:($global:PesterTestIPList) } | Should -Not -Throw
     }
 }

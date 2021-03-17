@@ -13,18 +13,19 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkProviderAdministrator' {
     It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $global:PesterTestProviderAdministrator = New-JcSdkProviderAdministrator @global:PesterDefProviderAdministrator
+        $global:PesterTestProviderAdministrator | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkProviderAdministrator -Body:($global:PesterTestProviderAdministrator) -ProviderId '<String>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkProviderAdministrator -Body:($global:PesterTestProviderAdministrator) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkProviderAdministrator -Email '<String>' -InputObject '<IJumpCloudApIsIdentity>' [-EnableMultiFactor] [-Firstname '<String>'] [-Lastname '<String>'] [-Role '<String>'] [-RoleName '<String>'] } | Should -Not -Throw
     }
 }

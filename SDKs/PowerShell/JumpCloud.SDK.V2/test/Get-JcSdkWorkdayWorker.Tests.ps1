@@ -12,7 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkWorkdayWorker' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' -skip {
+        { Get-JcSdkWorkdayWorker -WorkdayId '<String>' } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkWorkdayWorker -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

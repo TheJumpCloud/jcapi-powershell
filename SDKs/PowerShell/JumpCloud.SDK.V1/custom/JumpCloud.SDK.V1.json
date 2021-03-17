@@ -4641,7 +4641,7 @@
     "/systemusers/{id}/sshkeys": {
       "get": {
         "description": "This endpoint will return a specific System User's public SSH key.",
-        "operationId": "List-UserSshKey",
+        "operationId": "Get-UserSshKey",
         "parameters": [],
         "responses": {
           "200": {

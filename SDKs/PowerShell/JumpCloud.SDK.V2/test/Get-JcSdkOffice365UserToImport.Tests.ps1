@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkOffice365UserToImport' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkOffice365UserToImport -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 }

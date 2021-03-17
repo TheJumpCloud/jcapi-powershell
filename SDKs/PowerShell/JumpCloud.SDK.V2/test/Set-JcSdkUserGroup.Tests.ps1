@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroup' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkUserGroup -Body:($global:PesterTestUserGroup) -Id:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkUserGroup -Body:($global:PesterTestUserGroup) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkUserGroup -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestUserGroup.Name) [-AttributeLdapGroups '<IGraphAttributeLdapGroupsItem[]>'] [-AttributePosixGroups '<IGraphAttributePosixGroupsItem[]>'] [-AttributeRadiusReply '<IGraphAttributeRadiusReplyItem[]>'] [-AttributeSambaEnabled] [-Description '<String>'] [-Email '<String>'] [-MemberQueryFilters '<IFilter[]>'] } | Should -Not -Throw
     }
 }

@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Remove-JcSdkSystemGroup' {
     It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Remove-JcSdkSystemGroup -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

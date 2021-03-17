@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Invoke-JcSdkCommandTrigger' {
-    It 'Post' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Post' {
+        { Invoke-JcSdkCommandTrigger -Triggername:($global:PesterTestCommand.trigger) } | Should -Not -Throw
     }
 
     It 'PostViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Invoke-JcSdkCommandTrigger -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

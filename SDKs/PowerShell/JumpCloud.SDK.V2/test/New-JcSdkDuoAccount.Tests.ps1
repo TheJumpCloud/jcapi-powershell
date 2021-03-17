@@ -13,6 +13,6 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkDuoAccount' {
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkDuoAccount } | Should -Not -Throw
     }
 }

@@ -25,14 +25,13 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirec
 
 ### Get (Default)
 ```
-Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <String> [-CreationSource <String>]
- [<CommonParameters>]
+Get-JcSdkActiveDirectoryAssociation -ActivedirectoryId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <String>
- [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkActiveDirectoryAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -119,7 +118,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 
@@ -151,26 +150,25 @@ To create the parameters described below, construct a hash table containing the 
 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

@@ -2,40 +2,38 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    # , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate with "beta" to make release a prerelease.')][ValidateSet('beta')][System.String[]]$PrereleaseName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][System.String]$BuildModuleOverride = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][ValidateSet('', 'beta')][System.String]$PrereleaseName = ''
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set the module version increment type.')][ValidateSet('Major', 'Minor', 'Build')][ValidateNotNullOrEmpty()][System.String]$ModuleVersionIncrementType = 'Build'
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to increment the module version.')][ValidateNotNullOrEmpty()][System.Boolean]$IncrementModuleVersion = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to install prereqs.')][ValidateNotNullOrEmpty()][System.Boolean]$InstallPreReq = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run AutoRest to generate the module.')][ValidateNotNullOrEmpty()][System.Boolean]$GenerateModule = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to copy files from the custom directory to the SDK.')][ValidateNotNullOrEmpty()][System.Boolean]$CopyCustomFiles = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run build-module.ps1 ')][ValidateNotNullOrEmpty()][System.Boolean]$BuildModule = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run BuildCustomFunctions.ps1')][ValidateNotNullOrEmpty()][System.Boolean]$BuildCustomFunctions = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove the AutoRest generated .format.ps1xml file.')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveFormatPs1Xml = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Set to $true to publish the module to a repository.')][ValidateNotNullOrEmpty()][System.Boolean]$PublishModule = $false
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Specify the PowerShell repository to deploy to.')][ValidateNotNullOrEmpty()][System.String]$PSRepoName = 'PSGallery'
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'NuGetApiKey for your repository.')][ValidateNotNullOrEmpty()][System.String]$NuGetApiKey = ''
 )
 Try
 {
-    $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
+    # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
     # Create environmental variable so that they can be used by the pester tests later.
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
-    # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
-    $PSRepoName = 'PSGallery'
-    # $PSRepoPath = $Home + '/Documents/PowerShell/LocalRepository/'
-    $NuGetApiKey = ''
-    $ModuleVersionIncrementType = 'Build' # Major, Minor, Build
-    $FolderExcludeList = @('examples', 'test') # Excluded folder in root from being removed
-    $RunApiTransform = $true
-    $IncrementModuleVersion = $true
-    $InstallPreReq = $true
-    $GenerateModule = $true
-    $CopyCustomFiles = $true
-    $BuildModule = $true
-    $BuildCustomFunctions = $true
-    $PrereleaseName = '' # Beta
-    $UpdateModuleGuid = $true
-    $TestModule = $true
-    $ModifyGitIgnore = $true
-    $RemoveAzAccounts = $true
-    $CommentFormatPs1Xml = $true
+    $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
     $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
-    $PublishModule = $false
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
@@ -71,6 +69,8 @@ Try
                 $Config = $ConfigContent | ConvertFrom-Yaml
                 # $InputFile = $BaseFolder + $Config.'input-file'
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
+                $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
+                $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
                 $ModuleName = $Config.'module-name'
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
@@ -307,9 +307,11 @@ Try
                         $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
                         # Temp workaround untill autorest updates to use Pester V5 syntax
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
+                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         # Test module
-                        Install-Module -Name Pester -Force
+                        Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
@@ -373,7 +375,7 @@ Try
                 }
                 ###########################################################################
                 # Comment out refs to .format.ps1xml
-                If ($CommentFormatPs1Xml)
+                If ($RemoveFormatPs1Xml)
                 {
                     (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
                     (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force

@@ -12,15 +12,15 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkOffice365TranslationRule' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkOffice365TranslationRule -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

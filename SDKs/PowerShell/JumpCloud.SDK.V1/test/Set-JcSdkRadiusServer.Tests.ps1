@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkRadiusServer' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) -Name:($global:PesterTestRadiusServer.Name) -NetworkSourceIP '<String>' -SharedSecret '<String>' } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkRadiusServer -Body:($global:PesterTestRadiusServer) -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkRadiusServer -Body:($global:PesterTestRadiusServer) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkRadiusServer -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestRadiusServer.Name) -NetworkSourceIP '<String>' -SharedSecret '<String>' [-Mfa '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 }

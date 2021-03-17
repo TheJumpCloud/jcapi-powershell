@@ -12,19 +12,21 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkUserSshKey' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
+        $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
+        $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkUserSshKey -Body:($global:PesterTestUser) -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkUserSshKey -Body:($global:PesterTestUser) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkUserSshKey -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestUser.Name) -PublicKey '<String>' } | Should -Not -Throw
     }
 }

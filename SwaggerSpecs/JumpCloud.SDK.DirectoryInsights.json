@@ -132,7 +132,8 @@
         "search_after": {
           "description": "Specific query to search after, see x-* response headers for next values",
           "items": {
-            "type": "string"
+            "additionalProperties": true,
+            "type": "object"
           },
           "type": "array",
           "x-go-name": "SearchAfter"

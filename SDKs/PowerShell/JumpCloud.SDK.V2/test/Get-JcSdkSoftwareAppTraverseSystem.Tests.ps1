@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSoftwareAppTraverseSystem' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkSoftwareAppTraverseSystem -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkSoftwareAppTraverseSystem -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

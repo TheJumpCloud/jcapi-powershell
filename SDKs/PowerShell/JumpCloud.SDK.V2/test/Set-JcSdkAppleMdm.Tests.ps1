@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkAppleMdm' {
-    It 'UpdateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkAppleMdm -Id:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
 
-    It 'Update' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkAppleMdm -Body:($global:PesterTestAppleMdm) -Id:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkAppleMdm -Body:($global:PesterTestAppleMdm) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'UpdateViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkAppleMdm -InputObject '<IJumpCloudApIsIdentity>' [-AppleSignedCert '<String>'] [-DefaultSystemGroupId '<String>'] [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions '<IDepSetupAssistantOption[]>'] [-EncryptedDepServerToken '<String>'] [-Name '<String>'] [-WelcomeScreenButton '<String>'] [-WelcomeScreenParagraph '<String>'] [-WelcomeScreenTitle '<String>'] } | Should -Not -Throw
     }
 }

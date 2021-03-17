@@ -12,7 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkRadiusServerTraverseUser' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkRadiusServerTraverseUser -RadiusserverId:($global:PesterTestRadiusserver.Id) } | Should -Not -Throw
+    }
+
+    It 'GetViaIdentity' -skip {
+        { Get-JcSdkRadiusServerTraverseUser -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkRadiusServer' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestRadiusServer = New-JcSdkRadiusServer @global:PesterDefRadiusServer
+        $global:PesterTestRadiusServer | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkRadiusServer -Body:($global:PesterTestRadiusServer) } | Should -Not -Throw
     }
 }

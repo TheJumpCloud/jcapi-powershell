@@ -12,19 +12,19 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkLdapServerSambaDomain' {
-    It 'PutExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
     }
 
-    It 'Put' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Body:($global:PesterTestLdapServerSambaDomain) -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }
 
-    It 'PutViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentity' -skip {
+        { Set-JcSdkLdapServerSambaDomain -Body:($global:PesterTestLdapServerSambaDomain) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
-    It 'PutViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetViaIdentityExpanded' -skip {
+        { Set-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
     }
 }

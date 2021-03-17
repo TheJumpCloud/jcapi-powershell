@@ -11,9 +11,8 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml';
         FindAndReplace     = [Ordered]@{
-            '"basePath":"/insights/directory/v1"'                                                                                                                                                                                                                   = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-            '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}'                                                                          = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}'
-            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
+            '"basePath":"\/insights\/directory\/v1"'                                                                                                                                                                                                                 = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and\/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
         };
         OperationIdMapping = [Ordered]@{
             'POST_events'          = 'Get-Event';
@@ -27,24 +26,24 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"#\/definitions\/system"'                                                 = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             '"system":{"title":"System"'                                               = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
-            '"basePath":"/api"'                                                        = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
+            '"basePath":"\/api"'                                                       = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
             '"format":"email",'                                                        = ''; # WARNING (LLCS1001/DoesNotSupportEnum):Schema with type:'string and 'format:'email' is not recognized.
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''
             # Custom Tweaks
-            '{"$ref":"#/parameters/trait:systemContextAuth:Authorization"}'            = ''; # We dont want to support authentication through system context via the SDK
-            '{"$ref":"#/parameters/trait:systemContextAuth:Date"}'                     = ''; # We dont want to support authentication through system context via the SDK
-            '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                      = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'         = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                  = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                   = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             '{"name":"Content-Type","in":"header","required":false,"type":"string"}'   = ''; # This will be passed in later through the Module.cs file.
             '{"name":"Accept","in":"header","required":false,"type":"string"}'         = ''; # This will be passed in later through the Module.cs file.
             '{"name":"x-org-id","in":"header","required":false,"type":"string"}'       = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             ',,'                                                                       = ',';
-            '[,'                                                                       = '[';
+            '\[,'                                                                      = '[';
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
@@ -94,7 +93,7 @@ $TransformConfig = [Ordered]@{
             'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
             'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
             'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
-            'GET_systemusers-id-sshkeys'                      = 'List-UserSshKey';
+            'GET_systemusers-id-sshkeys'                      = 'Get-UserSshKey';
         };
         ExcludedList       = @();
     }
@@ -102,30 +101,32 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # V2 Issues
-            '"basePath":"/api/v2"'                                                                                = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '["string","number","boolean","array"]'                                                               = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '["string","number","boolean","array","null"]'                                                        = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
-            '["object","null"]'                                                                                   = '"object"';
-            '["string","null"]'                                                                                   = '"string"';
-            '["boolean","null"]'                                                                                  = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
-            '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
-            '"format":"uint32"'                                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"basePath":"\/api\/v2"'                                                                               = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+            '\["string","number","boolean","array"]'                                                               = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
+            '\["string","number","boolean","array","null"]'                                                        = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
+            '\["object","null"]'                                                                                   = '"object"';
+            '\["string","null"]'                                                                                   = '"string"';
+            '\["boolean","null"]'                                                                                  = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
+            '\["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
+            '\["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
+            '"jobId"'                                                                                              = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
+            '"type":"null"'                                                                                        = '"type":"string"'; # Error: Invalid type 'null' in schema
+            'software-app-settings'                                                                                = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":\[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                                                    = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"Content-Type","in":"header","required":false,"type":"string","default":"application/json"}' = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"Accept","in":"header","required":false,"type":"string","default":"application/json"}'       = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"x-api-key","in":"header","required":false,"type":"string"}'                                 = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                                                  = ',';
-            '[,'                                                                                                  = '[';
-            ',]'                                                                                                  = ']';
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                         = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                               = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"name":"Content-Type","in":"header","required":false,"type":"string","default":"application\/json"}' = ''; # This will be passed in later through the Module.cs file.
+            '{"name":"Accept","in":"header","required":false,"type":"string","default":"application\/json"}'       = ''; # This will be passed in later through the Module.cs file.
+            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'                                   = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"name":"x-api-key","in":"header","required":false,"type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                                                   = ',';
+            '\[,'                                                                                                  = '[';
+            ',]'                                                                                                   = ']';
+            '"collection_time":".*?",'                                                                             = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
         };
         OperationIdMapping = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
@@ -218,8 +219,7 @@ $TransformConfig = [Ordered]@{
             'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
             'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
             'GET_office365s-office365_id-import-users'                   = 'List-Office365UsersToImport';
-            'GET_policies-policy_id-policyresults'                       = 'List-PoliciesPolicyResult';
-            'GET_policies-policy_id-policystatuses'                      = 'List-PoliciesPolicyStatus';
+            'GET_policyresults'                                          = 'List-OrganizationPolicyResult';
             'POST_policies'                                              = 'Create-Policy';
             'DELETE_policies-id'                                         = 'Delete-Policy';
             'GET_policies-id'                                            = 'Get-Policy';
@@ -228,7 +228,8 @@ $TransformConfig = [Ordered]@{
             'GET_policies-policy_id-associations'                        = 'Get-PolicyAssociation';
             'POST_policies-policy_id-associations'                       = 'Set-PolicyAssociation';
             'GET_policyresults-id'                                       = 'Get-PolicyResult';
-            'GET_policyresults'                                          = 'List-PolicyResult';
+            'GET_policies-policy_id-policyresults'                       = 'List-PolicyResult';
+            'GET_policies-policy_id-policystatuses'                      = 'List-PolicyStatus';
             'GET_policytemplates-id'                                     = 'Get-PolicyTemplate';
             'GET_policytemplates'                                        = 'List-PolicyTemplate';
             'GET_policies-policy_id-systems'                             = 'Get-PolicyTraverseSystem';
@@ -249,6 +250,7 @@ $TransformConfig = [Ordered]@{
             'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
+            'GET_subscriptions'                                          = 'Get-Subscription';
             'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
             'POST_systems-system_id-associations'                        = 'Set-SystemAssociation';
             'GET_systems-system_id-fdekey'                               = 'Get-SystemFDEKey';
@@ -361,8 +363,7 @@ $TransformConfig = [Ordered]@{
             'PUT_workdays-id'                                            = 'Set-Workday';
             'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
-            'GET_workdays-workday_id-workers'                            = 'List-WorkdayWorker';
-            'GET_subscriptions'                                          = 'Get-Subscription'
+            'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
         ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
     }
@@ -481,66 +482,76 @@ Function Update-SwaggerObject
                     {
                         If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
                     }
-                    # # Append "x-ms-enum" to "enum" section
-                    # If ($AttributePath -like '*.enum')
-                    # {
-                    #     $xMsEnum = [PSCustomObject]@{
-                    #         name = $ThisObjectName
-                    #         # modelAsString = $true
-                    #     }
-                    #     # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                    #     If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
-                    #     {
-                    #         $xMsEnumValues = @(
-                    #             $ThisObject.enum | ForEach-Object {
-                    #                 $EnumItem = $_
-                    #                 $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
-                    #                 [PSCustomObject]@{
-                    #                     name  = $EnumItemName;
-                    #                     value = $EnumItem | ForEach-Object {
-                    #                         If ($_ -match [regex]'(\#|\s)')
-                    #                         {
-                    #                             "'$($_)'"
-                    #                         }
-                    #                         Else
-                    #                         {
-                    #                             $_
-                    #                         };
-                    #                     };
-                    #                 }
-                    #             }
-                    #         )
-                    #         Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
-                    #     }
-                    #     Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
-                    #     # Make x-ms-enum names unique
-                    #     # See if x-ms-enum already exists by name
-                    #     $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.name -eq $ThisObject.'x-ms-enum'.name }
-                    #     If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                    #     {
-                    #         $xMsEnumObjectFilteredId = 0
-                    #         $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #     }
-                    #     Else
-                    #     {
-                    #         # See if x-ms-enum already exists by name and value
-                    #         $xMsEnumObjectByNameValue = $xMsEnumObjectByName | Where-Object { ($_.values.value -join ',') -eq ($ThisObject.'x-ms-enum'.values.value -join ',') }
-                    #         If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                    #         {
-                    #             $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
-                    #             $global:xMsEnumObject += $xMsEnum | Select-Object *, @{Name = 'Id'; Expression = { $xMsEnumObjectFilteredId } }
-                    #         }
-                    #         Else
-                    #         {
-                    #             $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
-                    #         }
-                    #     }
-                    #     If ($xMsEnumObjectFilteredId -gt 0)
-                    #     {
-                    #         $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
-                    #     }
-                    #     # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.'x-ms-enum'.values.value -join ',')")
-                    # }
+                    # Append "x-ms-enum" to "enum" section
+                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum')
+                    {
+                        $xMsEnum = [PSCustomObject]@{
+                            name = $ThisObjectName
+                            # modelAsString = $true
+                        }
+                        # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
+                        If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
+                        {
+                            $xMsEnumValues = @(
+                                $ThisObject.enum | ForEach-Object {
+                                    $EnumItem = $_
+                                    $EnumItemName = $EnumItem.Replace('#', '').Replace('system', 'systems') # C# does not like it when we use these characters/reserved words
+                                    [PSCustomObject]@{
+                                        name  = $EnumItemName;
+                                        value = $EnumItem | ForEach-Object {
+                                            If ($_ -match [regex]'(\#|\s)')
+                                            {
+                                                "'$($_)'"
+                                            }
+                                            Else
+                                            {
+                                                $_
+                                            };
+                                        };
+                                    }
+                                }
+                            )
+                            Add-Member -InputObject:($xMsEnum) -MemberType:('NoteProperty') -Name:('values') -Value:($xMsEnumValues)
+                        }
+                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('x-ms-enum') -Value:($xMsEnum)
+                        # Make x-ms-enum names unique
+                        # See if x-ms-enum already exists by name
+                        $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName }
+                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
+                        {
+                            $xMsEnumObjectFilteredId = 0
+                            $xMsEnumItem = @{
+                                Id   = $xMsEnumObjectFilteredId
+                                Name = $ThisObjectName
+                                Enum = $ThisObject.enum
+                            }
+                            $global:xMsEnumObject += $xMsEnumItem
+                        }
+                        Else
+                        {
+                            # See if x-ms-enum already exists by name and value
+                            $xMsEnumObjectByNameValue = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName -and [String]$_.Enum -eq [String]$ThisObject.enum }
+                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
+                            {
+                                $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
+                                $xMsEnumItem = @{
+                                    Id   = $xMsEnumObjectFilteredId
+                                    Name = $ThisObjectName
+                                    Enum = $ThisObject.enum
+                                }
+                                $global:xMsEnumObject += $xMsEnumItem
+                            }
+                            Else
+                            {
+                                $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
+                            }
+                        }
+                        If ($xMsEnumObjectFilteredId -gt 0)
+                        {
+                            $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
+                        }
+                        # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.enum -join ',')")
+                    }
                     # Check for when type is object without defined properties
                     If ($AttributePath -like '*.type')
                     {
@@ -712,14 +723,14 @@ $SDKName | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
             {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
-                    $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
+                    $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
                     If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                     {
-                        While ($SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name)))
+                        Do
                         {
-                            $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
-                            $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
-                        }
+                            $SwaggerObject = $SwaggerObject -Replace ([regex]$_.Name, [string]$_.Value)
+                            $PatternExists = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
+                        } While ($PatternExists -and $PatternExists.Matches.Value -ne $_.Value)
                     }
                     Else
                     {

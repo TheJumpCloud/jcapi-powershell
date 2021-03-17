@@ -13,18 +13,18 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkIPList' {
     It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -Body:($global:PesterTestIPList) -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -Body:($global:PesterTestIPList) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
 }

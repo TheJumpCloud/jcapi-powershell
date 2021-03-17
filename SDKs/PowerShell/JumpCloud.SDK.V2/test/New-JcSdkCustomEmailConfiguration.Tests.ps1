@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkCustomEmailConfiguration' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestCustomEmailConfiguration = New-JcSdkCustomEmailConfiguration @global:PesterDefCustomEmailConfiguration
+        $global:PesterTestCustomEmailConfiguration | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkCustomEmailConfiguration -CustomEmail:($global:PesterTestCustomEmailConfiguration) } | Should -Not -Throw
     }
 }

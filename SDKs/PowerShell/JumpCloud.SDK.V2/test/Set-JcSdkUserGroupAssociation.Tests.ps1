@@ -12,19 +12,27 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkUserGroupAssociation' {
-    It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'SetExpanded' {
+        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+        }
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupAssociation -Body:(@{Id = $global:PesterTestSystemGroup.Id; Op = 'add'; Type = 'system_group';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkUserGroupAssociation -Id:($global:PesterTestSystemGroup.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('system_group') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }

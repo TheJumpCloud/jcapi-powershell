@@ -12,11 +12,12 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkSoftwareApp' {
-    It 'CreateExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'CreateExpanded' {
+        $global:PesterTestSoftwareApp = New-JcSdkSoftwareApp @global:PesterDefSoftwareApp
+        $global:PesterTestSoftwareApp | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkSoftwareApp -Body:($global:PesterTestSoftwareApp) } | Should -Not -Throw
     }
 }
