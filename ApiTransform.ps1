@@ -11,8 +11,8 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml';
         FindAndReplace     = [Ordered]@{
-            '"basePath":"\/insights\/directory\/v1"'                                                                                                                                                                                                                 = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and\/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
+            '"basePath":"\/insights\/directory\/v1"'                                                                                                                                                                                                                      = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction \(and\/or\)\\nNOTE: the validator limits what the operator can be, not the object\\nfor future-proof-ness\\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
         };
         OperationIdMapping = [Ordered]@{
             'POST_events'          = 'Get-Event';
