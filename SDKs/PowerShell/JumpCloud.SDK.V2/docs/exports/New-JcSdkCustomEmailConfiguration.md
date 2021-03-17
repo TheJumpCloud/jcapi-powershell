@@ -14,8 +14,8 @@ Create the custom email configuration for the specified custom email type
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-Body <String>] [-Button <String>]
- [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>] [-Confirm] [-WhatIf]
+New-JcSdkCustomEmailConfiguration -Subject <String> -Type <String> [-CreationSource <String>] [-Body <String>]
+ [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -72,6 +72,22 @@ Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomEmail
+Custom email content created by the admin user to personalize emails sent to their system users.
+To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.ICustomEmail
+Parameter Sets: Create
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
@@ -218,13 +234,12 @@ To create the parameters described below, construct a hash table containing the 
 
 
 CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
-  - `Subject <String>`: 
+  - `Subject <String>`:
   - `Type <String>`: CustomEmailType
-  - `[Body <String>]`: 
-  - `[Button <String>]`: 
-  - `[Header <String>]`: 
-  - `[NextStepContactInfo <String>]`: 
-  - `[Title <String>]`: 
+  - `[Body <String>]`:
+  - `[Button <String>]`:
+  - `[Header <String>]`:
+  - `[NextStepContactInfo <String>]`:
+  - `[Title <String>]`:
 
 ## RELATED LINKS
-

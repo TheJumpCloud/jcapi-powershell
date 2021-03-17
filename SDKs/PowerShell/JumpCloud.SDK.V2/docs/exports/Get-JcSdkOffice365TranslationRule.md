@@ -25,17 +25,19 @@ These rules specify how JumpCloud attributes translate to [Microsoft Graph](http
 ### List (Default)
 ```
 Get-JcSdkOffice365TranslationRule -Office365Id <String> [-Fields <String[]>] [-Filter <String[]>]
- [-Sort <String[]>] [<CommonParameters>]
+ [-Sort <String[]>] [-CreationSource <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkOffice365TranslationRule -Id <String> -Office365Id <String> [<CommonParameters>]
+Get-JcSdkOffice365TranslationRule -Id <String> -Office365Id <String> [-CreationSource <String>]
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Get-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,6 +70,23 @@ These rules specify how JumpCloud attributes translate to [Microsoft Graph](http
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Fields
 The comma separated fields included in the returned records.

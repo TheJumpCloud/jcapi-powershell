@@ -26,12 +26,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSystemGroup -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemGroup -Name <String> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkSystemGroup -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemGroup -Body <ISystemGroupData> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,6 +81,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

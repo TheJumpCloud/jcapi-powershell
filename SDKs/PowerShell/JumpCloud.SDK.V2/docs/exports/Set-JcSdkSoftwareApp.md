@@ -32,13 +32,14 @@ Set-JcSdkSoftwareApp -Id <String> [-DisplayName <String>] [-Id1 <String>] [-Sett
 
 ### Set
 ```
-Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-CreationSource <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-CreationSource <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -93,6 +94,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -227,55 +245,54 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <ISoftwareApp>: Software Application Package Object
-  - `[DisplayName <String>]`: 
-  - `[Id <String>]`: 
-  - `[Settings <ISoftwareAppSettings[]>]`: 
-    - `[AllowUpdateDelay <Boolean?>]`: 
-    - `[AppleVppAssignedLicenses <Int32?>]`: 
-    - `[AppleVppAvailableLicenses <Int32?>]`: 
+  - `[DisplayName <String>]`:
+  - `[Id <String>]`:
+  - `[Settings <ISoftwareAppSettings[]>]`:
+    - `[AllowUpdateDelay <Boolean?>]`:
+    - `[AppleVppAssignedLicenses <Int32?>]`:
+    - `[AppleVppAvailableLicenses <Int32?>]`:
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[AppleVppTotalLicenses <Int32?>]`: 
-    - `[AutoUpdate <Boolean?>]`: 
+    - `[AppleVppTotalLicenses <Int32?>]`:
+    - `[AutoUpdate <Boolean?>]`:
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-    - `[PackageId <String>]`: 
+    - `[PackageId <String>]`:
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 SETTINGS <ISoftwareAppSettings[]>: .
-  - `[AllowUpdateDelay <Boolean?>]`: 
-  - `[AppleVppAssignedLicenses <Int32?>]`: 
-  - `[AppleVppAvailableLicenses <Int32?>]`: 
+  - `[AllowUpdateDelay <Boolean?>]`:
+  - `[AppleVppAssignedLicenses <Int32?>]`:
+  - `[AppleVppAvailableLicenses <Int32?>]`:
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[AppleVppTotalLicenses <Int32?>]`: 
-  - `[AutoUpdate <Boolean?>]`: 
+  - `[AppleVppTotalLicenses <Int32?>]`:
+  - `[AutoUpdate <Boolean?>]`:
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
-  - `[PackageId <String>]`: 
+  - `[PackageId <String>]`:
   - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
 ## RELATED LINKS
-

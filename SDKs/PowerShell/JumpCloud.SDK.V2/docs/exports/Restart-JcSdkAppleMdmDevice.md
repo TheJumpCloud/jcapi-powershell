@@ -23,14 +23,14 @@ Restarts a DEP-enrolled device.
 
 ### Restart (Default)
 ```
-Restart-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Restart-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-CreationSource <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### RestartViaIdentity
 ```
-Restart-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Restart-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,6 +72,23 @@ Parameter Sets: Restart
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

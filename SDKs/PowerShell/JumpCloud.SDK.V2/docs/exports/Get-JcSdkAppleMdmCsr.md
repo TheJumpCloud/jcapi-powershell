@@ -23,12 +23,13 @@ The user must supply the returned plist to Apple for signing, and then provide t
 
 ### Get (Default)
 ```
-Get-JcSdkAppleMdmCsr -AppleMdmId <String> [-PassThru] [<CommonParameters>]
+Get-JcSdkAppleMdmCsr -AppleMdmId <String> [-CreationSource <String>] [-PassThru] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkAppleMdmCsr -InputObject <IJumpCloudApIsIdentity> [-PassThru] [<CommonParameters>]
+Get-JcSdkAppleMdmCsr -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-PassThru]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -70,6 +71,23 @@ Parameter Sets: Get
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

@@ -20,8 +20,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
   -H 'x-api-key: {API_KEY}' \\
   -d '{
 \t
-\"type\":\"user\", 
-\"id\":\"{USER_ID}\", 
+\"type\":\"user\",
+\"id\":\"{USER_ID}\",
 \"op\":\"add\"
 \t
 }'
@@ -37,14 +37,14 @@ Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <Stri
 
 ### Set
 ```
-Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphOperationRadiusServer> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphOperationRadiusServer>
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationRadiusServer>
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -66,8 +66,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
   -H 'x-api-key: {API_KEY}' \\
   -d '{
 \t
-\"type\":\"user\", 
-\"id\":\"{USER_ID}\", 
+\"type\":\"user\",
+\"id\":\"{USER_ID}\",
 \"op\":\"add\"
 \t
 }'
@@ -119,6 +119,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -274,26 +291,25 @@ BODY <IGraphOperationRadiusServer>: GraphOperation (RadiusServer)
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-

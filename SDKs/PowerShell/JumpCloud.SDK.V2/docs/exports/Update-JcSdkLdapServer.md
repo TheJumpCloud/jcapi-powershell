@@ -27,28 +27,29 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <String>]
+Update-JcSdkLdapServer -Id <String> [-CreationSource <String>] [-Id1 <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
 Update-JcSdkLdapServer -Id <String>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-CreationSource <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
 Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
- -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-CreationSource <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-CreationSource <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,6 +99,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CreationSource
+Defines the creation-source header for gapps, o365 and workdays requests.
+If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
+Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
