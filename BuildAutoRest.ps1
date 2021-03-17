@@ -375,7 +375,7 @@ Try
                 }
                 ###########################################################################
                 # Comment out refs to .format.ps1xml
-                If ($CommentFormatPs1Xml)
+                If ($RemoveFormatPs1Xml)
                 {
                     (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
                     (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force
