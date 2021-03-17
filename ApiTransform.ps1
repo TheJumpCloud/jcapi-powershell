@@ -44,7 +44,7 @@ $TransformConfig = [Ordered]@{
             '{"name":"Accept","in":"header","required":false,"type":"string"}'         = ''; # This will be passed in later through the Module.cs file.
             '{"name":"x-org-id","in":"header","required":false,"type":"string"}'       = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             ',,'                                                                       = ',';
-            '[,'                                                                       = '[';
+            '\[,'                                                                      = '[';
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
