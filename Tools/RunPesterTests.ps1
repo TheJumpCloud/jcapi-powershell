@@ -37,9 +37,7 @@ $moduleName = $moduleName # JumpCloud.SDK.V1
 #region Import Modules
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
-    Write-Host ("Hi1: $($modulePath)")
-    Write-Host ("Hi2: $($modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1'))")
-    Import-Module -Name $modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1') -Force -Verbose
+    Import-Module -Name $modulePath.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1') -Force
 }
 #endregion Import Modules
 #region Define Objects
