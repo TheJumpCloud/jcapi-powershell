@@ -75,6 +75,53 @@
       "title": "Administrator",
       "type": "object"
     },
+    "AppleMDM": {
+      "properties": {
+        "apnsCertExpiry": {
+          "description": "The expiration date and time for the APNS Certificate.",
+          "type": "string"
+        },
+        "apnsPushTopic": {
+          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist.",
+          "type": "string"
+        },
+        "defaultSystemGroupID": {
+          "description": "ObjectId uniquely identifying the MDM default System Group.",
+          "type": "string"
+        },
+        "dep": {
+          "$ref": "#/definitions/DEP"
+        },
+        "depAccessTokenExpiry": {
+          "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State.",
+          "type": "string"
+        },
+        "depServerTokenState": {
+          "description": "The state of the dep server token, presence and expiry.",
+          "enum": [
+            "unknown",
+            "missing",
+            "valid",
+            "expired"
+          ],
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying an MDM Enrollment,",
+          "type": "string"
+        },
+        "name": {
+          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
+          "maxLength": 255,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "AppleMDM",
+      "type": "object"
+    },
     "apple-mdm-device": {
       "properties": {
         "createdAt": {
@@ -135,53 +182,6 @@
     "apple-mdm-signed-csr-plist": {
       "title": "Apple MDM Signed CSR PList",
       "type": "string"
-    },
-    "AppleMDM": {
-      "properties": {
-        "apnsCertExpiry": {
-          "description": "The expiration date and time for the APNS Certificate.",
-          "type": "string"
-        },
-        "apnsPushTopic": {
-          "description": "The push topic assigned to this enrollment by Apple after uploading the Signed CSR plist.",
-          "type": "string"
-        },
-        "defaultSystemGroupID": {
-          "description": "ObjectId uniquely identifying the MDM default System Group.",
-          "type": "string"
-        },
-        "dep": {
-          "$ref": "#/definitions/DEP"
-        },
-        "depAccessTokenExpiry": {
-          "description": "The expiration date and time for the DEP Access Token. This aligns with the DEP Server Token State.",
-          "type": "string"
-        },
-        "depServerTokenState": {
-          "description": "The state of the dep server token, presence and expiry.",
-          "enum": [
-            "unknown",
-            "missing",
-            "valid",
-            "expired"
-          ],
-          "type": "string"
-        },
-        "id": {
-          "description": "ObjectId uniquely identifying an MDM Enrollment,",
-          "type": "string"
-        },
-        "name": {
-          "description": "A friendly name to identify this enrollment.  Not required to be unique.",
-          "maxLength": 255,
-          "type": "string"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "title": "AppleMDM",
-      "type": "object"
     },
     "auth-info": {
       "properties": {
@@ -884,6 +884,12 @@
       "title": "GraphAttribute (Radius)",
       "type": "object"
     },
+    "GraphAttributes": {
+      "additionalProperties": true,
+      "description": "The graph attributes.",
+      "title": "GraphAttributes",
+      "type": "object"
+    },
     "GraphAttribute-SambaEnabled": {
       "description": "Enabling Samba support allows for LDAP users to authenticate to endpoints that require Samba attributes within the LDAP directory",
       "properties": {
@@ -916,12 +922,6 @@
         }
       },
       "title": "GraphAttribute (Sudo)",
-      "type": "object"
-    },
-    "GraphAttributes": {
-      "additionalProperties": true,
-      "description": "The graph attributes.",
-      "title": "GraphAttributes",
       "type": "object"
     },
     "GraphConnection": {
@@ -1678,6 +1678,27 @@
       "title": "GroupType",
       "type": "string"
     },
+    "GSuiteBuiltinTranslation": {
+      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
+      "enum": [
+        "user_home_addresses",
+        "user_work_addresses",
+        "user_other_addresses",
+        "user_home_phone_numbers",
+        "user_mobile_phone_numbers",
+        "user_other_phone_numbers",
+        "user_work_phone_numbers",
+        "user_work_fax_phone_numbers",
+        "user_work_mobile_phone_numbers",
+        "user_primary_organization_cost_center",
+        "user_primary_organization_department",
+        "user_primary_organization_description",
+        "user_primary_organization_employee_id",
+        "user_primary_organization_title"
+      ],
+      "title": "G Suite BuiltIn Translation",
+      "type": "string"
+    },
     "gsuite-output": {
       "allOf": [
         {
@@ -1738,27 +1759,6 @@
       },
       "title": "GSuite Patch Input",
       "type": "object"
-    },
-    "GSuiteBuiltinTranslation": {
-      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n",
-      "enum": [
-        "user_home_addresses",
-        "user_work_addresses",
-        "user_other_addresses",
-        "user_home_phone_numbers",
-        "user_mobile_phone_numbers",
-        "user_other_phone_numbers",
-        "user_work_phone_numbers",
-        "user_work_fax_phone_numbers",
-        "user_work_mobile_phone_numbers",
-        "user_primary_organization_cost_center",
-        "user_primary_organization_department",
-        "user_primary_organization_description",
-        "user_primary_organization_employee_id",
-        "user_primary_organization_title"
-      ],
-      "title": "G Suite BuiltIn Translation",
-      "type": "string"
     },
     "GSuiteTranslationRule": {
       "properties": {
@@ -1862,6 +1862,14 @@
       "title": "Job WorkResult",
       "type": "object"
     },
+    "LdapServerAction": {
+      "enum": [
+        "disable",
+        "remove"
+      ],
+      "title": "LDAP Server Action",
+      "type": "string"
+    },
     "ldap-server-input": {
       "properties": {
         "name": {
@@ -1908,16 +1916,25 @@
       ],
       "title": "LDAP Server Output"
     },
-    "LdapServerAction": {
-      "enum": [
-        "disable",
-        "remove"
-      ],
-      "title": "LDAP Server Action",
-      "type": "string"
-    },
     "mobileconfig": {
       "title": "mobileconfig",
+      "type": "string"
+    },
+    "Office365BuiltinTranslation": {
+      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
+      "enum": [
+        "user_street_address",
+        "user_city",
+        "user_state",
+        "user_country",
+        "user_postal_code",
+        "user_business_phones",
+        "user_mobile_phone",
+        "user_department",
+        "user_job_title",
+        "user_office_location"
+      ],
+      "title": "Office 365 BuiltIn Translation",
       "type": "string"
     },
     "office365-output": {
@@ -1973,23 +1990,6 @@
       },
       "title": "Office 365 Patch Input",
       "type": "object"
-    },
-    "Office365BuiltinTranslation": {
-      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
-      "enum": [
-        "user_street_address",
-        "user_city",
-        "user_state",
-        "user_country",
-        "user_postal_code",
-        "user_business_phones",
-        "user_mobile_phone",
-        "user_department",
-        "user_job_title",
-        "user_office_location"
-      ],
-      "title": "Office 365 BuiltIn Translation",
-      "type": "string"
     },
     "Office365TranslationRule": {
       "properties": {
@@ -2495,35 +2495,6 @@
       "title": "software-app-apple-vpp",
       "type": "object"
     },
-    "software-app-status": {
-      "properties": {
-        "code": {
-          "type": "integer"
-        },
-        "details": {
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "softwareAppId": {
-          "type": "string"
-        },
-        "state": {
-          "type": "string"
-        },
-        "systemId": {
-          "type": "string"
-        },
-        "timestamp": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "title": "Software Application Status Object"
-    },
     "SoftwareAppSettings": {
       "properties": {
         "allowUpdateDelay": {
@@ -2555,6 +2526,35 @@
       },
       "title": "Software Application Package Setting Object",
       "type": "object"
+    },
+    "software-app-status": {
+      "properties": {
+        "code": {
+          "type": "integer"
+        },
+        "details": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "softwareAppId": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "systemId": {
+          "type": "string"
+        },
+        "timestamp": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "Software Application Status Object"
     },
     "subscription": {
       "properties": {
@@ -2590,6 +2590,63 @@
         "productCode"
       ],
       "title": "Subscription",
+      "type": "object"
+    },
+    "systemfdekey": {
+      "properties": {
+        "key": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "key"
+      ],
+      "title": "SystemFDEKey",
+      "type": "object"
+    },
+    "SystemGroup": {
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        "description": {
+          "description": "Description of a System Group",
+          "type": "string"
+        },
+        "email": {
+          "description": "E-mail address associated with a System Group",
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a System Group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of a System Group.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the group; always 'system' for a System Group.",
+          "enum": [
+            "system_group"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "SystemGroup",
+      "type": "object"
+    },
+    "SystemGroupData": {
+      "properties": {
+        "name": {
+          "description": "Display name of a System Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SystemGroupData",
       "type": "object"
     },
     "system-insights-alf": {
@@ -2698,7 +2755,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -2894,7 +2951,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -2934,7 +2991,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.858-06:00",
+        "collection_time": "2019-06-03T19:41:30.858+00:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -3062,7 +3119,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03T13:41:31.125-06:00",
+        "collection_time": "2019-06-03T19:41:31.125+00:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -3237,7 +3294,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.557-06:00",
+        "collection_time": "2019-06-03T19:41:31.557+00:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -3281,7 +3338,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -3369,7 +3426,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -3394,7 +3451,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T13:41:31.204-06:00",
+        "collection_time": "2019-06-03T19:41:31.204+00:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -3464,7 +3521,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -3526,7 +3583,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T13:41:31.008-06:00",
+        "collection_time": "2019-06-03T19:41:31.008+00:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -3812,7 +3869,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658+00:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -3885,7 +3942,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T13:41:31.746-06:00",
+        "collection_time": "2019-06-03T19:41:31.746+00:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -3943,7 +4000,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T13:41:30.933-06:00",
+        "collection_time": "2019-06-03T19:41:30.933+00:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -3998,7 +4055,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -4045,7 +4102,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673+00:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -4127,7 +4184,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T12:58:15.673-06:00",
+        "collection_time": "2019-05-16T18:58:15.673+00:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -4487,7 +4544,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.771-06:00",
+        "collection_time": "2019-06-03T19:41:30.771+00:00",
         "computer_name": "Johnny’s MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -4654,30 +4711,9 @@
       "title": "System Insights User Groups",
       "type": "object"
     },
-    "system-insights-user-ssh-keys": {
-      "properties": {
-        "collection_time": {
-          "type": "string"
-        },
-        "encrypted": {
-          "type": "integer"
-        },
-        "path": {
-          "type": "string"
-        },
-        "system_id": {
-          "type": "string"
-        },
-        "uid": {
-          "type": "string"
-        }
-      },
-      "title": "System Insights User SSH Keys",
-      "type": "object"
-    },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T13:41:29.71-06:00",
+        "collection_time": "2019-06-03T19:41:29.71+00:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -4745,6 +4781,27 @@
         }
       },
       "title": "System Insights Users",
+      "type": "object"
+    },
+    "system-insights-user-ssh-keys": {
+      "properties": {
+        "collection_time": {
+          "type": "string"
+        },
+        "encrypted": {
+          "type": "integer"
+        },
+        "path": {
+          "type": "string"
+        },
+        "system_id": {
+          "type": "string"
+        },
+        "uid": {
+          "type": "string"
+        }
+      },
+      "title": "System Insights User SSH Keys",
       "type": "object"
     },
     "system-insights-wifi-networks": {
@@ -4874,63 +4931,6 @@
         }
       },
       "title": "System Insights Windows Security Products",
-      "type": "object"
-    },
-    "systemfdekey": {
-      "properties": {
-        "key": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "key"
-      ],
-      "title": "SystemFDEKey",
-      "type": "object"
-    },
-    "SystemGroup": {
-      "properties": {
-        "attributes": {
-          "$ref": "#/definitions/GraphAttributes"
-        },
-        "description": {
-          "description": "Description of a System Group",
-          "type": "string"
-        },
-        "email": {
-          "description": "E-mail address associated with a System Group",
-          "type": "string"
-        },
-        "id": {
-          "description": "ObjectId uniquely identifying a System Group.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Display name of a System Group.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The type of the group; always 'system' for a System Group.",
-          "enum": [
-            "system_group"
-          ],
-          "type": "string"
-        }
-      },
-      "title": "SystemGroup",
-      "type": "object"
-    },
-    "SystemGroupData": {
-      "properties": {
-        "name": {
-          "description": "Display name of a System Group.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "title": "SystemGroupData",
       "type": "object"
     },
     "UserGroup": {
