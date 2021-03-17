@@ -11,9 +11,9 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         Url                = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml';
         FindAndReplace     = [Ordered]@{
-            '"basePath":"/insights/directory/v1"'                                                                                                                                                                                                                   = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-            '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}'                                                                          = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}'
-            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
+            '"basePath":"\/insights\/directory\/v1"'                                                                                                                                                                                                                 = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
+            '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}'                                                                           = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}'
+            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and\/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
         };
         OperationIdMapping = [Ordered]@{
             'POST_events'          = 'Get-Event';
@@ -27,19 +27,19 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#/definitions/system"'                                                   = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"#\/definitions\/system"'                                                 = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             '"system":{"title":"System"'                                               = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
-            '"basePath":"/api"'                                                        = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
+            '"basePath":"\/api"'                                                       = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
             '"format":"email",'                                                        = ''; # WARNING (LLCS1001/DoesNotSupportEnum):Schema with type:'string and 'format:'email' is not recognized.
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''
             # Custom Tweaks
-            '{"$ref":"#/parameters/trait:systemContextAuth:Authorization"}'            = ''; # We dont want to support authentication through system context via the SDK
-            '{"$ref":"#/parameters/trait:systemContextAuth:Date"}'                     = ''; # We dont want to support authentication through system context via the SDK
-            '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                      = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'         = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'         = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                  = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                   = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             '{"name":"Content-Type","in":"header","required":false,"type":"string"}'   = ''; # This will be passed in later through the Module.cs file.
             '{"name":"Accept","in":"header","required":false,"type":"string"}'         = ''; # This will be passed in later through the Module.cs file.
             '{"name":"x-org-id","in":"header","required":false,"type":"string"}'       = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -102,31 +102,32 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
         FindAndReplace     = [Ordered]@{
             # V2 Issues
-            '"basePath":"/api/v2"'                                                                                = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '["string","number","boolean","array"]'                                                               = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '["string","number","boolean","array","null"]'                                                        = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
-            '["object","null"]'                                                                                   = '"object"';
-            '["string","null"]'                                                                                   = '"string"';
-            '["boolean","null"]'                                                                                  = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"jobId"'                                                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
-            '"type":"null"'                                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
-            '"format":"uint32"'                                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"basePath":"\/api\/v2"'                                                                               = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+            '\["string","number","boolean","array"]'                                                               = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
+            '\["string","number","boolean","array","null"]'                                                        = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
+            '\["object","null"]'                                                                                   = '"object"';
+            '\["string","null"]'                                                                                   = '"string"';
+            '\["boolean","null"]'                                                                                  = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
+            '\["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
+            '\["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
+            '"jobId"'                                                                                              = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
+            '"type":"null"'                                                                                        = '"type":"string"'; # Error: Invalid type 'null' in schema
+            'software-app-settings'                                                                                = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":\[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                                                    = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            '{"$ref":"#/parameters/trait:requestHeaders:creation-source"}'                                        = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
-            '{"$ref":"#/parameters/trait:requestHeaders:Content-Type"}'                                           = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:requestHeaders:Accept"}'                                                 = ''; # This will be passed in later through the Module.cs file.
-            '{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}'                                    = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"Content-Type","in":"header","required":false,"type":"string","default":"application/json"}' = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"Accept","in":"header","required":false,"type":"string","default":"application/json"}'       = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"x-api-key","in":"header","required":false,"type":"string"}'                                 = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                                                  = ',';
-            '[,'                                                                                                  = '[';
-            ',]'                                                                                                  = ']';
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                         = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                               = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"name":"Content-Type","in":"header","required":false,"type":"string","default":"application\/json"}' = ''; # This will be passed in later through the Module.cs file.
+            '{"name":"Accept","in":"header","required":false,"type":"string","default":"application\/json"}'       = ''; # This will be passed in later through the Module.cs file.
+            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'                                   = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"name":"x-api-key","in":"header","required":false,"type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                                                   = ',';
+            '\[,'                                                                                                  = '[';
+            ',]'                                                                                                   = ']';
+            '"collection_time":".*?",'                                                                             = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
         };
         OperationIdMapping = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
@@ -723,14 +724,14 @@ $SDKName | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
             {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
-                    $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name))
+                    $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
                     If (-not [System.String]::IsNullOrEmpty($PatternMatch))
                     {
-                        While ($SwaggerObject | Select-String -Pattern:([regex]::Escape($_.Name)))
+                        Do
                         {
-                            $SwaggerObject = $SwaggerObject.Replace([string]$_.Name, [string]$_.Value)
-                            $SwaggerObject = $SwaggerObject.Replace([string]$PatternMatch.Matches.Value, [string]$_.Value)
-                        }
+                            $SwaggerObject = $SwaggerObject -Replace ([regex]$_.Name, [string]$_.Value)
+                            $PatternExists = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
+                        } While ($PatternExists -and $PatternExists.Matches.Value -ne $_.Value)
                     }
                     Else
                     {
