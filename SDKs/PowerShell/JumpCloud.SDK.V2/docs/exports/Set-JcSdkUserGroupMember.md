@@ -27,26 +27,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-CreationSource <String>]
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Id <String> -Op <String> [-Attributes <Hashtable>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkUserGroupMember -GroupId <String> -Body <IGraphOperationUserGroupMember> [-CreationSource <String>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroupMember -GroupId <String> -Body <IGraphOperationUserGroupMember> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
 Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUserGroupMember>
- [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
- [-CreationSource <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,23 +111,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

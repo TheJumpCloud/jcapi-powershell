@@ -24,7 +24,7 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
 ## SYNTAX
 
 ```
-Get-JcSdkAppleMdm [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkAppleMdm [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,23 +51,6 @@ Get-JcSdkAppleMdm
 Get Apple MDM Server information within a JumpCloud Tenant
 
 ## PARAMETERS
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).

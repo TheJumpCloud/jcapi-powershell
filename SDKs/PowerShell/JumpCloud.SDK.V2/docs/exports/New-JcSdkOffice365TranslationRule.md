@@ -26,26 +26,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tran
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkOffice365TranslationRule -Office365Id <String> [-CreationSource <String>] [-BuiltIn <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkOffice365TranslationRule -Office365Id <String> [-BuiltIn <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkOffice365TranslationRule -Office365Id <String> -Body <IOffice365TranslationRuleRequest>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkOffice365TranslationRule -Office365Id <String> -Body <IOffice365TranslationRuleRequest> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
 New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity>
- -Body <IOffice365TranslationRuleRequest> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Body <IOffice365TranslationRuleRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>]
- [-BuiltIn <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity> [-BuiltIn <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,23 +103,6 @@ Built-in translations for Office 365 (Microsoft Graph) export:* `user_street_add
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

@@ -29,25 +29,25 @@ Creates a Duo application for your organization and the specified account.
 ### CreateExpanded (Default)
 ```
 New-JcSdkDuoApplication -AccountId <String> -ApiHost <String> -IntegrationKey <String> -Name <String>
- -SecretKey <String> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -SecretKey <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkDuoApplication -AccountId <String> -Body <IDuoApplicationReq> [-CreationSource <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkDuoApplication -AccountId <String> -Body <IDuoApplicationReq> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -Body <IDuoApplicationReq>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -Body <IDuoApplicationReq> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
 New-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -ApiHost <String> -IntegrationKey <String>
- -Name <String> -SecretKey <String> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Name <String> -SecretKey <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -128,23 +128,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

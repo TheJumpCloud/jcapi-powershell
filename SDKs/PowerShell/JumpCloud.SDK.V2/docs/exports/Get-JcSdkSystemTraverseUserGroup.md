@@ -32,13 +32,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/usergroups 
 ### Get (Default)
 ```
 Get-JcSdkSystemTraverseUserGroup -SystemId <String> [-Filter <String[]>] [-Authorization <String>]
- [-CreationSource <String>] [-Date <String>] [<CommonParameters>]
+ [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
 Get-JcSdkSystemTraverseUserGroup -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>]
- [-Authorization <String>] [-CreationSource <String>] [-Date <String>] [<CommonParameters>]
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,23 +81,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/usergroups 
 
 ### -Authorization
 Authorization header for the System Context API
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
 
 ```yaml
 Type: System.String

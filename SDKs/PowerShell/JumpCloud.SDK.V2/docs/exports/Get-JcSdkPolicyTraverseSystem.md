@@ -30,14 +30,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\
 
 ### Get (Default)
 ```
-Get-JcSdkPolicyTraverseSystem -PolicyId <String> [-Filter <String[]>] [-CreationSource <String>]
- [<CommonParameters>]
+Get-JcSdkPolicyTraverseSystem -PolicyId <String> [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyTraverseSystem -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>]
- [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkPolicyTraverseSystem -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,23 +74,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Filter
 A filter to apply to the query.

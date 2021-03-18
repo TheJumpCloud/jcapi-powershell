@@ -23,14 +23,13 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
 
 ### Sync (Default)
 ```
-Sync-JcSdkAppleMdmDevice -AppleMdmId <String> [-CreationSource <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Sync-JcSdkAppleMdmDevice -AppleMdmId <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SyncViaIdentity
 ```
-Sync-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Sync-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -72,23 +71,6 @@ Parameter Sets: Sync
 Aliases:
 
 Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

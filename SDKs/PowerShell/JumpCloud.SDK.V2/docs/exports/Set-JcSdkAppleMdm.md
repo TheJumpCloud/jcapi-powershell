@@ -36,28 +36,26 @@ It may also be used to update the DEP Settings.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkAppleMdm -Id <String> [-CreationSource <String>] [-AppleSignedCert <String>]
- [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
- [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>] [-Name <String>]
- [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -Id <String> [-AppleSignedCert <String>] [-DefaultSystemGroupId <String>]
+ [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-EncryptedDepServerToken <String>] [-Name <String>] [-WelcomeScreenButton <String>]
+ [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatchInput> [-CreationSource <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> -Body <IAppleMdmPatchInput> [-CreationSource <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [-AppleSignedCert <String>]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-AppleSignedCert <String>]
  [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
  [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>] [-Name <String>]
  [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
@@ -135,23 +133,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

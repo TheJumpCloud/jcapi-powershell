@@ -26,26 +26,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translatio
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkGSuiteTranslationRule -GsuiteId <String> [-CreationSource <String>] [-BuiltIn <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -GsuiteId <String> [-BuiltIn <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkGSuiteTranslationRule -GsuiteId <String> -Body <IGSuiteTranslationRuleRequest>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -GsuiteId <String> -Body <IGSuiteTranslationRuleRequest> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
 New-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApIsIdentity> -Body <IGSuiteTranslationRuleRequest>
- [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>]
- [-BuiltIn <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApIsIdentity> [-BuiltIn <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,23 +103,6 @@ Built-in translations for G Suite export:* `user_home_addresses` - Translate all
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: False

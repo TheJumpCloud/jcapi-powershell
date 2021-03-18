@@ -22,17 +22,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
 
 ### List (Default)
 ```
-Get-JcSdkSoftwareApp [-Filter <String[]>] [-Sort <String[]>] [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkSoftwareApp [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkSoftwareApp -Id <String> [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkSoftwareApp -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-CreationSource <String>] [<CommonParameters>]
+Get-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,23 +63,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
 {{ Add output here }}
 
 ## PARAMETERS
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -Filter
 A filter to apply to the query.

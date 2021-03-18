@@ -26,13 +26,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkPolicy -Name <String> [-CreationSource <String>] [-TemplateId <String>] [-Values <IPolicyValue[]>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkPolicy -Body <IPolicyRequest> [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,23 +81,6 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -CreationSource
-Defines the creation-source header for gapps, o365 and workdays requests.
-If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
-Allowed: `jumpcloud:gapps`, `jumpcloud:o365`, `jumpcloud:workday`, `jumpcloud:bulk`.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
