@@ -145,7 +145,6 @@ $TransformConfig = [Ordered]@{
             'POST_applemdms-apple_mdm_id-devices-device_id-restart'      = 'Restart-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Stop-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Sync-AppleMDMDevice';
-            'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
             'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
             'GET_applications-application_id-associations'               = 'Get-ApplicationAssociation';
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
@@ -365,7 +364,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', 'applemdms/{apple_mdm_id}/enrollmentprofiles/{id}')
     }
 }
 Function Get-SwaggerItem
