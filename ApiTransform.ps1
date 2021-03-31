@@ -137,8 +137,6 @@ $TransformConfig = [Ordered]@{
             'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
             'GET_applemdms'                                              = 'List-AppleMDM';
             'PUT_applemdms-id'                                           = 'Set-AppleMDM';
-            'GET_applemdms-apple_mdm_id-csr'                             = 'Get-AppleMDMCsr';
-            'GET_applemdms-apple_mdm_id-depkey'                          = 'Get-AppleMDMDepKey';
             'POST_applemdms-apple_mdm_id-devices-device_id-erase'        = 'Clear-AppleMDMDevice';
             'GET_applemdms-apple_mdm_id-devices'                         = 'List-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-devices-device_id-lock'         = 'Lock-AppleMDMDevice';
@@ -364,7 +362,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr')
     }
 }
 Function Get-SwaggerItem
