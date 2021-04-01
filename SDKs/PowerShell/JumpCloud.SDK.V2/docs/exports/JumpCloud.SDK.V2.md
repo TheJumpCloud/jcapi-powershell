@@ -82,21 +82,6 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkAppleMdmCsr](Get-JcSdkAppleMdmCsr.md)
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
-
-#### Sample Request
-```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
-### [Get-JcSdkAppleMdmDepKey](Get-JcSdkAppleMdmDepKey.md)
-Retrieves an Apple MDM DEP Public Key.
-
 ### [Get-JcSdkAppleMdmDevice](Get-JcSdkAppleMdmDevice.md)
 Lists all Apple MDM devices.
 
@@ -118,15 +103,14 @@ The filter and sort queries will allow the following fields:
 ```
 
 ### [Get-JcSdkAppleMdmEnrollmentProfile](Get-JcSdkAppleMdmEnrollmentProfile.md)
-Get an enrollment profile
+Get a list of enrollment profiles for an apple mdm.
 
-Currently only requesting the mobileconfig is supported.
+Note: currently only one enrollment profile is supported.
 
 #### Sample Request
-
 ```
-curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\
-  -H 'accept: application/x-apple-aspen-config' \\
+ curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\
+  -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
@@ -1711,6 +1695,21 @@ Locks a DEP-enrolled device.
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{}'
+```
+
+### [New-JcSdkActiveDirectory](New-JcSdkActiveDirectory.md)
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
 ```
 
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)

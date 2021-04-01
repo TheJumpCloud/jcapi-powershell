@@ -130,7 +130,13 @@
         "depRegistered": {
           "type": "boolean"
         },
+        "deviceInformation": {
+          "$ref": "#/definitions/apple-mdm-device-info"
+        },
         "enrolled": {
+          "type": "boolean"
+        },
+        "hasActivationLockBypassCodes": {
           "type": "boolean"
         },
         "id": {
@@ -138,6 +144,9 @@
         },
         "osVersion": {
           "type": "string"
+        },
+        "securityInfo": {
+          "$ref": "#/definitions/apple-mdm-device-security-info"
         },
         "serialNumber": {
           "type": "string"
@@ -147,6 +156,41 @@
         }
       },
       "title": "Apple MDM Device",
+      "type": "object"
+    },
+    "apple-mdm-device-info": {
+      "description": "Apple MDM device information",
+      "properties": {
+        "activationLockAllowedWhileSupervised": {
+          "type": "boolean"
+        },
+        "isActivationLockEnabled": {
+          "type": "boolean"
+        },
+        "isSupervised": {
+          "type": "boolean"
+        }
+      },
+      "title": "Apple MDM Device Info",
+      "type": "object"
+    },
+    "apple-mdm-device-security-info": {
+      "description": "Apple MDM device security information",
+      "properties": {
+        "enrolledViaDep": {
+          "type": "boolean"
+        },
+        "isActivationLockManageable": {
+          "type": "boolean"
+        },
+        "isUserEnrollment": {
+          "type": "boolean"
+        },
+        "userApprovedEnrollment": {
+          "type": "boolean"
+        }
+      },
+      "title": "Apple MDM Device Security Info",
       "type": "object"
     },
     "apple-mdm-patch-input": {
@@ -174,14 +218,6 @@
       },
       "title": "Apple MDM Patch Input",
       "type": "object"
-    },
-    "apple-mdm-public-key-cert": {
-      "title": "Apple MDM Public Key Certificate",
-      "type": "string"
-    },
-    "apple-mdm-signed-csr-plist": {
-      "title": "Apple MDM Signed CSR PList",
-      "type": "string"
     },
     "auth-info": {
       "properties": {
@@ -1915,10 +1951,6 @@
         }
       ],
       "title": "LDAP Server Output"
-    },
-    "mobileconfig": {
-      "title": "mobileconfig",
-      "type": "string"
     },
     "Office365BuiltinTranslation": {
       "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
@@ -4746,12 +4778,16 @@
         "gid_signed": {
           "type": "string"
         },
+        "last_login": {
+          "description": "A Unix timestamp showing the last time this user logged in",
+          "type": "string"
+        },
         "managed": {
           "description": "Indicates this account belongs to a JumpCloud-managed user",
           "type": "boolean"
         },
         "real_user": {
-          "description": "Indicates this account represents an interactive user account vs. a system or daemon account\n",
+          "description": "Indicates this account represents an interactive user account vs. a system or daemon account",
           "type": "boolean"
         },
         "shell": {
@@ -5230,6 +5266,33 @@
           }
         ],
         "summary": "List Active Directories"
+      },
+      "post": {
+        "description": "This endpoint allows you to create a new Active Directory.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"domain\": \"{DC=AD_domain_name;DC=com}\"\n  }'\n```",
+        "operationId": "New-ActiveDirectory",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/active-directory-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/active-directory-output"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create a new Active Directory"
       }
     },
     "/activedirectories/{activedirectory_id}/associations": {
@@ -5435,70 +5498,6 @@
         ],
         "summary": "List Apple MDMs"
       }
-    },
-    "/applemdms/{apple_mdm_id}/csr": {
-      "get": {
-        "description": "Retrieves an Apple MDM signed CSR Plist for an organization.  The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "Get-AppleMDMCsr",
-        "parameters": [],
-        "produces": [
-          "application/octet-stream"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/apple-mdm-signed-csr-plist"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get Apple MDM CSR Plist"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "apple_mdm_id",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
-    "/applemdms/{apple_mdm_id}/depkey": {
-      "get": {
-        "description": "Retrieves an Apple MDM DEP Public Key.",
-        "operationId": "Get-AppleMDMDepKey",
-        "parameters": [],
-        "produces": [
-          "application/x-pem-file"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/apple-mdm-public-key-cert"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get Apple MDM DEP Public Key"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "apple_mdm_id",
-          "required": true,
-          "type": "string"
-        }
-      ]
     },
     "/applemdms/{apple_mdm_id}/devices": {
       "get": {
@@ -5771,44 +5770,6 @@
         {
           "in": "path",
           "name": "apple_mdm_id",
-          "required": true,
-          "type": "string"
-        }
-      ]
-    },
-    "/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}": {
-      "get": {
-        "description": "Get an enrollment profile\n\nCurrently only requesting the mobileconfig is supported.\n\n#### Sample Request\n\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\\n  -H 'accept: application/x-apple-aspen-config' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "Get-AppleMDMEnrollmentProfile",
-        "parameters": [],
-        "produces": [
-          "application/x-apple-aspen-config"
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/mobileconfig"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get an Apple MDM Enrollment Profile"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "apple_mdm_id",
-          "required": true,
-          "type": "string"
-        },
-        {
-          "in": "path",
-          "name": "id",
           "required": true,
           "type": "string"
         }
@@ -6325,6 +6286,23 @@
                 "$ref": "#/definitions/bulk-user-create"
               },
               "type": "array"
+            }
+          },
+          {
+            "default": "jumpcloud:bulk",
+            "description": "Defines the creation-source header for gapps, o365 and workdays requests.\nIf the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.\n",
+            "enum": [
+              "jumpcloud:gapps",
+              "jumpcloud:o365",
+              "jumpcloud:workday",
+              "jumpcloud:bulk"
+            ],
+            "in": "header",
+            "name": "creation-source",
+            "required": false,
+            "type": "string",
+            "x-ms-enum": {
+              "name": "parameters"
             }
           }
         ],
@@ -11188,6 +11166,12 @@
         "operationId": "Delete-SystemGroup",
         "parameters": [],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SystemGroup"
+            }
+          },
           "204": {
             "description": "No Content"
           }
@@ -16085,6 +16069,12 @@
         "operationId": "Delete-UserGroup",
         "parameters": [],
         "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/UserGroup"
+            }
+          },
           "204": {
             "description": "No Content"
           }
