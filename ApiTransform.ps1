@@ -115,7 +115,7 @@ $TransformConfig = [Ordered]@{
             'custom email type","parameters":\[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                                    = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
+            #'{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                         = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                               = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -131,6 +131,7 @@ $TransformConfig = [Ordered]@{
         OperationIdMapping = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
             'GET_activedirectories'                                      = 'List-ActiveDirectory';
+            'POST_activedirectories'                                     = 'New-ActiveDirectory'
             'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
             'POST_activedirectories-activedirectory_id-associations'     = 'Set-ActiveDirectoryAssociation';
             'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
@@ -362,7 +363,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/usergroups/{group_id}/suggestions')
     }
 }
 Function Get-SwaggerItem
