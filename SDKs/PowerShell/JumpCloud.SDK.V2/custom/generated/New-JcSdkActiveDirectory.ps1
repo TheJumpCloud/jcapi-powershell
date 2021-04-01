@@ -1,25 +1,31 @@
 <#
 .Synopsis
-This endpoint allows you to delete a System Group.
+This endpoint allows you to create a new Active Directory.
+
 
 #### Sample Request
 ```
-curl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
 ```
 .Description
-This endpoint allows you to delete a System Group.
+This endpoint allows you to create a new Active Directory.
+
 
 #### Sample Request
 ```
-curl -X DELETE https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -31,55 +37,36 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IActiveDirectoryInput
 .Outputs
-JumpCloud.SDK.V2.Models.ISystemGroup
+JumpCloud.SDK.V2.Models.IActiveDirectoryOutput
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
+BODY <IActiveDirectoryInput>:
+  [Domain <String>]: Domain name for this Active Directory instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkSystemGroup.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
 #>
- Function Remove-JcSdkSystemGroup
+ Function New-JcSdkActiveDirectory
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISystemGroup])]
-    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryOutput])]
+    [CmdletBinding(DefaultParameterSetName='NewExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Delete', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Path')]
-    [System.String]
-    # ObjectID of the System Group.
-    ${Id},
+    [Parameter(ParameterSetName='New', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IActiveDirectoryInput]
+    # Active Directory Input
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
 
-    [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
-    # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    [Parameter(ParameterSetName='NewExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Domain name for this Active Directory instance.
+    ${Domain},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -100,12 +87,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Returns true when the command succeeds
-    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -143,7 +124,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Remove-JcSdkInternalSystemGroup @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalActiveDirectory @PSBoundParameters
     }
     End
     {

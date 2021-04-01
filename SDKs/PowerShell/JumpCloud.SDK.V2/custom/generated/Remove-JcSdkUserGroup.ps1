@@ -33,7 +33,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-System.Boolean
+JumpCloud.SDK.V2.Models.IUserGroup
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -65,7 +65,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Remove-JcSdkUserGroup
 {
-    [OutputType([System.Boolean])]
+    [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Delete', Mandatory)]

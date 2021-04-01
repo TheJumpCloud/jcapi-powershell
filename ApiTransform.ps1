@@ -115,7 +115,6 @@ $TransformConfig = [Ordered]@{
             'custom email type","parameters":\[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                                    = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                         = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                               = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -131,21 +130,19 @@ $TransformConfig = [Ordered]@{
         OperationIdMapping = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
             'GET_activedirectories'                                      = 'List-ActiveDirectory';
+            'POST_activedirectories'                                     = 'New-ActiveDirectory';
             'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
             'POST_activedirectories-activedirectory_id-associations'     = 'Set-ActiveDirectoryAssociation';
             'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
             'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
             'GET_applemdms'                                              = 'List-AppleMDM';
             'PUT_applemdms-id'                                           = 'Set-AppleMDM';
-            'GET_applemdms-apple_mdm_id-csr'                             = 'Get-AppleMDMCsr';
-            'GET_applemdms-apple_mdm_id-depkey'                          = 'Get-AppleMDMDepKey';
             'POST_applemdms-apple_mdm_id-devices-device_id-erase'        = 'Clear-AppleMDMDevice';
             'GET_applemdms-apple_mdm_id-devices'                         = 'List-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-devices-device_id-lock'         = 'Lock-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-devices-device_id-restart'      = 'Restart-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Stop-AppleMDMDevice';
             'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Sync-AppleMDMDevice';
-            'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
             'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
             'GET_applications-application_id-associations'               = 'Get-ApplicationAssociation';
             'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
@@ -179,6 +176,7 @@ $TransformConfig = [Ordered]@{
             'GET_duo-accounts-account_id-applications'                   = 'List-DuoApplication';
             'PUT_duo-accounts-account_id-applications-application_id'    = 'Set-DuoApplication';
             'GET_groups'                                                 = 'List-Group';
+            'GET_usergroups-group_id-suggestions'                        = 'Get-UserGroupSuggestion';
             'GET_gsuites-id'                                             = 'Get-GSuite';
             'PATCH_gsuites-id'                                           = 'Update-GSuite';
             'GET_gsuites-gsuite_id-associations'                         = 'Get-GSuiteAssociation';
@@ -365,7 +363,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/usergroups/{group_id}/suggestions')
     }
 }
 Function Get-SwaggerItem
