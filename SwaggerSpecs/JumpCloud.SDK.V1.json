@@ -3539,6 +3539,35 @@
         "summary": "Update a Command"
       }
     },
+    "/commands/{id}/results": {
+      "get": {
+        "description": "This endpoint returns results for a specific command.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
+        "operationId": "GET_commands-id-results",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {},
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get results for a specific command"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/files/command/{id}": {
       "get": {
         "description": "This endpoint returns the uploaded file(s) associated with a specific command.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
