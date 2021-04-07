@@ -9,21 +9,18 @@ $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
 $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
-        Url                = 'https://api.stoplight.io/v1/versions/fj5YeBmMuwbb6dghr/export/oas.yaml';
-        FindAndReplace     = [Ordered]@{
-            '"basePath":"\/insights\/directory\/v1"'                                                                                                                                                                                                                      = '"basePath":"/insights/directory/v1/"'; # The extra slash at the end is needed to properly build the url.
-            '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction \(and\/or\)\\nNOTE: the validator limits what the operator can be, not the object\\nfor future-proof-ness\\nand a list of sub-values","type":"object"}' = '"TermConjunction":{"title":"TermConjunction","description":"TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values","type":"object","additionalProperties":true}'
-        };
+        Url                = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/generated/directory_insights_swagger.json?ref=master';
+        FindAndReplace     = [Ordered]@{};
         OperationIdMapping = [Ordered]@{
-            'POST_events'          = 'Get-Event';
-            'POST_events-count'    = 'Get-EventCount';
-            'POST_events-interval' = 'Get-EventInterval';
-            'POST_events-distinct' = 'Get-EventDistinct';
+            'directoryInsights_eventsPost'         = 'Get-Event';
+            'directoryInsights_eventsCountPost'    = 'Get-EventCount';
+            'directoryInsights_eventsDistinctPost' = 'Get-EventDistinct';
+            'directoryInsights_eventsIntervalPost' = 'Get-EventInterval';
         };
         ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
-        Url                = 'https://api.stoplight.io/v1/versions/MeLBYr6CGg2f4g9Qh/export/oas.yaml'
+        Url                = 'https://api.github.com/repos/TheJumpCloud/SI/contents/routes/webui/api/index.yaml?ref=master'
         FindAndReplace     = [Ordered]@{
             # Path Issues
             '"#\/definitions\/system"'                                                 = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
@@ -36,97 +33,98 @@ $TransformConfig = [Ordered]@{
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'         = ''; # We dont want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                  = ''; # We dont want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = '';
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                   = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"Content-Type","in":"header","required":false,"type":"string"}'   = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"Accept","in":"header","required":false,"type":"string"}'         = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'       = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Content-Type","type":"string"}'                    = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Accept","type":"string"}'                          = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-org-id","type":"string"}'                        = ''; # This will be passed in later through the Module.cs file.
             ',,'                                                                       = ',';
             '\[,'                                                                      = '[';
             ',]'                                                                       = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'POST_applications'                               = 'Create-Application';
-            'DELETE_applications-id'                          = 'Delete-Application';
-            'GET_applications-id'                             = 'Get-Application';
-            'GET_applications'                                = 'List-Application';
-            'PUT_applications-id'                             = 'Set-Application';
-            'GET_application-templates-id'                    = 'Get-ApplicationTemplate';
-            'GET_application-templates'                       = 'List-ApplicationTemplate';
-            'POST_commands'                                   = 'Create-Command';
-            'DELETE_commands-id'                              = 'Delete-Command';
-            'GET_commands-id'                                 = 'Get-Command';
-            'GET_commands'                                    = 'List-Command';
-            'PUT_commands-id'                                 = 'Set-Command';
-            'GET_files-command-id'                            = 'Get-CommandFile';
-            'DELETE_commandresults-id'                        = 'Delete-CommandResult';
-            'GET_commandresults-id'                           = 'Get-CommandResult';
-            'GET_commandresults'                              = 'List-CommandResult';
-            'POST_command-trigger-triggername'                = 'POST-CommandTrigger';
-            'POST_systemusers-id-expire'                      = 'POST-ExpireUserPassword';
-            'GET_organizations-id'                            = 'Get-Organization';
-            'GET_organizations'                               = 'List-Organization';
-            'POST_search-organizations'                       = 'Search-Organization';
-            'PUT_organizations-id'                            = 'Set-Organization';
-            'POST_radiusservers'                              = 'Create-RadiusServer';
-            'DELETE_radiusservers-id'                         = 'Delete-RadiusServer';
-            'GET_radiusservers-id'                            = 'Get-RadiusServer';
-            'GET_radiusservers'                               = 'List-RadiusServer';
-            'PUT_radiusservers-id'                            = 'Set-RadiusServer';
-            'POST_systems-system_id-command-builtin-erase'    = 'Clear-System';
-            'DELETE_systems-id'                               = 'Delete-System';
-            'GET_systems-id'                                  = 'Get-System';
-            'GET_systems'                                     = 'List-System';
-            'POST_systems-system_id-command-builtin-lock'     = 'Lock-System';
-            'POST_systems-system_id-command-builtin-restart'  = 'Restart-System';
-            'POST_search-systems'                             = 'Search-System';
-            'PUT_systems-id'                                  = 'Set-System';
-            'POST_systems-system_id-command-builtin-shutdown' = 'Stop-System';
-            'POST_systemusers'                                = 'Create-User';
-            'DELETE_systemusers-id'                           = 'Delete-User';
-            'GET_systemusers-id'                              = 'Get-User';
-            'GET_systemusers'                                 = 'List-User';
-            'POST_search-systemusers'                         = 'Search-User';
-            'PUT_systemusers-id'                              = 'Set-User';
-            'POST_systemusers-id-unlock'                      = 'Unlock-User';
-            'POST_systemusers-id-resetmfa'                    = 'Reset-UserMfa';
-            'POST_systemusers-id-sshkeys'                     = 'Create-UserSshKey';
-            'DELETE_systemusers-systemuser_id-sshkeys-id'     = 'Delete-UserSshKey';
-            'GET_systemusers-id-sshkeys'                      = 'Get-UserSshKey';
+            'systems_commandBuiltinErase'    = 'Clear-System';
+            'applications_post'              = 'Create-Application';
+            'commands_post'                  = 'Create-Command';
+            'radius_servers_post'            = 'Create-RadiusServer';
+            'systemusers_post'               = 'Create-User';
+            'sshkey_post'                    = 'Create-UserSshKey';
+            'applications_delete'            = 'Delete-Application';
+            'commands_delete'                = 'Delete-Command';
+            'command_results_delete'         = 'Delete-CommandResult';
+            'radius_servers_delete'          = 'Delete-RadiusServer';
+            'systems_delete'                 = 'Delete-System';
+            'systemusers_delete'             = 'Delete-User';
+            'sshkey_delete'                  = 'Delete-UserSshKey';
+            'applications_get'               = 'Get-Application';
+            'application_templates_get'      = 'Get-ApplicationTemplate';
+            'commands_get'                   = 'Get-Command';
+            'command_file_get'               = 'Get-CommandFile';
+            'command_results_get'            = 'Get-CommandResult';
+            'commands_getResults'            = 'Get-CommandResult';
+            'organizations_get'              = 'Get-Organization';
+            'radius_servers_get'             = 'Get-RadiusServer';
+            'systems_get'                    = 'Get-System';
+            'systemusers_get'                = 'Get-User';
+            'sshkey_list'                    = 'Get-UserSshKey';
+            'applications_list'              = 'List-Application';
+            'application_templates_list'     = 'List-ApplicationTemplate';
+            'commands_list'                  = 'List-Command';
+            'command_results_list'           = 'List-CommandResult';
+            'organization_list'              = 'List-Organization';
+            'radius_servers_list'            = 'List-RadiusServer';
+            'systems_list'                   = 'List-System';
+            'systemusers_list'               = 'List-User';
+            'systems_commandBuiltinLock'     = 'Lock-System';
+            'command_trigger_webhook_post'   = 'POST-CommandTrigger';
+            'systemusers_expire'             = 'POST-ExpireUserPassword';
+            'systemusers_resetmfa'           = 'Reset-UserMfa';
+            'systems_commandBuiltinRestart'  = 'Restart-System';
+            'search_organizations_post'      = 'Search-Organization';
+            'search_systems_post'            = 'Search-System';
+            'search_systemusers_post'        = 'Search-User';
+            'applications_put'               = 'Set-Application';
+            'commands_put'                   = 'Set-Command';
+            'organization_put'               = 'Set-Organization';
+            'radius_servers_put'             = 'Set-RadiusServer';
+            'systems_put'                    = 'Set-System';
+            'systemusers_put'                = 'Set-User';
+            'systems_commandBuiltinShutdown' = 'Stop-System';
+            'systemusers_unlock'             = 'Unlock-User';
         };
         ExcludedList       = @();
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
-        Url                = 'https://api.stoplight.io/v1/versions/kP6fw2Ppd9ZbbfNmT/export/oas.yaml'
+        Url                = 'https://api.github.com/repos/TheJumpCloud/SI/contents/routes/webui/api/v2/index.yaml?ref=master'
         FindAndReplace     = [Ordered]@{
             # V2 Issues
-            '"basePath":"\/api\/v2"'                                                                               = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '\["string","number","boolean","array"]'                                                               = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '\["string","number","boolean","array","null"]'                                                        = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
-            '\["object","null"]'                                                                                   = '"object"';
-            '\["string","null"]'                                                                                   = '"string"';
-            '\["boolean","null"]'                                                                                  = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '\["integer","null"]'                                                                                  = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '\["number","null"]'                                                                                   = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"jobId"'                                                                                              = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
-            '"type":"null"'                                                                                        = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                                                                = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":\[{"name":"body"'                                                     = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
-            '"format":"uint32"'                                                                                    = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"basePath":"\/api\/v2"'                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+            '\["string","number","boolean","array"]'                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
+            '\["string","number","boolean","array","null"]'                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
+            '\["object","null"]'                                                  = '"object"';
+            '\["string","null"]'                                                  = '"string"';
+            '\["boolean","null"]'                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
+            '\["integer","null"]'                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
+            '\["number","null"]'                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
+            '"jobId"'                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
+            '"type":"null"'                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
+            'software-app-settings'                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            'custom email type","parameters":\[{"name":"body"'                    = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'                                      = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                         = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                               = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                  = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"Content-Type","in":"header","required":false,"type":"string","default":"application\/json"}' = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"Accept","in":"header","required":false,"type":"string","default":"application\/json"}'       = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"x-org-id","in":"header","required":false,"type":"string"}'                                   = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"name":"x-api-key","in":"header","required":false,"type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                                                   = ',';
-            '\[,'                                                                                                  = '[';
-            ',]'                                                                                                   = ']';
-            '"collection_time":".*?",'                                                                             = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'     = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'              = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}' = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Content-Type","type":"string"}'               = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Accept","type":"string"}'                     = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-org-id","type":"string"}'                   = ''; # This will be passed in later through the Module.cs file.
+            '{"name":"x-api-key","in":"header","required":false,"type":"string"}' = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                  = ',';
+            '\[,'                                                                 = '[';
+            ',]'                                                                  = ']';
+            '"collection_time":".*?",'                                            = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
         };
         OperationIdMapping = [Ordered]@{
             'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
@@ -472,11 +470,6 @@ Function Update-SwaggerObject
                             Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
-                    # Remove non 2XX response so that autorest returns correct errors to PowerShell
-                    If ($AttributePath -like '.paths.*.responses.*' -and $AttributePath -notlike '.paths.*.responses.2*')
-                    {
-                        $ThisObject.PSObject.Properties.Remove($AttributeName)
-                    }
                     # Remove blank values from enum
                     If ($AttributePath -like '*.enum')
                     {
@@ -598,20 +591,43 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         $global:ExcludedList.Remove($AttributeName)
                     }
+                    # Remove non 2XX response so that autorest returns correct errors to PowerShell
+                    If ($AttributePath -like '.paths.*.responses.*' -and $AttributePath -notlike '.paths.*.responses.2*')
+                    {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
+                    # Remove endpoint where produces is not application/json
+                    If ('produces' -in $ThisObject.$AttributeName.PSObject.Properties.Name -and 'application/json' -notin $ThisObject.$AttributeName.produces) { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -match '(.paths.)([a-zA-Z\/\{\}\-_]+$|.*\.xml$)')
+                    {
+                        $ThisObject.$AttributeName.PSObject.Properties.Name | ForEach-Object {
+                            $Method = $_
+                            # Write-Host $ThisObject.$AttributeName.$Method.'x-stoplight'  -BackgroundColor Cyan -ForegroundColor Black
+                            If ([String]$ThisObject.$AttributeName.$Method.'x-stoplight'.public -eq 'False')
+                            {
+                                Write-Host("Removing: $($AttributeName) - $($Method.ToUpper())") -BackgroundColor Red -ForegroundColor Black
+                                $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
+                            }
+                        }
+                    }
+                    # Remove x-jumpcloud
+                    If ($AttributePath -like '*.x-jumpcloud*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-scopes
+                    If ($AttributePath -like '*.x-scopes') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-stoplight sections
+                    If ($AttributePath -like '*.x-stoplight') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-tagGroups
+                    If ($AttributePath -eq '.x-tagGroups') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-tests
+                    If ($AttributePath -eq '.x-tests') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-go-package
+                    If ($AttributePath -like '*.x-go-package') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove tags
-                    If ($AttributePath -like '*.tags')
-                    {
-                        $ThisObject.PSObject.Properties.Remove('tags')
-                    }
+                    If ($AttributePath -like '*.tags') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove tagnames
-                    If ($AttributePath -like '*.tagnames')
-                    {
-                        $ThisObject.PSObject.Properties.Remove('tagnames')
-                    }
-                    # If ($AttributePath -like '*.enum')
-                    # {
-                    #     $ThisObject.PSObject.Properties.Remove('enum')
-                    # }
+                    If ($AttributePath -like '*.tagnames') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # # If ($AttributePath -like '*.enum')
+                    # { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     If ($ThisObject.$AttributeName)
                     {
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
@@ -634,21 +650,24 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
-                    # If it was an array of objects before reapply the parent array.
-                    If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
+                    If ($ThisObject.$AttributeName)
                     {
-                        $ModifiedObject = @($ModifiedObject)
-                    }
-                    # Sort object
-                    If ($Sort)
-                    {
-                        $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
-                    }
-                    Else
-                    {
-                        $ThisObject.$AttributeName = $ModifiedObject
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
+                        # If it was an array of objects before reapply the parent array.
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
+                        {
+                            $ModifiedObject = @($ModifiedObject)
+                        }
+                        # Sort object
+                        If ($Sort)
+                        {
+                            $ThisObject.PSObject.Properties.Remove($AttributeName)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
+                        }
+                        Else
+                        {
+                            $ThisObject.$AttributeName = $ModifiedObject
+                        }
                     }
                 }
             }
@@ -688,9 +707,17 @@ $SDKName | ForEach-Object {
         {
             $GitHubHeaders = @{
                 'Authorization' = "token $GitHubAccessToken";
-                'Accept'        = 'application/vnd.github.v3.raw';
+                'Accept'        = 'application/vnd.github.json.raw';
             }
-            Invoke-RestMethod -Method:('GET') -Uri:($Config.Url) -Headers:($GitHubHeaders)
+            $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($Config.Url) -Headers:($GitHubHeaders)
+            If ($Config.Url -like '*.json*')
+            {
+                $RawContent | ConvertTo-Json -Depth:(100)
+            }
+            Else
+            {
+                $RawContent
+            }
         }
         ElseIf ($Config.Url -like '*https*')
         {
@@ -756,6 +783,22 @@ $SDKName | ForEach-Object {
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) -InputObjectOrg:($SwaggerObject)
+            #region Clean up paths without methods (that have been removed after stripping x-stoplight.public:false)
+            $UpdatedSwagger.paths.PSObject.Properties.Name | ForEach-Object {
+                $ValidPath = $false
+                $UpdatedSwagger.paths.$_.PSObject.Properties.Name | ForEach-Object {
+                    If ($_ -in ('delete', 'get', 'patch', 'post', 'put'))
+                    {
+                        $ValidPath = $true
+                    }
+                }
+                If (-not $ValidPath)
+                {
+                    Write-Host("Removing: $($_)") -BackgroundColor Red -ForegroundColor Black
+                    $UpdatedSwagger.paths.PSObject.Properties.Remove($_)
+                }
+            }
+            #endregion Clean up paths without methods (that have been removed after stripping x-stoplight.public:false)
             #region Clean up unused definitions and parameters
             Do
             {
