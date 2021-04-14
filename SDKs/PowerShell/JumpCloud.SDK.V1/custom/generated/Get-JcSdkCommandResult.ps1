@@ -31,6 +31,8 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
+JumpCloud.SDK.V1.Models.IAny
+.Outputs
 JumpCloud.SDK.V1.Models.ICommandresult
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandresultslist
@@ -49,30 +51,36 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommandResult
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.IAny], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
+    [Parameter(ParameterSetName='Get1', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Id},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='GetViaIdentity1', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # Use a space seperated string of field parameters to include the data in the response.
     # If omitted, the default list of fields will be returned.
     ${Fields},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A filter to apply to the query.

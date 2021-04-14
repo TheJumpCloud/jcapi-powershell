@@ -25,7 +25,7 @@ To create the parameters described below, construct a hash table containing the 
 
 CUSTOMEMAIL <ICustomEmail>:
   Subject <String>:
-  Type <String>: CustomEmailType
+  Type <String>:
   [Body <String>]:
   [Button <String>]:
   [Header <String>]:
@@ -95,7 +95,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # CustomEmailType
+    # .
     ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]

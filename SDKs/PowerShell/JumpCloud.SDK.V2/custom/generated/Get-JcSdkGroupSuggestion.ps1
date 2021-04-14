@@ -1,8 +1,8 @@
 <#
 .Synopsis
-Retrieves an Apple MDM DEP Public Key.
+This endpoint generates and returns all suggestions available for a given group
 .Description
-Retrieves an Apple MDM DEP Public Key.
+This endpoint generates and returns all suggestions available for a given group
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-System.Boolean
+JumpCloud.SDK.V2.Models.IAny
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -43,18 +43,18 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDepKey.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroupSuggestion.md
 #>
- Function Get-JcSdkAppleMdmDepKey
+ Function Get-JcSdkGroupSuggestion
 {
-    [OutputType([System.Boolean])]
+    [OutputType([JumpCloud.SDK.V2.Models.IAny])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # .
-    ${AppleMdmId},
+    # ID of the group
+    ${GroupId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -82,12 +82,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Returns true when the command succeeds
-    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -125,7 +119,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDepKey @PSBoundParameters
+        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

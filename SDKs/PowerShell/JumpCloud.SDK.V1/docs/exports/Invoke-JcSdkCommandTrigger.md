@@ -33,14 +33,27 @@ curl --silent \\
 
 ## SYNTAX
 
-### Post (Default)
+### PostExpanded (Default)
 ```
-Invoke-JcSdkCommandTrigger -Triggername <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -Triggername <String> [-AdditionalProperties <Hashtable>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### Post
+```
+Invoke-JcSdkCommandTrigger -Triggername <String> -Body <Hashtable> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### PostViaIdentity
 ```
-Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> -Body <Hashtable> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### PostViaIdentityExpanded
+```
+Invoke-JcSdkCommandTrigger -InputObject <IJumpCloudApIsIdentity> [-AdditionalProperties <Hashtable>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,13 +98,43 @@ curl --silent \\
 
 ## PARAMETERS
 
+### -AdditionalProperties
+Additional Parameters
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: PostExpanded, PostViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Body
+Dictionary of \<any\>
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: Post, PostViaIdentity
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: PostViaIdentity
+Parameter Sets: PostViaIdentity, PostViaIdentityExpanded
 Aliases:
 
 Required: True
@@ -106,7 +149,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Post
+Parameter Sets: Post, PostExpanded
 Aliases:
 
 Required: True
@@ -153,6 +196,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+
+### System.Collections.Hashtable
 
 ## OUTPUTS
 

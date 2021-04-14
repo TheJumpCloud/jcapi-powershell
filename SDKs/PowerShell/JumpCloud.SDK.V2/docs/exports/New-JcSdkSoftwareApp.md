@@ -69,7 +69,7 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 ## PARAMETERS
 
 ### -Body
-Software Application Package Object
+Software Application Package
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -181,7 +181,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISoftwareApp>: Software Application Package Object
+BODY <ISoftwareApp>: Software Application Package
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <ISoftwareAppSettings[]>]`: 
@@ -192,6 +192,7 @@ BODY <ISoftwareApp>: Software Application Package Object
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[AppleVppTotalLicenses <Int32?>]`: 
     - `[AutoUpdate <Boolean?>]`: 
+    - `[DesiredState <String>]`: State of Install or Uninstall
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
     - `[PackageId <String>]`: 
@@ -205,6 +206,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[AppleVppTotalLicenses <Int32?>]`: 
   - `[AutoUpdate <Boolean?>]`: 
+  - `[DesiredState <String>]`: State of Install or Uninstall
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
   - `[PackageId <String>]`: 

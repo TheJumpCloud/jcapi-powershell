@@ -82,21 +82,6 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkAppleMdmCsr](Get-JcSdkAppleMdmCsr.md)
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
-
-#### Sample Request
-```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
-### [Get-JcSdkAppleMdmDepKey](Get-JcSdkAppleMdmDepKey.md)
-Retrieves an Apple MDM DEP Public Key.
-
 ### [Get-JcSdkAppleMdmDevice](Get-JcSdkAppleMdmDevice.md)
 Lists all Apple MDM devices.
 
@@ -118,15 +103,14 @@ The filter and sort queries will allow the following fields:
 ```
 
 ### [Get-JcSdkAppleMdmEnrollmentProfile](Get-JcSdkAppleMdmEnrollmentProfile.md)
-Get an enrollment profile
+Get a list of enrollment profiles for an apple mdm.
 
-Currently only requesting the mobileconfig is supported.
+Note: currently only one enrollment profile is supported.
 
 #### Sample Request
-
 ```
-curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles/{ID} \\
-  -H 'accept: application/x-apple-aspen-config' \\
+ curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\
+  -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
@@ -313,6 +297,9 @@ This endpoint returns all Groups that exist in your organization.
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
+
+### [Get-JcSdkGroupSuggestion](Get-JcSdkGroupSuggestion.md)
+This endpoint generates and returns all suggestions available for a given group
 
 ### [Get-JcSdkGSuite](Get-JcSdkGSuite.md)
 This endpoint returns a specific G Suite.
@@ -1701,6 +1688,19 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{Im
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Invoke-JcSdkReactivateOffice365](Invoke-JcSdkReactivateOffice365.md)
+This endpoint starts the process to re-activate a new Office 365.
+It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain a new authorization grant.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/reactivate \\\\
+-H 'Accept: application/json' \\\\
+-H 'Content-Type: application/json' \\\\
+-H 'x-api-key: {API_KEY}' \\\\
+-H 'X-Requested-With: XMLHttpRequest'
+```
+
 ### [Lock-JcSdkAppleMdmDevice](Lock-JcSdkAppleMdmDevice.md)
 Locks a DEP-enrolled device.
 
@@ -1711,6 +1711,21 @@ Locks a DEP-enrolled device.
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{}'
+```
+
+### [New-JcSdkActiveDirectory](New-JcSdkActiveDirectory.md)
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
 ```
 
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
@@ -1983,6 +1998,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Remove-JcSdkApplicationLogo](Remove-JcSdkApplicationLogo.md)
+Deletes the specified image from an application
+
 ### [Remove-JcSdkAuthenticationPolicy](Remove-JcSdkAuthenticationPolicy.md)
 Delete the specified authentication policy.
 
@@ -2049,6 +2067,20 @@ This endpoint allows you to delete a samba domain from an LDAP server.
 ##### Sample Request
 ```
 curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Remove-JcSdkOffice365](Remove-JcSdkOffice365.md)
+This endpoint deletes an existing Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'

@@ -99,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-Targets which a "office_365" can be associated to.
+Targets which a "active_directory" can be associated to.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.Targets

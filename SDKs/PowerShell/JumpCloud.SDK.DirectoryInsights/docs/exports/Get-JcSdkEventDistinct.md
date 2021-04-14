@@ -14,7 +14,7 @@ Query the API for a list of distinct values for a field
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventDistinct -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Field <String>]
+Get-JcSdkEventDistinct -Field <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
  [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -83,7 +83,7 @@ Type: System.String
 Parameter Sets: GetExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -203,10 +203,10 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
+  - `Field <String>`: field is what they wish to query on
   - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[Field <String>]`: field is what they wish to query on
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

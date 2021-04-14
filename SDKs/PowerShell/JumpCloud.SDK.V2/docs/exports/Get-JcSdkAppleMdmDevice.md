@@ -31,7 +31,7 @@ The filter and sort queries will allow the following fields:
 
 ```
 Get-JcSdkAppleMdmDevice -AppleMdmId <String> [-Filter <String[]>] [-Sort <String[]>] [-XTotalCount <Int32>]
- [-XUnfilteredTotalCount <Int32>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -127,21 +127,6 @@ Accept wildcard characters: False
 
 ### -XTotalCount
 .
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XUnfilteredTotalCount
-If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
 
 ```yaml
 Type: System.Int32

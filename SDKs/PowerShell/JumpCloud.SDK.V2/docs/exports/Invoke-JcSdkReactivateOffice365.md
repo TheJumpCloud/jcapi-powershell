@@ -1,29 +1,51 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDepKey.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReactivateOffice365.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkAppleMdmDepKey
+# Invoke-JcSdkReactivateOffice365
 
 ## SYNOPSIS
-Retrieves an Apple MDM DEP Public Key.
+This endpoint starts the process to re-activate a new Office 365.
+It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain a new authorization grant.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/reactivate \\\\
+-H 'Accept: application/json' \\\\
+-H 'Content-Type: application/json' \\\\
+-H 'x-api-key: {API_KEY}' \\\\
+-H 'X-Requested-With: XMLHttpRequest'
+```
 
 ## SYNTAX
 
-### Get (Default)
+### Reactivate (Default)
 ```
-Get-JcSdkAppleMdmDepKey -AppleMdmId <String> [-PassThru] [<CommonParameters>]
+Invoke-JcSdkReactivateOffice365 -Id <String> [-XRequestedWith <XRequestedWith1>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
-### GetViaIdentity
+### ReactivateViaIdentity
 ```
-Get-JcSdkAppleMdmDepKey -InputObject <IJumpCloudApIsIdentity> [-PassThru] [<CommonParameters>]
+Invoke-JcSdkReactivateOffice365 -InputObject <IJumpCloudApIsIdentity> [-XRequestedWith <XRequestedWith1>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Retrieves an Apple MDM DEP Public Key.
+This endpoint starts the process to re-activate a new Office 365.
+It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain a new authorization grant.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/reactivate \\\\
+-H 'Accept: application/json' \\\\
+-H 'Content-Type: application/json' \\\\
+-H 'x-api-key: {API_KEY}' \\\\
+-H 'X-Requested-With: XMLHttpRequest'
+```
 
 ## EXAMPLES
 
@@ -43,12 +65,12 @@ Retrieves an Apple MDM DEP Public Key.
 
 ## PARAMETERS
 
-### -AppleMdmId
+### -Id
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: Get
+Parameter Sets: Reactivate
 Aliases:
 
 Required: True
@@ -64,7 +86,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: GetViaIdentity
+Parameter Sets: ReactivateViaIdentity
 Aliases:
 
 Required: True
@@ -74,13 +96,44 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Returns true when the command succeeds
+### -XRequestedWith
+.
+
+```yaml
+Type: JumpCloud.SDK.V2.Support.XRequestedWith1
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases:
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
 
 Required: False
 Position: Named
@@ -98,7 +151,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Boolean
+### System.String
 
 ## NOTES
 

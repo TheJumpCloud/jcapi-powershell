@@ -10,7 +10,9 @@ $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         Url                = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/generated/directory_insights_swagger.json?ref=master';
-        FindAndReplace     = [Ordered]@{};
+        FindAndReplace     = [Ordered]@{
+            '"in":"body","name":".*?"' = '"in":"body","name":"body"' # Across our APIs the standard is using "body" for the name of the body
+        };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsPost'         = 'Get-Event';
             'directoryInsights_eventsCountPost'    = 'Get-EventCount';
@@ -28,12 +30,11 @@ $TransformConfig = [Ordered]@{
             # V1 Issues
             '"basePath":"\/api"'                                                       = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
-            '"format":"email",'                                                        = ''; # WARNING (LLCS1001/DoesNotSupportEnum):Schema with type:'string and 'format:'email' is not recognized.
-            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''
+            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''; # is already listed in interface list
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'         = ''; # We dont want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                  = ''; # We dont want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = '';
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                   = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
             '{"in":"header","name":"Content-Type","type":"string"}'                    = ''; # This will be passed in later through the Module.cs file.
@@ -99,271 +100,271 @@ $TransformConfig = [Ordered]@{
         Url                = 'https://api.github.com/repos/TheJumpCloud/SI/contents/routes/webui/api/v2/index.yaml?ref=master'
         FindAndReplace     = [Ordered]@{
             # V2 Issues
-            '"basePath":"\/api\/v2"'                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '\["string","number","boolean","array"]'                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '\["string","number","boolean","array","null"]'                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
-            '\["object","null"]'                                                  = '"object"';
-            '\["string","null"]'                                                  = '"string"';
-            '\["boolean","null"]'                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '\["integer","null"]'                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '\["number","null"]'                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"jobId"'                                                             = '"id"'; # The transform removes the "-" in the parent objects name,"job-id",which makes the parent name the same as the child.
-            '"type":"null"'                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            'software-app-settings'                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            'custom email type","parameters":\[{"name":"body"'                    = 'custom email type","parameters":[{"name":"CustomEmail"'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
-            '"format":"uint32"'                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+            '\["string","number","boolean","array"]'                                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
+            '\["string","number","boolean","array","null"]'                                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
+            '\["object","null"]'                                                                  = '"object"';
+            '\["string","null"]'                                                                  = '"string"';
+            '\["boolean","null"]'                                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
+            '\["integer","null"]'                                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
+            '\["number","null"]'                                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
+            '"type":"null"'                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
+            '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            'software-app-settings'                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:creation-source"}'     = ''; # Stoplight is adding this in a lot of places it shouldnt be so were just going to remove it
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'        = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'              = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}' = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Content-Type","type":"string"}'               = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Accept","type":"string"}'                     = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-org-id","type":"string"}'                   = ''; # This will be passed in later through the Module.cs file.
-            '{"name":"x-api-key","in":"header","required":false,"type":"string"}' = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                  = ',';
-            '\[,'                                                                 = '[';
-            ',]'                                                                  = ']';
-            '"collection_time":".*?",'                                            = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"default":"application\/json","in":"header","name":"Content-Type","type":"string"}' = ''; # This will be passed in later through the Module.cs file.
+            '{"default":"application\/json","in":"header","name":"Accept","type":"string"}'       = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-org-id","type":"string"}'                                   = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-api-key","type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                                  = ',';
+            '\[,'                                                                                 = '[';
+            ',]'                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
-            'GET_activedirectories'                                      = 'List-ActiveDirectory';
-            'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
-            'POST_activedirectories-activedirectory_id-associations'     = 'Set-ActiveDirectoryAssociation';
-            'GET_activedirectories-activedirectory_id-usergroups'        = 'Get-ActiveDirectoryTraverseUserGroup';
-            'DELETE_applemdms-id'                                        = 'Delete-AppleMDM';
-            'GET_applemdms'                                              = 'List-AppleMDM';
-            'PUT_applemdms-id'                                           = 'Set-AppleMDM';
-            'GET_applemdms-apple_mdm_id-csr'                             = 'Get-AppleMDMCsr';
-            'GET_applemdms-apple_mdm_id-depkey'                          = 'Get-AppleMDMDepKey';
-            'POST_applemdms-apple_mdm_id-devices-device_id-erase'        = 'Clear-AppleMDMDevice';
-            'GET_applemdms-apple_mdm_id-devices'                         = 'List-AppleMDMDevice';
-            'POST_applemdms-apple_mdm_id-devices-device_id-lock'         = 'Lock-AppleMDMDevice';
-            'POST_applemdms-apple_mdm_id-devices-device_id-restart'      = 'Restart-AppleMDMDevice';
-            'POST_applemdms-apple_mdm_id-devices-device_id-shutdown'     = 'Stop-AppleMDMDevice';
-            'POST_applemdms-apple_mdm_id-refreshdepdevices'              = 'Sync-AppleMDMDevice';
-            'GET_applemdms-apple_mdm_id-enrollmentprofiles-id'           = 'Get-AppleMDMEnrollmentProfile';
-            'GET_applemdms-apple_mdm_id-enrollmentprofiles'              = 'List-AppleMDMEnrollmentProfile';
-            'GET_applications-application_id-associations'               = 'Get-ApplicationAssociation';
-            'POST_applications-application_id-associations'              = 'Set-ApplicationAssociation';
-            'GET_applications-application_id-users'                      = 'Get-ApplicationTraverseUser';
-            'GET_applications-application_id-usergroups'                 = 'Get-ApplicationTraverseUserGroup';
-            'POST_authn-policies'                                        = 'Create-AuthenticationPolicy';
-            'DELETE_authn-policies-id'                                   = 'Delete-AuthenticationPolicy';
-            'GET_authn-policies-id'                                      = 'Get-AuthenticationPolicy';
-            'GET_authn-policies'                                         = 'List-AuthenticationPolicy';
-            'PATCH_authn-policies-id'                                    = 'Update-AuthenticationPolicy';
-            'POST_bulk-users'                                            = 'Create-BulkUsers';
-            'PATCH_bulk-users'                                           = 'Update-BulkUsers';
-            'GET_bulk-users-job_id-results'                              = 'Get-BulkUsersResult';
-            'GET_commands-command_id-associations'                       = 'Get-CommandAssociation';
-            'POST_commands-command_id-associations'                      = 'Set-CommandAssociation';
-            'GET_commands-command_id-systems'                            = 'Get-CommandTraverseSystem';
-            'GET_commands-command_id-systemgroups'                       = 'Get-CommandTraverseSystemGroup';
-            'POST_customemails'                                          = 'Create-CustomEmailConfiguration';
-            'DELETE_customemails-custom_email_type'                      = 'Delete-CustomEmailConfiguration';
-            'GET_customemails-custom_email_type'                         = 'Get-CustomEmailConfiguration';
-            'PUT_customemails-custom_email_type'                         = 'Set-CustomEmailConfiguration';
-            'GET_customemail-templates'                                  = 'List-CustomEmailTemplates';
-            'GET_directories'                                            = 'List-Directory';
-            'POST_duo-accounts'                                          = 'Create-DuoAccount';
-            'DELETE_duo-accounts-id'                                     = 'Delete-DuoAccount';
-            'GET_duo-accounts-id'                                        = 'Get-DuoAccount';
-            'GET_duo-accounts'                                           = 'List-DuoAccount';
-            'POST_duo-accounts-account_id-applications'                  = 'Create-DuoApplication';
-            'DELETE_duo-accounts-account_id-applications-application_id' = 'Delete-DuoApplication';
-            'GET_duo-accounts-account_id-applications-application_id'    = 'Get-DuoApplication';
-            'GET_duo-accounts-account_id-applications'                   = 'List-DuoApplication';
-            'PUT_duo-accounts-account_id-applications-application_id'    = 'Set-DuoApplication';
-            'GET_groups'                                                 = 'List-Group';
-            'GET_gsuites-id'                                             = 'Get-GSuite';
-            'PATCH_gsuites-id'                                           = 'Update-GSuite';
-            'GET_gsuites-gsuite_id-associations'                         = 'Get-GSuiteAssociation';
-            'POST_gsuites-gsuite_id-associations'                        = 'Set-GSuiteAssociation';
-            'POST_gsuites-gsuite_id-translationrules'                    = 'Create-GSuiteTranslationRule';
-            'DELETE_gsuites-gsuite_id-translationrules-id'               = 'Delete-GSuiteTranslationRule';
-            'GET_gsuites-gsuite_id-translationrules-id'                  = 'Get-GSuiteTranslationRule';
-            'GET_gsuites-gsuite_id-translationrules'                     = 'List-GSuiteTranslationRule';
-            'GET_gsuites-gsuite_id-users'                                = 'Get-GSuiteTraverseUser';
-            'GET_gsuites-gsuite_id-usergroups'                           = 'Get-GSuiteTraverseUserGroup';
-            'GET_gsuites-gsuite_id-import-users'                         = 'List-GSuiteUsersToImport';
-            'POST_iplists'                                               = 'Create-IpList';
-            'DELETE_iplists-id'                                          = 'Delete-IpList';
-            'GET_iplists-id'                                             = 'Get-IpList';
-            'GET_iplists'                                                = 'List-IpList';
-            'PUT_iplists-id'                                             = 'Set-IpList';
-            'PATCH_iplists-id'                                           = 'Update-IpList';
-            'GET_ldapservers-id'                                         = 'Get-LdapServer';
-            'GET_ldapservers'                                            = 'List-LdapServer';
-            'PATCH_ldapservers-id'                                       = 'Update-LdapServer';
-            'GET_ldapservers-ldapserver_id-associations'                 = 'Get-LdapServerAssociation';
-            'POST_ldapservers-ldapserver_id-associations'                = 'Set-LdapServerAssociation';
-            'POST_ldapservers-ldapserver_id-sambadomains'                = 'Create-LdapServerSambaDomain';
-            'DELETE_ldapservers-ldapserver_id-sambadomains-id'           = 'Delete-LdapServerSambaDomain';
-            'GET_ldapservers-ldapserver_id-sambadomains-id'              = 'Get-LdapServerSambaDomain';
-            'GET_ldapservers-ldapserver_id-sambadomains'                 = 'List-LdapServerSambaDomain';
-            'PUT_ldapservers-ldapserver_id-sambadomains-id'              = 'Set-LdapServerSambaDomain';
-            'GET_ldapservers-ldapserver_id-users'                        = 'Get-LdapServerTraverseUser';
-            'GET_ldapservers-ldapserver_id-usergroups'                   = 'Get-LdapServerTraverseUserGroup';
-            'GET_office365s-office365_id'                                = 'Get-Office365';
-            'PATCH_office365s-office365_id'                              = 'Update-Office365';
-            'GET_office365s-office365_id-associations'                   = 'Get-Office365Association';
-            'POST_office365s-office365_id-associations'                  = 'Set-Office365Association';
-            'POST_office365s-office365_id-translationrules'              = 'Create-Office365TranslationRule';
-            'DELETE_office365s-office365_id-translationrules-id'         = 'Delete-Office365TranslationRule';
-            'GET_office365s-office365_id-translationrules-id'            = 'Get-Office365TranslationRule';
-            'GET_office365s-office365_id-translationrules'               = 'List-Office365TranslationRule';
-            'GET_office365s-office365_id-users'                          = 'Get-Office365TraverseUser';
-            'GET_office365s-office365_id-usergroups'                     = 'Get-Office365TraverseUserGroup';
-            'GET_office365s-office365_id-import-users'                   = 'List-Office365UsersToImport';
-            'GET_policyresults'                                          = 'List-OrganizationPolicyResult';
-            'POST_policies'                                              = 'Create-Policy';
-            'DELETE_policies-id'                                         = 'Delete-Policy';
-            'GET_policies-id'                                            = 'Get-Policy';
-            'GET_policies'                                               = 'List-Policy';
-            'PUT_policies-id'                                            = 'Set-Policy';
-            'GET_policies-policy_id-associations'                        = 'Get-PolicyAssociation';
-            'POST_policies-policy_id-associations'                       = 'Set-PolicyAssociation';
-            'GET_policyresults-id'                                       = 'Get-PolicyResult';
-            'GET_policies-policy_id-policyresults'                       = 'List-PolicyResult';
-            'GET_policies-policy_id-policystatuses'                      = 'List-PolicyStatus';
-            'GET_policytemplates-id'                                     = 'Get-PolicyTemplate';
-            'GET_policytemplates'                                        = 'List-PolicyTemplate';
-            'GET_policies-policy_id-systems'                             = 'Get-PolicyTraverseSystem';
-            'GET_policies-policy_id-systemgroups'                        = 'Get-PolicyTraverseSystemGroup';
-            'POST_providers-provider_id-administrators'                  = 'Create-ProviderAdministrator';
-            'GET_providers-provider_id-administrators'                   = 'List-ProviderAdministrator';
-            'GET_radiusservers-radiusserver_id-associations'             = 'Get-RadiusServerAssociation';
-            'POST_radiusservers-radiusserver_id-associations'            = 'Set-RadiusServerAssociation';
-            'GET_radiusservers-radiusserver_id-users'                    = 'Get-RadiusServerTraverseUser';
-            'GET_radiusservers-radiusserver_id-usergroups'               = 'Get-RadiusServerTraverseUserGroup';
-            'POST_softwareapps'                                          = 'Create-SoftwareApp';
-            'DELETE_softwareapps-id'                                     = 'Delete-SoftwareApp';
-            'GET_softwareapps-id'                                        = 'Get-SoftwareApp';
-            'GET_softwareapps'                                           = 'List-SoftwareApp';
-            'PUT_softwareapps-id'                                        = 'Set-SoftwareApp';
-            'GET_softwareapps-software_app_id-associations'              = 'Get-SoftwareAppAssociation';
-            'POST_softwareapps-software_app_id-associations'             = 'Set-SoftwareAppAssociation';
-            'GET_softwareapps-software_app_id-statuses'                  = 'Get-SoftwareAppStatus';
-            'GET_softwareapps-software_app_id-systems'                   = 'Get-SoftwareAppTraverseSystem';
-            'GET_softwareapps-software_app_id-systemgroups'              = 'Get-SoftwareAppTraverseSystemGroup';
-            'GET_subscriptions'                                          = 'Get-Subscription';
-            'GET_systems-system_id-associations'                         = 'Get-SystemAssociation';
-            'POST_systems-system_id-associations'                        = 'Set-SystemAssociation';
-            'GET_systems-system_id-fdekey'                               = 'Get-SystemFDEKey';
-            'POST_systemgroups'                                          = 'Create-SystemGroup';
-            'DELETE_systemgroups-id'                                     = 'Delete-SystemGroup';
-            'GET_systemgroups-id'                                        = 'Get-SystemGroup';
-            'GET_systemgroups'                                           = 'List-SystemGroup';
-            'PUT_systemgroups-id'                                        = 'Set-SystemGroup';
-            'GET_systemgroups-group_id-associations'                     = 'Get-SystemGroupAssociation';
-            'POST_systemgroups-group_id-associations'                    = 'Set-SystemGroupAssociation';
-            'GET_systemgroups-group_id-members'                          = 'Get-SystemGroupMembers';
-            'POST_systemgroups-group_id-members'                         = 'Set-SystemGroupMembers';
-            'GET_systemgroups-group_id-membership'                       = 'Get-SystemGroupMembership';
-            'GET_systemgroups-group_id-commands'                         = 'Get-SystemGroupTraverseCommand';
-            'GET_systemgroups-group_id-policies'                         = 'Get-SystemGroupTraversePolicy';
-            'GET_systemgroups-group_id-users'                            = 'Get-SystemGroupTraverseUser';
-            'GET_systemgroups-group_id-usergroups'                       = 'Get-SystemGroupTraverseUserGroup';
-            'GET_systeminsights-alf'                                     = 'List-SystemInsightsAlf';
-            'GET_systeminsights-alf_exceptions'                          = 'List-SystemInsightsAlfException';
-            'GET_systeminsights-alf_explicit_auths'                      = 'List-SystemInsightsAlfExplicitAuth';
-            'GET_systeminsights-appcompat_shims'                         = 'List-SystemInsightsAppCompatShim';
-            'GET_systeminsights-apps'                                    = 'List-SystemInsightsApps';
-            'GET_systeminsights-authorized_keys'                         = 'List-SystemInsightsAuthorizedKey';
-            'GET_systeminsights-battery'                                 = 'List-SystemInsightsBattery';
-            'GET_systeminsights-bitlocker_info'                          = 'List-SystemInsightsBitlockerInfo';
-            'GET_systeminsights-browser_plugins'                         = 'List-SystemInsightsBrowserPlugins';
-            'GET_systeminsights-certificates'                            = 'List-SystemInsightsCertificates';
-            'GET_systeminsights-chrome_extensions'                       = 'List-SystemInsightsChromeExtensions';
-            'GET_systeminsights-connectivity'                            = 'List-SystemInsightsConnectivity';
-            'GET_systeminsights-crashes'                                 = 'List-SystemInsightsCrashes';
-            'GET_systeminsights-cups_destinations'                       = 'List-SystemInsightsCupsDestinations';
-            'GET_systeminsights-disk_encryption'                         = 'List-SystemInsightsDiskEncryption';
-            'GET_systeminsights-disk_info'                               = 'List-SystemInsightsDiskInfo';
-            'GET_systeminsights-dns_resolvers'                           = 'List-SystemInsightsDnsResolver';
-            'GET_systeminsights-etc_hosts'                               = 'List-SystemInsightsEtcHosts';
-            'GET_systeminsights-firefox_addons'                          = 'List-SystemInsightsFirefoxAddons';
-            'GET_systeminsights-groups'                                  = 'List-SystemInsightsGroups';
-            'GET_systeminsights-ie_extensions'                           = 'List-SystemInsightsIEExtensions';
-            'GET_systeminsights-interface_addresses'                     = 'List-SystemInsightsInterfaceAddresses';
-            'GET_systeminsights-interface_details'                       = 'List-SystemInsightsInterfaceDetails';
-            'GET_systeminsights-kernel_info'                             = 'List-SystemInsightsKernelInfo';
-            'GET_systeminsights-launchd'                                 = 'List-SystemInsightsLaunchd';
-            'GET_systeminsights-logged_in_users'                         = 'List-SystemInsightsLoggedinUsers';
-            'GET_systeminsights-logical_drives'                          = 'List-SystemInsightsLogicalDrives';
-            'GET_systeminsights-managed_policies'                        = 'List-SystemInsightsManagedPolicies';
-            'GET_systeminsights-mounts'                                  = 'List-SystemInsightsMounts';
-            'GET_systeminsights-os_version'                              = 'List-SystemInsightsOsVersion';
-            'GET_systeminsights-patches'                                 = 'List-SystemInsightsPatches';
-            'GET_systeminsights-programs'                                = 'List-SystemInsightsPrograms';
-            'GET_systeminsights-python_packages'                         = 'List-SystemInsightsPythonPackages';
-            'GET_systeminsights-safari_extensions'                       = 'List-SystemInsightsSafariExtensions';
-            'GET_systeminsights-scheduled_tasks'                         = 'List-SystemInsightsScheduledTasks';
-            'GET_systeminsights-services'                                = 'List-SystemInsightsServices';
-            'GET_systeminsights-shadow'                                  = 'List-SystemInsightsShadow';
-            'GET_systeminsights-shared_folders'                          = 'List-SystemInsightsSharedFolders';
-            'GET_systeminsights-shared_resources'                        = 'List-SystemInsightsSharedResources';
-            'GET_systeminsights-sharing_preferences'                     = 'List-SystemInsightsSharingPreferences';
-            'GET_systeminsights-sip_config'                              = 'List-SystemInsightsSipConfig';
-            'GET_systeminsights-startup_items'                           = 'List-SystemInsightsStartupItems';
-            'GET_systeminsights-system_controls'                         = 'List-SystemInsightsSystemControls';
-            'GET_systeminsights-system_info'                             = 'List-SystemInsightsSystemInfo';
-            'GET_systeminsights-uptime'                                  = 'List-SystemInsightsUptime';
-            'GET_systeminsights-usb_devices'                             = 'List-SystemInsightsUSBDevices';
-            'GET_systeminsights-user_groups'                             = 'List-SystemInsightsUserGroups';
-            'GET_systeminsights-users'                                   = 'List-SystemInsightsUsers';
-            'GET_systeminsights-user_ssh_keys'                           = 'List-SystemInsightsUserSSHKeys';
-            'GET_systeminsights-wifi_networks'                           = 'List-SystemInsightsWifiNetwork';
-            'GET_systeminsights-wifi_status'                             = 'List-SystemInsightsWifiStatus';
-            'GET_systeminsights-windows_security_products'               = 'List-SystemInsightsWindowsSecurityProduct';
-            'GET_systems-system_id-memberof'                             = 'Get-SystemMember';
-            'GET_systems-system_id-policystatuses'                       = 'List-SystemsPolicyStatus';
-            'GET_systems-system_id-commands'                             = 'Get-SystemTraverseCommand';
-            'GET_systems-system_id-policies'                             = 'Get-SystemTraversePolicy';
-            'GET_systems-system_id-users'                                = 'Get-SystemTraverseUser';
-            'GET_systems-system_id-usergroups'                           = 'Get-SystemTraverseUserGroup';
-            'GET_users-user_id-associations'                             = 'Get-UserAssociation';
-            'POST_users-user_id-associations'                            = 'Set-UserAssociation';
-            'POST_usergroups'                                            = 'Create-UserGroup';
-            'DELETE_usergroups-id'                                       = 'Delete-UserGroup';
-            'GET_usergroups-id'                                          = 'Get-UserGroup';
-            'GET_usergroups'                                             = 'List-UserGroup';
-            'PUT_usergroups-id'                                          = 'Set-UserGroup';
-            'GET_usergroups-group_id-associations'                       = 'Get-UserGroupAssociation';
-            'POST_usergroups-group_id-associations'                      = 'Set-UserGroupAssociation';
-            'GET_usergroups-group_id-members'                            = 'Get-UserGroupMembers';
-            'POST_usergroups-group_id-members'                           = 'Set-UserGroupMembers';
-            'GET_usergroups-group_id-membership'                         = 'Get-UserGroupMembership';
-            'GET_usergroups-group_id-applications'                       = 'Get-UserGroupTraverseApplication';
-            'GET_usergroups-group_id-directories'                        = 'Get-UserGroupTraverseDirectory';
-            'GET_usergroups-group_id-gsuites'                            = 'Get-UserGroupTraverseGSuite';
-            'GET_usergroups-group_id-ldapservers'                        = 'Get-UserGroupTraverseLdapServer';
-            'GET_usergroups-group_id-office365s'                         = 'Get-UserGroupTraverseOffice365';
-            'GET_usergroups-group_id-radiusservers'                      = 'Get-UserGroupTraverseRadiusServer';
-            'GET_usergroups-group_id-systems'                            = 'Get-UserGroupTraverseSystem';
-            'GET_usergroups-group_id-systemgroups'                       = 'Get-UserGroupTraverseSystemGroup';
-            'GET_users-user_id-memberof'                                 = 'Get-UserMember';
-            'GET_users-user_id-applications'                             = 'Get-UserTraverseApplication';
-            'GET_users-user_id-directories'                              = 'Get-UserTraverseDirectory';
-            'GET_users-user_id-gsuites'                                  = 'Get-UserTraverseGSuite';
-            'GET_users-user_id-ldapservers'                              = 'Get-UserTraverseLdapServer';
-            'GET_users-user_id-office365s'                               = 'Get-UserTraverseOffice365';
-            'GET_users-user_id-radiusservers'                            = 'Get-UserTraverseRadiusServer';
-            'GET_users-user_id-systems'                                  = 'Get-UserTraverseSystem';
-            'GET_users-user_id-systemgroups'                             = 'Get-UserTraverseSystemGroup';
-            'POST_workdays-workday_id-auth'                              = 'Authorize-Workday';
-            'POST_workdays'                                              = 'Create-Workday';
-            'GET_workdays-id'                                            = 'Get-Workday';
-            'POST_workdays-workday_id-import'                            = 'Import-Workday';
-            'GET_workdays'                                               = 'List-Workday';
-            'PUT_workdays-id'                                            = 'Set-Workday';
-            'DELETE_workdays-workday_id-auth'                            = 'Delete-WorkdayAuthorization';
-            'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
-            'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
+            'office365_postActivate'                        = 'Activate-Office365';
+            'workdays_authorize'                            = 'Authorize-Workday';
+            'applemdms_deviceserase'                        = 'Clear-AppleMDMDevice';
+            'activedirectories_post'                        = 'Create-ActiveDirectory';
+            'authnpolicies_post'                            = 'Create-AuthenticationPolicy';
+            'bulk_usersCreate'                              = 'Create-BulkUsers';
+            'customEmails_create'                           = 'Create-CustomEmailConfiguration';
+            'duo_accountPost'                               = 'Create-DuoAccount';
+            'duo_applicationPost'                           = 'Create-DuoApplication';
+            'translationRules_gSuitePost'                   = 'Create-GSuiteTranslationRule';
+            'iplists_post'                                  = 'Create-IpList';
+            'ldapservers_sambaDomainsPost'                  = 'Create-LdapServerSambaDomain';
+            'translationRules_office365Post'                = 'Create-Office365TranslationRule';
+            'policies_post'                                 = 'Create-Policy';
+            'providers_postAdmins'                          = 'Create-ProviderAdministrator';
+            'softwareApps_post'                             = 'Create-SoftwareApp';
+            'groups_system_post'                            = 'Create-SystemGroup';
+            'groups_user_post'                              = 'Create-UserGroup';
+            'workdays_post'                                 = 'Create-Workday';
+            'applemdms_delete'                              = 'Delete-AppleMDM';
+            'applications_deleteLogo'                       = 'Delete-ApplicationLogo';
+            'authnpolicies_delete'                          = 'Delete-AuthenticationPolicy';
+            'customEmails_destroy'                          = 'Delete-CustomEmailConfiguration';
+            'duo_accountDelete'                             = 'Delete-DuoAccount';
+            'duo_applicationDelete'                         = 'Delete-DuoApplication';
+            'translationRules_gSuiteDelete'                 = 'Delete-GSuiteTranslationRule';
+            'iplists_delete'                                = 'Delete-IpList';
+            'ldapservers_sambaDomainsDelete'                = 'Delete-LdapServerSambaDomain';
+            'office365s_delete'                             = 'Delete-Office365';
+            'translationRules_office365Delete'              = 'Delete-Office365TranslationRule';
+            'policies_delete'                               = 'Delete-Policy';
+            'softwareApps_delete'                           = 'Delete-SoftwareApp';
+            'groups_system_delete'                          = 'Delete-SystemGroup';
+            'groups_user_delete'                            = 'Delete-UserGroup';
+            'workdays_deauthorize'                          = 'Delete-WorkdayAuthorization';
+            'activedirectories_get'                         = 'Get-ActiveDirectory';
+            'graph_activeDirectoryAssociationsList'         = 'Get-ActiveDirectoryAssociation';
+            'graph_activeDirectoryTraverseUserGroup'        = 'Get-ActiveDirectoryTraverseUserGroup';
+            'graph_applicationAssociationsList'             = 'Get-ApplicationAssociation';
+            'graph_applicationTraverseUser'                 = 'Get-ApplicationTraverseUser';
+            'graph_applicationTraverseUserGroup'            = 'Get-ApplicationTraverseUserGroup';
+            'authnpolicies_get'                             = 'Get-AuthenticationPolicy';
+            'bulk_usersCreateResults'                       = 'Get-BulkUsersResult';
+            'graph_commandAssociationsList'                 = 'Get-CommandAssociation';
+            'graph_commandTraverseSystem'                   = 'Get-CommandTraverseSystem';
+            'graph_commandTraverseSystemGroup'              = 'Get-CommandTraverseSystemGroup';
+            'customEmails_read'                             = 'Get-CustomEmailConfiguration';
+            'duo_accountGet'                                = 'Get-DuoAccount';
+            'duo_applicationGet'                            = 'Get-DuoApplication';
+            'groups_suggestions_get'                        = 'Get-GroupSuggestion';
+            'gsuites_get'                                   = 'Get-GSuite';
+            'graph_gSuiteAssociationsList'                  = 'Get-GSuiteAssociation';
+            'translationRules_gSuiteGet'                    = 'Get-GSuiteTranslationRule';
+            'graph_gSuiteTraverseUser'                      = 'Get-GSuiteTraverseUser';
+            'graph_gSuiteTraverseUserGroup'                 = 'Get-GSuiteTraverseUserGroup';
+            'iplists_get'                                   = 'Get-IpList';
+            'ldapservers_get'                               = 'Get-LdapServer';
+            'graph_ldapServerAssociationsList'              = 'Get-LdapServerAssociation';
+            'ldapservers_sambaDomainsGet'                   = 'Get-LdapServerSambaDomain';
+            'graph_ldapServerTraverseUser'                  = 'Get-LdapServerTraverseUser';
+            'graph_ldapServerTraverseUserGroup'             = 'Get-LdapServerTraverseUserGroup';
+            'office365s_get'                                = 'Get-Office365';
+            'graph_office365AssociationsList'               = 'Get-Office365Association';
+            'translationRules_office365Get'                 = 'Get-Office365TranslationRule';
+            'graph_office365TraverseUser'                   = 'Get-Office365TraverseUser';
+            'graph_office365TraverseUserGroup'              = 'Get-Office365TraverseUserGroup';
+            'policies_get'                                  = 'Get-Policy';
+            'graph_policyAssociationsList'                  = 'Get-PolicyAssociation';
+            'policyresults_get'                             = 'Get-PolicyResult';
+            'policytemplates_get'                           = 'Get-PolicyTemplate';
+            'graph_policyTraverseSystem'                    = 'Get-PolicyTraverseSystem';
+            'graph_policyTraverseSystemGroup'               = 'Get-PolicyTraverseSystemGroup';
+            'graph_radiusServerAssociationsList'            = 'Get-RadiusServerAssociation';
+            'graph_radiusServerTraverseUser'                = 'Get-RadiusServerTraverseUser';
+            'graph_radiusServerTraverseUserGroup'           = 'Get-RadiusServerTraverseUserGroup';
+            'softwareApps_get'                              = 'Get-SoftwareApp';
+            'graph_softwareappsAssociationsList'            = 'Get-SoftwareAppAssociation';
+            'softwareAppStatuses_list'                      = 'Get-SoftwareAppStatus';
+            'graph_softwareappsTraverseSystem'              = 'Get-SoftwareAppTraverseSystem';
+            'graph_softwareappsTraverseSystemGroup'         = 'Get-SoftwareAppTraverseSystemGroup';
+            'subscriptions_get'                             = 'Get-Subscription';
+            'graph_systemAssociationsList'                  = 'Get-SystemAssociation';
+            'systems_getFDEKey'                             = 'Get-SystemFDEKey';
+            'groups_system_get'                             = 'Get-SystemGroup';
+            'graph_systemGroupAssociationsList'             = 'Get-SystemGroupAssociation';
+            'graph_systemGroupMembersList'                  = 'Get-SystemGroupMembers';
+            'graph_systemGroupMembership'                   = 'Get-SystemGroupMembership';
+            'graph_systemGroupTraverseCommand'              = 'Get-SystemGroupTraverseCommand';
+            'graph_systemGroupTraversePolicy'               = 'Get-SystemGroupTraversePolicy';
+            'graph_systemGroupTraverseUser'                 = 'Get-SystemGroupTraverseUser';
+            'graph_systemGroupTraverseUserGroup'            = 'Get-SystemGroupTraverseUserGroup';
+            'graph_systemMemberOf'                          = 'Get-SystemMember';
+            'graph_systemTraverseCommand'                   = 'Get-SystemTraverseCommand';
+            'graph_systemTraversePolicy'                    = 'Get-SystemTraversePolicy';
+            'graph_systemTraverseUser'                      = 'Get-SystemTraverseUser';
+            'graph_systemTraverseUserGroup'                 = 'Get-SystemTraverseUserGroup';
+            'graph_userAssociationsList'                    = 'Get-UserAssociation';
+            'groups_user_get'                               = 'Get-UserGroup';
+            'graph_userGroupAssociationsList'               = 'Get-UserGroupAssociation';
+            'graph_userGroupMembersList'                    = 'Get-UserGroupMembers';
+            'graph_userGroupMembership'                     = 'Get-UserGroupMembership';
+            'graph_userGroupTraverseApplication'            = 'Get-UserGroupTraverseApplication';
+            'graph_userGroupTraverseDirectory'              = 'Get-UserGroupTraverseDirectory';
+            'graph_userGroupTraverseGSuite'                 = 'Get-UserGroupTraverseGSuite';
+            'graph_userGroupTraverseLdapServer'             = 'Get-UserGroupTraverseLdapServer';
+            'graph_userGroupTraverseOffice365'              = 'Get-UserGroupTraverseOffice365';
+            'graph_userGroupTraverseRadiusServer'           = 'Get-UserGroupTraverseRadiusServer';
+            'graph_userGroupTraverseSystem'                 = 'Get-UserGroupTraverseSystem';
+            'graph_userGroupTraverseSystemGroup'            = 'Get-UserGroupTraverseSystemGroup';
+            'graph_userMemberOf'                            = 'Get-UserMember';
+            'graph_userTraverseApplication'                 = 'Get-UserTraverseApplication';
+            'graph_userTraverseDirectory'                   = 'Get-UserTraverseDirectory';
+            'graph_userTraverseGSuite'                      = 'Get-UserTraverseGSuite';
+            'graph_userTraverseLdapServer'                  = 'Get-UserTraverseLdapServer';
+            'graph_userTraverseOffice365'                   = 'Get-UserTraverseOffice365';
+            'graph_userTraverseRadiusServer'                = 'Get-UserTraverseRadiusServer';
+            'graph_userTraverseSystem'                      = 'Get-UserTraverseSystem';
+            'graph_userTraverseSystemGroup'                 = 'Get-UserTraverseSystemGroup';
+            'workdays_get'                                  = 'Get-Workday';
+            'workdays_workers'                              = 'Get-WorkdayWorker';
+            'workdays_import'                               = 'Import-Workday';
+            'workdays_importresults'                        = 'Import-WorkdayResult';
+            'activedirectories_list'                        = 'List-ActiveDirectory';
+            'applemdms_list'                                = 'List-AppleMDM';
+            'applemdms_deviceslist'                         = 'List-AppleMDMDevice';
+            'applemdms_enrollmentprofileslist'              = 'List-AppleMDMEnrollmentProfile';
+            'authnpolicies_list'                            = 'List-AuthenticationPolicy';
+            'customEmails_getTemplates'                     = 'List-CustomEmailTemplates';
+            'directories_list'                              = 'List-Directory';
+            'duo_accountList'                               = 'List-DuoAccount';
+            'duo_applicationList'                           = 'List-DuoApplication';
+            'groups_list'                                   = 'List-Group';
+            'translationRules_gSuiteList'                   = 'List-GSuiteTranslationRule';
+            'gsuites_listImportUsers'                       = 'List-GSuiteUsersToImport';
+            'iplists_list'                                  = 'List-IpList';
+            'ldapservers_list'                              = 'List-LdapServer';
+            'ldapservers_sambaDomainsList'                  = 'List-LdapServerSambaDomain';
+            'translationRules_office365List'                = 'List-Office365TranslationRule';
+            'office365s_listImportUsers'                    = 'List-Office365UsersToImport';
+            'policyresults_org_list'                        = 'List-OrganizationPolicyResult';
+            'policies_list'                                 = 'List-Policy';
+            'policyresults_list'                            = 'List-PolicyResult';
+            'policystatuses_policiesList'                   = 'List-PolicyStatus';
+            'policytemplates_list'                          = 'List-PolicyTemplate';
+            'providers_listAdministrators'                  = 'List-ProviderAdministrator';
+            'softwareApps_list'                             = 'List-SoftwareApp';
+            'groups_system_list'                            = 'List-SystemGroup';
+            'systeminsights_list_alf'                       = 'List-SystemInsightsAlf';
+            'systeminsights_list_alf_exceptions'            = 'List-SystemInsightsAlfException';
+            'systeminsights_list_alf_explicit_auths'        = 'List-SystemInsightsAlfExplicitAuth';
+            'systeminsights_list_appcompat_shims'           = 'List-SystemInsightsAppCompatShim';
+            'systeminsights_list_apps'                      = 'List-SystemInsightsApps';
+            'systeminsights_list_authorized_keys'           = 'List-SystemInsightsAuthorizedKey';
+            'systeminsights_list_battery'                   = 'List-SystemInsightsBattery';
+            'systeminsights_list_bitlocker_info'            = 'List-SystemInsightsBitlockerInfo';
+            'systeminsights_list_browser_plugins'           = 'List-SystemInsightsBrowserPlugins';
+            'systeminsights_list_certificates'              = 'List-SystemInsightsCertificates';
+            'systeminsights_list_chrome_extensions'         = 'List-SystemInsightsChromeExtensions';
+            'systeminsights_list_connectivity'              = 'List-SystemInsightsConnectivity';
+            'systeminsights_list_crashes'                   = 'List-SystemInsightsCrashes';
+            'systeminsights_list_cups_destinations'         = 'List-SystemInsightsCupsDestinations';
+            'systeminsights_list_disk_encryption'           = 'List-SystemInsightsDiskEncryption';
+            'systeminsights_list_disk_info'                 = 'List-SystemInsightsDiskInfo';
+            'systeminsights_list_dns_resolvers'             = 'List-SystemInsightsDnsResolver';
+            'systeminsights_list_etc_hosts'                 = 'List-SystemInsightsEtcHosts';
+            'systeminsights_list_firefox_addons'            = 'List-SystemInsightsFirefoxAddons';
+            'systeminsights_list_groups'                    = 'List-SystemInsightsGroups';
+            'systeminsights_list_ie_extensions'             = 'List-SystemInsightsIEExtensions';
+            'systeminsights_list_interface_addresses'       = 'List-SystemInsightsInterfaceAddresses';
+            'systeminsights_list_interface_details'         = 'List-SystemInsightsInterfaceDetails';
+            'systeminsights_list_kernel_info'               = 'List-SystemInsightsKernelInfo';
+            'systeminsights_list_launchd'                   = 'List-SystemInsightsLaunchd';
+            'systeminsights_list_logged_in_users'           = 'List-SystemInsightsLoggedinUsers';
+            'systeminsights_list_logical_drives'            = 'List-SystemInsightsLogicalDrives';
+            'systeminsights_list_managed_policies'          = 'List-SystemInsightsManagedPolicies';
+            'systeminsights_list_mounts'                    = 'List-SystemInsightsMounts';
+            'systeminsights_list_os_version'                = 'List-SystemInsightsOsVersion';
+            'systeminsights_list_patches'                   = 'List-SystemInsightsPatches';
+            'systeminsights_list_programs'                  = 'List-SystemInsightsPrograms';
+            'systeminsights_list_python_packages'           = 'List-SystemInsightsPythonPackages';
+            'systeminsights_list_safari_extensions'         = 'List-SystemInsightsSafariExtensions';
+            'systeminsights_list_scheduled_tasks'           = 'List-SystemInsightsScheduledTasks';
+            'systeminsights_list_services'                  = 'List-SystemInsightsServices';
+            'systeminsights_list_shadow'                    = 'List-SystemInsightsShadow';
+            'systeminsights_list_shared_folders'            = 'List-SystemInsightsSharedFolders';
+            'systeminsights_list_shared_resources'          = 'List-SystemInsightsSharedResources';
+            'systeminsights_list_sharing_preferences'       = 'List-SystemInsightsSharingPreferences';
+            'systeminsights_list_sip_config'                = 'List-SystemInsightsSipConfig';
+            'systeminsights_list_startup_items'             = 'List-SystemInsightsStartupItems';
+            'systeminsights_list_system_controls'           = 'List-SystemInsightsSystemControls';
+            'systeminsights_list_system_info'               = 'List-SystemInsightsSystemInfo';
+            'systeminsights_list_uptime'                    = 'List-SystemInsightsUptime';
+            'systeminsights_list_usb_devices'               = 'List-SystemInsightsUSBDevices';
+            'systeminsights_list_user_groups'               = 'List-SystemInsightsUserGroups';
+            'systeminsights_list_users'                     = 'List-SystemInsightsUsers';
+            'systeminsights_list_user_ssh_keys'             = 'List-SystemInsightsUserSSHKeys';
+            'systeminsights_list_wifi_networks'             = 'List-SystemInsightsWifiNetwork';
+            'systeminsights_list_wifi_status'               = 'List-SystemInsightsWifiStatus';
+            'systeminsights_list_windows_security_products' = 'List-SystemInsightsWindowsSecurityProduct';
+            'policystatuses_systemsList'                    = 'List-SystemsPolicyStatus';
+            'groups_user_list'                              = 'List-UserGroup';
+            'workdays_list'                                 = 'List-Workday';
+            'applemdms_deviceslock'                         = 'Lock-AppleMDMDevice';
+            'office365s_postReactivate'                     = 'Reactivate-Office365';
+            'applemdms_devicesrestart'                      = 'Restart-AppleMDMDevice';
+            'graph_activeDirectoryAssociationsPost'         = 'Set-ActiveDirectoryAssociation';
+            'applemdms_put'                                 = 'Set-AppleMDM';
+            'graph_applicationAssociationsPost'             = 'Set-ApplicationAssociation';
+            'graph_commandAssociationsPost'                 = 'Set-CommandAssociation';
+            'customEmails_update'                           = 'Set-CustomEmailConfiguration';
+            'duo_applicationUpdate'                         = 'Set-DuoApplication';
+            'graph_gSuiteAssociationsPost'                  = 'Set-GSuiteAssociation';
+            'iplists_put'                                   = 'Set-IpList';
+            'graph_ldapServerAssociationsPost'              = 'Set-LdapServerAssociation';
+            'ldapservers_sambaDomainsPut'                   = 'Set-LdapServerSambaDomain';
+            'graph_office365AssociationsPost'               = 'Set-Office365Association';
+            'policies_put'                                  = 'Set-Policy';
+            'graph_policyAssociationsPost'                  = 'Set-PolicyAssociation';
+            'graph_radiusServerAssociationsPost'            = 'Set-RadiusServerAssociation';
+            'softwareApps_update'                           = 'Set-SoftwareApp';
+            'graph_softwareappsAssociationsPost'            = 'Set-SoftwareAppAssociation';
+            'graph_systemAssociationsPost'                  = 'Set-SystemAssociation';
+            'groups_system_put'                             = 'Set-SystemGroup';
+            'graph_systemGroupAssociationsPost'             = 'Set-SystemGroupAssociation';
+            'graph_systemGroupMembersPost'                  = 'Set-SystemGroupMembers';
+            'graph_userAssociationsPost'                    = 'Set-UserAssociation';
+            'groups_user_put'                               = 'Set-UserGroup';
+            'graph_userGroupAssociationsPost'               = 'Set-UserGroupAssociation';
+            'graph_userGroupMembersPost'                    = 'Set-UserGroupMembers';
+            'workdays_put'                                  = 'Set-Workday';
+            'applemdms_devicesshutdown'                     = 'Stop-AppleMDMDevice';
+            'applemdms_refreshdepdevices'                   = 'Sync-AppleMDMDevice';
+            'authnpolicies_patch'                           = 'Update-AuthenticationPolicy';
+            'bulk_usersUpdate'                              = 'Update-BulkUsers';
+            'gsuites_patch'                                 = 'Update-GSuite';
+            'iplists_patch'                                 = 'Update-IpList';
+            'ldapservers_patch'                             = 'Update-LdapServer';
+            'office365s_patch'                              = 'Update-Office365';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
@@ -407,7 +408,7 @@ Function Update-SwaggerObject
         {
             # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
             # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
-            If ($InputObjectName -like '*.get.parameters')
+            If ($InputObjectName -like '.parameters.*')
             {
                 $ThisObjectName = $ThisObject.name
                 If ($ThisObject | Get-Member -Name type)
@@ -476,10 +477,11 @@ Function Update-SwaggerObject
                         If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
                     }
                     # Append "x-ms-enum" to "enum" section
-                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum')
+                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum' -or $AttributePath -like '.parameters.*.enum')
                     {
                         $xMsEnum = [PSCustomObject]@{
-                            name = $ThisObjectName
+                            name = If ($ThisObject.name) { $ThisObject.name }
+                            Else { $ThisObjectName }
                             # modelAsString = $true
                         }
                         # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
@@ -596,16 +598,24 @@ Function Update-SwaggerObject
                     {
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                     }
-                    # Remove endpoint where produces is not application/json
-                    If ('produces' -in $ThisObject.$AttributeName.PSObject.Properties.Name -and 'application/json' -notin $ThisObject.$AttributeName.produces) { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove endpoints that are not AutoRest compatible or that should be hidden from the public
                     If ($AttributePath -match '(.paths.)([a-zA-Z\/\{\}\-_]+$|.*\.xml$)')
                     {
                         $ThisObject.$AttributeName.PSObject.Properties.Name | ForEach-Object {
                             $Method = $_
-                            # Write-Host $ThisObject.$AttributeName.$Method.'x-stoplight'  -BackgroundColor Cyan -ForegroundColor Black
-                            If ([String]$ThisObject.$AttributeName.$Method.'x-stoplight'.public -eq 'False')
+                            # Remove endpoint where "consumes" and "produces" does not contain "application/json" or "text/plain"
+                            If (
+                                ('produces' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and $ThisObject.$AttributeName.$Method.produces -notcontains 'application/json' -and $ThisObject.$AttributeName.$Method.produces -notcontains 'text/plain') `
+                                    -or ('consumes' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and $ThisObject.$AttributeName.$Method.consumes -notcontains 'application/json' -and $ThisObject.$AttributeName.$Method.consumes -notcontains 'text/plain')
+                            )
                             {
-                                Write-Host("Removing: $($AttributeName) - $($Method.ToUpper())") -BackgroundColor Red -ForegroundColor Black
+                                # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
+                                $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
+                            }
+                            # Remove endpoints where ".public.x-stoplight.public" is "false"
+                            If ('x-stoplight' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and [String]$ThisObject.$AttributeName.$Method.'x-stoplight'.public -eq 'False')
+                            {
+                                # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
                                 $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
                             }
                         }
@@ -729,7 +739,7 @@ $SDKName | ForEach-Object {
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
-            Write-Host("##vso[task.logissue type=error;]No content was returned from: $($Config.Url)")
+            Write-Host ("##vso[task.logissue type=error;]No content was returned from: $($Config.Url)")
         }
         Else
         {
@@ -761,7 +771,7 @@ $SDKName | ForEach-Object {
                     }
                     Else
                     {
-                        Write-Host("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                        Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
                     }
                 }
             }
@@ -794,7 +804,7 @@ $SDKName | ForEach-Object {
                 }
                 If (-not $ValidPath)
                 {
-                    Write-Host("Removing: $($_)") -BackgroundColor Red -ForegroundColor Black
+                    # Write-Warning ("Removing: $($_)")
                     $UpdatedSwagger.paths.PSObject.Properties.Remove($_)
                 }
             }
@@ -903,6 +913,6 @@ $SDKName | ForEach-Object {
     }
     Else
     {
-        Write-Host("##vso[task.logissue type=error;]Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
+        Write-Host ("##vso[task.logissue type=error;]Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }

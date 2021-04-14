@@ -22,10 +22,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventDistinctQuery>:
+  Field <String>: field is what they wish to query on
   Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
-  [Field <String>]: field is what they wish to query on
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
@@ -46,6 +46,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # field is what they wish to query on
+    ${Field},
+
+    [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
     # Known services: systems,radius,sso,directory,ldap,all
@@ -62,12 +68,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.DateTime]
     # optional query end time, UTC in RFC3339 format
     ${EndTime},
-
-    [Parameter(ParameterSetName='GetExpanded')]
-    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [System.String]
-    # field is what they wish to query on
-    ${Field},
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]

@@ -24,12 +24,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/
 
 ### Get (Default)
 ```
-Get-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Targets <Targets1> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Targets <Targets> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets1> [<CommonParameters>]
+Get-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -95,10 +95,10 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-Targets which a "software_app" can be associated to.
+Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets1
+Type: JumpCloud.SDK.V2.Support.Targets
 Parameter Sets: (All)
 Aliases:
 

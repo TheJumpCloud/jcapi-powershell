@@ -87,7 +87,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets])]
     [JumpCloud.SDK.V2.Category('Query')]
     [JumpCloud.SDK.V2.Support.Targets]
-    # Targets which a "radius_server" can be associated to.
+    # Targets which a "active_directory" can be associated to.
     ${Targets},
 
     [Parameter(DontShow)]

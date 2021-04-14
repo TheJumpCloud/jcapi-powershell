@@ -30,10 +30,20 @@ Get-JcSdkCommandResult [-Fields <String>] [-Filter <String>] [-Sort <String>] [<
 Get-JcSdkCommandResult -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
 ```
 
+### Get1
+```
+Get-JcSdkCommandResult -Id <String> [<CommonParameters>]
+```
+
 ### GetViaIdentity
 ```
 Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
  [<CommonParameters>]
+```
+
+### GetViaIdentity1
+```
+Get-JcSdkCommandResult -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -71,7 +81,7 @@ If omitted, the default list of fields will be returned.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: Get, GetViaIdentity, List
 Aliases:
 
 Required: False
@@ -93,7 +103,7 @@ Supports wild cards.
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: Get, GetViaIdentity, List
 Aliases:
 
 Required: False
@@ -108,7 +118,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Get
+Parameter Sets: Get, Get1
 Aliases:
 
 Required: True
@@ -124,7 +134,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-Parameter Sets: GetViaIdentity
+Parameter Sets: GetViaIdentity, GetViaIdentity1
 Aliases:
 
 Required: True
@@ -159,6 +169,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
+
+### JumpCloud.SDK.V1.Models.IAny
 
 ### JumpCloud.SDK.V1.Models.ICommandresult
 

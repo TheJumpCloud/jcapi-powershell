@@ -1,24 +1,28 @@
 <#
 .Synopsis
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+This endpoint deletes an existing Office 365 instance.
 
-#### Sample Request
+#####
+
+Sample Request
+
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+This endpoint deletes an existing Office 365 instance.
 
-#### Sample Request
+#####
+
+Sample Request
+
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
@@ -61,20 +65,20 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmCsr.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkOffice365.md
 #>
- Function Get-JcSdkAppleMdmCsr
+ Function Remove-JcSdkOffice365
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
+    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Get', Mandatory)]
+    [Parameter(ParameterSetName='Delete', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # .
-    ${AppleMdmId},
+    # ObjectID of the Office 365 instance.
+    ${Office365Id},
 
-    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
@@ -134,7 +138,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
                 # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
                 Return $ResponseTask
@@ -143,28 +147,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmCsr @PSBoundParameters
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-        {
-            $Result.results
-        }
-        Else
-        {
-            $Result
-        }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
-            $Results += $Result;
-        }
+        $Results = JumpCloud.SDK.V2.internal\Remove-JcSdkInternalOffice365 @PSBoundParameters
     }
     End
     {
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
         # Clean up global variables
-        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
             If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
         }

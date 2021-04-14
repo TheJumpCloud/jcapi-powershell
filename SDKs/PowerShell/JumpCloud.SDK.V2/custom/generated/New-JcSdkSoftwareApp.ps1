@@ -56,6 +56,7 @@ BODY <ISoftwareApp>:
       [(Any) <Object>]: This indicates any property can be added to this object.
     [AppleVppTotalLicenses <Int32?>]:
     [AutoUpdate <Boolean?>]:
+    [DesiredState <String>]: State of Install or Uninstall
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [PackageId <String>]:
@@ -69,6 +70,7 @@ SETTINGS <ISoftwareAppSettings[]>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [AppleVppTotalLicenses <Int32?>]:
   [AutoUpdate <Boolean?>]:
+  [DesiredState <String>]: State of Install or Uninstall
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [PackageId <String>]:
@@ -84,7 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.ISoftwareApp]
-    # Software Application Package Object
+    # Software Application Package
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

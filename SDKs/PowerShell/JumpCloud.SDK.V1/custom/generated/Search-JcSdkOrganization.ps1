@@ -104,7 +104,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]
-    # search
+    # Search
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 

@@ -1,45 +1,50 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmCsr.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkOffice365.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkAppleMdmCsr
+# Remove-JcSdkOffice365
 
 ## SYNOPSIS
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+This endpoint deletes an existing Office 365 instance.
 
-#### Sample Request
+#####
+
+Sample Request
+
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
 
 ## SYNTAX
 
-### Get (Default)
+### Delete (Default)
 ```
-Get-JcSdkAppleMdmCsr -AppleMdmId <String> [-PassThru] [<CommonParameters>]
+Remove-JcSdkOffice365 -Office365Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### GetViaIdentity
+### DeleteViaIdentity
 ```
-Get-JcSdkAppleMdmCsr -InputObject <IJumpCloudApIsIdentity> [-PassThru] [<CommonParameters>]
+Remove-JcSdkOffice365 -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Retrieves an Apple MDM signed CSR Plist for an organization.
-The user must supply the returned plist to Apple for signing, and then provide the certificate provided by Apple back into the PUT API.
+This endpoint deletes an existing Office 365 instance.
 
-#### Sample Request
+#####
+
+Sample Request
+
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/csr \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
+curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
 
@@ -61,34 +66,34 @@ The user must supply the returned plist to Apple for signing, and then provide t
 
 ## PARAMETERS
 
-### -AppleMdmId
-.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: GetViaIdentity
+Parameter Sets: DeleteViaIdentity
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Office365Id
+ObjectID of the Office 365 instance.
+
+```yaml
+Type: System.String
+Parameter Sets: Delete
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -99,6 +104,37 @@ Returns true when the command succeeds
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
 
 Required: False
 Position: Named
