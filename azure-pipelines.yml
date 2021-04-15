@@ -20,9 +20,9 @@ jobs:
   - template: steps/build.yml # Template reference
     parameters:
       SDKName: 'JumpCloud.SDK.V1'
-      JCApiKey:
-      JCOrgId:
-      GitHubAccessToken:
+      JCApiKey: $(JCApiKey)
+      JCOrgId: $(JCOrgId)
+      GitHubAccessToken: $(GitHubAccessToken)
       ManualModuleVersion: ''
       BuildModuleOverride: false
       RunApiTransform: true
