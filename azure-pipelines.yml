@@ -3,7 +3,7 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- SA-1769-Convert-To-YAML
 
 pool:
   name: Azure Pipelines
@@ -24,6 +24,6 @@ jobs:
       JCOrgId: $(JCOrgId)
       GitHubAccessToken: $(GitHubAccessToken)
       ManualModuleVersion: ''
-      # BuildModuleOverride: '$false'
-      # RunApiTransform: '$true'
-      # TestModule: '$true'
+      BuildModuleOverride: false
+      RunApiTransform: true
+      TestModule: true
