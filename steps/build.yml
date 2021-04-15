@@ -1,0 +1,70 @@
+# File: steps/build.yml
+
+parameters:
+- name: 'SDKName'
+  type: string
+  values:
+    - JumpCloud.SDK.DirectoryInsights
+    - JumpCloud.SDK.V1
+    - JumpCloud.SDK.V2
+- name: 'JCApiKey'
+  type: string
+- name: 'JCOrgId'
+  type: string
+- name: 'GitHubAccessToken'
+  type: string
+- name: 'ManualModuleVersion'
+  type: string
+- name: 'BuildModuleOverride'
+  type: boolean
+- name: 'RunApiTransform'
+  type: boolean
+- name: 'TestModule'
+  type: boolean
+
+steps:
+- pwsh: |
+   Write-Host ("---------------------------------------------------------------------------------------`n---------------------------------------------------------------------------------------")
+   Write-Host ('Host Information') -BackgroundColor:('Green') -ForegroundColor:('Black')
+   Get-Host | Select *
+
+   Write-Host ("---------------------------------------------------------------------------------------`n---------------------------------------------------------------------------------------")
+   Write-Host ('Imported Environment Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+   Get-ChildItem Env: | Format-Table
+
+   Write-Host ("---------------------------------------------------------------------------------------`n---------------------------------------------------------------------------------------")
+   Write-Host ('PsBoundParameters') -BackgroundColor:('Green') -ForegroundColor:('Black')
+   $PsBoundParameters.GetEnumerator()
+
+   Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+   Get-Variable | Format-Table
+   Write-Host ("---------------------------------------------------------------------------------------`n---------------------------------------------------------------------------------------")
+  displayName: 'Get Session Info (For Testing)'
+
+- pwsh: |
+   Try{
+       .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/SetupDependencies.ps1')
+       .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/BuildAutoRest.ps1') -SDKName:('$(SDKName)') -JCApiKey:('$(JCApiKey)') -JCOrgId:('$(JCOrgId)') -GitHubAccessToken:('$(GitHubAccessToken)') -BuildModuleOverride:($(BuildModuleOverride)) -ManualModuleVersion:('$(ManualModuleVersion)') -RunApiTransform:($(RunApiTransform)) -TestModule:($(TestModule))
+   }
+   Catch{
+       Write-Host("##vso[task.logissue type=error;]" + $_)
+       Write-Error ($_)
+   }
+  displayName: 'BuildAutoRest - $(SDKName)'
+  env:
+    NuGetApiKey: $(NuGetApiKey)
+
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results - $(SDKName)'
+  inputs:
+    testResultsFormat: NUnit
+    testResultsFiles: '**/*$(SDKName)*TestResults.xml'
+    failTaskOnFailedTests: true
+    testRunTitle: 'Publish Test Results - $(SDKName)'
+  condition: always()
+
+- task: PublishPipelineArtifact@1
+  displayName: 'Publish Pipeline Artifact'
+  inputs:
+    artifact: '$(SDKName)'
+  condition: and(succeeded(), eq(variables['UpdatedSpec'], True))

@@ -1,0 +1,29 @@
+# File: azure-pipelines.yml
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: Azure Pipelines
+
+variables:
+  NuGetApiKey: ''
+  SlackApiToken: ''
+
+jobs:
+- job: Windows
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - template: steps/build.yml # Template reference
+    parameters:
+      SDKName: 'JumpCloud.SDK.V1'
+      JCApiKey:
+      JCOrgId:
+      GitHubAccessToken:
+      ManualModuleVersion: ''
+      BuildModuleOverride: false
+      RunApiTransform: true
+      TestModule: true
