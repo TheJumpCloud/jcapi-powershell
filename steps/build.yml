@@ -15,12 +15,12 @@ parameters:
   type: string
 - name: 'ManualModuleVersion'
   type: string
-- name: 'BuildModuleOverride'
-  type: string
-- name: 'RunApiTransform'
-  type: string
-- name: 'TestModule'
-  type: string
+# - name: 'BuildModuleOverride'
+#   type: string
+# - name: 'RunApiTransform'
+#   type: string
+# - name: 'TestModule'
+#   type: string
 
 steps:
 - pwsh: |

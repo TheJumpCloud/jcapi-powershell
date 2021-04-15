@@ -24,6 +24,6 @@ jobs:
       JCOrgId: $(JCOrgId)
       GitHubAccessToken: $(GitHubAccessToken)
       ManualModuleVersion: ''
-      BuildModuleOverride: '$false'
-      RunApiTransform: '$true'
-      TestModule: '$true'
+      # BuildModuleOverride: '$false'
+      # RunApiTransform: '$true'
+      # TestModule: '$true'
