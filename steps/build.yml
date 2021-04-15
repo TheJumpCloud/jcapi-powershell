@@ -16,11 +16,11 @@ parameters:
 - name: 'ManualModuleVersion'
   type: string
 - name: 'BuildModuleOverride'
-  type: boolean
+  type: string
 - name: 'RunApiTransform'
-  type: boolean
+  type: string
 - name: 'TestModule'
-  type: boolean
+  type: string
 
 steps:
 - pwsh: |
