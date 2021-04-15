@@ -9,8 +9,8 @@ pool:
   name: Azure Pipelines
 
 variables:
-  NuGetApiKey: ''
-  SlackApiToken: ''
+  NuGetApiKey: $(NuGetApiKey)
+  SlackApiToken: $(SlackApiToken)
 
 jobs:
 - job: Windows
