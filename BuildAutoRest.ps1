@@ -5,12 +5,13 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][System.String]$BuildModuleOverride = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][System.Boolean]$BuildModuleOverride = $false
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][ValidateSet('', 'beta')][System.String]$PrereleaseName = ''
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set the module version increment type.')][ValidateSet('Major', 'Minor', 'Build')][ValidateNotNullOrEmpty()][System.String]$ModuleVersionIncrementType = 'Build'
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to increment the module version.')][ValidateNotNullOrEmpty()][System.Boolean]$IncrementModuleVersion = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to install prereqs.')][ValidateNotNullOrEmpty()][System.Boolean]$InstallPreReq = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run AutoRest to generate the module.')][ValidateNotNullOrEmpty()][System.Boolean]$GenerateModule = $true
@@ -18,7 +19,6 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run build-module.ps1 ')][ValidateNotNullOrEmpty()][System.Boolean]$BuildModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run BuildCustomFunctions.ps1')][ValidateNotNullOrEmpty()][System.Boolean]$BuildCustomFunctions = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove the AutoRest generated .format.ps1xml file.')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveFormatPs1Xml = $true
