@@ -46,6 +46,7 @@ steps:
   displayName: 'Get Session Info (For Testing)'
 
 - pwsh: |
+  write-host "-SDKName:('${{ parameters.SDKName }}') -JCApiKey:('${{ parameters.JCApiKey }}') -JCOrgId:('${{ parameters.JCOrgId }}') -GitHubAccessToken:('${{ parameters.GitHubAccessToken }}') -ManualModuleVersion:('${{ parameters.ManualModuleVersion }}') -BuildModuleOverride:(${{ parameters.BuildModuleOverride }}) -RunApiTransform:(${{ parameters.RunApiTransform }}) -TestModule:(${{ parameters.TestModule }})"
    Try{
        .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/SetupDependencies.ps1')
        .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/BuildAutoRest.ps1') -SDKName:('${{ parameters.SDKName }}') -JCApiKey:('${{ parameters.JCApiKey }}') -JCOrgId:('${{ parameters.JCOrgId }}') -GitHubAccessToken:('${{ parameters.GitHubAccessToken }}') -ManualModuleVersion:('${{ parameters.ManualModuleVersion }}') -BuildModuleOverride:(${{ parameters.BuildModuleOverride }}) -RunApiTransform:(${{ parameters.RunApiTransform }}) -TestModule:(${{ parameters.TestModule }})
