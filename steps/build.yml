@@ -44,7 +44,7 @@ steps:
 - pwsh: |
    Try{
        .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/SetupDependencies.ps1')
-       .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/BuildAutoRest.ps1') -SDKName:('$(SDKName)') -JCApiKey:('$(JCApiKey)') -JCOrgId:('$(JCOrgId)') -GitHubAccessToken:('$(GitHubAccessToken)') -BuildModuleOverride:($(BuildModuleOverride)) -ManualModuleVersion:('$(ManualModuleVersion)') -RunApiTransform:($(RunApiTransform)) -TestModule:($(TestModule))
+       .('$(SYSTEM.DEFAULTWORKINGDIRECTORY)/BuildAutoRest.ps1') -SDKName:('$(SDKName)') -JCApiKey:('$(JCApiKey)') -JCOrgId:('$(JCOrgId)') -GitHubAccessToken:('$(GitHubAccessToken)') -BuildModuleOverride:('$(BuildModuleOverride)') -ManualModuleVersion:('$(ManualModuleVersion)') -RunApiTransform:('$(RunApiTransform)') -TestModule:('$(TestModule)')
    }
    Catch{
        Write-Host("##vso[task.logissue type=error;]" + $_)
