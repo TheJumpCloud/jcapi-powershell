@@ -66,9 +66,6 @@ commands:
           name: Publish to Github Packages
           shell: pwsh.exe
           command: |
-            $username = '<< parameters.GithubUsernameTest >>'
-            $pass = ConvertTo-SecureString -AsPlainTest '<< parameters.GitHubAccessToken >>' -Force
-            $creds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $pass
             mkdir ./../local-repo
             Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
             Publish-PSResource -Path:("./") -Repository:("LocalRepo")
@@ -87,7 +84,6 @@ jobs:
           JCApiKey: ${JCApiKey}
           JCOrgId: ${JCOrgId}
           GitHubAccessToken: ${GitHubAccessToken}
-          GithubUsernameTest: ${GithubUsernameTest}
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
