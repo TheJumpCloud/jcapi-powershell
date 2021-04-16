@@ -70,7 +70,7 @@ commands:
             dir
             mkdir ./../local-repo
             Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
-            Publish-PSResource -Path:("./") -Repository:("LocalRepo")
+            Publish-PSResource -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/") -Repository:("LocalRepo")
             $NupkgPath = Get-Item ./../local-repo/*.nupkg | Resolve-Path -Relative
             gpr push -k '<< parameters.GitHubAccessToken >>' $NupkgPath -r "https://github.com/TheJumpCloud/jcapi-powershell"
 
