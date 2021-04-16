@@ -62,18 +62,18 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>) -TestModule:($<< parameters.TestModule >>)
-      -run:
-        name: Publish to Github Packages
-        shell: pwsh.exe
-        command: |
-          $username = '<< parameters.GithubUsernameTest >>'
-          $pass = ConvertTo-SecureString -AsPlainTest '<< parameters.GitHubAccessToken >>' -Force
-          $creds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $pass
-          mkdir ./../local-repo
-          Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
-          Publish-PSResource -Path:("./") -Repository:("LocalRepo")
-          $NupkgPath = Get-Item ./../local-repo/*.nupkg | Resolve-Path -Relative
-          gpr push -k '<< parameters.GitHubAccessToken >>' $NupkgPath -r "https://github.com/TheJumpCloud/jcapi-powershell"
+      - run:
+          name: Publish to Github Packages
+          shell: pwsh.exe
+          command: |
+            $username = '<< parameters.GithubUsernameTest >>'
+            $pass = ConvertTo-SecureString -AsPlainTest '<< parameters.GitHubAccessToken >>' -Force
+            $creds = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $pass
+            mkdir ./../local-repo
+            Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
+            Publish-PSResource -Path:("./") -Repository:("LocalRepo")
+            $NupkgPath = Get-Item ./../local-repo/*.nupkg | Resolve-Path -Relative
+            gpr push -k '<< parameters.GitHubAccessToken >>' $NupkgPath -r "https://github.com/TheJumpCloud/jcapi-powershell"
 
         
 jobs:
