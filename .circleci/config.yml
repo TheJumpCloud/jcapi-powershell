@@ -67,6 +67,7 @@ commands:
           name: Publish to Github Packages
           shell: pwsh.exe
           command: |
+            dir
             mkdir ./../local-repo
             Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
             Publish-PSResource -Path:("./") -Repository:("LocalRepo")
