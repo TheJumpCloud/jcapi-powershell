@@ -438,5 +438,4 @@ Try
 Catch
 {
     Write-Error $_
-    exit 1
 }
