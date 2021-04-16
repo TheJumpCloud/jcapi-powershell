@@ -17,6 +17,9 @@ commands:
             npm install -g autorest@latest
             autorest --reset
           # autorest --help
+      - run:
+          name: Install gpr
+          command: dotnet tool install --global gpr --version 0.1.268
       # TODO: ADD: dotnet-sdk-3.1-win-x64, dotnet-sdk-3.1-osx-x64, dotnet-sdk-3.1-linux-x64
   build:
     parameters:
@@ -59,6 +62,7 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>) -TestModule:($<< parameters.TestModule >>)
+        
 jobs:
   # TODO: Make these global parameters for entire pipeline: JCApiKey, JCOrgId, GitHubAccessToken
   'Build JumpCloud SDK DirectoryInsights':
