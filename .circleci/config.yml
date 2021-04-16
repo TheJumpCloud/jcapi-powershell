@@ -60,6 +60,7 @@ commands:
             }
             Catch {
               Write-Error ($_)
+              exit 1
             }
 jobs:
   # TODO: Make these global parameters for entire pipeline: JCApiKey, JCOrgId, GitHubAccessToken
