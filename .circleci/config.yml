@@ -68,39 +68,39 @@ jobs:
       - setup
       - build:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          JCApiKey: ''
-          JCOrgId: ''
-          GitHubAccessToken: ''
+          JCApiKey: ${JCApiKey}
+          JCOrgId: ${JCOrgId}
+          GitHubAccessToken: ${GitHubAccessToken}
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: false
+          TestModule: true
   'Build JumpCloud SDK V1':
     executor: win/default
     steps:
       - setup
       - build:
           SDKName: JumpCloud.SDK.V1
-          JCApiKey: ''
-          JCOrgId: ''
-          GitHubAccessToken: ''
+          JCApiKey: ${JCApiKey}
+          JCOrgId: ${JCOrgId}
+          GitHubAccessToken: ${GitHubAccessToken}
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: false
+          TestModule: true
   'Build JumpCloud SDK V2':
     executor: win/default
     steps:
       - setup
       - build:
           SDKName: JumpCloud.SDK.V2
-          JCApiKey: ''
-          JCOrgId: ''
-          GitHubAccessToken: ''
+          JCApiKey: ${JCApiKey}
+          JCOrgId: ${JCOrgId}
+          GitHubAccessToken: ${GitHubAccessToken}
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: false
+          TestModule: true
 workflows:
   version: 2
   ci:
