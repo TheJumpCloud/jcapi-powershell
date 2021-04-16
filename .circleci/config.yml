@@ -1,0 +1,119 @@
+version: 2.1
+orbs:
+  win: circleci/windows@2.2.0
+commands:
+  setup:
+    steps:
+      - checkout
+      - run: dotnet tool install --global PowerShell
+      - run:
+          name: Install Required Module
+          shell: pwsh.exe
+          command: |
+            Install-Module -Name:('BuildHelpers','JumpCloud','powershell-yaml','PSScriptAnalyzer') -Force
+            Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
+            npm install -g autorest@latest
+            autorest --reset
+          # autorest --help
+      # TODO: ADD: dotnet-sdk-3.1-win-x64, dotnet-sdk-3.1-osx-x64, dotnet-sdk-3.1-linux-x64
+  build:
+    parameters:
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+      ManualModuleVersion:
+        description: ''
+        type: string
+        default: ''
+      JCApiKey:
+        description: API key of the JumpCloud organization to run tests against
+        type: string
+      JCOrgId:
+        description: Organization id of the JumpCloud organization to run tests against
+        type: string
+      GitHubAccessToken:
+        description: GitHub Access Token used to pull the latest version of the swagger spec
+        type: string
+      BuildModuleOverride:
+        description: ''
+        type: boolean
+        default: false
+      RunApiTransform:
+        description: ''
+        type: boolean
+        default: true
+      TestModule:
+        description: ''
+        type: boolean
+        default: true
+    steps:
+      - run:
+          name: Get Session Info (For Testing)
+          shell: pwsh.exe
+          command: ./Tools/Get-SessionInfo.ps1
+      - run:
+          name: Building '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            Try {
+              ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>) -TestModule:($<< parameters.TestModule >>)
+            }
+            Catch {
+              Write-Error ($_)
+            }
+jobs:
+  'Build JumpCloud SDK DirectoryInsights':
+    executor: win/default
+    steps:
+      - setup
+      - build:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          JCApiKey: ''
+          JCOrgId: ''
+          GitHubAccessToken: ''
+          ManualModuleVersion: ''
+          BuildModuleOverride: false
+          RunApiTransform: true
+          TestModule: false
+  'Build JumpCloud SDK V1':
+    executor: win/default
+    steps:
+      - setup
+      - build:
+          SDKName: JumpCloud.SDK.V1
+          JCApiKey: ''
+          JCOrgId: ''
+          GitHubAccessToken: ''
+          ManualModuleVersion: ''
+          BuildModuleOverride: false
+          RunApiTransform: true
+          TestModule: false
+  'Build JumpCloud SDK V2':
+    executor: win/default
+    steps:
+      - setup
+      - build:
+          SDKName: JumpCloud.SDK.V2
+          JCApiKey: ''
+          JCOrgId: ''
+          GitHubAccessToken: ''
+          ManualModuleVersion: ''
+          BuildModuleOverride: false
+          RunApiTransform: true
+          TestModule: false
+workflows:
+  version: 2
+  ci:
+    jobs:
+      - 'Build JumpCloud SDK DirectoryInsights':
+          filters:
+            tags:
+              only: /.*/
+      - 'Build JumpCloud SDK V1':
+          filters:
+            tags:
+              only: /.*/
+      - 'Build JumpCloud SDK V2':
+          filters:
+            tags:
+              only: /.*/

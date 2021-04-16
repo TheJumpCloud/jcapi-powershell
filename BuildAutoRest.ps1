@@ -151,11 +151,6 @@ Try
                     ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
                     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
                     Else { Write-Error ('Unknown Operation System') }
-                    Write-Host ('[RUN COMMAND] npm install -g autorest@latest') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    npm install -g autorest@latest
-                    Write-Host ('[RUN COMMAND] autorest --reset') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    autorest --reset
-                    # autorest --help
                 }
                 ###########################################################################
                 If ($GenerateModule)
@@ -311,7 +306,6 @@ Try
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         # Test module
-                        Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
