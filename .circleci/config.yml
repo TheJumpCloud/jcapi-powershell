@@ -73,7 +73,7 @@ jobs:
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: true
+          TestModule: false
   'Build JumpCloud SDK V1':
     executor: win/default
     steps:
@@ -86,7 +86,7 @@ jobs:
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: true
+          TestModule: false
   'Build JumpCloud SDK V2':
     executor: win/default
     steps:
@@ -99,7 +99,7 @@ jobs:
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
-          TestModule: true
+          TestModule: false
 workflows:
   version: 2
   ci:
