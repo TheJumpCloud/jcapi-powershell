@@ -14,7 +14,7 @@ commands:
           command: |
             Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer') -Force
             Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
-            Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10'
+            Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
             npm install -g autorest@latest
             autorest --reset
           # autorest --help
