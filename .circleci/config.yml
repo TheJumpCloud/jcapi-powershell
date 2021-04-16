@@ -5,12 +5,14 @@ commands:
   setup:
     steps:
       - checkout
-      - run: dotnet tool install --global PowerShell
+      - run:
+          name: Install PowerShell Core
+          command: dotnet tool install --global PowerShell
       - run:
           name: Install Required Module
           shell: pwsh.exe
           command: |
-            Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer','Az.Accounts') -Force
+            Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer') -Force
             Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
             npm install -g autorest@latest
             autorest --reset
@@ -56,6 +58,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
+            Import-Module 'Az.Accounts' -Force
             Import-Module 'Az.Accounts' -Force
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>) -TestModule:($<< parameters.TestModule >>)
 jobs:
