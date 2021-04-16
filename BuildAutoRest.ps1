@@ -443,4 +443,5 @@ Catch
 {
     Write-Host("##vso[task.logissue type=error;]" + $_) -BackgroundColor:('Black') -ForegroundColor:('Red')
     Write-Error $_
+    exit 1
 }
