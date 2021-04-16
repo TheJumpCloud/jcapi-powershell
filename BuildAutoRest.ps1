@@ -331,15 +331,13 @@ Try
                                 Write-Host ('##############################################################################################################')
                                 Write-Host ('')
                                 $FailedTests | ForEach-Object { $_.InnerText + ';' }
-                                Write-Host("##vso[task.logissue type=error;]" + 'Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
-                                Write-Error -Message:('Tests Failed: ' + [string]($FailedTests | Measure-Object).Count)
+                                Write-Error ("Tests Failed: $([string]($FailedTests | Measure-Object).Count)")
                             }
                         }
                     }
                     Else
                     {
-                        Write-Host("##vso[task.logissue type=error;]" + 'JCApiKey and JCOrgId have not been set.')
-                        Write-Error ('JCApiKey and JCOrgId have not been set.')
+                        Write-Error ("JCApiKey and JCOrgId have not been set.")
                     }
                 }
                 Else
@@ -392,7 +390,6 @@ Try
                     }
                     Catch
                     {
-                        Write-Host("##vso[task.logissue type=error;]" + $_)
                         Write-Error $_
                     }
                 }
@@ -432,8 +429,7 @@ Try
         }
         Else
         {
-            Write-Host("##vso[task.logissue type=error;]" + 'Unable to find file: ' + $ConfigFilePath) -BackgroundColor:('Black') -ForegroundColor:('Red')
-            Write-Error ('Unable to find file: ' + $ConfigFilePath)
+            Write-Error ("Unable to find file: $ConfigFilePath")
         }
         # Mark Updated Spec in Pipeline
         Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
@@ -441,7 +437,6 @@ Try
 }
 Catch
 {
-    Write-Host("##vso[task.logissue type=error;]" + $_) -BackgroundColor:('Black') -ForegroundColor:('Red')
     Write-Error $_
     exit 1
 }

@@ -9,7 +9,6 @@ Describe -Tag:('ModuleValidation') 'Help File Tests' {
             # It ('The file "' + $_.Path + '" needs to be populated on line number "' + $_.LineNumber + '" where "' + $_.Line + '" exists.') {
             #     $_.Path | Should -Not -FileContentMatch ($Regex_FillInThePester)
             # }
-            Write-Host("##vso[task.logissue type=warning;]" + 'The file "' + $_.Path + '" needs to be populated on line number "' + $_.LineNumber + '" where "' + $_.Line + '" exists.')
             Write-Warning ('The file "' + $_.Path + '" needs to be populated on line number "' + $_.LineNumber + '" where "' + $_.Line + '" exists.')
         }
     }
