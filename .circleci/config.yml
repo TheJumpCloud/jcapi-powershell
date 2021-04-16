@@ -10,7 +10,7 @@ commands:
           name: Install Required Module
           shell: pwsh.exe
           command: |
-            Install-Module -Name:('BuildHelpers','JumpCloud','powershell-yaml','PSScriptAnalyzer') -Force
+            Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer','Az.Accounts') -Force
             Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
             npm install -g autorest@latest
             autorest --reset
@@ -62,6 +62,7 @@ commands:
               Write-Error ($_)
             }
 jobs:
+  # TODO: Make these global parameters for entire pipeline: JCApiKey, JCOrgId, GitHubAccessToken
   'Build JumpCloud SDK DirectoryInsights':
     executor: win/default
     steps:
