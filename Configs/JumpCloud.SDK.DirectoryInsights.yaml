@@ -5,13 +5,13 @@ powershell: true
 base-folder: '..'
 input-file: SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
 clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+output-folder: SDKs/JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
 sanitize-names: false
 # # Values
 module-version: 0.0.15
 # skip-model-cmdlets: false
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/
 metadata:
   authors: JumpCloud Solutions Architect Team
   owners: JumpCloud
@@ -21,7 +21,7 @@ metadata:
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
   companyName: JumpCloud
   licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/master/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/JumpCloud.SDK.DirectoryInsights/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 # # Names
 prefix: JcSdkInternal
