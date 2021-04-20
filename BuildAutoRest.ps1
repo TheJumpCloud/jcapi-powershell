@@ -282,16 +282,6 @@ Try
                     }
                 }
                 ###########################################################################
-                # Update module GUID
-                If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
-                {
-                    Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Update-ModuleManifest -Path:($psd1Path) -Guid:($PublishedModule.AdditionalMetadata.GUID)
-                    $moduleMdContent = Get-Content -Path:($moduleMdPath) -Raw
-                    $GuidMatch = $moduleMdContent | Select-String -Pattern:([regex]'(Module Guid:)(.*?)(\n)')
-                    $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
-                }
-                ###########################################################################
                 If ($TestModule)
                 {
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
@@ -366,11 +356,26 @@ Try
                     }
                 }
                 ###########################################################################
+                # One last built to generate nupkg
+                $BuildModuleCommand = "$buildModulePath -Docs -Release -Pack"
+                Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
+                ###########################################################################
                 # Comment out refs to .format.ps1xml
                 If ($RemoveFormatPs1Xml)
                 {
                     (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
                     (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force
+                }
+                ##########################################################################
+                # Update module GUID
+                If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
+                {
+                    Write-Host ('[RUN COMMAND] Updating module GUID to existing value: ' + $PublishedModule.AdditionalMetadata.GUID) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Update-ModuleManifest -Path:($psd1Path) -Guid:($PublishedModule.AdditionalMetadata.GUID)
+                    $moduleMdContent = Get-Content -Path:($moduleMdPath) -Raw
+                    $GuidMatch = $moduleMdContent | Select-String -Pattern:([regex]'(Module Guid:)(.*?)(\n)')
+                    $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
                 }
                 ##########################################################################
                 If ($CommitModule)
