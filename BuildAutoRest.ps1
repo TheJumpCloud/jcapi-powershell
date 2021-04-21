@@ -20,8 +20,6 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove the AutoRest generated .format.ps1xml file.')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveFormatPs1Xml = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Set to $true to publish the module to a repository.')][ValidateNotNullOrEmpty()][System.Boolean]$PublishModule = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Specify the PowerShell repository to deploy to.')][ValidateNotNullOrEmpty()][System.String]$PSRepoName = 'PSGallery'
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'NuGetApiKey for your repository.')][ValidateNotNullOrEmpty()][System.String]$NuGetApiKey = ''
@@ -99,7 +97,6 @@ Try
                 $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
                 $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
                 $moduleMdPath = '{0}/{1}.md' -f $DocsFolderPath, $ModuleName
-                $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
                 $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
                 $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
                 ###########################################################################
@@ -347,26 +344,10 @@ Try
                     }
                 }
                 ###########################################################################
-                # Remove auto generated Az module
-                If ($RemoveAzAccounts)
-                {
-                    If (Test-Path -Path:($AzAccountsPath))
-                    {
-                        Remove-Item -Path:($AzAccountsPath) -Force -Recurse
-                    }
-                }
-                ###########################################################################
                 # One last built to generate nupkg
                 $BuildModuleCommand = "$buildModulePath -Docs -Release -Pack"
                 Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                 Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
-                ###########################################################################
-                # Comment out refs to .format.ps1xml
-                If ($RemoveFormatPs1Xml)
-                {
-                    (Get-Content -Path:($psd1Path) -Raw).Replace('FormatsToProcess = ''./' + $SDK + '.format.ps1xml''', '# FormatsToProcess = ''./' + $SDK + '.format.ps1xml''') | Set-Content -Path:($psd1Path) -Force
-                    (Get-Content -Path:($nuspecPath) -Raw).Replace('<file src="' + $SDK + '.format.ps1xml" />', '<!-- <file src="' + $SDK + '.format.ps1xml" /> -->') | Set-Content -Path:($nuspecPath) -Force
-                }
                 ##########################################################################
                 # Update module GUID
                 If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
@@ -423,13 +404,11 @@ Try
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
                 # Invoke-Expression -Command:("$BaseFolder/nuget.exe pack $OutputFullPath\$ModuleName.csproj -NonInteractive -OutputDirectory $BaseFolder -Symbols -version $BuildVersion -Verbosity Detailed") | Tee-Object -FilePath:($LogFilePath) -Append
-                Write-Host ("##vso[task.setvariable variable=ModuleFolder]$OutputFullPath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                Write-Host ("##vso[task.setvariable variable=BuildVersion]$BuildVersion") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Write-Host ("$OutputFullPath - $BuildVersion") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
             {
-                Write-Warning ($SDK + ' spec is up to date.')
-
+                Write-Warning ($APIName + ' spec is up to date.')
             }
         }
         Else
@@ -437,7 +416,7 @@ Try
             Write-Error ("Unable to find file: $ConfigFilePath")
         }
         # Mark Updated Spec in Pipeline
-        Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+        Return $UpdatedSpec
     }
 }
 Catch

@@ -852,7 +852,6 @@ $SDKName | ForEach-Object {
             # # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $UpdatedSwagger | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
             # Return variable to Azure Pipelines
-            Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec
         }
     }
