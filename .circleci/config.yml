@@ -40,6 +40,9 @@ commands:
       GitHubAccessToken:
         description: GitHub Access Token used to pull the latest version of the swagger spec
         type: string
+      KyleGHPAT:
+        description: Test parameter for Kyle's PAT
+        type: string
       BuildModuleOverride:
         description: ''
         type: boolean
@@ -67,13 +70,10 @@ commands:
           name: Publish to Github Packages
           shell: pwsh.exe
           command: |
-            dir
-            mkdir ./../local-repo
-            Register-PSResourceRepository -Name:("LocalRepo") -Url:("./../local-repo")
-            Publish-PSResource -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/") -Repository:("LocalRepo")
-            $NupkgPath = Get-Item ./../local-repo/*.nupkg | Resolve-Path -Relative
-            gpr push -k '<< parameters.GitHubAccessToken >>' $NupkgPath -r "https://github.com/TheJumpCloud/jcapi-powershell"
-
+            dir .\bin\
+            Register-PSResourceRepository -Name:("GithubRepo") -Url:("https://nuget.pkg.github.com/TheJumpCloud/index.json")
+            # Publish-PSResource -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/") -Repository:("GithubRepo")
+            
         
 jobs:
   # TODO: Make these global parameters for entire pipeline: JCApiKey, JCOrgId, GitHubAccessToken
@@ -86,6 +86,7 @@ jobs:
           JCApiKey: ${JCApiKey}
           JCOrgId: ${JCOrgId}
           GitHubAccessToken: ${GitHubAccessToken}
+          KyleGHPAT: ${KyleGHPat}
           ManualModuleVersion: ''
           BuildModuleOverride: false
           RunApiTransform: true
