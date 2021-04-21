@@ -18,9 +18,9 @@ commands:
             npm install -g autorest@latest
             autorest --reset
           # autorest --help
-      - run:
-          name: Install gpr
-          command: dotnet tool install --global gpr --version 0.1.268
+      #- run:
+      #    name: Install gpr
+      #    command: dotnet tool install --global gpr --version 0.1.268
       # TODO: ADD: dotnet-sdk-3.1-win-x64, dotnet-sdk-3.1-osx-x64, dotnet-sdk-3.1-linux-x64
   build:
     parameters:
@@ -70,8 +70,8 @@ commands:
           name: Publish to Github Packages
           shell: pwsh.exe
           command: |
-            dir ./../
-            Register-PSResourceRepository -Name:("GithubRepo") -Url:("https://nuget.pkg.github.com/TheJumpCloud/index.json")
+            dotnet nuget help
+            # Register-PSResourceRepository -Name:("GithubRepo") -Url:("https://nuget.pkg.github.com/TheJumpCloud/index.json")
             # Publish-PSResource -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/") -Repository:("GithubRepo")
             
         
