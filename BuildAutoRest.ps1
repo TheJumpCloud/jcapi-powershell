@@ -395,7 +395,7 @@ Try
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        ./Invoke-Git.ps1 -Arguments:("push origin -q $(($env:CIRCLE_REPOSITORY_URL).Replace('git@',"https://$($env:GH_TOKEN)@")) $($env:CIRCLE_BRANCH);")
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
                     }
                     Catch
                     {
