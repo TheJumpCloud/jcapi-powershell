@@ -295,6 +295,7 @@ Try
                         $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  Install-Module -Name Az.Accounts -Force") | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('-RequiredVersion (Get-Module -Name Az.Accounts -ListAvailable | Sort-Object -Property Version -Descending)[0].Version', '') | Set-Content -Path:($testModulePath)
                         # Test module
+                        Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
                         # ./test-module.ps1 -Playback # Run once playback files have been created
