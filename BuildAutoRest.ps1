@@ -292,6 +292,7 @@ Try
                         $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  Install-Module -Name Az.Accounts -Force") | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('-RequiredVersion (Get-Module -Name Az.Accounts -ListAvailable | Sort-Object -Property Version -Descending)[0].Version', '') | Set-Content -Path:($testModulePath)
                         # Test module
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
@@ -383,7 +384,7 @@ Try
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
+                        ./Invoke-Git.ps1 -Arguments:("push origin -q $(($env:CIRCLE_REPOSITORY_URL).Replace('git@',"https://$($env:GH_TOKEN)@")) $($env:CIRCLE_BRANCH);")
                     }
                     Catch
                     {
