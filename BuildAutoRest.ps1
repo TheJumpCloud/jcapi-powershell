@@ -302,12 +302,12 @@ Try
                         $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
-                        $TestModuleJob = Start-Job -ScriptBlock:( {
-                                param ($TestModuleCommand);
+                        # $TestModuleJob = Start-Job -ScriptBlock:( {
+                                # param ($TestModuleCommand);
                                 Invoke-Expression -Command:($TestModuleCommand)
-                            }) -ArgumentList:($TestModuleCommand)
-                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
-                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                            # }) -ArgumentList:($TestModuleCommand)
+                        # $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
+                        # $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         If (Test-Path -Path:($PesterTestResultPath))
                         {
                             [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
