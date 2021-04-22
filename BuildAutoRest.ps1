@@ -32,7 +32,6 @@ Try
     $env:JCApiKey = $JCApiKey
     $env:JCOrgId = $JCOrgId
     $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
-    $CommitModule = If ($env:USERNAME -eq 'VssAdministrator') { $true } Else { $false }
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
@@ -132,15 +131,15 @@ Try
                         }
                     }
                 }
-                $env:BUILD_BUILDNUMBER = If ([System.String]::IsNullOrEmpty($env:BUILD_BUILDNUMBER))
+                $env:CIRCLE_BUILD_NUM = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM))
                 {
                     '0000'
                 }
                 Else
                 {
-                    $env:BUILD_BUILDNUMBER
+                    $env:CIRCLE_BUILD_NUM
                 }
-                $BuildVersion = "$($ModuleVersion)-$($env:BUILD_BUILDNUMBER)"
+                $BuildVersion = "$($ModuleVersion)-$($env:CIRCLE_BUILD_NUM)"
                 ###########################################################################
                 If ($InstallPreReq)
                 {
@@ -371,20 +370,20 @@ Try
                     $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
                 }
                 ##########################################################################
-                If ($CommitModule)
+                If ($env:CIRCLECI -eq $true)
                 {
-                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:BUILD_SOURCEBRANCHNAME + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:CIRCLE_BRANCH + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     Try
                     {
-                        $UserEmail = If ($env:BUILD_REQUESTEDFOREMAIL) { $env:BUILD_REQUESTEDFOREMAIL } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-                        $UserName = If ($env:BUILD_REQUESTEDFOR) { $env:BUILD_REQUESTEDFOR } Else { $env:USERNAME }
+                        $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+                        $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
                         Set-Location -Path:($BaseFolder)
                         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
                         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
                     }
                     Catch
                     {
