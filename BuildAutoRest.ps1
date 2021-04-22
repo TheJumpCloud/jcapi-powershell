@@ -30,10 +30,8 @@ Try
 {
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
     # Create environmental variable so that they can be used by the pester tests later.
-    Write-Host "env:JCOrgId is $env:JCOrgId"
-    Write-Host "JCOrgId is $JCOrgId"
-    $env:JCApiKey = $JCApiKey
-    $env:JCOrgId = $JCOrgId
+    If ([System.String]::IsNullOrEmpty($env:JCApiKey)) { $env:JCApiKey = $JCApiKey }
+    If ([System.String]::IsNullOrEmpty($env:JCOrgId)) { $env:JCOrgId = $JCOrgId }
     $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
     ForEach ($SDK In $SDKName)
     {
