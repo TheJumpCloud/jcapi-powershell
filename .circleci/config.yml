@@ -65,7 +65,7 @@ commands:
       #     command: |
       #       $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
       #       $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-      #       dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:KyleGHPAT)"
+      #       dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GitHubAccessToken)"
 jobs:
   # TODO: Make these global parameters for entire pipeline: JCApiKey, JCOrgId, GitHubAccessToken
   'Build JumpCloud SDK DirectoryInsights':

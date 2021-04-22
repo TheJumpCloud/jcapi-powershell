@@ -293,7 +293,7 @@ Try
                         $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
-                        $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  If(-not (Get-Module -Name Az.Accounts -ListAvailable)){Install-Module -Name Az.Accounts -Force;Import-Module -Name Az.Accounts -Force;}") | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  If(-not (Get-Module -Name Az.Accounts -ListAvailable)){Import-Module -Name Az.Accounts -Force;}") | Set-Content -Path:($testModulePath)
                         # Test module
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
@@ -303,9 +303,9 @@ Try
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
                         # $TestModuleJob = Start-Job -ScriptBlock:( {
-                                # param ($TestModuleCommand);
-                                Invoke-Expression -Command:($TestModuleCommand)
-                            # }) -ArgumentList:($TestModuleCommand)
+                        # param ($TestModuleCommand);
+                        Invoke-Expression -Command:($TestModuleCommand)
+                        # }) -ArgumentList:($TestModuleCommand)
                         # $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
                         # $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         If (Test-Path -Path:($PesterTestResultPath))
