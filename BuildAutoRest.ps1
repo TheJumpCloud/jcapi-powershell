@@ -20,6 +20,7 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to add GitHub Packages required attributes')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyNuspec = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Set to $true to publish the module to a repository.')][ValidateNotNullOrEmpty()][System.Boolean]$PublishModule = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Specify the PowerShell repository to deploy to.')][ValidateNotNullOrEmpty()][System.String]$PSRepoName = 'PSGallery'
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'NuGetApiKey for your repository.')][ValidateNotNullOrEmpty()][System.String]$NuGetApiKey = ''
@@ -291,9 +292,8 @@ Try
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                         $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
-                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
-                        # $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  If(-not (Get-Module -Name Az.Accounts -ListAvailable)){Install-Module -Name Az.Accounts -Force;Import-Module -Name Az.Accounts -Force;}") | Set-Content -Path:($testModulePath)
-                        $PesterTestsContent | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
+                        $testModuleContent.Replace("# Load the latest Az.Accounts installed", "# Load the latest Az.Accounts installed`n  If(-not (Get-Module -Name Az.Accounts -ListAvailable)){Install-Module -Name Az.Accounts -Force;Import-Module -Name Az.Accounts -Force;}") | Set-Content -Path:($testModulePath)
                         # Test module
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
                         # ./test-module.ps1 -Record # Run to create playback files
@@ -344,6 +344,16 @@ Try
                         $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
                         $GitIgnoreContent | Set-Content -Path:($_.FullName)
                     }
+                }
+                ###########################################################################
+                # Add GitHub Packages required attributes
+                If ($ModifyNuspec)
+                {
+                    $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecPath) )
+                    $repository = $nuspecContent.package.metadata.AppendChild($nuspecContent.CreateElement('repository', $nuspecContent.DocumentElement.NamespaceURI))
+                    $repository.SetAttribute('type', 'git')
+                    $repository.SetAttribute('url', $env:CIRCLE_REPOSITORY_URL)
+                    $nuspecContent.Save($nuspecPath)
                 }
                 ###########################################################################
                 # One last built to generate nupkg
