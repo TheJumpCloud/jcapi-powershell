@@ -9,7 +9,7 @@ commands:
           name: Install PowerShell Core
           command: dotnet tool install --global PowerShell
       - run:
-          name: Install Required Module
+          name: Install Required Module(s)
           shell: pwsh.exe
           command: |
             Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer') -Force
