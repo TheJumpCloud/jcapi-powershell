@@ -395,7 +395,7 @@ Try
                         ./Invoke-Git.ps1 -Arguments:('add -A')
                         ./Invoke-Git.ps1 -Arguments:('status')
                         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:BUILD_SOURCEBRANCHNAME + ';')
+                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
                     }
                     Catch
                     {
