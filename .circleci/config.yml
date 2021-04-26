@@ -112,7 +112,7 @@ jobs:
           TestModule: true
 workflows:
   version: 2
-  build-sdks:
+  ci:
     triggers:
       - schedule:
           cron: '0 0 * * *' # Run Nightly
