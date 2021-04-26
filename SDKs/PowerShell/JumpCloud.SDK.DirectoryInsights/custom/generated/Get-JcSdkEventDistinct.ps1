@@ -30,7 +30,7 @@ BODY <IEventDistinctQuery>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
 #>
  Function Get-JcSdkEventDistinct
 {
