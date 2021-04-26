@@ -43,20 +43,21 @@ Try
             # Run API Transform step
             If ($RunApiTransform)
             {
-                $UpdatedSpec = If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
+                If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
                 {
-                    .($ApiTransformPath) -SDKName:($SDKName) # -NoUpdate # | Out-Null
+                    $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) # -NoUpdate # | Out-Null
                 }
                 Else
                 {
-                    .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                    $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
                 }
-                If ($PSBoundParameters.BuildModuleOverride)
+                If ($PSBoundParameters.BuildModuleOverride -eq $true)
                 {
                     $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
                 }
             }
-            If (($UpdatedSpec -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
+            Write-Host ("HI:::$UpdatedSpec - $($env:CIRCLE_PROJECT_USERNAME)")
+            If (($UpdatedSpec -eq $true -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
