@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
 schema: 2.0.0
 ---
 
