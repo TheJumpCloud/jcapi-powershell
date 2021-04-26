@@ -112,7 +112,12 @@ jobs:
           TestModule: true
 workflows:
   version: 2
-  ci:
+  build-sdks:
+    jobs:
+      - 'Build JumpCloud SDK DirectoryInsights'
+      - 'Build JumpCloud SDK V1'
+      - 'Build JumpCloud SDK V2'
+  build-sdks-nightly:
     triggers:
       - schedule:
           cron: '0 0 * * *' # Run Nightly
@@ -121,15 +126,6 @@ workflows:
               only:
                 - master
     jobs:
-      - 'Build JumpCloud SDK DirectoryInsights':
-          filters:
-            tags:
-              only: /.*/
-      - 'Build JumpCloud SDK V1':
-          filters:
-            tags:
-              only: /.*/
-      - 'Build JumpCloud SDK V2':
-          filters:
-            tags:
-              only: /.*/
+      - 'Build JumpCloud SDK DirectoryInsights'
+      - 'Build JumpCloud SDK V1'
+      - 'Build JumpCloud SDK V2'
