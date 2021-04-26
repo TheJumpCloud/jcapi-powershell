@@ -56,7 +56,6 @@ Try
                     $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
                 }
             }
-            Write-Host ("HI:::$UpdatedSpec - $($env:CIRCLE_PROJECT_USERNAME)")
             If (($UpdatedSpec -eq $true -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
             {
                 # Start SDK generation
