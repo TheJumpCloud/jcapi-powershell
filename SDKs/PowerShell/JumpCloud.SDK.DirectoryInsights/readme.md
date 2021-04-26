@@ -1,6 +1,6 @@
 <!-- region Generated -->
 # JumpCloud.SDK.DirectoryInsights
-This directory contains the PowerShell module for the DirectoryInsightsApi service.
+This directory contains the PowerShell module for the JumpCloudSdkDirectoryInsights service.
 
 ---
 ## Status
