@@ -4,7 +4,6 @@ verbose: true
 azure: false
 powershell: true
 branch: master
-# repo: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
 metadata:
   authors: JumpCloud
   owners: JumpCloud
@@ -30,7 +29,7 @@ base-folder: '..'
 
 input-file:
   - SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
-# title: JumpCloud.SDK.DirectoryInsights
+title: JumpCloud.SDK.DirectoryInsights
 module-name: JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
 sample-generation: true
