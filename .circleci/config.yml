@@ -49,14 +49,13 @@ commands:
         type: boolean
         default: true
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - run:
           name: Get Session Info (For Testing)
           shell: pwsh.exe
           command: ./Tools/Get-SessionInfo.ps1
-      - add_ssh_keys:
-          name: Check-in Changes
-          fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - run:
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
