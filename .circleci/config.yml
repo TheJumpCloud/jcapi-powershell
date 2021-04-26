@@ -112,7 +112,14 @@ jobs:
           TestModule: true
 workflows:
   version: 2
-  ci:
+  build-sdks:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *' # Run Nightly
+          filters:
+            branches:
+              only:
+                - master
     jobs:
       - 'Build JumpCloud SDK DirectoryInsights':
           filters:
