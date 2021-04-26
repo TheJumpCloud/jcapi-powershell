@@ -118,9 +118,11 @@ workflows:
       - 'Build JumpCloud SDK V1':
           requires:
             - 'Build JumpCloud SDK DirectoryInsights'
+          when: always
       - 'Build JumpCloud SDK V2':
           requires:
             - 'Build JumpCloud SDK V1'
+          when: always
   build-sdks-nightly:
     triggers:
       - schedule:
@@ -134,6 +136,8 @@ workflows:
       - 'Build JumpCloud SDK V1':
           requires:
             - 'Build JumpCloud SDK DirectoryInsights'
+          when: always
       - 'Build JumpCloud SDK V2':
           requires:
             - 'Build JumpCloud SDK V1'
+          when: always
