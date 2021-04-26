@@ -3,7 +3,7 @@ verbose: true
 # Values
 azure: false
 powershell: true
-branch: $(CIRCLE_BRANCH)
+branch: master
 repo: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
 metadata:
   authors: JumpCloud

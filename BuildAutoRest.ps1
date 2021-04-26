@@ -67,6 +67,9 @@ Try
                 ###########################################################################
                 # Get config values
                 $Config = $ConfigContent | ConvertFrom-Yaml
+                # Write current branch back to config file
+                $Config.branch = $env:CIRCLE_BRANCH
+                $Config | Set-Content -Path:($ConfigFileFullName)
                 # $InputFile = $BaseFolder + $Config.'input-file'
                 $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
                 $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
