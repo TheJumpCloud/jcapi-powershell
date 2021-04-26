@@ -78,8 +78,6 @@ Try
                 $Namespace = $Config.'namespace'
                 $ConfigPrefix = $Config.prefix | Select-Object -First 1
                 $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-                # $ConfigProjectUri = $Config.metadata.projectUri
-                # $ConfigHelpLinkPrefix = $Config.'help-link-prefix'
                 $ConfigInputFile = '{0}/{1}' -f $BaseFolder, $Config.'input-file'
                 $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
                 $ModuleVersion = $Config.'module-version'
