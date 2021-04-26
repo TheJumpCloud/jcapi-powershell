@@ -32,7 +32,8 @@ Try
     # Create environmental variable so that they can be used by the pester tests later.
     If ([System.String]::IsNullOrEmpty($env:JCApiKey)) { $env:JCApiKey = $JCApiKey }
     If ([System.String]::IsNullOrEmpty($env:JCOrgId)) { $env:JCOrgId = $JCOrgId }
-    $RunLocal = If ($env:USERNAME -eq 'VssAdministrator') { $false } Else { $true }
+    $CI_USERNAME = 'TheJumpCloud'
+    $RunLocal = If ($env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) { $false } Else { $true }
     ForEach ($SDK In $SDKName)
     {
         $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
@@ -55,7 +56,7 @@ Try
                     $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
                 }
             }
-            If (($UpdatedSpec -and $env:USERNAME -eq 'VssAdministrator') -or $RunLocal)
+            If (($UpdatedSpec -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
             {
                 # Start SDK generation
                 $ConfigFile = Get-Item -Path:($ConfigFilePath)
