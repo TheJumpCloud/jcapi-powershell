@@ -4,7 +4,7 @@ verbose: true
 azure: false
 powershell: true
 branch: ${CIRCLE_BRANCH}
-repo: https://github.com/TheJumpCloud/jcapi-powershell/blob/${CIRCLE_BRANCH}/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+repo: https://github.com/TheJumpCloud/jcapi-powershell/blob/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
 metadata:
   authors: JumpCloud
   owners: JumpCloud
@@ -12,8 +12,8 @@ metadata:
   copyright: (c) JumpCloud. All rights reserved.
   companyName: JumpCloud
   requireLicenseAcceptance: false
-  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/${CIRCLE_BRANCH}/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/${CIRCLE_BRANCH}/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/$(branch)/LICENSE
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
   formatsToProcess: []
@@ -21,7 +21,7 @@ metadata:
 # Names
 prefix: JcSdkInternal
 customFunctionPrefix: JcSdk
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/${CIRCLE_BRANCH}/SDKs/PowerShell/
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
 
 # Folders
 clear-output-folder: true
