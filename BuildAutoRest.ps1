@@ -185,10 +185,9 @@ Try
                     $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
                     Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
                     # build the module
-                    $BuildModuleCommandJob = Start-Job -ScriptBlock:( {
-                            param ($BuildModuleCommand);
+                    $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                             Invoke-Expression -Command:($BuildModuleCommand)
-                        }) -ArgumentList:($BuildModuleCommand)
+                        })
                     $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
                     $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                 }
@@ -197,10 +196,9 @@ Try
                 {
                     Write-Host ('[RUN COMMAND] ' + $BuildCustomFunctionsPath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     # Run build custom functions script as a job in a new session to avoid "did you forget to close your session?" error
-                    $BuildCustomFunctionsJob = Start-Job -ScriptBlock:( {
-                            param ($BuildCustomFunctionsPath);
+                    $BuildCustomFunctionsJob = Start-Job -ArgumentList:($BuildCustomFunctionsPath) -ScriptBlock:( { param ($BuildCustomFunctionsPath);
                             Invoke-Expression -Command:($BuildCustomFunctionsPath)
-                        }) -ArgumentList:($BuildCustomFunctionsPath)
+                        })
                     $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
                     $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                     If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
@@ -312,12 +310,11 @@ Try
                         $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
-                        # $TestModuleJob = Start-Job -ScriptBlock:( {
-                        #         param ($TestModuleCommand);
-                        Invoke-Expression -Command:($TestModuleCommand)
-                        # }) -ArgumentList:($TestModuleCommand)
-                        # $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
-                        # $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                        $TestModuleJob = Start-Job -ArgumentList:($TestModuleCommand) -ScriptBlock:( { param ($TestModuleCommand);
+                                Invoke-Expression -Command:($TestModuleCommand)
+                            })
+                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
+                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         If (Test-Path -Path:($PesterTestResultPath))
                         {
                             [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)

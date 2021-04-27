@@ -61,6 +61,7 @@ $TransformConfig = [Ordered]@{
             'PUT_commands-id'                                 = 'Set-Command';
             'GET_files-command-id'                            = 'Get-CommandFile';
             'DELETE_commandresults-id'                        = 'Delete-CommandResult';
+            'GET_commands-id-results'                         = 'Get-CommandResult';
             'GET_commandresults-id'                           = 'Get-CommandResult';
             'GET_commandresults'                              = 'List-CommandResult';
             'POST_command-trigger-triggername'                = 'POST-CommandTrigger';
