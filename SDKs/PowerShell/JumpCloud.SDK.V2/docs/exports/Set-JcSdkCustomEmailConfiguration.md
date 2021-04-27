@@ -27,13 +27,13 @@ Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -CustomEmail <ICusto
 
 ### SetViaIdentity
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -CustomEmail <ICustomEmail> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudSdkV2Identity> -CustomEmail <ICustomEmail>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -Subject <String> -Type <String>
+Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudSdkV2Identity> -Subject <String> -Type <String>
  [-Body <String>] [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -140,7 +140,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -249,7 +249,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.ICustomEmail
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ## OUTPUTS
 
@@ -273,7 +273,7 @@ CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to pe
   - `[NextStepContactInfo <String>]`: 
   - `[Title <String>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

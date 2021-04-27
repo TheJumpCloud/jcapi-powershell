@@ -37,7 +37,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 .Inputs
 JumpCloud.SDK.V2.Models.ISoftwareApp
 .Outputs
@@ -58,12 +58,13 @@ BODY <ISoftwareApp>:
       [(Any) <Object>]: This indicates any property can be added to this object.
     [AppleVppTotalLicenses <Int32?>]:
     [AutoUpdate <Boolean?>]:
+    [DesiredState <String>]: State of Install or Uninstall
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [PackageId <String>]:
     [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -93,6 +94,7 @@ SETTINGS <ISoftwareAppSettings[]>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [AppleVppTotalLicenses <Int32?>]:
   [AutoUpdate <Boolean?>]:
+  [DesiredState <String>]: State of Install or Uninstall
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [PackageId <String>]:
@@ -116,7 +118,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

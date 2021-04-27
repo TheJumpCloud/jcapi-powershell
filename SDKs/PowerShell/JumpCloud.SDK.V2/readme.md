@@ -1,6 +1,6 @@
 <!-- region Generated -->
 # JumpCloud.SDK.V2
-This directory contains the PowerShell module for the JumpCloudApIs service.
+This directory contains the PowerShell module for the JumpCloudSdkV2 service.
 
 ---
 ## Status

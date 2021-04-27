@@ -38,13 +38,13 @@ Set-JcSdkPolicy -Id <String> -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<Commo
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
+Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Name <String> [-TemplateId <String>]
+Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Name <String> [-TemplateId <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -118,7 +118,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -211,7 +211,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ### JumpCloud.SDK.V2.Models.IPolicyRequest
 
@@ -235,7 +235,7 @@ BODY <IPolicyRequest>: An instance of a policy template.
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

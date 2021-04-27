@@ -43,7 +43,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IDuoApplicationReq
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 .Outputs
 JumpCloud.SDK.V2.Models.IDuoApplication
 .Notes
@@ -57,7 +57,7 @@ BODY <IDuoApplicationReq>:
   Name <String>:
   SecretKey <String>:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -96,7 +96,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

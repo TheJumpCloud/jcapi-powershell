@@ -36,15 +36,15 @@ Clear-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String>
 
 ### ClearViaIdentity
 ```
-Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity>
+Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudSdkV2Identity>
  -Body <IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### ClearViaIdentityExpanded
 ```
-Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApIsIdentity> -Pin <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudSdkV2Identity> -Pin <String> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -128,7 +128,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: ClearViaIdentity, ClearViaIdentityExpanded
 Aliases:
 
@@ -205,7 +205,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ### JumpCloud.SDK.V2.Models.IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema
 
@@ -225,7 +225,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema>: .
   - `Pin <String>`: 6-digit PIN required to erase the device
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

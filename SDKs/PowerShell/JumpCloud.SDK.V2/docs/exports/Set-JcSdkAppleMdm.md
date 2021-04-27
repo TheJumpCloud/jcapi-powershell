@@ -49,13 +49,13 @@ Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf] 
 
 ### SetViaIdentity
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudSdkV2Identity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-AppleSignedCert <String>]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudSdkV2Identity> [-AppleSignedCert <String>]
  [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
  [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>] [-Name <String>]
  [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
@@ -217,7 +217,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -326,7 +326,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ## OUTPUTS
 
@@ -356,7 +356,7 @@ BODY <IAppleMdmPatchInput>: Apple MDM Patch Input
 DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
   - `[Option <String>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

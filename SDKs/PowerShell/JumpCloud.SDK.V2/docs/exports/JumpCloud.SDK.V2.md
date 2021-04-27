@@ -1279,6 +1279,9 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/membership
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkUserGroupSuggestion](Get-JcSdkUserGroupSuggestion.md)
+This endpoint generates and returns all suggestions available for a given group
+
 ### [Get-JcSdkUserGroupTraverseApplication](Get-JcSdkUserGroupTraverseApplication.md)
 This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 

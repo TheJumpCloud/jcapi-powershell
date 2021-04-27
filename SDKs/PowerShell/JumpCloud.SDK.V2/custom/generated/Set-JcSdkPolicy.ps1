@@ -39,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 .Inputs
 JumpCloud.SDK.V2.Models.IPolicyRequest
 .Outputs
@@ -56,7 +56,7 @@ BODY <IPolicyRequest>:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Value <String>]: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -99,7 +99,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

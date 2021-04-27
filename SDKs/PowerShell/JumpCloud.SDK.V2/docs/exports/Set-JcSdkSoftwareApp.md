@@ -37,13 +37,13 @@ Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<Co
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudSdkV2Identity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-DisplayName <String>]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudSdkV2Identity> [-Id <String>] [-DisplayName <String>]
  [-Settings <ISoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -146,7 +146,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -209,7 +209,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ### JumpCloud.SDK.V2.Models.ISoftwareApp
 
@@ -237,12 +237,13 @@ BODY <ISoftwareApp>: Software Application Package Object
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[AppleVppTotalLicenses <Int32?>]`: 
     - `[AutoUpdate <Boolean?>]`: 
+    - `[DesiredState <String>]`: State of Install or Uninstall
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
     - `[PackageId <String>]`: 
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
@@ -272,6 +273,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[AppleVppTotalLicenses <Int32?>]`: 
   - `[AutoUpdate <Boolean?>]`: 
+  - `[DesiredState <String>]`: State of Install or Uninstall
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
   - `[PackageId <String>]`: 
