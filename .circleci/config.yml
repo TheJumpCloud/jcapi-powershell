@@ -17,9 +17,17 @@ commands:
           command: |
             Install-Module -Name:('BuildHelpers','powershell-yaml','PSScriptAnalyzer') -Force
             Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
+            Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
+            Install-Module AWS.Tools.Common, AWS.Tools.CodeArtifact -Force
             npm install -g autorest@latest
             autorest --reset
           # autorest --help
+      - run:
+          name: Configure AWS & NuGet
+          shell: pwsh.exe
+          command: |
+            Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
+            dotnet nuget add source "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json" --name CircleCI-Source --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken --username CircleCi
       # TODO: ADD: dotnet-sdk-3.1-win-x64, dotnet-sdk-3.1-osx-x64, dotnet-sdk-3.1-linux-x64
   build:
     parameters:
@@ -77,6 +85,11 @@ commands:
             git status
             git commit -m "Updating module: << parameters.SDKName >>;[skip ci]"
             git push origin << pipeline.git.branch >>
+      - run:
+          name: Push to AWS CodeArtifact
+          shell: pwsh.exe
+          command: |
+            dir ./SDKs/PowerShell/<< parameters.SDKName >>/
       # - run:
       #     name: Publishing to GitHub Packages
       #     shell: pwsh.exe
