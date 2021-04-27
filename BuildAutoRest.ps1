@@ -295,7 +295,12 @@ Try
                         $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                         $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
-                        $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', $PesterTestsContent) | Set-Content -Path:($testModulePath)
+                        $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
+                        If ([System.String]::IsNullOrEmpty($InvokePesterLine))
+                        {
+                            Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
+                        }
+                        $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent) | Set-Content -Path:($testModulePath)
                         $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts') | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
@@ -384,26 +389,26 @@ Try
                     $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
                 }
                 ##########################################################################
-                If ($env:CIRCLECI -eq $true)
-                {
-                    Write-Host ('[COMMITTING MODULE] changes back into "' + $env:CIRCLE_BRANCH + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    Try
-                    {
-                        $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-                        $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
-                        Set-Location -Path:($BaseFolder)
-                        ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
-                        ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
-                        ./Invoke-Git.ps1 -Arguments:('add -A')
-                        ./Invoke-Git.ps1 -Arguments:('status')
-                        ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                        ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
-                    }
-                    Catch
-                    {
-                        Write-Error $_
-                    }
-                }
+                # If ($env:CIRCLECI -eq $true)
+                # {
+                #     Write-Host ('[COMMITTING MODULE] changes back into "' + $env:CIRCLE_BRANCH + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                #     Try
+                #     {
+                #         $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+                #         $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
+                #         Set-Location -Path:($BaseFolder)
+                #         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
+                #         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
+                #         ./Invoke-Git.ps1 -Arguments:('add -A')
+                #         ./Invoke-Git.ps1 -Arguments:('status')
+                #         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
+                #         ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
+                #     }
+                #     Catch
+                #     {
+                #         Write-Error $_
+                #     }
+                # }
                 ###########################################################################
                 If ($PublishModule)
                 {
