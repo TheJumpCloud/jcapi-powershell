@@ -123,17 +123,6 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### [Get-JcSdkUserSshKey](Get-JcSdkUserSshKey.md)
 This endpoint will return a specific System User's public SSH key.
 
-### [Invoke-JcSdkCommandGetIdResult](Invoke-JcSdkCommandGetIdResult.md)
-This endpoint returns results for a specific command.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ````
-
 ### [Invoke-JcSdkCommandTrigger](Invoke-JcSdkCommandTrigger.md)
 This endpoint allows you to launch a command based on a defined trigger.
 

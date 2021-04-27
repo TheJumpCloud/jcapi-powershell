@@ -43,7 +43,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 .Inputs
 JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
@@ -61,7 +61,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudSdkV1Identity>:
   [Id <String>]:
   [SystemId <String>]:
   [SystemuserId <String>]:
@@ -84,7 +84,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

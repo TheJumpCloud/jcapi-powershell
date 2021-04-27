@@ -28,13 +28,13 @@ Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<Co
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
+Set-JcSdkApplication -InputObject <IJumpCloudSdkV1Identity> -Body <IApplication> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <String>]
+Set-JcSdkApplication -InputObject <IJumpCloudSdkV1Identity> [-Id <String>] [-Beta] [-Color <String>]
  [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
@@ -235,7 +235,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -419,7 +419,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IApplication
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 
 ## OUTPUTS
 
@@ -614,7 +614,7 @@ CONFIG <IApplicationConfig>: .
   - `[SpEntityIdValue <String>]`: 
   - `[SpEntityIdVisible <Boolean?>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
