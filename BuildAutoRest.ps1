@@ -92,7 +92,8 @@ Try
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
                 $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
-                $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath # -Pack
+                $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
+                $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
                 $checkDependenciesModulePath = '{0}/check-dependencies.ps1' -f $OutputFullPath
                 $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
@@ -177,7 +178,6 @@ Try
                 {
                     $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
                     $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
-
                     $BuildModuleCommand = "$buildModulePath -Release"
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     # fix docs help link
@@ -296,12 +296,13 @@ Try
                         $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
                         # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                         $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
-                        If ([System.String]::IsNullOrEmpty($InvokePesterLine))
+                        If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
                         {
                             Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
                         }
-                        $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent) | Set-Content -Path:($testModulePath)
-                        $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts') | Set-Content -Path:($testModulePath)
+                        $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
+                        $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
+                        $testModuleContent | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
@@ -373,11 +374,6 @@ Try
                     $repository.SetAttribute('url', $env:CIRCLE_REPOSITORY_URL)
                     $nuspecContent.Save($nuspecPath)
                 }
-                ###########################################################################
-                # One last built to generate nupkg
-                $BuildModuleCommand = "$buildModulePath -Docs -Release -Pack"
-                Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 ##########################################################################
                 # Update module GUID
                 If ($UpdateModuleGuid -and -not [System.String]::IsNullOrEmpty($PublishedModule))
@@ -388,27 +384,10 @@ Try
                     $GuidMatch = $moduleMdContent | Select-String -Pattern:([regex]'(Module Guid:)(.*?)(\n)')
                     $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
                 }
-                ##########################################################################
-                # If ($env:CIRCLECI -eq $true)
-                # {
-                #     Write-Host ('[COMMITTING MODULE] changes back into "' + $env:CIRCLE_BRANCH + '"' ) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                #     Try
-                #     {
-                #         $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-                #         $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
-                #         Set-Location -Path:($BaseFolder)
-                #         ./Invoke-Git.ps1 -Arguments:('config user.email "' + $UserEmail + '";')
-                #         ./Invoke-Git.ps1 -Arguments:('config user.name "' + $UserName + '";')
-                #         ./Invoke-Git.ps1 -Arguments:('add -A')
-                #         ./Invoke-Git.ps1 -Arguments:('status')
-                #         ./Invoke-Git.ps1 -Arguments:('commit -m ' + '"Updating module: ' + $ModuleName + ';[skip ci]";')
-                #         ./Invoke-Git.ps1 -Arguments:('push origin HEAD:refs/heads/' + $env:CIRCLE_BRANCH + ';')
-                #     }
-                #     Catch
-                #     {
-                #         Write-Error $_
-                #     }
-                # }
+                ###########################################################################
+                # One last built to generate nupkg
+                Write-Host ('[RUN COMMAND] ' + $packModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
+                Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
                 ###########################################################################
                 If ($PublishModule)
                 {
@@ -433,7 +412,6 @@ Try
                 }
                 ###########################################################################
                 Set-Location -Path:($OutputFullPath)
-                # Invoke-Expression -Command:("$BaseFolder/nuget.exe pack $OutputFullPath\$ModuleName.csproj -NonInteractive -OutputDirectory $BaseFolder -Symbols -version $BuildVersion -Verbosity Detailed") | Tee-Object -FilePath:($LogFilePath) -Append
                 Write-Host ("$OutputFullPath - $BuildVersion") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             }
             Else
