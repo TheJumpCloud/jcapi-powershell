@@ -33,7 +33,7 @@ title: JumpCloud.SDK.V2
 module-name: JumpCloud.SDK.V2
 namespace: JumpCloud.SDK.V2
 sample-generation: true
-module-version: 0.0.15
+module-version: 0.0.31
 dll-name: JumpCloud.SDK.V2.private
 
 directive:

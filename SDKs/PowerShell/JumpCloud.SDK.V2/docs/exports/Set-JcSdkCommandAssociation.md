@@ -42,13 +42,13 @@ Set-JcSdkCommandAssociation -CommandId <String> -Body <IGraphOperationCommand> [
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationCommand> [-PassThru]
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudSdkV2Identity> -Body <IGraphOperationCommand> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type1>
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudSdkV2Identity> -Id <String> -Op <String> -Type <Type1>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -155,7 +155,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -249,7 +249,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IGraphOperationCommand
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ## OUTPUTS
 
@@ -271,7 +271,7 @@ BODY <IGraphOperationCommand>: GraphOperation (Command)
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

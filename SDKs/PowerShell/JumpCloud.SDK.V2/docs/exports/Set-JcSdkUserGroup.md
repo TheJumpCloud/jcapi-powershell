@@ -38,13 +38,13 @@ Set-JcSdkUserGroup -Id <String> -Body <IUserGroupPut> [-Confirm] [-WhatIf] [<Com
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
+Set-JcSdkUserGroup -InputObject <IJumpCloudSdkV2Identity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
+Set-JcSdkUserGroup -InputObject <IJumpCloudSdkV2Identity> -Name <String>
  [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
  [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
  [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
@@ -212,7 +212,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -290,7 +290,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ### JumpCloud.SDK.V2.Models.IUserGroupPut
 
@@ -336,7 +336,7 @@ BODY <IUserGroupPut>: UserGroupPut
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

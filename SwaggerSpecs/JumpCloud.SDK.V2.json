@@ -1952,6 +1952,33 @@
       ],
       "title": "LDAP Server Output"
     },
+    "MemberSuggestion": {
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/GraphObject"
+        },
+        "op": {
+          "description": "How to modify group membership.",
+          "enum": [
+            "add",
+            "remove"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "MemberSuggestion"
+    },
+    "MemberSuggestionList": {
+      "properties": {
+        "suggestions": {
+          "items": {
+            "$ref": "#/definitions/MemberSuggestion"
+          },
+          "type": "array"
+        }
+      },
+      "title": "MemberSuggestionList"
+    },
     "Office365BuiltinTranslation": {
       "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`",
       "enum": [
@@ -2501,7 +2528,8 @@
           "type": "array"
         }
       },
-      "title": "Software Application Package Object"
+      "title": "Software Application Package Object",
+      "type": "object"
     },
     "software-app-apple-vpp": {
       "description": "appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.",
@@ -2539,6 +2567,10 @@
         "autoUpdate": {
           "default": false,
           "type": "boolean"
+        },
+        "desiredState": {
+          "description": "State of Install or Uninstall",
+          "type": "string"
         },
         "location": {
           "description": "Repository where the app is located within the package manager",
@@ -15932,6 +15964,31 @@
       "parameters": [
         {
           "description": "ObjectID of the User Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/usergroups/{group_id}/suggestions": {
+      "get": {
+        "description": "This endpoint generates and returns all suggestions available for a given group",
+        "operationId": "Get-UserGroupSuggestion",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MemberSuggestionList"
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "description": "ID of the group",
           "in": "path",
           "name": "group_id",
           "required": true,

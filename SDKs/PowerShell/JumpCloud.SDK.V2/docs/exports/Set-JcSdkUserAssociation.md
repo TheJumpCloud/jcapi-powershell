@@ -48,13 +48,13 @@ Set-JcSdkUserAssociation -UserId <String> -Body <IGraphOperationUser> [-PassThru
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUser> [-PassThru]
+Set-JcSdkUserAssociation -InputObject <IJumpCloudSdkV2Identity> -Body <IGraphOperationUser> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type4>
+Set-JcSdkUserAssociation -InputObject <IJumpCloudSdkV2Identity> -Id <String> -Op <String> -Type <Type4>
  [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -167,7 +167,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -276,7 +276,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IGraphOperationUser
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
 
 ## OUTPUTS
 
@@ -298,7 +298,7 @@ BODY <IGraphOperationUser>: GraphOperation (User)
   - `[AttributeSudoEnabled <Boolean?>]`: Enables sudo
   - `[AttributeSudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
