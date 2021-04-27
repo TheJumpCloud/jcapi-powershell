@@ -63,17 +63,17 @@ commands:
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>) -TestModule:($<< parameters.TestModule >>)
       - run:
-          name: '[COMMITTING MODULE] changes back into $CIRCLE_BRANCH << parameters.SDKName >>'
+          name: '[COMMITTING MODULE] changes back into << pipeline.git.branch >> << parameters.SDKName >>'
           shell: pwsh.exe
           command: |
-            $UserEmail = If ("$CIRCLE_PROJECT_USERNAME") { "$CIRCLE_PROJECT_USERNAME" } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-            $UserName = If ("$CIRCLE_PROJECT_USERNAME") { "$CIRCLE_PROJECT_USERNAME" } Else { $env:USERNAME }
+            $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+            $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
             git config user.email "$UserEmail"
             git config user.name "$UserName"
             git add -A
             git status
             git commit -m "Updating module: << parameters.SDKName >>;[skip ci]"
-            git push origin HEAD:refs/heads/$CIRCLE_BRANCH
+            git push origin << pipeline.git.branch >>
       # - run:
       #     name: Publishing to GitHub Packages
       #     shell: pwsh.exe
