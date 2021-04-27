@@ -3542,7 +3542,7 @@
     "/commands/{id}/results": {
       "get": {
         "description": "This endpoint returns results for a specific command.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
-        "operationId": "GET_commands-id-results",
+        "operationId": "Get-CommandResult",
         "responses": {
           "200": {
             "description": "OK",

@@ -52,14 +52,14 @@ Set-JcSdkOrganization -Id <String>
 
 ### SetViaIdentity
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
+Set-JcSdkOrganization -InputObject <IJumpCloudSdkV1Identity>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-Confirm]
+Set-JcSdkOrganization -InputObject <IJumpCloudSdkV1Identity> [-Settings <IOrganizationsettingsput>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -145,7 +145,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -208,7 +208,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 
 ### JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 
@@ -271,7 +271,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[SystemUsersCanEdit <Boolean?>]`: 
     - `[UserPortalIdleSessionDurationMinutes <Int32?>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

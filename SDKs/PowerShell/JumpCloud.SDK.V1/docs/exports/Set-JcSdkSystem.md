@@ -41,13 +41,13 @@ Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Confirm] [-WhatIf] [<CommonPar
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> -Body <ISystemput> [-Confirm] [-WhatIf]
+Set-JcSdkSystem -InputObject <IJumpCloudSdkV1Identity> -Body <ISystemput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApIsIdentity>
+Set-JcSdkSystem -InputObject <IJumpCloudSdkV1Identity>
  [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
  [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -216,7 +216,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -263,7 +263,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 
 ### JumpCloud.SDK.V1.Models.ISystemput
 
@@ -292,7 +292,7 @@ BODY <ISystemput>: SystemPut
   - `[AllowSshRootLogin <Boolean?>]`: 
   - `[DisplayName <String>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

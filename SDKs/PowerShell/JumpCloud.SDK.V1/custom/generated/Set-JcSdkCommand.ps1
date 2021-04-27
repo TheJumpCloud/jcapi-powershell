@@ -47,7 +47,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.ICommand
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 .Outputs
 JumpCloud.SDK.V1.Models.ICommand
 .Notes
@@ -73,7 +73,7 @@ BODY <ICommand>:
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudSdkV1Identity>:
   [Id <String>]:
   [SystemId <String>]:
   [SystemuserId <String>]:
@@ -96,7 +96,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

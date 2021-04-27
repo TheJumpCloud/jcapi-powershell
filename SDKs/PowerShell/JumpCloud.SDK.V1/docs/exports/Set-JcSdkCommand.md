@@ -43,13 +43,13 @@ Set-JcSdkCommand -Id <String> -Body <ICommand> [-Confirm] [-WhatIf] [<CommonPara
 
 ### SetViaIdentity
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Body <ICommand> [-Confirm] [-WhatIf]
+Set-JcSdkCommand -InputObject <IJumpCloudSdkV1Identity> -Body <ICommand> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> -Command <String> [-CommandRunners <String[]>]
+Set-JcSdkCommand -InputObject <IJumpCloudSdkV1Identity> -Command <String> [-CommandRunners <String[]>]
  [-CommandType <String>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
  [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo]
  [-Systems <String[]>] [-Timeout <String>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
@@ -189,7 +189,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -421,7 +421,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.ICommand
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
 
 ## OUTPUTS
 
@@ -454,7 +454,7 @@ BODY <ICommand>: Command
   - `[Trigger <String>]`: The name of the command trigger.
   - `[User <String>]`: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
