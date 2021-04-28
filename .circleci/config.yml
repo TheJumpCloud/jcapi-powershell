@@ -4,14 +4,30 @@ orbs:
 commands:
   setup:
     steps:
-      - checkout
-      - add_ssh_keys:
-          fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
-          command: ./Tools/Get-SessionVariables.ps1
+          command: |
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Host Information') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-Host | Select-Object *
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Imported Environment Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-ChildItem Env: | Format-Table
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('PsBoundParameters') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            $PsBoundParameters.GetEnumerator()
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-Variable | Format-Table
+      - add_ssh_keys:
+          fingerprints:
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+      - checkout
       - run:
           name: Install PowerShell Core
           command: dotnet tool install --global PowerShell
