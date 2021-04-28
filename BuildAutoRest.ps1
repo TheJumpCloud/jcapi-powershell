@@ -188,8 +188,7 @@ Try
                     $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                             Invoke-Expression -Command:($BuildModuleCommand)
                         })
-                    $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
-                    $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                    Wait-Job -Id:($BuildModuleCommandJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($BuildCustomFunctions)
@@ -199,8 +198,7 @@ Try
                     $BuildCustomFunctionsJob = Start-Job -ArgumentList:($BuildCustomFunctionsPath) -ScriptBlock:( { param ($BuildCustomFunctionsPath);
                             Invoke-Expression -Command:($BuildCustomFunctionsPath)
                         })
-                    $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
-                    $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                    Wait-Job -Id:($BuildCustomFunctionsJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                     If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
                     {
                         Write-Error ('Build custom functions job did not return a "Completed" status.')
@@ -310,11 +308,10 @@ Try
                         $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
                         Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                         # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
-                        # $TestModuleJob = Start-Job -ArgumentList:($TestModuleCommand) -ScriptBlock:( { param ($TestModuleCommand);
-                        Invoke-Expression -Command:($TestModuleCommand)
-                        #     })
-                        # $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
-                        # $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                        $TestModuleJob = Start-Job -ArgumentList:($TestModuleCommand) -ScriptBlock:( { param ($TestModuleCommand);
+                                Invoke-Expression -Command:($TestModuleCommand)
+                            })
+                        Wait-Job -Id:($TestModuleJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         If (Test-Path -Path:($PesterTestResultPath))
                         {
                             [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
