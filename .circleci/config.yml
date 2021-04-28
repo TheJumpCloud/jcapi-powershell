@@ -6,9 +6,6 @@ workflows:
   build-sdks:
     jobs:
       - 'Build JumpCloud PowerShell SDKs'
-      - commit:
-          requires:
-            - 'Build JumpCloud PowerShell SDKs'
       # - deploy-staging:
       #     name: Publishing to GitHub Packages
       #     shell: pwsh.exe
@@ -51,22 +48,7 @@ jobs:
       #     BuildModuleOverride: true
       #     RunApiTransform: true
       #     TestModule: true
-  'commit':
-    executor: win/default
-    steps:
-      - run:
-          when: on_success
-          name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
-          shell: pwsh.exe
-          command: |
-            $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
-            $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
-            git config user.email "$UserEmail"
-            git config user.name "$UserName"
-            git add -A
-            git status
-            git commit -m "Updating PowerShell SDKs;[skip ci]"
-            git push origin << pipeline.git.branch >>
+      - commit
 commands:
   setup:
     steps:
@@ -148,3 +130,18 @@ commands:
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
             - store_artifacts:
                 path: ./SDKs/<< parameters.SDKName >>/bin/<< parameters.SDKName >>*.nupkg"
+  commit:
+    steps:
+      - run:
+          when: on_success
+          name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
+          shell: pwsh.exe
+          command: |
+            $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+            $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
+            git config user.email "$UserEmail"
+            git config user.name "$UserName"
+            git add -A
+            git status
+            git commit -m "Updating PowerShell SDKs;[skip ci]"
+            git push origin << pipeline.git.branch >>
