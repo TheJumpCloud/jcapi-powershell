@@ -4,6 +4,10 @@ orbs:
 commands:
   setup:
     steps:
+      - run:
+          name: Display Session Variables (For Debugging)
+          shell: pwsh.exe
+          command: ./Tools/Get-SessionVariables.ps1
       - add_ssh_keys:
           fingerprints:
             - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
@@ -52,10 +56,6 @@ commands:
         type: boolean
         default: true
     steps:
-      - run:
-          name: Display Session Variables (For Debugging)
-          shell: pwsh.exe
-          command: ./Tools/Get-SessionVariables.ps1
       - run:
           when: always
           name: Building '<< parameters.SDKName >>'
