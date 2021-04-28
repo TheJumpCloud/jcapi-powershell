@@ -1,4 +1,5 @@
 #Requires -PSEdition Core
+#Requires -Modules @{ ModuleName="Pester"; ModuleVersion="4.10.1" }
 Param(
     [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
@@ -27,7 +28,6 @@ $env:JCOrgId = $JCOrgId
 If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
 {
     Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-    Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
     # ./test-module.ps1 -Isolated # Not sure when to use this yet
     # ./test-module.ps1 -Record # Run to create playback files
     # ./test-module.ps1 -Playback # Run once playback files have been created
