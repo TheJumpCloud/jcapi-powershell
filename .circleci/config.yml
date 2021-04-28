@@ -147,7 +147,7 @@ commands:
       - when:
           condition:
             equal:
-              - [true, << parameters.TestModule >>]
+              - [true, << pipeline.parameters.TestModule >>]
           steps:
             - run:
                 name: Testing '<< parameters.SDKName >>'
