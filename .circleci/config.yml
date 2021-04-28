@@ -49,6 +49,8 @@ jobs:
           RunApiTransform: true
           TestModule: true
       - commit
+      # - deploy:
+      #     SDKName: JumpCloud.SDK.V2
 commands:
   setup:
     steps:
@@ -128,6 +130,17 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
+      - run:
+          when: on_success
+          name: Packing '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ModuleName = '<< parameters.SDKName >>'
+            $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+            $BuildVersion = "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
+            $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/$ModuleName.nupkg"
+            $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+            dotnet nuget pack $csprojFilePath -NonInteractive -OutputDirectory $nupkgFilePath -Properties Configuration=$ModuleName -Symbols -version $BuildVersion -Verbosity Detailed
   commit:
     steps:
       - run:
@@ -143,3 +156,17 @@ commands:
             git status
             git commit -m "Updating PowerShell SDKs;[skip ci]"
             git push origin << pipeline.git.branch >>
+  # deploy:
+  #   parameters:
+  #     SDKName:
+  #       description: Name of the SDK to generate
+  #       type: string
+  #   steps:
+  #     - run:
+  #         name: Deploy 'JumpCloud.SDK.DirectoryInsights' to PowerShell Gallery (Prod)
+  #         shell: pwsh.exe
+  #         command: |
+  #           $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
+  #           # dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"
+  #           Write-Host ("Publish-Module -Repository:('PSGallery') -Path:($extractedModulePath) -NuGetApiKey:($env:NuGetApiKey) -SkipAutomaticTags -Force -Verbose")
+  #           Write-Host ("dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"")

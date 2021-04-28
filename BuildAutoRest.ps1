@@ -5,7 +5,7 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][System.String]$BuildModuleOverride = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][ValidateSet('', 'beta')][System.String]$PrereleaseName = ''
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][System.String]$PrereleaseName = ''
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set the module version increment type.')][ValidateSet('Major', 'Minor', 'Build')][ValidateNotNullOrEmpty()][System.String]$ModuleVersionIncrementType = 'Build'
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
@@ -83,7 +83,6 @@ ForEach ($SDK In $SDKName)
             $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
             $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
             $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
-            $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
             $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
             $checkDependenciesModulePath = '{0}/check-dependencies.ps1' -f $OutputFullPath
             $psd1Path = '{0}/{1}.psd1' -f $OutputFullPath, $ModuleName
@@ -320,10 +319,6 @@ ForEach ($SDK In $SDKName)
                 $GuidMatch = $moduleMdContent | Select-String -Pattern:([regex]'(Module Guid:)(.*?)(\n)')
                 $moduleMdContent.Replace($GuidMatch.Matches.Value, "Module Guid: $($PublishedModule.AdditionalMetadata.GUID)`n") | Set-Content -Path:($moduleMdPath)
             }
-            ###########################################################################
-            # One last built to generate nupkg
-            Write-Host ('[RUN COMMAND] ' + $packModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-            Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
             ###########################################################################
             If ($PublishModule)
             {

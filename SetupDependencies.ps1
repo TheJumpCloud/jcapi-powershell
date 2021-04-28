@@ -1,5 +1,5 @@
 # PowerShell Dependencies
-$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers')
+$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers', 'AWS.Tools.Common', 'AWS.Tools.CodeArtifact')
 ForEach ($RequiredModule In $RequiredModules)
 {
     # Check to see if the module is installed
@@ -15,6 +15,7 @@ ForEach ($RequiredModule In $RequiredModules)
     Import-Module -Name:($RequiredModule) -Force
 }
 Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
+Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
 # NPM Dependencies
 If ($env:CI -eq $false)
 {
