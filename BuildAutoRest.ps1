@@ -73,9 +73,7 @@ ForEach ($SDK In $SDKName)
             $ConfigInputFile = '{0}/{1}' -f $BaseFolder, $Config.'input-file'
             $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
             $ModuleVersion = $Config.'module-version'
-            $nupkgName = '{0}*.nupkg' -f $ModuleName
             $binFolder = '{0}/bin' -f $OutputFullPath
-            $nupkgFolderPath = '{0}/nupkg' -f $binFolder
             $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
             $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
             $CustomFolderPath = '{0}/custom' -f $OutputFullPath
@@ -326,8 +324,6 @@ ForEach ($SDK In $SDKName)
             # One last built to generate nupkg
             Write-Host ('[RUN COMMAND] ' + $packModulePath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
             Invoke-Expression -Command:($packModulePath) | Tee-Object -FilePath:($LogFilePath) -Append
-            If (!(Test-Path -Path:($nupkgFolderPath))) { New-Item -Path:($nupkgFolderPath) -ItemType:('Directory') | Out-Null }
-            Move-Item -Path:(Get-ChildItem "$binFolder/$nupkgName") -Destination:("$nupkgFolderPath")
             ###########################################################################
             If ($PublishModule)
             {
