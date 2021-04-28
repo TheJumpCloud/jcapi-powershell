@@ -6,12 +6,6 @@ workflows:
   build-sdks:
     jobs:
       - 'Build JumpCloud PowerShell SDKs'
-      - deploy-staging:
-          name: Publishing to AWS CodeArtifact
-          shell: pwsh.exe
-          command: ./PublishToCodeArtifact.ps1
-          requires:
-            - 'Build JumpCloud PowerShell SDKs'
   build-sdks-nightly:
     triggers:
       - schedule:
@@ -45,6 +39,7 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
+      - deploy-staging
       - commit
 commands:
   setup:
@@ -130,6 +125,14 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
+  deploy-staging:
+    steps:
+      - run:
+          name: Publishing to AWS CodeArtifact
+          shell: pwsh.exe
+          command: ./PublishToCodeArtifact.ps1
+          requires:
+            - 'Build JumpCloud PowerShell SDKs'
   commit:
     steps:
       - run:
