@@ -218,7 +218,9 @@ $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Get-*" -and $
 $OrderedTestsTakeDown | ForEach-Object { $FileBaseName = $_; $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -eq $FileBaseName }; }
 $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -and $_.BaseName -notin $PesterTestFiles.BaseName }
 # Run tests
-Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml") -OutputFormat:('JUnitXml')
+$OutputFilePath = (Join-Path $testFolder "results")
+If (!(Test-Path -Path:($OutputFilePath))) { New-Item -Path:($OutputFilePath) -ItemType:('Directory') | Out-Null }
+Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile:(Join-Path $OutputFilePath "$moduleName-TestResults.xml") -OutputFormat:('JUnitXml')
 #endregion Run Pester Tests
 
 #region Clean Up (This section should ideally be taken care of by the "Remove-" tests)

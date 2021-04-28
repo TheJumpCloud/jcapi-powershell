@@ -91,7 +91,7 @@ Try
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
-                $PesterTestResultPath = Join-Path $TestFolderPath "$ModuleName-TestResults.xml"
+                $PesterTestResultPath = Join-Path $TestFolderPath "results" "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
