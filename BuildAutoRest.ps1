@@ -188,7 +188,8 @@ Try
                     $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                             Invoke-Expression -Command:($BuildModuleCommand)
                         })
-                    Wait-Job -Id:($BuildModuleCommandJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
+                    $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                 }
                 ###########################################################################
                 If ($BuildCustomFunctions)
@@ -198,7 +199,8 @@ Try
                     $BuildCustomFunctionsJob = Start-Job -ArgumentList:($BuildCustomFunctionsPath) -ScriptBlock:( { param ($BuildCustomFunctionsPath);
                             Invoke-Expression -Command:($BuildCustomFunctionsPath)
                         })
-                    Wait-Job -Id:($BuildCustomFunctionsJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                    $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
+                    $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                     If ($BuildCustomFunctionsJobStatus.State -ne 'Completed')
                     {
                         Write-Error ('Build custom functions job did not return a "Completed" status.')
@@ -311,7 +313,8 @@ Try
                         $TestModuleJob = Start-Job -ArgumentList:($TestModuleCommand) -ScriptBlock:( { param ($TestModuleCommand);
                                 Invoke-Expression -Command:($TestModuleCommand)
                             })
-                        Wait-Job -Id:($TestModuleJob.Id) | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
+                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
                         If (Test-Path -Path:($PesterTestResultPath))
                         {
                             [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
