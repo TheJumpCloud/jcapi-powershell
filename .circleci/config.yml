@@ -131,8 +131,6 @@ commands:
           name: Publishing to AWS CodeArtifact
           shell: pwsh.exe
           command: ./PublishToCodeArtifact.ps1
-          requires:
-            - 'Build JumpCloud PowerShell SDKs'
   commit:
     steps:
       - run:
