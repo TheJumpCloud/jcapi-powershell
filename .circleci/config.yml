@@ -35,27 +35,27 @@ jobs:
       - setup
       - build-test-pack:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          JCApiKey: $JCApiKey
-          JCOrgId: $JCOrgId
-          GitHubAccessToken: $GitHubAccessToken
+          JCApiKey: << pipeline.parameters.JCApiKey >>
+          JCOrgId: << pipeline.parameters.JCOrgId >>
+          GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
       - build-test-pack:
           SDKName: JumpCloud.SDK.V1
-          JCApiKey: $JCApiKey
-          JCOrgId: $JCOrgId
-          GitHubAccessToken: $GitHubAccessToken
+          JCApiKey: << pipeline.parameters.JCApiKey >>
+          JCOrgId: << pipeline.parameters.JCOrgId >>
+          GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
       - build-test-pack:
           SDKName: JumpCloud.SDK.V2
-          JCApiKey: $JCApiKey
-          JCOrgId: $JCOrgId
-          GitHubAccessToken: $GitHubAccessToken
+          JCApiKey: << pipeline.parameters.JCApiKey >>
+          JCOrgId: << pipeline.parameters.JCOrgId >>
+          GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
