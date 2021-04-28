@@ -15,8 +15,8 @@ Query the API for Directory Insights events
 ### GetExpanded (Default)
 ```
 Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-SearchAfter <IEventQuerySearchAfterItem[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>]
- [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchAfter <IEventQuerySearchAfterItem[]>] [-SearchTerm <ISearchTerm>] [-Sort <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -148,26 +148,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SearchTermAnd
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+### -SearchTerm
+SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+To construct, see NOTES section for SEARCHTERM properties and create a hash table.
 
 ```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: GetExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SearchTermOr
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-
-```yaml
-Type: System.Collections.Hashtable
+Type: JumpCloud.SDK.DirectoryInsights.Models.ISearchTerm
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -282,10 +268,16 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[SearchAfter <IEventQuerySearchAfterItem[]>]`: Specific query to search after, see x-* response headers for next values
-  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTerm <ISearchTerm>]`: SearchTerm is the filter portion of the query         it contains only one of 'and' or 'or' conjunction maps
+    - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+      - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[Sort <String>]`: ASC or DESC order for timestamp
+
+SEARCHTERM <ISearchTerm>: SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+  - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS
 

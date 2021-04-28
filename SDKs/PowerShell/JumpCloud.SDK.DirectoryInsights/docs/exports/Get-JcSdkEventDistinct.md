@@ -15,7 +15,7 @@ Query the API for a list of distinct values for a field
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventDistinct -Field <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchTerm <ISearchTerm>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -90,26 +90,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SearchTermAnd
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+### -SearchTerm
+SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+To construct, see NOTES section for SEARCHTERM properties and create a hash table.
 
 ```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: GetExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SearchTermOr
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-
-```yaml
-Type: System.Collections.Hashtable
+Type: JumpCloud.SDK.DirectoryInsights.Models.ISearchTerm
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -207,9 +193,15 @@ BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search o
   - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTerm <ISearchTerm>]`: SearchTerm is the filter portion of the query         it contains only one of 'and' or 'or' conjunction maps
+    - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+      - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+
+SEARCHTERM <ISearchTerm>: SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+  - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS
 
