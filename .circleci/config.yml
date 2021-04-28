@@ -95,7 +95,7 @@ jobs:
           JCOrgId: ${JCOrgId}
           GitHubAccessToken: ${GitHubAccessToken}
           ManualModuleVersion: ''
-          BuildModuleOverride: false
+          BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
   'Build JumpCloud SDK V1':
@@ -138,12 +138,12 @@ workflows:
   build-sdks:
     jobs:
       - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V1':
-          requires:
-            - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V2':
-          requires:
-            - 'Build JumpCloud SDK V1'
+      # - 'Build JumpCloud SDK V1':
+      #     requires:
+      #       - 'Build JumpCloud SDK DirectoryInsights'
+      # - 'Build JumpCloud SDK V2':
+      #     requires:
+      #       - 'Build JumpCloud SDK V1'
   build-sdks-nightly:
     triggers:
       - schedule:
