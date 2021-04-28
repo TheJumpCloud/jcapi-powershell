@@ -35,27 +35,18 @@ jobs:
       - setup
       - build-test-pack:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          JCApiKey: << pipeline.parameters.JCApiKey >>
-          JCOrgId: << pipeline.parameters.JCOrgId >>
-          GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
       # - build-test-pack:
       #     SDKName: JumpCloud.SDK.V1
-      #     JCApiKey: << pipeline.parameters.JCApiKey >>
-      #     JCOrgId: << pipeline.parameters.JCOrgId >>
-      #     GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
       #     ManualModuleVersion: ''
       #     BuildModuleOverride: true
       #     RunApiTransform: true
       #     TestModule: true
       # - build-test-pack:
       #     SDKName: JumpCloud.SDK.V2
-      #     JCApiKey: << pipeline.parameters.JCApiKey >>
-      #     JCOrgId: << pipeline.parameters.JCOrgId >>
-      #     GitHubAccessToken: << pipeline.parameters.GitHubAccessToken >>
       #     ManualModuleVersion: ''
       #     BuildModuleOverride: true
       #     RunApiTransform: true
@@ -121,15 +112,6 @@ commands:
         description: ''
         type: string
         default: ''
-      JCApiKey:
-        description: API key of the JumpCloud organization to run tests against
-        type: string
-      JCOrgId:
-        description: Organization id of the JumpCloud organization to run tests against
-        type: string
-      GitHubAccessToken:
-        description: GitHub Access Token used to pull the latest version of the swagger spec
-        type: string
       BuildModuleOverride:
         description: ''
         type: boolean
@@ -149,7 +131,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:('<< parameters.GitHubAccessToken >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -160,7 +142,7 @@ commands:
                 shell: pwsh.exe
                 command: |
                   $ErrorActionPreference = 'Stop'
-                  ./Test-Module.ps1 -JCApiKey:('<< parameters.JCApiKey >>') -JCOrgId:('<< parameters.JCOrgId >>') -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
+                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: SDKs/PowerShell/<< parameters.SDKName >>/test/results
