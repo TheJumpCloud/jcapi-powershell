@@ -18,6 +18,7 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run build-module.ps1 ')][ValidateNotNullOrEmpty()][System.Boolean]$BuildModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run BuildCustomFunctions.ps1')][ValidateNotNullOrEmpty()][System.Boolean]$BuildCustomFunctions = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to perform customizations to test-module.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModulePrep = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
@@ -281,26 +282,30 @@ Try
                     }
                 }
                 ###########################################################################
+                If ($TestModulePrep)
+                {
+                    # Tmp workaround
+                    $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
+                    $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
+                    # Temp workaround untill autorest updates to use Pester V5 syntax
+                    $testModuleContent = Get-Content -Path:($testModulePath) -Raw
+                    $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
+                    # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
+                    $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
+                    If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
+                    {
+                        Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
+                    }
+                    $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
+                    $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
+                    $testModuleContent | Set-Content -Path:($testModulePath)
+                }
+                ###########################################################################
                 If ($TestModule)
                 {
                     If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
                     {
                         Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        # Tmp workaround
-                        $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
-                        $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
-                        # Temp workaround untill autorest updates to use Pester V5 syntax
-                        $testModuleContent = Get-Content -Path:($testModulePath) -Raw
-                        $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-                        # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
-                        $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
-                        If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
-                        {
-                            Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
-                        }
-                        $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
-                        $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
-                        $testModuleContent | Set-Content -Path:($testModulePath)
                         # Test module
                         Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
                         # ./test-module.ps1 -Isolated # Not sure when to use this yet
