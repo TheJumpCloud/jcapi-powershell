@@ -53,9 +53,9 @@ commands:
         default: true
     steps:
       - run:
-          name: Get Session Info (For Testing)
+          name: Display Session Variables (For Debugging)
           shell: pwsh.exe
-          command: ./Tools/Get-SessionInfo.ps1
+          command: ./Tools/Get-SessionVariables.ps1
       - run:
           when: always
           name: Building '<< parameters.SDKName >>'
@@ -66,6 +66,7 @@ commands:
       - store_test_results:
           path: SDKs/PowerShell/<< parameters.SDKName >>/test/results
       - run:
+          when: on_success
           name: 'Commit module to << pipeline.git.branch >>'
           shell: pwsh.exe
           command: |
