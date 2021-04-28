@@ -27,8 +27,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicy -Id <String> -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -Id <String> -Name <String> [-Template <IPolicyRequestTemplate>] [-Values <IPolicyValue[]>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -44,7 +44,7 @@ Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Body <IPolicyRequest> [-
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Name <String> [-TemplateId <String>]
+Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Name <String> [-Template <IPolicyRequestTemplate>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -144,11 +144,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TemplateId
-ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+### -Template
+.
+To construct, see NOTES section for TEMPLATE properties and create a hash table.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Models.IPolicyRequestTemplate
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -230,7 +231,8 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
-  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  - `[Template <IPolicyRequestTemplate>]`: 
+    - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
@@ -256,6 +258,9 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
+
+TEMPLATE <IPolicyRequestTemplate>: .
+  - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.

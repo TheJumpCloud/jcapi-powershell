@@ -46,14 +46,26 @@ BODY <IAuthnPolicyInput>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [Description <String>]:
   [Disabled <Boolean?>]:
-  [EffectAction <String>]:
-  [MfaRequired <Boolean?>]:
+  [Effect <IAuthnPolicyEffect>]: AuthnPolicyEffect
+    Action <String>:
+    [Obligations <IAuthnPolicyObligations>]: AuthnPolicyObligations
+      [Mfa <IAuthnPolicyObligationsMfa>]:
+        [Required <Boolean?>]:
   [Name <String>]:
-  [TargetResources <IAuthnPolicyResourceTarget[]>]:
-    [Type <String>]:
-  [UserGroupExclusions <String[]>]:
-  [UserGroupInclusions <String[]>]:
-  [UserInclusions <String[]>]:
+  [Targets <IAuthnPolicyTargets>]: AuthnPolicyTargets
+    [Resources <IAuthnPolicyResourceTarget[]>]:
+      [Type <String>]:
+    [UserGroups <IAuthnPolicyUserGroupTarget>]: AuthnPolicyUserGroupTarget
+      [Exclusions <String[]>]:
+      [Inclusions <String[]>]:
+    [Users <IAuthnPolicyUserTarget>]: AuthnPolicyUserTarget
+      [Inclusions <String[]>]:
+
+EFFECT <IAuthnPolicyEffect>:
+  Action <String>:
+  [Obligations <IAuthnPolicyObligations>]: AuthnPolicyObligations
+    [Mfa <IAuthnPolicyObligationsMfa>]:
+      [Required <Boolean?>]:
 
 INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [AccountId <String>]:
@@ -77,8 +89,14 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 
-TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
-  [Type <String>]:
+TARGETS <IAuthnPolicyTargets>:
+  [Resources <IAuthnPolicyResourceTarget[]>]:
+    [Type <String>]:
+  [UserGroups <IAuthnPolicyUserGroupTarget>]: AuthnPolicyUserGroupTarget
+    [Exclusions <String[]>]:
+    [Inclusions <String[]>]:
+  [Users <IAuthnPolicyUserTarget>]: AuthnPolicyUserTarget
+    [Inclusions <String[]>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
@@ -135,16 +153,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${EffectAction},
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${MfaRequired},
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyEffect]
+    # AuthnPolicyEffect
+    # To construct, see NOTES section for EFFECT properties and create a hash table.
+    ${Effect},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
@@ -156,31 +168,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
-    # .
-    # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
-    ${TargetResources},
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String[]]
-    # .
-    ${UserGroupExclusions},
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String[]]
-    # .
-    ${UserGroupInclusions},
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String[]]
-    # .
-    ${UserInclusions},
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyTargets]
+    # AuthnPolicyTargets
+    # To construct, see NOTES section for TARGETS properties and create a hash table.
+    ${Targets},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

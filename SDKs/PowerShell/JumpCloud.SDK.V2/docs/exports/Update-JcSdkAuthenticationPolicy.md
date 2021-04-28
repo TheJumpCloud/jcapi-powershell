@@ -24,9 +24,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ### UpdateExpanded (Default)
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
- [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Effect <IAuthnPolicyEffect>] [-Name <String>] [-Targets <IAuthnPolicyTargets>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Update
@@ -44,9 +43,8 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudSdkV2Identity> -Body <I
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudSdkV2Identity> [-Conditions <Hashtable>]
- [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupExclusions <String[]>]
- [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Description <String>] [-Disabled] [-Effect <IAuthnPolicyEffect>] [-Name <String>]
+ [-Targets <IAuthnPolicyTargets>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -140,11 +138,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -EffectAction
-.
+### -Effect
+AuthnPolicyEffect
+To construct, see NOTES section for EFFECT properties and create a hash table.
 
 ```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyEffect
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -186,21 +185,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -MfaRequired
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Name
 .
 
@@ -216,57 +200,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TargetResources
-.
-To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
+### -Targets
+AuthnPolicyTargets
+To construct, see NOTES section for TARGETS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserGroupExclusions
-.
-
-```yaml
-Type: System.String[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserGroupInclusions
-.
-
-```yaml
-Type: System.String[]
-Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserInclusions
-.
-
-```yaml
-Type: System.String[]
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyTargets
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -335,14 +274,26 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
-  - `[EffectAction <String>]`: 
-  - `[MfaRequired <Boolean?>]`: 
+  - `[Effect <IAuthnPolicyEffect>]`: AuthnPolicyEffect
+    - `Action <String>`: 
+    - `[Obligations <IAuthnPolicyObligations>]`: AuthnPolicyObligations
+      - `[Mfa <IAuthnPolicyObligationsMfa>]`: 
+        - `[Required <Boolean?>]`: 
   - `[Name <String>]`: 
-  - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
-    - `[Type <String>]`: 
-  - `[UserGroupExclusions <String[]>]`: 
-  - `[UserGroupInclusions <String[]>]`: 
-  - `[UserInclusions <String[]>]`: 
+  - `[Targets <IAuthnPolicyTargets>]`: AuthnPolicyTargets
+    - `[Resources <IAuthnPolicyResourceTarget[]>]`: 
+      - `[Type <String>]`: 
+    - `[UserGroups <IAuthnPolicyUserGroupTarget>]`: AuthnPolicyUserGroupTarget
+      - `[Exclusions <String[]>]`: 
+      - `[Inclusions <String[]>]`: 
+    - `[Users <IAuthnPolicyUserTarget>]`: AuthnPolicyUserTarget
+      - `[Inclusions <String[]>]`: 
+
+EFFECT <IAuthnPolicyEffect>: AuthnPolicyEffect
+  - `Action <String>`: 
+  - `[Obligations <IAuthnPolicyObligations>]`: AuthnPolicyObligations
+    - `[Mfa <IAuthnPolicyObligationsMfa>]`: 
+      - `[Required <Boolean?>]`: 
 
 INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -366,8 +317,14 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
-  - `[Type <String>]`: 
+TARGETS <IAuthnPolicyTargets>: AuthnPolicyTargets
+  - `[Resources <IAuthnPolicyResourceTarget[]>]`: 
+    - `[Type <String>]`: 
+  - `[UserGroups <IAuthnPolicyUserGroupTarget>]`: AuthnPolicyUserGroupTarget
+    - `[Exclusions <String[]>]`: 
+    - `[Inclusions <String[]>]`: 
+  - `[Users <IAuthnPolicyUserTarget>]`: AuthnPolicyUserTarget
+    - `[Inclusions <String[]>]`: 
 
 ## RELATED LINKS
 
