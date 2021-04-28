@@ -147,7 +147,7 @@ Try
                 }
                 $BuildVersion = "$($ModuleVersion)-$($env:CIRCLE_BUILD_NUM)"
                 ###########################################################################
-                If ($InstallPreReq)
+                If ($InstallPreReq -and $env:CI -eq $false)
                 {
                     Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-3.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                     If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
