@@ -1,9 +1,7 @@
 #Requires -PSEdition Core
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKey
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set to true to bypass swagger spec version check.')][ValidateNotNullOrEmpty()][System.String]$BuildModuleOverride = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
@@ -12,14 +10,12 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set the module version increment type.')][ValidateSet('Major', 'Minor', 'Build')][ValidateNotNullOrEmpty()][System.String]$ModuleVersionIncrementType = 'Build'
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to increment the module version.')][ValidateNotNullOrEmpty()][System.Boolean]$IncrementModuleVersion = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to install prereqs.')][ValidateNotNullOrEmpty()][System.Boolean]$InstallPreReq = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run AutoRest to generate the module.')][ValidateNotNullOrEmpty()][System.Boolean]$GenerateModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to copy files from the custom directory to the SDK.')][ValidateNotNullOrEmpty()][System.Boolean]$CopyCustomFiles = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run build-module.ps1 ')][ValidateNotNullOrEmpty()][System.Boolean]$BuildModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run BuildCustomFunctions.ps1')][ValidateNotNullOrEmpty()][System.Boolean]$BuildCustomFunctions = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to perform customizations to test-module.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModulePrep = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run pester tests.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModule = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to add GitHub Packages required attributes')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyNuspec = $true
@@ -30,9 +26,6 @@ Param(
 Try
 {
     # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
-    # Create environmental variable so that they can be used by the pester tests later.
-    If ([System.String]::IsNullOrEmpty($env:JCApiKey)) { $env:JCApiKey = $JCApiKey }
-    If ([System.String]::IsNullOrEmpty($env:JCOrgId)) { $env:JCOrgId = $JCOrgId }
     $CI_USERNAME = 'TheJumpCloud'
     $RunLocal = If ($env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) { $false } Else { $true }
     ForEach ($SDK In $SDKName)
@@ -92,7 +85,6 @@ Try
                 $TestFolderPath = '{0}/test' -f $OutputFullPath
                 $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
                 $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
-                $PesterTestResultPath = Join-Path $TestFolderPath "results" "$ModuleName-TestResults.xml"
                 $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
                 $packModulePath = '{0}/pack-module.ps1' -f $OutputFullPath
                 $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
@@ -146,15 +138,6 @@ Try
                     $env:CIRCLE_BUILD_NUM
                 }
                 $BuildVersion = "$($ModuleVersion)-$($env:CIRCLE_BUILD_NUM)"
-                ###########################################################################
-                If ($InstallPreReq -and $env:CI -eq $false)
-                {
-                    Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-3.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
-                    ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
-                    ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
-                    Else { Write-Error ('Unknown Operation System') }
-                }
                 ###########################################################################
                 If ($GenerateModule)
                 {
@@ -290,7 +273,6 @@ Try
                     # Temp workaround untill autorest updates to use Pester V5 syntax
                     $testModuleContent = Get-Content -Path:($testModulePath) -Raw
                     $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-                    # $testModuleContent.Replace('Invoke-Pester -Script @{ Path = $testFolder } -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")', 'Invoke-Pester -Path "' + $TestFolderPath + '" -PassThru | Export-NUnitReport -Path "' + $PesterTestResultPath + '"') | Set-Content -Path:($testModulePath)
                     $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
                     If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
                     {
@@ -299,51 +281,6 @@ Try
                     $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
                     $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
                     $testModuleContent | Set-Content -Path:($testModulePath)
-                }
-                ###########################################################################
-                If ($TestModule)
-                {
-                    If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
-                    {
-                        Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                        # Test module
-                        Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
-                        # ./test-module.ps1 -Isolated # Not sure when to use this yet
-                        # ./test-module.ps1 -Record # Run to create playback files
-                        # ./test-module.ps1 -Playback # Run once playback files have been created
-                        # ./test-module.ps1 -Live # Run to query against real API
-                        $TestModuleCommand = $testModulePath + ' -Live'  # Run to query against real API
-                        Write-Host ('[RUN COMMAND] ' + $TestModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
-                        # Run test-module script as a job in a new session to avoid "did you forget to close your session?" error
-                        $TestModuleJob = Start-Job -ArgumentList:($TestModuleCommand) -ScriptBlock:( { param ($TestModuleCommand);
-                                Invoke-Expression -Command:($TestModuleCommand)
-                            })
-                        $TestModuleJobStatus = Wait-Job -Id:($TestModuleJob.Id)
-                        $TestModuleJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
-                        If (Test-Path -Path:($PesterTestResultPath))
-                        {
-                            [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
-                            $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
-                            If ($FailedTests)
-                            {
-                                Write-Host ('')
-                                Write-Host ('##############################################################################################################')
-                                Write-Host ('##############################Error Description###############################################################')
-                                Write-Host ('##############################################################################################################')
-                                Write-Host ('')
-                                $FailedTests | ForEach-Object { $_.InnerText + ';' }
-                                Write-Error ("Tests Failed: $([string]($FailedTests | Measure-Object).Count)")
-                            }
-                        }
-                    }
-                    Else
-                    {
-                        Write-Error ("JCApiKey and JCOrgId have not been set.")
-                    }
-                }
-                Else
-                {
-                    Write-Warning ('Skipping TestModule.')
                 }
                 ###########################################################################
                 # Remove auto generated .gitignore files
