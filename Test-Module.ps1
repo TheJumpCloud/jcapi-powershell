@@ -33,22 +33,6 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     # ./test-module.ps1 -Playback # Run once playback files have been created
     # ./test-module.ps1 -Live # Run to query against real API
     Invoke-Expression -Command:("$testModulePath -Live")
-    # $PesterTestResultPath = Join-Path $TestFolderPath "results" "$ModuleName-TestResults.xml"
-    # If (Test-Path -Path:($PesterTestResultPath))
-    # {
-    # [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
-    # $FailedTests = $PesterResults.'test-results'.'test-suite'.'results'.'test-suite' | Where-Object { $_.success -eq 'False' }
-    # If ($FailedTests)
-    # {
-    #     Write-Host ('')
-    #     Write-Host ('##############################################################################################################')
-    #     Write-Host ('##############################Error Description###############################################################')
-    #     Write-Host ('##############################################################################################################')
-    #     Write-Host ('')
-    #     $FailedTests | ForEach-Object { $_.InnerText + ';' }
-    #     Write-Error ("Tests Failed: $([string]($FailedTests | Measure-Object).Count)")
-    # }
-    # }
 }
 Else
 {
