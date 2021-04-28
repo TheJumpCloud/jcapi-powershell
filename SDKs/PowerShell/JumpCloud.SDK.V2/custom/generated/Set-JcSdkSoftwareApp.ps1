@@ -52,11 +52,12 @@ BODY <ISoftwareApp>:
   [Id <String>]:
   [Settings <ISoftwareAppSettings[]>]:
     [AllowUpdateDelay <Boolean?>]:
-    [AppleVppAssignedLicenses <Int32?>]:
-    [AppleVppAvailableLicenses <Int32?>]:
-    [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
-      [(Any) <Object>]: This indicates any property can be added to this object.
-    [AppleVppTotalLicenses <Int32?>]:
+    [AppleVpp <ISoftwareAppAppleVpp>]: appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.
+      [AssignedLicenses <Int32?>]:
+      [AvailableLicenses <Int32?>]:
+      [Details <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+        [(Any) <Object>]: This indicates any property can be added to this object.
+      [TotalLicenses <Int32?>]:
     [AutoUpdate <Boolean?>]:
     [DesiredState <String>]: State of Install or Uninstall
     [Location <String>]: Repository where the app is located within the package manager
@@ -88,11 +89,12 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>:
 
 SETTINGS <ISoftwareAppSettings[]>:
   [AllowUpdateDelay <Boolean?>]:
-  [AppleVppAssignedLicenses <Int32?>]:
-  [AppleVppAvailableLicenses <Int32?>]:
-  [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
-    [(Any) <Object>]: This indicates any property can be added to this object.
-  [AppleVppTotalLicenses <Int32?>]:
+  [AppleVpp <ISoftwareAppAppleVpp>]: appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.
+    [AssignedLicenses <Int32?>]:
+    [AvailableLicenses <Int32?>]:
+    [Details <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [TotalLicenses <Int32?>]:
   [AutoUpdate <Boolean?>]:
   [DesiredState <String>]: State of Install or Uninstall
   [Location <String>]: Repository where the app is located within the package manager

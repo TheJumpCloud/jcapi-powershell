@@ -39,8 +39,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkWorkday [-BasicPassword <String>] [-BasicUsername <String>] [-Name <String>] [-OauthCode <String>]
- [-ReportUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkWorkday [-Auth <IAuthInput>] [-Name <String>] [-ReportUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -94,26 +94,12 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
 
 ## PARAMETERS
 
-### -BasicPassword
-.
+### -Auth
+Auth Input
+To construct, see NOTES section for AUTH properties and create a hash table.
 
 ```yaml
-Type: System.String
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -BasicUsername
-.
-
-```yaml
-Type: System.String
+Type: JumpCloud.SDK.V2.Models.IAuthInput
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -141,21 +127,6 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-.
-
-```yaml
-Type: System.String
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -OauthCode
 .
 
 ```yaml
@@ -236,11 +207,21 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
+AUTH <IAuthInput>: Auth Input
+  - `[Basic <IAuthInputBasic>]`: 
+    - `[Password <String>]`: 
+    - `[Username <String>]`: 
+  - `[Oauth <IAuthInputOauth>]`: 
+    - `[Code <String>]`: 
+
 BODY <IWorkdayInput>: Workday Input
-  - `[BasicPassword <String>]`: 
-  - `[BasicUsername <String>]`: 
+  - `[Auth <IAuthInput>]`: Auth Input
+    - `[Basic <IAuthInputBasic>]`: 
+      - `[Password <String>]`: 
+      - `[Username <String>]`: 
+    - `[Oauth <IAuthInputOauth>]`: 
+      - `[Code <String>]`: 
   - `[Name <String>]`: 
-  - `[OauthCode <String>]`: 
   - `[ReportUrl <String>]`: 
 
 ## RELATED LINKS
