@@ -78,46 +78,52 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [ContactEmail <String>]:
     [ContactName <String>]:
     [DeviceIdentificationEnabled <Boolean?>]:
-    [DirectoryInsightEnabled <Boolean?>]:
-    [DirectoryInsightPremiumEnabled <Boolean?>]:
     [DisableGoogleLogin <Boolean?>]:
     [DisableLdap <Boolean?>]:
     [DisableUm <Boolean?>]:
     [DuplicateLdapGroups <Boolean?>]:
     [EmailDisclaimer <String>]:
     [EnableManagedUid <Boolean?>]:
+    [Features <IOrganizationsettingsputFeatures>]:
+      [DirectoryInsights <IOrganizationsettingsputFeaturesDirectoryInsights>]:
+        [Enabled <Boolean?>]:
+      [DirectoryInsightsPremium <IOrganizationsettingsputFeaturesDirectoryInsightsPremium>]:
+        [Enabled <Boolean?>]:
+      [SystemInsights <IOrganizationsettingsputFeaturesSystemInsights>]:
+        [EnableNewDarwin <Boolean?>]:
+        [EnableNewLinux <Boolean?>]:
+        [EnableNewWindows <Boolean?>]:
+        [Enabled <Boolean?>]:
     [Logo <String>]:
     [Name <String>]:
     [PasswordCompliance <String>]:
-    [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-    [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
-    [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
-    [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
-    [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
-    [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]:
-    [PasswordPolicyEnableMaxHistory <Boolean?>]:
-    [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]:
-    [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]:
-    [PasswordPolicyEnableMinLength <Boolean?>]:
-    [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]:
-    [PasswordPolicyLockoutTimeInSeconds <Int32?>]:
-    [PasswordPolicyMaxHistory <Int32?>]:
-    [PasswordPolicyMaxLoginAttempts <Int32?>]:
-    [PasswordPolicyMinChangePeriodInDays <Int32?>]:
-    [PasswordPolicyMinLength <Int32?>]:
-    [PasswordPolicyNeedsLowercase <Boolean?>]:
-    [PasswordPolicyNeedsNumeric <Boolean?>]:
-    [PasswordPolicyNeedsSymbolic <Boolean?>]:
-    [PasswordPolicyNeedsUppercase <Boolean?>]:
-    [PasswordPolicyPasswordExpirationInDays <Int32?>]:
+    [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+      [AllowUsernameSubstring <Boolean?>]:
+      [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
+      [DaysBeforeExpirationToForceReset <Int32?>]:
+      [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
+      [EnableDaysBeforeExpirationToForceReset <Boolean?>]:
+      [EnableLockoutTimeInSeconds <Boolean?>]:
+      [EnableMaxHistory <Boolean?>]:
+      [EnableMaxLoginAttempts <Boolean?>]:
+      [EnableMinChangePeriodInDays <Boolean?>]:
+      [EnableMinLength <Boolean?>]:
+      [EnablePasswordExpirationInDays <Boolean?>]:
+      [LockoutTimeInSeconds <Int32?>]:
+      [MaxHistory <Int32?>]:
+      [MaxLoginAttempts <Int32?>]:
+      [MinChangePeriodInDays <Int32?>]:
+      [MinLength <Int32?>]:
+      [NeedsLowercase <Boolean?>]:
+      [NeedsNumeric <Boolean?>]:
+      [NeedsSymbolic <Boolean?>]:
+      [NeedsUppercase <Boolean?>]:
+      [PasswordExpirationInDays <Int32?>]:
     [ShowIntro <Boolean?>]:
-    [SystemInsightEnableNewDarwin <Boolean?>]:
-    [SystemInsightEnableNewLinux <Boolean?>]:
-    [SystemInsightEnableNewWindows <Boolean?>]:
-    [SystemInsightEnabled <Boolean?>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
-    [UserPortalIdleSessionDurationMinutes <Int32?>]:
+    [UserPortal <IOrganizationsettingsputUserPortal>]:
+      [IdleSessionDurationMinutes <Int32?>]:
 
 INPUTOBJECT <IJumpCloudSdkV1Identity>:
   [Id <String>]:
@@ -129,46 +135,52 @@ SETTINGS <IOrganizationsettingsput>:
   [ContactEmail <String>]:
   [ContactName <String>]:
   [DeviceIdentificationEnabled <Boolean?>]:
-  [DirectoryInsightEnabled <Boolean?>]:
-  [DirectoryInsightPremiumEnabled <Boolean?>]:
   [DisableGoogleLogin <Boolean?>]:
   [DisableLdap <Boolean?>]:
   [DisableUm <Boolean?>]:
   [DuplicateLdapGroups <Boolean?>]:
   [EmailDisclaimer <String>]:
   [EnableManagedUid <Boolean?>]:
+  [Features <IOrganizationsettingsputFeatures>]:
+    [DirectoryInsights <IOrganizationsettingsputFeaturesDirectoryInsights>]:
+      [Enabled <Boolean?>]:
+    [DirectoryInsightsPremium <IOrganizationsettingsputFeaturesDirectoryInsightsPremium>]:
+      [Enabled <Boolean?>]:
+    [SystemInsights <IOrganizationsettingsputFeaturesSystemInsights>]:
+      [EnableNewDarwin <Boolean?>]:
+      [EnableNewLinux <Boolean?>]:
+      [EnableNewWindows <Boolean?>]:
+      [Enabled <Boolean?>]:
   [Logo <String>]:
   [Name <String>]:
   [PasswordCompliance <String>]:
-  [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-  [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
-  [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
-  [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
-  [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
-  [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]:
-  [PasswordPolicyEnableMaxHistory <Boolean?>]:
-  [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]:
-  [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]:
-  [PasswordPolicyEnableMinLength <Boolean?>]:
-  [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]:
-  [PasswordPolicyLockoutTimeInSeconds <Int32?>]:
-  [PasswordPolicyMaxHistory <Int32?>]:
-  [PasswordPolicyMaxLoginAttempts <Int32?>]:
-  [PasswordPolicyMinChangePeriodInDays <Int32?>]:
-  [PasswordPolicyMinLength <Int32?>]:
-  [PasswordPolicyNeedsLowercase <Boolean?>]:
-  [PasswordPolicyNeedsNumeric <Boolean?>]:
-  [PasswordPolicyNeedsSymbolic <Boolean?>]:
-  [PasswordPolicyNeedsUppercase <Boolean?>]:
-  [PasswordPolicyPasswordExpirationInDays <Int32?>]:
+  [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+    [AllowUsernameSubstring <Boolean?>]:
+    [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
+    [DaysBeforeExpirationToForceReset <Int32?>]:
+    [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
+    [EnableDaysBeforeExpirationToForceReset <Boolean?>]:
+    [EnableLockoutTimeInSeconds <Boolean?>]:
+    [EnableMaxHistory <Boolean?>]:
+    [EnableMaxLoginAttempts <Boolean?>]:
+    [EnableMinChangePeriodInDays <Boolean?>]:
+    [EnableMinLength <Boolean?>]:
+    [EnablePasswordExpirationInDays <Boolean?>]:
+    [LockoutTimeInSeconds <Int32?>]:
+    [MaxHistory <Int32?>]:
+    [MaxLoginAttempts <Int32?>]:
+    [MinChangePeriodInDays <Int32?>]:
+    [MinLength <Int32?>]:
+    [NeedsLowercase <Boolean?>]:
+    [NeedsNumeric <Boolean?>]:
+    [NeedsSymbolic <Boolean?>]:
+    [NeedsUppercase <Boolean?>]:
+    [PasswordExpirationInDays <Int32?>]:
   [ShowIntro <Boolean?>]:
-  [SystemInsightEnableNewDarwin <Boolean?>]:
-  [SystemInsightEnableNewLinux <Boolean?>]:
-  [SystemInsightEnableNewWindows <Boolean?>]:
-  [SystemInsightEnabled <Boolean?>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
-  [UserPortalIdleSessionDurationMinutes <Int32?>]:
+  [UserPortal <IOrganizationsettingsputUserPortal>]:
+    [IdleSessionDurationMinutes <Int32?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md
 #>

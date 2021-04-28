@@ -102,9 +102,10 @@ BODY <ISystemuserputpost>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
-  [MfaConfigured <Boolean?>]:
-  [MfaExclusion <Boolean?>]:
-  [MfaExclusionUntil <DateTime?>]:
+  [Mfa <IMfa>]: mfa
+    [Configured <Boolean?>]:
+    [Exclusion <Boolean?>]:
+    [ExclusionUntil <DateTime?>]:
   [Middlename <String>]:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
@@ -119,6 +120,11 @@ BODY <ISystemuserputpost>:
   [Suspended <Boolean?>]:
   [UnixGuid <Int32?>]:
   [UnixUid <Int32?>]:
+
+MFA <IMfa>:
+  [Configured <Boolean?>]:
+  [Exclusion <Boolean?>]:
+  [ExclusionUntil <DateTime?>]:
 
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
   [Number <String>]:
@@ -298,21 +304,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${MfaConfigured},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${MfaExclusion},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.DateTime]
-    # .
-    ${MfaExclusionUntil},
+    [JumpCloud.SDK.V1.Models.IMfa]
+    # mfa
+    # To construct, see NOTES section for MFA properties and create a hash table.
+    ${Mfa},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
