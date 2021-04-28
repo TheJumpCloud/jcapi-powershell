@@ -14,9 +14,9 @@ Param(
             {
                 Throw "The Path argument must be a file. Folder paths are not allowed: $_"
             }
-            If ($_ -notmatch "(\.zip)")
+            If ($_ -notmatch "(test-module\.ps1)")
             {
-                Throw "The file specified in the path argument must be either of type zip: $_"
+                Throw "The file specified in the path argument must be test-module.ps1: $_"
             }
             Return $true
         })]$testModulePath
