@@ -128,6 +128,7 @@ commands:
   deploy-staging:
     steps:
       - run:
+          when: on_success
           name: Publishing to AWS CodeArtifact
           shell: pwsh.exe
           command: ./PublishToCodeArtifact.ps1
