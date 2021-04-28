@@ -6,15 +6,14 @@ workflows:
   build-sdks:
     jobs:
       - 'Build JumpCloud PowerShell SDKs'
-      # - deploy-staging:
-      #     name: Publishing to GitHub Packages
-      #     shell: pwsh.exe
-      #     command: |
-      #       $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-      #       $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-      #       dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
-      #     requires:
-      #       - 'Build JumpCloud PowerShell SDKs'
+      - deploy-staging:
+          name: Publishing to AWS CodeArtifact
+          shell: pwsh.exe
+          command: |
+            $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/bin/<< parameters.SDKName >>*.nupkg")).FullName
+            dotnet nuget push "$($NupkgPath)" --source CircleCI-Source
+          requires:
+            - 'Build JumpCloud PowerShell SDKs'
   build-sdks-nightly:
     triggers:
       - schedule:
@@ -65,6 +64,13 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
+      - run: 
+          name: Configure AWS CodeArtifact and NuGet
+          shell: pwsh.exe
+          command: |
+            Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
+            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json"
+            dotnet nuget add source $CARepoEndpoint --name CircleCI-Source --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken --username aws
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe

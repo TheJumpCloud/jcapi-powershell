@@ -15,6 +15,8 @@ ForEach ($RequiredModule In $RequiredModules)
     Import-Module -Name:($RequiredModule) -Force
 }
 Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
+Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
+Install-Module AWS.Tools.Common, AWS.Tools.CodeArtifact -Force
 # NPM Dependencies
 If ($env:CI -eq $false)
 {
