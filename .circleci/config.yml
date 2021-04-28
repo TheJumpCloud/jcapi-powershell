@@ -145,4 +145,6 @@ commands:
                   ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
-                path: SDKs/PowerShell/<< parameters.SDKName >>/test/results
+                path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
+            - store_artifacts:
+                path: ./SDKs/<< parameters.SDKName >>/bin/<< parameters.SDKName >>*.nupkg"
