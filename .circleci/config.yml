@@ -56,12 +56,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
-            ./SetupDependencies.ps1
-      - run: 
-          name: Configure AWS CodeArtifact and NuGet
-          shell: pwsh.exe
-          command: |
-            
+            ./SetupDependencies.ps1     
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
