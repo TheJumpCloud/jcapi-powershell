@@ -33,6 +33,24 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     # ./test-module.ps1 -Playback # Run once playback files have been created
     # ./test-module.ps1 -Live # Run to query against real API
     Invoke-Expression -Command:("$testModulePath -Live")
+    # Throw error if there were any failed tests
+    $PesterTestResultPath = (Get-ChildItem -Path:("$($testModulePath.Directory.FullName)/test/results")).FullName
+    If (Test-Path -Path:($PesterTestResultPath))
+    {
+        [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
+        If ([int]$PesterResults.'testsuites'.failures -gt 0)
+        {
+            Write-Error ("Test Failures: $($PesterResults.'testsuites'.failures)")
+        }
+        If ([int]$PesterResults.'testsuites'.errors -gt 0)
+        {
+            Write-Error ("Test Errors: $($PesterResults.'testsuites'.errors)")
+        }
+    }
+    Else
+    {
+        Write-Error ("Unable to find file path: $PesterTestResultPath")
+    }
 }
 Else
 {

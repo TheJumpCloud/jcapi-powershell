@@ -256,16 +256,3 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Remove-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id) -Id:((Get-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id)).id)
 }
 #endregion Clean Up
-# Throw error if there were any failed tests
-If (Test-Path -Path:($PesterTestResultPath))
-{
-    [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
-    If ([int]$PesterResults.'testsuites'.failures -gt 0)
-    {
-        Write-Error ("Test Failures: $($PesterResults.'testsuites'.failures)")
-    }
-    If ([int]$PesterResults.'testsuites'.errors -gt 0)
-    {
-        Write-Error ("Test Errors: $($PesterResults.'testsuites'.errors)")
-    }
-}
