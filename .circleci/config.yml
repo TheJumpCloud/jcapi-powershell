@@ -153,6 +153,7 @@ commands:
             equal: [true, << parameters.TestModule >>]
           steps:
             - run:
+                when: on_success
                 name: Testing '<< parameters.SDKName >>'
                 shell: pwsh.exe
                 command: |
