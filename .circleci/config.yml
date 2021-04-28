@@ -36,18 +36,18 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      # - build-test-pack:
-      #     SDKName: JumpCloud.SDK.V1
-      #     ManualModuleVersion: ''
-      #     BuildModuleOverride: true
-      #     RunApiTransform: true
-      #     TestModule: true
-      # - build-test-pack:
-      #     SDKName: JumpCloud.SDK.V2
-      #     ManualModuleVersion: ''
-      #     BuildModuleOverride: true
-      #     RunApiTransform: true
-      #     TestModule: true
+      - build-test-pack:
+          SDKName: JumpCloud.SDK.V1
+          ManualModuleVersion: ''
+          BuildModuleOverride: true
+          RunApiTransform: true
+          TestModule: true
+      - build-test-pack:
+          SDKName: JumpCloud.SDK.V2
+          ManualModuleVersion: ''
+          BuildModuleOverride: true
+          RunApiTransform: true
+          TestModule: true
       - commit
 commands:
   setup:
