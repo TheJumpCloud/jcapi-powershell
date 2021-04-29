@@ -10,16 +10,16 @@ build-sdks: &build-sdks
   - 'Build JumpCloud SDK V2':
       requires:
         - 'Build JumpCloud SDK V1'
-  - deploy-dev:
+  - deploy-CodeArtifact:
       type: approval
       requires:
         - 'Build JumpCloud SDK DirectoryInsights'
         - 'Build JumpCloud SDK V1'
         - 'Build JumpCloud SDK V2'
-  - deploy-prod:
+  - deploy-PSGallery:
       type: approval
       requires:
-        - 'deploy-dev'
+        - 'deploy-CodeArtifact'
         - 'Build JumpCloud SDK DirectoryInsights'
         - 'Build JumpCloud SDK V1'
         - 'Build JumpCloud SDK V2'
@@ -73,34 +73,34 @@ jobs:
           TestModule: true
       - commit:
           SDKName: JumpCloud.SDK.V2
-  deploy-dev:
+  deploy-CodeArtifact:
     executor: win/default
     steps:
       - attach_workspace:
           at: ./SDKs
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          environment: dev
+          source: CodeArtifact
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V1
-          environment: dev
+          source: CodeArtifact
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
-          environment: dev
-  deploy-prod:
+          source: CodeArtifact
+  deploy-PSGallery:
     executor: win/default
     steps:
       - attach_workspace:
           at: ./SDKs
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          environment: prod
+          source: PSGallery
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V1
-          environment: prod
+          source: PSGallery
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
-          environment: prod
+          source: PSGallery
 commands:
   setup:
     steps:
@@ -117,6 +117,14 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
+      - run:
+          name: Add nuget sources
+          shell: pwsh.exe
+          command: |
+            Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
+            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json"
+            dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery --api-key $env:NuGetApiKey
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
@@ -206,8 +214,8 @@ commands:
             git push origin << pipeline.git.branch >>
   pack:
     parameters:
-      environment:
-        description: Name of the environment to deploy to
+      source:
+        description: Name of the source to deploy to
         type: string
       SDKName:
         description: Name of the SDK to generate
@@ -222,11 +230,11 @@ commands:
             $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
             $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
             $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
-            $BuildVersion = If ('<< parameters.environment >>' -eq 'dev')
+            $BuildVersion = If ('<< parameters.source >>' -eq 'CodeArtifact')
             {
               "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
             }
-            ElseIf('<< parameters.environment >>' -eq 'prod')
+            ElseIf('<< parameters.source >>' -eq 'PSGallery')
             {
               $Psd1.ModuleVersion
             }
@@ -236,30 +244,20 @@ commands:
             dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName --verbosity Detailed
   deploy-nupkg:
     parameters:
-      environment:
-        description: Name of the environment to deploy to
+      source:
+        description: Name of the source to deploy to
         type: string
       SDKName:
         description: Name of the SDK to generate
         type: string
     steps:
       - pack:
-          environment: << parameters.environment >>
+          source: << parameters.source >>
           SDKName: << parameters.SDKName >>
       - run:
           # when: on_success
-          name: Publishing to "<< parameters.environment >>" repo
+          name: Publishing to "<< parameters.source >>" repo
           shell: pwsh.exe
           command: |
-            If ('<< parameters.environment >>' -eq 'dev')
-            {
-              $source = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-              $apiKey = $env:AWSAccessKey
-            }
-            ElseIf ('<< parameters.environment >>' -eq 'prod')
-            {
-              $source = "https://www.powershellgallery.com/api/v2"
-              $apiKey = $env:NuGetApiKey
-            }
             $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-            Write-Host ("dotnet nuget push $NupkgPath --source $source --api-key $apiKey")
+            dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $apiKey
