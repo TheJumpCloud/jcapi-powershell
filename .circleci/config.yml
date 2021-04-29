@@ -116,8 +116,8 @@ jobs:
   deploy-staging:
     executor: win/default
     steps:
-      - restore_cache:
-          key: SDK_Cache
+      - attach_workspace:
+          at: ./SDKs
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           environment: staging
@@ -130,8 +130,8 @@ jobs:
   deploy-prod:
     executor: win/default
     steps:
-      - restore_cache:
-          key: SDK_Cache
+      - attach_workspace:
+          at: ./SDKs
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           environment: prod
@@ -199,8 +199,8 @@ commands:
         type: boolean
         default: true
     steps:
-      - restore_cache:
-          key: SDK_Cache
+      - attach_workspace:
+          at: ./SDKs
       - run:
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
@@ -230,8 +230,8 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
-      - save_cache:
-          key: SDK_Cache
+      - persist_to_workspace:
+          root: ./SDKs
           paths:
             - ./SDKs
   commit:
