@@ -26,16 +26,16 @@ workflows:
             - 'Build JumpCloud.SDK.DirectoryInsights'
             - 'Build JumpCloud.SDK.V1'
             - 'Build JumpCloud.SDK.V2'
-  build-sdks-nightly:
-    triggers:
-      - schedule:
-          cron: '0 0 * * *' # Run Nightly
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - 'Build JumpCloud PowerShell SDKs'
+  # build-sdks-nightly:
+  #   triggers:
+  #     - schedule:
+  #         cron: '0 0 * * *' # Run Nightly
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
+  #   jobs:
+  #     - 'Build JumpCloud PowerShell SDKs'
 jobs:
   # 'Build JumpCloud PowerShell SDKs':
   #   executor: win/default
