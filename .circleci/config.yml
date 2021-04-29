@@ -118,6 +118,7 @@ commands:
             $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
             $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
             $nuspecContent.package.metadata.version = $BuildVersion
+            $nuspecContent.save($nuspecFilePath)
             dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName --verbosity Detailed
       - when:
           condition:
