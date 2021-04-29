@@ -5,7 +5,14 @@ workflows:
   version: 2
   build-sdks:
     jobs:
-      - 'Build JumpCloud PowerShell SDKs'
+      # - 'Build JumpCloud PowerShell SDKs'
+      - 'Build JumpCloud.SDK.DirectoryInsights'
+      - 'Build JumpCloud.SDK.V1':
+          requires:
+            - 'Build JumpCloud.SDK.DirectoryInsights'
+      - 'Build JumpCloud.SDK.V2':
+          requires:
+            - 'Build JumpCloud.SDK.V1'
       - deploy-staging:
           type: approval
           requires:
@@ -26,7 +33,30 @@ workflows:
     jobs:
       - 'Build JumpCloud PowerShell SDKs'
 jobs:
-  'Build JumpCloud PowerShell SDKs':
+  # 'Build JumpCloud PowerShell SDKs':
+  #   executor: win/default
+  #   steps:
+  #     - setup
+  #     - build-test-pack:
+  #         SDKName: JumpCloud.SDK.DirectoryInsights
+  #         ManualModuleVersion: ''
+  #         BuildModuleOverride: true
+  #         RunApiTransform: true
+  #         TestModule: true
+  #     - build-test-pack:
+  #         SDKName: JumpCloud.SDK.V1
+  #         ManualModuleVersion: ''
+  #         BuildModuleOverride: true
+  #         RunApiTransform: true
+  #         TestModule: true
+  #     - build-test-pack:
+  #         SDKName: JumpCloud.SDK.V2
+  #         ManualModuleVersion: ''
+  #         BuildModuleOverride: true
+  #         RunApiTransform: true
+  #         TestModule: true
+  #     - commit
+  'Build JumpCloud.SDK.DirectoryInsights':
     executor: win/default
     steps:
       - setup
@@ -36,12 +66,22 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
+      - commit
+  'Build JumpCloud.SDK.V1':
+    executor: win/default
+    steps:
+      - setup
       - build-test-pack:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
+      - commit
+  'Build JumpCloud.SDK.V2':
+    executor: win/default
+    steps:
+      - setup
       - build-test-pack:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
@@ -54,24 +94,29 @@ jobs:
     steps:
       - restore_cache:
           key: SDK_Cache
-      - run:
-          name: Publishing to AWS CodeArtifact (DEV)
-          shell: pwsh.exe
-          command: |
-            Write-Host ("Publishing to AWS CodeArtifact (DEV)")
-          # $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-          # $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-          # dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          environment: staging
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.V1
+          environment: staging
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.V2
+          environment: staging
   deploy-prod:
     executor: win/default
     steps:
       - restore_cache:
           key: SDK_Cache
-      - run:
-          name: Publishing to PowerShell Gallery (PROD)
-          shell: pwsh.exe
-          command: |
-            Write-Host ("Publishing to PowerShell Gallery (PROD)")
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          environment: prod
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.V1
+          environment: prod
+      - deployNupkg:
+          SDKName: JumpCloud.SDK.V2
+          environment: prod
 commands:
   setup:
     steps:
@@ -181,17 +226,43 @@ commands:
             git status
             git commit -m "Updating PowerShell SDKs;[skip ci]"
             git push origin << pipeline.git.branch >>
-  # deploy-prod:
-  #   parameters:
-  #     SDKName:
-  #       description: Name of the SDK to generate
-  #       type: string
-  #   steps:
-  #     - run:
-  #         name: Deploy '<< parameters.SDKName >>' to PowerShell Gallery (Prod)
-  #         shell: pwsh.exe
-  #         command: |
-  #           $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-  #           # dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"
-  #           Write-Host ("Publish-Module -Repository:('PSGallery') -Path:($extractedModulePath) -NuGetApiKey:($env:NuGetApiKey) -SkipAutomaticTags -Force -Verbose")
-  #           Write-Host ("dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"")
+  deployNupkg:
+    parameters:
+      environment:
+        description: Name of the environment to deploy to
+        type: string
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - when:
+          condition:
+            equal: [staging, << parameters.environment >>]
+          steps:
+            - run:
+                when: on_success
+                name: Publishing to AWS CodeArtifact (DEV)
+                shell: pwsh.exe
+                command: |
+                  Write-Host ("Publishing to AWS CodeArtifact (DEV)")
+                # $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
+                # $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
+                # dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
+      - when:
+          condition:
+            equal: [prod, << parameters.environment >>]
+          steps:
+            - run:
+                when: on_success
+                name: Publishing to PowerShell Gallery (PROD)
+                shell: pwsh.exe
+                command: |
+                  Write-Host ("Publishing to PowerShell Gallery (PROD)")
+            # - run:
+            #     name: Deploy '<< parameters.SDKName >>' to PowerShell Gallery (Prod)
+            #     shell: pwsh.exe
+            #     command: |
+            #       $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
+            #       # dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"
+            #       Write-Host ("Publish-Module -Repository:('PSGallery') -Path:($extractedModulePath) -NuGetApiKey:($env:NuGetApiKey) -SkipAutomaticTags -Force -Verbose")
+            #       Write-Host ("dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"")
