@@ -12,10 +12,6 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkEvent' {
-    It 'Testing' {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
     It 'GetExpanded' {
         { Get-JcSdkEvent -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw
     }
