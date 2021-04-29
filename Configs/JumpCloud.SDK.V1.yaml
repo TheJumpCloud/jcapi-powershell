@@ -40,6 +40,5 @@ directive:
   - where:
       prefix: JcSdk
     hide: true
-
 # Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-inlining-threshold: 0
+# inlining-threshold: 0

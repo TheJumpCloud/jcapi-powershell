@@ -167,16 +167,6 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
-      - run:
-          name: Packing '<< parameters.SDKName >>'
-          shell: pwsh.exe
-          command: |
-            $ModuleName = '<< parameters.SDKName >>'
-            $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
-            $BuildVersion = "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
-            $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
-            $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
-            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName /p:Version=$BuildVersion --verbosity Detailed
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -214,6 +204,36 @@ commands:
             git status
             git commit -m "Updating PowerShell SDK: << parameters.SDKName >>;[skip ci]"
             git push origin << pipeline.git.branch >>
+  pack:
+    parameters:
+      environment:
+        description: Name of the environment to deploy to
+        type: string
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - run:
+          name: Packing '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ModuleName = '<< parameters.SDKName >>'
+            $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+            $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
+            $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+            $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+            $BuildVersion = If ('<< parameters.environment >>' -eq 'dev')
+            {
+              "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
+            }
+            ElseIf('<< parameters.environment >>' -eq 'prod')
+            {
+              $Psd1.ModuleVersion
+            }
+            $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+            $nuspecContent.package.metadata.version = $BuildVersion
+            $nuspecContent.save($nuspecFilePath)
+            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName --verbosity Detailed
   deploy-nupkg:
     parameters:
       environment:
@@ -223,6 +243,9 @@ commands:
         description: Name of the SDK to generate
         type: string
     steps:
+      - pack:
+          environment: << parameters.environment >>
+          SDKName: << parameters.SDKName >>
       - run:
           # when: on_success
           name: Publishing to "<< parameters.environment >>" repo
