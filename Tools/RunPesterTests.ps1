@@ -118,10 +118,10 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey; }) -Body:($global:PesterDefActiveDirectory | ConvertTo-Json) -ContentType:('application/json') -UseBasicParsing
     # Create a Authentication Policy
     $global:PesterDefAuthenticationPolicy = @{
-        Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        EffectAction        = 'allow'
-        TargetResources     = @{"type" = "user_portal" }
-        UserGroupInclusions = $null # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
+        Name            = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        EffectAction    = 'allow'
+        TargetResources = @{"type" = "user_portal" }
+        UserGroup       = @{Inclusions = $null } # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
     }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{
@@ -156,16 +156,16 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Create a Policy
     $global:PesterDefPolicy = Get-Random @(
         @{
-            Name       = "Pester_Windows - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -First 1).Id
+            Name     = "Pester_Windows - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            Template = @{ Id = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -First 1).Id }
         },
         @{
-            Name       = "Pester_Linux - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -First 1).Id
+            Name     = "Pester_Linux - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            Template = @{ Id = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -First 1).Id }
         },
         @{
-            Name       = "Pester_Darwin - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-            TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -First 1).Id
+            Name     = "Pester_Darwin - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+            Template = @{ Id = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -First 1).Id }
         }
     )
     # Create a Software App
