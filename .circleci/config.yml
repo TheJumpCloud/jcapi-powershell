@@ -10,6 +10,11 @@ build-sdks: &build-sdks
   - 'Build JumpCloud SDK V2':
       requires:
         - 'Build JumpCloud SDK V1'
+  - Commit Changes:
+      requires:
+        - 'Build JumpCloud SDK DirectoryInsights'
+        - 'Build JumpCloud SDK V1'
+        - 'Build JumpCloud SDK V2'
   - Deploy To CodeArtifact:
       type: approval
       requires:
@@ -47,8 +52,6 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      - commit:
-          SDKName: JumpCloud.SDK.DirectoryInsights
   'Build JumpCloud SDK V1':
     executor: win/default
     steps:
@@ -59,8 +62,6 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      - commit:
-          SDKName: JumpCloud.SDK.V1
   'Build JumpCloud SDK V2':
     executor: win/default
     steps:
@@ -71,8 +72,11 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
+  Commit Changes:
+    executor: win/default
+    steps:
       - commit:
-          SDKName: JumpCloud.SDK.V2
+          SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   Deploy To CodeArtifact:
     executor: win/default
     steps:
@@ -198,6 +202,8 @@ commands:
         description: Name of the SDK to generate
         type: string
     steps:
+      - attach_workspace:
+          at: ./SDKs
       - run:
           when: on_success
           name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
