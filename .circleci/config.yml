@@ -3,31 +3,31 @@ orbs:
   win: circleci/windows@2.2.0
 # YAML Anchors
 build-sdks: &build-sdks
-  - 'Build JumpCloud SDK DirectoryInsights'
-  - 'Build JumpCloud SDK V1':
+  - 'Build Test JumpCloud SDK DirectoryInsights'
+  - 'Build Test JumpCloud SDK V1':
       requires:
-        - 'Build JumpCloud SDK DirectoryInsights'
-  - 'Build JumpCloud SDK V2':
+        - 'Build Test JumpCloud SDK DirectoryInsights'
+  - 'Build Test JumpCloud SDK V2':
       requires:
-        - 'Build JumpCloud SDK V1'
+        - 'Build Test JumpCloud SDK V1'
   - Commit Changes:
       requires:
-        - 'Build JumpCloud SDK DirectoryInsights'
-        - 'Build JumpCloud SDK V1'
-        - 'Build JumpCloud SDK V2'
-  - Deploy To CodeArtifact:
+        - 'Build Test JumpCloud SDK DirectoryInsights'
+        - 'Build Test JumpCloud SDK V1'
+        - 'Build Test JumpCloud SDK V2'
+  - Pack Deploy To CodeArtifact:
       type: approval
       requires:
-        - 'Build JumpCloud SDK DirectoryInsights'
-        - 'Build JumpCloud SDK V1'
-        - 'Build JumpCloud SDK V2'
-  - Deploy To PSGallery:
+        - 'Build Test JumpCloud SDK DirectoryInsights'
+        - 'Build Test JumpCloud SDK V1'
+        - 'Build Test JumpCloud SDK V2'
+  - Pack Deploy To PSGallery:
       type: approval
       requires:
-        - 'Deploy To CodeArtifact'
-        - 'Build JumpCloud SDK DirectoryInsights'
-        - 'Build JumpCloud SDK V1'
-        - 'Build JumpCloud SDK V2'
+        - 'Build Test JumpCloud SDK DirectoryInsights'
+        - 'Build Test JumpCloud SDK V1'
+        - 'Build Test JumpCloud SDK V2'
+        - 'Pack Deploy To CodeArtifact'
 workflows:
   version: 2
   ci:
@@ -42,31 +42,31 @@ workflows:
                 - master
     jobs: *build-sdks
 jobs:
-  'Build JumpCloud SDK DirectoryInsights':
+  'Build Test JumpCloud SDK DirectoryInsights':
     executor: win/default
     steps:
       - setup
-      - build-test-pack:
+      - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-  'Build JumpCloud SDK V1':
+  'Build Test JumpCloud SDK V1':
     executor: win/default
     steps:
       - setup
-      - build-test-pack:
+      - build-test:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-  'Build JumpCloud SDK V2':
+  'Build Test JumpCloud SDK V2':
     executor: win/default
     steps:
       - setup
-      - build-test-pack:
+      - build-test:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
           BuildModuleOverride: true
@@ -77,7 +77,7 @@ jobs:
     steps:
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
-  Deploy To CodeArtifact:
+  Pack Deploy To CodeArtifact:
     executor: win/default
     steps:
       - attach_workspace:
@@ -91,7 +91,7 @@ jobs:
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
           source: CodeArtifact
-  Deploy To PSGallery:
+  Pack Deploy To PSGallery:
     executor: win/default
     steps:
       - attach_workspace:
@@ -149,7 +149,7 @@ commands:
             Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
             Write-Host ("---------------------------------------------------------------------------------------")
             Get-Variable | Format-Table
-  build-test-pack:
+  build-test:
     parameters:
       SDKName:
         description: Name of the SDK to generate
