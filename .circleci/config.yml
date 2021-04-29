@@ -16,12 +16,16 @@ workflows:
       - deploy-staging:
           type: approval
           requires:
-            - 'Build JumpCloud PowerShell SDKs'
+            - 'Build JumpCloud.SDK.DirectoryInsights'
+            - 'Build JumpCloud.SDK.V1'
+            - 'Build JumpCloud.SDK.V2'
       - deploy-prod:
           type: approval
           requires:
-            - 'Build JumpCloud PowerShell SDKs'
             - 'deploy-staging'
+            - 'Build JumpCloud.SDK.DirectoryInsights'
+            - 'Build JumpCloud.SDK.V1'
+            - 'Build JumpCloud.SDK.V2'
   build-sdks-nightly:
     triggers:
       - schedule:
