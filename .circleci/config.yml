@@ -231,7 +231,7 @@ commands:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
       - persist_to_workspace:
-          root: ./SDKs
+          root: .
           paths:
             - ./SDKs
   commit:
