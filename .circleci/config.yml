@@ -6,26 +6,26 @@ workflows:
   build-sdks:
     jobs:
       # - 'Build JumpCloud PowerShell SDKs'
-      - 'Build JumpCloud.SDK.DirectoryInsights'
-      - 'Build JumpCloud.SDK.V1':
+      - 'Build JumpCloud SDK DirectoryInsights'
+      - 'Build JumpCloud SDK V1':
           requires:
-            - 'Build JumpCloud.SDK.DirectoryInsights'
-      - 'Build JumpCloud.SDK.V2':
+            - 'Build JumpCloud SDK DirectoryInsights'
+      - 'Build JumpCloud SDK V2':
           requires:
-            - 'Build JumpCloud.SDK.V1'
+            - 'Build JumpCloud SDK V1'
       - deploy-staging:
           type: approval
           requires:
-            - 'Build JumpCloud.SDK.DirectoryInsights'
-            - 'Build JumpCloud.SDK.V1'
-            - 'Build JumpCloud.SDK.V2'
+            - 'Build JumpCloud SDK DirectoryInsights'
+            - 'Build JumpCloud SDK V1'
+            - 'Build JumpCloud SDK V2'
       - deploy-prod:
           type: approval
           requires:
             - 'deploy-staging'
-            - 'Build JumpCloud.SDK.DirectoryInsights'
-            - 'Build JumpCloud.SDK.V1'
-            - 'Build JumpCloud.SDK.V2'
+            - 'Build JumpCloud SDK DirectoryInsights'
+            - 'Build JumpCloud SDK V1'
+            - 'Build JumpCloud SDK V2'
   # build-sdks-nightly:
   #   triggers:
   #     - schedule:
@@ -60,7 +60,7 @@ jobs:
   #         RunApiTransform: true
   #         TestModule: true
   #     - commit
-  'Build JumpCloud.SDK.DirectoryInsights':
+  'Build JumpCloud SDK DirectoryInsights':
     executor: win/default
     steps:
       - setup
@@ -71,7 +71,7 @@ jobs:
           RunApiTransform: true
           TestModule: true
       - commit
-  'Build JumpCloud.SDK.V1':
+  'Build JumpCloud SDK V1':
     executor: win/default
     steps:
       - setup
@@ -82,7 +82,7 @@ jobs:
           RunApiTransform: true
           TestModule: true
       - commit
-  'Build JumpCloud.SDK.V2':
+  'Build JumpCloud SDK V2':
     executor: win/default
     steps:
       - setup
