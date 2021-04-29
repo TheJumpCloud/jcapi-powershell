@@ -75,7 +75,8 @@ jobs:
   #         BuildModuleOverride: true
   #         RunApiTransform: true
   #         TestModule: true
-  #     - commit
+  #     - commit:
+  #         SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   'Build JumpCloud SDK DirectoryInsights':
     executor: win/default
     steps:
@@ -86,7 +87,8 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      - commit
+      - commit:
+          SDKName: JumpCloud.SDK.DirectoryInsights
   'Build JumpCloud SDK V1':
     executor: win/default
     steps:
@@ -97,7 +99,8 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      - commit
+      - commit:
+          SDKName: JumpCloud.SDK.V1
   'Build JumpCloud SDK V2':
     executor: win/default
     steps:
@@ -108,7 +111,8 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-      - commit
+      - commit:
+          SDKName: JumpCloud.SDK.V2
   deploy-staging:
     executor: win/default
     steps:
@@ -231,6 +235,10 @@ commands:
           paths:
             - ./SDKs
   commit:
+    parameters:
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
     steps:
       - run:
           when: on_success
@@ -243,7 +251,7 @@ commands:
             git config user.name "$UserName"
             git add -A
             git status
-            git commit -m "Updating PowerShell SDKs;[skip ci]"
+            git commit -m "Updating PowerShell SDK: << parameters.SDKName >>;[skip ci]"
             git push origin << pipeline.git.branch >>
   deploy-nupkg:
     parameters:
