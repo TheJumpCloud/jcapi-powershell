@@ -98,13 +98,13 @@ jobs:
     steps:
       - restore_cache:
           key: SDK_Cache
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           environment: staging
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.V1
           environment: staging
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
           environment: staging
   deploy-prod:
@@ -112,13 +112,13 @@ jobs:
     steps:
       - restore_cache:
           key: SDK_Cache
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           environment: prod
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.V1
           environment: prod
-      - deployNupkg:
+      - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
           environment: prod
 commands:
@@ -230,7 +230,7 @@ commands:
             git status
             git commit -m "Updating PowerShell SDKs;[skip ci]"
             git push origin << pipeline.git.branch >>
-  deployNupkg:
+  deploy-nupkg:
     parameters:
       environment:
         description: Name of the environment to deploy to
