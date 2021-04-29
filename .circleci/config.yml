@@ -253,10 +253,10 @@ commands:
             $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
             git config user.email "$UserEmail"
             git config user.name "$UserName"
+            git pull
             git add -A
             git status
             git commit -m "Updating PowerShell SDK: << parameters.SDKName >>;[skip ci]"
-            git pull
             git push origin << pipeline.git.branch >>
   deploy-nupkg:
     parameters:
