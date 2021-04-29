@@ -252,6 +252,7 @@ commands:
             git add -A
             git status
             git commit -m "Updating PowerShell SDK: << parameters.SDKName >>;[skip ci]"
+            git pull
             git push origin << pipeline.git.branch >>
   deploy-nupkg:
     parameters:
