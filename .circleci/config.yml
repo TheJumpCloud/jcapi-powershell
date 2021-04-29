@@ -182,7 +182,6 @@ commands:
       - restore_cache:
           key: SDK_Cache
       - run:
-          when: always
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
           command: |
