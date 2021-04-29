@@ -115,7 +115,10 @@ commands:
             $BuildVersion = "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
             $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
             $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
-            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName /p:Version=$BuildVersion --verbosity Detailed
+            $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+            $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+            $nuspecContent.package.metadata.version = $BuildVersion
+            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName --verbosity Detailed
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]

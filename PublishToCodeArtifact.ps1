@@ -7,7 +7,7 @@ $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region 
 dotnet nuget add source $CARepoEndpoint --name CircleCI-Source --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken --username aws
 
 ForEach ($SDK in $SDKs){
-    $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/$($SDK)/bin/$($SDK)*.nupkg")).FullName
+    $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/$($SDK)/bin/nupkg/$($SDK)*.nupkg")).FullName
     dotnet nuget push "$($NupkgPath)" --source CircleCI-Source
 }
 
