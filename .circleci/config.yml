@@ -124,7 +124,7 @@ commands:
             Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken
-            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery --api-key $env:NuGetApiKey
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
@@ -260,4 +260,6 @@ commands:
           shell: pwsh.exe
           command: |
             $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-            dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $apiKey
+            If('<< parameters.source >>' -eq 'CodeArtifact'){dotnet nuget push $NupkgPath --source << parameters.source >>}
+            ElseIf('<< parameters.source >>' -eq 'PSGallery'){dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $env:NuGetApiKey}
+            Else {Write-Error "Unknown source value: << parameters.source >>"}
