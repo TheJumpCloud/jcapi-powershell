@@ -6,15 +6,15 @@ workflows:
   build-sdks:
     jobs:
       - 'Build JumpCloud PowerShell SDKs'
-      # - deploy-staging:
-      #     name: Publishing to GitHub Packages
-      #     shell: pwsh.exe
-      #     command: |
-      #       $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-      #       $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-      #       dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
-      #     requires:
-      #       - 'Build JumpCloud PowerShell SDKs'
+      - deploy-staging:
+          type: approval
+          requires:
+            - 'Build JumpCloud PowerShell SDKs'
+      - deploy-prod:
+          type: approval
+          requires:
+            - 'Build JumpCloud PowerShell SDKs'
+            - 'deploy-staging'
   build-sdks-nightly:
     triggers:
       - schedule:
@@ -49,8 +49,29 @@ jobs:
           RunApiTransform: true
           TestModule: true
       - commit
-      # - deploy:
-      #     SDKName: JumpCloud.SDK.V2
+  deploy-staging:
+    executor: win/default
+    steps:
+      - restore_cache:
+          key: SDK_Cache
+      - run:
+          name: Publishing to AWS CodeArtifact (DEV)
+          shell: pwsh.exe
+          command: |
+            Write-Host ("Publishing to AWS CodeArtifact (DEV)")
+          # $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
+          # $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
+          # dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
+  deploy-prod:
+    executor: win/default
+    steps:
+      - restore_cache:
+          key: SDK_Cache
+      - run:
+          name: Publishing to PowerShell Gallery (PROD)
+          shell: pwsh.exe
+          command: |
+            Write-Host ("Publishing to PowerShell Gallery (PROD)")
 commands:
   setup:
     steps:
@@ -109,6 +130,8 @@ commands:
         type: boolean
         default: true
     steps:
+      - restore_cache:
+          key: SDK_Cache
       - run:
           when: always
           name: Building '<< parameters.SDKName >>'
@@ -139,6 +162,10 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
+      - save_cache:
+          key: SDK_Cache
+          paths:
+            - ./SDKs
   commit:
     steps:
       - run:
@@ -154,14 +181,14 @@ commands:
             git status
             git commit -m "Updating PowerShell SDKs;[skip ci]"
             git push origin << pipeline.git.branch >>
-  # deploy:
+  # deploy-prod:
   #   parameters:
   #     SDKName:
   #       description: Name of the SDK to generate
   #       type: string
   #   steps:
   #     - run:
-  #         name: Deploy 'JumpCloud.SDK.DirectoryInsights' to PowerShell Gallery (Prod)
+  #         name: Deploy '<< parameters.SDKName >>' to PowerShell Gallery (Prod)
   #         shell: pwsh.exe
   #         command: |
   #           $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
