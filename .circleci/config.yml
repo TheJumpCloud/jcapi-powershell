@@ -1,33 +1,41 @@
 version: 2.1
 orbs:
   win: circleci/windows@2.2.0
+# YAML Anchors
+build-sdks: &build-sdks
+  - 'Build JumpCloud SDK DirectoryInsights'
+  - 'Build JumpCloud SDK V1':
+      requires:
+        - 'Build JumpCloud SDK DirectoryInsights'
+  - 'Build JumpCloud SDK V2':
+      requires:
+        - 'Build JumpCloud SDK V1'
+  - deploy-dev:
+      type: approval
+      requires:
+        - 'Build JumpCloud SDK DirectoryInsights'
+        - 'Build JumpCloud SDK V1'
+        - 'Build JumpCloud SDK V2'
+  - deploy-prod:
+      type: approval
+      requires:
+        - 'deploy-dev'
+        - 'Build JumpCloud SDK DirectoryInsights'
+        - 'Build JumpCloud SDK V1'
+        - 'Build JumpCloud SDK V2'
 workflows:
   version: 2
-  build-sdks:
+  ci:
+    jobs: *build-sdks
+  ci-nightly:
     triggers:
       - schedule:
           cron: '0 0 * * *' # Run at midnight
-    jobs:
-      # - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V1' #:
-      #     requires:
-      #       - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V2':
-          requires:
-            - 'Build JumpCloud SDK V1'
-      - deploy-dev:
-          type: approval
-          requires:
-            # - 'Build JumpCloud SDK DirectoryInsights'
-            - 'Build JumpCloud SDK V1'
-            - 'Build JumpCloud SDK V2'
-      - deploy-prod:
-          type: approval
-          requires:
-            - 'deploy-dev'
-            # - 'Build JumpCloud SDK DirectoryInsights'
-            - 'Build JumpCloud SDK V1'
-            - 'Build JumpCloud SDK V2'
+          filters:
+            branches:
+              only:
+                - master
+    jobs: *build-sdks
 jobs:
   'Build JumpCloud SDK DirectoryInsights':
     executor: win/default
