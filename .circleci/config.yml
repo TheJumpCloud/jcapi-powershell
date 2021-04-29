@@ -193,7 +193,7 @@ commands:
       - persist_to_workspace:
           root: ./SDKs
           paths:
-            - ./SDKs
+            - .
   commit:
     parameters:
       SDKName:
@@ -223,34 +223,20 @@ commands:
         description: Name of the SDK to generate
         type: string
     steps:
-      - when:
-          condition:
-            equal: [dev, << parameters.environment >>]
-          steps:
-            - run:
-                # when: on_success
-                name: Publishing to AWS CodeArtifact (DEV)
-                shell: pwsh.exe
-                command: |
-                  Write-Host ("Publishing to AWS CodeArtifact (DEV)")
-                # $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-                # $GitHubPackagesURL = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
-                # dotnet nuget push "$NupkgPath" --source "$GitHubPackagesURL" --api-key "$($env:GH_TOKEN)"
-      - when:
-          condition:
-            equal: [prod, << parameters.environment >>]
-          steps:
-            - run:
-                # when: on_success
-                name: Publishing to PowerShell Gallery (PROD)
-                shell: pwsh.exe
-                command: |
-                  Write-Host ("Publishing to PowerShell Gallery (PROD)")
-            # - run:
-            #     name: Deploy '<< parameters.SDKName >>' to PowerShell Gallery (Prod)
-            #     shell: pwsh.exe
-            #     command: |
-            #       $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
-            #       # dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"
-            #       Write-Host ("Publish-Module -Repository:('PSGallery') -Path:($extractedModulePath) -NuGetApiKey:($env:NuGetApiKey) -SkipAutomaticTags -Force -Verbose")
-            #       Write-Host ("dotnet nuget push "$NupkgPath" --source "https://www.powershellgallery.com/api/v2" --api-key "$env:NuGetApiKey"")
+      - run:
+          # when: on_success
+          name: Publishing to "<< parameters.environment >>" repo
+          shell: pwsh.exe
+          command: |
+            If ('<< parameters.environment >>' -eq 'dev')
+            {
+              $source = "https://nuget.pkg.github.com/$($env:CIRCLE_PROJECT_USERNAME)/$($env:CIRCLE_PROJECT_REPONAME)/index.json"
+              $apiKey = $env:AWSAccessKey
+            }
+            ElseIf ('<< parameters.environment >>' -eq 'prod')
+            {
+              $source = "https://www.powershellgallery.com/api/v2"
+              $apiKey = $env:NuGetApiKey
+            }
+            $NupkgPath = (Get-ChildItem -Path:(".\SDKs\<< parameters.SDKName >>\bin\<< parameters.SDKName >>*.nupkg")).FullName
+            Write-Host ("dotnet nuget push $NupkgPath --source $source --api-key $apiKey")
