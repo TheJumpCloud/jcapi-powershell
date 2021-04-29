@@ -4,83 +4,31 @@ orbs:
 workflows:
   version: 2
   build-sdks:
-    jobs:
-      # - 'Build JumpCloud PowerShell SDKs'
-      - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V1':
-          requires:
-            - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V2':
-          requires:
-            - 'Build JumpCloud SDK V1'
-      - deploy-dev:
-          type: approval
-          requires:
-            - 'Build JumpCloud SDK DirectoryInsights'
-            - 'Build JumpCloud SDK V1'
-            - 'Build JumpCloud SDK V2'
-      - deploy-prod:
-          type: approval
-          requires:
-            - 'deploy-dev'
-            - 'Build JumpCloud SDK DirectoryInsights'
-            - 'Build JumpCloud SDK V1'
-            - 'Build JumpCloud SDK V2'
-  build-sdks-nightly:
     triggers:
       - schedule:
           cron: '0 0 * * *' # Run at midnight
-          filters:
-            branches:
-              only:
-                - master
     jobs:
-      # - 'Build JumpCloud PowerShell SDKs'
-      - 'Build JumpCloud SDK DirectoryInsights'
-      - 'Build JumpCloud SDK V1':
-          requires:
-            - 'Build JumpCloud SDK DirectoryInsights'
+      # - 'Build JumpCloud SDK DirectoryInsights'
+      - 'Build JumpCloud SDK V1' #:
+      #     requires:
+      #       - 'Build JumpCloud SDK DirectoryInsights'
       - 'Build JumpCloud SDK V2':
           requires:
             - 'Build JumpCloud SDK V1'
       - deploy-dev:
           type: approval
           requires:
-            - 'Build JumpCloud SDK DirectoryInsights'
+            # - 'Build JumpCloud SDK DirectoryInsights'
             - 'Build JumpCloud SDK V1'
             - 'Build JumpCloud SDK V2'
       - deploy-prod:
           type: approval
           requires:
             - 'deploy-dev'
-            - 'Build JumpCloud SDK DirectoryInsights'
+            # - 'Build JumpCloud SDK DirectoryInsights'
             - 'Build JumpCloud SDK V1'
             - 'Build JumpCloud SDK V2'
 jobs:
-  # 'Build JumpCloud PowerShell SDKs':
-  #   executor: win/default
-  #   steps:
-  #     - setup
-  #     - build-test-pack:
-  #         SDKName: JumpCloud.SDK.DirectoryInsights
-  #         ManualModuleVersion: ''
-  #         BuildModuleOverride: true
-  #         RunApiTransform: true
-  #         TestModule: true
-  #     - build-test-pack:
-  #         SDKName: JumpCloud.SDK.V1
-  #         ManualModuleVersion: ''
-  #         BuildModuleOverride: true
-  #         RunApiTransform: true
-  #         TestModule: true
-  #     - build-test-pack:
-  #         SDKName: JumpCloud.SDK.V2
-  #         ManualModuleVersion: ''
-  #         BuildModuleOverride: true
-  #         RunApiTransform: true
-  #         TestModule: true
-  #     - commit:
-  #         SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   'Build JumpCloud SDK DirectoryInsights':
     executor: win/default
     steps:
@@ -235,7 +183,7 @@ commands:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
       - persist_to_workspace:
-          root: .
+          root: ./SDKs
           paths:
             - ./SDKs
   commit:
