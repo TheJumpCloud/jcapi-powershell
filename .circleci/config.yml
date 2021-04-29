@@ -106,6 +106,16 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+      - run:
+          name: Packing '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ModuleName = '<< parameters.SDKName >>'
+            $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+            $BuildVersion = "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
+            $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
+            $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName /p:Version=$BuildVersion --verbosity Detailed
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
