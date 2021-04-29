@@ -10,16 +10,16 @@ build-sdks: &build-sdks
   - 'Build JumpCloud SDK V2':
       requires:
         - 'Build JumpCloud SDK V1'
-  - deploy-CodeArtifact:
+  - Deploy To CodeArtifact:
       type: approval
       requires:
         - 'Build JumpCloud SDK DirectoryInsights'
         - 'Build JumpCloud SDK V1'
         - 'Build JumpCloud SDK V2'
-  - deploy-PSGallery:
+  - Deploy To PSGallery:
       type: approval
       requires:
-        - 'deploy-CodeArtifact'
+        - 'Deploy To CodeArtifact'
         - 'Build JumpCloud SDK DirectoryInsights'
         - 'Build JumpCloud SDK V1'
         - 'Build JumpCloud SDK V2'
@@ -73,7 +73,7 @@ jobs:
           TestModule: true
       - commit:
           SDKName: JumpCloud.SDK.V2
-  deploy-CodeArtifact:
+  Deploy To CodeArtifact:
     executor: win/default
     steps:
       - attach_workspace:
@@ -87,7 +87,7 @@ jobs:
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
           source: CodeArtifact
-  deploy-PSGallery:
+  Deploy To PSGallery:
     executor: win/default
     steps:
       - attach_workspace:
