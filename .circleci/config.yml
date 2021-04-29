@@ -241,7 +241,7 @@ commands:
             equal: [staging, << parameters.environment >>]
           steps:
             - run:
-                when: on_success
+                # when: on_success
                 name: Publishing to AWS CodeArtifact (DEV)
                 shell: pwsh.exe
                 command: |
@@ -254,7 +254,7 @@ commands:
             equal: [prod, << parameters.environment >>]
           steps:
             - run:
-                when: on_success
+                # when: on_success
                 name: Publishing to PowerShell Gallery (PROD)
                 shell: pwsh.exe
                 command: |
