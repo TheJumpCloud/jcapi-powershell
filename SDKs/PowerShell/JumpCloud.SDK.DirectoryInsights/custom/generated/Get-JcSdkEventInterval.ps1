@@ -27,10 +27,16 @@ BODY <IEventIntervalQuery>:
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by         optional
-  [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    [(Any) <Object>]: This indicates any property can be added to this object.
-  [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  [SearchTerm <ISearchTerm>]: SearchTerm is the filter portion of the query         it contains only one of 'and' or 'or' conjunction maps
+    [And <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [Or <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [Timezone <String>]: TimeZone. Specify the timezone in which the user is in         optional
+
+SEARCHTERM <ISearchTerm>:
+  [And <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [Or <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
 #>
@@ -80,17 +86,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
-    [System.Collections.Hashtable]
-    # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermAnd},
-
-    [Parameter(ParameterSetName='GetExpanded')]
-    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
-    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
-    [System.Collections.Hashtable]
-    # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermOr},
+    [JumpCloud.SDK.DirectoryInsights.Models.ISearchTerm]
+    # SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+    # To construct, see NOTES section for SEARCHTERM properties and create a hash table.
+    ${SearchTerm},
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
@@ -136,12 +135,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
-
-    [Parameter(DontShow)]
-    [System.Boolean]
-    # Set to $true to return all results. This will overwrite any skip and limit parameter.
-    $Paginate = $true
+    ${ProxyUseDefaultCredentials}
     )
     Begin
     {
@@ -160,62 +154,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('GetExpanded'))
+        $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        If (-not [System.String]::IsNullOrEmpty($Result))
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
-            {
-                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
-                If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
-                {
-                    If (-not [System.String]::IsNullOrEmpty($Result))
-                    {
-                        $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
-                        {
-                            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body))
-                            {
-                                $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
-                            }
-                            Else
-                            {
-                                $PSBoundParameters.Body.SearchAfter = $XResultSearchAfter
-                            }
-                        }
-                        Else
-                        {
-                            $PSBoundParameters.SearchAfter = $XResultSearchAfter
-                        }
-                        $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
-                        $XLimit = $JCHttpResponse.Result.Headers.GetValues('X-Limit')
-                        $Results += $Result
-                        Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ");
-                        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-                        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-                        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-                        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-                    }
-                }
-                Else
-                {
-                    $Results += $Result
-                    Break
-                }
-            }
-            While ($XResultCount -eq $XLimit -and -not [System.String]::IsNullOrEmpty($Result))
-        }
-        Else
-        {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
-            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
-                $Results += $Result
-            }
+            $Results += $Result
         }
     }
     End

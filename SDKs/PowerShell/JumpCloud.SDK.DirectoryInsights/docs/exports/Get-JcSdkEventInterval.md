@@ -15,8 +15,8 @@ Query the API for a list of counts by time interval
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Timezone <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-IntervalValue <String>] [-SearchTerm <ISearchTerm>] [-Timezone <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Get
@@ -107,26 +107,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SearchTermAnd
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+### -SearchTerm
+SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+To construct, see NOTES section for SEARCHTERM properties and create a hash table.
 
 ```yaml
-Type: System.Collections.Hashtable
-Parameter Sets: GetExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SearchTermOr
-TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-
-```yaml
-Type: System.Collections.Hashtable
+Type: JumpCloud.SDK.DirectoryInsights.Models.ISearchTerm
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -241,10 +227,16 @@ BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search o
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by         optional
-  - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
-    - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[SearchTerm <ISearchTerm>]`: SearchTerm is the filter portion of the query         it contains only one of 'and' or 'or' conjunction maps
+    - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+      - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[Timezone <String>]`: TimeZone. Specify the timezone in which the user is in         optional
+
+SEARCHTERM <ISearchTerm>: SearchTerm is the filter portion of the queryit contains only one of 'and' or 'or' conjunction maps
+  - `[And <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Or <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS
 
