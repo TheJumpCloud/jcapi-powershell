@@ -27,7 +27,7 @@ workflows:
   build-sdks-nightly:
     triggers:
       - schedule:
-          cron: '0 0 * * *' # Run Nightly
+          cron: '0 0 * * *' # Run at midnight
           filters:
             branches:
               only:
