@@ -63,7 +63,7 @@ RequiredAssemblies = './bin/JumpCloud.SDK.V2.private.dll'
 # TypesToProcess = @()
 
 # Format files (.ps1xml) to be loaded when importing this module
-FormatsToProcess = './JumpCloud.SDK.V2.format.ps1xml'
+# FormatsToProcess = @()
 
 # Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 # NestedModules = @()
