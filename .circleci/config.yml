@@ -11,7 +11,7 @@ workflows:
       - 'Build JumpCloud SDK V2':
           requires:
             - 'Build JumpCloud SDK V1'
-      - deploy-staging:
+      - deploy-dev:
           type: approval
           requires:
             - 'Build JumpCloud SDK DirectoryInsights'
@@ -20,7 +20,7 @@ workflows:
       - deploy-prod:
           type: approval
           requires:
-            - 'deploy-staging'
+            - 'deploy-dev'
             - 'Build JumpCloud SDK DirectoryInsights'
             - 'Build JumpCloud SDK V1'
             - 'Build JumpCloud SDK V2'
@@ -39,7 +39,7 @@ workflows:
       - 'Build JumpCloud SDK V2':
           requires:
             - 'Build JumpCloud SDK V1'
-      - deploy-staging:
+      - deploy-dev:
           type: approval
           requires:
             - 'Build JumpCloud SDK DirectoryInsights'
@@ -48,7 +48,7 @@ workflows:
       - deploy-prod:
           type: approval
           requires:
-            - 'deploy-staging'
+            - 'deploy-dev'
             - 'Build JumpCloud SDK DirectoryInsights'
             - 'Build JumpCloud SDK V1'
             - 'Build JumpCloud SDK V2'
@@ -113,20 +113,20 @@ jobs:
           TestModule: true
       - commit:
           SDKName: JumpCloud.SDK.V2
-  deploy-staging:
+  deploy-dev:
     executor: win/default
     steps:
       - attach_workspace:
           at: ./SDKs
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          environment: staging
+          environment: dev
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V1
-          environment: staging
+          environment: dev
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
-          environment: staging
+          environment: dev
   deploy-prod:
     executor: win/default
     steps:
@@ -264,7 +264,7 @@ commands:
     steps:
       - when:
           condition:
-            equal: [staging, << parameters.environment >>]
+            equal: [dev, << parameters.environment >>]
           steps:
             - run:
                 # when: on_success
