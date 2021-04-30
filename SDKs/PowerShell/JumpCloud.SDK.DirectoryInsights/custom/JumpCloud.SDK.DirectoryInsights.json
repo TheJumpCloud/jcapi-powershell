@@ -1,0 +1,356 @@
+{
+  "basePath": "/insights/directory/v1/",
+  "consumes": [
+    "application/json"
+  ],
+  "definitions": {
+    "EventCount": {
+      "description": "EventCount JSON struct with count of matching events",
+      "properties": {
+        "count": {
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Count"
+        }
+      },
+      "title": "EventCount",
+      "type": "object"
+    },
+    "EventDistinctQuery": {
+      "description": "EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "EndTime"
+        },
+        "field": {
+          "description": "field is what they wish to query on",
+          "type": "string",
+          "x-go-name": "Field"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "StartTime"
+        }
+      },
+      "required": [
+        "service",
+        "start_time",
+        "field"
+      ],
+      "title": "EventDistinctQuery",
+      "type": "object"
+    },
+    "EventIntervalQuery": {
+      "description": "EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "EndTime"
+        },
+        "interval_unit": {
+          "type": "string",
+          "x-go-name": "IntervalUnit"
+        },
+        "interval_value": {
+          "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
+          "type": "string",
+          "x-go-name": "IntervalValue"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "StartTime"
+        },
+        "timezone": {
+          "description": "TimeZone. Specify the timezone in which the user is in\noptional",
+          "type": "string",
+          "x-go-name": "TimeZone"
+        }
+      },
+      "required": [
+        "service",
+        "start_time",
+        "interval_unit"
+      ],
+      "title": "EventIntervalQuery",
+      "type": "object"
+    },
+    "EventQuery": {
+      "description": "EventQuery is the users' command to search our auth logs",
+      "properties": {
+        "end_time": {
+          "description": "optional query end time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "EndTime"
+        },
+        "fields": {
+          "description": "optional list of fields to return from query",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Projection"
+        },
+        "limit": {
+          "description": "Max number of rows to return",
+          "format": "int64",
+          "type": "integer",
+          "x-go-name": "Limit"
+        },
+        "search_after": {
+          "description": "Specific query to search after, see x-* response headers for next values",
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "type": "array",
+          "x-go-name": "SearchAfter"
+        },
+        "search_term": {
+          "$ref": "#/definitions/SearchTerm"
+        },
+        "service": {
+          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
+          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-go-name": "Service"
+        },
+        "sort": {
+          "description": "ASC or DESC order for timestamp",
+          "type": "string",
+          "x-go-name": "Sort"
+        },
+        "start_time": {
+          "description": "query start time, UTC in RFC3339 format",
+          "format": "date-time",
+          "type": "string",
+          "x-go-name": "StartTime"
+        }
+      },
+      "required": [
+        "service",
+        "start_time"
+      ],
+      "title": "EventQuery",
+      "type": "object"
+    },
+    "SearchTerm": {
+      "description": "SearchTerm is the filter portion of the query\nit contains only one of 'and' or 'or' conjunction maps",
+      "properties": {
+        "and": {
+          "$ref": "#/definitions/TermConjunction"
+        },
+        "or": {
+          "$ref": "#/definitions/TermConjunction"
+        }
+      },
+      "title": "SearchTerm",
+      "type": "object"
+    },
+    "TermConjunction": {
+      "additionalProperties": true,
+      "description": "TermConjunction represents a conjunction (and/or)\nNOTE: the validator limits what the operator can be, not the object\nfor future-proof-ness\nand a list of sub-values",
+      "title": "TermConjunction",
+      "type": "object"
+    }
+  },
+  "host": "api.jumpcloud.com",
+  "info": {
+    "description": "# API Overview\n\nThe purpose of this API is to query Jumpcloud Directory Insights events\n\n## Directory Insights\n\nDirectory Insights provides event logs, see activity happening in your directory, and monitor user authentications to the console, SSO apps, RADIUS, and LDAP. Directory Insights shines a light on audit trails leading up to critical events so you know the what, where, when, how, and who of your directory activities.\n\nDirectory Events:** Logs on activity in the Portal, including admin changes in the directory and admin/user authentications to the Portal.\nSAML Events:** Logs on user authentications to SAML applications.\nRADIUS Events:** Logs on user authentications to RADIUS used for wifi and VPNs.\nMacOS, Windows and Linux Events**: Logs about user authentications to systems including agent related events on lockout, password changes, and File Disk Encryption key updates.\nLDAP Events**: Logs about user authentications to LDAP, including LDAP bind and search events types.\nMDM Events**: Logs about MDM command results.\n\nDirectory Insights is available in our API, Powershell, and Activity Log. The API uses a single POST endpoint:\n\n```\nhttps://api.jumpcloud.com/insights/directory/v1/events\n```\n\n## Data Retention\n\nEvent logs are retained for 90 days beginning on March 14, 2020. Queries that exceed the retention period will only return valid results within the time window. New services released after March 14, 2020 will have a total of 90 days available after their release date.\n\n# Authentication & Authorization\n\n## Authentication\n\n### Access Your API Key\n\nTo locate your API Key:\n\n1. Log in to the [JumpCloud Admin Portal](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Portal.\n3. Retrieve your API key from API Settings.\n\n### API Key Considerations\n\nThis API key is associated with the currently logged in administrator. Only administrator roles can access the API. Command runners will receive 403 error.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud admin account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Portal.\n\n#### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\n### Example Request (Mac and LINUX)\n\n```\ncurl -X POST -H x-api-key:[YOUR_API_KEY_HERE]\" -H \"Content-Type: application/json\" --data '{\"service\": [\"all\"], \"start_time\": \"2020-03-03T14:00:00Z\"}' https://api.jumpcloud.com/insights/directory/v1/events\n```\n\n### Example Request (Windows)\n\nFor Windows we recommend creating a local .txt file to pass in the JSON POST body with the query parameters.\n\n```\ncurl -X POST -H \"x-api-key:[YOUR_API_KEY_HERE]\" -H \"Content-Type: application/json\" --data @./filewithpostbody.txt \"https://api.jumpcloud.com/insights/directory/v1/events\"\n```\n\nIn the example above create a file `filewithpostbody.txt` with the POST body and execute the command within the directory with the local file. See [how to create a POST body](#json-post-request-body) below.\n\n```\n{\n\"service\": [\"all\"],\n\"start_time\": \"2020-03-03T00:00:00Z\"\n}\n```\n\n## Managed Service Providers\n\nManaged Service Providers can query client organizations by providing their API key in the header and a second header key \"x-org-id\" for the client org they administer.\n\n### Example Request\n\n```\ncurl -X POST -H \"x-api-key:[YOUR_API_KEY_HERE]\" -H \"x-org-id:[ADMINISTERED_ORG_ID]\" -H \"Content-Type: application/json\" --data '{\"service\": [\"all\"], \"start_time\": \"2020-03-03T14:00:00Z\"}' https://api.jumpcloud.com/insights/directory/v1/events\n```\n\n# How to use the Directory Insights API\n\n## JSON POST request body\n\nQueries are made by HTTP POST request to the api’s /events web context, using curl or Postman or wget or other HTTP client.\n\nThe two required fields in the JSON body are\n\n```\n\"service\": [\"<service name>\"]\n```\n\nand\n\n```\n\"start_time\": \"<RFC 3339 date>\"\n```\n\nValid values for \"service\" are:\n\n<table>\n<tr>\n<td>\"all\"</td>\n<td>Logs from all services.</td>\n</tr>\n<tr>\n<td>\"directory\"</td>\n<td>Logs on activity in the Portal, including admin changes in the directory and admin/user authentications to the Portal.</td>\n</tr>\n<tr>\n<td>\"radius\"</td>\n<td>Logs on user authentications to RADIUS used for wifi and VPNs.</td>\n</tr>\n<tr>\n<td>\"sso\"</td>\n<td>Logs on user authentications to SAML applications.</td>\n</tr>\n<tr>\n<td>\"systems\"</td>\n<td>Logs about user authentications to MacOS, Windows, and Linux systems including agent related events on lockout, password changes, and File Disk Encryption key updates.</td>\n</tr>\n<tr>\n<td>\"ldap\"</td>\n<td>Logs about user authentications to LDAP, including LDAP bind and search events types.</td>\n</tr>\n<tr>\n<td>\"mdm\"</td>\n<td>Logs about MDM command results.</td>\n</tr>\n</table>\n\nIf you specify an invalid or unknown value for \"service\", the system will respond with the list of supported values.\n\nChoo",
+    "title": "Directory Insights API",
+    "version": "1.0"
+  },
+  "paths": {
+    "/events": {
+      "post": {
+        "description": "Query the API for Directory Insights events",
+        "operationId": "Get-Event",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Array of Directory Insights events JSON objects",
+            "schema": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          },
+          {
+            "x-org-id": []
+          }
+        ],
+        "summary": "Query Events"
+      }
+    },
+    "/events/count": {
+      "post": {
+        "description": "Query the API for a count of matching events",
+        "operationId": "Get-EventCount",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Count of matching event rows",
+            "schema": {
+              "$ref": "#/definitions/EventCount"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          },
+          {
+            "x-org-id": []
+          }
+        ],
+        "summary": "Count Events"
+      }
+    },
+    "/events/distinct": {
+      "post": {
+        "description": "Query the API for a list of distinct values for a field",
+        "operationId": "Get-EventDistinct",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventDistinctQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of distinct field values",
+            "schema": {
+              "$ref": "#/definitions/EventCount"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          },
+          {
+            "x-org-id": []
+          }
+        ],
+        "summary": "Query event distinct field values"
+      }
+    },
+    "/events/interval": {
+      "post": {
+        "description": "Query the API for a list of counts by time interval",
+        "operationId": "Get-EventInterval",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/EventIntervalQuery"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of bucketed event counts",
+            "schema": {
+              "items": {
+                "additionalProperties": true,
+                "type": "object"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          },
+          {
+            "x-org-id": []
+          }
+        ],
+        "summary": "Query event counts by bucketed by a time interval"
+      }
+    }
+  },
+  "produces": [
+    "application/json"
+  ],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "x-api-key": {
+      "in": "header",
+      "name": "x-api-key",
+      "type": "apiKey"
+    },
+    "x-org-id": {
+      "in": "header",
+      "name": "x-org-id",
+      "type": "apiKey"
+    }
+  },
+  "swagger": "2.0"
+}
