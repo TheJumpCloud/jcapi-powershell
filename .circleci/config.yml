@@ -80,6 +80,7 @@ jobs:
   Pack and Deploy To CodeArtifact:
     executor: win/default
     steps:
+      - setup
       - attach_workspace:
           at: ./SDKs
       - deploy-nupkg:
@@ -94,6 +95,7 @@ jobs:
   Pack and Deploy To PSGallery:
     executor: win/default
     steps:
+      - setup
       - attach_workspace:
           at: ./SDKs
       - deploy-nupkg:
@@ -141,6 +143,14 @@ commands:
             Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
             Write-Host ("---------------------------------------------------------------------------------------")
             Get-Variable | Format-Table
+      - run:
+          name: Add nuget sources
+          shell: pwsh.exe
+          command: |
+            Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
+            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json"
+            dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
   build-test:
     parameters:
       SDKName:
@@ -252,14 +262,6 @@ commands:
       - pack:
           source: << parameters.source >>
           SDKName: << parameters.SDKName >>
-      - run:
-          name: Add nuget sources
-          shell: pwsh.exe
-          command: |
-            Set-AWSCredential -AccessKey:($env:AWSAccessKey) -SecretKey:($env:AWSSecretKey)
-            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain powershell-domain -Region us-west-2 -Repository powershell-team-repository -Format nuget)v3/index.json"
-            dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("powershell-domain") -Region:("us-west-2")).AuthorizationToken
-            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
       - run:
           when: on_success
           name: Publishing to "<< parameters.source >>" repo
