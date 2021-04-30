@@ -61,17 +61,16 @@ ForEach ($SDK In $SDKName)
             # Write current branch back to config file
             $Config.branch = $env:CIRCLE_BRANCH
             $Config | Set-Content -Path:($ConfigFileFullName)
-            # $InputFile = $BaseFolder + $Config.'input-file'
-            $OutputFullPath = '{0}/{1}' -f $BaseFolder, $Config.'output-folder'
+            $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
             $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
             $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
-            $ModuleName = $Config.'module-name'
-            $Namespace = $Config.'namespace'
+            $ModuleName = [System.String]$Config.'module-name'
+            $Namespace = [System.String]$Config.'namespace'
             $ConfigPrefix = $Config.prefix | Select-Object -First 1
             $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-            $ConfigInputFile = '{0}/{1}' -f $BaseFolder, $Config.'input-file'
+            $ConfigInputFile = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'input-file'
             $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
-            $ModuleVersion = $Config.'module-version'
+            $ModuleVersion = [System.String]$Config.'module-version'
             $binFolder = '{0}/bin' -f $OutputFullPath
             $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
             $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
