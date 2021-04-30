@@ -1,7 +1,7 @@
 debug: true
 verbose: true
 # Values
-azure: false
+# azure: false
 powershell: true
 branch: master
 metadata:
