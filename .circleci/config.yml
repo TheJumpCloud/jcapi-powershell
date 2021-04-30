@@ -265,7 +265,7 @@ commands:
           name: Publishing to "<< parameters.source >>" repo
           shell: pwsh.exe
           command: |
-            $NupkgPath = (Get-ChildItem -Path:("./SDKs/<< parameters.SDKName >>/bin/<< parameters.SDKName >>*.nupkg")).FullName
+            $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/bin/nupkg/<< parameters.SDKName >>*.nupkg")).FullName
             If('<< parameters.source >>' -eq 'CodeArtifact'){dotnet nuget push $NupkgPath --source << parameters.source >>}
             ElseIf('<< parameters.source >>' -eq 'PSGallery'){dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $env:NuGetApiKey}
             Else {Write-Error "Unknown source value: << parameters.source >>"}
