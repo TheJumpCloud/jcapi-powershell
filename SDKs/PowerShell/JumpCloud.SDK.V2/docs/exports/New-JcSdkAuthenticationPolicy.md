@@ -42,8 +42,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkAuthenticationPolicy [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
- [-Effect <IAuthnPolicyEffect>] [-Name <String>] [-Targets <IAuthnPolicyTargets>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
+ [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -160,12 +161,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Effect
-AuthnPolicyEffect
-To construct, see NOTES section for EFFECT properties and create a hash table.
+### -EffectAction
+.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyEffect
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MfaRequired
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -191,12 +206,57 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Targets
-AuthnPolicyTargets
-To construct, see NOTES section for TARGETS properties and create a hash table.
+### -TargetResources
+.
+To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyTargets
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserGroupExclusions
+.
+
+```yaml
+Type: System.String[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserGroupInclusions
+.
+
+```yaml
+Type: System.String[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserInclusions
+.
+
+```yaml
+Type: System.String[]
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -263,35 +323,17 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
-  - `[Effect <IAuthnPolicyEffect>]`: AuthnPolicyEffect
-    - `Action <String>`: 
-    - `[Obligations <IAuthnPolicyObligations>]`: AuthnPolicyObligations
-      - `[Mfa <IAuthnPolicyObligationsMfa>]`: 
-        - `[Required <Boolean?>]`: 
+  - `[EffectAction <String>]`: 
+  - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
-  - `[Targets <IAuthnPolicyTargets>]`: AuthnPolicyTargets
-    - `[Resources <IAuthnPolicyResourceTarget[]>]`: 
-      - `[Type <String>]`: 
-    - `[UserGroups <IAuthnPolicyUserGroupTarget>]`: AuthnPolicyUserGroupTarget
-      - `[Exclusions <String[]>]`: 
-      - `[Inclusions <String[]>]`: 
-    - `[Users <IAuthnPolicyUserTarget>]`: AuthnPolicyUserTarget
-      - `[Inclusions <String[]>]`: 
-
-EFFECT <IAuthnPolicyEffect>: AuthnPolicyEffect
-  - `Action <String>`: 
-  - `[Obligations <IAuthnPolicyObligations>]`: AuthnPolicyObligations
-    - `[Mfa <IAuthnPolicyObligationsMfa>]`: 
-      - `[Required <Boolean?>]`: 
-
-TARGETS <IAuthnPolicyTargets>: AuthnPolicyTargets
-  - `[Resources <IAuthnPolicyResourceTarget[]>]`: 
+  - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
     - `[Type <String>]`: 
-  - `[UserGroups <IAuthnPolicyUserGroupTarget>]`: AuthnPolicyUserGroupTarget
-    - `[Exclusions <String[]>]`: 
-    - `[Inclusions <String[]>]`: 
-  - `[Users <IAuthnPolicyUserTarget>]`: AuthnPolicyUserTarget
-    - `[Inclusions <String[]>]`: 
+  - `[UserGroupExclusions <String[]>]`: 
+  - `[UserGroupInclusions <String[]>]`: 
+  - `[UserInclusions <String[]>]`: 
+
+TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
+  - `[Type <String>]`: 
 
 ## RELATED LINKS
 

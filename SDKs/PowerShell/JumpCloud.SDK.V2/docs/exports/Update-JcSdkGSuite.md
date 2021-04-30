@@ -38,13 +38,13 @@ Update-JcSdkGSuite -Id <String> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf] [
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudSdkV2Identity> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf]
+Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudSdkV2Identity> [-GroupsEnabled] [-Name <String>]
+Update-JcSdkGSuite -InputObject <IJumpCloudApIsIdentity> [-GroupsEnabled] [-Name <String>]
  [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
@@ -134,7 +134,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -228,7 +228,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IGsuitePatchInput
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -249,7 +249,7 @@ BODY <IGsuitePatchInput>: GSuite Patch Input
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

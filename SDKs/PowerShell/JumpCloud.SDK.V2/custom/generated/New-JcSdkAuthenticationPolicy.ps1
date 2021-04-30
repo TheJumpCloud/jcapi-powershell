@@ -80,35 +80,17 @@ BODY <IAuthnPolicyInput>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [Description <String>]:
   [Disabled <Boolean?>]:
-  [Effect <IAuthnPolicyEffect>]: AuthnPolicyEffect
-    Action <String>:
-    [Obligations <IAuthnPolicyObligations>]: AuthnPolicyObligations
-      [Mfa <IAuthnPolicyObligationsMfa>]:
-        [Required <Boolean?>]:
+  [EffectAction <String>]:
+  [MfaRequired <Boolean?>]:
   [Name <String>]:
-  [Targets <IAuthnPolicyTargets>]: AuthnPolicyTargets
-    [Resources <IAuthnPolicyResourceTarget[]>]:
-      [Type <String>]:
-    [UserGroups <IAuthnPolicyUserGroupTarget>]: AuthnPolicyUserGroupTarget
-      [Exclusions <String[]>]:
-      [Inclusions <String[]>]:
-    [Users <IAuthnPolicyUserTarget>]: AuthnPolicyUserTarget
-      [Inclusions <String[]>]:
-
-EFFECT <IAuthnPolicyEffect>:
-  Action <String>:
-  [Obligations <IAuthnPolicyObligations>]: AuthnPolicyObligations
-    [Mfa <IAuthnPolicyObligationsMfa>]:
-      [Required <Boolean?>]:
-
-TARGETS <IAuthnPolicyTargets>:
-  [Resources <IAuthnPolicyResourceTarget[]>]:
+  [TargetResources <IAuthnPolicyResourceTarget[]>]:
     [Type <String>]:
-  [UserGroups <IAuthnPolicyUserGroupTarget>]: AuthnPolicyUserGroupTarget
-    [Exclusions <String[]>]:
-    [Inclusions <String[]>]:
-  [Users <IAuthnPolicyUserTarget>]: AuthnPolicyUserTarget
-    [Inclusions <String[]>]:
+  [UserGroupExclusions <String[]>]:
+  [UserGroupInclusions <String[]>]:
+  [UserInclusions <String[]>]:
+
+TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
+  [Type <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkAuthenticationPolicy.md
 #>
@@ -145,10 +127,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthnPolicyEffect]
-    # AuthnPolicyEffect
-    # To construct, see NOTES section for EFFECT properties and create a hash table.
-    ${Effect},
+    [System.String]
+    # .
+    ${EffectAction},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${MfaRequired},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -158,10 +145,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthnPolicyTargets]
-    # AuthnPolicyTargets
-    # To construct, see NOTES section for TARGETS properties and create a hash table.
-    ${Targets},
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
+    # .
+    # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
+    ${TargetResources},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserGroupExclusions},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserGroupInclusions},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # .
+    ${UserInclusions},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

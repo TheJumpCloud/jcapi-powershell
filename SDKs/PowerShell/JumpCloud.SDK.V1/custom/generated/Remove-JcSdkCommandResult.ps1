@@ -29,7 +29,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandresult
 .Notes
@@ -37,7 +37,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
   [SystemId <String>]:
   [SystemuserId <String>]:
@@ -58,7 +58,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

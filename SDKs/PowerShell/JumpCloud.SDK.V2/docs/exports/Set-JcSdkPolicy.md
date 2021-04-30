@@ -27,8 +27,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicy -Id <String> -Name <String> [-Template <IPolicyRequestTemplate>] [-Values <IPolicyValue[]>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -Id <String> -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -38,13 +38,13 @@ Set-JcSdkPolicy -Id <String> -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<Commo
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
+Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudSdkV2Identity> -Name <String> [-Template <IPolicyRequestTemplate>]
+Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Name <String> [-TemplateId <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -118,7 +118,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -144,12 +144,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Template
-.
-To construct, see NOTES section for TEMPLATE properties and create a hash table.
+### -TemplateId
+ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPolicyRequestTemplate
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -212,7 +211,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IPolicyRequest
 
@@ -231,13 +230,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
-  - `[Template <IPolicyRequestTemplate>]`: 
-    - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
@@ -258,9 +256,6 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
-
-TEMPLATE <IPolicyRequestTemplate>: .
-  - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.

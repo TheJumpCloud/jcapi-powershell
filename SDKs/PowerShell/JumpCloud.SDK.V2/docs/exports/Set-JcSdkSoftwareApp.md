@@ -37,13 +37,13 @@ Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<Co
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudSdkV2Identity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudSdkV2Identity> [-Id <String>] [-DisplayName <String>]
+Set-JcSdkSoftwareApp -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-DisplayName <String>]
  [-Settings <ISoftwareAppSettings[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -146,7 +146,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -209,7 +209,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.ISoftwareApp
 
@@ -231,12 +231,11 @@ BODY <ISoftwareApp>: Software Application Package Object
   - `[Id <String>]`: 
   - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
-    - `[AppleVpp <ISoftwareAppAppleVpp>]`: appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.
-      - `[AssignedLicenses <Int32?>]`: 
-      - `[AvailableLicenses <Int32?>]`: 
-      - `[Details <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
-        - `[(Any) <Object>]`: This indicates any property can be added to this object.
-      - `[TotalLicenses <Int32?>]`: 
+    - `[AppleVppAssignedLicenses <Int32?>]`: 
+    - `[AppleVppAvailableLicenses <Int32?>]`: 
+    - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+      - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[AppleVppTotalLicenses <Int32?>]`: 
     - `[AutoUpdate <Boolean?>]`: 
     - `[DesiredState <String>]`: State of Install or Uninstall
     - `[Location <String>]`: Repository where the app is located within the package manager
@@ -244,7 +243,7 @@ BODY <ISoftwareApp>: Software Application Package Object
     - `[PackageId <String>]`: 
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
@@ -268,12 +267,11 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
 
 SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
-  - `[AppleVpp <ISoftwareAppAppleVpp>]`: appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.
-    - `[AssignedLicenses <Int32?>]`: 
-    - `[AvailableLicenses <Int32?>]`: 
-    - `[Details <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
-      - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[TotalLicenses <Int32?>]`: 
+  - `[AppleVppAssignedLicenses <Int32?>]`: 
+  - `[AppleVppAvailableLicenses <Int32?>]`: 
+  - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[AppleVppTotalLicenses <Int32?>]`: 
   - `[AutoUpdate <Boolean?>]`: 
   - `[DesiredState <String>]`: State of Install or Uninstall
   - `[Location <String>]`: Repository where the app is located within the package manager

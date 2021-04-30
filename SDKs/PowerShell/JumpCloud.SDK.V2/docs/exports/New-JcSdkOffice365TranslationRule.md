@@ -38,13 +38,13 @@ New-JcSdkOffice365TranslationRule -Office365Id <String> -Body <IOffice365Transla
 
 ### CreateViaIdentity
 ```
-New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudSdkV2Identity>
+New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity>
  -Body <IOffice365TranslationRuleRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudSdkV2Identity> [-BuiltIn <String>] [-Confirm]
+New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApIsIdentity> [-BuiltIn <String>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -117,7 +117,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -179,7 +179,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IOffice365TranslationRuleRequest
 
@@ -199,7 +199,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IOffice365TranslationRuleRequest>: Office 365 Translation Rule Request
   - `[BuiltIn <String>]`: Built-in translations for Office 365 (Microsoft Graph) export:         * `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user         * `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user         * `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`         * `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`         * `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`         * `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`         * `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`         * `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`         * `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`         * `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

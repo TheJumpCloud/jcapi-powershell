@@ -17,7 +17,6 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to update the module guid.')][ValidateNotNullOrEmpty()][System.Boolean]$UpdateModuleGuid = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to perform customizations to test-module.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$TestModulePrep = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to modify the AutoRest .gitignore file')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyGitIgnore = $true
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to remove AutoRest generated Az module')][ValidateNotNullOrEmpty()][System.Boolean]$RemoveAzAccounts = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to add GitHub Packages required attributes')][ValidateNotNullOrEmpty()][System.Boolean]$ModifyNuspec = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Set to $true to publish the module to a repository.')][ValidateNotNullOrEmpty()][System.Boolean]$PublishModule = $false
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'Specify the PowerShell repository to deploy to.')][ValidateNotNullOrEmpty()][System.String]$PSRepoName = 'PSGallery'
@@ -90,7 +89,6 @@ ForEach ($SDK In $SDKName)
             $internalFolderPath = '{0}/internal' -f $OutputFullPath, $ModuleName
             $internalPsm1 = '{0}/{1}.internal.psm1' -f $internalFolderPath, $ModuleName
             $moduleMdPath = '{0}/{1}.md' -f $DocsFolderPath, $ModuleName
-            $AzAccountsPath = '{0}/{1}' -f $OutputFullPath, '\generated\modules\Az.Accounts'
             $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
             $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
             ###########################################################################
@@ -288,15 +286,6 @@ ForEach ($SDK In $SDKName)
                     $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
                     $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
                     $GitIgnoreContent | Set-Content -Path:($_.FullName)
-                }
-            }
-            ###########################################################################
-            # Remove auto generated Az module
-            If ($RemoveAzAccounts)
-            {
-                If (Test-Path -Path:($AzAccountsPath))
-                {
-                    Remove-Item -Path:($AzAccountsPath) -Force -Recurse
                 }
             }
             ###########################################################################

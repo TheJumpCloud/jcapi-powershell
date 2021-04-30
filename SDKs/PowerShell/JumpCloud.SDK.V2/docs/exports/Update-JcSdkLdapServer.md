@@ -40,14 +40,14 @@ Update-JcSdkLdapServer -Id <String>
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudSdkV2Identity>
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudSdkV2Identity> [-Id <String>] [-UserLockoutAction <String>]
+Update-JcSdkLdapServer -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -136,7 +136,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -213,7 +213,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
 
@@ -235,7 +235,7 @@ BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
   - `[UserLockoutAction <String>]`: LDAP Server Action
   - `[UserPasswordExpirationAction <String>]`: LDAP Server Action
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

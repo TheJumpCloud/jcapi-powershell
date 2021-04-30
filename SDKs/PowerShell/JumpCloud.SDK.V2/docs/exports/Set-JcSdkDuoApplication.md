@@ -40,13 +40,13 @@ Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> -Body <IDuoA
 
 ### SetViaIdentity
 ```
-Set-JcSdkDuoApplication -InputObject <IJumpCloudSdkV2Identity> -Body <IDuoApplicationUpdateReq> [-Confirm]
+Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -Body <IDuoApplicationUpdateReq> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkDuoApplication -InputObject <IJumpCloudSdkV2Identity> -ApiHost <String> -IntegrationKey <String>
+Set-JcSdkDuoApplication -InputObject <IJumpCloudApIsIdentity> -ApiHost <String> -IntegrationKey <String>
  -Name <String> [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -151,7 +151,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -245,7 +245,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -266,7 +266,7 @@ BODY <IDuoApplicationUpdateReq>: DuoApplicationUpdateReq
   - `Name <String>`: 
   - `[SecretKey <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

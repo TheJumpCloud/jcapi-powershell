@@ -63,7 +63,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IAuthInputObject
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 System.Boolean
 .Notes
@@ -71,22 +71,12 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-AUTH <IAuthInput>:
-  [Basic <IAuthInputBasic>]:
-    [Password <String>]:
-    [Username <String>]:
-  [Oauth <IAuthInputOauth>]:
-    [Code <String>]:
-
 BODY <IAuthInputObject>:
-  [Auth <IAuthInput>]: Auth Input
-    [Basic <IAuthInputBasic>]:
-      [Password <String>]:
-      [Username <String>]:
-    [Oauth <IAuthInputOauth>]:
-      [Code <String>]:
+  [BasicPassword <String>]:
+  [BasicUsername <String>]:
+  [OauthCode <String>]:
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -125,7 +115,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='AuthorizeViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -141,10 +131,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='AuthorizeExpanded')]
     [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthInput]
-    # Auth Input
-    # To construct, see NOTES section for AUTH properties and create a hash table.
-    ${Auth},
+    [System.String]
+    # .
+    ${BasicPassword},
+
+    [Parameter(ParameterSetName='AuthorizeExpanded')]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${BasicUsername},
+
+    [Parameter(ParameterSetName='AuthorizeExpanded')]
+    [Parameter(ParameterSetName='AuthorizeViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${OauthCode},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

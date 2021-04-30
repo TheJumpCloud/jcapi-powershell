@@ -26,8 +26,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkPolicy -Name <String> [-Template <IPolicyRequestTemplate>] [-Values <IPolicyValue[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -99,12 +99,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Template
-.
-To construct, see NOTES section for TEMPLATE properties and create a hash table.
+### -TemplateId
+ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPolicyRequestTemplate
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -184,14 +183,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
-  - `[Template <IPolicyRequestTemplate>]`: 
-    - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
-
-TEMPLATE <IPolicyRequestTemplate>: .
-  - `[Id <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.

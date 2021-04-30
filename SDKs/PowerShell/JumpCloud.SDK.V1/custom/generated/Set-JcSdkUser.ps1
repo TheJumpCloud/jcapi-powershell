@@ -41,7 +41,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.ISystemuserput
 .Outputs
@@ -100,10 +100,9 @@ BODY <ISystemuserput>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
-  [Mfa <IMfa>]: mfa
-    [Configured <Boolean?>]:
-    [Exclusion <Boolean?>]:
-    [ExclusionUntil <DateTime?>]:
+  [MfaConfigured <Boolean?>]:
+  [MfaExclusion <Boolean?>]:
+  [MfaExclusionUntil <DateTime?>]:
   [Middlename <String>]:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
@@ -122,16 +121,11 @@ BODY <ISystemuserput>:
   [UnixUid <Int32?>]:
   [Username <String>]:
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [Id <String>]:
   [SystemId <String>]:
   [SystemuserId <String>]:
   [Triggername <String>]:
-
-MFA <IMfa>:
-  [Configured <Boolean?>]:
-  [Exclusion <Boolean?>]:
-  [ExclusionUntil <DateTime?>]:
 
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:
   [Number <String>]:
@@ -158,7 +152,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -344,10 +338,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IMfa]
-    # mfa
-    # To construct, see NOTES section for MFA properties and create a hash table.
-    ${Mfa},
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${MfaConfigured},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${MfaExclusion},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.DateTime]
+    # .
+    ${MfaExclusionUntil},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

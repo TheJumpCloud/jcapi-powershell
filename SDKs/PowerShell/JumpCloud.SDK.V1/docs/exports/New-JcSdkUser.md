@@ -36,10 +36,11 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-Mfa <IMfa>] [-Middlename <String>] [-Password <String>]
- [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
- [-PublicKey <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo]
- [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
+ [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
+ [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -476,12 +477,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Mfa
-mfa
-To construct, see NOTES section for MFA properties and create a hash table.
+### -MfaConfigured
+.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IMfa
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MfaExclusion
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MfaExclusionUntil
+.
+
+```yaml
+Type: System.DateTime
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -790,10 +820,9 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
-  - `[Mfa <IMfa>]`: mfa
-    - `[Configured <Boolean?>]`: 
-    - `[Exclusion <Boolean?>]`: 
-    - `[ExclusionUntil <DateTime?>]`: 
+  - `[MfaConfigured <Boolean?>]`: 
+  - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionUntil <DateTime?>]`: 
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
@@ -808,11 +837,6 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Suspended <Boolean?>]`: 
   - `[UnixGuid <Int32?>]`: 
   - `[UnixUid <Int32?>]`: 
-
-MFA <IMfa>: mfa
-  - `[Configured <Boolean?>]`: 
-  - `[Exclusion <Boolean?>]`: 
-  - `[ExclusionUntil <DateTime?>]`: 
 
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
   - `[Number <String>]`: 

@@ -35,7 +35,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.ISystemGroupData
 .Outputs
@@ -48,7 +48,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISystemGroupData>:
   Name <String>: Display name of a System Group.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -87,7 +87,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

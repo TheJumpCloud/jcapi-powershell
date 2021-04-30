@@ -35,13 +35,13 @@ Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData> [-Confirm] [-WhatIf] 
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudSdkV2Identity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudSdkV2Identity> -Name <String> [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -113,7 +113,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -175,7 +175,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.ISystemGroupData
 
@@ -195,7 +195,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <ISystemGroupData>: SystemGroupData
   - `Name <String>`: Display name of a System Group.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

@@ -36,8 +36,10 @@ It may also be used to update the DEP Settings.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkAppleMdm -Id <String> [-AppleSignedCert <String>] [-DefaultSystemGroupId <String>] [-Dep <IDep>]
- [-EncryptedDepServerToken <String>] [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -Id <String> [-AppleSignedCert <String>] [-DefaultSystemGroupId <String>]
+ [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-EncryptedDepServerToken <String>] [-Name <String>] [-WelcomeScreenButton <String>]
+ [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -47,15 +49,17 @@ Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf] 
 
 ### SetViaIdentity
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudSdkV2Identity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudSdkV2Identity> [-AppleSignedCert <String>]
- [-DefaultSystemGroupId <String>] [-Dep <IDep>] [-EncryptedDepServerToken <String>] [-Name <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudApIsIdentity> [-AppleSignedCert <String>]
+ [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
+ [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>] [-Name <String>]
+ [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -147,12 +151,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Dep
-DEP
-To construct, see NOTES section for DEP properties and create a hash table.
+### -DepEnableZeroTouchEnrollment
+A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IDep
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DepSetupAssistantOptions
+.
+To construct, see NOTES section for DEPSETUPASSISTANTOPTIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -198,7 +217,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -211,6 +230,51 @@ Accept wildcard characters: False
 
 ### -Name
 A new name for the Apple MDM configuration.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WelcomeScreenButton
+Text to display on the button on the DEP Welcome Screen.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WelcomeScreenParagraph
+A message to display on the DEP Welcome Screen.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WelcomeScreenTitle
+The title to display on the DEP Welcome Screen.
 
 ```yaml
 Type: System.String
@@ -262,7 +326,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -280,27 +344,19 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IAppleMdmPatchInput>: Apple MDM Patch Input
   - `[AppleSignedCert <String>]`: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   - `[DefaultSystemGroupId <String>]`: ObjectId uniquely identifying the MDM default System Group.
-  - `[Dep <IDep>]`: DEP
-    - `[EnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
-    - `[SetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
-      - `[Option <String>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
-    - `[WelcomeScreen <IDepWelcomeScreen>]`: DEPWelcomeScreen
-      - `[Button <String>]`: Text to display on the button on the DEP Welcome Screen.
-      - `[Paragraph <String>]`: A message to display on the DEP Welcome Screen.
-      - `[Title <String>]`: The title to display on the DEP Welcome Screen.
+  - `[DepEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
+  - `[DepSetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
+    - `[Option <String>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
   - `[EncryptedDepServerToken <String>]`: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
   - `[Name <String>]`: A new name for the Apple MDM configuration.
+  - `[WelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
+  - `[WelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
+  - `[WelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
 
-DEP <IDep>: DEP
-  - `[EnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[SetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
-    - `[Option <String>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
-  - `[WelcomeScreen <IDepWelcomeScreen>]`: DEPWelcomeScreen
-    - `[Button <String>]`: Text to display on the button on the DEP Welcome Screen.
-    - `[Paragraph <String>]`: A message to display on the DEP Welcome Screen.
-    - `[Title <String>]`: The title to display on the DEP Welcome Screen.
+DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
+  - `[Option <String>]`: Options to skip screens during MacOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

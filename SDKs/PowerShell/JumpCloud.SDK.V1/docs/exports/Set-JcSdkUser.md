@@ -34,9 +34,9 @@ Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddresses
  [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
  [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-Mfa <IMfa>]
- [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
  [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -49,21 +49,21 @@ Set-JcSdkUser -Id <String> -Body <ISystemuserput> [-Confirm] [-WhatIf] [<CommonP
 
 ### SetViaIdentity
 ```
-Set-JcSdkUser -InputObject <IJumpCloudSdkV1Identity> -Body <ISystemuserput> [-Confirm] [-WhatIf]
+Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUser -InputObject <IJumpCloudSdkV1Identity> [-AccountLocked]
+Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
  [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
  [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>]
  [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
  [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>]
  [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
- [-Mfa <IMfa>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-Sudo]
  [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
@@ -442,7 +442,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -513,12 +513,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Mfa
-mfa
-To construct, see NOTES section for MFA properties and create a hash table.
+### -MfaConfigured
+.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IMfa
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MfaExclusion
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MfaExclusionUntil
+.
+
+```yaml
+Type: System.DateTime
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -762,7 +791,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V1.Models.ISystemuserput
 
@@ -828,10 +857,9 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
-  - `[Mfa <IMfa>]`: mfa
-    - `[Configured <Boolean?>]`: 
-    - `[Exclusion <Boolean?>]`: 
-    - `[ExclusionUntil <DateTime?>]`: 
+  - `[MfaConfigured <Boolean?>]`: 
+  - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionUntil <DateTime?>]`: 
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
@@ -850,16 +878,11 @@ BODY <ISystemuserput>: SystemUserPut
   - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
-
-MFA <IMfa>: mfa
-  - `[Configured <Boolean?>]`: 
-  - `[Exclusion <Boolean?>]`: 
-  - `[ExclusionUntil <DateTime?>]`: 
 
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
   - `[Number <String>]`: 

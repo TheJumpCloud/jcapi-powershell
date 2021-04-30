@@ -71,21 +71,11 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-AUTH <IAuthInput>:
-  [Basic <IAuthInputBasic>]:
-    [Password <String>]:
-    [Username <String>]:
-  [Oauth <IAuthInputOauth>]:
-    [Code <String>]:
-
 BODY <IWorkdayInput>:
-  [Auth <IAuthInput>]: Auth Input
-    [Basic <IAuthInputBasic>]:
-      [Password <String>]:
-      [Username <String>]:
-    [Oauth <IAuthInputOauth>]:
-      [Code <String>]:
+  [BasicPassword <String>]:
+  [BasicUsername <String>]:
   [Name <String>]:
+  [OauthCode <String>]:
   [ReportUrl <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkWorkday.md
@@ -104,16 +94,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthInput]
-    # Auth Input
-    # To construct, see NOTES section for AUTH properties and create a hash table.
-    ${Auth},
+    [System.String]
+    # .
+    ${BasicPassword},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${BasicUsername},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
     ${Name},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${OauthCode},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]

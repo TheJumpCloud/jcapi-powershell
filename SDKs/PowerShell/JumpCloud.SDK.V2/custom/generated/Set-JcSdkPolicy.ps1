@@ -39,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPolicyRequest
 .Outputs
@@ -51,13 +51,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>:
   Name <String>: The description for this specific Policy.
-  [Template <IPolicyRequestTemplate>]:
-    [Id <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   [Values <IPolicyValue[]>]:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Value <String>]: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -78,9 +77,6 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>:
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
-
-TEMPLATE <IPolicyRequestTemplate>:
-  [Id <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 VALUES <IPolicyValue[]>:
   [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
@@ -103,7 +99,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -126,10 +122,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPolicyRequestTemplate]
-    # .
-    # To construct, see NOTES section for TEMPLATE properties and create a hash table.
-    ${Template},
+    [System.String]
+    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+    ${TemplateId},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

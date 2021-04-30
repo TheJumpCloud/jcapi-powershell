@@ -32,7 +32,7 @@ Get-JcSdkRadiusServer -Id <String> [<CommonParameters>]
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServer -InputObject <IJumpCloudSdkV1Identity> [<CommonParameters>]
+Get-JcSdkRadiusServer -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -122,7 +122,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -155,7 +155,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -172,7 +172,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

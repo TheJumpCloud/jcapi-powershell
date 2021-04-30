@@ -45,7 +45,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationActiveDirectory
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 System.Boolean
 .Notes
@@ -60,7 +60,7 @@ BODY <IGraphOperationActiveDirectory>:
   [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>:
+INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AppleMdmId <String>]:
@@ -99,7 +99,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

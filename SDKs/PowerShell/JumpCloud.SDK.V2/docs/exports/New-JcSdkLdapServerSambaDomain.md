@@ -38,13 +38,13 @@ New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Body <ISambaDomainInput> 
 
 ### CreateViaIdentity
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudSdkV2Identity> -Body <ISambaDomainInput> [-Confirm]
+New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Body <ISambaDomainInput> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudSdkV2Identity> -Name <String> -Sid <String> [-Confirm]
+New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Name <String> -Sid <String> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -102,7 +102,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -194,7 +194,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.ISambaDomainInput
 
@@ -215,7 +215,7 @@ BODY <ISambaDomainInput>: Samba Domain Input
   - `Name <String>`: Name of this domain's WorkGroup
   - `Sid <String>`: Security identifier of this domain
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

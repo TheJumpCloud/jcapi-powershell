@@ -24,13 +24,13 @@ New-JcSdkUserSshKey -Id <String> -Body <ISshkeypost> [-Confirm] [-WhatIf] [<Comm
 
 ### CreateViaIdentity
 ```
-New-JcSdkUserSshKey -InputObject <IJumpCloudSdkV1Identity> -Body <ISshkeypost> [-Confirm] [-WhatIf]
+New-JcSdkUserSshKey -InputObject <IJumpCloudApIsIdentity> -Body <ISshkeypost> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkUserSshKey -InputObject <IJumpCloudSdkV1Identity> -Name <String> -PublicKey <String> [-Confirm]
+New-JcSdkUserSshKey -InputObject <IJumpCloudApIsIdentity> -Name <String> -PublicKey <String> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -91,7 +91,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -168,7 +168,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V1.Models.ISshkeypost
 
@@ -189,7 +189,7 @@ BODY <ISshkeypost>: SSHKeyPost
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

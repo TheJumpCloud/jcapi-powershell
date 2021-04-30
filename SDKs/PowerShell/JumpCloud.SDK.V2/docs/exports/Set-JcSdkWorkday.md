@@ -38,13 +38,13 @@ Set-JcSdkWorkday -Id <String> -Body <IWorkdayFields> [-Confirm] [-WhatIf] [<Comm
 
 ### SetViaIdentity
 ```
-Set-JcSdkWorkday -InputObject <IJumpCloudSdkV2Identity> -Body <IWorkdayFields> [-Confirm] [-WhatIf]
+Set-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> -Body <IWorkdayFields> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkWorkday -InputObject <IJumpCloudSdkV2Identity> [-Name <String>] [-ReportUrl <String>] [-Confirm]
+Set-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> [-Name <String>] [-ReportUrl <String>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -119,7 +119,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -196,7 +196,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IWorkdayFields
 
@@ -217,7 +217,7 @@ BODY <IWorkdayFields>: Workday Fields
   - `[Name <String>]`: 
   - `[ReportUrl <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

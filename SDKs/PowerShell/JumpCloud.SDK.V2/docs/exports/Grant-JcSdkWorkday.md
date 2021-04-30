@@ -38,8 +38,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 
 ### AuthorizeExpanded (Default)
 ```
-Grant-JcSdkWorkday -WorkdayId <String> [-Auth <IAuthInput>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Grant-JcSdkWorkday -WorkdayId <String> [-BasicPassword <String>] [-BasicUsername <String>]
+ [-OauthCode <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Authorize
@@ -50,14 +50,14 @@ Grant-JcSdkWorkday -WorkdayId <String> -Body <IAuthInputObject> [-PassThru] [-Co
 
 ### AuthorizeViaIdentity
 ```
-Grant-JcSdkWorkday -InputObject <IJumpCloudSdkV2Identity> -Body <IAuthInputObject> [-PassThru] [-Confirm]
+Grant-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> -Body <IAuthInputObject> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### AuthorizeViaIdentityExpanded
 ```
-Grant-JcSdkWorkday -InputObject <IJumpCloudSdkV2Identity> [-Auth <IAuthInput>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Grant-JcSdkWorkday -InputObject <IJumpCloudApIsIdentity> [-BasicPassword <String>] [-BasicUsername <String>]
+ [-OauthCode <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -105,12 +105,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 
 ## PARAMETERS
 
-### -Auth
-Auth Input
-To construct, see NOTES section for AUTH properties and create a hash table.
+### -BasicPassword
+.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthInput
+Type: System.String
+Parameter Sets: AuthorizeExpanded, AuthorizeViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -BasicUsername
+.
+
+```yaml
+Type: System.String
 Parameter Sets: AuthorizeExpanded, AuthorizeViaIdentityExpanded
 Aliases:
 
@@ -142,7 +156,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: AuthorizeViaIdentity, AuthorizeViaIdentityExpanded
 Aliases:
 
@@ -150,6 +164,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -OauthCode
+.
+
+```yaml
+Type: System.String
+Parameter Sets: AuthorizeExpanded, AuthorizeViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -221,7 +250,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAuthInputObject
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -236,22 +265,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-AUTH <IAuthInput>: Auth Input
-  - `[Basic <IAuthInputBasic>]`: 
-    - `[Password <String>]`: 
-    - `[Username <String>]`: 
-  - `[Oauth <IAuthInputOauth>]`: 
-    - `[Code <String>]`: 
-
 BODY <IAuthInputObject>: Auth Input Object
-  - `[Auth <IAuthInput>]`: Auth Input
-    - `[Basic <IAuthInputBasic>]`: 
-      - `[Password <String>]`: 
-      - `[Username <String>]`: 
-    - `[Oauth <IAuthInputOauth>]`: 
-      - `[Code <String>]`: 
+  - `[BasicPassword <String>]`: 
+  - `[BasicUsername <String>]`: 
+  - `[OauthCode <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

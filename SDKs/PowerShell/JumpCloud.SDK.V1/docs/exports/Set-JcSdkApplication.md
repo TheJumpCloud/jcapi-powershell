@@ -16,9 +16,9 @@ The endpoint updates a SSO / SAML Application.
 ```
 Set-JcSdkApplication -Id <String> [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-Logo <IApplicationLogo>] [-Name <String>]
- [-Organization <String>] [-Sso <IApplicationSso>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
+ [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -28,17 +28,17 @@ Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<Co
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudSdkV1Identity> -Body <IApplication> [-Confirm] [-WhatIf]
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudSdkV1Identity> [-Id <String>] [-Beta] [-Color <String>]
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <String>]
  [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-Logo <IApplicationLogo>] [-Name <String>]
- [-Organization <String>] [-Sso <IApplicationSso>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -235,7 +235,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -261,12 +261,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Logo
+### -LogoColor
 .
-To construct, see NOTES section for LOGO properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationLogo
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -LogoUrl
+.
+
+```yaml
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -307,12 +321,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Sso
+### -SsoBeta
 .
-To construct, see NOTES section for SSO properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IApplicationSso
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoJit
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SsoType
+.
+
+```yaml
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -376,7 +419,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IApplication
 
-### JumpCloud.SDK.V1.Models.IJumpCloudSdkV1Identity
+### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -395,104 +438,85 @@ BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <String>]`: 
   - `[Config <IApplicationConfig>]`: 
-    - `[AcsUrl <IApplicationConfigAcsUrl>]`: 
-      - `[Label <String>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
+    - `[AcUrlLabel <String>]`: 
+    - `[AcUrlOptions <String>]`: 
+    - `[AcUrlPosition <Int32?>]`: 
+    - `[AcUrlReadOnly <Boolean?>]`: 
+    - `[AcUrlRequired <Boolean?>]`: 
+    - `[AcUrlToggle <String>]`: 
+    - `[AcUrlType <String>]`: 
+    - `[AcUrlValue <String>]`: 
+    - `[AcUrlVisible <Boolean?>]`: 
+    - `[AcsUrlTooltipTemplate <String>]`: 
+    - `[AcsUrlTooltipVariablesIcon <String>]`: 
+    - `[AcsUrlTooltipVariablesMessage <String>]`: 
+    - `[ConstantAttributeLabel <String>]`: 
+    - `[ConstantAttributeMutable <Boolean?>]`: 
+    - `[ConstantAttributeOptions <String>]`: 
+    - `[ConstantAttributePosition <Int32?>]`: 
+    - `[ConstantAttributeReadOnly <Boolean?>]`: 
+    - `[ConstantAttributeRequired <Boolean?>]`: 
+    - `[ConstantAttributeToggle <String>]`: 
+    - `[ConstantAttributeType <String>]`: 
+    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+      - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigAcsUrlTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigAcsUrlTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
       - `[Value <String>]`: 
       - `[Visible <Boolean?>]`: 
-    - `[ConstantAttributes <IApplicationConfigConstantAttributes>]`: 
-      - `[Label <String>]`: 
-      - `[Mutable <Boolean?>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigConstantAttributesTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigConstantAttributesTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
-      - `[Value <IApplicationConfigConstantAttributesValueItem[]>]`: 
-        - `[Name <String>]`: 
-        - `[ReadOnly <Boolean?>]`: 
-        - `[Required <Boolean?>]`: 
-        - `[Value <String>]`: 
-        - `[Visible <Boolean?>]`: 
-      - `[Visible <Boolean?>]`: 
-    - `[DatabaseAttributes <IApplicationConfigDatabaseAttributes>]`: 
-      - `[Position <Int32?>]`: 
-    - `[IdpCertificate <IApplicationConfigIdpCertificate>]`: 
-      - `[Label <String>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigIdpCertificateTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigIdpCertificateTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
-      - `[Value <String>]`: 
-      - `[Visible <Boolean?>]`: 
-    - `[IdpEntityId <IApplicationConfigIdpEntityId>]`: 
-      - `[Label <String>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigIdpEntityIdTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigIdpEntityIdTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
-      - `[Value <String>]`: 
-      - `[Visible <Boolean?>]`: 
-    - `[IdpPrivateKey <IApplicationConfigIdpPrivateKey>]`: 
-      - `[Label <String>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigIdpPrivateKeyTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigIdpPrivateKeyTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
-      - `[Value <String>]`: 
-      - `[Visible <Boolean?>]`: 
-    - `[SpEntityId <IApplicationConfigSpEntityId>]`: 
-      - `[Label <String>]`: 
-      - `[Options <String>]`: 
-      - `[Position <Int32?>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Toggle <String>]`: 
-      - `[Tooltip <IApplicationConfigSpEntityIdTooltip>]`: 
-        - `[Template <String>]`: 
-        - `[Variables <IApplicationConfigSpEntityIdTooltipVariables>]`: 
-          - `[Icon <String>]`: 
-          - `[Message <String>]`: 
-      - `[Type <String>]`: 
-      - `[Value <String>]`: 
-      - `[Visible <Boolean?>]`: 
+    - `[ConstantAttributeVisible <Boolean?>]`: 
+    - `[ConstantAttributesTooltipTemplate <String>]`: 
+    - `[ConstantAttributesTooltipVariablesIcon <String>]`: 
+    - `[ConstantAttributesTooltipVariablesMessage <String>]`: 
+    - `[DatabaseAttributePosition <Int32?>]`: 
+    - `[IdpCertificateLabel <String>]`: 
+    - `[IdpCertificateOptions <String>]`: 
+    - `[IdpCertificatePosition <Int32?>]`: 
+    - `[IdpCertificateReadOnly <Boolean?>]`: 
+    - `[IdpCertificateRequired <Boolean?>]`: 
+    - `[IdpCertificateToggle <String>]`: 
+    - `[IdpCertificateTooltipTemplate <String>]`: 
+    - `[IdpCertificateTooltipVariablesIcon <String>]`: 
+    - `[IdpCertificateTooltipVariablesMessage <String>]`: 
+    - `[IdpCertificateType <String>]`: 
+    - `[IdpCertificateValue <String>]`: 
+    - `[IdpCertificateVisible <Boolean?>]`: 
+    - `[IdpEntityIdLabel <String>]`: 
+    - `[IdpEntityIdOptions <String>]`: 
+    - `[IdpEntityIdPosition <Int32?>]`: 
+    - `[IdpEntityIdReadOnly <Boolean?>]`: 
+    - `[IdpEntityIdRequired <Boolean?>]`: 
+    - `[IdpEntityIdToggle <String>]`: 
+    - `[IdpEntityIdTooltipTemplate <String>]`: 
+    - `[IdpEntityIdTooltipVariablesIcon <String>]`: 
+    - `[IdpEntityIdTooltipVariablesMessage <String>]`: 
+    - `[IdpEntityIdType <String>]`: 
+    - `[IdpEntityIdValue <String>]`: 
+    - `[IdpEntityIdVisible <Boolean?>]`: 
+    - `[IdpPrivateKeyLabel <String>]`: 
+    - `[IdpPrivateKeyOptions <String>]`: 
+    - `[IdpPrivateKeyPosition <Int32?>]`: 
+    - `[IdpPrivateKeyReadOnly <Boolean?>]`: 
+    - `[IdpPrivateKeyRequired <Boolean?>]`: 
+    - `[IdpPrivateKeyToggle <String>]`: 
+    - `[IdpPrivateKeyTooltipTemplate <String>]`: 
+    - `[IdpPrivateKeyTooltipVariablesIcon <String>]`: 
+    - `[IdpPrivateKeyTooltipVariablesMessage <String>]`: 
+    - `[IdpPrivateKeyType <String>]`: 
+    - `[IdpPrivateKeyValue <String>]`: 
+    - `[IdpPrivateKeyVisible <Boolean?>]`: 
+    - `[SpEntityIdLabel <String>]`: 
+    - `[SpEntityIdOptions <String>]`: 
+    - `[SpEntityIdPosition <Int32?>]`: 
+    - `[SpEntityIdReadOnly <Boolean?>]`: 
+    - `[SpEntityIdRequired <Boolean?>]`: 
+    - `[SpEntityIdToggle <String>]`: 
+    - `[SpEntityIdTooltipTemplate <String>]`: 
+    - `[SpEntityIdTooltipVariablesIcon <String>]`: 
+    - `[SpEntityIdTooltipVariablesMessage <String>]`: 
+    - `[SpEntityIdType <String>]`: 
+    - `[SpEntityIdValue <String>]`: 
+    - `[SpEntityIdVisible <Boolean?>]`: 
   - `[Created <String>]`: 
   - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
@@ -500,131 +524,101 @@ BODY <IApplication>: Application
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[LearnMore <String>]`: 
-  - `[Logo <IApplicationLogo>]`: 
-    - `[Color <String>]`: 
-    - `[Url <String>]`: 
+  - `[LogoColor <String>]`: 
+  - `[LogoUrl <String>]`: 
   - `[Name <String>]`: 
   - `[Organization <String>]`: 
-  - `[Sso <IApplicationSso>]`: 
-    - `[Beta <Boolean?>]`: 
-    - `[Jit <Boolean?>]`: 
-    - `[Type <String>]`: 
+  - `[SsoBeta <Boolean?>]`: 
+  - `[SsoJit <Boolean?>]`: 
+  - `[SsoType <String>]`: 
   - `[SsoUrl <String>]`: 
 
 CONFIG <IApplicationConfig>: .
-  - `[AcsUrl <IApplicationConfigAcsUrl>]`: 
-    - `[Label <String>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
+  - `[AcUrlLabel <String>]`: 
+  - `[AcUrlOptions <String>]`: 
+  - `[AcUrlPosition <Int32?>]`: 
+  - `[AcUrlReadOnly <Boolean?>]`: 
+  - `[AcUrlRequired <Boolean?>]`: 
+  - `[AcUrlToggle <String>]`: 
+  - `[AcUrlType <String>]`: 
+  - `[AcUrlValue <String>]`: 
+  - `[AcUrlVisible <Boolean?>]`: 
+  - `[AcsUrlTooltipTemplate <String>]`: 
+  - `[AcsUrlTooltipVariablesIcon <String>]`: 
+  - `[AcsUrlTooltipVariablesMessage <String>]`: 
+  - `[ConstantAttributeLabel <String>]`: 
+  - `[ConstantAttributeMutable <Boolean?>]`: 
+  - `[ConstantAttributeOptions <String>]`: 
+  - `[ConstantAttributePosition <Int32?>]`: 
+  - `[ConstantAttributeReadOnly <Boolean?>]`: 
+  - `[ConstantAttributeRequired <Boolean?>]`: 
+  - `[ConstantAttributeToggle <String>]`: 
+  - `[ConstantAttributeType <String>]`: 
+  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+    - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigAcsUrlTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigAcsUrlTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
     - `[Value <String>]`: 
     - `[Visible <Boolean?>]`: 
-  - `[ConstantAttributes <IApplicationConfigConstantAttributes>]`: 
-    - `[Label <String>]`: 
-    - `[Mutable <Boolean?>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
-    - `[ReadOnly <Boolean?>]`: 
-    - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigConstantAttributesTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigConstantAttributesTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
-    - `[Value <IApplicationConfigConstantAttributesValueItem[]>]`: 
-      - `[Name <String>]`: 
-      - `[ReadOnly <Boolean?>]`: 
-      - `[Required <Boolean?>]`: 
-      - `[Value <String>]`: 
-      - `[Visible <Boolean?>]`: 
-    - `[Visible <Boolean?>]`: 
-  - `[DatabaseAttributes <IApplicationConfigDatabaseAttributes>]`: 
-    - `[Position <Int32?>]`: 
-  - `[IdpCertificate <IApplicationConfigIdpCertificate>]`: 
-    - `[Label <String>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
-    - `[ReadOnly <Boolean?>]`: 
-    - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigIdpCertificateTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigIdpCertificateTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
-    - `[Value <String>]`: 
-    - `[Visible <Boolean?>]`: 
-  - `[IdpEntityId <IApplicationConfigIdpEntityId>]`: 
-    - `[Label <String>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
-    - `[ReadOnly <Boolean?>]`: 
-    - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigIdpEntityIdTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigIdpEntityIdTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
-    - `[Value <String>]`: 
-    - `[Visible <Boolean?>]`: 
-  - `[IdpPrivateKey <IApplicationConfigIdpPrivateKey>]`: 
-    - `[Label <String>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
-    - `[ReadOnly <Boolean?>]`: 
-    - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigIdpPrivateKeyTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigIdpPrivateKeyTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
-    - `[Value <String>]`: 
-    - `[Visible <Boolean?>]`: 
-  - `[SpEntityId <IApplicationConfigSpEntityId>]`: 
-    - `[Label <String>]`: 
-    - `[Options <String>]`: 
-    - `[Position <Int32?>]`: 
-    - `[ReadOnly <Boolean?>]`: 
-    - `[Required <Boolean?>]`: 
-    - `[Toggle <String>]`: 
-    - `[Tooltip <IApplicationConfigSpEntityIdTooltip>]`: 
-      - `[Template <String>]`: 
-      - `[Variables <IApplicationConfigSpEntityIdTooltipVariables>]`: 
-        - `[Icon <String>]`: 
-        - `[Message <String>]`: 
-    - `[Type <String>]`: 
-    - `[Value <String>]`: 
-    - `[Visible <Boolean?>]`: 
+  - `[ConstantAttributeVisible <Boolean?>]`: 
+  - `[ConstantAttributesTooltipTemplate <String>]`: 
+  - `[ConstantAttributesTooltipVariablesIcon <String>]`: 
+  - `[ConstantAttributesTooltipVariablesMessage <String>]`: 
+  - `[DatabaseAttributePosition <Int32?>]`: 
+  - `[IdpCertificateLabel <String>]`: 
+  - `[IdpCertificateOptions <String>]`: 
+  - `[IdpCertificatePosition <Int32?>]`: 
+  - `[IdpCertificateReadOnly <Boolean?>]`: 
+  - `[IdpCertificateRequired <Boolean?>]`: 
+  - `[IdpCertificateToggle <String>]`: 
+  - `[IdpCertificateTooltipTemplate <String>]`: 
+  - `[IdpCertificateTooltipVariablesIcon <String>]`: 
+  - `[IdpCertificateTooltipVariablesMessage <String>]`: 
+  - `[IdpCertificateType <String>]`: 
+  - `[IdpCertificateValue <String>]`: 
+  - `[IdpCertificateVisible <Boolean?>]`: 
+  - `[IdpEntityIdLabel <String>]`: 
+  - `[IdpEntityIdOptions <String>]`: 
+  - `[IdpEntityIdPosition <Int32?>]`: 
+  - `[IdpEntityIdReadOnly <Boolean?>]`: 
+  - `[IdpEntityIdRequired <Boolean?>]`: 
+  - `[IdpEntityIdToggle <String>]`: 
+  - `[IdpEntityIdTooltipTemplate <String>]`: 
+  - `[IdpEntityIdTooltipVariablesIcon <String>]`: 
+  - `[IdpEntityIdTooltipVariablesMessage <String>]`: 
+  - `[IdpEntityIdType <String>]`: 
+  - `[IdpEntityIdValue <String>]`: 
+  - `[IdpEntityIdVisible <Boolean?>]`: 
+  - `[IdpPrivateKeyLabel <String>]`: 
+  - `[IdpPrivateKeyOptions <String>]`: 
+  - `[IdpPrivateKeyPosition <Int32?>]`: 
+  - `[IdpPrivateKeyReadOnly <Boolean?>]`: 
+  - `[IdpPrivateKeyRequired <Boolean?>]`: 
+  - `[IdpPrivateKeyToggle <String>]`: 
+  - `[IdpPrivateKeyTooltipTemplate <String>]`: 
+  - `[IdpPrivateKeyTooltipVariablesIcon <String>]`: 
+  - `[IdpPrivateKeyTooltipVariablesMessage <String>]`: 
+  - `[IdpPrivateKeyType <String>]`: 
+  - `[IdpPrivateKeyValue <String>]`: 
+  - `[IdpPrivateKeyVisible <Boolean?>]`: 
+  - `[SpEntityIdLabel <String>]`: 
+  - `[SpEntityIdOptions <String>]`: 
+  - `[SpEntityIdPosition <Int32?>]`: 
+  - `[SpEntityIdReadOnly <Boolean?>]`: 
+  - `[SpEntityIdRequired <Boolean?>]`: 
+  - `[SpEntityIdToggle <String>]`: 
+  - `[SpEntityIdTooltipTemplate <String>]`: 
+  - `[SpEntityIdTooltipVariablesIcon <String>]`: 
+  - `[SpEntityIdTooltipVariablesMessage <String>]`: 
+  - `[SpEntityIdType <String>]`: 
+  - `[SpEntityIdValue <String>]`: 
+  - `[SpEntityIdVisible <Boolean?>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV1Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
-
-LOGO <IApplicationLogo>: .
-  - `[Color <String>]`: 
-  - `[Url <String>]`: 
-
-SSO <IApplicationSso>: .
-  - `[Beta <Boolean?>]`: 
-  - `[Jit <Boolean?>]`: 
-  - `[Type <String>]`: 
 
 ## RELATED LINKS
 

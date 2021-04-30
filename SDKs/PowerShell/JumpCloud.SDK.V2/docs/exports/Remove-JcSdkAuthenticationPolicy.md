@@ -27,7 +27,7 @@ Remove-JcSdkAuthenticationPolicy -Id <String> [-Confirm] [-WhatIf] [<CommonParam
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkAuthenticationPolicy -InputObject <IJumpCloudSdkV2Identity> [-Confirm] [-WhatIf]
+Remove-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -80,7 +80,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: DeleteViaIdentity
 Aliases:
 
@@ -127,7 +127,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -142,7 +142,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

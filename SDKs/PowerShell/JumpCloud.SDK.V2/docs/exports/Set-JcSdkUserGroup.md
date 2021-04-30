@@ -25,9 +25,10 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroup -Id <String> -Name <String> [-Attributes <IGroupAttributesUserGroup>]
- [-Description <String>] [-Email <String>] [-MemberQuery <IFilterQuery>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
+ [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
+ [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -37,15 +38,17 @@ Set-JcSdkUserGroup -Id <String> -Body <IUserGroupPut> [-Confirm] [-WhatIf] [<Com
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudSdkV2Identity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
+Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudSdkV2Identity> -Name <String>
- [-Attributes <IGroupAttributesUserGroup>] [-Description <String>] [-Email <String>]
- [-MemberQuery <IFilterQuery>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
+ [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
+ [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
+ [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,12 +83,59 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 
 ## PARAMETERS
 
-### -Attributes
-The graph attributes for a UserGroup.
-To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
+### -AttributeLdapGroups
+.
+To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGroupAttributesUserGroup
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributePosixGroups
+.
+To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributeRadiusReply
+.
+To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AttributeSambaEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -162,7 +212,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -173,12 +223,12 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -MemberQuery
-Query using a sequence of field filters.
-To construct, see NOTES section for MEMBERQUERY properties and create a hash table.
+### -MemberQueryFilters
+.
+To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IFilterQuery
+Type: JumpCloud.SDK.V2.Models.IFilter[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -240,7 +290,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IUserGroupPut
 
@@ -257,40 +307,36 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTES <IGroupAttributesUserGroup>: The graph attributes for a UserGroup.
-  - `[LdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
-    - `Name <String>`: 
-  - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
-    - `Id <Int32>`: 
-    - `Name <String>`: 
-  - `[Radius <IGraphAttributeRadiusAutoGenerated>]`: 
-    - `[Reply <IGraphAttributeRadiusReplyItem[]>]`: 
-      - `Name <String>`: 
-      - `Value <String>`: 
-  - `[SambaEnabled <Boolean?>]`: 
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>: .
+  - `Name <String>`: 
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>: .
+  - `Id <Int32>`: 
+  - `Name <String>`: 
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>: .
+  - `Name <String>`: 
+  - `Value <String>`: 
 
 BODY <IUserGroupPut>: UserGroupPut
   - `Name <String>`: Display name of a User Group.
-  - `[Attributes <IGroupAttributesUserGroup>]`: The graph attributes for a UserGroup.
-    - `[LdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
-      - `Name <String>`: 
-    - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
-      - `Id <Int32>`: 
-      - `Name <String>`: 
-    - `[Radius <IGraphAttributeRadiusAutoGenerated>]`: 
-      - `[Reply <IGraphAttributeRadiusReplyItem[]>]`: 
-        - `Name <String>`: 
-        - `Value <String>`: 
-    - `[SambaEnabled <Boolean?>]`: 
+  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
+    - `Name <String>`: 
+  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
+    - `Id <Int32>`: 
+    - `Name <String>`: 
+  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
+    - `Name <String>`: 
+    - `Value <String>`: 
+  - `[AttributeSambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
-  - `[MemberQuery <IFilterQuery>]`: Query using a sequence of field filters.
-    - `[Filters <IFilter[]>]`: 
-      - `Field <String>`: Name of field in filter target object.
-      - `Operator <String>`: Filter comparison operator.
-      - `Value <String>`: Filter comparison value.
+  - `[MemberQueryFilters <IFilter[]>]`: 
+    - `Field <String>`: Name of field in filter target object.
+    - `Operator <String>`: Filter comparison operator.
+    - `Value <String>`: Filter comparison value.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
@@ -312,11 +358,10 @@ INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-MEMBERQUERY <IFilterQuery>: Query using a sequence of field filters.
-  - `[Filters <IFilter[]>]`: 
-    - `Field <String>`: Name of field in filter target object.
-    - `Operator <String>`: Filter comparison operator.
-    - `Value <String>`: Filter comparison value.
+MEMBERQUERYFILTERS <IFilter[]>: .
+  - `Field <String>`: Name of field in filter target object.
+  - `Operator <String>`: Filter comparison operator.
+  - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
 

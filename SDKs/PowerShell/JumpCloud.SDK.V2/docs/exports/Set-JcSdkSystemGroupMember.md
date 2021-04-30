@@ -39,13 +39,13 @@ Set-JcSdkSystemGroupMember -GroupId <String> -Body <IGraphOperationSystemGroupMe
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudSdkV2Identity> -Body <IGraphOperationSystemGroupMember>
+Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationSystemGroupMember>
  [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudSdkV2Identity> -Id <String> -Op <String>
+Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
  [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
@@ -180,7 +180,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -259,7 +259,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IGraphOperationSystemGroupMember
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -280,7 +280,7 @@ BODY <IGraphOperationSystemGroupMember>: GraphOperation (SystemGroup-Member)
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

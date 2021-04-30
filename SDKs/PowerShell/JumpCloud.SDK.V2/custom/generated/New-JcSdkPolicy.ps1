@@ -47,14 +47,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>:
   Name <String>: The description for this specific Policy.
-  [Template <IPolicyRequestTemplate>]:
-    [Id <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   [Values <IPolicyValue[]>]:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Value <String>]: The value for the configuration field for this Policy instance.
-
-TEMPLATE <IPolicyRequestTemplate>:
-  [Id <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
 VALUES <IPolicyValue[]>:
   [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
@@ -82,10 +78,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPolicyRequestTemplate]
-    # .
-    # To construct, see NOTES section for TEMPLATE properties and create a hash table.
-    ${Template},
+    [System.String]
+    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+    ${TemplateId},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]

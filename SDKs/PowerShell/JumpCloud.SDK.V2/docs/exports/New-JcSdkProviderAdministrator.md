@@ -40,13 +40,13 @@ New-JcSdkProviderAdministrator -ProviderId <String> -Body <IProviderAdminReq> [-
 
 ### CreateViaIdentity
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudSdkV2Identity> -Body <IProviderAdminReq> [-Confirm]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Body <IProviderAdminReq> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudSdkV2Identity> -Email <String> [-EnableMultiFactor]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
  [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
@@ -152,7 +152,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -259,7 +259,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ### JumpCloud.SDK.V2.Models.IProviderAdminReq
 
@@ -284,7 +284,7 @@ BODY <IProviderAdminReq>: ProviderAdminReq
   - `[Role <String>]`: 
   - `[RoleName <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 

@@ -39,13 +39,13 @@ Set-JcSdkIPList -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<Commo
 
 ### SetViaIdentity
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudSdkV2Identity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudSdkV2Identity> [-Description <String>] [-Ips <String[]>]
+Set-JcSdkIPList -InputObject <IJumpCloudApIsIdentity> [-Description <String>] [-Ips <String[]>]
  [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -135,7 +135,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -214,7 +214,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IIPListRequest
 
-### JumpCloud.SDK.V2.Models.IJumpCloudSdkV2Identity
+### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
 ## OUTPUTS
 
@@ -234,7 +234,7 @@ BODY <IIPListRequest>: IPListRequest
   - `[Ips <String[]>]`: 
   - `[Name <String>]`: 
 
-INPUTOBJECT <IJumpCloudSdkV2Identity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AppleMdmId <String>]`: 
