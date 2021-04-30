@@ -3,30 +3,32 @@ orbs:
   win: circleci/windows@2.2.0
 # YAML Anchors
 build-sdks: &build-sdks
-  - 'Build and Test JumpCloud SDK DirectoryInsights'
-  - 'Build and Test JumpCloud SDK V1':
+  - Build and Test JumpCloud SDK DirectoryInsights
+  - Build and Test JumpCloud SDK V1:
       requires:
-        - 'Build and Test JumpCloud SDK DirectoryInsights'
-  - 'Build and Test JumpCloud SDK V2':
+        - Build and Test JumpCloud SDK DirectoryInsights
+  - Build and Test JumpCloud SDK V2:
       requires:
-        - 'Build and Test JumpCloud SDK V1'
+        - Build and Test JumpCloud SDK V1
   - Commit Changes:
       requires:
-        - 'Build and Test JumpCloud SDK DirectoryInsights'
-        - 'Build and Test JumpCloud SDK V1'
-        - 'Build and Test JumpCloud SDK V2'
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
   - Pack and Deploy To CodeArtifact:
       requires:
-        - 'Build and Test JumpCloud SDK DirectoryInsights'
-        - 'Build and Test JumpCloud SDK V1'
-        - 'Build and Test JumpCloud SDK V2'
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
   - Pack and Deploy To PSGallery:
       type: approval
       requires:
-        - 'Build and Test JumpCloud SDK DirectoryInsights'
-        - 'Build and Test JumpCloud SDK V1'
-        - 'Build and Test JumpCloud SDK V2'
-        - 'Pack and Deploy To CodeArtifact'
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
+        - Pack and Deploy To CodeArtifact
 workflows:
   version: 2
   ci:
@@ -41,7 +43,7 @@ workflows:
                 - master
     jobs: *build-sdks
 jobs:
-  'Build and Test JumpCloud SDK DirectoryInsights':
+  Build and Test JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
       - setup
@@ -51,7 +53,7 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-  'Build and Test JumpCloud SDK V1':
+  Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
       - setup
@@ -61,7 +63,7 @@ jobs:
           BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
-  'Build and Test JumpCloud SDK V2':
+  Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
       - setup
