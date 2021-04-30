@@ -75,6 +75,7 @@ jobs:
   Commit Changes:
     executor: win/default
     steps:
+      - setup
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   Pack and Deploy To CodeArtifact:
