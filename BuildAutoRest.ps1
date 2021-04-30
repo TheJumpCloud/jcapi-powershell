@@ -68,7 +68,7 @@ ForEach ($SDK In $SDKName)
             $Namespace = [System.String]$Config.'namespace'
             $ConfigPrefix = $Config.prefix | Select-Object -First 1
             $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
-            $ConfigInputFile = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'input-file'
+            $SwaggerSpecFilePath = '{0}/SwaggerSpecs/{1}.json' -f $BaseFolder, $ModuleName
             $LogFilePath = '{0}/{1}.log' -f $OutputFullPath, $ModuleName
             $ModuleVersion = [System.String]$Config.'module-version'
             $binFolder = '{0}/bin' -f $OutputFullPath
@@ -148,7 +148,7 @@ ForEach ($SDK In $SDKName)
                 Copy-Item -Path:("$($CustomFolderSourcePath)/*") -Destination:([System.String]$CustomFolderPath) -Force
                 (Get-Content -Path:($CustomFolderPath + '/Module.cs') -Raw).Replace('namespace ModuleNameSpace', "namespace $Namespace").Replace('ModuleNameSpace/ModuleVersion', $Namespace.Replace('SDK', 'PowerShell.SDK') + '/' + $ModuleVersion) | Set-Content -Path:($CustomFolderPath + '/Module.cs')
                 # Copy swagger spec to SDK directory
-                Copy-Item -Path:("$ConfigInputFile") -Destination:([System.String]$CustomFolderPath) -Force
+                Copy-Item -Path:("$SwaggerSpecFilePath") -Destination:([System.String]$CustomFolderPath) -Force
             }
             ###########################################################################
             If ($BuildModule)
