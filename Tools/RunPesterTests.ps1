@@ -118,10 +118,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey; }) -Body:($global:PesterDefActiveDirectory | ConvertTo-Json) -ContentType:('application/json') -UseBasicParsing
     # Create a Authentication Policy
     $global:PesterDefAuthenticationPolicy = @{
-        Name            = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        EffectAction    = 'allow'
-        TargetResources = @{"type" = "user_portal" }
-        UserGroup       = @{Inclusions = $null } # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
+        Name    = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        Effect  = @{Action = 'allow' }
+        Targets = @{
+            Resources  = @{type = "user_portal" }
+            UserGroups = @{Inclusions = $null } # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
+        }
     }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{

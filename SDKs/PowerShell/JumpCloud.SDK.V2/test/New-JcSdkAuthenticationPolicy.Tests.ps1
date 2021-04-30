@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkAuthenticationPolicy' {
     It 'CreateExpanded' {
-        $global:PesterDefAuthenticationPolicy.UserGroupInclusions = $global:PesterTestUserGroup.Id
+        $global:PesterDefAuthenticationPolicy.Targets.UserGroups.Inclusions = $global:PesterTestUserGroup.Id
         $global:PesterTestAuthenticationPolicy = New-JcSdkAuthenticationPolicy @global:PesterDefAuthenticationPolicy
         $global:PesterTestAuthenticationPolicy | Should -Not -BeNullOrEmpty
     }
