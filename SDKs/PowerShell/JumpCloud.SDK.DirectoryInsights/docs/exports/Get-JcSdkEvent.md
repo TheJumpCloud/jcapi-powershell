@@ -15,8 +15,8 @@ Query the API for Directory Insights events
 ### GetExpanded (Default)
 ```
 Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-SearchAfter <IEventQuerySearchAfterItem[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>]
- [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -137,7 +137,7 @@ Accept wildcard characters: False
 Specific query to search after, see x-* response headers for next values
 
 ```yaml
-Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuerySearchAfterItem[]
+Type: System.String[]
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -281,7 +281,7 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
-  - `[SearchAfter <IEventQuerySearchAfterItem[]>]`: Specific query to search after, see x-* response headers for next values
+  - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
