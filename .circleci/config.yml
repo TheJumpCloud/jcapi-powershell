@@ -16,7 +16,6 @@ build-sdks: &build-sdks
         - 'Build and Test JumpCloud SDK V1'
         - 'Build and Test JumpCloud SDK V2'
   - Pack and Deploy To CodeArtifact:
-      type: approval
       requires:
         - 'Build and Test JumpCloud SDK DirectoryInsights'
         - 'Build and Test JumpCloud SDK V1'
@@ -262,7 +261,7 @@ commands:
           source: << parameters.source >>
           SDKName: << parameters.SDKName >>
       - run:
-          # when: on_success
+          when: on_success
           name: Publishing to "<< parameters.source >>" repo
           shell: pwsh.exe
           command: |
