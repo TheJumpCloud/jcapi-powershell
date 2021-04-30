@@ -25,7 +25,7 @@ Param(
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $CI_USERNAME = 'TheJumpCloud'
 $RunLocal = If ($env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) { $false } Else { $true }
-ForEach ($SDK In $PSBoundParameters.SDKName)
+ForEach ($SDK In $SDKName)
 {
     $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
     $ApiTransformPath = '{0}/ApiTransform.ps1' -f $PSScriptRoot
@@ -34,7 +34,7 @@ ForEach ($SDK In $PSBoundParameters.SDKName)
         # Run API Transform step
         If ($RunApiTransform)
         {
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
+            If ([System.String]::IsNullOrEmpty($GitHubAccessToken))
             {
                 $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
             }
@@ -42,9 +42,9 @@ ForEach ($SDK In $PSBoundParameters.SDKName)
             {
                 $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
             }
-            If ($PSBoundParameters.BuildModuleOverride -eq $true)
+            If ($BuildModuleOverride -eq $true)
             {
-                $UpdatedSpec = $PSBoundParameters.BuildModuleOverride
+                $UpdatedSpec = $BuildModuleOverride
             }
         }
         If (($UpdatedSpec -eq $true -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
