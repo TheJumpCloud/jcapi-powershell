@@ -25,7 +25,7 @@ Param(
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 $CI_USERNAME = 'TheJumpCloud'
 $RunLocal = If ($env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) { $false } Else { $true }
-ForEach ($SDK In $SDKName)
+ForEach ($SDK In $PSBoundParameters.SDKName)
 {
     $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
     $ApiTransformPath = '{0}/ApiTransform.ps1' -f $PSScriptRoot
@@ -59,7 +59,7 @@ ForEach ($SDK In $SDKName)
             # Get config values
             $Config = $ConfigContent | ConvertFrom-Yaml
             # Write current branch back to config file
-            $Config.branch = $env:CIRCLE_BRANCH
+            $Config.branch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
             $Config | Set-Content -Path:($ConfigFileFullName)
             $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
             $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
@@ -342,6 +342,4 @@ ForEach ($SDK In $SDKName)
     {
         Write-Error ("Unable to find file: $ConfigFilePath")
     }
-    # Mark Updated Spec in Pipeline
-    Return $UpdatedSpec
 }
