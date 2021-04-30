@@ -36,11 +36,11 @@ ForEach ($SDK In $SDKName)
         {
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.GitHubAccessToken))
             {
-                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) # -NoUpdate # | Out-Null
+                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
             }
             Else
             {
-                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDKName) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
+                $UpdatedSpec = .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
             }
             If ($PSBoundParameters.BuildModuleOverride -eq $true)
             {
