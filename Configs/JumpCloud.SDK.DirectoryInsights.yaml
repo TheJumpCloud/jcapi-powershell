@@ -29,7 +29,7 @@ base-folder: '..'
 
 input-file:
   - SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
-title: JumpCloud.SDK.DirectoryInsights
+# title: JumpCloud.SDK.DirectoryInsights
 module-name: JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
 sample-generation: true
@@ -41,4 +41,4 @@ directive:
       prefix: JcSdk
     hide: true
 # Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-inlining-threshold: 0
+# inlining-threshold: 0

@@ -29,7 +29,7 @@ base-folder: '..'
 
 input-file:
   - SwaggerSpecs/JumpCloud.SDK.V2.json
-title: JumpCloud.SDK.V2
+# title: JumpCloud.SDK.V2
 module-name: JumpCloud.SDK.V2
 namespace: JumpCloud.SDK.V2
 sample-generation: true
@@ -41,4 +41,4 @@ directive:
       prefix: JcSdk
     hide: true
 # Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-inlining-threshold: 0
+# inlining-threshold: 0
