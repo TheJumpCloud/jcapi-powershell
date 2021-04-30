@@ -23,8 +23,13 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, ParameterSetName = 'Publish', HelpMessage = 'NuGetApiKey for your repository.')][ValidateNotNullOrEmpty()][System.String]$NuGetApiKey = ''
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
+# CI Variables
 $CI_USERNAME = 'TheJumpCloud'
 $RunLocal = If ($env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) { $false } Else { $true }
+$CurrentBranch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
+$BuildNumber = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM)) { '0000' } Else { $env:CIRCLE_BUILD_NUM }
+$RepoUrl = If ([System.String]::IsNullOrEmpty($env:CIRCLE_REPOSITORY_URL)) { 'https://github.com/TheJumpCloud/jcapi-powershell' } Else { $env:CIRCLE_REPOSITORY_URL }
+# Start script
 ForEach ($SDK In $SDKName)
 {
     $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
@@ -47,7 +52,7 @@ ForEach ($SDK In $SDKName)
                 $UpdatedSpec = $BuildModuleOverride
             }
         }
-        If (($UpdatedSpec -eq $true -and $env:CIRCLE_PROJECT_USERNAME -eq $CI_USERNAME) -or $RunLocal)
+        If (($UpdatedSpec -eq $true -and $RunLocal -eq $false) -or $RunLocal)
         {
             # Start SDK generation
             $ConfigFile = Get-Item -Path:($ConfigFilePath)
@@ -59,7 +64,7 @@ ForEach ($SDK In $SDKName)
             # Get config values
             $Config = $ConfigContent | ConvertFrom-Yaml
             # Write current branch back to config file
-            $Config.branch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
+            $Config.branch = $CurrentBranch
             $Config | Set-Content -Path:($ConfigFileFullName)
             $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
             $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
@@ -122,15 +127,7 @@ ForEach ($SDK In $SDKName)
                     }
                 }
             }
-            $env:CIRCLE_BUILD_NUM = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM))
-            {
-                '0000'
-            }
-            Else
-            {
-                $env:CIRCLE_BUILD_NUM
-            }
-            $BuildVersion = "$($ModuleVersion)-$($env:CIRCLE_BUILD_NUM)"
+            $BuildVersion = "$($ModuleVersion)-$($BuildNumber)"
             ###########################################################################
             If ($GenerateModule)
             {
@@ -294,7 +291,7 @@ ForEach ($SDK In $SDKName)
                 $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecPath) )
                 $repository = $nuspecContent.package.metadata.AppendChild($nuspecContent.CreateElement('repository', $nuspecContent.DocumentElement.NamespaceURI))
                 $repository.SetAttribute('type', 'git')
-                $repository.SetAttribute('url', $env:CIRCLE_REPOSITORY_URL)
+                $repository.SetAttribute('url', $RepoUrl)
                 $nuspecContent.Save($nuspecPath)
             }
             ##########################################################################
