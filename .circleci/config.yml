@@ -152,7 +152,7 @@ commands:
           shell: pwsh.exe
           command: |
             echo "Access Key: $($AWS_ACCESS_KEY_ID)`r`nEnv Access Key: $($env:AWS_ACCESS_KEY_ID)"
-            Set-AWSCredential -AccessKey:($AWS_ACCESS_KEY_ID) -SecretKey:($AWS_SECRET_ACCESS_KEY)
+            Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-ci -Region us-west-2 -Repository nuget-store -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-ci") -Region:("us-west-2")).AuthorizationToken
             dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
