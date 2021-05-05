@@ -21,6 +21,7 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
         - Commit Changes
+      context: aws-credentials
   - Pack and Deploy To PSGallery:
       type: approval
       requires:
@@ -32,35 +33,7 @@ build-sdks: &build-sdks
 workflows:
   version: 2
   ci:
-    jobs: 
-      - Build and Test JumpCloud SDK DirectoryInsights
-      - Build and Test JumpCloud SDK V1:
-          requires:
-            - Build and Test JumpCloud SDK DirectoryInsights
-      - Build and Test JumpCloud SDK V2:
-          requires:
-            - Build and Test JumpCloud SDK V1
-      - Commit Changes:
-          requires:
-            - Build and Test JumpCloud SDK DirectoryInsights
-            - Build and Test JumpCloud SDK V1
-            - Build and Test JumpCloud SDK V2
-      - Pack and Deploy To CodeArtifact:
-          requires:
-            - Build and Test JumpCloud SDK DirectoryInsights
-            - Build and Test JumpCloud SDK V1
-            - Build and Test JumpCloud SDK V2
-            - Commit Changes
-          context:
-            - aws-credentials
-      - Pack and Deploy To PSGallery:
-          type: approval
-          requires:
-            - Build and Test JumpCloud SDK DirectoryInsights
-            - Build and Test JumpCloud SDK V1
-            - Build and Test JumpCloud SDK V2
-            - Commit Changes
-            - Pack and Deploy To CodeArtifact
+    jobs: *build-sdks
   ci-nightly:
     triggers:
       - schedule:
