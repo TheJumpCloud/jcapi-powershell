@@ -46,7 +46,6 @@ workflows:
               only:
                 - master
     jobs: *build-sdks
-context: aws-credentials
 jobs:
   Build and Test JumpCloud SDK DirectoryInsights:
     executor: win/default
@@ -154,7 +153,6 @@ commands:
           name: Add nuget sources
           shell: pwsh.exe
           command: |
-            echo "Access Key: $($AWS_ACCESS_KEY_ID)`r`nEnv Access Key: $($env:AWS_ACCESS_KEY_ID)"
             Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-ci -Region us-west-2 -Repository nuget-store -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-ci") -Region:("us-west-2")).AuthorizationToken
