@@ -7,6 +7,7 @@ build-sdks: &build-sdks
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+      context: aws-credentials
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK V1
