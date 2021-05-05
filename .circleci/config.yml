@@ -33,7 +33,6 @@ workflows:
   version: 2
   ci:
     jobs: *build-sdks
-    context: aws-credentials
   ci-nightly:
     triggers:
       - schedule:
@@ -43,6 +42,7 @@ workflows:
               only:
                 - master
     jobs: *build-sdks
+context: aws-credentials
 jobs:
   Build and Test JumpCloud SDK DirectoryInsights:
     executor: win/default
