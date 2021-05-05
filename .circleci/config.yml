@@ -3,7 +3,8 @@ orbs:
   win: circleci/windows@2.2.0
 # YAML Anchors
 build-sdks: &build-sdks
-  - Build and Test JumpCloud SDK DirectoryInsights
+  - Build and Test JumpCloud SDK DirectoryInsights:
+      context: aws-credentials
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -11,6 +12,7 @@ build-sdks: &build-sdks
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK V1
+      context: aws-credentials  
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
