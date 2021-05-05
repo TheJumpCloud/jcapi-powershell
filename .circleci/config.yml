@@ -32,8 +32,7 @@ build-sdks: &build-sdks
 workflows:
   version: 2
   ci:
-    jobs: *build-sdks
-    context: aws-credentials
+    jobs: *build-sdks:
   ci-nightly:
     triggers:
       - schedule:
@@ -43,6 +42,7 @@ workflows:
               only:
                 - master
     jobs: *build-sdks
+context: aws-credentials
 jobs:
   Build and Test JumpCloud SDK DirectoryInsights:
     executor: win/default
@@ -51,9 +51,9 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
-          BuildModuleOverride: true
-          RunApiTransform: true
-          TestModule: true
+          BuildModuleOverride: false
+          RunApiTransform: false
+          TestModule: false
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -61,9 +61,9 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
-          BuildModuleOverride: true
-          RunApiTransform: true
-          TestModule: true
+          BuildModuleOverride: false
+          RunApiTransform: false
+          TestModule: false
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -71,9 +71,9 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
-          BuildModuleOverride: true
-          RunApiTransform: true
-          TestModule: true
+          BuildModuleOverride: false
+          RunApiTransform: false
+          TestModule: false
   Commit Changes:
     executor: win/default
     steps:
