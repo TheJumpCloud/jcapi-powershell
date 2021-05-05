@@ -32,7 +32,7 @@ build-sdks: &build-sdks
 workflows:
   version: 2
   ci:
-    jobs: *build-sdks:
+    jobs: *build-sdks
   ci-nightly:
     triggers:
       - schedule:
