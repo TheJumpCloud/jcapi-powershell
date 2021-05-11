@@ -54,7 +54,7 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
-          BuildModuleOverride: false
+          BuildModuleOverride: true
           RunApiTransform: false
           TestModule: false
   Build and Test JumpCloud SDK V1:
@@ -64,7 +64,7 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
-          BuildModuleOverride: false
+          BuildModuleOverride: true
           RunApiTransform: false
           TestModule: false
   Build and Test JumpCloud SDK V2:
@@ -74,7 +74,7 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
-          BuildModuleOverride: false
+          BuildModuleOverride: true
           RunApiTransform: false
           TestModule: false
   Commit Changes:
