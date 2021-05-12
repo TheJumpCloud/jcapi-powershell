@@ -259,6 +259,7 @@ $TransformConfig = [Ordered]@{
             'GET_systems-system_id-associations'                                             = 'Get-SystemAssociation';
             'POST_systems-system_id-associations'                                            = 'Set-SystemAssociation';
             'GET_systems-system_id-fdekey'                                                   = 'Get-SystemFDEKey';
+            'GET_systems-system_id-policygroups'                                             = 'Get-SystemPolicyGroup'
             'POST_systemgroups'                                                              = 'Create-SystemGroup';
             'DELETE_systemgroups-id'                                                         = 'Delete-SystemGroup';
             'GET_systemgroups-id'                                                            = 'Get-SystemGroup';
