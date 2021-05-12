@@ -271,6 +271,7 @@ $TransformConfig = [Ordered]@{
             'GET_systemgroups-group_id-membership'                                           = 'Get-SystemGroupMembership';
             'GET_systemgroups-group_id-commands'                                             = 'Get-SystemGroupTraverseCommand';
             'GET_systemgroups-group_id-policies'                                             = 'Get-SystemGroupTraversePolicy';
+            'GET_systemgroups-group_id-policygroups'                                         = 'Get-SystemGroupTraversePolicyGroup'
             'GET_systemgroups-group_id-users'                                                = 'Get-SystemGroupTraverseUser';
             'GET_systemgroups-group_id-usergroups'                                           = 'Get-SystemGroupTraverseUserGroup';
             'GET_systeminsights-alf'                                                         = 'List-SystemInsightsAlf';
