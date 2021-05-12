@@ -254,6 +254,7 @@ $TransformConfig = [Ordered]@{
             'GET_softwareapps-software_app_id-statuses'                                      = 'Get-SoftwareAppStatus';
             'GET_softwareapps-software_app_id-systems'                                       = 'Get-SoftwareAppTraverseSystem';
             'GET_softwareapps-software_app_id-systemgroups'                                  = 'Get-SoftwareAppTraverseSystemGroup';
+            'POST_softwareapps-software_app_id-reclaim-licenses'                             = 'Reclaim-SofwareAppLicenses'
             'GET_subscriptions'                                                              = 'Get-Subscription';
             'GET_systems-system_id-associations'                                             = 'Get-SystemAssociation';
             'POST_systems-system_id-associations'                                            = 'Set-SystemAssociation';
