@@ -230,6 +230,7 @@ $TransformConfig = [Ordered]@{
             'PUT_policies-id'                                                                = 'Set-Policy';
             'GET_policies-policy_id-associations'                                            = 'Get-PolicyAssociation';
             'POST_policies-policy_id-associations'                                           = 'Set-PolicyAssociation';
+            'GET_policies-policy_id-memberof'                                                = 'Get-PolicyMembers'
             'GET_policyresults-id'                                                           = 'Get-PolicyResult';
             'GET_policies-policy_id-policyresults'                                           = 'List-PolicyResult';
             'GET_policies-policy_id-policystatuses'                                          = 'List-PolicyStatus';
