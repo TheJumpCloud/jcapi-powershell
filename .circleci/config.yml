@@ -75,8 +75,8 @@ jobs:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
           BuildModuleOverride: true
-          RunApiTransform: false
-          TestModule: false
+          RunApiTransform: true
+          TestModule: true
   Commit Changes:
     executor: win/default
     steps:
