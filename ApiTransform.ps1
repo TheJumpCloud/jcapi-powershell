@@ -634,21 +634,24 @@ Function Update-SwaggerObject
                 }
                 Else
                 {
-                    $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
-                    # If it was an array of objects before reapply the parent array.
-                    If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
+                    If ($ThisObject.$AttributeName)
                     {
-                        $ModifiedObject = @($ModifiedObject)
-                    }
-                    # Sort object
-                    If ($Sort)
-                    {
-                        $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
-                    }
-                    Else
-                    {
-                        $ThisObject.$AttributeName = $ModifiedObject
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
+                        # If it was an array of objects before reapply the parent array.
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
+                        {
+                            $ModifiedObject = @($ModifiedObject)
+                        }
+                        # Sort object
+                        If ($Sort)
+                        {
+                            $ThisObject.PSObject.Properties.Remove($AttributeName)
+                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
+                        }
+                        Else
+                        {
+                            $ThisObject.$AttributeName = $ModifiedObject
+                        }
                     }
                 }
             }
