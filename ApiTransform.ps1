@@ -130,7 +130,7 @@ $TransformConfig = [Ordered]@{
             '"collection_time":".*?",'                                                                             = '"collection_time":"2020-01-01T00:00:00.00-06:00",'; # Stoplight keeps updating these examples when we want them to remain static
         };
         OperationIdMapping = [Ordered]@{
-            'GET_activedirectories-id'                                   = 'Get-ActiveDirectory';
+            'GET_activedirectories-id'                                   = 'Get-ActiveDirectory'
             'GET_activedirectories'                                      = 'List-ActiveDirectory';
             'POST_activedirectories'                                     = 'New-ActiveDirectory';
             'GET_activedirectories-activedirectory_id-associations'      = 'Get-ActiveDirectoryAssociation';
@@ -365,7 +365,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation', '/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock', '/applemdms/{apple_mdm_id}/devices/{device_id}', '/softwareapps/{software_app_id}/reclaimLicenses', '/policies/{policy_id}/memberof', '/systems/{system_id}/policygroups', '/systemgroups/{group_id}/policygroups')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation', '/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock', '/applemdms/{apple_mdm_id}/devices/{device_id}', '/softwareapps/{software_app_id}/reclaim-licenses', '/policies/{policy_id}/memberof', '/systems/{system_id}/policygroups', '/systemgroups/{group_id}/policygroups')
     }
 }
 Function Get-SwaggerItem
