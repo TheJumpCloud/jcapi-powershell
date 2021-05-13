@@ -1,4 +1,5 @@
-$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers', 'JumpCloud')
+# PowerShell Dependencies
+$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers', 'AWS.Tools.Common', 'AWS.Tools.CodeArtifact')
 ForEach ($RequiredModule In $RequiredModules)
 {
     # Check to see if the module is installed
@@ -13,3 +14,17 @@ ForEach ($RequiredModule In $RequiredModules)
     }
     Import-Module -Name:($RequiredModule) -Force
 }
+Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
+Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
+# NPM Dependencies
+If ($env:CI -eq $false)
+{
+    Write-Host ('[RUN COMMAND] npm install -g dotnet-sdk-3.1') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+    If ($IsWindows) { npm install -g dotnet-sdk-3.1-win-x64 }
+    ElseIf ($IsMacOS) { npm install -g dotnet-sdk-3.1-osx-x64 }
+    ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
+    Else { Write-Error ('Unknown Operation System') }
+}
+npm install -g autorest@latest
+autorest --reset
+# autorest --help

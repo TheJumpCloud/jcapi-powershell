@@ -392,8 +392,7 @@ $($IndentChar)$($IndentChar)Return `$Results"
             }
             Else
             {
-                Write-Host ("##vso[task.logissue type=error;]" + 'Unmapped command: ' + $CommandName)
-                Write-Error ('Unmapped command: ' + $CommandName)
+                Write-Error ("Unmapped command: $CommandName")
                 $null
             }
             If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
