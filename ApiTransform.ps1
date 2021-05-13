@@ -2,6 +2,7 @@
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub branch or tag to pull spec from.')][ValidateNotNullOrEmpty()][System.String]$GitHubTag
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$SortAttributes = $true
 )
 Set-Location $PSScriptRoot
@@ -9,7 +10,8 @@ $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
 $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
-        Url                = 'https://api.github.com/repos/TheJumpCloud/jumpcloud-insights-api/contents/docs/generated/directory_insights_swagger.json?ref=master';
+        Repo               = "jumpcloud-insights-api"
+        Path               = "docs/generated/directory_insights_swagger.json"
         FindAndReplace     = [Ordered]@{
             '"in":"body","name":".*?"' = '"in":"body","name":"body"' # Across our APIs the standard is using "body" for the name of the body
         };
@@ -22,7 +24,8 @@ $TransformConfig = [Ordered]@{
         ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
-        Url                = 'https://api.github.com/repos/TheJumpCloud/SI/contents/routes/webui/api/index.yaml?ref=master'
+        Repo               = "SI"
+        Path               = "routes/webui/api/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
             '"#\/definitions\/system"'                                                 = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
@@ -97,7 +100,8 @@ $TransformConfig = [Ordered]@{
         ExcludedList       = @();
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
-        Url                = 'https://api.github.com/repos/TheJumpCloud/SI/contents/routes/webui/api/v2/index.yaml?ref=master'
+        Repo               = "SI"
+        Path               = "routes/webui/api/v2/index.yaml"
         FindAndReplace     = [Ordered]@{
             # V2 Issues
             '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
@@ -712,15 +716,29 @@ $SDKName | ForEach-Object {
         {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
-        # Get OAS content
-        $OASContent = If ($Config.Url -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
+        $RepoUrl = 'https://api.github.com/repos/TheJumpCloud/{0}' -f $Config.Repo
+        $LatestReleaseUrl = '{0}/releases/latest' -f $RepoUrl
+        # Get latest version of SI from GitHub
+        $GitHubHeaders = @{
+            'Authorization' = "token $GitHubAccessToken";
+            'Accept'        = 'application/vnd.github.json.raw';
+        }
+        # Get repo's latest release
+        $GitHubTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
         {
-            $GitHubHeaders = @{
-                'Authorization' = "token $GitHubAccessToken";
-                'Accept'        = 'application/vnd.github.json.raw';
-            }
-            $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($Config.Url) -Headers:($GitHubHeaders)
-            If ($Config.Url -like '*.json*')
+            (Invoke-RestMethod -Method:('GET') -Uri:($LatestReleaseUrl) -Headers:($GitHubHeaders)).tag_name
+        }
+        Else
+        {
+            'master'
+        }
+        Write-Host ("Latest Tag: $GitHubTag")
+        # Get OAS content
+        $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubTag
+        $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
+        {
+            $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($SwaggerUrl) -Headers:($GitHubHeaders)
+            If ($SwaggerUrl -like '*.json*')
             {
                 $RawContent | ConvertTo-Json -Depth:(100)
             }
@@ -729,22 +747,22 @@ $SDKName | ForEach-Object {
                 $RawContent
             }
         }
-        ElseIf ($Config.Url -like '*https*')
+        ElseIf ($SwaggerUrl -like '*https*')
         {
-            (Invoke-WebRequest -Uri:($Config.Url)).Content
+            (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
         }
         Else
         {
-            Get-Content -Path:($Config.Url) -Raw
+            Get-Content -Path:($SwaggerUrl) -Raw
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
-            Write-Error ("No content was returned from: $($Config.Url)")
+            Write-Error ("No content was returned from: $($SwaggerUrl)")
         }
         Else
         {
             # Prep json for find and replace by flattening string
-            $SwaggerObjectContent = If ($Config.Url -like '*.yaml*')
+            $SwaggerObjectContent = If ($SwaggerUrl -like '*.yaml*')
             {
                 $OASContent | ConvertFrom-Yaml -Ordered # | ConvertTo-Yaml -JsonCompatible
             }

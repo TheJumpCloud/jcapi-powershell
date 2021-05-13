@@ -443,6 +443,11 @@
           "type": "string"
         }
       },
+      "required": [
+        "config",
+        "name",
+        "ssoUrl"
+      ],
       "title": "Application",
       "type": "object"
     },
@@ -1760,6 +1765,9 @@
             "enablePasswordExpirationInDays": {
               "type": "boolean"
             },
+            "enableResetLockoutCounter": {
+              "type": "boolean"
+            },
             "lockoutTimeInSeconds": {
               "type": "integer"
             },
@@ -1791,6 +1799,10 @@
               "type": "boolean"
             },
             "passwordExpirationInDays": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "resetLockoutCounterMinutes": {
               "minimum": 1,
               "type": "integer"
             }
@@ -2445,6 +2457,13 @@
             "$ref": "#/definitions/sshkeypost"
           },
           "type": "array"
+        },
+        "state": {
+          "enum": [
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
         },
         "sudo": {
           "type": "boolean"

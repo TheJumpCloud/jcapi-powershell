@@ -33,9 +33,17 @@
           "$ref": "#/definitions/SearchTerm"
         },
         "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "description": "service name to query.",
           "items": {
+            "enum": [
+              "all",
+              "systems",
+              "radius",
+              "sso",
+              "directory",
+              "ldap",
+              "mdm"
+            ],
             "type": "string"
           },
           "type": "array",
@@ -65,11 +73,18 @@
           "x-go-name": "EndTime"
         },
         "interval_unit": {
+          "enum": [
+            "s",
+            "m",
+            "h",
+            "d",
+            "w"
+          ],
           "type": "string",
           "x-go-name": "IntervalUnit"
         },
         "interval_value": {
-          "description": "Interval Value. This specifies how many units you want to bucket the event counts by\noptional",
+          "description": "Interval Value. This specifies how many units you want to bucket the event counts by",
           "type": "string",
           "x-go-name": "IntervalValue"
         },
@@ -77,9 +92,17 @@
           "$ref": "#/definitions/SearchTerm"
         },
         "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "description": "service name to query.",
           "items": {
+            "enum": [
+              "all",
+              "systems",
+              "radius",
+              "sso",
+              "directory",
+              "ldap",
+              "mdm"
+            ],
             "type": "string"
           },
           "type": "array",
@@ -140,9 +163,17 @@
           "$ref": "#/definitions/SearchTerm"
         },
         "service": {
-          "description": "service name to query. Known services: systems,radius,sso,directory,ldap,all",
-          "example": "[systems,radius,sso,directory,ldap,mdm,all]",
+          "description": "service name to query.",
           "items": {
+            "enum": [
+              "all",
+              "systems",
+              "radius",
+              "sso",
+              "directory",
+              "ldap",
+              "mdm"
+            ],
             "type": "string"
           },
           "type": "array",
@@ -343,11 +374,26 @@
           "200": {
             "description": "List of bucketed event counts",
             "schema": {
-              "items": {
-                "additionalProperties": true,
-                "type": "object"
+              "properties": {
+                "buckets": {
+                  "items": {
+                    "properties": {
+                      "doc_count": {
+                        "type": "integer"
+                      },
+                      "key": {
+                        "type": "integer"
+                      },
+                      "key_as_string": {
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
               },
-              "type": "array"
+              "type": "object"
             }
           }
         },

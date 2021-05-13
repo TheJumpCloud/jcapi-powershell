@@ -312,6 +312,9 @@
         },
         "targets": {
           "$ref": "#/definitions/AuthnPolicyTargets"
+        },
+        "type": {
+          "$ref": "#/definitions/AuthnPolicyType"
         }
       },
       "title": "AuthnPolicy",
@@ -373,6 +376,9 @@
         },
         "targets": {
           "$ref": "#/definitions/AuthnPolicyTargets"
+        },
+        "type": {
+          "$ref": "#/definitions/AuthnPolicyType"
         }
       },
       "title": "AuthnPolicyInput",
@@ -394,13 +400,22 @@
     },
     "AuthnPolicyResourceTarget": {
       "properties": {
+        "id": {
+          "default": null,
+          "description": "Object ID of the resource target. If undefined, then all resources of the given type are targeted.",
+          "type": "string"
+        },
         "type": {
           "enum": [
-            "user_portal"
+            "user_portal",
+            "application"
           ],
           "type": "string"
         }
       },
+      "required": [
+        "type"
+      ],
       "title": "AuthnPolicyResourceTarget",
       "type": "object"
     },
@@ -421,6 +436,15 @@
       },
       "title": "AuthnPolicyTargets",
       "type": "object"
+    },
+    "AuthnPolicyType": {
+      "default": "user_portal",
+      "enum": [
+        "user_portal",
+        "application"
+      ],
+      "title": "AuthnPolicyType",
+      "type": "string"
     },
     "AuthnPolicyUserGroupTarget": {
       "properties": {
@@ -1320,6 +1344,75 @@
       "title": "GraphOperation (Policy)",
       "type": "object"
     },
+    "GraphOperation-PolicyGroup": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "Targets which a \"policy_group\" can be associated to.",
+              "enum": [
+                "system",
+                "system_group"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type1",
+                "values": [
+                  {
+                    "name": "systems",
+                    "value": "system"
+                  },
+                  {
+                    "name": "systems_group",
+                    "value": "system_group"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (PolicyGroup)",
+      "type": "object"
+    },
+    "GraphOperation-PolicyGroup-Member": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/GraphOperation"
+        },
+        {
+          "properties": {
+            "attributes": {
+              "$ref": "#/definitions/GraphAttributes"
+            },
+            "type": {
+              "description": "The member type.",
+              "enum": [
+                "policy"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "type2"
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        }
+      ],
+      "title": "GraphOperation (PolicyGroup-Member)",
+      "type": "object"
+    },
     "GraphOperation-RadiusServer": {
       "allOf": [
         {
@@ -1412,12 +1505,13 @@
               "enum": [
                 "command",
                 "policy",
+                "policy_group",
                 "user",
                 "user_group"
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type2"
+                "name": "type3"
               }
             }
           },
@@ -1444,12 +1538,13 @@
               "enum": [
                 "command",
                 "policy",
+                "policy_group",
                 "user",
                 "user_group"
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type2"
+                "name": "type3"
               }
             }
           },
@@ -1478,7 +1573,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type3",
+                "name": "type4",
                 "values": [
                   {
                     "name": "systems",
@@ -1527,7 +1622,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type4",
+                "name": "type5",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1597,7 +1692,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type4",
+                "name": "type5",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1660,7 +1755,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type5"
+                "name": "type6"
               }
             }
           },
@@ -1682,6 +1777,7 @@
         "ldap_server",
         "office_365",
         "policy",
+        "policy_group",
         "radius_server",
         "system",
         "system_group",
@@ -1744,6 +1840,7 @@
     "GroupType": {
       "description": "The group type.",
       "enum": [
+        "policy_group",
         "system_group",
         "user_group"
       ],
@@ -2003,16 +2100,6 @@
         }
       }
     },
-    "MemberSuggestionList": {
-      "properties": {
-        "suggestions": {
-          "items": {
-            "$ref": "#/definitions/MemberSuggestion"
-          },
-          "type": "array"
-        }
-      }
-    },
     "office365-output": {
       "properties": {
         "id": {
@@ -2110,14 +2197,14 @@
       "type": "object"
     },
     "Policy": {
-      "description": "An instance of a policy template.",
+      "description": "An instance of a configuration (policy) template.",
       "properties": {
         "id": {
-          "description": "ObjectId uniquely identifying a Policy.",
+          "description": "ObjectId uniquely identifying a Configuration (Policy).",
           "type": "string"
         },
         "name": {
-          "description": "The description for this specific Policy.",
+          "description": "The description for this specific Configuration (Policy).",
           "type": "string"
         },
         "template": {
@@ -2127,17 +2214,62 @@
       "title": "Policy",
       "type": "object"
     },
-    "PolicyRequest": {
-      "description": "An instance of a policy template.",
+    "PolicyGroup": {
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        "description": {
+          "description": "Description of a Configuration (Policy) Group",
+          "type": "string"
+        },
+        "email": {
+          "description": "E-mail address associated with a Configuration (Policy) Group",
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectId uniquely identifying a Configuration (Policy) Group.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Display name of a Configuration (Policy) Group.",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of the group; always 'policy' for a Configuration (Policy) Group.",
+          "enum": [
+            "policy_group"
+          ],
+          "type": "string"
+        }
+      },
+      "title": "PolicyGroup",
+      "type": "object"
+    },
+    "PolicyGroupData": {
       "properties": {
         "name": {
-          "description": "The description for this specific Policy.",
+          "description": "Display name of a Configuration (Policy) Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PolicyGroupData",
+      "type": "object"
+    },
+    "PolicyRequest": {
+      "description": "An instance of a configuration (policy) template.",
+      "properties": {
+        "name": {
+          "description": "The description for this specific Configuration (Policy).",
           "type": "string"
         },
         "template": {
           "properties": {
             "id": {
-              "description": "ObjectId uniquely identifying a Policy instance; only allowed on POST requests.",
+              "description": "ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.",
               "type": "string"
             }
           },
@@ -2159,46 +2291,46 @@
     "PolicyResult": {
       "properties": {
         "detail": {
-          "description": "Details pertaining to the policy result.",
+          "description": "Details pertaining to the configuration (policy) result.",
           "type": "string"
         },
         "endedAt": {
-          "description": "The end of the policy application.",
+          "description": "The end of the configuration (policy) application.",
           "format": "date-time",
           "type": "string"
         },
         "exitStatus": {
-          "description": "The 32-bit unsigned exit status from the applying the policy.",
+          "description": "The 32-bit unsigned exit status from the applying the configuration (policy).",
           "format": "int64",
           "type": "integer"
         },
         "id": {
-          "description": "ObjectId uniquely identifying a Policy Result.",
+          "description": "ObjectId uniquely identifying a Configuration (Policy) Result.",
           "type": "string"
         },
         "policyID": {
-          "description": "ObjectId uniquely identifying the parent Policy.",
+          "description": "ObjectId uniquely identifying the parent Configuration (Policy).",
           "type": "string"
         },
         "startedAt": {
-          "description": "The start of the policy application.",
+          "description": "The start of the configuration (policy) application.",
           "format": "date-time",
           "type": "string"
         },
         "state": {
-          "description": "Enumeration describing the state of the policy. Success, failed, or pending.",
+          "description": "Enumeration describing the state of the configuration (policy). Success, failed, or pending.",
           "type": "string"
         },
         "stdErr": {
-          "description": "The STDERR output from applying the policy.",
+          "description": "The STDERR output from applying the configuration (policy).",
           "type": "string"
         },
         "stdOut": {
-          "description": "The STDOUT output from applying the policy.",
+          "description": "The STDOUT output from applying the configuration (policy).",
           "type": "string"
         },
         "success": {
-          "description": "True if the policy was successfully applied; false otherwise.",
+          "description": "True if the configuration (policy) was successfully applied; false otherwise.",
           "type": "boolean"
         },
         "systemID": {
@@ -2210,22 +2342,22 @@
       "type": "object"
     },
     "PolicyTemplate": {
-      "description": "The shallow information about a Policy Template.",
+      "description": "The shallow information about a Configuration (Policy) Template.",
       "properties": {
         "activation": {
-          "description": "Requirements before the policy can be activated.",
+          "description": "Requirements before the configuration (policy) can be activated.",
           "type": "string"
         },
         "alert": {
-          "description": "Text to describe any risk associated with this policy.",
+          "description": "Text to describe any risk associated with this configuration (policy).",
           "type": "string"
         },
         "behavior": {
-          "description": "Specifics about the behavior of the policy.",
+          "description": "Specifics about the behavior of the configuration (policy).",
           "type": "string"
         },
         "deliveryTypes": {
-          "description": "The supported delivery mechanisms for this policy template.",
+          "description": "The supported delivery mechanisms for this configuration (policy) template.",
           "items": {
             "default": "agent",
             "enum": [
@@ -2237,19 +2369,19 @@
           "type": "array"
         },
         "description": {
-          "description": "The default description for the Policy.",
+          "description": "The default description for the Configuration (Policy).",
           "type": "string"
         },
         "displayName": {
-          "description": "The default display name for the Policy.",
+          "description": "The default display name for the Configuration (Policy).",
           "type": "string"
         },
         "id": {
-          "description": "ObjectId uniquely identifying a Policy Template.",
+          "description": "ObjectId uniquely identifying a Configuration (Policy) Template.",
           "type": "string"
         },
         "name": {
-          "description": "The unique name for the Policy Template.",
+          "description": "The unique name for the Configuration (Policy) Template.",
           "type": "string"
         },
         "osMetaFamily": {
@@ -2266,7 +2398,7 @@
         },
         "state": {
           "default": "",
-          "description": "String describing the release status of the policy template.",
+          "description": "String describing the release status of the configuration (policy) template.",
           "type": "string"
         }
       },
@@ -2302,7 +2434,7 @@
           "type": "string"
         },
         "id": {
-          "description": "ObjectId uniquely identifying a Policy Template Configuration Field",
+          "description": "ObjectId uniquely identifying a Configuration (Policy) Template Configuration Field",
           "type": "string"
         },
         "label": {
@@ -2353,37 +2485,37 @@
       "type": "object"
     },
     "PolicyTemplateWithDetails": {
-      "description": "The shallow information about a Policy Template.",
+      "description": "The shallow information about a Configuration (Policy) Template.",
       "properties": {
         "activation": {
-          "description": "Requirements before the policy can be activated.",
+          "description": "Requirements before the configuration (policy) can be activated.",
           "type": "string"
         },
         "behavior": {
-          "description": "Specifics about the behavior of the policy.",
+          "description": "Specifics about the behavior of the configuration (policy).",
           "type": "string"
         },
         "configFields": {
-          "description": "An unordered list of all the fields that can be configured for this Policy Template.",
+          "description": "An unordered list of all the fields that can be configured for this Configuration (Policy) Template.",
           "items": {
             "$ref": "#/definitions/PolicyTemplateConfigField"
           },
           "type": "array"
         },
         "description": {
-          "description": "The default description for the Policy.",
+          "description": "The default description for the Configuration (Policy).",
           "type": "string"
         },
         "displayName": {
-          "description": "The default display name for the Policy.",
+          "description": "The default display name for the Configuration (Policy).",
           "type": "string"
         },
         "id": {
-          "description": "ObjectId uniquely identifying a Policy Template.",
+          "description": "ObjectId uniquely identifying a Configuration (Policy) Template.",
           "type": "string"
         },
         "name": {
-          "description": "The unique name for the Policy Template.",
+          "description": "The unique name for the Configuration (Policy) Template.",
           "type": "string"
         },
         "osMetaFamily": {
@@ -2401,11 +2533,11 @@
     "PolicyValue": {
       "properties": {
         "configFieldID": {
-          "description": "The ObjectId of the corresponding Policy Template configuration field.",
+          "description": "The ObjectId of the corresponding Configuration (Policy) Template configuration field.",
           "type": "string"
         },
         "value": {
-          "description": "The value for the configuration field for this Policy instance.",
+          "description": "The value for the configuration field for this Configuration (Policy) instance.",
           "type": "string"
         }
       },
@@ -2413,7 +2545,7 @@
       "type": "object"
     },
     "PolicyWithDetails": {
-      "description": "An instance of a policy template.",
+      "description": "An instance of a configuration (policy) template.",
       "properties": {
         "configFields": {
           "items": {
@@ -2422,11 +2554,11 @@
           "type": "array"
         },
         "id": {
-          "description": "ObjectId uniquely identifying a Policy.",
+          "description": "ObjectId uniquely identifying a Configuration (Policy).",
           "type": "string"
         },
         "name": {
-          "description": "The description for this specific Policy.",
+          "description": "The description for this specific Configuration (Policy).",
           "type": "string"
         },
         "template": {
@@ -2594,6 +2726,27 @@
       "title": "software-app-apple-vpp",
       "type": "object"
     },
+    "software-app-reclaim-licenses": {
+      "properties": {
+        "assignedLicenses": {
+          "default": 0,
+          "type": "integer"
+        },
+        "availableLicenses": {
+          "default": 0,
+          "type": "integer"
+        },
+        "reclaimedLicenses": {
+          "default": 0,
+          "type": "integer"
+        },
+        "totalLicenses": {
+          "default": 0,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "software-app-status": {
       "properties": {
         "code": {
@@ -2632,9 +2785,28 @@
         "appleVpp": {
           "$ref": "#/definitions/software-app-apple-vpp"
         },
+        "assetKind": {
+          "description": "The manifest asset kind (ex: software).",
+          "type": "string"
+        },
+        "assetSha256Size": {
+          "description": "The incremental size to use for summing the package as it is downloaded.",
+          "type": "integer"
+        },
+        "assetSha256Strings": {
+          "description": "The array of checksums, one each for the hash size up to the total size of the package.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "autoUpdate": {
           "default": false,
           "type": "boolean"
+        },
+        "description": {
+          "description": "The software app description.",
+          "type": "string"
         },
         "desiredState": {
           "description": "State of Install or Uninstall",
@@ -2651,8 +2823,20 @@
         "packageId": {
           "type": "string"
         },
+        "packageKind": {
+          "description": "The package manifest kind (ex: software-package).",
+          "type": "string"
+        },
         "packageManager": {
           "description": "App store serving the app: APPLE_VPP, CHOCOLATEY, etc.",
+          "type": "string"
+        },
+        "packageSubtitle": {
+          "description": "The package manifest subtitle.",
+          "type": "string"
+        },
+        "packageVersion": {
+          "description": "The package manifest version.",
           "type": "string"
         }
       },
@@ -2703,6 +2887,21 @@
         "productCode"
       ],
       "title": "Subscription",
+      "type": "object"
+    },
+    "SuggestionCounts": {
+      "properties": {
+        "add": {
+          "type": "integer"
+        },
+        "remove": {
+          "type": "integer"
+        },
+        "total": {
+          "type": "integer"
+        }
+      },
+      "readOnly": true,
       "type": "object"
     },
     "system-insights-alf": {
@@ -5067,6 +5266,9 @@
           "description": "Display name of a User Group.",
           "type": "string"
         },
+        "suggestionCounts": {
+          "$ref": "#/definitions/SuggestionCounts"
+        },
         "type": {
           "description": "The type of the group.",
           "enum": [
@@ -5231,7 +5433,7 @@
       "name": "JumpCloud Support",
       "url": "https://support.jumpcloud.com/support/s/"
     },
-    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Configurations (Policies)\n* Configuration (Policy) Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
     "title": "JumpCloud APIs",
     "version": "2.0"
   },
@@ -5374,6 +5576,30 @@
         ]
       }
     },
+    "trait:graphTargetsPolicyGroup:targets": {
+      "description": "Targets which a \"policy_group\" can be associated to.",
+      "enum": [
+        "system",
+        "system_group"
+      ],
+      "in": "query",
+      "name": "targets",
+      "required": true,
+      "type": "string",
+      "x-ms-enum": {
+        "name": "targets1",
+        "values": [
+          {
+            "name": "systems",
+            "value": "system"
+          },
+          {
+            "name": "systems_group",
+            "value": "system_group"
+          }
+        ]
+      }
+    },
     "trait:graphTargetsRadiusServer:targets": {
       "description": "Targets which a \"radius_server\" can be associated to.",
       "enum": [
@@ -5417,6 +5643,7 @@
       "enum": [
         "command",
         "policy",
+        "policy_group",
         "user",
         "user_group"
       ],
@@ -5433,6 +5660,7 @@
       "enum": [
         "command",
         "policy",
+        "policy_group",
         "user",
         "user_group"
       ],
@@ -5927,6 +6155,72 @@
         }
       ]
     },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}": {
+      "get": {
+        "description": "Gets a single Apple MDM device.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\\n  -H 'accept: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "applemdms_getdevice",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/apple-mdm-device"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Details of an AppleMDM Device"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "Clears the activation lock on the specified device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "operationId": "applemdms_devicesClearActivationLock",
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Clears the Activation Lock for a Device"
+      }
+    },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
       "parameters": [
         {
@@ -6027,6 +6321,38 @@
           }
         ],
         "summary": "Lock Device"
+      }
+    },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "parameters": [],
+        "description": "Refreshes the activation lock information for a device\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "operationId": "applemdms_devicesRefreshActivationLockInformation",
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Refresh activation lock information for a device"
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/restart": {
@@ -8845,7 +9171,7 @@
     },
     "/policies": {
       "get": {
-        "description": "This endpoint returns all policies.\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns all configurations (policies).\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-Policy",
         "parameters": [
           {
@@ -8880,10 +9206,10 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all the Policies"
+        "summary": "Lists all the Configurations (Policies)"
       },
       "post": {
-        "description": "This endpoint allows you to create a policy. Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
+        "description": "This endpoint allows you to create a configuration (policy). Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
         "operationId": "Create-Policy",
         "parameters": [
           {
@@ -8907,13 +9233,13 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Policy"
+        "summary": "Create a new Configuration (Policy)"
       }
     },
     "/policies/{id}": {
       "delete": {
         "parameters": [],
-        "description": "This endpoint allows you to delete a policy.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d4291e6b9 \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint allows you to delete a configuration (policy).\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d4291e6b9 \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Delete-Policy",
         "responses": {
           "204": {
@@ -8925,11 +9251,11 @@
             "x-api-key": []
           }
         ],
-        "summary": "Deletes a Policy"
+        "summary": "Deletes a Configuration (Policy)"
       },
       "get": {
         "parameters": [],
-        "description": "This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns a specific configuration (policy).\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-Policy",
         "responses": {
           "200": {
@@ -8944,11 +9270,11 @@
             "x-api-key": []
           }
         ],
-        "summary": "Gets a specific Policy."
+        "summary": "Gets a specific Configuration (Policy)."
       },
       "parameters": [
         {
-          "description": "ObjectID of the Policy object.",
+          "description": "ObjectID of the Configuration (Policy) object.",
           "in": "path",
           "name": "id",
           "required": true,
@@ -8956,7 +9282,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint allows you to update a policy. Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
+        "description": "This endpoint allows you to update a configuration (policy). Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
         "operationId": "Set-Policy",
         "parameters": [
           {
@@ -8980,12 +9306,12 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update an existing Policy"
+        "summary": "Update an existing Configuration (Policy)"
       }
     },
     "/policies/{policy_id}/associations": {
       "get": {
-        "description": "This endpoint returns the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations?targets=system_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns the _direct_ associations of a Configuration (Policy).\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations?targets=system_group \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-PolicyAssociation",
         "parameters": [
           {
@@ -9014,11 +9340,11 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a Policy"
+        "summary": "List the associations of a Configuration (Policy)"
       },
       "parameters": [
         {
-          "description": "ObjectID of the Policy.",
+          "description": "ObjectID of the Configuration (Policy).",
           "in": "path",
           "name": "policy_id",
           "required": true,
@@ -9026,7 +9352,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to manage the _direct_ associations of a Policy.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```",
+        "description": "This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system_group\",\n    \"id\": \"{Group_ID}\"\n  }'\n```",
         "operationId": "Set-PolicyAssociation",
         "parameters": [
           {
@@ -9047,13 +9373,65 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a Policy"
+        "summary": "Manage the associations of a Configuration (Policy)"
       },
       "x-swagger-jumpcloud-auto-insert": true
     },
+    "/policies/{policy_id}/memberof": {
+      "get": {
+        "description": "This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "graph_policyMemberOf",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:sort:sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the parent Groups of a Configuration (Policy)"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy).",
+          "in": "path",
+          "name": "policy_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/policies/{policy_id}/policyresults": {
       "get": {
-        "description": "This endpoint returns all policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns all configurations (policies) results for a specific configuration (policy).\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-PolicyResult",
         "parameters": [
           {
@@ -9088,7 +9466,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all the policy results of a policy."
+        "summary": "Lists all the configuration (policy) results of a configuration (policy)."
       },
       "parameters": [
         {
@@ -9101,7 +9479,7 @@
     },
     "/policies/{policy_id}/policystatuses": {
       "get": {
-        "description": "This endpoint returns the latest policies results for a specific policy.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns the latest configuration (policy) results for a specific configuration (policy).\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-PolicyStatus",
         "parameters": [
           {
@@ -9136,7 +9514,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists the latest policy results of a policy."
+        "summary": "Lists the latest configuration (policy) results of a configuration (policy)."
       },
       "parameters": [
         {
@@ -9149,7 +9527,7 @@
     },
     "/policies/{policy_id}/systemgroups": {
       "get": {
-        "description": "This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Policy to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Systems Groups bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the group's type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-PolicyTraverseSystemGroup",
         "parameters": [
           {
@@ -9178,7 +9556,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to a Policy"
+        "summary": "List the System Groups bound to a Configuration (Policy)"
       },
       "parameters": [
         {
@@ -9192,7 +9570,7 @@
     },
     "/policies/{policy_id}/systems": {
       "get": {
-        "description": "This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Policy to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Systems bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-PolicyTraverseSystem",
         "parameters": [
           {
@@ -9221,7 +9599,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a Policy"
+        "summary": "List the Systems bound to a Configuration (Policy)"
       },
       "parameters": [
         {
@@ -9233,9 +9611,420 @@
         }
       ]
     },
+    "/policygroups": {
+      "get": {
+        "description": "This endpoint returns all Configuration (Policy) Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "groups_policy_list",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:fields:fields"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:sort:sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/PolicyGroup"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List all Configuration (Policy) Groups"
+      },
+      "post": {
+        "description": "This endpoint allows you to create a new Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
+        "operationId": "groups_policy_post",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupData"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create a new Configuration (Policy) Group"
+      }
+    },
+    "/policygroups/{group_id}/associations": {
+      "get": {
+        "description": "This endpoint returns the _direct_ associations of this Configuration (Policy) Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations?targets=system \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "graph_policyGroupAssociationsList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:graphTargetsPolicyGroup:targets"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphConnection"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the associations of a Configuration (Policy) Group."
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint manages the _direct_ associations of this Configuration (Policy) Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n  }'\n```",
+        "operationId": "graph_policyGroupAssociationsPost",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GraphOperation-PolicyGroup"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Manage the associations of a Configuration (Policy) Group"
+      },
+      "x-swagger-jumpcloud-auto-insert": true
+    },
+    "/policygroups/{group_id}/members": {
+      "get": {
+        "description": "This endpoint returns the Configuration (Policy) members of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "graph_policyGroupMembersList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphConnection"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the members of a Configuration (Policy) Group"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to manage the Configuration (Policy) members of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"policy\",\n    \"id\": \"{Policy_ID}\"\n  }'\n```",
+        "operationId": "graph_policyGroupMembersPost",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/GraphOperation-PolicyGroup-Member"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Manage the members of a Configuration (Policy) Group"
+      },
+      "x-swagger-jumpcloud-auto-insert": true
+    },
+    "/policygroups/{group_id}/membership": {
+      "get": {
+        "description": "This endpoint returns all Configuration (Policy) members that are a member of this Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/membership \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "graph_policyGroupMembership",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:sort:sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Configuration (Policy) Group's membership"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/policygroups/{group_id}/systemgroups": {
+      "get": {
+        "description": "This endpoint will return all System Groups bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "graph_policyGroupTraverseSystemGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the System Groups bound to Configuration (Policy) Groups"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/policygroups/{group_id}/systems": {
+      "get": {
+        "description": "This endpoint will return all Systems bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "graph_policyGroupTraverseSystem",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Systems bound to a Configuration (Policy) Group"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/policygroups/{id}": {
+      "delete": {
+        "parameters": [],
+        "description": "This endpoint allows you to delete a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "groups_policy_delete",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete a Configuration (Policy) Group"
+      },
+      "get": {
+        "parameters": [],
+        "description": "This endpoint returns the details of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "groups_policy_get",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "View an individual Configuration (Policy) Group details"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Configuration (Policy) Group.",
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "description": "This endpoint allows you to do a full update of the Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
+        "operationId": "groups_policy_put",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroupData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PolicyGroup"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Update a Configuration (Policy) Group"
+      }
+    },
     "/policyresults": {
       "get": {
-        "description": "This endpoint returns all policies results for an organization.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns all configuration (policy) results for an organization.\n\n##### Sample Request\n\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-OrganizationPolicyResult",
         "parameters": [
           {
@@ -9270,13 +10059,13 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all the policy results for an organization."
+        "summary": "Lists all of the configuration (policy) results for an organization."
       }
     },
     "/policyresults/{id}": {
       "get": {
         "parameters": [],
-        "description": "This endpoint will return the policy results for a specific policy.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint will return the configuration (policy) results for a specific configuration (policy).\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Get-PolicyResult",
         "responses": {
           "200": {
@@ -9291,11 +10080,11 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a specific Policy Result."
+        "summary": "Get a specific Configuration (Policy) Result."
       },
       "parameters": [
         {
-          "description": "ObjectID of the Policy Result.",
+          "description": "ObjectID of the Configuration (Policy) Result.",
           "in": "path",
           "name": "id",
           "required": true,
@@ -9305,7 +10094,7 @@
     },
     "/policytemplates": {
       "get": {
-        "description": "This endpoint returns all policy templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policytemplates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns all configuration (policy) templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policytemplates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "List-PolicyTemplate",
         "parameters": [
           {
@@ -9340,13 +10129,13 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all of the Policy Templates"
+        "summary": "Lists all of the Configuration (Policy) Templates"
       }
     },
     "/policytemplates/{id}": {
       "get": {
         "parameters": [],
-        "description": "This endpoint returns a specific policy template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns a specific configuration (policy) template.\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-PolicyTemplate",
         "responses": {
           "200": {
@@ -9361,11 +10150,11 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a specific Policy Template"
+        "summary": "Get a specific Configuration (Policy) Template"
       },
       "parameters": [
         {
-          "description": "ObjectID of the Policy Template.",
+          "description": "ObjectID of the Configuration (Policy) Template.",
           "in": "path",
           "name": "id",
           "required": true,
@@ -9846,6 +10635,35 @@
       },
       "x-swagger-jumpcloud-auto-insert": true
     },
+    "/softwareapps/{software_app_id}/reclaim-licenses": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "software_app_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{}'\n```",
+        "operationId": "softwareApps_reclaimLicenses",
+        "responses": {
+          "200": {
+            "description": "Reclaim Licenses Response",
+            "schema": {
+              "$ref": "#/definitions/software-app-reclaim-licenses"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Reclaim Licenses for a Software Application.",
+        "x-swagger-jumpcloud-auto-insert": true
+      }
+    },
     "/softwareapps/{software_app_id}/statuses": {
       "get": {
         "description": "This endpoint allows you to get the status of the provided Software Application on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/statuses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n```",
@@ -10308,7 +11126,7 @@
     },
     "/systemgroups/{group_id}/policies": {
       "get": {
-        "description": "This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not public yet as we haven't finished the code.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint will return all Configurations (Policies) bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not public yet as we haven't finished the code.\n\n##### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Get-SystemGroupTraversePolicy",
         "parameters": [
           {
@@ -10337,7 +11155,50 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policies bound to a System Group"
+        "summary": "List the Configurations (Policies) bound to a System Group"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the System Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/systemgroups/{group_id}/policygroups": {
+      "get": {
+        "description": "This endpoint will return all Configuration (Policy) Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "graph_systemGroupTraversePolicyGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Configuration (Policy) Groups bound to a System Group"
       },
       "parameters": [
         {
@@ -12658,7 +13519,7 @@
     },
     "/systems/{system_id}/policies": {
       "get": {
-        "description": "This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not yet public as we have finish the code.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "description": "This endpoint will return all Configurations (Policies) bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\nThis endpoint is not yet public as we have finish the code.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Get-SystemTraversePolicy",
         "parameters": [
           {
@@ -12687,7 +13548,56 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policies bound to a System"
+        "summary": "List the Configurations (Policies) bound to a System"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the System.",
+          "in": "path",
+          "name": "system_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/systems/{system_id}/policygroups": {
+      "get": {
+        "description": "This endpoint will return all Configuration (Policy) Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "graph_systemTraversePolicyGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Date"
+          },
+          {
+            "$ref": "#/parameters/trait:systemContextAuth:Authorization"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Configuration (Policy) Groups bound to a System"
       },
       "parameters": [
         {
@@ -12701,7 +13611,7 @@
     },
     "/systems/{system_id}/policystatuses": {
       "get": {
-        "description": "This endpoint returns the policy results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "description": "This endpoint returns the configuration (policy) results for a particular system.\n\n##### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatuses \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "List-SystemsPolicyStatus",
         "parameters": [
           {
@@ -12736,7 +13646,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the policy statuses for a system"
+        "summary": "List the configuration (policy) statuses for a system"
       },
       "parameters": [
         {
@@ -12848,7 +13758,7 @@
     },
     "/usergroups": {
       "get": {
-        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `suggestionCounts.add`\n  - `suggestionCounts.remove`\n  - `suggestionCounts.total`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "List-UserGroup",
         "parameters": [
           {
@@ -13352,28 +14262,36 @@
     },
     "/usergroups/{group_id}/suggestions": {
       "get": {
-        "description": "This endpoint generates and returns all suggestions available for a given group",
+        "parameters": [],
+        "description": "This endpoint returns all suggestions available for a given group.\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Get-GroupSuggestion",
-        "parameters": [
-          {
-            "description": "ID of the group",
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/MemberSuggestionList"
-              }
+                "$ref": "#/definitions/MemberSuggestion"
+              },
+              "type": "array"
             }
           }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List Suggestions for a User Group"
+      },
+      "parameters": [
+        {
+          "description": "ID of the group",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
         }
-      }
+      ]
     },
     "/usergroups/{group_id}/systemgroups": {
       "get": {
