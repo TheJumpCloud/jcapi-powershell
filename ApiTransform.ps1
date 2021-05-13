@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$SortAttributes = $true
 )
@@ -109,9 +109,9 @@ $TransformConfig = [Ordered]@{
             '\["integer","null"]'                                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
             '\["number","null"]'                                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
             '"type":"null"'                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
-            '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             'software-app-settings'                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
             '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
@@ -468,7 +468,7 @@ Function Update-SwaggerObject
                         }
                         Else
                         {
-                            Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
+                            Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId)'.")
                         }
                     }
                     # Remove blank values from enum
@@ -739,7 +739,7 @@ $SDKName | ForEach-Object {
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
-            Write-Host ("##vso[task.logissue type=error;]No content was returned from: $($Config.Url)")
+            Write-Error ("No content was returned from: $($Config.Url)")
         }
         Else
         {
@@ -771,7 +771,7 @@ $SDKName | ForEach-Object {
                     }
                     Else
                     {
-                        Write-Host ("##vso[task.logissue type=error;]" + 'Unable to find a match in "' + $CurrentSDKName + '" for : ' + $_.Name)
+                        Write-Error ("Unable to find a match in '$CurrentSDKName' for : $_.Name")
                     }
                 }
             }
@@ -852,27 +852,27 @@ $SDKName | ForEach-Object {
             If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
             {
                 ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
-                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
+                    Write-Error ("In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
                 }
             }
             # Validate that all "ExcludedList" in mapping have been removed from spec
             If (-not [System.String]::IsNullOrEmpty($global:ExcludedList))
             {
                 $global:ExcludedList | ForEach-Object {
-                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
+                    Write-Error ("In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
                 }
             }
             $global:ExcludedListOrg | ForEach-Object {
                 If ($SwaggerString -match """$($_)""" -or $SwaggerString -match [regex]("(""\`$ref"": ""\#\/)(.*?)($($_)"")"))
                 {
-                    Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' the item '$($_)' has not been excluded.")
+                    Write-Error ("In '$($CurrentSDKName)' the item '$($_)' has not been excluded.")
                 }
             }
             # Validate that "tags" have been removed
             $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
             If ($Tags.Matches.Value)
             {
-                Write-Host ("##vso[task.logissue type=error;]In '$($CurrentSDKName)' still has '$($Tags.Matches.Value)' in it.")
+                Write-Error ("In '$($CurrentSDKName)' still has '$($Tags.Matches.Value)' in it.")
             }
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
@@ -907,12 +907,11 @@ $SDKName | ForEach-Object {
             # # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $UpdatedSwagger | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
             # Return variable to Azure Pipelines
-            Write-Host ("##vso[task.setvariable variable=UpdatedSpec]$UpdatedSpec")
             Return $UpdatedSpec
         }
     }
     Else
     {
-        Write-Host ("##vso[task.logissue type=error;]Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
+        Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }

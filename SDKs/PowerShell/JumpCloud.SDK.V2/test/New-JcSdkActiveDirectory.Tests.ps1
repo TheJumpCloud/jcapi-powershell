@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkActiveDirectory' {
-    It 'CreateExpanded' -skip {
+    It 'NewExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Create' -skip {
+    It 'New' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
