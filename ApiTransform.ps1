@@ -29,24 +29,25 @@ $TransformConfig = [Ordered]@{
         Path               = "routes/webui/api/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#\/definitions\/system"'                                                 = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"title":"System"'                                               = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"#\/definitions\/system"'                                                           = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"title":"System"'                                                         = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
-            '"basePath":"\/api"'                                                       = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
-            '"type":"null"'                                                            = '"type":"string"'; # A type of null is not valid.
-            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}' = ''; # is already listed in interface list
+            '"basePath":"\/api"'                                                                 = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
+            '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
+            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list
+            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'         = ''; # We dont want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                  = ''; # We dont want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'             = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                   = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'      = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Content-Type","type":"string"}'                    = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Accept","type":"string"}'                          = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-org-id","type":"string"}'                        = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                       = ',';
-            '\[,'                                                                      = '[';
-            ',]'                                                                       = ']';
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                       = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                             = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Content-Type","type":"string"}'                              = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Accept","type":"string"}'                                    = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-org-id","type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                                 = ',';
+            '\[,'                                                                                = '[';
+            ',]'                                                                                 = ']';
         };
         OperationIdMapping = [Ordered]@{
             'systems_commandBuiltinErase'    = 'Clear-System';
@@ -810,7 +811,7 @@ $SDKName | ForEach-Object {
                     }
                     Else
                     {
-                        Write-Error ("Unable to find a match in '$CurrentSDKName' for : $_.Name")
+                        Write-Error ("Unable to find a match in '$CurrentSDKName' for:$($_.Name)")
                     }
                 }
             }
