@@ -109,10 +109,7 @@
         }
       },
       "title": "Apple MDM Device",
-      "type": "object",
-      "x-tags": [
-        "Apple MDM"
-      ]
+      "type": "object"
     },
     "apple-mdm-device-info": {
       "description": "Apple MDM device information",
@@ -128,10 +125,7 @@
         }
       },
       "title": "Apple MDM Device Info",
-      "type": "object",
-      "x-tags": [
-        "Apple MDM"
-      ]
+      "type": "object"
     },
     "apple-mdm-device-security-info": {
       "description": "Apple MDM device security information",
@@ -150,10 +144,7 @@
         }
       },
       "title": "Apple MDM Device Security Info",
-      "type": "object",
-      "x-tags": [
-        "Apple MDM"
-      ]
+      "type": "object"
     },
     "apple-mdm-patch-input": {
       "properties": {
@@ -6007,8 +5998,7 @@
           }
         ],
         "summary": "Manage the associations of an Active Directory instance"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/activedirectories/{activedirectory_id}/usergroups": {
       "get": {
@@ -6598,8 +6588,7 @@
           }
         ],
         "summary": "Manage the associations of an Application"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/applications/{application_id}/logo": {
       "delete": {
@@ -7037,8 +7026,7 @@
           }
         ],
         "summary": "Manage the associations of a Command"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/commands/{command_id}/systemgroups": {
       "get": {
@@ -7629,8 +7617,7 @@
           }
         ],
         "summary": "Manage the associations of a G Suite instance"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/gsuites/{gsuite_id}/import/users": {
       "get": {
@@ -8352,8 +8339,7 @@
           }
         ],
         "summary": "Manage the associations of a LDAP Server"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/ldapservers/{ldapserver_id}/sambadomains": {
       "get": {
@@ -8603,130 +8589,7 @@
         }
       ]
     },
-    "/office365/activate": {
-      "post": {
-        "description": "This endpoint starts the process to activate a new Office 365. It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain an authorization grant.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365/activate \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'X-Requested-With: XMLHttpRequest' \\\n  -d '{ \"name\": \"Example\" }'\n```",
-        "operationId": "Activate-Office365",
-        "parameters": [
-          {
-            "enum": [
-              "XMLHttpRequest"
-            ],
-            "in": "header",
-            "name": "X-Requested-With",
-            "type": "string",
-            "x-ms-enum": {
-              "name": "X-Requested-With1"
-            }
-          },
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "properties": {
-                "name": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "name"
-              ],
-              "type": "object"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/plain"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "properties": {
-                "location": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Activate Office 365"
-      }
-    },
-    "/office365s/{id}/reactivate": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "description": "This endpoint starts the process to re-activate a new Office 365. It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain a new authorization grant.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/reactivate \\\\\n-H 'Accept: application/json' \\\\\n-H 'Content-Type: application/json' \\\\\n-H 'x-api-key: {API_KEY}' \\\\\n-H 'X-Requested-With: XMLHttpRequest'\n```",
-        "operationId": "Reactivate-Office365",
-        "parameters": [
-          {
-            "enum": [
-              "XMLHttpRequest"
-            ],
-            "in": "header",
-            "name": "X-Requested-With",
-            "type": "string",
-            "x-ms-enum": {
-              "name": "X-Requested-With1"
-            }
-          }
-        ],
-        "produces": [
-          "application/json",
-          "text/plain"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "properties": {
-                "location": {
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Reactivate an Office 365"
-      }
-    },
     "/office365s/{office365_id}": {
-      "delete": {
-        "parameters": [],
-        "description": "This endpoint deletes an existing Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "Delete-Office365",
-        "responses": {
-          "204": {
-            "description": "No Content"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Delete an existing Office 365"
-      },
       "get": {
         "parameters": [],
         "description": "This endpoint returns a specific Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
@@ -8848,8 +8711,7 @@
           }
         ],
         "summary": "Manage the associations of an Office 365 instance"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/office365s/{office365_id}/import/users": {
       "get": {
@@ -9374,8 +9236,7 @@
           }
         ],
         "summary": "Manage the associations of a Configuration (Policy)"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/policies/{policy_id}/memberof": {
       "get": {
@@ -9743,8 +9604,7 @@
           }
         ],
         "summary": "Manage the associations of a Configuration (Policy) Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/policygroups/{group_id}/members": {
       "get": {
@@ -9808,8 +9668,7 @@
           }
         ],
         "summary": "Manage the members of a Configuration (Policy) Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/policygroups/{group_id}/membership": {
       "get": {
@@ -10342,8 +10201,7 @@
           }
         ],
         "summary": "Manage the associations of a RADIUS Server"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/radiusservers/{radiusserver_id}/usergroups": {
       "get": {
@@ -10632,8 +10490,7 @@
           }
         ],
         "summary": "Manage the associations of a software application."
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/softwareapps/{software_app_id}/reclaim-licenses": {
       "parameters": [
@@ -10660,8 +10517,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Reclaim Licenses for a Software Application.",
-        "x-swagger-jumpcloud-auto-insert": true
+        "summary": "Reclaim Licenses for a Software Application."
       }
     },
     "/softwareapps/{software_app_id}/statuses": {
@@ -10961,8 +10817,7 @@
           }
         ],
         "summary": "Manage the associations of a System Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/systemgroups/{group_id}/commands": {
       "get": {
@@ -11075,8 +10930,7 @@
           }
         ],
         "summary": "Manage the members of a System Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/systemgroups/{group_id}/membership": {
       "get": {
@@ -13385,8 +13239,7 @@
           }
         ],
         "summary": "Manage associations of a System"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/systems/{system_id}/commands": {
       "get": {
@@ -13931,8 +13784,7 @@
           }
         ],
         "summary": "Manage the associations of a User Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/usergroups/{group_id}/directories": {
       "get": {
@@ -14125,8 +13977,7 @@
           }
         ],
         "summary": "Manage the members of a User Group"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/usergroups/{group_id}/membership": {
       "get": {
@@ -14566,8 +14417,7 @@
           }
         ],
         "summary": "Manage the associations of a User"
-      },
-      "x-swagger-jumpcloud-auto-insert": true
+      }
     },
     "/users/{user_id}/directories": {
       "get": {

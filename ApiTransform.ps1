@@ -129,7 +129,6 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'office365_postActivate'                            = 'Activate-Office365';
             'workdays_authorize'                                = 'Authorize-Workday';
             'applemdms_deviceserase'                            = 'Clear-AppleMDMDevice';
             'applemdms_devicesClearActivationLock'              = 'Clear-AppleMDMDeviceActivationLock';
@@ -159,7 +158,6 @@ $TransformConfig = [Ordered]@{
             'translationRules_gSuiteDelete'                     = 'Delete-GSuiteTranslationRule';
             'iplists_delete'                                    = 'Delete-IpList';
             'ldapservers_sambaDomainsDelete'                    = 'Delete-LdapServerSambaDomain';
-            'office365s_delete'                                 = 'Delete-Office365';
             'translationRules_office365Delete'                  = 'Delete-Office365TranslationRule';
             'policies_delete'                                   = 'Delete-Policy';
             'softwareApps_delete'                               = 'Delete-SoftwareApp';
@@ -346,7 +344,6 @@ $TransformConfig = [Ordered]@{
             'workdays_list'                                     = 'List-Workday';
             'applemdms_deviceslock'                             = 'Lock-AppleMDMDevice';
             'groups_policy_post'                                = 'New-GroupPolicy';
-            'office365s_postReactivate'                         = 'Reactivate-Office365';
             'softwareApps_reclaimLicenses'                      = 'Reclaim-SoftwareAppsLicenses';
             'applemdms_devicesRefreshActivationLockInformation' = 'Refresh-AppleMDMDeviceLockInformation';
             'applemdms_devicesrestart'                          = 'Restart-AppleMDMDevice';
@@ -622,7 +619,7 @@ Function Update-SwaggerObject
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                     }
                     # Remove endpoints that are not AutoRest compatible or that should be hidden from the public
-                    If ($AttributePath -match '(.paths.)([a-zA-Z\/\{\}\-_]+$|.*\.xml$)')
+                    If ($AttributePath -match '(.paths.)([a-zA-Z0-9\/\{\}\-_]+$|.*\.xml$)')
                     {
                         $ThisObject.$AttributeName.PSObject.Properties.Name | ForEach-Object {
                             $Method = $_
@@ -643,12 +640,14 @@ Function Update-SwaggerObject
                             }
                         }
                     }
+                    # Remove x-stoplight sections
+                    If ($AttributePath -like '*.x-stoplight') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-swagger-jumpcloud-auto-insert
+                    If ($AttributePath -like '*.x-swagger-jumpcloud-auto-insert*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-jumpcloud
                     If ($AttributePath -like '*.x-jumpcloud*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-scopes
                     If ($AttributePath -like '*.x-scopes') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
-                    # Remove x-stoplight sections
-                    If ($AttributePath -like '*.x-stoplight') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-tagGroups
                     If ($AttributePath -eq '.x-tagGroups') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-tests
@@ -657,6 +656,8 @@ Function Update-SwaggerObject
                     If ($AttributePath -like '*.x-go-package') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove tags
                     If ($AttributePath -like '*.tags') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # Remove x-tags
+                    If ($AttributePath -like '*.x-tags*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove tagnames
                     If ($AttributePath -like '*.tagnames') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # # If ($AttributePath -like '*.enum')
