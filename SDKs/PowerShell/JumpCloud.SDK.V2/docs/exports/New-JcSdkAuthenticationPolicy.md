@@ -43,8 +43,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 ```
 New-JcSdkAuthenticationPolicy [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Type <String>] [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>]
+ [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -222,6 +222,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Type
+AuthnPolicyType
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserGroupExclusions
 .
 
@@ -327,13 +342,16 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
-    - `[Type <String>]`: 
+    - `Type <String>`: 
+    - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+  - `[Type <String>]`: AuthnPolicyType
   - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
-  - `[Type <String>]`: 
+  - `Type <String>`: 
+  - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
 
 ## RELATED LINKS
 

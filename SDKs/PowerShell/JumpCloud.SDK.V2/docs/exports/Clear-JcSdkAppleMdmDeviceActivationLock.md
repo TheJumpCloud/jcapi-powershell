@@ -1,49 +1,48 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Clear-JcSdkAppleMdmDeviceActivationLock.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkPolicyTemplate
+# Clear-JcSdkAppleMdmDeviceActivationLock
 
 ## SYNOPSIS
-This endpoint returns a specific policy template.
+Clears the activation lock on the specified device.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
 ```
 
 ## SYNTAX
 
-### List (Default)
+### Clear (Default)
 ```
-Get-JcSdkPolicyTemplate [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
-```
-
-### Get
-```
-Get-JcSdkPolicyTemplate -Id <String> [<CommonParameters>]
+Clear-JcSdkAppleMdmDeviceActivationLock -AppleMdmId <String> -DeviceId <String> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
-### GetViaIdentity
+### ClearViaIdentity
 ```
-Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Clear-JcSdkAppleMdmDeviceActivationLock -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy template.
+Clears the activation lock on the specified device.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
 ```
 
 ## EXAMPLES
@@ -64,50 +63,27 @@ This endpoint returns a specific policy template.
 
 ## PARAMETERS
 
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Filter
-A filter to apply to the query.
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-**field** = Populate with a valid field from an endpoint response.
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-Supports wild cards.
-**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-ObjectID of the Policy Template.
+### -AppleMdmId
+.
 
 ```yaml
 Type: System.String
-Parameter Sets: Get
+Parameter Sets: Clear
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeviceId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: Clear
 Aliases:
 
 Required: True
@@ -123,7 +99,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: GetViaIdentity
+Parameter Sets: ClearViaIdentity
 Aliases:
 
 Required: True
@@ -133,14 +109,44 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Sort
-The comma separated fields used to sort the collection.
-Default sort is ascending, prefix with `-` to sort descending.
+### -PassThru
+Returns true when the command succeeds
 
 ```yaml
-Type: System.String[]
-Parameter Sets: List
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
 Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
 
 Required: False
 Position: Named
@@ -158,9 +164,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyTemplate
-
-### JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
+### System.Boolean
 
 ## NOTES
 

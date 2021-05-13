@@ -1,51 +1,23 @@
 <#
 .Synopsis
-This endpoint allows you to manage the _direct_ associations of a User.
-
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
-
-
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
 #### Sample Request
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"attributes\": {
-      \"sudo\": {
-      \"enabled\": true,
-        \"withoutPassword\": false
-      }
-    },
-    \"op\": \"add\",
-    \"type\": \"system_group\",
-    \"id\": \"{GroupID}\"
-  }'
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 .Description
-This endpoint allows you to manage the _direct_ associations of a User.
-
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Users and Systems.
-
-
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
 #### Sample Request
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"attributes\": {
-      \"sudo\": {
-      \"enabled\": true,
-        \"withoutPassword\": false
-      }
-    },
-    \"op\": \"add\",
-    \"type\": \"system_group\",
-    \"id\": \"{GroupID}\"
-  }'
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -56,23 +28,14 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
-.Inputs
-JumpCloud.SDK.V2.Models.IGraphOperationUser
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-System.Boolean
+JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IGraphOperationUser>:
-  Id <String>: The ObjectID of graph object being added or removed as an association.
-  Op <String>: How to modify the graph connection.
-  Type <Type5>: Targets which a "user" can be associated to.
-  [AttributeSudoEnabled <Boolean?>]: Enables sudo
-  [AttributeSudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -96,71 +59,25 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserAssociation.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 #>
- Function Set-JcSdkUserAssociation
+ Function Invoke-JcSdkReclaimSofwareAppLicense
 {
-    [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses])]
+    [CmdletBinding(DefaultParameterSetName='Reclaim', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Set', Mandatory)]
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Reclaim', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the User.
-    ${UserId},
+    # .
+    ${SoftwareAppId},
 
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='ReclaimViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphOperationUser]
-    # GraphOperation (User)
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # The ObjectID of graph object being added or removed as an association.
-    ${Id},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # How to modify the graph connection.
-    ${Op},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type5])]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type5]
-    # Targets which a "user" can be associated to.
-    ${Type},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enables sudo
-    ${AttributeSudoEnabled},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enable sudo without password (requires 'enabled' to be true)
-    ${AttributeSudoWithoutPassword},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -181,12 +98,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
     ${HttpPipelinePrepend},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Returns true when the command succeeds
-    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -224,7 +135,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserAssociation @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Invoke-JcSdkInternalReclaimSofwareAppLicense @PSBoundParameters
     }
     End
     {
