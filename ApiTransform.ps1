@@ -458,7 +458,7 @@ Function Update-SwaggerObject
         # Iterate through child objects
         If (-not [System.String]::IsNullOrEmpty($AttributeNames))
         {
-            Write-Host ("AttributeNames: $AttributeNames")
+            # Write-Host ("AttributeNames: $AttributeNames")
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))

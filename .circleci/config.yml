@@ -185,7 +185,7 @@ commands:
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
           command: |
-            $ErrorActionPreference = 'Stop'
+            $ErrorActionPreference = 'Continue'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
