@@ -6158,7 +6158,7 @@
     "/applemdms/{apple_mdm_id}/devices/{device_id}": {
       "get": {
         "description": "Gets a single Apple MDM device.\n\n#### Sample Request\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\\n  -H 'accept: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "applemdms_getdevice",
+        "operationId": "Get-AppleMDMDevice",
         "responses": {
           "200": {
             "description": "OK",
@@ -6207,7 +6207,7 @@
       "post": {
         "parameters": [],
         "description": "Clears the activation lock on the specified device.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
-        "operationId": "applemdms_devicesClearActivationLock",
+        "operationId": "Clear-AppleMDMDeviceActivationLock",
         "responses": {
           "204": {
             "description": ""
@@ -6341,7 +6341,7 @@
       "post": {
         "parameters": [],
         "description": "Refreshes the activation lock information for a device\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
-        "operationId": "applemdms_devicesRefreshActivationLockInformation",
+        "operationId": "Refresh-AppleMDMDeviceLockInformation",
         "responses": {
           "204": {
             "description": ""
@@ -9380,7 +9380,7 @@
     "/policies/{policy_id}/memberof": {
       "get": {
         "description": "This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "graph_policyMemberOf",
+        "operationId": "Get-PolicyGroupMember",
         "parameters": [
           {
             "$ref": "#/parameters/trait:filter:filter"
@@ -9614,7 +9614,7 @@
     "/policygroups": {
       "get": {
         "description": "This endpoint returns all Configuration (Policy) Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "groups_policy_list",
+        "operationId": "List-GroupPolicy",
         "parameters": [
           {
             "$ref": "#/parameters/trait:fields:fields"
@@ -9652,7 +9652,7 @@
       },
       "post": {
         "description": "This endpoint allows you to create a new Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
-        "operationId": "groups_policy_post",
+        "operationId": "New-GroupPolicy",
         "parameters": [
           {
             "in": "body",
@@ -9681,7 +9681,7 @@
     "/policygroups/{group_id}/associations": {
       "get": {
         "description": "This endpoint returns the _direct_ associations of this Configuration (Policy) Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations?targets=system \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "graph_policyGroupAssociationsList",
+        "operationId": "List-PolicyGroupAssociation",
         "parameters": [
           {
             "$ref": "#/parameters/trait:graphTargetsPolicyGroup:targets"
@@ -9722,7 +9722,7 @@
       ],
       "post": {
         "description": "This endpoint manages the _direct_ associations of this Configuration (Policy) Group.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"system\",\n    \"id\": \"{SystemID}\"\n  }'\n```",
-        "operationId": "graph_policyGroupAssociationsPost",
+        "operationId": "Set-PolicyGroupAssociation",
         "parameters": [
           {
             "in": "body",
@@ -9749,7 +9749,7 @@
     "/policygroups/{group_id}/members": {
       "get": {
         "description": "This endpoint returns the Configuration (Policy) members of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "graph_policyGroupMembersList",
+        "operationId": "List-PolicyGroupMembers",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limit:limit"
@@ -9787,7 +9787,7 @@
       ],
       "post": {
         "description": "This endpoint allows you to manage the Configuration (Policy) members of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"op\": \"add\",\n    \"type\": \"policy\",\n    \"id\": \"{Policy_ID}\"\n  }'\n```",
-        "operationId": "graph_policyGroupMembersPost",
+        "operationId": "Set-PolicyGroupMembers",
         "parameters": [
           {
             "in": "body",
@@ -9814,7 +9814,7 @@
     "/policygroups/{group_id}/membership": {
       "get": {
         "description": "This endpoint returns all Configuration (Policy) members that are a member of this Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/membership \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "graph_policyGroupMembership",
+        "operationId": "Get-PolicyGroupMembership",
         "parameters": [
           {
             "$ref": "#/parameters/trait:filter:filter"
@@ -9860,7 +9860,7 @@
     "/policygroups/{group_id}/systemgroups": {
       "get": {
         "description": "This endpoint will return all System Groups bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "graph_policyGroupTraverseSystemGroup",
+        "operationId": "Get-PolicyGroupTraverseSystemGroup",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limit:limit"
@@ -9903,7 +9903,7 @@
     "/policygroups/{group_id}/systems": {
       "get": {
         "description": "This endpoint will return all Systems bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systems \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "graph_policyGroupTraverseSystem",
+        "operationId": "Get-PolicyGroupTraverseSystem",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limit:limit"
@@ -9947,7 +9947,7 @@
       "delete": {
         "parameters": [],
         "description": "This endpoint allows you to delete a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "groups_policy_delete",
+        "operationId": "Delete-GroupPolicy",
         "responses": {
           "200": {
             "description": "OK",
@@ -9969,7 +9969,7 @@
       "get": {
         "parameters": [],
         "description": "This endpoint returns the details of a Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
-        "operationId": "groups_policy_get",
+        "operationId": "Get-GroupPolicy",
         "responses": {
           "200": {
             "description": "OK",
@@ -9996,7 +9996,7 @@
       ],
       "put": {
         "description": "This endpoint allows you to do a full update of the Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
-        "operationId": "groups_policy_put",
+        "operationId": "Set-GroupPolicy",
         "parameters": [
           {
             "in": "body",
@@ -10646,7 +10646,7 @@
       ],
       "post": {
         "description": "This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{}'\n```",
-        "operationId": "softwareApps_reclaimLicenses",
+        "operationId": "Reclaim-SoftwareAppsLicenses",
         "responses": {
           "200": {
             "description": "Reclaim Licenses Response",
@@ -11170,7 +11170,7 @@
     "/systemgroups/{group_id}/policygroups": {
       "get": {
         "description": "This endpoint will return all Configuration (Policy) Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "graph_systemGroupTraversePolicyGroup",
+        "operationId": "Get-SystemGroupTraversePolicyGroup",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limit:limit"
@@ -13563,7 +13563,7 @@
     "/systems/{system_id}/policygroups": {
       "get": {
         "description": "This endpoint will return all Configuration (Policy) Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "graph_systemTraversePolicyGroup",
+        "operationId": "Get-SystemTraversePolicyGroup",
         "parameters": [
           {
             "$ref": "#/parameters/trait:limit:limit"
