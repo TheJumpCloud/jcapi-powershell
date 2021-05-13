@@ -365,7 +365,7 @@ $TransformConfig = [Ordered]@{
             'GET_workdays-id-import-job_id-results'                      = 'Import-WorkdayResult';
             'GET_workdays-workday_id-workers'                            = 'Get-WorkdayWorker';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation', '/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock', '/applemdms/{apple_mdm_id}/devices/{device_id}', '/softwareapps/{software_app_id}/reclaimLicenses', '/policies/{policy_id}/memberof', '/systems/{system_id}/policygroups', '/systemgroups/{group_id}/policygroups')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/logo', '/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}', '/applemdms/{apple_mdm_id}/depkey', '/applemdms/{apple_mdm_id}/csr', '/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation', '/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock', '/applemdms/{apple_mdm_id}/devices/{device_id}', '/softwareapps/{software_app_id}/reclaim-licenses', '/policies/{policy_id}/memberof', '/systems/{system_id}/policygroups', '/systemgroups/{group_id}/policygroups')
     }
 }
 Function Get-SwaggerItem
@@ -451,7 +451,7 @@ Function Update-SwaggerObject
         # Iterate through child objects
         If (-not [System.String]::IsNullOrEmpty($AttributeNames))
         {
-            # Write-Host ("AttributeNames: $AttributeNames")
+            Write-Host ("AttributeNames: $AttributeNames")
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
