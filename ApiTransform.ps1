@@ -13,7 +13,8 @@ $TransformConfig = [Ordered]@{
         Repo               = "jumpcloud-insights-api"
         Path               = "docs/generated/directory_insights_swagger.json"
         FindAndReplace     = [Ordered]@{
-            '"in":"body","name":".*?"' = '"in":"body","name":"body"' # Across our APIs the standard is using "body" for the name of the body
+            '"in":"body","name":".*?"'                                                                                                                                                      = '"in":"body","name":"body"' # Across our APIs the standard is using "body" for the name of the body
+            '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","items":{"type":"object"},"type":"array","x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","items":{"type":"string"},"type":"array","x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsPost'         = 'Get-Event';
