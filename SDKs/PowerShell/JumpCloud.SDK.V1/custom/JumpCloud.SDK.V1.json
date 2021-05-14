@@ -1701,6 +1701,11 @@
           },
           "type": "object"
         },
+        "growthData": {
+          "additionalProperties": true,
+          "description": "Object containing Optimizely experimentIds and states corresponding to them",
+          "type": "object"
+        },
         "logo": {
           "type": "string"
         },
@@ -1755,6 +1760,9 @@
             "enablePasswordExpirationInDays": {
               "type": "boolean"
             },
+            "enableResetLockoutCounter": {
+              "type": "boolean"
+            },
             "lockoutTimeInSeconds": {
               "type": "integer"
             },
@@ -1786,6 +1794,10 @@
               "type": "boolean"
             },
             "passwordExpirationInDays": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "resetLockoutCounterMinutes": {
               "minimum": 1,
               "type": "integer"
             }
@@ -1883,6 +1895,11 @@
               "type": "object"
             }
           },
+          "type": "object"
+        },
+        "growthData": {
+          "additionalProperties": true,
+          "description": "Object containing Optimizely experimentIds and states corresponding to them",
           "type": "object"
         },
         "logo": {
@@ -2435,6 +2452,13 @@
           },
           "type": "array"
         },
+        "state": {
+          "enum": [
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
         "sudo": {
           "type": "boolean"
         },
@@ -2926,7 +2950,7 @@
   },
   "host": "console.jumpcloud.com",
   "info": {
-    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its Syste",
+    "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may",
     "title": "JumpCloud APIs",
     "version": "1.0"
   },
@@ -2938,39 +2962,39 @@
         "operationId": "List-Application",
         "parameters": [
           {
+            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "name",
             "description": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3019,9 +3043,9 @@
     },
     "/applications/{id}": {
       "delete": {
+        "parameters": [],
         "description": "The endpoint deletes an SSO / SAML Application.",
         "operationId": "Delete-Application",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3038,9 +3062,9 @@
         "summary": "Delete an Application"
       },
       "get": {
+        "parameters": [],
         "description": "The endpoint retrieves an SSO / SAML Application.",
         "operationId": "Get-Application",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3098,38 +3122,38 @@
         "operationId": "List-ApplicationTemplate",
         "parameters": [
           {
+            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3155,38 +3179,38 @@
         "operationId": "Get-ApplicationTemplate",
         "parameters": [
           {
+            "required": false,
             "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3224,9 +3248,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```",
         "operationId": "POST-CommandTrigger",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3249,43 +3273,43 @@
         "operationId": "List-CommandResult",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3307,9 +3331,9 @@
     },
     "/commandresults/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
         "operationId": "Delete-CommandResult",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3330,18 +3354,18 @@
         "operationId": "Get-CommandResult",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3375,43 +3399,43 @@
         "operationId": "List-Command",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3460,9 +3484,9 @@
     },
     "/commands/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Delete-Command",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -3480,11 +3504,11 @@
         "operationId": "Get-Command",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3574,28 +3598,28 @@
         "operationId": "Get-CommandFile",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           }
         ],
@@ -3629,50 +3653,50 @@
         "operationId": "List-Organization",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3698,18 +3722,18 @@
         "operationId": "Get-Organization",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3775,43 +3799,43 @@
         "operationId": "List-RadiusServer",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           }
         ],
@@ -3860,9 +3884,9 @@
     },
     "/radiusservers/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "Delete-RadiusServer",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3879,9 +3903,9 @@
         "summary": "Delete Radius Server"
       },
       "get": {
+        "parameters": [],
         "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "Get-RadiusServer",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3978,35 +4002,35 @@
         "operationId": "Search-Organization",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
@@ -4039,35 +4063,35 @@
         "operationId": "Search-System",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
@@ -4100,35 +4124,35 @@
         "operationId": "Search-User",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
@@ -4161,50 +4185,50 @@
         "operationId": "List-System",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once. Limited to 100.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": 0,
+            "minimum": 0,
             "description": "The offset into the records to return.",
             "in": "query",
-            "minimum": 0,
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "Use space separated sort parameters to sort the collection.\nDefault sort is ascending. Prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -4226,9 +4250,9 @@
     },
     "/systems/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint allows you to delete a system. This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute. If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Delete-System",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -4249,18 +4273,18 @@
         "operationId": "Get-System",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -4325,9 +4349,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "Clear-System",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4351,9 +4375,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "Lock-System",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4377,9 +4401,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "Restart-System",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4403,9 +4427,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "Stop-System",
-        "parameters": [],
         "responses": {
           "201": {
             "description": "Command created"
@@ -4425,49 +4449,49 @@
         "operationId": "List-User",
         "parameters": [
           {
+            "required": false,
             "default": 10,
             "description": "The number of records to return at once.",
             "in": "query",
             "name": "limit",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": 0,
             "description": "The offset into the records to return.",
             "in": "query",
             "name": "skip",
-            "required": false,
             "type": "integer"
           },
           {
+            "required": false,
             "default": "",
             "description": "The comma separated fields used to sort the collection.\nDefault sort is ascending, prefix with `-` to sort descending.\n",
             "in": "query",
             "name": "sort",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "default": "",
             "description": "The comma separated fields included in the returned records.\nIf omitted the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A nested object containing a string `searchTerm` and a list of `fields` to search on.",
             "in": "query",
             "name": "search",
-            "required": false,
             "type": "string"
           }
         ],
@@ -4516,9 +4540,9 @@
     },
     "/systemusers/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "Delete-User",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -4539,18 +4563,18 @@
         "operationId": "Get-User",
         "parameters": [
           {
+            "required": false,
             "default": "",
             "description": "Use a space seperated string of field parameters to include the data in the response. If omitted, the default list of fields will be returned.\n",
             "in": "query",
             "name": "fields",
-            "required": false,
             "type": "string"
           },
           {
+            "required": false,
             "description": "A filter to apply to the query. **Filter structure**: `<field>:<operator>:<value>`. **field** = Populate with a valid field from an endpoint response. **operator** =  Supported operators are: eq, ne, gt, ge, lt, le, between, search, in. **value** = Populate with the value you want to search for. Is case sensitive. Supports wild cards. **EX:** `GET /users?username=eq:testuser`",
             "in": "query",
             "name": "filter",
-            "required": false,
             "type": "string"
           }
         ],
@@ -4615,9 +4639,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to expire a user's password.",
         "operationId": "POST-ExpireUserPassword",
-        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -4676,9 +4700,9 @@
     },
     "/systemusers/{id}/sshkeys": {
       "get": {
+        "parameters": [],
         "description": "This endpoint will return a specific System User's public SSH key.",
         "operationId": "Get-UserSshKey",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -4743,9 +4767,9 @@
         }
       ],
       "post": {
+        "parameters": [],
         "description": "This endpoint allows you to unlock a user's account.",
         "operationId": "Unlock-User",
-        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -4761,9 +4785,9 @@
     },
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
       "delete": {
+        "parameters": [],
         "description": "This endpoint will delete a specific System User's SSH Key.",
         "operationId": "Delete-UserSshKey",
-        "parameters": [],
         "responses": {
           "200": {
             "description": ""

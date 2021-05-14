@@ -1,49 +1,64 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemTraversePolicyGroup.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkPolicyTemplate
+# Get-JcSdkSystemTraversePolicyGroup
 
 ## SYNOPSIS
-This endpoint returns a specific policy template.
+This endpoint will return all Policy Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this System to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System.
+
+See `/members` and `/associations` endpoints to manage those collections.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policygroups \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 
 ## SYNTAX
 
-### List (Default)
+### Get (Default)
 ```
-Get-JcSdkPolicyTemplate [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
-```
-
-### Get
-```
-Get-JcSdkPolicyTemplate -Id <String> [<CommonParameters>]
+Get-JcSdkSystemTraversePolicyGroup -SystemId <String> [-Filter <String[]>] [-Authorization <String>]
+ [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Get-JcSdkSystemTraversePolicyGroup -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>]
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy template.
+This endpoint will return all Policy Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this System to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System.
+
+See `/members` and `/associations` endpoints to manage those collections.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policygroups \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 
 ## EXAMPLES
@@ -64,13 +79,27 @@ This endpoint returns a specific policy template.
 
 ## PARAMETERS
 
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
+### -Authorization
+Authorization header for the System Context API
 
 ```yaml
-Type: System.String[]
-Parameter Sets: List
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Date
+Current date header for the System Context API
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -92,25 +121,10 @@ Supports wild cards.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-ObjectID of the Policy Template.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -133,16 +147,15 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Sort
-The comma separated fields used to sort the collection.
-Default sort is ascending, prefix with `-` to sort descending.
+### -SystemId
+ObjectID of the System.
 
 ```yaml
-Type: System.String[]
-Parameter Sets: List
+Type: System.String
+Parameter Sets: Get
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -158,9 +171,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyTemplate
-
-### JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
+### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
 
 ## NOTES
 

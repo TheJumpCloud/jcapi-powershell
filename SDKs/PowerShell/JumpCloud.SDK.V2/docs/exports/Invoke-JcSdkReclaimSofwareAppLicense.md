@@ -1,49 +1,45 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkPolicyTemplate
+# Invoke-JcSdkReclaimSofwareAppLicense
 
 ## SYNOPSIS
-This endpoint returns a specific policy template.
-
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 
 ## SYNTAX
 
-### List (Default)
+### Reclaim (Default)
 ```
-Get-JcSdkPolicyTemplate [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
-```
-
-### Get
-```
-Get-JcSdkPolicyTemplate -Id <String> [<CommonParameters>]
+Invoke-JcSdkReclaimSofwareAppLicense -SoftwareAppId <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### GetViaIdentity
+### ReclaimViaIdentity
 ```
-Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Invoke-JcSdkReclaimSofwareAppLicense -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy template.
-
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 
 ## EXAMPLES
@@ -64,66 +60,13 @@ This endpoint returns a specific policy template.
 
 ## PARAMETERS
 
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Filter
-A filter to apply to the query.
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-**field** = Populate with a valid field from an endpoint response.
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-Supports wild cards.
-**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
-
-```yaml
-Type: System.String[]
-Parameter Sets: List
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-ObjectID of the Policy Template.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: GetViaIdentity
+Parameter Sets: ReclaimViaIdentity
 Aliases:
 
 Required: True
@@ -133,14 +76,44 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Sort
-The comma separated fields used to sort the collection.
-Default sort is ascending, prefix with `-` to sort descending.
+### -SoftwareAppId
+.
 
 ```yaml
-Type: System.String[]
-Parameter Sets: List
+Type: System.String
+Parameter Sets: Reclaim
 Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Confirm
+Prompts you for confirmation before running the cmdlet.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: cf
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -WhatIf
+Shows what would happen if the cmdlet runs.
+The cmdlet is not run.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases: wi
 
 Required: False
 Position: Named
@@ -158,9 +131,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyTemplate
-
-### JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
+### JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses
 
 ## NOTES
 

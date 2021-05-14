@@ -25,8 +25,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Type <String>] [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>]
+ [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -45,7 +45,7 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IA
 ```
 Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <Hashtable>]
  [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-UserGroupExclusions <String[]>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>] [-UserGroupExclusions <String[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -232,6 +232,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Type
+AuthnPolicyType
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserGroupExclusions
 .
 
@@ -339,7 +354,9 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
-    - `[Type <String>]`: 
+    - `Type <String>`: 
+    - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+  - `[Type <String>]`: AuthnPolicyType
   - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
@@ -367,7 +384,8 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[WorkdayId <String>]`: 
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
-  - `[Type <String>]`: 
+  - `Type <String>`: 
+  - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
 
 ## RELATED LINKS
 

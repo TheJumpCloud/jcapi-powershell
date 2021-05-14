@@ -4,7 +4,7 @@ This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+ curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -14,7 +14,7 @@ This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+ curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'

@@ -1,21 +1,25 @@
 <#
 .Synopsis
-Gets a single Apple MDM device.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
-  -H 'accept: application/json' \\
+curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 .Description
-Gets a single Apple MDM device.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
-  -H 'accept: application/json' \\
+curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -29,7 +33,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IAppleMdmDevice
+JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -57,25 +61,18 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDevice.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyMember.md
 #>
- Function Get-JcSdkAppleMdmDevice
+ Function Get-JcSdkPolicyMember
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
-    [Parameter(ParameterSetName='List', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # .
-    ${AppleMdmId},
-
-    [Parameter(ParameterSetName='Get', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Path')]
-    [System.String]
-    # .
-    ${DeviceId},
+    # ObjectID of the Policy.
+    ${PolicyId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -84,7 +81,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
-    [Parameter(ParameterSetName='List')]
+    [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
@@ -97,24 +94,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
-    [Parameter(ParameterSetName='List')]
+    [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
 
-    [Parameter(ParameterSetName='List')]
+    [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
-    [System.Int32]
-    # .
-    ${XTotalCount},
+    [System.String]
+    # Authorization header for the System Context API
+    ${Authorization},
 
-    [Parameter(ParameterSetName='List')]
+    [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
-    [System.Int32]
-    # If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
-    ${XUnfilteredTotalCount},
+    [System.String]
+    # Current date header for the System Context API
+    ${Date},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -177,7 +174,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
@@ -192,7 +189,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyMember @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -217,7 +214,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdmDevice @PSBoundParameters
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyMember @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

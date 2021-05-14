@@ -1,49 +1,48 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyMember.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkPolicyTemplate
+# Get-JcSdkPolicyMember
 
 ## SYNOPSIS
-This endpoint returns a specific policy template.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
+curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 
 ## SYNTAX
 
-### List (Default)
+### Get (Default)
 ```
-Get-JcSdkPolicyTemplate [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
-```
-
-### Get
-```
-Get-JcSdkPolicyTemplate -Id <String> [<CommonParameters>]
+Get-JcSdkPolicyMember -PolicyId <String> [-Filter <String[]>] [-Sort <String[]>] [-Authorization <String>]
+ [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
+Get-JcSdkPolicyMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy template.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
+curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+
 ```
 
 ## EXAMPLES
@@ -64,13 +63,27 @@ This endpoint returns a specific policy template.
 
 ## PARAMETERS
 
-### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
+### -Authorization
+Authorization header for the System Context API
 
 ```yaml
-Type: System.String[]
-Parameter Sets: List
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Date
+Current date header for the System Context API
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -92,25 +105,10 @@ Supports wild cards.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Id
-ObjectID of the Policy Template.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -133,13 +131,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -PolicyId
+ObjectID of the Policy.
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Sort
 The comma separated fields used to sort the collection.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: List
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -158,9 +171,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyTemplate
-
-### JumpCloud.SDK.V2.Models.IPolicyTemplateWithDetails
+### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
 
 ## NOTES
 

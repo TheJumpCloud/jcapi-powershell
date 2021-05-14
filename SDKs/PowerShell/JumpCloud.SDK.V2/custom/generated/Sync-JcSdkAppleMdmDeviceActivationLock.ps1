@@ -1,51 +1,27 @@
 <#
 .Synopsis
-This endpoint allows you to manage the _direct_ associations of a System.
-
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.
-
+Refreshes the activation lock information for a device
 
 #### Sample Request
+
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
+curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"attributes\": {
-      \"sudo\": {
-        \"enabled\": true,
-        \"withoutPassword\": false
-      }
-    },
-    \"op\": \"add\",
-    \"type\": \"user\",
-    \"id\": \"UserID\"
-  }'
+  -d '{}'
 ```
 .Description
-This endpoint allows you to manage the _direct_ associations of a System.
-
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.
-
+Refreshes the activation lock information for a device
 
 #### Sample Request
+
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
+curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"attributes\": {
-      \"sudo\": {
-        \"enabled\": true,
-        \"withoutPassword\": false
-      }
-    },
-    \"op\": \"add\",
-    \"type\": \"user\",
-    \"id\": \"UserID\"
-  }'
+  -d '{}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -56,8 +32,6 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
-.Inputs
-JumpCloud.SDK.V2.Models.IGraphOperationSystem
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -66,13 +40,6 @@ System.Boolean
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IGraphOperationSystem>:
-  Id <String>: The ObjectID of graph object being added or removed as an association.
-  Op <String>: How to modify the graph connection.
-  Type <Type3>: Targets which a "system" can be associated to.
-  [AttributeSudoEnabled <Boolean?>]: Enables sudo
-  [AttributeSudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -96,83 +63,31 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSystemAssociation.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Sync-JcSdkAppleMdmDeviceActivationLock.md
 #>
- Function Set-JcSdkSystemAssociation
+ Function Sync-JcSdkAppleMdmDeviceActivationLock
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Sync', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Set', Mandatory)]
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Sync', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the System.
-    ${SystemId},
+    # .
+    ${AppleMdmId},
 
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Sync', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${DeviceId},
+
+    [Parameter(ParameterSetName='SyncViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # Authorization header for the System Context API
-    ${Authorization},
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Header')]
-    [System.String]
-    # Current date header for the System Context API
-    ${Date},
-
-    [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphOperationSystem]
-    # GraphOperation (System)
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # The ObjectID of graph object being added or removed as an association.
-    ${Id},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # How to modify the graph connection.
-    ${Op},
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type3])]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type3]
-    # Targets which a "system" can be associated to.
-    ${Type},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enables sudo
-    ${AttributeSudoEnabled},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enable sudo without password (requires 'enabled' to be true)
-    ${AttributeSudoWithoutPassword},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -236,7 +151,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSystemAssociation @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Sync-JcSdkInternalAppleMdmDeviceActivationLock @PSBoundParameters
     }
     End
     {

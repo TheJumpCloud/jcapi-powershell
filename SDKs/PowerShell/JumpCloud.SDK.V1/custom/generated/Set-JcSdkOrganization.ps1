@@ -86,6 +86,8 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [DuplicateLdapGroups <Boolean?>]:
     [EmailDisclaimer <String>]:
     [EnableManagedUid <Boolean?>]:
+    [GrowthData <IOrganizationsettingsputGrowthData>]: Object containing Optimizely experimentIds and states corresponding to them
+      [(Any) <Object>]: This indicates any property can be added to this object.
     [Logo <String>]:
     [Name <String>]:
     [PasswordCompliance <String>]:
@@ -137,6 +139,8 @@ SETTINGS <IOrganizationsettingsput>:
   [DuplicateLdapGroups <Boolean?>]:
   [EmailDisclaimer <String>]:
   [EnableManagedUid <Boolean?>]:
+  [GrowthData <IOrganizationsettingsputGrowthData>]: Object containing Optimizely experimentIds and states corresponding to them
+    [(Any) <Object>]: This indicates any property can be added to this object.
   [Logo <String>]:
   [Name <String>]:
   [PasswordCompliance <String>]:
