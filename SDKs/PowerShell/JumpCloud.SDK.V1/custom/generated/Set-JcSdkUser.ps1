@@ -115,6 +115,7 @@ BODY <ISystemuserput>:
   [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
+  [State <String>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
   [UnixGuid <Int32?>]:
@@ -413,6 +414,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for SSHKEYS properties and create a hash table.
     ${SshKeys},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${State},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

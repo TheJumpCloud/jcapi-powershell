@@ -17,6 +17,6 @@ Describe 'Get-JcSdkEvent' {
     }
 
     It 'Get' {
-        { Get-JcSdkEvent -Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime();}) } | Should -Not -Throw
+        { Get-JcSdkEvent -Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime(); }) } | Should -Not -Throw
     }
 }

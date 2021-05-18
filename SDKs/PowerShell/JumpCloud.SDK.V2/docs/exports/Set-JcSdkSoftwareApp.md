@@ -237,6 +237,7 @@ BODY <ISoftwareApp>: Software Application Package Object
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[AppleVppTotalLicenses <Int32?>]`: 
     - `[AutoUpdate <Boolean?>]`: 
+    - `[DesiredState <String>]`: State of Install or Uninstall
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
     - `[PackageId <String>]`: 
@@ -272,6 +273,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[AppleVppTotalLicenses <Int32?>]`: 
   - `[AutoUpdate <Boolean?>]`: 
+  - `[DesiredState <String>]`: State of Install or Uninstall
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
   - `[PackageId <String>]`: 

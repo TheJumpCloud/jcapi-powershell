@@ -1,275 +1,44 @@
 debug: true
 verbose: true
-disable-validation: false
+# Values
+# azure: false
 powershell: true
-base-folder: '..'
-input-file: SwaggerSpecs/JumpCloud.SDK.V1.json
-clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
-namespace: JumpCloud.SDK.V1
-sanitize-names: false
-# # Values
-module-version: 0.0.27
-# skip-model-cmdlets: false
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/
+branch: master
 metadata:
-  authors: JumpCloud Solutions Architect Team
+  authors: JumpCloud
   owners: JumpCloud
-  requireLicenseAcceptance: false
   description: The JumpCloud V1 PowerShell SDK
   copyright: (c) JumpCloud. All rights reserved.
-  tags: JumpCloud, DaaS, Jump, Cloud, Directory
   companyName: JumpCloud
-  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/blob/master/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/
+  requireLicenseAcceptance: false
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V1/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
-# # Names
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  formatsToProcess: []
+
+# Names
 prefix: JcSdkInternal
 customFunctionPrefix: JcSdk
-## subject-prefix: JcSdk
-module-name: JumpCloud.SDK.V1 # $(service-name)
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
+
+# Folders
+clear-output-folder: true
+output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
+base-folder: '..'
+
+input-file:
+  - SwaggerSpecs/JumpCloud.SDK.V1.json
+# title: JumpCloud.SDK.V1
+module-name: JumpCloud.SDK.V1
+namespace: JumpCloud.SDK.V1
+sample-generation: true
+module-version: 0.0.27
 dll-name: JumpCloud.SDK.V1.private
-# # Folders
-# use-namespace-folders: false
-# current-folder: .
-# module-folder: $(current-folder)/generated
-# cmdlet-folder: $(module-folder)/cmdlets
-# model-cmdlet-folder: $(module-folder)/model-cmdlets
-# custom-cmdlet-folder: $(current-folder)/custom
-# internal-cmdlet-folder: $(current-folder)/internal
-# test-folder: $(current-folder)/test
-# runtime-folder: $(module-folder)/runtime
-# api-folder: $(module-folder)/api
-# bin-folder: $(current-folder)/bin
-# obj-folder: $(current-folder)/obj
-# exports-folder: $(current-folder)/exports
-# docs-folder: $(current-folder)/docs
-# dependency-module-folder: $(module-folder)/modules
-# examples-folder: $(current-folder)/examples
-# resources-folder: $(current-folder)/resources
-# # File Paths
-# csproj: $(current-folder)/$(module-name).csproj
-# dll: $(bin-folder)/$(dll-name).dll
-# psd1: $(current-folder)/$(module-name).psd1
-# psm1: $(current-folder)/$(module-name).psm1
-# psm1-custom: $(custom-cmdlet-folder)/$(module-name).custom.psm1
-# psm1-internal: $(internal-cmdlet-folder)/$(module-name).internal.psm1
-# format-ps1xml: $(current-folder)/$(module-name).format.ps1xml
-# nuspec: $(current-folder)/$(module-name).nuspec
-# declare-directive:
-#   no-inline: >-
-#     (() => {
-#       return {
-#         from: "code-model-v3",
-#         where: (Array.isArray($) ? $ : [$]).map( each => `$.schemas[?(/^${each}$/i.exec(@.details.default.name))]`),
-#         transform: "$.details.default['skip-inline'] = true;"
-#       };
-#     })()
+
 directive:
   - where:
       prefix: JcSdk
     hide: true
-## Cmdlet Names
-# verb-mapping:
-#   Access: Get
-#   Acquire: Get
-#   Activate: Initialize
-#   Add: Add
-#   Allocate: New
-#   Analyze: Test
-#   Append: Add
-#   Apply: Add
-#   Approve: Approve
-#   Assert: Assert
-#   Assign: Set
-#   Associate: Join
-#   Attach: Add
-#   Authorize: Grant
-#   Backup: Backup
-#   Block: Block
-#   Build: Build
-#   Bypass: Skip
-#   Cancel: Stop
-#   Capture: Export
-#   Cat: Get
-#   Change: Rename
-#   Check: Test
-#   Checkpoint: Checkpoint
-#   Clear: Clear
-#   Clone: Copy
-#   Close: Close
-#   Combine: Join
-#   Compare: Compare
-#   Compile: Build
-#   Complete: Complete
-#   Compress: Compress
-#   Concatenate: Add
-#   Configure: Set
-#   Confirm: Confirm
-#   Connect: Connect
-#   Convert: Convert
-#   ConvertFrom: ConvertFrom
-#   ConvertTo: ConvertTo
-#   Copy: Copy
-#   Create: New
-#   Cut: Remove
-#   Debug: Debug
-#   Delete: Remove
-#   Deny: Deny
-#   Deploy: Deploy
-#   Dir: Get
-#   Disable: Disable
-#   Discard: Remove
-#   Disconnect: Disconnect
-#   Discover: Find
-#   Dismount: Dismount
-#   Display: Show
-#   Dispose: Remove
-#   Dump: Get
-#   Duplicate: Copy
-#   Edit: Edit
-#   Enable: Enable
-#   End: Stop
-#   Enter: Enter
-#   Erase: Clear
-#   Evaluate: Test
-#   Examine: Get
-#   Execute: Invoke
-#   Exit: Exit
-#   Expand: Expand
-#   Export: Export
-#   Failover: Set
-#   Find: Find
-#   Finish: Complete
-#   Flush: Clear
-#   ForceReboot: Restart
-#   Format: Format
-#   Generalize: Reset
-#   Generate: New
-#   Get: Get
-#   Grant: Grant
-#   Group: Group
-#   Hide: Hide
-#   Import: Import
-#   Initialize: Initialize
-#   Insert: Add
-#   Install: Install
-#   Into: Enter
-#   Invoke: Invoke
-#   Is: Test
-#   Join: Join
-#   Jump: Skip
-#   Limit: Limit
-#   List: Get
-#   Load: Import
-#   Locate: Find
-#   Lock: Lock
-#   Make: New
-#   Measure: Measure
-#   Merge: Merge
-#   Migrate: Move
-#   Mount: Mount
-#   Move: Move
-#   Name: Move
-#   New: New
-#   Notify: Send
-#   Nullify: Clear
-#   Obtain: Get
-#   Open: Open
-#   Optimize: Optimize
-#   Out: Out
-#   Patch: Update
-#   Pause: Suspend
-#   Perform: Invoke
-#   Ping: Ping
-#   Pop: Pop
-#   Post: Invoke
-#   Power: Start
-#   PowerOff: Stop
-#   PowerOn: Start
-#   Produce: Show
-#   Protect: Protect
-#   Provision: New
-#   Publish: Publish
-#   Purge: Clear
-#   Push: Push
-#   Put: Set
-#   Read: Read
-#   Reassociate: Move
-#   Reboot: Restart
-#   Receive: Receive
-#   Recover: Restore
-#   Redo: Redo
-#   Refresh: Update
-#   Regenerate: New
-#   Register: Register
-#   Reimage: Update
-#   Release: Publish
-#   Remove: Remove
-#   Rename: Rename
-#   Repair: Repair
-#   Replace: Update
-#   Replicate: Copy
-#   Reprocess: Update
-#   Request: Request
-#   Reset: Reset
-#   Resize: Resize
-#   Resolve: Resolve
-#   Restart: Restart
-#   Restore: Restore
-#   Restrict: Lock
-#   Resubmit: Submit
-#   Resume: Resume
-#   Retarget: Update
-#   Retrieve: Get
-#   Revoke: Revoke
-#   Run: Start
-#   Save: Save
-#   Search: Search
-#   Secure: Lock
-#   Select: Select
-#   Send: Send
-#   Separate: Split
-#   Set: Set
-#   Show: Show
-#   Shutdown: Stop
-#   Skip: Skip
-#   Split: Split
-#   Start: Start
-#   Step: Step
-#   Stop: Stop
-#   Submit: Submit
-#   Suggest: Get
-#   Suspend: Suspend
-#   Swap: Switch
-#   Switch: Switch
-#   Sync: Sync
-#   Synch: Sync
-#   Synchronize: Sync
-#   Test: Test
-#   Trace: Trace
-#   Transfer: Move
-#   Trigger: Start
-#   Type: Get
-#   Unblock: Unblock
-#   Undelete: Restore
-#   Undo: Undo
-#   Uninstall: Uninstall
-#   Unite: Join
-#   Unlock: Unlock
-#   Unmark: Clear
-#   Unprotect: Unprotect
-#   Unpublish: Unpublish
-#   Unregister: Unregister
-#   Unrestrict: Unlock
-#   Unsecure: Unlock
-#   Unset: Clear
-#   Update: Update
-#   Upgrade: Update
-#   Use: Use
-#   Validate: Test
-#   Verify: Test
-#   Wait: Wait
-#   Watch: Watch
-#   Wipe: Clear
-#   Write: Write
+# Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
+# inlining-threshold: 0

@@ -1,0 +1,279 @@
+version: 2.1
+orbs:
+  win: circleci/windows@2.2.0
+# YAML Anchors
+build-sdks: &build-sdks
+  - Build and Test JumpCloud SDK DirectoryInsights:
+      context: aws-credentials
+  - Build and Test JumpCloud SDK V1:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+      context: aws-credentials
+  - Build and Test JumpCloud SDK V2:
+      requires:
+        - Build and Test JumpCloud SDK V1
+      context: aws-credentials  
+  - Commit Changes:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+  - Pack and Deploy To CodeArtifact:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
+      context: aws-credentials
+  - Pack and Deploy To PSGallery:
+      type: approval
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
+        - Pack and Deploy To CodeArtifact
+workflows:
+  version: 2
+  ci:
+    jobs: *build-sdks
+  ci-nightly:
+    triggers:
+      - schedule:
+          cron: '0 0 * * *' # Run at midnight
+          filters:
+            branches:
+              only:
+                - master
+    jobs: *build-sdks
+jobs:
+  Build and Test JumpCloud SDK DirectoryInsights:
+    executor: win/default
+    steps:
+      - setup
+      - build-test:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          ManualModuleVersion: ''
+          BuildModuleOverride: true
+          RunApiTransform: true
+          TestModule: true
+  Build and Test JumpCloud SDK V1:
+    executor: win/default
+    steps:
+      - setup
+      - build-test:
+          SDKName: JumpCloud.SDK.V1
+          ManualModuleVersion: ''
+          BuildModuleOverride: true
+          RunApiTransform: true
+          TestModule: true
+  Build and Test JumpCloud SDK V2:
+    executor: win/default
+    steps:
+      - setup
+      - build-test:
+          SDKName: JumpCloud.SDK.V2
+          ManualModuleVersion: ''
+          BuildModuleOverride: true
+          RunApiTransform: true
+          TestModule: true
+  Commit Changes:
+    executor: win/default
+    steps:
+      - setup
+      - commit:
+          SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
+  Pack and Deploy To CodeArtifact:
+    executor: win/default
+    steps:
+      - setup
+      - attach_workspace:
+          at: ./SDKs
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          source: CodeArtifact
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.V1
+          source: CodeArtifact
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.V2
+          source: CodeArtifact
+  Pack and Deploy To PSGallery:
+    executor: win/default
+    steps:
+      - setup
+      - attach_workspace:
+          at: ./SDKs
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          source: PSGallery
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.V1
+          source: PSGallery
+      - deploy-nupkg:
+          SDKName: JumpCloud.SDK.V2
+          source: PSGallery
+commands:
+  setup:
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+      - checkout
+      - run:
+          name: Install PowerShell Core
+          command: dotnet tool install --global PowerShell
+      - run:
+          name: Setup Dependencies
+          shell: pwsh.exe
+          command: |
+            $ErrorActionPreference = 'Stop'
+            ./SetupDependencies.ps1
+      - run:
+          name: Display Session Variables (For Debugging)
+          shell: pwsh.exe
+          command: |
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Host Information') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-Host | Select-Object *
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Imported Environment Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-ChildItem Env: | Format-Table
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('PsBoundParameters') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            $PsBoundParameters.GetEnumerator()
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
+            Write-Host ("---------------------------------------------------------------------------------------")
+            Get-Variable | Format-Table
+      - run:
+          name: Add nuget sources
+          shell: pwsh.exe
+          command: |
+            Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
+            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
+            dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
+  build-test:
+    parameters:
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+      ManualModuleVersion:
+        description: ''
+        type: string
+        default: ''
+      BuildModuleOverride:
+        description: ''
+        type: boolean
+        default: false
+      RunApiTransform:
+        description: ''
+        type: boolean
+        default: true
+      TestModule:
+        description: ''
+        type: boolean
+        default: true
+    steps:
+      - attach_workspace:
+          at: ./SDKs
+      - run:
+          name: Building '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ErrorActionPreference = 'Continue'
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+      - when:
+          condition:
+            equal: [true, << parameters.TestModule >>]
+          steps:
+            - run:
+                name: Testing '<< parameters.SDKName >>'
+                shell: pwsh.exe
+                command: |
+                  $ErrorActionPreference = 'Stop'
+                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
+            - store_test_results:
+                name: Uploading test results for '<< parameters.SDKName >>'
+                path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
+      - persist_to_workspace:
+          root: ./SDKs
+          paths:
+            - .
+  commit:
+    parameters:
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - attach_workspace:
+          at: ./SDKs
+      - run:
+          when: on_success
+          name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
+          shell: pwsh.exe
+          command: |
+            $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
+            $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
+            git config user.email "$UserEmail"
+            git config user.name "$UserName"
+            git pull
+            git add -A
+            git status
+            git commit -m "Updating PowerShell SDK: << parameters.SDKName >>;[skip ci]"
+            git push origin << pipeline.git.branch >>
+  pack:
+    parameters:
+      source:
+        description: Name of the source to deploy to
+        type: string
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - run:
+          name: Packing '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ModuleName = '<< parameters.SDKName >>'
+            $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+            $nupkgFilePath = "./SDKs/PowerShell/$ModuleName/bin/nupkg"
+            $csprojFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+            $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+            $BuildVersion = If ('<< parameters.source >>' -eq 'CodeArtifact')
+            {
+              "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
+            }
+            ElseIf('<< parameters.source >>' -eq 'PSGallery')
+            {
+              $Psd1.ModuleVersion
+            }
+            $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+            $nuspecContent.package.metadata.version = $BuildVersion
+            $nuspecContent.save($nuspecFilePath)
+            dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName --verbosity Detailed
+  deploy-nupkg:
+    parameters:
+      source:
+        description: Name of the source to deploy to
+        type: string
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - pack:
+          source: << parameters.source >>
+          SDKName: << parameters.SDKName >>
+      - run:
+          when: on_success
+          name: Publishing to "<< parameters.source >>" repo
+          shell: pwsh.exe
+          command: |
+            $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/bin/nupkg/<< parameters.SDKName >>*.nupkg")).FullName
+            If('<< parameters.source >>' -eq 'CodeArtifact'){dotnet nuget push $NupkgPath --source << parameters.source >>}
+            ElseIf('<< parameters.source >>' -eq 'PSGallery'){dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $env:NuGetApiKey}
+            Else {Write-Error "Unknown source value: << parameters.source >>"}

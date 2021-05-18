@@ -23,6 +23,18 @@ Erases a DEP-enrolled device.
   -d '{}'
 ```
 
+### [Clear-JcSdkAppleMdmDeviceActivationLock](Clear-JcSdkAppleMdmDeviceActivationLock.md)
+Clears the activation lock on the specified device.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
+
 ### [Get-JcSdkActiveDirectory](Get-JcSdkActiveDirectory.md)
 This endpoint returns a specific Active Directory.
 
@@ -83,23 +95,13 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
 ```
 
 ### [Get-JcSdkAppleMdmDevice](Get-JcSdkAppleMdmDevice.md)
-Lists all Apple MDM devices.
-
-The filter and sort queries will allow the following fields:
-`createdAt`
-`depRegistered`
-`enrolled`
-`id`
-`osVersion`
-`serialNumber`
-`udid`
+Gets a single Apple MDM device.
 
 #### Sample Request
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
   -H 'accept: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -H 'x-api-key: {API_KEY}'
 ```
 
 ### [Get-JcSdkAppleMdmEnrollmentProfile](Get-JcSdkAppleMdmEnrollmentProfile.md)
@@ -550,7 +552,7 @@ See `/members` and `/associations` endpoints to manage those collections.
 Lists Office 365 users available for import.
 
 ### [Get-JcSdkOrganizationPolicyResult](Get-JcSdkOrganizationPolicyResult.md)
-This endpoint returns all policies results for an organization.
+This endpoint returns all policy results for an organization.
 
 ##### Sample Request
 
@@ -586,6 +588,18 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkPolicyMember](Get-JcSdkPolicyMember.md)
+This endpoint returns all the Policy Groups a Policy is a member of.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
+
 ### [Get-JcSdkPolicyResult](Get-JcSdkPolicyResult.md)
 This endpoint will return the policy results for a specific policy.
 
@@ -614,7 +628,7 @@ This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
- curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}\\
+ curl -X GET https://console.jumpcloud.com/api/v2/policytemplates/{Policy_Template_ID}\\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -914,6 +928,26 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkSystemGroupTraversePolicyGroup](Get-JcSdkSystemGroupTraversePolicyGroup.md)
+This endpoint will return all Policy Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this System Group to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System Group.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policygroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
+
 ### [Get-JcSdkSystemGroupTraverseUser](Get-JcSdkSystemGroupTraverseUser.md)
 This endpoint will return all Users bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1177,6 +1211,26 @@ curl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\
 
 ```
 
+### [Get-JcSdkSystemTraversePolicyGroup](Get-JcSdkSystemTraversePolicyGroup.md)
+This endpoint will return all Policy Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this System to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policygroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
+
 ### [Get-JcSdkSystemTraverseUser](Get-JcSdkSystemTraverseUser.md)
 This endpoint will return all Users bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1278,6 +1332,9 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/membership
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
+
+### [Get-JcSdkUserGroupSuggestion](Get-JcSdkUserGroupSuggestion.md)
+This endpoint generates and returns all suggestions available for a given group
 
 ### [Get-JcSdkUserGroupTraverseApplication](Get-JcSdkUserGroupTraverseApplication.md)
 This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1683,6 +1740,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{Im
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
+```
+
+### [Invoke-JcSdkReclaimSofwareAppLicense](Invoke-JcSdkReclaimSofwareAppLicense.md)
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 
 ### [Lock-JcSdkAppleMdmDevice](Lock-JcSdkAppleMdmDevice.md)
@@ -2592,6 +2660,19 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
 #### Sample Request
 ```
   curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
+
+### [Sync-JcSdkAppleMdmDeviceActivationLock](Sync-JcSdkAppleMdmDeviceActivationLock.md)
+Refreshes the activation lock information for a device
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
