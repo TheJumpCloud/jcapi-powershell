@@ -50,72 +50,52 @@ BODY <IActiveDirectoryInput>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
 #>
- Function New-JcSdkActiveDirectory
+Function New-JcSdkActiveDirectory
 {
     [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryOutput])]
-<<<<<<< HEAD
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName = 'CreateExpanded', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
     Param(
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
-=======
-    [CmdletBinding(DefaultParameterSetName='NewExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
-    Param(
-    [Parameter(ParameterSetName='New', Mandatory, ValueFromPipeline)]
->>>>>>> master
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IActiveDirectoryInput]
-    # Active Directory Input
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+        [Parameter(ParameterSetName = 'Create', Mandatory, ValueFromPipeline)]
+        [Parameter(ParameterSetName = 'CreateExpanded')]
+        [JumpCloud.SDK.V2.Category('Body')]
+        [System.String]
+        # Domain name for this Active Directory instance.
+        ${Domain},
 
-<<<<<<< HEAD
-    [Parameter(ParameterSetName='CreateExpanded')]
-=======
-    [Parameter(ParameterSetName='NewExpanded')]
->>>>>>> master
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # Domain name for this Active Directory instance.
-    ${Domain},
+        [Parameter(ParameterSetName = 'CreateExpanded')]
 
-    [Parameter(DontShow)]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Wait for .NET debugger to attach
-    ${Break},
+        [Parameter(DontShow)]
+        [ValidateNotNull()]
+        [JumpCloud.SDK.V2.Category('Runtime')]
+        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+        # SendAsync Pipeline Steps to be appended to the front of the pipeline
+        ${HttpPipelineAppend},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-    # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+        [Parameter(DontShow)]
+        [ValidateNotNull()]
+        [JumpCloud.SDK.V2.Category('Runtime')]
+        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+        # SendAsync Pipeline Steps to be prepended to the front of the pipeline
+        ${HttpPipelinePrepend},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-    # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+        [Parameter(DontShow)]
+        [JumpCloud.SDK.V2.Category('Runtime')]
+        [System.Uri]
+        # The URI for the proxy server to use
+        ${Proxy},
 
-    [Parameter(DontShow)]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Uri]
-    # The URI for the proxy server to use
-    ${Proxy},
+        [Parameter(DontShow)]
+        [ValidateNotNull()]
+        [JumpCloud.SDK.V2.Category('Runtime')]
+        [System.Management.Automation.PSCredential]
+        # Credentials for a proxy server to use for the remote call
+        ${ProxyCredential},
 
-    [Parameter(DontShow)]
-    [ValidateNotNull()]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.PSCredential]
-    # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
-
-    [Parameter(DontShow)]
-    [JumpCloud.SDK.V2.Category('Runtime')]
-    [System.Management.Automation.SwitchParameter]
-    # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
+        [Parameter(DontShow)]
+        [JumpCloud.SDK.V2.Category('Runtime')]
+        [System.Management.Automation.SwitchParameter]
+        # Use the default credentials for the proxy
+        ${ProxyUseDefaultCredentials}
     )
     Begin
     {
@@ -152,3 +132,11 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 }
 
 
+        # Clean up global variables
+        $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+        $GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+        }
+        Return $Results
+    }
+}

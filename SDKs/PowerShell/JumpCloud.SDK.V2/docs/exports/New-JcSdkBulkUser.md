@@ -11,7 +11,7 @@ schema: 2.0.0
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -34,11 +34,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-<<<<<<< HEAD
 New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource>] [-Confirm] [-WhatIf]
-=======
-New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <Parameters>] [-Confirm] [-WhatIf]
->>>>>>> master
  [<CommonParameters>]
 ```
 
@@ -46,7 +42,7 @@ New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <Parameters>] [-Con
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -105,11 +101,7 @@ Defines the creation-source header for gapps, o365 and workdays requests.
 If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
 
 ```yaml
-<<<<<<< HEAD
 Type: JumpCloud.SDK.V2.Support.CreationSource
-=======
-Type: JumpCloud.SDK.V2.Support.Parameters
->>>>>>> master
 Parameter Sets: (All)
 Aliases:
 
@@ -173,10 +165,9 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IBulkUserCreate[]>: Array of bulk-user-create
   - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
-  - `[Email <String>]`: 
-  - `[Firstname <String>]`: 
-  - `[Lastname <String>]`: 
-  - `[Username <String>]`: 
+  - `[Email <String>]`:
+  - `[Firstname <String>]`:
+  - `[Lastname <String>]`:
+  - `[Username <String>]`:
 
 ## RELATED LINKS
-

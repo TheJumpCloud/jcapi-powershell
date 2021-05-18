@@ -1,7 +1,6 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-<<<<<<< HEAD:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 schema: 2.0.0
 ---
@@ -21,52 +20,11 @@ Remove-JcSdkApplicationLogo -ApplicationId <String> [-PassThru] [-Confirm] [-Wha
 ### DeleteViaIdentity
 ```
 Remove-JcSdkApplicationLogo -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
-=======
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
-schema: 2.0.0
----
-
-# Invoke-JcSdkReclaimSofwareAppLicense
-
-## SYNOPSIS
-This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
-#### Sample Request
-```
-$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
--H 'Accept: application/json' \\
--H 'Content-Type: application/json' \\
--H 'x-api-key: {API_KEY}' \\
--d '{}'
-```
-
-## SYNTAX
-
-### Reclaim (Default)
-```
-Invoke-JcSdkReclaimSofwareAppLicense -SoftwareAppId <String> [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### ReclaimViaIdentity
-```
-Invoke-JcSdkReclaimSofwareAppLicense -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf]
->>>>>>> master:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-<<<<<<< HEAD:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 Deletes the specified image from an application
-=======
-This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
-#### Sample Request
-```
-$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
--H 'Accept: application/json' \\
--H 'Content-Type: application/json' \\
--H 'x-api-key: {API_KEY}' \\
--d '{}'
-```
->>>>>>> master:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 
 ## EXAMPLES
 
@@ -86,36 +44,12 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_i
 
 ## PARAMETERS
 
-<<<<<<< HEAD:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 ### -ApplicationId
-=======
-### -InputObject
-Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-Parameter Sets: ReclaimViaIdentity
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -SoftwareAppId
->>>>>>> master:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 .
 
 ```yaml
 Type: System.String
-<<<<<<< HEAD:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 Parameter Sets: Delete
-=======
-Parameter Sets: Reclaim
->>>>>>> master:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 Aliases:
 
 Required: True
@@ -129,15 +63,9 @@ Accept wildcard characters: False
 Prompts you for confirmation before running the cmdlet.
 
 ```yaml
-<<<<<<< HEAD:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkApplicationLogo.md
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: DeleteViaIdentity
 Aliases:
-=======
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases: cf
->>>>>>> master:SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSofwareAppLicense.md
 
 Required: False
 Position: Named
@@ -214,26 +142,25 @@ To create the parameters described below, construct a hash table containing the 
 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`: 
-  - `[ActivedirectoryId <String>]`: 
-  - `[AppleMdmId <String>]`: 
+  - `[AccountId <String>]`:
+  - `[ActivedirectoryId <String>]`:
+  - `[AppleMdmId <String>]`:
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`: 
-  - `[DeviceId <String>]`: 
+  - `[CustomEmailType <String>]`:
+  - `[DeviceId <String>]`:
   - `[GroupId <String>]`: ObjectID of the System Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`: 
+  - `[JobId <String>]`:
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`: 
+  - `[ProviderId <String>]`:
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`: 
+  - `[WorkdayId <String>]`:
 
 ## RELATED LINKS
-
