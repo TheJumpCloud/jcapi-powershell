@@ -50,7 +50,9 @@ BODY <IAuthnPolicyInput>:
   [MfaRequired <Boolean?>]:
   [Name <String>]:
   [TargetResources <IAuthnPolicyResourceTarget[]>]:
-    [Type <String>]:
+    Type <String>:
+    [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+  [Type <String>]: AuthnPolicyType
   [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
@@ -78,7 +80,8 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [WorkdayId <String>]:
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
-  [Type <String>]:
+  Type <String>:
+  [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
@@ -160,6 +163,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
     ${TargetResources},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # AuthnPolicyType
+    ${Type},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]

@@ -1,41 +1,21 @@
 <#
 .Synopsis
-Lists all Apple MDM devices.
-
-The filter and sort queries will allow the following fields:
-`createdAt`
-`depRegistered`
-`enrolled`
-`id`
-`osVersion`
-`serialNumber`
-`udid`
+Gets a single Apple MDM device.
 
 #### Sample Request
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
   -H 'accept: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -H 'x-api-key: {API_KEY}'
 ```
 .Description
-Lists all Apple MDM devices.
-
-The filter and sort queries will allow the following fields:
-`createdAt`
-`depRegistered`
-`enrolled`
-`id`
-`osVersion`
-`serialNumber`
-`udid`
+Gets a single Apple MDM device.
 
 #### Sample Request
 ```
-  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices \\
+  curl -X GET https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
   -H 'accept: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -H 'x-api-key: {API_KEY}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -46,8 +26,36 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdmDevice
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the System Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmDevice.md
 #>
@@ -56,13 +64,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-    [Parameter(Mandatory)]
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [Parameter(ParameterSetName='List', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
     ${AppleMdmId},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${DeviceId},
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
+
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
@@ -75,19 +97,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
 
-    [Parameter()]
+    [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.Int32]
     # .
     ${XTotalCount},
 
+<<<<<<< HEAD
+=======
+    [Parameter(ParameterSetName='List')]
+    [JumpCloud.SDK.V2.Category('Header')]
+    [System.Int32]
+    # If provided in the request with any non-empty value, this header will be returned on the response populated with the total count of objects without filters taken into account
+    ${XUnfilteredTotalCount},
+
+>>>>>>> master
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]

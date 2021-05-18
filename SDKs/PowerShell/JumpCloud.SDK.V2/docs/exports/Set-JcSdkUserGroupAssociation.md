@@ -30,7 +30,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associati
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <Type4>
+Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <Type5>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -48,7 +48,7 @@ Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGrap
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type4>
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type5>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -200,7 +200,7 @@ Accept wildcard characters: False
 Targets which a "user_group" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type4
+Type: JumpCloud.SDK.V2.Support.Type5
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -267,7 +267,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUserGroup>: GraphOperation (UserGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type4>`: Targets which a "user_group" can be associated to.
+  - `Type <Type5>`: Targets which a "user_group" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

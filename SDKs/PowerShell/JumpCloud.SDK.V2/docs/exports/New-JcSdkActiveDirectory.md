@@ -24,12 +24,20 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
 
 ## SYNTAX
 
+<<<<<<< HEAD
 ### CreateExpanded (Default)
+=======
+### NewExpanded (Default)
+>>>>>>> master
 ```
 New-JcSdkActiveDirectory [-Domain <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
+<<<<<<< HEAD
 ### Create
+=======
+### New
+>>>>>>> master
 ```
 New-JcSdkActiveDirectory -Body <IActiveDirectoryInput> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -73,7 +81,11 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IActiveDirectoryInput
+<<<<<<< HEAD
 Parameter Sets: Create
+=======
+Parameter Sets: New
+>>>>>>> master
 Aliases:
 
 Required: True
@@ -88,7 +100,11 @@ Domain name for this Active Directory instance.
 
 ```yaml
 Type: System.String
+<<<<<<< HEAD
 Parameter Sets: CreateExpanded
+=======
+Parameter Sets: NewExpanded
+>>>>>>> master
 Aliases:
 
 Required: False
