@@ -34,6 +34,10 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
+      filters:
+        branches:
+          only:
+            - master
 workflows:
   version: 2
   ci:
