@@ -502,9 +502,30 @@ Function Update-SwaggerObject
                     # Append "x-ms-enum" to "enum" section
                     If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum' -or $AttributePath -like '.parameters.*.enum')
                     {
+                        # Determine unique xMsEnum name
+                        $xMsEnumNameProperty = If ($ThisObject.name) { $ThisObject.name }
+                        $xMsEnumModelName = If ($AttributePath -match [regex]'\.definitions\.(.*?)\.allOf\.properties\.type\.enum') { $matches[1] }
+                        ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.items\.enum') { $matches[1].Replace(':', '-') }
+                        ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.enum') { $matches[1].Replace(':', '-') }
+                        # Else { $ThisObjectName }
+                        $xMsEnumName = If (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName))
+                        {
+                            "$($xMsEnumModelName.Replace($xMsEnumNameProperty,''))$((Get-Culture).TextInfo.ToTitleCase($xMsEnumNameProperty))"
+                        }
+                        ElseIf (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and [System.String]::IsNullOrEmpty($xMsEnumModelName))
+                        {
+                            "$($xMsEnumNameProperty)"
+                        }
+                        ElseIf ([System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName))
+                        {
+                            "$($xMsEnumModelName)"
+                        }
+                        Else
+                        {
+                            Write-Error ("Unable to determine enum name: $($AttributePath)  $($ThisObject.name)")
+                        }
                         $xMsEnum = [PSCustomObject]@{
-                            name = If ($ThisObject.name) { $ThisObject.name }
-                            Else { $ThisObjectName }
+                            name = $xMsEnumName
                             # modelAsString = $true
                         }
                         # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
