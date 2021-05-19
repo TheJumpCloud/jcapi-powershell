@@ -120,8 +120,6 @@ $TransformConfig = [Ordered]@{
             '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
-            'ObjectID of the Configuration (Policy) Group.'                                       = 'ObjectID of the System Group.' # TODO: Normalize descriptions so as not to cause so many changes
-            'ObjectID of the Configuration (Policy).'                                             = 'ObjectID of the Policy.'  # TODO: Normalize descriptions so as not to cause so many changes
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -816,6 +814,8 @@ $SDKName | ForEach-Object {
             {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
+            # Add GitHubTag to spec
+            $SwaggerObjectContent.info.Add('x-releaseTag', $GitHubTag)
             # Format the spec
             $SwaggerObjectContent = Format-SwaggerObject -InputObject:($SwaggerObjectContent) -Sort:($SortAttributes)
             # Find and replace on file
