@@ -93,7 +93,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           source: CodeArtifact
@@ -108,7 +108,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           source: PSGallery
@@ -185,7 +185,7 @@ commands:
         default: true
     steps:
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - run:
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
@@ -206,7 +206,7 @@ commands:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
       - persist_to_workspace:
-          root: ./SDKs
+          root: .
           paths:
             - .
   commit:
@@ -216,7 +216,7 @@ commands:
         type: string
     steps:
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - run:
           when: on_success
           name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
