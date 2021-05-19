@@ -815,7 +815,11 @@ $SDKName | ForEach-Object {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
             # Add GitHubTag to spec
-            $SwaggerObjectContent.info.Add('x-releaseTag', $GitHubTag)
+            Add-Member -InputObject:($SwaggerObjectContent.info) -MemberType:('NoteProperty') -Name:('x-releaseTag') -Value:($GitHubTag) -Force
+            If (-not $SwaggerObjectContent.info.'x-releaseTag')
+            {
+                $SwaggerObjectContent.info.Add('x-releaseTag', $GitHubTag)
+            }
             # Format the spec
             $SwaggerObjectContent = Format-SwaggerObject -InputObject:($SwaggerObjectContent) -Sort:($SortAttributes)
             # Find and replace on file
