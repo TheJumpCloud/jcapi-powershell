@@ -21,6 +21,9 @@ Try
     # Misc Functions
     Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix)
     {
+        # Normalize Id descriptions
+        $InputString = $InputString.Replace('[GroupId <String>]: ObjectID of the Configuration (Policy) Group.', '[GroupId <String>]: ObjectID of the System Group.')
+        $InputString = $InputString.Replace('[PolicyId <String>]: ObjectID of the Configuration (Policy).', '[PolicyId <String>]: ObjectID of the Policy.')
         # Swap out SDK prefix for customFunction prefix
         $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
         # Remove weird output conversion for the customFunctions
