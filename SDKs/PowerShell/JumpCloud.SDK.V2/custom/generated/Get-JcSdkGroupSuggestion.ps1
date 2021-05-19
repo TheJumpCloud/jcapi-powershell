@@ -1,8 +1,24 @@
 <#
 .Synopsis
-This endpoint generates and returns all suggestions available for a given group
+This endpoint returns all suggestions available for a given group.
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Description
-This endpoint generates and returns all suggestions available for a given group
+This endpoint returns all suggestions available for a given group.
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -15,7 +31,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IAny
+JumpCloud.SDK.V2.Models.IMemberSuggestion
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -29,13 +45,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -45,62 +61,62 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroupSuggestion.md
 #>
-Function Get-JcSdkGroupSuggestion
+ Function Get-JcSdkGroupSuggestion
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAny])]
-    [CmdletBinding(DefaultParameterSetName = 'Get', PositionalBinding = $false)]
+    [OutputType([JumpCloud.SDK.V2.Models.IMemberSuggestion])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-        [Parameter(ParameterSetName = 'Get', Mandatory)]
-        [JumpCloud.SDK.V2.Category('Path')]
-        [System.String]
-        # ID of the group
-        ${GroupId},
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # ID of the group
+    ${GroupId},
 
-        [Parameter(ParameterSetName = 'GetViaIdentity', Mandatory, ValueFromPipeline)]
-        [JumpCloud.SDK.V2.Category('Path')]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
-        # Identity Parameter
-        # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-        ${InputObject},
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.SwitchParameter]
-        # Wait for .NET debugger to attach
-        ${Break},
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Wait for .NET debugger to attach
+    ${Break},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-        # SendAsync Pipeline Steps to be appended to the front of the pipeline
-        ${HttpPipelineAppend},
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be appended to the front of the pipeline
+    ${HttpPipelineAppend},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-        # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-        ${HttpPipelinePrepend},
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be prepended to the front of the pipeline
+    ${HttpPipelinePrepend},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Uri]
-        # The URI for the proxy server to use
-        ${Proxy},
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Uri]
+    # The URI for the proxy server to use
+    ${Proxy},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.PSCredential]
-        # Credentials for a proxy server to use for the remote call
-        ${ProxyCredential},
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.PSCredential]
+    # Credentials for a proxy server to use for the remote call
+    ${ProxyCredential},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.SwitchParameter]
-        # Use the default credentials for the proxy
-        ${ProxyUseDefaultCredentials}
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Use the default credentials for the proxy
+    ${ProxyUseDefaultCredentials}
     )
     Begin
     {
@@ -125,26 +141,20 @@ Function Get-JcSdkGroupSuggestion
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
         # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
         $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
-        $Result
+        {
+            $Result.results
+        }
+        Else
+        {
+            $Result
+        }
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result;
+        }
     }
-    If (-not [System.String]::IsNullOrEmpty($Result))
+    End
     {
-        $Results += $Result;
-    }
-}
-End
-{
-    # Clean up global variables
-    $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-    $GlobalVars | ForEach-Object {
-        If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-    }
-    Return $Results
-}
-}
-
-
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
@@ -153,3 +163,5 @@ End
         Return $Results
     }
 }
+
+

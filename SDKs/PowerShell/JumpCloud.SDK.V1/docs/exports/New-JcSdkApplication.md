@@ -12,18 +12,18 @@ The endpoint adds a new SSO / SAML Applications.
 
 ## SYNTAX
 
-### CreateExpanded (Default)
-```
-New-JcSdkApplication [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Create
+### Create (Default)
 ```
 New-JcSdkApplication -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### CreateExpanded
+```
+New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta] [-Color <String>]
+ [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>]
+ [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <String>]
+ [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,7 +102,7 @@ Type: JumpCloud.SDK.V1.Models.IApplicationConfig
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -252,7 +252,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -327,7 +327,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -386,9 +386,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IApplication>: Application
-  - `[Beta <Boolean?>]`: 
-  - `[Color <String>]`: 
-  - `[Config <IApplicationConfig>]`: 
+  - `Config <IApplicationConfig>`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -468,6 +466,10 @@ BODY <IApplication>: Application
     - `[SpEntityIdType <String>]`: 
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
+  - `Name <String>`: 
+  - `SsoUrl <String>`: 
+  - `[Beta <Boolean?>]`: 
+  - `[Color <String>]`: 
   - `[Created <String>]`: 
   - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
@@ -477,12 +479,10 @@ BODY <IApplication>: Application
   - `[LearnMore <String>]`: 
   - `[LogoColor <String>]`: 
   - `[LogoUrl <String>]`: 
-  - `[Name <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
-  - `[SsoUrl <String>]`: 
 
 CONFIG <IApplicationConfig>: .
   - `[AcUrlLabel <String>]`: 

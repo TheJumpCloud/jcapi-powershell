@@ -30,7 +30,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventQuery>:
-  Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  Service <String[]>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [Fields <String[]>]: optional list of fields to return from query
@@ -59,7 +59,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
-    # Known services: systems,radius,sso,directory,ldap,all
     ${Service},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]

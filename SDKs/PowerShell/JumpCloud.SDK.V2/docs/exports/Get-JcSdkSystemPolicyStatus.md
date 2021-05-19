@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSystemPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the policy results for a particular system.
+This endpoint returns the configuration (policy) results for a particular system.
 
 ##### Sample Request
 
@@ -28,7 +28,7 @@ Get-JcSdkSystemPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <St
 ```
 
 ## DESCRIPTION
-This endpoint returns the policy results for a particular system.
+This endpoint returns the configuration (policy) results for a particular system.
 
 ##### Sample Request
 

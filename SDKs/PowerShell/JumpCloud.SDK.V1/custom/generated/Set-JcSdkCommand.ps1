@@ -57,12 +57,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ICommand>:
   Command1 <String>: The command to execute on the server.
+  CommandType <String>: The Command OS
+  Name <String>:
   [CommandRunners <String[]>]: An array of IDs of the Command Runner Users that can execute this command.
-  [CommandType <String>]: The Command OS
   [Files <String[]>]: An array of file IDs to include with the command.
   [LaunchType <String>]: How the command will execute.
   [ListensTo <String>]:
-  [Name <String>]:
   [Organization <String>]: The ID of the organization.
   [Schedule <String>]: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.        
   [ScheduleRepeatType <String>]: When the command will repeat.
@@ -116,19 +116,26 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # The command to execute on the server.
     ${Command},
 
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # The Command OS
+    ${CommandType},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Name},
+
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
     ${CommandRunners},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # The Command OS
-    ${CommandType},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -150,13 +157,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${ListensTo},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Name},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

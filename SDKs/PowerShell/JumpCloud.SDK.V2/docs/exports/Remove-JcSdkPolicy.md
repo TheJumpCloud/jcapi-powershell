@@ -8,7 +8,7 @@ schema: 2.0.0
 # Remove-JcSdkPolicy
 
 ## SYNOPSIS
-This endpoint allows you to delete a policy.
+This endpoint allows you to delete a configuration (policy).
 
 #### Sample Request
 
@@ -32,7 +32,7 @@ Remove-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] 
 ```
 
 ## DESCRIPTION
-This endpoint allows you to delete a policy.
+This endpoint allows you to delete a configuration (policy).
 
 #### Sample Request
 
@@ -62,7 +62,7 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d429
 ## PARAMETERS
 
 ### -Id
-ObjectID of the Policy object.
+ObjectID of the Configuration (Policy) object.
 
 ```yaml
 Type: System.String
@@ -166,13 +166,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

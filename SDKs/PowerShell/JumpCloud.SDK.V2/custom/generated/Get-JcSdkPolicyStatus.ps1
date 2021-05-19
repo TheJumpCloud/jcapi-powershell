@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns the latest policies results for a specific policy.
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 
@@ -11,7 +11,7 @@ This endpoint returns the latest policies results for a specific policy.
   -H 'x-api-key: {API_KEY}'
   ```
 .Description
-This endpoint returns the latest policies results for a specific policy.
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 

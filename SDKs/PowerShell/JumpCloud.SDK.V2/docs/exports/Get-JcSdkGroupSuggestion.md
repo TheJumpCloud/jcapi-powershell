@@ -8,7 +8,15 @@ schema: 2.0.0
 # Get-JcSdkGroupSuggestion
 
 ## SYNOPSIS
-This endpoint generates and returns all suggestions available for a given group
+This endpoint returns all suggestions available for a given group.
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## SYNTAX
 
@@ -23,7 +31,15 @@ Get-JcSdkGroupSuggestion -InputObject <IJumpCloudApIsIdentity> [<CommonParameter
 ```
 
 ## DESCRIPTION
-This endpoint generates and returns all suggestions available for a given group
+This endpoint returns all suggestions available for a given group.
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ## EXAMPLES
 
@@ -83,7 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IAny
+### JumpCloud.SDK.V2.Models.IMemberSuggestion
 
 ## NOTES
 
@@ -95,25 +111,26 @@ To create the parameters described below, construct a hash table containing the 
 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`:
-  - `[ActivedirectoryId <String>]`:
-  - `[AppleMdmId <String>]`:
+  - `[AccountId <String>]`: 
+  - `[ActivedirectoryId <String>]`: 
+  - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`:
-  - `[DeviceId <String>]`:
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[CustomEmailType <String>]`: 
+  - `[DeviceId <String>]`: 
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`:
+  - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`:
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`:
+  - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS
+

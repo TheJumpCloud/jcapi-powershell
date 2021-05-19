@@ -1,29 +1,25 @@
 <#
 .Synopsis
-This endpoint deletes an existing Office 365 instance.
+Clears the activation lock on the specified device.
 
-#####
-
-Sample Request
-
+#### Sample Request
 ```
-curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
 ```
 .Description
-This endpoint deletes an existing Office 365 instance.
+Clears the activation lock on the specified device.
 
-#####
-
-Sample Request
-
+#### Sample Request
 ```
-curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -51,13 +47,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -65,70 +61,76 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkOffice365.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Clear-JcSdkAppleMdmDeviceActivationLock.md
 #>
-Function Remove-JcSdkOffice365
+ Function Clear-JcSdkAppleMdmDeviceActivationLock
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName = 'Delete', PositionalBinding = $false, SupportsShouldProcess, ConfirmImpact = 'Medium')]
+    [CmdletBinding(DefaultParameterSetName='Clear', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-        [Parameter(ParameterSetName = 'Delete', Mandatory)]
-        [JumpCloud.SDK.V2.Category('Path')]
-        [System.String]
-        # ObjectID of the Office 365 instance.
-        ${Office365Id},
+    [Parameter(ParameterSetName='Clear', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${AppleMdmId},
 
-        [Parameter(ParameterSetName = 'DeleteViaIdentity', Mandatory, ValueFromPipeline)]
-        [JumpCloud.SDK.V2.Category('Path')]
-        [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
-        # Identity Parameter
-        # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-        ${InputObject},
+    [Parameter(ParameterSetName='Clear', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [System.String]
+    # .
+    ${DeviceId},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.SwitchParameter]
-        # Wait for .NET debugger to attach
-        ${Break},
+    [Parameter(ParameterSetName='ClearViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    # Identity Parameter
+    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
+    ${InputObject},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-        # SendAsync Pipeline Steps to be appended to the front of the pipeline
-        ${HttpPipelineAppend},
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Wait for .NET debugger to attach
+    ${Break},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
-        # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-        ${HttpPipelinePrepend},
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be appended to the front of the pipeline
+    ${HttpPipelineAppend},
 
-        [Parameter()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.SwitchParameter]
-        # Returns true when the command succeeds
-        ${PassThru},
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
+    # SendAsync Pipeline Steps to be prepended to the front of the pipeline
+    ${HttpPipelinePrepend},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Uri]
-        # The URI for the proxy server to use
-        ${Proxy},
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Returns true when the command succeeds
+    ${PassThru},
 
-        [Parameter(DontShow)]
-        [ValidateNotNull()]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.PSCredential]
-        # Credentials for a proxy server to use for the remote call
-        ${ProxyCredential},
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Uri]
+    # The URI for the proxy server to use
+    ${Proxy},
 
-        [Parameter(DontShow)]
-        [JumpCloud.SDK.V2.Category('Runtime')]
-        [System.Management.Automation.SwitchParameter]
-        # Use the default credentials for the proxy
-        ${ProxyUseDefaultCredentials}
+    [Parameter(DontShow)]
+    [ValidateNotNull()]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.PSCredential]
+    # Credentials for a proxy server to use for the remote call
+    ${ProxyCredential},
+
+    [Parameter(DontShow)]
+    [JumpCloud.SDK.V2.Category('Runtime')]
+    [System.Management.Automation.SwitchParameter]
+    # Use the default credentials for the proxy
+    ${ProxyUseDefaultCredentials}
     )
     Begin
     {
@@ -147,7 +149,7 @@ Function Remove-JcSdkOffice365
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Remove-JcSdkInternalOffice365 @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Clear-JcSdkInternalAppleMdmDeviceActivationLock @PSBoundParameters
     }
     End
     {
@@ -163,3 +165,5 @@ Function Remove-JcSdkOffice365
         Return $Results
     }
 }
+
+

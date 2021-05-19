@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the latest policies results for a specific policy.
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 
@@ -27,7 +27,7 @@ Get-JcSdkPolicyStatus -PolicyId <String> [-Fields <String[]>] [-Filter <String[]
 ```
 
 ## DESCRIPTION
-This endpoint returns the latest policies results for a specific policy.
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 

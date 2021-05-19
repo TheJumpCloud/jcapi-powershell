@@ -1,7 +1,7 @@
 <#
 .Synopsis
-This endpoint allows you to create a policy.
-Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to create a configuration (policy).
+Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 ##### Sample Request
 ```
@@ -14,8 +14,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
   }'
 ```
 .Description
-This endpoint allows you to create a policy.
-Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to create a configuration (policy).
+Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 ##### Sample Request
 ```
@@ -46,15 +46,15 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPolicyRequest>:
-  Name <String>: The description for this specific Policy.
-  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+  Name <String>: The description for this specific Configuration (Policy).
+  [TemplateId <String>]: ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
   [Values <IPolicyValue[]>]:
-    [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
-    [Value <String>]: The value for the configuration field for this Policy instance.
+    [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+    [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
 
 VALUES <IPolicyValue[]>:
-  [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
-  [Value <String>]: The value for the configuration field for this Policy instance.
+  [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+  [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
 #>
@@ -66,20 +66,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyRequest]
-    # An instance of a policy template.
+    # An instance of a configuration (policy) template.
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # The description for this specific Policy.
+    # The description for this specific Configuration (Policy).
     ${Name},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+    # ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
     ${TemplateId},
 
     [Parameter(ParameterSetName='CreateExpanded')]

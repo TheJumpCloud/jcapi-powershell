@@ -59,29 +59,29 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Confirm
-Prompts you for confirmation before running the cmdlet.
+### -InputObject
+Identity Parameter
+To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 Parameter Sets: DeleteViaIdentity
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -WhatIf
-Shows what would happen if the cmdlet runs.
-The cmdlet is not run.
+### -PassThru
+Returns true when the command succeeds
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
-Aliases: wi
+Aliases:
 
 Required: False
 Position: Named
@@ -130,7 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses
+### System.Boolean
 
 ## NOTES
 
@@ -142,25 +142,26 @@ To create the parameters described below, construct a hash table containing the 
 
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
-  - `[AccountId <String>]`:
-  - `[ActivedirectoryId <String>]`:
-  - `[AppleMdmId <String>]`:
+  - `[AccountId <String>]`: 
+  - `[ActivedirectoryId <String>]`: 
+  - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
-  - `[CustomEmailType <String>]`:
-  - `[DeviceId <String>]`:
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[CustomEmailType <String>]`: 
+  - `[DeviceId <String>]`: 
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
-  - `[JobId <String>]`:
+  - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
-  - `[ProviderId <String>]`:
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[WorkdayId <String>]`:
+  - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS
+

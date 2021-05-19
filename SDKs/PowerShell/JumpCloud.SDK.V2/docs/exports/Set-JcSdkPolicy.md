@@ -8,8 +8,8 @@ schema: 2.0.0
 # Set-JcSdkPolicy
 
 ## SYNOPSIS
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to update a configuration (policy).
+Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 
 ##### Sample Request
@@ -49,8 +49,8 @@ Set-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> -Name <String> [-TemplateI
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to update a configuration (policy).
+Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 
 ##### Sample Request
@@ -83,7 +83,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 ## PARAMETERS
 
 ### -Body
-An instance of a policy template.
+An instance of a configuration (policy) template.
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -99,7 +99,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-ObjectID of the Policy object.
+ObjectID of the Configuration (Policy) object.
 
 ```yaml
 Type: System.String
@@ -130,7 +130,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-The description for this specific Policy.
+The description for this specific Configuration (Policy).
 
 ```yaml
 Type: System.String
@@ -145,7 +145,7 @@ Accept wildcard characters: False
 ```
 
 ### -TemplateId
-ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
 
 ```yaml
 Type: System.String
@@ -228,12 +228,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyRequest>: An instance of a policy template.
-  - `Name <String>`: The description for this specific Policy.
-  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+BODY <IPolicyRequest>: An instance of a configuration (policy) template.
+  - `Name <String>`: The description for this specific Configuration (Policy).
+  - `[TemplateId <String>]`: ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
-    - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
-    - `[Value <String>]`: The value for the configuration field for this Policy instance.
+    - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+    - `[Value <String>]`: The value for the configuration field for this Configuration (Policy) instance.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -243,13 +243,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
@@ -258,8 +258,8 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[WorkdayId <String>]`: 
 
 VALUES <IPolicyValue[]>: .
-  - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
-  - `[Value <String>]`: The value for the configuration field for this Policy instance.
+  - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+  - `[Value <String>]`: The value for the configuration field for this Configuration (Policy) instance.
 
 ## RELATED LINKS
 

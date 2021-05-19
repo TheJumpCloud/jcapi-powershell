@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkOrganizationPolicyResult
 
 ## SYNOPSIS
-This endpoint returns all policy results for an organization.
+This endpoint returns all configuration (policy) results for an organization.
 
 ##### Sample Request
 
@@ -27,7 +27,7 @@ Get-JcSdkOrganizationPolicyResult [-Fields <String[]>] [-Filter <String[]>] [-So
 ```
 
 ## DESCRIPTION
-This endpoint returns all policy results for an organization.
+This endpoint returns all configuration (policy) results for an organization.
 
 ##### Sample Request
 

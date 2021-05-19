@@ -56,8 +56,6 @@ PS C:\> {{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
-.Inputs
-System.Collections.Hashtable
 .Outputs
 System.String
 .Notes
@@ -76,37 +74,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Invoke-JcSdkCommandTrigger
 {
     [OutputType([System.String])]
-    [CmdletBinding(DefaultParameterSetName='PostExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Post', Mandatory)]
-    [Parameter(ParameterSetName='PostExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
     ${Triggername},
 
     [Parameter(ParameterSetName='PostViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PostViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(ParameterSetName='Post', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='PostViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V1.Models.IDictionaryOfany]))]
-    [System.Collections.Hashtable]
-    # Dictionary of <any>
-    ${Body},
-
-    [Parameter(ParameterSetName='PostExpanded')]
-    [Parameter(ParameterSetName='PostViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.Collections.Hashtable]
-    # Additional Parameters
-    ${AdditionalProperties},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

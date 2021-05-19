@@ -15,7 +15,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
+JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -23,10 +23,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IEventIntervalQuery>:
   IntervalUnit <String>:
-  Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  Service <String[]>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
-  [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by         optional
+  [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
@@ -36,7 +36,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventInterval
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
@@ -56,7 +56,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
-    # Known services: systems,radius,sso,directory,ldap,all
     ${Service},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
@@ -75,7 +74,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String]
     # Interval Value.
-    # This specifies how many units you want to bucket the event counts byoptional
+    # This specifies how many units you want to bucket the event counts by
     ${IntervalValue},
 
     [Parameter(ParameterSetName='GetExpanded')]
@@ -165,7 +164,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $PSBoundParameters.Remove('Paginate') | Out-Null
             Do
             {
-                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
+                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
                 {
                     If (-not [System.String]::IsNullOrEmpty($Result))
@@ -207,7 +206,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters
+            $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventInterval @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

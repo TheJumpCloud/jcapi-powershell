@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to manage the _direct_ associations of a Policy.
+This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -17,9 +17,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
   }'
 ```
 .Description
-This endpoint allows you to manage the _direct_ associations of a Policy.
+This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -68,13 +68,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -93,7 +93,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Policy.
+    # ObjectID of the Configuration (Policy).
     ${PolicyId},
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]

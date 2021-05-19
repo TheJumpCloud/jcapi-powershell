@@ -12,18 +12,18 @@ The endpoint updates a SSO / SAML Application.
 
 ## SYNTAX
 
-### SetExpanded (Default)
-```
-Set-JcSdkApplication -Id <String> [-Beta] [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
- [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Name <String>] [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
-```
-
-### Set
+### Set (Default)
 ```
 Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### SetExpanded
+```
+Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta]
+ [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
+ [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
+ [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoJit]
+ [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
@@ -34,12 +34,11 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> 
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> [-Id <String>] [-Beta] [-Color <String>]
- [-Config <IApplicationConfig>] [-Created <String>]
+Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Config <IApplicationConfig> -Name <String>
+ -SsoUrl <String> [-Id <String>] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
- [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -118,7 +117,7 @@ Type: JumpCloud.SDK.V1.Models.IApplicationConfig
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -299,7 +298,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -374,7 +373,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -435,9 +434,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IApplication>: Application
-  - `[Beta <Boolean?>]`: 
-  - `[Color <String>]`: 
-  - `[Config <IApplicationConfig>]`: 
+  - `Config <IApplicationConfig>`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlOptions <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -517,6 +514,10 @@ BODY <IApplication>: Application
     - `[SpEntityIdType <String>]`: 
     - `[SpEntityIdValue <String>]`: 
     - `[SpEntityIdVisible <Boolean?>]`: 
+  - `Name <String>`: 
+  - `SsoUrl <String>`: 
+  - `[Beta <Boolean?>]`: 
+  - `[Color <String>]`: 
   - `[Created <String>]`: 
   - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
   - `[Description <String>]`: 
@@ -526,12 +527,10 @@ BODY <IApplication>: Application
   - `[LearnMore <String>]`: 
   - `[LogoColor <String>]`: 
   - `[LogoUrl <String>]`: 
-  - `[Name <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
-  - `[SsoUrl <String>]`: 
 
 CONFIG <IApplicationConfig>: .
   - `[AcUrlLabel <String>]`: 

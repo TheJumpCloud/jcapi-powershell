@@ -11,7 +11,7 @@ schema: 2.0.0
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -42,7 +42,7 @@ New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource>] [
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -165,9 +165,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IBulkUserCreate[]>: Array of bulk-user-create
   - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
-  - `[Email <String>]`:
-  - `[Firstname <String>]`:
-  - `[Lastname <String>]`:
-  - `[Username <String>]`:
+  - `[Email <String>]`: 
+  - `[Firstname <String>]`: 
+  - `[Lastname <String>]`: 
+  - `[Username <String>]`: 
 
 ## RELATED LINKS
+

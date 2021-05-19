@@ -23,7 +23,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IEventDistinctQuery>:
   Field <String>: field is what they wish to query on
-  Service <String[]>: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  Service <String[]>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
@@ -54,7 +54,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
-    # Known services: systems,radius,sso,directory,ldap,all
     ${Service},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]

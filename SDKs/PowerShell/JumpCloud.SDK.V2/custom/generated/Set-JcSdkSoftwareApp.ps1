@@ -57,12 +57,19 @@ BODY <ISoftwareApp>:
     [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       [(Any) <Object>]: This indicates any property can be added to this object.
     [AppleVppTotalLicenses <Int32?>]:
+    [AssetKind <String>]: The manifest asset kind (ex: software).
+    [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
+    [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
     [AutoUpdate <Boolean?>]:
+    [Description <String>]: The software app description.
     [DesiredState <String>]: State of Install or Uninstall
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [PackageId <String>]:
+    [PackageKind <String>]: The package manifest kind (ex: software-package).
     [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+    [PackageSubtitle <String>]: The package manifest subtitle.
+    [PackageVersion <String>]: The package manifest version.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -72,13 +79,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -93,12 +100,19 @@ SETTINGS <ISoftwareAppSettings[]>:
   [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     [(Any) <Object>]: This indicates any property can be added to this object.
   [AppleVppTotalLicenses <Int32?>]:
+  [AssetKind <String>]: The manifest asset kind (ex: software).
+  [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
+  [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
   [AutoUpdate <Boolean?>]:
+  [Description <String>]: The software app description.
   [DesiredState <String>]: State of Install or Uninstall
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [PackageId <String>]:
+  [PackageKind <String>]: The package manifest kind (ex: software-package).
   [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+  [PackageSubtitle <String>]: The package manifest subtitle.
+  [PackageVersion <String>]: The package manifest version.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 #>

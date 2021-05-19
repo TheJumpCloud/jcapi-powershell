@@ -179,7 +179,7 @@ curl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkBulkUserResult](Get-JcSdkBulkUserResult.md)
+### [Get-JcSdkBulkUsersResult](Get-JcSdkBulkUsersResult.md)
 This endpoint will return the results of particular user import or update job request.
 
 #### Sample Request
@@ -301,7 +301,15 @@ This endpoint returns all Groups that exist in your organization.
 ```
 
 ### [Get-JcSdkGroupSuggestion](Get-JcSdkGroupSuggestion.md)
-This endpoint generates and returns all suggestions available for a given group
+This endpoint returns all suggestions available for a given group.
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ### [Get-JcSdkGSuite](Get-JcSdkGSuite.md)
 This endpoint returns a specific G Suite.
@@ -380,7 +388,7 @@ See `/members` and `/associations` endpoints to manage those collections.
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkGSuiteUserToImport](Get-JcSdkGSuiteUserToImport.md)
+### [Get-JcSdkGSuiteUsersToImport](Get-JcSdkGSuiteUsersToImport.md)
 Lists G Suite users available for import.
 
 ### [Get-JcSdkIPList](Get-JcSdkIPList.md)
@@ -551,11 +559,11 @@ See `/members` and `/associations` endpoints to manage those collections.
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkOffice365UserToImport](Get-JcSdkOffice365UserToImport.md)
+### [Get-JcSdkOffice365UsersToImport](Get-JcSdkOffice365UsersToImport.md)
 Lists Office 365 users available for import.
 
 ### [Get-JcSdkOrganizationPolicyResult](Get-JcSdkOrganizationPolicyResult.md)
-This endpoint returns all policy results for an organization.
+This endpoint returns all configuration (policy) results for an organization.
 
 ##### Sample Request
 
@@ -567,7 +575,7 @@ This endpoint returns all policy results for an organization.
   ```
 
 ### [Get-JcSdkPolicy](Get-JcSdkPolicy.md)
-This endpoint returns a specific policy.
+This endpoint returns a specific configuration (policy).
 
 ###### Sample Request
 
@@ -579,9 +587,9 @@ This endpoint returns a specific policy.
   ```
 
 ### [Get-JcSdkPolicyAssociation](Get-JcSdkPolicyAssociation.md)
-This endpoint returns the _direct_ associations of a Policy.
+This endpoint returns the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -591,8 +599,33 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkPolicyMember](Get-JcSdkPolicyMember.md)
-This endpoint returns all the Policy Groups a Policy is a member of.
+### [Get-JcSdkPolicyGroup](Get-JcSdkPolicyGroup.md)
+This endpoint returns the details of a Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkPolicyGroupAssociation](Get-JcSdkPolicyGroupAssociation.md)
+This endpoint returns the _direct_ associations of this Configuration (Policy) Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations?targets=system \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkPolicyGroupMember](Get-JcSdkPolicyGroupMember.md)
+This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
 
 #### Sample Request
 ```
@@ -603,8 +636,57 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \
 
 ```
 
+### [Get-JcSdkPolicyGroupMembership](Get-JcSdkPolicyGroupMembership.md)
+This endpoint returns all Configuration (Policy) members that are a member of this Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/membership \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkPolicyGroupTraverseSystem](Get-JcSdkPolicyGroupTraverseSystem.md)
+This endpoint will return all Systems bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy Group.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkPolicyGroupTraverseSystemGroup](Get-JcSdkPolicyGroupTraverseSystemGroup.md)
+This endpoint will return all System Groups bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
 ### [Get-JcSdkPolicyResult](Get-JcSdkPolicyResult.md)
-This endpoint will return the policy results for a specific policy.
+This endpoint will return the configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 ```
@@ -615,7 +697,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
   ```
 
 ### [Get-JcSdkPolicyStatus](Get-JcSdkPolicyStatus.md)
-This endpoint returns the latest policies results for a specific policy.
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
 
 ##### Sample Request
 
@@ -627,7 +709,7 @@ This endpoint returns the latest policies results for a specific policy.
   ```
 
 ### [Get-JcSdkPolicyTemplate](Get-JcSdkPolicyTemplate.md)
-This endpoint returns a specific policy template.
+This endpoint returns a specific configuration (policy) template.
 
 #### Sample Request
 ```
@@ -638,13 +720,13 @@ This endpoint returns a specific policy template.
 ```
 
 ### [Get-JcSdkPolicyTraverseSystem](Get-JcSdkPolicyTraverseSystem.md)
-This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Systems bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Policy to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
+The `paths` array enumerates each path from this Configuration (Policy) to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -657,13 +739,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\
 ```
 
 ### [Get-JcSdkPolicyTraverseSystemGroup](Get-JcSdkPolicyTraverseSystemGroup.md)
-This endpoint will return all Systems Groups bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Systems Groups bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the group's type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Policy to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy.
+The `paths` array enumerates each path from this Configuration (Policy) to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -911,13 +993,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/commands
 ```
 
 ### [Get-JcSdkSystemGroupTraversePolicy](Get-JcSdkSystemGroupTraversePolicy.md)
-This endpoint will return all Policies bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Configurations (Policies) bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System Group to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System Group.
+The `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -932,13 +1014,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies
 ```
 
 ### [Get-JcSdkSystemGroupTraversePolicyGroup](Get-JcSdkSystemGroupTraversePolicyGroup.md)
-This endpoint will return all Policy Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Configuration (Policy) Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System Group to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System Group.
+The `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -1159,7 +1241,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\
 ```
 
 ### [Get-JcSdkSystemPolicyStatus](Get-JcSdkSystemPolicyStatus.md)
-This endpoint returns the policy results for a particular system.
+This endpoint returns the configuration (policy) results for a particular system.
 
 ##### Sample Request
 
@@ -1192,13 +1274,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/commands \\
 ```
 
 ### [Get-JcSdkSystemTraversePolicy](Get-JcSdkSystemTraversePolicy.md)
-This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Configurations (Policies) bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System.
+The `paths` array enumerates each path from this System to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -1215,13 +1297,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\
 ```
 
 ### [Get-JcSdkSystemTraversePolicyGroup](Get-JcSdkSystemTraversePolicyGroup.md)
-This endpoint will return all Policy Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Configuration (Policy) Groups bound to a System, either directly or indirectly essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System.
+The `paths` array enumerates each path from this System to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -1335,9 +1417,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/membership
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
-
-### [Get-JcSdkUserGroupSuggestion](Get-JcSdkUserGroupSuggestion.md)
-This endpoint generates and returns all suggestions available for a given group
 
 ### [Get-JcSdkUserGroupTraverseApplication](Get-JcSdkUserGroupTraverseApplication.md)
 This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
@@ -1701,7 +1780,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
   -d '{
 \t\"auth\":{
 \t  \"basic\": {
-\t\t\"username\": \"someDeveloper\",\t
+\t\t\"username\": \"someDeveloper\",\t  
 \t\t\"password\": \"notTheRealPassword\"
 
 \t  }
@@ -1713,7 +1792,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 ### [Import-JcSdkWorkday](Import-JcSdkWorkday.md)
 The endpoint allows you to create a Workday Import request.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
   -H 'Accept: application/json' \\
@@ -1745,17 +1824,15 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{Im
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Invoke-JcSdkReactivateOffice365](Invoke-JcSdkReactivateOffice365.md)
-This endpoint starts the process to re-activate a new Office 365.
-It returns a URL in the Location header that should be redirected to in order to perform an OAuth 2.0 authorization request and obtain a new authorization grant.
-
+### [Invoke-JcSdkReclaimSoftwareAppLicense](Invoke-JcSdkReclaimSoftwareAppLicense.md)
+This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
 #### Sample Request
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/reactivate \\\\
--H 'Accept: application/json' \\\\
--H 'Content-Type: application/json' \\\\
--H 'x-api-key: {API_KEY}' \\\\
--H 'X-Requested-With: XMLHttpRequest'
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{}'
 ```
 
 ### [Lock-JcSdkAppleMdmDevice](Lock-JcSdkAppleMdmDevice.md)
@@ -1819,7 +1896,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 The endpoint allows you to create a bulk job to asynchronously create users.
 See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -1938,8 +2015,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tran
 ```
 
 ### [New-JcSdkPolicy](New-JcSdkPolicy.md)
-This endpoint allows you to create a policy.
-Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to create a configuration (policy).
+Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 ##### Sample Request
 ```
@@ -1949,6 +2026,20 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
     {Policy_Parameters}
+  }'
+```
+
+### [New-JcSdkPolicyGroup](New-JcSdkPolicyGroup.md)
+This endpoint allows you to create a new Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
   }'
 ```
 
@@ -2129,20 +2220,6 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambad
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Remove-JcSdkOffice365](Remove-JcSdkOffice365.md)
-This endpoint deletes an existing Office 365 instance.
-
-#####
-
-Sample Request
-
-```
-curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
 ### [Remove-JcSdkOffice365TranslationRule](Remove-JcSdkOffice365TranslationRule.md)
 This endpoint allows you to delete a translation rule for a specific Office 365 instance.
 These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.
@@ -2157,7 +2234,7 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tr
   ```
 
 ### [Remove-JcSdkPolicy](Remove-JcSdkPolicy.md)
-This endpoint allows you to delete a policy.
+This endpoint allows you to delete a configuration (policy).
 
 #### Sample Request
 
@@ -2167,6 +2244,18 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d429
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
   ```
+
+### [Remove-JcSdkPolicyGroup](Remove-JcSdkPolicyGroup.md)
+This endpoint allows you to delete a Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
 
 ### [Remove-JcSdkSoftwareApp](Remove-JcSdkSoftwareApp.md)
 Removes a Software Application configuration.
@@ -2415,8 +2504,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 ```
 
 ### [Set-JcSdkPolicy](Set-JcSdkPolicy.md)
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to update a configuration (policy).
+Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
 
 
 ##### Sample Request
@@ -2431,9 +2520,9 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 ```
 
 ### [Set-JcSdkPolicyAssociation](Set-JcSdkPolicyAssociation.md)
-This endpoint allows you to manage the _direct_ associations of a Policy.
+This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -2445,6 +2534,55 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
     \"op\": \"add\",
     \"type\": \"system_group\",
     \"id\": \"{Group_ID}\"
+  }'
+```
+
+### [Set-JcSdkPolicyGroup](Set-JcSdkPolicyGroup.md)
+This endpoint allows you to do a full update of the Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    \"name\": \"group_update\"
+  }'
+```
+
+### [Set-JcSdkPolicyGroupAssociation](Set-JcSdkPolicyGroupAssociation.md)
+This endpoint manages the _direct_ associations of this Configuration (Policy) Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"system\",
+    \"id\": \"{SystemID}\"
+  }'
+```
+
+### [Set-JcSdkPolicyGroupMember](Set-JcSdkPolicyGroupMember.md)
+This endpoint allows you to manage the Configuration (Policy) members of a Configuration (Policy) Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"op\": \"add\",
+    \"type\": \"policy\",
+    \"id\": \"{Policy_ID}\"
   }'
 ```
 
@@ -2461,8 +2599,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
   -H 'x-api-key: {API_KEY}' \\
   -d '{
 \t
-\"type\":\"user\",
-\"id\":\"{USER_ID}\",
+\"type\":\"user\", 
+\"id\":\"{USER_ID}\", 
 \"op\":\"add\"
 \t
 }'
@@ -2688,7 +2826,7 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
   -d '{}'
 ```
 
-### [Sync-JcSdkAppleMdmDeviceActivationLock](Sync-JcSdkAppleMdmDeviceActivationLock.md)
+### [Update-JcSdkAppleMdmDeviceLockInformation](Update-JcSdkAppleMdmDeviceLockInformation.md)
 Refreshes the activation lock information for a device
 
 #### Sample Request
@@ -2717,7 +2855,7 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 The endpoint allows you to create a bulk job to asynchronously update users.
 See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
 
-#### Sample Request
+#### Sample Request 
 ```
 curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
   -H 'Accept: application/json' \\
@@ -2805,3 +2943,5 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
     \"userPasswordExpirationAction\": \"suspend\"
   }'
 ```
+
+

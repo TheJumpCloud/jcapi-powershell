@@ -191,12 +191,19 @@ BODY <ISoftwareApp>: Software Application Package
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[AppleVppTotalLicenses <Int32?>]`: 
+    - `[AssetKind <String>]`: The manifest asset kind (ex: software).
+    - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.
+    - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
     - `[AutoUpdate <Boolean?>]`: 
+    - `[Description <String>]`: The software app description.
     - `[DesiredState <String>]`: State of Install or Uninstall
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
     - `[PackageId <String>]`: 
+    - `[PackageKind <String>]`: The package manifest kind (ex: software-package).
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+    - `[PackageSubtitle <String>]`: The package manifest subtitle.
+    - `[PackageVersion <String>]`: The package manifest version.
 
 SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
@@ -205,12 +212,19 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[AppleVppTotalLicenses <Int32?>]`: 
+  - `[AssetKind <String>]`: The manifest asset kind (ex: software).
+  - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.
+  - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
   - `[AutoUpdate <Boolean?>]`: 
+  - `[Description <String>]`: The software app description.
   - `[DesiredState <String>]`: State of Install or Uninstall
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
   - `[PackageId <String>]`: 
+  - `[PackageKind <String>]`: The package manifest kind (ex: software-package).
   - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+  - `[PackageSubtitle <String>]`: The package manifest subtitle.
+  - `[PackageVersion <String>]`: The package manifest version.
 
 ## RELATED LINKS
 
