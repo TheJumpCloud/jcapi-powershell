@@ -1,5 +1,5 @@
 {
-  "basePath": "/api/v2/test",
+  "basePath": "/api/v2/",
   "consumes": [
     "application/json"
   ],
