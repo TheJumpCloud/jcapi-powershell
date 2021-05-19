@@ -191,7 +191,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GitHubAccessToken) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
