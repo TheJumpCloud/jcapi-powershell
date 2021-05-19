@@ -24,12 +24,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/assoc
 
 ### Get (Default)
 ```
-Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -RadiusserverId <String> -Targets <GraphTargetsActiveDirectoryTargets>
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity>
+ -Targets <GraphTargetsActiveDirectoryTargets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -98,7 +100,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets
+Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
 Parameter Sets: (All)
 Aliases:
 

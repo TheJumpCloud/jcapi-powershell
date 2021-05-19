@@ -31,26 +31,28 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Id <String> -Op <String>
+ -Type <GraphOperationRadiusServer> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphOperationRadiusServer> [-PassThru]
+Set-JcSdkRadiusServerAssociation -RadiusserverId <String> -Body <IGraphOperationRadiusServer1> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationRadiusServer>
+Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationRadiusServer1>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServerAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationRadiusServer> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -111,7 +113,7 @@ GraphOperation (RadiusServer)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer
+Type: JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer1
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -202,7 +204,7 @@ Accept wildcard characters: False
 Targets which a "radius_server" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphOperationRadiusServer
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -249,7 +251,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer
+### JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer1
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -266,10 +268,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationRadiusServer>: GraphOperation (RadiusServer)
+BODY <IGraphOperationRadiusServer1>: GraphOperation (RadiusServer)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type>`: Targets which a "radius_server" can be associated to.
+  - `Type <GraphOperationRadiusServer>`: Targets which a "radius_server" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

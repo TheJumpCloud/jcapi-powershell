@@ -30,7 +30,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associa
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicyGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <Type1>
+Set-JcSdkPolicyGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <GraphOperationPolicyGroup1>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -48,8 +48,9 @@ Set-JcSdkPolicyGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGr
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicyGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type1>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationPolicyGroup1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -200,7 +201,7 @@ Accept wildcard characters: False
 Targets which a "policy_group" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type1
+Type: JumpCloud.SDK.V2.Support.GraphOperationPolicyGroup1
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -267,7 +268,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationPolicyGroup>: GraphOperation (PolicyGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type1>`: Targets which a "policy_group" can be associated to.
+  - `Type <GraphOperationPolicyGroup1>`: Targets which a "policy_group" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

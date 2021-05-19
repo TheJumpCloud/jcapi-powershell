@@ -30,7 +30,7 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type <Type1>
+Set-JcSdkCommandAssociation -CommandId <String> -Id <String> -Op <String> -Type <GraphOperationCommand1>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -48,8 +48,9 @@ Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphO
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type1>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCommandAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationCommand1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -200,7 +201,7 @@ Accept wildcard characters: False
 Targets which a "command" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type1
+Type: JumpCloud.SDK.V2.Support.GraphOperationCommand1
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -267,7 +268,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationCommand>: GraphOperation (Command)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type1>`: Targets which a "command" can be associated to.
+  - `Type <GraphOperationCommand1>`: Targets which a "command" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
