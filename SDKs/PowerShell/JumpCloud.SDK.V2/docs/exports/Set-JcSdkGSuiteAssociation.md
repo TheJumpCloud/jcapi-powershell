@@ -30,26 +30,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associatio
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkGSuiteAssociation -GsuiteId <String> -Id <String> -Op <String> -Type <Type> [-Attributes <Hashtable>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkGSuiteAssociation -GsuiteId <String> -Id <String> -Op <String> -Type <GraphOperationGSuite>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkGSuiteAssociation -GsuiteId <String> -Body <IGraphOperationGSuite> [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkGSuiteAssociation -GsuiteId <String> -Body <IGraphOperationGSuite1> [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationGSuite> [-PassThru]
+Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationGSuite1> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkGSuiteAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationGSuite> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -109,7 +109,7 @@ GraphOperation (GSuite)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphOperationGSuite
+Type: JumpCloud.SDK.V2.Models.IGraphOperationGSuite1
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -200,7 +200,7 @@ Accept wildcard characters: False
 Targets which a "g_suite" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphOperationGSuite
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -247,7 +247,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphOperationGSuite
+### JumpCloud.SDK.V2.Models.IGraphOperationGSuite1
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -264,10 +264,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationGSuite>: GraphOperation (GSuite)
+BODY <IGraphOperationGSuite1>: GraphOperation (GSuite)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type>`: Targets which a "g_suite" can be associated to.
+  - `Type <GraphOperationGSuite>`: Targets which a "g_suite" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 

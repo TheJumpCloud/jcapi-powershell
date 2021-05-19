@@ -1123,7 +1123,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-ActiveDirectory"
               }
             }
           },
@@ -1153,7 +1153,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-Application"
               }
             }
           },
@@ -1183,7 +1183,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type1",
+                "name": "GraphOperation-Command1",
                 "values": [
                   {
                     "name": "systems",
@@ -1223,7 +1223,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-GSuite"
               }
             }
           },
@@ -1253,7 +1253,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-LdapServer"
               }
             }
           },
@@ -1283,7 +1283,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-Office365"
               }
             }
           },
@@ -1313,7 +1313,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type1",
+                "name": "GraphOperation-Policy1",
                 "values": [
                   {
                     "name": "systems",
@@ -1353,7 +1353,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type1",
+                "name": "GraphOperation-PolicyGroup1",
                 "values": [
                   {
                     "name": "systems",
@@ -1392,7 +1392,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type2"
+                "name": "GraphOperation-PolicyGroup-Member2"
               }
             }
           },
@@ -1422,7 +1422,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type"
+                "name": "GraphOperation-RadiusServer"
               }
             }
           },
@@ -1452,7 +1452,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type1",
+                "name": "GraphOperation-SoftwareApp1",
                 "values": [
                   {
                     "name": "systems",
@@ -1502,7 +1502,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type3"
+                "name": "GraphOperation-System3"
               }
             }
           },
@@ -1535,7 +1535,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type3"
+                "name": "GraphOperation-SystemGroup3"
               }
             }
           },
@@ -1564,7 +1564,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type4",
+                "name": "GraphOperation-SystemGroup-Member4",
                 "values": [
                   {
                     "name": "systems",
@@ -1613,7 +1613,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type5",
+                "name": "GraphOperation-User5",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1683,7 +1683,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type5",
+                "name": "GraphOperation-UserGroup5",
                 "values": [
                   {
                     "name": "active_directory",
@@ -1746,7 +1746,7 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "type6"
+                "name": "GraphOperation-UserGroup-Member6"
               }
             }
           },
@@ -5460,7 +5460,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsActiveDirectory-Targets"
       }
     },
     "trait:graphTargetsApplication:targets": {
@@ -5474,7 +5474,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsApplication-Targets"
       }
     },
     "trait:graphTargetsCommand:targets": {
@@ -5488,7 +5488,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets1",
+        "name": "graphTargetsCommand-Targets1",
         "values": [
           {
             "name": "systems",
@@ -5512,7 +5512,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsGSuite-Targets"
       }
     },
     "trait:graphTargetsLdapServer:targets": {
@@ -5526,7 +5526,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsLdapServer-Targets"
       }
     },
     "trait:graphTargetsOffice365:targets": {
@@ -5540,7 +5540,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsOffice365-Targets"
       }
     },
     "trait:graphTargetsPolicy:targets": {
@@ -5554,7 +5554,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets1",
+        "name": "graphTargetsPolicy-Targets1",
         "values": [
           {
             "name": "systems",
@@ -5578,7 +5578,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets1",
+        "name": "graphTargetsPolicyGroup-Targets1",
         "values": [
           {
             "name": "systems",
@@ -5602,7 +5602,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets"
+        "name": "graphTargetsRadiusServer-Targets"
       }
     },
     "trait:graphTargetsSoftwareApp:targets": {
@@ -5616,7 +5616,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets1",
+        "name": "graphTargetsSoftwareApp-Targets1",
         "values": [
           {
             "name": "systems",
@@ -5643,7 +5643,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets2"
+        "name": "graphTargetsSystem-Targets2"
       }
     },
     "trait:graphTargetsSystemGroup:targets": {
@@ -5660,7 +5660,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets2"
+        "name": "graphTargetsSystemGroup-Targets2"
       }
     },
     "trait:graphTargetsUser:targets": {
@@ -5680,7 +5680,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets3",
+        "name": "graphTargetsUser-Targets3",
         "values": [
           {
             "name": "active_directory",
@@ -5734,7 +5734,7 @@
       "required": true,
       "type": "string",
       "x-ms-enum": {
-        "name": "targets3",
+        "name": "graphTargetsUserGroup-Targets3",
         "values": [
           {
             "name": "active_directory",

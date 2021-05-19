@@ -26,14 +26,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/association
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets> [-Authorization <String>] [-Date <String>]
- [<CommonParameters>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <GraphTargetsActiveDirectoryTargets>
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [-Authorization <String>]
- [-Date <String>] [<CommonParameters>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <GraphTargetsActiveDirectoryTargets>
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -134,7 +134,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets
+Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
 Parameter Sets: (All)
 Aliases:
 

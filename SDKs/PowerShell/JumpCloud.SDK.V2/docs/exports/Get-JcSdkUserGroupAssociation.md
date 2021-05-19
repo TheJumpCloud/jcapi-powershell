@@ -25,12 +25,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associatio
 
 ### Get (Default)
 ```
-Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -GroupId <String> -Targets <GraphTargetsActiveDirectoryTargets>
+ [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets> [<CommonParameters>]
+Get-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity>
+ -Targets <GraphTargetsActiveDirectoryTargets> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,7 +102,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets
+Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
 Parameter Sets: (All)
 Aliases:
 
