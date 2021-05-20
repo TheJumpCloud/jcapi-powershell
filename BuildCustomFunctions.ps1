@@ -401,9 +401,6 @@ $($IndentChar)$($IndentChar)Return `$Results"
                 $NewScript = $FunctionTemplate -f '', $NewCommandName, $CmdletBinding, ($ParameterContent -join ",`n`n"), ($BeginContent -join "`n"), ($ProcessContent -join "`n"), ($EndContent -join "`n")
                 # Fix line endings
                 $NewScript = $NewScript.Replace("`r`n", "`n").Trim()
-                # Normalize Id descriptions
-                $NewScript = $NewScript.Replace('[GroupId <String>]: ObjectID of the Configuration (Policy) Group.', '[GroupId <String>]: ObjectID of the System Group.')
-                $NewScript = $NewScript.Replace('[PolicyId <String>]: ObjectID of the Configuration (Policy).', '[PolicyId <String>]: ObjectID of the Policy.')
                 # Export the function
                 Write-Host ("[STATUS] Building: $NewCommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
                 $OutputFilePath = "$CustomFolderPath/$NewCommandName.ps1"
