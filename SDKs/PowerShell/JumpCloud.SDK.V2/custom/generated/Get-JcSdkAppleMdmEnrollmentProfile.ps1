@@ -1,4 +1,43 @@
-﻿Function Get-JcSdkAppleMdmEnrollmentProfile
+<#
+.Synopsis
+Get a list of enrollment profiles for an apple mdm.
+
+Note: currently only one enrollment profile is supported.
+
+#### Sample Request
+```
+ curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+Get a list of enrollment profiles for an apple mdm.
+
+Note: currently only one enrollment profile is supported.
+
+#### Sample Request
+```
+ curl https://console.jumpcloud.com/api/v2/applemdms/{APPLE_MDM_ID}/enrollmentprofiles \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
+
+Get a list of enrollment profiles for an apple mdm
+.Example
+PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
+
+Get an enrollment profile by Id
+
+.Outputs
+JumpCloud.SDK.V2.Models.IAppleMdm
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdmEnrollmentProfile.md
+#>
+ Function Get-JcSdkAppleMdmEnrollmentProfile
 {
     [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -93,3 +132,5 @@
         Return $Results
     }
 }
+
+

@@ -1,4 +1,64 @@
-﻿Function New-JcSdkPolicy
+<#
+.Synopsis
+This endpoint allows you to create a configuration (policy).
+Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
+.Description
+This endpoint allows you to create a configuration (policy).
+Given the amount of configurable parameters required to create a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
+
+##### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/policies \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    {Policy_Parameters}
+  }'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IPolicyRequest
+.Outputs
+JumpCloud.SDK.V2.Models.IPolicyWithDetails
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IPolicyRequest>:
+  Name <String>: The description for this specific Configuration (Policy).
+  [TemplateId <String>]: ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
+  [Values <IPolicyValue[]>]:
+    [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+    [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
+
+VALUES <IPolicyValue[]>:
+  [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
+  [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
+#>
+ Function New-JcSdkPolicy
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyWithDetails])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -101,3 +161,5 @@
         Return $Results
     }
 }
+
+

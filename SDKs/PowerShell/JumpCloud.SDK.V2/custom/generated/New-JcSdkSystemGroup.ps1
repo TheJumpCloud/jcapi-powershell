@@ -1,4 +1,56 @@
-﻿Function New-JcSdkSystemGroup
+<#
+.Synopsis
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
+.Description
+This endpoint allows you to create a new System Group.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.ISystemGroupData
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <ISystemGroupData>:
+  Name <String>: Display name of a System Group.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSystemGroup.md
+#>
+ Function New-JcSdkSystemGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemGroup])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -88,3 +140,5 @@
         Return $Results
     }
 }
+
+

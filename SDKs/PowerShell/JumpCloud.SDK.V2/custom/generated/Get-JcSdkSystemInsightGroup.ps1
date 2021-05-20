@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightGroup
+<#
+.Synopsis
+Valid filter fields are `system_id` and `groupname`.
+.Description
+Valid filter fields are `system_id` and `groupname`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsGroups
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightGroup.md
+#>
+ Function Get-JcSdkSystemInsightGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsGroups])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

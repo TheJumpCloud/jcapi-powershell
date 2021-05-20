@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkCustomEmailTemplate
+<#
+.Synopsis
+Get the list of custom email templates
+.Description
+Get the list of custom email templates
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ICustomEmailTemplate
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkCustomEmailTemplate.md
+#>
+ Function Get-JcSdkCustomEmailTemplate
 {
     [OutputType([JumpCloud.SDK.V2.Models.ICustomEmailTemplate])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -87,3 +106,5 @@
         Return $Results
     }
 }
+
+

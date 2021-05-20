@@ -1,4 +1,41 @@
-﻿Function Get-JcSdkSubscription
+<#
+.Synopsis
+This endpoint returns all pricing & packaging subscriptions.
+
+##### Sample Request
+
+```
+ curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
+.Description
+This endpoint returns all pricing & packaging subscriptions.
+
+##### Sample Request
+
+```
+ curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISubscription
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSubscription.md
+#>
+ Function Get-JcSdkSubscription
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISubscription])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
@@ -87,3 +124,5 @@
         Return $Results
     }
 }
+
+

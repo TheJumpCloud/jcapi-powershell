@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightInterfaceDetail
+<#
+.Synopsis
+Valid filter fields are `system_id` and `interface`.
+.Description
+Valid filter fields are `system_id` and `interface`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightInterfaceDetail.md
+#>
+ Function Get-JcSdkSystemInsightInterfaceDetail
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

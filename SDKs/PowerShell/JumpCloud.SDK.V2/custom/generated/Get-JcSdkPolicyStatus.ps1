@@ -1,4 +1,41 @@
-﻿Function Get-JcSdkPolicyStatus
+<#
+.Synopsis
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
+
+##### Sample Request
+
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
+.Description
+This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
+
+##### Sample Request
+
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/policystatuses \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IPolicyResult
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyStatus.md
+#>
+ Function Get-JcSdkPolicyStatus
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -166,3 +203,5 @@
         Return $Results
     }
 }
+
+

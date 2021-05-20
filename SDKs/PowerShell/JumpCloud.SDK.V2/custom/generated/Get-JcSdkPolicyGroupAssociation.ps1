@@ -1,4 +1,45 @@
-﻿Function Get-JcSdkPolicyGroupAssociation
+<#
+.Synopsis
+This endpoint returns the _direct_ associations of this Configuration (Policy) Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations?targets=system \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+This endpoint returns the _direct_ associations of this Configuration (Policy) Group.
+
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associations?targets=system \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IGraphConnection
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyGroupAssociation.md
+#>
+ Function Get-JcSdkPolicyGroupAssociation
 {
     [OutputType([JumpCloud.SDK.V2.Models.IGraphConnection])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -146,3 +187,5 @@
         Return $Results
     }
 }
+
+

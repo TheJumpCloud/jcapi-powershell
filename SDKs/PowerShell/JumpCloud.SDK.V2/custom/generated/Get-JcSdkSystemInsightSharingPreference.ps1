@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightSharingPreference
+<#
+.Synopsis
+Only valid filed field is `system_id`.
+.Description
+Only valid filed field is `system_id`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsSharingPreferences
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSharingPreference.md
+#>
+ Function Get-JcSdkSystemInsightSharingPreference
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSharingPreferences])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightCrash
+<#
+.Synopsis
+Valid filter fields are `system_id` and `identifier`.
+.Description
+Valid filter fields are `system_id` and `identifier`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsCrashes
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightCrash.md
+#>
+ Function Get-JcSdkSystemInsightCrash
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsCrashes])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

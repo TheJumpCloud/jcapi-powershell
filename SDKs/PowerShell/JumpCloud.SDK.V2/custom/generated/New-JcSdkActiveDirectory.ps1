@@ -1,4 +1,56 @@
-﻿Function New-JcSdkActiveDirectory
+<#
+.Synopsis
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
+```
+.Description
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IActiveDirectoryInput
+.Outputs
+JumpCloud.SDK.V2.Models.IActiveDirectoryOutput
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IActiveDirectoryInput>:
+  [Domain <String>]: Domain name for this Active Directory instance.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
+#>
+ Function New-JcSdkActiveDirectory
 {
     [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryOutput])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -88,3 +140,5 @@
         Return $Results
     }
 }
+
+

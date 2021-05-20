@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightSharedFolder
+<#
+.Synopsis
+Valid filter fields are `system_id` and `name`.
+.Description
+Valid filter fields are `system_id` and `name`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsSharedFolders
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSharedFolder.md
+#>
+ Function Get-JcSdkSystemInsightSharedFolder
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSharedFolders])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

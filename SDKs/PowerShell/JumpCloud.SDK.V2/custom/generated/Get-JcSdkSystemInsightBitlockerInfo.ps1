@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightBitlockerInfo
+<#
+.Synopsis
+Valid filter fields are `system_id` and `protection_status`.
+.Description
+Valid filter fields are `system_id` and `protection_status`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsBitlockerInfo
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightBitlockerInfo.md
+#>
+ Function Get-JcSdkSystemInsightBitlockerInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsBitlockerInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

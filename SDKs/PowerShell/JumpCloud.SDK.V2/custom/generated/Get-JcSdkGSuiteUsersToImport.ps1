@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkGSuiteUsersToImport
+<#
+.Synopsis
+Lists G Suite users available for import.
+.Description
+Lists G Suite users available for import.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IPathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGSuiteUsersToImport.md
+#>
+ Function Get-JcSdkGSuiteUsersToImport
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -168,3 +187,5 @@
         Return $Results
     }
 }
+
+

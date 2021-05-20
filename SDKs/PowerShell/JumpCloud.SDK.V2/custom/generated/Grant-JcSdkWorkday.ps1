@@ -1,4 +1,106 @@
-﻿Function Grant-JcSdkWorkday
+<#
+.Synopsis
+This endpoint adds an authorization method to a workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"auth\":{
+\t  \"basic\": {
+\t\t\"username\": \"someDeveloper\",\t  
+\t\t\"password\": \"notTheRealPassword\"
+
+\t  }
+\t}
+}'
+
+```
+.Description
+This endpoint adds an authorization method to a workday instance.
+
+You must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.
+Failure to provide these credentials  will result in the request being rejected.
+
+Currently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.
+
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+\t\"auth\":{
+\t  \"basic\": {
+\t\t\"username\": \"someDeveloper\",\t  
+\t\t\"password\": \"notTheRealPassword\"
+
+\t  }
+\t}
+}'
+
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IAuthInputObject
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+.Outputs
+System.Boolean
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IAuthInputObject>:
+  [BasicPassword <String>]:
+  [BasicUsername <String>]:
+  [OauthCode <String>]:
+
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [ProviderId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Grant-JcSdkWorkday.md
+#>
+ Function Grant-JcSdkWorkday
 {
     [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='AuthorizeExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -125,3 +227,5 @@
         Return $Results
     }
 }
+
+

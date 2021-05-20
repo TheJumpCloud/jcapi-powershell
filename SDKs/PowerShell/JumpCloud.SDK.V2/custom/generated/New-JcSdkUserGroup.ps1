@@ -1,4 +1,85 @@
-﻿Function New-JcSdkUserGroup
+<#
+.Synopsis
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
+.Description
+This endpoint allows you to create a new User Group.
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"{Group_Name}\"
+  }'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IUserGroupPost
+.Outputs
+JumpCloud.SDK.V2.Models.IUserGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>:
+  Name <String>:
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>:
+  Id <Int32>:
+  Name <String>:
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>:
+  Name <String>:
+  Value <String>:
+
+BODY <IUserGroupPost>:
+  Name <String>: Display name of a User Group.
+  [AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]:
+    Name <String>:
+  [AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]:
+    Id <Int32>:
+    Name <String>:
+  [AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]:
+    Name <String>:
+    Value <String>:
+  [AttributeSambaEnabled <Boolean?>]:
+  [Description <String>]: Description of a User Group
+  [Email <String>]: Email address of a User Group
+  [MemberQueryFilters <IFilter[]>]:
+    Field <String>: Name of field in filter target object.
+    Operator <String>: Filter comparison operator.
+    Value <String>: Filter comparison value.
+
+MEMBERQUERYFILTERS <IFilter[]>:
+  Field <String>: Name of field in filter target object.
+  Operator <String>: Filter comparison operator.
+  Value <String>: Filter comparison value.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkUserGroup.md
+#>
+ Function New-JcSdkUserGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -134,3 +215,5 @@
         Return $Results
     }
 }
+
+

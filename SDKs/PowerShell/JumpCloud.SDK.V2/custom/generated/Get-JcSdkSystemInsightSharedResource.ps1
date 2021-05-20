@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightSharedResource
+<#
+.Synopsis
+Valid filter fields are `system_id` and `type`.
+.Description
+Valid filter fields are `system_id` and `type`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsSharedResources
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSharedResource.md
+#>
+ Function Get-JcSdkSystemInsightSharedResource
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSharedResources])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+

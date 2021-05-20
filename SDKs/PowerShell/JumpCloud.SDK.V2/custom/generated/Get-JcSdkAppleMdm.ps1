@@ -1,4 +1,41 @@
-﻿Function Get-JcSdkAppleMdm
+<#
+.Synopsis
+Get a list of all Apple MDM configurations.
+An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+
+Note: currently only one MDM configuration per organization is supported.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/applemdms \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+Get a list of all Apple MDM configurations.
+An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
+
+Note: currently only one MDM configuration per organization is supported.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/applemdms \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> Get-JcSdkAppleMdm
+
+Get Apple MDM Server information within a JumpCloud Tenant
+
+.Outputs
+JumpCloud.SDK.V2.Models.IAppleMdm
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAppleMdm.md
+#>
+ Function Get-JcSdkAppleMdm
 {
     [OutputType([JumpCloud.SDK.V2.Models.IAppleMdm])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -87,3 +124,5 @@
         Return $Results
     }
 }
+
+

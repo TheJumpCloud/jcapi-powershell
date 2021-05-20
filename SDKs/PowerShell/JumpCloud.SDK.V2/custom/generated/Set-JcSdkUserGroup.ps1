@@ -1,4 +1,109 @@
-﻿Function Set-JcSdkUserGroup
+<#
+.Synopsis
+This endpoint allows you to do a full update of the User Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    \"name\": \"group_update\"
+  }'
+```
+.Description
+This endpoint allows you to do a full update of the User Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY' \\
+  -d '{
+    \"name\": \"group_update\"
+  }'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.IUserGroupPut
+.Outputs
+JumpCloud.SDK.V2.Models.IUserGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>:
+  Name <String>:
+
+ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>:
+  Id <Int32>:
+  Name <String>:
+
+ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>:
+  Name <String>:
+  Value <String>:
+
+BODY <IUserGroupPut>:
+  Name <String>: Display name of a User Group.
+  [AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]:
+    Name <String>:
+  [AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]:
+    Id <Int32>:
+    Name <String>:
+  [AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]:
+    Name <String>:
+    Value <String>:
+  [AttributeSambaEnabled <Boolean?>]:
+  [Description <String>]: Description of a User Group
+  [Email <String>]: Email address of a User Group
+  [MemberQueryFilters <IFilter[]>]:
+    Field <String>: Name of field in filter target object.
+    Operator <String>: Filter comparison operator.
+    Value <String>: Filter comparison value.
+
+INPUTOBJECT <IJumpCloudApIsIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [ProviderId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+
+MEMBERQUERYFILTERS <IFilter[]>:
+  Field <String>: Name of field in filter target object.
+  Operator <String>: Filter comparison operator.
+  Value <String>: Filter comparison value.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserGroup.md
+#>
+ Function Set-JcSdkUserGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -158,3 +263,5 @@
         Return $Results
     }
 }
+
+

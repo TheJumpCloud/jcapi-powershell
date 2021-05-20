@@ -1,4 +1,45 @@
-﻿Function New-JcSdkDuoAccount
+<#
+.Synopsis
+Registers a Duo account for an organization.
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
+.Description
+Registers a Duo account for an organization.
+Only one Duo account will be allowed,
+in case an organization has a Duo account already a 409 (Conflict) code will be returned.
+
+#### Sample Request
+```
+  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IDuoAccount
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkDuoAccount.md
+#>
+ Function New-JcSdkDuoAccount
 {
     [OutputType([JumpCloud.SDK.V2.Models.IDuoAccount])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -75,3 +116,5 @@
         Return $Results
     }
 }
+
+

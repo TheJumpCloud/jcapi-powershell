@@ -1,4 +1,23 @@
-﻿Function Get-JcSdkSystemInsightMount
+<#
+.Synopsis
+Valid filter fields are `system_id` and `path`.
+.Description
+Valid filter fields are `system_id` and `path`.
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsMounts
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightMount.md
+#>
+ Function Get-JcSdkSystemInsightMount
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsMounts])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -153,3 +172,5 @@
         Return $Results
     }
 }
+
+
