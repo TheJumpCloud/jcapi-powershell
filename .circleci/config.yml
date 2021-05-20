@@ -59,7 +59,6 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
-          BuildModuleOverride: false
           RunApiTransform: true
           TestModule: true
   Build and Test JumpCloud SDK V1:
@@ -69,7 +68,6 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
-          BuildModuleOverride: false
           RunApiTransform: true
           TestModule: true
   Build and Test JumpCloud SDK V2:
@@ -79,7 +77,6 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
-          BuildModuleOverride: false
           RunApiTransform: true
           TestModule: true
   Commit Changes:
@@ -171,10 +168,6 @@ commands:
         description: ''
         type: string
         default: ''
-      BuildModuleOverride:
-        description: ''
-        type: boolean
-        default: false
       RunApiTransform:
         description: ''
         type: boolean
@@ -191,7 +184,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GitHubAccessToken) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GitHubAccessToken) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
