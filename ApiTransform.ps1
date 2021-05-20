@@ -3,7 +3,6 @@ Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub branch or tag to pull spec from.')][ValidateNotNullOrEmpty()][System.String]$GitHubTag
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$SortAttributes = $true
 )
 Set-Location $PSScriptRoot
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
@@ -13,8 +12,8 @@ $TransformConfig = [Ordered]@{
         Repo               = "jumpcloud-insights-api"
         Path               = "docs/generated/directory_insights_swagger.json"
         FindAndReplace     = [Ordered]@{
-            '"in":"body","name":".*?"'                                                                                                                                                      = '"in":"body","name":"body"' # Across our APIs the standard is using "body" for the name of the body
-            '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","items":{"type":"object"},"type":"array","x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","items":{"type":"string"},"type":"array","x-go-name":"SearchAfter"}';
+            '"name":".*?","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
+            '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsCountPost'    = 'EventCount_Get';
@@ -415,8 +414,7 @@ Function Update-SwaggerObject
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
-        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $false
-        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object. Use if you want to only sort a swagger object.')][bool]$NoUpdate = $false
+        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object.')][bool]$NoUpdate = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The original input object which will be used as a reference', DontShow)]$InputObjectOrg
     )
     $InputObject | ForEach-Object {
@@ -459,11 +457,6 @@ Function Update-SwaggerObject
             $AttributeNames = If ($AttributeType.FullName -in ('System.Management.Automation.PSCustomObject'))
             {
                 $ThisObject.PSObject.Properties.Name
-            }
-            # Sort attribute names
-            If (-not [System.String]::IsNullOrEmpty($AttributeNames) -and $Sort -eq $true)
-            {
-                $AttributeNames = $AttributeNames | Sort-Object -CaseSensitive
             }
         }
         Else
@@ -684,48 +677,29 @@ Function Update-SwaggerObject
                     If ($AttributePath -like '*.x-tags*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove tagnames
                     If ($AttributePath -like '*.tagnames') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
-                    # # If ($AttributePath -like '*.enum')
-                    # { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    # If ($AttributePath -like '*.enum') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     If ($ThisObject.$AttributeName)
                     {
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
                         If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
                         }
-                        # Sort object
-                        If ($Sort)
-                        {
-                            $ThisObject.PSObject.Properties.Remove($AttributeName)
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
-                        }
-                        Else
-                        {
-                            $ThisObject.$AttributeName = $ModifiedObject
-                        }
+                        $ThisObject.$AttributeName = $ModifiedObject
                     }
                 }
                 Else
                 {
                     If ($ThisObject.$AttributeName)
                     {
-                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -Sort:($Sort) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
+                        $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
                         If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
                         }
-                        # Sort object
-                        If ($Sort)
-                        {
-                            $ThisObject.PSObject.Properties.Remove($AttributeName)
-                            Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:($AttributeName) -Value:($ModifiedObject)
-                        }
-                        Else
-                        {
-                            $ThisObject.$AttributeName = $ModifiedObject
-                        }
+                        $ThisObject.$AttributeName = $ModifiedObject
                     }
                 }
             }
@@ -733,15 +707,6 @@ Function Update-SwaggerObject
     }
     # Return modified object
     Return $InputObject
-}
-Function Format-SwaggerObject
-{
-    Param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An Object representing a swagger file.')]$InputObject
-        , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to alphabetically order the properties within the swagger object.')][bool]$Sort = $true
-    )
-    $SortedSwaggerObject = Update-SwaggerObject -InputObject:($InputObject) -Sort:($Sort) -NoUpdate:($true)
-    Return $SortedSwaggerObject
 }
 # Start script
 $SDKName | ForEach-Object {
@@ -768,7 +733,7 @@ $SDKName | ForEach-Object {
             'Accept'        = 'application/vnd.github.json.raw';
         }
         # Get repo's latest release
-        $GitHubTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
+        $GitHubLatestReleaseTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
         {
             (Invoke-RestMethod -Method:('GET') -Uri:($LatestReleaseUrl) -Headers:($GitHubHeaders)).tag_name
         }
@@ -776,9 +741,9 @@ $SDKName | ForEach-Object {
         {
             'master'
         }
-        Write-Host ("Latest Tag: $GitHubTag")
+        Write-Host ("Repo: $($Config.Repo); Path: $($Config.Path); Latest Release Tag: $($GitHubLatestReleaseTag);")
         # Get OAS content
-        $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubTag
+        $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubLatestReleaseTag
         $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
         {
             $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($SwaggerUrl) -Headers:($GitHubHeaders)
@@ -814,14 +779,6 @@ $SDKName | ForEach-Object {
             {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
-            # Add GitHubTag to spec
-            Add-Member -InputObject:($SwaggerObjectContent.info) -MemberType:('NoteProperty') -Name:('x-releaseTag') -Value:($GitHubTag) -Force
-            If (-not $SwaggerObjectContent.info.'x-releaseTag')
-            {
-                $SwaggerObjectContent.info.Add('x-releaseTag', $GitHubTag)
-            }
-            # Format the spec
-            $SwaggerObjectContent = Format-SwaggerObject -InputObject:($SwaggerObjectContent) -Sort:($SortAttributes)
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -860,7 +817,13 @@ $SDKName | ForEach-Object {
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -Sort:($SortAttributes) -InputObjectOrg:($SwaggerObject)
+            # Add GitHubTag to spec
+            Add-Member -InputObject:($SwaggerObject.info) -MemberType:('NoteProperty') -Name:('x-releaseTag') -Value:($GitHubLatestReleaseTag) -Force
+            If (-not $SwaggerObject.info.'x-releaseTag')
+            {
+                $SwaggerObject.info.Add('x-releaseTag', $GitHubLatestReleaseTag)
+            }
+            $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -InputObjectOrg:($SwaggerObject)
             #region Clean up paths without methods (that have been removed after stripping x-stoplight.public:false)
             $UpdatedSwagger.paths.PSObject.Properties.Name | ForEach-Object {
                 $ValidPath = $false
@@ -964,13 +927,10 @@ $SDKName | ForEach-Object {
             {
                 $UpdatedSpec = $true
             }
-            # Format the results
-            $SwaggerString = Format-SwaggerObject -InputObject:($SwaggerString | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes) | ConvertTo-Json -Depth:(100)
             # Output new file
             $SwaggerString | Out-File -Path:($OutputFullPathJson) -Force
             # # For comparing before and after
             # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.FindAndReplace")) -Force # For Debugging to compare before and after
-            # $SwaggerObjectOrg = Format-SwaggerObject -InputObject:($SwaggerObjectContent | ConvertTo-Json -Depth:(100) | ConvertFrom-Json -Depth:(100)) -Sort:($SortAttributes)
             # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # # $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.Before")) -Force # For Debugging to compare before and after
             # $UpdatedSwagger | ConvertTo-Json -Depth:(100) | Out-File -Path:($OutputFullPathJson.Replace($CurrentSDKName, "$CurrentSDKName.After")) -Force # For Debugging to compare before and after
