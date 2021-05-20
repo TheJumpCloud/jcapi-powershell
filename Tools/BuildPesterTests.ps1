@@ -208,6 +208,8 @@ $SDKs | ForEach-Object {
                     New     = [Ordered]@{
                         Create                    = $null
                         CreateExpanded            = $PesterTestTypes.NewObjectShouldNotBeNullOrEmpty
+                        New                       = $null
+                        NewExpanded               = $PesterTestTypes.NewObjectShouldNotBeNullOrEmpty
                         CreateViaIdentity         = $null
                         CreateViaIdentityExpanded = $null
                     }
