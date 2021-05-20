@@ -327,14 +327,6 @@ ForEach ($SDK In $SDKName)
                 }
             }
             ###########################################################################
-            # TODO: Normalize Id descriptions. When these change it causes every file to show as updated.
-            Get-ChildItem -Path:($exportsFolderPath, $internalFolderPath) | ForEach-Object {
-                $FileContent = Get-Content -Path:($_.FullName)
-                $FileContent = $FileContent.Replace('[GroupId <String>]: ObjectID of the Configuration (Policy) Group.', '[GroupId <String>]: ObjectID of the System Group.')
-                $FileContent = $FileContent.Replace('[PolicyId <String>]: ObjectID of the Configuration (Policy).', '[PolicyId <String>]: ObjectID of the Policy.')
-                $FileContent | Set-Content -Path:($_.FullName)
-            }
-            ###########################################################################
             Set-Location -Path:($OutputFullPath)
             Write-Host ("$OutputFullPath - $BuildVersion") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
         }
