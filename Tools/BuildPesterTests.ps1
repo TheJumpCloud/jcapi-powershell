@@ -72,7 +72,7 @@ $SDKs | ForEach-Object {
                         $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestSystemGroup.Id)")
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<Type.*?>'", "-Id:(`$global:PesterTestUserGroup.Id)`${1}-Op:('add') -Type:('user_group')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUserGroup.Id; Op = 'add'; Type = 'user_group';})")
-                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<Targets.*?>'", "-Targets:('user_group')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<.*?Targets.*?>'", "-Targets:('user_group')")
                     }
                     ElseIf ($CommandName -like '*SystemGroupTraverse*')
                     {
@@ -94,25 +94,25 @@ $SDKs | ForEach-Object {
                         $RequiredParameters = $RequiredParameters.Replace("-GroupId '<String>'", "-GroupId:(`$global:PesterTestUserGroup.Id)")
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>' -Type '<Type.*?>'", "-Id:(`$global:PesterTestSystemGroup.Id)`${1}-Op:('add') -Type:('system_group')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystemGroup.Id; Op = 'add'; Type = 'system_group';})")
-                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<Targets.*?>'", "-Targets:('system_group')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<.*?Targets.*?>'", "-Targets:('system_group')")
                     }
                     ElseIf ($CommandName -like '*CommandAssociation' -or $CommandName -like '*SoftwareAppAssociation' -or $CommandName -like '*PolicyAssociation' -or $CommandName -like '*UserAssociation' )
                     {
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<Type.*?>'", "-Id:(`$global:PesterTestSystem.Id)`${1}-Op:('add')`${2}-Type:('system')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestSystem.Id; Op = 'add'; Type = 'system';})")
-                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<Targets.*?>'", "-Targets:('system')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<.*?Targets.*?>'", "-Targets:('system')")
                     }
                     Else
                     {
                         $RequiredParameters = $RequiredParameters -Replace ("-Id '<String>'(.*?)-Op '<String>'(.*?)-Type '<Type.*?>'", "-Id:(`$global:PesterTestUser.Id)`${1}-Op:('add')`${2}-Type:('user')")
                         $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Id = `$global:PesterTestUser.Id; Op = 'add'; Type = 'user';})")
-                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<Targets.*?>'", "-Targets:('user')")
+                        $RequiredParameters = $RequiredParameters -Replace ("-Targets '<.*?Targets.*?>'", "-Targets:('user')")
                     }
                 }
                 ElseIf ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights' -and $CommandName -like '*Event*')
                 {
                     $RequiredParameters = $RequiredParameters.Replace("-Service '<String[]>' -StartTime '<DateTime>'", "-Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime())")
-                    $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime();})")
+                    $RequiredParameters = $RequiredParameters -Replace ("-Body '<.*?>'", "-Body:(@{Service = 'all'; StartTime = (Get-Date).AddHours(-24).ToUniversalTime(); })")
                 }
                 # Misc.
                 $RequiredParameters = $RequiredParameters.Replace("-Subject '<String>' -Type '<String>'", "-Subject:(`$global:PesterTestCustomEmailConfiguration.Subject) -Type:(`$global:PesterTestCustomEmailConfiguration.Type)")

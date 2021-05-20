@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Update-JcSdkAuthenticationPolicy' {
     It 'UpdateExpanded' -skip {
-        { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
+        { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-Type '<String>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
     }
 
     It 'Update' -skip {
@@ -25,6 +25,6 @@ Describe 'Update-JcSdkAuthenticationPolicy' {
     }
 
     It 'UpdateViaIdentityExpanded' -skip {
-        { Update-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
+        { Update-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-Type '<String>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
     }
 }

@@ -179,6 +179,10 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterDefSystemGroup = @{
         Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
+    # Create a User Group
+    $global:PesterDefPolicyGroup = @{
+        Name = "PesterTestPolicyGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
 }
 #endregion Define Objects
 

@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'New-JcSdkPolicyGroup' {
     It 'NewExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkPolicyGroup -Name:($global:PesterTestPolicyGroup.Name) } | Should -Not -Throw
     }
 
     It 'New' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkPolicyGroup -Body:($global:PesterTestPolicyGroup) } | Should -Not -Throw
     }
 }
