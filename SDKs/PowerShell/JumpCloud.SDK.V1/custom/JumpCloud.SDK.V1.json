@@ -375,11 +375,11 @@
           "type": "string"
         },
         "databaseAttributes": {
+          "type": "array",
           "items": {
-            "additionalProperties": true,
-            "type": "object"
-          },
-          "type": "array"
+            "type": "object",
+            "additionalProperties": true
+          }
         },
         "description": {
           "maxLength": 256,
@@ -427,14 +427,14 @@
         },
         "sso": {
           "properties": {
+            "type": {
+              "type": "string"
+            },
             "beta": {
               "type": "boolean"
             },
             "jit": {
               "type": "boolean"
-            },
-            "type": {
-              "type": "string"
             }
           },
           "type": "object"
@@ -478,6 +478,14 @@
         },
         "beta": {
           "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "end_of_life",
+            "end_of_support",
+            "beta"
+          ],
+          "type": "string"
         },
         "color": {
           "enum": [
@@ -850,20 +858,14 @@
         "jit": {
           "properties": {
             "attributes": {
-              "additionalProperties": true,
-              "type": "object"
+              "type": "object",
+              "additionalProperties": true
             },
             "createOnly": {
               "type": "boolean"
             }
           },
           "type": "object"
-        },
-        "keywords": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
         },
         "learnMore": {
           "type": "string"
@@ -881,28 +883,28 @@
         },
         "provision": {
           "properties": {
+            "type": {
+              "type": "string"
+            },
             "beta": {
               "type": "boolean"
             },
             "groups_supported": {
               "type": "boolean"
-            },
-            "type": {
-              "type": "string"
             }
           },
           "type": "object"
         },
         "sso": {
           "properties": {
+            "type": {
+              "type": "string"
+            },
             "beta": {
               "type": "boolean"
             },
             "jit": {
               "type": "boolean"
-            },
-            "type": {
-              "type": "string"
             }
           },
           "type": "object"
@@ -910,16 +912,14 @@
         "ssoUrl": {
           "type": "string"
         },
-        "status": {
-          "enum": [
-            "end_of_life",
-            "end_of_support",
-            "beta"
-          ],
-          "type": "string"
-        },
         "test": {
           "type": "string"
+        },
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "title": "ApplicationTemplate",
@@ -943,6 +943,8 @@
       "type": "object"
     },
     "command": {
+      "title": "Command",
+      "type": "object",
       "properties": {
         "command": {
           "description": "The command to execute on the server.",
@@ -950,10 +952,10 @@
         },
         "commandRunners": {
           "description": "An array of IDs of the Command Runner Users that can execute this command.",
+          "type": "array",
           "items": {
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "commandType": {
           "default": "linux",
@@ -962,10 +964,10 @@
         },
         "files": {
           "description": "An array of file IDs to include with the command.",
+          "type": "array",
           "items": {
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "launchType": {
           "description": "How the command will execute.",
@@ -990,20 +992,16 @@
           "description": "When the command will repeat.",
           "type": "string"
         },
-        "shell": {
-          "description": "The shell used to run the command.",
-          "type": "string"
-        },
         "sudo": {
           "description": "",
           "type": "boolean"
         },
         "systems": {
           "description": "An array of system IDs to run the command on. Not available if you are using Groups.",
+          "type": "array",
           "items": {
             "type": "string"
-          },
-          "type": "array"
+          }
         },
         "timeout": {
           "description": "The time in seconds to allow the command to run for.",
@@ -1016,15 +1014,17 @@
         "user": {
           "description": "The ID of the system user to run the command as. This field is required when creating a command with a commandType of \"mac\" or \"linux\".",
           "type": "string"
+        },
+        "shell": {
+          "type": "string",
+          "description": "The shell used to run the command."
         }
       },
       "required": [
         "command",
         "commandType",
         "name"
-      ],
-      "title": "Command",
-      "type": "object"
+      ]
     },
     "commandfilereturn": {
       "properties": {
@@ -1142,66 +1142,66 @@
       "type": "object"
     },
     "commandresultslist": {
+      "title": "CommandResultsList",
+      "type": "object",
       "properties": {
-        "results": {
-          "items": {
-            "properties": {
-              "_id": {
-                "description": "The ID of the command result.",
-                "type": "string"
-              },
-              "command": {
-                "description": "The command that was executed on the system.",
-                "type": "string"
-              },
-              "exitCode": {
-                "description": "The stderr output from the command that ran.",
-                "type": "integer"
-              },
-              "name": {
-                "description": "The name of the command.",
-                "type": "string"
-              },
-              "requestTime": {
-                "description": "The time (UTC) that the command was sent.",
-                "type": "string"
-              },
-              "responseTime": {
-                "description": "The time (UTC) that the command was completed.",
-                "type": "string"
-              },
-              "sudo": {
-                "description": "If the user had sudo rights.",
-                "type": "boolean"
-              },
-              "system": {
-                "description": "The display name of the system the command was executed on.",
-                "type": "string"
-              },
-              "systemId": {
-                "description": "The id of the system the command was executed on.",
-                "type": "string"
-              },
-              "user": {
-                "description": "The user the command ran as.",
-                "type": "string"
-              },
-              "workflowId": {
-                "description": "The id for the command that ran on the system.",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
         "totalCount": {
           "description": "The total number of command results.",
           "type": "integer"
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string",
+                "description": "The command that was executed on the system."
+              },
+              "exitCode": {
+                "type": "integer",
+                "description": "The stderr output from the command that ran."
+              },
+              "name": {
+                "type": "string",
+                "description": "The name of the command."
+              },
+              "requestTime": {
+                "type": "string",
+                "description": "The time (UTC) that the command was sent."
+              },
+              "responseTime": {
+                "type": "string",
+                "description": "The time (UTC) that the command was completed."
+              },
+              "sudo": {
+                "type": "boolean",
+                "description": "If the user had sudo rights."
+              },
+              "system": {
+                "type": "string",
+                "description": "The display name of the system the command was executed on."
+              },
+              "systemId": {
+                "type": "string",
+                "description": "The id of the system the command was executed on."
+              },
+              "user": {
+                "type": "string",
+                "description": "The user the command ran as."
+              },
+              "workflowId": {
+                "type": "string",
+                "description": "The id for the command that ran on the system."
+              },
+              "_id": {
+                "type": "string",
+                "description": "The ID of the command result."
+              }
+            }
+          }
         }
-      },
-      "title": "CommandResultsList",
-      "type": "object"
+      }
     },
     "commandslist": {
       "properties": {
@@ -1281,207 +1281,6 @@
       "title": "FDE",
       "type": "object"
     },
-    "JcSystem": {
-      "properties": {
-        "_id": {
-          "type": "string"
-        },
-        "active": {
-          "type": "boolean"
-        },
-        "agentVersion": {
-          "type": "string"
-        },
-        "allowMultiFactorAuthentication": {
-          "type": "boolean"
-        },
-        "allowPublicKeyAuthentication": {
-          "type": "boolean"
-        },
-        "allowSshPasswordAuthentication": {
-          "type": "boolean"
-        },
-        "allowSshRootLogin": {
-          "type": "boolean"
-        },
-        "amazonInstanceID": {
-          "type": "string"
-        },
-        "arch": {
-          "type": "string"
-        },
-        "builtInCommands": {
-          "items": {
-            "properties": {
-              "name": {
-                "enum": [
-                  "erase",
-                  "lock",
-                  "restart",
-                  "shutdown"
-                ],
-                "type": "string"
-              },
-              "type": {
-                "enum": [
-                  "security"
-                ],
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "readOnly": true,
-          "type": "array"
-        },
-        "connectionHistory": {
-          "items": {
-            "additionalProperties": true,
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "created": {
-          "type": "string"
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "fde": {
-          "$ref": "#/definitions/fde"
-        },
-        "fileSystem": {
-          "type": "string"
-        },
-        "hasServiceAccount": {
-          "type": "boolean"
-        },
-        "hostname": {
-          "type": "string"
-        },
-        "lastContact": {
-          "type": "string"
-        },
-        "mdm": {
-          "properties": {
-            "dep": {
-              "type": "boolean"
-            },
-            "profileIdentifier": {
-              "type": "string"
-            },
-            "userApproved": {
-              "type": "boolean"
-            },
-            "vendor": {
-              "enum": [
-                "unknown",
-                "none",
-                "internal",
-                "external"
-              ],
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "modifySSHDConfig": {
-          "type": "boolean"
-        },
-        "networkInterfaces": {
-          "items": {
-            "properties": {
-              "address": {
-                "type": "string"
-              },
-              "family": {
-                "type": "string"
-              },
-              "internal": {
-                "type": "boolean"
-              },
-              "name": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "organization": {
-          "type": "string"
-        },
-        "os": {
-          "type": "string"
-        },
-        "provisionMetadata": {
-          "properties": {
-            "provisioner": {
-              "properties": {
-                "provisionerId": {
-                  "type": "string"
-                },
-                "type": {
-                  "default": "administrator",
-                  "enum": [
-                    "administrator",
-                    "mdm",
-                    "user"
-                  ],
-                  "type": "string"
-                }
-              },
-              "type": "object"
-            }
-          },
-          "type": "object"
-        },
-        "remoteIP": {
-          "type": "string"
-        },
-        "sshdParams": {
-          "items": {
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "sshRootEnabled": {
-          "type": "boolean"
-        },
-        "systemInsights": {
-          "properties": {
-            "state": {
-              "enum": [
-                "enabled",
-                "disabled",
-                "deferred"
-              ],
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "systemTimezone": {
-          "type": "integer"
-        },
-        "templateName": {
-          "type": "string"
-        },
-        "version": {
-          "type": "string"
-        }
-      },
-      "title": "JcSystem",
-      "type": "object"
-    },
     "mfa": {
       "properties": {
         "configured": {
@@ -1526,14 +1325,13 @@
       "type": "object"
     },
     "organizationsettings": {
-      "description": "",
       "properties": {
         "agentVersion": {
           "type": "string"
         },
         "betaFeatures": {
-          "additionalProperties": true,
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         },
         "contactEmail": {
           "type": "string"
@@ -1541,13 +1339,7 @@
         "contactName": {
           "type": "string"
         },
-        "deviceIdentificationEnabled": {
-          "type": "boolean"
-        },
         "disableCommandRunner": {
-          "type": "boolean"
-        },
-        "disableGoogleLogin": {
           "type": "boolean"
         },
         "disableLdap": {
@@ -1562,7 +1354,7 @@
               "properties": {
                 "deviceNotifications": {
                   "properties": {
-                    "agentOutOfDateMetric": {
+                    "inactiveMetric": {
                       "properties": {
                         "visible": {
                           "type": "boolean"
@@ -1570,7 +1362,23 @@
                       },
                       "type": "object"
                     },
-                    "inactiveMetric": {
+                    "withoutUsersMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "withoutPoliciesMetric": {
+                      "properties": {
+                        "visible": {
+                          "type": "boolean"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    "agentOutOfDateMetric": {
                       "properties": {
                         "visible": {
                           "type": "boolean"
@@ -1588,22 +1396,6 @@
                     },
                     "visible": {
                       "type": "boolean"
-                    },
-                    "withoutPoliciesMetric": {
-                      "properties": {
-                        "visible": {
-                          "type": "boolean"
-                        }
-                      },
-                      "type": "object"
-                    },
-                    "withoutUsersMetric": {
-                      "properties": {
-                        "visible": {
-                          "type": "boolean"
-                        }
-                      },
-                      "type": "object"
                     }
                   }
                 },
@@ -1673,14 +1465,6 @@
         },
         "features": {
           "properties": {
-            "directoryInsights": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            },
             "directoryInsightsPremium": {
               "properties": {
                 "enabled": {
@@ -1691,9 +1475,6 @@
             },
             "systemInsights": {
               "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
                 "enableNewDarwin": {
                   "type": "boolean"
                 },
@@ -1701,6 +1482,17 @@
                   "type": "boolean"
                 },
                 "enableNewWindows": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "directoryInsights": {
+              "properties": {
+                "enabled": {
                   "type": "boolean"
                 }
               },
@@ -1710,9 +1502,9 @@
           "type": "object"
         },
         "growthData": {
-          "additionalProperties": true,
           "description": "Object containing Optimizely experimentIds and states corresponding to them",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         },
         "logo": {
           "type": "string"
@@ -1734,8 +1526,8 @@
               "type": "boolean"
             },
             "daysAfterExpirationToSelfRecover": {
-              "description": "Deprecated field used for the legacy grace period feature.",
-              "type": "integer"
+              "type": "integer",
+              "description": "Deprecated field used for the legacy grace period feature."
             },
             "daysBeforeExpirationToForceReset": {
               "minimum": 1,
@@ -1768,9 +1560,6 @@
             "enablePasswordExpirationInDays": {
               "type": "boolean"
             },
-            "enableResetLockoutCounter": {
-              "type": "boolean"
-            },
             "lockoutTimeInSeconds": {
               "type": "integer"
             },
@@ -1805,6 +1594,9 @@
               "minimum": 1,
               "type": "integer"
             },
+            "enableResetLockoutCounter": {
+              "type": "boolean"
+            },
             "resetLockoutCounterMinutes": {
               "minimum": 1,
               "type": "integer"
@@ -1824,6 +1616,9 @@
         "systemUsersCanEdit": {
           "type": "boolean"
         },
+        "disableGoogleLogin": {
+          "type": "boolean"
+        },
         "userPortal": {
           "properties": {
             "idleSessionDurationMinutes": {
@@ -1833,11 +1628,15 @@
             }
           },
           "type": "object"
+        },
+        "deviceIdentificationEnabled": {
+          "type": "boolean"
         }
       },
       "title": "OrganizationSettings",
       "type": "object",
-      "x-examples": {}
+      "x-examples": {},
+      "description": ""
     },
     "organizationsettingsput": {
       "properties": {
@@ -1846,12 +1645,6 @@
         },
         "contactName": {
           "type": "string"
-        },
-        "deviceIdentificationEnabled": {
-          "type": "boolean"
-        },
-        "disableGoogleLogin": {
-          "type": "boolean"
         },
         "disableLdap": {
           "type": "boolean"
@@ -1870,14 +1663,6 @@
         },
         "features": {
           "properties": {
-            "directoryInsights": {
-              "properties": {
-                "enabled": {
-                  "type": "boolean"
-                }
-              },
-              "type": "object"
-            },
             "directoryInsightsPremium": {
               "properties": {
                 "enabled": {
@@ -1888,9 +1673,6 @@
             },
             "systemInsights": {
               "properties": {
-                "enabled": {
-                  "type": "boolean"
-                },
                 "enableNewDarwin": {
                   "type": "boolean"
                 },
@@ -1898,6 +1680,17 @@
                   "type": "boolean"
                 },
                 "enableNewWindows": {
+                  "type": "boolean"
+                },
+                "enabled": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "directoryInsights": {
+              "properties": {
+                "enabled": {
                   "type": "boolean"
                 }
               },
@@ -1907,9 +1700,9 @@
           "type": "object"
         },
         "growthData": {
-          "additionalProperties": true,
           "description": "Object containing Optimizely experimentIds and states corresponding to them",
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         },
         "logo": {
           "type": "string"
@@ -1931,8 +1724,8 @@
               "type": "boolean"
             },
             "daysAfterExpirationToSelfRecover": {
-              "description": "Deprecated field used for the legacy grace period feature.",
-              "type": "integer"
+              "type": "integer",
+              "description": "Deprecated field used for the legacy grace period feature."
             },
             "daysBeforeExpirationToForceReset": {
               "minimum": 1,
@@ -2008,6 +1801,9 @@
         "systemUsersCanEdit": {
           "type": "boolean"
         },
+        "disableGoogleLogin": {
+          "type": "boolean"
+        },
         "userPortal": {
           "properties": {
             "idleSessionDurationMinutes": {
@@ -2017,6 +1813,9 @@
             }
           },
           "type": "object"
+        },
+        "deviceIdentificationEnabled": {
+          "type": "boolean"
         }
       },
       "title": "OrganizationSettingsPut",
@@ -2176,12 +1975,12 @@
           "type": "string"
         },
         "filter": {
-          "additionalProperties": true,
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         },
         "searchFilter": {
-          "additionalProperties": true,
-          "type": "object"
+          "type": "object",
+          "additionalProperties": true
         }
       },
       "title": "Search",
@@ -2226,6 +2025,207 @@
       ],
       "title": "SSHKeyPost",
       "type": "object"
+    },
+    "JcSystem": {
+      "title": "JcSystem",
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "allowMultiFactorAuthentication": {
+          "type": "boolean"
+        },
+        "allowPublicKeyAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshPasswordAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshRootLogin": {
+          "type": "boolean"
+        },
+        "amazonInstanceID": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "connectionHistory": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "created": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "fde": {
+          "$ref": "#/definitions/fde"
+        },
+        "fileSystem": {
+          "type": "string"
+        },
+        "hasServiceAccount": {
+          "type": "boolean"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "lastContact": {
+          "type": "string"
+        },
+        "modifySSHDConfig": {
+          "type": "boolean"
+        },
+        "networkInterfaces": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "family": {
+                "type": "string"
+              },
+              "internal": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "organization": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "provisionMetadata": {
+          "type": "object",
+          "properties": {
+            "provisioner": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "administrator",
+                    "mdm",
+                    "user"
+                  ],
+                  "default": "administrator"
+                },
+                "provisionerId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "remoteIP": {
+          "type": "string"
+        },
+        "sshRootEnabled": {
+          "type": "boolean"
+        },
+        "sshdParams": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "systemInsights": {
+          "type": "object",
+          "properties": {
+            "state": {
+              "enum": [
+                "enabled",
+                "disabled",
+                "deferred"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "systemTimezone": {
+          "type": "integer"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "mdm": {
+          "type": "object",
+          "properties": {
+            "vendor": {
+              "type": "string",
+              "enum": [
+                "unknown",
+                "none",
+                "internal",
+                "external"
+              ]
+            },
+            "profileIdentifier": {
+              "type": "string"
+            },
+            "dep": {
+              "type": "boolean"
+            },
+            "userApproved": {
+              "type": "boolean"
+            }
+          }
+        },
+        "builtInCommands": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "security"
+                ]
+              },
+              "name": {
+                "type": "string",
+                "enum": [
+                  "erase",
+                  "lock",
+                  "restart",
+                  "shutdown"
+                ]
+              }
+            }
+          }
+        }
+      }
     },
     "systemput": {
       "properties": {
@@ -2327,6 +2327,7 @@
         },
         "attributes": {
           "items": {
+            "type": "object",
             "properties": {
               "name": {
                 "type": "string"
@@ -2335,8 +2336,7 @@
                 "maxLength": 1024,
                 "type": "string"
               }
-            },
-            "type": "object"
+            }
           },
           "type": "array"
         },
@@ -2447,8 +2447,8 @@
         },
         "relationships": {
           "items": {
-            "additionalProperties": true,
-            "type": "object"
+            "type": "object",
+            "additionalProperties": true
           },
           "type": "array"
         },
@@ -2535,6 +2535,7 @@
         },
         "attributes": {
           "items": {
+            "type": "object",
             "properties": {
               "name": {
                 "type": "string"
@@ -2543,8 +2544,7 @@
                 "maxLength": 1024,
                 "type": "string"
               }
-            },
-            "type": "object"
+            }
           },
           "type": "array"
         },
@@ -2647,8 +2647,8 @@
         },
         "relationships": {
           "items": {
-            "additionalProperties": true,
-            "type": "object"
+            "type": "object",
+            "additionalProperties": true
           },
           "type": "array"
         },
@@ -2742,6 +2742,7 @@
         },
         "attributes": {
           "items": {
+            "type": "object",
             "properties": {
               "name": {
                 "type": "string"
@@ -2750,8 +2751,7 @@
                 "maxLength": 1024,
                 "type": "string"
               }
-            },
-            "type": "object"
+            }
           },
           "type": "array"
         },
@@ -2881,8 +2881,8 @@
         },
         "relationships": {
           "items": {
-            "additionalProperties": true,
-            "type": "object"
+            "type": "object",
+            "additionalProperties": true
           },
           "type": "array"
         },
@@ -2966,7 +2966,8 @@
     },
     "description": "JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.\n# V1 API\n  Our existing API offers the ability to interact with some of our core features such as: Commands, Systems, and Users. We are currently in the process of migrating our API V1 features to [API V2](https://docs.jumpcloud.com/2.0) Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V2](https://docs.jumpcloud.com/2.0) docs to understand the functionality available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n\n### API Notice\nSome endpoints erroneously return a **200 (OK)** with an empty object when the resource does not exist. As of  **April 15th, 2021** the endpoints will return a **404 (Not Found)** when the resource does not exist.\n\n- DELETE /applications/{id}\n- DELETE /commandresults/{id}\n- DELETE /commands/{id}\n- DELETE /systems/{id}\n- DELETE /systemusers/{id}\n- GET /applications/{id}\n- GET /commandresults/{id}\n- GET /commands/{id}\n- GET /files/command/{id}\n- GET /systems/{id}\n- GET /systemusers/{id}\n- PUT /applications/{id}\n- PUT /commands/{id}\n- PUT /systems/{id}\n- PUT /systemusers/{id}\n\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V1 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
     "title": "JumpCloud APIs",
-    "version": "1.0"
+    "version": "1.0",
+    "x-releaseTag": "v16.22.0"
   },
   "parameters": {
     "trait:fields:fields": {
@@ -2997,9 +2998,9 @@
     },
     "trait:skip:skip": {
       "default": 0,
-      "minimum": 0,
       "description": "The offset into the records to return.",
       "in": "query",
+      "minimum": 0,
       "name": "skip",
       "type": "integer"
     },
@@ -3012,160 +3013,7 @@
     }
   },
   "paths": {
-    "/applications": {
-      "get": {
-        "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "Application_List",
-        "parameters": [
-          {
-            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
-            "in": "query",
-            "name": "fields",
-            "type": "string"
-          },
-          {
-            "description": "The number of records to return at once.",
-            "in": "query",
-            "name": "limit",
-            "type": "integer"
-          },
-          {
-            "description": "The offset into the records to return.",
-            "in": "query",
-            "name": "skip",
-            "type": "integer"
-          },
-          {
-            "default": "name",
-            "description": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
-            "in": "query",
-            "name": "sort",
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/applicationslist"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Applications"
-      },
-      "post": {
-        "description": "The endpoint adds a new SSO / SAML Applications.",
-        "operationId": "Application_Create",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Create an Application"
-      }
-    },
-    "/applications/{id}": {
-      "delete": {
-        "parameters": [],
-        "description": "The endpoint deletes an SSO / SAML Application.",
-        "operationId": "Application_Delete",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Delete an Application"
-      },
-      "get": {
-        "parameters": [],
-        "description": "The endpoint retrieves an SSO / SAML Application.",
-        "operationId": "Application_Get",
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get an Application"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "put": {
-        "description": "The endpoint updates a SSO / SAML Application.",
-        "operationId": "Application_Set",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/application"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Update an Application"
-      }
-    },
     "/application-templates": {
-      "parameters": [],
       "get": {
         "description": "The endpoint returns all the SSO / SAML Application Templates.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/application-templates \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "ApplicationTemplate_List",
@@ -3212,7 +3060,8 @@
           }
         ],
         "summary": "List Application Templates"
-      }
+      },
+      "parameters": []
     },
     "/application-templates/{id}": {
       "get": {
@@ -3271,6 +3120,158 @@
         }
       ]
     },
+    "/applications": {
+      "get": {
+        "description": "The endpoint returns all your SSO / SAML Applications.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "Application_List",
+        "parameters": [
+          {
+            "description": "The comma separated fields included in the returned records. If omitted the default list of fields will be returned.",
+            "in": "query",
+            "name": "fields",
+            "type": "string"
+          },
+          {
+            "description": "The number of records to return at once.",
+            "in": "query",
+            "name": "limit",
+            "type": "integer"
+          },
+          {
+            "description": "The offset into the records to return.",
+            "in": "query",
+            "name": "skip",
+            "type": "integer"
+          },
+          {
+            "description": "The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.",
+            "in": "query",
+            "name": "sort",
+            "type": "string",
+            "default": "name"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/applicationslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Applications"
+      },
+      "post": {
+        "description": "The endpoint adds a new SSO / SAML Applications.",
+        "operationId": "Application_Create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create an Application"
+      }
+    },
+    "/applications/{id}": {
+      "delete": {
+        "description": "The endpoint deletes an SSO / SAML Application.",
+        "operationId": "Application_Delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete an Application"
+      },
+      "get": {
+        "description": "The endpoint retrieves an SSO / SAML Application.",
+        "operationId": "Application_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get an Application"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "description": "The endpoint updates a SSO / SAML Application.",
+        "operationId": "Application_Set",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/application"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Update an Application"
+      }
+    },
     "/command/trigger/{triggername}": {
       "parameters": [
         {
@@ -3281,9 +3282,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to launch a command based on a defined trigger.\n\n#### Sample Requests\n\n**Launch a Command via a Trigger**\n\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```\n**Launch a Command via a Trigger passing a JSON object to the command**\n```\ncurl --silent \\\n     -X 'POST' \\\n     -H \"x-api-key: {API_KEY}\" \\\n     -H 'Accept: application/json' \\\n     -H 'Content-Type: application/json' \\\n     -d '{ \"srcip\":\"192.168.2.32\", \"attack\":\"Cross Site Scripting Attempt\" }' \\\n     \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"\n```",
         "operationId": "CommandTrigger_POST",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3339,9 +3340,9 @@
     },
     "/commandresults/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
         "operationId": "CommandResult_Delete",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -3458,9 +3459,9 @@
     },
     "/commands/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint deletes a specific command based on the Command ID.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
         "operationId": "Command_Delete",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK"
@@ -3531,35 +3532,6 @@
         ],
         "summary": "Update a Command"
       }
-    },
-    "/commands/{id}/results": {
-      "get": {
-        "description": "This endpoint returns results for a specific command.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
-        "operationId": "CommandResult_Get",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {},
-              "type": "array"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get results for a specific command"
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ]
     },
     "/files/command/{id}": {
       "get": {
@@ -3773,29 +3745,10 @@
       }
     },
     "/radiusservers/{id}": {
-      "delete": {
-        "parameters": [],
-        "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
-        "operationId": "RadiusServer_Delete",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/radiusserverput"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Delete Radius Server"
-      },
       "get": {
-        "parameters": [],
         "description": "This endpoint allows you to get a RADIUS server in your organization.\n\n####\n```\ncurl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "RadiusServer_Get",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -3851,13 +3804,13 @@
                 "networkSourceIp": {
                   "type": "string"
                 },
-                "sharedSecret": {
-                  "type": "string"
-                },
                 "userLockoutAction": {
                   "type": "string"
                 },
                 "userPasswordExpirationAction": {
+                  "type": "string"
+                },
+                "sharedSecret": {
                   "type": "string"
                 }
               },
@@ -3884,6 +3837,25 @@
           }
         ],
         "summary": "Update Radius Servers"
+      },
+      "delete": {
+        "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
+        "operationId": "RadiusServer_Delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/radiusserverput"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete Radius Server"
       }
     },
     "/search/organizations": {
@@ -4051,9 +4023,9 @@
     },
     "/systems/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint allows you to delete a system. This command will cause the system to uninstall the JumpCloud agent from its self which can can take about a minute. If the system is not connected to JumpCloud the system record will simply be removed.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "System_Delete",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -4129,110 +4101,6 @@
           }
         ],
         "summary": "Update a system"
-      }
-    },
-    "/systems/{system_id}/command/builtin/erase": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "system_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "parameters": [],
-        "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "System_Clear",
-        "responses": {
-          "201": {
-            "description": "Command created"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Erase a System"
-      }
-    },
-    "/systems/{system_id}/command/builtin/lock": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "system_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "parameters": [],
-        "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "System_Lock",
-        "responses": {
-          "201": {
-            "description": "Command created"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Lock a System"
-      }
-    },
-    "/systems/{system_id}/command/builtin/restart": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "system_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "parameters": [],
-        "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "System_Restart",
-        "responses": {
-          "201": {
-            "description": "Command created"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Restart a System"
-      }
-    },
-    "/systems/{system_id}/command/builtin/shutdown": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "system_id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "post": {
-        "parameters": [],
-        "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
-        "operationId": "System_Stop",
-        "responses": {
-          "201": {
-            "description": "Command created"
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Shutdown a System"
       }
     },
     "/systemusers": {
@@ -4320,9 +4188,9 @@
     },
     "/systemusers/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint allows you to delete a particular system user.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "User_Delete",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -4410,9 +4278,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to expire a user's password.",
         "operationId": "ExpireUserPassword_POST",
+        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -4471,9 +4339,9 @@
     },
     "/systemusers/{id}/sshkeys": {
       "get": {
-        "parameters": [],
         "description": "This endpoint will return a specific System User's public SSH key.",
         "operationId": "UserSshKey_Get",
+        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -4538,9 +4406,9 @@
         }
       ],
       "post": {
-        "parameters": [],
         "description": "This endpoint allows you to unlock a user's account.",
         "operationId": "User_Unlock",
+        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -4556,9 +4424,9 @@
     },
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
       "delete": {
-        "parameters": [],
         "description": "This endpoint will delete a specific System User's SSH Key.",
         "operationId": "UserSshKey_Delete",
+        "parameters": [],
         "responses": {
           "200": {
             "description": ""
@@ -4585,6 +4453,139 @@
           "type": "string"
         }
       ]
+    },
+    "/commands/{id}/results": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "summary": "Get results for a specific command",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {}
+            }
+          }
+        },
+        "operationId": "CommandResult_Get",
+        "description": "This endpoint returns results for a specific command.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ]
+      }
+    },
+    "/systems/{system_id}/command/builtin/erase": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "system_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "System_Clear",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Command created"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Erase a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/lock": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "system_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "System_Lock",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Command created"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Lock a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/restart": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "system_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "System_Restart",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Command created"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Restart a System"
+      }
+    },
+    "/systems/{system_id}/command/builtin/shutdown": {
+      "parameters": [
+        {
+          "type": "string",
+          "name": "system_id",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "operationId": "System_Stop",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": "Command created"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Shutdown a System"
+      }
     }
   },
   "produces": [
