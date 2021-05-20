@@ -85,7 +85,10 @@ jobs:
   Commit Changes:
     executor: win/default
     steps:
-      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+      - checkout
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   Pack and Deploy To CodeArtifact:
@@ -121,9 +124,6 @@ jobs:
 commands:
   setup:
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - checkout
       - run:
           name: Install PowerShell Core
