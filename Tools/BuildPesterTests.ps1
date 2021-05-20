@@ -11,7 +11,7 @@ $SDKs | ForEach-Object {
     $Module = $_.BaseName
     $TestFolderPath = "$ModuleFolder/$Module/test/"
     Import-Module "$ModuleFolder/$Module/$Module.psd1"
-    $Commands = Get-Command -Module $Module Set*Association* #-Verb Get # For testing specific commands
+    $Commands = Get-Command -Module $Module #-Verb Get # For testing specific commands
     $Commands | ForEach-Object {
         $CommandName = $_.Name
         $CommandVerb = $_.Verb
