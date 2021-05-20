@@ -1,53 +1,4 @@
-<#
-.Synopsis
-This endpoint returns all Groups that exist in your organization.
-
-#### Available filter fields:
-  - `name`
-  - `disabled`
-  - `type`
-
-#### Sample Request
-
-```
-  curl -X GET \\
-  https://console.jumpcloud.com/api/v2/groups \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-.Description
-This endpoint returns all Groups that exist in your organization.
-
-#### Available filter fields:
-  - `name`
-  - `disabled`
-  - `type`
-
-#### Sample Request
-
-```
-  curl -X GET \\
-  https://console.jumpcloud.com/api/v2/groups \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.IGroup
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroup.md
-#>
- Function Get-JcSdkGroup
+﻿Function Get-JcSdkGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.IGroup])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -215,5 +166,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,23 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `cpu_subtype`.
-.Description
-Valid filter fields are `system_id` and `cpu_subtype`.
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSystemInfo.md
-#>
- Function Get-JcSdkSystemInsightSystemInfo
+﻿Function Get-JcSdkSystemInsightSystemInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -172,5 +153,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

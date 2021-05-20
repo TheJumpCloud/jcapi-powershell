@@ -1,66 +1,4 @@
-<#
-.Synopsis
-Create an IP list.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/iplists \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"name\": \"Sample IP List\",
-    \"ips\": [
-      \"192.168.10.12\",
-      \"192.168.10.20 - 192.168.10.30\",
-      \"123.225.10.0/32\"
-    ]
-  }'
-```
-.Description
-Create an IP list.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/iplists \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"name\": \"Sample IP List\",
-    \"ips\": [
-      \"192.168.10.12\",
-      \"192.168.10.20 - 192.168.10.30\",
-      \"123.225.10.0/32\"
-    ]
-  }'
-```
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.IIPListRequest
-.Outputs
-JumpCloud.SDK.V2.Models.IIPList
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IIPListRequest>:
-  [Description <String>]:
-  [Ips <String[]>]:
-  [Name <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkIPList.md
-#>
- Function New-JcSdkIPList
+﻿Function New-JcSdkIPList
 {
     [OutputType([JumpCloud.SDK.V2.Models.IIPList])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -162,5 +100,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

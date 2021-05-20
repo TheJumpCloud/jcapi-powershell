@@ -1,23 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `state`.
-.Description
-Valid filter fields are `system_id` and `state`.
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightWindowSecurityProduct.md
-#>
- Function Get-JcSdkSystemInsightWindowSecurityProduct
+﻿Function Get-JcSdkSystemInsightWindowSecurityProduct
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -172,5 +153,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,78 +1,4 @@
-<#
-.Synopsis
-The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
-
-#### Sample Request 
-```
-curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '[
-\t{
-\t\t\"email\":\"{email}\",
-\t\t\"firstname\":\"{firstname}\",
-\t\t\"lastname\":\"{firstname}\",
-\t\t\"username\":\"{username}\",
-\t\t\"attributes\":[
-\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
-\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
-\t\t]
-\t}
-]
-```
-.Description
-The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
-
-#### Sample Request 
-```
-curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '[
-\t{
-\t\t\"email\":\"{email}\",
-\t\t\"firstname\":\"{firstname}\",
-\t\t\"lastname\":\"{firstname}\",
-\t\t\"username\":\"{username}\",
-\t\t\"attributes\":[
-\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
-\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
-\t\t]
-\t}
-]
-```
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.IBulkUserCreate[]
-.Outputs
-System.String
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IBulkUserCreate[]>:
-  [Attributes <IBulkUserCreateAttributesItem[]>]: Map of additional attributes.
-  [Email <String>]:
-  [Firstname <String>]:
-  [Lastname <String>]:
-  [Username <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUser.md
-#>
- Function New-JcSdkBulkUser
+﻿Function New-JcSdkBulkUser
 {
     [OutputType([System.String])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -164,5 +90,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

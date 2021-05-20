@@ -1,67 +1,4 @@
-<#
-.Synopsis
-This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
-#### Sample Request
-```
-$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
--H 'Accept: application/json' \\
--H 'Content-Type: application/json' \\
--H 'x-api-key: {API_KEY}' \\
--d '{}'
-```
-.Description
-This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.
-#### Sample Request
-```
-$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\
--H 'Accept: application/json' \\
--H 'Content-Type: application/json' \\
--H 'x-api-key: {API_KEY}' \\
--d '{}'
-```
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-.Outputs
-JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-INPUTOBJECT <IJumpCloudApIsIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Invoke-JcSdkReclaimSoftwareAppLicense.md
-#>
- Function Invoke-JcSdkReclaimSoftwareAppLicense
+﻿Function Invoke-JcSdkReclaimSoftwareAppLicense
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppReclaimLicenses])]
     [CmdletBinding(DefaultParameterSetName='Reclaim', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -151,5 +88,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

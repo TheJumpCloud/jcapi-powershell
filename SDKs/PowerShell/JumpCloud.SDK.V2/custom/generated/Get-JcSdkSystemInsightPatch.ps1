@@ -1,23 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `hotfix_id`.
-.Description
-Valid filter fields are `system_id` and `hotfix_id`.
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsPatches
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightPatch.md
-#>
- Function Get-JcSdkSystemInsightPatch
+﻿Function Get-JcSdkSystemInsightPatch
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsPatches])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -172,5 +153,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

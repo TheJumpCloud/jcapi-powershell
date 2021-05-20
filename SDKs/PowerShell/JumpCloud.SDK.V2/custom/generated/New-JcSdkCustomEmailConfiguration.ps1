@@ -1,38 +1,4 @@
-<#
-.Synopsis
-Create the custom email configuration for the specified custom email type
-.Description
-Create the custom email configuration for the specified custom email type
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.ICustomEmail
-.Outputs
-JumpCloud.SDK.V2.Models.ICustomEmail
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-CUSTOMEMAIL <ICustomEmail>:
-  Subject <String>:
-  Type <String>:
-  [Body <String>]:
-  [Button <String>]:
-  [Header <String>]:
-  [NextStepContactInfo <String>]:
-  [Title <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkCustomEmailConfiguration.md
-#>
- Function New-JcSdkCustomEmailConfiguration
+﻿Function New-JcSdkCustomEmailConfiguration
 {
     [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -158,5 +124,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

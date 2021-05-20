@@ -1,23 +1,4 @@
-<#
-.Synopsis
-Lists Office 365 users available for import.
-.Description
-Lists Office 365 users available for import.
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.IPaths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkOffice365UsersToImport.md
-#>
- Function Get-JcSdkOffice365UsersToImport
+﻿Function Get-JcSdkOffice365UsersToImport
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPaths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -202,5 +183,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

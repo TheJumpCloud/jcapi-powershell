@@ -1,23 +1,4 @@
-<#
-.Synopsis
-Only valid filter field is `system_id`.
-.Description
-Only valid filter field is `system_id`.
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsUserGroups
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightUserGroup.md
-#>
- Function Get-JcSdkSystemInsightUserGroup
+﻿Function Get-JcSdkSystemInsightUserGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUserGroups])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -172,5 +153,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

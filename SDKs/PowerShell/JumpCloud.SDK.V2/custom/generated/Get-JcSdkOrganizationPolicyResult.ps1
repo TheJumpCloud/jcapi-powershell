@@ -1,41 +1,4 @@
-<#
-.Synopsis
-This endpoint returns all configuration (policy) results for an organization.
-
-##### Sample Request
-
-```
- curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
-.Description
-This endpoint returns all configuration (policy) results for an organization.
-
-##### Sample Request
-
-```
- curl -X GET https://console.jumpcloud.com/api/v2/policyresults \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.IPolicyResult
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkOrganizationPolicyResult.md
-#>
- Function Get-JcSdkOrganizationPolicyResult
+﻿Function Get-JcSdkOrganizationPolicyResult
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -197,5 +160,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-
