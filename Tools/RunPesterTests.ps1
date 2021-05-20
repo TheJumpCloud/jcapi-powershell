@@ -114,8 +114,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterDefActiveDirectory = @{
         'domain' = "DC=ADTEST{0};DC=ORG" -f [string]( -join ((65..90) + (97..122) | Get-Random -Count 6 | ForEach-Object { [char]$_ }));
     }
-    # TODO: Make this endpoint public
-    $global:PesterTestActiveDirectory = Invoke-RestMethod -Method 'Post' -Uri "https://console.jumpcloud.com/api/v2/activedirectories" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey; }) -Body:($global:PesterDefActiveDirectory | ConvertTo-Json) -ContentType:('application/json') -UseBasicParsing
     # Create a Authentication Policy
     $global:PesterDefAuthenticationPolicy = @{
         Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
