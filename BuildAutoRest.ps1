@@ -281,6 +281,7 @@ ForEach ($SDK In $SDKName)
                     $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                     $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
                     $GitIgnoreContent = $GitIgnoreContent.Replace('generated', "generated`n!custom/generated")
+                    $GitIgnoreContent = $GitIgnoreContent.Replace('/*.ps1', "/*.ps1`n'!test-module.ps1'")
                     $GitIgnoreContent | Set-Content -Path:($_.FullName)
                 }
             }
