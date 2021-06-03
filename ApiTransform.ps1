@@ -131,6 +131,7 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
+            'activedirectories_agentsList '                     = 'ActiveDirectoryAgent_List';
             'activedirectories_get'                             = 'ActiveDirectory_Get';
             'activedirectories_list'                            = 'ActiveDirectory_List';
             'activedirectories_post'                            = 'ActiveDirectory_Create';
