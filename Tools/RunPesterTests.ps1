@@ -169,7 +169,10 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Create a Software App
     $global:PesterDefSoftwareApp = @{
         DisplayName = "Adobe Reader"
-        Settings    = @{PackageId = 'adobereader' }
+        Settings    = @{
+            PackageId      = 'adobereader'
+            packageManager = 'CHOCOLATEY'
+        }
     }
     # Create a User Group
     $global:PesterDefUserGroup = @{
@@ -179,7 +182,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterDefSystemGroup = @{
         Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
-    # Create a User Group
+    # Create a Policy Group
     $global:PesterDefPolicyGroup = @{
         Name = "PesterTestPolicyGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
@@ -251,8 +254,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V1')
 }
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
-    # Delete a ActiveDirectory
-    Invoke-WebRequest -Method 'DELETE' -Uri "https://console.jumpcloud.com/api/v2/activedirectories/$($global:PesterTestActiveDirectory.Id)" -Headers:(@{'Accept' = 'application/json'; 'x-api-key' = $env:JCApiKey }) -ContentType 'application/json' -UseBasicParsing
     # Remove-JcSdkCustomEmailConfiguration -CustomEmailType:('password_reset_confirmation')
     # Remove-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id) -Id:((Get-JcSdkGSuiteTranslationRule -GsuiteId:((Get-JcSdkDirectory | Where-Object { $_.type -eq "g_suite" } | Select-Object -First 1).id)).id)
     # Remove-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id) -Id:((Get-JcSdkOffice365TranslationRule -Office365Id:((Get-JcSdkDirectory | Where-Object { $_.type -eq "office_365" } | Select-Object -First 1).id)).id)
