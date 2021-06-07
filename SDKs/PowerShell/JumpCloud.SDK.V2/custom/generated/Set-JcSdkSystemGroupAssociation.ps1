@@ -58,25 +58,26 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationSystemGroup>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <Type3>: Targets which a "system_group" can be associated to.
+  Type <GraphOperationSystemGroup3>: Targets which a "system_group" can be associated to.
   [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -130,9 +131,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type3])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphOperationSystemGroup3])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type3]
+    [JumpCloud.SDK.V2.Support.GraphOperationSystemGroup3]
     # Targets which a "system_group" can be associated to.
     ${Type},
 

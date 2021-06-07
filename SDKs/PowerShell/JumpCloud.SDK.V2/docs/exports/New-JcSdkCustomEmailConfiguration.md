@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-CustomEmailType
+.
 
 ```yaml
 Type: System.String
@@ -219,7 +219,7 @@ To create the parameters described below, construct a hash table containing the 
 
 CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
-  - `Type <String>`: CustomEmailType
+  - `Type <String>`: 
   - `[Body <String>]`: 
   - `[Button <String>]`: 
   - `[Header <String>]`: 

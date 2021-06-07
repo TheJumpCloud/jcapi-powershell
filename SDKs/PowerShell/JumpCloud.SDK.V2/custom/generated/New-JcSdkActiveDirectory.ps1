@@ -53,16 +53,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function New-JcSdkActiveDirectory
 {
     [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryOutput])]
-    [CmdletBinding(DefaultParameterSetName='NewExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='New', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IActiveDirectoryInput]
     # Active Directory Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
-    [Parameter(ParameterSetName='NewExpanded')]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Domain name for this Active Directory instance.

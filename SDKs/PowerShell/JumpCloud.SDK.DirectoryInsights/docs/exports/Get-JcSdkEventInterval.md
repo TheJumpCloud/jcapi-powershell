@@ -93,7 +93,7 @@ Accept wildcard characters: False
 
 ### -IntervalValue
 Interval Value.
-This specifies how many units you want to bucket the event counts byoptional
+This specifies how many units you want to bucket the event counts by
 
 ```yaml
 Type: System.String
@@ -139,7 +139,6 @@ Accept wildcard characters: False
 
 ### -Service
 service name to query.
-Known services: systems,radius,sso,directory,ldap,all
 
 ```yaml
 Type: System.String[]
@@ -224,7 +223,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
+### JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem
 
 ## NOTES
 
@@ -237,10 +236,10 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
   - `IntervalUnit <String>`: 
-  - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  - `Service <String[]>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by         optional
+  - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

@@ -45,7 +45,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGraphOperationGSuite
+JumpCloud.SDK.V2.Models.IGraphOperationGSuite1
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 .Outputs
@@ -55,28 +55,29 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGraphOperationGSuite>:
+BODY <IGraphOperationGSuite1>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <Type>: Targets which a "g_suite" can be associated to.
+  Type <GraphOperationGSuite>: Targets which a "g_suite" can be associated to.
   [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -109,7 +110,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphOperationGSuite]
+    [JumpCloud.SDK.V2.Models.IGraphOperationGSuite1]
     # GraphOperation (GSuite)
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
@@ -130,9 +131,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Type])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphOperationGSuite])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.Type]
+    [JumpCloud.SDK.V2.Support.GraphOperationGSuite]
     # Targets which a "g_suite" can be associated to.
     ${Type},
 

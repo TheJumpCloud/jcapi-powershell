@@ -172,7 +172,7 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 ## PARAMETERS
 
 ### -Body
-search
+Search
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
@@ -321,7 +321,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISearch>: search
+BODY <ISearch>: Search
   - `[Fields <String>]`: 
   - `[Filter <ISearchFilter>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.

@@ -22,9 +22,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IApplication>:
-  [Beta <Boolean?>]:
-  [Color <String>]:
-  [Config <IApplicationConfig>]:
+  Config <IApplicationConfig>:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
     [AcUrlPosition <Int32?>]:
@@ -104,6 +102,10 @@ BODY <IApplication>:
     [SpEntityIdType <String>]:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
+  Name <String>:
+  SsoUrl <String>:
+  [Beta <Boolean?>]:
+  [Color <String>]:
   [Created <String>]:
   [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
   [Description <String>]:
@@ -113,12 +115,10 @@ BODY <IApplication>:
   [LearnMore <String>]:
   [LogoColor <String>]:
   [LogoUrl <String>]:
-  [Name <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
-  [SsoUrl <String>]:
 
 CONFIG <IApplicationConfig>:
   [AcUrlLabel <String>]:
@@ -206,7 +206,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function New-JcSdkApplication
 {
     [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -214,6 +214,25 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Application
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
+
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IApplicationConfig]
+    # .
+    # To construct, see NOTES section for CONFIG properties and create a hash table.
+    ${Config},
+
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Name},
+
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoUrl},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -226,13 +245,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Color},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationConfig]
-    # .
-    # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -292,12 +304,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Name},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
     ${Organization},
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -317,12 +323,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${SsoType},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${SsoUrl},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

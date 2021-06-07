@@ -26,14 +26,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/association
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <Targets2> [-Authorization <String>] [-Date <String>]
- [<CommonParameters>]
+Get-JcSdkSystemAssociation -SystemId <String> -Targets <GraphTargetsActiveDirectoryTargets>
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <Targets2> [-Authorization <String>]
- [-Date <String>] [<CommonParameters>]
+Get-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Targets <GraphTargetsActiveDirectoryTargets>
+ [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -131,10 +131,10 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-Targets which a "system" can be associated to.
+Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Targets2
+Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
 Parameter Sets: (All)
 Aliases:
 
@@ -168,18 +168,19 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

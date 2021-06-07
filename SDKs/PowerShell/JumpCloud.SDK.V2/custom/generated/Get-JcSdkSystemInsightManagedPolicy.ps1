@@ -25,12 +25,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
-    # Supported operators are: eq, in.
-    # e.g:
-    # Filter for single value:
-    # `filter=field:eq:value`
-    # Filter for any value in a list: (note “pipe” character: `|` separating values)
-    # `filter=field:in:value1|value2|value3`
+    # A filter to apply to the query.
+    # **Filter structure**: `<field>:<operator>:<value>`.
+    # **field** = Populate with a valid field from an endpoint response.
+    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # **value** = Populate with the value you want to search for.
+    # Is case sensitive.
+    # Supports wild cards.
+    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
     [Parameter()]
@@ -38,13 +40,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
-    # e.g:
-    # Sort by single field:
-    # `sort=field`
-    # Sort descending by single field:
-    # `sort=-field`
-    # Sort by multiple fields:
-    # `sort=field1,-field2,field3`
     ${Sort},
 
     [Parameter(DontShow)]

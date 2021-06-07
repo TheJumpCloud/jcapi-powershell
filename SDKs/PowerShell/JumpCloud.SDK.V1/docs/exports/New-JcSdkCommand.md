@@ -31,10 +31,10 @@ curl -X POST https://console.jumpcloud.com/api/commands/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkCommand -Command <String> [-CommandRunners <String[]>] [-CommandType <String>] [-Files <String[]>]
- [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
- [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>] [-Timeout <String>]
- [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -Command <String> -CommandType <String> -Name <String> [-CommandRunners <String[]>]
+ [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Organization <String>]
+ [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>]
+ [-Timeout <String>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -134,7 +134,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -194,7 +194,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -392,12 +392,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <ICommand>: Command
   - `Command1 <String>`: The command to execute on the server.
+  - `CommandType <String>`: The Command OS
+  - `Name <String>`: 
   - `[CommandRunners <String[]>]`: An array of IDs of the Command Runner Users that can execute this command.
-  - `[CommandType <String>]`: The Command OS
   - `[Files <String[]>]`: An array of file IDs to include with the command.
   - `[LaunchType <String>]`: How the command will execute.
   - `[ListensTo <String>]`: 
-  - `[Name <String>]`: 
   - `[Organization <String>]`: The ID of the organization.
   - `[Schedule <String>]`: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.         
   - `[ScheduleRepeatType <String>]`: When the command will repeat.

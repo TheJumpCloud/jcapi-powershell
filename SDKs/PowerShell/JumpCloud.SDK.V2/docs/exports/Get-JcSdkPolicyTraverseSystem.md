@@ -8,13 +8,13 @@ schema: 2.0.0
 # Get-JcSdkPolicyTraverseSystem
 
 ## SYNOPSIS
-This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Systems bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Policy to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
+The `paths` array enumerates each path from this Configuration (Policy) to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -39,13 +39,13 @@ Get-JcSdkPolicyTraverseSystem -InputObject <IJumpCloudApIsIdentity> [-Filter <St
 ```
 
 ## DESCRIPTION
-This endpoint will return all Systems bound to a Policy, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Systems bound to a Configuration (Policy), either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Policy to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
+The `paths` array enumerates each path from this Configuration (Policy) to the corresponding System; this array represents all grouping and/or associations that would have to be removed to deprovision the System from this Policy.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -151,18 +151,19 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

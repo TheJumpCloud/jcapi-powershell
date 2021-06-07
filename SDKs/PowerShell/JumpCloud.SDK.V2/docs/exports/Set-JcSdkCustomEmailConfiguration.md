@@ -197,7 +197,7 @@ Accept wildcard characters: False
 ```
 
 ### -Type
-CustomEmailType
+.
 
 ```yaml
 Type: System.String
@@ -266,7 +266,7 @@ To create the parameters described below, construct a hash table containing the 
 
 CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
-  - `Type <String>`: CustomEmailType
+  - `Type <String>`: 
   - `[Body <String>]`: 
   - `[Button <String>]`: 
   - `[Header <String>]`: 
@@ -276,18 +276,19 @@ CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to pe
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

@@ -12,13 +12,14 @@ build-sdks: &build-sdks
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK V1
-      context: aws-credentials  
+      context: aws-credentials
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
   - Pack and Deploy To CodeArtifact:
+      type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
@@ -33,6 +34,10 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
+      filters:
+        branches:
+          only:
+            - master
 workflows:
   version: 2
   ci:
@@ -54,7 +59,6 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
-          BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
   Build and Test JumpCloud SDK V1:
@@ -64,7 +68,6 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
-          BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
   Build and Test JumpCloud SDK V2:
@@ -74,13 +77,15 @@ jobs:
       - build-test:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
-          BuildModuleOverride: true
           RunApiTransform: true
           TestModule: true
   Commit Changes:
     executor: win/default
     steps:
-      - setup
+      - add_ssh_keys:
+          fingerprints:
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+      - checkout
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   Pack and Deploy To CodeArtifact:
@@ -88,7 +93,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           source: CodeArtifact
@@ -103,7 +108,7 @@ jobs:
     steps:
       - setup
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.DirectoryInsights
           source: PSGallery
@@ -116,9 +121,6 @@ jobs:
 commands:
   setup:
     steps:
-      - add_ssh_keys:
-          fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - checkout
       - run:
           name: Install PowerShell Core
@@ -166,10 +168,6 @@ commands:
         description: ''
         type: string
         default: ''
-      BuildModuleOverride:
-        description: ''
-        type: boolean
-        default: false
       RunApiTransform:
         description: ''
         type: boolean
@@ -180,13 +178,13 @@ commands:
         default: true
     steps:
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - run:
           name: Building '<< parameters.SDKName >>'
           shell: pwsh.exe
           command: |
-            $ErrorActionPreference = 'Continue'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GH_TOKEN) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -BuildModuleOverride:($<< parameters.BuildModuleOverride >>) -RunApiTransform:($<< parameters.RunApiTransform >>)
+            $ErrorActionPreference = 'Stop'
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GitHubAccessToken) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -201,7 +199,7 @@ commands:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
       - persist_to_workspace:
-          root: ./SDKs
+          root: .
           paths:
             - .
   commit:
@@ -211,7 +209,7 @@ commands:
         type: string
     steps:
       - attach_workspace:
-          at: ./SDKs
+          at: .
       - run:
           when: on_success
           name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'

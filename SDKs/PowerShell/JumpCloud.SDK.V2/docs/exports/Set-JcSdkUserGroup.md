@@ -25,9 +25,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroup -Id <String> -Name <String> [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
- [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
- [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
+Set-JcSdkUserGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
  [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -44,11 +42,9 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String>
- [-AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]
- [-AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]
- [-AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>] [-AttributeSambaEnabled] [-Description <String>]
- [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Attributes <Hashtable>]
+ [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -83,59 +79,11 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 
 ## PARAMETERS
 
-### -AttributeLdapGroups
-.
-To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
+### -Attributes
+The graph attributes for a UserGroup.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AttributePosixGroups
-.
-To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AttributeRadiusReply
-.
-To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AttributeSambaEnabled
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -307,28 +255,19 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>: .
-  - `Name <String>`: 
-
-ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>: .
-  - `Id <Int32>`: 
-  - `Name <String>`: 
-
-ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>: .
-  - `Name <String>`: 
-  - `Value <String>`: 
-
 BODY <IUserGroupPut>: UserGroupPut
   - `Name <String>`: Display name of a User Group.
-  - `[AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
-    - `Name <String>`: 
-  - `[AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
-    - `Id <Int32>`: 
-    - `Name <String>`: 
-  - `[AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
-    - `Name <String>`: 
-    - `Value <String>`: 
-  - `[AttributeSambaEnabled <Boolean?>]`: 
+  - `[Attributes <IGroupAttributesUserGroup>]`: The graph attributes for a UserGroup.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[LdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
+      - `Name <String>`: 
+    - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
+      - `Id <Int32>`: 
+      - `Name <String>`: 
+    - `[RadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
+      - `Name <String>`: 
+      - `Value <String>`: 
+    - `[SambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
   - `[MemberQueryFilters <IFilter[]>]`: 
@@ -339,18 +278,19 @@ BODY <IUserGroupPut>: UserGroupPut
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

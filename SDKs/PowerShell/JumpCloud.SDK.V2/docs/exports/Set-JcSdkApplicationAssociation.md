@@ -28,26 +28,28 @@ curl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Id <String> -Op <String>
+ -Type <GraphOperationApplication> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphOperationApplication> [-PassThru]
+Set-JcSdkApplicationAssociation -ApplicationId <String> -Body <IGraphOperationApplication1> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationApplication>
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationApplication1>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplicationAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationApplication> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -120,7 +122,7 @@ GraphOperation (Application)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphOperationApplication
+Type: JumpCloud.SDK.V2.Models.IGraphOperationApplication1
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -196,7 +198,7 @@ Accept wildcard characters: False
 Targets which a "application" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphOperationApplication
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -243,7 +245,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphOperationApplication
+### JumpCloud.SDK.V2.Models.IGraphOperationApplication1
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -260,28 +262,29 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationApplication>: GraphOperation (Application)
+BODY <IGraphOperationApplication1>: GraphOperation (Application)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type>`: Targets which a "application" can be associated to.
+  - `Type <GraphOperationApplication>`: Targets which a "application" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

@@ -29,26 +29,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkOffice365Association -Office365Id <String> -Id <String> -Op <String> -Type <Type>
+Set-JcSdkOffice365Association -Office365Id <String> -Id <String> -Op <String> -Type <GraphOperationOffice365>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkOffice365Association -Office365Id <String> -Body <IGraphOperationOffice365> [-PassThru] [-Confirm]
+Set-JcSdkOffice365Association -Office365Id <String> -Body <IGraphOperationOffice3651> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationOffice365>
+Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationOffice3651>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkOffice365Association -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationOffice365> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -107,7 +108,7 @@ GraphOperation (Office365)
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGraphOperationOffice365
+Type: JumpCloud.SDK.V2.Models.IGraphOperationOffice3651
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -198,7 +199,7 @@ Accept wildcard characters: False
 Targets which a "office_365" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type
+Type: JumpCloud.SDK.V2.Support.GraphOperationOffice365
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -245,7 +246,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphOperationOffice365
+### JumpCloud.SDK.V2.Models.IGraphOperationOffice3651
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
 
@@ -262,28 +263,29 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationOffice365>: GraphOperation (Office365)
+BODY <IGraphOperationOffice3651>: GraphOperation (Office365)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type>`: Targets which a "office_365" can be associated to.
+  - `Type <GraphOperationOffice365>`: Targets which a "office_365" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

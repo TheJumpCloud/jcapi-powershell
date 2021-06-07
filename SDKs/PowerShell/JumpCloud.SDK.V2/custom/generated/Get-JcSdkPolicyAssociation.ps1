@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns the _direct_ associations of a Policy.
+This endpoint returns the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -12,9 +12,9 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint returns the _direct_ associations of a Policy.
+This endpoint returns the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -44,18 +44,19 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the System Group.
+  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
+  [PolicyId <String>]: ObjectID of the Configuration (Policy).
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -73,7 +74,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Policy.
+    # ObjectID of the Configuration (Policy).
     ${PolicyId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -84,10 +85,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Targets1])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets])]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.Targets1]
-    # Targets which a "policy" can be associated to.
+    [JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets]
+    # Targets which a "active_directory" can be associated to.
     ${Targets},
 
     [Parameter(DontShow)]

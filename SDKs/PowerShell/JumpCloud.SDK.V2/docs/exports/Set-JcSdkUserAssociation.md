@@ -36,8 +36,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <Type5> [-AttributeSudoEnabled]
- [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserAssociation -UserId <String> -Id <String> -Op <String> -Type <GraphOperationUser4>
+ [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -54,8 +54,8 @@ Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOper
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type5>
- [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUserAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationUser4> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -101,26 +101,11 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ## PARAMETERS
 
-### -AttributeSudoEnabled
-Enables sudo
+### -Attributes
+.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AttributeSudoWithoutPassword
-Enable sudo without password (requires 'enabled' to be true)
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -212,7 +197,7 @@ Accept wildcard characters: False
 Targets which a "user" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type5
+Type: JumpCloud.SDK.V2.Support.GraphOperationUser4
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -294,25 +279,28 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUser>: GraphOperation (User)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type5>`: Targets which a "user" can be associated to.
-  - `[AttributeSudoEnabled <Boolean?>]`: Enables sudo
-  - `[AttributeSudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
+  - `Type <GraphOperationUser4>`: Targets which a "user" can be associated to.
+  - `[Attributes <IGraphOperationUserAttributes>]`: 
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[SudoEnabled <Boolean?>]`: Enables sudo
+    - `[SudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

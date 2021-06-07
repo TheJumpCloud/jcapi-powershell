@@ -122,7 +122,6 @@ Accept wildcard characters: False
 
 ### -Service
 service name to query.
-Known services: systems,radius,sso,directory,ldap,all
 
 ```yaml
 Type: System.String[]
@@ -204,7 +203,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
   - `Field <String>`: field is what they wish to query on
-  - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  - `Service <String[]>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

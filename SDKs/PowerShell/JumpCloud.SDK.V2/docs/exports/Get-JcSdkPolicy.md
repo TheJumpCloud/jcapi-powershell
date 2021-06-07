@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicy
 
 ## SYNOPSIS
-This endpoint returns a specific policy.
+This endpoint returns a specific configuration (policy).
 
 ###### Sample Request
 
@@ -37,7 +37,7 @@ Get-JcSdkPolicy -InputObject <IJumpCloudApIsIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific policy.
+This endpoint returns a specific configuration (policy).
 
 ###### Sample Request
 
@@ -105,7 +105,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-ObjectID of the Policy object.
+ObjectID of the Configuration (Policy) object.
 
 ```yaml
 Type: System.String
@@ -176,18 +176,19 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

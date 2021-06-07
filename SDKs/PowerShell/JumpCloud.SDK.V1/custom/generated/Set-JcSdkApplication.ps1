@@ -24,9 +24,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IApplication>:
-  [Beta <Boolean?>]:
-  [Color <String>]:
-  [Config <IApplicationConfig>]:
+  Config <IApplicationConfig>:
     [AcUrlLabel <String>]:
     [AcUrlOptions <String>]:
     [AcUrlPosition <Int32?>]:
@@ -106,6 +104,10 @@ BODY <IApplication>:
     [SpEntityIdType <String>]:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
+  Name <String>:
+  SsoUrl <String>:
+  [Beta <Boolean?>]:
+  [Color <String>]:
   [Created <String>]:
   [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
   [Description <String>]:
@@ -115,12 +117,10 @@ BODY <IApplication>:
   [LearnMore <String>]:
   [LogoColor <String>]:
   [LogoUrl <String>]:
-  [Name <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
-  [SsoUrl <String>]:
 
 CONFIG <IApplicationConfig>:
   [AcUrlLabel <String>]:
@@ -214,7 +214,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Set-JcSdkApplication
 {
     [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
-    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Set', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
@@ -240,6 +240,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IApplicationConfig]
+    # .
+    # To construct, see NOTES section for CONFIG properties and create a hash table.
+    ${Config},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Name},
+
+    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoUrl},
+
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -253,14 +275,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Color},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationConfig]
-    # .
-    # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -329,13 +343,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Name},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
     ${Organization},
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -358,13 +365,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${SsoType},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${SsoUrl},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

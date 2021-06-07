@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns all policy results for an organization.
+This endpoint returns all configuration (policy) results for an organization.
 
 ##### Sample Request
 
@@ -11,7 +11,7 @@ This endpoint returns all policy results for an organization.
   -H 'x-api-key: {API_KEY}'
   ```
 .Description
-This endpoint returns all policy results for an organization.
+This endpoint returns all configuration (policy) results for an organization.
 
 ##### Sample Request
 

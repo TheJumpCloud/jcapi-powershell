@@ -8,9 +8,9 @@ schema: 2.0.0
 # Set-JcSdkPolicyAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a Policy.
+This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -29,7 +29,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicyAssociation -PolicyId <String> -Id <String> -Op <String> -Type <Type1>
+Set-JcSdkPolicyAssociation -PolicyId <String> -Id <String> -Op <String> -Type <GraphOperationPolicy1>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -47,14 +47,14 @@ Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOp
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String> -Type <Type1>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationPolicy1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a Policy.
+This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
 
 #### Sample Request
 ```
@@ -180,7 +180,7 @@ Accept wildcard characters: False
 ```
 
 ### -PolicyId
-ObjectID of the Policy.
+ObjectID of the Configuration (Policy).
 
 ```yaml
 Type: System.String
@@ -198,7 +198,7 @@ Accept wildcard characters: False
 Targets which a "policy" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.Type1
+Type: JumpCloud.SDK.V2.Support.GraphOperationPolicy1
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -265,25 +265,26 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationPolicy>: GraphOperation (Policy)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <Type1>`: Targets which a "policy" can be associated to.
+  - `Type <GraphOperationPolicy1>`: Targets which a "policy" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the System Group.
+  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

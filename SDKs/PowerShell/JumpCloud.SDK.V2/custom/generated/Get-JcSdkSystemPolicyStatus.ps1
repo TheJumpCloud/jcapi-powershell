@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns the policy results for a particular system.
+This endpoint returns the configuration (policy) results for a particular system.
 
 ##### Sample Request
 
@@ -12,7 +12,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatu
 
 ```
 .Description
-This endpoint returns the policy results for a particular system.
+This endpoint returns the configuration (policy) results for a particular system.
 
 ##### Sample Request
 

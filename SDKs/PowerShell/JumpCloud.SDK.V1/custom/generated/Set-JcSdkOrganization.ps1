@@ -79,6 +79,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [ContactName <String>]:
     [DeviceIdentificationEnabled <Boolean?>]:
     [DirectoryInsightEnabled <Boolean?>]:
+    [DirectoryInsightPremiumCreatedAt <String>]:
     [DirectoryInsightPremiumEnabled <Boolean?>]:
     [DisableGoogleLogin <Boolean?>]:
     [DisableLdap <Boolean?>]:
@@ -113,6 +114,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [PasswordPolicyNeedsUppercase <Boolean?>]:
     [PasswordPolicyPasswordExpirationInDays <Int32?>]:
     [ShowIntro <Boolean?>]:
+    [SystemInsightCreatedAt <String>]:
     [SystemInsightEnableNewDarwin <Boolean?>]:
     [SystemInsightEnableNewLinux <Boolean?>]:
     [SystemInsightEnableNewWindows <Boolean?>]:
@@ -132,6 +134,7 @@ SETTINGS <IOrganizationsettingsput>:
   [ContactName <String>]:
   [DeviceIdentificationEnabled <Boolean?>]:
   [DirectoryInsightEnabled <Boolean?>]:
+  [DirectoryInsightPremiumCreatedAt <String>]:
   [DirectoryInsightPremiumEnabled <Boolean?>]:
   [DisableGoogleLogin <Boolean?>]:
   [DisableLdap <Boolean?>]:
@@ -166,6 +169,7 @@ SETTINGS <IOrganizationsettingsput>:
   [PasswordPolicyNeedsUppercase <Boolean?>]:
   [PasswordPolicyPasswordExpirationInDays <Int32?>]:
   [ShowIntro <Boolean?>]:
+  [SystemInsightCreatedAt <String>]:
   [SystemInsightEnableNewDarwin <Boolean?>]:
   [SystemInsightEnableNewLinux <Boolean?>]:
   [SystemInsightEnableNewWindows <Boolean?>]:

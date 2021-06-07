@@ -180,7 +180,6 @@ Accept wildcard characters: False
 
 ### -Service
 service name to query.
-Known services: systems,radius,sso,directory,ldap,all
 
 ```yaml
 Type: System.String[]
@@ -276,7 +275,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
-  - `Service <String[]>`: service name to query. Known services: systems,radius,sso,directory,ldap,all
+  - `Service <String[]>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Fields <String[]>]`: optional list of fields to return from query
