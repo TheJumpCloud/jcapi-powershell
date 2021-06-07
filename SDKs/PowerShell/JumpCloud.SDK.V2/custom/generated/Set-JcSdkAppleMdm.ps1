@@ -68,6 +68,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IAppleMdmPatchInput>:
+  [AllowMobileUserEnrollment <Boolean?>]: A toggle to allow mobile device enrollment for an organization.
   [AppleSignedCert <String>]: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   [DefaultSystemGroupId <String>]: ObjectId uniquely identifying the MDM default System Group.
   [DepEnableZeroTouchEnrollment <Boolean?>]: A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
@@ -85,6 +86,7 @@ DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>:
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
@@ -133,6 +135,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Apple MDM Patch Input
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # A toggle to allow mobile device enrollment for an organization.
+    ${AllowMobileUserEnrollment},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

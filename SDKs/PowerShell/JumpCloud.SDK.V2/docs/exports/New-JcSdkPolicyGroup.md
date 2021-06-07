@@ -23,12 +23,12 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
 
 ## SYNTAX
 
-### NewExpanded (Default)
+### CreateExpanded (Default)
 ```
 New-JcSdkPolicyGroup -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### New
+### Create
 ```
 New-JcSdkPolicyGroup -Body <IPolicyGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -71,7 +71,7 @@ To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyGroupData
-Parameter Sets: New
+Parameter Sets: Create
 Aliases:
 
 Required: True
@@ -86,7 +86,7 @@ Display name of a Configuration (Policy) Group.
 
 ```yaml
 Type: System.String
-Parameter Sets: NewExpanded
+Parameter Sets: CreateExpanded
 Aliases:
 
 Required: True

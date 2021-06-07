@@ -71,12 +71,15 @@ BODY <IGraphOperationUser>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
   Type <GraphOperationUser4>: Targets which a "user" can be associated to.
-  [AttributeSudoEnabled <Boolean?>]: Enables sudo
-  [AttributeSudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
+  [Attributes <IGraphOperationUserAttributes>]:
+    [(Any) <Object>]: This indicates any property can be added to this object.
+    [SudoEnabled <Boolean?>]: Enables sudo
+    [SudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
@@ -151,16 +154,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enables sudo
-    ${AttributeSudoEnabled},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Enable sudo without password (requires 'enabled' to be true)
-    ${AttributeSudoWithoutPassword},
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphOperationUserAttributes]))]
+    [System.Collections.Hashtable]
+    # .
+    ${Attributes},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

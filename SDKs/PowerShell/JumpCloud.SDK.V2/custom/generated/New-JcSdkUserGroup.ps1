@@ -43,28 +43,19 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-ATTRIBUTELDAPGROUPS <IGraphAttributeLdapGroupsItem[]>:
-  Name <String>:
-
-ATTRIBUTEPOSIXGROUPS <IGraphAttributePosixGroupsItem[]>:
-  Id <Int32>:
-  Name <String>:
-
-ATTRIBUTERADIUSREPLY <IGraphAttributeRadiusReplyItem[]>:
-  Name <String>:
-  Value <String>:
-
 BODY <IUserGroupPost>:
   Name <String>: Display name of a User Group.
-  [AttributeLdapGroups <IGraphAttributeLdapGroupsItem[]>]:
-    Name <String>:
-  [AttributePosixGroups <IGraphAttributePosixGroupsItem[]>]:
-    Id <Int32>:
-    Name <String>:
-  [AttributeRadiusReply <IGraphAttributeRadiusReplyItem[]>]:
-    Name <String>:
-    Value <String>:
-  [AttributeSambaEnabled <Boolean?>]:
+  [Attributes <IGroupAttributesUserGroup>]: The graph attributes for a UserGroup.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+    [LdapGroups <IGraphAttributeLdapGroupsItem[]>]:
+      Name <String>:
+    [PosixGroups <IGraphAttributePosixGroupsItem[]>]:
+      Id <Int32>:
+      Name <String>:
+    [RadiusReply <IGraphAttributeRadiusReplyItem[]>]:
+      Name <String>:
+      Value <String>:
+    [SambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
   [MemberQueryFilters <IFilter[]>]:
@@ -99,30 +90,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphAttributeLdapGroupsItem[]]
-    # .
-    # To construct, see NOTES section for ATTRIBUTELDAPGROUPS properties and create a hash table.
-    ${AttributeLdapGroups},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphAttributePosixGroupsItem[]]
-    # .
-    # To construct, see NOTES section for ATTRIBUTEPOSIXGROUPS properties and create a hash table.
-    ${AttributePosixGroups},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGraphAttributeRadiusReplyItem[]]
-    # .
-    # To construct, see NOTES section for ATTRIBUTERADIUSREPLY properties and create a hash table.
-    ${AttributeRadiusReply},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${AttributeSambaEnabled},
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGroupAttributesUserGroup]))]
+    [System.Collections.Hashtable]
+    # The graph attributes for a UserGroup.
+    ${Attributes},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]

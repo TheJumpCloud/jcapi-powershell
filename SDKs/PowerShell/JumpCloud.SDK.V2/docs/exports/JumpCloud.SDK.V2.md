@@ -47,6 +47,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirect
   -H 'x-api-key: {API_KEY}'
   ```
 
+### [Get-JcSdkActiveDirectoryAgent](Get-JcSdkActiveDirectoryAgent.md)
+This endpoint returns an Active Directory agent.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
 ### [Get-JcSdkActiveDirectoryAssociation](Get-JcSdkActiveDirectoryAssociation.md)
 This endpoint returns the direct associations of this Active Directory instance.
 
@@ -56,6 +67,25 @@ A direct association can be a non-homogeneous relationship between 2 different o
 #### Sample Request
 ```
 curl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkActiveDirectoryTraverseUser](Get-JcSdkActiveDirectoryTraverseUser.md)
+This endpoint will return all Users bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this Active Directory instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Active Directory instance.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/users \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -1418,6 +1448,23 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/membership
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkUserGroupTraverseActiveDirectory](Get-JcSdkUserGroupTraverseActiveDirectory.md)
+This endpoint will return all Active Directory Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this User Group to the corresponding Active Directory; this array represents all grouping and/or associations that would have to be removed to deprovision the Active Directory from this User Group.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/activedirectories \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
 ### [Get-JcSdkUserGroupTraverseApplication](Get-JcSdkUserGroupTraverseApplication.md)
 This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
@@ -1579,6 +1626,25 @@ This endpoint returns all the User Groups a User is a member of.
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/memberof \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+
+### [Get-JcSdkUserTraverseActiveDirectory](Get-JcSdkUserTraverseActiveDirectory.md)
+This endpoint will return all Active Directory Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+
+Each element will contain the type, id, attributes and paths.
+
+The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
+
+The `paths` array enumerates each path from this User to the corresponding Active Directory instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Active Directory instance from this User.
+
+See `/members` and `/associations` endpoints to manage those collections.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/activedirectories \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -1862,6 +1928,19 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
   }'
 ```
 
+### [New-JcSdkActiveDirectoryAgent](New-JcSdkActiveDirectoryAgent.md)
+This endpoint allows you to create a new Active Directory Agent.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{}'
+```
+
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
 
@@ -2130,6 +2209,28 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
       }
     }
   }'
+```
+
+### [Remove-JcSdkActiveDirectory](Remove-JcSdkActiveDirectory.md)
+This endpoint allows you to delete an Active Directory Instance.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY'
+  ```
+
+### [Remove-JcSdkActiveDirectoryAgent](Remove-JcSdkActiveDirectoryAgent.md)
+This endpoint deletes an Active Directory agent.
+
+#### Sample Request
+```
+curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
 ```
 
 ### [Remove-JcSdkAppleMdm](Remove-JcSdkAppleMdm.md)

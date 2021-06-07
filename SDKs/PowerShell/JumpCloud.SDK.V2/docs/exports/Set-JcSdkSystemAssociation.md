@@ -37,8 +37,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
 ### SetExpanded (Default)
 ```
 Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <String> -Type <GraphOperationSystem3>
- [-Authorization <String>] [-Date <String>] [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -56,8 +56,8 @@ Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOp
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkSystemAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
- -Type <GraphOperationSystem3> [-Authorization <String>] [-Date <String>] [-AttributeSudoEnabled]
- [-AttributeSudoWithoutPassword] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+ -Type <GraphOperationSystem3> [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -103,26 +103,11 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
 
 ## PARAMETERS
 
-### -AttributeSudoEnabled
-Enables sudo
+### -Attributes
+.
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -AttributeSudoWithoutPassword
-Enable sudo without password (requires 'enabled' to be true)
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
+Type: System.Collections.Hashtable
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -327,12 +312,15 @@ BODY <IGraphOperationSystem>: GraphOperation (System)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `Type <GraphOperationSystem3>`: Targets which a "system" can be associated to.
-  - `[AttributeSudoEnabled <Boolean?>]`: Enables sudo
-  - `[AttributeSudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
+  - `[Attributes <IGraphOperationSystemAttributes>]`: 
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[SudoEnabled <Boolean?>]`: Enables sudo
+    - `[SudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.

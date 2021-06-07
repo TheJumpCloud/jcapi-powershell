@@ -86,6 +86,10 @@
         },
         "dep": {
           "$ref": "#/definitions/DEP"
+        },
+        "allowMobileUserEnrollment": {
+          "description": "A toggle to allow mobile device enrollment for an organization.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -336,6 +340,48 @@
       ],
       "title": "DuoApplicationUpdateReq",
       "type": "object"
+    },
+    "Error": {
+      "title": "Error",
+      "type": "object",
+      "x-examples": {},
+      "description": "",
+      "properties": {
+        "code": {
+          "format": "int32",
+          "type": "integer",
+          "description": "HTTP status code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "status": {
+          "type": "string",
+          "description": "HTTP status description"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Error"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "details": {
+              "description": "Describes a list of objects with more detailed information of the given error. Each detail schema is according to one of the messages defined in Google's API: https://github.com/googleapis/googleapis/blob/master/google/rpc/error_details.proto",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": true,
+                "description": "Object according to Google's API."
+              }
+            }
+          }
+        }
+      ]
     },
     "Filter": {
       "title": "Filter",
@@ -2037,6 +2083,78 @@
       "title": "UserGroupPut",
       "type": "object"
     },
+    "active-directory-agent-get-output": {
+      "properties": {
+        "connectKey": {
+          "description": "The connect key to use when installing the Agent on a Domain Controller.",
+          "type": "string"
+        },
+        "contactAt": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectID of this Active Directory Agent.",
+          "type": "string"
+        },
+        "source_ip": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "unsealed",
+            "active",
+            "inactive"
+          ],
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "Active Directory Agent Get Output",
+      "type": "object"
+    },
+    "active-directory-agent-input": {
+      "title": "Active Directory Agent Input",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "active-directory-agent-list-output": {
+      "properties": {
+        "contactAt": {
+          "type": "string"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectID of this Active Directory Agent.",
+          "type": "string"
+        },
+        "source_ip": {
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "unsealed",
+            "active",
+            "inactive"
+          ],
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "Active Directory Agent List Output",
+      "type": "object"
+    },
     "active-directory-input": {
       "properties": {
         "domain": {
@@ -2085,6 +2203,10 @@
         "defaultSystemGroupID": {
           "description": "ObjectId uniquely identifying the MDM default System Group.",
           "type": "string"
+        },
+        "allowMobileUserEnrollment": {
+          "description": "A toggle to allow mobile device enrollment for an organization.",
+          "type": "boolean"
         },
         "dep": {
           "$ref": "#/definitions/DEP"
@@ -2209,15 +2331,6 @@
         }
       },
       "title": "Bulk User Update",
-      "type": "object"
-    },
-    "errorresponse": {
-      "properties": {
-        "message": {
-          "type": "string"
-        }
-      },
-      "title": "ErrorResponse",
       "type": "object"
     },
     "feature": {
@@ -5118,6 +5231,27 @@
         },
         "activationLockAllowedWhileSupervised": {
           "type": "boolean"
+        },
+        "availableDeviceCapacity": {
+          "type": "number"
+        },
+        "deviceCapacity": {
+          "type": "number"
+        },
+        "deviceName": {
+          "type": "string"
+        },
+        "iccid": {
+          "type": "string"
+        },
+        "imei": {
+          "type": "string"
+        },
+        "subscriberCarrierNetwork": {
+          "type": "string"
+        },
+        "wifiMac": {
+          "type": "string"
         }
       }
     },
@@ -5136,6 +5270,9 @@
           "type": "boolean"
         },
         "userApprovedEnrollment": {
+          "type": "boolean"
+        },
+        "passcodePresent": {
           "type": "boolean"
         }
       }
@@ -5427,7 +5564,7 @@
     "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Configurations (Policies)\n* Configuration (Policy) Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud APIs.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
     "title": "JumpCloud APIs",
     "version": "2.0",
-    "x-releaseTag": "v16.22.0"
+    "x-releaseTag": "v16.49.0"
   },
   "parameters": {
     "trait:fields:fields": {
@@ -5935,6 +6072,126 @@
       },
       "parameters": []
     },
+    "/activedirectories/{activedirectory_id}/agents": {
+      "get": {
+        "description": "This endpoint allows you to list all your Active Directory Agents for a given Instance.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "operationId": "ActiveDirectoryAgent_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:sort:sort"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/active-directory-agent-list-output"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List Active Directory Agents"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "activedirectory_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to create a new Active Directory Agent.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "operationId": "ActiveDirectoryAgent_Create",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/active-directory-agent-input"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/active-directory-agent-get-output"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Create a new Active Directory Agent"
+      }
+    },
+    "/activedirectories/{activedirectory_id}/agents/{agent_id}": {
+      "delete": {
+        "operationId": "ActiveDirectoryAgent_Delete",
+        "parameters": [],
+        "responses": {
+          "204": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete Active Directory Agent",
+        "description": "This endpoint deletes an Active Directory agent.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```"
+      },
+      "get": {
+        "description": "This endpoint returns an Active Directory agent.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "ActiveDirectoryAgent_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/active-directory-agent-list-output"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get Active Directory Agent"
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "activedirectory_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "agent_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/activedirectories/{activedirectory_id}/associations": {
       "get": {
         "description": "This endpoint returns the direct associations of this Active Directory instance.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Active Directory and Users.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/associations?targets=user \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -6044,7 +6301,69 @@
         }
       ]
     },
+    "/activedirectories/{activedirectory_id}/users": {
+      "get": {
+        "description": "This endpoint will return all Users bound to an Active Directory instance, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this Active Directory instance to the corresponding User; this array represents all grouping and/or associations that would have to be removed to deprovision the User from this Active Directory instance.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID}/users \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "ActiveDirectoryTraverseUser_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Users bound to an Active Directory instance"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Active Directory instance.",
+          "in": "path",
+          "name": "activedirectory_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/activedirectories/{id}": {
+      "delete": {
+        "description": "This endpoint allows you to delete an Active Directory Instance.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY'\n  ```",
+        "operationId": "ActiveDirectory_Delete",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/active-directory-output"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Delete an Active Directory"
+      },
       "get": {
         "description": "This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "ActiveDirectory_Get",
@@ -8861,7 +9180,7 @@
       },
       "post": {
         "description": "This endpoint allows you to create a new Configuration (Policy) Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
-        "operationId": "PolicyGroup_New",
+        "operationId": "PolicyGroup_Create",
         "parameters": [
           {
             "in": "body",
@@ -13005,6 +13324,49 @@
         "summary": "Create a new User Group"
       }
     },
+    "/usergroups/{group_id}/activedirectories": {
+      "get": {
+        "description": "This endpoint will return all Active Directory Instances bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding Active Directory; this array represents all grouping and/or associations that would have to be removed to deprovision the Active Directory from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/activedirectories \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "UserGroupTraverseActiveDirectory_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Active Directories bound to a User Group"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the User Group.",
+          "in": "path",
+          "name": "group_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/usergroups/{group_id}/applications": {
       "get": {
         "description": "This endpoint will return all Applications bound to a User Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User Group to the corresponding Application; this array represents all grouping and/or associations that would have to be removed to deprovision the Application from this User Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/applications \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -13637,6 +13999,49 @@
         ],
         "summary": "Update a User Group"
       }
+    },
+    "/users/{user_id}/activedirectories": {
+      "get": {
+        "description": "This endpoint will return all Active Directory Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Active Directory instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Active Directory instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/activedirectories \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "operationId": "UserTraverseActiveDirectory_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/GraphObjectWithPaths"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List the Active Directory instances bound to a User"
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the User.",
+          "in": "path",
+          "name": "user_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
     },
     "/users/{user_id}/applications": {
       "get": {
@@ -15096,37 +15501,37 @@
     "trait:standardErrors:400": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/ErrorDetails"
       }
     },
     "trait:standardErrors:401": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/Error"
       }
     },
     "trait:standardErrors:403": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/Error"
       }
     },
     "trait:standardErrors:404": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/Error"
       }
     },
     "trait:standardErrors:409": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/Error"
       }
     },
     "trait:standardErrors:500": {
       "description": "",
       "schema": {
-        "$ref": "#/definitions/errorresponse"
+        "$ref": "#/definitions/Error"
       }
     }
   },
