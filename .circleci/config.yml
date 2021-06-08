@@ -45,7 +45,8 @@ workflows:
   ci-nightly:
     triggers:
       - schedule:
-          cron: '0 0 * * *' # Run at midnight
+          # cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
+          cron: '0 16 * * 1-5'
           filters:
             branches:
               only:
