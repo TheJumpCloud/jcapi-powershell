@@ -311,5 +311,15 @@ $SDKs | ForEach-Object {
             }
         }
     }
-    Invoke-ScriptAnalyzer -Path:($TestFolderPathAll) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+    #### PSScriptAnalyzer Setup ####
+    $FolderPath_Module = (Get-Item -Path("$PSScriptRoot/../")).FullName
+    $SettingsFile = "$PSScriptRoot/PSScriptAnalyzerSettings.psd1"
+    # Import Settings:
+    $SettingsFromFile = Import-PowerShellDataFile $SettingsFile
+    $settingsObject = @{
+        Severity     = $SettingsFromFile.Severity
+        ExcludeRules = $SettingsFromFile.ExcludeRules
+    }
+    Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings $settingsObject -reportSummary -Verbose
+    # Invoke-ScriptAnalyzer -Path:($TestFolderPathAll) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
 }
