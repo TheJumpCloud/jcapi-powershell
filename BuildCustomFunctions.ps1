@@ -413,7 +413,7 @@ $($IndentChar)$($IndentChar)Return `$Results"
                     Severity     = $SettingsFromFile.Severity
                     ExcludeRules = $SettingsFromFile.ExcludeRules
                 }
-                $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings $settingsObject -reportSummary
+                $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$OutputFilePath") -recurse -Settings $settingsObject -reportSummary
                 # $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
                 If ($ScriptAnalyzerResult)
                 {
