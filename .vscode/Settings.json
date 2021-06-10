@@ -1,0 +1,4 @@
+{
+    "powershell.scriptAnalysis.settingsPath": "jcapi-powershell/Tools/PSScriptAnalyzerSettings.psd1",
+    "powershell.scriptAnalysis.enable": true
+}
