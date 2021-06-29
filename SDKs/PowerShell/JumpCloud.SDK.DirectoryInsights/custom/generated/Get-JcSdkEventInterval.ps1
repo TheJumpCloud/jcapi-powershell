@@ -53,6 +53,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${IntervalUnit},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.

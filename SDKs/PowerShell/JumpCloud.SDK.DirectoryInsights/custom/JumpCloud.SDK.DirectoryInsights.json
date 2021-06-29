@@ -16,7 +16,7 @@
       "email": "support@jumpcloud.com"
     },
     "version": "1.0",
-    "x-releaseTag": "v0.85.0"
+    "x-releaseTag": "v0.86.0"
   },
   "host": "api.jumpcloud.com",
   "basePath": "/insights/directory/v1/",

@@ -88,6 +88,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.

@@ -83,6 +83,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${InputObject},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields included in the returned records.
@@ -90,6 +91,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Fields},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
@@ -103,6 +105,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Filter},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.

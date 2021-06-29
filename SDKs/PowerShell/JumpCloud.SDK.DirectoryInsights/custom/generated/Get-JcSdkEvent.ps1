@@ -72,6 +72,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Body},
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
@@ -90,12 +91,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${EndTime},
 
     [Parameter(ParameterSetName='GetExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # optional list of fields to return from query
     ${Fields},
 
     [Parameter(ParameterSetName='GetExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # Specific query to search after, see x-* response headers for next values
