@@ -10,6 +10,10 @@ parameters:
       - "trigger-ci-nightly"
       - "ci-nightly"
     default: "ci"
+  triggered_by_scheduled_job:
+    description: Whether or not this CI build was triggered by a scheduled job.
+    type: boolean
+    default: false
 # YAML Anchors
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
