@@ -61,7 +61,7 @@ workflows:
     triggers:
       - schedule:
           # cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
-          cron: '45 15 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
+          cron: '0 16 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
           filters:
             branches:
               only:
@@ -146,9 +146,7 @@ jobs:
       - run:
           name: Trigger Scheduled Run
           command: |
-            Invoke-RestMethod -Method "POST" -Uri "https://circleci.com/api/v2/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pipeline" `
-                -Headers @{"Circle-Token" = $CIRCLE_TOKEN; "content-type" = "application/json"; } `
-                -Body ('{"branch":"' + $CIRCLE_BRANCH + '","parameters":{"workflow": "ci-nightly", "triggered_by_scheduled_job": true}}')
+            Invoke-RestMethod -Method "POST" -Uri "https://circleci.com/api/v2/project/github/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME/pipeline" -Headers @{"Circle-Token" = $CIRCLE_TOKEN; "content-type" = "application/json"; } -Body ('{"branch":"' + $CIRCLE_BRANCH + '","parameters":{"workflow": "ci-nightly", "triggered_by_scheduled_job": true}}')
 commands:
   setup:
     steps:
