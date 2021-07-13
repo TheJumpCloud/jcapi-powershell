@@ -60,8 +60,7 @@ workflows:
   trigger-ci-nightly:
     triggers:
       - schedule:
-          # cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
-          cron: '35 16 * * 1-5'
+          cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
           filters:
             branches:
               only:
@@ -147,7 +146,6 @@ jobs:
           name: Trigger Scheduled Run
           shell: pwsh.exe
           command: |
-            write-host ("Invoke-RestMethod -Method:(POST) -Uri:(https://circleci.com/api/v2/project/github/$env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME/pipeline) -Headers:(@{Circle-Token = $env:CIRCLE_TOKEN; content-type = application/json;}) -Body:('{branch:' + $env:CIRCLE_BRANCH + ',parameters:{workflow: ci-nightly, triggered_by_scheduled_job: true}}'")
             Invoke-RestMethod -Method:("POST") -Uri:("https://circleci.com/api/v2/project/github/$env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME/pipeline") -Headers:(@{"Circle-Token" = "$env:CIRCLE_TOKEN"; "content-type" = "application/json";}) -Body:('{"branch":"' + $env:CIRCLE_BRANCH + '","parameters":{"workflow": "ci-nightly", "triggered_by_scheduled_job": true}}')
 commands:
   setup:
