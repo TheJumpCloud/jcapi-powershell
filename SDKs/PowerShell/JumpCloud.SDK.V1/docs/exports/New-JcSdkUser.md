@@ -615,6 +615,7 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
+To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]
@@ -832,6 +833,8 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[Sudo <Boolean?>]`: 
   - `[Suspended <Boolean?>]`: 
@@ -841,6 +844,10 @@ BODY <ISystemuserputpost>: SystemUserPost
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
+
+RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>: .
+  - `[Type <String>]`: 
+  - `[Value <String>]`: 
 
 ## RELATED LINKS
 

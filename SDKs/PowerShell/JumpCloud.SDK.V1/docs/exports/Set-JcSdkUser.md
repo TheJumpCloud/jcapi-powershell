@@ -636,6 +636,7 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
+To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
@@ -883,6 +884,8 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.
@@ -903,6 +906,10 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
+
+RELATIONSHIPS <ISystemuserputRelationshipsItem[]>: .
+  - `[Type <String>]`: 
+  - `[Value <String>]`: 
 
 SSHKEYS <ISshkeypost[]>: .
   - `Name <String>`: The name of the SSH key.
