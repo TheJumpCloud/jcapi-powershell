@@ -1,6 +1,19 @@
 version: 2.1
 orbs:
   win: circleci/windows@2.2.0
+parameters:
+  workflow:
+    description: The name of the workflow to run. Must match the workflow name exactly.
+    type: enum
+    enum:
+      - "ci"
+      - "trigger-ci-nightly"
+      - "ci-nightly"
+    default: "ci"
+  triggered_by_scheduled_job:
+    description: Whether or not this CI build was triggered by a scheduled job.
+    type: boolean
+    default: false
 # YAML Anchors
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
@@ -41,8 +54,10 @@ build-sdks: &build-sdks
 workflows:
   version: 2
   ci:
+    when:
+      equal: [<< pipeline.parameters.workflow >>, "ci"]
     jobs: *build-sdks
-  ci-nightly:
+  trigger-ci-nightly:
     triggers:
       - schedule:
           cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
@@ -50,6 +65,11 @@ workflows:
             branches:
               only:
                 - master
+    jobs:
+      - Trigger ci-nightly
+  ci-nightly:
+    when:
+      equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
     jobs: *build-sdks
 jobs:
   Build and Test JumpCloud SDK DirectoryInsights:
@@ -118,6 +138,14 @@ jobs:
       - deploy-nupkg:
           SDKName: JumpCloud.SDK.V2
           source: PSGallery
+  Trigger ci-nightly:
+    executor: win/default
+    steps:
+      - run:
+          name: Trigger Scheduled Run
+          shell: pwsh.exe
+          command: |
+            Invoke-RestMethod -Method:("POST") -Uri:("https://circleci.com/api/v2/project/github/$env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME/pipeline") -Headers:(@{"Circle-Token" = "$env:CIRCLE_TOKEN"; "content-type" = "application/json";}) -Body:('{"branch":"' + $env:CIRCLE_BRANCH + '","parameters":{"workflow": "ci-nightly", "triggered_by_scheduled_job": true}}')
 commands:
   setup:
     steps:

@@ -36,6 +36,8 @@ $TransformConfig = [Ordered]@{
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list
             # '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = '{"in":"body","name":"body","schema":{"description": "Key value pair of parameters to pass into command.","type":"object","additionalProperties":{"type": "string"},"required": false}'; # Remove bodys that dont have parameters
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
+            '\["object","null"]'                                                                 = '"object"';
+            '\["string","null"]'                                                                 = '"string"';
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We dont want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We dont want to support authentication through system context via the SDK
