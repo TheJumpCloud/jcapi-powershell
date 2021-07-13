@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -10,7 +10,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestion
 
 ```
 .Description
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -117,7 +117,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
+    ${ProxyUseDefaultCredentials},
+
+    [Parameter(DontShow)]
+    [System.Boolean]
+    # Set to $true to return all results. This will overwrite any skip and limit parameter.
+    $Paginate = $true
     )
     Begin
     {
@@ -136,22 +141,63 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
-            $Result.results
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+            {
+                $PSBoundParameters.Add('Limit', 100)
+            }
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+            {
+                $PSBoundParameters.Add('Skip', 0)
+            }
+            Do
+            {
+                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+                {
+                    $Result.results
+                }
+                Else
+                {
+                    $Result
+                }
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                    $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
-            $Result
-        }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
-            $Results += $Result;
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+            {
+                $Result.results
+            }
+            Else
+            {
+                $Result
+            }
+            If (-not [System.String]::IsNullOrEmpty($Result))
+            {
+                $Results += $Result;
+            }
         }
     }
     End

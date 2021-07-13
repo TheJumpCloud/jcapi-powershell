@@ -331,7 +331,7 @@ This endpoint returns all Groups that exist in your organization.
 ```
 
 ### [Get-JcSdkGroupSuggestion](Get-JcSdkGroupSuggestion.md)
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\

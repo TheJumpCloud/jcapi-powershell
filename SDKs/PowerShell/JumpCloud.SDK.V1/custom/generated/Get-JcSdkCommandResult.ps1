@@ -31,8 +31,6 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.IAny
-.Outputs
 JumpCloud.SDK.V1.Models.ICommandresult
 .Outputs
 JumpCloud.SDK.V1.Models.ICommandresultslist
@@ -51,7 +49,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkCommandResult
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.IAny], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

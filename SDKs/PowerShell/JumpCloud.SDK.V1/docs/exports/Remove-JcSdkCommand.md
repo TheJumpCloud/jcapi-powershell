@@ -23,13 +23,12 @@ curl -X DELETE https://console.jumpcloud.com/api/commands/{CommandID} \\
 
 ### Delete (Default)
 ```
-Remove-JcSdkCommand -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkCommand -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Remove-JcSdkCommand -InputObject <IJumpCloudApIsIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -93,21 +92,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -PassThru
-Returns true when the command succeeds
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -148,7 +132,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Boolean
+### JumpCloud.SDK.V1.Models.ICommand
 
 ## NOTES
 

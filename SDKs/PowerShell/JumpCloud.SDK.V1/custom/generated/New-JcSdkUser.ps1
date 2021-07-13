@@ -114,6 +114,8 @@ BODY <ISystemuserputpost>:
     [Type <String>]:
   [PublicKey <String>]:
   [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+    [Type <String>]:
+    [Value <String>]:
   [SambaServiceUser <Boolean?>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
@@ -123,6 +125,10 @@ BODY <ISystemuserputpost>:
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
+
+RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>:
+  [Type <String>]:
+  [Value <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
 #>
@@ -359,6 +365,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
     # .
+    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships},
 
     [Parameter(ParameterSetName='CreateExpanded')]

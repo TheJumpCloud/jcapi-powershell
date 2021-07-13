@@ -22,8 +22,8 @@ Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<Co
 Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta]
  [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
- [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoJit]
- [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
+ [-SsoCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
@@ -38,7 +38,8 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Config <IApplication
  -SsoUrl <String> [-Id <String>] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Organization <String>] [-SsoBeta] [-SsoCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -335,6 +336,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoCertExpirationAt
+.
+
+```yaml
+Type: System.DateTime
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoJit
 .
 
@@ -529,6 +545,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
+  - `[SsoCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
 
