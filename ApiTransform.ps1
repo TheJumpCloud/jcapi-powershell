@@ -38,6 +38,7 @@ $TransformConfig = [Ordered]@{
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
             '\["object","null"]'                                                                 = '"object"';
             '\["string","null"]'                                                                 = '"string"';
+            '"application\/json","text\/plain"'                                                  = '"text/plain"';
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We dont want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We dont want to support authentication through system context via the SDK
