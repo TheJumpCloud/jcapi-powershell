@@ -65,7 +65,6 @@ workflows:
             branches:
               only:
                 - master
-                - DEA-410-Fix-Unauthorized
     jobs:
       - Trigger ci-nightly
   ci-nightly:
