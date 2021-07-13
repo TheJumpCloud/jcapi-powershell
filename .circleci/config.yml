@@ -58,6 +58,8 @@ workflows:
       equal: [<< pipeline.parameters.workflow >>, "ci"]
     jobs: *build-sdks
   trigger-ci-nightly:
+    when:
+      equal: [<< pipeline.parameters.workflow >>, "trigger-ci-nightly"]
     triggers:
       - schedule:
           # cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
