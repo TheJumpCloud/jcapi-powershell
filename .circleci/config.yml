@@ -6,10 +6,10 @@ parameters:
     description: The name of the workflow to run. Must match the workflow name exactly.
     type: enum
     enum:
-      - "ci"
-      - "trigger-ci-nightly"
-      - "ci-nightly"
-    default: "ci"
+      - 'ci'
+      - 'trigger-ci-nightly'
+      - 'ci-nightly'
+    default: 'ci'
   triggered_by_scheduled_job:
     description: Whether or not this CI build was triggered by a scheduled job.
     type: boolean
@@ -58,7 +58,7 @@ workflows:
   version: 2
   ci:
     when:
-      equal: [<< pipeline.parameters.workflow >>, "ci"]
+      equal: [<< pipeline.parameters.workflow >>, 'ci']
     jobs: *build-sdks
   trigger-ci-nightly:
     triggers:
@@ -72,7 +72,7 @@ workflows:
       - Trigger ci-nightly
   ci-nightly:
     when:
-      equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
+      equal: [<< pipeline.parameters.workflow >>, 'ci-nightly']
     jobs: *build-sdks
 jobs:
   Build and Test JumpCloud SDK DirectoryInsights:
@@ -141,14 +141,10 @@ jobs:
           no_output_timeout: 30m
           command: |
             $ErrorActionPreference = 'Stop'
-            Import-Module -Force '.\SDKs\PowerShell\JumpCloud.SDK.V1\JumpCloud.SDK.V1.psd1'
-            Import-Module -Force '.\SDKs\PowerShell\JumpCloud.SDK.V2\JumpCloud.SDK.V2.psd1'
-            Import-Module -Force '.\SDKs\PowerShell\JumpCloud.SDK.DirectoryInsights\JumpCloud.SDK.DirectoryInsights.psd1'
-            Import-Module -Force '.\support\PowerShell\JumpCloud Module\JumpCloud.psd1'
-            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey:($env:JCApiKey) -JumpCloudApiKeyMsp:($env:JCApiKeyMTP) -ExcludeTagList:("ModuleValidation, JCUsersFromCSV, JCDeployment, JCModule") -IncludeTagList:("*") -RequiredModulesRepo:("PSGallery")
+            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey:($env:JCApiKey) -JumpCloudApiKeyMsp:($env:JCApiKeyMTP) -ExcludeTagList:("ModuleValidation, JCUsersFromCSV, JCDeployment, JCModule") -IncludeTagList:("*") -RequiredModulesRepo:("CodeArtifact")
       - store_test_results:
           name: Uploading test results'
-          path: "./PowerShell/JumpCloud Module/Tests/test_results/"
+          path: './PowerShell/JumpCloud Module/Tests/test_results/'
   Pack and Deploy To PSGallery:
     executor: win/default
     steps:
