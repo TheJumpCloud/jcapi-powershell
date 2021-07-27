@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicyGroupMember
 
 ## SYNOPSIS
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -39,7 +39,7 @@ Get-JcSdkPolicyGroupMember -GroupId <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -121,7 +121,7 @@ Accept wildcard characters: False
 ```
 
 ### -GroupId
-ObjectID of the Configuration (Policy) Group.
+ObjectID of the Policy Group.
 
 ```yaml
 Type: System.String
@@ -152,7 +152,7 @@ Accept wildcard characters: False
 ```
 
 ### -PolicyId
-ObjectID of the Configuration (Policy).
+ObjectID of the Policy.
 
 ```yaml
 Type: System.String
@@ -213,13 +213,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

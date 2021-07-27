@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -11,7 +11,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \
 
 ```
 .Description
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -50,13 +50,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -74,7 +74,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy).
+    # ObjectID of the Policy.
     ${PolicyId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -87,7 +87,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='List', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) Group.
+    # ObjectID of the Policy Group.
     ${GroupId},
 
     [Parameter(ParameterSetName='Get')]

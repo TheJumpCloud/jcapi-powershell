@@ -36,9 +36,9 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
- [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-LdapBindingUser] [-Location <String>] [-Manager <String>] [-MfaConfigured] [-MfaExclusion]
+ [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordlessSudo]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
  [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -477,6 +477,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Manager
+Relation with another systemuser to identify the last as a manager.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MfaConfigured
 .
 
@@ -821,6 +836,7 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
