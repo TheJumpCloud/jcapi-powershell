@@ -42,6 +42,7 @@ build-sdks: &build-sdks
   - Run JumpCloud Module Tests:
       requires:
         - Pack and Deploy To CodeArtifact
+      context: aws-credentials
   - Pack and Deploy To PSGallery:
       type: approval
       requires:
