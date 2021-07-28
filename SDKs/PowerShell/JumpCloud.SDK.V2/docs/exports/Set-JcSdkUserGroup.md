@@ -26,7 +26,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkUserGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
- [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -43,8 +44,8 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Attributes <Hashtable>]
- [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -187,6 +188,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MemberSuggestionsNotify
+True if notification emails are to be sent for membership suggestions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 Display name of a User Group.
 
@@ -274,6 +290,7 @@ BODY <IUserGroupPut>: UserGroupPut
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
+  - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -284,13 +301,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

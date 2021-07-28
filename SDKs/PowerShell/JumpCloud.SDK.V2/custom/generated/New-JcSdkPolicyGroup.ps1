@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to create a new Configuration (Policy) Group.
+This endpoint allows you to create a new Policy Group.
 
 #### Sample Request
 ```
@@ -13,7 +13,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
   }'
 ```
 .Description
-This endpoint allows you to create a new Configuration (Policy) Group.
+This endpoint allows you to create a new Policy Group.
 
 #### Sample Request
 ```
@@ -44,7 +44,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPolicyGroupData>:
-  Name <String>: Display name of a Configuration (Policy) Group.
+  Name <String>: Display name of a Policy Group.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicyGroup.md
 #>
@@ -63,7 +63,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # Display name of a Configuration (Policy) Group.
+    # Display name of a Policy Group.
     ${Name},
 
     [Parameter(DontShow)]

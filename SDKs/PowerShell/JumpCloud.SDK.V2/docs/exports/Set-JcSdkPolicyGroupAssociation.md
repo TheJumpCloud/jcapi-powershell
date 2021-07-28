@@ -8,9 +8,9 @@ schema: 2.0.0
 # Set-JcSdkPolicyGroupAssociation
 
 ## SYNOPSIS
-This endpoint manages the _direct_ associations of this Configuration (Policy) Group.
+This endpoint manages the _direct_ associations of this Policy Group.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policy Groups and Policies.
 
 
 #### Sample Request
@@ -54,9 +54,9 @@ Set-JcSdkPolicyGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <Strin
 ```
 
 ## DESCRIPTION
-This endpoint manages the _direct_ associations of this Configuration (Policy) Group.
+This endpoint manages the _direct_ associations of this Policy Group.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policy Groups and Policies.
 
 
 #### Sample Request
@@ -122,7 +122,7 @@ Accept wildcard characters: False
 ```
 
 ### -GroupId
-ObjectID of the Configuration (Policy) Group.
+ObjectID of the Policy Group.
 
 ```yaml
 Type: System.String
@@ -281,13 +281,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

@@ -100,6 +100,7 @@ BODY <ISystemuserput>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
+  [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
   [MfaExclusionUntil <DateTime?>]:
@@ -343,6 +344,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Location},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Relation with another systemuser to identify the last as a manager.
+    ${Manager},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
