@@ -179,6 +179,7 @@ commands:
       - run:
           name: Setup Dependencies
           shell: pwsh.exe
+          no_output_timeout: 30m
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
