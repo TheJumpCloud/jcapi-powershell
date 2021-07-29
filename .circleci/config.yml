@@ -130,9 +130,6 @@ jobs:
   Run JumpCloud Module Tests:
     executor: win/default
     steps:
-      - setup
-      - attach_workspace:
-          at: .
       - run:
           name: Clone support repo
           command: git clone https://github.com/TheJumpCloud/support.git
