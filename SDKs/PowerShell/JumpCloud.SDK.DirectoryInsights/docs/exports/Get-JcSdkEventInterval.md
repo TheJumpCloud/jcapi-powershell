@@ -9,6 +9,10 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Query the API for a list of counts by time interval
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+```
 
 ## SYNTAX
 
@@ -26,6 +30,10 @@ Get-JcSdkEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<Common
 
 ## DESCRIPTION
 Query the API for a list of counts by time interval
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+```
 
 ## EXAMPLES
 
