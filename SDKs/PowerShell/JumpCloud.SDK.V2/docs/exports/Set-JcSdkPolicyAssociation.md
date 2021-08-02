@@ -8,9 +8,9 @@ schema: 2.0.0
 # Set-JcSdkPolicyAssociation
 
 ## SYNOPSIS
-This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
+This endpoint allows you to manage the _direct_ associations of a Policy.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
 
 #### Sample Request
 ```
@@ -52,9 +52,9 @@ Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -O
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the _direct_ associations of a Configuration (Policy).
+This endpoint allows you to manage the _direct_ associations of a Policy.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
 
 #### Sample Request
 ```
@@ -180,7 +180,7 @@ Accept wildcard characters: False
 ```
 
 ### -PolicyId
-ObjectID of the Configuration (Policy).
+ObjectID of the Policy.
 
 ```yaml
 Type: System.String
@@ -278,13 +278,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

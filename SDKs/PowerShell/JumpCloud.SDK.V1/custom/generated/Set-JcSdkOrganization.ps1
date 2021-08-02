@@ -81,6 +81,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [DirectoryInsightEnabled <Boolean?>]:
     [DirectoryInsightPremiumCreatedAt <String>]:
     [DirectoryInsightPremiumEnabled <Boolean?>]:
+    [DirectoryInsightPremiumUpdatedAt <String>]:
     [DisableGoogleLogin <Boolean?>]:
     [DisableLdap <Boolean?>]:
     [DisableUm <Boolean?>]:
@@ -119,6 +120,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightEnableNewLinux <Boolean?>]:
     [SystemInsightEnableNewWindows <Boolean?>]:
     [SystemInsightEnabled <Boolean?>]:
+    [SystemInsightUpdatedAt <String>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
     [UserPortalIdleSessionDurationMinutes <Int32?>]:
@@ -136,6 +138,7 @@ SETTINGS <IOrganizationsettingsput>:
   [DirectoryInsightEnabled <Boolean?>]:
   [DirectoryInsightPremiumCreatedAt <String>]:
   [DirectoryInsightPremiumEnabled <Boolean?>]:
+  [DirectoryInsightPremiumUpdatedAt <String>]:
   [DisableGoogleLogin <Boolean?>]:
   [DisableLdap <Boolean?>]:
   [DisableUm <Boolean?>]:
@@ -174,6 +177,7 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightEnableNewLinux <Boolean?>]:
   [SystemInsightEnableNewWindows <Boolean?>]:
   [SystemInsightEnabled <Boolean?>]:
+  [SystemInsightUpdatedAt <String>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
   [UserPortalIdleSessionDurationMinutes <Int32?>]:

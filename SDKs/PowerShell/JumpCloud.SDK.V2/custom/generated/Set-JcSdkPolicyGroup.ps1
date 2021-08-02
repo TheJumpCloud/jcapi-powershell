@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to do a full update of the Configuration (Policy) Group.
+This endpoint allows you to do a full update of the Policy Group.
 
 #### Sample Request
 ```
@@ -13,7 +13,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   }'
 ```
 .Description
-This endpoint allows you to do a full update of the Configuration (Policy) Group.
+This endpoint allows you to do a full update of the Policy Group.
 
 #### Sample Request
 ```
@@ -46,7 +46,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPolicyGroupData>:
-  Name <String>: Display name of a Configuration (Policy) Group.
+  Name <String>: Display name of a Policy Group.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>:
   [AccountId <String>]:
@@ -57,13 +57,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -82,7 +82,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) Group.
+    # ObjectID of the Policy Group.
     ${Id},
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -105,7 +105,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # Display name of a Configuration (Policy) Group.
+    # Display name of a Policy Group.
     ${Name},
 
     [Parameter(DontShow)]

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicyTemplate
 
 ## SYNOPSIS
-This endpoint returns a specific configuration (policy) template.
+This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
@@ -36,7 +36,7 @@ Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApIsIdentity> [<CommonParameters
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific configuration (policy) template.
+This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
@@ -103,7 +103,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-ObjectID of the Configuration (Policy) Template.
+ObjectID of the Policy Template.
 
 ```yaml
 Type: System.String
@@ -180,13 +180,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

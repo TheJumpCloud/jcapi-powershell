@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkPolicyGroupMember
 
 ## SYNOPSIS
-This endpoint allows you to manage the Configuration (Policy) members of a Configuration (Policy) Group.
+This endpoint allows you to manage the Policy members of a Policy Group.
 
 #### Sample Request
 ```
@@ -50,7 +50,7 @@ Set-JcSdkPolicyGroupMember -InputObject <IJumpCloudApIsIdentity> -Id <String> -O
 ```
 
 ## DESCRIPTION
-This endpoint allows you to manage the Configuration (Policy) members of a Configuration (Policy) Group.
+This endpoint allows you to manage the Policy members of a Policy Group.
 
 #### Sample Request
 ```
@@ -115,7 +115,7 @@ Accept wildcard characters: False
 ```
 
 ### -GroupId
-ObjectID of the Configuration (Policy) Group.
+ObjectID of the Policy Group.
 
 ```yaml
 Type: System.String
@@ -258,13 +258,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

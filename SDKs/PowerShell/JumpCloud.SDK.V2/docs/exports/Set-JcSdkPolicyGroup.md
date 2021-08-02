@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkPolicyGroup
 
 ## SYNOPSIS
-This endpoint allows you to do a full update of the Configuration (Policy) Group.
+This endpoint allows you to do a full update of the Policy Group.
 
 #### Sample Request
 ```
@@ -46,7 +46,7 @@ Set-JcSdkPolicyGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Conf
 ```
 
 ## DESCRIPTION
-This endpoint allows you to do a full update of the Configuration (Policy) Group.
+This endpoint allows you to do a full update of the Policy Group.
 
 #### Sample Request
 ```
@@ -94,7 +94,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-ObjectID of the Configuration (Policy) Group.
+ObjectID of the Policy Group.
 
 ```yaml
 Type: System.String
@@ -125,7 +125,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Display name of a Configuration (Policy) Group.
+Display name of a Policy Group.
 
 ```yaml
 Type: System.String
@@ -193,7 +193,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPolicyGroupData>: PolicyGroupData
-  - `Name <String>`: Display name of a Configuration (Policy) Group.
+  - `Name <String>`: Display name of a Policy Group.
 
 INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -204,13 +204,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

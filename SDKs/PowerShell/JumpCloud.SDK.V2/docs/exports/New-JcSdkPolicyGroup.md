@@ -8,7 +8,7 @@ schema: 2.0.0
 # New-JcSdkPolicyGroup
 
 ## SYNOPSIS
-This endpoint allows you to create a new Configuration (Policy) Group.
+This endpoint allows you to create a new Policy Group.
 
 #### Sample Request
 ```
@@ -34,7 +34,7 @@ New-JcSdkPolicyGroup -Body <IPolicyGroupData> [-Confirm] [-WhatIf] [<CommonParam
 ```
 
 ## DESCRIPTION
-This endpoint allows you to create a new Configuration (Policy) Group.
+This endpoint allows you to create a new Policy Group.
 
 #### Sample Request
 ```
@@ -82,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -Name
-Display name of a Configuration (Policy) Group.
+Display name of a Policy Group.
 
 ```yaml
 Type: System.String
@@ -148,7 +148,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPolicyGroupData>: PolicyGroupData
-  - `Name <String>`: Display name of a Configuration (Policy) Group.
+  - `Name <String>`: Display name of a Policy Group.
 
 ## RELATED LINKS
 

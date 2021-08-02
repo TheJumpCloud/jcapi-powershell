@@ -102,6 +102,7 @@ BODY <ISystemuserputpost>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
+  [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
   [MfaExclusionUntil <DateTime?>]:
@@ -114,6 +115,8 @@ BODY <ISystemuserputpost>:
     [Type <String>]:
   [PublicKey <String>]:
   [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+    [Type <String>]:
+    [Value <String>]:
   [SambaServiceUser <Boolean?>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
@@ -123,6 +126,10 @@ BODY <ISystemuserputpost>:
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
+
+RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>:
+  [Type <String>]:
+  [Value <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
 #>
@@ -300,6 +307,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Relation with another systemuser to identify the last as a manager.
+    ${Manager},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${MfaConfigured},
@@ -359,6 +372,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
     # .
+    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships},
 
     [Parameter(ParameterSetName='CreateExpanded')]

@@ -26,7 +26,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkUserGroup -Name <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
- [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -143,6 +143,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MemberSuggestionsNotify
+True if notification emails are to be sent for membership suggestions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 Display name of a User Group.
 
@@ -228,6 +243,7 @@ BODY <IUserGroupPost>: UserGroupPost
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
+  - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
 
 MEMBERQUERYFILTERS <IFilter[]>: .
   - `Field <String>`: Name of field in filter target object.

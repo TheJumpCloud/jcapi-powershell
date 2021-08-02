@@ -1,12 +1,12 @@
 <#
 .Synopsis
-This endpoint will return all System Groups bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all System Groups bound to a Policy Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.
+The `paths` array enumerates each path from this Policy Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -18,13 +18,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/systemgr
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint will return all System Groups bound to a Configuration (Policy) Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all System Groups bound to a Policy Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this Configuration (Policy) Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.
+The `paths` array enumerates each path from this Policy Group to the corresponding System Group; this array represents all grouping and/or associations that would have to be removed to deprovision the System Group from this Policy Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -62,13 +62,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -86,7 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) Group.
+    # ObjectID of the Policy Group.
     ${GroupId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]

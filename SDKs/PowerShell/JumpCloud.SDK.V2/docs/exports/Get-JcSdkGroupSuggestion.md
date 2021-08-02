@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkGroupSuggestion
 
 ## SYNOPSIS
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -31,7 +31,7 @@ Get-JcSdkGroupSuggestion -InputObject <IJumpCloudApIsIdentity> [<CommonParameter
 ```
 
 ## DESCRIPTION
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -119,13 +119,13 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

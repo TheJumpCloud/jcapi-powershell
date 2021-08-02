@@ -34,8 +34,8 @@ Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddresses
  [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
  [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-Manager <String>]
+ [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
  [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
  [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
  [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
@@ -62,11 +62,11 @@ Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
  [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
  [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>]
  [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
- [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
- [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser]
+ [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -513,6 +513,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Manager
+Relation with another systemuser to identify the last as a manager.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MfaConfigured
 .
 
@@ -636,6 +651,7 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
+To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
@@ -872,6 +888,7 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
@@ -883,6 +900,8 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.
@@ -903,6 +922,10 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
+
+RELATIONSHIPS <ISystemuserputRelationshipsItem[]>: .
+  - `[Type <String>]`: 
+  - `[Value <String>]`: 
 
 SSHKEYS <ISshkeypost[]>: .
   - `Name <String>`: The name of the SSH key.
