@@ -119,7 +119,7 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
-  [SsoCertExpirationAt <DateTime?>]:
+  [SsoIdpCertExpirationAt <DateTime?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
 
@@ -359,7 +359,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.DateTime]
     # .
-    ${SsoCertExpirationAt},
+    ${SsoIdpCertExpirationAt},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

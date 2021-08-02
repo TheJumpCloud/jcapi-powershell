@@ -23,7 +23,7 @@ Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -S
  [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
  [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
- [-SsoCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
@@ -38,7 +38,7 @@ Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Config <IApplication
  -SsoUrl <String> [-Id <String>] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Organization <String>] [-SsoBeta] [-SsoCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
+ [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -336,7 +336,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SsoCertExpirationAt
+### -SsoIdpCertExpirationAt
 .
 
 ```yaml
@@ -545,7 +545,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
-  - `[SsoCertExpirationAt <DateTime?>]`: 
+  - `[SsoIdpCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
 

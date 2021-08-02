@@ -22,7 +22,7 @@ New-JcSdkApplication -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameter
 New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta] [-Color <String>]
  [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>]
  [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <String>]
- [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoCertExpirationAt <DateTime>] [-SsoJit]
+ [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit]
  [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -289,7 +289,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SsoCertExpirationAt
+### -SsoIdpCertExpirationAt
 .
 
 ```yaml
@@ -496,7 +496,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
-  - `[SsoCertExpirationAt <DateTime?>]`: 
+  - `[SsoIdpCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
 
