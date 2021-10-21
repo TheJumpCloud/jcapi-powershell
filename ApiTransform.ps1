@@ -20,6 +20,9 @@ $TransformConfig = [Ordered]@{
             'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
             'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
             'directoryInsights_eventsPost'         = 'Event_Get';
+            'directoryInsights_commandResultsReportsGet'         = 'EventCommandResultReport_Get';
+            'directoryInsights_policyResultsReportsGet'         = 'EventPolicyResultReport_Get';
+            'directoryInsights_deviceHealthReportGet'         = 'EventDeviceHealthReport_Get';
         };
         ExcludedList       = @();
     }
