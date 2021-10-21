@@ -16,15 +16,15 @@ $TransformConfig = [Ordered]@{
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
-            'directoryInsights_eventsCountPost'    = 'EventCount_Get';
-            'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
-            'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
-            'directoryInsights_eventsPost'         = 'Event_Get';
-            'directoryInsights_commandResultsReportsGet'         = 'EventCommandResultReport_Get';
-            'directoryInsights_policyResultsReportsGet'         = 'EventPolicyResultReport_Get';
-            'directoryInsights_deviceHealthReportGet'         = 'EventDeviceHealthReport_Get';
+            'directoryInsights_eventsCountPost'          = 'EventCount_Get';
+            'directoryInsights_eventsDistinctPost'       = 'EventDistinct_Get';
+            'directoryInsights_eventsIntervalPost'       = 'EventInterval_Get';
+            'directoryInsights_eventsPost'               = 'Event_Get';
+            # 'directoryInsights_commandResultsReportsGet' = 'EventCommandResultReport_Get';
+            # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
+            # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
-        ExcludedList       = @();
+        ExcludedList       = @('/reports/command_results', '/reports/policy_results', '/reports/device_health');
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
         Repo               = "SI"
