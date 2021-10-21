@@ -10,7 +10,15 @@ ForEach ($RequiredModule In $RequiredModules)
     # Check to see if the module exists on the PSGallery
     ElseIf (Find-Module -Name:($RequiredModule))
     {
-        Install-Module -Name:($RequiredModule) -Force
+        Write-Host("[status]Installing module: '$RequiredModule' from 'PSGallery'")
+        if ($RequiredModule -eq 'PSScriptAnalyzer')
+        {
+            Install-Module -Name $RequiredModule -Repository:('PSGallery') -RequiredVersion '1.19.1' -Force
+        }
+        else
+        {
+            Install-Module -Name:($RequiredModule) -Force
+        }
     }
     Import-Module -Name:($RequiredModule) -Force
 }
