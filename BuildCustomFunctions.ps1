@@ -46,7 +46,9 @@ Try
             $CommandName = $Command.Name
             $NewCommandName = $CommandName.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
             # Get content from sdk function
-            $CommandFilePath = $Command.ScriptBlock.File
+            # $CommandFilePath = $Command.ScriptBlock.File
+            # TODO: is this the fix
+            $CommandFilePath = ($Command.ScriptBlock.File -replace "ProxyCmdletDefinitions", $CommandName)
             $CommandFilePathContent = Get-Content -Path:($CommandFilePath) -Raw
             $FunctionContent = If ($CommandFilePath -like '*ProxyCmdletDefinitions.ps1')
             {
