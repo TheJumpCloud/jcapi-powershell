@@ -238,6 +238,8 @@ ForEach ($SDK In $SDKName)
                     If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                     # Rebuild to distribute the update PSScriptInfo to other locations
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                    Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    bash $CleanScript $PSScriptRoot $OutputFullPath
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
