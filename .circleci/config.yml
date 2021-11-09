@@ -124,7 +124,7 @@ commands:
       - checkout
       - run:
           name: Install PowerShell Core
-          command: dotnet tool install --global PowerShell
+          command: dotnet tool install --global PowerShell --version 7.1.5
       - run:
           name: Setup Dependencies
           shell: pwsh.exe
