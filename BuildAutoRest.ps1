@@ -61,6 +61,7 @@ ForEach ($SDK In $SDKName)
         $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
         $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
         $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
+        $CleanScript = '{0}/clean.sh' -f $ToolsFolderPath
         $ModuleName = [System.String]$Config.'module-name'
         $Namespace = [System.String]$Config.'namespace'
         $ConfigPrefix = $Config.prefix | Select-Object -First 1
@@ -125,6 +126,8 @@ ForEach ($SDK In $SDKName)
         {
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
+            Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            bash $CleanScript $PSScriptRoot $OutputFullPath
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
         }
@@ -145,6 +148,8 @@ ForEach ($SDK In $SDKName)
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"
+            Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            bash $CleanScript $PSScriptRoot $OutputFullPath
             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
             # fix docs help link
             $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
@@ -173,6 +178,8 @@ ForEach ($SDK In $SDKName)
             }
             Else
             {
+                #TODO: is this necessary?
+                $BuildCustomFunctionsJobStatus | Remove-Job
                 # Rebuild the module with the new custom functions
                 If ($BuildModule)
                 {
@@ -181,6 +188,8 @@ ForEach ($SDK In $SDKName)
                     $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
                     # Build-module
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                    Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                    bash $CleanScript $PSScriptRoot $OutputFullPath
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                     # Build PSScriptInfo - Theres gotta be a better way to do this
