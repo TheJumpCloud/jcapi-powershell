@@ -398,8 +398,26 @@ $TransformConfig = [Ordered]@{
             'workdays_post'                                     = 'Workday_Create';
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
+            # Start new manual function declarations - 11/11/2021
+            'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
+            'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
+            'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
+            'bulk_userStatesList'                               = 'BulkUserStates_List';
+            'bulk_userStatesCreate'                             = 'BulkUserState_Create';
+            'bulk_userStatesDelete'                             = 'BulkUserState_Delete';
+            'bulk_userStatesGetNextScheduled'                   = 'NextScheduledBulkUserState_Get';
+            'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
+            'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
+            'providers_listOrganizations'                       = 'ProviderOrganizations_List';
+            'pushEndpoints_list'                                = 'UserPushEndpoints_List';
+            'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
+            'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
+            'pushEndpoints_patch'                               = 'UserPushEndpoint_Update';
+            'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
+
+
         };
-        ExcludedList       = @('/applications/{application_id}') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
