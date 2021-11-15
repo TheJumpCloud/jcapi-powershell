@@ -66,7 +66,7 @@ Try
                 $ProxyContentSplit = $ProxyContent.Split("[SPLIT]")
                 foreach ($functionSplit in $ProxyContentSplit)
                 {
-                    if ($functionSplit -match "function $CommandName")
+                    if ($functionSplit -match "function $CommandName {")
                     {
                         # return the matched content
                         $functionSplit
