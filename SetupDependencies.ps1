@@ -33,6 +33,6 @@ If ($env:CI -eq $false)
     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
     Else { Write-Error ('Unknown Operation System') }
 }
-npm install -g autorest@latest
+npm install -g autorest@3.4.2
 autorest --reset
 # autorest --help
