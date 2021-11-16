@@ -32,9 +32,19 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     # ./test-module.ps1 -Record # Run to create playback files
     # ./test-module.ps1 -Playback # Run once playback files have been created
     # ./test-module.ps1 -Live # Run to query against real API
+
+    # set autorest --version="3.6.6" in check-dependencies for consistancy
+    $sdkRoot = [System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)))
+    $checkDependenciesFile = "$sdkRoot/check-dependencies.ps1"
+    $checkDependenciesFileContent = Get-Content -path $checkDependenciesFile -raw
+    $regexPattern = [regex]"autorest .\\README.md --use:"
+    $checkDependenciesFileContent = $checkDependenciesFileContent -replace $regexPattern, 'autorest .\README.md --version="3.6.6" --use:'
+    $checkDependenciesFileContent | Out-File $checkDependenciesFile
+
+    # Now test Module
     Invoke-Expression -Command:("$testModulePath -Live")
     # Throw error if there were any failed tests
-    $PesterTestResultPath = (Get-ChildItem -Path:([System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)) )+ "/test/results"))
+    $PesterTestResultPath = (Get-ChildItem -Path:([System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)) ) + "/test/results"))
     If (Test-Path -Path:($PesterTestResultPath))
     {
         [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
