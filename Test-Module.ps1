@@ -34,7 +34,7 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     # ./test-module.ps1 -Live # Run to query against real API
     Invoke-Expression -Command:("$testModulePath -Live")
     # Throw error if there were any failed tests
-    $PesterTestResultPath = (Get-ChildItem -Path:("$($testModulePath.Directory.FullName)/test/results")).FullName
+    $PesterTestResultPath = (Get-ChildItem -Path:([System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)) )+ "/test/results"))
     If (Test-Path -Path:($PesterTestResultPath))
     {
         [xml]$PesterResults = Get-Content -Path:($PesterTestResultPath)
