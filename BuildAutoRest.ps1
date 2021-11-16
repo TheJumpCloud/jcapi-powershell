@@ -276,16 +276,14 @@ ForEach ($SDK In $SDKName)
             # Temp workaround untill autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-            $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)' -AllMatches
+            $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
             If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
             {
                 Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
             }
-            $InvokePesterLine.Matches.Value | ForEach-Object {
-                $testModuleContent = $testModuleContent.Replace($_, $PesterTestsContent)
-                $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
-                $testModuleContent | Set-Content -Path:($testModulePath)
-            }
+            $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
+            $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
+            $testModuleContent | Set-Content -Path:($testModulePath)
         }
         ###########################################################################
         # Remove auto generated .gitignore files
