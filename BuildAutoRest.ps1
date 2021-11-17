@@ -269,19 +269,8 @@ ForEach ($SDK In $SDKName)
             # Temp workaround untill autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-            # TODO: Replace this block with contents from runpestertests file. 
-
-            ###
-            # if ($null -ne $TestName)
-            # {
-            #     Invoke-Pester -Script @{ Path = $testFolder } -TestName $TestName -ExcludeTag $ExcludeTag -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")
-            # } else
-            # {
-            #     Invoke-Pester -Script @{ Path = $testFolder } -ExcludeTag $ExcludeTag -EnableExit -OutputFile (Join-Path $testFolder "$moduleName-TestResults.xml")
-            # }
-            ###
-
-            $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
+            # Replace if else Invoke-Pester block with contents from runpestertests file. 
+            $InvokePesterLine = $testModuleContent | Select-String -Pattern '(.*?if)(.*?\(\$null -ne \$TestName\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(\})'
             If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
             {
                 Write-Error ("Unable to find Invoke-Pester line in $testModulePath")
