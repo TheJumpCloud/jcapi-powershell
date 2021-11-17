@@ -23,8 +23,6 @@ Param(
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # CI Variables
-$ErrorActionPreference = 'Stop'
-
 $CI_USERNAME = 'TheJumpCloud'
 $CurrentBranch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
 $BuildNumber = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM)) { '0000' } Else { $env:CIRCLE_BUILD_NUM }
