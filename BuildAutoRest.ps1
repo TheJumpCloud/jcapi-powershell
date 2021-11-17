@@ -23,6 +23,8 @@ Param(
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # CI Variables
+$ErrorActionPreference = 'Stop'
+
 $CI_USERNAME = 'TheJumpCloud'
 $CurrentBranch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
 $BuildNumber = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM)) { '0000' } Else { $env:CIRCLE_BUILD_NUM }
@@ -124,21 +126,12 @@ ForEach ($SDK In $SDKName)
         ###########################################################################
         If ($GenerateModule)
         {
-            ## Ensure core & powershell packages are installed
-            $autorestCore = npm ls @autorest/core
-            if ($autorestCore -match "empty"){
-                npm install @autorest/core -g
-            }
-            $autorestPowerShell = npm ls @autorest/powershell
-            if ($autorestPowerShell -match "empty"){
-                npm install @autorest/powershell -g
-            }
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
             Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             bash $CleanScript $PSScriptRoot $OutputFullPath
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            autorest $ConfigFileFullName --force --version="3.6.6" --use:@autorest/powershell@3.0.461 | Tee-Object -FilePath:($LogFilePath) -Append
+            autorest $ConfigFileFullName --force --version="3.6.6" --use:@autorest/powershell@3.0.463 | Tee-Object -FilePath:($LogFilePath) -Append
             # autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
         }
         ###########################################################################
