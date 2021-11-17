@@ -38,6 +38,7 @@ $TransformConfig = [Ordered]@{
             '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
             '\["object","null"]'                                                                 = '"object"';
             '\["string","null"]'                                                                 = '"string"';
+            '{"in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the casecasde manager param from delete user
             '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list
             # '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = '{"in":"body","name":"body","schema":{"description": "Key value pair of parameters to pass into command.","type":"object","additionalProperties":{"type": "string"},"required": false}'; # Remove bodys that dont have parameters
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
