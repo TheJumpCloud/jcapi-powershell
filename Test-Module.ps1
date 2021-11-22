@@ -46,11 +46,11 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         Write-Host "Matched"
         Write-Host $sdkRoot
         $NewPath = $sdkRoot.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
-        $psd1Path = $NewPath.Replace('test-module.ps1', 'JumpCloud.SDK.V1.psd1')
-        Write-Host $psd1Path
+        $psd1Path = $NewPath + '/JumpCloud.SDK.V1.psd1'
+        Write-Host "new path: $NewPath"
+        Write-Host "pds1 path: $psd1Path"
         Test-Path $psd1Path
         Import-Module $psd1Path -Force
-        # break
     }
     Invoke-Expression -Command:("$testModulePath -Live")
     # Throw error if there were any failed tests
