@@ -42,6 +42,16 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     $checkDependenciesFileContent | Out-File $checkDependenciesFile
 
     # Now test Module
+    if ($testModulePath -Match "JumpCloud.SDK.V2") {
+        Write-Host "Matched"
+        Write-Host $sdkRoot
+        $NewPath = $sdkRoot.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
+        $psd1Path = $NewPath.Replace('test-module.ps1', 'JumpCloud.SDK.V1.psd1')
+        Write-Host $psd1Path
+        Test-Path $psd1Path
+        Import-Module $psd1Path -Force
+        # break
+    }
     Invoke-Expression -Command:("$testModulePath -Live")
     # Throw error if there were any failed tests
     $PesterTestResultPath = (Get-ChildItem -Path:([System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)) ) + "/test/results"))
