@@ -23,6 +23,7 @@ Param(
         })]$testModulePath
 )
 # Create environmental variable so that they can be used by the pester tests
+$ErrorActionPreference = 'Stop'
 $env:JCApiKey = $JCApiKey
 $env:JCOrgId = $JCOrgId
 If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
@@ -56,15 +57,13 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         }
         Write-Host $sdkRoot
         $NewPath = $sdkRoot.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
-        $psm1Path = $NewPath + '/JumpCloud.SDK.V1.psm1'
         $psd1Path = $NewPath + '/JumpCloud.SDK.V1.psd1'
         Write-Host "new path: $NewPath"
         Write-Host "pds1 path: $psd1Path"
         Test-Path $psd1Path
         Write-Host "PSD1 File:"
         get-content $psd1Path -TotalCount 6
-        Import-Module $psm1Path -Force
-        Import-Module $psd1Path -Force
+        Import-Module $psd1Path -Force -PassThru -ErrorAction Ignore
         Write-Host "Modules After"
         get-module
     }
