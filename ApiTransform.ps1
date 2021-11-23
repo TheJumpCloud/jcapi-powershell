@@ -417,12 +417,8 @@ $TransformConfig = [Ordered]@{
             'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
             'pushEndpoints_patch'                               = 'UserPushEndpoint_Update';
             'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
-            'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
-            'connectwise_getConfiguration'                      = 'ConnectwiseConfiguration_Get'
-            'connectwise_deleteConfiguration'                   = 'ConnectwiseConfigurationDelete_'
-            'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Update'
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{id}') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
