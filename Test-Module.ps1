@@ -63,7 +63,15 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         Test-Path $psd1Path
         Write-Host "PSD1 File:"
         get-content $psd1Path -TotalCount 6
-        Import-Module $psd1Path -Force -PassThru -ErrorAction Ignore
+        try
+        {
+            Import-Module $psd1Path -Force -PassThru
+        }
+        catch
+        {
+            Import-Module $psd1Path -Force -PassThru
+    
+        }
         Write-Host "Modules After"
         get-module
     }
