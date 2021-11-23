@@ -43,7 +43,19 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
 
     # Now test Module
     if ($testModulePath -Match "JumpCloud.SDK.V2") {
-        Write-Host "Matched"
+        Write-Host "Modules Before"
+        get-module
+        $modules = Get-Module
+        foreach ($module in $modules)
+        {
+            If ($module.Name -eq "JumpCloud.SDK.V1")
+            {
+                Write-Host "Found $($module.name)"
+                Remove-Module $module.Name
+            }
+        }
+        Write-Host "Modules After"
+        get-module
         Write-Host $sdkRoot
         $NewPath = $sdkRoot.Replace('JumpCloud.SDK.V2', 'JumpCloud.SDK.V1')
         $psd1Path = $NewPath + '/JumpCloud.SDK.V1.psd1'
