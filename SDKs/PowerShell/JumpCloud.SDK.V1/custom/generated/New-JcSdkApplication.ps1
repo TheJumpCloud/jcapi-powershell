@@ -117,6 +117,7 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
+  [SsoIdpCertExpirationAt <DateTime?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
 
@@ -253,6 +254,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Created},
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
     # .
@@ -311,6 +313,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${SsoBeta},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.DateTime]
+    # .
+    ${SsoIdpCertExpirationAt},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

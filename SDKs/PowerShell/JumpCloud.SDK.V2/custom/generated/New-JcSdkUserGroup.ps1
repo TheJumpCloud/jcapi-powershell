@@ -62,6 +62,7 @@ BODY <IUserGroupPost>:
     Field <String>: Name of field in filter target object.
     Operator <String>: Filter comparison operator.
     Value <String>: Filter comparison value.
+  [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
 
 MEMBERQUERYFILTERS <IFilter[]>:
   Field <String>: Name of field in filter target object.
@@ -108,11 +109,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Email},
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IFilter[]]
     # .
     # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
     ${MemberQueryFilters},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # True if notification emails are to be sent for membership suggestions.
+    ${MemberSuggestionsNotify},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

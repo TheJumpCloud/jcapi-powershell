@@ -38,13 +38,13 @@ New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Body <ISambaDomainInput> 
 
 ### CreateViaIdentity
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Body <ISambaDomainInput> [-Confirm]
+New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Body <ISambaDomainInput> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApIsIdentity> -Name <String> -Sid <String> [-Confirm]
+New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Name <String> -Sid <String> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -102,7 +102,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -194,7 +194,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V2.Models.ISambaDomainInput
 
@@ -215,23 +215,25 @@ BODY <ISambaDomainInput>: Samba Domain Input
   - `Name <String>`: Name of this domain's WorkGroup
   - `Sid <String>`: Security identifier of this domain
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

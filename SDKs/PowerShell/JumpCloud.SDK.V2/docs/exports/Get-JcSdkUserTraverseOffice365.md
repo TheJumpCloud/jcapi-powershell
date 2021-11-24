@@ -35,7 +35,7 @@ Get-JcSdkUserTraverseOffice365 -UserId <String> [-Filter <String[]>] [<CommonPar
 
 ### GetViaIdentity
 ```
-Get-JcSdkUserTraverseOffice365 -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [<CommonParameters>]
+Get-JcSdkUserTraverseOffice365 -InputObject <IJumpCloudApiIdentity> [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,12 +77,18 @@ curl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/office365s \\
 
 ### -Filter
 A filter to apply to the query.
+
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
 **field** = Populate with a valid field from an endpoint response.
+
 **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
 **value** = Populate with the value you want to search for.
 Is case sensitive.
 Supports wild cards.
+
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
@@ -102,7 +108,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -133,7 +139,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -148,23 +154,25 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

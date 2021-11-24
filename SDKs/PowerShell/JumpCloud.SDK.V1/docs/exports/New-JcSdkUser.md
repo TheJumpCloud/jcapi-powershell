@@ -30,15 +30,16 @@ curl -X POST https://console.jumpcloud.com/api/systemusers \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
- [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey]
+ [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>]
- [-Middlename <String>] [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
+ [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-RecoveryEmailAddress <String>]
  [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
  [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -135,6 +136,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AlternateEmail
+.
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -477,6 +493,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ManagedAppleId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Manager
+Relation with another systemuser to identify the last as a manager.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MfaConfigured
 .
 
@@ -613,8 +659,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RecoveryEmailAddress
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Relationships
 .
+To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]
@@ -798,6 +860,7 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[StreetAddress <String>]`: 
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
+  - `[AlternateEmail <String>]`: 
   - `[Attributes <ISystemuserputpostAttributesItem[]>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
@@ -820,6 +883,8 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
+  - `[ManagedAppleId <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
@@ -831,7 +896,10 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
+  - `[RecoveryEmailAddress <String>]`: 
   - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[Sudo <Boolean?>]`: 
   - `[Suspended <Boolean?>]`: 
@@ -841,6 +909,10 @@ BODY <ISystemuserputpost>: SystemUserPost
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
+
+RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>: .
+  - `[Type <String>]`: 
+  - `[Value <String>]`: 
 
 ## RELATED LINKS
 

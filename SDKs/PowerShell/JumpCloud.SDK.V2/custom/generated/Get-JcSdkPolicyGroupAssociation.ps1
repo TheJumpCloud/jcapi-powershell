@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns the _direct_ associations of this Configuration (Policy) Group.
+This endpoint returns the _direct_ associations of this Policy Group.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policy Groups and Policies.
 
 
 #### Sample Request
@@ -13,9 +13,9 @@ curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associat
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint returns the _direct_ associations of this Configuration (Policy) Group.
+This endpoint returns the _direct_ associations of this Policy Group.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configuration (Policy) Groups and Configurations (Policies).
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policy Groups and Policies.
 
 
 #### Sample Request
@@ -47,7 +47,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) Group.
+    # ObjectID of the Policy Group.
     ${GroupId},
 
     [Parameter(Mandatory)]

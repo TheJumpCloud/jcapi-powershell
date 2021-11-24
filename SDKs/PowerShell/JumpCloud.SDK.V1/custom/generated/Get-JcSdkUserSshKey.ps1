@@ -13,7 +13,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V1.Models.ISshkeylist
 .Notes
@@ -21,10 +21,9 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
-  [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUserSshKey.md
@@ -42,7 +41,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

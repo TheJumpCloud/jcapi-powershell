@@ -28,8 +28,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/adminis
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-EnableMultiFactor] [-Firstname <String>]
- [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-BindNoOrgs] [-EnableMultiFactor]
+ [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -40,15 +41,15 @@ New-JcSdkProviderAdministrator -ProviderId <String> -Body <IProviderAdminReq> [-
 
 ### CreateViaIdentity
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Body <IProviderAdminReq> [-Confirm]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Body <IProviderAdminReq> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudApIsIdentity> -Email <String> [-EnableMultiFactor]
- [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <String> [-BindNoOrgs]
+ [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -85,6 +86,21 @@ curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/adminis
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -BindNoOrgs
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 ProviderAdminReq
@@ -152,7 +168,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
@@ -259,7 +275,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V2.Models.IProviderAdminReq
 
@@ -278,29 +294,32 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IProviderAdminReq>: ProviderAdminReq
   - `Email <String>`: 
+  - `[BindNoOrgs <Boolean?>]`: 
   - `[EnableMultiFactor <Boolean?>]`: 
   - `[Firstname <String>]`: 
   - `[Lastname <String>]`: 
   - `[Role <String>]`: 
   - `[RoleName <String>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

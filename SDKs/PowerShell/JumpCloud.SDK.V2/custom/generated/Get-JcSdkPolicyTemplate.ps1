@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns a specific configuration (policy) template.
+This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
@@ -10,7 +10,7 @@ This endpoint returns a specific configuration (policy) template.
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint returns a specific configuration (policy) template.
+This endpoint returns a specific policy template.
 
 #### Sample Request
 ```
@@ -29,7 +29,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IPolicyTemplate
 .Outputs
@@ -39,23 +39,25 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -72,17 +74,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) Template.
+    # ObjectID of the Policy Template.
     ${Id},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields included in the returned records.
@@ -90,19 +93,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Fields},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
+    # 
     # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
     # **field** = Populate with a valid field from an endpoint response.
+    # 
     # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # _Note: v1 operators differ from v2 operators._
+    # 
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
+    # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.

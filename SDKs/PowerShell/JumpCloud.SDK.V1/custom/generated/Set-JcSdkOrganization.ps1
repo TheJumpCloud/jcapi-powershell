@@ -63,7 +63,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 .Outputs
@@ -81,6 +81,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [DirectoryInsightEnabled <Boolean?>]:
     [DirectoryInsightPremiumCreatedAt <String>]:
     [DirectoryInsightPremiumEnabled <Boolean?>]:
+    [DirectoryInsightPremiumUpdatedAt <String>]:
     [DisableGoogleLogin <Boolean?>]:
     [DisableLdap <Boolean?>]:
     [DisableUm <Boolean?>]:
@@ -119,14 +120,19 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightEnableNewLinux <Boolean?>]:
     [SystemInsightEnableNewWindows <Boolean?>]:
     [SystemInsightEnabled <Boolean?>]:
+    [SystemInsightUpdatedAt <String>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
+    [TrustedAppConfigChecksum <String>]: Checksum to validate the configuarion for the organization
+    [TrustedAppConfigTrustedApps <ITrustedappConfigTrustedAppsItem[]>]: List of authorized apps for the organization
+      Name <String>: Name of the trusted appl
+      [Path <String>]: Absolute path for the app's location in user's device
+      [Teamid <String>]: App's Team ID
     [UserPortalIdleSessionDurationMinutes <Int32?>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
-  [SystemuserId <String>]:
   [Triggername <String>]:
 
 SETTINGS <IOrganizationsettingsput>:
@@ -136,6 +142,7 @@ SETTINGS <IOrganizationsettingsput>:
   [DirectoryInsightEnabled <Boolean?>]:
   [DirectoryInsightPremiumCreatedAt <String>]:
   [DirectoryInsightPremiumEnabled <Boolean?>]:
+  [DirectoryInsightPremiumUpdatedAt <String>]:
   [DisableGoogleLogin <Boolean?>]:
   [DisableLdap <Boolean?>]:
   [DisableUm <Boolean?>]:
@@ -174,8 +181,14 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightEnableNewLinux <Boolean?>]:
   [SystemInsightEnableNewWindows <Boolean?>]:
   [SystemInsightEnabled <Boolean?>]:
+  [SystemInsightUpdatedAt <String>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
+  [TrustedAppConfigChecksum <String>]: Checksum to validate the configuarion for the organization
+  [TrustedAppConfigTrustedApps <ITrustedappConfigTrustedAppsItem[]>]: List of authorized apps for the organization
+    Name <String>: Name of the trusted appl
+    [Path <String>]: Absolute path for the app's location in user's device
+    [Teamid <String>]: App's Team ID
   [UserPortalIdleSessionDurationMinutes <Int32?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md
@@ -195,7 +208,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

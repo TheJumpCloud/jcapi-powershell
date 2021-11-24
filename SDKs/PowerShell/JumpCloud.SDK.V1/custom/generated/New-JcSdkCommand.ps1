@@ -106,12 +106,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Name},
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
     ${CommandRunners},
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of file IDs to include with the command.
@@ -161,6 +163,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Sudo},
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of system IDs to run the command on.

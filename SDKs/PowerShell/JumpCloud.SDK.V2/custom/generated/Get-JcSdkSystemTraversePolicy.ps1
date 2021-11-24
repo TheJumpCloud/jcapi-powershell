@@ -1,12 +1,12 @@
 <#
 .Synopsis
-This endpoint will return all Configurations (Policies) bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System.
+The `paths` array enumerates each path from this System to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -22,13 +22,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\
 
 ```
 .Description
-This endpoint will return all Configurations (Policies) bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Policies bound to a System, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System to the corresponding Configuration (Policy); this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) from this System.
+The `paths` array enumerates each path from this System to the corresponding Policy; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy from this System.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -53,7 +53,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
 .Notes
@@ -61,23 +61,25 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
+  [PolicyId <String>]: ObjectID of the Policy.
   [ProviderId <String>]:
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -99,21 +101,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
 
     [Parameter()]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
+    # 
     # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
     # **field** = Populate with a valid field from an endpoint response.
+    # 
     # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # _Note: v1 operators differ from v2 operators._
+    # 
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
+    # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 

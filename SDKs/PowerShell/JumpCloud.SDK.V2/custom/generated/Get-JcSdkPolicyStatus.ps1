@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
+This endpoint returns the latest policy results for a specific policy.
 
 ##### Sample Request
 
@@ -11,7 +11,7 @@ This endpoint returns the latest configuration (policy) results for a specific c
   -H 'x-api-key: {API_KEY}'
   ```
 .Description
-This endpoint returns the latest configuration (policy) results for a specific configuration (policy).
+This endpoint returns the latest policy results for a specific policy.
 
 ##### Sample Request
 
@@ -47,6 +47,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${PolicyId},
 
     [Parameter()]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields included in the returned records.
@@ -54,19 +55,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Fields},
 
     [Parameter()]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
+    # 
     # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
     # **field** = Populate with a valid field from an endpoint response.
+    # 
     # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # _Note: v1 operators differ from v2 operators._
+    # 
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
+    # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 
     [Parameter()]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # The comma separated fields used to sort the collection.

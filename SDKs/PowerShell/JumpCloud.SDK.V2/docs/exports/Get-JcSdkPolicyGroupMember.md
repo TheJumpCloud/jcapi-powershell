@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicyGroupMember
 
 ## SYNOPSIS
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -29,7 +29,7 @@ Get-JcSdkPolicyGroupMember -PolicyId <String> [-Filter <String[]>] [-Sort <Strin
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyGroupMember -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>] [-Sort <String[]>]
+Get-JcSdkPolicyGroupMember -InputObject <IJumpCloudApiIdentity> [-Filter <String[]>] [-Sort <String[]>]
  [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
@@ -39,7 +39,7 @@ Get-JcSdkPolicyGroupMember -GroupId <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all the Configuration (Policy) Groups a Configuration (Policy) is a member of.
+This endpoint returns all the Policy Groups a Policy is a member of.
 
 #### Sample Request
 ```
@@ -100,12 +100,18 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
 **field** = Populate with a valid field from an endpoint response.
+
 **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
 **value** = Populate with the value you want to search for.
 Is case sensitive.
 Supports wild cards.
+
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
@@ -121,7 +127,7 @@ Accept wildcard characters: False
 ```
 
 ### -GroupId
-ObjectID of the Configuration (Policy) Group.
+ObjectID of the Policy Group.
 
 ```yaml
 Type: System.String
@@ -140,7 +146,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -152,7 +158,7 @@ Accept wildcard characters: False
 ```
 
 ### -PolicyId
-ObjectID of the Configuration (Policy).
+ObjectID of the Policy.
 
 ```yaml
 Type: System.String
@@ -187,7 +193,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -204,23 +210,25 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

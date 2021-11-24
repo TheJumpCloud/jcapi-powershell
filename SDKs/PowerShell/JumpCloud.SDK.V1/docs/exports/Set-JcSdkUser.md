@@ -29,17 +29,17 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey]
- [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
- [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
- [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-AlternateEmail <String>] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>]
+ [-CostCenter <String>] [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts]
+ [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
+ [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
- [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser]
+ [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -49,24 +49,25 @@ Set-JcSdkUser -Id <String> -Body <ISystemuserput> [-Confirm] [-WhatIf] [<CommonP
 
 ### SetViaIdentity
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> -Body <ISystemuserput> [-Confirm] [-WhatIf]
+Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> -Body <ISystemuserput> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApIsIdentity> [-AccountLocked]
- [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-Attributes <ISystemuserputAttributesItem[]>]
- [-Company <String>] [-CostCenter <String>] [-Department <String>] [-Description <String>]
- [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>]
- [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>]
- [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>]
- [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>]
- [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
- [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-AccountLocked]
+ [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
+ [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+ [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
+ [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
+ [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser]
+ [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -140,6 +141,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AlternateEmail
+.
+
+```yaml
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -442,7 +458,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -500,6 +516,36 @@ Accept wildcard characters: False
 
 ### -Location
 .
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ManagedAppleId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Manager
+Relation with another systemuser to identify the last as a manager.
 
 ```yaml
 Type: System.String
@@ -636,6 +682,7 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
+To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
@@ -806,7 +853,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V1.Models.ISystemuserput
 
@@ -849,6 +896,7 @@ BODY <ISystemuserput>: SystemUserPut
     - `[StreetAddress <String>]`: 
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
+  - `[AlternateEmail <String>]`: 
   - `[Attributes <ISystemuserputAttributesItem[]>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
@@ -872,6 +920,8 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Lastname <String>]`: 
   - `[LdapBindingUser <Boolean?>]`: 
   - `[Location <String>]`: 
+  - `[ManagedAppleId <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
@@ -883,6 +933,8 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.
@@ -894,15 +946,18 @@ BODY <ISystemuserput>: SystemUserPut
   - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
-  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
+
+RELATIONSHIPS <ISystemuserputRelationshipsItem[]>: .
+  - `[Type <String>]`: 
+  - `[Value <String>]`: 
 
 SSHKEYS <ISshkeypost[]>: .
   - `Name <String>`: The name of the SSH key.

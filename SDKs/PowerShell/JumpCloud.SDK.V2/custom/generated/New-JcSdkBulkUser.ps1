@@ -86,6 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${CreationSource},
 
     [Parameter(Mandatory, ValueFromPipeline)]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]
     # Array of bulk-user-create

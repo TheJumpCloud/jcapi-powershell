@@ -8,13 +8,13 @@ schema: 2.0.0
 # Get-JcSdkSystemGroupTraversePolicyGroup
 
 ## SYNOPSIS
-This endpoint will return all Configuration (Policy) Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Policy Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System Group.
+The `paths` array enumerates each path from this System Group to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -36,18 +36,18 @@ Get-JcSdkSystemGroupTraversePolicyGroup -GroupId <String> [-Filter <String[]>] [
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemGroupTraversePolicyGroup -InputObject <IJumpCloudApIsIdentity> [-Filter <String[]>]
+Get-JcSdkSystemGroupTraversePolicyGroup -InputObject <IJumpCloudApiIdentity> [-Filter <String[]>]
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint will return all Configuration (Policy) Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
+This endpoint will return all Policy Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
 Each element will contain the type, id, attributes and paths.
 
 The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
 
-The `paths` array enumerates each path from this System Group to the corresponding Configuration (Policy) Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Configuration (Policy) Group from this System Group.
+The `paths` array enumerates each path from this System Group to the corresponding Policy Group; this array represents all grouping and/or associations that would have to be removed to deprovision the Policy Group from this System Group.
 
 See `/members` and `/associations` endpoints to manage those collections.
 
@@ -80,12 +80,18 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policygr
 
 ### -Filter
 A filter to apply to the query.
+
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
 **field** = Populate with a valid field from an endpoint response.
+
 **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
 **value** = Populate with the value you want to search for.
 Is case sensitive.
 Supports wild cards.
+
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
@@ -120,7 +126,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -136,7 +142,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -151,23 +157,25 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
+  - `[PolicyId <String>]`: ObjectID of the Policy.
   - `[ProviderId <String>]`: 
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

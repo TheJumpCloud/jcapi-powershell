@@ -22,23 +22,24 @@ Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<Co
 Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta]
  [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
- [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoJit]
- [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
+ [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
+Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApIsIdentity> -Config <IApplicationConfig> -Name <String>
+Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Config <IApplicationConfig> -Name <String>
  -SsoUrl <String> [-Id <String>] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Organization <String>] [-SsoBeta] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -234,7 +235,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -335,6 +336,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoIdpCertExpirationAt
+.
+
+```yaml
+Type: System.DateTime
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoJit
 .
 
@@ -418,7 +434,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V1.Models.IApplication
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -529,6 +545,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
+  - `[SsoIdpCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
 
@@ -613,10 +630,9 @@ CONFIG <IApplicationConfig>: .
   - `[SpEntityIdValue <String>]`: 
   - `[SpEntityIdVisible <Boolean?>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
-  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS

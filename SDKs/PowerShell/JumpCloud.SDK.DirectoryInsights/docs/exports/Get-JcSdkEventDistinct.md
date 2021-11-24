@@ -9,6 +9,10 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Query the API for a list of distinct values for a field
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+```
 
 ## SYNTAX
 
@@ -25,6 +29,10 @@ Get-JcSdkEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<Common
 
 ## DESCRIPTION
 Query the API for a list of distinct values for a field
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+```
 
 ## EXAMPLES
 
