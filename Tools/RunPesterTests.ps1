@@ -201,16 +201,17 @@ else
 }
 # Validate script syntax
 $SettingsFile = '../../../Tools/PSScriptAnalyzerSettings.psd1'
+$LintFilePath = './custom/generated/*.ps1'
 # Import Settings:
 $SettingsFromFile = Import-PowerShellDataFile $SettingsFile
 $settingsObject = @{
     Severity     = $SettingsFromFile.Severity
     ExcludeRules = $SettingsFromFile.ExcludeRules
 }
-$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$OutputFilePath") -recurse -Settings $settingsObject -reportSummary
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings $settingsObject -reportSummary
 If ($ScriptAnalyzerResult)
 {
-    $ScriptAnalyzerResults += $ScriptAnalyzerResult
+    $ScriptAnalyzerResult
 }
 
 $Filter = "*"
