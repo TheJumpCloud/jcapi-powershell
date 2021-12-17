@@ -423,20 +423,6 @@ $($IndentChar)$($IndentChar)Return `$Results"
                 Write-Host ("[STATUS] Building: $NewCommandName") -BackgroundColor:('Black') -ForegroundColor:('Magenta') # | Tee-Object -FilePath:($LogFilePath) -Append
                 $OutputFilePath = "$CustomFolderPath/$NewCommandName.ps1"
                 [System.IO.File]::WriteAllLines($OutputFilePath, $NewScript, (New-Object System.Text.UTF8Encoding $true))
-                # Validate script syntax
-                $SettingsFile = "$PSScriptRoot/Tools/PSScriptAnalyzerSettings.psd1"
-                # Import Settings:
-                $SettingsFromFile = Import-PowerShellDataFile $SettingsFile
-                $settingsObject = @{
-                    Severity     = $SettingsFromFile.Severity
-                    ExcludeRules = $SettingsFromFile.ExcludeRules
-                }
-                $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$OutputFilePath") -recurse -Settings $settingsObject -reportSummary
-                # $ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:($OutputFilePath) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
-                If ($ScriptAnalyzerResult)
-                {
-                    $ScriptAnalyzerResults += $ScriptAnalyzerResult
-                }
             }
         }
     }

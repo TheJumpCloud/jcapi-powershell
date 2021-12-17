@@ -199,6 +199,20 @@ else
 {
     $testFolder
 }
+# Validate script syntax
+$SettingsFile = '../../../Tools/PSScriptAnalyzerSettings.psd1'
+# Import Settings:
+$SettingsFromFile = Import-PowerShellDataFile $SettingsFile
+$settingsObject = @{
+    Severity     = $SettingsFromFile.Severity
+    ExcludeRules = $SettingsFromFile.ExcludeRules
+}
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$OutputFilePath") -recurse -Settings $settingsObject -reportSummary
+If ($ScriptAnalyzerResult)
+{
+    $ScriptAnalyzerResults += $ScriptAnalyzerResult
+}
+
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order
