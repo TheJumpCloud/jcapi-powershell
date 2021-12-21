@@ -128,6 +128,7 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
+  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS

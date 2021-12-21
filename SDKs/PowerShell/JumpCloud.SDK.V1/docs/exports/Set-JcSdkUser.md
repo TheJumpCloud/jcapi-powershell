@@ -949,6 +949,7 @@ BODY <ISystemuserput>: SystemUserPut
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
+  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .

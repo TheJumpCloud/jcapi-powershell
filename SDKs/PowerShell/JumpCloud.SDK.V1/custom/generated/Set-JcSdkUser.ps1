@@ -130,6 +130,7 @@ BODY <ISystemuserput>:
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
+  [SystemuserId <String>]:
   [Triggername <String>]:
 
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:

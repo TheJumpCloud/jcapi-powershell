@@ -40,6 +40,7 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
+  [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkUser.md

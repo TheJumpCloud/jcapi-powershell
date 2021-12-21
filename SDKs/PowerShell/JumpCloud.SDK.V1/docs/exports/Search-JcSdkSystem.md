@@ -20,7 +20,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -52,6 +52,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
   \"searchFilter\": {
     \"searchTerm\": \"my-host\",
     \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
+
+Text search for a multiple hostnames.
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": [\"my-host\", \"my-other-host\"],
+    \"fields\": [\"hostname\"]
   },
   \"fields\": \"os hostname displayName\"
 }'
@@ -105,7 +120,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -137,6 +152,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
   \"searchFilter\": {
     \"searchTerm\": \"my-host\",
     \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
+
+Text search for a multiple hostnames.
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": [\"my-host\", \"my-other-host\"],
+    \"fields\": [\"hostname\"]
   },
   \"fields\": \"os hostname displayName\"
 }'

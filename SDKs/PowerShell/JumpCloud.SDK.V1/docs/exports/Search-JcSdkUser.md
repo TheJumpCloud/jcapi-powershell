@@ -20,7 +20,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -47,6 +47,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
   \"searchFilter\" : {
     \"searchTerm\": \"@jumpcloud.com\",
     \"fields\": [\"email\"]
+  },
+  \"fields\" : \"email username sudo\"
+}'
+```
+
+Text search for multiple system users
+```
+curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"john\", \"sarah\"],
+    \"fields\": [\"username\"]
   },
   \"fields\" : \"email username sudo\"
 }'
@@ -100,7 +115,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -127,6 +142,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
   \"searchFilter\" : {
     \"searchTerm\": \"@jumpcloud.com\",
     \"fields\": [\"email\"]
+  },
+  \"fields\" : \"email username sudo\"
+}'
+```
+
+Text search for multiple system users
+```
+curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"john\", \"sarah\"],
+    \"fields\": [\"username\"]
   },
   \"fields\" : \"email username sudo\"
 }'

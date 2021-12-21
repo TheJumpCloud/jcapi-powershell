@@ -30,9 +30,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventDistinctQuery>:
-  Field <String>: field is what they wish to query on
   Service <String[]>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
+  Field <String>: field is what they wish to query on
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.

@@ -42,6 +42,7 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
+  [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkSystem.md
@@ -113,7 +114,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
-    # A nested object containing a string `searchTerm` and a list of `fields` to search on.
+    # A nested object containing a `searchTerm` string or array of strings and a list of `fields` to search on.
     ${Search},
 
     [Parameter(ParameterSetName='List')]

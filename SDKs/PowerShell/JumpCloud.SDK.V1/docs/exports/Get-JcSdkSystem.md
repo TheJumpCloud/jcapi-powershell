@@ -161,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -Search
-A nested object containing a string `searchTerm` and a list of `fields` to search on.
+A nested object containing a `searchTerm` string or array of strings and a list of `fields` to search on.
 
 ```yaml
 Type: System.String
@@ -217,6 +217,7 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
+  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS

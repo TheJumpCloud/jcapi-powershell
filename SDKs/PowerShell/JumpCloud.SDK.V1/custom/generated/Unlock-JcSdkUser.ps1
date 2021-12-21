@@ -1,30 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to run the shutdown command on the specified device.
-If a device is offline, the command will be run when the device becomes available.
-
-#### Sample Request
-```
-curl -X POST \\
-  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d {}
-```
+This endpoint allows you to unlock a user's account.
 .Description
-This endpoint allows you to run the shutdown command on the specified device.
-If a device is offline, the command will be run when the device becomes available.
-
-#### Sample Request
-```
-curl -X POST \\
-  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d {}
-```
+This endpoint allows you to unlock a user's account.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -49,20 +27,20 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Stop-JcSdkSystem.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Unlock-JcSdkUser.md
 #>
- Function Stop-JcSdkSystem
+ Function Unlock-JcSdkUser
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='Stop', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='Unlock', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Stop', Mandatory)]
+    [Parameter(ParameterSetName='Unlock', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${SystemId},
+    ${Id},
 
-    [Parameter(ParameterSetName='StopViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='UnlockViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
@@ -131,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V1.internal\Stop-JcSdkInternalSystem @PSBoundParameters
+        $Results = JumpCloud.SDK.V1.internal\Unlock-JcSdkInternalUser @PSBoundParameters
     }
     End
     {

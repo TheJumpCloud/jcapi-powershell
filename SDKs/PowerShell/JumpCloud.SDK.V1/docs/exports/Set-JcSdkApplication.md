@@ -633,6 +633,7 @@ CONFIG <IApplicationConfig>: .
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
+  - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
 ## RELATED LINKS

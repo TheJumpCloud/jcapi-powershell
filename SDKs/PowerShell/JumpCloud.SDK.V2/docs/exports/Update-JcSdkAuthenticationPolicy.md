@@ -25,8 +25,9 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-Type <String>] [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>]
- [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Type <String>] [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
+ [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
+ [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -45,7 +46,9 @@ Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> -Body <IAu
 ```
 Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> [-Conditions <Hashtable>]
  [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>] [-UserGroupExclusions <String[]>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>]
+ [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
+ [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -247,6 +250,38 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserAttributeExclusions
+.
+To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserAttributeInclusions
+.
+To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserGroupExclusions
 .
 
@@ -357,6 +392,11 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
     - `Type <String>`: 
     - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   - `[Type <String>]`: AuthnPolicyType
+  - `[UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
+    - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+    - `[Operator <String>]`: 
+    - `[Value <IAny>]`: Any object
+  - `[UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
   - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
@@ -389,6 +429,16 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
   - `Type <String>`: 
   - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+
+USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+  - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+  - `[Operator <String>]`: 
+  - `[Value <IAny>]`: Any object
+
+USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+  - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+  - `[Operator <String>]`: 
+  - `[Value <IAny>]`: Any object
 
 ## RELATED LINKS
 

@@ -123,9 +123,8 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightUpdatedAt <String>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
-    [TrustedAppConfigChecksum <String>]: Checksum to validate the configuarion for the organization
-    [TrustedAppConfigTrustedApps <ITrustedappConfigTrustedAppsItem[]>]: List of authorized apps for the organization
-      Name <String>: Name of the trusted appl
+    [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization
+      Name <String>: Name of the trusted application
       [Path <String>]: Absolute path for the app's location in user's device
       [Teamid <String>]: App's Team ID
     [UserPortalIdleSessionDurationMinutes <Int32?>]:
@@ -133,6 +132,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
+  [SystemuserId <String>]:
   [Triggername <String>]:
 
 SETTINGS <IOrganizationsettingsput>:
@@ -184,9 +184,8 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightUpdatedAt <String>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
-  [TrustedAppConfigChecksum <String>]: Checksum to validate the configuarion for the organization
-  [TrustedAppConfigTrustedApps <ITrustedappConfigTrustedAppsItem[]>]: List of authorized apps for the organization
-    Name <String>: Name of the trusted appl
+  [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization
+    Name <String>: Name of the trusted application
     [Path <String>]: Absolute path for the app's location in user's device
     [Teamid <String>]: App's Team ID
   [UserPortalIdleSessionDurationMinutes <Int32?>]:

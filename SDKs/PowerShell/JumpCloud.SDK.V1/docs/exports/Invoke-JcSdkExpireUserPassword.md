@@ -1,45 +1,30 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkCommandResult.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireUserPassword.md
 schema: 2.0.0
 ---
 
-# Remove-JcSdkCommandResult
+# Invoke-JcSdkExpireUserPassword
 
 ## SYNOPSIS
-This endpoint deletes a specific command result.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ````
+This endpoint allows you to expire a user's password.
 
 ## SYNTAX
 
-### Delete (Default)
+### Post (Default)
 ```
-Remove-JcSdkCommandResult -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
-### DeleteViaIdentity
+### PostViaIdentity
 ```
-Remove-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint deletes a specific command result.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ````
+This endpoint allows you to expire a user's password.
 
 ## EXAMPLES
 
@@ -64,7 +49,7 @@ curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
 
 ```yaml
 Type: System.String
-Parameter Sets: Delete
+Parameter Sets: Post
 Aliases:
 
 Required: True
@@ -80,13 +65,28 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
-Parameter Sets: DeleteViaIdentity
+Parameter Sets: PostViaIdentity
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -130,7 +130,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommandresult
+### System.Boolean
 
 ## NOTES
 

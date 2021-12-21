@@ -1,45 +1,31 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkCommandResult.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Remove-JcSdkUserSshKey.md
 schema: 2.0.0
 ---
 
-# Remove-JcSdkCommandResult
+# Remove-JcSdkUserSshKey
 
 ## SYNOPSIS
-This endpoint deletes a specific command result.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ````
+This endpoint will delete a specific System User's SSH Key.
 
 ## SYNTAX
 
 ### Delete (Default)
 ```
-Remove-JcSdkCommandResult -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkUserSshKey -Id <String> -SystemuserId <String> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### DeleteViaIdentity
 ```
-Remove-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+Remove-JcSdkUserSshKey -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint deletes a specific command result.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ````
+This endpoint will delete a specific System User's SSH Key.
 
 ## EXAMPLES
 
@@ -90,6 +76,36 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -PassThru
+Returns true when the command succeeds
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SystemuserId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: Delete
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -130,7 +146,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ICommandresult
+### System.Boolean
 
 ## NOTES
 

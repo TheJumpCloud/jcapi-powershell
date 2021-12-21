@@ -147,6 +147,9 @@ curl --silent \\
      \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"
 ```
 
+### [Invoke-JcSdkExpireUserPassword](Invoke-JcSdkExpireUserPassword.md)
+This endpoint allows you to expire a user's password.
+
 ### [Lock-JcSdkSystem](Lock-JcSdkSystem.md)
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
@@ -282,6 +285,27 @@ curl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Remove-JcSdkUserSshKey](Remove-JcSdkUserSshKey.md)
+This endpoint will delete a specific System User's SSH Key.
+
+### [Reset-JcSdkUserMfa](Reset-JcSdkUserMfa.md)
+This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
+This will result in the user being prompted to setup TOTP MFA when logging into userportal.
+Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+
+Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'
+
+```
+
 ### [Restart-JcSdkSystem](Restart-JcSdkSystem.md)
 This endpoint allows you to run the restart command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
@@ -335,7 +359,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -367,6 +391,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
   \"searchFilter\": {
     \"searchTerm\": \"my-host\",
     \"fields\": [\"hostname\", \"displayName\"]
+  },
+  \"fields\": \"os hostname displayName\"
+}'
+```
+
+Text search for a multiple hostnames.
+```
+curl -X POST https://console.jumpcloud.com/api/search/systems \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": [\"my-host\", \"my-other-host\"],
+    \"fields\": [\"hostname\"]
   },
   \"fields\": \"os hostname displayName\"
 }'
@@ -406,7 +445,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -433,6 +472,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
   \"searchFilter\" : {
     \"searchTerm\": \"@jumpcloud.com\",
     \"fields\": [\"email\"]
+  },
+  \"fields\" : \"email username sudo\"
+}'
+```
+
+Text search for multiple system users
+```
+curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"john\", \"sarah\"],
+    \"fields\": [\"username\"]
   },
   \"fields\" : \"email username sudo\"
 }'
@@ -575,5 +629,8 @@ curl -X POST \\
   -H 'x-api-key: {API_KEY}' \\
   -d {}
 ```
+
+### [Unlock-JcSdkUser](Unlock-JcSdkUser.md)
+This endpoint allows you to unlock a user's account.
 
 

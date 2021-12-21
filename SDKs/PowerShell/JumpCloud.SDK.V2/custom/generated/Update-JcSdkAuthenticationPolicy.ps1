@@ -53,6 +53,11 @@ BODY <IAuthnPolicyInput>:
     Type <String>:
     [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   [Type <String>]: AuthnPolicyType
+  [UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]:
+    [Field <String>]: The only field that is currently supported is ldap_binding_user
+    [Operator <String>]:
+    [Value <IAny>]: Any object
+  [UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]:
   [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
@@ -85,6 +90,16 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
   Type <String>:
   [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+
+USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Any object
+
+USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Any object
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
@@ -174,6 +189,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # AuthnPolicyType
     ${Type},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
+    # .
+    # To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
+    ${UserAttributeExclusions},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
+    # .
+    # To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
+    ${UserAttributeInclusions},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
