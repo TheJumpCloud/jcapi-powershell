@@ -49,7 +49,7 @@ Try
             $CommandFilePath = $Command.ScriptBlock.File
             # TODO: is this the fix
             # $CommandFilePath = ($Command.ScriptBlock.File -replace "ProxyCmdletDefinitions", $CommandName)
-            write-host $CommandFilePath
+            Write-Host ("[STATUS] Command Source: $CommandFilePath") -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             $CommandFilePathContent = Get-Content -Path:($CommandFilePath) -Raw
             # TODO: commit or revert this section
             $MSCopyrightHeader = "`n<#`n.Synopsis`n"
