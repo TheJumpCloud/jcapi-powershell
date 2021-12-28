@@ -13,10 +13,40 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkBulkUsersResult' {
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        # Create a new users from bulk import
+        $Body = @(
+            @{
+                Username  = "BulkUsers-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+                FirstName = "Pester"
+                LastName  = "Test"
+                Password  = "Testing123!"
+                Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
+            },
+            @{
+                Username  = "BulkUsers-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+                FirstName = "Pester"
+                LastName  = "Test"
+                Password  = "Testing123!"
+                Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
+
+            }
+        )
+        $bulkUsersImport = New-JcSdkBulkUser -Body $Body -CreationSource 'jumpcloud:bulk'
+        $username = "PesterTestBulkUserState-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        $user = New-JCsdkUser -Username $username -Email "$username@pestertest.com"
+        # Suspend the use with this endpoint
+        $BulkStateJob = New-JcSdkBulkUserState -StartDate (Get-Date).AddSeconds(1) -UserIds $user.Id
+        Start-Sleep -Seconds 2
+        # $BulkStateJob = Get-JcSdkBulkUserState -Userid $user.Id
+        Get-JcSdkBulkUsersResult -JobId $BulkStateJob.ScheduledJobId
     }
 
     It 'GetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
+}
+
+AfterAll {
+    # Cleanup any users with the username matching "PesterTestBulkUserState-"
+    Get-JCSDKUser | Where-Object { $_.username -match "BulkUsers-" } | ForEach-Object { Remove-JcSdkUser -Id $_.Id }
 }
