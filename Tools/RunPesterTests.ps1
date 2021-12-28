@@ -208,7 +208,7 @@ $settingsObject = @{
     Severity     = $SettingsFromFile.Severity
     ExcludeRules = $SettingsFromFile.ExcludeRules
 }
-$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings $settingsObject -reportSummary
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings $settingsObject
 If ($ScriptAnalyzerResult)
 {
     $ScriptAnalyzerResult
