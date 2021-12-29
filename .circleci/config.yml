@@ -41,6 +41,10 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
+      filters:
+        branches:
+          only:
+            - master
   - Pack and Deploy To PSGallery:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
