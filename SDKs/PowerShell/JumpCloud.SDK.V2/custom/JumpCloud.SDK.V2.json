@@ -7343,8 +7343,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/job-id"
             }
@@ -7390,8 +7390,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/job-id"
             }
@@ -15582,8 +15582,8 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "",
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/job-id"
             }
