@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkBulkUsersResult' {
-    It 'Get' -skip {
+    It 'Get' {
         # Create a new users from bulk import
         $Body = @(
             @{
@@ -28,17 +28,11 @@ Describe 'Get-JcSdkBulkUsersResult' {
                 LastName  = "Test"
                 Password  = "Testing123!"
                 Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
-
             }
         )
+        # Per swagger definition, this returns a string in the meantime
         $bulkUsersImport = New-JcSdkBulkUser -Body $Body -CreationSource 'jumpcloud:bulk'
-        $username = "PesterTestBulkUserState-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        $user = New-JCsdkUser -Username $username -Email "$username@pestertest.com"
-        # Suspend the use with this endpoint
-        $BulkStateJob = New-JcSdkBulkUserState -StartDate (Get-Date).AddSeconds(1) -UserIds $user.Id
-        Start-Sleep -Seconds 2
-        # $BulkStateJob = Get-JcSdkBulkUserState -Userid $user.Id
-        Get-JcSdkBulkUsersResult -JobId $BulkStateJob.ScheduledJobId
+        { Get-JcSdkBulkUsersResult -JobId $bulkUsersImport } | Should -not -Throw
     }
 
     It 'GetViaIdentity' -skip {

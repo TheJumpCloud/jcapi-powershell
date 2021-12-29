@@ -127,6 +127,7 @@ $TransformConfig = [Ordered]@{
             '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
+            '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.

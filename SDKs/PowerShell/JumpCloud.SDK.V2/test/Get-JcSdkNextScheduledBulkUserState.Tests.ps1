@@ -15,7 +15,17 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkNextScheduledBulkUse
 }
 
 Describe 'Get-JcSdkNextScheduledBulkUserState' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        # { throw [System.NotImplementedException] } | Should -Not -Throw
+        # Create a new bulkuserstate user
+        $username = "PesterTestNextBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        $user = New-JCsdkUser -Username $username -Email "$username@pestertest.com"
+        # Suspend the use with this endpoint
+        New-JcSdkBulkUserState -StartDate (Get-Date).AddDays(1) -UserIds $user.Id
+        { Get-JcSdkNextScheduledBulkUserState -Users @($user.Id) } | Should -Not -Throw
     }
+}
+AfterAll {
+    # Cleanup any users with the username matching "PesterTestBulkUserState-"
+    Get-JCSDKUser | Where-Object { $_.username -match "PesterTestNextBulkUser-" } | ForEach-Object { Remove-JcSdkUser -Id $_.Id }
 }
