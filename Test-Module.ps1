@@ -3,6 +3,8 @@
 Param(
     [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'API key used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKey
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'MTP API key used for select pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKeyMTP
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'MTP ProviderID used for select pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCProviderId
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test-module.ps1')]
     [ValidateNotNullOrEmpty()]
     [System.IO.FileInfo]
@@ -26,7 +28,9 @@ Param(
 $ErrorActionPreference = 'Stop'
 $env:JCApiKey = $JCApiKey
 $env:JCOrgId = $JCOrgId
-If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId))
+$env:JCApiKeyMTP = $JCApiKeyMTP
+$env:JCProviderId = $JCProviderId
+If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId) -and -not [System.String]::IsNullOrEmpty($env:JCApiKeyMTP) -and -not [System.String]::IsNullOrEmpty($env:JCProviderId))
 {
     Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
     # ./test-module.ps1 -Isolated # Not sure when to use this yet

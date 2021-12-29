@@ -213,7 +213,7 @@ commands:
                 shell: pwsh.exe
                 command: |
                   $ErrorActionPreference = 'Stop'
-                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
+                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
