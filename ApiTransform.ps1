@@ -148,10 +148,10 @@ $TransformConfig = [Ordered]@{
             'activedirectories_get'                             = 'ActiveDirectory_Get';
             'activedirectories_list'                            = 'ActiveDirectory_List';
             'activedirectories_post'                            = 'ActiveDirectory_Create';
-            'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
-            'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
-            'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
-            'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
+            # 'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
+            # 'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
+            # 'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
+            # 'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
             'applemdms_delete'                                  = 'AppleMDM_Delete';
             'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
             'applemdms_devicesClearActivationLock'              = 'AppleMDMDeviceActivationLock_Clear';
@@ -331,10 +331,10 @@ $TransformConfig = [Ordered]@{
             'policystatuses_systemsList'                        = 'SystemPolicyStatus_List';
             'policytemplates_get'                               = 'PolicyTemplate_Get';
             'policytemplates_list'                              = 'PolicyTemplate_List';
-            'providers_listAdministrators'                      = 'ProviderAdministrator_List';
-            'providers_listOrganizations'                       = 'ProviderOrganizations_List';
-            'providers_postAdmins'                              = 'ProviderAdministrator_Create';
-            'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
+            # 'providers_listAdministrators'                      = 'ProviderAdministrator_List';
+            # 'providers_listOrganizations'                       = 'ProviderOrganizations_List';
+            # 'providers_postAdmins'                              = 'ProviderAdministrator_Create';
+            # 'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
             'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
             'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
             'pushEndpoints_list'                                = 'UserPushEndpoints_List';
@@ -418,7 +418,7 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/mappings') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/mappings', '/providers/{provider_id}/administrators', '/providers/{provider_id}/administrators/{id}', '/providers/{provider_id}/organizations', '/administrators/{id}/organizationlinks', '/administrators/{administrator_id}/organizationlinks/{id}') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
