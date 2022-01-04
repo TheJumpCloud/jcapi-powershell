@@ -263,7 +263,7 @@ commands:
             $nuspecFilePath = "./SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
             $BuildVersion = If ('<< parameters.source >>' -eq 'CodeArtifact')
             {
-              "$($Psd1.ModuleVersion)-Build$($env:CIRCLE_BUILD_NUM)DateTime$((Get-Date).ToString("yyyyMMddHHmm"))"
+              "$($Psd1.ModuleVersion).$($env:CIRCLE_BUILD_NUM)-$((Get-Date).ToString("yyyyMMddHHmm"))"
             }
             ElseIf('<< parameters.source >>' -eq 'PSGallery')
             {
