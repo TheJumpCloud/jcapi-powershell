@@ -110,12 +110,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirect
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkAdministratorOrganization](Get-JcSdkAdministratorOrganization.md)
-This endpoint returns the association links between an Administrator and Organizations.
-
-### [Get-JcSdkAdministratorOrganizationLink](Get-JcSdkAdministratorOrganizationLink.md)
-This endpoint returns the association links between an Organization and Administrators.
-
 ### [Get-JcSdkAppleMdm](Get-JcSdkAppleMdm.md)
 Get a list of all Apple MDM configurations.
 An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.
@@ -810,30 +804,6 @@ See `/members` and `/associations` endpoints to manage those collections.
 #### Sample Request
 ```
 curl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgroups \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
-### [Get-JcSdkProviderAdministrator](Get-JcSdkProviderAdministrator.md)
-This endpoint returns a list of the Administrators associated with the Provider.
-You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
-### [Get-JcSdkProviderOrganization](Get-JcSdkProviderOrganization.md)
-This endpoint returns a list of the Organizations associated with the Provider.
-You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/organizations \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -1984,9 +1954,6 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -d '{}'
 ```
 
-### [New-JcSdkAdministratorOrganization](New-JcSdkAdministratorOrganization.md)
-This endpoint allows you to allow Administrator access to an Organization.
-
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
 
@@ -2183,23 +2150,6 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
   }'
 ```
 
-### [New-JcSdkProviderAdministrator](New-JcSdkProviderAdministrator.md)
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
-
 ### [New-JcSdkSoftwareApp](New-JcSdkSoftwareApp.md)
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
 
@@ -2293,9 +2243,6 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{activedir
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
-
-### [Remove-JcSdkAdministratorOrganization](Remove-JcSdkAdministratorOrganization.md)
-This endpoint removes the association link between an Administrator and an Organization.
 
 ### [Remove-JcSdkAppleMdm](Remove-JcSdkAppleMdm.md)
 Removes an Apple MDM configuration.
@@ -2441,10 +2388,6 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\
   -H 'x-api-key: {API_KEY}'
 
 ```
-
-### [Remove-JcSdkProviderAdministrator](Remove-JcSdkProviderAdministrator.md)
-This endpoint removes an Administrator associated with the Provider.
-You must be associated with the provider to use this route.
 
 ### [Remove-JcSdkSoftwareApp](Remove-JcSdkSoftwareApp.md)
 Removes a Software Application configuration.
