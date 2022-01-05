@@ -16,7 +16,7 @@
       "email": "support@jumpcloud.com"
     },
     "version": "1.0",
-    "x-releaseTag": "v0.117.0"
+    "x-releaseTag": "v0.117.1"
   },
   "host": "api.jumpcloud.com",
   "basePath": "/insights/directory/v1",
@@ -60,7 +60,8 @@
               }
             }
           }
-        }
+        },
+        "x-internal": false
       }
     },
     "/events/count": {
@@ -98,7 +99,8 @@
               "$ref": "#/definitions/EventCount"
             }
           }
-        }
+        },
+        "x-internal": false
       }
     },
     "/events/distinct": {
@@ -136,7 +138,8 @@
               "$ref": "#/definitions/EventCount"
             }
           }
-        }
+        },
+        "x-internal": false
       }
     },
     "/events/interval": {
@@ -193,7 +196,8 @@
               }
             }
           }
-        }
+        },
+        "x-internal": false
       }
     }
   },
