@@ -3379,7 +3379,7 @@
     "description": "JumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, & system users.\n# V1 API\n  Our existing API offers the ability to interact with some of our core features such as: Commands, Systems, and Users. We are currently in the process of migrating our API V1 features to [API V2](https://docs.jumpcloud.com/2.0) Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V2](https://docs.jumpcloud.com/2.0) docs to understand the functionality available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V1 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
     "title": "JumpCloud API",
     "version": "1.0",
-    "x-releaseTag": "v16.314.0"
+    "x-releaseTag": "v16.316.0"
   },
   "parameters": {
     "trait:fields:fields": {
@@ -3471,7 +3471,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Application Templates"
+        "summary": "List Application Templates",
+        "x-internal": false
       },
       "parameters": []
     },
@@ -3521,7 +3522,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get an Application Template"
+        "summary": "Get an Application Template",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -3579,7 +3581,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Applications"
+        "summary": "Applications",
+        "x-internal": false
       },
       "post": {
         "description": "The endpoint adds a new SSO / SAML Applications.",
@@ -3606,7 +3609,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create an Application"
+        "summary": "Create an Application",
+        "x-internal": false
       }
     },
     "/applications/{id}": {
@@ -3627,7 +3631,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete an Application"
+        "summary": "Delete an Application",
+        "x-internal": false
       },
       "get": {
         "description": "The endpoint retrieves an SSO / SAML Application.",
@@ -3646,7 +3651,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get an Application"
+        "summary": "Get an Application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -3681,7 +3687,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update an Application"
+        "summary": "Update an Application",
+        "x-internal": false
       }
     },
     "/command/trigger/{triggername}": {
@@ -3710,7 +3717,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Launch a command via a Trigger"
+        "summary": "Launch a command via a Trigger",
+        "x-internal": false
       }
     },
     "/commandresults": {
@@ -3747,7 +3755,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all Command Results"
+        "summary": "List all Command Results",
+        "x-internal": false
       }
     },
     "/commandresults/{id}": {
@@ -3768,7 +3777,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a Command result"
+        "summary": "Delete a Command result",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific command result.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -3794,7 +3804,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List an individual Command result"
+        "summary": "List an individual Command result",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -3839,7 +3850,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List All Commands"
+        "summary": "List All Commands",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new command.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/commands/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"name\":\"Test API Command\",\n\t\"command\":\"String\",\n\t\"user\":\"{UserID}\",\n\t\"schedule\":\"\",\n\t\"timeout\":\"100\"\n}'\n\n```",
@@ -3866,7 +3878,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create A Command"
+        "summary": "Create A Command",
+        "x-internal": false
       }
     },
     "/commands/{id}": {
@@ -3887,7 +3900,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a Command"
+        "summary": "Delete a Command",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific command based on the command ID.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -3910,7 +3924,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List an individual Command"
+        "summary": "List an individual Command",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -3945,7 +3960,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a Command"
+        "summary": "Update a Command",
+        "x-internal": false
       }
     },
     "/files/command/{id}": {
@@ -3976,7 +3992,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a Command File"
+        "summary": "Get a Command File",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4024,7 +4041,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Organization Details"
+        "summary": "Get Organization Details",
+        "x-internal": false
       }
     },
     "/organizations/{id}": {
@@ -4052,7 +4070,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get an Organization"
+        "summary": "Get an Organization",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4092,7 +4111,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update an Organization"
+        "summary": "Update an Organization",
+        "x-internal": false
       }
     },
     "/radiusservers": {
@@ -4129,7 +4149,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Radius Servers"
+        "summary": "List Radius Servers",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create RADIUS servers in your organization.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/radiusservers/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{test_radius}\",\n    \"networkSourceIp\": \"{0.0.0.0}\",\n    \"sharedSecret\":\"{secretpassword}\",\n    \"userLockoutAction\": \"REMOVE\",\n    \"userPasswordExpirationAction\": \"MAINTAIN\"\n}'\n```",
@@ -4156,7 +4177,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a Radius Server"
+        "summary": "Create a Radius Server",
+        "x-internal": false
       }
     },
     "/radiusservers/{id}": {
@@ -4177,7 +4199,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Radius Server"
+        "summary": "Get Radius Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4251,7 +4274,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update Radius Servers"
+        "summary": "Update Radius Servers",
+        "x-internal": false
       },
       "delete": {
         "description": "This endpoint allows you to delete RADIUS servers in your organization.\n```\ncurl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n```",
@@ -4270,7 +4294,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete Radius Server"
+        "summary": "Delete Radius Server",
+        "x-internal": false
       }
     },
     "/search/organizations": {
@@ -4311,7 +4336,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Search Organizations"
+        "summary": "Search Organizations",
+        "x-internal": false
       }
     },
     "/search/systems": {
@@ -4352,7 +4378,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Search Systems"
+        "summary": "Search Systems",
+        "x-internal": false
       }
     },
     "/search/systemusers": {
@@ -4393,7 +4420,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Search System Users"
+        "summary": "Search System Users",
+        "x-internal": false
       }
     },
     "/systems": {
@@ -4433,7 +4461,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List All Systems"
+        "summary": "List All Systems",
+        "x-internal": false
       }
     },
     "/systems/{id}": {
@@ -4454,7 +4483,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a System"
+        "summary": "Delete a System",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns an individual system.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/systems/{SystemID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -4480,7 +4510,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List an individual system"
+        "summary": "List an individual system",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4515,7 +4546,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a system"
+        "summary": "Update a system",
+        "x-internal": false
       }
     },
     "/systemusers": {
@@ -4571,7 +4603,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all system users"
+        "summary": "List all system users",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new system user.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n\t\"username\":\"{username}\",\n\t\"email\":\"{email_address}\",\n\t\"firstname\":\"{Name}\",\n\t\"lastname\":\"{Name}\"\n}'\n```",
@@ -4598,7 +4631,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a system user"
+        "summary": "Create a system user",
+        "x-internal": false
       }
     },
     "/systemusers/{id}": {
@@ -4619,7 +4653,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a system user"
+        "summary": "Delete a system user",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a particular System User.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -4645,7 +4680,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List a system user"
+        "summary": "List a system user",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4680,7 +4716,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a system user"
+        "summary": "Update a system user",
+        "x-internal": false
       }
     },
     "/systemusers/{id}/expire": {
@@ -4706,7 +4743,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Expire a system user's password"
+        "summary": "Expire a system user's password",
+        "x-internal": false
       }
     },
     "/systemusers/{id}/resetmfa": {
@@ -4749,7 +4787,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Reset a system user's MFA token"
+        "summary": "Reset a system user's MFA token",
+        "x-internal": false
       }
     },
     "/systemusers/{id}/sshkeys": {
@@ -4773,7 +4812,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List a system user's public SSH keys"
+        "summary": "List a system user's public SSH keys",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4808,7 +4848,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a system user's Public SSH Key"
+        "summary": "Create a system user's Public SSH Key",
+        "x-internal": false
       }
     },
     "/systemusers/{id}/unlock": {
@@ -4834,7 +4875,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Unlock a system user"
+        "summary": "Unlock a system user",
+        "x-internal": false
       }
     },
     "/systemusers/{systemuser_id}/sshkeys/{id}": {
@@ -4852,7 +4894,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a system user's Public SSH Keys"
+        "summary": "Delete a system user's Public SSH Keys",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -4880,6 +4923,7 @@
       ],
       "get": {
         "summary": "Get results for a specific command",
+        "x-internal": false,
         "responses": {
           "200": {
             "description": "OK",
@@ -4923,7 +4967,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Erase a System"
+        "summary": "Erase a System",
+        "x-internal": false
       }
     },
     "/systems/{system_id}/command/builtin/lock": {
@@ -4949,7 +4994,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lock a System"
+        "summary": "Lock a System",
+        "x-internal": false
       }
     },
     "/systems/{system_id}/command/builtin/restart": {
@@ -4975,7 +5021,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Restart a System"
+        "summary": "Restart a System",
+        "x-internal": false
       }
     },
     "/systems/{system_id}/command/builtin/shutdown": {
@@ -5001,7 +5048,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Shutdown a System"
+        "summary": "Shutdown a System",
+        "x-internal": false
       }
     }
   },

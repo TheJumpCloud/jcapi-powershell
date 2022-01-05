@@ -1427,7 +1427,8 @@
             "osVersion": {
               "type": "string"
             }
-          }
+          },
+          "x-internal": false
         },
         "enrollmentDate": {
           "type": "string",
@@ -1440,7 +1441,7 @@
       }
     },
     "Office365BuiltinTranslation": {
-      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`\n* `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`",
+      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`\n* `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`\n* `user_alternate_email` - Translate `alternateEmail` field of JumpCloud user to `otherMails` field of Microsoft Graph `user`",
       "enum": [
         "user_street_address",
         "user_city",
@@ -1452,7 +1453,8 @@
         "user_department",
         "user_job_title",
         "user_office_location",
-        "user_manager"
+        "user_manager",
+        "user_alternate_email"
       ],
       "title": "Office 365 BuiltIn Translation",
       "type": "string"
@@ -1978,7 +1980,8 @@
               }
             }
           },
-          "title": "FilterQuery"
+          "title": "FilterQuery",
+          "x-internal": false
         }
       ],
       "description": "Query using a sequence of field filters.",
@@ -5765,7 +5768,7 @@
     "description": "JumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n# V2 API\n  ### Directory Objects\n\nOur new API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud API.\n\n### JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n\n### JumpCloud Graph Model Example\n\nThe diagram below highlights our association and membership model as it relates to Directory Objects.\n\n![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\")\n\n\n### API Considerations\n\nWe are currently in the process of migrating our [API V1](https://docs.jumpcloud.com/1.0)  features to API V2. Depending on your type of integration you may be required to use both V1 and V2 APIs.\n\nPlease refer to our [API V1](https://docs.jumpcloud.com/1.0) docs to understand the functionality still available in that API set.\n\n### API SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n# API Key\n  #### Access Your API Key\n\nTo locate your API Key:\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/)\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n#### API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\nPlease keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n##### Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nFor API V2 the API key will be passed in as a header with the header name \"x-api-key\".\n\n**Example**\n```\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n# System Context\n  * [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n### Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n### Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n- A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  - `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/1.0/systems/list-an-individual-system) [`PUT`](https://docs.jumpcloud.com/1.0/systems/update-a-system)\n- A system may delete itself from your JumpCloud organization\n  - `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/1.0/systems/delete-a-system)\n- A system may fetch its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-a-systems-group-membership)\n  - `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-associations-of-a-system)\n  - `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/2.0/systems/list-the-users-associated-with-a-system)\n- A system may alter its direct resource associations under v2 (Groups)\n  - `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/2.0/systems/manage-associations-of-a-system)\n- A system may alter its System Group associations\n  - `/api/v2/systemgroups/{systemgroup_id}/members` | [`POST`](https://docs.jumpcloud.com/2.0/system-groups/update-a-system-group)\n    - _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n\n### Response Codes\n\nIf endpoints other than those described above are called using the System Context API the server will return a `401` response.\n\n### Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\n\nHere is a breakdown of the example script, with explanations.\n\nThe first thing the script does is extract the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```\n#!/bin/bash\n\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen the script retrieves the current date in the correct format.\n\n```\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n1. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n#### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n\n#### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```\n{\n  \"__v\": 0,\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n\n### Additional Examples\n\n#### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n\n#### Shutdown Hook\n\nThis example demonstrates how to make authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent...\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`\n\n\n### Third Party\n\n#### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n# Multi Tenant Organization API Headers\n  Multi-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to Jumpcloud as this header will define what organization you would like to make the request for.\n\nPlease note that Single Tenant Admins do not need to provide this header when making an API request.\n\n#### Header Value\n\n`x-org-id`\n\n#### API Response Codes\n\n- `400` Malformed ID.\n- `400` x-org-id and Organization path ID do not match.\n- `401` ID not included for multi-tenant admin\n- `403` ID included on unsupported route.\n- `404` Organization ID Not Found.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n#### To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite your Primary Organization will need to be setup for Multi-Tenancy which will give you access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n#### To Obtain All Organization IDs via the API\n\n1. You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n#### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
     "title": "JumpCloud API",
     "version": "2.0",
-    "x-releaseTag": "v16.314.0"
+    "x-releaseTag": "v16.316.0"
   },
   "parameters": {
     "trait:fields:fields": {
@@ -6262,7 +6265,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Active Directories"
+        "summary": "List Active Directories",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new Active Directory.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"domain\": \"{DC=AD_domain_name;DC=com}\"\n  }'\n```",
@@ -6289,7 +6293,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Active Directory"
+        "summary": "Create a new Active Directory",
+        "x-internal": false
       },
       "parameters": []
     },
@@ -6324,7 +6329,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Active Directory Agents"
+        "summary": "List Active Directory Agents",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6359,7 +6365,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Active Directory Agent"
+        "summary": "Create a new Active Directory Agent",
+        "x-internal": false
       }
     },
     "/activedirectories/{activedirectory_id}/agents/{agent_id}": {
@@ -6377,6 +6384,7 @@
           }
         ],
         "summary": "Delete Active Directory Agent",
+        "x-internal": false,
         "description": "This endpoint deletes an Active Directory agent.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```"
       },
       "get": {
@@ -6396,7 +6404,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Active Directory Agent"
+        "summary": "Get Active Directory Agent",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6444,7 +6453,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of an Active Directory instance"
+        "summary": "List the associations of an Active Directory instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6476,7 +6486,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of an Active Directory instance"
+        "summary": "Manage the associations of an Active Directory instance",
+        "x-internal": false
       }
     },
     "/activedirectories/{activedirectory_id}/usergroups": {
@@ -6510,7 +6521,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to an Active Directory instance"
+        "summary": "List the User Groups bound to an Active Directory instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6553,7 +6565,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to an Active Directory instance"
+        "summary": "List the Users bound to an Active Directory instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6583,7 +6596,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete an Active Directory"
+        "summary": "Delete an Active Directory",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific Active Directory.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -6602,7 +6616,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get an Active Directory"
+        "summary": "Get an Active Directory",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6635,7 +6650,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Apple MDMs"
+        "summary": "List Apple MDMs",
+        "x-internal": false
       }
     },
     "/applemdms/{id}": {
@@ -6656,7 +6672,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete an Apple MDM"
+        "summary": "Delete an Apple MDM",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6691,7 +6708,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update an Apple MDM"
+        "summary": "Update an Apple MDM",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/enrollmentprofiles": {
@@ -6715,7 +6733,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Apple MDM Enrollment Profiles"
+        "summary": "List Apple MDM Enrollment Profiles",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -6749,7 +6768,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Refresh DEP Devices"
+        "summary": "Refresh DEP Devices",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
@@ -6800,7 +6820,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Erase Device"
+        "summary": "Erase Device",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/lock": {
@@ -6851,7 +6872,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lock Device"
+        "summary": "Lock Device",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/restart": {
@@ -6883,7 +6905,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Restart Device"
+        "summary": "Restart Device",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/shutdown": {
@@ -6915,7 +6938,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Shut Down Device"
+        "summary": "Shut Down Device",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock": {
@@ -6947,7 +6971,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Clears the Activation Lock for a Device"
+        "summary": "Clears the Activation Lock for a Device",
+        "x-internal": false
       }
     },
     "/applications/{application_id}/associations": {
@@ -6981,7 +7006,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of an Application"
+        "summary": "List the associations of an Application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7014,7 +7040,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of an Application"
+        "summary": "Manage the associations of an Application",
+        "x-internal": false
       }
     },
     "/applications/{application_id}/logo": {
@@ -7039,7 +7066,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete application image"
+        "summary": "Delete application image",
+        "x-internal": false
       }
     },
     "/applications/{application_id}/usergroups": {
@@ -7073,7 +7101,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to an Application"
+        "summary": "List the User Groups bound to an Application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7116,7 +7145,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to an Application"
+        "summary": "List the Users bound to an Application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7157,7 +7187,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Bulk Users Update"
+        "summary": "Bulk Users Update",
+        "x-internal": false
       },
       "post": {
         "description": "The endpoint allows you to create a bulk job to asynchronously create users. See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t\t\"email\":\"{email}\",\n\t\t\"firstname\":\"{firstname}\",\n\t\t\"lastname\":\"{firstname}\",\n\t\t\"username\":\"{username}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},\n\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}\n\t\t]\n\t}\n]\n```",
@@ -7187,7 +7218,7 @@
               "jumpcloud:bulk"
             ],
             "x-ms-enum": {
-              "name": "creation-source"
+              "name": "creation-source1"
             }
           }
         ],
@@ -7204,7 +7235,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Bulk Users Create"
+        "summary": "Bulk Users Create",
+        "x-internal": false
       }
     },
     "/bulk/users/{job_id}/results": {
@@ -7235,7 +7267,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Bulk Users Results"
+        "summary": "List Bulk Users Results",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7280,7 +7313,8 @@
             "name": "userid",
             "description": "The systemuser id to filter by."
           }
-        ]
+        ],
+        "x-internal": false
       },
       "post": {
         "summary": "Create Scheduled Userstate Job",
@@ -7303,6 +7337,7 @@
           }
         ],
         "operationId": "BulkUserState_Create",
+        "x-internal": false,
         "parameters": [
           {
             "in": "body",
@@ -7330,7 +7365,8 @@
             "x-api-key": []
           }
         ],
-        "parameters": []
+        "parameters": [],
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7386,6 +7422,7 @@
             "$ref": "#/parameters/trait:skip:skip"
           }
         ],
+        "x-internal": false,
         "security": [
           {
             "x-api-key": []
@@ -7425,7 +7462,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a Command"
+        "summary": "List the associations of a Command",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7458,7 +7496,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a Command"
+        "summary": "Manage the associations of a Command",
+        "x-internal": false
       }
     },
     "/commands/{command_id}/systemgroups": {
@@ -7492,7 +7531,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to a Command"
+        "summary": "List the System Groups bound to a Command",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7535,7 +7575,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a Command"
+        "summary": "List the Systems bound to a Command",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7581,7 +7622,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List All Directories"
+        "summary": "List All Directories",
+        "x-internal": false
       }
     },
     "/duo/accounts": {
@@ -7605,7 +7647,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Duo Accounts"
+        "summary": "List Duo Accounts",
+        "x-internal": false
       },
       "post": {
         "description": "Registers a Duo account for an organization. Only one Duo account will be allowed,\nin case an organization has a Duo account already a 409 (Conflict) code will be returned.\n\n#### Sample Request\n```\n  curl -X POST https://console.jumpcloud.com/api/v2/duo/accounts \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
@@ -7624,7 +7667,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create Duo Account"
+        "summary": "Create Duo Account",
+        "x-internal": false
       }
     },
     "/duo/accounts/{account_id}/applications": {
@@ -7648,7 +7692,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Duo Applications"
+        "summary": "List Duo Applications",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7683,7 +7728,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create Duo Application"
+        "summary": "Create Duo Application",
+        "x-internal": false
       }
     },
     "/duo/accounts/{account_id}/applications/{application_id}": {
@@ -7704,7 +7750,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a Duo Application"
+        "summary": "Delete a Duo Application",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific Duo application that is associated with the specified Duo account.\n\n#### Sample Request\n```\n  curl https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -7723,7 +7770,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a Duo application"
+        "summary": "Get a Duo application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7764,7 +7812,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update Duo Application"
+        "summary": "Update Duo Application",
+        "x-internal": false
       }
     },
     "/duo/accounts/{id}": {
@@ -7785,7 +7834,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a Duo Account"
+        "summary": "Delete a Duo Account",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific Duo account.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -7804,7 +7854,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a Duo Acount"
+        "summary": "Get a Duo Acount",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7856,7 +7907,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List All Groups"
+        "summary": "List All Groups",
+        "x-internal": false
       },
       "parameters": []
     },
@@ -7891,7 +7943,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a G Suite instance"
+        "summary": "List the associations of a G Suite instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -7924,7 +7977,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a G Suite instance"
+        "summary": "Manage the associations of a G Suite instance",
+        "x-internal": false
       }
     },
     "/gsuites/{gsuite_id}/translationrules": {
@@ -7973,7 +8027,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all the G Suite Translation Rules"
+        "summary": "List all the G Suite Translation Rules",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8008,7 +8063,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new G Suite Translation Rule"
+        "summary": "Create a new G Suite Translation Rule",
+        "x-internal": false
       }
     },
     "/gsuites/{gsuite_id}/translationrules/{id}": {
@@ -8026,7 +8082,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Deletes a G Suite translation rule"
+        "summary": "Deletes a G Suite translation rule",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -8045,7 +8102,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Gets a specific G Suite translation rule"
+        "summary": "Gets a specific G Suite translation rule",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8093,7 +8151,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to a G Suite instance"
+        "summary": "List the User Groups bound to a G Suite instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8136,7 +8195,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to a G Suite instance"
+        "summary": "List the Users bound to a G Suite instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8166,7 +8226,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get G Suite"
+        "summary": "Get G Suite",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8197,7 +8258,8 @@
             }
           }
         },
-        "summary": "Update existing G Suite"
+        "summary": "Update existing G Suite",
+        "x-internal": false
       }
     },
     "/iplists": {
@@ -8237,7 +8299,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       },
       "post": {
         "summary": "Create IP List",
@@ -8264,7 +8327,8 @@
               "$ref": "#/definitions/IPListRequest"
             }
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/ldapservers": {
@@ -8304,7 +8368,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List LDAP Servers"
+        "summary": "List LDAP Servers",
+        "x-internal": false
       }
     },
     "/ldapservers/{id}": {
@@ -8325,7 +8390,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get LDAP Server"
+        "summary": "Get LDAP Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8386,7 +8452,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update existing LDAP server"
+        "summary": "Update existing LDAP server",
+        "x-internal": false
       }
     },
     "/ldapservers/{ldapserver_id}/associations": {
@@ -8420,7 +8487,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a LDAP Server"
+        "summary": "List the associations of a LDAP Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8453,7 +8521,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a LDAP Server"
+        "summary": "Manage the associations of a LDAP Server",
+        "x-internal": false
       }
     },
     "/ldapservers/{ldapserver_id}/sambadomains": {
@@ -8493,7 +8562,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Samba Domains"
+        "summary": "List Samba Domains",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8529,7 +8599,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create Samba Domain"
+        "summary": "Create Samba Domain",
+        "x-internal": false
       }
     },
     "/ldapservers/{ldapserver_id}/sambadomains/{id}": {
@@ -8553,7 +8624,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete Samba Domain"
+        "summary": "Delete Samba Domain",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific samba domain for an LDAP server.\n\n##### Sample Request\n```\ncurl -X GET \\\n  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -8572,7 +8644,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Samba Domain"
+        "summary": "Get Samba Domain",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8615,7 +8688,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update Samba Domain"
+        "summary": "Update Samba Domain",
+        "x-internal": false
       }
     },
     "/ldapservers/{ldapserver_id}/usergroups": {
@@ -8649,7 +8723,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to a LDAP Server"
+        "summary": "List the User Groups bound to a LDAP Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8692,7 +8767,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to a LDAP Server"
+        "summary": "List the Users bound to a LDAP Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8722,7 +8798,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Office 365 instance"
+        "summary": "Get Office 365 instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8758,7 +8835,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update existing Office 365 instance."
+        "summary": "Update existing Office 365 instance.",
+        "x-internal": false
       }
     },
     "/office365s/{office365_id}/associations": {
@@ -8792,7 +8870,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of an Office 365 instance"
+        "summary": "List the associations of an Office 365 instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8825,7 +8904,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of an Office 365 instance"
+        "summary": "Manage the associations of an Office 365 instance",
+        "x-internal": false
       }
     },
     "/office365s/{office365_id}/translationrules": {
@@ -8874,7 +8954,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all the Office 365 Translation Rules"
+        "summary": "List all the Office 365 Translation Rules",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8909,7 +8990,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Office 365 Translation Rule"
+        "summary": "Create a new Office 365 Translation Rule",
+        "x-internal": false
       }
     },
     "/office365s/{office365_id}/translationrules/{id}": {
@@ -8927,7 +9009,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Deletes a Office 365 translation rule"
+        "summary": "Deletes a Office 365 translation rule",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -8946,7 +9029,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Gets a specific Office 365 translation rule"
+        "summary": "Gets a specific Office 365 translation rule",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -8994,7 +9078,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to an Office 365 instance"
+        "summary": "List the User Groups bound to an Office 365 instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9037,7 +9122,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to an Office 365 instance"
+        "summary": "List the Users bound to an Office 365 instance",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9065,7 +9151,8 @@
             }
           }
         },
-        "summary": "Lists all the Pricing & Packaging Subscriptions"
+        "summary": "Lists all the Pricing & Packaging Subscriptions",
+        "x-internal": false
       }
     },
     "/policies": {
@@ -9105,7 +9192,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all the Policies"
+        "summary": "Lists all the Policies",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a policy. Given the amount of configurable parameters required to create a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n##### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policies \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
@@ -9132,7 +9220,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Policy"
+        "summary": "Create a new Policy",
+        "x-internal": false
       }
     },
     "/policies/{id}": {
@@ -9150,7 +9239,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Deletes a Policy"
+        "summary": "Deletes a Policy",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns a specific policy.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/policies/{PolicyID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
@@ -9169,7 +9259,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Gets a specific Policy."
+        "summary": "Gets a specific Policy.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9205,7 +9296,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update an existing Policy"
+        "summary": "Update an existing Policy",
+        "x-internal": false
       }
     },
     "/policies/{policy_id}/associations": {
@@ -9239,7 +9331,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a Policy"
+        "summary": "List the associations of a Policy",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9272,7 +9365,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a Policy"
+        "summary": "Manage the associations of a Policy",
+        "x-internal": false
       }
     },
     "/policies/{policy_id}/memberof": {
@@ -9315,7 +9409,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the parent Groups of a Policy"
+        "summary": "List the parent Groups of a Policy",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9364,7 +9459,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all the policy results of a policy."
+        "summary": "Lists all the policy results of a policy.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9412,7 +9508,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists the latest policy results of a policy."
+        "summary": "Lists the latest policy results of a policy.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9454,7 +9551,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to a Policy"
+        "summary": "List the System Groups bound to a Policy",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9497,7 +9595,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a Policy"
+        "summary": "List the Systems bound to a Policy",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9546,7 +9645,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all Policy Groups"
+        "summary": "List all Policy Groups",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new Policy Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/policygroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
@@ -9573,7 +9673,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new Policy Group"
+        "summary": "Create a new Policy Group",
+        "x-internal": false
       }
     },
     "/policygroups/{group_id}/associations": {
@@ -9607,7 +9708,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a Policy Group."
+        "summary": "List the associations of a Policy Group.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9640,7 +9742,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a Policy Group"
+        "summary": "Manage the associations of a Policy Group",
+        "x-internal": false
       }
     },
     "/policygroups/{group_id}/members": {
@@ -9671,7 +9774,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the members of a Policy Group"
+        "summary": "List the members of a Policy Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9704,7 +9808,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the members of a Policy Group"
+        "summary": "Manage the members of a Policy Group",
+        "x-internal": false
       }
     },
     "/policygroups/{group_id}/membership": {
@@ -9741,7 +9846,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policy Group's membership"
+        "summary": "List the Policy Group's membership",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9784,7 +9890,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to Policy Groups"
+        "summary": "List the System Groups bound to Policy Groups",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9827,7 +9934,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a Policy Group"
+        "summary": "List the Systems bound to a Policy Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9860,7 +9968,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a Policy Group"
+        "summary": "Delete a Policy Group",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns the details of a Policy Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -9879,7 +9988,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "View an individual Policy Group details"
+        "summary": "View an individual Policy Group details",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -9915,7 +10025,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a Policy Group"
+        "summary": "Update a Policy Group",
+        "x-internal": false
       }
     },
     "/policyresults": {
@@ -9955,7 +10066,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all of the policy results for an organization."
+        "summary": "Lists all of the policy results for an organization.",
+        "x-internal": false
       }
     },
     "/policyresults/{id}": {
@@ -9976,7 +10088,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a specific Policy Result."
+        "summary": "Get a specific Policy Result.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10025,7 +10138,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Lists all of the Policy Templates"
+        "summary": "Lists all of the Policy Templates",
+        "x-internal": false
       }
     },
     "/policytemplates/{id}": {
@@ -10046,7 +10160,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get a specific Policy Template"
+        "summary": "Get a specific Policy Template",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10089,7 +10204,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a RADIUS  Server"
+        "summary": "List the associations of a RADIUS  Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10122,7 +10238,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a RADIUS Server"
+        "summary": "Manage the associations of a RADIUS Server",
+        "x-internal": false
       }
     },
     "/radiusservers/{radiusserver_id}/usergroups": {
@@ -10156,7 +10273,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to a RADIUS  Server"
+        "summary": "List the User Groups bound to a RADIUS  Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10199,7 +10317,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to a RADIUS  Server"
+        "summary": "List the Users bound to a RADIUS  Server",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10245,6 +10364,7 @@
             "x-api-key": []
           }
         ],
+        "x-internal": false,
         "summary": "Get all configured Software Applications"
       },
       "post": {
@@ -10272,7 +10392,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a Software Application that will be managed by JumpCloud"
+        "summary": "Create a Software Application that will be managed by JumpCloud",
+        "x-internal": false
       }
     },
     "/softwareapps/{id}": {
@@ -10290,7 +10411,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a configured Software Application"
+        "summary": "Delete a configured Software Application",
+        "x-internal": false
       },
       "put": {
         "summary": "Update a Software Application Configuration",
@@ -10317,7 +10439,8 @@
               "$ref": "#/definitions/software-app"
             }
           }
-        }
+        },
+        "x-internal": false
       },
       "get": {
         "description": "Retrieves a Software Application.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -10336,7 +10459,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Retrieve a configured Software Application"
+        "summary": "Retrieve a configured Software Application",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10387,7 +10511,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a Software Application"
+        "summary": "List the associations of a Software Application",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to associate or disassociate a software application to a system or system group.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"id\": \"<object_id>\",\n  \"op\": \"add\",\n  \"type\": \"system\"\n }'\n```",
@@ -10411,7 +10536,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a software application."
+        "summary": "Manage the associations of a software application.",
+        "x-internal": false
       }
     },
     "/softwareapps/{software_app_id}/reclaim-licenses": {
@@ -10439,6 +10565,7 @@
             "x-api-key": []
           }
         ],
+        "x-internal": false,
         "operationId": "SoftwareAppsLicenses_Reclaim"
       }
     },
@@ -10485,6 +10612,7 @@
             "x-api-key": []
           }
         ],
+        "x-internal": false,
         "summary": "Get the status of the provided Software Application"
       }
     },
@@ -10519,7 +10647,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to a Software App."
+        "summary": "List the System Groups bound to a Software App.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10562,7 +10691,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a Software App."
+        "summary": "List the Systems bound to a Software App.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10625,7 +10755,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all System Groups"
+        "summary": "List all System Groups",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new System Group.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
@@ -10652,7 +10783,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new System Group"
+        "summary": "Create a new System Group",
+        "x-internal": false
       }
     },
     "/systemgroups/{group_id}/associations": {
@@ -10686,7 +10818,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a System Group"
+        "summary": "List the associations of a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10719,7 +10852,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a System Group"
+        "summary": "Manage the associations of a System Group",
+        "x-internal": false
       }
     },
     "/systemgroups/{group_id}/commands": {
@@ -10753,7 +10887,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Commands bound to a System Group"
+        "summary": "List the Commands bound to a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10793,7 +10928,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the members of a System Group"
+        "summary": "List the members of a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10832,7 +10968,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the members of a System Group"
+        "summary": "Manage the members of a System Group",
+        "x-internal": false
       }
     },
     "/systemgroups/{group_id}/membership": {
@@ -10869,7 +11006,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Group's membership"
+        "summary": "List the System Group's membership",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10912,7 +11050,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policy Groups bound to a System Group"
+        "summary": "List the Policy Groups bound to a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10955,7 +11094,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policies bound to a System Group"
+        "summary": "List the Policies bound to a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -10998,7 +11138,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to a System Group"
+        "summary": "List the User Groups bound to a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -11041,7 +11182,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to a System Group"
+        "summary": "List the Users bound to a System Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -11074,7 +11216,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a System Group"
+        "summary": "Delete a System Group",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns the details of a System Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -11100,7 +11243,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "View an individual System Group details"
+        "summary": "View an individual System Group details",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -11143,7 +11287,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a System Group"
+        "summary": "Update a System Group",
+        "x-internal": false
       }
     },
     "/systeminsights/alf": {
@@ -11180,7 +11325,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights ALF"
+        "summary": "List System Insights ALF",
+        "x-internal": false
       }
     },
     "/systeminsights/alf_exceptions": {
@@ -11217,7 +11363,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights ALF Exceptions"
+        "summary": "List System Insights ALF Exceptions",
+        "x-internal": false
       }
     },
     "/systeminsights/alf_explicit_auths": {
@@ -11254,7 +11401,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights ALF Explicit Authentications"
+        "summary": "List System Insights ALF Explicit Authentications",
+        "x-internal": false
       }
     },
     "/systeminsights/appcompat_shims": {
@@ -11291,7 +11439,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Application Compatibility Shims"
+        "summary": "List System Insights Application Compatibility Shims",
+        "x-internal": false
       }
     },
     "/systeminsights/apps": {
@@ -11328,7 +11477,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Apps"
+        "summary": "List System Insights Apps",
+        "x-internal": false
       }
     },
     "/systeminsights/authorized_keys": {
@@ -11365,7 +11515,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Authorized Keys"
+        "summary": "List System Insights Authorized Keys",
+        "x-internal": false
       }
     },
     "/systeminsights/battery": {
@@ -11402,7 +11553,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Battery"
+        "summary": "List System Insights Battery",
+        "x-internal": false
       }
     },
     "/systeminsights/bitlocker_info": {
@@ -11439,7 +11591,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Bitlocker Info"
+        "summary": "List System Insights Bitlocker Info",
+        "x-internal": false
       }
     },
     "/systeminsights/browser_plugins": {
@@ -11476,7 +11629,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Browser Plugins"
+        "summary": "List System Insights Browser Plugins",
+        "x-internal": false
       }
     },
     "/systeminsights/certificates": {
@@ -11513,7 +11667,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Certificates"
+        "summary": "List System Insights Certificates",
+        "x-internal": false
       }
     },
     "/systeminsights/chrome_extensions": {
@@ -11550,7 +11705,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Chrome Extensions"
+        "summary": "List System Insights Chrome Extensions",
+        "x-internal": false
       }
     },
     "/systeminsights/connectivity": {
@@ -11587,7 +11743,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Connectivity"
+        "summary": "List System Insights Connectivity",
+        "x-internal": false
       }
     },
     "/systeminsights/crashes": {
@@ -11624,7 +11781,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Crashes"
+        "summary": "List System Insights Crashes",
+        "x-internal": false
       }
     },
     "/systeminsights/cups_destinations": {
@@ -11661,7 +11819,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights CUPS Destinations"
+        "summary": "List System Insights CUPS Destinations",
+        "x-internal": false
       }
     },
     "/systeminsights/disk_encryption": {
@@ -11698,7 +11857,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Disk Encryption"
+        "summary": "List System Insights Disk Encryption",
+        "x-internal": false
       }
     },
     "/systeminsights/disk_info": {
@@ -11735,7 +11895,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Disk Info"
+        "summary": "List System Insights Disk Info",
+        "x-internal": false
       }
     },
     "/systeminsights/dns_resolvers": {
@@ -11772,7 +11933,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights DNS Resolvers"
+        "summary": "List System Insights DNS Resolvers",
+        "x-internal": false
       }
     },
     "/systeminsights/etc_hosts": {
@@ -11809,7 +11971,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Etc Hosts"
+        "summary": "List System Insights Etc Hosts",
+        "x-internal": false
       }
     },
     "/systeminsights/firefox_addons": {
@@ -11846,7 +12009,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Firefox Addons"
+        "summary": "List System Insights Firefox Addons",
+        "x-internal": false
       }
     },
     "/systeminsights/groups": {
@@ -11883,7 +12047,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Groups"
+        "summary": "List System Insights Groups",
+        "x-internal": false
       }
     },
     "/systeminsights/ie_extensions": {
@@ -11920,7 +12085,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights IE Extensions"
+        "summary": "List System Insights IE Extensions",
+        "x-internal": false
       }
     },
     "/systeminsights/interface_addresses": {
@@ -11957,7 +12123,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Interface Addresses"
+        "summary": "List System Insights Interface Addresses",
+        "x-internal": false
       }
     },
     "/systeminsights/interface_details": {
@@ -11994,7 +12161,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Interface Details"
+        "summary": "List System Insights Interface Details",
+        "x-internal": false
       }
     },
     "/systeminsights/kernel_info": {
@@ -12031,7 +12199,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Kernel Info"
+        "summary": "List System Insights Kernel Info",
+        "x-internal": false
       }
     },
     "/systeminsights/launchd": {
@@ -12068,7 +12237,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Launchd"
+        "summary": "List System Insights Launchd",
+        "x-internal": false
       }
     },
     "/systeminsights/logged_in_users": {
@@ -12105,7 +12275,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Logged-In Users"
+        "summary": "List System Insights Logged-In Users",
+        "x-internal": false
       }
     },
     "/systeminsights/logical_drives": {
@@ -12142,7 +12313,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Logical Drives"
+        "summary": "List System Insights Logical Drives",
+        "x-internal": false
       }
     },
     "/systeminsights/managed_policies": {
@@ -12179,7 +12351,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Managed Policies"
+        "summary": "List System Insights Managed Policies",
+        "x-internal": false
       }
     },
     "/systeminsights/mounts": {
@@ -12216,7 +12389,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Mounts"
+        "summary": "List System Insights Mounts",
+        "x-internal": false
       }
     },
     "/systeminsights/os_version": {
@@ -12253,7 +12427,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights OS Version"
+        "summary": "List System Insights OS Version",
+        "x-internal": false
       }
     },
     "/systeminsights/patches": {
@@ -12290,7 +12465,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Patches"
+        "summary": "List System Insights Patches",
+        "x-internal": false
       }
     },
     "/systeminsights/programs": {
@@ -12327,7 +12503,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Programs"
+        "summary": "List System Insights Programs",
+        "x-internal": false
       }
     },
     "/systeminsights/python_packages": {
@@ -12364,7 +12541,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Python Packages"
+        "summary": "List System Insights Python Packages",
+        "x-internal": false
       }
     },
     "/systeminsights/safari_extensions": {
@@ -12401,7 +12579,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Safari Extensions"
+        "summary": "List System Insights Safari Extensions",
+        "x-internal": false
       }
     },
     "/systeminsights/scheduled_tasks": {
@@ -12438,7 +12617,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Scheduled Tasks"
+        "summary": "List System Insights Scheduled Tasks",
+        "x-internal": false
       }
     },
     "/systeminsights/services": {
@@ -12475,7 +12655,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Services"
+        "summary": "List System Insights Services",
+        "x-internal": false
       }
     },
     "/systeminsights/shadow": {
@@ -12512,7 +12693,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "LIst System Insights Shadow"
+        "summary": "LIst System Insights Shadow",
+        "x-internal": false
       }
     },
     "/systeminsights/shared_folders": {
@@ -12549,7 +12731,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Shared Folders"
+        "summary": "List System Insights Shared Folders",
+        "x-internal": false
       }
     },
     "/systeminsights/shared_resources": {
@@ -12581,7 +12764,8 @@
             }
           }
         },
-        "summary": "List System Insights Shared Resources"
+        "summary": "List System Insights Shared Resources",
+        "x-internal": false
       }
     },
     "/systeminsights/sharing_preferences": {
@@ -12618,7 +12802,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Sharing Preferences"
+        "summary": "List System Insights Sharing Preferences",
+        "x-internal": false
       }
     },
     "/systeminsights/sip_config": {
@@ -12655,7 +12840,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights SIP Config"
+        "summary": "List System Insights SIP Config",
+        "x-internal": false
       }
     },
     "/systeminsights/startup_items": {
@@ -12692,7 +12878,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Startup Items"
+        "summary": "List System Insights Startup Items",
+        "x-internal": false
       }
     },
     "/systeminsights/system_controls": {
@@ -12729,7 +12916,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights System Control"
+        "summary": "List System Insights System Control",
+        "x-internal": false
       }
     },
     "/systeminsights/system_info": {
@@ -12766,7 +12954,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights System Info"
+        "summary": "List System Insights System Info",
+        "x-internal": false
       }
     },
     "/systeminsights/uptime": {
@@ -12803,7 +12992,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Uptime"
+        "summary": "List System Insights Uptime",
+        "x-internal": false
       }
     },
     "/systeminsights/usb_devices": {
@@ -12840,7 +13030,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights USB Devices"
+        "summary": "List System Insights USB Devices",
+        "x-internal": false
       }
     },
     "/systeminsights/user_groups": {
@@ -12877,7 +13068,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights User Groups"
+        "summary": "List System Insights User Groups",
+        "x-internal": false
       }
     },
     "/systeminsights/user_ssh_keys": {
@@ -12914,7 +13106,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights User SSH Keys"
+        "summary": "List System Insights User SSH Keys",
+        "x-internal": false
       }
     },
     "/systeminsights/users": {
@@ -12951,7 +13144,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Users"
+        "summary": "List System Insights Users",
+        "x-internal": false
       }
     },
     "/systeminsights/wifi_networks": {
@@ -12988,7 +13182,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights WiFi Networks"
+        "summary": "List System Insights WiFi Networks",
+        "x-internal": false
       }
     },
     "/systeminsights/wifi_status": {
@@ -13025,7 +13220,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights WiFi Status"
+        "summary": "List System Insights WiFi Status",
+        "x-internal": false
       }
     },
     "/systeminsights/windows_security_products": {
@@ -13062,7 +13258,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List System Insights Windows Security Products"
+        "summary": "List System Insights Windows Security Products",
+        "x-internal": false
       }
     },
     "/systems/{system_id}/associations": {
@@ -13102,7 +13299,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a System"
+        "summary": "List the associations of a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13141,7 +13339,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage associations of a System"
+        "summary": "Manage associations of a System",
+        "x-internal": false
       }
     },
     "/systems/{system_id}/commands": {
@@ -13175,7 +13374,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Commands bound to a System"
+        "summary": "List the Commands bound to a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13210,7 +13410,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get System FDE Key"
+        "summary": "Get System FDE Key",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13261,7 +13462,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the parent Groups of a System"
+        "summary": "List the parent Groups of a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13310,7 +13512,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policy Groups bound to a System"
+        "summary": "List the Policy Groups bound to a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13353,7 +13556,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Policies bound to a System"
+        "summary": "List the Policies bound to a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13402,7 +13606,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the policy statuses for a system"
+        "summary": "List the policy statuses for a system",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13451,7 +13656,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Groups bound to a System"
+        "summary": "List the User Groups bound to a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13500,7 +13706,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Users bound to a System"
+        "summary": "List the Users bound to a System",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13549,7 +13756,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List all User Groups"
+        "summary": "List all User Groups",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new User Group.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"{Group_Name}\"\n  }'\n```",
@@ -13576,7 +13784,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a new User Group"
+        "summary": "Create a new User Group",
+        "x-internal": false
       }
     },
     "/usergroups/{group_id}/activedirectories": {
@@ -13610,7 +13819,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Active Directories bound to a User Group"
+        "summary": "List the Active Directories bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13653,7 +13863,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Applications bound to a User Group"
+        "summary": "List the Applications bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13696,7 +13907,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a User Group."
+        "summary": "List the associations of a User Group.",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13729,7 +13941,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a User Group"
+        "summary": "Manage the associations of a User Group",
+        "x-internal": false
       }
     },
     "/usergroups/{group_id}/directories": {
@@ -13763,7 +13976,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Directories bound to a User Group"
+        "summary": "List the Directories bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13806,7 +14020,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the G Suite instances bound to a User Group"
+        "summary": "List the G Suite instances bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13849,7 +14064,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the LDAP Servers bound to a User Group"
+        "summary": "List the LDAP Servers bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13889,7 +14105,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the members of a User Group"
+        "summary": "List the members of a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -13922,7 +14139,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the members of a User Group"
+        "summary": "Manage the members of a User Group",
+        "x-internal": false
       }
     },
     "/usergroups/{group_id}/membership": {
@@ -13959,7 +14177,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the User Group's membership"
+        "summary": "List the User Group's membership",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14002,7 +14221,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Office 365 instances bound to a User Group"
+        "summary": "List the Office 365 instances bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14045,7 +14265,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the RADIUS Servers bound to a User Group"
+        "summary": "List the RADIUS Servers bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14088,7 +14309,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to User Groups"
+        "summary": "List the System Groups bound to User Groups",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14131,7 +14353,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a User Group"
+        "summary": "List the Systems bound to a User Group",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14178,7 +14401,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Suggestions for a User Group"
+        "summary": "List Suggestions for a User Group",
+        "x-internal": false
       }
     },
     "/usergroups/{id}": {
@@ -14202,7 +14426,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Delete a User Group"
+        "summary": "Delete a User Group",
+        "x-internal": false
       },
       "get": {
         "description": "This endpoint returns the details of a User Group.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -14221,7 +14446,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "View an individual User Group details"
+        "summary": "View an individual User Group details",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14257,7 +14483,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a User Group"
+        "summary": "Update a User Group",
+        "x-internal": false
       }
     },
     "/users/{user_id}/activedirectories": {
@@ -14291,7 +14518,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Active Directory instances bound to a User"
+        "summary": "List the Active Directory instances bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14334,7 +14562,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Applications bound to a User"
+        "summary": "List the Applications bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14377,7 +14606,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the associations of a User"
+        "summary": "List the associations of a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14410,7 +14640,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Manage the associations of a User"
+        "summary": "Manage the associations of a User",
+        "x-internal": false
       }
     },
     "/users/{user_id}/directories": {
@@ -14444,7 +14675,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Directories bound to a User"
+        "summary": "List the Directories bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14487,7 +14719,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the G Suite instances bound to a User"
+        "summary": "List the G Suite instances bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14530,7 +14763,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the LDAP servers bound to a User"
+        "summary": "List the LDAP servers bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14576,7 +14810,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the parent Groups of a User"
+        "summary": "List the parent Groups of a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14619,7 +14854,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Office 365 instances bound to a User"
+        "summary": "List the Office 365 instances bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14660,6 +14896,7 @@
             "x-api-key": []
           }
         ],
+        "x-internal": false,
         "description": "This endpoint returns the list of push endpoints associated with a user.\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/pushendpoints \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: ${API_KEY}'\n```"
       }
     },
@@ -14695,7 +14932,8 @@
             "x-api-key": []
           }
         ],
-        "description": "This endpoint will retrieve a push endpoint associated with a user."
+        "description": "This endpoint will retrieve a push endpoint associated with a user.",
+        "x-internal": false
       },
       "delete": {
         "summary": "Delete a Push Endpoint associated with a User",
@@ -14714,7 +14952,8 @@
             "x-api-key": []
           }
         ],
-        "description": "This endpoint will delete a push endpoint associated with a user."
+        "description": "This endpoint will delete a push endpoint associated with a user.",
+        "x-internal": false
       },
       "patch": {
         "summary": "Update a push endpoint associated with a User",
@@ -14750,7 +14989,8 @@
               }
             }
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/users/{user_id}/radiusservers": {
@@ -14784,7 +15024,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the RADIUS Servers bound to a User"
+        "summary": "List the RADIUS Servers bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14827,7 +15068,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the System Groups bound to a User"
+        "summary": "List the System Groups bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14870,7 +15112,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List the Systems bound to a User"
+        "summary": "List the Systems bound to a User",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -14919,7 +15162,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Workdays"
+        "summary": "List Workdays",
+        "x-internal": false
       },
       "post": {
         "description": "This endpoint allows you to create a new workday instance.\n\nYou must supply a username and password for `Basic Authentication` that is the same as your WorkDay Integrator System User.  Failure to provide these credentials  will result in the request being rejected.\n\nCurrently `O-Auth` isn't a supported authentication protocol for WorkDay, but will be in the future.\n\nCurrently, only one instance is allowed and it must be `Workday Import`.\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"Workday2\",\n    \"reportUrl\":\"https://workday.com/ccx/service/customreport2/gms/user/reportname?format=json\",\n    \"auth\": {\n      \"basic\": {\n        \"username\": \"someDeveloper\",\n        \"password\": \"notTheRealPassword\"\n      }\n    }\n  }'\n```",
@@ -14946,7 +15190,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create new Workday"
+        "summary": "Create new Workday",
+        "x-internal": false
       }
     },
     "/workdays/{id}": {
@@ -14967,7 +15212,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get Workday"
+        "summary": "Get Workday",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -15002,7 +15248,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update Workday"
+        "summary": "Update Workday",
+        "x-internal": false
       }
     },
     "/workdays/{id}/import/{job_id}/results": {
@@ -15033,7 +15280,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Import Results"
+        "summary": "List Import Results",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -15065,7 +15313,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Deauthorize Workday"
+        "summary": "Deauthorize Workday",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -15097,7 +15346,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Authorize Workday"
+        "summary": "Authorize Workday",
+        "x-internal": false
       }
     },
     "/workdays/{workday_id}/import": {
@@ -15137,7 +15387,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Workday Import"
+        "summary": "Workday Import",
+        "x-internal": false
       }
     },
     "/workdays/{workday_id}/workers": {
@@ -15192,7 +15443,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "List Workday Workers"
+        "summary": "List Workday Workers",
+        "x-internal": false
       },
       "parameters": [
         {
@@ -15248,7 +15500,8 @@
           {
             "$ref": "#/parameters/trait:listCount:x-total-count"
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}": {
@@ -15282,7 +15535,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       },
       "delete": {
         "summary": "Remove an Apple MDM Device's Enrollment",
@@ -15300,7 +15554,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/authn/policies": {
@@ -15340,7 +15595,8 @@
           {
             "$ref": "#/parameters/trait:sort:sort"
           }
-        ]
+        ],
+        "x-internal": false
       },
       "post": {
         "summary": "Create an Authentication Policy",
@@ -15367,7 +15623,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/authn/policies/{id}": {
@@ -15397,7 +15654,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       },
       "delete": {
         "summary": "Delete Authentication Policy",
@@ -15416,7 +15674,8 @@
             "x-api-key": []
           }
         ],
-        "parameters": []
+        "parameters": [],
+        "x-internal": false
       },
       "patch": {
         "summary": "Patch Authentication Policy",
@@ -15443,7 +15702,8 @@
               "$ref": "#/definitions/AuthnPolicyInput"
             }
           }
-        ]
+        ],
+        "x-internal": false
       }
     },
     "/iplists/{id}": {
@@ -15472,7 +15732,8 @@
             "x-api-key": []
           }
         ],
-        "parameters": []
+        "parameters": [],
+        "x-internal": false
       },
       "patch": {
         "summary": "Update an IP list",
@@ -15499,7 +15760,8 @@
           {
             "x-api-key": []
           }
-        ]
+        ],
+        "x-internal": false
       },
       "put": {
         "summary": "Replace an IP list",
@@ -15526,7 +15788,8 @@
               "$ref": "#/definitions/IPListRequest"
             }
           }
-        ]
+        ],
+        "x-internal": false
       },
       "delete": {
         "summary": "Delete an IP list",
@@ -15545,7 +15808,8 @@
           }
         ],
         "parameters": [],
-        "description": "Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```"
+        "description": "Delete a specific IP list.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "x-internal": false
       }
     },
     "/gsuites/{gsuite_id}/import/users": {
@@ -15636,7 +15900,8 @@
             "description": "Google Directory API sort direction parameter. See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list."
           }
         ],
-        "description": "Lists G Suite users available for import."
+        "description": "Lists G Suite users available for import.",
+        "x-internal": false
       }
     },
     "/office365s/{office365_id}/import/users": {
@@ -15733,7 +15998,8 @@
             "description": "Office 365 API count parameter. See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters."
           }
         ],
-        "description": "Lists Office 365 users available for import."
+        "description": "Lists Office 365 users available for import.",
+        "x-internal": false
       }
     },
     "/customemails": {
@@ -15763,7 +16029,8 @@
             "x-api-key": []
           }
         ],
-        "description": "Create the custom email configuration for the specified custom email type"
+        "description": "Create the custom email configuration for the specified custom email type",
+        "x-internal": false
       }
     },
     "/customemails/{custom_email_type}": {
@@ -15800,7 +16067,8 @@
             "x-api-key": []
           }
         ],
-        "description": "Update the custom email configuration for the specified custom email type"
+        "description": "Update the custom email configuration for the specified custom email type",
+        "x-internal": false
       },
       "get": {
         "summary": "Get custom email configuration",
@@ -15819,7 +16087,8 @@
             "x-api-key": []
           }
         ],
-        "description": "Get the custom email configuration for the specified custom email type"
+        "description": "Get the custom email configuration for the specified custom email type",
+        "x-internal": false
       },
       "delete": {
         "summary": "Delete custom email configuration",
@@ -15835,7 +16104,8 @@
             "x-api-key": []
           }
         ],
-        "description": "Delete the custom email configuration for the specified custom email type"
+        "description": "Delete the custom email configuration for the specified custom email type",
+        "x-internal": false
       }
     },
     "/customemail/templates": {
@@ -15858,7 +16128,8 @@
             "x-api-key": []
           }
         ],
-        "description": "Get the list of custom email templates"
+        "description": "Get the list of custom email templates",
+        "x-internal": false
       }
     },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation": {
@@ -15890,7 +16161,8 @@
             "x-api-key": []
           }
         ],
-        "summary": "Refresh activation lock information for a device"
+        "summary": "Refresh activation lock information for a device",
+        "x-internal": false
       }
     }
   },
