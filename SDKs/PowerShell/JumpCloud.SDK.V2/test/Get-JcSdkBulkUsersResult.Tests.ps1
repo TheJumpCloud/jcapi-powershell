@@ -33,18 +33,15 @@ Describe 'Get-JcSdkBulkUsersResult' {
         # Per swagger definition, this returns a string in the meantime
         $bulkUsersImport = New-JcSdkBulkUser -Body $Body -CreationSource 'jumpcloud:bulk'
         { Get-JcSdkBulkUsersResult -JobId $bulkUsersImport } | Should -not -Throw
+        # Cleanup any users with the username matching "PesterTestBulkUserState-"
+        $users = Get-JCSDKUser | Where-Object { $_.username -match "BulkUsers-" }
+        foreach ($user in $users)
+        {
+            Remove-JcSdkUser -Id $user.Id
+        }
     }
 
     It 'GetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-}
-
-AfterAll {
-    # Cleanup any users with the username matching "PesterTestBulkUserState-"
-    $users = Get-JCSDKUser | Where-Object { $_.username -match "BulkUsers-" }
-    foreach ($user in $users)
-    {
-        Remove-JcSdkUser -Id $user.Id
     }
 }

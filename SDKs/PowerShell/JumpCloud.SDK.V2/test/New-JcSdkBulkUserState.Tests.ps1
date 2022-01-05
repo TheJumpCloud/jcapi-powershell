@@ -22,13 +22,11 @@ Describe 'New-JcSdkBulkUserState' {
         $user = New-JCsdkUser -Username $username -Email "$username@pestertest.com"
         # Suspend the use with this endpoint
         { New-JcSdkBulkUserState -StartDate (Get-Date).AddDays(1) -UserIds $user.Id } | Should -Not -Throw
-    }
-}
-AfterAll {
-    # Cleanup any users with the username matching "PesterTestBulkUserState-"
-    $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestBulkUserState-" }
-    foreach ($user in $users)
-    {
-        Remove-JcSdkUser -Id $user.Id
+        # Cleanup any users with the username matching "PesterTestBulkUserState-"
+        $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestBulkUserState-" }
+        foreach ($user in $users)
+        {
+            Remove-JcSdkUser -Id $user.Id
+        }
     }
 }

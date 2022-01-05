@@ -20,17 +20,15 @@ Describe 'Remove-JcSdkBulkUserState' {
         # Suspend the use with this endpoint
         $bulkJob = New-JcSdkBulkUserState -StartDate (Get-Date).AddDays(1) -UserIds $user.Id
         { Remove-JcSdkBulkUserState -Id $bulkJob.ScheduledJobId } | Should -Not -Throw
+        # Cleanup any users with the username matching "PesterTestBulkUserState-"
+        $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestBulkUserState-" }
+        foreach ($user in $users)
+        {
+            Remove-JcSdkUser -Id $user.Id
+        }
     }
 
     It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-}
-AfterAll {
-    # Cleanup any users with the username matching "PesterTestBulkUserState-"
-    $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestBulkUserState-" }
-    foreach ($user in $users)
-    {
-        Remove-JcSdkUser -Id $user.Id
     }
 }

@@ -20,7 +20,7 @@ BeforeAll {
     $ENV:JcOrgId = ''
 }
 Describe 'Get-JcSdkProviderAdministrator' {
-    It 'List' {
+    It 'List' -skip {
         { Get-JcSdkProviderAdministrator -ProviderId $Env:JCProviderId } | Should -Not -Throw
     }
 }
