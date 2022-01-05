@@ -507,16 +507,37 @@ Function Update-SwaggerObject
                     # Map operationIds
                     If ($AttributePath -like '*.operationId')
                     {
-                        If (($global:OperationIdMapping).Contains($ThisObject.operationId))
+                        If ($inputobject.'x-internal')
                         {
-                            $OperationId = $ThisObject.operationId
-                            $ThisObject.operationId = $global:OperationIdMapping.($ThisObject.operationId)
-                            $global:OperationIdMapping.Remove($OperationId)
-                            $NewOperationId = $ThisObject.operationId
+                            Write-Warning ("$($ThisObject.operationId) x-internal: $($ThisObject.'x-internal') | Skipping...")
+                            # Split out the string by path to clean things up
+                            $pathlessInputObjectName = $InputObjectName -replace '.paths.', ''
+                            # Declare a regex pattern
+                            $regexPattern = [regex]'.[^.]*$'
+                            # Regex Matches should return the path string and the last opperator like: get, put, delete etc...
+                            $regexMatches = Select-String -InputObject:($pathlessInputObjectName) -Pattern:($regexPattern)
+                            # Replace the .opperator with '' to get the path
+                            $InputObjectNameEndpoint = $regexMatches.tostring().Replace($regexMatches.matches.value, '')
+                            # Declare the .opperator
+                            $InputObjectNameOp = $regexMatches.matches.value -replace ('\.'),('')
+                            # Write-Host "$InputObjectNameEndpoint/$InputObjectNameOp"
+                            # finally remove x-internal object from the YAML file
+                            $InputObjectOrg.paths.$InputObjectNameEndpoint.PSobject.Properties.Remove($InputObjectNameOp)
+                            # return
                         }
-                        Else
+                        else
                         {
-                            Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
+                            If (($global:OperationIdMapping).Contains($ThisObject.operationId))
+                            {
+                                $OperationId = $ThisObject.operationId
+                                $ThisObject.operationId = $global:OperationIdMapping.($ThisObject.operationId)
+                                $global:OperationIdMapping.Remove($OperationId)
+                                $NewOperationId = $ThisObject.operationId
+                            }
+                            Else
+                            {
+                                Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
+                            }
                         }
                     }
                     # Remove blank values from enum
@@ -714,11 +735,14 @@ Function Update-SwaggerObject
                     {
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
-                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
-                        {
-                            $ModifiedObject = @($ModifiedObject)
+                        # accounting for objects which may have been removed, check that thisobject is not null
+                        If ($ThisObject.$AttributeName){
+                            If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
+                            {
+                                $ModifiedObject = @($ModifiedObject)
+                            }
+                            $ThisObject.$AttributeName = $ModifiedObject
                         }
-                        $ThisObject.$AttributeName = $ModifiedObject
                     }
                 }
                 Else
