@@ -27,5 +27,9 @@ Describe 'Get-JcSdkNextScheduledBulkUserState' {
 }
 AfterAll {
     # Cleanup any users with the username matching "PesterTestBulkUserState-"
-    Get-JCSDKUser | Where-Object { $_.username -match "PesterTestNextBulkUser-" } | ForEach-Object { Remove-JcSdkUser -Id $_.Id }
+    $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestNextBulkUser-" }
+    foreach ($user in $users)
+    {
+        Remove-JcSdkUser -Id $user.Id
+    }
 }
