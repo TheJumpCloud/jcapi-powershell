@@ -179,8 +179,6 @@ ForEach ($SDK In $SDKName)
             }
             Else
             {
-                #TODO: is this necessary?
-                $BuildCustomFunctionsJobStatus | Remove-Job
                 # Rebuild the module with the new custom functions
                 If ($BuildModule)
                 {
