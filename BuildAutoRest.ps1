@@ -135,7 +135,6 @@ ForEach ($SDK In $SDKName)
             }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             autorest $ConfigFileFullName --force --version="3.6.6" --use:@autorest/powershell@3.0.463 | Tee-Object -FilePath:($LogFilePath) -Append
-            # autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
         }
         ###########################################################################
         If ($CopyCustomFiles)

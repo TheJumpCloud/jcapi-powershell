@@ -1,29 +1,29 @@
 # PowerShell Dependencies
-$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers', 'AWS.Tools.Common', 'AWS.Tools.CodeArtifact')
-ForEach ($RequiredModule In $RequiredModules)
-{
-    # Check to see if the module is installed
+$PSDependencies = @{
+    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = ''}
+    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '' }
+    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = ''}
+    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '4.10.1'}
+    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = ''}
+    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.0-beta10'}
+    'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
+}
+foreach ($RequiredModule in $PSDependencies.Keys) {
     If (Get-InstalledModule -Name:($RequiredModule) -ErrorAction:('SilentlyContinue'))
     {
-        Update-Module -Name:($RequiredModule) -Force
+        Write-Host("[status]Updating module: '$RequiredModule' from $($PSDependencies[$RequiredModule].Repository)")
+        # Update-Module -Name:($RequiredModule) -Force
     }
-    # Check to see if the module exists on the PSGallery
-    ElseIf (Find-Module -Name:($RequiredModule))
-    {
-        Write-Host("[status]Installing module: '$RequiredModule' from 'PSGallery'")
-        if ($RequiredModule -eq 'PSScriptAnalyzer')
-        {
-            Install-Module -Name $RequiredModule -Repository:('PSGallery') -RequiredVersion '1.19.1' -Force
-        }
-        else
-        {
-            Install-Module -Name:($RequiredModule) -Force
-        }
+    # If module version is specified:
+    If ($($PSDependencies[$RequiredModule].RequiredVersion)) {
+        Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
+        # Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
     }
-    Import-Module -Name:($RequiredModule) -Force
+    else{
+        Write-Host("[status]Installing module: '$RequiredModule' from $($PSDependencies[$RequiredModule].Repository)")
+        # Install-Module -Name:($RequiredModule) -Repository:($($PSDependencies[$RequiredModule].Repository)) -Force
+    }
 }
-Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
-Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
 # NPM Dependencies
 If ($env:CI -eq $false)
 {
