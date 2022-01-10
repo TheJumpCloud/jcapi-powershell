@@ -321,5 +321,4 @@ $SDKs | ForEach-Object {
         ExcludeRules = $SettingsFromFile.ExcludeRules
     }
     Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings $settingsObject -reportSummary -Verbose
-    # Invoke-ScriptAnalyzer -Path:($TestFolderPathAll) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
 }
