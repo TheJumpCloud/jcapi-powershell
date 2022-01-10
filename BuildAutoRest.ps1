@@ -127,8 +127,12 @@ ForEach ($SDK In $SDKName)
         {
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-            Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            bash $CleanScript $PSScriptRoot $OutputFullPath
+            if ($IsMacOS)
+            {
+                Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # check if the /bin /obj directories need to permissions reset and deleted before continuing.
+                bash $CleanScript $PSScriptRoot $OutputFullPath
+            }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
             autorest $ConfigFileFullName --force --version="3.6.6" --use:@autorest/powershell@3.0.463 | Tee-Object -FilePath:($LogFilePath) -Append
             # autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
@@ -150,8 +154,11 @@ ForEach ($SDK In $SDKName)
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"
-            Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            bash $CleanScript $PSScriptRoot $OutputFullPath
+            if ($IsMacOS)
+            {
+                Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                bash $CleanScript $PSScriptRoot $OutputFullPath
+            }
             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
             # fix docs help link
             $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
@@ -188,8 +195,11 @@ ForEach ($SDK In $SDKName)
                     $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
                     # Build-module
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    bash $CleanScript $PSScriptRoot $OutputFullPath
+                    if ($IsMacOS)
+                    {
+                        Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        bash $CleanScript $PSScriptRoot $OutputFullPath
+                    }
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                     # Build PSScriptInfo - Theres gotta be a better way to do this
@@ -238,8 +248,11 @@ ForEach ($SDK In $SDKName)
                     If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                     # Rebuild to distribute the update PSScriptInfo to other locations
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    bash $CleanScript $PSScriptRoot $OutputFullPath
+                    if ($IsMacOS)
+                    {
+                        Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        bash $CleanScript $PSScriptRoot $OutputFullPath
+                    }
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
