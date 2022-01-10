@@ -70,7 +70,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUser>:
   Id <String>: The ObjectID of graph object being added or removed as an association.
   Op <String>: How to modify the graph connection.
-  Type <GraphOperationUser4>: Targets which a "user" can be associated to.
+  Type <GraphOperationUser5>: Targets which a "user" can be associated to.
   [Attributes <IGraphOperationUserAttributes>]:
     [(Any) <Object>]: This indicates any property can be added to this object.
     [SudoEnabled <Boolean?>]: Enables sudo
@@ -145,9 +145,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphOperationUser4])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphOperationUser5])]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Support.GraphOperationUser4]
+    [JumpCloud.SDK.V2.Support.GraphOperationUser5]
     # Targets which a "user" can be associated to.
     ${Type},
 
