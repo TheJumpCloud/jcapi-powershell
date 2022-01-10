@@ -3,6 +3,7 @@ Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub branch or tag to pull spec from.')][ValidateNotNullOrEmpty()][System.String]$GitHubTag
+    , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Swagger source, either Public from Documentation Yaml or Private from interneral swagger')][ValidateNotNullOrEmpty()][System.String][ValidateSet('Public', 'Private')]$SwaggerSource = 'Public'
 )
 Set-Location $PSScriptRoot
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
@@ -11,6 +12,7 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         Repo               = "jumpcloud-insights-api"
         Path               = "docs/generated/index.json"
+        PublicUrl                = "https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             '"name":".*?","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
@@ -29,19 +31,24 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
         Repo               = "SI"
         Path               = "routes/webui/api/index.yaml"
+        PublicUrl                = "https://docs.jumpcloud.com/api/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
             '"#\/definitions\/system"'                                                           = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"title":"System"'                                                         = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            # '"system":{"description"'                                                         = '"JcSystem":{"description"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System' # Necessary for internal docs generation
+            '"system":{"properties"'                                                            = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"title":"System"'                                                                  = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
+            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = ''
             '"basePath":"\/api"'                                                                 = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
-            '\["object","null"]'                                                                 = '"object"';
-            '\["string","null"]'                                                                 = '"string"';
-            '{"in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the casecasde manager param from delete user
+            # '\["object","null"]'                                                                 = '"object"'; # Necessary for internal docs generation
+            # '\["string","null"]'                                                                 = '"string"'; # Necessary for internal docs generation
+            # '{"in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the casecasde manager param from delete user # Necessary for internal docs generation
+            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the casecasde manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
             '"produces":\["application\/json","text\/plain"\]'                                   = '';
             '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                 = '"responses":{"200":{"description":""}';
-            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list
+            # '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list # Necessary for internal docs generation
             # '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = '{"in":"body","name":"body","schema":{"description": "Key value pair of parameters to pass into command.","type":"object","additionalProperties":{"type": "string"},"required": false}'; # Remove bodys that dont have parameters
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
             # Custom Tweaks
@@ -112,19 +119,20 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         Repo               = "SI"
         Path               = "routes/webui/api/v2/index.yaml"
+        PublicUrl                = "https://docs.jumpcloud.com/api/2.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # V2 Issues
             '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '\["string","number","boolean","array"]'                                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '\["string","number","boolean","array","null"]'                                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
+            # '\["string","number","boolean","array"]'                                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema # Necessary for private docs Generation
+            # '\["string","number","boolean","array","null"]'                                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema # Necessary for private docs Generation
             '\["object","null"]'                                                                  = '"object"';
-            '\["string","null"]'                                                                  = '"string"';
-            '\["boolean","null"]'                                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '\["integer","null"]'                                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '\["number","null"]'                                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"type":"null"'                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
+            # '\["string","null"]'                                                                  = '"string"'; # Necessary for private docs Generation
+            # '\["boolean","null"]'                                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema # Necessary for private docs Generation
+            # '\["integer","null"]'                                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema # Necessary for private docs Generation
+            # '\["number","null"]'                                                                  = '"number"'; # Error:Invalid type 'number,null' in schema # Necessary for private docs Generation
+            # '"type":"null"'                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema # Necessary for private docs Generation
             'software-app-settings'                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'          = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
             '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200
@@ -798,27 +806,64 @@ $SDKName | ForEach-Object {
             'master'
         }
         Write-Host ("Repo: $($Config.Repo); Path: $($Config.Path); Latest Release Tag: $($GitHubLatestReleaseTag);")
-        # Get OAS content
-        $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubLatestReleaseTag
-        $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
-        {
-            $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($SwaggerUrl) -Headers:($GitHubHeaders)
-            If ($SwaggerUrl -like '*.json*')
+        If ($SwaggerSource -eq 'Public'){
+            # Follow path to pull from public docs source:
+            # Get OAS content
+            $SwaggerUrl = $Config.PublicUrl
+            $OASContent = If ($SwaggerUrl -like '*https*')
             {
-                $RawContent | ConvertTo-Json -Depth:(100)
+                (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
             }
             Else
             {
-                $RawContent
+                Get-Content -Path:($SwaggerUrl) -Raw
+            }
+            If ([System.String]::IsNullOrEmpty($OASContent))
+            {
+                Write-Error ("No content was returned from: $($SwaggerUrl)")
             }
         }
-        ElseIf ($SwaggerUrl -like '*https*')
-        {
-            (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
-        }
-        Else
-        {
-            Get-Content -Path:($SwaggerUrl) -Raw
+        Else{
+            # Follow path to pull from internal source:
+            # $RepoUrl = 'https://api.github.com/repos/TheJumpCloud/{0}' -f $Config.Repo
+            # $LatestReleaseUrl = '{0}/releases/latest' -f $RepoUrl
+            # # Get latest version of SI from GitHub
+            # $GitHubHeaders = @{
+            #     'Authorization' = "token $GitHubAccessToken";
+            #     'Accept'        = 'application/vnd.github.json.raw';
+            # }
+            # # Get repo's latest release
+            # $GitHubLatestReleaseTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
+            # {
+            #     (Invoke-RestMethod -Method:('GET') -Uri:($LatestReleaseUrl) -Headers:($GitHubHeaders)).tag_name
+            # }
+            # Else
+            # {
+            #     'master'
+            # }
+            # Write-Host ("Repo: $($Config.Repo); Path: $($Config.Path); Latest Release Tag: $($GitHubLatestReleaseTag);")
+            # Get OAS content
+            $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubLatestReleaseTag
+            $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
+            {
+                $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($SwaggerUrl) -Headers:($GitHubHeaders)
+                If ($SwaggerUrl -like '*.json*')
+                {
+                    $RawContent | ConvertTo-Json -Depth:(100)
+                }
+                Else
+                {
+                    $RawContent
+                }
+            }
+            ElseIf ($SwaggerUrl -like '*https*')
+            {
+                (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
+            }
+            Else
+            {
+                Get-Content -Path:($SwaggerUrl) -Raw
+            }
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
