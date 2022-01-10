@@ -825,23 +825,6 @@ $SDKName | ForEach-Object {
         }
         Else{
             # Follow path to pull from internal source:
-            # $RepoUrl = 'https://api.github.com/repos/TheJumpCloud/{0}' -f $Config.Repo
-            # $LatestReleaseUrl = '{0}/releases/latest' -f $RepoUrl
-            # # Get latest version of SI from GitHub
-            # $GitHubHeaders = @{
-            #     'Authorization' = "token $GitHubAccessToken";
-            #     'Accept'        = 'application/vnd.github.json.raw';
-            # }
-            # # Get repo's latest release
-            # $GitHubLatestReleaseTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
-            # {
-            #     (Invoke-RestMethod -Method:('GET') -Uri:($LatestReleaseUrl) -Headers:($GitHubHeaders)).tag_name
-            # }
-            # Else
-            # {
-            #     'master'
-            # }
-            # Write-Host ("Repo: $($Config.Repo); Path: $($Config.Path); Latest Release Tag: $($GitHubLatestReleaseTag);")
             # Get OAS content
             $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubLatestReleaseTag
             $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))

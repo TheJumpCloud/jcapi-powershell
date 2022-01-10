@@ -279,7 +279,7 @@ ForEach ($SDK In $SDKName)
             # Temp workaround untill autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-            # Replace if else Invoke-Pester block with contents from runpestertests file. 
+            # Replace if else Invoke-Pester block with contents from runpestertests file.
             $InvokePesterLine = $testModuleContent | Select-String -Pattern '(.*?if)(.*?\(\$null -ne \$TestName\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(\})'
             If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
             {
