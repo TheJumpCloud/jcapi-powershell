@@ -313,12 +313,5 @@ $SDKs | ForEach-Object {
     }
     #### PSScriptAnalyzer Setup ####
     $FolderPath_Module = (Get-Item -Path("$PSScriptRoot/../")).FullName
-    $SettingsFile = "$PSScriptRoot/PSScriptAnalyzerSettings.psd1"
-    # Import Settings:
-    $SettingsFromFile = Import-PowerShellDataFile $SettingsFile
-    $settingsObject = @{
-        Severity     = $SettingsFromFile.Severity
-        ExcludeRules = $SettingsFromFile.ExcludeRules
-    }
-    Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings $settingsObject -reportSummary -Verbose
+    Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings:($SettingsFile) -reportSummary -Verbose
 }
