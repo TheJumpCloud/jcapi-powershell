@@ -199,6 +199,16 @@ else
 {
     $testFolder
 }
+# Validate script syntax
+$LintFilePath = "$PSScriptRoot/custom/generated/*.ps1"
+# Import Settings:
+
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings:("$PSScriptRoot/../../../Tools/PSScriptAnalyzerSettings.psd1")
+If ($ScriptAnalyzerResult)
+{
+    $ScriptAnalyzerResult
+}
+
 $Filter = "*"
 $PesterTestFiles = @()
 # Populate with test file basenames that need to be run in a specific order

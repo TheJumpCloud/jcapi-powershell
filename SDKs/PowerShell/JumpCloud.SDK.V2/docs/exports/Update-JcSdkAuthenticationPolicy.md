@@ -25,8 +25,9 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ```
 Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-Type <String>] [-UserGroupExclusions <String[]>] [-UserGroupInclusions <String[]>]
- [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Type <String>] [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
+ [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
+ [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -37,15 +38,17 @@ Update-JcSdkAuthenticationPolicy -Id <String> -Body <IAuthnPolicyInput> [-Confir
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> -Body <IAuthnPolicyInput> [-Confirm]
+Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> -Body <IAuthnPolicyInput> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApIsIdentity> [-Conditions <Hashtable>]
+Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> [-Conditions <Hashtable>]
  [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
- [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>] [-UserGroupExclusions <String[]>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>]
+ [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
+ [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -175,7 +178,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: UpdateViaIdentity, UpdateViaIdentityExpanded
 Aliases:
 
@@ -237,6 +240,38 @@ AuthnPolicyType
 
 ```yaml
 Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserAttributeExclusions
+.
+To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserAttributeInclusions
+.
+To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -330,7 +365,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IAuthnPolicyInput
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -357,11 +392,16 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
     - `Type <String>`: 
     - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   - `[Type <String>]`: AuthnPolicyType
+  - `[UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
+    - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+    - `[Operator <String>]`: 
+    - `[Value <IAny>]`: Any object
+  - `[UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
   - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AgentId <String>]`: 
@@ -370,14 +410,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
-  - `[ProviderId <String>]`: 
+  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
@@ -387,6 +427,16 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
   - `Type <String>`: 
   - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+
+USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+  - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+  - `[Operator <String>]`: 
+  - `[Value <IAny>]`: Any object
+
+USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+  - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
+  - `[Operator <String>]`: 
+  - `[Value <IAny>]`: Any object
 
 ## RELATED LINKS
 

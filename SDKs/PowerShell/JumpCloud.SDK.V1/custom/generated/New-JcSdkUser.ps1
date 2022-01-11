@@ -80,6 +80,7 @@ BODY <ISystemuserputpost>:
     [StreetAddress <String>]:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
+  [AlternateEmail <String>]:
   [Attributes <ISystemuserputpostAttributesItem[]>]:
     [Name <String>]:
     [Value <String>]:
@@ -102,6 +103,8 @@ BODY <ISystemuserputpost>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
+  [ManagedAppleId <String>]:
+  [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
   [MfaExclusionUntil <DateTime?>]:
@@ -113,7 +116,10 @@ BODY <ISystemuserputpost>:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
+  [RecoveryEmailAddress <String>]:
   [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+    [Type <String>]:
+    [Value <String>]:
   [SambaServiceUser <Boolean?>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
@@ -123,6 +129,10 @@ BODY <ISystemuserputpost>:
 PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
+
+RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>:
+  [Type <String>]:
+  [Value <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
 #>
@@ -175,6 +185,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${AllowPublicKey},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${AlternateEmail},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
@@ -300,6 +317,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${ManagedAppleId},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Relation with another systemuser to identify the last as a manager.
+    ${Manager},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${MfaConfigured},
@@ -357,8 +386,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${RecoveryEmailAddress},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
     # .
+    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships},
 
     [Parameter(ParameterSetName='CreateExpanded')]

@@ -1,46 +1,46 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub branch or tag to pull spec from.')][ValidateNotNullOrEmpty()][System.String]$GitHubTag
 )
 Set-Location $PSScriptRoot
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
 $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
-        Repo               = "jumpcloud-insights-api"
-        Path               = "docs/generated/directory_insights_swagger.json"
+        PublicUrl                = "https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             '"name":".*?","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
-            'directoryInsights_eventsCountPost'    = 'EventCount_Get';
-            'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
-            'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
-            'directoryInsights_eventsPost'         = 'Event_Get';
+            'directoryInsights_eventsCountPost'          = 'EventCount_Get';
+            'directoryInsights_eventsDistinctPost'       = 'EventDistinct_Get';
+            'directoryInsights_eventsIntervalPost'       = 'EventInterval_Get';
+            'directoryInsights_eventsPost'               = 'Event_Get';
+            # 'directoryInsights_commandResultsReportsGet' = 'EventCommandResultReport_Get';
+            # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
+            # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
-        ExcludedList       = @();
+        ExcludedList       = @('/reports/command_results', '/reports/policy_results', '/reports/device_health');
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
-        Repo               = "SI"
-        Path               = "routes/webui/api/index.yaml"
+        PublicUrl                = "https://docs.jumpcloud.com/api/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
             '"#\/definitions\/system"'                                                           = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"title":"System"'                                                         = '"JcSystem":{"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"properties"'                                                             = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"title":"System"'                                                                   = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
+            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
             '"basePath":"\/api"'                                                                 = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
-            '"internal":{"type":"object","properties":{"deviceId":{"type":"string"}}}'           = ''; # is already listed in interface list
-            # '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = '{"in":"body","name":"body","schema":{"description": "Key value pair of parameters to pass into command.","type":"object","additionalProperties":{"type": "string"},"required": false}'; # Remove bodys that dont have parameters
-            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodys that dont have parameters
-            '\["object","null"]'                                                                 = '"object"';
-            '\["string","null"]'                                                                 = '"string"';
+            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
+            '"produces":\["application\/json","text\/plain"\]'                                   = '';
+            '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                 = '"responses":{"200":{"description":""}';
+            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodies that don't have parameters
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We dont want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We dont want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We don't want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We don't want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                       = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                             = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -104,23 +104,16 @@ $TransformConfig = [Ordered]@{
         ExcludedList       = @();
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
-        Repo               = "SI"
-        Path               = "routes/webui/api/v2/index.yaml"
+        PublicUrl                = "https://docs.jumpcloud.com/api/2.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # V2 Issues
             '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '\["string","number","boolean","array"]'                                              = '"string"'; # FAILURE  {} Error:Invalid type 'string,number,boolean,array' in schema
-            '\["string","number","boolean","array","null"]'                                       = '"string"' #  FAILURE  {} Error:Invalid type 'string,number,boolean,array,null' in schema
             '\["object","null"]'                                                                  = '"object"';
-            '\["string","null"]'                                                                  = '"string"';
-            '\["boolean","null"]'                                                                 = '"boolean"'; # Error:Invalid type 'boolean,null' in schema
-            '\["integer","null"]'                                                                 = '"integer"'; # Error:Invalid type 'integer,null' in schema
-            '\["number","null"]'                                                                  = '"number"'; # Error:Invalid type 'number,null' in schema
-            '"type":"null"'                                                                       = '"type":"string"'; # Error: Invalid type 'null' in schema
             'software-app-settings'                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            '{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'         = '{"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'          = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
+            '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -141,7 +134,12 @@ $TransformConfig = [Ordered]@{
             'activedirectories_get'                             = 'ActiveDirectory_Get';
             'activedirectories_list'                            = 'ActiveDirectory_List';
             'activedirectories_post'                            = 'ActiveDirectory_Create';
+            # 'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
+            # 'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
+            # 'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
+            # 'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
             'applemdms_delete'                                  = 'AppleMDM_Delete';
+            'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
             'applemdms_devicesClearActivationLock'              = 'AppleMDMDeviceActivationLock_Clear';
             'applemdms_deviceserase'                            = 'AppleMDMDevice_Clear';
             'applemdms_deviceslist'                             = 'AppleMDMDevice_List';
@@ -162,6 +160,10 @@ $TransformConfig = [Ordered]@{
             'authnpolicies_post'                                = 'AuthenticationPolicy_Create';
             'bulk_usersCreate'                                  = 'BulkUsers_Create';
             'bulk_usersCreateResults'                           = 'BulkUsersResult_Get';
+            'bulk_userStatesCreate'                             = 'BulkUserState_Create';
+            'bulk_userStatesDelete'                             = 'BulkUserState_Delete';
+            'bulk_userStatesGetNextScheduled'                   = 'NextScheduledBulkUserState_Get';
+            'bulk_userStatesList'                               = 'BulkUserStates_List';
             'bulk_usersUpdate'                                  = 'BulkUsers_Update';
             'customEmails_create'                               = 'CustomEmailConfiguration_Create';
             'customEmails_destroy'                              = 'CustomEmailConfiguration_Delete';
@@ -315,8 +317,14 @@ $TransformConfig = [Ordered]@{
             'policystatuses_systemsList'                        = 'SystemPolicyStatus_List';
             'policytemplates_get'                               = 'PolicyTemplate_Get';
             'policytemplates_list'                              = 'PolicyTemplate_List';
-            'providers_listAdministrators'                      = 'ProviderAdministrator_List';
-            'providers_postAdmins'                              = 'ProviderAdministrator_Create';
+            # 'providers_listAdministrators'                      = 'ProviderAdministrator_List';
+            # 'providers_listOrganizations'                       = 'ProviderOrganizations_List';
+            # 'providers_postAdmins'                              = 'ProviderAdministrator_Create';
+            # 'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
+            'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
+            'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
+            'pushEndpoints_list'                                = 'UserPushEndpoints_List';
+            'pushEndpoints_patch'                               = 'UserPushEndpoint_Update';
             'softwareApps_delete'                               = 'SoftwareApp_Delete';
             'softwareApps_get'                                  = 'SoftwareApp_Get';
             'softwareApps_list'                                 = 'SoftwareApp_List';
@@ -325,9 +333,9 @@ $TransformConfig = [Ordered]@{
             'softwareApps_update'                               = 'SoftwareApp_Set';
             'softwareAppStatuses_list'                          = 'SoftwareAppStatus_Get';
             'subscriptions_get'                                 = 'Subscription_Get';
-            'systeminsights_list_alf'                           = 'SystemInsightAlf_List';
             'systeminsights_list_alf_exceptions'                = 'SystemInsightAlfException_List';
             'systeminsights_list_alf_explicit_auths'            = 'SystemInsightAlfExplicitAuth_List';
+            'systeminsights_list_alf'                           = 'SystemInsightAlf_List';
             'systeminsights_list_appcompat_shims'               = 'SystemInsightAppCompatShim_List';
             'systeminsights_list_apps'                          = 'SystemInsightApps_List';
             'systeminsights_list_authorized_keys'               = 'SystemInsightAuthorizedKey_List';
@@ -396,7 +404,7 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @('/applications/{application_id}') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/mappings', '/providers/{provider_id}/administrators', '/providers/{provider_id}/administrators/{id}', '/providers/{provider_id}/organizations', '/administrators/{id}/organizationlinks', '/administrators/{administrator_id}/organizationlinks/{id}', '/organizations/{id}/administratorlinks') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem
@@ -659,16 +667,8 @@ Function Update-SwaggerObject
                                 # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
                                 $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
                             }
-                            # Remove endpoints where ".public.x-stoplight.public" is "false"
-                            If ('x-stoplight' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and [String]$ThisObject.$AttributeName.$Method.'x-stoplight'.public -eq 'False')
-                            {
-                                # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
-                                $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
-                            }
                         }
                     }
-                    # Remove x-stoplight sections
-                    If ($AttributePath -like '*.x-stoplight') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-swagger-jumpcloud-auto-insert
                     If ($AttributePath -like '*.x-swagger-jumpcloud-auto-insert*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
                     # Remove x-jumpcloud
@@ -692,6 +692,7 @@ Function Update-SwaggerObject
                     {
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
+                        # accounting for objects which may have been removed, check that thisobject is not null
                         If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
                         {
                             $ModifiedObject = @($ModifiedObject)
@@ -735,44 +736,19 @@ $SDKName | ForEach-Object {
         {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
-        $RepoUrl = 'https://api.github.com/repos/TheJumpCloud/{0}' -f $Config.Repo
-        $LatestReleaseUrl = '{0}/releases/latest' -f $RepoUrl
-        # Get latest version of SI from GitHub
-        $GitHubHeaders = @{
-            'Authorization' = "token $GitHubAccessToken";
-            'Accept'        = 'application/vnd.github.json.raw';
-        }
-        # Get repo's latest release
-        $GitHubLatestReleaseTag = If (-not [System.String]::IsNullOrEmpty($GitHubAccessToken) -and [System.String]::IsNullOrEmpty($GitHubTag))
-        {
-            (Invoke-RestMethod -Method:('GET') -Uri:($LatestReleaseUrl) -Headers:($GitHubHeaders)).tag_name
-        }
-        Else
-        {
-            'master'
-        }
-        Write-Host ("Repo: $($Config.Repo); Path: $($Config.Path); Latest Release Tag: $($GitHubLatestReleaseTag);")
-        # Get OAS content
-        $SwaggerUrl = '{0}/contents/{1}?ref={2}' -f $RepoUrl, $Config.Path, $GitHubLatestReleaseTag
-        $OASContent = If ($SwaggerUrl -like '*api.github.com*' -and -not [System.String]::IsNullOrEmpty($GitHubAccessToken))
-        {
-            $RawContent = Invoke-RestMethod -Method:('GET') -Uri:($SwaggerUrl) -Headers:($GitHubHeaders)
-            If ($SwaggerUrl -like '*.json*')
-            {
-                $RawContent | ConvertTo-Json -Depth:(100)
-            }
-            Else
-            {
-                $RawContent
-            }
-        }
-        ElseIf ($SwaggerUrl -like '*https*')
+        # Get OAS content from Public URL
+        $SwaggerUrl = $Config.PublicUrl
+        $OASContent = If ($SwaggerUrl -like '*https*')
         {
             (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
         }
         Else
         {
             Get-Content -Path:($SwaggerUrl) -Raw
+        }
+        If ([System.String]::IsNullOrEmpty($OASContent))
+        {
+            Write-Error ("No content was returned from: $($SwaggerUrl)")
         }
         If ([System.String]::IsNullOrEmpty($OASContent))
         {
@@ -827,30 +803,7 @@ $SDKName | ForEach-Object {
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
-            # Add GitHubTag to spec
-            Add-Member -InputObject:($SwaggerObject.info) -MemberType:('NoteProperty') -Name:('x-releaseTag') -Value:($GitHubLatestReleaseTag) -Force
-            If (-not $SwaggerObject.info.'x-releaseTag')
-            {
-                $SwaggerObject.info.Add('x-releaseTag', $GitHubLatestReleaseTag)
-            }
             $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -InputObjectOrg:($SwaggerObject)
-            #region Clean up paths without methods (that have been removed after stripping x-stoplight.public:false)
-            $UpdatedSwagger.paths.PSObject.Properties.Name | ForEach-Object {
-                $ValidPath = $false
-                $UpdatedSwagger.paths.$_.PSObject.Properties.Name | ForEach-Object {
-                    If ($_ -in ('delete', 'get', 'patch', 'post', 'put'))
-                    {
-                        $ValidPath = $true
-                    }
-                }
-                If (-not $ValidPath)
-                {
-                    # Write-Warning ("Removing: $($_)")
-                    $UpdatedSwagger.paths.PSObject.Properties.Remove($_)
-                }
-            }
-            #endregion Clean up paths without methods (that have been removed after stripping x-stoplight.public:false)
-            #region Clean up unused definitions and parameters
             Do
             {
                 $UsedRefs = ($UpdatedSwagger | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches).Matches

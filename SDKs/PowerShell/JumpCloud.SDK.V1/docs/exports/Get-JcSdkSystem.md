@@ -32,7 +32,7 @@ Get-JcSdkSystem -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParam
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystem -InputObject <IJumpCloudApIsIdentity> [-Fields <String>] [-Filter <String>]
+Get-JcSdkSystem -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String>]
  [<CommonParameters>]
 ```
 
@@ -83,13 +83,39 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+See the supported operators below.
+For more complex searches,
+see the related `/search/\<domain\>` endpoints,
+e.g.
+`/search/systems`.
+
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
 **field** = Populate with a valid field from an endpoint response.
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+
+**operator** = Supported operators are:
+- `$eq` (equals)
+- `$ne` (does not equal)
+- `$gt` (is greater than)
+- `$gte` (is greater than or equal to)
+- `$lt` (is less than)
+- `$lte` (is less than or equal to)
+
+_Note: v1 operators differ from v2 operators._
+
+_Note: For v1 operators, excluding the `$` will result in undefined behavior._
+
 **value** = Populate with the value you want to search for.
 Is case sensitive.
-Supports wild cards.
-**EX:** `GET /users?username=eq:testuser`
+
+**Examples**
+- `GET /users?filter=username:$eq:testuser`
+- `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`
+- `GET /systemusers?filter=department:$ne:Accounting`
+- `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will
+ AND the filters together.
+- `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will
+ OR the filters together.
 
 ```yaml
 Type: System.String
@@ -123,7 +149,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 Parameter Sets: GetViaIdentity
 Aliases:
 
@@ -135,7 +161,7 @@ Accept wildcard characters: False
 ```
 
 ### -Search
-A nested object containing a string `searchTerm` and a list of `fields` to search on.
+A nested object containing a `searchTerm` string or array of strings and a list of `fields` to search on.
 
 ```yaml
 Type: System.String
@@ -171,7 +197,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -188,7 +214,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

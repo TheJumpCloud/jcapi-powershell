@@ -41,7 +41,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Inputs
 JumpCloud.SDK.V1.Models.ISystemuserput
 .Outputs
@@ -77,6 +77,7 @@ BODY <ISystemuserput>:
     [StreetAddress <String>]:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
+  [AlternateEmail <String>]:
   [Attributes <ISystemuserputAttributesItem[]>]:
     [Name <String>]:
     [Value <String>]:
@@ -100,6 +101,8 @@ BODY <ISystemuserput>:
   [Lastname <String>]:
   [LdapBindingUser <Boolean?>]:
   [Location <String>]:
+  [ManagedAppleId <String>]:
+  [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
   [MfaExclusionUntil <DateTime?>]:
@@ -111,6 +114,8 @@ BODY <ISystemuserput>:
     [Type <String>]:
   [PublicKey <String>]:
   [Relationships <ISystemuserputRelationshipsItem[]>]:
+    [Type <String>]:
+    [Value <String>]:
   [SambaServiceUser <Boolean?>]:
   [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
@@ -122,7 +127,7 @@ BODY <ISystemuserput>:
   [UnixUid <Int32?>]:
   [Username <String>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
   [SystemId <String>]:
   [SystemuserId <String>]:
@@ -131,6 +136,10 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:
   [Number <String>]:
   [Type <String>]:
+
+RELATIONSHIPS <ISystemuserputRelationshipsItem[]>:
+  [Type <String>]:
+  [Value <String>]:
 
 SSHKEYS <ISshkeypost[]>:
   Name <String>: The name of the SSH key.
@@ -153,7 +162,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Path')]
-    [JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -188,6 +197,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${AllowPublicKey},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${AlternateEmail},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -341,6 +358,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${ManagedAppleId},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Relation with another systemuser to identify the last as a manager.
+    ${Manager},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${MfaConfigured},
@@ -402,6 +433,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]
     # .
+    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships},
 
     [Parameter(ParameterSetName='SetExpanded')]

@@ -1,8 +1,16 @@
 <#
 .Synopsis
 Query the API for a list of counts by time interval
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+```
 .Description
 Query the API for a list of counts by time interval
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -22,9 +30,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventIntervalQuery>:
-  IntervalUnit <String>:
   Service <String[]>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
+  IntervalUnit <String>:
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

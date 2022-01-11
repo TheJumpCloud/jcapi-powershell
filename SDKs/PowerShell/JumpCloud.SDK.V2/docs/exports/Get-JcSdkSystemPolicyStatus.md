@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSystemPolicyStatus
 
 ## SYNOPSIS
-This endpoint returns the configuration (policy) results for a particular system.
+This endpoint returns the policy results for a particular system.
 
 ##### Sample Request
 
@@ -28,7 +28,7 @@ Get-JcSdkSystemPolicyStatus -SystemId <String> [-Fields <String[]>] [-Filter <St
 ```
 
 ## DESCRIPTION
-This endpoint returns the configuration (policy) results for a particular system.
+This endpoint returns the policy results for a particular system.
 
 ##### Sample Request
 
@@ -76,12 +76,18 @@ Accept wildcard characters: False
 
 ### -Filter
 A filter to apply to the query.
+
 **Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
 **field** = Populate with a valid field from an endpoint response.
+
 **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
 **value** = Populate with the value you want to search for.
 Is case sensitive.
 Supports wild cards.
+
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml

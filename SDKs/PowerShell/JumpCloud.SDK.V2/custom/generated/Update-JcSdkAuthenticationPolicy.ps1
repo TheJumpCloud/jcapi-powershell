@@ -33,7 +33,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IAuthnPolicyInput
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IAuthnPolicy
 .Notes
@@ -53,11 +53,16 @@ BODY <IAuthnPolicyInput>:
     Type <String>:
     [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   [Type <String>]: AuthnPolicyType
+  [UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]:
+    [Field <String>]: The only field that is currently supported is ldap_binding_user
+    [Operator <String>]:
+    [Value <IAny>]: Any object
+  [UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]:
   [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AgentId <String>]:
@@ -66,14 +71,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
+  [PolicyId <String>]: ObjectID of the Policy.
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -83,6 +88,16 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
   Type <String>:
   [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+
+USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Any object
+
+USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Any object
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
@@ -101,7 +116,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -172,6 +187,24 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # AuthnPolicyType
     ${Type},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
+    # .
+    # To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
+    ${UserAttributeExclusions},
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
+    # .
+    # To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
+    ${UserAttributeInclusions},
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]

@@ -9,6 +9,10 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Query the API for a list of distinct values for a field
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+```
 
 ## SYNTAX
 
@@ -25,6 +29,10 @@ Get-JcSdkEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<Common
 
 ## DESCRIPTION
 Query the API for a list of distinct values for a field
+#### Sample Request
+```
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+```
 
 ## EXAMPLES
 
@@ -202,9 +210,9 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
-  - `Field <String>`: field is what they wish to query on
   - `Service <String[]>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
+  - `Field <String>`: field is what they wish to query on
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.

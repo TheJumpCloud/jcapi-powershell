@@ -42,14 +42,14 @@ Reset-JcSdkUserMfa -Id <String>
 
 ### ResetViaIdentity
 ```
-Reset-JcSdkUserMfa -InputObject <IJumpCloudApIsIdentity>
+Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity>
  -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
 ```
-Reset-JcSdkUserMfa -InputObject <IJumpCloudApIsIdentity> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru]
+Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -155,7 +155,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 Parameter Sets: ResetViaIdentity, ResetViaIdentityExpanded
 Aliases:
 
@@ -217,7 +217,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
 
@@ -238,7 +238,7 @@ BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSche
   - `[Exclusion <Boolean?>]`: 
   - `[ExclusionUntil <DateTime?>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

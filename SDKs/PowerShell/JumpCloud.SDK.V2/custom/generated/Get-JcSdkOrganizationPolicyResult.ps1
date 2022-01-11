@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns all configuration (policy) results for an organization.
+This endpoint returns all policy results for an organization.
 
 ##### Sample Request
 
@@ -11,7 +11,7 @@ This endpoint returns all configuration (policy) results for an organization.
   -H 'x-api-key: {API_KEY}'
   ```
 .Description
-This endpoint returns all configuration (policy) results for an organization.
+This endpoint returns all policy results for an organization.
 
 ##### Sample Request
 
@@ -53,12 +53,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
     # A filter to apply to the query.
+    # 
     # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
     # **field** = Populate with a valid field from an endpoint response.
+    # 
     # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # _Note: v1 operators differ from v2 operators._
+    # 
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
     # Supports wild cards.
+    # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter},
 

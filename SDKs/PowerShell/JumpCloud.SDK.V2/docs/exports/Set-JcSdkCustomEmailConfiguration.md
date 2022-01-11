@@ -27,13 +27,13 @@ Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -CustomEmail <ICusto
 
 ### SetViaIdentity
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -CustomEmail <ICustomEmail> [-Confirm]
+Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApiIdentity> -CustomEmail <ICustomEmail> [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApIsIdentity> -Subject <String> -Type <String>
+Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApiIdentity> -Subject <String> -Type <String>
  [-Body <String>] [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -140,7 +140,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -249,7 +249,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.ICustomEmail
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -273,7 +273,7 @@ CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to pe
   - `[NextStepContactInfo <String>]`: 
   - `[Title <String>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AgentId <String>]`: 
@@ -282,14 +282,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
-  - `[ProviderId <String>]`: 
+  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

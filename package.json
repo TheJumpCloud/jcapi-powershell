@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "@autorest/core": "3.6.6",
+    "@autorest/powershell": "3.0.463",
+    "autorest": "3.4.2"
+  }
+}

@@ -1,35 +1,21 @@
 <#
 .Synopsis
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.
+Remove a single Apple MDM device from MDM enrollment.
 
 #### Sample Request
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
+  curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
+  -H 'accept: application/json' \\
+  -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint allows you to create a provider administrator.
-You must be associated with the provider to use this route.
-You must provide either `role` or `roleName`.
+Remove a single Apple MDM device from MDM enrollment.
 
 #### Sample Request
 ```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
+  curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id} \\
+  -H 'accept: application/json' \\
+  -H 'x-api-key: {API_KEY}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -41,25 +27,15 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
-.Inputs
-JumpCloud.SDK.V2.Models.IProviderAdminReq
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IAdministrator
+JumpCloud.SDK.V2.Models.IAppleMdmDevice
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IProviderAdminReq>:
-  Email <String>:
-  [EnableMultiFactor <Boolean?>]:
-  [Firstname <String>]:
-  [Lastname <String>]:
-  [Role <String>]:
-  [RoleName <String>]:
-
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AgentId <String>]:
@@ -68,91 +44,45 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
+  [PolicyId <String>]: ObjectID of the Policy.
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdministrator.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkAppleMdmDevice.md
 #>
- Function New-JcSdkProviderAdministrator
+ Function Remove-JcSdkAppleMdmDevice
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IAdministrator])]
-    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.V2.Models.IAppleMdmDevice])]
+    [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter(ParameterSetName='Create', Mandatory)]
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='Delete', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${ProviderId},
+    ${AppleMdmId},
 
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Delete', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [System.String]
+    # .
+    ${DeviceId},
+
+    [Parameter(ParameterSetName='DeleteViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Path')]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
-
-    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IProviderAdminReq]
-    # ProviderAdminReq
-    # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${Email},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${EnableMultiFactor},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${Firstname},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${Lastname},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${Role},
-
-    [Parameter(ParameterSetName='CreateExpanded')]
-    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${RoleName},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -210,7 +140,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\New-JcSdkInternalProviderAdministrator @PSBoundParameters
+        $Results = JumpCloud.SDK.V2.internal\Remove-JcSdkInternalAppleMdmDevice @PSBoundParameters
     }
     End
     {

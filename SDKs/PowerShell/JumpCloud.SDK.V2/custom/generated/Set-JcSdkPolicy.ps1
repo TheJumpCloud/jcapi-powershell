@@ -1,7 +1,7 @@
 <#
 .Synopsis
-This endpoint allows you to update a configuration (policy).
-Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
+This endpoint allows you to update a policy.
+Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
 
 
 ##### Sample Request
@@ -15,8 +15,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
   }'
 ```
 .Description
-This endpoint allows you to update a configuration (policy).
-Given the amount of configurable parameters required to update a Configuration (Policy), we suggest you use the JumpCloud Admin Console to create new configurations (policies).
+This endpoint allows you to update a policy.
+Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
 
 
 ##### Sample Request
@@ -39,7 +39,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
 JumpCloud.SDK.V2.Models.IPolicyRequest
 .Outputs
@@ -50,13 +50,13 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPolicyRequest>:
-  Name <String>: The description for this specific Configuration (Policy).
-  [TemplateId <String>]: ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
+  Name <String>: The description for this specific Policy.
+  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   [Values <IPolicyValue[]>]:
-    [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
-    [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
+    [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
+    [Value <String>]: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AgentId <String>]:
@@ -65,14 +65,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
+  [PolicyId <String>]: ObjectID of the Policy.
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -80,8 +80,8 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [WorkdayId <String>]:
 
 VALUES <IPolicyValue[]>:
-  [ConfigFieldId <String>]: The ObjectId of the corresponding Configuration (Policy) Template configuration field.
-  [Value <String>]: The value for the configuration field for this Configuration (Policy) instance.
+  [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
+  [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicy.md
 #>
@@ -94,13 +94,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy) object.
+    # ObjectID of the Policy object.
     ${Id},
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -109,7 +109,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyRequest]
-    # An instance of a configuration (policy) template.
+    # An instance of a policy template.
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body},
 
@@ -117,14 +117,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # The description for this specific Configuration (Policy).
+    # The description for this specific Policy.
     ${Name},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
-    # ObjectId uniquely identifying a Configuration (Policy) instance; only allowed on POST requests.
+    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
     ${TemplateId},
 
     [Parameter(ParameterSetName='SetExpanded')]

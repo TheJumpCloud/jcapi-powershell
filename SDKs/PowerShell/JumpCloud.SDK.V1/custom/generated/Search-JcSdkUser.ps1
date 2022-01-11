@@ -12,7 +12,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -39,6 +39,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
   \"searchFilter\" : {
     \"searchTerm\": \"@jumpcloud.com\",
     \"fields\": [\"email\"]
+  },
+  \"fields\" : \"email username sudo\"
+}'
+```
+
+Text search for multiple system users
+```
+curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"john\", \"sarah\"],
+    \"fields\": [\"username\"]
   },
   \"fields\" : \"email username sudo\"
 }'
@@ -77,7 +92,7 @@ This allows you to filter records using the logic of matching ALL or ANY records
 If the `and` or `or` are not included the default behavior is to match ALL query expressions.
 
 The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
-If any `field` has a partial text match on the`searchTerm` the record will be returned.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
 
 
 #### Sample Request
@@ -104,6 +119,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
   \"searchFilter\" : {
     \"searchTerm\": \"@jumpcloud.com\",
     \"fields\": [\"email\"]
+  },
+  \"fields\" : \"email username sudo\"
+}'
+```
+
+Text search for multiple system users
+```
+curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"john\", \"sarah\"],
+    \"fields\": [\"username\"]
   },
   \"fields\" : \"email username sudo\"
 }'
@@ -172,13 +202,39 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
     # A filter to apply to the query.
+    # See the supported operators below.
+    # For more complex searches,
+    # see the related `/search/<domain>` endpoints,
+    # e.g.
+    # `/search/systems`.
+    # 
     # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
     # **field** = Populate with a valid field from an endpoint response.
-    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # 
+    # **operator** = Supported operators are:
+    # - `$eq` (equals)
+    # - `$ne` (does not equal)
+    # - `$gt` (is greater than)
+    # - `$gte` (is greater than or equal to)
+    # - `$lt` (is less than)
+    # - `$lte` (is less than or equal to)
+    # 
+    # _Note: v1 operators differ from v2 operators._
+    # 
+    # _Note: For v1 operators, excluding the `$` will result in undefined behavior._
+    # 
     # **value** = Populate with the value you want to search for.
     # Is case sensitive.
-    # Supports wild cards.
-    # **EX:** `GET /users?username=eq:testuser`
+    # 
+    # **Examples**
+    # - `GET /users?filter=username:$eq:testuser`
+    # - `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`
+    # - `GET /systemusers?filter=department:$ne:Accounting`
+    # - `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will
+    #  AND the filters together.
+    # - `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will
+    #  OR the filters together.
     ${Filter},
 
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]

@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint returns the _direct_ associations of a Configuration (Policy).
+This endpoint returns the _direct_ associations of a Policy.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
 
 #### Sample Request
 ```
@@ -12,9 +12,9 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
   -H 'x-api-key: {API_KEY}'
 ```
 .Description
-This endpoint returns the _direct_ associations of a Configuration (Policy).
+This endpoint returns the _direct_ associations of a Policy.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Configurations (Policies) and Systems.
+A direct association can be a non-homogeneous relationship between 2 different objects, for example Policies and Systems.
 
 #### Sample Request
 ```
@@ -33,7 +33,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IGraphConnection
 .Notes
@@ -41,7 +41,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AgentId <String>]:
@@ -50,14 +50,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
+  [PolicyId <String>]: ObjectID of the Policy.
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -74,12 +74,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ObjectID of the Configuration (Policy).
+    # ObjectID of the Policy.
     ${PolicyId},
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},

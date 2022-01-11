@@ -12,8 +12,33 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkBulkUsersResult' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        # Create a new users from bulk import
+        $Body = @(
+            @{
+                Username  = "BulkUsers-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+                FirstName = "Pester"
+                LastName  = "Test"
+                Password  = "Testing123!"
+                Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
+            },
+            @{
+                Username  = "BulkUsers-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+                FirstName = "Pester"
+                LastName  = "Test"
+                Password  = "Testing123!"
+                Email     = "pester.test@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com"
+            }
+        )
+        # Per swagger definition, this returns a string in the meantime
+        $bulkUsersImport = New-JcSdkBulkUser -Body $Body -CreationSource 'jumpcloud:bulk'
+        { Get-JcSdkBulkUsersResult -JobId $bulkUsersImport } | Should -not -Throw
+        # Cleanup any users with the username matching "PesterTestBulkUserState-"
+        $users = Get-JCSDKUser | Where-Object { $_.username -match "BulkUsers-" }
+        foreach ($user in $users)
+        {
+            Remove-JcSdkUser -Id $user.Id
+        }
     }
 
     It 'GetViaIdentity' -skip {

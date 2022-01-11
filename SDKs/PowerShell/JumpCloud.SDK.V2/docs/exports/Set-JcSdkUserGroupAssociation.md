@@ -30,7 +30,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associati
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <GraphOperationUserGroup4>
+Set-JcSdkUserGroupAssociation -GroupId <String> -Id <String> -Op <String> -Type <GraphOperationUserGroup5>
  [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -42,14 +42,14 @@ Set-JcSdkUserGroupAssociation -GroupId <String> -Body <IGraphOperationUserGroup>
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Body <IGraphOperationUserGroup>
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApiIdentity> -Body <IGraphOperationUserGroup>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApIsIdentity> -Id <String> -Op <String>
- -Type <GraphOperationUserGroup4> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkUserGroupAssociation -InputObject <IJumpCloudApiIdentity> -Id <String> -Op <String>
+ -Type <GraphOperationUserGroup5> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -156,7 +156,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -201,7 +201,7 @@ Accept wildcard characters: False
 Targets which a "user_group" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphOperationUserGroup4
+Type: JumpCloud.SDK.V2.Support.GraphOperationUserGroup5
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -250,7 +250,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IGraphOperationUserGroup
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -268,11 +268,11 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGraphOperationUserGroup>: GraphOperation (UserGroup)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <GraphOperationUserGroup4>`: Targets which a "user_group" can be associated to.
+  - `Type <GraphOperationUserGroup5>`: Targets which a "user_group" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AgentId <String>]`: 
@@ -281,14 +281,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
-  - `[ProviderId <String>]`: 
+  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

@@ -12,7 +12,9 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkSystem' {
-    It 'Delete' {
+    # TODO: implemnet a step to add the pester test system after we run this.
+    # This test is removing the system necessary for Pester Tests to complete in the PowerShell Module pipeline
+    It 'Delete' -Skip {
         { Remove-JcSdkSystem -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 

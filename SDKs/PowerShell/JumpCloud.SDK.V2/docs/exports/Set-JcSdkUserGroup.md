@@ -26,7 +26,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkUserGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
- [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -36,15 +37,15 @@ Set-JcSdkUserGroup -Id <String> -Body <IUserGroupPut> [-Confirm] [-WhatIf] [<Com
 
 ### SetViaIdentity
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
+Set-JcSdkUserGroup -InputObject <IJumpCloudApiIdentity> -Body <IUserGroupPut> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUserGroup -InputObject <IJumpCloudApIsIdentity> -Name <String> [-Attributes <Hashtable>]
- [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUserGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Attributes <Hashtable>]
+ [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -160,7 +161,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -177,6 +178,21 @@ To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a h
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IFilter[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberSuggestionsNotify
+True if notification emails are to be sent for membership suggestions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -238,7 +254,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V2.Models.IUserGroupPut
 
@@ -274,8 +290,9 @@ BODY <IUserGroupPut>: UserGroupPut
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
+  - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AgentId <String>]`: 
@@ -284,14 +301,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 
-  - `[GroupId <String>]`: ObjectID of the Configuration (Policy) Group.
+  - `[GroupId <String>]`: ObjectID of the Policy Group.
   - `[GsuiteId <String>]`: ObjectID of the G Suite instance.
   - `[Id <String>]`: ObjectID of this Active Directory instance.
   - `[JobId <String>]`: 
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
-  - `[PolicyId <String>]`: ObjectID of the Configuration (Policy).
-  - `[ProviderId <String>]`: 
+  - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.

@@ -311,5 +311,6 @@ $SDKs | ForEach-Object {
             }
         }
     }
-    Invoke-ScriptAnalyzer -Path:($TestFolderPathAll) -Recurse -ExcludeRule PSShouldProcess, PSAvoidTrailingWhitespace, PSAvoidUsingWMICmdlet, PSAvoidUsingPlainTextForPassword, PSAvoidUsingUsernameAndPasswordParams, PSAvoidUsingInvokeExpression, PSUseDeclaredVarsMoreThanAssignments, PSUseSingularNouns, PSAvoidGlobalVars, PSUseShouldProcessForStateChangingFunctions, PSAvoidUsingWriteHost, PSAvoidUsingPositionalParameters
+    #### PSScriptAnalyzer Setup ####
+    Invoke-ScriptAnalyzer -Path:("$ModuleFolder") -recurse -Settings:("$($PSScriptRoot)/PSScriptAnalyzerSettings.psd1") -reportSummary -Verbose
 }

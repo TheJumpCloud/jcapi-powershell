@@ -1,21 +1,18 @@
 # PowerShell Dependencies
-$RequiredModules = ('PSScriptAnalyzer', 'powershell-yaml', 'BuildHelpers', 'AWS.Tools.Common', 'AWS.Tools.CodeArtifact')
-ForEach ($RequiredModule In $RequiredModules)
-{
-    # Check to see if the module is installed
-    If (Get-InstalledModule -Name:($RequiredModule) -ErrorAction:('SilentlyContinue'))
-    {
-        Update-Module -Name:($RequiredModule) -Force
-    }
-    # Check to see if the module exists on the PSGallery
-    ElseIf (Find-Module -Name:($RequiredModule))
-    {
-        Install-Module -Name:($RequiredModule) -Force
-    }
-    Import-Module -Name:($RequiredModule) -Force
+#TODO: get latest of these other modules
+$PSDependencies = @{
+    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
+    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '4.10.1'}
+    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
+    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.0-beta10'}
+    'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
 }
-Install-Module -Name Pester -RequiredVersion '4.10.1' -Force
-Install-Module -Name PowerShellGet -AllowPrerelease -RequiredVersion '3.0.0-beta10' -Force
+foreach ($RequiredModule in $PSDependencies.Keys) {
+    Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
+    Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
+}
 # NPM Dependencies
 If ($env:CI -eq $false)
 {
@@ -25,6 +22,5 @@ If ($env:CI -eq $false)
     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
     Else { Write-Error ('Unknown Operation System') }
 }
-npm install -g autorest@latest
-autorest --reset
-# autorest --help
+# Install NPM Dependencies from packages.json
+npm install

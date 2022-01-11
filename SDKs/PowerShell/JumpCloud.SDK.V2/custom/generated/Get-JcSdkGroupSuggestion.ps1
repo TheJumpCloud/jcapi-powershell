@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -10,7 +10,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestion
 
 ```
 .Description
-This endpoint returns all suggestions available for a given group.
+This endpoint returns available suggestions for a given group
 #### Sample Request
 ```
 curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
@@ -29,7 +29,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IMemberSuggestion
 .Notes
@@ -37,7 +37,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-INPUTOBJECT <IJumpCloudApIsIdentity>:
+INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
   [AgentId <String>]:
@@ -46,14 +46,14 @@ INPUTOBJECT <IJumpCloudApIsIdentity>:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Configuration (Policy) Group.
+  [GroupId <String>]: ObjectID of the Policy Group.
   [GsuiteId <String>]: ObjectID of the G Suite instance.
   [Id <String>]: ObjectID of this Active Directory instance.
   [JobId <String>]:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Configuration (Policy).
-  [ProviderId <String>]:
+  [PolicyId <String>]: ObjectID of the Policy.
+  [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
@@ -75,7 +75,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApIsIdentity]
+    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
@@ -117,7 +117,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
+    ${ProxyUseDefaultCredentials},
+
+    [Parameter(DontShow)]
+    [System.Boolean]
+    # Set to $true to return all results. This will overwrite any skip and limit parameter.
+    $Paginate = $true
     )
     Begin
     {
@@ -136,22 +141,63 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
-            $Result.results
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+            {
+                $PSBoundParameters.Add('Limit', 100)
+            }
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+            {
+                $PSBoundParameters.Add('Skip', 0)
+            }
+            Do
+            {
+                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+                {
+                    $Result.results
+                }
+                Else
+                {
+                    $Result
+                }
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                    $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
-            $Result
-        }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
-            $Results += $Result;
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+            {
+                $Result.results
+            }
+            Else
+            {
+                $Result
+            }
+            If (-not [System.String]::IsNullOrEmpty($Result))
+            {
+                $Results += $Result;
+            }
         }
     }
     End

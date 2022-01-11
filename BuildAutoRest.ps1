@@ -2,7 +2,6 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][System.String]$PrereleaseName = ''
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
@@ -37,14 +36,7 @@ ForEach ($SDK In $SDKName)
         # Run API Transform step
         If ($RunApiTransform)
         {
-            If ([System.String]::IsNullOrEmpty($GitHubAccessToken))
-            {
-                .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
-            }
-            Else
-            {
-                .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
-            }
+            .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
         }
         # Start SDK generation
         $ConfigFile = Get-Item -Path:($ConfigFilePath)
@@ -61,6 +53,7 @@ ForEach ($SDK In $SDKName)
         $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
         $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
         $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
+        $CleanScript = '{0}/clean.sh' -f $ToolsFolderPath
         $ModuleName = [System.String]$Config.'module-name'
         $Namespace = [System.String]$Config.'namespace'
         $ConfigPrefix = $Config.prefix | Select-Object -First 1
@@ -87,6 +80,7 @@ ForEach ($SDK In $SDKName)
         $moduleMdPath = '{0}/{1}.md' -f $DocsFolderPath, $ModuleName
         $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
         $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+        $npmDependencies = Get-Content "$BaseFolder/package.json" | ConvertFrom-Json
         ###########################################################################
         # Check to see if module exists on PowerShellGallery already
         $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
@@ -125,8 +119,14 @@ ForEach ($SDK In $SDKName)
         {
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
+            if ($IsMacOS)
+            {
+                Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                # check if the /bin /obj directories need to permissions reset and deleted before continuing.
+                bash $CleanScript $PSScriptRoot $OutputFullPath
+            }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            autorest $ConfigFileFullName --force --verbose --debug | Tee-Object -FilePath:($LogFilePath) -Append
+            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Tee-Object -FilePath:($LogFilePath) -Append
         }
         ###########################################################################
         If ($CopyCustomFiles)
@@ -145,6 +145,11 @@ ForEach ($SDK In $SDKName)
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"
+            if ($IsMacOS)
+            {
+                Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                bash $CleanScript $PSScriptRoot $OutputFullPath
+            }
             Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
             # fix docs help link
             $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
@@ -181,6 +186,11 @@ ForEach ($SDK In $SDKName)
                     $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
                     # Build-module
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                    if ($IsMacOS)
+                    {
+                        Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        bash $CleanScript $PSScriptRoot $OutputFullPath
+                    }
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                     # Build PSScriptInfo - Theres gotta be a better way to do this
@@ -229,6 +239,11 @@ ForEach ($SDK In $SDKName)
                     If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                     # Rebuild to distribute the update PSScriptInfo to other locations
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
+                    if ($IsMacOS)
+                    {
+                        Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                        bash $CleanScript $PSScriptRoot $OutputFullPath
+                    }
                     Write-Host ('[RUN COMMAND] ' + $BuildModuleCommand) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
                     Invoke-Expression -Command:($BuildModuleCommand) | Tee-Object -FilePath:($LogFilePath) -Append
                 }
@@ -251,11 +266,12 @@ ForEach ($SDK In $SDKName)
         {
             # Tmp workaround
             $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
-            $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
-            # Temp workaround untill autorest updates to use Pester V5 syntax
+            $checkDependenciesModuleContent.Replace("autorest .\README.md", "npx autorest .\README.md --version:$($npmDependencies.dependencies.'@autorest/core')") | Set-Content -Path:($checkDependenciesModulePath)
+            # Temp workaround until autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
-            $InvokePesterLine = $testModuleContent | Select-String -Pattern 'Invoke-Pester.*?.xml"\)'
+            # Replace if else Invoke-Pester block with contents from runpestertests file.
+            $InvokePesterLine = $testModuleContent | Select-String -Pattern '(.*?if)(.*?\(\$null -ne \$TestName\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(Invoke-Pester.*?.xml"\))([\s\S]*?)(\})'
             If ([System.String]::IsNullOrEmpty($InvokePesterLine.Matches.Value))
             {
                 Write-Error ("Unable to find Invoke-Pester line in $testModulePath")

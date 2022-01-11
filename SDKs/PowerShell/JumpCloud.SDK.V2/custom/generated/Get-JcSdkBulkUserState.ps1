@@ -1,25 +1,21 @@
 <#
 .Synopsis
-This endpoint returns a list of the Administrators associated with the Provider.
-You must be associated with the provider to use this route.
-
+The endpoint allows you to list scheduled statechange jobs.
 #### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
+curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
+  -H 'x-api-key: {API_KEY}' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  -H 'Accept: application/json'
 ```
 .Description
-This endpoint returns a list of the Administrators associated with the Provider.
-You must be associated with the provider to use this route.
-
+The endpoint allows you to list scheduled statechange jobs.
 #### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
+curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
+  -H 'x-api-key: {API_KEY}' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
+  -H 'Accept: application/json'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -31,50 +27,21 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Outputs
-JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
+JumpCloud.SDK.V2.Models.IScheduledUserstateResult
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkProviderAdministrator.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkBulkUserState.md
 #>
- Function Get-JcSdkProviderAdministrator
+ Function Get-JcSdkBulkUserState
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema])]
+    [OutputType([JumpCloud.SDK.V2.Models.IScheduledUserstateResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-    [Parameter(Mandatory)]
-    [JumpCloud.SDK.V2.Category('Path')]
+    [Parameter()]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
-    # .
-    ${ProviderId},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # The comma separated fields included in the returned records.
-    # If omitted, the default list of fields will be returned.
-    ${Fields},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # A filter to apply to the query.
-    # **Filter structure**: `<field>:<operator>:<value>`.
-    # **field** = Populate with a valid field from an endpoint response.
-    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-    # **value** = Populate with the value you want to search for.
-    # Is case sensitive.
-    # Supports wild cards.
-    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
-    ${Filter},
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # The comma separated fields used to sort the collection.
-    # Default sort is ascending, prefix with `-` to sort descending.
-    ${Sort},
+    # The systemuser id to filter by.
+    ${Userid},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -152,7 +119,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalBulkUserState @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -177,7 +144,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalBulkUserState @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

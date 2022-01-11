@@ -52,14 +52,14 @@ Set-JcSdkOrganization -Id <String>
 
 ### SetViaIdentity
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity>
+Set-JcSdkOrganization -InputObject <IJumpCloudApiIdentity>
  -Body <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkOrganization -InputObject <IJumpCloudApIsIdentity> [-Settings <IOrganizationsettingsput>] [-Confirm]
+Set-JcSdkOrganization -InputObject <IJumpCloudApiIdentity> [-Settings <IOrganizationsettingsput>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -145,7 +145,7 @@ Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 Parameter Sets: SetViaIdentity, SetViaIdentityExpanded
 Aliases:
 
@@ -208,7 +208,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V1.Models.IJumpCloudApIsIdentity
+### JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 
 ### JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema
 
@@ -233,6 +233,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[DirectoryInsightEnabled <Boolean?>]`: 
     - `[DirectoryInsightPremiumCreatedAt <String>]`: 
     - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
+    - `[DirectoryInsightPremiumUpdatedAt <String>]`: 
     - `[DisableGoogleLogin <Boolean?>]`: 
     - `[DisableLdap <Boolean?>]`: 
     - `[DisableUm <Boolean?>]`: 
@@ -271,11 +272,16 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[SystemInsightEnableNewLinux <Boolean?>]`: 
     - `[SystemInsightEnableNewWindows <Boolean?>]`: 
     - `[SystemInsightEnabled <Boolean?>]`: 
+    - `[SystemInsightUpdatedAt <String>]`: 
     - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
     - `[SystemUsersCanEdit <Boolean?>]`: 
+    - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
+      - `Name <String>`: Name of the trusted application
+      - `[Path <String>]`: Absolute path for the app's location in user's device
+      - `[Teamid <String>]`: App's Team ID
     - `[UserPortalIdleSessionDurationMinutes <Int32?>]`: 
 
-INPUTOBJECT <IJumpCloudApIsIdentity>: Identity Parameter
+INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
@@ -288,6 +294,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[DirectoryInsightEnabled <Boolean?>]`: 
   - `[DirectoryInsightPremiumCreatedAt <String>]`: 
   - `[DirectoryInsightPremiumEnabled <Boolean?>]`: 
+  - `[DirectoryInsightPremiumUpdatedAt <String>]`: 
   - `[DisableGoogleLogin <Boolean?>]`: 
   - `[DisableLdap <Boolean?>]`: 
   - `[DisableUm <Boolean?>]`: 
@@ -326,8 +333,13 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[SystemInsightEnableNewLinux <Boolean?>]`: 
   - `[SystemInsightEnableNewWindows <Boolean?>]`: 
   - `[SystemInsightEnabled <Boolean?>]`: 
+  - `[SystemInsightUpdatedAt <String>]`: 
   - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
   - `[SystemUsersCanEdit <Boolean?>]`: 
+  - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
+    - `Name <String>`: Name of the trusted application
+    - `[Path <String>]`: Absolute path for the app's location in user's device
+    - `[Teamid <String>]`: App's Team ID
   - `[UserPortalIdleSessionDurationMinutes <Int32?>]`: 
 
 ## RELATED LINKS
