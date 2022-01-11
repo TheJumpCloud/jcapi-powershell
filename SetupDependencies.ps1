@@ -24,5 +24,3 @@ If ($env:CI -eq $false)
 }
 # Install NPM Dependencies from packages.json
 npm install
-autorest --reset
-# autorest --help
