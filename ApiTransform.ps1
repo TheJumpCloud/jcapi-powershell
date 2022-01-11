@@ -33,7 +33,7 @@ $TransformConfig = [Ordered]@{
             '"system":{"properties"'                                                             = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             '"title":"System"'                                                                   = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
-            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = '' # TODO: add note
+            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
             '"basePath":"\/api"'                                                                 = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
             '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
             '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)

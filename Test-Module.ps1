@@ -40,8 +40,7 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
 
     # Now test Module
     if ($testModulePath -Match "JumpCloud.SDK.V2") {
-        Write-Host "Modules Before"
-        get-module
+        $sdkRoot = [System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)))
         $modules = Get-Module
         foreach ($module in $modules)
         {
@@ -58,7 +57,7 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         Write-Host "pds1 path: $psd1Path"
         Test-Path $psd1Path
         Write-Host "PSD1 File:"
-        get-content $psd1Path -TotalCount 6
+        get-content $psd1Path -TotalCount 6 # just print out the header to see the generation date
         try
         {
             Import-Module $psd1Path -Force -PassThru
@@ -67,8 +66,6 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         {
             Import-Module $psd1Path -Force -PassThru
         }
-        Write-Host "Modules After"
-        get-module
     }
     Invoke-Expression -Command:("$testModulePath -Live")
     # Throw error if there were any failed tests
