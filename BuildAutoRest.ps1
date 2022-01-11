@@ -32,7 +32,6 @@ ForEach ($SDK In $SDKName)
 {
     $ConfigFilePath = '{0}/Configs/{1}.yaml' -f $PSScriptRoot, $SDK
     $ApiTransformPath = '{0}/ApiTransform.ps1' -f $PSScriptRoot
-    $ApiTransformSwaggerSource = 'Public'
     If (Test-Path -Path:($ConfigFilePath))
     {
         # Run API Transform step
@@ -40,11 +39,11 @@ ForEach ($SDK In $SDKName)
         {
             If ([System.String]::IsNullOrEmpty($GitHubAccessToken))
             {
-                .($ApiTransformPath) -SDKName:($SDK) -SwaggerSource:($ApiTransformSwaggerSource)# -NoUpdate # | Out-Null
+                .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
             }
             Else
             {
-                .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) -SwaggerSource:($ApiTransformSwaggerSource)# -NoUpdate # | Out-Null
+                .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
             }
         }
         # Start SDK generation
