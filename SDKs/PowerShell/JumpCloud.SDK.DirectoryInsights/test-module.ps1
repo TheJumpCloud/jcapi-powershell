@@ -268,15 +268,10 @@ else
     $testFolder
 }
 # Validate script syntax
-$SettingsFile = '../../../Tools/PSScriptAnalyzerSettings.psd1'
-$LintFilePath = './custom/generated/*.ps1'
+$LintFilePath = "$PSScriptRoot/custom/generated/*.ps1"
 # Import Settings:
-$SettingsFromFile = Import-PowerShellDataFile $SettingsFile
-$settingsObject = @{
-    Severity     = $SettingsFromFile.Severity
-    ExcludeRules = $SettingsFromFile.ExcludeRules
-}
-$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings $settingsObject
+
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings:("$PSScriptRoot/../../../Tools/PSScriptAnalyzerSettings.psd1")
 If ($ScriptAnalyzerResult)
 {
     $ScriptAnalyzerResult
