@@ -89,6 +89,7 @@ ForEach ($SDK In $SDKName)
         $moduleMdPath = '{0}/{1}.md' -f $DocsFolderPath, $ModuleName
         $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
         $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
+        $npmDependencies = Get-Content "$BaseFolder/package.json" | ConvertFrom-Json
         ###########################################################################
         # Check to see if module exists on PowerShellGallery already
         $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
@@ -134,7 +135,7 @@ ForEach ($SDK In $SDKName)
                 bash $CleanScript $PSScriptRoot $OutputFullPath
             }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            autorest $ConfigFileFullName --force --version="3.6.6" --use:@autorest/powershell@3.0.463 | Tee-Object -FilePath:($LogFilePath) -Append
+            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Tee-Object -FilePath:($LogFilePath) -Append
         }
         ###########################################################################
         If ($CopyCustomFiles)
@@ -275,7 +276,7 @@ ForEach ($SDK In $SDKName)
             # Tmp workaround
             $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
             $checkDependenciesModuleContent.Replace('autorest-beta', 'autorest') | Set-Content -Path:($checkDependenciesModulePath)
-            # Temp workaround untill autorest updates to use Pester V5 syntax
+            # Temp workaround until autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw
             # Replace if else Invoke-Pester block with contents from runpestertests file.

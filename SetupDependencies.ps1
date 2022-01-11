@@ -1,28 +1,17 @@
 # PowerShell Dependencies
+#TODO: get latest of these other modules
 $PSDependencies = @{
-    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = ''}
-    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '' }
-    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = ''}
+    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
     'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '4.10.1'}
-    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = ''}
+    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
     'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.0-beta10'}
     'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
 }
 foreach ($RequiredModule in $PSDependencies.Keys) {
-    If (Get-InstalledModule -Name:($RequiredModule) -ErrorAction:('SilentlyContinue'))
-    {
-        Write-Host("[status]Updating module: '$RequiredModule' from $($PSDependencies[$RequiredModule].Repository)")
-        # Update-Module -Name:($RequiredModule) -Force
-    }
-    # If module version is specified:
-    If ($($PSDependencies[$RequiredModule].RequiredVersion)) {
-        Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
-        # Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
-    }
-    else{
-        Write-Host("[status]Installing module: '$RequiredModule' from $($PSDependencies[$RequiredModule].Repository)")
-        # Install-Module -Name:($RequiredModule) -Repository:($($PSDependencies[$RequiredModule].Repository)) -Force
-    }
+    Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
+    Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
 }
 # NPM Dependencies
 If ($env:CI -eq $false)
@@ -33,6 +22,7 @@ If ($env:CI -eq $false)
     ElseIf ($IsLinux) { npm install -g dotnet-sdk-3.1-linux-x64 }
     Else { Write-Error ('Unknown Operation System') }
 }
-npm install -g autorest@3.4.2
+# Install NPM Dependencies from packages.json
+npm install
 autorest --reset
 # autorest --help
