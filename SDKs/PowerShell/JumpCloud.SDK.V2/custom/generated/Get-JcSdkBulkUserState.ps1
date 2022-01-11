@@ -37,7 +37,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter()]
-    [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # The systemuser id to filter by.
