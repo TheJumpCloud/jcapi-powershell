@@ -2,7 +2,6 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][System.String]$PrereleaseName = ''
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
@@ -37,14 +36,7 @@ ForEach ($SDK In $SDKName)
         # Run API Transform step
         If ($RunApiTransform)
         {
-            If ([System.String]::IsNullOrEmpty($GitHubAccessToken))
-            {
-                .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
-            }
-            Else
-            {
-                .($ApiTransformPath) -SDKName:($SDK) -GitHubAccessToken:($GitHubAccessToken) # -NoUpdate # | Out-Null
-            }
+            .($ApiTransformPath) -SDKName:($SDK) # -NoUpdate # | Out-Null
         }
         # Start SDK generation
         $ConfigFile = Get-Item -Path:($ConfigFilePath)

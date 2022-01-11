@@ -203,7 +203,7 @@ commands:
           shell: pwsh.exe
           command: |
             $ErrorActionPreference = 'Stop'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -GitHubAccessToken:($env:GitHubAccessToken) -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]

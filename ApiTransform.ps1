@@ -1,8 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub Personal Access Token.')][ValidateNotNullOrEmpty()][System.String]$GitHubAccessToken = $env:GitHubAccessToken
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'GitHub branch or tag to pull spec from.')][ValidateNotNullOrEmpty()][System.String]$GitHubTag
 )
 Set-Location $PSScriptRoot
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
@@ -669,12 +667,6 @@ Function Update-SwaggerObject
                                 # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
                                 $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
                             }
-                            # # Remove endpoints where ".public.x-stoplight.public" is "false"
-                            # If ('x-stoplight' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and [String]$ThisObject.$AttributeName.$Method.'x-stoplight'.public -eq 'False')
-                            # {
-                            #     # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
-                            #     $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
-                            # }
                         }
                     }
                     # Remove x-swagger-jumpcloud-auto-insert
