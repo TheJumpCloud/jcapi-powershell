@@ -274,7 +274,7 @@ ForEach ($SDK In $SDKName)
         {
             # Tmp workaround
             $checkDependenciesModuleContent = Get-Content -Path:($checkDependenciesModulePath) -Raw
-            $checkDependenciesModuleContent.Replace('autorest', 'npx autorest') | Set-Content -Path:($checkDependenciesModulePath)
+            $checkDependenciesModuleContent.Replace("autorest .\README.md", "npx autorest .\README.md --version:$($npmDependencies.dependencies.'@autorest/core')") | Set-Content -Path:($checkDependenciesModulePath)
             # Temp workaround until autorest updates to use Pester V5 syntax
             $testModuleContent = Get-Content -Path:($testModulePath) -Raw
             $PesterTestsContent = Get-Content -Path:($RunPesterTestsFilePath) -Raw

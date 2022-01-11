@@ -38,14 +38,6 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
     # ./test-module.ps1 -Playback # Run once playback files have been created
     # ./test-module.ps1 -Live # Run to query against real API
 
-    # set autorest --version="3.6.6" in check-dependencies for consistancy
-    $sdkRoot = [System.IO.Path]::GetDirectoryName( (Resolve-Path $($testModulePath)))
-    $checkDependenciesFile = "$sdkRoot/check-dependencies.ps1"
-    $checkDependenciesFileContent = Get-Content -path $checkDependenciesFile -raw
-    $regexPattern = [regex]"autorest .\\README.md --use:"
-    $checkDependenciesFileContent = $checkDependenciesFileContent -replace $regexPattern, 'autorest .\README.md --version="3.6.6" --use:'
-    $checkDependenciesFileContent | Out-File $checkDependenciesFile
-
     # Now test Module
     if ($testModulePath -Match "JumpCloud.SDK.V2") {
         Write-Host "Modules Before"
@@ -74,7 +66,6 @@ If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]
         catch
         {
             Import-Module $psd1Path -Force -PassThru
-    
         }
         Write-Host "Modules After"
         get-module

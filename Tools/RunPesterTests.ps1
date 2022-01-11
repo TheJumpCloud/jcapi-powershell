@@ -200,10 +200,10 @@ else
     $testFolder
 }
 # Validate script syntax
-$LintFilePath = './custom/generated/*.ps1'
+$LintFilePath = "$PSScriptRoot/custom/generated/*.ps1"
 # Import Settings:
 
-$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings:("../../../Tools/PSScriptAnalyzerSettings.psd1")
+$ScriptAnalyzerResult = Invoke-ScriptAnalyzer -Path:("$LintFilePath") -recurse -Settings:("$PSScriptRoot/../../../Tools/PSScriptAnalyzerSettings.psd1")
 If ($ScriptAnalyzerResult)
 {
     $ScriptAnalyzerResult
