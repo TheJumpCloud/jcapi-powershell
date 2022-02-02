@@ -1,7 +1,7 @@
 <#
 .Synopsis
 The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
+See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -31,7 +31,7 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
 ```
 .Description
 The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/1.0/systemusers/update-a-system-user) for full list of attributes.
+See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```

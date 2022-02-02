@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
+See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -40,7 +40,7 @@ New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource>] [
 
 ## DESCRIPTION
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/1.0/systemusers/create-a-system-user) for full list of attributes.
+See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.
 
 #### Sample Request 
 ```
