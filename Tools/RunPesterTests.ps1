@@ -70,19 +70,19 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Upload file to ORG and create reusable global object of that File
     $global:PesterDefCommandFile = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/files' -Method POST -Headers $headers -Body $body
     # Declare a Command definition
+    $global:PesterDefCommandName = "PesterTestCommand$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     $global:PesterDefCommand = @{
-        Name        = "PesterTestCommand-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        Name        = $global:PesterDefCommandName
         Command     = 'echo "Hello World"'
         User        = "000000000000000000000000"
         launchType  = "trigger"
-        trigger     = "PesterTestTrigger"
+        trigger     = $global:PesterDefCommandName
         commandType = "linux"
         files       = $global:PesterDefCommandFile._id
     }
     # Create a command, assign it to systems, and run it
     $NewCommand = New-JcSdkCommand @global:PesterDefCommand
     $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
-    # $global:PesterDefCommand.Id = $global:PesterTestCommand.Id
     # Using Requests, assign the command to the system / Splatting the command object with system does not work perhaps it's been depricated in favor of associations?
     $CommandAssociaion = Get-JcSdkSystem | Where-Object { $_.os -eq 'Ubuntu' } | Select-Object -ExpandProperty Id
     $headers = @{}
