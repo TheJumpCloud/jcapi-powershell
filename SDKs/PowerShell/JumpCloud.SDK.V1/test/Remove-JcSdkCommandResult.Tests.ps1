@@ -12,8 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Remove-JcSdkCommandResult' {
-    It 'Delete' -skip {
-        { Remove-JcSdkCommandResult -Id:($global:PesterTestCommandResult.Id) } | Should -Not -Throw
+    It 'Delete' {
+        { Get-JcSdkCommandResult | Where-Object { $_.Name -eq $global:PesterDefCommandName } | ForEach-Object { Remove-JcSdkCommandResult -Id $_.Id } } | Should -Not -Throw
     }
 
     It 'DeleteViaIdentity' -skip {

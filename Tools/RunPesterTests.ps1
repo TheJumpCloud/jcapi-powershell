@@ -59,31 +59,43 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # }
     # TODO: Switch from get to new
     $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
-    # Post a command file
+    # Post a command file (README.md from SDK directory)
     $headers = @{}
     $headers.Add("x-api-key", $env:JCApiKey)
-    $body = @{}
-    $body.Add("content", "./how-to.md")
-    $body.Add("name", "how-to.md")
-    $body.Add("destination", "/tmp/how-to.md")
+    $body = @{
+        content     = "./README.md"
+        name        = "README.md"
+        destination = "/tmp/README.md"
+    }
+    # Upload file to ORG and create reusable global object of that File
     $global:PesterDefCommandFile = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/files' -Method POST -Headers $headers -Body $body
-    # Create a Command
+    # Declare a Command definition
     $global:PesterDefCommand = @{
         Name        = "PesterTestCommand-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         Command     = 'echo "Hello World"'
         User        = "000000000000000000000000"
         launchType  = "trigger"
         trigger     = "PesterTestTrigger"
-        commandType = "windows"
+        commandType = "linux"
         files       = $global:PesterDefCommandFile._id
     }
-    # Trying to create a command, assign it to systems, and run it
-    # $NewCommand = New-JcSdkCommand @global:PesterDefCommand
-    # $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
+    # Create a command, assign it to systems, and run it
+    $NewCommand = New-JcSdkCommand @global:PesterDefCommand
+    $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
     # $global:PesterDefCommand.Id = $global:PesterTestCommand.Id
-    # $global:PesterDefCommand.Systems = Get-JcSdkSystem | Where-Object { $_.os -eq $global:PesterDefCommand.commandType } | Select-Object -ExpandProperty Id
-    # Set-JcSdkCommand @global:PesterDefCommand
-    # Invoke-JcSdkCommandTrigger @global:PesterDefCommand.trigger
+    # Using Requests, assign the command to the system / Splatting the command object with system does not work perhaps it's been depricated in favor of associations?
+    $CommandAssociaion = Get-JcSdkSystem | Where-Object { $_.os -eq 'Ubuntu' } | Select-Object -ExpandProperty Id
+    $headers = @{}
+    $headers.Add("x-api-key", $env:JCApiKey)
+    $headers.Add("content-type", "application/json")
+    $body = @{
+        id   = $CommandAssociaion
+        op   = "add"
+        type = "system"
+    } | ConvertTo-Json
+    $response = Invoke-RestMethod -Uri "https://console.jumpcloud.com/api/v2/commands/$($global:PesterTestCommand.Id)/associations" -Method POST -Headers $headers -Body $body
+    # Invoke SDK Command Trigger to generate Command Results
+    Invoke-JcSdkCommandTrigger -Triggername $global:PesterTestCommand.trigger
     # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
