@@ -22,7 +22,6 @@
 }
 TODO:
     Clear-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be cleared each time
-    Get-JcSdkCommandFile.Tests.ps1: Configure New-JcSdkCommand test to upload a simple text file
     Invoke-JcSdkCommandTrigger.Tests.ps1: Configure a command with a 'trigger' launchType
     Lock-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be locked each time
     New-JcApplication.Tests.ps1: Figure out how to configure an Application from the SDK
@@ -60,6 +59,14 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # }
     # TODO: Switch from get to new
     $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    # Post a command file
+    $headers = @{}
+    $headers.Add("x-api-key", $env:JCApiKey)
+    $body = @{}
+    $body.Add("content", "./how-to.md")
+    $body.Add("name", "how-to.md")
+    $body.Add("destination", "/tmp/how-to.md")
+    $global:PesterDefCommandFile = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/files' -Method POST -Headers $headers -Body $body
     # Create a Command
     $global:PesterDefCommand = @{
         Name        = "PesterTestCommand-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
@@ -68,6 +75,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         launchType  = "trigger"
         trigger     = "PesterTestTrigger"
         commandType = "windows"
+        files       = $global:PesterDefCommandFile._id
     }
     # Trying to create a command, assign it to systems, and run it
     # $NewCommand = New-JcSdkCommand @global:PesterDefCommand
