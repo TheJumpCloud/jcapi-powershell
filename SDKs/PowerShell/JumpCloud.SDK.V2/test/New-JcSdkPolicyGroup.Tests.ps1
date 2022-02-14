@@ -12,7 +12,7 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkPolicyGroup' {
-    It 'NewExpanded' -Skip {
+    It 'NewExpanded' {
         $global:PesterTestPolicyGroup = New-JcSdkPolicyGroup @global:PesterDefPolicyGroup
         $global:PesterTestPolicyGroup | Should -Not -BeNullOrEmpty
     }
