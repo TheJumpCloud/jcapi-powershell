@@ -153,6 +153,21 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
         TargetResources     = @{"type" = "user_portal" }
         UserGroupInclusions = $null # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
     }
+    # Create a Bulk User Configuration:
+    $global:pesterDefBulkUsername = "PesterBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $global:PesterDefBulkUser = [JumpCloud.SDK.V2.Models.BulkUserCreate]@{
+        Email      = "$($global:pesterDefBulkUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        Firstname  = $global:pesterDefBulkUsername;
+        Lastname   = $global:pesterDefBulkUsername;
+        Username   = $global:pesterDefBulkUsername;
+    }
+    $global:PesterDefUpdateBulkUser = [JumpCloud.SDK.V2.Models.BulkUserUpdate]@{
+        Id        = $global:PesterTestBulkUserJobId.Id
+        Email     = "$($global:pesterDefBulkUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        Firstname = $global:pesterDefBulkUsername; ;
+        Lastname  = $global:pesterDefBulkUsername; ;
+        Username  = $global:pesterDefBulkUsername; ;
+    }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{
         Type    = 'password_reset_confirmation'
