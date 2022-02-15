@@ -16,8 +16,8 @@ Describe 'Set-JcSdkPolicyGroupAssociation' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Set' {
+        { Set-JcSdkPolicyGroupAssociation -Id:($global:PesterTestPolicyGroup.Id) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
