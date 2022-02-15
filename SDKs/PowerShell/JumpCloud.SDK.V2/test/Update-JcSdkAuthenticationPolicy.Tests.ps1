@@ -16,8 +16,8 @@ Describe 'Update-JcSdkAuthenticationPolicy' {
         { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-Type '<String>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
     }
 
-    It 'Update' -skip {
-        { Update-JcSdkAuthenticationPolicy -Body:($global:PesterTestAuthenticationPolicy) -Id:($global:PesterTestAuthenticationPolicy.Id) } | Should -Not -Throw
+    It 'Update' {
+        { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) -UserGroupInclusions:($global:PesterTestUserGroup.id) -TargetResources:($global:PesterTestAuthenticationPolicy.TargetResources)  } | Should -Not -Throw
     }
 
     It 'UpdateViaIdentity' -skip {
