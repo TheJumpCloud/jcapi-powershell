@@ -83,11 +83,14 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Create a command, assign it to systems, and run it
     $NewCommand = New-JcSdkCommand @global:PesterDefCommand
     $global:PesterTestCommand = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
-    # Using Requests, assign the command to the system / Splatting the command object with system does not work perhaps it's been depricated in favor of associations?
+    # Using Requests, assign the command to the system / Splatting the command object with system does not work perhaps it's been deprecated in favor of associations?
+    # This Association is set to run one instance of the command on a system
+    # It is removed in order for the Set-JcSdkCommandAssociation tests to work as expected
     $CommandAssociaion = Get-JcSdkSystem | Where-Object { $_.os -eq 'Ubuntu' } | Select-Object -ExpandProperty Id
-    $headers = @{}
-    $headers.Add("x-api-key", $env:JCApiKey)
-    $headers.Add("content-type", "application/json")
+    $headers = @{
+        "x-api-key" = $env:JCApiKey
+        "content-type" = "application/json"
+    }
     $body = @{
         id   = $CommandAssociaion
         op   = "add"
@@ -96,6 +99,9 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     $response = Invoke-RestMethod -Uri "https://console.jumpcloud.com/api/v2/commands/$($global:PesterTestCommand.Id)/associations" -Method POST -Headers $headers -Body $body
     # Invoke SDK Command Trigger to generate Command Results
     Invoke-JcSdkCommandTrigger -Triggername $global:PesterTestCommand.trigger
+    # Remove the Command Associations to continue tests as normal
+    $body.op = "remove"
+    $response = Invoke-RestMethod -Uri "https://console.jumpcloud.com/api/v2/commands/$($global:PesterTestCommand.Id)/associations" -Method POST -Headers $headers -Body $body
     # Create a User
     $global:PesterDefUser = @{
         Username  = "pester.test.$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
