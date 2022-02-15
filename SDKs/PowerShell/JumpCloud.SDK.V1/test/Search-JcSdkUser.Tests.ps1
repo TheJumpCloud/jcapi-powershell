@@ -16,7 +16,14 @@ Describe 'Search-JcSdkUser' {
         { Search-JcSdkUser [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw
     }
 
-    It 'Search' -skip {
-        { Search-JcSdkUser -Body:($global:PesterTestUser) } | Should -Not -Throw
+    It 'Search' {
+        $Search = @{
+            filter = @{
+                or = @(
+                    'username:$regex:/pester/i'
+                )
+            }
+        }
+        { Search-JcSdkUser -Body:($Search) } | Should -Not -Throw
     }
 }
