@@ -293,7 +293,7 @@ $PesterTestResultFolder = (Join-Path $testFolder "results")
 If (!(Test-Path -Path:($PesterTestResultFolder))) { New-Item -Path:($PesterTestResultFolder) -ItemType:('Directory') | Out-Null }
 $PesterTestResultPath = Join-Path $PesterTestResultFolder "$moduleName-TestResults.xml"
 # Print Test Coverage:
-. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $moduleTestFolder
+. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
 Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile:($PesterTestResultPath) -OutputFormat:('JUnitXml')
 #endregion Run Pester Tests
 
