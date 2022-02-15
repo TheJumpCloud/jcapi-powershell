@@ -16,8 +16,10 @@ Describe 'Set-JcSdkApplication' {
         { Set-JcSdkApplication -Id:($global:PesterTestApplication.Id) } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         { Set-JcSdkApplication -Body:($global:PesterTestApplication) -Id:($global:PesterTestApplication.Id) } | Should -Not -Throw
+        # TODO: this does not actually change the app
+        { Set-JcSdkApplication -id $global:PesterTestApplication.Id -Config $global:PesterDefApplicationConfig -name new -SsoUrl "https://changed.com" } | Should -Not -Throw
     }
 
     It 'SetViaIdentityExpanded' -skip {

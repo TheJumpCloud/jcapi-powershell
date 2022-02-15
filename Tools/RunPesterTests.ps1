@@ -52,13 +52,19 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
 
     # # Create a Application
-    # $global:PesterDefApplication = @{
-    #     Name   = 'dropbox'
-    #     ssoUrl = 'https://sso.jumpcloud.com/saml2/dropbox'
-    #     config = @{}
-    # }
+    $global:PesterDefApplicationConfig = [JumpCloud.SDK.V1.Models.IApplicationConfig]@{}
+    $global:PesterDefApplication = @{
+        Name   = 'bookmark'
+        ssoUrl = 'https://JumpCloud.com'
+        config = $global:PesterDefApplicationConfig
+        DisplayName = 'Bookmark'
+        DisplayLabel = 'Bookmark'
+    }
+    # Create an application
+    # Define Json object
     # TODO: Switch from get to new
-    $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
+    # $global:PesterTestApplication = New-JcSdkApplication @global:PesterDefApplication
+    # $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
     # Post a command file (README.md from SDK directory)
     $headers = @{}
     $headers.Add("x-api-key", $env:JCApiKey)
