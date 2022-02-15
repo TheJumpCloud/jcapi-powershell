@@ -106,7 +106,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     # Invoke SDK Command Trigger to generate Command Results
     Invoke-JcSdkCommandTrigger -Triggername $global:PesterTestCommand.trigger
     # Remove the Command Associations to continue tests as normal
-    $body.op = "remove"
+    $body = @{
+        id   = $CommandAssociaion
+        op   = "remove"
+        type = "system"
+    } | ConvertTo-Json
     $response = Invoke-RestMethod -Uri "https://console.jumpcloud.com/api/v2/commands/$($global:PesterTestCommand.Id)/associations" -Method POST -Headers $headers -Body $body
     # Create a User
     $global:PesterDefUser = @{
