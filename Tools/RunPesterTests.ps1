@@ -203,6 +203,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
     # Create a User Group
     $global:PesterDefUserGroup = @{
         Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = [JumpCloud.SDK.V2.Models.Filter]@{
+            Field = "description";
+            Operator = "eq";
+            Value = "test";
+        }
     }
     # Create a System Group
     $global:PesterDefSystemGroup = @{
