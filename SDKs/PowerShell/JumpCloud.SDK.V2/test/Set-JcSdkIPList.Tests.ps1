@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkIPList' {
     It 'SetExpanded' {
-        { Set-JcSdkIPList -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
+        { Set-JcSdkIPList -Id:($global:PesterTestIPList.Id) -Name "Test" -Ips:($global:PesterDefIPList.Ips)} | Should -Not -Throw
     }
 
     It 'Set' {
-        { Set-JcSdkIPList -Body:($global:PesterTestIPList) -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
+        { Set-JcSdkIPList -Body:($global:PesterDefIPList) -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

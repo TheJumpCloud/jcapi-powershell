@@ -13,10 +13,10 @@ while(-not $mockingPath) {
 
 Describe 'Get-JcSdkPolicyGroupMembership' {
     It 'Get' {
-        { Get-JcSdkPolicyGroupMembership -Id:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
+        { Get-JcSdkPolicyGroupMembership -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
     }
 
-    It 'GetViaIdentity' {
+    It 'GetViaIdentity' -skip {
         { Get-JcSdkPolicyGroupMembership -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }

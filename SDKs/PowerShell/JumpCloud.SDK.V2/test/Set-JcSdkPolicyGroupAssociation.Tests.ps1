@@ -13,11 +13,19 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkPolicyGroupAssociation' {
     It 'SetExpanded' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $ParameterType = (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkPolicyGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkPolicyGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
+        }
     }
 
-    It 'Set' {
-        { Set-JcSdkPolicyGroupAssociation -Id:($global:PesterTestPolicyGroup.Id) -GroupId:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
+    It 'Set' -skip {
+        $ParameterType = (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.FullName
+        (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
+            { Set-JcSdkPolicyGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
+            { Set-JcSdkPolicyGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
+        }
     }
 
     It 'SetViaIdentity' -skip {

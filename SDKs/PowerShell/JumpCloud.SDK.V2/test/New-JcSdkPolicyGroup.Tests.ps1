@@ -17,7 +17,7 @@ Describe 'New-JcSdkPolicyGroup' {
         $global:PesterTestPolicyGroup | Should -Not -BeNullOrEmpty
     }
 
-    It 'New' {
+    It 'New' -skip {
         { New-JcSdkPolicyGroup -Body:($global:PesterTestPolicyGroup) } | Should -Not -Throw
     }
 }

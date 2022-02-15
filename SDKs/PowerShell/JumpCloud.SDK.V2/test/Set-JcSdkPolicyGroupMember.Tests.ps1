@@ -13,11 +13,11 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkPolicyGroupMember' {
     It 'SetExpanded' -skip {
-        { Set-JcSdkPolicyGroupAssociation -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } } | Should -Not -Throw
+        { Set-JcSdkPolicyGroupAssociation -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Set-JcSdkPolicyGroupAssociation -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
