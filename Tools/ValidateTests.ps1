@@ -29,7 +29,7 @@ Process{
         $TestResults += [PSCustomObject]@{
             TestName = $($test.BaseName)
             Tests    = "($notSkipped / $count)"
-            Coverage = if (($notSkipped / $count -eq 1)) { "Covered" }elseif ($count - $notSkipped -lt $count) { "Partial" }else { "Missing"}
+            Coverage = if (($notSkipped / $count -eq 1)) { "$([char]0x1b)[92mOK" }elseif ($count - $notSkipped -lt $count) { "$([char]0x1b)[93m-" }else { "$([char]0x1b)[91mx" }
         }
     }
 }
