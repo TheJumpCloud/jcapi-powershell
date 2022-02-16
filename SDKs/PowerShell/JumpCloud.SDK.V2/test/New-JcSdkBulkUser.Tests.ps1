@@ -12,7 +12,9 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'New-JcSdkBulkUser' {
-    It 'Create' -skip {
-        { New-JcSdkBulkUser -Body:($global:PesterTestBulkUser) } | Should -Not -Throw
+    It 'Create' {
+        $global:PesterTestBulkUserJobId =  New-JcSdkBulkUser -Body:($global:PesterDefBulkUser) -CreationSource:('jumpcloud:bulk')
+        { $global:PesterTestBulkUserJobId } | Should -Not -BeNullOrEmpty
+        { Get-JcSdkUser -id $global:PesterTestBulkUserJobId.Id } | Should -Not -BeNullOrEmpty
     }
 }

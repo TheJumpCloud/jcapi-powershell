@@ -9,7 +9,7 @@ $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
         PublicUrl                = "https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
-            '"name":".*?","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
+            '"name":"\w+Body","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
@@ -404,7 +404,7 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/mappings', '/providers/{provider_id}/administrators', '/providers/{provider_id}/administrators/{id}', '/providers/{provider_id}/organizations', '/administrators/{id}/organizationlinks', '/administrators/{administrator_id}/organizationlinks/{id}', '/organizations/{id}/administratorlinks') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/companytypes', '/integrations/connectwise/{UUID}/mappings', '/providers/{provider_id}/administrators', '/providers/{provider_id}/administrators/{id}', '/providers/{provider_id}/organizations', '/administrators/{id}/organizationlinks', '/administrators/{administrator_id}/organizationlinks/{id}', '/organizations/{id}/administratorlinks') #, '/applications/{application_id}/logo', '/logos/{id}')
     }
 }
 Function Get-SwaggerItem

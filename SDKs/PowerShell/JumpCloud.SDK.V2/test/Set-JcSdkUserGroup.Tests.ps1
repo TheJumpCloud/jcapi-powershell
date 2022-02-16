@@ -13,7 +13,7 @@ while(-not $mockingPath) {
 
 Describe 'Set-JcSdkUserGroup' {
     It 'SetExpanded' {
-        { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) } | Should -Not -Throw
+        { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) -MemberQueryFilters:($global:PesterTestUserGroup.MemberQueryFilters) } | Should -Not -Throw
     }
 
     It 'Set' -skip {

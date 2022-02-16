@@ -1122,6 +1122,9 @@ Valid filter fields are `system_id` and `state`.
 Valid filter fields are `system_id` and `process`.
 
 ### [Get-JcSdkSystemInsightApp](Get-JcSdkSystemInsightApp.md)
+Lists all apps for macOS devices.
+For Windows devices, use [List System Insights Programs](#operation/systeminsights_list_programs).
+
 Valid filter fields are `system_id` and `bundle_name`.
 
 ### [Get-JcSdkSystemInsightAppCompatShim](Get-JcSdkSystemInsightAppCompatShim.md)
@@ -1206,6 +1209,9 @@ Valid filter fields are `system_id` and `version`.
 Valid filter fields are `system_id` and `hotfix_id`.
 
 ### [Get-JcSdkSystemInsightProgram](Get-JcSdkSystemInsightProgram.md)
+Lists all programs for Windows devices.
+For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).
+
 Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightPythonPackage](Get-JcSdkSystemInsightPythonPackage.md)

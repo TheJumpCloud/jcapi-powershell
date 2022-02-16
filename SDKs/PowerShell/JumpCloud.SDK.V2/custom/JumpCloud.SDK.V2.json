@@ -14398,7 +14398,7 @@
     },
     "/systeminsights/apps": {
       "get": {
-        "description": "Valid filter fields are `system_id` and `bundle_name`.",
+        "description": "Lists all apps for macOS devices. For Windows devices, use [List System Insights Programs](#operation/systeminsights_list_programs).\n\nValid filter fields are `system_id` and `bundle_name`.",
         "operationId": "SystemInsightApps_List",
         "parameters": [
           {
@@ -15775,7 +15775,7 @@
     },
     "/systeminsights/programs": {
       "get": {
-        "description": "Valid filter fields are `system_id` and `name`.",
+        "description": "Lists all programs for Windows devices. For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).\n\nValid filter fields are `system_id` and `name`.",
         "operationId": "SystemInsightPrograms_List",
         "parameters": [
           {
