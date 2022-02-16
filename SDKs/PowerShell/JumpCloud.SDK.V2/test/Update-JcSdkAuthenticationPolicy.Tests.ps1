@@ -12,11 +12,11 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Update-JcSdkAuthenticationPolicy' {
-    It 'UpdateExpanded' -skip {
-        { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-Type '<String>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
+    It 'update' -skip {
+        { Update-JcSdkAuthenticationPolicy -body:($global:PesterDefApplicationd) } | Should -Not -Throw
     }
 
-    It 'Update' {
+    It 'UpdateExpanded' {
         { Update-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) -UserGroupInclusions:($global:PesterTestUserGroup.id) -TargetResources:($global:PesterTestAuthenticationPolicy.TargetResources)  } | Should -Not -Throw
     }
 
