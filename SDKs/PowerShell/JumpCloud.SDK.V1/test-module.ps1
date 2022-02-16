@@ -90,10 +90,7 @@ try
 }
 TODO:
     Clear-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be cleared each time
-    Invoke-JcSdkCommandTrigger.Tests.ps1: Configure a command with a 'trigger' launchType
     Lock-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be locked each time
-    New-JcApplication.Tests.ps1: Figure out how to configure an Application from the SDK
-    New-JcSdkCommand.Tests.ps1: Configure a simple text file to upload with this command.
     Restart-JcSdkSystem.Tests.ps1: Setup Orgs with a device that can be restarted each time
     Remove-JcSdkSystem.Tests.ps1: Disabled untill we can also create systems
     Reset-JcSdkUserMfa.Tests.ps1: Configure MFA for $global:PesterTestUser
@@ -118,7 +115,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
     $global:PesterTestOrganization = Get-JcSdkOrganization
     # Get a System
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
-
     # # Create a Application
     $global:PesterDefApplicationConfig = [JumpCloud.SDK.V1.Models.IApplicationConfig]@{}
     $global:PesterDefApplication = @{
@@ -128,11 +124,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         DisplayName = 'Bookmark'
         DisplayLabel = 'Bookmark'
     }
-    # Create an application
-    # Define Json object
-    # TODO: Switch from get to new
-    # $global:PesterTestApplication = New-JcSdkApplication @global:PesterDefApplication
-    # $global:PesterTestApplication = Get-JcSdkApplication | Select-Object -First 1
     # Post a command file (README.md from SDK directory)
     $headers = @{}
     $headers.Add("x-api-key", $env:JCApiKey)
