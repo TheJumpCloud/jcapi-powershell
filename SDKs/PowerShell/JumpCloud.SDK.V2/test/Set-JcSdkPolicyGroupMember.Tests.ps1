@@ -12,12 +12,13 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Set-JcSdkPolicyGroupMember' {
-    It 'SetExpanded' -skip {
-        { Set-JcSdkPolicyGroupAssociation -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
+    It 'SetExpanded' {
+        { Set-JcSdkPolicyGroupMember -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { Set-JcSdkPolicyGroupAssociation -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
+        #TODO: Set using Body param
+        { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {
