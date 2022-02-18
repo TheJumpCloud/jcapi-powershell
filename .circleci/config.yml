@@ -209,8 +209,32 @@ commands:
           command: |
             $ErrorActionPreference = 'stop'
             ./support\PowerShell\Deploy\SdkSync\jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
-            #TODO: pull in tests dynamically if they are using/ built with SDKs
-            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:JCApiKey -JumpCloudApiKeyMsp $env:JCApiKeyMTP -ExcludeTagList:('None') -IncludeTagList:(@('JCEvent', 'JCAssociation', 'JCBackupOrg')) -RequiredModulesRepo:('CodeArtifact')
+            # Private & Public Functions
+            $pathList = @('Private', 'Public')
+            # Get all matching functions to search
+            $functions = $pathList | ForEach-Object {
+                Get-ChildItem "./support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
+            }
+            $testTags = @()
+            # For each function file
+            foreach ($file in $functions) {
+                $regex = [regex]'jcsdk'
+                if (Select-String -path $file.FullName -Pattern $regex){
+                    # If 'jcsdk' is used in the function file continue
+                    # get test file
+                    $testFile = ($file.FullName -replace "/Jumpcloud Module/", "/Jumpcloud Module/Tests/") -replace ".ps1", ".Tests.ps1"
+                    $tagRegex = [regex]'-Tag:\(.(\w+).\)'
+                    $testTag = Select-String -path $testFile -Pattern $tagRegex
+                    if ($testTag.matches) {
+                        # If tag found in test file add to testTags list:
+                        $testTags += $testTag.matches.Groups[1].Value
+                    }
+                }
+            }
+            # return found tags
+            $tags = ($testTags | Select-Object -Unique)
+            # Invoke Pester
+            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:JCApiKey -JumpCloudApiKeyMsp $env:JCApiKeyMTP -ExcludeTagList:('None') -IncludeTagList:($tags) -RequiredModulesRepo:('CodeArtifact')
       - store_test_results:
           name: Uploading test results'
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
