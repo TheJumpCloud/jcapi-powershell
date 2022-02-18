@@ -222,7 +222,7 @@ commands:
                 if (Select-String -path $file.FullName -Pattern $regex){
                     # If 'jcsdk' is used in the function file continue
                     # get test file
-                    $testFile = ($file.FullName -replace "\Jumpcloud Module\", "\Jumpcloud Module\Tests\") -replace ".ps1", ".Tests.ps1"
+                    $testFile = ($file.FullName -replace "\\Jumpcloud Module\\", "\\Jumpcloud Module\\Tests\\") -replace ".ps1", ".Tests.ps1"
                     $tagRegex = [regex]'-Tag:\(.(\w+).\)'
                     $testTag = Select-String -path $testFile -Pattern $tagRegex
                     if ($testTag.matches) {
