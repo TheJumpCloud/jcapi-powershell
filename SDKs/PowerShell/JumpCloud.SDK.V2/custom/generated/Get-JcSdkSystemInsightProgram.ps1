@@ -1,7 +1,13 @@
 <#
 .Synopsis
+Lists all programs for Windows devices.
+For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).
+
 Valid filter fields are `system_id` and `name`.
 .Description
+Lists all programs for Windows devices.
+For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).
+
 Valid filter fields are `system_id` and `name`.
 .Example
 PS C:\> {{ Add code here }}

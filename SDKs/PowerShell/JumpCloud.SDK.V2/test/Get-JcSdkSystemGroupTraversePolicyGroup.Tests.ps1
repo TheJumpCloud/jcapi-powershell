@@ -12,8 +12,8 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkSystemGroupTraversePolicyGroup' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkSystemGroupTraversePolicyGroup -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

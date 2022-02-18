@@ -12,8 +12,10 @@ while(-not $mockingPath) {
 . ($mockingPath | Select-Object -First 1).FullName
 
 Describe 'Get-JcSdkCommandFile' {
-    It 'Get' -skip {
-        { Get-JcSdkCommandFile -Id:($global:PesterTestCommandFile.Id) } | Should -Not -Throw
+    It 'Get' {
+        $newCommand = New-JcSdkCommand @global:PesterDefCommand
+        $testCommandFile = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1
+        { Get-JcSdkCommandFile -Id:($($testCommandFile.Id)) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

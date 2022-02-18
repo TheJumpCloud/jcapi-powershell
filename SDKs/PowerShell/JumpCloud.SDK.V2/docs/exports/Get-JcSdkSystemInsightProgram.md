@@ -8,6 +8,9 @@ schema: 2.0.0
 # Get-JcSdkSystemInsightProgram
 
 ## SYNOPSIS
+Lists all programs for Windows devices.
+For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).
+
 Valid filter fields are `system_id` and `name`.
 
 ## SYNTAX
@@ -17,6 +20,9 @@ Get-JcSdkSystemInsightProgram [-Filter <String[]>] [-Sort <String[]>] [<CommonPa
 ```
 
 ## DESCRIPTION
+Lists all programs for Windows devices.
+For macOS devices, use [List System Insights Apps](#operation/systeminsights_list_apps).
+
 Valid filter fields are `system_id` and `name`.
 
 ## EXAMPLES

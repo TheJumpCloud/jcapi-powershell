@@ -15,8 +15,18 @@ if(($null -eq $TestName) -or ($TestName -contains 'Invoke-JcSdkExpireUserPasswor
 }
 
 Describe 'Invoke-JcSdkExpireUserPassword' {
-    It 'Post' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Post' {
+        $body = [JumpCloud.SDK.V1.Models.Systemuserput]@{
+            Email = "PesterInvokeExpire-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))@example.com";
+            Firstname = "InvokeExpire";
+            Lastname = "UserPasssword";
+            Username  = "PesterInvokeExpire-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))";
+            Password = "TestTest1234!@#"
+        }
+        $userToExpire = New-JcSdkUser -Body $body
+        { Invoke-JcSdkExpireUserPassword -id:($userToExpire.Id) } | Should -Not -Throw
+        # Cleanup
+        Remove-JcSdkUser -Id $userToExpire.Id
     }
 
     It 'PostViaIdentity' -skip {

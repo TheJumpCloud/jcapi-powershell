@@ -1290,6 +1290,36 @@
       "title": "mfa",
       "type": "object"
     },
+    "mfaEnrollment": {
+      "properties": {
+        "overallStatus": {
+          "$ref": "#/definitions/mfaEnrollmentStatus"
+        },
+        "pushStatus": {
+          "$ref": "#/definitions/mfaEnrollmentStatus"
+        },
+        "totpStatus": {
+          "$ref": "#/definitions/mfaEnrollmentStatus"
+        },
+        "webAuthnStatus": {
+          "$ref": "#/definitions/mfaEnrollmentStatus"
+        }
+      },
+      "title": "mfaEnrollment",
+      "type": "object"
+    },
+    "mfaEnrollmentStatus": {
+      "enum": [
+        "NOT_ENROLLED",
+        "DISABLED",
+        "PENDING_ACTIVATION",
+        "ENROLLMENT_EXPIRED",
+        "IN_ENROLLMENT",
+        "PRE_ENROLLMENT",
+        "ENROLLED"
+      ],
+      "type": "string"
+    },
     "organization": {
       "properties": {
         "_id": {
@@ -1417,6 +1447,14 @@
           "properties": {
             "orgInsights": {
               "properties": {
+                "applicationsUsage": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
                 "consoleStats": {
                   "properties": {
                     "totalApplications": {
@@ -1534,7 +1572,31 @@
                   },
                   "type": "object"
                 },
+                "failedConfigurations": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
                 "fundamentals": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "mfaEnrolledDevices": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "newUsers": {
                   "properties": {
                     "visible": {
                       "type": "boolean"
@@ -3201,6 +3263,9 @@
         },
         "mfa": {
           "$ref": "#/definitions/mfa"
+        },
+        "mfaEnrollment": {
+          "$ref": "#/definitions/mfaEnrollment"
         },
         "middlename": {
           "maxLength": 1024,
