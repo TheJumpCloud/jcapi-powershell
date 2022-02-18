@@ -18,6 +18,8 @@ parameters:
 build-sdks: &build-sdks
   - Test SDKs on Production JumpCloud PowerShell TestModule
   - Build and Test JumpCloud SDK DirectoryInsights:
+      requires:
+        - "Test SDKs on Production JumpCloud PowerShell TestModule"
       context: aws-credentials
   - Build and Test JumpCloud SDK V1:
       requires:
