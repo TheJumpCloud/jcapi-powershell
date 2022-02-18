@@ -6,7 +6,7 @@ $PSDependencies = @{
     'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
     'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '4.10.1'}
     'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
-    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.0-beta10'}
+    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.12-beta'}
     'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
 }
 foreach ($RequiredModule in $PSDependencies.Keys) {
