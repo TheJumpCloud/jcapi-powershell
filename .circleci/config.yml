@@ -210,7 +210,7 @@ commands:
             $ErrorActionPreference = 'stop'
             ./support\PowerShell\Deploy\SdkSync\jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
             #TODO: pull in tests dynamically if they are using/ built with SDKs
-            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:JCApiKey -JumpCloudApiKeyMsp $env:JCApiKeyMTP -ExcludeTagList:('None') -IncludeTagList:('JCEvent, JCAssociation, JCBackupOrg') -RequiredModulesRepo:('CodeArtifact')
+            . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:JCApiKey -JumpCloudApiKeyMsp $env:JCApiKeyMTP -ExcludeTagList:('None') -IncludeTagList:(@('JCEvent, JCAssociation, JCBackupOrg')) -RequiredModulesRepo:('CodeArtifact')
       - store_test_results:
           name: Uploading test results'
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
