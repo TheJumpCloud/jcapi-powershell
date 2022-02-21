@@ -213,7 +213,7 @@ commands:
             $pathList = @('Private', 'Public')
             # Get all matching functions to search
             $functions = $pathList | ForEach-Object {
-                Get-ChildItem "./PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
+                Get-ChildItem "./support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
             }
             $testTags = @()
             # For each function file
@@ -222,7 +222,7 @@ commands:
                 if (Select-String -path $file.FullName -Pattern $regex){
                     # If 'jcsdk' is used in the function file continue
                     # get test file
-                    $testFile = ($file.FullName -replace "/Jumpcloud Module/", "/Jumpcloud Module/Tests/") -replace ".ps1", ".Tests.ps1"
+                    $testFile = ($file.FullName -replace "\\Jumpcloud Module\\", "\\Jumpcloud Module\\Tests\\") -replace ".ps1", ".Tests.ps1"
                     $tagRegex = [regex]'-Tag:\(.(\w+).\)'
                     $testFiles = Get-ChildItem (Get-Item -path $testFile).Directory.FullName
                     foreach ($test in $testFiles){
