@@ -16,11 +16,7 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Test SDKs on Production JumpCloud PowerShell TestModule:
-      context: aws-credentials
   - Build and Test JumpCloud SDK DirectoryInsights:
-      requires:
-        - "Test SDKs on Production JumpCloud PowerShell TestModule"
       context: aws-credentials
   - Build and Test JumpCloud SDK V1:
       requires:
@@ -49,6 +45,15 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
+      context: aws-credentials
+  - Test SDKs on Production JumpCloud PowerShell TestModule:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
+        - CodeArtifact Approval
+        - Pack and Deploy To CodeArtifact
       context: aws-credentials
   - PSGallery Approval:
       type: approval
