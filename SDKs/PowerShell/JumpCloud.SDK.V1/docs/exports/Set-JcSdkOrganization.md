@@ -248,6 +248,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
     - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
+    - `[PasswordPolicyEffectiveDate <String>]`: 
     - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
     - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 
     - `[PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]`: 
@@ -256,6 +257,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]`: 
     - `[PasswordPolicyEnableMinLength <Boolean?>]`: 
     - `[PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]`: 
+    - `[PasswordPolicyGracePeriodDate <String>]`: 
     - `[PasswordPolicyLockoutTimeInSeconds <Int32?>]`: 
     - `[PasswordPolicyMaxHistory <Int32?>]`: 
     - `[PasswordPolicyMaxLoginAttempts <Int32?>]`: 
@@ -309,6 +311,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[PasswordPolicyAllowUsernameSubstring <Boolean?>]`: 
   - `[PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
   - `[PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]`: 
+  - `[PasswordPolicyEffectiveDate <String>]`: 
   - `[PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
   - `[PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]`: 
   - `[PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]`: 
@@ -317,6 +320,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]`: 
   - `[PasswordPolicyEnableMinLength <Boolean?>]`: 
   - `[PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]`: 
+  - `[PasswordPolicyGracePeriodDate <String>]`: 
   - `[PasswordPolicyLockoutTimeInSeconds <Int32?>]`: 
   - `[PasswordPolicyMaxHistory <Int32?>]`: 
   - `[PasswordPolicyMaxLoginAttempts <Int32?>]`: 

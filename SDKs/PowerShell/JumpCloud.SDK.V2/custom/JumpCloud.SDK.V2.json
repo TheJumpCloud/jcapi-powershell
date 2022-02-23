@@ -4,11 +4,53 @@
     "application/json"
   ],
   "definitions": {
+    "ADE": {
+      "properties": {
+        "defaultDeviceGroupObjectIds": {
+          "description": "An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "x-nullable": true
+        },
+        "enableZeroTouchEnrollment": {
+          "description": "A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.",
+          "type": "boolean"
+        },
+        "setupAssistantOptions": {
+          "items": {
+            "$ref": "#/definitions/DEPSetupAssistantOption"
+          },
+          "type": "array"
+        },
+        "welcomeScreen": {
+          "$ref": "#/definitions/DEPWelcomeScreen"
+        }
+      },
+      "title": "ADE",
+      "type": "object"
+    },
+    "ADES": {
+      "properties": {
+        "ios": {
+          "$ref": "#/definitions/ADE"
+        },
+        "macos": {
+          "$ref": "#/definitions/ADE"
+        }
+      },
+      "title": "ADES",
+      "type": "object"
+    },
     "AnyValue": {
       "description": "Can be any value - string, number, boolean, array or object."
     },
     "AppleMDM": {
       "properties": {
+        "ades": {
+          "$ref": "#/definitions/ADES"
+        },
         "allowMobileUserEnrollment": {
           "description": "A toggle to allow mobile device enrollment for an organization.",
           "type": "boolean"
@@ -27,7 +69,8 @@
         },
         "defaultSystemGroupID": {
           "description": "ObjectId uniquely identifying the MDM default System Group.",
-          "type": "string"
+          "type": "string",
+          "x-deprecated": true
         },
         "dep": {
           "$ref": "#/definitions/DEP"
@@ -403,7 +446,8 @@
         }
       },
       "title": "DEP",
-      "type": "object"
+      "type": "object",
+      "x-deprecated": true
     },
     "DEPSetupAssistantOption": {
       "properties": {
@@ -2340,7 +2384,7 @@
       }
     },
     "SetupAssistantOption": {
-      "description": "Options to skip screens during MacOS setup:\n* `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.\n* `appearance` - Skips the Choose Your Look screen.\n* `appleID` - Skips Apple ID setup.\n* `biometric` - Skips biometric setup.\n* `diagnostics` - Skips the App Analytics pane.\n* `displayTone` - Skips display tone setup.\n* `fileVault` - Skips FileVault setup assistant screen.\n* `icloudDiagnostics` - Skips iCloud analytics screen.\n* `icloudStorage` - Skips iCloud documents and desktop screen.\n* `location` - Skips location services setup.\n* `payment` - Skips Apple Pay setup.\n* `privacy` - Skips the Privacy setup.\n* `restore` - Skips restoring from backup.\n* `screenTime` - Skips screen time setup.\n* `siri` - Skips Siri setup.\n* `tos` - Skips terms and conditions.\n",
+      "description": "Options to skip screens during MacOS and iOS setup:\n* `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.\n* `appearance` - Skips the Choose Your Look screen.\n* `appleID` - Skips Apple ID setup.\n* `biometric` - Skips biometric setup.\n* `diagnostics` - Skips the App Analytics pane.\n* `displayTone` - Skips display tone setup.\n* `fileVault` - Skips FileVault setup assistant screen.\n* `icloudDiagnostics` - Skips iCloud analytics screen.\n* `icloudStorage` - Skips iCloud documents and desktop screen.\n* `location` - Skips location services setup.\n* `payment` - Skips Apple Pay setup.\n* `privacy` - Skips the Privacy setup.\n* `restore` - Skips restoring from backup.\n* `screenTime` - Skips screen time setup.\n* `siri` - Skips Siri setup.\n* `tos` - Skips terms and conditions.\n* `appStore` - Skips the App Store pane.\n* `deviceToDeviceMigration` - Skips Device to Device Migration pane.\n* `displayZoom` - Skips zoom setup.\n* `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.\n* `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.\n* `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.\n* `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O\n* `passcode` - Hides and disables the passcode pane.\n* `restoreComplete` - Skips the Restore Completed pane.\n* `setupCellular` - Skips the add cellular plan pane.\n* `softwareUpdate` - Skips the mandatory software update screen in iOS.\n* `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.\n* `updateComplete` - Skips the Software Update Complete pane.\n* `watchMigration` - Skips the screen for watch migration.\n* `welcome` - Skips the Get Started pane.\n",
       "enum": [
         "accessibility",
         "appearance",
@@ -2357,7 +2401,22 @@
         "restore",
         "screenTime",
         "siri",
-        "tos"
+        "tos",
+        "appStore",
+        "displayZoom",
+        "deviceToDeviceMigration",
+        "homeButton",
+        "imessageAndFacetime",
+        "messagingActivationUsingPhoneNumber",
+        "moveFromAndroid",
+        "passcode",
+        "restoreComplete",
+        "setupCellular",
+        "softwareUpdate",
+        "unlockWithWatch",
+        "updateComplete",
+        "watchMigration",
+        "welcome"
       ],
       "title": "Setup Assistant Option",
       "type": "string"
@@ -2728,6 +2787,9 @@
     },
     "apple-mdm-patch-input": {
       "properties": {
+        "ades": {
+          "$ref": "#/definitions/ADES"
+        },
         "allowMobileUserEnrollment": {
           "description": "A toggle to allow mobile device enrollment for an organization.",
           "type": "boolean"
@@ -2937,7 +2999,8 @@
             "sso",
             "systemInsights",
             "userLifecycle",
-            "zeroTrust"
+            "zeroTrust",
+            "osPatchManagement"
           ],
           "type": "string"
         }
@@ -7511,15 +7574,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"allowMobileUserEnrollment\":true,\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D\"\n\npayload = {\n    \"allowMobileUserEnrollment\": True,\n    \"appleSignedCert\": \"string\",\n    \"defaultIosUserEnrollmentDeviceGroupID\": \"string\",\n    \"defaultSystemGroupID\": \"string\",\n    \"dep\": {\n        \"enableZeroTouchEnrollment\": True,\n        \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n        \"welcomeScreen\": {\n            \"button\": \"string\",\n            \"paragraph\": \"string\",\n            \"title\": \"string\"\n        }\n    },\n    \"encryptedDepServerToken\": \"string\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D\"\n\npayload = {\n    \"ades\": {\n        \"ios\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        },\n        \"macos\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        }\n    },\n    \"allowMobileUserEnrollment\": True,\n    \"appleSignedCert\": \"string\",\n    \"defaultIosUserEnrollmentDeviceGroupID\": \"string\",\n    \"defaultSystemGroupID\": \"string\",\n    \"dep\": {\n        \"enableZeroTouchEnrollment\": True,\n        \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n        \"welcomeScreen\": {\n            \"button\": \"string\",\n            \"paragraph\": \"string\",\n            \"title\": \"string\"\n        }\n    },\n    \"encryptedDepServerToken\": \"string\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"allowMobileUserEnrollment\":true,\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applemdms/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
           }
         ]
       }
