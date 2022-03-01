@@ -192,7 +192,7 @@ commands:
           name: Clone JC Module Repository
           command: |
             # GIT_SSH_COMMAND='ssh -i ~/.ssh/id_rsa'
-            git clone -b SA-2315_Test_SDKs_w_prod_pwsh_Module git@github.com:TheJumpCloud/support.git .\support
+            git clone git@github.com:TheJumpCloud/support.git .\support
       - run:
           name: Setup Dependencies
           shell: pwsh.exe
