@@ -101,7 +101,7 @@ $TransformConfig = [Ordered]@{
             'systemusers_resetmfa'           = 'UserMfa_Reset';
             'systemusers_unlock'             = 'User_Unlock';
         };
-        ExcludedList       = @();
+        ExcludedList       = @('/failedcommands', '/pendingcommands', '/search/commands', '/systemusers/{id}/mfasync'); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         PublicUrl                = "https://docs.jumpcloud.com/api/2.0/index.yaml"
