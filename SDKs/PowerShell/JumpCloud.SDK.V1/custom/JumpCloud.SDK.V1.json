@@ -1816,6 +1816,8 @@
               "type": "string"
             },
             "lockoutTimeInSeconds": {
+              "maximum": 5400,
+              "minimum": 300,
               "type": "integer"
             },
             "maxHistory": {
@@ -4948,6 +4950,15 @@
           }
         ],
         "summary": "Search System Users",
+        "x-stoplight": {
+          "id": "search_systemusers_post",
+          "mock": {
+            "dynamic": false,
+            "enabled": false,
+            "statusCode": 200
+          },
+          "public": true
+        },
         "x-codeSamples": [
           {
             "lang": "Shell",
