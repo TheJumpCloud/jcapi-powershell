@@ -6,6 +6,7 @@ Function Global:New-SdkChangelog
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 2)][ValidateNotNullOrEmpty()][System.String]$Features
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 3)][ValidateNotNullOrEmpty()][System.String]$Improvements
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 4)][ValidateNotNullOrEmpty()][System.String]$BugFixes
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 5)][ValidateNotNullOrEmpty()][System.String]$Diff
     )
     $Content = "## {0}
 Release Date: $(Get-Date -UFormat:('%B %d, %Y'))
@@ -19,6 +20,8 @@ Release Date: $(Get-Date -UFormat:('%B %d, %Y'))
 {3}
 #### BUG FIXES:
 {4}
+#### DIFF:
+{5}
 "
-    Return ($Content -f $LatestVersion, $ReleaseNotes, $Features, $Improvements, $BugFixes)
+    Return ($Content -f $LatestVersion, $ReleaseNotes, $Features, $Improvements, $BugFixes, $Diff)
 }

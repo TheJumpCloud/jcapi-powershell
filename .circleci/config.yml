@@ -158,11 +158,8 @@ jobs:
       - run:
           name: "Draft Release on GitHub"
           command: |
-            # Module Version
-            VERSION=$(grep -o '\d\+\.\d\+\.\d\+' https://github.com/TheJumpCloud/support/blob/master/PowerShell/JumpCloud%20Module/JumpCloud.psd1)
-            TITLE="JumpCloud PowerShell Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat /root/project/PowerShell/ModuleChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            CHANGELOG=$(cat /root/project/SDKs/Powershell/DiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
             TAG="v$VERSION"
             BODY="$TITLE $CHANGELOG"
             # Post Draft Release

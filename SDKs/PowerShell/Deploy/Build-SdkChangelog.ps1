@@ -19,8 +19,11 @@ $DiLatestVersion = $releaseVersions.tag_name -match "JumpCloud.SDK.DirectoryInsi
 #Write-Host $test | ConvertFrom-Json -Depth 100
 #TODO: Populate SdkChangelog.md
 #TODO: Call New-SdkChangelog to populate data
+$CurrentBranch = git branch --show-current
+
+$Diffs = git diff master...$CurrentBranch
 $SdkChangelog = Get-Content -Path:("SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/DiChangelog.md")
-$NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($DiLatestVersion | Out-String) -ReleaseNotes:('{{Fill in the Release Notes}}') -Features:('{{Fill in the Features}}') -Improvements:('{{Fill in the Improvements}}') -BugFixes('{{Fill in the Bug Fixes}}')
+$NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($DiLatestVersion | Out-String) -ReleaseNotes:('{{Fill in the Release Notes}}') -Features:('{{Fill in the Features}}') -Improvements:('{{Fill in the Improvements}}') -BugFixes('{{Fill in the Bug Fixes}}') -Diff($Diffs | Out-String)
 
 If ((($SdkChangelog | Select-Object -First 1) -match $DiLatestVersion)){
     ($NewSdkChangelogRecord + ($SdkChangelog | Out-String)).Trim() | Set-Content -Path:("SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/DiChangelog.md") -Force
