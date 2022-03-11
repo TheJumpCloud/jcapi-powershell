@@ -131,9 +131,6 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -357,6 +354,7 @@ commands:
                 name: Testing '<< parameters.SDKName >>'
                 shell: pwsh.exe
                 command: |
+                  $ErrorActionPreference = 'Stop'
                   ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
