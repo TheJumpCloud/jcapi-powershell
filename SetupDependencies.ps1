@@ -4,7 +4,7 @@ $PSDependencies = @{
     'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
     'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
     'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
-    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '4.10.1'}
+    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '5.3.1'}
     'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
     'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.12-beta'}
     'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
