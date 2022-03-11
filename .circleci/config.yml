@@ -133,7 +133,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
+          SDKChangelogLocation: '/root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md'
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -145,7 +145,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V1/sdkV1Changelog.md
+          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud \SDK \V1/sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
