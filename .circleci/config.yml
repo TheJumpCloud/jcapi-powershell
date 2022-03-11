@@ -333,11 +333,11 @@ commands:
         type: string
     steps:
       - run:
-          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangeLocation >>'
+          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangelogLocation >>'
           shell: pwsh.exe
           command: | 
            $ErrorActionPreference = 'Stop' 
-           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangeLocation >>')
+           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
   build-test:
     parameters:
       SDKName:
