@@ -26,23 +26,31 @@ build-sdks: &build-sdks
       requires:
         - Build and Test JumpCloud SDK V1
       context: aws-credentials
+  - Create GitHub Release Draft:
+      requires:
+      - Build and Test JumpCloud SDK DirectoryInsights
+      - Build and Test JumpCloud SDK V1
+      - Build and Test JumpCloud SDK V2
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
+        - Create GitHub Release Draft
   - CodeArtifact Approval:
       type: approval
       requires:
           - Build and Test JumpCloud SDK DirectoryInsights
           - Build and Test JumpCloud SDK V1
           - Build and Test JumpCloud SDK V2
+          - Create GitHub Release Draft
           - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
+        - Create GitHub Release Draft
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
@@ -51,6 +59,7 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
+        - Create GitHub Release Draft
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -61,6 +70,7 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
+        - Create GitHub Release Draft
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -72,6 +82,7 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
+        - Create GitHub Release Draft
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
@@ -120,6 +131,9 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+      - changelog:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          SDKChangelogLocation: /SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -129,6 +143,9 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+      - changelog:
+          SDKName: JumpCloud.SDK.V1
+          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud \SDK \V1/sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -138,6 +155,24 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+      - changelog:
+          SDKName: JumpCloud.SDK.V2
+          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V2/sdkV2Changelog.md
+  Create GitHub Release Draft:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Draft Release on GitHub"
+          command: |
+            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+            CHANGELOG=$(cat /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            TAG="v$VERSION"
+            BODY="$TITLE $CHANGELOG"
+            # Post Draft Release
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/PowerShell/
   Commit Changes:
     executor: win/default
     steps:
@@ -331,6 +366,21 @@ commands:
           root: .
           paths:
             - .
+  changelog:
+    parameters:
+     SDKName:
+        description: Name of the SDK to generate
+        type: string
+     SDKChangelogLocation:
+        description: Location of the sdk changelog .md file
+        type: string
+    steps:
+      - run:
+          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangelogLocation >>'
+          shell: pwsh.exe
+          command: | 
+           $ErrorActionPreference = 'Stop' 
+           ./root/project/Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
   commit:
     parameters:
       SDKName:
