@@ -133,7 +133,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: '/root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md'
+          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -323,21 +323,6 @@ commands:
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
             dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
-  changelog:
-    parameters:
-     SDKName:
-        description: Name of the SDK to generate
-        type: string
-     SDKChangelogLocation:
-        description: Location of the sdk changelog .md file
-        type: string
-    steps:
-      - run:
-          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangelogLocation >>'
-          shell: pwsh.exe
-          command: | 
-           $ErrorActionPreference = 'Stop' 
-           ./root/project/Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
   build-test:
     parameters:
       SDKName:
@@ -381,6 +366,21 @@ commands:
           root: .
           paths:
             - .
+  changelog:
+    parameters:
+     SDKName:
+        description: Name of the SDK to generate
+        type: string
+     SDKChangelogLocation:
+        description: Location of the sdk changelog .md file
+        type: string
+    steps:
+      - run:
+          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangelogLocation >>'
+          shell: pwsh.exe
+          command: | 
+           $ErrorActionPreference = 'Stop' 
+           ./root/project/Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
   commit:
     parameters:
       SDKName:
