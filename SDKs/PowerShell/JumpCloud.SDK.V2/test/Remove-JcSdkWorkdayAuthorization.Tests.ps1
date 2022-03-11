@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Remove-JcSdkWorkdayAuthorization' {
     It 'Delete' -skip {
         { Remove-JcSdkWorkdayAuthorization -WorkdayId '<String>' } | Should -Not -Throw
@@ -20,3 +23,4 @@ Describe 'Remove-JcSdkWorkdayAuthorization' {
         { Remove-JcSdkWorkdayAuthorization -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

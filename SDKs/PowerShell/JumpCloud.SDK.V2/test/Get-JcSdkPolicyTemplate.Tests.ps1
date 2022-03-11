@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Get-JcSdkPolicyTemplate' {
     It 'List' {
         { Get-JcSdkPolicyTemplate } | Should -Not -Throw
@@ -24,3 +27,4 @@ Describe 'Get-JcSdkPolicyTemplate' {
         { Get-JcSdkPolicyTemplate -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

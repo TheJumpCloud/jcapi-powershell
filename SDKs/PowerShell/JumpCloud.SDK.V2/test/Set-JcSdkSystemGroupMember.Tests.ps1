@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkSystemGroupMember' {
     It 'SetExpanded' {
         { Set-JcSdkSystemGroupMember -GroupId:($global:PesterTestSystemGroup.Id) -Id:($global:PesterTestSystem.Id) -Op:('add') } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkSystemGroupMember' {
         { Set-JcSdkSystemGroupMember -Id:($global:PesterTestSystem.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') [-Attributes '<Hashtable>'] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }
+

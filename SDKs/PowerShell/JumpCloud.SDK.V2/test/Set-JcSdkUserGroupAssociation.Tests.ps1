@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkUserGroupAssociation' {
     It 'SetExpanded' {
         $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
@@ -36,3 +39,4 @@ Describe 'Set-JcSdkUserGroupAssociation' {
         { Set-JcSdkUserGroupAssociation -Id:($global:PesterTestSystemGroup.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('system_group') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }
+

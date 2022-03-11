@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkOffice365Association' {
     It 'SetExpanded' {
         $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
@@ -36,3 +39,4 @@ Describe 'Set-JcSdkOffice365Association' {
         { Set-JcSdkOffice365Association -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-Attributes '<Hashtable>'] } | Should -Not -Throw
     }
 }
+

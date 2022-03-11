@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkLdapServerSambaDomain' {
     It 'SetExpanded' -skip {
         { Set-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkLdapServerSambaDomain' {
         { Set-JcSdkLdapServerSambaDomain -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
     }
 }
+

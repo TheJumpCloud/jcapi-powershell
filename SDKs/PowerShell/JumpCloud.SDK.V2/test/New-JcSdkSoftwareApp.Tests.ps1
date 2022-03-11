@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'New-JcSdkSoftwareApp' {
     It 'CreateExpanded' {
         $global:PesterTestSoftwareApp = New-JcSdkSoftwareApp @global:PesterDefSoftwareApp
@@ -21,3 +24,4 @@ Describe 'New-JcSdkSoftwareApp' {
         { New-JcSdkSoftwareApp -Body:($global:PesterTestSoftwareApp) } | Should -Not -Throw
     }
 }
+

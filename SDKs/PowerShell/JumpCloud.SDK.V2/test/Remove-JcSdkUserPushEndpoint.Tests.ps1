@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkUserPushEndpoint'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,6 +15,8 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkUserPushEndpoint'
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
+
+}
 Describe 'Remove-JcSdkUserPushEndpoint' {
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
@@ -23,3 +26,4 @@ Describe 'Remove-JcSdkUserPushEndpoint' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

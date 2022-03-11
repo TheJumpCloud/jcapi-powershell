@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'New-JcSdkSystemGroup' {
     It 'CreateExpanded' {
         $global:PesterTestSystemGroup = New-JcSdkSystemGroup @global:PesterDefSystemGroup
@@ -21,3 +24,4 @@ Describe 'New-JcSdkSystemGroup' {
         { New-JcSdkSystemGroup -Body:($global:PesterTestSystemGroup) } | Should -Not -Throw
     }
 }
+

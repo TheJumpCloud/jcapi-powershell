@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Remove-JcSdkDuoApplication' {
     It 'Delete' -skip {
         { Remove-JcSdkDuoApplication -AccountId '<String>' -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
@@ -20,3 +23,4 @@ Describe 'Remove-JcSdkDuoApplication' {
         { Remove-JcSdkDuoApplication -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

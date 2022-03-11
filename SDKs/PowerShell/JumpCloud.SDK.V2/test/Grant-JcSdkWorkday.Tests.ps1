@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Grant-JcSdkWorkday' {
     It 'AuthorizeExpanded' -skip {
         { Grant-JcSdkWorkday -WorkdayId '<String>' [-BasicPassword '<String>'] [-BasicUsername '<String>'] [-OauthCode '<String>'] } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Grant-JcSdkWorkday' {
         { Grant-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' [-BasicPassword '<String>'] [-BasicUsername '<String>'] [-OauthCode '<String>'] } | Should -Not -Throw
     }
 }
+

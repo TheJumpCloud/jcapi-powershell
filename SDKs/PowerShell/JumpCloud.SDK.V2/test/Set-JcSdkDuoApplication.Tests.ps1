@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkDuoApplication' {
     It 'SetExpanded' -skip {
         { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId:($global:PesterTestApplication.Id) -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkDuoApplication' {
         { Set-JcSdkDuoApplication -ApiHost '<String>' -InputObject '<IJumpCloudApIsIdentity>' -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) [-SecretKey '<String>'] } | Should -Not -Throw
     }
 }
+

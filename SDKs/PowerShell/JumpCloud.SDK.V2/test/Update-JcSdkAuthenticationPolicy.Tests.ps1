@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Update-JcSdkAuthenticationPolicy' {
     It 'update' -skip {
         { Update-JcSdkAuthenticationPolicy -body:($global:PesterDefApplicationd) } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Update-JcSdkAuthenticationPolicy' {
         { Update-JcSdkAuthenticationPolicy -InputObject '<IJumpCloudApIsIdentity>' [-Conditions '<Hashtable>'] [-Description '<String>'] [-Disabled] [-EffectAction '<String>'] [-MfaRequired] [-Name '<String>'] [-TargetResources '<IAuthnPolicyResourceTarget[]>'] [-Type '<String>'] [-UserGroupExclusions '<String[]>'] [-UserGroupInclusions '<String[]>'] [-UserInclusions '<String[]>'] } | Should -Not -Throw
     }
 }
+

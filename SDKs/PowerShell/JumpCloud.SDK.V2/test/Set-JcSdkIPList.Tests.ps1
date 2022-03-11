@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkIPList' {
     It 'SetExpanded' {
         { Set-JcSdkIPList -Id:($global:PesterTestIPList.Id) -Name "Test" -Ips:($global:PesterDefIPList.Ips)} | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkIPList' {
         { Set-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
 }
+

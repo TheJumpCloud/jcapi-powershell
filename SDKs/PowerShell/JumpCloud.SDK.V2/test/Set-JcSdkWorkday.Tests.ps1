@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkWorkday' {
     It 'SetExpanded' -skip {
         { Set-JcSdkWorkday -Id:($global:PesterTestWorkday.Id) } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkWorkday' {
         { Set-JcSdkWorkday -InputObject '<IJumpCloudApIsIdentity>' [-Name '<String>'] [-ReportUrl '<String>'] } | Should -Not -Throw
     }
 }
+

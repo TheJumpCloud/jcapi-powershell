@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'New-JcSdkGSuiteTranslationRule' {
     It 'CreateExpanded' {
         $global:PesterTestGSuiteTranslationRule = New-JcSdkGSuiteTranslationRule @global:PesterDefGSuiteTranslationRule
@@ -29,3 +32,4 @@ Describe 'New-JcSdkGSuiteTranslationRule' {
         { New-JcSdkGSuiteTranslationRule -InputObject '<IJumpCloudApIsIdentity>' [-BuiltIn '<String>'] } | Should -Not -Throw
     }
 }
+

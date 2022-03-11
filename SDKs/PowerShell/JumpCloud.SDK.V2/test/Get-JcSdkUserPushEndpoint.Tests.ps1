@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkUserPushEndpoint'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,6 +15,8 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkUserPushEndpoint'))
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
+
+}
 Describe 'Get-JcSdkUserPushEndpoint' {
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
@@ -27,3 +30,4 @@ Describe 'Get-JcSdkUserPushEndpoint' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

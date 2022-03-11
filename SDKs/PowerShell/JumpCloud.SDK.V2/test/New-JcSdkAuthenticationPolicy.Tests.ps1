@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'New-JcSdkAuthenticationPolicy' {
     It 'CreateExpanded' {
         $global:PesterDefAuthenticationPolicy.UserGroupInclusions = $global:PesterTestUserGroup.Id
@@ -22,3 +25,4 @@ Describe 'New-JcSdkAuthenticationPolicy' {
         { New-JcSdkAuthenticationPolicy -Body:($global:PesterTestAuthenticationPolicy) } | Should -Not -Throw
     }
 }
+

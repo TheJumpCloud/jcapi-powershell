@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Update-JcSdkLdapServer' {
     It 'UpdateExpanded' -skip {
         { Update-JcSdkLdapServer -Id:($global:PesterTestLdapServer.Id) [-Id1 '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
@@ -28,3 +31,4 @@ Describe 'Update-JcSdkLdapServer' {
         { Update-JcSdkLdapServer -Body:($global:PesterTestLdapServer) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,6 +12,8 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
+
+}
 Describe 'Set-JcSdkPolicyGroupMember' {
     It 'SetExpanded' {
         { Set-JcSdkPolicyGroupMember -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
@@ -29,3 +32,4 @@ Describe 'Set-JcSdkPolicyGroupMember' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+
