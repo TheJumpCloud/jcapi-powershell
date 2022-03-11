@@ -165,7 +165,9 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
+  - `[AgreementId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
@@ -178,11 +180,13 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[ProviderId <String>]`: 
   - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
+  - `[Uuid <String>]`: 
   - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS

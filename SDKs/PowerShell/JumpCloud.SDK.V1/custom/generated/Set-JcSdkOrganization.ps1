@@ -92,6 +92,9 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
       [(Any) <Object>]: This indicates any property can be added to this object.
     [Logo <String>]:
     [Name <String>]:
+    [NewSystemUserStateDefaultApplicationImport <String>]:
+    [NewSystemUserStateDefaultCsvImport <String>]:
+    [NewSystemUserStateDefaultManualEntry <String>]:
     [PasswordCompliance <String>]:
     [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
     [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
@@ -155,6 +158,9 @@ SETTINGS <IOrganizationsettingsput>:
     [(Any) <Object>]: This indicates any property can be added to this object.
   [Logo <String>]:
   [Name <String>]:
+  [NewSystemUserStateDefaultApplicationImport <String>]:
+  [NewSystemUserStateDefaultCsvImport <String>]:
+  [NewSystemUserStateDefaultManualEntry <String>]:
   [PasswordCompliance <String>]:
   [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
   [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
