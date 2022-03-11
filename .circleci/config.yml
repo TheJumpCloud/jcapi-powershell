@@ -328,7 +328,7 @@ commands:
      SDKName:
         description: Name of the SDK to generate
         type: string
-     SDKChangeLocation:
+     SDKChangelogLocation:
         description: Location of the sdk changelog .md file
         type: string
     steps:
