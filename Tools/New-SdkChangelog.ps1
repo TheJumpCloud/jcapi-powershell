@@ -6,7 +6,9 @@ Function Global:New-SdkChangelog
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 2)][ValidateNotNullOrEmpty()][System.String]$Features
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 3)][ValidateNotNullOrEmpty()][System.String]$Improvements
         , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 4)][ValidateNotNullOrEmpty()][System.String]$BugFixes
-        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 5)][ValidateNotNullOrEmpty()][System.String]$Diff
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 5)][ValidateNotNullOrEmpty()][System.String]$DiffAdded
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 6)][ValidateNotNullOrEmpty()][System.String]$DiffModified
+        , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, Position = 7)][ValidateNotNullOrEmpty()][System.String]$DiffDeleted
     )
     $Content = "## {0}
 Release Date: $(Get-Date -UFormat:('%B %d, %Y'))
@@ -20,8 +22,12 @@ Release Date: $(Get-Date -UFormat:('%B %d, %Y'))
 {3}
 #### BUG FIXES:
 {4}
-#### DIFF:
+#### DIFF ADDED:
 {5}
+#### DIFF MODIFIED:
+{6}
+#### DIFF DELETED:
+{7}
 "
-    Return ($Content -f $LatestVersion, $ReleaseNotes, $Features, $Improvements, $BugFixes, $Diff)
+    Return ($Content -f $LatestVersion, $ReleaseNotes, $Features, $Improvements, $BugFixes, $DiffAdded, $DiffModified, $DiffDeleted)
 }
