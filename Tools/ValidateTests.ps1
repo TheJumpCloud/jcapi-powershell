@@ -1,14 +1,17 @@
 param (
     [Parameter()]
     [System.String]
-    $Path
+    $Path,
+    [Parameter()]
+    [System.Boolean]
+    $ReplacePesterBlock
 )
 Begin
 {
     Write-Host $Path
     # Regex search for tests
     $regex = [regex]"It.*{"
-    $pesterRegex = [regex]"([^;]*)Describe"
+    $pesterRegex = [regex]"[\S\s]*(?=Describe)"
     # Test List
     $TestResults = @()
 }
@@ -28,10 +31,17 @@ Process{
             }
         }
         # Search for code outside describe block
-        $raw = Get-Content -Path ($test.FullName)
+        $raw = Get-Content -Path ($test.FullName) -Raw
         $rogueText = [regex]::match($raw, $pesterRegex)
         if ($rogueText.Value -notmatch "BeforeAll"){
             Write-Warning "Pester test: $($test.BaseName) contains code outside valid blocks; This test may not execute"
+            if ($ReplacePesterBlock){
+                Write-Warning "Updating test: $($test.BaseName)"
+                $raw = Get-Content -Path $test.FullName -Raw
+                $pesterRegex.Replace($raw, ('BeforeAll {' + "`n" + [regex]::match($raw, $pesterRegex) + "`n" + '}' + "`n"), 1) | Set-Content -Path $test.FullName
+                $raw = Get-Content -Path $test.FullName -Raw
+                $rogueText = [regex]::match($raw, $pesterRegex)
+            }
         }
         $TestResults += [PSCustomObject]@{
             TestName = $($test.BaseName)
