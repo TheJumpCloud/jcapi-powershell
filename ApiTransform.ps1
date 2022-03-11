@@ -21,7 +21,7 @@ $TransformConfig = [Ordered]@{
             # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
             # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
-        ExcludedList       = @('/reports/command_results', '/reports/policy_results', '/reports/device_health');
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
         PublicUrl                = "https://docs.jumpcloud.com/api/1.0/index.yaml"
