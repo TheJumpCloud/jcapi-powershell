@@ -326,9 +326,11 @@ commands:
   changelog:
     parameters:
      SDKName:
-      description: Name of the SDK to generate
+        description: Name of the SDK to generate
+        type: string
      SDKChangeLocation:
-      description: Location of the sdk changelog .md file
+        description: Location of the sdk changelog .md file
+        type: string
     steps:
       - run:
           name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangeLocation >>'
