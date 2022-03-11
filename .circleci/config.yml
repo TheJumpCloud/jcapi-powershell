@@ -337,7 +337,7 @@ commands:
           shell: pwsh.exe
           command: | 
            $ErrorActionPreference = 'Stop' 
-           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
+           ./root/project/Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
   build-test:
     parameters:
       SDKName:
