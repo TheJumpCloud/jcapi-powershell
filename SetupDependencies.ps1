@@ -25,4 +25,17 @@ If ($env:CI -eq $false)
 # Install NPM Dependencies from packages.json
 npm install
 
-Import-Module 'Tools/New-SdkChangelog.ps1' -Force
+$DeployFunctions = @(Get-ChildItem -Path:($PSScriptRoot + '/tools/New-SdkChangelog.ps1') -Recurse)
+Foreach ($DeployFunction In $DeployFunctions)
+    {
+        Try
+        {
+            Write-Host "Importing $($DeployFunction.FullName)"
+            . $DeployFunction.FullName
+            # Get-Command $DeployFunction
+        }
+        Catch
+        {
+            Write-Error -Message:('Failed to import function: ' + $DeployFunction.FullName)
+        }
+    }
