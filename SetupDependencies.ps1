@@ -24,3 +24,5 @@ If ($env:CI -eq $false)
 }
 # Install NPM Dependencies from packages.json
 npm install
+
+Import-Module 'Tools/New-SdkChangelog.ps1' -Force
