@@ -7,7 +7,7 @@ param (
     [String]
     $sdkChangelogLocation
 )
-Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
+Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1') #TODO: Ask Joe where to put
 $sdkName = 'JumpCloud.SDK.V2'
 $sdkChangelogLocation = 'SDKs/PowerShell/JumpCloud.SDK.V2/sdkV2Changelog.md'
 $release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'
