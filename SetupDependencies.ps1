@@ -25,13 +25,13 @@ If ($env:CI -eq $false)
 # Install NPM Dependencies from packages.json
 npm install
 
-$DeployFunctions = @(Get-ChildItem -Path:($PSScriptRoot + '/tools/New-SdkChangelog.ps1') -Recurse)
+$DeployFunctions = @(Get-ChildItem -Path:($PSScriptRoot + '/SDKs/PowerShell/Deploy/Functions/*.ps1') -Recurse)
 Foreach ($DeployFunction In $DeployFunctions)
     {
         Try
         {
             Write-Host "Importing $($DeployFunction.FullName)"
-            . $DeployFunction.FullName
+            Import-Module $DeployFunction.FullName
             # Get-Command $DeployFunction
         }
         Catch
