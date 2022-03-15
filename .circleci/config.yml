@@ -16,11 +16,7 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Create GitHub Release Draft:
-      requires:
-      - Build and Test JumpCloud SDK DirectoryInsights
-      - Build and Test JumpCloud SDK V1
-      - Build and Test JumpCloud SDK V2
+  - Create GitHub Release Draft
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
   - Build and Test JumpCloud SDK V1:
