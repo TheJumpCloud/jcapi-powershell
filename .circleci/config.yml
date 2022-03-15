@@ -16,9 +16,9 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Create GitHub Release Draft
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
+  - Create GitHub Release Draft
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -119,6 +119,18 @@ jobs:
             - '24:54:e1:c2:70:c6:f7:61:71:4b:c5:52:9f:20:b9:63'
       - checkout
       - pulljcmodule
+  Build and Test JumpCloud SDK DirectoryInsights:
+    executor: win/default
+    steps:
+      - setup
+      - changelog:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          SDKChangelogLocation: /SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
+      - build-test:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          ManualModuleVersion: ''
+          RunApiTransform: true
+          TestModule: true
   Create GitHub Release Draft:
     docker:
       - image: cibuilds/github:0.13
@@ -134,27 +146,6 @@ jobs:
             BODY="$TITLE $CHANGELOG"
             # Post Draft Release
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/
-  Build and Test JumpCloud SDK DirectoryInsights:
-    executor: win/default
-    steps:
-      - setup
-      - changelog:
-          SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
-      - run:
-          name: "Draft Release for SDKDi in GitHub"
-          command: |
-            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            $CHANGELOG=$(cat /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
-            $TITLE="Test"
-            $BODY="$TITLE $CHANGELOG"
-            # Post Draft Release
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/PowerShell/
-      - build-test:
-          SDKName: JumpCloud.SDK.DirectoryInsights
-          ManualModuleVersion: ''
-          RunApiTransform: true
-          TestModule: true
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
