@@ -115,6 +115,21 @@ workflows:
       - Build and Test JumpCloud SDK V1
       - Build and Test JumpCloud SDK V2
 jobs:
+  Create GitHub Release Draft:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Draft Release for SDKDi in GitHub"
+          command: |
+            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+            CHANGELOG=$(cat /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            TAG="v$VERSION"
+            BODY="$TITLE $CHANGELOG"
+            # Post Draft Release
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/
   Test SDKs on Production JumpCloud PowerShell TestModule:
     executor: win/default
     steps:
@@ -169,7 +184,7 @@ jobs:
       - changelog:
           SDKName: JumpCloud.SDK.V2
           SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V2/sdkV2Changelog.md
-  Create GitHub Release Draft:
+  Create GitHub Release Draft2:
     docker:
       - image: cibuilds/github:0.13
     steps:
