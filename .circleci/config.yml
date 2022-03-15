@@ -143,7 +143,7 @@ jobs:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            CHANGELOG=$(cat /root/project/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
             TAG="v$VERSION"
             BODY="$TITLE $CHANGELOG"
             # Post Draft Release
