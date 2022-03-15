@@ -18,7 +18,9 @@ parameters:
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Create GitHub Release Draft
+  - Create GitHub Release Draft:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
