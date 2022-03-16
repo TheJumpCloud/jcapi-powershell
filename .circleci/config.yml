@@ -142,7 +142,7 @@ jobs:
           command: |
             BODY="Test"
             VERSION="v1.1.1"
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "Test Release" -b "$BODY" -delete -draft ${VERSION} /root/project/
+            ghr -t ${GITHUB_TOKEN} -u "${CIRCLE_PROJECT_USERNAME}"" -r "${CIRCLE_PROJECT_REPONAME}"" -c "${CIRCLE_SHA1}"" -n "Test Release" -b "$BODY" -delete -draft "${VERSION}"" /root/project/
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
