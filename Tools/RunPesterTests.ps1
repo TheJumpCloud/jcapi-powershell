@@ -37,7 +37,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
 }
 #endregion Import Modules
 #region Define Objects
-If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList))
 {
     # Get a ApplicationTemplate
     $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
@@ -287,47 +287,19 @@ $PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCov
 # Print Test Coverage & Pester 5 Compatibility:
 . "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
 
-# Begin Block for non-MTP Pester Tests
-$IncludeTags = ""
-$ExcludeTagList = "MTP"
-Write-Host "$($PesterTestFiles.FullName)"
-. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
+# Write-Host "$($PesterTestFiles.FullName)"
 $configuration = [PesterConfiguration]::Default
 $configuration.Run.Path = $($PesterTestFiles.FullName)
 $configuration.Should.ErrorAction = 'Continue'
 $configuration.CodeCoverage.Enabled = $false
 $configuration.testresult.Enabled = $true
 $configuration.testresult.OutputFormat = 'JUnitXml'
-$configuration.Filter.Tag = $IncludeTags
-$configuration.Filter.ExcludeTag = $ExcludeTagList
+$configuration.Filter.Tag = $Env:IncludeTags
+$configuration.Filter.ExcludeTag = $Env:ExcludeTagList
 $configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
 $configuration.testresult.OutputPath = ($PesterTestResultPath)
-# Invoke Non-MTP org tests
+# Invoke pester
 Invoke-Pester -configuration $configuration
-# End non-MTP Pester Tests
-
-# Begin Block for MTP Pester Tests
-# Set MTP Key and ORGID from one of the MTP tenants
-$env:JCApiKey = $env:JCApiKeyMTP
-$env:JCOrgId = (Get-JcSdkOrganization | Select-Object -First 1).Id
-
-$IncludeTags = "MTP"
-$ExcludeTagList = ""
-. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
-$configuration = [PesterConfiguration]::Default
-$configuration.Run.Path = $($PesterTestFiles.FullName)
-$configuration.Should.ErrorAction = 'Continue'
-$configuration.CodeCoverage.Enabled = $false
-$configuration.testresult.Enabled = $true
-$configuration.testresult.OutputFormat = 'JUnitXml'
-$configuration.Filter.Tag = $IncludeTags
-$configuration.Filter.ExcludeTag = $ExcludeTagList
-$configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
-$configuration.testresult.OutputPath = ($PesterTestResultPath)
-#Invoke MTP org Tests
-Invoke-Pester -configuration $configuration
-# End MTP Pester Tests
-#endregion Run Pester Tests
 
 #region Clean Up (This section should ideally be taken care of by the "Remove-" tests)
 If ($moduleName -eq 'JumpCloud.SDK.V1')

@@ -5,6 +5,8 @@ Param(
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'OrgId used for pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCOrgId
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'MTP API key used for select pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCApiKeyMTP
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'MTP ProviderID used for select pester tests.')][ValidateNotNullOrEmpty()][System.String]$JCProviderId
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'ExcludeTagList for pester tests.')][ValidateNotNullOrEmpty()][System.String]$ExcludeTagList
+    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'IncludeTagList for pester tests.')][ValidateNotNullOrEmpty()][System.String]$IncludeTagList
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test-module.ps1')]
     [ValidateNotNullOrEmpty()]
     [System.IO.FileInfo]
@@ -26,10 +28,13 @@ Param(
 )
 # Create environmental variable so that they can be used by the pester tests
 $ErrorActionPreference = 'Stop'
-$env:JCApiKey = $JCApiKey
-$env:JCOrgId = $JCOrgId
 $env:JCApiKeyMTP = $JCApiKeyMTP
 $env:JCProviderId = $JCProviderId
+$env:JCApiKey = $JCApiKey
+$env:JCOrgId = $JCOrgId
+# Set Exclude Tags List to pass to tests
+$env:ExcludeTagList = $ExcludeTagList
+$env:IncludeTagList = $IncludeTagList
 If (-not [System.String]::IsNullOrEmpty($env:JCApiKey) -and -not [System.String]::IsNullOrEmpty($env:JCOrgId) -and -not [System.String]::IsNullOrEmpty($env:JCApiKeyMTP) -and -not [System.String]::IsNullOrEmpty($env:JCProviderId))
 {
     Write-Host ('[VALIDATION] JCApiKey AND JCOrgId have been populated.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
