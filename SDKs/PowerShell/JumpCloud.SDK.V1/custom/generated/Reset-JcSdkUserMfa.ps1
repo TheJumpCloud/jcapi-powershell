@@ -55,6 +55,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>:
   [Exclusion <Boolean?>]:
+  [ExclusionDays <Single?>]:
   [ExclusionUntil <DateTime?>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
@@ -99,6 +100,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${Exclusion},
+
+    [Parameter(ParameterSetName='ResetExpanded')]
+    [Parameter(ParameterSetName='ResetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Single]
+    # .
+    ${ExclusionDays},
 
     [Parameter(ParameterSetName='ResetExpanded')]
     [Parameter(ParameterSetName='ResetViaIdentityExpanded')]

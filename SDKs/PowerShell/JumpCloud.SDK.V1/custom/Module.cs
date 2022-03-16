@@ -64,10 +64,20 @@ namespace JumpCloud.SDK.V1
             {
                 request.Headers.Add("x-org-id", JCOrgId);
             }
-            // Organization endpoint does not accept x-org-id as a header so remove it
-            if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith("/api/organizations") == true)
-            {
-                request.Headers.Remove("x-org-id");
+            List<String> mtpUrls = new List<String>();
+            // Adding elements to List
+            mtpUrls.Add("/api/search/organizations");
+            mtpUrls.Add("/api/organizations");
+            mtpUrls.Add("/api/v2/organizations");
+            mtpUrls.Add("/api/v2/administrators");
+            mtpUrls.Add("/api/v2/providers");
+            mtpUrls.Add("/api/v2/integrations/");
+            foreach (string mtpUrl in mtpUrls){
+                // endpoints do not accept x-org-id as a header so remove it
+                if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith(mtpUrl) == true)
+                {
+                    request.Headers.Remove("x-org-id");
+                }
             }
             // If headers do not contain an "Accept" header add one
             if (request.Headers.Contains("Accept") == false)

@@ -351,9 +351,50 @@ $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -an
 $PesterTestResultFolder = (Join-Path $testFolder "results")
 If (!(Test-Path -Path:($PesterTestResultFolder))) { New-Item -Path:($PesterTestResultFolder) -ItemType:('Directory') | Out-Null }
 $PesterTestResultPath = Join-Path $PesterTestResultFolder "$moduleName-TestResults.xml"
-# Print Test Coverage:
+$PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCoverage.xml"
+# Print Test Coverage & Pester 5 Compatibility:
 . "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
-Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile:($PesterTestResultPath) -OutputFormat:('JUnitXml')
+
+# Begin Block for non-MTP Pester Tests
+$IncludeTags = ""
+$ExcludeTagList = "MTP"
+Write-Host "$($PesterTestFiles.FullName)"
+. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
+$configuration = [PesterConfiguration]::Default
+$configuration.Run.Path = $($PesterTestFiles.FullName)
+$configuration.Should.ErrorAction = 'Continue'
+$configuration.CodeCoverage.Enabled = $false
+$configuration.testresult.Enabled = $true
+$configuration.testresult.OutputFormat = 'JUnitXml'
+$configuration.Filter.Tag = $IncludeTags
+$configuration.Filter.ExcludeTag = $ExcludeTagList
+$configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
+$configuration.testresult.OutputPath = ($PesterTestResultPath)
+# Invoke Non-MTP org tests
+Invoke-Pester -configuration $configuration
+# End non-MTP Pester Tests
+
+# Begin Block for MTP Pester Tests
+# Set MTP Key and ORGID from one of the MTP tenants
+$env:JCApiKey = $env:JCApiKeyMTP
+$env:JCOrgId = (Get-JcSdkOrganization | Select-Object -First 1).Id
+
+$IncludeTags = "MTP"
+$ExcludeTagList = ""
+. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
+$configuration = [PesterConfiguration]::Default
+$configuration.Run.Path = $($PesterTestFiles.FullName)
+$configuration.Should.ErrorAction = 'Continue'
+$configuration.CodeCoverage.Enabled = $false
+$configuration.testresult.Enabled = $true
+$configuration.testresult.OutputFormat = 'JUnitXml'
+$configuration.Filter.Tag = $IncludeTags
+$configuration.Filter.ExcludeTag = $ExcludeTagList
+$configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
+$configuration.testresult.OutputPath = ($PesterTestResultPath)
+#Invoke MTP org Tests
+Invoke-Pester -configuration $configuration
+# End MTP Pester Tests
 #endregion Run Pester Tests
 
 #region Clean Up (This section should ideally be taken care of by the "Remove-" tests)
