@@ -143,7 +143,7 @@ jobs:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             BODY="Test"
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "Test Release" -b "$BODY" -delete -draft "Test tag" /root/project/
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "Test Release" -b "$BODY" -delete -draft "v.1.1.1" /root/project/
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
