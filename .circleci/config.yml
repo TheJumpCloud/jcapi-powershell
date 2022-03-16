@@ -140,10 +140,15 @@ jobs:
       - run:
           name: "Draft Release for SDKDi in GitHub"
           command: |
-            git clone << pipeline.git.branch >>
-            BODY="Test"
-            VERSION="v1.1.1"
-            ghr -t ${GITHUB_TOKEN} -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -n "Test Release" -b "$BODY" -delete -draft v1.1.1 /root/project/
+            # Module Version
+            VERSION=$(grep -o '\d\+\.\d\+\.\d\+' /root/project/PowerShell/JumpCloud\ Module/JumpCloud.psd1)
+            TITLE="JumpCloud PowerShell Module v$VERSION"
+            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+            CHANGELOG=$(cat /root/project/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            TAG="v$VERSION"
+            BODY="$TITLE $CHANGELOG"
+            # Post Draft Release
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/PowerShell/
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
