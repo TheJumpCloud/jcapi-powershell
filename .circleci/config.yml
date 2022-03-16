@@ -140,6 +140,7 @@ jobs:
       - run:
           name: "Draft Release for SDKDi in GitHub"
           command: |
+            git clone << pipeline.git.branch >>
             BODY="Test"
             VERSION="v1.1.1"
             ghr -t ${GITHUB_TOKEN} -u "${CIRCLE_PROJECT_USERNAME}" -r "${CIRCLE_PROJECT_REPONAME}" -c "${CIRCLE_SHA1}" -n "Test Release" -b "$BODY" -delete -draft v1.1.1 /root/project/
