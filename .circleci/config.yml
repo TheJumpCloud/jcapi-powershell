@@ -145,7 +145,7 @@ jobs:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             # Module Version
-            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” ./JumpCloud.SDK.DirectoryInsights.psd1 | Head -1) 
+            VERSION="0.0.16"
             TITLE="JumpCloud SDK DI Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./sdkDiChangelog.md | awk "/^## JumpCloud.SDK.DirectoryInsights-$VERSION/{ f = 1; next } /## JumpCloud.SDK.DirectoryInsights-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
