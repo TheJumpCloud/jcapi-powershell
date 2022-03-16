@@ -150,6 +150,7 @@ jobs:
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./sdkDiChangelog.md | awk "/^## JumpCloud.SDK.DirectoryInsights-$VERSION/{ f = 1; next } /## JumpCloud.SDK.DirectoryInsights-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
             BODY="$TITLE $CHANGELOG"
+            TAG="v$VERSION"
             # Post Draft Release
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/PowerShell/
   Build and Test JumpCloud SDK V1:
