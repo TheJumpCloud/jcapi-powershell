@@ -146,10 +146,6 @@ jobs:
             ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "Test Release" -b "$BODY" -delete -draft "$TAG" /root/project/
   Build and Test JumpCloud SDK V1:
     executor: win/default
-    docker:
-      - image: cibuilds/github:0.13
-      - attach_workspace:
-          at: .
     steps:
       - setup
       - build-test:
@@ -160,16 +156,6 @@ jobs:
       - changelog:
           SDKName: JumpCloud.SDK.V1
           SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V1/sdkV1Changelog.md
-      - run:
-          name: "Draft Release for SDKDi in GitHub"
-          command: |
-            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat /root/project/sdkDiChangelog.md |awk "/^## $VERSION/{ f = 1; next } /## [0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
-            TAG="v$VERSION"
-            BODY="$TITLE $CHANGELOG"
-            # Post Draft Release
-            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG" /root/project/
-      
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
