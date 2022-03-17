@@ -363,7 +363,8 @@ commands:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             # Module Version
-            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1 | Head -1) 
+            MODULE_VERSION=$(grep -o "ModuleVersion = '\d\+\.\d\+\.\d\+'" ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1)
+            VERSION=$(echo $MODULE_VERSION | grep -o "\d\+\.\d\+\.\d\+")
             TITLE="JumpCloud SDK DI Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./<< parameters.SDKChangelogLocation >> | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
