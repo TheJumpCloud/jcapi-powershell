@@ -131,6 +131,8 @@ jobs:
     docker:
       - image: cibuild/github:0.13
     steps:
+      - attach_workspace:
+          at: .
       - create-github-release-draft: 
           SDKName: JumpCloud.SDK.DirectoryInsights
           SDKChangelogLocation: /sdkDiChangelog.md
