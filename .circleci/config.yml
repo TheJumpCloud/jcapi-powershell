@@ -124,14 +124,14 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-  Create SDKDi changelog:
-    executor: win/default
-    steps:
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
           SDKChangelogLocation: /root/project/sdkDiChangelog.md
+  Create SDKDi changelog:
+    docker:
+      - image: cibuild/github:0.13
+    steps:
       - create-github-release-draft: 
-          SDKVersionLocation: /JumpCloud.SDK.DirectoryInsights.psd1
           SDKName: JumpCloud.SDK.DirectoryInsights
           SDKChangelogLocation: /sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
@@ -348,9 +348,6 @@ commands:
             - .
   create-github-release-draft:
     parameters:
-      SDKVersionLocation:
-        description: PSD1 location where the version number resides
-        type: string
       SDKName:
         description: Name of the SDK to generate
         type: string
@@ -364,7 +361,7 @@ commands:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             # Module Version
-            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” .<<parameters.SDKVersionLocation >> | Head -1) 
+            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1 | Head -1) 
             TITLE="JumpCloud SDK DI Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./<< parameters.SDKChangelogLocation >> | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
