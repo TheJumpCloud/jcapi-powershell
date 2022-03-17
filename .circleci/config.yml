@@ -22,6 +22,9 @@ parameters:
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
+  - Create SDKDi changelog:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -36,21 +39,18 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
-        - Create GitHub Release Draft
   - CodeArtifact Approval:
       type: approval
       requires:
           - Build and Test JumpCloud SDK DirectoryInsights
           - Build and Test JumpCloud SDK V1
           - Build and Test JumpCloud SDK V2
-          - Create GitHub Release Draft
           - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
-        - Create GitHub Release Draft
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
@@ -59,7 +59,6 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
-        - Create GitHub Release Draft
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -70,7 +69,6 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
-        - Create GitHub Release Draft
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -82,7 +80,6 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
         - Build and Test JumpCloud SDK V2
-        - Create GitHub Release Draft
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
@@ -124,40 +121,32 @@ jobs:
       - pulljcmodule
   Build and Test JumpCloud SDK DirectoryInsights:
     executor: win/default
-    executors: docker-execute
     steps:
       - setup
-      - changelog:
-          SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/sdkDiChangelog.md
       - build-test:
           SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Create SDKDi changelog:
+    executor: win/default
+    steps:
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
           SDKChangelogLocation: /root/project/sdkDiChangelog.md
-      - create github release draft: 
-          SDKVersionLocation: ./JumpCloud.SDK.DirectoryInsights.psd1
+      - create-github-release-draft: 
+          SDKVersionLocation: /JumpCloud.SDK.DirectoryInsights.psd1
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogFileLoc: ./sdkDiChangelog.md
+          SDKChangelogLocation: /sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
       - setup
       - build-test:
-          SDKName: JumpCloud.SDK.DirectoryInsights
+          SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /root/project/sdkV1Changelog.md
-      - create github release draft: 
-          SDKVersionLocation: ./JumpCloud.SDK.V1.psd1
-          SDKName: JumpCloud.SDK.V1
-          SDKChangelogFileLocation: ./sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -167,13 +156,6 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.V2
-          SDKChangelogLocation: /root/project/sdkV2Changelog.md
-      - create github release draft: 
-          SDKVersionLocation: ./JumpCloud.SDK.V2.psd1
-          SDKName: JumpCloud.SDK.V2
-          SDKChangelogFileLocation: ./sdkV2Changelog.md
   Commit Changes:
     executor: win/default
     steps:
@@ -368,7 +350,7 @@ commands:
           root: .
           paths:
             - .
-  create github release draft:
+  create-github-release-draft:
     parameters:
       SDKVersionLocation:
         description: PSD1 location where the version number resides
@@ -376,7 +358,7 @@ commands:
       SDKName:
         description: Name of the SDK to generate
         type: string
-      SDKChangelogFileLocation:
+      SDKChangelogLocation:
         description: Location of the .md file
         type: string
     steps:
@@ -386,7 +368,7 @@ commands:
           name: "Draft Release for SDKDi in GitHub"
           command: |
             # Module Version
-            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” ./<< parameters.SDKVersionLocation>> | Head -1) 
+            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” .<<parameters.SDKVersionLocation >> | Head -1) 
             TITLE="JumpCloud SDK DI Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./<< parameters.SDKChangelogLocation >> | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
