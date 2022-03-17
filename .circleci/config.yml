@@ -130,14 +130,12 @@ jobs:
           RunApiTransform: true
           TestModule: true
           IncludeTagList: '*'
-          ExcludeTagList:
       - test-mtp:
           SDKName: JumpCloud.SDK.V1
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
           IncludeTagList: 'MTP'
-          ExcludeTagList:
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -148,14 +146,12 @@ jobs:
           RunApiTransform: true
           TestModule: true
           IncludeTagList: '*'
-          ExcludeTagList:
       - test-mtp:
           SDKName: JumpCloud.SDK.V2
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
           IncludeTagList: 'MTP'
-          ExcludeTagList:
   Commit Changes:
     executor: win/default
     steps:
@@ -326,7 +322,7 @@ commands:
       ExcludeTagList:
         description: 'Pester Tags to either run or skip during test-module'
         type: string
-        default: ''
+        default: 'None'
       IncludeTagList:
         description: 'Pester Tags to either run or skip during test-module'
         type: string
