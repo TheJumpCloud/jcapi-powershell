@@ -37,7 +37,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
 }
 #endregion Import Modules
 #region Define Objects
-If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList))
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
 {
     # Get a ApplicationTemplate
     $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
