@@ -16,16 +16,11 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Create GitHub Release Draft:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create GitHub Release Draft
       context: aws-credentials
   - Build and Test JumpCloud SDK V2:
       requires:
@@ -135,39 +130,29 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-  Create GitHub Release Draft:
-    docker:
-      - image: cibuilds/github:0.13
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: "Draft Release for SDKDi in GitHub"
-          command: |
-            # Module Version
-            VERSION="0.0.16"
-            TITLE="JumpCloud SDK DI Module v$VERSION"
-            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat ./sdkDiChangelog.md | awk "/^## JumpCloud.SDK.DirectoryInsights-$VERSION/{ f = 1; next } /## JumpCloud.SDK.DirectoryInsights-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
-            BODY="$TITLE $CHANGELOG"
-            TAG="v$VERSION"
-            echo ${CIRCLE_PROJECT_USERNAME}
-            echo ${CIRCLE_PROJECT_REPONAME}
-            echo ${GITHUB_TOKEN}
-            # Post Draft Release
-            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
+      - changelog:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          SDKChangelogLocation: /root/project/sdkDiChangelog.md
+      - create github release draft: 
+          SDKVersionLoc: ./JumpCloud.SDK.DirectoryInsights.psd1
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          SDKChangelogFileLoc: ./sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
       - setup
       - build-test:
-          SDKName: JumpCloud.SDK.V1
+          SDKName: JumpCloud.SDK.DirectoryInsights
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V1/sdkV1Changelog.md
+          SDKChangelogLocation: /root/project/sdkV1Changelog.md
+      - create github release draft: 
+          SDKVersionLoc: ./JumpCloud.SDK.V1.psd1
+          SDKName: JumpCloud.SDK.V1
+          SDKChangelogFileLocation: ./sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -179,7 +164,11 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V2
-          SDKChangelogLocation: /root/project/SDKs/PowerShell/JumpCloud.SDK.V2/sdkV2Changelog.md
+          SDKChangelogLocation: /root/project/sdkV2Changelog.md
+      - create github release draft: 
+          SDKVersionLoc: ./JumpCloud.SDK.V2.psd1
+          SDKName: JumpCloud.SDK.V2
+          SDKChangelogFileLocation: ./sdkV2Changelog.md
   Commit Changes:
     executor: win/default
     steps:
@@ -291,6 +280,7 @@ commands:
           name: Uploading test results'
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
   setup:
+
     steps:
       - checkout
       - run:
@@ -373,6 +363,37 @@ commands:
           root: .
           paths:
             - .
+  create github release draft:
+    docker:
+      - image: cibuilds/github:0.13
+    parameters:
+      SDKVersionLoc:
+        description: PSD1 location where the version number resides
+        type: string
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+      SDKChangelogFileLocation:
+        description: Location of the .md file
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Draft Release for SDKDi in GitHub"
+          command: |
+            # Module Version
+            VERSION=$(grep -o “‘\d\+\.\d\+\.\d\+‘” ./<< parameters.SDKVersionLoc>> | Head -1) 
+            TITLE="JumpCloud SDK DI Module v$VERSION"
+            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+            CHANGELOG=$(cat ./<< parameters.SDKChangelogLocation >> | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            BODY="$TITLE $CHANGELOG"
+            TAG="v$VERSION"
+            echo ${CIRCLE_PROJECT_USERNAME}
+            echo ${CIRCLE_PROJECT_REPONAME}
+            echo ${GITHUB_TOKEN}
+            # Post Draft Release
+            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
   changelog:
     parameters:
      SDKName:
