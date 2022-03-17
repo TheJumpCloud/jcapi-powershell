@@ -129,7 +129,7 @@ jobs:
           SDKChangelogLocation: /root/project/sdkDiChangelog.md
   Create SDKDi changelog:
     docker:
-      - image: cibuild/github:0.13
+      - image: cibuilds/github:0.13
     steps:
       - attach_workspace:
           at: .
