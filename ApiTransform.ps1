@@ -158,6 +158,13 @@ $TransformConfig = [Ordered]@{
             'authnpolicies_list'                                = 'AuthenticationPolicy_List';
             'authnpolicies_patch'                               = 'AuthenticationPolicy_Update';
             'authnpolicies_post'                                = 'AuthenticationPolicy_Create';
+            # 'autotask_deleteConfiguration'                      = 'AutotaskConfiguration_Delete'
+            # 'autotask_getConfiguration'                         = 'AutotaskConfiguration_Get'
+            # 'autotask_updateConfiguration'                      = 'AutotaskConfiguration_Update'
+            # 'autotask_retrieveCompanyTypes'                     = 'Autotask_CompanyTypes_Get'
+            # 'autotask_retrieveSettings'                         = 'AutotaskSettings_Get'
+            # 'autotask_patchSettings'                            = 'AutotaskSettings_Update'
+            # 'autotask_createConfiguration'                      = 'AutotaskConfiguration_Create'
             'bulk_usersCreate'                                  = 'BulkUsers_Create';
             'bulk_usersCreateResults'                           = 'BulkUsersResult_Get';
             'bulk_userStatesCreate'                             = 'BulkUserState_Create';
@@ -165,18 +172,18 @@ $TransformConfig = [Ordered]@{
             'bulk_userStatesGetNextScheduled'                   = 'NextScheduledBulkUserState_Get';
             'bulk_userStatesList'                               = 'BulkUserStates_List';
             'bulk_usersUpdate'                                  = 'BulkUsers_Update';
-            'connectwise_retrieveSettings'                      = 'ConnectwiseSettings_Get'
-            'connectwise_patchSettings'                         = 'ConnectwiseSetttings_Set'
-            'connectwise_deleteConfiguration'                   = 'ConnectwiseConfiguration_Delete'
-            'connectwise_getConfiguration'                  = 'ConnectwiseConfiguration_Get'
-            'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
-            'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Set'
-            'connectwise_retrieveAgreements'                    = 'ConnectwiseConfiguration_Delete'
-            'connectwise_retrieveAdditions'                 = 'ConnectwiseAdditions_Get'
-            'connectwise_retrieveCompanies'                 = 'ConnectwiseCompanies_Get'
-            'connectwise_retrieveCompanyTypes'                  = 'ConnectwiseCompanyTypes_Get'
-            'connectwise_retrieveMappings'                  = 'ConnectwiseMappings_Get'
-            'connectwise_patchMappings'                 = 'ConnectwiseMappings_Set'
+            # 'connectwise_retrieveSettings'                      = 'ConnectwiseSettings_Get'
+            # 'connectwise_patchSettings'                         = 'ConnectwiseSetttings_Set'
+            # 'connectwise_deleteConfiguration'                   = 'ConnectwiseConfiguration_Delete'
+            # 'connectwise_getConfiguration'                  = 'ConnectwiseConfiguration_Get'
+            # 'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
+            # 'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Set'
+            # 'connectwise_retrieveAgreements'                    = 'ConnectwiseConfiguration_Delete'
+            # 'connectwise_retrieveAdditions'                 = 'ConnectwiseAdditions_Get'
+            # 'connectwise_retrieveCompanies'                 = 'ConnectwiseCompanies_Get'
+            # 'connectwise_retrieveCompanyTypes'                  = 'ConnectwiseCompanyTypes_Get'
+            # 'connectwise_retrieveMappings'                  = 'ConnectwiseMappings_Get'
+            # 'connectwise_patchMappings'                 = 'ConnectwiseMappings_Set'
             'customEmails_create'                               = 'CustomEmailConfiguration_Create';
             'customEmails_destroy'                              = 'CustomEmailConfiguration_Delete';
             'customEmails_getTemplates'                         = 'CustomEmailTemplates_List';
@@ -334,7 +341,7 @@ $TransformConfig = [Ordered]@{
             'providers_postAdmins'                              = 'ProviderAdministrator_Create';
             'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
             'providers_retrieveInvoices'                        = 'ProvidersInvoices_Get'
-            'providers_retrieveIntegrations'                    = 'ProvidersIntegrations_Get'
+            # 'providers_retrieveIntegrations'                    = 'ProvidersIntegrations_Get'
             'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
             'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
             'pushEndpoints_list'                                = 'UserPushEndpoints_List';
@@ -418,7 +425,28 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @(
+            '/applications/{application_id}',
+            '/applications/{application_id}/import/users',
+            '/providers/{provider_id}/integrations',
+            '/providers/{provider_id}/integrations/connectwise',
+            '/integrations/connectwise/{UUID}',
+            '/integrations/connectwise/{UUID}/settings',
+            '/integrations/connectwise/{UUID}/agreements',
+            '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions',
+            '/integrations/connectwise/{UUID}/companies',
+            '/integrations/connectwise/{UUID}/companytypes',
+            '/integrations/connectwise/{UUID}/mappings',
+            # '/providers/{provider_id}/administrators',
+            # '/providers/{provider_id}/administrators/{id}',
+            # '/providers/{provider_id}/organizations',
+            # '/administrators/{id}/organizationlinks',
+            # '/administrators/{administrator_id}/organizationlinks/{id}',
+            # '/organizations/{id}/administratorlinks',
+            '/integrations/autotask/{UUID}',
+            '/integrations/autotask/{UUID}/settings',
+            '/integrations/autotask/{UUID}/companytypes',
+            '/providers/{provider_id}/integrations/autotask')
     }
 }
 Function Get-SwaggerItem
