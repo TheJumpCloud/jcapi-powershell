@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Search-JcSdkOrganization' {
+Describe 'Search-JcSdkOrganization' -Tag:("MTP") {
     # TODO: MTP Function: Forbidden: organization selection not allowed via header - ORG ID should not be set when running this function
     It 'SearchExpanded' -skip {
         { Search-JcSdkOrganization [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw

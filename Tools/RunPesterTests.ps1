@@ -238,7 +238,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
 {
     # Set MTP Keys & Continue to test
     $env:JCApiKey = $env:JCApiKeyMTP
-    $env:JCOrgId = (Get-JCOrganization | Select-Object -First 1).Id
+    $env:JCOrgId = (Get-JcSdkOrganization | Select-Object -First 1).Id
 }
 #endregion Define Objects
 

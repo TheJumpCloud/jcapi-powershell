@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProvidersInvoice'))
 
 
 }
-Describe 'Get-JcSdkProvidersInvoice' {
+Describe 'Get-JcSdkProvidersInvoice' -Tag:("MTP") {
     It 'Get' {
         { Get-JCSDKProvidersInvoice -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
