@@ -24,6 +24,7 @@ build-sdks: &build-sdks
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
       context: aws-credentials
   - Create SDKV1 changelog:
       requires:

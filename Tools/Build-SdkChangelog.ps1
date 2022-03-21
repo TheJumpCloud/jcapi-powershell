@@ -1,9 +1,9 @@
 [CmdletBinding()]
 param (
-    [Parameter(Mandatory=$True)]
+    [Parameter()]
     [String]
     $sdkName,
-    [Parameter(Mandatory=$True)]
+    [Parameter()]
     [String]
     $sdkChangelogLocation
 )
