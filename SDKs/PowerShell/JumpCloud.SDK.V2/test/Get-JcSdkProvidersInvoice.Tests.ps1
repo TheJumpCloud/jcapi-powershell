@@ -18,8 +18,8 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProvidersInvoice'))
 
 }
 Describe 'Get-JcSdkProvidersInvoice' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JCSDKProvidersInvoice -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

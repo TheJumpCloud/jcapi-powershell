@@ -17,9 +17,11 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkAdministratorOrganiz
 
 
 }
-Describe 'Get-JcSdkAdministratorOrganization' {
+Describe 'Get-JcSdkAdministratorOrganization' -Tag:("MTP"){
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        $ProviderAdmins = Get-JCSDKProviderAdministrator - ProviderID $env:JCProviderId
+        # TODO: The server responded with an unrecognized response, Status: OK
+        { Get-JcSdkAdministratorOrganization -Id:(($ProviderAdmins | Select-Object -First 1).Id) } | Should -Not -Throw
     }
 }
 

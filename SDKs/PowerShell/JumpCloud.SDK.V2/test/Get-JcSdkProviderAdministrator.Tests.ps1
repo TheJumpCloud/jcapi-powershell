@@ -19,7 +19,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProviderAdministrato
 }
 Describe 'Get-JcSdkProviderAdministrator' {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkProviderAdministrator -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 }
 

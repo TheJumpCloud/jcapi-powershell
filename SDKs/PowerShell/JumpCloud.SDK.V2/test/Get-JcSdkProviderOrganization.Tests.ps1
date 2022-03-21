@@ -18,8 +18,8 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProviderOrganization
 
 }
 Describe 'Get-JcSdkProviderOrganization' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkProviderOrganization -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 }
 
