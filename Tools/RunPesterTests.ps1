@@ -124,7 +124,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
     }
 }
-If ($moduleName -eq 'JumpCloud.SDK.V2')
+If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
 {
     # Get the Apple MDM
     $global:PesterTestAppleMDM = Get-JcSdkAppleMdm | Select-Object -First 1
@@ -234,6 +234,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
         Name = "PesterTestPolicyGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
 }
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -in $Env:IncludeTagList)
+{
+    # Set MTP Keys & Continue to test
+    $env:JCApiKey = $env:JCApiKeyMTP
+    $env:JCOrgId = (Get-JCOrganization | Select-Object -First 1).Id
+}
 #endregion Define Objects
 
 #region Run Pester Tests
@@ -294,7 +300,7 @@ $configuration.Should.ErrorAction = 'Continue'
 $configuration.CodeCoverage.Enabled = $false
 $configuration.testresult.Enabled = $true
 $configuration.testresult.OutputFormat = 'JUnitXml'
-$configuration.Filter.Tag = $Env:IncludeTags
+$configuration.Filter.Tag = $Env:IncludeTagList
 $configuration.Filter.ExcludeTag = $Env:ExcludeTagList
 $configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
 $configuration.testresult.OutputPath = ($PesterTestResultPath)
