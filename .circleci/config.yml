@@ -25,36 +25,60 @@ build-sdks: &build-sdks
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
       context: aws-credentials
+  - Create SDKV1 changelog:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
+        - Build and Test JumpCloud SDK V1
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
       context: aws-credentials
+  - Create SDKV2 changelog:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
+        - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
+        - Build and Test JumpCloud SDK V2
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
         - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
         - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
   - CodeArtifact Approval:
       type: approval
       requires:
-          - Build and Test JumpCloud SDK DirectoryInsights
-          - Build and Test JumpCloud SDK V1
-          - Build and Test JumpCloud SDK V2
-          - Commit Changes
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
+        - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
+        - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
+        - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
         - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
         - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
         - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
         - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -63,8 +87,11 @@ build-sdks: &build-sdks
       type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
         - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
         - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -74,8 +101,11 @@ build-sdks: &build-sdks
   - Pack and Deploy To PSGallery:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Create SDKDi changelog
         - Build and Test JumpCloud SDK V1
+        - Create SDKV1 changelog
         - Build and Test JumpCloud SDK V2
+        - Create SDKV2 changelog
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
@@ -145,6 +175,15 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Create SDKV1 changelog:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - attach_workspace:
+          at: .
+      - create-github-release-draft: 
+          SDKName: JumpCloud.SDK.V1
+          SDKChangelogLocation: /sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -154,6 +193,15 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Create SDKV2 changelog:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - attach_workspace:
+          at: .
+      - create-github-release-draft: 
+          SDKName: JumpCloud.SDK.V2
+          SDKChangelogLocation: /sdkV2Changelog.md
   Commit Changes:
     executor: win/default
     steps:
