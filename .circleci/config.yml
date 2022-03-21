@@ -176,6 +176,9 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+      - changelog:
+          SDKName: JumpCloud.SDK.V1
+          SDKChangelogLocation: /sdkV1Changelog.md
   Create SDKV1 changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -194,6 +197,9 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+      - changelog:
+          SDKName: JumpCloud.SDK.V2
+          SDKChangelogLocation: /sdkV2Changelog.md
   Create SDKV2 changelog:
     docker:
       - image: cibuilds/github:0.13
