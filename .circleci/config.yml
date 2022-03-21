@@ -16,41 +16,48 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Build and Test JumpCloud SDK DirectoryInsights:
+  - Build JumpCloud SDK DirectoryInsights
+  - Build JumpCloud SDK V1
+  - Build JumpCloud SDK V2
+  - Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Build and Test JumpCloud SDK V1:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build JumpCloud SDK DirectoryInsights
+  - Test JumpCloud SDK V1:
+      requires:
+        - Build JumpCloud SDK V1
       context: aws-credentials
-  - Build and Test JumpCloud SDK V2:
+  - Test JumpCloud SDK V2:
       requires:
-        - Build and Test JumpCloud SDK V1
+        - Build JumpCloud SDK V1
+        - Build JumpCloud SDK V2
+        - Test JumpCloud SDK V1
       context: aws-credentials
   - Commit Changes:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
   - CodeArtifact Approval:
       type: approval
       requires:
-          - Build and Test JumpCloud SDK DirectoryInsights
-          - Build and Test JumpCloud SDK V1
-          - Build and Test JumpCloud SDK V2
+          - Test JumpCloud SDK DirectoryInsights
+          - Test JumpCloud SDK V1
+          - Test JumpCloud SDK V2
           - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -58,9 +65,9 @@ build-sdks: &build-sdks
   - PSGallery Approval:
       type: approval
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -69,9 +76,9 @@ build-sdks: &build-sdks
             - master
   - Pack and Deploy To PSGallery:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
@@ -99,10 +106,34 @@ workflows:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
     jobs:
-      - Build and Test JumpCloud SDK DirectoryInsights
-      - Build and Test JumpCloud SDK V1
-      - Build and Test JumpCloud SDK V2
+      - Test JumpCloud SDK DirectoryInsights
+      - Test JumpCloud SDK V1
+      - Test JumpCloud SDK V2
 jobs:
+  Build JumpCloud SDK DirectoryInsights:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          ManualModuleVersion: ''
+          RunApiTransform: true
+  Build JumpCloud SDK V1:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.V1
+          ManualModuleVersion: ''
+          RunApiTransform: true
+  Build JumpCloud SDK V2:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.V2
+          ManualModuleVersion: ''
+          RunApiTransform: true
   Test SDKs on Production JumpCloud PowerShell TestModule:
     executor: win/default
     steps:
@@ -111,45 +142,35 @@ jobs:
             - '24:54:e1:c2:70:c6:f7:61:71:4b:c5:52:9f:20:b9:63'
       - checkout
       - pulljcmodule
-  Build and Test JumpCloud SDK DirectoryInsights:
+  Test JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
       - setup
-      - build-test:
+      - test-sdk:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
-  Build and Test JumpCloud SDK V1:
+  Test JumpCloud SDK V1:
     executor: win/default
     steps:
       - setup
-      - build-test:
+      - test-sdk:
           SDKName: JumpCloud.SDK.V1
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
           IncludeTagList: '*'
       - test-mtp:
           SDKName: JumpCloud.SDK.V1
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
           IncludeTagList: 'MTP'
-  Build and Test JumpCloud SDK V2:
+  Test JumpCloud SDK V2:
     executor: win/default
     steps:
       - setup
-      - build-test:
+      - test-sdk:
           SDKName: JumpCloud.SDK.V2
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
           IncludeTagList: '*'
       - test-mtp:
           SDKName: JumpCloud.SDK.V2
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
           IncludeTagList: 'MTP'
   Commit Changes:
@@ -302,7 +323,7 @@ commands:
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
             dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
-  build-test:
+  build-sdk:
     parameters:
       SDKName:
         description: Name of the SDK to generate
@@ -315,6 +336,24 @@ commands:
         description: 'Boolean to run or skip transforming the Swagger index.yaml file'
         type: boolean
         default: true
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Building '<< parameters.SDKName >>'
+          shell: pwsh.exe
+          command: |
+            $ErrorActionPreference = 'Stop'
+            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+  test-sdk:
+    parameters:
+      SDKName:
+        description: Name of the SDK to test
+        type: string
       TestModule:
         description: 'Boolean ro run or skip the test-module step'
         type: boolean
@@ -330,12 +369,6 @@ commands:
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: Building '<< parameters.SDKName >>'
-          shell: pwsh.exe
-          command: |
-            $ErrorActionPreference = 'Stop'
-            ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -358,14 +391,6 @@ commands:
       SDKName:
         description: Name of the SDK to generate
         type: string
-      ManualModuleVersion:
-        description: 'Manually specify the module version given the case a version should be skipped'
-        type: string
-        default: ''
-      RunApiTransform:
-        description: 'Boolean to run or skip transforming the Swagger index.yaml file'
-        type: boolean
-        default: true
       TestModule:
         description: 'Boolean ro run or skip the test-module step'
         type: boolean
@@ -373,7 +398,7 @@ commands:
       ExcludeTagList:
         description: 'Pester Tags to either run or skip during test-module'
         type: string
-        default: ''
+        default: 'None'
       IncludeTagList:
         description: 'Pester Tags to either run or skip during test-module'
         type: string
