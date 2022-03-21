@@ -157,7 +157,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /sdkDiChangelog.md
+          SDKChangelogLocation: /root/project/sdkDiChangelog.md
   Create SDKDi changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -178,7 +178,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /sdkV1Changelog.md
+          SDKChangelogLocation: /root/project/sdkV1Changelog.md
   Create SDKV1 changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -199,7 +199,7 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V2
-          SDKChangelogLocation: /sdkV2Changelog.md
+          SDKChangelogLocation: /root/project/sdkV2Changelog.md
   Create SDKV2 changelog:
     docker:
       - image: cibuilds/github:0.13
