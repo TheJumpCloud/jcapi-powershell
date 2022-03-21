@@ -27,7 +27,7 @@ build-sdks: &build-sdks
       requires:
         - Build JumpCloud SDK V1
       context: aws-credentials
-  - Test JumpCloud SDK V2 MTP:
+  - Test JumpCloud SDK V1 MTP:
       requires:
         - Build JumpCloud SDK V1
   - Test JumpCloud SDK V2:
