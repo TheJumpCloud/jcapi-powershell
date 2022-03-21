@@ -27,6 +27,9 @@ build-sdks: &build-sdks
       requires:
         - Build JumpCloud SDK V1
       context: aws-credentials
+  - Test JumpCloud SDK V2 MTP:
+      requires:
+        - Build JumpCloud SDK V1
   - Test JumpCloud SDK V2:
       requires:
         - Build JumpCloud SDK V1
@@ -163,6 +166,10 @@ jobs:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
           IncludeTagList: '*'
+  Test JumpCloud SDK V1 MTP:
+    executor: win/default
+    steps:
+      - setup
       - test-mtp:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
