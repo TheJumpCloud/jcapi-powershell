@@ -157,7 +157,6 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /root/project/sdkDiChangelog.md
   Create SDKDi changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -166,7 +165,6 @@ jobs:
           at: .
       - create-github-release-draft: 
           SDKName: JumpCloud.SDK.DirectoryInsights
-          SDKChangelogLocation: /sdkDiChangelog.md
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -178,7 +176,6 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /root/project/sdkV1Changelog.md
   Create SDKV1 changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -187,7 +184,6 @@ jobs:
           at: .
       - create-github-release-draft: 
           SDKName: JumpCloud.SDK.V1
-          SDKChangelogLocation: /sdkV1Changelog.md
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -199,7 +195,6 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V2
-          SDKChangelogLocation: /root/project/sdkV2Changelog.md
   Create SDKV2 changelog:
     docker:
       - image: cibuilds/github:0.13
@@ -208,7 +203,6 @@ jobs:
           at: .
       - create-github-release-draft: 
           SDKName: JumpCloud.SDK.V2
-          SDKChangelogLocation: /sdkV2Changelog.md
   Commit Changes:
     executor: win/default
     steps:
@@ -408,21 +402,18 @@ commands:
       SDKName:
         description: Name of the SDK to generate
         type: string
-      SDKChangelogLocation:
-        description: Location of the .md file
-        type: string
     steps:
       - attach_workspace:
           at: .
       - run:
-          name: "Draft Release for SDKDi in GitHub"
+          name: "Draft Release GitHub"
           command: |
             # Module Version
             MODULE_VERSION=$(grep -o "ModuleVersion = '\d\+\.\d\+\.\d\+'" ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1)
             VERSION=$(echo $MODULE_VERSION | grep -o "\d\+\.\d\+\.\d\+")
             TITLE="JumpCloud SDK DI Module v$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat ./<< parameters.SDKChangelogLocation >> | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            CHANGELOG=$(cat ./<< parameters.SDKName >>.md | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
             BODY="$TITLE $CHANGELOG"
             TAG="v$VERSION"
             echo ${CIRCLE_PROJECT_USERNAME}
@@ -435,18 +426,15 @@ commands:
      SDKName:
         description: Name of the SDK to generate
         type: string
-     SDKChangelogLocation:
-        description: Location of the sdk changelog .md file
-        type: string
     steps:
       - attach_workspace:
           at: .
       - run:
-          name: Building Changelog '<< parameters.SDKName >>' SDK location '<< parameters.SDKChangelogLocation >>'
+          name: Building Changelog for '<< parameters.SDKName >>''
           shell: pwsh.exe
           command: | 
            $ErrorActionPreference = 'Stop' 
-           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>') -SDKChangelogLocation:('<< parameters.SDKChangelogLocation >>')
+           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
       - persist_to_workspace:
           root: .
           paths:

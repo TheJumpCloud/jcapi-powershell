@@ -2,12 +2,9 @@
 param (
     [Parameter()]
     [String]
-    $sdkName,
-    [Parameter()]
-    [String]
-    $sdkChangelogLocation
+    $sdkName
 )
-
+$sdkChangelogLocation = "./$sdkName.md"
 Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 $release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'
 $releaseVersions = $release | ConvertFrom-Json -Depth 4
@@ -30,6 +27,7 @@ if (!$diffModified) {
 if (!$diffDeleted) {
     $diffDeleted = 'No changes'
 }
+
 $SdkChangelog = Get-Content -Path $sdkChangelogLocation | Out-String
 # Populate changelog data
 $NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($sdkName+'-'+$moduleVersion) -ReleaseNotes:('{{Fill in the Release Notes}}') -Features:('{{Fill in the Features}}') -Improvements:('{{Fill in the Improvements}}') -BugFixes('{{Fill in the Bug Fixes}}') -DiffAdded $diffAdded -DiffModified $diffModified -diffDeleted $diffDeleted
