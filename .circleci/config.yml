@@ -16,11 +16,13 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Build JumpCloud SDK DirectoryInsights
-  - Build JumpCloud SDK V1
-  - Build JumpCloud SDK V2
-  - Test JumpCloud SDK DirectoryInsights:
+  - Build JumpCloud SDK DirectoryInsights:
       context: aws-credentials
+  - Build JumpCloud SDK V1:
+      context: aws-credentials
+  - Build JumpCloud SDK V2:
+      context: aws-credentials
+  - Test JumpCloud SDK DirectoryInsights:
       requires:
         - Build JumpCloud SDK DirectoryInsights
   - Test JumpCloud SDK V1:
@@ -35,13 +37,12 @@ build-sdks: &build-sdks
         - Build JumpCloud SDK V1
         - Build JumpCloud SDK V2
         - Test JumpCloud SDK V1
-      context: aws-credentials
   - Test JumpCloud SDK V2 MTP:
       requires:
         - Build JumpCloud SDK V1
         - Build JumpCloud SDK V2
         - Test JumpCloud SDK V1
-      context: aws-credentials
+        - Test JumpCloud SDK V2
   - Commit Changes:
       requires:
         - Test JumpCloud SDK DirectoryInsights
@@ -154,14 +155,12 @@ jobs:
   Test JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
-      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.DirectoryInsights
           TestModule: true
   Test JumpCloud SDK V1:
     executor: win/default
     steps:
-      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
@@ -169,7 +168,6 @@ jobs:
   Test JumpCloud SDK V1 MTP:
     executor: win/default
     steps:
-      - setup
       - test-mtp:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
@@ -177,7 +175,6 @@ jobs:
   Test JumpCloud SDK V2:
     executor: win/default
     steps:
-      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.V2
           TestModule: true
@@ -185,7 +182,6 @@ jobs:
   Test JumpCloud SDK V2 MTP:
     executor: win/default
     steps:
-      - setup
       - test-mtp:
           SDKName: JumpCloud.SDK.V2
           TestModule: true
