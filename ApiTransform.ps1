@@ -446,6 +446,11 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}',
             '/integrations/autotask/{UUID}/settings',
             '/integrations/autotask/{UUID}/companytypes',
+            '/integrations/autotask/{UUID}/companies',
+            '/integrations/autotask/{UUID}/contracts',
+            '/integrations/autotask/{UUID}/contracts/fields',
+            '/integrations/autotask/{UUID}/contracts/services',
+            '/integrations/autotask/{UUID}/mappings',
             '/providers/{provider_id}/integrations/autotask')
     }
 }

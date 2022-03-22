@@ -18,68 +18,68 @@ parameters:
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Create SDKDi changelog:
+  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
       context: aws-credentials
-  - Create SDKV1 changelog:
+  - Draft JumpCloud SDK V1 GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
       context: aws-credentials
-  - Create SDKV2 changelog:
+  - Draft JumpCloud SDK V2 GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
   - CodeArtifact Approval:
       type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -88,11 +88,11 @@ build-sdks: &build-sdks
       type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -102,11 +102,11 @@ build-sdks: &build-sdks
   - Pack and Deploy To PSGallery:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Create SDKDi changelog
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Create SDKV1 changelog
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Create SDKV2 changelog
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
@@ -157,13 +157,13 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.DirectoryInsights
-  Create SDKDi changelog:
+  Draft JumpCloud SDK DirectoryInsights GitHub Release:
     docker:
       - image: cibuilds/github:0.13
     steps:
       - attach_workspace:
           at: .
-      - create-github-release-draft: 
+      - create-github-release-draft:
           SDKName: JumpCloud.SDK.DirectoryInsights
   Build and Test JumpCloud SDK V1:
     executor: win/default
@@ -176,13 +176,13 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V1
-  Create SDKV1 changelog:
+  Draft JumpCloud SDK V1 GitHub Release:
     docker:
       - image: cibuilds/github:0.13
     steps:
       - attach_workspace:
           at: .
-      - create-github-release-draft: 
+      - create-github-release-draft:
           SDKName: JumpCloud.SDK.V1
   Build and Test JumpCloud SDK V2:
     executor: win/default
@@ -195,13 +195,13 @@ jobs:
           TestModule: true
       - changelog:
           SDKName: JumpCloud.SDK.V2
-  Create SDKV2 changelog:
+  Draft JumpCloud SDK V2 GitHub Release:
     docker:
       - image: cibuilds/github:0.13
     steps:
       - attach_workspace:
           at: .
-      - create-github-release-draft: 
+      - create-github-release-draft:
           SDKName: JumpCloud.SDK.V2
   Commit Changes:
     executor: win/default
@@ -424,16 +424,16 @@ commands:
   changelog:
     parameters:
      SDKName:
-        description: Name of the SDK to generate
+        description: Name of the SDK to generate/update it's current changelog
         type: string
     steps:
       - attach_workspace:
           at: .
       - run:
-          name: Building Changelog for '<< parameters.SDKName >>''
+          name: Creating/Updating Changelog For '<< parameters.SDKName >>''
           shell: pwsh.exe
-          command: | 
-           $ErrorActionPreference = 'Stop' 
+          command: |
+           $ErrorActionPreference = 'Stop'
            ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
       - persist_to_workspace:
           root: .
