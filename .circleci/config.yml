@@ -411,7 +411,7 @@ commands:
             # Module Version
             MODULE_VERSION=$(grep -o "ModuleVersion = '\d\+\.\d\+\.\d\+'" ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1)
             VERSION=$(echo $MODULE_VERSION | grep -o "\d\+\.\d\+\.\d\+")
-            TITLE="<< parameters.SDKName >> v$VERSION"
+            TITLE="<< parameters.SDKName >>-$VERSION"
             # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
             CHANGELOG=$(cat ./<< parameters.SDKName >>.md | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
             BODY="$TITLE $CHANGELOG"
