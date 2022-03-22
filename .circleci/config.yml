@@ -208,7 +208,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+            - '77:04:3b:23:54:68:a8:d3:ee:63:6b:77:bb:a1:9d:c3'
       - checkout
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
