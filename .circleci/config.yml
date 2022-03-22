@@ -18,31 +18,16 @@ parameters:
 build-sdks: &build-sdks
   - Build and Test JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Draft JumpCloud SDK DirectoryInsights GitHub Release
       context: aws-credentials
-  - Draft JumpCloud SDK V1 GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
   - Build and Test JumpCloud SDK V2:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
       context: aws-credentials
-  - Draft JumpCloud SDK V2 GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
-        - Build and Test JumpCloud SDK V2
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -110,6 +95,33 @@ build-sdks: &build-sdks
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK V1 GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
+        - Build and Test JumpCloud SDK V1
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK V2 GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
+        - Build and Test JumpCloud SDK V1
+        - Draft JumpCloud SDK V1 GitHub Release
+        - Build and Test JumpCloud SDK V2
       filters:
         branches:
           only:
