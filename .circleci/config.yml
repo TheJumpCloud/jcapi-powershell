@@ -41,6 +41,7 @@ build-sdks: &build-sdks
         - Build JumpCloud SDK V1
         - Build JumpCloud SDK V2
         - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
       context: aws-credentials
   - Commit Changes:
       requires:
