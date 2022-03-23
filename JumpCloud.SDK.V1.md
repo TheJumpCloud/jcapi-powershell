@@ -21,10 +21,7 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-* New-JcSdkUser.ps1
-* Set-JcSdkOrganization.ps1
-* Set-JcSdkUser.ps1
-
+No changes
 </details>
 
 <details>
