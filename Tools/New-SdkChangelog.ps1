@@ -22,12 +22,26 @@ Release Date: $(Get-Date -UFormat:('%B %d, %Y'))
 {3}
 #### BUG FIXES:
 {4}
-#### DIFF ADDED:
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
 {5}
-#### DIFF MODIFIED:
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
 {6}
-#### DIFF DELETED:
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
 {7}
+</details>
+
 "
     Return ($Content -f $LatestVersion, $ReleaseNotes, $Features, $Improvements, $BugFixes, $DiffAdded, $DiffModified, $DiffDeleted)
 }

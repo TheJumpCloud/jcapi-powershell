@@ -102,19 +102,11 @@ build-sdks: &build-sdks
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-      filters:
-        branches:
-          only:
-            - master
   - Draft JumpCloud SDK V1 GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
         - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-      filters:
-        branches:
-          only:
-            - master
   - Draft JumpCloud SDK V2 GitHub Release:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -122,10 +114,6 @@ build-sdks: &build-sdks
         - Build and Test JumpCloud SDK V1
         - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-      filters:
-        branches:
-          only:
-            - master
 workflows:
   version: 2
   ci:

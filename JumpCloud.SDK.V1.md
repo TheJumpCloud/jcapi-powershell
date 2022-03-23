@@ -10,14 +10,44 @@ Release Date: March 22, 2022
 {{Fill in the Improvements}}
 #### BUG FIXES:
 {{Fill in the Bug Fixes}}
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkUser.ps1
+* Set-JcSdkOrganization.ps1
+* Set-JcSdkUser.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
+## JumpCloud.SDK.V1-0.0.27
+Release Date: Feb 16, 2022
+#### RELEASE NOTES
+```
+{{Fill in the Release Notes}}
+```
+#### FEATURES:
+{{Fill in the Features}}
+#### IMPROVEMENTS:
+{{Fill in the Improvements}}
+#### BUG FIXES:
+{{Fill in the Bug Fixes}}
 #### DIFF ADDED:
 No changes
 #### DIFF MODIFIED:
- SDKs/PowerShell/JumpCloud.SDK.V1/custom/generated/New-JcSdkUser.ps1   | 2 --
- .../JumpCloud.SDK.V1/custom/generated/Set-JcSdkOrganization.ps1       | 4 ++++
- SDKs/PowerShell/JumpCloud.SDK.V1/custom/generated/Set-JcSdkUser.ps1   | 1 -
- 3 files changed, 4 insertions(+), 3 deletions(-)
-
-#### DIFF DELETED:
 No changes
-## JumpCloud.SDK.V1-0.0.27
+#### DIFF Deleted:
+No changes

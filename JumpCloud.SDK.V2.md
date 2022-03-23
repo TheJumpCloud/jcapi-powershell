@@ -2,137 +2,43 @@
 Release Date: March 22, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release includes several new functions to interact with MTP functions
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
-No changes
-#### DIFF MODIFIED:
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 -
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 ++
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 ++
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 ++++++++++++++++++++-
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
- 6 files changed, 128 insertions(+), 7 deletions(-)
+SDK generated functions that can not accept the x-org-id header strip that header before calling that endpoint. Previously an error was thrown on each of these functions.
+#### Generated Changes:
 
-#### DIFF DELETED:
-No changes
-## JumpCloud.SDK.V2-0.0.31
+<details>
+<summary>Functions Added</summary>
 
-Release Date: March 14, 2022
-#### RELEASE NOTES
-```
-{{Fill in the Release Notes}}
-```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
-No changes
-#### DIFF MODIFIED:
- .../custom/generated/New-JcSdkUser.ps1             |   2 +
- .../custom/generated/Set-JcSdkOrganization.ps1     |   4 -
- .../custom/generated/Set-JcSdkUser.ps1             |   1 +
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 +
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 -
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 -
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 +----------
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
+* Get-JcSdkAdministratorOrganization.ps1
+* Get-JcSdkAdministratorOrganizationLink.ps1
+* Get-JcSdkProviderAdministrator.ps1
+* Get-JcSdkProviderOrganization.ps1
+* Get-JcSdkProvidersInvoice.ps1
+* New-JcSdkAdministratorOrganization.ps1
+* New-JcSdkProviderAdministrator.ps1
+* Remove-JcSdkAdministratorOrganization.ps1
+* Remove-JcSdkProviderAdministrator.ps1
 
-#### DIFF DELETED:
-No changes
-## JumpCloud.SDK.V2-0.0.31
+</details>
 
-Release Date: March 14, 2022
-#### RELEASE NOTES
-```
-{{Fill in the Release Notes}}
-```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
-No changes
-#### DIFF MODIFIED:
- .../custom/generated/New-JcSdkUser.ps1             |   2 +
- .../custom/generated/Set-JcSdkOrganization.ps1     |   4 -
- .../custom/generated/Set-JcSdkUser.ps1             |   1 +
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 +
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 -
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 -
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 +----------
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
+<details>
+<summary>Functions Modified</summary>
 
-#### DIFF DELETED:
-No changes
-## JumpCloud.SDK.V2-0.0.31
+* Get-JcSdkBulkUserState.ps1
+* Get-JcSdkSystemInsightApp.ps1
+* Get-JcSdkSystemInsightProgram.ps1
+* New-JcSdkBulkUser.ps1
+* Set-JcSdkAppleMdm.ps1
+* Update-JcSdkBulkUser.ps1
 
-Release Date: March 11, 2022
-#### RELEASE NOTES
-```
-{{Fill in the Release Notes}}
-```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
-No changes
-#### DIFF MODIFIED:
- .../custom/generated/New-JcSdkUser.ps1             |   2 +
- .../custom/generated/Set-JcSdkOrganization.ps1     |   4 -
- .../custom/generated/Set-JcSdkUser.ps1             |   1 +
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 +
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 -
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 -
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 +----------
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
+</details>
 
-#### DIFF DELETED:
-No changes
-## JumpCloud.SDK.V2-0.0.31
+<details>
+<summary>Functions Removed</summary>
 
-Release Date: March 11, 2022
-#### RELEASE NOTES
-```
-{{Fill in the Release Notes}}
-```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
 No changes
-#### DIFF MODIFIED:
- .../custom/generated/New-JcSdkUser.ps1             |   2 +
- .../custom/generated/Set-JcSdkOrganization.ps1     |   4 -
- .../custom/generated/Set-JcSdkUser.ps1             |   1 +
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 +
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 -
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 -
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 +----------
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
+</details>
 
-#### DIFF DELETED:
-No changes
 ## JumpCloud.SDK.V2-0.0.31

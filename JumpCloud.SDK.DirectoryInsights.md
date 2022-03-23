@@ -10,12 +10,28 @@ Release Date: March 22, 2022
 {{Fill in the Improvements}}
 #### BUG FIXES:
 {{Fill in the Bug Fixes}}
-#### DIFF ADDED:
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
 No changes
-#### DIFF MODIFIED:
+</details>
+
+
+<details>
+<summary>Functions Modified</summary>
+
 No changes
-#### DIFF DELETED:
+</details>
+
+
+<details>
+<summary>Functions Removed</summary>
+
 No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.15
 
 Release Date: March 16, 2022
