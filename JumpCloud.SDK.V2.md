@@ -11,13 +11,28 @@ SDK generated functions that can not accept the x-org-id header strip that heade
 <details>
 <summary>Functions Added</summary>
 
-No changes
+* Get-JcSdkAdministratorOrganization.ps1
+* Get-JcSdkAdministratorOrganizationLink.ps1
+* Get-JcSdkProviderAdministrator.ps1
+* Get-JcSdkProviderOrganization.ps1
+* Get-JcSdkProvidersInvoice.ps1
+* New-JcSdkAdministratorOrganization.ps1
+* New-JcSdkProviderAdministrator.ps1
+* Remove-JcSdkAdministratorOrganization.ps1
+* Remove-JcSdkProviderAdministrator.ps1
+
 </details>
 
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkBulkUserState.ps1
+* Get-JcSdkSystemInsightApp.ps1
+* Get-JcSdkSystemInsightProgram.ps1
+* New-JcSdkBulkUser.ps1
+* Set-JcSdkAppleMdm.ps1
+* Update-JcSdkBulkUser.ps1
+
 </details>
 
 <details>
