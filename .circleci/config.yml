@@ -21,7 +21,6 @@ build-sdks: &build-sdks
   - Build and Test JumpCloud SDK V1:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
       context: aws-credentials
   - Build and Test JumpCloud SDK V2:
       requires:
@@ -31,40 +30,28 @@ build-sdks: &build-sdks
   - Commit Changes:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
   - CodeArtifact Approval:
       type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -101,12 +88,18 @@ build-sdks: &build-sdks
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
         - Commit Changes
   - Draft JumpCloud SDK V1 GitHub Release:
       requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
         - Commit Changes
   - Draft JumpCloud SDK V2 GitHub Release:
       requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
         - Commit Changes
 workflows:
   version: 2
