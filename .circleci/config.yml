@@ -101,19 +101,13 @@ build-sdks: &build-sdks
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
+        - Commit Changes
   - Draft JumpCloud SDK V1 GitHub Release:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
+        - Commit Changes
   - Draft JumpCloud SDK V2 GitHub Release:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
-        - Build and Test JumpCloud SDK V2
+        - Commit Changes
 workflows:
   version: 2
   ci:
@@ -161,8 +155,6 @@ jobs:
     docker:
       - image: cibuilds/github:0.13
     steps:
-      - attach_workspace:
-          at: .
       - create-github-release-draft:
           SDKName: JumpCloud.SDK.DirectoryInsights
   Build and Test JumpCloud SDK V1:
@@ -180,8 +172,6 @@ jobs:
     docker:
       - image: cibuilds/github:0.13
     steps:
-      - attach_workspace:
-          at: .
       - create-github-release-draft:
           SDKName: JumpCloud.SDK.V1
   Build and Test JumpCloud SDK V2:
@@ -199,8 +189,6 @@ jobs:
     docker:
       - image: cibuilds/github:0.13
     steps:
-      - attach_workspace:
-          at: .
       - create-github-release-draft:
           SDKName: JumpCloud.SDK.V2
   Commit Changes:
@@ -403,8 +391,7 @@ commands:
         description: Name of the SDK to generate
         type: string
     steps:
-      - attach_workspace:
-          at: .
+      - checkout
       - run:
           name: "Draft Release GitHub"
           command: |

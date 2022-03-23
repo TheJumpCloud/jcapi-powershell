@@ -14,7 +14,7 @@ $release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jca
 # Get latest release by sorting last published
 $releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $sdkName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
 # Latest release commit, getting the first value since it is the most recent
-$LatestCommit = $releaseVersions.target_commitish[0]
+$LatestCommit = $releaseVersions[0].target_commitish
 # Write-Host "Latest Release Commit: $LatestCommit"
 
 # For each diff type, replace string with '* ' to turn it into a markdown list; we only care about reporting functions in the /custom/generated directory
