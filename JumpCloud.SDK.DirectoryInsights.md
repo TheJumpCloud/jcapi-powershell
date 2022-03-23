@@ -31,32 +31,30 @@ No changes
 </details>
 
 ## JumpCloud.SDK.DirectoryInsights-0.0.15
-
-Release Date: March 16, 2022
+Release Date: Feb 16, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+Rollup of missing SDK functions/ parameter updates for Directory Insights Module
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### DIFF ADDED:
-No changes
-#### DIFF MODIFIED:
- .../custom/generated/New-JcSdkUser.ps1             |   2 +
- .../custom/generated/Set-JcSdkOrganization.ps1     |   4 -
- .../custom/generated/Set-JcSdkUser.ps1             |   1 +
- .../custom/generated/Get-JcSdkBulkUserState.ps1    |   1 +
- .../custom/generated/Get-JcSdkSystemInsightApp.ps1 |   6 -
- .../generated/Get-JcSdkSystemInsightProgram.ps1    |   6 -
- .../custom/generated/New-JcSdkBulkUser.ps1         |   4 +-
- .../custom/generated/Set-JcSdkAppleMdm.ps1         | 114 +----------
- .../custom/generated/Update-JcSdkBulkUser.ps1      |   4 +-
+#### Generated Changes:
 
-#### DIFF DELETED:
+<details>
+<summary>Functions Added</summary>
+
 No changes
-## JumpCloud.SDK.DirectoryInsights-0.0.14
-test
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkEvent.ps1
+* Get-JcSdkEventCount.ps1
+* Get-JcSdkEventDistinct.ps1
+* Get-JcSdkEventInterval.ps1
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
