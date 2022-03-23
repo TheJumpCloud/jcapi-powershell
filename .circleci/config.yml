@@ -384,7 +384,8 @@ commands:
         description: Name of the SDK to generate
         type: string
     steps:
-      - checkout
+      - attach_workspace:
+          at: .
       - run:
           name: "Draft Release GitHub"
           command: |
