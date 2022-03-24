@@ -154,8 +154,6 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.DirectoryInsights
   Draft JumpCloud SDK DirectoryInsights GitHub Release:
     docker:
       - image: cibuilds/github:0.13
@@ -171,8 +169,6 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.V1
   Draft JumpCloud SDK V1 GitHub Release:
     docker:
       - image: cibuilds/github:0.13
@@ -188,8 +184,6 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
-      - changelog:
-          SDKName: JumpCloud.SDK.V2
   Draft JumpCloud SDK V2 GitHub Release:
     docker:
       - image: cibuilds/github:0.13
@@ -373,6 +367,12 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
+      - run:
+          name: Creating/Updating Changelog For '<< parameters.SDKName >>''
+          shell: pwsh.exe
+          command: |
+           $ErrorActionPreference = 'Stop'
+           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -414,24 +414,6 @@ commands:
             echo ${GITHUB_TOKEN}
             # Post Draft Release
             ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
-  changelog:
-    parameters:
-     SDKName:
-        description: Name of the SDK to generate/update it's current changelog
-        type: string
-    steps:
-      - attach_workspace:
-          at: .
-      - run:
-          name: Creating/Updating Changelog For '<< parameters.SDKName >>''
-          shell: pwsh.exe
-          command: |
-           $ErrorActionPreference = 'Stop'
-           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
   commit:
     parameters:
       SDKName:
