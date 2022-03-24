@@ -107,6 +107,7 @@ BODY <ISystemuserputpost>:
   [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
+  [MfaExclusionDays <Int32?>]:
   [MfaExclusionUntil <DateTime?>]:
   [Middlename <String>]:
   [Password <String>]:
@@ -121,6 +122,7 @@ BODY <ISystemuserputpost>:
     [Type <String>]:
     [Value <String>]:
   [SambaServiceUser <Boolean?>]:
+  [State <String>]:
   [Sudo <Boolean?>]:
   [Suspended <Boolean?>]:
   [UnixGuid <Int32?>]:
@@ -340,6 +342,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # .
+    ${MfaExclusionDays},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.DateTime]
     # .
     ${MfaExclusionUntil},
@@ -401,6 +409,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${SambaServiceUser},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${State},
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

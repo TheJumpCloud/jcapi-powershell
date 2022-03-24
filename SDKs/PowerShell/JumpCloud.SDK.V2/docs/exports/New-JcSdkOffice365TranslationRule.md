@@ -26,8 +26,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tran
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkOffice365TranslationRule -Office365Id <String> [-BuiltIn <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkOffice365TranslationRule -Office365Id <String> [-BuiltIn <String>] [-Direction <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -44,8 +44,8 @@ New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApiIdentity>
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApiIdentity> [-BuiltIn <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkOffice365TranslationRule -InputObject <IJumpCloudApiIdentity> [-BuiltIn <String>]
+ [-Direction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -99,6 +99,21 @@ Accept wildcard characters: False
 
 ### -BuiltIn
 Built-in translations for Office 365 (Microsoft Graph) export:* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`* `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`* `user_alternate_email` - Translate `alternateEmail` field of JumpCloud user to `otherMails` field of Microsoft Graph `user`
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Direction
+Direction identify if a attribute is going to be exported or imported from Office365* `Import`- The data will be imported from Office365 into the user modal* `Export`- The data will exported from the user modal to Office365
 
 ```yaml
 Type: System.String
@@ -198,10 +213,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IOffice365TranslationRuleRequest>: Office 365 Translation Rule Request
   - `[BuiltIn <String>]`: Built-in translations for Office 365 (Microsoft Graph) export:         * `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user         * `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user         * `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`         * `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`         * `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`         * `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`         * `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`         * `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`         * `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`         * `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`         * `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`         * `user_alternate_email` - Translate `alternateEmail` field of JumpCloud user to `otherMails` field of Microsoft Graph `user`
+  - `[Direction <String>]`: Direction identify if a attribute is going to be exported or imported from Office365         * `Import`- The data will be imported from Office365 into the user modal         * `Export`- The data will exported from the user modal to Office365         
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
+  - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
@@ -215,6 +232,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[LdapserverId <String>]`: ObjectID of the LDAP Server.
   - `[Office365Id <String>]`: ObjectID of the Office 365 instance.
   - `[PolicyId <String>]`: ObjectID of the Policy.
+  - `[ProviderId <String>]`: 
   - `[PushEndpointId <String>]`: 
   - `[RadiusserverId <String>]`: ObjectID of the Radius Server.
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.

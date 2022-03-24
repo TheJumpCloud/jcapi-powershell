@@ -49,10 +49,12 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IGSuiteTranslationRuleRequest>:
   [BuiltIn <String>]: Built-in translations for G Suite export:         * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`         * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`         * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`         * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`         * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`         * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`         * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`         * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`         * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`         * `user_manager` - Translate JumpCloud user `manager` to G Suite Directory user `relations-manager`         * `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization         * `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization         * `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization         * `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`         * `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization         * `user_alternate_email` - Translate JumpCloud user  `alternateEmail` to G Suite Directory user `emails`        
+  [Direction <String>]: Direction identify if an attribute is going to be exported or imported from GSuite         * `Import`- The data will be imported from GSuite into the user modal         * `Export`- The data will be exported from the user modal to GSuite        
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
   [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
@@ -66,6 +68,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [LdapserverId <String>]: ObjectID of the LDAP Server.
   [Office365Id <String>]: ObjectID of the Office 365 instance.
   [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
   [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
@@ -109,6 +112,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Built-in translations for G Suite export:* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`* `user_manager` - Translate JumpCloud user `manager` to G Suite Directory user `relations-manager`* `user_primary_organization_cost_center` - Translate JumpCloud user `costCenter` to G Suite Directory user `costCenter` for `primary` organization* `user_primary_organization_department` - Translate JumpCloud user `department` to G Suite Directory user `department` for `primary` organization* `user_primary_organization_description` - Translate JumpCloud user `employeeType` to G Suite Directory user `description` for `primary` organization* `user_primary_organization_employee_id` - Translate JumpCloud user `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`* `user_primary_organization_title` - Translate JumpCloud user `jobTitle` to G Suite Directory user `title` for `primary` organization* `user_alternate_email` - Translate JumpCloud user `alternateEmail` to G Suite Directory user `emails`
     ${BuiltIn},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Direction identify if an attribute is going to be exported or imported from GSuite* `Import`- The data will be imported from GSuite into the user modal* `Export`- The data will be exported from the user modal to GSuite
+    ${Direction},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

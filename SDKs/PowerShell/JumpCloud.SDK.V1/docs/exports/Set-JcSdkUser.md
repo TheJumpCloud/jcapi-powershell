@@ -35,11 +35,12 @@ Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddresses
  [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
  [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
- [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
- [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
- [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser]
- [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
- [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
+ [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
+ [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -63,11 +64,12 @@ Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-AccountLocked]
  [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
  [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
- [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
- [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
- [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser]
- [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
- [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
+ [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
+ [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -589,6 +591,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MfaExclusionDays
+.
+
+```yaml
+Type: System.Int32
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MfaExclusionUntil
 .
 
@@ -924,6 +941,7 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionDays <Int32?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
