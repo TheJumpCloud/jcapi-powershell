@@ -17,12 +17,12 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAdministratorOrga
 
 
 }
-Describe 'Remove-JcSdkAdministratorOrganization' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+Describe 'Remove-JcSdkAdministratorOrganization' -Tag:("MTP") {
+    It 'Delete' {
+        { Remove-JcSdkAdministratorOrganization -AdministratorId:(($global:PesterTestProviderAdmin).Id) -Id:($env:JCOrgId) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -skip {
+   It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

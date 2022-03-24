@@ -17,9 +17,9 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganiz
 
 
 }
-Describe 'New-JcSdkAdministratorOrganization' {
-    It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
+    It 'Create' {
+        { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($global:PesterTestProviderAdmin).Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
@@ -27,3 +27,7 @@ Describe 'New-JcSdkAdministratorOrganization' {
     }
 }
 
+    It 'CreateViaIdentityExpanded' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+}
