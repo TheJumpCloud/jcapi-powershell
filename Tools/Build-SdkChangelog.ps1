@@ -1,10 +1,8 @@
 [CmdletBinding()]
 param (
-    [Parameter()]
-    [String]
-    $sdkName
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
 )
-$SdkChangelogFilePath = "./$sdkName.md"
+$SdkChangelogFilePath = "./$SDKName.md"
 Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # For authorized requests add header & OAuth Token:
 # $headers = @{
@@ -12,15 +10,15 @@ Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # }
 $release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET' # -Headers $Headers
 # Get latest release by sorting last published
-$releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $sdkName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
+$releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $SDKName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
 # Latest release commit, getting the first value since it is the most recent
 $LatestCommit = $releaseVersions[0].target_commitish
 # Write-Host "Latest Release Commit: $LatestCommit"
 
 # For each diff type, replace string with '* ' to turn it into a markdown list; we only care about reporting functions in the /custom/generated directory
-$diffAdded = (git diff $LatestCommit HEAD --diff-filter=A --name-only ./SDKs/PowerShell/$sdkName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$sdkName/custom/generated/", '* ')
-$diffModified = (git diff $LatestCommit HEAD --diff-filter=M --name-only ./SDKs/PowerShell/$sdkName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$sdkName/custom/generated/", '* ')
-$diffDeleted = (git diff $LatestCommit HEAD --diff-filter=D --name-only ./SDKs/PowerShell/$sdkName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$sdkName/custom/generated/", '* ')
+$diffAdded = (git diff $LatestCommit HEAD --diff-filter=A --name-only ./SDKs/PowerShell/$SDKName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$SDKName/custom/generated/", '* ')
+$diffModified = (git diff $LatestCommit HEAD --diff-filter=M --name-only ./SDKs/PowerShell/$SDKName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$SDKName/custom/generated/", '* ')
+$diffDeleted = (git diff $LatestCommit HEAD --diff-filter=D --name-only ./SDKs/PowerShell/$SDKName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$SDKName/custom/generated/", '* ')
 # If nothing is returned, return no changes
 if (!$diffAdded) {
     $diffAdded = 'No changes'
@@ -33,7 +31,7 @@ if (!$diffDeleted) {
 }
 # Get Latest Version from Changelog
 $SdkChangelog = Get-Content -Path $SdkChangelogFilePath -Raw
-$ChangelogVersionRegex = [regex]"##\ ($sdkName-\d+\.\d+\.\d+)"
+$ChangelogVersionRegex = [regex]"##\ ($SDKName-\d+\.\d+\.\d+)"
 $ChangelogVersions = Select-String -InputObject $SdkChangelog -Pattern $ChangelogVersionRegex
 if ($ChangelogVersions){
     $LatestVersionInChangelog = $ChangelogVersions.Matches.Groups[1].value
@@ -41,15 +39,15 @@ if ($ChangelogVersions){
 # Write-Host "Last Version in changelog: $LatestVersionInChangelog"
 
 # Get lastest development version from PSD1 file:
-$sdkPsd1FilePath = "./SDKs/PowerShell/$sdkName/$sdkName.psd1"
+$sdkPsd1FilePath = "./SDKs/PowerShell/$SDKName/$SDKName.psd1"
 $SdkPsd1 = Get-Content -Path $sdkPsd1FilePath -Raw
 $sdkPsd1Regex = [regex]"ModuleVersion\ =\ '(\d+\.\d+\.\d+)'"
 $SdkDevVersion = Select-String -InputObject $SdkPsd1 -Pattern $sdkPsd1Regex
-$LatestPsd1Version = "$sdkName-" +$SdkDevVersion.Matches.Groups[1].value
+$LatestPsd1Version = "$SDKName-" +$SdkDevVersion.Matches.Groups[1].value
 # Write-Host "Last Version in psd1: $LatestPsd1Version"
 
 # Populate changelog data
-$NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($sdkName + '-' + $LatestPsd1Version) -ReleaseNotes:('{{Fill in the Release Notes}}') -Features:('{{Fill in the Features}}') -Improvements:('{{Fill in the Improvements}}') -BugFixes('{{Fill in the Bug Fixes}}') -DiffAdded $diffAdded -DiffModified $diffModified -diffDeleted $diffDeleted
+$NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($SDKName + '-' + $LatestPsd1Version) -ReleaseNotes:('{{Fill in the Release Notes}}') -Features:('{{Fill in the Features}}') -Improvements:('{{Fill in the Improvements}}') -BugFixes('{{Fill in the Bug Fixes}}') -DiffAdded $diffAdded -DiffModified $diffModified -diffDeleted $diffDeleted
 
 # Check if we need to post a new changelog block or update the diffs
 if ($SdkChangelog -notmatch "$LatestPsd1Version") {
