@@ -37,11 +37,11 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
  [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
  [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
  [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>]
- [-PasswordlessSudo] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]
- [-PublicKey <String>] [-RecoveryEmailAddress <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>] [-RecoveryEmailAddress <String>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-State <String>] [-Sudo]
+ [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -553,6 +553,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MfaExclusionDays
+.
+
+```yaml
+Type: System.Int32
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MfaExclusionUntil
 .
 
@@ -695,6 +710,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -State
+.
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -887,6 +917,7 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
   - `[MfaConfigured <Boolean?>]`: 
   - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionDays <Int32?>]`: 
   - `[MfaExclusionUntil <DateTime?>]`: 
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
@@ -901,6 +932,7 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Type <String>]`: 
     - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
+  - `[State <String>]`: 
   - `[Sudo <Boolean?>]`: 
   - `[Suspended <Boolean?>]`: 
   - `[UnixGuid <Int32?>]`: 

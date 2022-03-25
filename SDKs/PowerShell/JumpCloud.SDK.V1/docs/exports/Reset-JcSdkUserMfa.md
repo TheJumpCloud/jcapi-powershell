@@ -29,8 +29,8 @@ curl -X POST \\
 
 ### ResetExpanded (Default)
 ```
-Reset-JcSdkUserMfa -Id <String> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Reset-JcSdkUserMfa -Id <String> [-Exclusion] [-ExclusionDays <Single>] [-ExclusionUntil <DateTime>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Reset
@@ -49,8 +49,8 @@ Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity>
 
 ### ResetViaIdentityExpanded
 ```
-Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity> [-Exclusion] [-ExclusionUntil <DateTime>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity> [-Exclusion] [-ExclusionDays <Single>]
+ [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -110,6 +110,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: ResetExpanded, ResetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExclusionDays
+.
+
+```yaml
+Type: System.Single
 Parameter Sets: ResetExpanded, ResetViaIdentityExpanded
 Aliases:
 
@@ -236,6 +251,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>: .
   - `[Exclusion <Boolean?>]`: 
+  - `[ExclusionDays <Single?>]`: 
   - `[ExclusionUntil <DateTime?>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter

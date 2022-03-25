@@ -106,6 +106,7 @@ BODY <IApplication>:
     [SpEntityIdVisible <Boolean?>]:
   Name <String>:
   SsoUrl <String>:
+  [Active <Boolean?>]:
   [Beta <Boolean?>]:
   [Color <String>]:
   [Created <String>]:
@@ -262,6 +263,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${SsoUrl},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${Active},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
